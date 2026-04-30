@@ -11,12 +11,15 @@ using QAtlas: S1Heisenberg1D, OBC
     βs = [0.5, 1.0, 2.0]
     results = verify_thermodynamic_identities(model, OBC(4); βs=βs)
 
-    @test length(results) == 6
-    @test all(r.status === :pass for r in results)
+    # 4 default identities × 3 βs; m_x identity skipped (no h field on
+    # S1Heisenberg1D).
+    @test length(results) == 12
+    @test all(r.status !== :fail for r in results)
     @test any(occursin("Gibbs", r.identity) for r in results)
     @test any(occursin("c_v", r.identity) for r in results)
+    @test count(r -> r.status === :skipped, results) == 3
 
-    for r in results
+    for r in filter(r -> r.status === :pass, results)
         @test r.abs_err < 1e-7
     end
 end
@@ -25,5 +28,5 @@ end
     model = S1Heisenberg1D(; J=0.7)
     βs = [0.5, 2.0]
     results = verify_thermodynamic_identities(model, OBC(4); βs=βs)
-    @test all(r.status === :pass for r in results)
+    @test all(r.status !== :fail for r in results)
 end

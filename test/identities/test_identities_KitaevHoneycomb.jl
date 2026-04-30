@@ -24,18 +24,20 @@ using ForwardDiff
     βs = [0.5, 1.0, 2.0]
     results = verify_thermodynamic_identities(model, Infinite(); βs=βs)
 
-    # 2 identities × 3 βs
-    @test length(results) == 6
-    @test all(r.status === :pass for r in results)
+    # 4 default identities × 3 βs.  Kitaev has no `MagnetizationX` impl
+    # (deferred — σ flips Z₂ flux pairs) so the m_x identity is :skipped
+    # on dispatch lookup.
+    @test length(results) == 12
+    @test all(r.status !== :fail for r in results)
 
-    # Spot-check both identities ran (didn't all skip).
+    # Spot-check that the universal identities ran.
     @test any(occursin("Gibbs", r.identity) for r in results)
     @test any(occursin("c_v", r.identity) for r in results)
+    @test count(r -> r.status === :skipped, results) == 3
 
     # Tolerance: matter-sector quantities go through QuadGK; the harness
-    # default is `(rtol=1e-8, atol=1e-10)`.  Numerical residuals should
-    # comfortably sit below 1e-7 here.
-    for r in results
+    # default is `(rtol=1e-8, atol=1e-10)`.
+    for r in filter(r -> r.status === :pass, results)
         @test r.abs_err < 1e-7
     end
 end

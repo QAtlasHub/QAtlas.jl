@@ -135,6 +135,19 @@ function _sector_state(
             d2Ldβ2 += (Λ / 2)^2 * sech2x
             # ∂_h log Z mode contribution:
             # ∂_h g_+(βΛ/2) = (β/2) tanh(x) ∂_h Λ
+            #
+            # Critical-point guard.  At Λ = 0 (k = 0, h = J in R sector;
+            # also k = π, h = -J pathological) `_tfim_dΛdh = 4(h - J cos k)/Λ`
+            # has form 0/0 → NaN.  Physically `(Λ/2) tanh(x) dΛ/dh` and
+            # `sech²(x) (dΛ/dh)²` both vanish in the limit (tanh and Λ
+            # are linear in deviation from criticality), so set the mode
+            # contribution to zero explicitly to avoid NaN propagation.
+            if Λ <= 1e-12
+                # All derivative pieces vanish (tanh(0) = 0, sech²(0) = 1
+                # but multiplied by Λ²·... = 0).  Skip the h-derivative
+                # additions for this mode.
+                continue
+            end
             dΛh = _tfim_dΛdh(k, J, h)
             dLdh += (β / 2) * tx * dΛh
             # ∂²_h g_+(βΛ/2) = (β²/4) sech²(x) (∂_h Λ)² + (β/2) tanh(x) ∂²_h Λ

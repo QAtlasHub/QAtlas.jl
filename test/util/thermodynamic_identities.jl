@@ -34,7 +34,7 @@ using QAtlas:
     Infinite
 
 """
-    ThermoIdentity(name, requires, check)
+    ThermoIdentity(name, requires, check; model_filter = _ -> true)
 
 A single self-validation rule.
 
@@ -45,11 +45,20 @@ A single self-validation rule.
   required type lacks a non-catch-all method.
 - `check::Function`: `(model, bc, params::NamedTuple) -> (lhs, rhs)`.
   The two sides should be equal up to the harness's `(rtol, atol)`.
+- `model_filter::Function`: predicate `model -> Bool` for restricting
+  the identity to specific model classes (e.g. only models that carry an
+  `h` field for field-perturbation identities).  Default `_ -> true`
+  applies the identity to every model that satisfies `requires`.
 """
 struct ThermoIdentity
     name::String
     requires::Vector{Type}
     check::Function
+    model_filter::Function
+end
+
+function ThermoIdentity(name, requires, check; model_filter=_ -> true)
+    ThermoIdentity(name, requires, check, model_filter)
 end
 
 """
@@ -118,12 +127,154 @@ const SPECIFIC_HEAT_FROM_ENERGY = ThermoIdentity(
 )
 
 """
+    SPECIFIC_HEAT_FROM_ENTROPY
+
+Cross-method check `c_v = T · ∂s/∂T = -β · ∂s/∂β` via `ForwardDiff` on
+`ThermalEntropy`.  Equivalent to `SPECIFIC_HEAT_FROM_ENERGY` only modulo
+the Gibbs relation, so a discrepancy here pinpoints which of (s, ε)
+disagrees with the c_v implementation.
+"""
+const SPECIFIC_HEAT_FROM_ENTROPY = ThermoIdentity(
+    "c_v = -β · ∂s/∂β  (ForwardDiff on ThermalEntropy)",
+    Type[ThermalEntropy, SpecificHeat],
+    function (model, bc, params)
+        β = params.β
+        ds_dβ = ForwardDiff.derivative(b -> fetch(model, ThermalEntropy(), bc; beta=b), β)
+        c_v = fetch(model, SpecificHeat(), bc; beta=β)
+        return -β * Float64(ds_dβ), Float64(c_v)
+    end,
+)
+
+# ──────────────────────────────────────────────────────────────────────
+# Field-perturbation identities (require the model to carry an `h` field
+# that can be reconstructed by positional argument)
+# ──────────────────────────────────────────────────────────────────────
+
+"""
+    _perturb_field(model, field::Symbol, val) -> Union{typeof(model),Nothing}
+
+Reconstruct `model` with the named `field` replaced by `val`, using the
+positional constructor `typeof(model)(getfield.(model, propertynames)...)`.
+Returns `nothing` if the field is absent or the constructor signature
+does not match — the harness treats either as a skip signal.
+
+ForwardDiff-friendly: the returned model carries `Dual` numbers in the
+perturbed field if `val` is `Dual`.
+"""
+function _perturb_field(model, field::Symbol, val)
+    field in propertynames(model) || return nothing
+    args = map(propertynames(model)) do f
+        f == field ? val : getfield(model, f)
+    end
+    try
+        return typeof(model).name.wrapper(args...)
+    catch
+        return nothing
+    end
+end
+
+_has_h_field(model) = :h in propertynames(model)
+
+"""
+    _central_diff(f, x; δ) -> Float64
+
+Symmetric central finite difference `(f(x + δ) − f(x − δ)) / (2δ)`.
+Used in place of `ForwardDiff` for identities that perturb a model's
+*physical* field (e.g. `h`), since concrete-typed model structs
+(`TFIM`, …) cannot store the `Dual` numbers that ForwardDiff would push.
+The `O(δ²)` truncation error sets the achievable atol; default `δ`
+balances against `O(eps/δ)` round-off (`eps^{1/3} ≈ 6e-6` is optimal).
+"""
+function _central_diff(f, x; δ::Real=1e-5)
+    return (f(x + δ) - f(x - δ)) / (2δ)
+end
+
+"""
+    MAGNETIZATION_X_FROM_FREE_ENERGY
+
+Cross-method check `m_x = -∂f/∂h` (Helmholtz identity) via central
+finite difference on `FreeEnergy` w.r.t. the model's transverse field.
+Skipped on models without an `h` field (XXZ1D, S1Heisenberg1D, …).
+For TFIM specifically this cross-validates the Pfeuty closed-form `m_x`
+against a derivative of the free-fermion free energy.
+
+Tolerance: limited by the `O(δ²) ~ 1e-10` central-difference truncation
+error, so set the harness atol no tighter than `1e-7`.
+"""
+const MAGNETIZATION_X_FROM_FREE_ENERGY = ThermoIdentity(
+    "m_x = -∂f/∂h  (central diff on FreeEnergy w.r.t. h)",
+    Type[FreeEnergy, MagnetizationX],
+    function (model, bc, params)
+        β = params.β
+        h0 = getfield(model, :h)
+        df_dh = _central_diff(h0) do h
+            perturbed = _perturb_field(model, :h, h)
+            return fetch(perturbed, FreeEnergy(), bc; beta=β)
+        end
+        m_x = fetch(model, MagnetizationX(), bc; beta=β)
+        return -Float64(df_dh), Float64(m_x)
+    end;
+    model_filter=_has_h_field,
+)
+
+"""
+    SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION
+
+Cross-method check `χ_xx = ∂m_x/∂h` (Kubo / static linear response)
+via central finite difference on `MagnetizationX` w.r.t. the model's
+transverse field.
+
+**Convention warning.**  This identity tests the *Kubo* static
+susceptibility, which equals `(β/N) ∫₀^β dτ ⟨M_x(τ)M_x(0)⟩_c` — the
+imaginary-time-integrated correlator at ω=0.  For a quantum
+Hamiltonian where `[M_x, H] ≠ 0` the Kubo χ differs from the
+*equal-time* variance `β·Var(M_x)/N` by operator-ordering corrections.
+
+QAtlas's OBC dense-ED implementations of `SusceptibilityXX` (TFIM,
+XXZ1D, S1Heisenberg1D) return the **variance form**, so this identity
+is **not** in `DEFAULT_IDENTITIES` to avoid spurious failures on those
+backends.  Only the closed-form `Infinite()` Kubo paths (e.g. TFIM
+Infinite via the Calabrese-Mussardo integral) pass.  Use this identity
+explicitly via the `identities=[…]` kwarg of
+`verify_thermodynamic_identities` when validating a Kubo-convention
+implementation.
+"""
+const SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION = ThermoIdentity(
+    "χ_xx = ∂m_x/∂h  (central diff, Kubo convention)",
+    Type[MagnetizationX, SusceptibilityXX],
+    function (model, bc, params)
+        β = params.β
+        h0 = getfield(model, :h)
+        dmx_dh = _central_diff(h0) do h
+            perturbed = _perturb_field(model, :h, h)
+            return fetch(perturbed, MagnetizationX(), bc; beta=β)
+        end
+        χ_xx = fetch(model, SusceptibilityXX(), bc; beta=β)
+        return Float64(dmx_dh), Float64(χ_xx)
+    end;
+    model_filter=_has_h_field,
+)
+
+"""
     DEFAULT_IDENTITIES
 
 The identity set evaluated by `verify_thermodynamic_identities` when
-the caller does not pass an explicit `identities` kwarg.
+the caller does not pass an explicit `identities` kwarg.  Includes the
+universal Gibbs / specific-heat-from-energy / specific-heat-from-entropy
+checks plus the Helmholtz `m_x = -∂f/∂h` check (skipped on models
+without an `h` field).
+
+The Kubo-vs-variance susceptibility identity
+[`SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION`](@ref) is *not* in this
+set because the QAtlas OBC dense-ED backends use the equal-time
+variance convention; see that identity's docstring for details.
 """
-const DEFAULT_IDENTITIES = ThermoIdentity[GIBBS_RELATION, SPECIFIC_HEAT_FROM_ENERGY]
+const DEFAULT_IDENTITIES = ThermoIdentity[
+    GIBBS_RELATION,
+    SPECIFIC_HEAT_FROM_ENERGY,
+    SPECIFIC_HEAT_FROM_ENTROPY,
+    MAGNETIZATION_X_FROM_FREE_ENERGY,
+]
 
 # ──────────────────────────────────────────────────────────────────────
 # Dispatch-existence helper
@@ -142,7 +293,8 @@ function _has_dispatch(model, ::Type{Q}, bc) where {Q}
 end
 
 function _can_run(identity::ThermoIdentity, model, bc)
-    all(Q -> _has_dispatch(model, Q, bc), identity.requires)
+    identity.model_filter(model) || return false
+    return all(Q -> _has_dispatch(model, Q, bc), identity.requires)
 end
 
 # ──────────────────────────────────────────────────────────────────────

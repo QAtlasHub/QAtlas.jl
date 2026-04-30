@@ -30,3 +30,17 @@ end
     results = verify_thermodynamic_identities(model, OBC(4); βs=βs)
     @test all(r.status !== :fail for r in results)
 end
+
+@testset "S1Heisenberg1D — SU(2) symmetry identities" begin
+    # Spin-1 Heisenberg is SU(2) symmetric: χ_xx = χ_yy = χ_zz, m_α = 0.
+    model = S1Heisenberg1D(; J=1.0)
+    βs = [0.5, 1.0, 2.0]
+    results = verify_thermodynamic_identities(
+        model, OBC(4); βs=βs, identities=SYMMETRY_IDENTITIES
+    )
+    @test length(results) == 15
+    @test all(r.status === :pass for r in results)
+    for r in results
+        @test r.abs_err < 1e-12
+    end
+end

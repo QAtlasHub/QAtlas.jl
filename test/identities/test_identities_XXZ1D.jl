@@ -38,3 +38,40 @@ end
     results = verify_thermodynamic_identities(model, OBC(5); βs=βs)
     @test all(r.status !== :fail for r in results)
 end
+
+@testset "XXZ1D Δ = 1 (Heisenberg point) — SU(2) symmetry identities" begin
+    # At Δ = 1 the Hamiltonian is fully SU(2) invariant, so per-site
+    # susceptibilities along all three axes coincide and every uniform
+    # magnetisation vanishes in the canonical ensemble.  The
+    # `SYMMETRY_IDENTITIES` set covers the χ_xx = χ_yy = χ_zz pair plus
+    # m_α = 0 for α ∈ {x, y, z}.
+    model = XXZ1D(; J=1.0, Δ=1.0)
+    βs = [0.5, 1.0, 2.0]
+    results = verify_thermodynamic_identities(
+        model, OBC(6); βs=βs, identities=SYMMETRY_IDENTITIES
+    )
+
+    # 5 symmetry identities × 3 βs = 15 results; all should pass at the
+    # Heisenberg point (full SU(2) invariance).
+    @test length(results) == 15
+    @test all(r.status === :pass for r in results)
+    for r in results
+        @test r.abs_err < 1e-12
+    end
+end
+
+@testset "XXZ1D Δ ≠ 1 — SU(2) identities skip but m_y = 0 holds" begin
+    # Off the Heisenberg point the model is only U(1) × Z₂, so the SU(2)
+    # axis-equality identities are :skipped.  The real-Hamiltonian
+    # `m_y = 0` identity still applies and passes everywhere.
+    for Δ in (-0.5, 0.0, 0.5)
+        model = XXZ1D(; J=1.0, Δ=Δ)
+        results = verify_thermodynamic_identities(
+            model, OBC(6); βs=[1.0], identities=SYMMETRY_IDENTITIES
+        )
+        # 4 SU(2) identities skip + 1 m_y identity passes
+        @test count(r -> r.status === :skipped, results) == 4
+        @test count(r -> r.status === :pass, results) == 1
+        @test all(r.status !== :fail for r in results)
+    end
+end

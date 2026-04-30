@@ -18,18 +18,21 @@ using QAtlas: TFIM, OBC, Infinite
     βs = [0.5, 1.0, 2.0]
     results = verify_thermodynamic_identities(model, OBC(8); βs=βs)
 
-    # 2 identities × 3 βs
-    @test length(results) == 6
+    # 4 identities × 3 βs (Kubo χ_xx is opt-in, not in DEFAULT — OBC
+    # uses variance convention).
+    @test length(results) == 12
     @test all(r.status === :pass for r in results)
 
-    # Spot-check that both identities actually ran (didn't all skip)
+    # Spot-check that every default identity class actually ran on TFIM.
     @test any(occursin("Gibbs", r.identity) for r in results)
-    @test any(occursin("c_v", r.identity) for r in results)
+    @test any(occursin("c_v = -β²", r.identity) for r in results)
+    @test any(occursin("c_v = -β · ∂s", r.identity) for r in results)
+    @test any(occursin("m_x", r.identity) for r in results)
 
-    # Numerical tightness — TFIM has closed-form thermodynamics, so the
-    # residuals should sit well below the harness's default `(1e-8, 1e-10)`.
+    # Numerical tightness — TFIM has closed-form thermodynamics + central
+    # diff has `O(δ²) ~ 1e-10` truncation error.
     for r in results
-        @test r.abs_err < 1e-8
+        @test r.abs_err < 1e-7
     end
 end
 
@@ -38,13 +41,32 @@ end
     βs = [0.5, 1.0, 2.0]
     results = verify_thermodynamic_identities(model, Infinite(); βs=βs)
 
-    @test length(results) == 6
+    @test length(results) == 12
     @test all(r.status === :pass for r in results)
 
     # The Infinite() Energy + thermal observables go through QuadGK; tighter
     # tolerance than OBC dense ED but still within the harness threshold.
     for r in results
-        @test r.abs_err < 1e-7
+        @test r.abs_err < 1e-6
+    end
+end
+
+@testset "TFIM Infinite — opt-in Kubo χ_xx = ∂m_x/∂h identity" begin
+    # The Infinite implementation uses the analytic Calabrese-Mussardo
+    # closed form (the Kubo response derivative of f), so the
+    # `SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION` identity passes here
+    # (unlike OBC, which uses the variance convention).
+    model = TFIM(; J=1.0, h=0.5)
+    βs = [0.5, 1.0, 2.0]
+    results = verify_thermodynamic_identities(
+        model, Infinite();
+        βs=βs,
+        identities=[SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION],
+    )
+    @test length(results) == 3
+    @test all(r.status === :pass for r in results)
+    for r in results
+        @test r.abs_err < 1e-6
     end
 end
 

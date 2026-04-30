@@ -15,11 +15,16 @@ using QAtlas: XXZ1D, OBC, Energy, FreeEnergy, ThermalEntropy, SpecificHeat
         model = XXZ1D(; J=1.0, Δ=Δ)
         results = verify_thermodynamic_identities(model, OBC(6); βs=βs)
 
-        @test length(results) == 6
-        @test all(r.status === :pass for r in results)
+        # 4 default identities × 3 βs.  XXZ1D has no `h` field, so the
+        # m_x identity is recorded as `:skipped` rather than evaluated.
+        @test length(results) == 12
+        @test all(r.status !== :fail for r in results)
         @test any(occursin("Gibbs", r.identity) for r in results)
         @test any(occursin("c_v", r.identity) for r in results)
-        for r in results
+        # m_x identity is skipped on XXZ1D (no h field).
+        @test count(r -> r.status === :skipped, results) == 3
+        # Numerical tightness on the rows that did run.
+        for r in filter(r -> r.status === :pass, results)
             @test r.abs_err < 1e-7
         end
     end
@@ -31,5 +36,5 @@ end
     model = XXZ1D(; J=1.0, Δ=-1.0)
     βs = [0.5, 2.0]
     results = verify_thermodynamic_identities(model, OBC(5); βs=βs)
-    @test all(r.status === :pass for r in results)
+    @test all(r.status !== :fail for r in results)
 end

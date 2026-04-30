@@ -29,9 +29,18 @@ using QAtlas:
     FreeEnergy,
     ThermalEntropy,
     SpecificHeat,
+    MagnetizationX,
+    MagnetizationY,
+    MagnetizationZ,
+    SusceptibilityXX,
+    SusceptibilityYY,
+    SusceptibilityZZ,
     OBC,
     PBC,
-    Infinite
+    Infinite,
+    Heisenberg1D,
+    XXZ1D,
+    S1Heisenberg1D
 
 """
     ThermoIdentity(name, requires, check; model_filter = _ -> true)
@@ -255,6 +264,163 @@ const SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION = ThermoIdentity(
     model_filter=_has_h_field,
 )
 
+# ──────────────────────────────────────────────────────────────────────
+# Symmetry-induced identities — checked by axis-equality / vanishing
+# ──────────────────────────────────────────────────────────────────────
+#
+# These rules are phrased identically to the thermodynamic ones (`(model,
+# bc, params) -> (lhs, rhs)`) but tag specific *physical symmetries* of
+# the model:
+#
+#   * SU(2) (Heisenberg-type isotropic point):  χ_xx = χ_yy = χ_zz,
+#     m_x = m_y = m_z = 0.
+#   * Real Hermitian Hamiltonian (parity / time reversal): m_y = 0,
+#     <σʸ_i> = 0 (local), <σʸ_i σʸ_j> real.
+#   * Z₂ symmetric Hamiltonian (TFIM at any β): <σᶻ_i> = 0 → m_z = 0.
+#
+# By making each symmetry a `ThermoIdentity` we get the same
+# pass/fail/skip semantics from the existing harness; a model that ships
+# a fetch method for a symmetric quantity but returns a non-zero value
+# (sign error / convention drift / branch-cut) surfaces here as `:fail`.
+
+"""
+    is_su2_symmetric(model) -> Bool
+
+Predicate marking models whose Hamiltonian is fully SU(2) invariant
+(rotations of the spin axes leave H unchanged).  Default is `false`;
+each model file that wishes to declare SU(2) symmetry overloads this
+trait.  Used by `model_filter` of the SU(2) `ThermoIdentity`s.
+
+Currently: `Heisenberg1D` (always), `XXZ1D` at `Δ ≈ 1`,
+`S1Heisenberg1D` (always).
+"""
+is_su2_symmetric(::Any) = false
+
+# Concrete model overloads
+is_su2_symmetric(::Heisenberg1D) = true
+is_su2_symmetric(::S1Heisenberg1D) = true
+is_su2_symmetric(m::XXZ1D) = isapprox(m.Δ, 1.0; atol=1e-10)
+
+"""
+    SU2_CHI_XX_EQ_YY
+
+At an SU(2)-symmetric point of the model, the per-site susceptibilities
+along all three axes coincide: `χ_xx = χ_yy = χ_zz`.  This identity
+checks the (xx, yy) pair; pair them with [`SU2_CHI_YY_EQ_ZZ`](@ref) to
+chain the full triple equality.
+"""
+const SU2_CHI_XX_EQ_YY = ThermoIdentity(
+    "χ_xx = χ_yy  (SU(2) symmetry)",
+    Type[SusceptibilityXX, SusceptibilityYY],
+    function (model, bc, params)
+        β = params.β
+        χ_xx = fetch(model, SusceptibilityXX(), bc; beta=β)
+        χ_yy = fetch(model, SusceptibilityYY(), bc; beta=β)
+        return Float64(χ_xx), Float64(χ_yy)
+    end;
+    model_filter=is_su2_symmetric,
+)
+
+"""
+    SU2_CHI_YY_EQ_ZZ
+
+Companion to [`SU2_CHI_XX_EQ_YY`](@ref) — chain of axis equalities
+under SU(2) invariance.
+"""
+const SU2_CHI_YY_EQ_ZZ = ThermoIdentity(
+    "χ_yy = χ_zz  (SU(2) symmetry)",
+    Type[SusceptibilityYY, SusceptibilityZZ],
+    function (model, bc, params)
+        β = params.β
+        χ_yy = fetch(model, SusceptibilityYY(), bc; beta=β)
+        χ_zz = fetch(model, SusceptibilityZZ(), bc; beta=β)
+        return Float64(χ_yy), Float64(χ_zz)
+    end;
+    model_filter=is_su2_symmetric,
+)
+
+"""
+    MAGNETIZATION_Y_VANISHES_REAL_H
+
+For any real Hermitian Hamiltonian (`H = Hᵀ` in the σᶻ-product basis)
+the off-diagonal σʸ matrix elements come in conjugate pairs and the
+thermal expectation `⟨σʸ⟩` is identically zero, regardless of
+temperature or boundary condition.  This is a parity/time-reversal
+identity: a non-zero value flags either a sign error in the σʸ
+implementation or a complex non-Hermitian artefact in the dense matrix.
+
+Only requires `MagnetizationY` to dispatch; no model_filter (every QAtlas
+spin Hamiltonian considered here is real).  At Inf temperature
+`m_y = 0` exactly; at finite β round-off should leave residuals at
+`< 1e-12`.
+"""
+const MAGNETIZATION_Y_VANISHES_REAL_H = ThermoIdentity(
+    "m_y = 0  (real H, parity)",
+    Type[MagnetizationY],
+    function (model, bc, params)
+        β = params.β
+        m_y = fetch(model, MagnetizationY(), bc; beta=β)
+        return Float64(m_y), 0.0
+    end,
+)
+
+"""
+    MAGNETIZATION_X_VANISHES_SU2
+
+At an SU(2) point the unbroken global rotation symmetry forces
+`m_x = m_y = m_z = 0` in any finite-N canonical ensemble.  This
+testing of `m_x = 0` is the "easy" axis (X is real, no convention).
+Combined with [`MAGNETIZATION_Y_VANISHES_REAL_H`](@ref) and
+[`MAGNETIZATION_Z_VANISHES_SU2`](@ref) it covers the full triple.
+"""
+const MAGNETIZATION_X_VANISHES_SU2 = ThermoIdentity(
+    "m_x = 0  (SU(2) symmetry)",
+    Type[MagnetizationX],
+    function (model, bc, params)
+        β = params.β
+        m_x = fetch(model, MagnetizationX(), bc; beta=β)
+        return Float64(m_x), 0.0
+    end;
+    model_filter=is_su2_symmetric,
+)
+
+"""
+    MAGNETIZATION_Z_VANISHES_SU2
+
+Companion of [`MAGNETIZATION_X_VANISHES_SU2`](@ref): SU(2) invariance
+forces `m_z = 0` in any finite-N canonical ensemble.
+"""
+const MAGNETIZATION_Z_VANISHES_SU2 = ThermoIdentity(
+    "m_z = 0  (SU(2) symmetry)",
+    Type[MagnetizationZ],
+    function (model, bc, params)
+        β = params.β
+        m_z = fetch(model, MagnetizationZ(), bc; beta=β)
+        return Float64(m_z), 0.0
+    end;
+    model_filter=is_su2_symmetric,
+)
+
+"""
+    SYMMETRY_IDENTITIES
+
+Catalogue of symmetry-induced identities (SU(2) χ-axis equalities, m_y=0,
+m_α=0 at SU(2)).  Pass via the `identities=…` kwarg of
+[`verify_thermodynamic_identities`](@ref) to apply the symmetry layer
+on top of the thermodynamic one.
+
+Not appended to `DEFAULT_IDENTITIES` because not every model exposes the
+required quantities (Y-axis support is the weakest link), and adding
+them by default would mass-skip on most models.
+"""
+const SYMMETRY_IDENTITIES = ThermoIdentity[
+    SU2_CHI_XX_EQ_YY,
+    SU2_CHI_YY_EQ_ZZ,
+    MAGNETIZATION_X_VANISHES_SU2,
+    MAGNETIZATION_Y_VANISHES_REAL_H,
+    MAGNETIZATION_Z_VANISHES_SU2,
+]
+
 """
     DEFAULT_IDENTITIES
 
@@ -265,9 +431,11 @@ checks plus the Helmholtz `m_x = -∂f/∂h` check (skipped on models
 without an `h` field).
 
 The Kubo-vs-variance susceptibility identity
-[`SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION`](@ref) is *not* in this
-set because the QAtlas OBC dense-ED backends use the equal-time
-variance convention; see that identity's docstring for details.
+[`SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION`](@ref) and the symmetry
+identities ([`SYMMETRY_IDENTITIES`](@ref)) are *not* in this set because
+the QAtlas OBC dense-ED backends use the equal-time variance convention
+(former) and not every model exposes Y-axis quantities (latter).  Pass
+explicit `identities=` kwarg to enable.
 """
 const DEFAULT_IDENTITIES = ThermoIdentity[
     GIBBS_RELATION,

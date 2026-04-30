@@ -27,12 +27,12 @@ using QAtlas
 # *reproduces* the trivial product / classical limits.
 
 const _CLOSED_TFIM_FREE_SPIN = (
-    f      = (β, h) -> -log(2 * cosh(β * h)) / β,
-    ε_per  = (β, h) -> -h * tanh(β * h),
-    s_per  = (β, h) -> log(2 * cosh(β * h)) - β * h * tanh(β * h),
-    c_v    = (β, h) -> (β * h)^2 * sech(β * h)^2,
-    m_x    = (β, h) -> tanh(β * h),
-    χ_xx   = (β, h) -> β * sech(β * h)^2,
+    f=(β, h) -> -log(2 * cosh(β * h)) / β,
+    ε_per=(β, h) -> -h * tanh(β * h),
+    s_per=(β, h) -> log(2 * cosh(β * h)) - β * h * tanh(β * h),
+    c_v=(β, h) -> (β * h)^2 * sech(β * h)^2,
+    m_x=(β, h) -> tanh(β * h),
+    χ_xx=(β, h) -> β * sech(β * h)^2,
 )
 
 @testset "TFIM J = 0 (free-spin paramagnet) — closed-form match" begin
@@ -122,8 +122,8 @@ end
     J = 1.3
     for β in (0.4, 1.5)
         model = TFIM(; J=J, h=0.0)
-        @test QAtlas.fetch(model, Energy(:per_site), Infinite(); beta=β) ≈
-            -J * tanh(β * J) atol = 1e-10
+        @test QAtlas.fetch(model, Energy(:per_site), Infinite(); beta=β) ≈ -J * tanh(β * J) atol =
+            1e-10
         @test QAtlas.fetch(model, FreeEnergy(), Infinite(); beta=β) ≈
             -log(2 * cosh(β * J)) / β atol = 1e-10
         @test QAtlas.fetch(model, SpecificHeat(), Infinite(); beta=β) ≈

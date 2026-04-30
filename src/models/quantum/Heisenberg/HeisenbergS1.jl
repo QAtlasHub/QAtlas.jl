@@ -22,7 +22,7 @@
 #   T. Kennedy and H. Tasaki, Phys. Rev. B 45, 304 (1992) — string order.
 # ─────────────────────────────────────────────────────────────────────────────
 
-using LinearAlgebra: I, kron
+using LinearAlgebra: I, Diagonal, Hermitian, eigen, eigvals, kron, tr
 
 """
     _MAX_ED_SITES_S1 = 8
@@ -160,4 +160,68 @@ numerical differentiation).
 function fetch(model::S1Heisenberg1D, ::SpecificHeat, bc::OBC; beta::Real, kwargs...)
     H = _s1_heisenberg_hamiltonian_matrix(model, bc.N)
     return _ed_thermal_specific_heat(H, beta) / bc.N
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Internal kernel — one eigendecomposition shared across many observables
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    _s1_thermal_kernel(model, N, beta) -> NamedTuple
+
+Compute the eigendecomposition of the OBC spin-1 Heisenberg Hamiltonian
+on `N` sites and return everything downstream observables need to evaluate
+thermal expectation values:
+
+- `H`        — the dense `3^N × 3^N` Hermitian Hamiltonian matrix
+- `evals`    — sorted real eigenvalues (`F.values`)
+- `evecs`    — eigenvector matrix (`F.vectors`)
+- `weights`  — Boltzmann weights `wₙ = exp(-β(eₙ - emin))/Z̃`,
+                normalised so `sum(weights) == 1`
+- `ρ`        — `evecs · diagm(weights) · evecs'`, the thermal density
+                matrix in the computational (product) basis
+
+For `beta = Inf` we collapse onto the (possibly degenerate) ground-state
+manifold by zeroing all weights above `evals[1] + 1e-12`.
+
+Constructed once per fetch call (so a routine that needs both an energy
+and a magnetisation does not pay for two `eigen` calls).  No caching
+across calls — that would require a per-model mutable cache and hasn't
+been profiled to matter yet.
+"""
+function _s1_thermal_kernel(model::S1Heisenberg1D, N::Int, beta::Real)
+    H = _s1_heisenberg_hamiltonian_matrix(model, N)
+    F = eigen(Hermitian(H))
+    evals = F.values
+    evecs = F.vectors
+    if isinf(beta) && beta > 0
+        emin = evals[1]
+        # Ground-state projector: equal weight on the (numerically) degenerate
+        # ground manifold.  `1e-12` is well below typical N ≤ 8 spectrum gaps
+        # for the antiferromagnetic spin-1 chain (smallest finite-N gap ≳ 0.1).
+        gs_mask = (evals .- emin) .≤ 1e-12
+        ng = count(gs_mask)
+        weights = zeros(Float64, length(evals))
+        weights[gs_mask] .= 1.0 / ng
+    else
+        emin = minimum(evals)
+        ws = exp.(-beta .* (evals .- emin))
+        Z = sum(ws)
+        weights = ws ./ Z
+    end
+    # Density matrix in product basis: ρ = U diag(w) U'
+    ρ = evecs * Diagonal(weights) * evecs'
+    return (; H=H, evals=evals, evecs=evecs, weights=weights, ρ=ρ)
+end
+
+"""
+    _s1_thermal_expectation(kernel, O) -> Float64
+
+Trace `Tr(O ρ)` from a precomputed `_s1_thermal_kernel` and a dense
+operator `O` of matching size.  Returns the real part (Hermitian
+operators give real expectation values; small imaginary residue is
+numerical noise).
+"""
+function _s1_thermal_expectation(kernel, O::AbstractMatrix)
+    return real(tr(O * kernel.ρ))
 end

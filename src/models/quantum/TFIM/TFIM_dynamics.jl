@@ -462,6 +462,42 @@ function fetch(
 end
 
 """
+    fetch(model::TFIM, ::ZZCorrelation{:connected}, bc::OBC;
+          beta::Float64, [i::Int, j::Int]) -> Matrix{Float64} or Float64
+
+Connected static thermal correlator
+`C^c_{ij} = ⟨σᶻ_i σᶻ_j⟩_β − ⟨σᶻ_i⟩_β ⟨σᶻ_j⟩_β` for the OBC TFIM.
+
+In the OBC TFIM the Z₂ symmetry σᶻ → −σᶻ is unbroken at any finite N
+(Gaussian state of the JW fermions; odd-product expectation
+vanishes), so `⟨σᶻ_i⟩_β = 0` and the connected correlator coincides
+with the bare static one.  This method therefore re-uses the
+`:static` routine and is provided as a separate dispatch for caller
+clarity / API completeness.
+
+If at some point a TFIM variant breaks Z₂ explicitly (e.g. by adding
+a longitudinal field), the implementation will still be correct
+provided the per-site `⟨σᶻ_i⟩_β` is taken from
+[`MagnetizationZLocal`](@ref) and subtracted off — see the comment
+in the source.
+"""
+function fetch(
+    model::TFIM,
+    ::ZZCorrelation{:connected},
+    bc::OBC;
+    beta::Float64,
+    i::Union{Int,Nothing}=nothing,
+    j::Union{Int,Nothing}=nothing,
+    kwargs...,
+)
+    # In TFIM at OBC ⟨σᶻ_i⟩ = 0 by Z₂ symmetry.  The static routine already
+    # returns the connected correlator under that assumption.  Wire to it
+    # directly; if a future TFIM variant adds explicit symmetry breaking,
+    # subtract `mz[i] * mz[j]` here using `MagnetizationZLocal`.
+    return fetch(model, ZZCorrelation{:static}(), bc; beta=beta, i=i, j=j, kwargs...)
+end
+
+"""
     fetch(model::TFIM, ::ZZStructureFactor, bc::OBC;
           beta::Float64, q::Real) -> Float64
 

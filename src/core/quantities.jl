@@ -190,6 +190,16 @@ Site-resolved `⟨σˣ_i⟩` vector of length `N_bulk`.
 struct MagnetizationXLocal <: AbstractQuantity end
 
 """
+    MagnetizationYLocal() <: AbstractQuantity
+
+Site-resolved `⟨σʸ_i⟩` vector of length `N_bulk`.  Identically zero
+for any real Hermitian Hamiltonian (parity / time-reversal); a model
+that returns it explicitly does so as an exact baseline against
+random-sample estimators that fluctuate around zero.
+"""
+struct MagnetizationYLocal <: AbstractQuantity end
+
+"""
     MagnetizationZLocal() <: AbstractQuantity
 
 Site-resolved `⟨σᶻ_i⟩` vector of length `N_bulk`.
@@ -317,6 +327,20 @@ extracted from the Calabrese–Cardy entanglement formula; universality
 pages return literature values.
 """
 struct CentralCharge <: AbstractQuantity end
+
+"""
+    CorrelationLength() <: AbstractQuantity
+
+Two-point correlation length `ξ` controlling the exponential decay of
+connected equal-time correlators in a gapped phase,
+
+    ⟨σ_α(0) σ_α(r)⟩_c ~ e^{-r/ξ}    (r → ∞).
+
+For a critical system `ξ = ∞`; implementations return `Inf` in that
+case.  At `T = 0` and 1D free-fermion models like TFIM, `ξ` is set by
+the inverse mass gap (`ξ = 1/(2|h - J|)`).
+"""
+struct CorrelationLength <: AbstractQuantity end
 
 """
     LuttingerParameter() <: AbstractQuantity

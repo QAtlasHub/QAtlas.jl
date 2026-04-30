@@ -35,6 +35,23 @@
 # (SVD of the 2^N ground-state vector, `test_entanglement_central_charge.jl`)
 # is O(2^N) memory and O(4^N) time and breaks down at N ≳ 16.
 #
+# Rényi extension.  For a Gaussian fermionic ρ_A the per-mode reduced
+# density matrix is the 2×2 diagonal Bernoulli matrix with eigenvalues
+# (1 ± ν_k)/2, so its α-th moment is
+#
+#   Tr ρ_A^α = ∏_k [ ((1+ν_k)/2)^α + ((1-ν_k)/2)^α ]
+#
+# and the Rényi entropy of order α (α ≠ 1) factorises mode-by-mode:
+#
+#   S_α = Σ_k s_α(ν_k),
+#   s_α(ν) = (1/(1-α)) · log[ ((1+ν)/2)^α + ((1-ν)/2)^α ].         (2)
+#
+# The α → 1 limit reproduces (1).  The same JW-factorisation argument
+# (Fagotti–Calabrese 2010) gives S_α^{(f)} = S_α^{(s)} for contiguous
+# blocks.  Calabrese–Cardy (2009, arXiv:0905.4013) discuss the CFT
+# scaling of Rényi entropies; for the OBC critical TFIM,
+# S_α(ℓ, N) = (c/12)(1 + 1/α) log[(2N/π) sin(πℓ/N)] + s₁^{(α)}.
+#
 # References:
 # - I. Peschel, J. Phys. A 36, L205 (2003), eq. (9).
 # - G. Vidal, J. I. Latorre, E. Rico, A. Kitaev, Phys. Rev. Lett. 90,
@@ -43,6 +60,8 @@
 #   §2.
 # - M. Fagotti, P. Calabrese, Phys. Rev. Lett. 104, 227203 (2010) —
 #   JW-factorisation argument for contiguous blocks.
+# - P. Calabrese, J. Cardy, J. Phys. A 42, 504005 (2009),
+#   arXiv:0905.4013 — Rényi entropies in 1+1d CFT.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using LinearAlgebra: eigvals, Hermitian
@@ -103,6 +122,89 @@ function fetch(
     S = 0.0
     @inbounds for k in (ℓ + 1):(2ℓ)
         S += _peschel_mode_entropy(λ[k])
+    end
+    return S
+end
+
+"""
+    _peschel_mode_renyi(ν::Real, α::Real) -> Float64
+
+Per-mode Rényi entropy of order `α` (`α ≠ 1`) for a Gaussian fermionic
+mode with covariance singular value `ν ∈ [0, 1]`:
+
+    s_α(ν) = (1 / (1 - α)) · log[ ((1+ν)/2)^α + ((1-ν)/2)^α ].
+
+Numerically stable at the corner cases:
+
+- `ν → 1` (pure mode): the vanishing branch is *dropped* rather than
+  clamped to `eps(Float64)` — clamping injects an `α · log(eps)` error
+  that becomes visible at small `α < 1` (the dominant branch is
+  `α log 1 ≈ 0`, so a clamped contribution of `exp(α log eps)` no
+  longer underflows).  See `test/models/test_TFIM_renyi.jl` "Compare
+  against full ED".
+- `ν → 0` (maximally mixed): both branches are `(1/2)^α`, giving
+  `s_α = log(2^{1-α}) / (1 − α) = log 2`.
+- `α → ∞`: `s_α → -log p_max = -log((1+ν)/2)` (min-entropy limit).
+- `α → 0⁺`: `s_α → log 2` (Hartley entropy for a 2-level Bernoulli).
+"""
+function _peschel_mode_renyi(ν::Real, α::Real)::Float64
+    νc = clamp(abs(ν), 0.0, 1.0)
+    p⁻ = (1 - νc) / 2
+    p⁺ = (1 + νc) / 2
+    # Drop a vanishing branch (`p ≲ eps`) rather than clamping its
+    # log to `log(eps)`.  Clamping is fine for α ≥ 1 (the artificial
+    # `α · log(eps) ≲ -36` is killed by the dominant LSE term), but at
+    # α < 1 the artefact `exp(α · log(eps)) ≈ exp(-36 α)` is much
+    # larger than round-off and corrupts the sub-extensive Rényi at the
+    # ~10⁻⁸ level.
+    if p⁺ ≤ eps(Float64)
+        # ν = -1 case (cannot happen after the `abs` above, but defensive).
+        return α * log(p⁻) / (1 - α)
+    end
+    if p⁻ ≤ eps(Float64)
+        return α * log(p⁺) / (1 - α)  # = 0 for ν = 1 since log(1) = 0.
+    end
+    a = α * log(p⁺)
+    b = α * log(p⁻)
+    M = max(a, b)
+    L = M + log(exp(a - M) + exp(b - M))
+    return L / (1 - α)
+end
+
+"""
+    fetch(model::TFIM, q::RenyiEntropy, bc::OBC;
+          ℓ::Int, beta::Float64 = Inf, kwargs...) -> Float64
+
+Rényi entropy of order `α = q.α` (`α ≠ 1`) for the first `ℓ` spins of
+the N-site OBC TFIM in the thermal state at inverse temperature `beta`
+(or the ground state when `beta = Inf`), via Peschel's
+correlation-matrix method — see equation (2) in the file header.
+
+The Gaussian factorisation gives `S_α = Σ_k s_α(ν_k)`, where the
+ν_k are the non-negative eigenvalues of `i Σ_A`.  As for the
+von Neumann case, the JW-factorisation argument
+(Fagotti–Calabrese 2010) means the fermion Rényi entropy equals the
+spin Rényi entropy for a contiguous block.
+
+`α = 1` is rejected at the [`RenyiEntropy`](@ref) constructor; use
+[`VonNeumannEntropy`](@ref) explicitly.
+
+Cost is `O(ℓ³)` from the Hermitian eigendecomposition of `i Σ_A`,
+identical to the von Neumann path.
+"""
+function fetch(model::TFIM, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Float64=Inf, kwargs...)
+    N = _bc_size(bc, kwargs)
+    1 ≤ ℓ ≤ N - 1 || throw(
+        ArgumentError("RenyiEntropy: ℓ must satisfy 1 ≤ ℓ ≤ N - 1; got ℓ = $ℓ, N = $N.")
+    )
+    α = q.α
+    hmat = _majorana_ham(N, model.J, model.h)
+    Σ = _majorana_thermal_covariance(hmat, beta)
+    Σ_A = Σ[1:(2ℓ), 1:(2ℓ)]
+    λ = eigvals(Hermitian(im .* Σ_A))
+    S = 0.0
+    @inbounds for k in (ℓ + 1):(2ℓ)
+        S += _peschel_mode_renyi(λ[k], α)
     end
     return S
 end

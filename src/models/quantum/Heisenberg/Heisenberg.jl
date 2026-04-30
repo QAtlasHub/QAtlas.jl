@@ -159,6 +159,21 @@ function fetch(::Heisenberg1D, ::GroundStateEnergyDensity; J::Real=1.0)
     return J * (1 // 4 - log(2))
 end
 
+"""
+    fetch(::Heisenberg1D, ::GroundStateEnergyDensity, ::Infinite; J=1.0) -> Float64
+
+BC-explicit dispatch sister of the legacy `fetch(::Heisenberg1D,
+::GroundStateEnergyDensity; J=1.0)` method.  The thermodynamic-limit
+ground-state energy density is only meaningful at `Infinite`, so the
+two methods return the same Hulthén value
+`e₀ = J(1/4 - ln 2)`.  Provided so `which(fetch, ::Heisenberg1D,
+::GroundStateEnergyDensity, ::Infinite)` resolves and the registry
+drift guard passes.
+"""
+function fetch(::Heisenberg1D, ::GroundStateEnergyDensity, ::Infinite; J::Real=1.0)
+    return J * (1 // 4 - log(2))
+end
+
 native_energy_granularity(::Heisenberg1D, ::OBC) = :total
 
 """
@@ -178,4 +193,106 @@ function fetch(
     ::Heisenberg1D, ::Energy{:total}, bc::OBC; beta::Real, J::Real=1.0, kwargs...
 )
     return fetch(XXZ1D(; J=J, Δ=1.0), Energy{:total}(), bc; beta=beta)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# fetch — finite-N OBC delegators to XXZ1D(Δ = 1)
+#
+# `Heisenberg1D` carries no model parameters of its own (J is passed as a
+# kwarg), so every quantity on the OBC chain at finite temperature is a
+# thin wrapper around the corresponding `XXZ1D(; J, Δ = 1.0)` fetch.  We
+# keep this enumerated rather than dispatching through a generic
+# fallback so that:
+#
+# - the public surface is explicit and grep-friendly,
+# - each method's docstring can name the delegate model,
+# - the registry (`Heisenberg_registry.jl`) lists each triple.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Scalar thermodynamic potentials — per-site at OBC, matching XXZ1D.
+for QTy in (:FreeEnergy, :ThermalEntropy, :SpecificHeat)
+    @eval function fetch(
+        ::Heisenberg1D, ::$QTy, bc::OBC; beta::Real, J::Real=1.0, kwargs...
+    )
+        return fetch(XXZ1D(; J=J, Δ=1.0), $QTy(), bc; beta=beta, kwargs...)
+    end
+end
+
+# Bulk-averaged magnetisations and susceptibilities (scalar).
+for QTy in (
+    :MagnetizationX,
+    :MagnetizationY,
+    :MagnetizationZ,
+    :SusceptibilityXX,
+    :SusceptibilityYY,
+    :SusceptibilityZZ,
+)
+    @eval function fetch(
+        ::Heisenberg1D, ::$QTy, bc::OBC; beta::Real, J::Real=1.0, kwargs...
+    )
+        return fetch(XXZ1D(; J=J, Δ=1.0), $QTy(), bc; beta=beta, kwargs...)
+    end
+end
+
+# Site-resolved local observables (Vector{Float64}).
+for QTy in (:MagnetizationXLocal, :MagnetizationYLocal, :MagnetizationZLocal, :EnergyLocal)
+    @eval function fetch(
+        ::Heisenberg1D, ::$QTy, bc::OBC; beta::Real, J::Real=1.0, kwargs...
+    )
+        return fetch(XXZ1D(; J=J, Δ=1.0), $QTy(), bc; beta=beta, kwargs...)
+    end
+end
+
+# Two-point correlators (static + connected).
+for CorrTy in (:XXCorrelation, :YYCorrelation, :ZZCorrelation)
+    for mode in (:static, :connected)
+        @eval function fetch(
+            ::Heisenberg1D,
+            ::$CorrTy{$(QuoteNode(mode))},
+            bc::OBC;
+            beta::Real,
+            i::Int,
+            j::Int,
+            J::Real=1.0,
+            kwargs...,
+        )
+            return fetch(
+                XXZ1D(; J=J, Δ=1.0),
+                $CorrTy{$(QuoteNode(mode))}(),
+                bc;
+                beta=beta,
+                i=i,
+                j=j,
+                kwargs...,
+            )
+        end
+    end
+end
+
+# Entanglement: VonNeumannEntropy and RenyiEntropy.
+function fetch(
+    ::Heisenberg1D,
+    ::VonNeumannEntropy,
+    bc::OBC;
+    ℓ::Int,
+    beta::Real=Inf,
+    J::Real=1.0,
+    kwargs...,
+)
+    return fetch(XXZ1D(; J=J, Δ=1.0), VonNeumannEntropy(), bc; ℓ=ℓ, beta=beta, kwargs...)
+end
+
+function fetch(
+    ::Heisenberg1D, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, J::Real=1.0, kwargs...
+)
+    return fetch(XXZ1D(; J=J, Δ=1.0), q, bc; ℓ=ℓ, beta=beta, kwargs...)
+end
+
+# Mass gap.
+function fetch(::Heisenberg1D, ::MassGap, bc::OBC; J::Real=1.0, kwargs...)
+    return fetch(XXZ1D(; J=J, Δ=1.0), MassGap(), bc; kwargs...)
+end
+
+function fetch(::Heisenberg1D, ::MassGap, bc::Infinite; J::Real=1.0, kwargs...)
+    return fetch(XXZ1D(; J=J, Δ=1.0), MassGap(), bc; kwargs...)
 end

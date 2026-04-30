@@ -106,36 +106,18 @@ native_energy_granularity(::KitaevHoneycomb, ::Infinite) = :per_site
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Energy — Infinite (per site)
+#
+# The unified GS + thermal `Energy{:per_site}, Infinite` fetch lives in
+# `KitaevHoneycomb_thermal.jl` (sibling include).  At `beta = nothing`
+# (default) it returns the T = 0 ground-state value
+#
+#     ε_gs = − 1/(8π²) ∫₀^{2π} dθ₁ ∫₀^{2π} dθ₂ |f(θ₁, θ₂)|
+#
+# computed by adaptive nested Gauss-Kronrod quadrature.  With a real
+# `beta` it returns the matter-sector thermal value (see thermal file).
+# Defining the method there keeps the GS path bit-for-bit identical
+# while avoiding a method-overwrite warning on package load.
 # ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    fetch(model::KitaevHoneycomb, ::Energy{:per_site}, ::Infinite; rtol=1e-8) -> Float64
-
-Ground state energy **per site** in the thermodynamic limit:
-
-    ε_gs = − 1/(8π²) ∫₀^{2π} dθ₁ ∫₀^{2π} dθ₂ |f(θ₁, θ₂)|
-
-Computed as a nested Gauss-Kronrod quadrature; `rtol` sets the
-outer-integral tolerance and 10× `rtol` the inner.
-
-At the isotropic point `Kx = Ky = Kz = 1` this returns
-`ε_gs ≈ −0.78729862...` per site (Baskaran–Mandal–Shankar 2007,
-Eq. 9); for Kitaev's original `|K_γ| ≤ 1/2` convention the same call
-at `Kx = Ky = Kz = 0.5` gives `ε_gs ≈ −0.39364931...`, half of the
-`K = 1` value (H is linear in the couplings). Finite-size PBC sums
-converge to this TL value within `~10⁻³` at `Lx = Ly = 8` and
-`~10⁻⁶` at `Lx = Ly = 64` — see
-`test/models/test_KitaevHoneycomb.jl`.
-"""
-function fetch(
-    model::KitaevHoneycomb, ::Energy{:per_site}, ::Infinite; rtol::Float64=1e-8, kwargs...
-)
-    inner(θ₁) = first(
-        quadgk(θ₂ -> _kitaev_fk_abs(model, θ₁, θ₂), 0.0, 2π; rtol=rtol * 10, atol=1e-14)
-    )
-    I, _ = quadgk(inner, 0.0, 2π; rtol=rtol, atol=1e-14)
-    return -I / (8π^2)
-end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Energy — PBC finite (per site)
@@ -210,6 +192,15 @@ end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Energy — OBC finite (per site)
+#
+# The unified GS + thermal `Energy{:per_site}, OBC` fetch lives in
+# `KitaevHoneycomb_thermal.jl` (sibling include).  At `beta = nothing`
+# (default) it returns the T = 0 ground-state value
+# `−Σ σ_k / (2·Lx·Ly)`, where `σ_k` are the singular values of the
+# bipartite hopping matrix `M` defined below.  With a real `beta` it
+# returns the matter-sector thermal value (see thermal file).  Defining
+# the method there keeps the GS path bit-for-bit identical while avoiding
+# a method-overwrite warning on package load.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
@@ -244,26 +235,6 @@ function _obc_hopping_matrix(m::KitaevHoneycomb, Lx::Integer, Ly::Integer)
         end
     end
     return M
-end
-
-"""
-    fetch(model::KitaevHoneycomb, ::Energy{:per_site}, ::OBC; Lx, Ly) -> Float64
-
-Per-site ground state energy on a `Lx × Ly` honeycomb strip with open
-boundaries in both lattice directions. Uses the flux-free-sector
-ansatz (`u_{ij} = +1`) and diagonalises the bipartite hopping matrix M
-returned by [`_obc_hopping_matrix`](@ref). Singular values `σ_k` of M
-are the positive Majorana single-particle energies; ground state
-energy = `−Σₖ σₖ`; per site = that divided by `2·Lx·Ly`.
-
-`bc.N` is ignored; pass `Lx`, `Ly` explicitly.
-"""
-function fetch(model::KitaevHoneycomb, ::Energy{:per_site}, ::OBC; Lx::Integer, Ly::Integer)
-    Lx > 0 && Ly > 0 ||
-        error("KitaevHoneycomb OBC: Lx, Ly must be positive (got Lx=$Lx, Ly=$Ly).")
-    M = _obc_hopping_matrix(model, Lx, Ly)
-    σ = svdvals(M)
-    return -sum(σ) / (2 * Lx * Ly)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

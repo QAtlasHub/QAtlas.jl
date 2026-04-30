@@ -38,13 +38,16 @@ export Implementation, implementation_status, implementation_status_markdown
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
-export MagnetizationXLocal, MagnetizationZLocal, EnergyLocal
+export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
-export CentralCharge, LuttingerParameter
+export CentralCharge, LuttingerParameter, CorrelationLength
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
+
+# --- TFIM Infinite dynamic helpers ---
+export tfim_quasiparticle_dispersion, tfim_two_spinon_dos
 
 # --- Universality Classes ---
 export Universality, CriticalExponents, GrowthExponents
@@ -70,14 +73,26 @@ include("models/quantum/tightbinding/regular/Lieb.jl")
 include("models/quantum/tightbinding/regular/Triangular.jl")
 include("models/quantum/TFIM/TFIM.jl")
 include("models/quantum/TFIM/TFIM_dynamics.jl")
+include("models/quantum/TFIM/TFIM_xx_static.jl")
 include("models/quantum/TFIM/TFIM_thermal.jl")
+include("models/quantum/TFIM/TFIM_pbc_thermal.jl")
+include("models/quantum/TFIM/TFIM_zaxis.jl")
 include("models/quantum/TFIM/TFIM_local.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
+include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
+include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")
+include("models/quantum/Heisenberg/HeisenbergS1_observables.jl")
+include("models/quantum/Heisenberg/HeisenbergS1_registry.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
+include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
+include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/XXZ/XXZ.jl")
+include("models/quantum/XXZ/XXZ_thermal.jl")
+include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
+include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 
 # --- Deprecation shims (legacy API) ---
 # Loaded last so they can route into any already-registered concrete

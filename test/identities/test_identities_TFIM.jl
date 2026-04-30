@@ -59,9 +59,7 @@ end
     model = TFIM(; J=1.0, h=0.5)
     βs = [0.5, 1.0, 2.0]
     results = verify_thermodynamic_identities(
-        model, Infinite();
-        βs=βs,
-        identities=[SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION],
+        model, Infinite(); βs=βs, identities=[SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION]
     )
     @test length(results) == 3
     @test all(r.status === :pass for r in results)

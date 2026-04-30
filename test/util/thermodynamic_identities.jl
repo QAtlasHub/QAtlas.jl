@@ -57,8 +57,9 @@ struct ThermoIdentity
     model_filter::Function
 end
 
-ThermoIdentity(name, requires, check; model_filter=_ -> true) =
+function ThermoIdentity(name, requires, check; model_filter=_ -> true)
     ThermoIdentity(name, requires, check, model_filter)
+end
 
 """
     IdentityCheckResult

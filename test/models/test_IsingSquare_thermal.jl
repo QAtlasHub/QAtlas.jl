@@ -9,7 +9,7 @@ using ForwardDiff: ForwardDiff
 function _bruteforce_thermo(Lx::Int, Ly::Int, β::Real, J::Real=1.0)
     N = Lx * Ly
     energies = Float64[]
-    for cfg in 0:(2^N - 1)
+    for cfg in 0:(2 ^ N - 1)
         σ = [(cfg >> k) & 1 == 1 ? 1 : -1 for k in 0:(N - 1)]
         idx(i, j) = (i - 1) * Ly + j  # row i, col j
         E = 0.0
@@ -37,7 +37,7 @@ end
 @testset "IsingSquare PBC: ED comparison at small (Lx, Ly)" begin
     J = 1.0
     for (Lx, Ly) in [(3, 3), (3, 4), (4, 3)]   # avoid Lx,Ly=2 (transfer-matrix
-                                              # PBC double-counts bonds there)
+        # PBC double-counts bonds there)
         for β in (0.1, 0.3, 0.6)
             m = IsingSquare(; J=J)
             ed = _bruteforce_thermo(Lx, Ly, β, J)

@@ -37,9 +37,7 @@ end
     # central difference.
     model = IsingSquare(; J=1.0)
     βs = [0.15, 0.30, 0.65]
-    results = verify_thermodynamic_identities(
-        model, Infinite(); βs=βs, atol=1e-3
-    )
+    results = verify_thermodynamic_identities(model, Infinite(); βs=βs, atol=1e-3)
 
     @test length(results) == 12
     @test all(r.status !== :fail for r in results)

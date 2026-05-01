@@ -433,3 +433,50 @@
 # Note: the static `ZZStructureFactor, Infinite` is registered via the
 # router method in TFIM_infinite_dynamics.jl (when ω === nothing).
 # The dynamic branch (ω::Real) is the new content.
+
+# ── Tier 3: σʸ correlators + MagnetizationY/SusceptibilityYY OBC ────
+# (defined in TFIM_yy.jl; closes the YY gap left by PR #130 Tier 2)
+@register(
+    TFIM,
+    YYCorrelation{:static},
+    OBC,
+    method=:pfaffian,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_yy.jl",
+    notes="σʸ_i = -(-i)^{i-1} γ_1 … γ_{2i-2} γ_{2i}; same Pfaffian machinery as σᶻ.",
+)
+@register(
+    TFIM,
+    YYCorrelation{:connected},
+    OBC,
+    method=:pfaffian,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_yy.jl",
+    notes="Connected = static for TFIM since ⟨σʸ⟩ = 0 by parity (odd Majorana product).",
+)
+@register(
+    TFIM,
+    YYCorrelation{:dynamic},
+    OBC,
+    method=:pfaffian,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_yy.jl",
+)
+@register(
+    TFIM,
+    MagnetizationY,
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_yy.jl",
+    notes="Identically 0 in any Gaussian state (odd-Majorana product).",
+)
+@register(
+    TFIM,
+    SusceptibilityYY,
+    OBC,
+    method=:pfaffian,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_yy.jl",
+    notes="Per-site β·Var(M_y)/N via Wick contraction over O(N²) pairs.",
+)

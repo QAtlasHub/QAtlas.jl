@@ -6,7 +6,6 @@ using QAtlas, Test, LinearAlgebra
 const _SY = ComplexF64[0 -im; im 0]
 
 @testset "TFIM YY OBC: static / connected / dynamic correlators" begin
-
     @testset "ED comparison: static ⟨σʸ_i σʸ_j⟩_β" begin
         for h in (0.5, 1.0, 1.5)
             N = 4
@@ -50,12 +49,7 @@ const _SY = ComplexF64[0 -im; im 0]
         for h in (0.5, 1.0, 1.5), β in (1.0, Inf)
             for i in 2:7, j in i:7
                 v_st = QAtlas.fetch(
-                    TFIM(; J=1.0, h=h),
-                    YYCorrelation{:static}(),
-                    OBC(8);
-                    beta=β,
-                    i=i,
-                    j=j,
+                    TFIM(; J=1.0, h=h), YYCorrelation{:static}(), OBC(8); beta=β, i=i, j=j
                 )
                 v_cn = QAtlas.fetch(
                     TFIM(; J=1.0, h=h),
@@ -75,17 +69,9 @@ const _SY = ComplexF64[0 -im; im 0]
         model = TFIM(; J=1.0, h=h)
         for i in 2:(N - 1), j in i:(N - 1)
             c_dyn = QAtlas.fetch(
-                model,
-                YYCorrelation{:dynamic}(),
-                OBC(N);
-                i=i,
-                j=j,
-                t=0.0,
-                beta=β,
+                model, YYCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=0.0, beta=β
             )
-            c_st = QAtlas.fetch(
-                model, YYCorrelation{:static}(), OBC(N); i=i, j=j, beta=β
-            )
+            c_st = QAtlas.fetch(model, YYCorrelation{:static}(), OBC(N); i=i, j=j, beta=β)
             @test imag(c_dyn) ≈ 0 atol = 1e-12
             @test real(c_dyn) ≈ c_st atol = 1e-10
         end
@@ -96,22 +82,10 @@ const _SY = ComplexF64[0 -im; im 0]
         model = TFIM(; J=1.0, h=h)
         for i in (3, 5), t in (0.4, 1.5)
             c_pos = QAtlas.fetch(
-                model,
-                YYCorrelation{:dynamic}(),
-                OBC(N);
-                i=i,
-                j=i,
-                t=t,
-                beta=β,
+                model, YYCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=t, beta=β
             )
             c_neg = QAtlas.fetch(
-                model,
-                YYCorrelation{:dynamic}(),
-                OBC(N);
-                i=i,
-                j=i,
-                t=-t,
-                beta=β,
+                model, YYCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=(-t), beta=β
             )
             @test real(c_pos) ≈ real(c_neg) atol = 1e-10
             @test imag(c_pos) ≈ -imag(c_neg) atol = 1e-10
@@ -131,7 +105,8 @@ end
         N = 4
         H = _build_tfim_dense(N, 1.0, h)
         E, V = eigen(Hermitian(H))
-        ws = exp.(-β .* (E .- E[1])); ws ./= sum(ws)
+        ws = exp.(-β .* (E .- E[1]));
+        ws ./= sum(ws)
         ρ = V * (Diagonal(ComplexF64.(ws))) * V'
         M_y = sum(_op_site(_SY, k, N) for k in 1:N)
         M2 = real(tr(ρ * (M_y * M_y)))

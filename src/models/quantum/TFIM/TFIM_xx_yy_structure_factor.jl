@@ -116,9 +116,7 @@ Static transverse structure factor `S_xx(q, β)` for the OBC TFIM with
 N sites.  Defined as `(1/N) Σ_{i,j} e^{-iq(i-j)} ⟨σˣ_i σˣ_j⟩_β` with σˣ
 correlators from the t = 0 slice of the free-fermion Pfaffian formula.
 """
-function fetch(
-    model::TFIM, ::XXStructureFactor, bc::OBC; beta::Real, q::Real, kwargs...
-)
+function fetch(model::TFIM, ::XXStructureFactor, bc::OBC; beta::Real, q::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     return _xx_static_structure_factor(N, model.J, model.h, beta, q)
 end
@@ -130,9 +128,7 @@ end
 Static σʸ structure factor for the OBC TFIM.  Companion of
 [`XXStructureFactor`](@ref).
 """
-function fetch(
-    model::TFIM, ::YYStructureFactor, bc::OBC; beta::Real, q::Real, kwargs...
-)
+function fetch(model::TFIM, ::YYStructureFactor, bc::OBC; beta::Real, q::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     return _yy_static_structure_factor(N, model.J, model.h, beta, q)
 end

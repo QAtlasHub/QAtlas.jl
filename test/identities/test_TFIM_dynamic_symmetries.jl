@@ -33,22 +33,10 @@ using LinearAlgebra: norm
         N = 8
         for i in (3, 4, 5), t in (0.4, 1.2, 2.5)
             c_pos = QAtlas.fetch(
-                model,
-                ZZCorrelation{:dynamic}(),
-                OBC(N);
-                i=i,
-                j=i,
-                t=t,
-                beta=β,
+                model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=t, beta=β
             )
             c_neg = QAtlas.fetch(
-                model,
-                ZZCorrelation{:dynamic}(),
-                OBC(N);
-                i=i,
-                j=i,
-                t=-t,
-                beta=β,
+                model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=(-t), beta=β
             )
             @test real(c_pos) ≈ real(c_neg) atol = 1e-10
             @test imag(c_pos) ≈ -imag(c_neg) atol = 1e-10
@@ -64,7 +52,7 @@ end
             model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=t, beta=β
         )
         c_neg = QAtlas.fetch(
-            model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=-t, beta=β
+            model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=i, t=(-t), beta=β
         )
         @test real(c_pos) ≈ real(c_neg) atol = 1e-10
         @test imag(c_pos) ≈ -imag(c_neg) atol = 1e-10
@@ -81,22 +69,10 @@ end
     model = TFIM(; J=1.0, h=h)
     for (i, j) in ((3, 5), (2, 6), (3, 7)), t in (0.5, 1.7)
         c_ij_pos = QAtlas.fetch(
-            model,
-            ZZCorrelation{:dynamic}(),
-            OBC(N);
-            i=i,
-            j=j,
-            t=t,
-            beta=β,
+            model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=t, beta=β
         )
         c_ji_neg = QAtlas.fetch(
-            model,
-            ZZCorrelation{:dynamic}(),
-            OBC(N);
-            i=j,
-            j=i,
-            t=-t,
-            beta=β,
+            model, ZZCorrelation{:dynamic}(), OBC(N); i=j, j=i, t=(-t), beta=β
         )
         @test conj(c_ij_pos) ≈ c_ji_neg atol = 1e-10
     end
@@ -109,22 +85,10 @@ end
     model = TFIM(; J=1.0, h=h)
     for (i, j) in ((3, 5), (4, 7)), t in (0.6, 1.4)
         c_ij_pos = QAtlas.fetch(
-            model,
-            ZZCorrelation{:dynamic}(),
-            OBC(N);
-            i=i,
-            j=j,
-            t=t,
-            beta=β,
+            model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=t, beta=β
         )
         c_ji_neg = QAtlas.fetch(
-            model,
-            ZZCorrelation{:dynamic}(),
-            OBC(N);
-            i=j,
-            j=i,
-            t=-t,
-            beta=β,
+            model, ZZCorrelation{:dynamic}(), OBC(N); i=j, j=i, t=(-t), beta=β
         )
         @test conj(c_ij_pos) ≈ c_ji_neg atol = 1e-10
     end
@@ -140,17 +104,9 @@ end
         N = 8
         for i in 2:(N - 1), j in i:(N - 1)
             c_dyn = QAtlas.fetch(
-                model,
-                ZZCorrelation{:dynamic}(),
-                OBC(N);
-                i=i,
-                j=j,
-                t=0.0,
-                beta=β,
+                model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=0.0, beta=β
             )
-            c_stat = QAtlas.fetch(
-                model, ZZCorrelation{:static}(), OBC(N); i=i, j=j, beta=β
-            )
+            c_stat = QAtlas.fetch(model, ZZCorrelation{:static}(), OBC(N); i=i, j=j, beta=β)
             @test imag(c_dyn) ≈ 0 atol = 1e-12
             @test real(c_dyn) ≈ c_stat atol = 1e-10
         end
@@ -162,13 +118,7 @@ end
     model = TFIM(; J=1.0, h=h)
     for i in 2:(N - 1), j in i:(N - 1)
         c_dyn = QAtlas.fetch(
-            model,
-            XXCorrelation{:dynamic}(),
-            OBC(N);
-            i=i,
-            j=j,
-            t=0.0,
-            beta=β,
+            model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=0.0, beta=β
         )
         c_stat = QAtlas.fetch(model, XXCorrelation{:static}(), OBC(N); i=i, j=j, beta=β)
         @test imag(c_dyn) ≈ 0 atol = 1e-12
@@ -192,36 +142,21 @@ end
     i, j = 4, 12
     Δr = j - i  # = 8
 
-    c_static = QAtlas.fetch(
-        model, ZZCorrelation{:static}(), OBC(N); i=i, j=j, beta=Inf
-    )
+    c_static = QAtlas.fetch(model, ZZCorrelation{:static}(), OBC(N); i=i, j=j, beta=Inf)
 
     # Just outside lightcone: t = Δr/(4 v_max) → exponential decay.
     t_out = Δr / (4 * v_max)
     c_out = abs(
         QAtlas.fetch(
-            model,
-            ZZCorrelation{:dynamic}(),
-            OBC(N);
-            i=i,
-            j=j,
-            t=t_out,
-            beta=Inf,
+            model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=t_out, beta=Inf
         ) - c_static,
     )
 
     # Well inside lightcone: t = 4 Δr / v_max → O(1) deviation.
     t_in = 4 * Δr / v_max
     c_in = abs(
-        QAtlas.fetch(
-            model,
-            ZZCorrelation{:dynamic}(),
-            OBC(N);
-            i=i,
-            j=j,
-            t=t_in,
-            beta=Inf,
-        ) - c_static,
+        QAtlas.fetch(model, ZZCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=t_in, beta=Inf) -
+        c_static,
     )
 
     @test c_out < c_in    # outside-lightcone deviation is smaller
@@ -246,11 +181,9 @@ end
     δ = 1e-4
     for i in (3, 5)
         j = i + 1   # nearest neighbour, well inside the bulk
-        c_p = QAtlas.fetch(
-            model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=δ, beta=β
-        )
+        c_p = QAtlas.fetch(model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=δ, beta=β)
         c_m = QAtlas.fetch(
-            model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=-δ, beta=β
+            model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=(-δ), beta=β
         )
         re_slope = (real(c_p) - real(c_m)) / (2δ)
         im_slope = (imag(c_p) - imag(c_m)) / (2δ)
@@ -262,12 +195,8 @@ end
         @test abs(im_slope) > 1e-4
     end
     # Locality check: at |i − j| = 3 the slope is identically 0.
-    c_p = QAtlas.fetch(
-        model, XXCorrelation{:dynamic}(), OBC(N); i=3, j=6, t=δ, beta=β
-    )
-    c_m = QAtlas.fetch(
-        model, XXCorrelation{:dynamic}(), OBC(N); i=3, j=6, t=-δ, beta=β
-    )
+    c_p = QAtlas.fetch(model, XXCorrelation{:dynamic}(), OBC(N); i=3, j=6, t=δ, beta=β)
+    c_m = QAtlas.fetch(model, XXCorrelation{:dynamic}(), OBC(N); i=3, j=6, t=(-δ), beta=β)
     far_im_slope = (imag(c_p) - imag(c_m)) / (2δ)
     @test abs(far_im_slope) < 1e-10
 end

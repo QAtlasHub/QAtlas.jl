@@ -124,7 +124,9 @@ end
 
 @testset "Markdown rendering produces a non-empty GFM table" begin
     io = IOBuffer()
-    implementation_status_markdown(io, implementation_status()[1:3])
+    # Pick TFIM-only rows so this test stays stable as more models get
+    # registered ahead of TFIM in include order.
+    implementation_status_markdown(io, implementation_status(TFIM)[1:3])
     md = String(take!(io))
     # Header + alignment row + 3 data rows = 5 lines minimum
     lines = split(strip(md), '\n')

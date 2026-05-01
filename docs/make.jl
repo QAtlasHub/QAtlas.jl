@@ -17,6 +17,14 @@ makedocs(;
         canonical="https://codes.sota-shimozono.com/QAtlas.jl/stable/",
         prettyurls=get(ENV, "CI", "false") == "true",
         edit_link="main",
+        # `index.md` includes a full `@autodocs` of every QAtlas binding; the
+        # generated HTML grew past the default 200 KiB threshold once the
+        # observable surface expanded in v0.17/0.18 (Tier 1 + Tier 2 brought
+        # ~80 new fetch methods).  Bump the size threshold instead of
+        # splitting the autodocs page (the user explicitly preserved the
+        # `Modules = [QAtlas]` API layout).
+        size_threshold=600_000,
+        size_threshold_warn=300_000,
         mathengine=MathJax3(
             Dict(
                 :tex => Dict(
@@ -42,6 +50,7 @@ makedocs(;
                 "TFIM" => "models/quantum/tfim.md",
                 "Heisenberg" => "models/quantum/heisenberg.md",
                 "XXZ" => "models/quantum/xxz.md",
+                "Kitaev Honeycomb" => "models/quantum/kitaev-honeycomb.md",
                 "Tight-Binding" => [
                     "models/quantum/tightbinding/index.md",
                     "Honeycomb" => "models/quantum/tightbinding/honeycomb.md",
@@ -66,6 +75,7 @@ makedocs(;
             "Cross-Checks" => "verification/cross-checks.md",
             "Entanglement" => "verification/entanglement.md",
             "Disordered" => "verification/disordered.md",
+            "Identity Harness" => "verification/identity-harness.md",
         ],
         "Methods" => [
             "methods/index.md",

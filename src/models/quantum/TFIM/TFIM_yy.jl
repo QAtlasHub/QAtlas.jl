@@ -44,7 +44,8 @@ end
 
 `⟨σʸ_i(t) σʸ_j(0)⟩_β` from a precomputed thermal Majorana covariance `Σ`
 and time-evolution matrix `R = exp(h·t)`.  Same structure as
-[`_sz_sz_corr_from_cached`](@ref) — only the index lists differ.
+`_sz_sz_corr_from_cached` (in `TFIM_dynamics.jl`) — only the index lists
+differ.
 
 The overall phase is `(-i)^{i+j-2}`: each σʸ_k contributes
 `-(-i)^{k-1}`; the two minus signs cancel, leaving `(-i)^{i+j-2}`.

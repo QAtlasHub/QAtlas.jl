@@ -67,6 +67,8 @@ include("universalities/ONModel.jl")
 # tight-binding Hamiltonians by lattice type (regular = Bloch-diagonalisable;
 # future: quasicrystalline, fractal, disordered).
 include("models/classical/IsingSquare/IsingSquare.jl")
+include("models/classical/IsingSquare/IsingSquare_thermal.jl")
+include("models/classical/IsingSquare/IsingSquare_registry.jl")
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

@@ -217,9 +217,7 @@ end
     for k in 1:5
         J = 0.5 + rand()
         N = rand((3, 4))
-        s = QAtlas.fetch(
-            S1Heisenberg1D(; J=J), ThermalEntropy(), OBC(N); beta=1e-4
-        )
+        s = QAtlas.fetch(S1Heisenberg1D(; J=J), ThermalEntropy(), OBC(N); beta=1e-4)
         @test s ≈ log(3) atol = 1e-3
     end
 end

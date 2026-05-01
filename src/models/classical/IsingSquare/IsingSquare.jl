@@ -195,6 +195,23 @@ function fetch(
     return tr(T^Lx)
 end
 
+# BC-aware delegator: required by the registry drift guard so the
+# `(IsingSquare, PartitionFunction, PBC)` triple resolves to a
+# non-catch-all fetch method.  PBC is the only natural BC for the
+# transfer-matrix Z; OBC (open horizontal axis) would simply omit the
+# wrap-around bond and is not registered.
+function fetch(
+    m::IsingSquare,
+    q::PartitionFunction,
+    ::PBC;
+    β::Real,
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    J::Real=m.J,
+)
+    return fetch(m, q; β=β, Lx=Lx, Ly=Ly, J=J)
+end
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # Dispatch tags: Onsager + Yang exact results
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -238,6 +255,12 @@ function fetch(m::IsingSquare, ::CriticalTemperature; J::Real=m.J)
     return 2J / log(1 + sqrt(2))
 end
 
+# BC-aware delegator: registry drift-guard companion.  `T_c` is a
+# property of the thermodynamic limit, so the natural BC is `Infinite`.
+function fetch(m::IsingSquare, q::CriticalTemperature, ::Infinite; J::Real=m.J)
+    return fetch(m, q; J=J)
+end
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # fetch: Yang spontaneous magnetization
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -273,4 +296,13 @@ function fetch(m::IsingSquare, ::SpontaneousMagnetization; β::Real, J::Real=m.J
     else
         return (1 - s^(-4))^(1 / 8)
     end
+end
+
+# BC-aware delegator: registry drift-guard companion.  Yang's
+# spontaneous magnetization is a thermodynamic-limit quantity, so the
+# natural BC is `Infinite`.
+function fetch(
+    m::IsingSquare, q::SpontaneousMagnetization, ::Infinite; β::Real, J::Real=m.J
+)
+    return fetch(m, q; β=β, J=J)
 end

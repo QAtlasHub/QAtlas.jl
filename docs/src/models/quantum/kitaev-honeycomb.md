@@ -1,0 +1,91 @@
+# KitaevHoneycomb — Honeycomb Lattice Kitaev Model
+
+!!! warning "Status: Unstable (v0.18.x)"
+    Matter-Majorana finite-T サーフェスは v0.17 で導入。**flux-free 近似**であり flux gap T ≪ Δ_v でのみ valid。`SusceptibilityXX/YY/ZZ` および `Magnetization{X,Y,Z}` は **未実装** — σᵅ matrix elements が flux pair を励起するため flux-free sector で恒等的に消える。完全な finite-T は flux-sector Monte Carlo (Nasu et al. 2014) が必要、今回の射程外。
+
+## Hamiltonian
+
+H = − Σ_{⟨ij⟩ ∈ x-bonds} K_x σˣᵢ σˣⱼ
+    − Σ_{⟨ij⟩ ∈ y-bonds} K_y σʸᵢ σʸⱼ
+    − Σ_{⟨ij⟩ ∈ z-bonds} K_z σᶻᵢ σᶻⱼ
+
+(σ-convention; eigenvalues ±1)
+
+## Phases (Kitaev 2006)
+
+- isotropic gapless (B-phase): each |K_α| ≤ sum of others
+- anisotropic gapped (A_x, A_y, A_z phases): one K dominates
+- gap: Δ = 2·max(0, |K_max| − |K_other₁| − |K_other₂|)
+
+## Coverage Matrix
+
+| Quantity | OBC | PBC | Infinite |
+|---|---|---|---|
+| Energy{:per_site} (T=0) | ✅ SVD on hopping matrix | ✅ 4-flux-sector min | ✅ BZ integral |
+| Energy{:per_site} (T>0) | ✅ matter sum | (deferred) | ✅ BZ integral |
+| FreeEnergy / Entropy / SpecificHeat | ✅ matter sum | — | ✅ BZ integral |
+| MassGap | — | — | ✅ analytic |
+| Mag{X,Y,Z} / Susc{XX,YY,ZZ} | not implemented (deferred) | — | not implemented |
+| ZZStructureFactor | — | — | static + dynamic via TFIM-style proxy* |
+
+*ZZStructureFactor router を参照 (TFIM_infinite_dynamics.jl に同様の実装あり; Kitaev 自身の動的 SF は別 issue)。
+
+## v0.17 Highlights — Matter-Majorana Free-Fermion Finite-T
+
+Lieb 1994: GS は flux-free sector に固定。flux-free セクター内では matter Majorana が自由フェルミオン hopping を成し、
+
+    Z_matter(β) = ∏_k 2 cosh(β λ_k)
+
+(λ_k は bipartite hopping matrix M の正の SVD 値; λ_k は full Majorana eigenvalue 規約 — 半固有値ではなく)。
+
+per-site (= per Majorana site, 2 atoms per unit cell) 物理量:
+
+```
+ε(β) = -(1/N_sites) Σ_k λ_k tanh(β λ_k)
+f(β) = -(1/(N_sites β)) Σ_k log(2 cosh(β λ_k))
+s(β) = (1/N_sites) Σ_k [log(2 cosh(βλ)) − βλ tanh(βλ)]
+c_v(β) = (1/N_sites) Σ_k (βλ)² sech²(βλ)
+```
+
+Infinite では `Σ_k → ∫_BZ d²θ / (2π)²` (factor 2 で 2 atoms/cell)。
+
+## Code Examples
+
+```julia
+m = KitaevHoneycomb(Kx=1.0, Ky=1.0, Kz=1.0)  # isotropic gapless
+
+# T = 0 GS
+QAtlas.fetch(m, Energy(:per_site), Infinite())   # Baskaran-Mandal-Shankar 2007 ≈ -0.787
+QAtlas.fetch(m, Energy(:per_site), OBC(0); Lx=4, Ly=4)
+QAtlas.fetch(m, Energy(:per_site), PBC(0); Lx=4, Ly=4)
+QAtlas.fetch(m, MassGap(), Infinite())  # = 0 (gapless)
+
+# T > 0 matter sector
+β = 5.0
+QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
+QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=β)
+
+# Anisotropic gapped phase
+m_az = KitaevHoneycomb(Kx=0.5, Ky=0.5, Kz=2.0)
+QAtlas.fetch(m_az, MassGap(), Infinite())  # = 2(2 − 1) = 2
+```
+
+## Validity Boundary of Matter-Sector Finite-T
+
+flux gap Δ_v ≈ 0.07 |K| (isotropic) — 凍結する温度スケール。
+
+| Regime | matter-only valid? |
+|---|---|
+| T ≪ Δ_v | ✅ |
+| T ~ Δ_v | × (flux fluctuations dominate, Nasu-Udagawa-Motome 2014) |
+| T ≫ Δ_v ≪ K | × |
+
+## References
+- Kitaev 2006 — exactly solved model and beyond
+- Lieb 1994 — flux-free ground state theorem
+- Baskaran-Mandal-Shankar 2007 — TL ε_gs ≈ −0.787 |K|
+- Nasu-Udagawa-Motome 2014 — full flux-sector finite-T (sign-free QMC)
+- Loss-Pu 2008 — spin correlators (z-bond local, off-diagonal)
+
+## Related
+- `TFIM` — 1D version of "single Majorana species" (BdG hopping); Kitaev's matter sector is the 2D analogue

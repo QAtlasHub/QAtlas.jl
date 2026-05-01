@@ -82,8 +82,8 @@ end
 Adaptive nested Gauss-Kronrod quadrature of `integrand(θ₁, θ₂)` over the
 2D Brillouin zone `(θ₁, θ₂) ∈ [0, 2π)²`.  Mirrors the inner / outer
 tolerance choice already used by the T = 0 `Energy` integration in
-[`KitaevHoneycomb.jl`](@ref).  Returns the integral value (the
-contribution of the prefactor `1/((2π)²)` is left to the caller).
+`KitaevHoneycomb.jl`.  Returns the integral value (the contribution
+of the prefactor `1/((2π)²)` is left to the caller).
 """
 function _kitaev_bz_integral(integrand, model::KitaevHoneycomb; rtol::Float64=1e-8)
     inner(θ₁) = first(

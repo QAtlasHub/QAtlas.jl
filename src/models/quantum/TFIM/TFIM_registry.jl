@@ -480,3 +480,39 @@
     tested_in="test/models/test_TFIM_yy.jl",
     notes="Per-site β·Var(M_y)/N via Wick contraction over O(N²) pairs.",
 )
+
+# ── Tier 3: XX / YY static structure factors at OBC + Infinite proxy ─
+@register(
+    TFIM,
+    XXStructureFactor,
+    OBC,
+    method=:pfaffian,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+    notes="(1/N) Σ_{ij} e^{-iq(i-j)} ⟨σˣᵢ σˣⱼ⟩ from t=0 Pfaffian correlator.",
+)
+@register(
+    TFIM,
+    YYStructureFactor,
+    OBC,
+    method=:pfaffian,
+    reliability=:high,
+    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+)
+@register(
+    TFIM,
+    XXStructureFactor,
+    Infinite,
+    method=:pfaffian,
+    reliability=:medium,
+    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+    notes="OBC large-N proxy (N_proxy kwarg).",
+)
+@register(
+    TFIM,
+    YYStructureFactor,
+    Infinite,
+    method=:pfaffian,
+    reliability=:medium,
+    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+)

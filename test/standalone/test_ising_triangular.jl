@@ -79,8 +79,7 @@ end
 
     @testset "FM (J < 0) — ordered ground state" begin
         for J in (-0.1, -1.0, -3.5)
-            @test QAtlas.fetch(IsingTriangular(; J=J), ResidualEntropy(), Infinite()) ==
-                0.0
+            @test QAtlas.fetch(IsingTriangular(; J=J), ResidualEntropy(), Infinite()) == 0.0
         end
     end
 

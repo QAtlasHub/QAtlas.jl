@@ -9,6 +9,7 @@ Hamiltonian, all stored results with derivations and references, the
 
 - [Classical Models](classical/index.md)
   - [2D Ising on the Square Lattice](classical/ising-square.md)
+  - [Six-Vertex / Ice Rule (Lieb 1967)](classical/six-vertex.md)
 - [Quantum Models](quantum/index.md)
   - [Transverse-Field Ising Model](quantum/tfim.md)
   - [Heisenberg Chain](quantum/heisenberg.md)

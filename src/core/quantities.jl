@@ -152,6 +152,19 @@ struct RenyiEntropy <: AbstractQuantity
     end
 end
 
+"""
+    ResidualEntropy() <: AbstractQuantity
+
+Zero-temperature configurational (residual) entropy density.  Real-
+valued, non-negative; non-zero in the presence of macroscopic
+ground-state degeneracy (e.g. ice rule, frustrated Ising AFM,
+Pauling-1935-style models).  Distinct from [`ThermalEntropy`](@ref):
+`ThermalEntropy` is a finite-temperature thermodynamic quantity, while
+`ResidualEntropy` is the lim_{T -> 0} S(T) / N residual term.
+"""
+struct ResidualEntropy <: AbstractQuantity end
+
+
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
 """

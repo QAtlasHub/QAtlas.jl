@@ -235,12 +235,28 @@ for QTy in (
 end
 
 # Site-resolved local observables (Vector{Float64}).
-for QTy in (:MagnetizationXLocal, :MagnetizationYLocal, :MagnetizationZLocal, :EnergyLocal)
+# Note: `MagnetizationXLocal` is parametric on the mode `M` (equilibrium / quench);
+# Heisenberg1D currently only implements the equilibrium branch so we dispatch
+# explicitly on `MagnetizationXLocal{:equilibrium}` to avoid accidentally
+# capturing quench requests that this model does not support.
+for QTy in (:MagnetizationYLocal, :MagnetizationZLocal, :EnergyLocal)
     @eval function fetch(
         ::Heisenberg1D, ::$QTy, bc::OBC; beta::Real, J::Real=1.0, kwargs...
     )
         return fetch(XXZ1D(; J=J, Δ=1.0), $QTy(), bc; beta=beta, kwargs...)
     end
+end
+function fetch(
+    ::Heisenberg1D,
+    ::MagnetizationXLocal{:equilibrium},
+    bc::OBC;
+    beta::Real,
+    J::Real=1.0,
+    kwargs...,
+)
+    return fetch(
+        XXZ1D(; J=J, Δ=1.0), MagnetizationXLocal(), bc; beta=beta, kwargs...
+    )
 end
 
 # Two-point correlators (static + connected).

@@ -157,11 +157,31 @@
 )
 @register(
     TFIM,
-    MagnetizationXLocal,
+    MagnetizationXLocal{:equilibrium},
     OBC,
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_local.jl"
+)
+@register(
+    TFIM,
+    MagnetizationXLocal{:quench},
+    OBC,
+    method=:majorana_evolution,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
+    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
+    notes="Sudden h_0 -> h_f quench; Sigma(t) = R(t) Sigma_0 R(t)^T; sigma^x_i(t) = Sigma(t)[2i-1, 2i].",
+)
+@register(
+    TFIM,
+    MagnetizationXLocal{:quench},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
+    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
+    notes="Closed-form k-integral over the Bogoliubov angles theta_k(h_0,f); QuadGK rtol=1e-12.",
 )
 @register(
     TFIM,

@@ -23,7 +23,7 @@
 _zz_bond(Σ::AbstractMatrix, i::Int) = Σ[2i, 2i + 1]
 
 """
-    fetch(model::TFIM, ::MagnetizationXLocal, bc::OBC; beta::Float64, kwargs...)
+    fetch(model::TFIM, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Float64, kwargs...)
         -> Vector{Float64}
 
 Site-resolved transverse magnetisation `[⟨σˣ_i⟩_β for i = 1:N]` of the OBC
@@ -32,7 +32,7 @@ covariance as `Σ[2i-1, 2i]`.  `N` is taken from `bc.N`.
 
 `beta = Inf` falls back to the ground state.
 """
-function fetch(model::TFIM, ::MagnetizationXLocal, bc::OBC; beta::Float64, kwargs...)
+function fetch(model::TFIM, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Float64, kwargs...)
     N = _bc_size(bc, kwargs)
     hmat = _majorana_ham(N, model.J, model.h)
     Σ = _majorana_thermal_covariance(hmat, beta)

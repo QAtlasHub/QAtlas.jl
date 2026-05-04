@@ -104,7 +104,7 @@
 # ── Local site-resolved observables ───────────────────────────────────
 @register(
     Heisenberg1D,
-    MagnetizationXLocal,
+    MagnetizationXLocal{:equilibrium},
     OBC,
     method=:dense_ed,
     reliability=:high,

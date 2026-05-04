@@ -7,6 +7,7 @@ export fetch
 
 # --- Classical Models ---
 export IsingSquare, PartitionFunction, CriticalTemperature, SpontaneousMagnetization
+export IsingTriangular
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -36,7 +37,7 @@ export Implementation, implementation_status, implementation_status_markdown
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
-export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
+export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
@@ -69,6 +70,8 @@ include("universalities/ONModel.jl")
 include("models/classical/IsingSquare/IsingSquare.jl")
 include("models/classical/IsingSquare/IsingSquare_thermal.jl")
 include("models/classical/IsingSquare/IsingSquare_registry.jl")
+include("models/classical/IsingTriangular/IsingTriangular.jl")
+include("models/classical/IsingTriangular/IsingTriangular_registry.jl")
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

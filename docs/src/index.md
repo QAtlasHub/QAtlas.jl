@@ -43,6 +43,7 @@ Exact solutions for specific physical models.
 |-------|------|-------------|------|
 | TFIM | Quantum | Energy, gap, thermal observables, entanglement | [→](models/quantum/tfim.md) |
 | IsingSquare | Classical | $Z$, $T_c$, $M(T)$ | [→](models/classical/ising-square.md) |
+| IsingTriangular | Classical | Frustrated AFM ($T_c = 0$) + Wannier residual entropy; FM Houtappel | [→](models/classical/ising-triangular.md) |
 | Heisenberg1D | Quantum | Dimer, 4-site PBC, Bethe $e_0$ | [→](models/quantum/heisenberg.md) |
 | XXZ1D | Quantum | Exact $\Delta \in \{-1, 0, 1\}$ + Luttinger $K, u$ | [→](models/quantum/xxz.md) |
 | Honeycomb TB | Quantum | Bloch spectrum (honeycomb / graphene) | [→](models/quantum/tightbinding/honeycomb.md) |

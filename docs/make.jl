@@ -44,6 +44,7 @@ makedocs(;
             "Classical" => [
                 "models/classical/index.md",
                 "Ising Square" => "models/classical/ising-square.md",
+                "Ising Triangular" => "models/classical/ising-triangular.md",
             ],
             "Quantum" => [
                 "models/quantum/index.md",

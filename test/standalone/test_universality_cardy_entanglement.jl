@@ -47,13 +47,18 @@ using QAtlas, Test
         L = 64.0
         Smid = QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=L / 2, L=L)
         Soff1 = QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=L / 4, L=L)
-        Soff2 =
-            QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=3 * L / 8, L=L)
+        Soff2 = QAtlas.fetch(
+            Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=3 * L / 8, L=L
+        )
         @test Smid ≥ Soff1
         @test Smid ≥ Soff2
         # Endpoints: ℓ = 0 and ℓ = L give log(0) → -Inf
-        Send_left = QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=0.0, L=L)
-        Send_right = QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=L, L=L)
+        Send_left = QAtlas.fetch(
+            Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=0.0, L=L
+        )
+        Send_right = QAtlas.fetch(
+            Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=L, L=L
+        )
         @test Send_left == -Inf
         @test Send_right == -Inf
     end
@@ -86,16 +91,15 @@ using QAtlas, Test
         @test QAtlas.fetch(Universality(:Ising), CentralCharge()) == 1 // 2
 
         ℓ, L = 4.0, 8.0
-        S_potts3 =
-            QAtlas.fetch(Universality(:Potts3), VonNeumannEntropy(), PBC(); ℓ=ℓ, L=L)
+        S_potts3 = QAtlas.fetch(Universality(:Potts3), VonNeumannEntropy(), PBC(); ℓ=ℓ, L=L)
         @test S_potts3 ≈ ((4 / 5) / 3) * log((L / π) * sin(π * ℓ / L)) atol = 1e-12
 
-        S_potts4_inf =
-            QAtlas.fetch(Universality(:Potts4), VonNeumannEntropy(), Infinite(); ℓ=10.0)
+        S_potts4_inf = QAtlas.fetch(
+            Universality(:Potts4), VonNeumannEntropy(), Infinite(); ℓ=10.0
+        )
         @test S_potts4_inf ≈ (1 / 3) * log(10.0) atol = 1e-12
 
-        S_xy_obc =
-            QAtlas.fetch(Universality(:XY), VonNeumannEntropy(), OBC(); ℓ=ℓ, L=L)
+        S_xy_obc = QAtlas.fetch(Universality(:XY), VonNeumannEntropy(), OBC(); ℓ=ℓ, L=L)
         @test S_xy_obc ≈ (1 / 6) * log((2 * L / π) * sin(π * ℓ / L)) atol = 1e-12
     end
 
@@ -114,12 +118,8 @@ using QAtlas, Test
 
     # ── d ≥ 3 Ising / XY: not a 1+1D CFT, error out ─────────────────────────
     @testset "d ≥ 3 has no 1+1D-CFT central charge" begin
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:Ising), CentralCharge(); d=3
-        )
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:XY), CentralCharge(); d=3
-        )
+        @test_throws ErrorException QAtlas.fetch(Universality(:Ising), CentralCharge(); d=3)
+        @test_throws ErrorException QAtlas.fetch(Universality(:XY), CentralCharge(); d=3)
     end
 
     # ── Argument validation ─────────────────────────────────────────────────

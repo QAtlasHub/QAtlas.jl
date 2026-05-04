@@ -284,12 +284,7 @@ because `RenyiEntropy(1)` throws — use `VonNeumannEntropy()` instead).
 Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) eq. (3.12).
 """
 function fetch(
-    model::Universality{C},
-    q::RenyiEntropy,
-    ::PBC;
-    ℓ::Real,
-    L::Real,
-    kwargs...,
+    model::Universality{C}, q::RenyiEntropy, ::PBC; ℓ::Real, L::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy PBC Rényi: L must be > 0; got L=$L."))
     0 ≤ ℓ ≤ L ||
@@ -322,12 +317,7 @@ The non-universal `c'_1` and Affleck–Ludwig `log g` are dropped.
 Reference: Calabrese–Cardy J. Phys. A 42, 504005 (2009) eq. (30).
 """
 function fetch(
-    model::Universality{C},
-    q::RenyiEntropy,
-    ::OBC;
-    ℓ::Real,
-    L::Real,
-    kwargs...,
+    model::Universality{C}, q::RenyiEntropy, ::OBC; ℓ::Real, L::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy OBC Rényi: L must be > 0; got L=$L."))
     0 ≤ ℓ ≤ L ||
@@ -355,11 +345,7 @@ Reduces to the von Neumann `(c/3) log ℓ` at `α = 1` after the
 substitution `c -> c · (1 + 1/α) / 2`.
 """
 function fetch(
-    model::Universality{C},
-    q::RenyiEntropy,
-    ::Infinite;
-    ℓ::Real,
-    kwargs...,
+    model::Universality{C}, q::RenyiEntropy, ::Infinite; ℓ::Real, kwargs...
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite Rényi: ℓ must be > 0; got ℓ=$ℓ."))
     c = _cardy_central_charge(model; kwargs...)

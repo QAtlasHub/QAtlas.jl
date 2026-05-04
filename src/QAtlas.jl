@@ -21,6 +21,7 @@ export TightBindingSpectrum
 # backward-compat top-level alias for `Honeycomb` (see src/deprecate/)
 # since the name does not collide with anything in Lattice2D.
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
+export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 
 # --- Core Implementation ---
@@ -97,6 +98,8 @@ include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
+include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
+include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
 
 # --- Deprecation shims (legacy API) ---
 # Loaded last so they can route into any already-registered concrete

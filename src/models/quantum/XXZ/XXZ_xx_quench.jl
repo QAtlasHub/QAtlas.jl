@@ -106,8 +106,7 @@
 # lands `XXZ_xx_infinite.jl`, and the include order in src/QAtlas.jl
 # is independent.  Define a phase-148-local copy and gate every
 # Δ-sensitive entry point through it.
-@inline _xx_quench_is_free_fermion(model::XXZ1D) =
-    isapprox(model.Δ, 0.0; atol=1e-12)
+@inline _xx_quench_is_free_fermion(model::XXZ1D) = isapprox(model.Δ, 0.0; atol=1e-12)
 
 # Throw a precise DomainError so callers (and `iszero(Δ)` filter
 # tests) can match on the type.
@@ -252,12 +251,7 @@ julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite();
 - F.H.L. Essler, M. Fagotti, *J. Stat. Mech.* (2016) 064002.
 """
 function fetch(
-    model_f::XXZ1D,
-    ::LoschmidtEcho{:rate},
-    ::Infinite;
-    initial::XXZ1D,
-    t::Real,
-    kwargs...,
+    model_f::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite; initial::XXZ1D, t::Real, kwargs...
 )
     _xx_quench_assert_free_fermion(model_f, initial)
 

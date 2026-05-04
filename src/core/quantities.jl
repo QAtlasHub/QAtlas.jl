@@ -135,9 +135,7 @@ struct LoschmidtEcho{M} <: AbstractQuantity
         M isa Symbol ||
             throw(ArgumentError("LoschmidtEcho mode must be a Symbol, got $(typeof(M))"))
         M in (:probability, :rate) || throw(
-            ArgumentError(
-                "unknown LoschmidtEcho mode :$M; expected :probability or :rate"
-            ),
+            ArgumentError("unknown LoschmidtEcho mode :$M; expected :probability or :rate"),
         )
         return new{M}()
     end

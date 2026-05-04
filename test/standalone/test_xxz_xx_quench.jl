@@ -32,9 +32,10 @@ const _LE_RATE = LoschmidtEcho(; mode=:rate)
 
 # Helper to silence the deliberate `@warn` calls in the orthogonality /
 # flat-band branches without losing real failures.
-_silent(f) = with_logger(NullLogger()) do
-    f()
-end
+_silent(f) =
+    with_logger(NullLogger()) do
+        f()
+    end
 
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -83,11 +84,7 @@ end
     # any future generalisation (magnetic-field XX or full Bogoliubov
     # XY) must reproduce λ = 0 at the no-quench fixed point.
     λ = QAtlas.fetch(
-        XXZ1D(; J=1.0, Δ=0.0),
-        _LE_RATE,
-        Infinite();
-        initial=XXZ1D(; J=1.0, Δ=0.0),
-        t=1.0,
+        XXZ1D(; J=1.0, Δ=0.0), _LE_RATE, Infinite(); initial=XXZ1D(; J=1.0, Δ=0.0), t=1.0
     )
     @test isapprox(λ, 0.0; atol=1e-8)
 end
@@ -119,63 +116,45 @@ end
 @testset "XXZ1D Δ=0 LoschmidtEcho — Δ ≠ 0 raises DomainError" begin
     # Final has Δ = 0.5
     @test_throws DomainError QAtlas.fetch(
-        XXZ1D(; J=1.0, Δ=0.5),
-        _LE_RATE,
-        Infinite();
-        initial=_XX,
-        t=1.0,
+        XXZ1D(; J=1.0, Δ=0.5), _LE_RATE, Infinite(); initial=_XX, t=1.0
     )
     # Initial has Δ = 0.5
     @test_throws DomainError QAtlas.fetch(
-        _XX,
-        _LE_RATE,
-        Infinite();
-        initial=XXZ1D(; J=1.0, Δ=0.5),
-        t=1.0,
+        _XX, _LE_RATE, Infinite(); initial=XXZ1D(; J=1.0, Δ=0.5), t=1.0
     )
     # Both have Δ ≠ 0
     @test_throws DomainError QAtlas.fetch(
-        XXZ1D(; J=1.0, Δ=1.0),
-        _LE_RATE,
-        Infinite();
-        initial=XXZ1D(; J=1.0, Δ=-0.3),
-        t=1.0,
+        XXZ1D(; J=1.0, Δ=1.0), _LE_RATE, Infinite(); initial=XXZ1D(; J=1.0, Δ=-0.3), t=1.0
     )
 end
 
 @testset "XXZ1D Δ=0 LoschmidtEcho — flat-band edge cases" begin
     # Both flat-band → no dynamics → λ = 0 (no warning).
     λ_both = QAtlas.fetch(
-        XXZ1D(; J=0.0, Δ=0.0),
-        _LE_RATE,
-        Infinite();
-        initial=XXZ1D(; J=0.0, Δ=0.0),
-        t=2.5,
+        XXZ1D(; J=0.0, Δ=0.0), _LE_RATE, Infinite(); initial=XXZ1D(; J=0.0, Δ=0.0), t=2.5
     )
     @test λ_both == 0.0
 
     # One-sided flat band → degenerate; λ = NaN with a @warn.
     λ_init_flat = _silent(
-        () ->
-            QAtlas.fetch(
-                XXZ1D(; J=1.0, Δ=0.0),
-                _LE_RATE,
-                Infinite();
-                initial=XXZ1D(; J=0.0, Δ=0.0),
-                t=1.0,
-            ),
+        () -> QAtlas.fetch(
+            XXZ1D(; J=1.0, Δ=0.0),
+            _LE_RATE,
+            Infinite();
+            initial=XXZ1D(; J=0.0, Δ=0.0),
+            t=1.0,
+        ),
     )
     @test isnan(λ_init_flat)
 
     λ_final_flat = _silent(
-        () ->
-            QAtlas.fetch(
-                XXZ1D(; J=0.0, Δ=0.0),
-                _LE_RATE,
-                Infinite();
-                initial=XXZ1D(; J=1.0, Δ=0.0),
-                t=1.0,
-            ),
+        () -> QAtlas.fetch(
+            XXZ1D(; J=0.0, Δ=0.0),
+            _LE_RATE,
+            Infinite();
+            initial=XXZ1D(; J=1.0, Δ=0.0),
+            t=1.0,
+        ),
     )
     @test isnan(λ_final_flat)
 end
@@ -184,9 +163,7 @@ end
     # Cross-check that XXZ_registry.jl declares the new triple.
     rows = QAtlas.implementation_status()
     matching = filter(rows) do r
-        r.model === XXZ1D &&
-            r.quantity === LoschmidtEcho{:rate} &&
-            r.bc === Infinite
+        r.model === XXZ1D && r.quantity === LoschmidtEcho{:rate} && r.bc === Infinite
     end
     @test length(matching) == 1
     if length(matching) == 1

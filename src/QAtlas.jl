@@ -35,7 +35,7 @@ include("core/dense_ed.jl")
 export Implementation, implementation_status, implementation_status_markdown
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
-export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
+export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
@@ -95,6 +95,7 @@ include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
+include("models/quantum/XXZ/XXZ_xx_quench.jl")  # XX (Δ=0) Loschmidt rate at Infinite (issue #148)
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 

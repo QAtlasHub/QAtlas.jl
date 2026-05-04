@@ -19,8 +19,7 @@ using QAtlas, Test
         # J scaling: E₀/N is linear in J
         for Jval in (0.5, 2.0, 3.7)
             mJ = MajumdarGhosh(; J=Jval)
-            @test QAtlas.fetch(mJ, GroundStateEnergyDensity(), Infinite()) ==
-                -3 * Jval / 8
+            @test QAtlas.fetch(mJ, GroundStateEnergyDensity(), Infinite()) == -3 * Jval / 8
         end
 
         # Constructor variants must agree
@@ -35,9 +34,7 @@ using QAtlas, Test
         end
 
         # Odd N is rejected (no consistent dimer covering on a ring).
-        @test_throws DomainError QAtlas.fetch(
-            m, GroundStateEnergyDensity(), PBC(5)
-        )
+        @test_throws DomainError QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(5))
 
         # N kwarg form also works.
         @test QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(); N=8) == -3 / 8
@@ -56,23 +53,17 @@ using QAtlas, Test
         Δ_num = QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
         @test Δ_num ≈ 0.234 atol = 0.01
 
-
         # J scaling for both methods.
         for Jval in (0.5, 2.0, 3.7)
             mJ = MajumdarGhosh(; J=Jval)
-            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:lower_bound) ==
-                Jval / 4
-            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:numerical) ≈
-                0.234 * Jval atol = 1e-14
+            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:lower_bound) == Jval / 4
+            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:numerical) ≈ 0.234 * Jval atol =
+                1e-14
         end
 
         # Unsupported method symbols raise DomainError.
-        @test_throws DomainError QAtlas.fetch(
-            m, MassGap(), Infinite(); method=:dmrg_strict
-        )
-        @test_throws DomainError QAtlas.fetch(
-            m, MassGap(), Infinite(); method=:bogus
-        )
+        @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); method=:dmrg_strict)
+        @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); method=:bogus)
     end
 
     @testset "Registry rows" begin

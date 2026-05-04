@@ -22,6 +22,8 @@ export TightBindingSpectrum
 # since the name does not collide with anything in Lattice2D.
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
+export S1TFIM                                            # spin-1 transverse-field Ising chain
+export S1XXZ1D                                           # spin-1 XXZ chain
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -90,12 +92,16 @@ include("models/quantum/Heisenberg/Heisenberg.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_observables.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_registry.jl")
+include("models/quantum/TFIM/S1TFIM.jl")
+include("models/quantum/TFIM/S1TFIM_registry.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
+include("models/quantum/XXZ/S1XXZ1D.jl")
+include("models/quantum/XXZ/S1XXZ1D_registry.jl")
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 
 # --- Deprecation shims (legacy API) ---

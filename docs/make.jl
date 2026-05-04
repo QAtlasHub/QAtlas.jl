@@ -50,6 +50,8 @@ makedocs(;
                 "TFIM" => "models/quantum/tfim.md",
                 "Heisenberg" => "models/quantum/heisenberg.md",
                 "XXZ" => "models/quantum/xxz.md",
+                "S=1 TFIM" => "models/quantum/s1tfim.md",
+                "S=1 XXZ" => "models/quantum/s1xxz.md",
                 "Kitaev Honeycomb" => "models/quantum/kitaev-honeycomb.md",
                 "Tight-Binding" => [
                     "models/quantum/tightbinding/index.md",

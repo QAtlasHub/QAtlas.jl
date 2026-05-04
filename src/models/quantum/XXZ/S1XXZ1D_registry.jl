@@ -1,0 +1,154 @@
+# models/quantum/XXZ/S1XXZ1D_registry.jl —
+# declarative implementation map for S1XXZ1D (spin-1 XXZ chain).
+
+@register(
+    S1XXZ1D,
+    Energy{:total},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+    notes="Total ⟨H⟩(β) by dense ED on the 3^N Hilbert space; N ≤ 8.",
+)
+@register(
+    S1XXZ1D,
+    FreeEnergy,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    ThermalEntropy,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    SpecificHeat,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+
+@register(
+    S1XXZ1D,
+    MagnetizationX,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    MagnetizationY,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    MagnetizationZ,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+
+@register(
+    S1XXZ1D,
+    SusceptibilityXX,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    SusceptibilityYY,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    SusceptibilityZZ,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+
+@register(
+    S1XXZ1D,
+    XXCorrelation{:static},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    YYCorrelation{:static},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    ZZCorrelation{:static},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    XXCorrelation{:connected},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    YYCorrelation{:connected},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+@register(
+    S1XXZ1D,
+    ZZCorrelation{:connected},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+)
+
+@register(
+    S1XXZ1D,
+    MassGap,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+    notes="E₁ - E₀ from dense ED on the 3^N space.",
+)
+@register(
+    S1XXZ1D,
+    ExactSpectrum,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/standalone/test_s1_xxz.jl",
+    notes="Sorted eigenvalues of the dense 3^N × 3^N Hamiltonian.",
+)

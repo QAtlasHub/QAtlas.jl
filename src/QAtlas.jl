@@ -85,6 +85,7 @@ include("models/quantum/TFIM/TFIM_local.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
 include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
 include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
+include("models/quantum/TFIM/TFIM_fidelity.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")

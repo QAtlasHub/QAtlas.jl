@@ -164,7 +164,6 @@ Pauling-1935-style models).  Distinct from [`ThermalEntropy`](@ref):
 """
 struct ResidualEntropy <: AbstractQuantity end
 
-
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
 """

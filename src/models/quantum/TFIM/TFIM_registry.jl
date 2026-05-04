@@ -525,7 +525,10 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
-    references=["Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)", "Heyl Rep. Prog. Phys. 81, 054001 (2018)"],
+    references=[
+        "Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)",
+        "Heyl Rep. Prog. Phys. 81, 054001 (2018)",
+    ],
     notes="L(t) = ∏_n |cos²θ_n + sin²θ_n e^{-2iΛ_n t}|² via OBC BdG diagonalisation of H_0, H_f.",
 )
 @register(
@@ -545,6 +548,9 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
-    references=["Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)", "Heyl Rep. Prog. Phys. 81, 054001 (2018)"],
+    references=[
+        "Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)",
+        "Heyl Rep. Prog. Phys. 81, 054001 (2018)",
+    ],
     notes="λ(t) = -(1/2π) ∫₀^π log|cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k(h_f) t}|² dk via QuadGK.",
 )

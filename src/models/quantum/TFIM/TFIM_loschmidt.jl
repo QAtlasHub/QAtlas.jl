@@ -248,12 +248,7 @@ References: Heyl-Polkovnikov-Kehrein, PRL 110, 135704 (2013); Heyl,
 Rep. Prog. Phys. 81, 054001 (2018).
 """
 function fetch(
-    model_f::TFIM,
-    ::LoschmidtEcho{:amplitude},
-    bc::OBC;
-    initial::TFIM,
-    t::Real,
-    kwargs...,
+    model_f::TFIM, ::LoschmidtEcho{:amplitude}, bc::OBC; initial::TFIM, t::Real, kwargs...
 )
     isapprox(initial.J, model_f.J; atol=1e-12) || throw(
         ArgumentError(
@@ -275,12 +270,7 @@ Loschmidt rate function `λ(t) = -log L(t) / N` for the OBC TFIM
 quench `h_0 → h_f`.  See [`LoschmidtEcho`](@ref).
 """
 function fetch(
-    model_f::TFIM,
-    ::LoschmidtEcho{:rate},
-    bc::OBC;
-    initial::TFIM,
-    t::Real,
-    kwargs...,
+    model_f::TFIM, ::LoschmidtEcho{:rate}, bc::OBC; initial::TFIM, t::Real, kwargs...
 )
     isapprox(initial.J, model_f.J; atol=1e-12) || throw(
         ArgumentError(

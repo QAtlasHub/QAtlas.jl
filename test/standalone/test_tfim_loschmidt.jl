@@ -47,9 +47,12 @@ end
         m_0 = TFIM(; J=J, h=2.0)
         m_f = TFIM(; J=J, h=0.5)
         N = 32
-        @test QAtlas.fetch(m_f, LoschmidtEcho(:amplitude), OBC(N); initial=m_0, t=0.0) ≈ 1.0 atol = 1e-12
-        @test QAtlas.fetch(m_f, LoschmidtRateFunction(), OBC(N); initial=m_0, t=0.0) ≈ 0.0 atol = 1e-12
-        @test QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=0.0) ≈ 0.0 atol = 1e-12
+        @test QAtlas.fetch(m_f, LoschmidtEcho(:amplitude), OBC(N); initial=m_0, t=0.0) ≈ 1.0 atol =
+            1e-12
+        @test QAtlas.fetch(m_f, LoschmidtRateFunction(), OBC(N); initial=m_0, t=0.0) ≈ 0.0 atol =
+            1e-12
+        @test QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=0.0) ≈
+            0.0 atol = 1e-12
     end
 
     # ─── No-quench identity: h_0 = h_f ⇒ L(t) = 1, λ(t) = 0 for all t ─────
@@ -57,9 +60,12 @@ end
         m = TFIM(; J=J, h=1.3)
         N = 24
         for t in (0.1, 0.7, 2.5, 5.0)
-            @test QAtlas.fetch(m, LoschmidtEcho(:amplitude), OBC(N); initial=m, t=t) ≈ 1.0 atol = 1e-10
-            @test QAtlas.fetch(m, LoschmidtRateFunction(), OBC(N); initial=m, t=t) ≈ 0.0 atol = 1e-10
-            @test QAtlas.fetch(m, LoschmidtRateFunction(), Infinite(); initial=m, t=t) ≈ 0.0 atol = 1e-10
+            @test QAtlas.fetch(m, LoschmidtEcho(:amplitude), OBC(N); initial=m, t=t) ≈ 1.0 atol =
+                1e-10
+            @test QAtlas.fetch(m, LoschmidtRateFunction(), OBC(N); initial=m, t=t) ≈ 0.0 atol =
+                1e-10
+            @test QAtlas.fetch(m, LoschmidtRateFunction(), Infinite(); initial=m, t=t) ≈ 0.0 atol =
+                1e-10
         end
     end
 
@@ -93,9 +99,13 @@ end
         # that |slope_left − slope_right| at t_c is much larger than the
         # corresponding slope difference at a smooth control point.
         δ = 0.02
-        λ_minus = QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_c - δ)
+        λ_minus = QAtlas.fetch(
+            m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_c - δ
+        )
         λ_at = QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_c)
-        λ_plus = QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_c + δ)
+        λ_plus = QAtlas.fetch(
+            m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_c + δ
+        )
 
         # Local maximum (cusp peak): λ(t_c) at least matches both neighbours.
         @test λ_at ≥ λ_minus - 1e-6
@@ -103,8 +113,12 @@ end
 
         # Sign of slope flips across t_c.  Compare to a smooth region.
         t_smooth = 0.5 * t_c
-        λ_sm_m = QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_smooth - δ)
-        λ_sm_p = QAtlas.fetch(m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_smooth + δ)
+        λ_sm_m = QAtlas.fetch(
+            m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_smooth - δ
+        )
+        λ_sm_p = QAtlas.fetch(
+            m_f, LoschmidtRateFunction(), Infinite(); initial=m_0, t=t_smooth + δ
+        )
         slope_smooth = (λ_sm_p - λ_sm_m) / (2δ)
         slope_left = (λ_at - λ_minus) / δ
         slope_right = (λ_plus - λ_at) / δ

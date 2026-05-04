@@ -73,10 +73,11 @@ end
     # trigonometric branches, so a sign / atan2 error in the GGE code
     # would mismatch.
     function e_initial_in_Hf(J, h0, hf)
-        integrand = k -> begin
-            two_theta0 = atan(J * sin(k), h0 - J * cos(k))
-            (hf - J * cos(k)) * cos(two_theta0) + J * sin(k) * sin(two_theta0)
-        end
+        integrand =
+            k -> begin
+                two_theta0 = atan(J * sin(k), h0 - J * cos(k))
+                (hf - J * cos(k)) * cos(two_theta0) + J * sin(k) * sin(two_theta0)
+            end
         val, _ = quadgk(integrand, 0.0, π; rtol=1e-12)
         return -val / π
     end
@@ -103,8 +104,7 @@ end
     hf = 0.5
 
     function n_k_local(k)
-        Δ = atan(J * sin(k), h0 - J * cos(k)) -
-            atan(J * sin(k), hf - J * cos(k))
+        Δ = atan(J * sin(k), h0 - J * cos(k)) - atan(J * sin(k), hf - J * cos(k))
         return sin(Δ / 2)^2
     end
 
@@ -167,9 +167,7 @@ end
 
     # Required kwarg `initial` missing — Julia raises UndefKeywordError
     @test_throws UndefKeywordError QAtlas.fetch(m_f, GGEValue(Energy()), Infinite())
-    @test_throws UndefKeywordError QAtlas.fetch(
-        m_f, GGEValue(MagnetizationX()), Infinite()
-    )
+    @test_throws UndefKeywordError QAtlas.fetch(m_f, GGEValue(MagnetizationX()), Infinite())
 
     # Mismatched Ising coupling — DomainError from
     # `_check_quench_couplings`

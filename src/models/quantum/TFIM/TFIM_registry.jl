@@ -525,7 +525,9 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_gge.jl",
-    references=["Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"],
+    references=[
+        "Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"
+    ],
     notes="Per-site ε_GGE via QuadGK over the post-quench dispersion with Bogoliubov-mismatch occupations n_k = sin²(θ_k(h₀)−θ_k(h_f)).",
 )
 @register(
@@ -535,6 +537,8 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_gge.jl",
-    references=["Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"],
+    references=[
+        "Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"
+    ],
     notes="⟨σˣ⟩_GGE via QuadGK over (h_f − J cos k)/Λ_k(h_f) · (1 − 2 n_k).",
 )

@@ -192,11 +192,7 @@ fetch(TFIM(J = 1.0, h = 0.5), GGEValue(Energy(:per_site)), Infinite();
   Field Ising Chain*, J. Stat. Mech. (2012) P07016, P07022.
 """
 function fetch(
-    model_f::TFIM,
-    ::GGEValue{Energy{:per_site}},
-    ::Infinite;
-    initial::TFIM,
-    kwargs...,
+    model_f::TFIM, ::GGEValue{Energy{:per_site}}, ::Infinite; initial::TFIM, kwargs...
 )
     _check_quench_couplings(model_f, initial)
     return _tfim_gge_energy_density(model_f.J, initial.h, model_f.h)
@@ -205,11 +201,7 @@ end
 # `Energy()` (`:natural`) routes to `:per_site` for Infinite TFIM —
 # same convention as the equilibrium Energy methods.
 function fetch(
-    model_f::TFIM,
-    ::GGEValue{Energy{:natural}},
-    ::Infinite;
-    initial::TFIM,
-    kwargs...,
+    model_f::TFIM, ::GGEValue{Energy{:natural}}, ::Infinite; initial::TFIM, kwargs...
 )
     return fetch(
         model_f, GGEValue(Energy{:per_site}()), Infinite(); initial=initial, kwargs...

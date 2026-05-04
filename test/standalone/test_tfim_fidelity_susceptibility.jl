@@ -24,8 +24,15 @@ using QAtlas, Test
 @testset "TFIM FidelitySusceptibility — Infinite, closed-form values" begin
     # Ordered phase (h < J): χ_F / L = 1 / (16 (J² − h²))
     @testset "ordered phase" begin
-        for (J, h) in ((1.0, 0.0), (1.0, 0.1), (1.0, 0.5), (1.0, 0.9),
-                       (2.0, 0.5), (2.0, 1.5), (0.5, 0.2))
+        for (J, h) in (
+            (1.0, 0.0),
+            (1.0, 0.1),
+            (1.0, 0.5),
+            (1.0, 0.9),
+            (2.0, 0.5),
+            (2.0, 1.5),
+            (0.5, 0.2),
+        )
             m = TFIM(J=J, h=h)
             χ = QAtlas.fetch(m, FidelitySusceptibility(), Infinite())
             expected = 1 / (16 * (J^2 - h^2))
@@ -36,8 +43,8 @@ using QAtlas, Test
 
     # Disordered phase (h > J): χ_F / L = J² / (16 h² (h² − J²))
     @testset "disordered phase" begin
-        for (J, h) in ((1.0, 1.5), (1.0, 2.0), (1.0, 5.0),
-                       (2.0, 3.0), (0.5, 1.0), (1.0, 1.01))
+        for (J, h) in
+            ((1.0, 1.5), (1.0, 2.0), (1.0, 5.0), (2.0, 3.0), (0.5, 1.0), (1.0, 1.01))
             m = TFIM(J=J, h=h)
             χ = QAtlas.fetch(m, FidelitySusceptibility(), Infinite())
             expected = J^2 / (16 * h^2 * (h^2 - J^2))
@@ -63,20 +70,14 @@ using QAtlas, Test
             TFIM(J=2.0, h=2.0), FidelitySusceptibility(), Infinite()
         )
         # ε-detuning OK
-        χε = QAtlas.fetch(
-            TFIM(J=1.0, h=1.0 - 1e-3), FidelitySusceptibility(), Infinite()
-        )
+        χε = QAtlas.fetch(TFIM(J=1.0, h=1.0 - 1e-3), FidelitySusceptibility(), Infinite())
         @test isfinite(χε) && χε > 0
     end
 
     # Approach to criticality: divergence as h → J⁻
     @testset "approach to criticality (h → J⁻)" begin
-        χ_h_close = QAtlas.fetch(
-            TFIM(J=1.0, h=0.999), FidelitySusceptibility(), Infinite()
-        )
-        χ_h_far = QAtlas.fetch(
-            TFIM(J=1.0, h=0.5), FidelitySusceptibility(), Infinite()
-        )
+        χ_h_close = QAtlas.fetch(TFIM(J=1.0, h=0.999), FidelitySusceptibility(), Infinite())
+        χ_h_far = QAtlas.fetch(TFIM(J=1.0, h=0.5), FidelitySusceptibility(), Infinite())
         @test χ_h_close > 100 * χ_h_far
         # Linear divergence: χ_F / L ~ 1/(2 |h − J|) at leading order
         # (since χ_F / L = 1/(16 (J−h)(J+h)) ≈ 1/(32 (J − h)) as h → J).
@@ -98,11 +99,11 @@ end
     @testset "convergence to thermodynamic limit (h=0.5)" begin
         target = QAtlas.fetch(m, FidelitySusceptibility(), Infinite())
         @test target ≈ 1 / 12 atol = 1e-12
-        χ_per_site_64  = QAtlas.fetch(m, FidelitySusceptibility(), OBC(64))  / 64
+        χ_per_site_64 = QAtlas.fetch(m, FidelitySusceptibility(), OBC(64)) / 64
         χ_per_site_128 = QAtlas.fetch(m, FidelitySusceptibility(), OBC(128)) / 128
         χ_per_site_256 = QAtlas.fetch(m, FidelitySusceptibility(), OBC(256)) / 256
         # Errors should shrink monotonically as N grows.
-        err_64  = abs(χ_per_site_64  - target)
+        err_64 = abs(χ_per_site_64 - target)
         err_128 = abs(χ_per_site_128 - target)
         err_256 = abs(χ_per_site_256 - target)
         @test err_128 < err_64
@@ -157,15 +158,15 @@ end
     # χ_F is invariant under h → -h for any J > 0 (the model has σˣ → -σˣ
     # parity; see core Hamiltonian).  We test the Infinite case.
     for h in (0.3, 0.7, 1.5, 3.0)
-        m_plus  = TFIM(J=1.0, h= h)
-        m_minus = TFIM(J=1.0, h=-h)
-        @test QAtlas.fetch(m_plus,  FidelitySusceptibility(), Infinite()) ≈
-              QAtlas.fetch(m_minus, FidelitySusceptibility(), Infinite()) atol = 1e-10
+        m_plus = TFIM(J=1.0, h=h)
+        m_minus = TFIM(J=1.0, h=(-h))
+        @test QAtlas.fetch(m_plus, FidelitySusceptibility(), Infinite()) ≈
+            QAtlas.fetch(m_minus, FidelitySusceptibility(), Infinite()) atol = 1e-10
     end
 
     # Per-site option: per_site=true returns χ_F / N.
     m = TFIM(J=1.0, h=0.5)
-    χ_total   = QAtlas.fetch(m, FidelitySusceptibility(), OBC(32))
+    χ_total = QAtlas.fetch(m, FidelitySusceptibility(), OBC(32))
     χ_persite = QAtlas.fetch(m, FidelitySusceptibility(), OBC(32); per_site=true)
     @test χ_persite ≈ χ_total / 32 atol = 1e-12
 end

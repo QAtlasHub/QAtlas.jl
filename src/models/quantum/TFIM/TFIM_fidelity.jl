@@ -191,9 +191,13 @@ divergence of the integrand at `k = 0`).
 """
 function _tfim_chi_F_infinite(J::Float64, h::Float64; rtol::Float64=1e-10)
     if abs(abs(h) - abs(J)) < 1e-14
-        throw(DomainError(h,
-            "Fidelity susceptibility diverges at the critical point |h| = J; " *
-            "query at h = J ± ε instead."))
+        throw(
+            DomainError(
+                h,
+                "Fidelity susceptibility diverges at the critical point |h| = J; " *
+                "query at h = J ± ε instead.",
+            ),
+        )
     end
     integrand = k -> begin
         ε2 = J^2 + h^2 - 2 * J * h * cos(k)
@@ -225,11 +229,7 @@ References: Gu, Int. J. Mod. Phys. B 24, 4371 (2010); Damski,
 PRB 87, 165101 (2013).
 """
 function fetch(
-    model::TFIM,
-    ::FidelitySusceptibility,
-    bc::OBC;
-    per_site::Bool=false,
-    kwargs...,
+    model::TFIM, ::FidelitySusceptibility, bc::OBC; per_site::Bool=false, kwargs...
 )
     N = _bc_size(bc, kwargs)
     χ = _tfim_chi_F_obc(N, model.J, model.h)
@@ -257,11 +257,7 @@ References: Gu, Int. J. Mod. Phys. B 24, 4371 (2010); Damski,
 PRB 87, 165101 (2013).
 """
 function fetch(
-    model::TFIM,
-    ::FidelitySusceptibility,
-    ::Infinite;
-    rtol::Float64=1e-10,
-    kwargs...,
+    model::TFIM, ::FidelitySusceptibility, ::Infinite; rtol::Float64=1e-10, kwargs...
 )
     return _tfim_chi_F_infinite(model.J, model.h; rtol=rtol)
 end

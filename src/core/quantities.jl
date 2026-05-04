@@ -441,3 +441,47 @@ function fetch(model::AbstractQAtlasModel, ::Energy{:total}, bc::Union{OBC,PBC};
     )
     return fetch(model, Energy{:per_site}(), bc; kwargs...) * _bc_size(bc, kwargs)
 end
+
+# ─── Quench / nonequilibrium long-time ensembles ────────────────────────
+
+"""
+    GGEValue{Q<:AbstractQuantity}(inner) <: AbstractQuantity
+
+Wrapper quantity carrying an underlying observable `inner::Q` whose
+*generalised Gibbs ensemble* (GGE) stationary value is to be computed —
+i.e. the `t → ∞` long-time average that an integrable (free-fermion)
+quench reaches.
+
+For an integrable system the ordinary (canonical) Gibbs ensemble does
+not describe the long-time relaxed state: every mode-occupation
+`n_k = ⟨c_k† c_k⟩` is a separate conserved quantity, so the diagonal
+ensemble is a *generalised* Gibbs ensemble fixed by the full
+distribution `{n_k}`.  See Rigol et al. PRL 98, 050405 (2007) for the
+foundational argument and Calabrese, Essler, Fagotti J. Stat. Mech.
+(2012) P07016 / P07022 for the TFIM-specific closed-form expressions.
+
+`fetch(model_f, ::GGEValue{Q}, bc; initial::ModelType, kwargs...)`
+returns the GGE expectation of the `Q` observable in the post-quench
+Hamiltonian `model_f`, with the conserved mode occupations frozen by
+the initial-state (`initial`) Bogoliubov rotation.
+
+# Construction
+
+```julia
+GGEValue(Energy())                  # ⟨H_f⟩ stationary value
+GGEValue(MagnetizationX())          # ⟨σˣ⟩ stationary value
+```
+
+# Fetch signature (TFIM)
+
+```julia
+fetch(TFIM(h = h_f), GGEValue(Energy()), Infinite();
+      initial = TFIM(h = h_0)) -> Float64
+```
+
+A no-quench limit `h_0 = h_f` reduces to the static ground-state value
+of the inner observable.
+"""
+struct GGEValue{Q<:AbstractQuantity} <: AbstractQuantity
+    inner::Q
+end

@@ -45,6 +45,7 @@ export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
+export GGEValue                                          # quench long-time wrapper
 
 # --- TFIM Infinite dynamic helpers ---
 export tfim_quasiparticle_dispersion, tfim_two_spinon_dos
@@ -85,6 +86,7 @@ include("models/quantum/TFIM/TFIM_local.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
 include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
 include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
+include("models/quantum/TFIM/TFIM_gge.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")

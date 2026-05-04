@@ -241,3 +241,134 @@ function fetch(
         model.J, model.h, beta, q, ω, N_proxy, t_max, dt
     )
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Dynamic imaginary part of ZZ susceptibility at Infinite — OBC large-N proxy
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    _tfim_chi_imag_zz_dynamic_proxy(J, h, β, q, ω, N_proxy, t_max, dt) -> Float64
+
+OBC large-N proxy implementation of the imaginary part of the dynamic
+longitudinal susceptibility `χ''_zz(q, ω; β)`.  Used by the `Infinite()`
+`fetch` router; the heavy lifting lives here so the public method stays
+a thin wrapper.
+
+The Kubo formula (Kubo 1957; Mahan, *Many-Particle Physics*, ch. 3)
+gives the spectral function as the time-Fourier transform of the
+expectation value of the commutator,
+
+    χ''_zz(q, ω; β) = (1/2) ∫dt e^{iωt} · (1/N_b) Σ_{i,j ∈ bulk}
+                          e^{-iq(i-j)} ⟨[σᶻ_i(t), σᶻ_j(0)]⟩_β.
+
+For Hermitian operators in a thermal state Hermiticity gives
+
+    ⟨[σᶻ_i(t), σᶻ_j(0)]⟩_β = 2i Im ⟨σᶻ_i(t) σᶻ_j(0)⟩_β,
+
+so each `(i, j, t)` point reuses the cached Pfaffian correlator
+`_sz_sz_corr_from_cached` and only the imaginary part participates.
+The result is real (the explicit `i` from the commutator combines with
+the `(1/2)` and the imaginary part to give a real spectral function);
+we return `real(...)` defensively against round-off.
+
+Discretisation: `t ∈ [-t_max, t_max]` with spacing `dt`, `(i, j)`
+restricted to the central bulk window `[N/4, 3N/4]` of an `N_proxy`-site
+OBC chain.  The Majorana Hamiltonian and thermal covariance are
+computed once; the evolution matrix `R(t)` is recomputed at every time
+step (single 2N × 2N `expm`) — same machinery as
+`_tfim_zz_structure_factor_dynamic_proxy`.
+"""
+function _tfim_chi_imag_zz_dynamic_proxy(
+    J::Real, h::Real, β::Real, q::Real, ω::Real, N_proxy::Int, t_max::Real, dt::Real
+)
+    Jf = Float64(J)
+    hf = Float64(h)
+    N = N_proxy
+    bulk_lo = max(1, N ÷ 4)
+    bulk_hi = min(N, 3 * N ÷ 4)
+    Nb = bulk_hi - bulk_lo + 1
+
+    hmat = _majorana_ham(N, Jf, hf)
+    Σ = _majorana_thermal_covariance(hmat, β)
+
+    ts = collect((-t_max):dt:t_max)
+    χ = 0.0 + 0.0im
+
+    for t in ts
+        R = _majorana_evolution(hmat, t)
+        ker = 0.0 + 0.0im
+        for i in bulk_lo:bulk_hi, j in bulk_lo:bulk_hi
+            c = _sz_sz_corr_from_cached(Σ, R, i, j)
+            # ⟨[σᶻ_i(t), σᶻ_j(0)]⟩_β = 2i · Im⟨σᶻ_i(t) σᶻ_j(0)⟩_β
+            comm = 2im * imag(c)
+            ker += comm * exp(-im * q * (i - j))
+        end
+        ker /= Nb
+        χ += exp(im * ω * t) * ker * dt
+    end
+    return real(χ / 2)
+end
+
+"""
+    fetch(model::TFIM, ::SusceptibilityZZ, ::Infinite;
+          beta::Real, ω::Union{Real,Nothing} = nothing,
+          q::Union{Real,Nothing} = nothing,
+          N_proxy::Int = 64, t_max::Real = 20.0, dt::Real = 0.1, kwargs...)
+        -> Float64
+
+Longitudinal susceptibility of the infinite TFIM.  This router
+dispatches on `ω`:
+
+* `ω === nothing` (default) → static uniform isothermal susceptibility
+  `χ_zz(β)` at q = 0, the same large-N OBC proxy
+  `_zz_uniform_susceptibility` previously exposed in `TFIM_zaxis.jl`
+  (default `N_proxy = 80`).  `q` is ignored on this branch.
+
+* `ω::Real` → dynamic imaginary part `χ''_zz(q, ω; β)` at finite
+  momentum, computed via the Kubo commutator formula
+
+      χ''_zz(q, ω; β) = (1/2) ∫dt e^{iωt} · (1/N_b) Σ_{i,j ∈ bulk}
+                              e^{-iq(i-j)} ⟨[σᶻ_i(t), σᶻ_j(0)]⟩_β
+
+  (Kubo 1957; Mahan, *Many-Particle Physics*, ch. 3) on the same
+  `N_proxy`-site OBC chain as `ZZStructureFactor`'s dynamic branch.
+  `q` is required on this branch; `ArgumentError` is raised if absent.
+
+  Default `N_proxy = 64`, `t_max = 20.0`, `dt = 0.1` mirror the
+  dynamic `ZZStructureFactor` proxy so the two are directly comparable
+  (e.g. for fluctuation–dissipation cross-checks); the same
+  ω-resolution `~ π/t_max`, UV cutoff `~ π/dt`, and finite-bulk
+  exponential corrections apply.
+
+The static and dynamic branches answer different physical questions:
+the static path returns the equilibrium thermodynamic susceptibility
+(integral of χ''(ω)/ω weighted by `tanh(βω/2)`), while the dynamic
+path returns the spectral function at a single `(q, ω)`.  The static
+branch is the recommended one for sum-rule / equation-of-state work.
+"""
+function fetch(
+    model::TFIM,
+    ::SusceptibilityZZ,
+    ::Infinite;
+    beta::Real,
+    ω::Union{Real,Nothing}=nothing,
+    q::Union{Real,Nothing}=nothing,
+    N_proxy::Int=ω === nothing ? 80 : 64,
+    t_max::Real=20.0,
+    dt::Real=0.1,
+    kwargs...,
+)
+    if ω === nothing
+        # Static branch — preserve the behaviour of the method previously
+        # defined in TFIM_zaxis.jl by routing to the same proxy.
+        return _zz_uniform_susceptibility(N_proxy, model.J, model.h, beta)
+    end
+    q === nothing && throw(
+        ArgumentError(
+            "dynamic SusceptibilityZZ at Infinite() requires the `q` keyword"
+        ),
+    )
+    return _tfim_chi_imag_zz_dynamic_proxy(
+        model.J, model.h, beta, q, ω, N_proxy, t_max, dt
+    )
+end

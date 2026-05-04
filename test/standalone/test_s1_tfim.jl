@@ -116,7 +116,7 @@ end
     β = 1.0
     for i in 1:N, j in 1:N
         c_static = QAtlas.fetch(m, ZZCorrelation{:static}(), OBC(N); beta=β, i=i, j=j)
-        c_conn   = QAtlas.fetch(m, ZZCorrelation{:connected}(), OBC(N); beta=β, i=i, j=j)
+        c_conn = QAtlas.fetch(m, ZZCorrelation{:connected}(), OBC(N); beta=β, i=i, j=j)
         @test c_conn ≈ c_static atol = 1e-12  # ⟨Sᶻ⟩ = 0 ⇒ connected = static
     end
 end

@@ -55,12 +55,7 @@ function _s1_xxz_hamiltonian_matrix(model::S1XXZ1D, N::Int)
     J = model.J
     Δ = model.Δ
     D = 3^N
-    bond =
-        J * (
-            kron(_S1_x, _S1_x) +
-            kron(_S1_y, _S1_y) +
-            Δ * kron(_S1_z, _S1_z)
-        )
+    bond = J * (kron(_S1_x, _S1_x) + kron(_S1_y, _S1_y) + Δ * kron(_S1_z, _S1_z))
     H = zeros(ComplexF64, D, D)
     for i in 1:(N - 1)
         d_left = 3^(i - 1)
@@ -197,13 +192,7 @@ for (Q, axis_sym) in ((:XXCorrelation, :x), (:YYCorrelation, :y), (:ZZCorrelatio
         for the spin-1 OBC XXZ chain.
         """
         function fetch(
-            model::S1XXZ1D,
-            ::$Q{:static},
-            bc::OBC;
-            beta::Real,
-            i::Int,
-            j::Int,
-            kwargs...,
+            model::S1XXZ1D, ::$Q{:static}, bc::OBC; beta::Real, i::Int, j::Int, kwargs...
         )
             N = bc.N
             (1 ≤ i ≤ N && 1 ≤ j ≤ N) || throw(
@@ -223,13 +212,7 @@ for (Q, axis_sym) in ((:XXCorrelation, :x), (:YYCorrelation, :y), (:ZZCorrelatio
         Connected correlator for the spin-1 OBC XXZ chain.
         """
         function fetch(
-            model::S1XXZ1D,
-            ::$Q{:connected},
-            bc::OBC;
-            beta::Real,
-            i::Int,
-            j::Int,
-            kwargs...,
+            model::S1XXZ1D, ::$Q{:connected}, bc::OBC; beta::Real, i::Int, j::Int, kwargs...
         )
             N = bc.N
             (1 ≤ i ≤ N && 1 ≤ j ≤ N) || throw(

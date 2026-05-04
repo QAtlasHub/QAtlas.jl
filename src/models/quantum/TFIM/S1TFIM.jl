@@ -211,13 +211,7 @@ end
 Static thermal correlator `⟨Sᶻ_i Sᶻ_j⟩_β` of the spin-1 OBC TFIM.
 """
 function fetch(
-    model::S1TFIM,
-    ::ZZCorrelation{:static},
-    bc::OBC;
-    beta::Real,
-    i::Int,
-    j::Int,
-    kwargs...,
+    model::S1TFIM, ::ZZCorrelation{:static}, bc::OBC; beta::Real, i::Int, j::Int, kwargs...
 )
     N = bc.N
     (1 ≤ i ≤ N && 1 ≤ j ≤ N) || throw(
@@ -226,9 +220,11 @@ function fetch(
         ),
     )
     kernel = _s1_tfim_thermal_kernel(model, N, beta)
-    O =
-        i == j ? _spin1_string(N, i => _S1_z * _S1_z) :
+    O = if i == j
+        _spin1_string(N, i => _S1_z * _S1_z)
+    else
         _spin1_string(N, i => _S1_z, j => _S1_z)
+    end
     return real(tr(O * kernel.ρ))
 end
 
@@ -253,9 +249,11 @@ function fetch(
         ),
     )
     kernel = _s1_tfim_thermal_kernel(model, N, beta)
-    O =
-        i == j ? _spin1_string(N, i => _S1_z * _S1_z) :
+    O = if i == j
+        _spin1_string(N, i => _S1_z * _S1_z)
+    else
         _spin1_string(N, i => _S1_z, j => _S1_z)
+    end
     Si = _spin1_string(N, i => _S1_z)
     Sj = i == j ? Si : _spin1_string(N, j => _S1_z)
     mean_SiSj = real(tr(O * kernel.ρ))

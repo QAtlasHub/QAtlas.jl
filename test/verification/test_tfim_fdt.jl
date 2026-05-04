@@ -99,7 +99,7 @@ using QAtlas, Test
             Infinite();
             beta=β,
             q=q,
-            ω=-ω,
+            ω=(-ω),
             N_proxy=N_proxy,
             t_max=t_max,
             dt=dt,

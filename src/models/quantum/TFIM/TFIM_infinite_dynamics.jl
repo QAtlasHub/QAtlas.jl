@@ -364,11 +364,7 @@ function fetch(
         return _zz_uniform_susceptibility(N_proxy, model.J, model.h, beta)
     end
     q === nothing && throw(
-        ArgumentError(
-            "dynamic SusceptibilityZZ at Infinite() requires the `q` keyword"
-        ),
+        ArgumentError("dynamic SusceptibilityZZ at Infinite() requires the `q` keyword")
     )
-    return _tfim_chi_imag_zz_dynamic_proxy(
-        model.J, model.h, beta, q, ω, N_proxy, t_max, dt
-    )
+    return _tfim_chi_imag_zz_dynamic_proxy(model.J, model.h, beta, q, ω, N_proxy, t_max, dt)
 end

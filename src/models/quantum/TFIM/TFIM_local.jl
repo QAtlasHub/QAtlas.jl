@@ -32,7 +32,9 @@ covariance as `Σ[2i-1, 2i]`.  `N` is taken from `bc.N`.
 
 `beta = Inf` falls back to the ground state.
 """
-function fetch(model::TFIM, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Float64, kwargs...)
+function fetch(
+    model::TFIM, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Float64, kwargs...
+)
     N = _bc_size(bc, kwargs)
     hmat = _majorana_ham(N, model.J, model.h)
     Σ = _majorana_thermal_covariance(hmat, beta)

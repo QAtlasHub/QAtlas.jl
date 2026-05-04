@@ -24,8 +24,9 @@ const J = 1.0
         for h_f in (0.2, 0.5, 1.0, 1.7, 4.0)
             m_0 = TFIM(; J=J, h=h_0)
             m_f = TFIM(; J=J, h=h_f)
-            v0 = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), Infinite();
-                              initial=m_0, t=0.0)
+            v0 = QAtlas.fetch(
+                m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=0.0
+            )
             gs = QAtlas.fetch(m_0, MagnetizationX(), Infinite(); beta=Inf)
             @test v0 ≈ gs atol = 1e-10
         end
@@ -40,8 +41,9 @@ const J = 1.0
             m_f = TFIM(; J=J, h=h_f)
             mx_eq = QAtlas.fetch(m_0, MagnetizationXLocal(), OBC(N); beta=Inf)
             for i in (1, N ÷ 4, N ÷ 2, 3N ÷ 4, N)
-                v0 = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), OBC(N);
-                                  initial=m_0, i=i, t=0.0)
+                v0 = QAtlas.fetch(
+                    m_f, MagnetizationXLocal(:quench), OBC(N); initial=m_0, i=i, t=0.0
+                )
                 @test v0 ≈ mx_eq[i] atol = 1e-12
             end
         end
@@ -54,8 +56,7 @@ end
         m = TFIM(; J=J, h=h)
         gs = QAtlas.fetch(m, MagnetizationX(), Infinite(); beta=Inf)
         for t in (0.0, 0.1, 1.0, 3.7, 11.5)
-            v = QAtlas.fetch(m, MagnetizationXLocal(:quench), Infinite();
-                             initial=m, t=t)
+            v = QAtlas.fetch(m, MagnetizationXLocal(:quench), Infinite(); initial=m, t=t)
             @test v ≈ gs atol = 1e-12
         end
     end
@@ -67,8 +68,9 @@ end
         mx_eq = QAtlas.fetch(m, MagnetizationXLocal(), OBC(N); beta=Inf)
         for t in (0.0, 0.5, 2.3, 7.1)
             for i in (1, N ÷ 2, N)
-                v = QAtlas.fetch(m, MagnetizationXLocal(:quench), OBC(N);
-                                 initial=m, i=i, t=t)
+                v = QAtlas.fetch(
+                    m, MagnetizationXLocal(:quench), OBC(N); initial=m, i=i, t=t
+                )
                 @test v ≈ mx_eq[i] atol = 1e-10
             end
         end
@@ -82,8 +84,7 @@ end
     # cross-verified against literature / an independent integrator).
     m_0 = TFIM(; J=1.0, h=2.0)
     m_f = TFIM(; J=1.0, h=0.5)
-    v = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), Infinite();
-                     initial=m_0, t=1.0)
+    v = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=1.0)
     @test v ≈ 0.28761380338145004 atol = 1e-8
 end
 
@@ -102,10 +103,12 @@ end
     for c in cases
         m_0 = TFIM(; J=J, h=c.h_0)
         m_f = TFIM(; J=J, h=c.h_f)
-        v_inf = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), Infinite();
-                             initial=m_0, t=c.t)
-        v_obc = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), OBC(N);
-                             initial=m_0, i=N ÷ 2, t=c.t)
+        v_inf = QAtlas.fetch(
+            m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=c.t
+        )
+        v_obc = QAtlas.fetch(
+            m_f, MagnetizationXLocal(:quench), OBC(N); initial=m_0, i=N ÷ 2, t=c.t
+        )
         @test v_obc ≈ v_inf atol = 1e-4
     end
 end
@@ -133,11 +136,7 @@ end
         return val / π
     end
 
-    cases = [
-        (h_0=2.0, h_f=0.5),
-        (h_0=0.5, h_f=2.0),
-        (h_0=0.3, h_f=1.7),
-    ]
+    cases = [(h_0=2.0, h_f=0.5), (h_0=0.5, h_f=2.0), (h_0=0.3, h_f=1.7)]
     for c in cases
         m_0 = TFIM(; J=J, h=c.h_0)
         m_f = TFIM(; J=J, h=c.h_f)
@@ -152,8 +151,9 @@ end
         dt = (t_max - t_min) / (nt - 1)
         S = 0.0
         for (idx, t) in enumerate(ts)
-            v = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), Infinite();
-                             initial=m_0, t=t)
+            v = QAtlas.fetch(
+                m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=t
+            )
             w = (idx == 1 || idx == nt) ? 0.5 : 1.0
             S += w * v
         end

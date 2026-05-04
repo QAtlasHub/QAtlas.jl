@@ -208,12 +208,10 @@ P07016 (2012); Barouch–McCoy–Dresden, PRA **2** (1970)).
 """
 struct MagnetizationXLocal{M} <: AbstractQuantity
     function MagnetizationXLocal{M}() where {M}
-        M isa Symbol || error(
-            "MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))",
-        )
-        M in (:equilibrium, :quench) || error(
-            "unknown MagnetizationXLocal mode :\$M; expected :equilibrium or :quench",
-        )
+        M isa Symbol ||
+            error("MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))")
+        M in (:equilibrium, :quench) ||
+            error("unknown MagnetizationXLocal mode :\$M; expected :equilibrium or :quench")
         return new{M}()
     end
 end

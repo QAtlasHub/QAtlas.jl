@@ -106,9 +106,7 @@ plus one matrix exponential for R(t).  Sweeps in `i` should reuse the
 returned matrix; sweeps in `t` should be hoisted to a custom loop that
 caches `Σ_0` and recomputes only `R(t)`.
 """
-function _tfim_sigma_x_quench_obc(
-    N::Int, J::Real, h_0::Real, h_f::Real, i::Int, t::Real
-)
+function _tfim_sigma_x_quench_obc(N::Int, J::Real, h_0::Real, h_f::Real, i::Int, t::Real)
     (1 ≤ i ≤ N) || throw(ArgumentError("site index out of range: i = $i, N = $N"))
     h0_mat = _majorana_ham(N, Float64(J), Float64(h_0))
     hf_mat = _majorana_ham(N, Float64(J), Float64(h_f))

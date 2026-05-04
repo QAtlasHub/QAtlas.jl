@@ -254,9 +254,7 @@ function fetch(
     J::Real=1.0,
     kwargs...,
 )
-    return fetch(
-        XXZ1D(; J=J, Δ=1.0), MagnetizationXLocal(), bc; beta=beta, kwargs...
-    )
+    return fetch(XXZ1D(; J=J, Δ=1.0), MagnetizationXLocal(), bc; beta=beta, kwargs...)
 end
 
 # Two-point correlators (static + connected).

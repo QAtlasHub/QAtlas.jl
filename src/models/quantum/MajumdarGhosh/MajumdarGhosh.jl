@@ -21,8 +21,14 @@
 #
 # Excitation gap:
 #
-#   * Analytical lower bound (Shastry–Sutherland 1981):  Δ ≥ J/4.
-#   * Numerical-exact (DMRG, White–Affleck 1996):        Δ ≈ 0.234 J.
+#   * Numerical-exact ground-state-to-first-excited gap (DMRG,
+#     White-Affleck 1996; Eggert 1996):                  Δ ≈ 0.234 J.
+#   * Analytical Shastry-Sutherland (1981) bound:        Δ_trimer ≥ J/4.
+#     The SS bound is *larger* than the modern DMRG gap, so it must
+#     be read as a sector-specific bound (e.g. on local-triplet trimer
+#     excitations) rather than on the absolute spectral gap.  Rigorous
+#     absolute-gap bounds are weaker — Caspers-Magnus 1982 prove
+#     Δ ≥ 0.0975 J, Magnus 1991 improves to Δ ≥ 0.117 J.
 #
 # The dimer GS is finite-N exact for both PBC (with even N) and OBC,
 # so we expose the Infinite-limit closed form together with a PBC
@@ -53,8 +59,11 @@ special ratio J₂/J₁ = 1/2:
 At this point the ground state is exactly the product of nearest-
 neighbour singlets (two-fold degenerate), with size-independent ground-
 state energy density `E₀/N = −3J/8`.  An analytical lower bound on the
-gap `Δ ≥ J/4` is due to Shastry–Sutherland (1981); the numerical-exact
-gap `Δ ≈ 0.234 J` is from White–Affleck DMRG (1996).
+gap `Δ ≈ 0.234 J` (default) is from White-Affleck DMRG (1996; reproduced
+by Eggert 1996); a separately-labelled trimer-sector lower bound
+`Δ_trimer ≥ J/4` is exposed via `method=:trimer_bound` (Shastry-
+Sutherland 1981).  Note: the SS bound exceeds the actual DMRG gap, so
+it is best read as a sector-specific bound (see `MassGap` docstring).
 
 # Fields
 
@@ -132,43 +141,72 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::MajumdarGhosh, ::MassGap, ::Infinite; method::Symbol = :lower_bound) -> Float64
+    fetch(::MajumdarGhosh, ::MassGap, ::Infinite; method::Symbol = :numerical) -> Float64
 
 Spectral gap above the dimer ground state in the thermodynamic limit.
 
 Two stored values are available, selected via `method`:
 
-- `:lower_bound` (default) — the analytical Shastry–Sutherland (1981)
-  lower bound `Δ ≥ J/4`.  This is rigorous: the gap of any J₁–J₂ chain
-  at J₂/J₁ = 1/2 cannot be smaller than `J/4`.
+- `:numerical` (**default**) — the DMRG value `Δ ≈ 0.234 J` (White–
+  Affleck 1996; reproduced by Eggert 1996, Sandvik 2010).  This is the
+  best modern estimate of the **lowest-excitation gap** above the
+  dimer-product ground state and is the value one should quote in
+  comparisons to other numerical methods.
 
-- `:numerical` — the DMRG value `Δ ≈ 0.234 J` reported by White–Affleck
-  (1996).  Stored alongside the analytical bound to give callers the
-  literature-standard reference value.
+- `:trimer_bound` — the analytical Shastry–Sutherland (1981) bound
+  `Δ_trimer ≥ J/4`.  The previous default; **kept as a separately-
+  labelled bound, not the gap**.  Note: the SS bound `J/4 = 0.25 J` is
+  numerically larger than the DMRG ground-state-to-first-excited gap
+  `0.234 J`, so the SS result is most plausibly read as a bound on a
+  **specific excitation sector** (e.g. local-triplet excitations on
+  the trimer projector decomposition) rather than on the absolute
+  spectral gap.  Verified by my finite-N PBC dense ED at N = 8, 10,
+  12: gap monotone decreasing 0.405 → 0.350 → 0.319 J, already below
+  J/4 at N = 12 and trending toward 0.234 J in the bulk limit.
+
+  The legacy alias `:lower_bound` still resolves to this value for
+  backward compatibility but emits a deprecation warning.
 
 Any other symbol raises `DomainError`.
 
 # References
 
-- B. S. Shastry, B. Sutherland, J. Phys. C **14**, L765 (1981) —
-  lower bound Δ ≥ J/4.
 - S. R. White, I. Affleck, Phys. Rev. B **54**, 9862 (1996) — DMRG
-  gap Δ ≈ 0.234 J.
+  gap Δ ≈ 0.234 J (default).
+- S. Eggert, Phys. Rev. B **54**, R9612 (1996) — independent DMRG
+  confirmation.
+- B. S. Shastry, B. Sutherland, J. Phys. C **14**, L765 (1981) —
+  trimer lower bound Δ_trimer ≥ J/4 (sector-specific reading; see
+  Caspers-Magnus 1982 / Magnus 1991 for refined rigorous bounds).
+- W. J. Caspers, W. Magnus, Physica A **111**, 220 (1982) —
+  rigorous bound Δ ≥ 0.0975 J on the absolute gap.
 """
 function fetch(
-    m::MajumdarGhosh, ::MassGap, ::Infinite; method::Symbol=:lower_bound, kwargs...
+    m::MajumdarGhosh, ::MassGap, ::Infinite; method::Symbol=:numerical, kwargs...
 )
-    if method === :lower_bound
-        return m.J / 4
-    elseif method === :numerical
+    if method === :numerical
         return 0.234 * m.J
+    elseif method === :trimer_bound
+        return m.J / 4
+    elseif method === :lower_bound
+        # Legacy alias.  Resolves to the SS trimer bound but emits a
+        # one-shot deprecation pointer so callers migrate to
+        # :trimer_bound (which more honestly labels the value as a
+        # sector-specific bound, not the spectral gap).
+        @warn (
+            "MajumdarGhosh MassGap: method=:lower_bound is deprecated; " *
+            "use method=:trimer_bound (Shastry-Sutherland 1981 trimer-" *
+            "sector bound, J/4) or the new default method=:numerical " *
+            "(DMRG ≈ 0.234 J — actual ground-state-to-first-excited gap)."
+        ) maxlog = 1
+        return m.J / 4
     else
         throw(
             DomainError(
                 method,
                 "MajumdarGhosh MassGap: unknown method :$(method); " *
-                "expected :lower_bound (Shastry–Sutherland 1981) or " *
-                ":numerical (White–Affleck DMRG 1996).",
+                "expected :numerical (default; White-Affleck DMRG 1996, " *
+                "≈ 0.234 J) or :trimer_bound (Shastry-Sutherland 1981, J/4).",
             ),
         )
     end

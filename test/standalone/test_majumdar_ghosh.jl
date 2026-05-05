@@ -8,6 +8,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
+using Logging: with_logger, NullLogger
 
 @testset "MajumdarGhosh: ground state and gap" begin
     @testset "GroundStateEnergyDensity (Infinite) — exact dimer GS" begin
@@ -40,23 +41,36 @@ using QAtlas, Test
         @test QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(); N=8) == -3 / 8
     end
 
-    @testset "MassGap (Infinite) — :lower_bound vs :numerical" begin
+    @testset "MassGap (Infinite) — :numerical default + :trimer_bound + legacy alias" begin
         m = MajumdarGhosh(; J=1.0)
 
-        # Default method is the analytical Shastry–Sutherland bound.
-        Δ_lb_default = QAtlas.fetch(m, MassGap(), Infinite())
-        Δ_lb_explicit = QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)
-        @test Δ_lb_default == Δ_lb_explicit
-        @test Δ_lb_default ≈ 0.25 atol = 1e-14
+        # Default method is now :numerical (the actual DMRG ground-state-
+        # to-first-excited gap, ≈ 0.234 J).  Switched from the previous
+        # :lower_bound default after PR review noted that the SS 1981
+        # J/4 value exceeds the true gap and is best read as a sector-
+        # specific bound.
+        Δ_default = QAtlas.fetch(m, MassGap(), Infinite())
+        Δ_num_explicit = QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
+        @test Δ_default == Δ_num_explicit
+        @test Δ_default ≈ 0.234 atol = 1e-14
 
-        # White–Affleck DMRG numerical-exact gap.
-        Δ_num = QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
-        @test Δ_num ≈ 0.234 atol = 0.01
+        # Shastry-Sutherland trimer-sector bound.
+        Δ_trimer = QAtlas.fetch(m, MassGap(), Infinite(); method=:trimer_bound)
+        @test Δ_trimer ≈ 0.25 atol = 1e-14
+        @test Δ_trimer > Δ_num_explicit  # SS bound numerically exceeds the actual gap
 
-        # J scaling for both methods.
+        # Legacy :lower_bound alias still resolves to J/4 (with a one-shot
+        # @warn pointing callers to :trimer_bound).  Wrapped to silence
+        # the deprecation warning during regression testing.
+        Δ_legacy = with_logger(NullLogger()) do
+            QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)
+        end
+        @test Δ_legacy ≈ 0.25 atol = 1e-14
+
+        # J scaling for both physical methods.
         for Jval in (0.5, 2.0, 3.7)
             mJ = MajumdarGhosh(; J=Jval)
-            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:lower_bound) == Jval / 4
+            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:trimer_bound) == Jval / 4
             @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:numerical) ≈ 0.234 * Jval atol =
                 1e-14
         end

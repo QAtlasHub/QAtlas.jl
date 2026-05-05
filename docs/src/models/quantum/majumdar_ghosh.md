@@ -43,17 +43,24 @@ on both.
 
 | Source | Value | Method |
 |--------|-------|--------|
-| Shastry–Sutherland (1981) | $\Delta \geq J/4$ | analytical lower bound |
-| White–Affleck (1996) | $\Delta \approx 0.234\,J$ | DMRG (numerical exact) |
+| White–Affleck (1996) | $\Delta \approx 0.234\,J$ | DMRG (default) |
+| Shastry–Sutherland (1981) | $\Delta_\text{trimer} \geq J/4$ | trimer-sector bound |
+| Caspers–Magnus (1982) | $\Delta \geq 0.0975\,J$ | rigorous absolute-gap bound |
 
-Both are exposed through the `MassGap` quantity with a `method` kwarg.
+Both stored values are exposed through the `MassGap` quantity with a
+`method` kwarg.  Note that the SS $J/4$ value *exceeds* the actual
+DMRG gap ($0.25 > 0.234$), so it must be read as a bound on a specific
+excitation sector (likely the local-triplet sector on the
+trimer-projector decomposition) rather than on the absolute spectral
+gap.  Rigorous absolute-gap bounds (Caspers–Magnus 1982; Magnus 1991:
+$\Delta \geq 0.117\,J$) are weaker.
 
 ## Coverage Matrix
 
 | Quantity | Infinite | PBC | OBC |
 |---|---|---|---|
 | `GroundStateEnergyDensity` | $-3J/8$ (analytic) | $-3J/8$ (size-indep.) | — |
-| `MassGap` | $J/4$ or $0.234\,J$ | — | — |
+| `MassGap` | $0.234\,J$ (default) or $J/4$ | — | — |
 
 ## Quick-look code
 
@@ -64,9 +71,10 @@ m = MajumdarGhosh(; J=1.0)
 
 QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())            # -3/8
 QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(8))                # -3/8
-QAtlas.fetch(m, MassGap(), Infinite())                             # 1/4  (Shastry–Sutherland)
-QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)        # 1/4
-QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)          # 0.234 (White–Affleck DMRG)
+QAtlas.fetch(m, MassGap(), Infinite())                             # 0.234 (default; White–Affleck DMRG)
+QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)          # 0.234
+QAtlas.fetch(m, MassGap(), Infinite(); method=:trimer_bound)       # 1/4   (Shastry–Sutherland trimer-sector bound)
+QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)        # 1/4   (legacy alias of :trimer_bound; emits deprecation @warn)
 ```
 
 ## References

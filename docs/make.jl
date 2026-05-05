@@ -51,6 +51,7 @@ makedocs(;
                 "Heisenberg" => "models/quantum/heisenberg.md",
                 "XXZ" => "models/quantum/xxz.md",
                 "Kitaev Honeycomb" => "models/quantum/kitaev-honeycomb.md",
+                "Kitaev1D" => "models/quantum/kitaev1d.md",
                 "Tight-Binding" => [
                     "models/quantum/tightbinding/index.md",
                     "Honeycomb" => "models/quantum/tightbinding/honeycomb.md",

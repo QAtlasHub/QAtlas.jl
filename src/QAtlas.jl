@@ -13,6 +13,7 @@ export TFIM                                             # v0.13 concrete struct
 export E8                                               # v0.13 concrete struct
 export XXZ1D                                            # v0.13 new model
 export KitaevHoneycomb                                  # spin-½ Kitaev honeycomb
+export Kitaev1D                                         # 1D p-wave Majorana wire (Kitaev 2001)
 export TightBindingSpectrum
 # NOTE: `Honeycomb`, `Kagome`, `Lieb`, `Triangular` are NOT exported —
 # they all conflict with Lattice2D's topology types of the same name.
@@ -45,6 +46,7 @@ export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
+export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 
 # --- TFIM Infinite dynamic helpers ---
 export tfim_quasiparticle_dispersion, tfim_two_spinon_dos
@@ -93,6 +95,8 @@ include("models/quantum/Heisenberg/HeisenbergS1_registry.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
+include("models/quantum/Kitaev1D/Kitaev1D.jl")
+include("models/quantum/Kitaev1D/Kitaev1D_registry.jl")  # populates REGISTRY for Kitaev1D
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D

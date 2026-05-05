@@ -396,6 +396,50 @@ here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
 
+"""
+    TopologicalInvariant() <: AbstractQuantity
+
+Topological `Z_2` invariant of a 1D BdG superconductor (Kitaev 2001).
+Defined as the Pfaffian sign at the time-reversal-invariant momenta
+`k = 0` and `k = π`,
+
+```math
+\\nu = \\operatorname{sgn}\\bigl[\\operatorname{Pf}(H_{\\mathrm{BdG}}(k=0))
+                                  \\cdot \\operatorname{Pf}(H_{\\mathrm{BdG}}(k=\\pi))\\bigr]
+       \\in \\{+1, -1\\},
+```
+
+with `ν = -1` in the topological phase and `ν = +1` in the trivial
+phase.  For a gapless bulk (Pfaffian zero at `k = 0` or `k = π`) the
+invariant is ill-defined and implementations should signal an error.
+
+Currently used by [`Kitaev1D`](@ref).
+"""
+struct TopologicalInvariant <: AbstractQuantity end
+
+"""
+    EdgeModeEnergy() <: AbstractQuantity
+
+Energy of the lowest-lying boundary mode on an open chain.  In a
+topological 1D superconductor (Kitaev 2001) the OBC chain hosts two
+Majorana zero modes at the chain ends; their hybridization energy
+decays exponentially with chain length,
+
+```math
+E_\\text{edge}(N) \\sim e^{-N/\\xi},
+```
+
+where `ξ` is the bulk correlation length.  In the trivial phase the
+OBC lowest single-particle excitation is set by the bulk gap.
+
+`EdgeModeEnergy` is the smallest positive BdG eigenvalue of the OBC
+chain — the same quantity as [`MassGap`](@ref) at `OBC`, exposed under
+a name that makes the boundary-mode interpretation explicit at the
+call site.
+
+Currently used by [`Kitaev1D`](@ref).
+"""
+struct EdgeModeEnergy <: AbstractQuantity end
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
 # `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,
 # `GrowthExponents`) are currently defined in their respective model /

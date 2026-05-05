@@ -329,33 +329,6 @@ pages return literature values.
 struct CentralCharge <: AbstractQuantity end
 
 """
-    ConformalWeights() <: AbstractQuantity
-
-Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro
-[`MinimalModel`](@ref) this is the Kac-table entry `h_{r,s}`; for
-[`WZWSU2`](@ref) it is the SU(2)-spin label `h_j = j(j+1)/(k+2)`.
-
-Concrete model fetch methods take additional keyword arguments
-identifying the primary (`r`, `s` for `MinimalModel`; `j` for
-`WZWSU2`) and return an exact `Rational{Int}`.
-"""
-struct ConformalWeights <: AbstractQuantity end
-
-"""
-    PrimaryFields() <: AbstractQuantity
-
-Full list of primary fields of a 2D rational CFT.  For
-[`MinimalModel`](@ref) the result is a `Vector{NamedTuple{(:r, :s, :h)}}`
-of length `(p - 1)(p_prime - 1) / 2`, with one entry per Kac-symmetry
-orbit.
-
-Future CFT classes may return different NamedTuple schemas (e.g.
-`(j, h)` for WZW). The return type is therefore a
-`Vector{<:NamedTuple}` whose schema depends on the model.
-"""
-struct PrimaryFields <: AbstractQuantity end
-
-"""
     CorrelationLength() <: AbstractQuantity
 
 Two-point correlation length `ξ` controlling the exponential decay of

@@ -45,7 +45,6 @@ export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
-export ConformalWeights, PrimaryFields
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
 export CasimirEnergyCorrection
@@ -60,7 +59,6 @@ export heisenberg_spinon_dispersion,
 # --- Universality Classes ---
 export Universality, CriticalExponents, GrowthExponents
 export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
-export MinimalModel, WZWSU2       # 2D rational-CFT dispatch tags
 include("universalities/Universality.jl")
 include("universalities/E8.jl")
 include("universalities/MeanField.jl")
@@ -69,8 +67,6 @@ include("universalities/KPZ.jl")
 include("universalities/Percolation.jl")
 include("universalities/Potts.jl")
 include("universalities/ONModel.jl")
-include("universalities/MinimalModel.jl")
-include("universalities/WZW.jl")
 
 # --- Models ---
 # Layout: `<class>/<Model>/<Model>.jl` (with optional sibling axis files like

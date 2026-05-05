@@ -66,6 +66,15 @@ Quantities currently registered for this model:
 | [`CriticalTemperature`](@ref)             | `Infinite`  | analytic          |
 | [`ResidualEntropy`](@ref)                 | `Infinite`  | analytic (QuadGK) |
 
+!!! warning "Sign convention differs from `IsingSquare`"
+    `IsingTriangular` uses the **Wannier 1950 convention** `H = +J Σ σσ`,
+    so `J > 0` means *antiferromagnetic* (frustrated).  By contrast,
+    [`IsingSquare`](@ref) uses the modern `H = -J Σ σσ` convention
+    where `J > 0` means *ferromagnetic*.  Passing the same numerical
+    value of `J` to the two models therefore selects opposite physics.
+    To keep the user-facing critical-temperature comparison meaningful:
+    `IsingSquare(J=1.0)` (FM) ↔ `IsingTriangular(J=-1.0)` (FM).
+
 See also: [`IsingSquare`](@ref) for the square-lattice (non-frustrated)
 counterpart with the Onsager / Yang closed forms.
 """

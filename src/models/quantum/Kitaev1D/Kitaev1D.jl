@@ -255,6 +255,15 @@ boundary-mode-explicit name).  In the trivial phase it converges to the
 bulk gap as `N → ∞`.
 """
 function fetch(model::Kitaev1D, ::MassGap, bc::OBC; kwargs...)
+    if model.Δ == 0.0 && abs(model.μ) < 2 * abs(model.t)
+        return error(
+            "Kitaev1D MassGap@OBC: Δ = 0 with |μ| < 2|t| is the gapless metal " *
+            "regime — the dispersion has zeros at k_F = ±arccos(-μ/2t) and the " *
+            "BdG spectrum lowest level is a finite-size remnant of those Fermi " *
+            "points, not a physical gap.  Refusing to silently mask this with a " *
+            "misleading number; re-evaluate with Δ ≠ 0.",
+        )
+    end
     N = _bc_size(bc, kwargs)
     Λ = _kitaev1d_bdg_spectrum(N, model.μ, model.t, model.Δ)
     return Λ[1]
@@ -280,6 +289,15 @@ exist as separate names so call sites can be explicit about which
 physical interpretation they have in mind.
 """
 function fetch(model::Kitaev1D, ::EdgeModeEnergy, bc::OBC; kwargs...)
+    if model.Δ == 0.0 && abs(model.μ) < 2 * abs(model.t)
+        return error(
+            "Kitaev1D EdgeModeEnergy@OBC: Δ = 0 with |μ| < 2|t| is the gapless " *
+            "metal regime — there is no SC pairing, no topological invariant, " *
+            "and no Majorana edge modes; the BdG-spectrum lowest level is a " *
+            "finite-size Fermi-point remnant.  Refusing to mask this with a " *
+            "misleading number; re-evaluate with Δ ≠ 0.",
+        )
+    end
     N = _bc_size(bc, kwargs)
     Λ = _kitaev1d_bdg_spectrum(N, model.μ, model.t, model.Δ)
     return Λ[1]

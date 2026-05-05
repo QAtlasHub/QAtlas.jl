@@ -95,7 +95,6 @@ include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
-include("models/quantum/XXZ/XXZ_xx_infinite.jl")
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 

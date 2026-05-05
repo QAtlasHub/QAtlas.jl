@@ -38,12 +38,20 @@
 # **Why does `e` carry 1/(2π) while `f, s, C` carry 1/π?**  All four
 # observables are defined as `(1/(2π)) ∫_{-π}^{π} ⋯ dk`; collapsing
 # to [0, π] by the k ↔ -k symmetry of the integrand contributes a
-# factor 2 to the overall coefficient.  For `f, s, C` the integrand is
-# even in k *and* the natural definition of e, s, C also includes
-# an extra factor of 2 (e.g. `f = -(1/β) ⟨log(1 + e^{-βε})⟩` plus its
-# particle-hole partner combine into `log(2 cosh(βε/2))`).  For `e`
-# the original definition `e = ⟨ε · n_F(ε)⟩` does not have such a
-# doubling, so the k → [0,π] reduction leaves the prefactor at 1/(2π).
+# factor 2 to the overall coefficient.  The remaining factor comes
+# from the algebraic identity
+#     log(1 + e^{-βε}) = -βε/2 + log(2 cosh(βε/2))
+# combined with ∫_{-π}^{π} ε(k) dk = 0 (true for ε(k) = -J cos k since
+# cos is odd over a full period of length 2π — equivalently ε is even
+# in k but its mean over the BZ is zero).  The linear -βε/2 piece
+# integrates to zero, so for `f` (and inherited `s, C`) the
+# integrand collapses cleanly to `log(2 cosh(βε/2))` — already
+# carrying an implicit factor of 2 from the cosh.  For `e` the
+# integrand `ε · n_F(ε)` does not benefit from this doubling: the
+# similar identity `ε · n_F(ε) = ε/2 - (ε/2) tanh(βε/2)` produces a
+# linear ε/2 piece that *also* integrates to zero, but no extra factor
+# of 2 appears in the surviving `-(ε/2) tanh` term.  Hence the k →
+# [0, π] reduction of `e` retains the prefactor at 1/(2π).
 # A direct algebraic check: at β → ∞,
 #     e(∞) = -(1/(2π)) ∫₀^π ε(k) sgn(ε(k)) dk
 #          = -(1/(2π)) ∫₀^π |ε(k)| dk

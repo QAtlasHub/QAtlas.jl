@@ -83,6 +83,7 @@ the test suite.
 ## Further Reading
 
 - [Ising](ising.md) --- the most thoroughly studied class
+- [CFT Casimir Correction](cft-casimir.md) --- universal 1/L finite-size correction (Cardy 1986)
 - [Mean-Field](mean-field.md) --- baseline for $d \geq d_c$
 - [Cross-Verification](../verification/cross-checks.md) --- how
   universality predictions are tested against model-specific results

@@ -70,6 +70,7 @@ makedocs(;
             "XY / Heisenberg" => "universalities/on-models.md",
             "Mean-Field" => "universalities/mean-field.md",
             "E8" => "universalities/e8.md",
+            "CFT Casimir Correction" => "universalities/cft-casimir.md",
         ],
         "Verification" => [
             "verification/index.md",

@@ -47,6 +47,7 @@ export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
+export CasimirEnergyCorrection
 
 # --- TFIM Infinite dynamic helpers ---
 export tfim_quasiparticle_dispersion, tfim_two_spinon_dos

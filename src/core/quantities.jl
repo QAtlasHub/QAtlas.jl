@@ -396,6 +396,48 @@ here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
 
+"""
+    CasimirEnergyCorrection() <: AbstractQuantity
+
+Universal `1/L` finite-size correction to the ground-state energy of a
+1+1D conformal field theory.
+
+For a critical 1+1D system with central charge `c` and CFT velocity
+`v` on a system of size `L`:
+
+- Periodic boundary (PBC):
+  ``E_0(L) = L\\,\\varepsilon_\\infty - \\dfrac{\\pi c v}{6 L} + O(L^{-2})``
+- Open boundary (OBC):
+  ``E_0(L) = L\\,\\varepsilon_\\infty + \\varepsilon_{\\mathrm{surf}} - \\dfrac{\\pi c v}{24 L} + O(L^{-2})``
+
+This quantity returns *only* the universal ``1/L`` correction term
+(``-\\pi c v/(6 L)`` at PBC, ``-\\pi c v/(24 L)`` at OBC), not the
+extensive ``L \\varepsilon_\\infty`` piece nor the OBC surface term
+``\\varepsilon_{\\mathrm{surf}}``.  The PBC-to-OBC ratio is exactly 4,
+independent of the universality class.
+
+The CFT velocity `v` is model-dependent (e.g. ``v = 2J`` for the TFIM
+at the critical point, ``v = (\\pi/2) J`` for the AFM Heisenberg chain,
+``v = v_F`` for the XXZ Luttinger liquid) and is supplied by the caller
+as a kwarg.  The central charge `c` is read from the universality
+class via the same data the `Universality{C}` entry exposes for
+[`CriticalExponents`](@ref).
+
+# References
+- J. Cardy, *Nucl. Phys. B* **270**, 186 (1986).
+- H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, *Phys. Rev. Lett.*
+  **56**, 742 (1986).
+- I. Affleck, *Phys. Rev. Lett.* **56**, 746 (1986).
+
+!!! note "Phase 2 (TODO)"
+    The conformal *tower of states* --- primary scaling dimensions
+    ``(h, \\bar h)`` and the
+    ``E_n - E_0 = (2\\pi v/L)(h_n + \\bar h_n)`` excitation pattern ---
+    is tracked separately as future work (Phase 2 of issue #150) and
+    will be exposed via a `ConformalTower` quantity once implemented.
+"""
+struct CasimirEnergyCorrection <: AbstractQuantity end
+
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
 # `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,
 # `GrowthExponents`) are currently defined in their respective model /

@@ -116,13 +116,45 @@ free energy per site.  Real-valued, non-negative, monotone in `T`.
 struct ThermalEntropy <: AbstractQuantity end
 
 """
-    VonNeumannEntropy() <: AbstractQuantity
+    VonNeumannEntropy{M}() <: AbstractQuantity
+    VonNeumannEntropy()                   # M = :equilibrium (default)
+    VonNeumannEntropy(:equilibrium)       # explicit equilibrium S(ℓ)
+    VonNeumannEntropy(:quench)            # post-quench S(ℓ, t)
 
-Von Neumann entanglement entropy of a reduced density matrix:
-`S_vN = −Tr ρ_A log ρ_A`.  Requires a subsystem specification through the
-model's fetch kwargs (e.g. `ℓ`, the subsystem length).
+Von Neumann entanglement entropy of a reduced density matrix,
+`S_vN = −Tr ρ_A log ρ_A`.  The mode parameter `M::Symbol` is a
+phantom type that splits the dispatch into:
+
+- `:equilibrium` — equilibrium / thermal value
+  `S_vN = -Tr ρ_A log ρ_A` of the GS or thermal reduced density
+  matrix on the first `ℓ` sites (kwarg `ℓ`).  This is the original
+  meaning; the no-argument constructor `VonNeumannEntropy()` keeps
+  back-compatibility by routing here.
+
+- `:quench` — time-evolved entanglement entropy
+  `S_vN(ℓ, t) = -Tr ρ_A(t) log ρ_A(t)` after a sudden quench from
+  the ground state of an `initial::AbstractQAtlasModel` (`H_0`) to
+  the post-quench Hamiltonian (the `model` argument to `fetch`).
+  Calabrese–Cardy quasi-particle picture (J. Stat. Mech. P04010
+  (2005)): linear growth `S(ℓ, t) ≈ (c/3) v_E t` for `t ≪ ℓ/(2 v_E)`,
+  saturating at `(c/3) log ℓ + const` for `t ≫ ℓ/(2 v_E)`.
+
+See `docs/src/calc/tfim-quench-entanglement.md` for the
+free-fermion derivation in the TFIM.
 """
-struct VonNeumannEntropy <: AbstractQuantity end
+struct VonNeumannEntropy{M} <: AbstractQuantity
+    function VonNeumannEntropy{M}() where {M}
+        M isa Symbol || error(
+            "VonNeumannEntropy mode must be a Symbol, got $(typeof(M))"
+        )
+        M in (:equilibrium, :quench) || error(
+            "unknown VonNeumannEntropy mode :$M; expected :equilibrium or :quench"
+        )
+        return new{M}()
+    end
+end
+VonNeumannEntropy() = VonNeumannEntropy{:equilibrium}()
+VonNeumannEntropy(m::Symbol) = VonNeumannEntropy{m}()
 
 """
     RenyiEntropy(α) <: AbstractQuantity

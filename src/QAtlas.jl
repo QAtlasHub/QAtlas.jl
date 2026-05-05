@@ -83,6 +83,7 @@ include("models/quantum/TFIM/TFIM_pbc_thermal.jl")
 include("models/quantum/TFIM/TFIM_zaxis.jl")
 include("models/quantum/TFIM/TFIM_local.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
+include("models/quantum/TFIM/TFIM_quench_entanglement.jl")
 include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
 include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM

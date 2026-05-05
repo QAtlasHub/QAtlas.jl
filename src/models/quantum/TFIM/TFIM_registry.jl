@@ -227,7 +227,7 @@
 # ── Entanglement (T = 0; β kwarg defaults to Inf) ─────────────────────
 @register(
     TFIM,
-    VonNeumannEntropy,
+    VonNeumannEntropy{:equilibrium},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -410,7 +410,7 @@
 # ── Tier 2: CC entanglement at Infinite ──────────────────────────────
 @register(
     TFIM,
-    VonNeumannEntropy,
+    VonNeumannEntropy{:equilibrium},
     Infinite,
     method=:cft,
     reliability=:high,
@@ -515,4 +515,16 @@
     method=:pfaffian,
     reliability=:medium,
     tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+)
+
+# ── Tier 2: post-quench entanglement entropy at OBC (Calabrese-Cardy) ─
+@register(
+    TFIM,
+    VonNeumannEntropy{:quench},
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_quench_entanglement.jl",
+    references=["Calabrese-Cardy 2005", "Peschel 2003"],
+    notes="S(ℓ, t) after a global quench from initial::TFIM ground state; Peschel on time-evolved Σ(t) = R(t) Σ_0 R(t)ᵀ.",
 )

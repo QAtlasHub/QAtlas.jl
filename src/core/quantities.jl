@@ -442,7 +442,6 @@ function fetch(model::AbstractQAtlasModel, ::Energy{:total}, bc::Union{OBC,PBC};
     return fetch(model, Energy{:per_site}(), bc; kwargs...) * _bc_size(bc, kwargs)
 end
 
-
 # ─── Charge / spin gaps (correlated electron systems) ──────────────────
 
 """

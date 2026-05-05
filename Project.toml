@@ -6,6 +6,7 @@ authors = ["sota shimozono <shimozono-sota631@g.ecc.u-tokyo.ac.jp>"]
 [deps]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [compat]
 Aqua = "0.8"
@@ -17,6 +18,7 @@ LinearAlgebra = "1.10"
 QuadGK = "2.11.2"
 Random = "1.10"
 SparseArrays = "1.10"
+SpecialFunctions = "2"
 Test = "1.10"
 julia = "1.10"
 

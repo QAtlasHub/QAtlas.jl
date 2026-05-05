@@ -236,7 +236,12 @@ end
 """
     fetch(model::S1XXZ1D, ::MassGap, ::OBC) -> Float64
 
-Single-particle gap `Δ = E₁ - E₀` of the spin-1 OBC XXZ chain at finite N ≤ 8.
+Many-body gap `Δ = E₁ - E₀` (first-excitation gap) of the spin-1 OBC
+XXZ chain at finite N ≤ 8.  Computed from dense ED of the 3^N Hamiltonian.
+
+Not a single-particle gap: the spin-1 XXZ chain has no free-fermion
+factorisation; this is the genuine many-body gap from the lowest excited
+eigenvalue minus the ground-state eigenvalue of H.
 """
 function fetch(model::S1XXZ1D, ::MassGap, bc::OBC; kwargs...)
     H = _s1_xxz_hamiltonian_matrix(model, bc.N)

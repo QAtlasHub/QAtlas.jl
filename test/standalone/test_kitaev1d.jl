@@ -200,9 +200,7 @@ using QAtlas:
 
         # Critical |μ| = 2|t|: gap = 0.
         @test isapprox(
-            fetch(Kitaev1D(; μ=2.0, t=1.0, Δ=1.0), MassGap(), Infinite()),
-            0.0;
-            atol=1e-10,
+            fetch(Kitaev1D(; μ=2.0, t=1.0, Δ=1.0), MassGap(), Infinite()), 0.0; atol=1e-10
         )
     end
 end

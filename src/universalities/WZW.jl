@@ -32,7 +32,11 @@ Special cases:
 - `k = 1`: `c = 1` (free boson at the SU(2)-symmetric radius;
   low-energy theory of the spin-1/2 Heisenberg antiferromagnet,
   Affleck 1989).
-- `k = 2`: `c = 3/2` (equivalent to Ising × free Majorana).
+- `k = 2`: `c = 3/2` — equivalent to **3 free Majorana fermions**
+  (each contributing `c = 1/2`), or equivalently the smallest N=1
+  super-Virasoro minimal model.  Note that "Ising × free Majorana"
+  with one Majorana would only give `c = 1/2 + 1/2 = 1 ≠ 3/2`; the
+  correct decomposition needs three Majorana fermions.
 - `k = 3`: `c = 9/5`.
 
 ```julia

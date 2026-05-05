@@ -100,7 +100,7 @@ $$h_j = \frac{j (j + 1)}{k + 2}.$$
 | Level | $c$  | Spectrum $j$         | Notes                                                |
 |:-----:|:----:|:---------------------|:-----------------------------------------------------|
 | 1     | 1    | $0, 1/2$             | Free boson at SU(2)-symmetric radius; low-energy theory of the spin-$1/2$ Heisenberg AFM (Affleck 1989) |
-| 2     | 3/2  | $0, 1/2, 1$          | Equivalent to Ising × free Majorana                  |
+| 2     | 3/2  | $0, 1/2, 1$          | 3 free Majorana fermions (smallest $\mathcal{N}{=}1$ super-Virasoro minimal model) |
 | 3     | 9/5  | $0, 1/2, 1, 3/2$     |                                                      |
 
 ### Usage

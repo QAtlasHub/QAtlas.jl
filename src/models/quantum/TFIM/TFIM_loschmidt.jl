@@ -245,7 +245,11 @@ function _tfim_loschmidt_obc_log_echo(N::Int, J::Float64, h0::Float64, hf::Float
             log_L += log(mag2)
         end
     end
-    return log_L
+    # OBC discretisation density is N modes on (0, π) ⇒ Σ_n ≈ (N/π) ∫_0^π,
+    # while the Infinite formula uses (1/2π) ∫_0^π. This factor-2 mismatch
+    # makes a naïve sum yield λ_obc = 2 × λ_inf in the thermodynamic limit;
+    # divide by 2 here so that λ_obc → λ_inf as N → ∞ (off-cusp t).
+    return log_L / 2
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

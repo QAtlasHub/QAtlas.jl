@@ -144,12 +144,13 @@ end
 
         @test λ_obc_small > 0
         @test λ_obc_large > 0
-        # OBC bulk converges to Infinite as N grows: the large-N error
-        # should be smaller than the small-N error.  Tolerance is loose
-        # because OBC mode mixing introduces O(1/N) boundary corrections
-        # on top of the bulk per-mode product.
+        # OBC bulk converges to Infinite as N grows.  After the factor-2
+        # discretisation correction in `_tfim_loschmidt_obc_log_echo`, the
+        # remaining Euler-Maclaurin error of the midpoint sum vs the
+        # Infinite integral is O(1/N²) for smooth (off-cusp) integrands,
+        # so N=64 should agree with the continuum limit to ≪ 1%.
         @test abs(λ_obc_large - λ_inf) < abs(λ_obc_small - λ_inf) + 0.05
-        @test abs(λ_obc_large - λ_inf) < 0.20
+        @test abs(λ_obc_large - λ_inf) < 1e-3
     end
 
     # ─── Pinned reference value: Infinite λ(t = 1.0; h_0=2, h_f=0.5) ──────

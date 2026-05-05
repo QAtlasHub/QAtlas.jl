@@ -83,12 +83,13 @@ using QAtlas, Test
         @test S_r2_inf ≈ (3 // 4) * S_vn_inf atol = 1e-12
     end
 
-    # ── Other classes: Potts3 (c=4/5), Potts4 (c=1), XY (c=1) ────────────────
-    @testset "Potts3 / Potts4 / XY central charges" begin
+    # ── Other classes: Potts3 (c=4/5), Potts4 (c=1), XY (c=1), Heisenberg (c=1)
+    @testset "Potts3 / Potts4 / XY / Heisenberg central charges" begin
         @test QAtlas.fetch(Universality(:Potts3), CentralCharge()) == 4 // 5
         @test QAtlas.fetch(Universality(:Potts4), CentralCharge()) == 1 // 1
         @test QAtlas.fetch(Universality(:XY), CentralCharge()) == 1 // 1
         @test QAtlas.fetch(Universality(:Ising), CentralCharge()) == 1 // 2
+        @test QAtlas.fetch(Universality(:Heisenberg), CentralCharge(); d=1) == 1 // 1
 
         ℓ, L = 4.0, 8.0
         S_potts3 = QAtlas.fetch(Universality(:Potts3), VonNeumannEntropy(), PBC(); ℓ=ℓ, L=L)
@@ -111,15 +112,14 @@ using QAtlas, Test
         @test_throws ErrorException QAtlas.fetch(
             Universality(:Percolation), VonNeumannEntropy(), Infinite(); ℓ=10.0
         )
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:Heisenberg), RenyiEntropy(2.0), OBC(); ℓ=4.0, L=8.0
-        )
     end
 
-    # ── d ≥ 3 Ising / XY: not a 1+1D CFT, error out ─────────────────────────
-    @testset "d ≥ 3 has no 1+1D-CFT central charge" begin
+    # ── d ≥ 3 Ising / XY / Heisenberg d≥2: not a 1+1D CFT, error out ────────
+    @testset "non-1+1D classes have no central charge" begin
         @test_throws ErrorException QAtlas.fetch(Universality(:Ising), CentralCharge(); d=3)
         @test_throws ErrorException QAtlas.fetch(Universality(:XY), CentralCharge(); d=3)
+        @test_throws ErrorException QAtlas.fetch(Universality(:Heisenberg), CentralCharge(); d=2)
+        @test_throws ErrorException QAtlas.fetch(Universality(:Heisenberg), CentralCharge(); d=3)
     end
 
     # ── Argument validation ─────────────────────────────────────────────────

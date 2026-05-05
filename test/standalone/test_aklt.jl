@@ -22,10 +22,12 @@ using QAtlas, Test
         # Linear J scaling for every analytic infinite-limit observable
         for J in (0.5, 1.0, 2.5)
             mJ = AKLT1D(; J=J)
-            @test QAtlas.fetch(mJ, GroundStateEnergyDensity(), Infinite()) ≈ -2J / 3 atol = 1e-14
+            @test QAtlas.fetch(mJ, GroundStateEnergyDensity(), Infinite()) ≈ -2J / 3 atol =
+                1e-14
             @test QAtlas.fetch(mJ, MassGap(), Infinite()) ≈ 0.41048 * J rtol = 1e-12
             # ξ and O_str are J-independent
-            @test QAtlas.fetch(mJ, CorrelationLength(), Infinite()) ≈ 1 / log(3) atol = 1e-14
+            @test QAtlas.fetch(mJ, CorrelationLength(), Infinite()) ≈ 1 / log(3) atol =
+                1e-14
             @test QAtlas.fetch(mJ, StringOrderParameter(), Infinite()) ≈ 4 / 9 atol = 1e-14
         end
     end

@@ -127,14 +127,14 @@ end
 Central charge of the spin-1/2 Heisenberg universality class.
 
 Only `d = 1` is supported (the spin-1/2 antiferromagnetic Heisenberg
-chain in the SU(2)\_1 Wess-Zumino-Witten universality class, central
+chain in the SU(2)_1 Wess-Zumino-Witten universality class, central
 charge `c = 1`).  For `d ≥ 2` the Heisenberg universality class is not
 a 1+1D CFT (the 2D Heisenberg model has Goldstone modes; the 3D one
 has no critical line at finite T) — call sites that want a
 generic-CFT entanglement formula must use a 1+1D class.
 
 Reference: Affleck–Haldane, Phys. Rev. B 36, 5291 (1987); di Francesco–
-Mathieu–Sénéchal §15.6 (SU(2)\_1 WZW).
+Mathieu–Sénéchal §15.6 (SU(2)_1 WZW).
 """
 function fetch(::Universality{:Heisenberg}, ::CentralCharge; d::Int=1, kwargs...)
     if d == 1

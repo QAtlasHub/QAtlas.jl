@@ -118,36 +118,13 @@ end
 # Longitudinal susceptibility at Infinite — OBC large-N proxy
 # ═══════════════════════════════════════════════════════════════════════════════
 
-"""
-    fetch(model::TFIM, ::SusceptibilityZZ, ::Infinite;
-          beta::Real, N_proxy::Int = 80, kwargs...) -> Float64
-
-Per-site uniform longitudinal susceptibility `χ_zz(β)` of the infinite
-TFIM, defined as the `N → ∞` limit of the OBC fluctuation-dissipation
-expression
-
-    χ_zz(β) = (β/N) Σ_{i,j} ⟨σᶻ_i σᶻ_j⟩_β
-            = (β/N) Var(M_z) / N    (since ⟨σᶻ⟩_OBC = 0 by Z₂).
-
-A fully closed form (Calabrese–Mussardo form-factor integral) exists
-but is intricate; QAtlas uses the **OBC large-N proxy** —
-`_zz_uniform_susceptibility(N_proxy, J, h, β)` — defined in
-`TFIM_dynamics.jl`.  Caller can tighten the bound by raising
-`N_proxy`.  Default `N_proxy = 80` gives ~3-digit agreement with the
-asymptotic value in the gapped phase at moderate β (the cost is the
-single 2N×2N BdG diagonalisation).
-
-This is a deliberate practical compromise: it lets `χ_zz` at
-`Infinite()` cohabit with the other Z-axis Infinite quantities while
-the closed-form work is deferred.  The fact that χ_zz is finite (no
-IR divergence) for any β > 0 in either phase is what makes the proxy
-sensible.
-"""
-function fetch(
-    model::TFIM, ::SusceptibilityZZ, ::Infinite; beta::Real, N_proxy::Int=80, kwargs...
-)
-    return _zz_uniform_susceptibility(N_proxy, model.J, model.h, beta)
-end
+# NOTE: The (ω-omitted) static SusceptibilityZZ, Infinite was originally
+# defined here.  It is now folded into the dynamic-aware router inside
+# TFIM_infinite_dynamics.jl (same pattern as ZZStructureFactor) so the
+# dynamic-ω branch can be added without method-overwrite conflicts.
+# The static behaviour is preserved bit-for-bit: the router falls
+# through to _zz_uniform_susceptibility(N_proxy, J, h, β) when
+# ω === nothing.
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Infinite-N static σᶻσᶻ structure factor

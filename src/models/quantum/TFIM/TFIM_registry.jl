@@ -354,8 +354,8 @@
     Infinite,
     method=:bdg,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_zaxis.jl",
-    notes="OBC large-N proxy (N_proxy kwarg controls precision).",
+    tested_in="test/verification/test_tfim_fdt.jl",
+    notes="OBC large-N proxy.  Static (ω = nothing) → uniform χ_zz(β); dynamic (ω::Real, q required) → χ''_zz(q,ω;β) via Kubo commutator.  N_proxy kwarg controls precision.",
 )
 @register(
     TFIM,

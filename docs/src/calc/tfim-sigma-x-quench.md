@@ -142,10 +142,21 @@ quadrature.
 | $h_0 = h_f$ | $\Delta\theta_k = 0 \Rightarrow$ time-independent $= \langle\sigma^x\rangle_{\rm GS}(h_f)$ |
 | $t \to \infty$ time average | $\langle\sigma^x\rangle_{\rm GGE} = \frac{1}{\pi}\int_0^\pi \cos(2\theta_k^f)\,\cos(2\Delta\theta_k)\,dk$ (diagonal ensemble) |
 
-The OBC route at large $N$ and central site $i = N/2$ converges to the
-infinite-volume integral up to boundary-reflection effects suppressed by
-$t \, v_{\max} < N/2$ where $v_{\max} \le 2\,\max(J, h)$ is the maximal
-group velocity.
+The OBC route converges to the infinite-volume integral while the
+**light cone** from each open boundary has not yet reached the
+observation site $i$.  The relevant condition at site $i$ is
+
+$$
+t \, v_{\max} \,<\, d(i),\qquad d(i) \,=\, \min\bigl(i, \, N - i + 1\bigr),
+$$
+
+where $d(i)$ is the distance to the nearer boundary and
+$v_{\max} \le 2\,\max(J, h)$ is the maximal group velocity in either
+phase of the TFIM.  For the central site $i = N/2$ the bound becomes
+$t\,v_{\max} < N/2$, which is the convention quoted in the
+verification tests.  Outside this window the OBC value contains
+boundary-reflection contributions not present in the infinite-volume
+integral and a finite (controllable) deviation appears.
 
 ## API
 

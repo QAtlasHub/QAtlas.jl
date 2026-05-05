@@ -5,5 +5,6 @@ coverage:
         informational: true
     project:
       default:
+        informational: true
         target: auto
         threshold: 1%

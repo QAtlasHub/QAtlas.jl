@@ -13,5 +13,3 @@ rigorously verifiable solutions.
 - [Tight-Binding Models](tightbinding/index.md) -- nearest-neighbor
   hopping on 8 lattice topologies, with closed-form Bloch spectra and
   a generic builder
-- [Hubbard1D Chain](hubbard1d.md) -- 1D Hubbard model, Lieb-Wu Bethe
-  ansatz half-filling closed forms (E_0/N, charge gap, spin gap)

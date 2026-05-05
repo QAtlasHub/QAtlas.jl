@@ -157,6 +157,18 @@ weight near the upper edge.  The *Phase 2* exact result is given by
 the Caux–Hagemans (2006) algebraic Bethe ansatz form factor sum;
 implementing it is tracked as a TODO in
 `docs/src/calc/heisenberg-spinons.md`.
+
+!!! warning "Longitudinal only — S^{xx}, S^{yy} are NOT equal to S^{zz} at q ≠ 0"
+    Despite the SU(2) symmetry of the spin-½ XXX AFM chain, the
+    individual transverse and longitudinal dynamic structure factors
+    `S^{xx}(q, ω) = S^{yy}(q, ω)` and `S^{zz}(q, ω)` differ at any
+    `q ≠ 0` — only their sum (the rotation-invariant trace
+    `Σ_α S^{αα}`) is equal across spin axes.  The transverse Müller-
+    style ansatz (Schulz 1986; Bougourzi-Karbach-Müller 1998) shares
+    the two-spinon support `[ε_L(q), ε_U(q)]` but has a different
+    singularity structure at the lower edge.  This method returns
+    only the **longitudinal** `S^{zz}`; do not use it as a drop-in
+    for `S^{xx}` at finite `q`.
 """
 function _heisenberg_szz_muller(J::Real, q::Real, ω::Real)
     Jf = float(J)

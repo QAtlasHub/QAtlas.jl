@@ -1,3 +1,7 @@
+Your branch is behind 'origin/feat/issue-143-loschmidt' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+ test/standalone/test_tfim_loschmidt.jl    | 34 ++++++++++++++++++++++---------
+ 3 files changed, 34 insertions(+), 24 deletions(-)
 # ─────────────────────────────────────────────────────────────────────────────
 # Transverse Field Ising Model — Loschmidt echo + dynamical quantum phase
 # transitions (DQPT) for sudden quenches H_0 → H_f.
@@ -184,6 +188,25 @@ In the diagonal-pair limit (translationally invariant), this reduces to
 the issue's `(cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k t})` factor; for OBC the
 row-norm form folds residual mode mixing into per-mode angles consistent
 with unitarity (cos² + sin² = 1 is enforced by row normalisation).
+
+!!! warning "OBC implementation is a per-mode-product approximation, not the exact Pfaffian"
+    The exact OBC Bogoliubov-vacuum overlap is a Pfaffian (or
+    determinant) of the full `(N + N) × (N + N)` BdG mode-mixing
+    matrix between the H_0 and H_f bases — equivalent to the
+    Onishi-Yoshida formula or Robledo's Pfaffian sign-resolved form
+    for HFB vacua.  The implementation here uses the **diagonal
+    (rank-1-per-row) approximation**: each H_f mode `n` is summed
+    against all H_0 modes `m` only via the row norms `Σ_m |P^{(±)}_{n,m}|²`,
+    folding off-diagonal mode-mixing structure into per-mode angles
+    consistent with unitarity.  This is exact in the translationally-
+    invariant (PBC, k-decoupled) limit and converges to the exact
+    Pfaffian as N → ∞ at OBC, but at any finite N it carries an
+    `O(off-diagonal mode-mixing / N)` discrepancy from the strict
+    Pfaffian value.  The cross-check test `OBC N → ∞ matches
+    Infinite (off-cusp)` uses a `0.20` tolerance to accommodate this;
+    a tighter assertion (e.g. `<0.02` at N = 128) would expose the
+    approximation.  Replacing this with the Pfaffian form is a Phase
+    2 candidate if precision is needed at modest N.
 
 Returns `log L(t)`, suitable for direct `λ = −log L / N` conversion.
 """

@@ -24,7 +24,7 @@
 #   * String order parameter (Kennedy–Tasaki): O_str = 4/9
 #
 # Numerical-exact (no closed form):
-#   * Haldane gap (Infinite):  Δ ≈ 0.41048 J  (Östlund–Rommer 1995, DMRG)
+#   * Haldane gap (Infinite):  Δ ≈ 0.350 J  (García-Saez–Murg–Verstraete 2013, DMRG)
 #
 # References:
 #   I. Affleck, T. Kennedy, E. H. Lieb, H. Tasaki,
@@ -33,9 +33,9 @@
 #   T. Kennedy and H. Tasaki,
 #     "Hidden Z₂ × Z₂ symmetry breaking in Haldane-gap antiferromagnets",
 #     Phys. Rev. B 45, 304 (1992) — string order parameter.
-#   S. Östlund and S. Rommer,
-#     "Thermodynamic limit of density matrix renormalization",
-#     Phys. Rev. Lett. 75, 3537 (1995) — DMRG gap.
+#   A. García-Saez, V. Murg, and F. Verstraete,
+#     "Spectral gap of the Affleck-Kennedy-Lieb-Tasaki Hamiltonian",
+#     Phys. Rev. B 88, 245118 (2013); arXiv:1308.3631 — DMRG gap.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using LinearAlgebra: I, Hermitian, eigvals, kron
@@ -52,7 +52,7 @@ with `J > 0` antiferromagnetic.  Same local Hilbert space as
 the special AKLT value `1/3` where the ground state is an exact
 Valence Bond Solid (VBS).  The infinite-system observables exposed
 through `fetch` are closed-form (energy density, correlation length,
-string order parameter); the Haldane gap is the Östlund–Rommer (1995)
+string order parameter); the Haldane gap is the García-Saez–Murg–Verstraete (2013)
 DMRG numerical-exact value.
 """
 struct AKLT1D <: AbstractQAtlasModel
@@ -152,14 +152,14 @@ end
 
 Haldane gap of the AKLT chain in the thermodynamic limit,
 
-    Δ ≈ 0.41048 J
+    Δ ≈ 0.350 J
 
-(numerical-exact DMRG value; S. Östlund and S. Rommer, Phys. Rev. Lett.
-**75**, 3537 (1995)).  No closed form is known; `reliability=:medium`
+(numerical-exact DMRG value; A. García-Saez, V. Murg, and F. Verstraete,
+Phys. Rev. B **88**, 245118 (2013), arXiv:1308.3631).  No closed form is known; `reliability=:medium`
 in the registry.
 """
 function fetch(model::AKLT1D, ::MassGap, ::Infinite; kwargs...)
-    return 0.41048 * model.J
+    return 0.350 * model.J
 end
 
 """

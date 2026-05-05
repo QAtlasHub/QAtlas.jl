@@ -4,7 +4,7 @@
 # Closed-form analytical rows have `reliability=:high` because they
 # follow from the AKLT 1988 projector construction and the
 # Kennedy–Tasaki 1992 hidden-symmetry argument.  The Haldane gap row is
-# `:medium` because it is an Östlund–Rommer 1995 numerical-exact value
+# `:medium` because it is an García-Saez–Murg–Verstraete 2013 numerical-exact value
 # with no closed form.
 
 # ── Infinite analytical rows (closed form) ───────────────────────────
@@ -57,8 +57,8 @@
     method=:literature_value,
     reliability=:medium,
     tested_in="test/standalone/test_aklt.jl",
-    references=["Östlund-Rommer 1995"],
-    notes="Haldane gap Δ ≈ 0.41048 J; DMRG numerical-exact, no closed form.",
+    references=["García-Saez-Murg-Verstraete 2013"],
+    notes="Haldane gap Δ ≈ 0.350 J; DMRG numerical-exact, no closed form.",
 )
 
 # ── OBC dense ED (cap N ≤ 8 from _MAX_ED_SITES_S1) ───────────────────

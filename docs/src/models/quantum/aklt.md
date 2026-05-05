@@ -42,7 +42,7 @@ spin-$\tfrac{1}{2}$ edge modes under OBC.
 | GS energy density $e_0$ | $-2J/3$ | AKLT 1988 (closed form) |
 | Correlation length $\xi$ | $1/\log 3 \approx 0.910$ | AKLT 1988 (closed form) |
 | String order parameter $O_{\rm str}$ | $4/9$ | AKLT 1988 + Kennedy-Tasaki 1992 |
-| Haldane gap $\Delta_\infty$ | $\approx 0.41048\,J$ | Östlund-Rommer 1995 (DMRG) |
+| Haldane gap $\Delta_\infty$ | $\approx 0.350\,J$ | García-Saez-Murg-Verstraete 2013 (DMRG) |
 | OBC ground-state degeneracy | 4 (singlet $\oplus$ triplet of edge $\tfrac{1}{2}$-spins) | AKLT 1988 |
 
 The AKLT chain and the spin-1 Heisenberg chain
@@ -66,7 +66,7 @@ $e_0$, $\xi$, $O_{\rm str}$, and a literature value for $\Delta$.
 | `Energy{:per_site}` | $-2J/3$ (closed form) | conversion via `Energy{:total}` |
 | `CorrelationLength` | $1/\log 3$ (closed form) | — |
 | `StringOrderParameter` | $4/9$ (closed form) | — |
-| `MassGap` | $\approx 0.41048\,J$ (Östlund-Rommer 1995) | — |
+| `MassGap` | $\approx 0.350\,J$ (García-Saez-Murg-Verstraete 2013) | — |
 | `ExactSpectrum` | — | dense-ED ($3^N \times 3^N$) |
 
 ## Usage
@@ -78,7 +78,7 @@ m = AKLT1D()                         # default J = 1.0
 fetch(m, GroundStateEnergyDensity(), Infinite())   # → -2/3
 fetch(m, CorrelationLength(),       Infinite())    # → 1/log 3 ≈ 0.910
 fetch(m, StringOrderParameter(),    Infinite())    # → 4/9
-fetch(m, MassGap(),                 Infinite())    # → 0.41048
+fetch(m, MassGap(),                 Infinite())    # → 0.350
 
 # OBC dense ED — full sorted spectrum (3^N entries; N ≤ 8)
 λ = fetch(m, ExactSpectrum(), OBC(6))
@@ -120,7 +120,7 @@ that approaches the Haldane gap as $N$ grows.
   Haldane-gap antiferromagnets"*,
   Phys. Rev. B **45**, 304 (1992) — string order parameter and the
   non-local unitary that exposes it.
-- S. Östlund and S. Rommer,
-  *"Thermodynamic limit of density matrix renormalization"*,
-  Phys. Rev. Lett. **75**, 3537 (1995) — DMRG numerical-exact value of
-  the AKLT Haldane gap.
+- A. García-Saez, V. Murg, and F. Verstraete,
+  *"Spectral gap of the Affleck-Kennedy-Lieb-Tasaki Hamiltonian"*,
+  Phys. Rev. B **88**, 245118 (2013); arXiv:1308.3631 — DMRG numerical-
+  exact value of the AKLT Haldane gap.

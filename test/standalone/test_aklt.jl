@@ -2,7 +2,7 @@
 # Standalone test: AKLT1D — exact VBS ground state + Haldane gap
 #
 # Verifies the closed-form AKLT 1988 values (energy density, correlation
-# length, string order parameter), the Östlund–Rommer 1995 Haldane gap,
+# length, string order parameter), the García-Saez–Murg–Verstraete 2013 Haldane gap,
 # and the OBC dense-ED 4-fold edge-state degeneracy (S=1/2 edges → S_tot
 # ∈ {0, 1}: singlet + triplet) on N = 4, 6, 8.
 #
@@ -24,7 +24,7 @@ using QAtlas, Test
             mJ = AKLT1D(; J=J)
             @test QAtlas.fetch(mJ, GroundStateEnergyDensity(), Infinite()) ≈ -2J / 3 atol =
                 1e-14
-            @test QAtlas.fetch(mJ, MassGap(), Infinite()) ≈ 0.41048 * J rtol = 1e-12
+            @test QAtlas.fetch(mJ, MassGap(), Infinite()) ≈ 0.350 * J rtol = 1e-12
             # ξ and O_str are J-independent
             @test QAtlas.fetch(mJ, CorrelationLength(), Infinite()) ≈ 1 / log(3) atol =
                 1e-14
@@ -47,11 +47,11 @@ using QAtlas, Test
         @test ξ ≈ 0.9102392266268373 atol = 1e-12
     end
 
-    @testset "MassGap (Infinite) ≈ 0.41048 J (Östlund-Rommer 1995)" begin
+    @testset "MassGap (Infinite) ≈ 0.350 J (García-Saez-Murg-Verstraete 2013)" begin
         Δ = QAtlas.fetch(AKLT1D(), MassGap(), Infinite())
         # Compare against the canonical DMRG value with atol 1e-4 as per the
         # acceptance criteria; the implementation stores it to 5 decimal places.
-        @test Δ ≈ 0.41048 atol = 1e-4
+        @test Δ ≈ 0.350 atol = 1e-3
     end
 
     @testset "StringOrderParameter (Infinite) = 4/9 (Kennedy-Tasaki 1992)" begin

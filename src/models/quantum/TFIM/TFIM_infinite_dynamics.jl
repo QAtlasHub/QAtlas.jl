@@ -345,6 +345,19 @@ the static path returns the equilibrium thermodynamic susceptibility
 (integral of χ''(ω)/ω weighted by `tanh(βω/2)`), while the dynamic
 path returns the spectral function at a single `(q, ω)`.  The static
 branch is the recommended one for sum-rule / equation-of-state work.
+
+!!! note "FDT cross-check is not an independent physics anchor"
+    The dynamic χ'' branch shares the OBC large-N Pfaffian / Majorana
+    machinery (and (`N_proxy, t_max, dt`) discretisation) with the
+    `ZZStructureFactor` dynamic branch.  Asserting `S = 2χ''/(1−e^{-βω})`
+    therefore primarily verifies the **commutator-vs-product structure**
+    is consistent — both spectral functions are computed from the same
+    cached `Σ_thermal` and `R(t) = exp(h_majorana · t)`, so their
+    discretisation errors are correlated.  Stronger independent anchors
+    are: (i) the **f-sum rule** ∫₀^∞ ω χ''(q,ω) dω relates analytically
+    to ½⟨[[H, σᶻ_q], σᶻ_{-q}]⟩ (Hohenberg-Brinkman 1974); and (ii) at
+    h = 0 the σᶻ operator commutes with H, so χ''_zz(q,ω) ≡ 0 — a
+    trivial-but-strong test that fails fast on any sign error.
 """
 function fetch(
     model::TFIM,

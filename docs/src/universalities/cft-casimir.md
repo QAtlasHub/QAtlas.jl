@@ -42,17 +42,24 @@ QAtlas.fetch(Universality(:Ising), CasimirEnergyCorrection(), OBC(); L=16.0, v=2
 QAtlas.fetch(Universality(:Heisenberg), CasimirEnergyCorrection(), PBC(); L=16.0, v=π/2)
 ```
 
-The CFT velocity `v` is **model-dependent** and supplied by the caller:
+The CFT velocity `v` is **model-dependent** and supplied by the caller.
+Each row below quotes the velocity in the **spin convention used by the
+named model in QAtlas**, so that passing `model.J` (and `model.h`)
+through this column gives the correct numerical `v`:
 
-| Model                       | Velocity $v$ at criticality                |
-|----------------------------|--------------------------------------------|
-| TFIM, $h = J$              | $v = 2J$                                   |
-| AFM Heisenberg chain        | $v = (\pi/2)\,J$                           |
-| XXZ Luttinger liquid        | $v = v_F = \pi J \sin(\gamma)/\gamma$ (Bethe ansatz)|
+| Model                       | Spin convention             | Velocity $v$ at criticality                |
+|-----------------------------|-----------------------------|----------------------------------------------|
+| [`TFIM`](@ref), $h = J$ | Pauli, $H = -J\sum\sigma^z\sigma^z - h\sum\sigma^x$ | $v = 2J$                |
+| AFM Heisenberg chain        | $\mathbf{S} = oldsymbol{\sigma}/2$, $H = J\sum \mathbf{S}\cdot\mathbf{S}$ | $v = (\pi/2)\,J$ |
+| XXZ Luttinger liquid        | $\mathbf{S} = oldsymbol{\sigma}/2$, $H = J\sum(S^xS^x+S^yS^y+\Delta S^zS^z)$ | $v = \pi J\,\sin(\gamma)/\gamma$ (Bethe ansatz, $\Delta=\cos\gamma$) |
 
-QAtlas already exposes `LuttingerVelocity` / `FermiVelocity` /
-`SpinWaveVelocity` for the relevant models — read those, then pass
-the value through as the `v` kwarg.
+If a downstream code uses Pauli normalisation ($\mathbf{S}=oldsymbol{\sigma}$
+without the $1/2$ factor) for a spin-$	frac12$ chain, all three
+velocities pick up a factor of $4$ relative to this table.
+
+QAtlas already exposes [`LuttingerVelocity`](@ref) /
+[`FermiVelocity`](@ref) / [`SpinWaveVelocity`](@ref) for the relevant
+models — read those, then pass the value through as the `v` kwarg.
 
 ---
 

@@ -183,40 +183,11 @@ documented.
 struct MagnetizationZ <: AbstractQuantity end
 
 """
-    MagnetizationXLocal{M}() <: AbstractQuantity
-    MagnetizationXLocal()                       # M = :equilibrium (default)
-    MagnetizationXLocal(:equilibrium)           # explicit equilibrium ⟨σˣ_i⟩_β
-    MagnetizationXLocal(:quench)                # post-quench ⟨σˣ_i⟩(t)
+    MagnetizationXLocal() <: AbstractQuantity
 
-Site-resolved `⟨σˣ_i⟩` quantity.  The mode parameter `M::Symbol` is a
-phantom type that splits the dispatch into:
-
-- `:equilibrium` — site-resolved thermal expectation
-  `[⟨σˣ_i⟩_β for i = 1:N]` (Vector{Float64}).  This is the original
-  meaning; the no-argument constructor `MagnetizationXLocal()` keeps
-  back-compatibility by routing here.
-
-- `:quench` — time-evolved local transverse magnetisation
-  `⟨σˣ_i⟩(t) = ⟨ψ_0|e^{iH_f t} σˣ_i e^{-iH_f t}|ψ_0⟩` after a sudden
-  quench from the ground state of an `initial::AbstractQAtlasModel`
-  (`H_0`) to the post-quench Hamiltonian (the `model` argument to
-  `fetch`).  Returns a single `Float64` for one `(i, t)` pair.
-
-See `docs/src/calc/tfim-sigma-x-quench.md` for the closed-form
-derivation in the TFIM (Calabrese–Essler–Fagotti, J. Stat. Mech.
-P07016 (2012); Barouch–McCoy–Dresden, PRA **2** (1970)).
+Site-resolved `⟨σˣ_i⟩` vector of length `N_bulk`.
 """
-struct MagnetizationXLocal{M} <: AbstractQuantity
-    function MagnetizationXLocal{M}() where {M}
-        M isa Symbol ||
-            error("MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))")
-        M in (:equilibrium, :quench) ||
-            error("unknown MagnetizationXLocal mode :\$M; expected :equilibrium or :quench")
-        return new{M}()
-    end
-end
-MagnetizationXLocal() = MagnetizationXLocal{:equilibrium}()
-MagnetizationXLocal(m::Symbol) = MagnetizationXLocal{m}()
+struct MagnetizationXLocal <: AbstractQuantity end
 
 """
     MagnetizationYLocal() <: AbstractQuantity

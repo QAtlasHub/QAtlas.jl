@@ -146,7 +146,7 @@
 # ── Local one-site / one-bond observables (OBC) ───────────────────────
 @register(
     S1Heisenberg1D,
-    MagnetizationXLocal{:equilibrium},
+    MagnetizationXLocal,
     OBC,
     method=:dense_ed,
     reliability=:high,

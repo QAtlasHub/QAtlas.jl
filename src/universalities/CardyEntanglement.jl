@@ -211,9 +211,19 @@ end
         -> Float64
 
 Calabrese–Cardy von Neumann entanglement entropy on an *open* chain of
-length `L`:
+length `L`, **for the canonical "block at one boundary" geometry**:
+the subsystem A occupies sites 1..ℓ (or equivalently L-ℓ+1..L), so
+exactly **one** of A's endpoints sits at the open boundary and only
+one entanglement cut lies in the bulk:
 
-    S(ℓ, L) = (c/6) log[(2L/π) sin(πℓ/L)]                (OBC)
+    S(ℓ, L) = (c/6) log[(2L/π) sin(πℓ/L)]                (OBC, block at end)
+
+For a block in the **bulk** of an open chain (e.g. sites L/4..L/4+ℓ
+with both endpoints away from the boundary), there are **two** bulk
+cuts and the prefactor reverts to `c/3`, with a different log
+argument involving conformal cross-ratios of four points (Calabrese–
+Cardy J. Phys. A 42, 504005 (2009) §3.3).  This bulk-block formula is
+*not* implemented by this method.
 
 The non-universal additive constant `c'_1` and the Affleck–Ludwig
 boundary entropy `log g` (boundary state-dependent) are **dropped**.

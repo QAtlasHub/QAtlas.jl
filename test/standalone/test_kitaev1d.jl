@@ -204,3 +204,14 @@ using QAtlas:
         )
     end
 end
+
+@testset "Kitaev1D gapless-metal guard (OBC)" begin
+    m_metal = Kitaev1D(; μ=1.0, t=1.0, Δ=0.0)
+    @test_throws ErrorException QAtlas.fetch(m_metal, MassGap(), OBC(20))
+    @test_throws ErrorException QAtlas.fetch(m_metal, EdgeModeEnergy(), OBC(20))
+
+    m_atomic = Kitaev1D(; μ=3.0, t=1.0, Δ=0.0)
+    Δgap = QAtlas.fetch(m_atomic, MassGap(), OBC(20))
+    @test isfinite(Δgap)
+    @test Δgap > 0
+end

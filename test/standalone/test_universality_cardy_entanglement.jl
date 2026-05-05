@@ -118,8 +118,12 @@ using QAtlas, Test
     @testset "non-1+1D classes have no central charge" begin
         @test_throws ErrorException QAtlas.fetch(Universality(:Ising), CentralCharge(); d=3)
         @test_throws ErrorException QAtlas.fetch(Universality(:XY), CentralCharge(); d=3)
-        @test_throws ErrorException QAtlas.fetch(Universality(:Heisenberg), CentralCharge(); d=2)
-        @test_throws ErrorException QAtlas.fetch(Universality(:Heisenberg), CentralCharge(); d=3)
+        @test_throws ErrorException QAtlas.fetch(
+            Universality(:Heisenberg), CentralCharge(); d=2
+        )
+        @test_throws ErrorException QAtlas.fetch(
+            Universality(:Heisenberg), CentralCharge(); d=3
+        )
     end
 
     # ── Argument validation ─────────────────────────────────────────────────

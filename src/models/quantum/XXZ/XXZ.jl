@@ -78,33 +78,11 @@ _xxz1d_energy_heisenberg_fm(J::Float64)::Float64 = -J / 4
 native_energy_granularity(::XXZ1D, ::OBC) = :total
 native_energy_granularity(::XXZ1D, ::Infinite) = :per_site
 
-"""
-    fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite) -> Float64
-
-Ground-state energy **per site** of the infinite XXZ chain in units of
-the Hamiltonian `J`.  Currently exposes the three canonical values:
-
-- `Δ = -1`  →  `-J/4`             (isotropic FM, saturated)
-- `Δ =  0`  →  `-J/π`             (XX, free fermion)
-- `Δ =  1`  →  `J (1/4 - ln 2)`   (AF Heisenberg, Hulthén 1938)
-
-For every other `Δ` a warning is emitted and `NaN` is returned — the
-general-`Δ` Bethe-ansatz integral is tracked as a v0.13 follow-up.
-"""
-function fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite; kwargs...)
-    J, Δ = model.J, model.Δ
-    if isapprox(Δ, 0.0; atol=1e-12)
-        return _xxz1d_energy_free_fermion(J)
-    elseif isapprox(Δ, 1.0; atol=1e-12)
-        return _xxz1d_energy_heisenberg_af(J)
-    elseif isapprox(Δ, -1.0; atol=1e-12)
-        return _xxz1d_energy_heisenberg_fm(J)
-    else
-        @warn "XXZ1D Energy: general-Δ Bethe ansatz not yet implemented; " *
-            "only Δ ∈ {-1, 0, 1} are exposed in this release." Δ = Δ
-        return NaN
-    end
-end
+# fetch(::XXZ1D, ::Energy{:per_site}, ::Infinite; ...) is defined in
+# XXZ_xx_infinite.jl, which extends the ground-state branch with a
+# finite-T (β kwarg) free-fermion path at Δ = 0.  The ground-state
+# logic for Δ ∈ {-1, 0, 1} is preserved bit-for-bit there; general-Δ
+# Bethe-ansatz remains a v0.13 follow-up (issue #108).
 
 """
     fetch(model::XXZ1D, ::GroundStateEnergyDensity, ::Infinite) -> Float64

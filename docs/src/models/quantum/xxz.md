@@ -4,7 +4,9 @@
     The XXZ1D OBC dense-ED full observable surface was introduced in
     v0.17. Method signatures and kwarg names (`beta`, `i`, `j`, `ℓ`, …)
     may change in v0.19. The infinite-system finite-temperature surface
-    is not yet implemented (TBA / NLIE work tracked in issue #108).
+    is currently restricted to the **XX point (Δ = 0)** via the
+    free-fermion (Jordan-Wigner) integrals; general-Δ TBA / NLIE is
+    tracked in issue #108.
 
 ## Hamiltonian
 
@@ -36,8 +38,8 @@ rows are analytic / Bethe-ansatz closed forms.
 | Quantity | OBC | Infinite |
 |---|---|---|
 | `Energy{:total}` (any $\Delta$) | dense-ED | — |
-| `Energy{:per_site}` | conversion via $E/N$ | $\Delta \in \{-1, 0, 1\}$ only (issue #108) |
-| `FreeEnergy` / `ThermalEntropy` / `SpecificHeat` | dense-ED | — (TBA not yet) |
+| `Energy{:per_site}` | conversion via $E/N$ | GS at $\Delta \in \{-1, 0, 1\}$; finite-T at Δ = 0 (issue #108 for general Δ) |
+| `FreeEnergy` / `ThermalEntropy` / `SpecificHeat` | dense-ED | Δ = 0 free-fermion (QuadGK); other Δ NaN+warn (issue #108) |
 | `MagnetizationX` / `Y` / `Z` (+ `…Local`) | dense-ED | — |
 | `SusceptibilityXX` / `YY` / `ZZ` | variance | — |
 | `XXCorrelation` / `YY` / `ZZ` (`:static`, `:connected`) | dense-ED | — |
@@ -49,6 +51,40 @@ rows are analytic / Bethe-ansatz closed forms.
 | `EnergyLocal` | dense-ED (symmetric bond split) | — |
 
 `SpinWaveVelocity` is a type-level alias of `LuttingerVelocity`.
+
+## XX Point (Δ = 0) — Free-Fermion Thermo at Infinite()
+
+After Jordan-Wigner the XX chain is non-interacting; the
+single-particle dispersion (in the spin convention `Sᵅ = σᵅ/2`) is
+
+```math
+\varepsilon(k) = -J \cos k, \quad k \in [-\pi, \pi].
+```
+
+QAtlas exposes per-site `FreeEnergy`, `Energy{:per_site}`,
+`ThermalEntropy`, and `SpecificHeat` at `Infinite()` for `Δ = 0` via
+adaptive Gauss-Kronrod quadrature on `[0, π]`:
+
+```math
+\begin{aligned}
+f(\beta) &= -\frac{1}{\pi\beta} \int_0^\pi \log\!\left(2\cosh\tfrac{\beta\varepsilon(k)}{2}\right) dk, \
+e(\beta) &= -\frac{1}{2\pi} \int_0^\pi \varepsilon(k)\,\tanh\tfrac{\beta\varepsilon(k)}{2}\,dk, \
+s(\beta) &= \beta\,\bigl(e(\beta) - f(\beta)\bigr), \
+C(\beta) &=  \frac{1}{\pi} \int_0^\pi \bigl(\tfrac{\beta\varepsilon}{2}\bigr)^2 \operatorname{sech}^2\!\tfrac{\beta\varepsilon}{2}\,dk.
+\end{aligned}
+```
+
+```julia
+m = XXZ1D(J=1.0, Δ=0.0)
+QAtlas.fetch(m, Energy(),         Infinite(); beta=10.0)   # → ≈ -1/π = -0.3183
+QAtlas.fetch(m, FreeEnergy(),     Infinite(); beta=1.0)
+QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=0.01)   # → ≈ log 2
+QAtlas.fetch(m, SpecificHeat(),   Infinite(); beta=1.0)    # → > 0
+```
+
+For any Δ ≠ 0 these four calls emit a `@warn` and return `NaN` —
+the general-Δ thermal Bethe ansatz / NLIE is tracked in
+[issue #108](https://github.com/sotashimozono/QAtlas.jl/issues/108).
 
 ## v0.17 Highlights — Dense-ED Full Suite
 

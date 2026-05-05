@@ -28,6 +28,15 @@
 #   ρ̂(ω) = â_1(ω) / (1 + â_2(ω)) = 1 / (2 cosh(ω/2))
 #       ⇒ ρ(λ) = 1/(2 cosh(π λ)).
 #
+# Normalisation convention: ρ here is the *spinon rapidity density*
+# with ∫_{-∞}^{∞} ρ(λ) dλ = 1/2 (half-filling of magnons).  This is the
+# convention used by Takahashi (1999) and Yang-Yang II (1966); some
+# Bethe-ansatz textbooks (e.g. Korepin–Bogoliubov–Izergin) instead use
+# ∫ρ = 1, in which case all per-site formulas pick up a factor 1/2 in
+# the prefactor.  The two conventions are equivalent up to that
+# rescaling — verify by checking ∫_{-∞}^{∞} 1/(2 cosh π λ) dλ = 1/2
+# (an elementary integral).
+#
 # All γ dependence is then carried by the energy formula
 # (Takahashi 1999 eq. 4.3.18, equivalent to Yang–Yang II 1966 eq. (4.4)):
 #

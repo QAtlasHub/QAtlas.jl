@@ -183,40 +183,11 @@ documented.
 struct MagnetizationZ <: AbstractQuantity end
 
 """
-    MagnetizationXLocal{M}() <: AbstractQuantity
-    MagnetizationXLocal()                       # M = :equilibrium (default)
-    MagnetizationXLocal(:equilibrium)           # explicit equilibrium ⟨σˣ_i⟩_β
-    MagnetizationXLocal(:quench)                # post-quench ⟨σˣ_i⟩(t)
+    MagnetizationXLocal() <: AbstractQuantity
 
-Site-resolved `⟨σˣ_i⟩` quantity.  The mode parameter `M::Symbol` is a
-phantom type that splits the dispatch into:
-
-- `:equilibrium` — site-resolved thermal expectation
-  `[⟨σˣ_i⟩_β for i = 1:N]` (Vector{Float64}).  This is the original
-  meaning; the no-argument constructor `MagnetizationXLocal()` keeps
-  back-compatibility by routing here.
-
-- `:quench` — time-evolved local transverse magnetisation
-  `⟨σˣ_i⟩(t) = ⟨ψ_0|e^{iH_f t} σˣ_i e^{-iH_f t}|ψ_0⟩` after a sudden
-  quench from the ground state of an `initial::AbstractQAtlasModel`
-  (`H_0`) to the post-quench Hamiltonian (the `model` argument to
-  `fetch`).  Returns a single `Float64` for one `(i, t)` pair.
-
-See `docs/src/calc/tfim-sigma-x-quench.md` for the closed-form
-derivation in the TFIM (Calabrese–Essler–Fagotti, J. Stat. Mech.
-P07016 (2012); Barouch–McCoy–Dresden, PRA **2** (1970)).
+Site-resolved `⟨σˣ_i⟩` vector of length `N_bulk`.
 """
-struct MagnetizationXLocal{M} <: AbstractQuantity
-    function MagnetizationXLocal{M}() where {M}
-        M isa Symbol ||
-            error("MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))")
-        M in (:equilibrium, :quench) ||
-            error("unknown MagnetizationXLocal mode :\$M; expected :equilibrium or :quench")
-        return new{M}()
-    end
-end
-MagnetizationXLocal() = MagnetizationXLocal{:equilibrium}()
-MagnetizationXLocal(m::Symbol) = MagnetizationXLocal{m}()
+struct MagnetizationXLocal <: AbstractQuantity end
 
 """
     MagnetizationYLocal() <: AbstractQuantity
@@ -358,33 +329,6 @@ pages return literature values.
 struct CentralCharge <: AbstractQuantity end
 
 """
-    ConformalWeights() <: AbstractQuantity
-
-Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro
-[`MinimalModel`](@ref) this is the Kac-table entry `h_{r,s}`; for
-[`WZWSU2`](@ref) it is the SU(2)-spin label `h_j = j(j+1)/(k+2)`.
-
-Concrete model fetch methods take additional keyword arguments
-identifying the primary (`r`, `s` for `MinimalModel`; `j` for
-`WZWSU2`) and return an exact `Rational{Int}`.
-"""
-struct ConformalWeights <: AbstractQuantity end
-
-"""
-    PrimaryFields() <: AbstractQuantity
-
-Full list of primary fields of a 2D rational CFT.  For
-[`MinimalModel`](@ref) the result is a `Vector{NamedTuple{(:r, :s, :h)}}`
-of length `(p - 1)(p_prime - 1) / 2`, with one entry per Kac-symmetry
-orbit.
-
-Future CFT classes may return different NamedTuple schemas (e.g.
-`(j, h)` for WZW). The return type is therefore a
-`Vector{<:NamedTuple}` whose schema depends on the model.
-"""
-struct PrimaryFields <: AbstractQuantity end
-
-"""
     CorrelationLength() <: AbstractQuantity
 
 Two-point correlation length `ξ` controlling the exponential decay of
@@ -452,91 +396,6 @@ here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
 
-"""
-    CasimirEnergyCorrection() <: AbstractQuantity
-
-Universal `1/L` finite-size correction to the ground-state energy of a
-1+1D conformal field theory.
-
-For a critical 1+1D system with central charge `c` and CFT velocity
-`v` on a system of size `L`:
-
-- Periodic boundary (PBC):
-  ``E_0(L) = L\\,\\varepsilon_\\infty - \\dfrac{\\pi c v}{6 L} + O(L^{-2})``
-- Open boundary (OBC):
-  ``E_0(L) = L\\,\\varepsilon_\\infty + \\varepsilon_{\\mathrm{surf}} - \\dfrac{\\pi c v}{24 L} + O(L^{-2})``
-
-This quantity returns *only* the universal ``1/L`` correction term
-(``-\\pi c v/(6 L)`` at PBC, ``-\\pi c v/(24 L)`` at OBC), not the
-extensive ``L \\varepsilon_\\infty`` piece nor the OBC surface term
-``\\varepsilon_{\\mathrm{surf}}``.  The PBC-to-OBC ratio is exactly 4,
-independent of the universality class.
-
-The CFT velocity `v` is model-dependent (e.g. ``v = 2J`` for the TFIM
-at the critical point, ``v = (\\pi/2) J`` for the AFM Heisenberg chain,
-``v = v_F`` for the XXZ Luttinger liquid) and is supplied by the caller
-as a kwarg.  The central charge `c` is read from the universality
-class via the same data the `Universality{C}` entry exposes for
-[`CriticalExponents`](@ref).
-
-# References
-- J. Cardy, *Nucl. Phys. B* **270**, 186 (1986).
-- H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, *Phys. Rev. Lett.*
-  **56**, 742 (1986).
-- I. Affleck, *Phys. Rev. Lett.* **56**, 746 (1986).
-
-!!! note "Phase 2 (TODO)"
-    The conformal *tower of states* --- primary scaling dimensions
-    ``(h, \\bar h)`` and the
-    ``E_n - E_0 = (2\\pi v/L)(h_n + \\bar h_n)`` excitation pattern ---
-    is tracked separately as future work (Phase 2 of issue #150) and
-    will be exposed via a `ConformalTower` quantity once implemented.
-"""
-struct CasimirEnergyCorrection <: AbstractQuantity end
-    TopologicalInvariant() <: AbstractQuantity
-
-Topological `Z_2` invariant of a 1D BdG superconductor (Kitaev 2001).
-Defined as the Pfaffian sign at the time-reversal-invariant momenta
-`k = 0` and `k = π`,
-
-```math
-\\nu = \\operatorname{sgn}\\bigl[\\operatorname{Pf}(H_{\\mathrm{BdG}}(k=0))
-                                  \\cdot \\operatorname{Pf}(H_{\\mathrm{BdG}}(k=\\pi))\\bigr]
-       \\in \\{+1, -1\\},
-```
-
-with `ν = -1` in the topological phase and `ν = +1` in the trivial
-phase.  For a gapless bulk (Pfaffian zero at `k = 0` or `k = π`) the
-invariant is ill-defined and implementations should signal an error.
-
-Currently used by [`Kitaev1D`](@ref).
-"""
-struct TopologicalInvariant <: AbstractQuantity end
-
-"""
-    EdgeModeEnergy() <: AbstractQuantity
-
-Energy of the lowest-lying boundary mode on an open chain.  In a
-topological 1D superconductor (Kitaev 2001) the OBC chain hosts two
-Majorana zero modes at the chain ends; their hybridization energy
-decays exponentially with chain length,
-
-```math
-E_\\text{edge}(N) \\sim e^{-N/\\xi},
-```
-
-where `ξ` is the bulk correlation length.  In the trivial phase the
-OBC lowest single-particle excitation is set by the bulk gap.
-
-`EdgeModeEnergy` is the smallest positive BdG eigenvalue of the OBC
-chain — the same quantity as [`MassGap`](@ref) at `OBC`, exposed under
-a name that makes the boundary-mode interpretation explicit at the
-call site.
-
-Currently used by [`Kitaev1D`](@ref).
-"""
-struct EdgeModeEnergy <: AbstractQuantity end
-
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
 # `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,
 # `GrowthExponents`) are currently defined in their respective model /
@@ -582,36 +441,3 @@ function fetch(model::AbstractQAtlasModel, ::Energy{:total}, bc::Union{OBC,PBC};
     )
     return fetch(model, Energy{:per_site}(), bc; kwargs...) * _bc_size(bc, kwargs)
 end
-
-# ─── Charge / spin gaps (correlated electron systems) ──────────────────
-
-"""
-    ChargeGap() <: AbstractQuantity
-
-Charge (Mott) gap of an electron system,
-
-    Δ_c = E₀(N+1) + E₀(N-1) - 2 E₀(N),
-
-i.e. the energy cost of adding a particle plus the cost of removing
-one, equivalent to the gap between the half-filled ground state and
-the lowest charged excitation.  Strictly positive in a Mott insulator
-and exactly zero in a metal / superconductor.
-
-Implemented analytically for [](@ref) at half filling via
-the Lieb–Wu (1968) closed-form integral.
-"""
-struct ChargeGap <: AbstractQuantity end
-
-"""
-    SpinGap() <: AbstractQuantity
-
-Spin gap of an electron system,
-
-    Δ_s = E₀(S^z = 1) - E₀(S^z = 0),
-
-i.e. the lowest excitation energy at fixed total particle number that
-flips one spin.  Zero whenever the spinon branch is gapless (e.g. the
-half-filled 1D Hubbard chain — rigorous Lieb–Wu result), positive in a
-spin-gapped phase (Haldane chain, BCS superconductor, …).
-"""
-struct SpinGap <: AbstractQuantity end

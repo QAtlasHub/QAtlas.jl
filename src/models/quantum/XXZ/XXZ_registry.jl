@@ -136,7 +136,7 @@
 # ── Site-resolved local observables ───────────────────────────────────
 @register(
     XXZ1D,
-    MagnetizationXLocal{:equilibrium},
+    MagnetizationXLocal,
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -225,36 +225,4 @@ end
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
     notes="S_α = log Tr ρ_A^α / (1 - α); pass subsystem ℓ and order α.",
-)
-
-# ── Free-fermion thermal at Infinite (Δ = 0 only; general Δ pending #108) ──
-@register(
-    XXZ1D,
-    FreeEnergy,
-    Infinite,
-    method=:free_fermion_quadgk,
-    reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan §1.3", "Coleman §2.4", "Takahashi 1999 §4"],
-    notes="XX (Δ = 0) free-fermion f(β) by QuadGK; warns + NaN at general Δ (issue #108).",
-)
-@register(
-    XXZ1D,
-    ThermalEntropy,
-    Infinite,
-    method=:free_fermion_quadgk,
-    reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan §1.3", "Coleman §2.4"],
-    notes="XX (Δ = 0) free-fermion s(β) = β(e − f); warns + NaN at general Δ.",
-)
-@register(
-    XXZ1D,
-    SpecificHeat,
-    Infinite,
-    method=:free_fermion_quadgk,
-    reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan §1.3"],
-    notes="XX (Δ = 0) free-fermion C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk.",
 )

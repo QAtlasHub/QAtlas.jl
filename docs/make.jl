@@ -50,9 +50,7 @@ makedocs(;
                 "TFIM" => "models/quantum/tfim.md",
                 "Heisenberg" => "models/quantum/heisenberg.md",
                 "XXZ" => "models/quantum/xxz.md",
-                "Hubbard1D" => "models/quantum/hubbard1d.md",
                 "Kitaev Honeycomb" => "models/quantum/kitaev-honeycomb.md",
-                "Kitaev1D" => "models/quantum/kitaev1d.md",
                 "Tight-Binding" => [
                     "models/quantum/tightbinding/index.md",
                     "Honeycomb" => "models/quantum/tightbinding/honeycomb.md",
@@ -71,7 +69,6 @@ makedocs(;
             "XY / Heisenberg" => "universalities/on-models.md",
             "Mean-Field" => "universalities/mean-field.md",
             "E8" => "universalities/e8.md",
-            "CFT Casimir Correction" => "universalities/cft-casimir.md",
         ],
         "Verification" => [
             "verification/index.md",
@@ -100,7 +97,6 @@ makedocs(;
             "Yang Magnetization" => "calc/yang-magnetization-toeplitz.md",
             "Heisenberg Dimer" => "calc/heisenberg-dimer-singlet-triplet.md",
             "Bethe Ansatz e₀" => "calc/bethe-ansatz-heisenberg-e0.md",
-            "Heisenberg Spinons" => "calc/heisenberg-spinons.md",
             "XXZ Luttinger Parameters" => "calc/xxz-luttinger-parameters.md",
             "Honeycomb Bloch" => "calc/bloch-honeycomb-dispersion.md",
             "Kagome Flat Band" => "calc/bloch-kagome-flat-band.md",

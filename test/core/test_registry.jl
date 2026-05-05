@@ -86,9 +86,9 @@ end
     # By quantity instance
     @test implementation_status(Energy(:total)) == energy_total_rows
 
-    # Unregistered quantity returns empty (FermiVelocity has no
+    # Unregistered quantity returns empty (FidelitySusceptibility has no
     # fetch implementation yet, so the registry must not list it).
-    @test isempty(implementation_status(FermiVelocity()))
+    @test isempty(implementation_status(FidelitySusceptibility()))
 end
 
 @testset "implementation_status(queue) returns one row per registered triple" begin
@@ -96,7 +96,7 @@ end
     queue = [
         (m, Energy(:total), OBC(8)),       # registered
         (m, MassGap(), Infinite()),   # registered
-        (m, FermiVelocity(), OBC(8)),   # NOT registered → dropped
+        (m, FidelitySusceptibility(), OBC(8)),   # NOT registered → dropped
     ]
     rows = implementation_status(queue)
     @test length(rows) == 2

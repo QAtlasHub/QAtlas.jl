@@ -32,8 +32,6 @@ family of physical models.
 | Heisenberg | `:Heisenberg` | $d = 3, \geq 4$ | Bootstrap / MF | $\mathrm{O}(3)$ symmetry | [→](on-models.md) |
 | Mean-Field | `MeanField()` | $d \geq d_c$ | Exact | Baseline reference | [→](mean-field.md) |
 | E8 | `:E8` | — | Exact mass ratios | Integrable field theory | [→](e8.md) |
-| Virasoro minimal model | `MinimalModel(p, p_prime)` | $d = 2$ | Exact (Rational) | $\mathcal{M}(p, p^\prime)$ central charge & Kac weights | [→](cft_minimal_models.md) |
-| WZW SU(2)$_k$ | `WZWSU2(k)` | $d = 2$ | Exact (Rational) | Sugawara $c$, primary $h_j$ | [→](cft_minimal_models.md) |
 
 ---
 
@@ -85,7 +83,6 @@ the test suite.
 ## Further Reading
 
 - [Ising](ising.md) --- the most thoroughly studied class
-- [CFT Casimir Correction](cft-casimir.md) --- universal 1/L finite-size correction (Cardy 1986)
 - [Mean-Field](mean-field.md) --- baseline for $d \geq d_c$
 - [Cross-Verification](../verification/cross-checks.md) --- how
   universality predictions are tested against model-specific results

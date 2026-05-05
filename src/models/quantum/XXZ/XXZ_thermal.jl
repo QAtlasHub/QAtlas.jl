@@ -208,15 +208,13 @@ end
 # ─── Site-resolved magnetisations (Vector of length N) ────────────────────
 
 """
-    fetch(model::XXZ1D, ::MagnetizationXLocal{:equilibrium}, ::OBC; beta) -> Vector{Float64}
+    fetch(model::XXZ1D, ::MagnetizationXLocal, ::OBC; beta) -> Vector{Float64}
 
 Site-resolved `[⟨σˣ_i⟩_β for i = 1:N]`.  Identically zero up to
 dense-ED round-off because `σˣ_i` flips a single Sᶻ and the XXZ
 Hamiltonian conserves total Sᶻ.
 """
-function fetch(
-    model::XXZ1D, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Real, kwargs...
-)
+function fetch(model::XXZ1D, ::MagnetizationXLocal, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     F = _xxz1d_thermal_kernel(model, N, beta)
     return Float64[_xxz1d_thermal_expectation_op(F, _xxz1d_sx(N, i)) for i in 1:N]

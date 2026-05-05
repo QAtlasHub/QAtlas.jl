@@ -157,31 +157,11 @@
 )
 @register(
     TFIM,
-    MagnetizationXLocal{:equilibrium},
+    MagnetizationXLocal,
     OBC,
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_local.jl"
-)
-@register(
-    TFIM,
-    MagnetizationXLocal{:quench},
-    OBC,
-    method=:majorana_evolution,
-    reliability=:high,
-    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
-    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
-    notes="Sudden h_0 -> h_f quench; Sigma(t) = R(t) Sigma_0 R(t)^T; sigma^x_i(t) = Sigma(t)[2i-1, 2i].",
-)
-@register(
-    TFIM,
-    MagnetizationXLocal{:quench},
-    Infinite,
-    method=:analytic,
-    reliability=:high,
-    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
-    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
-    notes="Closed-form k-integral over the Bogoliubov angles theta_k(h_0,f); QuadGK rtol=1e-12.",
 )
 @register(
     TFIM,
@@ -354,8 +334,8 @@
     Infinite,
     method=:bdg,
     reliability=:medium,
-    tested_in="test/verification/test_tfim_fdt.jl",
-    notes="OBC large-N proxy.  Static (ω = nothing) → uniform χ_zz(β); dynamic (ω::Real, q required) → χ''_zz(q,ω;β) via Kubo commutator.  N_proxy kwarg controls precision.",
+    tested_in="test/models/test_TFIM_zaxis.jl",
+    notes="OBC large-N proxy (N_proxy kwarg controls precision).",
 )
 @register(
     TFIM,
@@ -535,26 +515,4 @@
     method=:pfaffian,
     reliability=:medium,
     tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
-)
-
-# ── Fidelity susceptibility (BdG analytical, issue #147) ─────────────
-@register(
-    TFIM,
-    FidelitySusceptibility,
-    OBC,
-    method=:bdg,
-    reliability=:high,
-    tested_in="test/standalone/test_tfim_fidelity_susceptibility.jl",
-    references=["Gu IJMPB 24 4371 (2010)", "Damski PRB 87 165101 (2013)"],
-    notes="χ_F = Σ_{p<q} 4 X_{pq}² / (Λ_p+Λ_q)² from Bogoliubov amplitudes.",
-)
-@register(
-    TFIM,
-    FidelitySusceptibility,
-    Infinite,
-    method=:analytic,
-    reliability=:high,
-    tested_in="test/standalone/test_tfim_fidelity_susceptibility.jl",
-    references=["Gu IJMPB 24 4371 (2010)", "Damski PRB 87 165101 (2013)"],
-    notes="χ_F/L = 1/(16(J²-h²)) (h<J), J²/(16h²(h²-J²)) (h>J); QuadGK, divergent at h=J.",
 )

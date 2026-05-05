@@ -180,12 +180,8 @@ end
 # Local (site-resolved) observables  (OBC)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# `MagnetizationXLocal` is parametric (equilibrium / quench); S1Heisenberg1D
-# only implements the equilibrium thermal branch.  Dispatching on the
-# concrete equilibrium mode keeps quench fetches from silently routing here.
 for (Q, axis_sym) in ((:MagnetizationXLocal, :x), (:MagnetizationZLocal, :z))
     axis_str = string(axis_sym)
-    Qsig = Q === :MagnetizationXLocal ? :(MagnetizationXLocal{:equilibrium}) : Q
     @eval begin
         """
             fetch(model::S1Heisenberg1D, ::$($Q), ::OBC; beta) -> Vector{Float64}
@@ -194,7 +190,7 @@ for (Q, axis_sym) in ((:MagnetizationXLocal, :x), (:MagnetizationZLocal, :z))
         Heisenberg chain.  Sums to `N · MagnetizationX/Y/Z` (per-site bulk
         average) by construction.
         """
-        function fetch(model::S1Heisenberg1D, ::$Qsig, bc::OBC; beta::Real, kwargs...)
+        function fetch(model::S1Heisenberg1D, ::$Q, bc::OBC; beta::Real, kwargs...)
             N = bc.N
             kernel = _s1_thermal_kernel(model, N, beta)
             S = _S1_AXIS_MATS.$axis_sym

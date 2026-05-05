@@ -6,9 +6,15 @@
 #                  initial::XXZ1D, t::Real)` against the closed-form
 # analytical result derived in `src/models/quantum/XXZ/XXZ_xx_quench.jl`:
 #
-#   λ(t) = 0     for sgn J_initial == sgn J_final  (same Fermi sea)
-#   λ(t) = ∞     for sgn J_initial != sgn J_final  (Anderson orthog.)
-#   λ(t) = NaN   for the mixed flat-band cases (J = 0 on one side only)
+#   λ(t) ≡ 0   for every (J_initial, J_final, t) at Δ = 0.
+#
+# Reason: |ψ₀⟩ = |GS(J_initial)⟩ is a number eigenstate of H_XX(J_final)
+# in the shared plane-wave basis (no Bogoliubov pairing rotation
+# between the two XX Hamiltonians), so e^{-iH_f t}|ψ₀⟩ is a pure phase
+# and |L(t)| = 1.  This holds at every sgn-J combination including the
+# sign-flip case (the static overlap |⟨GS(J₀)|GS(J_f)⟩| does vanish at
+# sign-flip — Anderson orthogonality — but that is a different quantity
+# from the Loschmidt autocorrelation).
 #
 # A `Δ ≠ 0` final or initial model raises `DomainError` — this is the
 # phase-1 contract; the general-Δ Loschmidt route lives behind issue
@@ -25,17 +31,9 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
-using Logging: with_logger, NullLogger
 
 const _XX = XXZ1D(; J=1.0, Δ=0.0)
 const _LE_RATE = LoschmidtEcho(; mode=:rate)
-
-# Helper to silence the deliberate `@warn` calls in the orthogonality /
-# flat-band branches without losing real failures.
-_silent(f) =
-    with_logger(NullLogger()) do
-        f()
-    end
 
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -102,14 +100,22 @@ end
     end
 end
 
-@testset "XXZ1D Δ=0 LoschmidtEcho — sign-flip quench (orthogonality)" begin
-    # sgn J flips → complementary Fermi seas → Anderson orthogonality;
-    # rate is +∞ for every t.  Suppress the deliberate @warn.
-    m_0 = XXZ1D(; J=1.0, Δ=0.0)
-    m_f = XXZ1D(; J=-1.0, Δ=0.0)
-    for t in (0.0, 1.0, 5.0)
-        λ = _silent(() -> QAtlas.fetch(m_f, _LE_RATE, Infinite(); initial=m_0, t=t))
-        @test λ === Inf
+@testset "XXZ1D Δ=0 LoschmidtEcho — sign-flip quench: λ ≡ 0" begin
+    # sgn J flips → the two Fermi seas are complementary, but |ψ₀⟩ is
+    # still a number eigenstate of H_f in the shared plane-wave basis,
+    # so |L(t)| = 1 and λ ≡ 0.  Anderson orthogonality of the static
+    # |⟨GS(J₀)|GS(J_f)⟩| vanishing is a different quantity from the
+    # Loschmidt autocorrelation and does not enter λ(t).  Verified
+    # numerically by Slater-determinant evolution det(D₀† U(t) D₀) at
+    # finite N up to N = 20: |L|² = 1.0 to machine precision for all
+    # (J₀, J_f, t) combinations including sgn-flip.
+    for (J0, Jf) in ((1.0, -1.0), (-1.0, 1.0), (0.5, -2.0), (-0.7, 1.3))
+        m_0 = XXZ1D(; J=J0, Δ=0.0)
+        m_f = XXZ1D(; J=Jf, Δ=0.0)
+        for t in (0.0, 1.0, 5.0)
+            λ = QAtlas.fetch(m_f, _LE_RATE, Infinite(); initial=m_0, t=t)
+            @test λ == 0.0
+        end
     end
 end
 
@@ -128,35 +134,39 @@ end
     )
 end
 
-@testset "XXZ1D Δ=0 LoschmidtEcho — flat-band edge cases" begin
-    # Both flat-band → no dynamics → λ = 0 (no warning).
+@testset "XXZ1D Δ=0 LoschmidtEcho — flat-band edge cases (J = 0): λ ≡ 0" begin
+    # Both flat-band → no dynamics → λ = 0.
     λ_both = QAtlas.fetch(
         XXZ1D(; J=0.0, Δ=0.0), _LE_RATE, Infinite(); initial=XXZ1D(; J=0.0, Δ=0.0), t=2.5
     )
     @test λ_both == 0.0
 
-    # One-sided flat band → degenerate; λ = NaN with a @warn.
-    λ_init_flat = _silent(
-        () -> QAtlas.fetch(
-            XXZ1D(; J=1.0, Δ=0.0),
-            _LE_RATE,
-            Infinite();
-            initial=XXZ1D(; J=0.0, Δ=0.0),
-            t=1.0,
-        ),
+    # J_initial = 0, J_final ≠ 0: H_0 = 0, the GS manifold is
+    # 2^N-degenerate.  For *any* number-eigenstate choice from that
+    # manifold, |ψ₀⟩ is also an H_f eigenstate (number eigenstates of
+    # the shared plane-wave basis), so |L(t)| = 1 and λ = 0.  The
+    # implementation routes through the same `return 0.0` as every
+    # other (J₀, J_f) combination, which is consistent with this
+    # observation.
+    λ_init_flat = QAtlas.fetch(
+        XXZ1D(; J=1.0, Δ=0.0),
+        _LE_RATE,
+        Infinite();
+        initial=XXZ1D(; J=0.0, Δ=0.0),
+        t=1.0,
     )
-    @test isnan(λ_init_flat)
+    @test λ_init_flat == 0.0
 
-    λ_final_flat = _silent(
-        () -> QAtlas.fetch(
-            XXZ1D(; J=0.0, Δ=0.0),
-            _LE_RATE,
-            Infinite();
-            initial=XXZ1D(; J=1.0, Δ=0.0),
-            t=1.0,
-        ),
+    # J_initial ≠ 0, J_final = 0: H_f = 0, so e^{-iH_f t} = I and
+    # L(t) = ⟨ψ₀|ψ₀⟩ = 1 trivially.  λ = 0.
+    λ_final_flat = QAtlas.fetch(
+        XXZ1D(; J=0.0, Δ=0.0),
+        _LE_RATE,
+        Infinite();
+        initial=XXZ1D(; J=1.0, Δ=0.0),
+        t=1.0,
     )
-    @test isnan(λ_final_flat)
+    @test λ_final_flat == 0.0
 end
 
 @testset "XXZ1D Δ=0 LoschmidtEcho — registry row landed" begin

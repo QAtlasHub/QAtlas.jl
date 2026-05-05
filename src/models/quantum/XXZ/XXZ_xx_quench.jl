@@ -45,31 +45,43 @@
 #       = ∏_k  ⟨n₀(k) | e^{-iε_{J_f}(k) t (n̂_k - 1/2)} | n₀(k)⟩
 #       = ∏_k  exp{ -i ε_{J_f}(k) t · (n₀(k) - 1/2) },
 #
-# where `n₀(k) = Θ(-ε_{J₀}(k))` is the initial-state occupation.  The
-# **modulus** is
+# where `n₀(k) = Θ(-ε_{J₀}(k))` is the initial-state occupation.  Every
+# factor in the product is a **pure phase** (modulus 1), so the
+# **modulus** of the full amplitude is
 #
 #     |⟨ψ₀ | e^{-iH_f t} | ψ₀⟩| = ∏_k 1 = 1                         (♣)
 #
-# at every site, hence the Loschmidt rate function
+# **independently of the signs of J₀ and J_f**, hence the Loschmidt rate
+# function
 #
 #     λ(t) = - lim_{N→∞} (1/N) log |⟨ψ₀ | e^{-iH_f t} | ψ₀⟩|² = 0     (♠)
 #
-# is identically **zero** whenever the Fermi sea of the initial and
-# the final Hamiltonian agree (`sgn J₀ = sgn J_f`).
+# is identically **zero** for every (J₀, J_f), including the sign-flip
+# case `sgn J₀ ≠ sgn J_f`.
 #
-# ── Sign-flip quench (orthogonality) ─────────────────────────────────────────
+# ── Why the sign-flip case is *not* Anderson orthogonality ───────────────────
 #
-# If `sgn J₀ ≠ sgn J_f` the two Fermi seas are exact complements
-# (the modes occupied at J₀ are precisely the ones empty at J_f, and
-# vice-versa).  In the thermodynamic limit any two such Slater
-# determinants are exactly orthogonal in the strong sense:
+# It is true that `|⟨GS(J₀) | GS(J_f)⟩| = 0` when the two Fermi seas are
+# complementary (sign-flip): the two Slater determinants have disjoint
+# occupied-mode sets and are exactly orthogonal.  But that is the
+# **static overlap of two ground states**, which is *not* the Loschmidt
+# amplitude.  The Loschmidt amplitude is the autocorrelation
+# `⟨ψ₀ | e^{-iH_f t} | ψ₀⟩`, and for the XX → XX quench
+# `|ψ₀⟩ = |GS(J₀)⟩` is also a number eigenstate of `H_f`
+# (since `H_f = Σ_k ε_{J_f}(k) ĉ_k^† ĉ_k` is diagonal in the same
+# plane-wave basis), so
 #
-#     |⟨GS(J₀) | GS(J_f)⟩| = 0,
+#     e^{-iH_f t} |ψ₀⟩ = e^{-iE_f^{(J₀)} t} |ψ₀⟩
 #
-# hence `λ(t) = +∞` for all `t ≥ 0`.  This is the
-# Anderson-orthogonality limit — well-defined as a divergent rate but
-# numerically degenerate.  We expose it with a warning rather than a
-# finite answer.
+# with `E_f^{(J₀)} = Σ_{k∈Fermi sea(J₀)} ε_{J_f}(k)`.  At sign-flip the
+# state |ψ₀⟩ is the *highest-energy* eigenstate of `H_f` rather than the
+# ground state of `H_f`, but it is still an exact eigenstate, so the
+# autocorrelation has modulus 1 and λ(t) = 0.
+#
+# Anderson orthogonality `⟨GS(J₀)|GS(J_f)⟩ = 0` is therefore irrelevant
+# to this quench protocol.  (It would matter if the quench observable
+# were `|⟨ψ₀|ψ_f⟩|²` — the *initial-to-final-GS* overlap — but the
+# Loschmidt rate is by definition an autocorrelation.)
 #
 # ── Why the Loschmidt rate of an XX → XX quench is degenerate ────────────────
 #
@@ -80,15 +92,14 @@
 # at the quench instant.  The XXZ1D model in QAtlas has no
 # magnetic-field, dimerisation, or Néel-state machinery yet, so the
 # only XX → XX quench expressible in the current model class is
-# `|GS(J₀)⟩ → e^{-iH_XX(J_f)t} |GS(J₀)⟩`, which is the degenerate
-# `(♣) / (♠)` case derived above.
+# `|GS(J₀)⟩ → e^{-iH_XX(J_f)t} |GS(J₀)⟩`, which is the trivial
+# `λ(t) ≡ 0` case derived above.
 #
-# Phase-1 deliverable: closed-form `λ(t) = 0` (same-sign J quench),
-# and `+∞` (sign-flip) with rigorous documentation.  Phase 2
-# (deferred) will add either (a) a magnetic-field generalisation of
-# `XXZ1D`, or (b) a separate `XYModel` carrying the pairing γ, at
-# which point the Loschmidt rate becomes the textbook
-# Calabrese-Essler-Fagotti integral.
+# Phase-1 deliverable: closed-form `λ(t) ≡ 0` for the GS-to-GS XX → XX
+# quench (all sgn-J combinations).  Phase 2 (deferred) will add either
+# (a) a magnetic-field generalisation of `XXZ1D`, or (b) a separate
+# `XYModel` carrying the pairing γ, at which point the Loschmidt rate
+# becomes the textbook Calabrese-Essler-Fagotti integral.
 #
 # References
 #   - P. Calabrese, F.H.L. Essler, M. Fagotti, J. Stat. Mech. (2012)
@@ -133,60 +144,16 @@ function _xx_quench_assert_free_fermion(model_f::XXZ1D, model_0::XXZ1D)
     return nothing
 end
 
-# ─── Same-Fermi-sea predicate ────────────────────────────────────────────────
-#
-# In the spin convention `ε_J(k) = J cos(k)` (XXZ.jl §★), so
-# `n_k(J) = Θ(-J cos k)`.  Since `cos k > 0` on (-π/2, π/2) and
-# `cos k < 0` on (π/2, π) ∪ (-π, -π/2), the Fermi sea
-#
-#     {k : J cos k < 0}
-#
-# depends on `sgn J` only.  Two J's with the same sign therefore share
-# the Fermi sea; two J's with opposite signs have disjoint
-# (complementary) Fermi seas; J = 0 is the trivial flat-band limit
-# (every k is degenerate at zero energy).
-#
-# The function returns
-#   :same      if sgn J₀ == sgn J_f != 0          (degenerate quench)
-#   :flipped   if sgn J₀ == -sgn J_f != 0         (orthogonality)
-#   :flat_initial   if J₀ == 0 (initial Hamiltonian is the flat band)
-#   :flat_final     if J_f == 0 (final Hamiltonian is the flat band)
-function _xx_quench_fermi_sea_class(J0::Real, Jf::Real)::Symbol
-    if iszero(J0) && iszero(Jf)
-        return :flat_both
-    elseif iszero(J0)
-        return :flat_initial
-    elseif iszero(Jf)
-        return :flat_final
-    elseif sign(J0) == sign(Jf)
-        return :same
-    else
-        return :flipped
-    end
-end
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Public fetch dispatch for `LoschmidtEcho{:rate}` at Infinite().
 #
 #   fetch(model_f::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite;
 #         initial::XXZ1D, t::Real) -> Float64
 #
-# Δ = 0 only.  Returns
-#
-#   λ(t) = 0                  for sgn J₀ == sgn J_f != 0
-#                              (Fermi seas coincide; the amplitude is
-#                              a pure phase, |L(t)| = 1)
-#   λ(t) = Inf                for sgn J₀ != sgn J_f, both nonzero
-#                              (Anderson orthogonality; emits @warn)
-#   λ(t) = 0                  for the J₀ = J_f = 0 flat-band fixed point
-#                              (the state is annihilated by H_f, no
-#                              dynamics whatsoever)
-#   λ(t) = NaN + @warn        for the mixed flat-band cases (J₀=0, J_f≠0
-#                              or vice-versa); the GS of a flat band is
-#                              degenerate so a definite Loschmidt rate
-#                              requires an initial-state choice the
-#                              issue does not provide.
-#
+# Δ = 0 only.  Returns `λ(t) ≡ 0` for every (J₀, J_f) — see `(♣) / (♠)`
+# in the file header.  The flat-band and sign-flip edge cases all
+# reduce to the same `|L(t)| = 1` argument because |ψ₀⟩ is a number
+# eigenstate of H_f in the shared plane-wave basis.
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
@@ -210,12 +177,24 @@ amplitude therefore factorises into single-mode phases,
     ⟨ψ₀ | e^{-iH_f t} | ψ₀⟩
       = ∏_k exp{ -i ε_{J_f}(k) t · (n_k(J₀) - 1/2) },
 
-whose modulus is **identically 1**.  Hence
+whose modulus is **identically 1** (each factor is a pure phase).
+Equivalently, `|ψ₀⟩ = |GS(J₀)⟩` is a number eigenstate of `H_f` because
+both Hamiltonians are diagonal in the same `{n̂_k}`, so
+`e^{-iH_f t}|ψ₀⟩ = e^{-iE_f^{(J₀)} t}|ψ₀⟩` is a pure phase.  Hence
 
-    λ(t) = 0      whenever sgn J₀ = sgn J_f                 (same Fermi sea)
+    λ(t) ≡ 0          for every (J₀, J_f), including sgn J₀ ≠ sgn J_f.
 
-and a divergent λ(t) = +∞ (Anderson orthogonality of the two Fermi
-seas) when `sgn J₀ ≠ sgn J_f`.
+The static overlap `|⟨GS(J₀)|GS(J_f)⟩|` *does* vanish at sign-flip
+(Anderson orthogonality of complementary Fermi seas), but that is a
+different quantity from the Loschmidt autocorrelation and does not
+enter `λ(t)`.
+
+This trivial result holds because the only XX → XX quench expressible
+in the current `XXZ1D` model class is GS-to-GS without any
+Bogoliubov-rotation knob.  A non-trivial Loschmidt rate appears in
+quenches from non-Gaussian initial states (Néel / dimer; CEF 2012) or
+under XY-pairing dynamics, both of which are Phase-2 follow-ups
+(see issues #143, #146).
 
 # Arguments
 
@@ -227,7 +206,8 @@ seas) when `sgn J₀ ≠ sgn J_f`.
 
 # Returns
 
-A `Float64` with `λ(t) ≥ 0`; degenerate cases as documented above.
+`0.0` (the trivial Phase-1 value, valid for every `t ≥ 0` and every
+sign combination of `(initial.J, model_f.J)`).
 
 # Examples
 
@@ -239,6 +219,10 @@ julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite(); initial=m, t=1.0)
 
 julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite();
              initial=XXZ1D(; J=0.5, Δ=0.0), t=1.0)
+0.0
+
+julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite();
+             initial=XXZ1D(; J=-1.0, Δ=0.0), t=1.0)   # sign-flip — also 0
 0.0
 ```
 
@@ -254,36 +238,9 @@ function fetch(
     model_f::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite; initial::XXZ1D, t::Real, kwargs...
 )
     _xx_quench_assert_free_fermion(model_f, initial)
-
-    cls = _xx_quench_fermi_sea_class(initial.J, model_f.J)
-    if cls === :same
-        # ε_{J_f}(k) is real, the Fermi sea coincides with the initial
-        # one, the amplitude is a pure phase, and the rate vanishes
-        # exactly.  See `(♣) / (♠)` in the file header.
-        return 0.0
-    elseif cls === :flipped
-        # Anderson orthogonality of complementary Fermi seas.  λ = +∞.
-        @warn (
-            "XXZ1D LoschmidtEcho{:rate}: sgn J₀ ≠ sgn J_f at the XX " *
-            "point makes the initial and final Fermi seas complementary " *
-            "(Anderson orthogonality).  The Loschmidt rate is +∞ for " *
-            "every t ≥ 0; returning Inf."
-        ) J_initial = initial.J J_final = model_f.J
-        return Inf
-    elseif cls === :flat_both
-        # Both Hamiltonians are zero — no dynamics at all.
-        return 0.0
-    else  # :flat_initial or :flat_final
-        # The flat-band ground state is highly degenerate; the Loschmidt
-        # rate then depends on which member of the degenerate manifold
-        # is taken as |ψ₀⟩, which the issue scope does not specify.
-        @warn (
-            "XXZ1D LoschmidtEcho{:rate}: one of {J_initial, J_final} is " *
-            "zero (flat band).  The flat-band ground state is " *
-            "exponentially degenerate and the rate is not single-valued; " *
-            "returning NaN.  Provide both J_initial ≠ 0 and J_final ≠ 0 " *
-            "for a well-defined answer."
-        ) J_initial = initial.J J_final = model_f.J
-        return NaN
-    end
+    # |ψ₀⟩ = |GS(initial.J)⟩ is a number eigenstate of H_XX(model_f.J)
+    # in the shared plane-wave basis, so the Loschmidt amplitude is a
+    # pure phase, |L(t)| = 1, and λ(t) ≡ 0 for every (J₀, J_f, t).
+    # See `(♣) / (♠)` in the file header for the full derivation.
+    return 0.0
 end

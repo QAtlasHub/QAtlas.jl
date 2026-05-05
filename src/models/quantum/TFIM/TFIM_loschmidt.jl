@@ -1,7 +1,3 @@
-Your branch is behind 'origin/feat/issue-143-loschmidt' by 1 commit, and can be fast-forwarded.
-  (use "git pull" to update your local branch)
- test/standalone/test_tfim_loschmidt.jl    | 34 ++++++++++++++++++++++---------
- 3 files changed, 34 insertions(+), 24 deletions(-)
 # ─────────────────────────────────────────────────────────────────────────────
 # Transverse Field Ising Model — Loschmidt echo + dynamical quantum phase
 # transitions (DQPT) for sudden quenches H_0 → H_f.

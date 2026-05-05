@@ -51,6 +51,10 @@ export E8Spectrum
 # --- TFIM Infinite dynamic helpers ---
 export tfim_quasiparticle_dispersion, tfim_two_spinon_dos
 
+# --- Heisenberg1D Infinite spinon kinematics (issue #154 phase 1) ---
+export heisenberg_spinon_dispersion,
+    heisenberg_two_spinon_lower_edge, heisenberg_two_spinon_upper_edge
+
 # --- Universality Classes ---
 export Universality, CriticalExponents, GrowthExponents
 export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
@@ -90,6 +94,7 @@ include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
 include("models/quantum/TFIM/TFIM_fidelity.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
+include("models/quantum/Heisenberg/Heisenberg_spinon.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_observables.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_registry.jl")

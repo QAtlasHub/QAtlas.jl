@@ -144,12 +144,9 @@ free-fermion derivation in the TFIM.
 """
 struct VonNeumannEntropy{M} <: AbstractQuantity
     function VonNeumannEntropy{M}() where {M}
-        M isa Symbol || error(
-            "VonNeumannEntropy mode must be a Symbol, got $(typeof(M))"
-        )
-        M in (:equilibrium, :quench) || error(
-            "unknown VonNeumannEntropy mode :$M; expected :equilibrium or :quench"
-        )
+        M isa Symbol || error("VonNeumannEntropy mode must be a Symbol, got $(typeof(M))")
+        M in (:equilibrium, :quench) ||
+            error("unknown VonNeumannEntropy mode :$M; expected :equilibrium or :quench")
         return new{M}()
     end
 end

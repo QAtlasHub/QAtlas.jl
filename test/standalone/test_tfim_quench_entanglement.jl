@@ -48,13 +48,9 @@ end
     ℓ = 8
     for h in (0.5, 1.0, 2.0)
         m = TFIM(; J=1.0, h=h)
-        S_t0 = QAtlas.fetch(
-            m, VonNeumannEntropy{:quench}(), OBC(N); initial=m, ℓ=ℓ, t=0.0
-        )
+        S_t0 = QAtlas.fetch(m, VonNeumannEntropy{:quench}(), OBC(N); initial=m, ℓ=ℓ, t=0.0)
         for t in (0.7, 1.5, 3.0, 5.0)
-            S_t = QAtlas.fetch(
-                m, VonNeumannEntropy{:quench}(), OBC(N); initial=m, ℓ=ℓ, t=t
-            )
+            S_t = QAtlas.fetch(m, VonNeumannEntropy{:quench}(), OBC(N); initial=m, ℓ=ℓ, t=t)
             @test S_t ≈ S_t0 atol = 1e-9
         end
     end
@@ -82,9 +78,8 @@ end
 
     ts_grow = (0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0)
     Ss_grow = [
-        QAtlas.fetch(
-            m_f, VonNeumannEntropy{:quench}(), OBC(N); initial=m_0, ℓ=ℓ, t=t
-        ) for t in ts_grow
+        QAtlas.fetch(m_f, VonNeumannEntropy{:quench}(), OBC(N); initial=m_0, ℓ=ℓ, t=t) for
+        t in ts_grow
     ]
     # Strict monotonic increase over the linear-growth window.
     for k in 2:length(Ss_grow)
@@ -126,9 +121,7 @@ end
     # (~1e-12 relative).
     m_0 = TFIM(; J=1.0, h=2.0)
     m_f = TFIM(; J=1.0, h=1.0)
-    S = QAtlas.fetch(
-        m_f, VonNeumannEntropy{:quench}(), OBC(32); initial=m_0, ℓ=8, t=1.0
-    )
+    S = QAtlas.fetch(m_f, VonNeumannEntropy{:quench}(), OBC(32); initial=m_0, ℓ=8, t=1.0)
     @test S ≈ 0.5338124210270956 atol = 1e-10
 end
 

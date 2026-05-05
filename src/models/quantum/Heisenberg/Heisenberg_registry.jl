@@ -202,7 +202,7 @@ end
     ZZStructureFactor,
     Infinite,
     method=:muller_ansatz,
-    reliability=:approximate,
+    reliability=:medium,
     tested_in="test/standalone/test_heisenberg_spinon.jl",
     references=["des Cloizeaux–Pearson 1962", "Müller-Thomas-Beck-Bonner 1981"],
     notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",

@@ -13,10 +13,26 @@
 # excitations couple to the ground state.  In momentum space (Infinite, PBC) each
 # (k, -k) pair contributes a single 2-qp channel of energy 2 Λ_k, giving
 #
-#   χ_F(h) per pair = (∂_h θ_k)² / 4
+#   χ_F(h) per pair = (∂_h θ_k)²
 #
-# where θ_k is the Bogoliubov rotation angle, tan θ_k = J sin k / (h - J cos k).
-# Since ∂_h θ_k = -J sin k / ε_k², with ε_k = √(J² + h² - 2Jh cos k) = Λ_k / 2,
+# where θ_k is the Bogoliubov rotation angle that diagonalises the
+# 2×2 BdG block at momentum k.  The standard convention (Sachdev,
+# "Quantum Phase Transitions" 2e §5.1; Damski PRB 87, 165101) is
+#
+#   tan(2 θ_k) = J sin k / (h - J cos k)                        (★)
+#
+# with the factor of 2 inside `tan` reflecting that θ_k mixes the
+# pair (k, -k) modes (the rotation is by 2θ_k in the SU(2) Bogoliubov
+# subspace).  Differentiating (★) with respect to h:
+#
+#   ∂_h(2 θ_k) = -J sin k / ε_k²,    ε_k = √(J² + h² - 2Jh cos k) = Λ_k / 2,
+#   ⇒ ∂_h θ_k = -J sin k / (2 ε_k²).
+#
+# Per (k, -k) pair:
+#
+#   χ_F(h)/pair = (∂_h θ_k)² = (J sin k)² / (4 ε_k⁴),
+#
+# and integrating over k > 0 in the thermodynamic limit gives
 #
 #   χ_F / L = (1 / 8π) ∫₀^π (J sin k)² / ε_k⁴ dk
 #           = (2 / π) ∫₀^π (J sin k)² / Λ_k(h)⁴ dk          (Λ_k = 2 ε_k).

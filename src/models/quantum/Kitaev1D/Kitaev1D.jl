@@ -183,10 +183,7 @@ function fetch(model::Kitaev1D, ::Energy{:per_site}, ::Infinite; kwargs...)
         k -> begin
             Ek = sqrt((2t * cos(k) + μ)^2 + 4Δ^2 * sin(k)^2)
             -Ek / 2
-        end,
-        -π,
-        π;
-        rtol=1e-10,
+        end, -π, π; rtol=1e-10
     )
     return result / (2π)
 end

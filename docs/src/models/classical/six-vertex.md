@@ -41,7 +41,7 @@ entropy.
 At the symmetric point $a = b = c = 1$ the zero-temperature
 configurational entropy per vertex is the closed form
 
-$$\frac{S}{N} = \frac{3}{2} \log\frac{4}{3} \approx 0.4314718055994530\ldots$$
+$$\frac{S}{N} = \frac{3}{2} \log\frac{4}{3} \approx 0.4315231086776713\ldots$$
 
 ### Physical Context
 
@@ -57,7 +57,7 @@ estimate $S/N = \log(3/2)$ is *not* tight.
 
 ```julia
 m = QAtlas.square_ice()
-QAtlas.fetch(m, ResidualEntropy(), Infinite())     # → 0.4314718055994530
+QAtlas.fetch(m, ResidualEntropy(), Infinite())     # → 0.4315231086776713
 ```
 
 The implementation returns the closed form `(3/2) * log(4/3)` directly.

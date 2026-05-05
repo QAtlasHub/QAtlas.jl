@@ -43,11 +43,14 @@
 #
 #     ⟨ψ_0 | H_f | ψ_0⟩ / N = ε_GGE,
 #
-# i.e. the GGE energy *equals* the (constant) energy of the initial
-# state evaluated against the post-quench Hamiltonian.  This is the
-# strongest cross-check: the same closed form arises from two
-# physically distinct routes (long-time average vs. instantaneous
-# expectation in the initial state).
+# i.e. the GGE energy *equals the post-quench Hamiltonian H_f
+# evaluated in the (pre-quench) initial state* |ψ_0⟩ = GS(H_0).  Note
+# the asymmetry: this is *not* the GS energy of H_0 (which equals
+# ⟨ψ_0|H_0|ψ_0⟩/N), but the expectation of H_f in |ψ_0⟩, a constant
+# of the post-quench dynamics.  This identity is the strongest cross-
+# check: the same closed form arises from two physically distinct
+# routes (long-time average of an evolving state vs. instantaneous
+# expectation of H_f in the unevolved initial state).
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QuadGK: quadgk

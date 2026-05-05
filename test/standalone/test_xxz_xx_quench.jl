@@ -149,22 +149,14 @@ end
     # other (J₀, J_f) combination, which is consistent with this
     # observation.
     λ_init_flat = QAtlas.fetch(
-        XXZ1D(; J=1.0, Δ=0.0),
-        _LE_RATE,
-        Infinite();
-        initial=XXZ1D(; J=0.0, Δ=0.0),
-        t=1.0,
+        XXZ1D(; J=1.0, Δ=0.0), _LE_RATE, Infinite(); initial=XXZ1D(; J=0.0, Δ=0.0), t=1.0
     )
     @test λ_init_flat == 0.0
 
     # J_initial ≠ 0, J_final = 0: H_f = 0, so e^{-iH_f t} = I and
     # L(t) = ⟨ψ₀|ψ₀⟩ = 1 trivially.  λ = 0.
     λ_final_flat = QAtlas.fetch(
-        XXZ1D(; J=0.0, Δ=0.0),
-        _LE_RATE,
-        Infinite();
-        initial=XXZ1D(; J=1.0, Δ=0.0),
-        t=1.0,
+        XXZ1D(; J=0.0, Δ=0.0), _LE_RATE, Infinite(); initial=XXZ1D(; J=1.0, Δ=0.0), t=1.0
     )
     @test λ_final_flat == 0.0
 end

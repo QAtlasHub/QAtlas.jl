@@ -7,24 +7,29 @@ on:
   pull_request:
 jobs:
   test:
-    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }}
-    runs-on: ${{ matrix.os }}
+    name: Julia ${{ matrix.version }} - ${{ matrix.group }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         version:
           - '1'
-        os:
-          - ubuntu-latest
-        arch:
-          - x64
+        group:
+          - core,universalities
+          - models
+          - identities,standalone
+          - verification
+    env:
+      QATLAS_TEST_GROUP: ${{ matrix.group }}
     steps:
       - uses: actions/checkout@v6
       - uses: julia-actions/setup-julia@v3
         with:
           version: ${{ matrix.version }}
-          arch: ${{ matrix.arch }}
+          arch: x64
       - uses: julia-actions/cache@v3
+        with:
+          cache-name: ${{ matrix.group }}
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
         with:
@@ -34,3 +39,4 @@ jobs:
         with:
           file: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.group }}

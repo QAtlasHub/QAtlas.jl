@@ -17,9 +17,21 @@ println("BLAS threads: $(BLAS.get_num_threads()) / $(Sys.CPU_THREADS) cores")
 # cron only.
 const QATLAS_TEST_FULL = get(ENV, "QATLAS_TEST_FULL", "0") != "0"
 println("QATLAS_TEST_FULL = $(QATLAS_TEST_FULL)")
-const dirs = [
+
+const ALL_DIRS = [
     "core/", "universalities/", "models/", "identities/", "standalone/", "verification/"
 ]
+
+# QATLAS_TEST_GROUP="core,universalities" runs only those dirs (CI parallelism).
+# Unset or empty → run all.
+const _test_group = get(ENV, "QATLAS_TEST_GROUP", "")
+const dirs = if isempty(_test_group)
+    ALL_DIRS
+else
+    groups = split(_test_group, ",")
+    filter(d -> any(startswith(d, g) for g in groups), ALL_DIRS)
+end
+println("QATLAS_TEST_GROUP = $(repr(_test_group))  →  dirs = $(dirs)")
 
 const FIG_BASE = joinpath(pkgdir(QAtlas), "docs", "src", "assets")
 const PATHS = Dict()
@@ -38,11 +50,11 @@ include(joinpath(@__DIR__, "util", "thermodynamic_identities.jl"))
     test_args = copy(ARGS)
     println("Passed arguments ARGS = $(test_args) to tests.")
 
-    # Aqua static QA first — runs in under a second and catches
-    # Project.toml drift (stale / missing compat) before the expensive
-    # physics tests.
-    @testset "test_aqua.jl" begin
-        @time include(joinpath(@__DIR__, "test_aqua.jl"))
+    # Aqua static QA — run only in the core group (or when running all).
+    if isempty(_test_group) || any(g -> startswith("core/", g), split(_test_group, ","))
+        @testset "test_aqua.jl" begin
+            @time include(joinpath(@__DIR__, "test_aqua.jl"))
+        end
     end
 
     @time for dir in dirs

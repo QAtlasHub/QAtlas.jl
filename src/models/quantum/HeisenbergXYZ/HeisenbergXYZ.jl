@@ -86,7 +86,7 @@ already implemented in [`XXZ1D`](@ref).  General (Jx ≠ Jy) triples
 require the Baxter elliptic Bethe ansatz and currently raise
 `DomainError` — Phase 2.
 
-`Jx ≠ 0` is required (so `Δ = Jz/Jx` is well-defined).
+`Jx > 0` is required (so `Delta = Jz/Jx` is well-defined and the delegation routes into the XXZ1D-tested domain; FM-exchange `Jx < 0` is Phase 2).
 
 # References
 
@@ -108,10 +108,14 @@ function fetch(
             "HeisenbergXYZ Energy(:per_site) currently supports only the axis-aligned reduction Jx = Jy (delegated to XXZ1D); general XYZ via Baxter elliptic Bethe ansatz is tracked as Phase 2.  Got (Jx, Jy) = ($Jx, $Jy).",
         ),
     )
-    Jx == 0 && throw(
+    # Restrict to Jx > 0 so that Delta = Jz/Jx has unambiguous sign and the
+    # delegation lands in the XXZ1D-tested domain.  Jx < 0 (FM exchange) would
+    # flip Delta's sign into XXZ1D regions whose Yang-Yang analytic
+    # continuation is not exercised by the current XXZ1D test suite.
+    Jx > 0 || throw(
         DomainError(
             Jx,
-            "HeisenbergXYZ Energy(:per_site): Jx = 0 with Jx = Jy degenerates to an Ising-like model not in the XXZ family; pure-Ising reductions are tracked as Phase 2.",
+            "HeisenbergXYZ Energy(:per_site): Jx > 0 required (Jx == 0 is Ising-like; Jx < 0 is the FM-exchange XXZ regime whose XXZ1D delegation is not yet tested).  Got Jx = $Jx.",
         ),
     )
     Δ = Jz / Jx

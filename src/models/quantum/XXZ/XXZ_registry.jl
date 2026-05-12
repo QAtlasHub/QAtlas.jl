@@ -210,7 +210,7 @@ end
 # ── Entanglement (β = Inf default → ground-state pure-state entropy) ──
 @register(
     XXZ1D,
-    VonNeumannEntropy,
+    VonNeumannEntropy{:equilibrium},
     OBC,
     method=:dense_ed,
     reliability=:high,

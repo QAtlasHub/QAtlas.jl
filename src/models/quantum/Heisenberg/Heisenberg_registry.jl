@@ -176,7 +176,7 @@ end
 # ── Entanglement ──────────────────────────────────────────────────────
 @register(
     Heisenberg1D,
-    VonNeumannEntropy,
+    VonNeumannEntropy{:equilibrium},
     OBC,
     method=:dense_ed,
     reliability=:high,

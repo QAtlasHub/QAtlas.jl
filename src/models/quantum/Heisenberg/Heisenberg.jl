@@ -286,7 +286,7 @@ end
 # Entanglement: VonNeumannEntropy and RenyiEntropy.
 function fetch(
     ::Heisenberg1D,
-    ::VonNeumannEntropy,
+    ::VonNeumannEntropy{:equilibrium},
     bc::OBC;
     ℓ::Int,
     beta::Real=Inf,

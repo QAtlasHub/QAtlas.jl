@@ -494,7 +494,12 @@ Computed by exact ED + partial trace; cost `O(2^{2N})` memory and
 `O(2^{3ℓ})` for the `eigen` of `ρ_A`.  Capped by `_MAX_ED_SITES`.
 """
 function fetch(
-    model::XXZ1D, ::VonNeumannEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...
+    model::XXZ1D,
+    ::VonNeumannEntropy{:equilibrium},
+    bc::OBC;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
 )
     N = _bc_size(bc, kwargs)
     ρA = _xxz1d_reduced_density_matrix(model, N, ℓ, beta)

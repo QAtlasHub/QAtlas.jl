@@ -203,7 +203,7 @@
 # ── Entanglement (T = 0; β kwarg defaults to Inf) ─────────────────────
 @register(
     S1Heisenberg1D,
-    VonNeumannEntropy,
+    VonNeumannEntropy{:equilibrium},
     OBC,
     method=:dense_ed,
     reliability=:high,

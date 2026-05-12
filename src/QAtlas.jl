@@ -12,6 +12,7 @@ export IsingTriangular
 export CurieWeissIsing                                   # complete-graph mean-field Ising
 export IsingChain1D                                      # 1-D Ising chain (Ising 1925)
 export SpinIce                                           # pyrochlore Pauling 1935
+export TodaLattice                                       # 1-D Toda lattice (Toda 1967, integrable)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -112,6 +113,8 @@ include("models/classical/IsingChain1D/IsingChain1D.jl")
 include("models/classical/IsingChain1D/IsingChain1D_registry.jl")        # populates REGISTRY for IsingChain1D (#262)
 include("models/classical/SpinIce/SpinIce.jl")
 include("models/classical/SpinIce/SpinIce_registry.jl")                  # populates REGISTRY for SpinIce (#257)
+include("models/classical/TodaLattice/TodaLattice.jl")
+include("models/classical/TodaLattice/TodaLattice_registry.jl")          # populates REGISTRY for TodaLattice (#254)
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

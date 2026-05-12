@@ -100,6 +100,48 @@ Fidelity susceptibility `χ_F(λ) = −∂²⟨ψ(λ)|ψ(λ + δλ)⟩/∂δλ²
 """
 struct FidelitySusceptibility <: AbstractQuantity end
 
+"""
+    LoschmidtEcho{M}() <: AbstractQuantity
+    LoschmidtEcho(; mode::Symbol = :rate)
+
+Quench observable derived from the Loschmidt amplitude
+`L(t) = ⟨ψ₀ | e^{-i H_f t} | ψ₀⟩` of an initial state `|ψ₀⟩` evolving
+under a final Hamiltonian `H_f`.  The phantom-type parameter `M`
+selects which derived quantity is returned:
+
+- `:probability`  →  `|L(t)|²` (the Loschmidt echo proper, in `[0, 1]`)
+- `:rate`          →  Loschmidt rate function
+                      `λ(t) = -lim_{N→∞} (1/N) log |L(t)|²`,
+                      the standard order parameter for dynamical
+                      quantum phase transitions in the thermodynamic
+                      limit (Heyl, Polkovnikov & Kehrein 2013)
+
+A model-specific `fetch` method is required to provide the initial
+Hamiltonian (typically as the kwarg `initial::Model`) and the time
+`t::Real`; a Δ-mismatch / DomainError convention is left to the model
+author.
+
+This type is shared infrastructure for issues #143 (TFIM Loschmidt),
+#148 (XX free-fermion quench), and any future quench observable that
+factorises through the Loschmidt amplitude.
+
+# References
+- M. Heyl, A. Polkovnikov, S. Kehrein, *Phys. Rev. Lett.* 110, 135704
+  (2013).
+- F.H.L. Essler, M. Fagotti, *J. Stat. Mech.* (2016) 064002.
+"""
+struct LoschmidtEcho{M} <: AbstractQuantity
+    function LoschmidtEcho{M}() where {M}
+        M isa Symbol ||
+            throw(ArgumentError("LoschmidtEcho mode must be a Symbol, got $(typeof(M))"))
+        M in (:probability, :rate) || throw(
+            ArgumentError("unknown LoschmidtEcho mode :$M; expected :probability or :rate"),
+        )
+        return new{M}()
+    end
+end
+LoschmidtEcho(; mode::Symbol=:rate) = LoschmidtEcho{mode}()
+
 # `PartitionFunction`, `CriticalTemperature`, `SpontaneousMagnetization`
 # are currently defined in src/models/classical/IsingSquare/IsingSquare.jl
 # as bare `struct X end` tags.  They will be migrated to subtype
@@ -155,6 +197,12 @@ end
 """
     ResidualEntropy() <: AbstractQuantity
 
+Zero-temperature configurational (residual) entropy density.  Real-
+valued, non-negative; non-zero in the presence of macroscopic
+ground-state degeneracy (e.g. ice rule, frustrated Ising AFM,
+Pauling-1935-style models).  Distinct from [`ThermalEntropy`](@ref):
+`ThermalEntropy` is a finite-temperature thermodynamic quantity, while
+`ResidualEntropy` is the lim_{T -> 0} S(T) / N residual term.
 Zero-temperature ground-state entropy per site,
 
     S_residual / (N k_B) = lim_{T → 0⁺} S(T) / N,
@@ -376,6 +424,33 @@ pages return literature values.
 struct CentralCharge <: AbstractQuantity end
 
 """
+    ConformalWeights() <: AbstractQuantity
+
+Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro
+[`MinimalModel`](@ref) this is the Kac-table entry `h_{r,s}`; for
+[`WZWSU2`](@ref) it is the SU(2)-spin label `h_j = j(j+1)/(k+2)`.
+
+Concrete model fetch methods take additional keyword arguments
+identifying the primary (`r`, `s` for `MinimalModel`; `j` for
+`WZWSU2`) and return an exact `Rational{Int}`.
+"""
+struct ConformalWeights <: AbstractQuantity end
+
+"""
+    PrimaryFields() <: AbstractQuantity
+
+Full list of primary fields of a 2D rational CFT.  For
+[`MinimalModel`](@ref) the result is a `Vector{NamedTuple{(:r, :s, :h)}}`
+of length `(p - 1)(p_prime - 1) / 2`, with one entry per Kac-symmetry
+orbit.
+
+Future CFT classes may return different NamedTuple schemas (e.g.
+`(j, h)` for WZW). The return type is therefore a
+`Vector{<:NamedTuple}` whose schema depends on the model.
+"""
+struct PrimaryFields <: AbstractQuantity end
+
+"""
     CorrelationLength() <: AbstractQuantity
 
 Two-point correlation length `ξ` controlling the exponential decay of
@@ -459,6 +534,62 @@ here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
 
+# ─── Quench dynamics: Loschmidt echo / DQPT rate function ──────────────
+
+"""
+    LoschmidtEcho{M}() <: AbstractQuantity
+    LoschmidtEcho(:amplitude)
+    LoschmidtEcho(:rate)
+    LoschmidtRateFunction()        # alias for LoschmidtEcho{:rate}
+
+Loschmidt-echo family for sudden-quench dynamics.  After preparing
+`|ψ_0⟩` as the ground state of an "initial" model `H_0` and quenching to
+the "final" model `H_f` (passed as the first positional argument to
+`fetch`), the Loschmidt amplitude is
+
+    G(t) = ⟨ψ_0 | e^{-i H_f t} | ψ_0⟩,
+
+with the Loschmidt echo `L(t) = |G(t)|² ∈ [0, 1]` and the rate function
+
+    λ(t) = -log L(t) / N         (finite N)
+    λ(t) = -lim_{N→∞} log L(t)/N (thermodynamic limit / Infinite)
+
+Non-analytic cusps in `λ(t)` are dynamical quantum phase transitions
+(DQPT).  See Heyl, Polkovnikov, Kehrein, PRL 110, 135704 (2013) and the
+review Heyl, Rep. Prog. Phys. 81, 054001 (2018).
+
+The mode `M::Symbol ∈ (:amplitude, :rate)` is a phantom type parameter
+so that `:amplitude` (returns `L(t)`) and `:rate` (returns `λ(t)`)
+dispatch separately.  The convenience alias
+[`LoschmidtRateFunction`](@ref) is the only flavour defined for
+`Infinite`, since the `:amplitude` itself is identically zero in the
+thermodynamic limit (extensive cumulants).
+
+The pre-quench Hamiltonian is passed via the `initial` keyword on
+`fetch`, e.g.
+
+    fetch(TFIM(J=1.0, h=0.5), LoschmidtRateFunction(), Infinite();
+          initial=TFIM(J=1.0, h=2.0), t=1.0)
+"""
+struct LoschmidtEcho{M} <: AbstractQuantity
+    function LoschmidtEcho{M}() where {M}
+        M isa Symbol || error("LoschmidtEcho mode must be a Symbol, got $(typeof(M))")
+        M in (:amplitude, :rate) ||
+            error("unknown LoschmidtEcho mode :$M; expected :amplitude or :rate")
+        return new{M}()
+    end
+end
+LoschmidtEcho() = LoschmidtEcho{:rate}()
+LoschmidtEcho(m::Symbol) = LoschmidtEcho{m}()
+
+"""
+    const LoschmidtRateFunction = LoschmidtEcho{:rate}
+
+Convenience alias for the rate-function flavour
+`λ(t) = -log L(t)/N`.  See [`LoschmidtEcho`](@ref).
+"""
+const LoschmidtRateFunction = LoschmidtEcho{:rate}
+
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
 # `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,
 # `GrowthExponents`) are currently defined in their respective model /
@@ -505,6 +636,38 @@ function fetch(model::AbstractQAtlasModel, ::Energy{:total}, bc::Union{OBC,PBC};
     return fetch(model, Energy{:per_site}(), bc; kwargs...) * _bc_size(bc, kwargs)
 end
 
+# ─── Charge / spin gaps (correlated electron systems) ──────────────────
+
+"""
+    ChargeGap() <: AbstractQuantity
+
+Charge (Mott) gap of an electron system,
+
+    Δ_c = E₀(N+1) + E₀(N-1) - 2 E₀(N),
+
+i.e. the energy cost of adding a particle plus the cost of removing
+one, equivalent to the gap between the half-filled ground state and
+the lowest charged excitation.  Strictly positive in a Mott insulator
+and exactly zero in a metal / superconductor.
+
+Implemented analytically for [](@ref) at half filling via
+the Lieb–Wu (1968) closed-form integral.
+"""
+struct ChargeGap <: AbstractQuantity end
+
+"""
+    SpinGap() <: AbstractQuantity
+
+Spin gap of an electron system,
+
+    Δ_s = E₀(S^z = 1) - E₀(S^z = 0),
+
+i.e. the lowest excitation energy at fixed total particle number that
+flips one spin.  Zero whenever the spinon branch is gapless (e.g. the
+half-filled 1D Hubbard chain — rigorous Lieb–Wu result), positive in a
+spin-gapped phase (Haldane chain, BCS superconductor, …).
+"""
+struct SpinGap <: AbstractQuantity end
 # ─── Quench / nonequilibrium long-time ensembles ────────────────────────
 
 """

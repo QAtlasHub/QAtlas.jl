@@ -62,8 +62,9 @@ struct HeisenbergXYZ <: AbstractQAtlasModel
     Jy::Float64
     Jz::Float64
 end
-HeisenbergXYZ(; Jx::Real=1.0, Jy::Real=1.0, Jz::Real=1.0) =
+function HeisenbergXYZ(; Jx::Real=1.0, Jy::Real=1.0, Jz::Real=1.0)
     HeisenbergXYZ(Float64(Jx), Float64(Jy), Float64(Jz))
+end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Ground-state energy per site — axis-aligned (Jx = Jy) reduction

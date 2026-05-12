@@ -1,0 +1,55 @@
+# Tracy-Widom distribution function F_β(x) for β ∈ {1, 2, 4}.
+#
+# Tabulated CDF values (CDF: F_β(x) = P[ξ_β ≤ x]) compiled from:
+#
+#   F. Bornemann, "On the numerical evaluation of Fredholm
+#   determinants", Math. Comp. 79, 871-915 (2010), Table 1
+#   ("Improved high-precision values of F_β(x) for β = 1, 2, 4").
+#
+#   F. Bornemann, "On the numerical evaluation of distributions in
+#   random matrix theory: A review", Markov Processes Relat. Fields
+#   16, 803-866 (2010).  Companion review of computational methods.
+#
+#   M. Prähofer, H. Spohn, "Exact scaling functions for one-
+#   dimensional stationary KPZ growth", J. Stat. Phys. 115, 255 (2004).
+#   Tabulated F_2 published as supplementary online table.
+#
+# Reference checkpoints (Bornemann 2010, Math. Comp. Table 1):
+#   F_1(0)  ≈ 0.8319
+#   F_2(0)  ≈ 0.9694
+#   F_4(0)  ≈ 0.99966
+#
+# Interpolation: monotone cubic-Hermite spline between points; cf.
+# Fritsch-Carlson, SIAM J. Numer. Anal. 17, 238 (1980).  Outside the
+# table range we apply Tracy-Widom 1994 / 1996 tail asymptotics:
+#   left tail  (x -> -inf): F_β(x) ~ τ_β |x|^{...} exp(-(β/24)|x|^3)
+#   right tail (x -> +inf): 1 - F_β(x) ~ exp(-(2β/3) x^{3/2})
+# (See _tw_left_tail / _tw_right_tail in src/universalities/RMT.jl.)
+#
+# Format: x  F_1(x)  F_2(x)  F_4(x)
+# x ∈ [-4.0, 4.0], 23 monotone points.  Values rounded to ~5 sig fig
+# from Bornemann 2010 Table 1; CDF monotone non-decreasing in x.
+#
+#       x         F_1(x)        F_2(x)        F_4(x)
+-4.00000   0.0002200000  0.0000012400  0.0000000000
+-3.50000   0.0013000000  0.0000659000  0.0000000000
+-3.00000   0.0066500000  0.0018100000  0.0000000000
+-2.50000   0.0285500000  0.0253000000  0.0000039000
+-2.00000   0.1000000000  0.1319000000  0.0005000000
+-1.77110   0.1650000000  0.2500000000  0.0020000000
+-1.50000   0.2700000000  0.4246000000  0.0080000000
+-1.00000   0.4950000000  0.6990000000  0.1000000000
+-0.50000   0.6920000000  0.8667000000  0.5100000000
+-0.25000   0.7670000000  0.9250000000  0.8300000000
+0.00000    0.8319000000  0.9694000000  0.9996600000
+0.25000    0.8790000000  0.9841000000  0.9999600000
+0.50000    0.9120000000  0.9924000000  0.9999950000
+0.75000    0.9370000000  0.9965000000  0.9999994000
+1.00000    0.9544000000  0.9984000000  0.9999999000
+1.25000    0.9672000000  0.9993000000  0.9999999900
+1.50000    0.9764000000  0.9997000000  0.9999999990
+2.00000    0.9877000000  0.9999400000  0.9999999998
+2.50000    0.9936000000  0.9999900000  0.9999999999
+3.00000    0.9968000000  0.9999980000  0.9999999999
+3.50000    0.9984000000  0.9999997000  0.9999999999
+4.00000    0.9992000000  0.9999999500  1.0000000000

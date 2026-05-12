@@ -227,6 +227,36 @@ end
     notes="S_α = log Tr ρ_A^α / (1 - α); pass subsystem ℓ and order α.",
 )
 
+# ── Free-fermion thermal at Infinite (Δ = 0 only; general Δ pending #108) ──
+@register(
+    XXZ1D,
+    FreeEnergy,
+    Infinite,
+    method=:free_fermion_quadgk,
+    reliability=:high,
+    tested_in="test/standalone/test_xxz_xx_infinite.jl",
+    references=["Mahan §1.3", "Coleman §2.4", "Takahashi 1999 §4"],
+    notes="XX (Δ = 0) free-fermion f(β) by QuadGK; warns + NaN at general Δ (issue #108).",
+)
+@register(
+    XXZ1D,
+    ThermalEntropy,
+    Infinite,
+    method=:free_fermion_quadgk,
+    reliability=:high,
+    tested_in="test/standalone/test_xxz_xx_infinite.jl",
+    references=["Mahan §1.3", "Coleman §2.4"],
+    notes="XX (Δ = 0) free-fermion s(β) = β(e − f); warns + NaN at general Δ.",
+)
+@register(
+    XXZ1D,
+    SpecificHeat,
+    Infinite,
+    method=:free_fermion_quadgk,
+    reliability=:high,
+    tested_in="test/standalone/test_xxz_xx_infinite.jl",
+    references=["Mahan §1.3"],
+    notes="XX (Δ = 0) free-fermion C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk.",
 # ── Quench observables (Δ = 0 / XX free fermion only; issue #148 phase 1) ──
 register!(
     XXZ1D,

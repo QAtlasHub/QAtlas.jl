@@ -89,6 +89,11 @@ _xxz1d_energy_heisenberg_fm(J::Float64)::Float64 = -J / 4
 native_energy_granularity(::XXZ1D, ::OBC) = :total
 native_energy_granularity(::XXZ1D, ::Infinite) = :per_site
 
+# fetch(::XXZ1D, ::Energy{:per_site}, ::Infinite; ...) is defined in
+# XXZ_xx_infinite.jl, which extends the ground-state branch with a
+# finite-T (β kwarg) free-fermion path at Δ = 0.  The ground-state
+# logic for Δ ∈ {-1, 0, 1} is preserved bit-for-bit there; general-Δ
+# Bethe-ansatz remains a v0.13 follow-up (issue #108).
 """
     fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite) -> Float64
 

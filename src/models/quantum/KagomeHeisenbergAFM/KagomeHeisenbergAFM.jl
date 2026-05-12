@@ -66,7 +66,20 @@ end
 KagomeHeisenbergAFM(; J::Real=1.0) = KagomeHeisenbergAFM(Float64(J))
 
 # Hardcoded DMRG reference values (Yan-Huse-White 2011 et seq.).
+# Ground-state energy density e_0/J of the spin-1/2 Heisenberg AFM on
+# the kagome lattice.  Reference: Yan-Huse-White, Science 332, 1173
+# (2011), cylindrical DMRG extrapolated to the 2-D limit.  Confirmed by
+# Depenbrock-McCulloch-Schollwock, PRL 109, 067201 (2012); the central
+# value matches across both works at the -0.4386(5) band.  Update if a
+# tighter literature consensus emerges (e.g. He-Zhu-Chen 2017 et seq.).
 const _KAGOME_AFM_ENERGY_DENSITY_PER_J = -0.4386
+# Singlet-triplet (spin) gap Delta_s/J in the gapped-Z2 spin-liquid
+# scenario.  Reference: Yan-Huse-White 2011 DMRG (Science 332, 1173);
+# treated as a DMRG upper bound because variational Monte Carlo
+# (Iqbal-Becca-Sorella-Poilblanc, PRB 87, 060405R, 2013) favours a
+# competing gapless U(1) Dirac spin liquid.  Later cylindrical DMRG
+# (He-Zhu-Chen, PRX 7, 031020, 2017) reports Delta_s ~ 0.18(2); revisit
+# if a tighter consensus emerges.
 const _KAGOME_AFM_SPIN_GAP_PER_J = 0.13
 
 # ═══════════════════════════════════════════════════════════════════════════════

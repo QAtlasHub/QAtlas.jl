@@ -94,6 +94,7 @@ include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/XXZ/XXZ.jl")
+include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used by XXZ.jl dispatch
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D

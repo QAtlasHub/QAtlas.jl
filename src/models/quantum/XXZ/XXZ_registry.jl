@@ -27,7 +27,7 @@
     reliability=:high,
     tested_in="test/models/test_XXZ1D.jl",
     references=["Hulthén 1938", "Yang Yang 1966"],
-    notes="Closed form at Δ ∈ {-1, 0, 1}; general-Δ Bethe-ansatz integral deferred.",
+    notes="Closed form at Δ ∈ {-1, 0, 1}; Yang-Yang single integral via QuadGK for general -1 < Δ < 1; |Δ| > 1 (gapped) deferred.",
 )
 
 # ── Spectrum / criticality ────────────────────────────────────────────

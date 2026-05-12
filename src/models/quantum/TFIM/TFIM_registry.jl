@@ -547,6 +547,42 @@
     tested_in="test/standalone/test_tfim_quench_entanglement.jl",
     references=["Calabrese-Cardy 2005", "Peschel 2003"],
     notes="S(ℓ, t) after a global quench from initial::TFIM ground state; Peschel on time-evolved Σ(t) = R(t) Σ_0 R(t)ᵀ.",
+# ── Quench dynamics: Loschmidt echo + DQPT rate function ─────────────
+@register(
+    TFIM,
+    LoschmidtEcho{:amplitude},
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_loschmidt.jl",
+    references=[
+        "Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)",
+        "Heyl Rep. Prog. Phys. 81, 054001 (2018)",
+    ],
+    notes="L(t) = ∏_n |cos²θ_n + sin²θ_n e^{-2iΛ_n t}|² via OBC BdG diagonalisation of H_0, H_f.",
+)
+@register(
+    TFIM,
+    LoschmidtEcho{:rate},
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_loschmidt.jl",
+    references=["Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)"],
+    notes="λ(t) = -log L(t) / N from the OBC BdG product.",
+)
+@register(
+    TFIM,
+    LoschmidtEcho{:rate},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_loschmidt.jl",
+    references=[
+        "Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)",
+        "Heyl Rep. Prog. Phys. 81, 054001 (2018)",
+    ],
+    notes="λ(t) = -(1/2π) ∫₀^π log|cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k(h_f) t}|² dk via QuadGK.",
 # ── GGE stationary values for h-quench (TFIM_gge.jl) ─────────────────
 @register(
     TFIM,

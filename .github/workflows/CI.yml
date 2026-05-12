@@ -40,3 +40,4 @@ jobs:
           file: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.group }}
+          fail_ci_if_error: false

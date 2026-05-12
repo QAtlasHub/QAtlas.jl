@@ -82,34 +82,57 @@ end
 # Spontaneous magnetisation (zero field)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Fixed-point solver for the self-consistency equation m = tanh(βJ m).
-# Returns the nontrivial positive root for βJ > 1 and 0 for βJ ≤ 1
-# (paramagnetic phase).
-function _curie_weiss_solve_m(βJ::Real; tol::Real=1e-14, maxiter::Int=400)
-    if βJ ≤ 1
+# Bisection solver for the self-consistency equation m = tanh(beta*J*m).
+# Returns the nontrivial positive root for beta*J > 1 and 0 for beta*J <= 1.
+#
+# Why not Picard / fixed-point iteration: the map m -> tanh(beta*J*m) has
+# derivative beta*J*sech^2(beta*J*m_star) at the stable root, and this
+# derivative approaches 1 as beta*J -> 1+ (where m_star -> 0).  Near
+# criticality the Picard iterate decays as q^k with q -> 1, so machine
+# precision needs millions of steps - and at maxiter=400 the iterate sits
+# at ~1e-4 relative error, breaking the Landau exponent test (atol = 5e-3
+# on m* / sqrt(3 t) at t = 1 - T/T_c = 1e-4).
+#
+# Bisection on g(m) := m - tanh(beta*J*m) sidesteps the rate degeneracy:
+#   g(0) = 0 (unstable trivial root),
+#   g has a unique minimum at m_min = atanh(sqrt(1 - 1/beta*J)) / (beta*J)
+#     with g(m_min) < 0,
+#   g(m) -> 1 - tanh(beta*J) > 0 as m -> 1-.
+# So [m_min, 1 - 1e-15] brackets the positive root m_star with g(lo) < 0
+# and g(hi) > 0, and ~52 halvings reach 1e-15 relative width.
+function _curie_weiss_solve_m(beta_J::Real; tol::Real=1e-14, maxiter::Int=200)
+    if beta_J <= 1
         return 0.0
     end
-    # Fixed-point iteration m_{n+1} = tanh(βJ m_n).  At the stable
-    # non-trivial root the map's derivative is βJ (1 - tanh²(βJ m*)) < 1,
-    # so the iteration converges geometrically.  The trivial m = 0
-    # root has derivative βJ > 1 (repulsive for βJ > 1), so any strictly
-    # positive seed escapes it monotonically.  The earlier Newton+clamp
-    # variant overshot to the negative-m basin deep in the ordered phase
-    # (β ≫ 1/J) and snapped to the trivial 0 root.
-    #
-    # Seed: Landau leading-order m₀ ≈ √(3(βJ-1))/(βJ)^{3/2}, lifted to
-    # `tanh(βJ/2)` for βJ ≫ 1 so a single fixed-point step lands inside
-    # the contractive neighbourhood of m*.
-    m_landau = sqrt(3 * (βJ - 1)) / βJ^1.5
-    m = clamp(max(m_landau, tanh(βJ * 0.5)), 1e-12, 1.0 - 1e-15)
-    for _ in 1:maxiter
-        m_new = tanh(βJ * m)
-        if abs(m_new - m) ≤ tol * max(1.0, abs(m_new))
-            return m_new
-        end
-        m = m_new
+    # Lower bracket: m_min, the unique minimum of g(m) = m - tanh(beta_J*m).
+    m_min = atanh(sqrt(1 - 1 / beta_J)) / beta_J
+    lo = nextfloat(m_min)
+    hi = 1.0 - 1e-15
+    g_lo = lo - tanh(beta_J * lo)
+    g_hi = hi - tanh(beta_J * hi)
+    # In the extreme beta_J -> 1+ limit, floating-point cancellation can
+    # push m_min above the true root by an ulp; in that case fall back to
+    # a tiny positive seed where g is guaranteed negative.
+    if !(g_lo < 0)
+        lo = 1e-300
+        g_lo = lo - tanh(beta_J * lo)
     end
-    return m
+    if !(g_hi > 0)
+        return hi
+    end
+    for _ in 1:maxiter
+        mid = 0.5 * (lo + hi)
+        g_mid = mid - tanh(beta_J * mid)
+        if g_mid == 0 || (hi - lo) <= tol * max(1.0, hi)
+            return mid
+        end
+        if g_mid < 0
+            lo, g_lo = mid, g_mid
+        else
+            hi, g_hi = mid, g_mid
+        end
+    end
+    return 0.5 * (lo + hi)
 end
 
 """
@@ -124,9 +147,9 @@ inverse temperature `β` and zero external field, defined as the
 
 For `T ≥ T_c = J` (equivalently `β J ≤ 1`) only the trivial `m = 0`
 root exists and `0.0` is returned.  For `T < T_c` the nontrivial
-root is found by fixed-point iteration from the Landau-expansion seed
-`m₀ ≈ √(3 (βJ - 1)) / (βJ)^{3/2}`, which converges geometrically
-across the full ordered phase (linear rate).
+root is found by bisection of `g(m) := m - tanh(?J m)` on
+`[m_min, 1 - eps)` where `m_min = atanh(?(1 - 1/?J)) / ?J`.  Bisection
+converges absolutely (no rate degeneracy at criticality) in ~52 steps.
 
 # References
 

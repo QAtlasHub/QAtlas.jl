@@ -23,5 +23,5 @@
     reliability=:high,
     tested_in="test/standalone/test_curie_weiss_ising.jl",
     references=["Landau-Lifshitz §149"],
-    notes="m = tanh(βJ m) self-consistency; fixed-point from Landau seed √(3(βJ-1))/(βJ)^{3/2}; 0 in paramagnetic phase.",
+    notes="m = tanh(βJ m) self-consistency; bisection on g(m)=m-tanh(betaJ m) over [m_min, 1); 0 in paramagnetic phase.",
 )

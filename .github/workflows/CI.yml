@@ -20,7 +20,10 @@ jobs:
           - models/quantum/TFIM
           - models/quantum/XXZ,models/quantum/Heisenberg,models/quantum/KitaevHoneycomb,models/quantum/misc
           - identities
-          - verification
+          - verification/tightbinding
+          - verification/tfim_ising
+          - verification/heisenberg_xxz
+          - verification/universality
     env:
       QATLAS_TEST_GROUP: ${{ matrix.group }}
     steps:

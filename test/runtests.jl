@@ -26,7 +26,10 @@ const ALL_DIRS = [
     "models/quantum/KitaevHoneycomb/",
     "models/quantum/misc/",
     "identities/",
-    "verification/",
+    "verification/tightbinding/",
+    "verification/tfim_ising/",
+    "verification/heisenberg_xxz/",
+    "verification/universality/",
 ]
 
 # QATLAS_TEST_GROUP="models/quantum/TFIM" runs only that dir (CI parallelism).

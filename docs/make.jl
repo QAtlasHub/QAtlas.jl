@@ -106,6 +106,7 @@ makedocs(;
             "Lieb Flat Band" => "calc/bloch-lieb-flat-band.md",
             "Calabrese-Cardy OBC/PBC" => "calc/calabrese-cardy-obc-vs-pbc.md",
             "TFIM Entanglement (Peschel)" => "calc/tfim-entanglement-peschel.md",
+            "TFIM GGE Quench" => "calc/tfim-gge.md",
             "AD from ln Z" => "calc/ad-thermodynamics-from-z.md",
             "Scaling Relations" => "calc/ising-scaling-relations.md",
             "Ising CFT Operators" => "calc/ising-cft-primary-operators.md",

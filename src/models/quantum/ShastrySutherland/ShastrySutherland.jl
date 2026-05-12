@@ -76,8 +76,7 @@ struct ShastrySutherland <: AbstractQAtlasModel
     J::Float64
     Jp::Float64
 end
-ShastrySutherland(; J::Real=0.0, Jp::Real=1.0) =
-    ShastrySutherland(Float64(J), Float64(Jp))
+ShastrySutherland(; J::Real=0.0, Jp::Real=1.0) = ShastrySutherland(Float64(J), Float64(Jp))
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Ground-state energy per site (exact dimer phase)

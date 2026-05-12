@@ -152,6 +152,24 @@ struct RenyiEntropy <: AbstractQuantity
     end
 end
 
+"""
+    ResidualEntropy() <: AbstractQuantity
+
+Zero-temperature ground-state entropy per site,
+
+    S_residual / (N k_B) = lim_{T → 0⁺} S(T) / N,
+
+i.e. the entropy density of the (possibly degenerate) ground-state
+manifold.  Non-zero for frustrated classical models with extensive
+ground-state degeneracy — e.g. the antiferromagnetic Ising model on
+the triangular lattice (Wannier 1950, ≈ 0.3230659669) and on the
+kagome lattice (Houtappel 1950).  Defined as a separate quantity
+from [`ThermalEntropy`](@ref) to keep the zero-temperature limit
+explicit at the dispatch level (avoiding β → ∞ extrapolations of a
+finite-T fetch).
+"""
+struct ResidualEntropy <: AbstractQuantity end
+
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
 """

@@ -610,7 +610,6 @@ struct LoschmidtEcho{M} <: AbstractQuantity
         return new{M}()
     end
 end
-LoschmidtEcho() = LoschmidtEcho{:rate}()
 LoschmidtEcho(m::Symbol) = LoschmidtEcho{m}()
 LoschmidtEcho(; mode::Symbol=:rate) = LoschmidtEcho{mode}()
 
@@ -682,7 +681,7 @@ one, equivalent to the gap between the half-filled ground state and
 the lowest charged excitation.  Strictly positive in a Mott insulator
 and exactly zero in a metal / superconductor.
 
-Implemented analytically for [](@ref) at half filling via
+Implemented analytically for [`Hubbard1D`](@ref) at half filling via
 the Lieb–Wu (1968) closed-form integral.
 """
 struct ChargeGap <: AbstractQuantity end

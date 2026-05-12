@@ -30,6 +30,7 @@ export TightBindingSpectrum
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
 export Hubbard1D                                         # Lieb-Wu Bethe ansatz half-filling
 export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
+export ShastrySutherland                                 # SrCu₂(BO₃)₂ 2D dimer GS (Shastry-Sutherland 1981)
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
 
@@ -152,6 +153,8 @@ include("models/quantum/Hubbard1D/Hubbard1D.jl")
 include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY for Hubbard1D
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
 include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
+include("models/quantum/ShastrySutherland/ShastrySutherland.jl")
+include("models/quantum/ShastrySutherland/ShastrySutherland_registry.jl")  # populates REGISTRY for ShastrySutherland (#259)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

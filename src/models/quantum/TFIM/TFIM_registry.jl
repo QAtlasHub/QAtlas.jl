@@ -157,11 +157,31 @@
 )
 @register(
     TFIM,
-    MagnetizationXLocal,
+    MagnetizationXLocal{:equilibrium},
     OBC,
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_local.jl"
+)
+@register(
+    TFIM,
+    MagnetizationXLocal{:quench},
+    OBC,
+    method=:majorana_evolution,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
+    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
+    notes="Sudden h_0 -> h_f quench; Sigma(t) = R(t) Sigma_0 R(t)^T; sigma^x_i(t) = Sigma(t)[2i-1, 2i].",
+)
+@register(
+    TFIM,
+    MagnetizationXLocal{:quench},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
+    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
+    notes="Closed-form k-integral over the Bogoliubov angles theta_k(h_0,f); QuadGK rtol=1e-12.",
 )
 @register(
     TFIM,
@@ -334,8 +354,8 @@
     Infinite,
     method=:bdg,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_zaxis.jl",
-    notes="OBC large-N proxy (N_proxy kwarg controls precision).",
+    tested_in="test/verification/test_tfim_fdt.jl",
+    notes="OBC large-N proxy.  Static (ω = nothing) → uniform χ_zz(β); dynamic (ω::Real, q required) → χ''_zz(q,ω;β) via Kubo commutator.  N_proxy kwarg controls precision.",
 )
 @register(
     TFIM,
@@ -527,4 +547,28 @@
     tested_in="test/standalone/test_tfim_quench_entanglement.jl",
     references=["Calabrese-Cardy 2005", "Peschel 2003"],
     notes="S(ℓ, t) after a global quench from initial::TFIM ground state; Peschel on time-evolved Σ(t) = R(t) Σ_0 R(t)ᵀ.",
+# ── GGE stationary values for h-quench (TFIM_gge.jl) ─────────────────
+@register(
+    TFIM,
+    GGEValue{Energy{:per_site}},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_gge.jl",
+    references=[
+        "Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"
+    ],
+    notes="Per-site ε_GGE via QuadGK over the post-quench dispersion with Bogoliubov-mismatch occupations n_k = sin²(θ_k(h₀)−θ_k(h_f)).",
+)
+@register(
+    TFIM,
+    GGEValue{MagnetizationX},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/standalone/test_tfim_gge.jl",
+    references=[
+        "Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"
+    ],
+    notes="⟨σˣ⟩_GGE via QuadGK over (h_f − J cos k)/Λ_k(h_f) · (1 − 2 n_k).",
 )

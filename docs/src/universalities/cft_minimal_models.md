@@ -9,7 +9,7 @@ conformal field theories as concrete dispatch tags:
   $\widehat{\mathfrak{su}}(2)_k$ symmetry.
 
 Both expose their CFT data as exact `Rational{Int}` values via
-[`fetch`](@ref) on [`CentralCharge`](@ref),
+`fetch` on [`CentralCharge`](@ref),
 [`ConformalWeights`](@ref), and (minimal models only)
 [`PrimaryFields`](@ref).
 

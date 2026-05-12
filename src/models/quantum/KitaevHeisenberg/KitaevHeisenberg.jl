@@ -63,8 +63,9 @@ struct KitaevHeisenberg <: AbstractQAtlasModel
     J::Float64
     Γ::Float64
 end
-KitaevHeisenberg(; K::Real=1.0, J::Real=0.0, Γ::Real=0.0) =
+function KitaevHeisenberg(; K::Real=1.0, J::Real=0.0, Γ::Real=0.0)
     KitaevHeisenberg(Float64(K), Float64(J), Float64(Γ))
+end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Mass gap — K-only delegation to KitaevHoneycomb
@@ -107,7 +108,5 @@ function fetch(
             "KitaevHeisenberg MassGap currently only handles the Γ = 0 limit (delegated to KitaevHoneycomb); off-diagonal Γ ≠ 0 perturbations require DMRG/ED — Phase 2.",
         ),
     )
-    return QAtlas.fetch(
-        QAtlas.KitaevHoneycomb(; Kx=K, Ky=K, Kz=K), MassGap(), Infinite()
-    )
+    return QAtlas.fetch(QAtlas.KitaevHoneycomb(; Kx=K, Ky=K, Kz=K), MassGap(), Infinite())
 end

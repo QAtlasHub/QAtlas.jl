@@ -47,7 +47,7 @@ Quantities registered:
 | Quantity                          | BC         | Method                |
 | --------------------------------- | ---------- | --------------------- |
 | [`CriticalTemperature`](@ref)     | `Infinite` | analytic              |
-| [`SpontaneousMagnetization`](@ref)| `Infinite` | Newton root solve     |
+| [`SpontaneousMagnetization`](@ref)| `Infinite` | fixed-point iter      |
 
 # References
 
@@ -82,7 +82,7 @@ end
 # Spontaneous magnetisation (zero field)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Newton solver for the self-consistency equation m = tanh(βJ m).
+# Fixed-point solver for the self-consistency equation m = tanh(βJ m).
 # Returns the nontrivial positive root for βJ > 1 and 0 for βJ ≤ 1
 # (paramagnetic phase).
 function _curie_weiss_solve_m(βJ::Real; tol::Real=1e-14, maxiter::Int=400)
@@ -124,9 +124,9 @@ inverse temperature `β` and zero external field, defined as the
 
 For `T ≥ T_c = J` (equivalently `β J ≤ 1`) only the trivial `m = 0`
 root exists and `0.0` is returned.  For `T < T_c` the nontrivial
-root is found by Newton iteration from the Landau-expansion seed
-`m₀ ≈ √(3 (βJ - 1)) / (βJ)^{3/2}`, which converges quadratically
-across the full ordered phase.
+root is found by fixed-point iteration from the Landau-expansion seed
+`m₀ ≈ √(3 (βJ - 1)) / (βJ)^{3/2}`, which converges geometrically
+across the full ordered phase (linear rate).
 
 # References
 

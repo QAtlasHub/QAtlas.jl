@@ -100,6 +100,7 @@ makedocs(;
             "Yang Magnetization" => "calc/yang-magnetization-toeplitz.md",
             "Heisenberg Dimer" => "calc/heisenberg-dimer-singlet-triplet.md",
             "Bethe Ansatz e₀" => "calc/bethe-ansatz-heisenberg-e0.md",
+            "Heisenberg Spinons" => "calc/heisenberg-spinons.md",
             "XXZ Luttinger Parameters" => "calc/xxz-luttinger-parameters.md",
             "Honeycomb Bloch" => "calc/bloch-honeycomb-dispersion.md",
             "Kagome Flat Band" => "calc/bloch-kagome-flat-band.md",

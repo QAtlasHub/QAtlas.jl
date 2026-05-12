@@ -16,14 +16,14 @@ using QAtlas, Lattice2D, LinearAlgebra, Test
 
 const T_HOP = 1.0
 
-@testset "ShastrySutherland TB — generic Bloch vs real-space ED" begin
+@testset "Lattice2D.ShastrySutherland TB — generic Bloch vs real-space ED" begin
     for (Lx, Ly) in [(2, 2), (3, 3), (3, 4), (4, 4)]
-        lat = build_lattice(ShastrySutherland, Lx, Ly)
+        lat = build_lattice(Lattice2D.ShastrySutherland, Lx, Ly)
 
         @testset "$(Lx)×$(Ly) SS PBC" begin
             H = build_tight_binding(lat, T_HOP)
             λ_real = sort(eigvals(Symmetric(H)))
-            λ_bloch = bloch_tb_spectrum(ShastrySutherland, Lx, Ly, T_HOP)
+            λ_bloch = bloch_tb_spectrum(Lattice2D.ShastrySutherland, Lx, Ly, T_HOP)
 
             @test length(λ_real) == 4 * Lx * Ly
             @test length(λ_bloch) == 4 * Lx * Ly
@@ -35,9 +35,9 @@ const T_HOP = 1.0
     end
 
     @testset "t scaling" begin
-        λ1 = bloch_tb_spectrum(ShastrySutherland, 3, 3, 1.0)
+        λ1 = bloch_tb_spectrum(Lattice2D.ShastrySutherland, 3, 3, 1.0)
         for t in (0.5, 2.0)
-            λt = bloch_tb_spectrum(ShastrySutherland, 3, 3, t)
+            λt = bloch_tb_spectrum(Lattice2D.ShastrySutherland, 3, 3, t)
             @test λt ≈ t .* λ1 rtol = 1e-12
         end
     end

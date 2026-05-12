@@ -1,0 +1,138 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# KagomeHeisenbergAFM — spin-½ Heisenberg antiferromagnet on the Kagome lattice.
+#
+# Hamiltonian:
+#
+#     H = J Σ_{⟨i,j⟩} S_i · S_j,   S = 1/2,   J > 0,
+#
+# on the highly frustrated corner-sharing-triangle (Kagome) lattice.
+# No closed-form ground state is known; the model is a paradigmatic
+# quantum spin liquid candidate.  Best modern DMRG references
+# (Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012):
+#
+#     e_0 / J  ≈ -0.4386(5)        (ground-state energy density)
+#     Δ_s / J  ≈ 0.13              (spin gap; gapped Z₂ spin liquid)
+#     γ        =  log 2            (topological entanglement entropy
+#                                  ; Z₂ topological order)
+#
+# Variational Monte Carlo (Iqbal-Becca-Sorella-Poilblanc 2013)
+# competes with a U(1) Dirac spin liquid at slightly higher energy,
+# so the precise nature of the ground state remains a controversy
+# in the open literature.  The reliability for the energy density
+# and the spin gap is therefore reported as `:medium`.
+#
+# This Phase-1 entry registers the DMRG energy-density and spin-gap
+# reference values.  The topological-entanglement-entropy `γ = log 2`
+# (already exposed by [`TopologicalEntanglementEntropy`](@ref))
+# delegation, and lattice-dependent finite-size scaling extrapolation
+# infrastructure, are tracked as Phase 2.
+#
+# References:
+#   - S. Yan, D. A. Huse, S. R. White, Science 332, 1173 (2011).
+#   - S. Depenbrock, I. P. McCulloch, U. Schollwöck,
+#     Phys. Rev. Lett. 109, 067201 (2012).
+#   - Y. Iqbal, F. Becca, S. Sorella, D. Poilblanc,
+#     Phys. Rev. B 87, 060405(R) (2013).
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    KagomeHeisenbergAFM(; J::Real = 1.0) <: AbstractQAtlasModel
+
+Spin-½ Heisenberg antiferromagnet on the Kagome lattice (highly
+frustrated, quantum spin liquid candidate).
+
+Quantities registered (Phase 1, DMRG reference values):
+
+| Quantity                       | BC         | Method                              |
+| ------------------------------ | ---------- | ----------------------------------- |
+| [`Energy`](@ref) (`:per_site`) | `Infinite` | DMRG (Yan-Huse-White 2011)          |
+| [`MassGap`](@ref)              | `Infinite` | DMRG (gapped Z₂ spin liquid)        |
+
+Both registered with reliability `:medium` (different methods —
+DMRG vs variational Monte Carlo — give slightly different gap
+estimates; the precise spin-liquid character is an open question).
+
+# References
+
+- S. Yan, D. A. Huse, S. R. White, *Science* **332**, 1173 (2011).
+- S. Depenbrock, I. P. McCulloch, U. Schollwöck,
+  *Phys. Rev. Lett.* **109**, 067201 (2012).
+- Y. Iqbal, F. Becca, S. Sorella, D. Poilblanc,
+  *Phys. Rev. B* **87**, 060405(R) (2013).
+"""
+struct KagomeHeisenbergAFM <: AbstractQAtlasModel
+    J::Float64
+end
+KagomeHeisenbergAFM(; J::Real=1.0) = KagomeHeisenbergAFM(Float64(J))
+
+# Hardcoded DMRG reference values (Yan-Huse-White 2011 et seq.).
+const _KAGOME_AFM_ENERGY_DENSITY_PER_J = -0.4386
+const _KAGOME_AFM_SPIN_GAP_PER_J = 0.13
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Ground-state energy per site (DMRG reference, Yan-Huse-White 2011)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::KagomeHeisenbergAFM, ::Energy{:per_site}, ::Infinite; J=m.J)
+        -> Float64
+
+Ground-state energy density of the spin-½ Kagome AFM:
+
+    e_0 / J ≈ -0.4386(5)
+
+(Yan-Huse-White 2011 DMRG; Depenbrock-McCulloch-Schollwöck 2012
+confirm with cylindrical DMRG).  Returned as `J × (-0.4386)`.
+
+# References
+
+- S. Yan, D. A. Huse, S. R. White, *Science* **332**, 1173 (2011).
+"""
+function fetch(
+    m::KagomeHeisenbergAFM,
+    ::Energy{:per_site},
+    ::Infinite;
+    J::Real=m.J,
+    kwargs...,
+)
+    J ≥ 0 || throw(
+        DomainError(
+            J,
+            "KagomeHeisenbergAFM Energy(:per_site) requires J ≥ 0 (AF convention); got J = $J.",
+        ),
+    )
+    return J * _KAGOME_AFM_ENERGY_DENSITY_PER_J
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Spin gap (DMRG reference, Yan-Huse-White 2011)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::KagomeHeisenbergAFM, ::MassGap, ::Infinite; J=m.J) -> Float64
+
+Spin gap of the spin-½ Kagome AFM:
+
+    Δ_s / J ≈ 0.13
+
+(Yan-Huse-White 2011 DMRG; gapped Z₂ spin liquid scenario).
+Returned as `J × 0.13`.  Variational Monte Carlo (Iqbal-Becca-
+Sorella-Poilblanc 2013) favours a competing gapless U(1) Dirac
+spin liquid, so the spin gap value should be treated as a DMRG
+upper bound; reliability is therefore `:medium`.
+
+# References
+
+- S. Yan, D. A. Huse, S. R. White, *Science* **332**, 1173 (2011).
+- Y. Iqbal, F. Becca, S. Sorella, D. Poilblanc,
+  *Phys. Rev. B* **87**, 060405(R) (2013).
+"""
+function fetch(m::KagomeHeisenbergAFM, ::MassGap, ::Infinite; J::Real=m.J, kwargs...)
+    J ≥ 0 || throw(
+        DomainError(
+            J,
+            "KagomeHeisenbergAFM MassGap requires J ≥ 0 (AF convention); got J = $J.",
+        ),
+    )
+    return J * _KAGOME_AFM_SPIN_GAP_PER_J
+end

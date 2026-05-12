@@ -4,8 +4,6 @@ using QAtlas, Test, LinearAlgebra, Lattice2D, ForwardDiff, Random
 using SparseArrays, KrylovKit
 using Aqua
 
-# Use all available BLAS threads for dense eigensolves (ED).
-# On multi-core machines this dramatically speeds up eigvals/eigen.
 const N_BLAS = min(Sys.CPU_THREADS, 64)
 BLAS.set_num_threads(N_BLAS)
 println("BLAS threads: $(BLAS.get_num_threads()) / $(Sys.CPU_THREADS) cores")
@@ -19,17 +17,26 @@ const QATLAS_TEST_FULL = get(ENV, "QATLAS_TEST_FULL", "0") != "0"
 println("QATLAS_TEST_FULL = $(QATLAS_TEST_FULL)")
 
 const ALL_DIRS = [
-    "core/", "universalities/", "models/", "identities/", "standalone/", "verification/"
+    "core/",
+    "universalities/",
+    "models/classical/",
+    "models/quantum/TFIM/",
+    "models/quantum/XXZ/",
+    "models/quantum/Heisenberg/",
+    "models/quantum/KitaevHoneycomb/",
+    "models/quantum/misc/",
+    "identities/",
+    "verification/",
 ]
 
-# QATLAS_TEST_GROUP="core,universalities" runs only those dirs (CI parallelism).
-# Unset or empty → run all.
+# QATLAS_TEST_GROUP="models/quantum/TFIM" runs only that dir (CI parallelism).
+# Comma-separated for multi-dir groups. Unset or empty → run all.
 const _test_group = get(ENV, "QATLAS_TEST_GROUP", "")
 const dirs = if isempty(_test_group)
     ALL_DIRS
 else
     groups = split(_test_group, ",")
-    filter(d -> any(startswith(d, g) for g in groups), ALL_DIRS)
+    filter(d -> any(g -> startswith(d, g), groups), ALL_DIRS)
 end
 println("QATLAS_TEST_GROUP = $(repr(_test_group))  →  dirs = $(dirs)")
 
@@ -37,7 +44,6 @@ const FIG_BASE = joinpath(pkgdir(QAtlas), "docs", "src", "assets")
 const PATHS = Dict()
 mkpath.(values(PATHS))
 
-# Load all test utilities ONCE to avoid method-overwrite warnings.
 include(joinpath(@__DIR__, "util", "classical_partition.jl"))
 include(joinpath(@__DIR__, "util", "tight_binding.jl"))
 include(joinpath(@__DIR__, "util", "spinhalf_ed.jl"))

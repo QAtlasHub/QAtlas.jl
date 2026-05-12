@@ -16,8 +16,10 @@ jobs:
           - '1'
         group:
           - core,universalities
-          - models
-          - identities,standalone
+          - models/classical
+          - models/quantum/TFIM
+          - models/quantum/XXZ,models/quantum/Heisenberg,models/quantum/KitaevHoneycomb,models/quantum/misc
+          - identities
           - verification
     env:
       QATLAS_TEST_GROUP: ${{ matrix.group }}

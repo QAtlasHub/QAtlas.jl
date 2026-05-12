@@ -31,8 +31,7 @@ end
 @testset "IsingChain1D — FreeEnergy at h ≠ 0 matches independent eigvals" begin
     # Build the 2×2 transfer matrix explicitly and diagonalise it, then
     # compare λ_+ → f = -β⁻¹ log λ_+ against the closed-form code.
-    for (β, J, h) in
-        ((0.5, 1.0, 0.3), (1.0, 0.7, -0.6), (2.0, 1.5, 0.1), (0.4, -0.8, 0.25))
+    for (β, J, h) in ((0.5, 1.0, 0.3), (1.0, 0.7, -0.6), (2.0, 1.5, 0.1), (0.4, -0.8, 0.25))
         T = [
             exp(β*(J+h)) exp(-β*J)
             exp(-β*J) exp(β*(J-h))
@@ -55,8 +54,7 @@ end
 end
 
 @testset "IsingChain1D — CorrelationLength at h ≠ 0 matches independent eigvals" begin
-    for (β, J, h) in
-        ((0.5, 1.0, 0.3), (1.0, 0.7, -0.6), (2.0, 1.5, 0.1), (0.4, 0.8, 0.25))
+    for (β, J, h) in ((0.5, 1.0, 0.3), (1.0, 0.7, -0.6), (2.0, 1.5, 0.1), (0.4, 0.8, 0.25))
         T = [
             exp(β*(J+h)) exp(-β*J)
             exp(-β*J) exp(β*(J-h))

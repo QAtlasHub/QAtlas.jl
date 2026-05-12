@@ -164,7 +164,7 @@ function fetch(
     kwargs...,
 )
     beta > 0 || throw(
-        DomainError(beta, "IsingChain1D CorrelationLength requires β > 0; got β = $beta.")
+        DomainError(beta, "IsingChain1D CorrelationLength requires β > 0; got β = $beta."),
     )
     λp, λm = _ising_chain_1d_lambdas(beta, J, h)
     λm > 0 || return Inf       # degenerate eigenvalues ⇒ ξ → ∞ (e.g. T = 0 FM).

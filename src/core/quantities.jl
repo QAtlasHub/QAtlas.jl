@@ -152,6 +152,24 @@ struct RenyiEntropy <: AbstractQuantity
     end
 end
 
+"""
+    ResidualEntropy() <: AbstractQuantity
+
+Zero-temperature ground-state entropy per site,
+
+    S_residual / (N k_B) = lim_{T → 0⁺} S(T) / N,
+
+i.e. the entropy density of the (possibly degenerate) ground-state
+manifold.  Non-zero for frustrated classical models with extensive
+ground-state degeneracy — e.g. the antiferromagnetic Ising model on
+the triangular lattice (Wannier 1950, ≈ 0.3230659669) and on the
+kagome lattice (Houtappel 1950).  Defined as a separate quantity
+from [`ThermalEntropy`](@ref) to keep the zero-temperature limit
+explicit at the dispatch level (avoiding β → ∞ extrapolations of a
+finite-T fetch).
+"""
+struct ResidualEntropy <: AbstractQuantity end
+
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
 """
@@ -183,11 +201,40 @@ documented.
 struct MagnetizationZ <: AbstractQuantity end
 
 """
-    MagnetizationXLocal() <: AbstractQuantity
+    MagnetizationXLocal{M}() <: AbstractQuantity
+    MagnetizationXLocal()                       # M = :equilibrium (default)
+    MagnetizationXLocal(:equilibrium)           # explicit equilibrium ⟨σˣ_i⟩_β
+    MagnetizationXLocal(:quench)                # post-quench ⟨σˣ_i⟩(t)
 
-Site-resolved `⟨σˣ_i⟩` vector of length `N_bulk`.
+Site-resolved `⟨σˣ_i⟩` quantity.  The mode parameter `M::Symbol` is a
+phantom type that splits the dispatch into:
+
+- `:equilibrium` — site-resolved thermal expectation
+  `[⟨σˣ_i⟩_β for i = 1:N]` (Vector{Float64}).  This is the original
+  meaning; the no-argument constructor `MagnetizationXLocal()` keeps
+  back-compatibility by routing here.
+
+- `:quench` — time-evolved local transverse magnetisation
+  `⟨σˣ_i⟩(t) = ⟨ψ_0|e^{iH_f t} σˣ_i e^{-iH_f t}|ψ_0⟩` after a sudden
+  quench from the ground state of an `initial::AbstractQAtlasModel`
+  (`H_0`) to the post-quench Hamiltonian (the `model` argument to
+  `fetch`).  Returns a single `Float64` for one `(i, t)` pair.
+
+See `docs/src/calc/tfim-sigma-x-quench.md` for the closed-form
+derivation in the TFIM (Calabrese–Essler–Fagotti, J. Stat. Mech.
+P07016 (2012); Barouch–McCoy–Dresden, PRA **2** (1970)).
 """
-struct MagnetizationXLocal <: AbstractQuantity end
+struct MagnetizationXLocal{M} <: AbstractQuantity
+    function MagnetizationXLocal{M}() where {M}
+        M isa Symbol ||
+            error("MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))")
+        M in (:equilibrium, :quench) ||
+            error("unknown MagnetizationXLocal mode :\$M; expected :equilibrium or :quench")
+        return new{M}()
+    end
+end
+MagnetizationXLocal() = MagnetizationXLocal{:equilibrium}()
+MagnetizationXLocal(m::Symbol) = MagnetizationXLocal{m}()
 
 """
     MagnetizationYLocal() <: AbstractQuantity
@@ -343,6 +390,22 @@ the inverse mass gap (`ξ = 1/(2|h - J|)`).
 struct CorrelationLength <: AbstractQuantity end
 
 """
+    StringOrderParameter() <: AbstractQuantity
+
+Kennedy-Tasaki non-local (string) order parameter
+
+    O_str = lim_{|i-j| -> infty} -<S^z_i exp[i pi sum_{i<k<j} S^z_k] S^z_j>
+
+for S=1 chains.  Detects the hidden Z_2 x Z_2 symmetry breaking that
+defines the Haldane phase (T. Kennedy and H. Tasaki, Phys. Rev. B **45**,
+304 (1992)).  At the AKLT point the closed-form value is O_str = 4/9
+(AKLT 1988), making it the canonical analytic test bed for any
+implementation that aims to detect topologically non-trivial gapped
+phases of integer-spin chains.
+"""
+struct StringOrderParameter <: AbstractQuantity end
+
+"""
     LuttingerParameter() <: AbstractQuantity
 
 Luttinger liquid parameter `K`.  Meaningful for critical 1D models
@@ -474,3 +537,46 @@ half-filled 1D Hubbard chain — rigorous Lieb–Wu result), positive in a
 spin-gapped phase (Haldane chain, BCS superconductor, …).
 """
 struct SpinGap <: AbstractQuantity end
+# ─── Quench / nonequilibrium long-time ensembles ────────────────────────
+
+"""
+    GGEValue{Q<:AbstractQuantity}(inner) <: AbstractQuantity
+
+Wrapper quantity carrying an underlying observable `inner::Q` whose
+*generalised Gibbs ensemble* (GGE) stationary value is to be computed —
+i.e. the `t → ∞` long-time average that an integrable (free-fermion)
+quench reaches.
+
+For an integrable system the ordinary (canonical) Gibbs ensemble does
+not describe the long-time relaxed state: every mode-occupation
+`n_k = ⟨c_k† c_k⟩` is a separate conserved quantity, so the diagonal
+ensemble is a *generalised* Gibbs ensemble fixed by the full
+distribution `{n_k}`.  See Rigol et al. PRL 98, 050405 (2007) for the
+foundational argument and Calabrese, Essler, Fagotti J. Stat. Mech.
+(2012) P07016 / P07022 for the TFIM-specific closed-form expressions.
+
+`fetch(model_f, ::GGEValue{Q}, bc; initial::ModelType, kwargs...)`
+returns the GGE expectation of the `Q` observable in the post-quench
+Hamiltonian `model_f`, with the conserved mode occupations frozen by
+the initial-state (`initial`) Bogoliubov rotation.
+
+# Construction
+
+```julia
+GGEValue(Energy())                  # ⟨H_f⟩ stationary value
+GGEValue(MagnetizationX())          # ⟨σˣ⟩ stationary value
+```
+
+# Fetch signature (TFIM)
+
+```julia
+fetch(TFIM(h = h_f), GGEValue(Energy()), Infinite();
+      initial = TFIM(h = h_0)) -> Float64
+```
+
+A no-quench limit `h_0 = h_f` reduces to the static ground-state value
+of the inner observable.
+"""
+struct GGEValue{Q<:AbstractQuantity} <: AbstractQuantity
+    inner::Q
+end

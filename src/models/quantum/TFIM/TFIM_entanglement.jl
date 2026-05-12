@@ -105,7 +105,12 @@ to 1e-10 in `test/models/test_TFIM_entanglement.jl`).
 See full derivation in `docs/src/calc/jw-tfim-bdg.md`.
 """
 function fetch(
-    model::TFIM, ::VonNeumannEntropy{:equilibrium}, bc::OBC; ℓ::Int, beta::Float64=Inf, kwargs...
+    model::TFIM,
+    ::VonNeumannEntropy{:equilibrium},
+    bc::OBC;
+    ℓ::Int,
+    beta::Float64=Inf,
+    kwargs...,
 )
     N = _bc_size(bc, kwargs)
     1 ≤ ℓ ≤ N - 1 || throw(

@@ -55,7 +55,6 @@ KPZ-type growth / roughness / dynamic exponents.  Returns
 """
 struct GrowthExponents <: AbstractQuantity end
 
-
 # ─────────────────────────────────────────────────────────────────────────────
 # CFT Casimir / finite-size ground-state energy correction (Cardy 1986)
 #

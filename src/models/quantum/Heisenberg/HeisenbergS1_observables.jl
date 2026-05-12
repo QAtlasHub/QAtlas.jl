@@ -312,7 +312,12 @@ Both `ℓ` and `N = bc.N` are bounded by `_MAX_ED_SITES_S1` because the
 full `3^N × 3^N` ρ is built explicitly.
 """
 function fetch(
-    model::S1Heisenberg1D, ::VonNeumannEntropy{:equilibrium}, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...
+    model::S1Heisenberg1D,
+    ::VonNeumannEntropy{:equilibrium},
+    bc::OBC;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
 )
     N = bc.N
     1 ≤ ℓ ≤ N - 1 || throw(

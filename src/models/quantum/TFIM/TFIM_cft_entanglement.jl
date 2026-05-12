@@ -108,7 +108,12 @@ under `β → ∞`.  The off-critical + finite-T case errors out (not yet
 implemented).
 """
 function fetch(
-    model::TFIM, ::VonNeumannEntropy{:equilibrium}, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
+    model::TFIM,
+    ::VonNeumannEntropy{:equilibrium},
+    ::Infinite;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
 )
     ℓ ≥ 1 || throw(ArgumentError("VonNeumannEntropy Infinite: ℓ must be ≥ 1; got $ℓ."))
     return _tfim_cc_entanglement(model.J, model.h, ℓ, beta; α=1.0)

@@ -21,6 +21,7 @@ export ChernSimons3D                                     # SU(N)_k Chern-Simons 
 export SherringtonKirkpatrick                            # mean-field Ising spin glass (Sherrington-Kirkpatrick 1975)
 export KagomeHeisenbergAFM                              # Kagome S=1/2 AFM Z₂ spin liquid candidate (Yan-Huse-White 2011)
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
+export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -139,6 +140,8 @@ include("models/quantum/KagomeHeisenbergAFM/KagomeHeisenbergAFM.jl")
 include("models/quantum/KagomeHeisenbergAFM/KagomeHeisenbergAFM_registry.jl")  # populates REGISTRY for KagomeHeisenbergAFM (#258)
 include("models/quantum/GrossNeveu/GrossNeveu.jl")
 include("models/quantum/GrossNeveu/GrossNeveu_registry.jl")              # populates REGISTRY for GrossNeveu (#247)
+include("models/quantum/XCube/XCube.jl")
+include("models/quantum/XCube/XCube_registry.jl")                        # populates REGISTRY for XCube (#252)
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

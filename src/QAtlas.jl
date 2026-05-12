@@ -7,6 +7,7 @@ export fetch
 
 # --- Classical Models ---
 export IsingSquare, PartitionFunction, CriticalTemperature, SpontaneousMagnetization
+export IsingTriangular
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -21,7 +22,9 @@ export TightBindingSpectrum
 # backward-compat top-level alias for `Honeycomb` (see src/deprecate/)
 # since the name does not collide with anything in Lattice2D.
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
+export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
+export AKLT1D                                            # spin-1 BLBQ at AKLT point
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -36,7 +39,7 @@ export Implementation, implementation_status, implementation_status_markdown
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
-export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
+export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
@@ -44,11 +47,17 @@ export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
 export ConformalWeights, PrimaryFields
+export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
+export GGEValue                                          # quench long-time wrapper
 
 # --- TFIM Infinite dynamic helpers ---
 export tfim_quasiparticle_dispersion, tfim_two_spinon_dos
+
+# --- Heisenberg1D Infinite spinon kinematics (issue #154 phase 1) ---
+export heisenberg_spinon_dispersion,
+    heisenberg_two_spinon_lower_edge, heisenberg_two_spinon_upper_edge
 
 # --- Universality Classes ---
 export Universality, CriticalExponents, GrowthExponents
@@ -64,6 +73,7 @@ include("universalities/Potts.jl")
 include("universalities/ONModel.jl")
 include("universalities/MinimalModel.jl")
 include("universalities/WZW.jl")
+include("universalities/CardyEntanglement.jl")
 
 # --- Models ---
 # Layout: `<class>/<Model>/<Model>.jl` (with optional sibling axis files like
@@ -73,6 +83,8 @@ include("universalities/WZW.jl")
 include("models/classical/IsingSquare/IsingSquare.jl")
 include("models/classical/IsingSquare/IsingSquare_thermal.jl")
 include("models/classical/IsingSquare/IsingSquare_registry.jl")
+include("models/classical/IsingTriangular/IsingTriangular.jl")
+include("models/classical/IsingTriangular/IsingTriangular_registry.jl")
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")
@@ -86,21 +98,29 @@ include("models/quantum/TFIM/TFIM_thermal.jl")
 include("models/quantum/TFIM/TFIM_pbc_thermal.jl")
 include("models/quantum/TFIM/TFIM_zaxis.jl")
 include("models/quantum/TFIM/TFIM_local.jl")
+include("models/quantum/TFIM/TFIM_sigma_x_quench.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
 include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
 include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
+include("models/quantum/TFIM/TFIM_gge.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
+include("models/quantum/Heisenberg/Heisenberg_spinon.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_observables.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_registry.jl")
+include("models/quantum/AKLT/AKLT1D.jl")
+include("models/quantum/AKLT/AKLT1D_registry.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/XXZ/XXZ.jl")
+include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used by XXZ.jl dispatch
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
+include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
+include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
 
 # --- Deprecation shims (legacy API) ---
 # Loaded last so they can route into any already-registered concrete

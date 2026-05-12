@@ -7,6 +7,7 @@ export fetch
 
 # --- Classical Models ---
 export IsingSquare, PartitionFunction, CriticalTemperature, SpontaneousMagnetization
+export SixVertex
 export IsingTriangular
 
 # --- Quantum Models ---
@@ -82,6 +83,8 @@ include("universalities/CardyEntanglement.jl")
 include("models/classical/IsingSquare/IsingSquare.jl")
 include("models/classical/IsingSquare/IsingSquare_thermal.jl")
 include("models/classical/IsingSquare/IsingSquare_registry.jl")
+include("models/classical/SixVertex/SixVertex.jl")
+include("models/classical/SixVertex/SixVertex_registry.jl")
 include("models/classical/IsingTriangular/IsingTriangular.jl")
 include("models/classical/IsingTriangular/IsingTriangular_registry.jl")
 include("models/quantum/tightbinding/regular/Honeycomb.jl")

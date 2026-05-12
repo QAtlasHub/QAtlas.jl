@@ -1,0 +1,99 @@
+# ToricCode — Kitaev 2003 Z₂ Surface Code
+
+`ToricCode` is the canonical topological-order benchmark model: Kitaev's
+(2003) Z₂ surface code on the square lattice. All physical observables
+exposed here are closed-form / purely topological — no numerical solver
+is involved.
+
+## Hamiltonian
+
+S = 1/2 on every edge of a square lattice. For each vertex `v` and each
+plaquette `p` define the stabilizer operators
+
+```
+A_v = ∏_{i ∈ star(v)} σˣ_i      (vertex / "electric" stabilizer, 4-body)
+B_p = ∏_{i ∈ ∂p}     σᶻ_i      (plaquette / "magnetic" stabilizer, 4-body)
+```
+
+```
+H = − J_e Σ_v A_v − J_m Σ_p B_p,    J_e, J_m ≥ 0.
+```
+
+Each pair of stabilizers shares 0 or 2 edges, hence anti-commutes by an
+even number of factors and so commutes. The full set
+`{A_v} ∪ {B_p}` is mutually commuting, and `H` is exactly diagonal in
+their joint eigenbasis. The ground state has every `A_v = +1` and every
+`B_p = +1`.
+
+## Closed-Form Quantities
+
+| Quantity                                | Value                  | Boundary | Reference          |
+| --------------------------------------- | ---------------------- | -------- | ------------------ |
+| `GroundStateEnergyDensity`              | `−(J_e + J_m)`         | Infinite | Kitaev 2003        |
+| `MassGap`                               | `2·min(J_e, J_m)`      | Infinite | Kitaev 2003        |
+| `GroundStateDegeneracy` (genus `g`)     | `4^g`                  | PBC      | Kitaev 2003 §5     |
+| `TopologicalEntanglementEntropy`        | `log 2`                | Infinite | Kitaev–Preskill 2006 / Levin–Wen 2006 |
+| `AnyonStatistics(:em)` mutual phase     | `π`                    | (any)    | Kitaev 2003        |
+
+## Anyon Content
+
+Four Abelian anyons with quantum dimension `d_a = 1`:
+
+| Label  | Origin                       | Self-statistics | Notes                         |
+| :----- | :--------------------------- | :-------------- | :---------------------------- |
+| `1`    | vacuum                       | boson (`0`)     | identity sector               |
+| `e`    | vertex defect `A_v = −1`     | boson (`0`)     | "electric" charge             |
+| `m`    | plaquette defect `B_p = −1`  | boson (`0`)     | "magnetic" flux               |
+| `ε`    | `e × m`                      | fermion (`π`)   | bound state, statistics from mutual braid |
+
+Fusion rules: `e×e = m×m = ε×ε = 1`, `e×m = ε`. The mutual phase from
+braiding `e` once fully around `m` is `π` (Z₂ mutual semion); this
+phase is responsible for the `ε` self-statistics.
+
+Total quantum dimension `𝒟 = √(Σ_a d_a²) = √4 = 2`, matching the
+Kitaev–Preskill / Levin–Wen extraction `γ = log 𝒟 = log 2`.
+
+## Code Examples
+
+```julia
+using QAtlas
+
+# Default isotropic point
+m = ToricCode()                      # J_e = J_m = 1
+QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())   # -2.0
+QAtlas.fetch(m, MassGap(),                  Infinite())   # 2.0
+QAtlas.fetch(m, GroundStateDegeneracy(),    PBC(0))       # 4 (torus)
+QAtlas.fetch(m, GroundStateDegeneracy(),    PBC(0); genus=2)  # 16
+QAtlas.fetch(m, TopologicalEntanglementEntropy(), Infinite()) # log 2
+
+# Anisotropic
+m2 = ToricCode(J_e=2.0, J_m=0.5)
+QAtlas.fetch(m2, GroundStateEnergyDensity(), Infinite())  # -2.5
+QAtlas.fetch(m2, MassGap(),                  Infinite())  # 1.0  (= 2·0.5)
+
+# Anyon table
+QAtlas.fetch(m, AnyonStatistics())                     # default :em
+QAtlas.fetch(m, AnyonStatistics(); type=:e)            # NamedTuple for e
+QAtlas.fetch(m, AnyonStatistics(); type=:ε)            # NamedTuple for ε
+```
+
+## Distinction from `KitaevHoneycomb`
+
+The `KitaevHoneycomb` model (Kitaev 2006, Annals 321) shares an author
+and a topological-order theme but is otherwise a different physical
+system:
+
+|                         | `ToricCode` (this page)        | [`KitaevHoneycomb`](kitaev-honeycomb.md) |
+| :---------------------- | :----------------------------- | :--------------------------------------- |
+| Reference               | Kitaev 2003, Annals 303        | Kitaev 2006, Annals 321                  |
+| Lattice                 | square (qubits on edges)       | honeycomb (qubits on sites)              |
+| Hamiltonian             | 4-body stabilizers (`σˣˣˣˣ`, `σᶻᶻᶻᶻ`) | bond-anisotropic 2-body (`σˣσˣ`, `σʸσʸ`, `σᶻσᶻ`) |
+| Solution                | exact stabilizer code          | four-Majorana mapping + Z₂ gauge fields  |
+| Anyons                  | Abelian Z₂ (`1, e, m, ε`)      | Abelian (A-phases) / non-Abelian Ising (B + B-field) |
+
+## References
+
+1. A. Yu. Kitaev, "Fault-tolerant quantum computation by anyons", **Annals Phys. 303**, 2 (2003).
+2. A. Kitaev, J. Preskill, "Topological entanglement entropy", **Phys. Rev. Lett. 96**, 110404 (2006).
+3. M. Levin, X.-G. Wen, "Detecting topological order in a ground state wave function", **Phys. Rev. Lett. 96**, 110405 (2006).
+4. C. Nayak, S. H. Simon, A. Stern, M. Freedman, S. Das Sarma, "Non-Abelian anyons and topological quantum computation", **Rev. Mod. Phys. 80**, 1083 (2008).

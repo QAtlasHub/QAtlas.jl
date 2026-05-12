@@ -100,6 +100,48 @@ Fidelity susceptibility `χ_F(λ) = −∂²⟨ψ(λ)|ψ(λ + δλ)⟩/∂δλ²
 """
 struct FidelitySusceptibility <: AbstractQuantity end
 
+"""
+    LoschmidtEcho{M}() <: AbstractQuantity
+    LoschmidtEcho(; mode::Symbol = :rate)
+
+Quench observable derived from the Loschmidt amplitude
+`L(t) = ⟨ψ₀ | e^{-i H_f t} | ψ₀⟩` of an initial state `|ψ₀⟩` evolving
+under a final Hamiltonian `H_f`.  The phantom-type parameter `M`
+selects which derived quantity is returned:
+
+- `:probability`  →  `|L(t)|²` (the Loschmidt echo proper, in `[0, 1]`)
+- `:rate`          →  Loschmidt rate function
+                      `λ(t) = -lim_{N→∞} (1/N) log |L(t)|²`,
+                      the standard order parameter for dynamical
+                      quantum phase transitions in the thermodynamic
+                      limit (Heyl, Polkovnikov & Kehrein 2013)
+
+A model-specific `fetch` method is required to provide the initial
+Hamiltonian (typically as the kwarg `initial::Model`) and the time
+`t::Real`; a Δ-mismatch / DomainError convention is left to the model
+author.
+
+This type is shared infrastructure for issues #143 (TFIM Loschmidt),
+#148 (XX free-fermion quench), and any future quench observable that
+factorises through the Loschmidt amplitude.
+
+# References
+- M. Heyl, A. Polkovnikov, S. Kehrein, *Phys. Rev. Lett.* 110, 135704
+  (2013).
+- F.H.L. Essler, M. Fagotti, *J. Stat. Mech.* (2016) 064002.
+"""
+struct LoschmidtEcho{M} <: AbstractQuantity
+    function LoschmidtEcho{M}() where {M}
+        M isa Symbol ||
+            throw(ArgumentError("LoschmidtEcho mode must be a Symbol, got $(typeof(M))"))
+        M in (:probability, :rate) || throw(
+            ArgumentError("unknown LoschmidtEcho mode :$M; expected :probability or :rate"),
+        )
+        return new{M}()
+    end
+end
+LoschmidtEcho(; mode::Symbol=:rate) = LoschmidtEcho{mode}()
+
 # `PartitionFunction`, `CriticalTemperature`, `SpontaneousMagnetization`
 # are currently defined in src/models/classical/IsingSquare/IsingSquare.jl
 # as bare `struct X end` tags.  They will be migrated to subtype

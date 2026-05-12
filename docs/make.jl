@@ -44,11 +44,13 @@ makedocs(;
             "Classical" => [
                 "models/classical/index.md",
                 "Ising Square" => "models/classical/ising-square.md",
+                "Ising Triangular" => "models/classical/ising-triangular.md",
             ],
             "Quantum" => [
                 "models/quantum/index.md",
                 "TFIM" => "models/quantum/tfim.md",
                 "Heisenberg" => "models/quantum/heisenberg.md",
+                "Majumdar-Ghosh" => "models/quantum/majumdar_ghosh.md",
                 "XXZ" => "models/quantum/xxz.md",
                 "Kitaev Honeycomb" => "models/quantum/kitaev-honeycomb.md",
                 "Tight-Binding" => [
@@ -69,6 +71,7 @@ makedocs(;
             "XY / Heisenberg" => "universalities/on-models.md",
             "Mean-Field" => "universalities/mean-field.md",
             "E8" => "universalities/e8.md",
+            "Cardy Entanglement" => "universalities/cardy_entanglement.md",
         ],
         "Verification" => [
             "verification/index.md",
@@ -97,6 +100,7 @@ makedocs(;
             "Yang Magnetization" => "calc/yang-magnetization-toeplitz.md",
             "Heisenberg Dimer" => "calc/heisenberg-dimer-singlet-triplet.md",
             "Bethe Ansatz e₀" => "calc/bethe-ansatz-heisenberg-e0.md",
+            "Heisenberg Spinons" => "calc/heisenberg-spinons.md",
             "XXZ Luttinger Parameters" => "calc/xxz-luttinger-parameters.md",
             "Honeycomb Bloch" => "calc/bloch-honeycomb-dispersion.md",
             "Kagome Flat Band" => "calc/bloch-kagome-flat-band.md",
@@ -104,6 +108,7 @@ makedocs(;
             "Calabrese-Cardy OBC/PBC" => "calc/calabrese-cardy-obc-vs-pbc.md",
             "TFIM Entanglement (Peschel)" => "calc/tfim-entanglement-peschel.md",
             "TFIM Loschmidt + DQPT" => "calc/tfim-loschmidt.md",
+            "TFIM GGE Quench" => "calc/tfim-gge.md",
             "AD from ln Z" => "calc/ad-thermodynamics-from-z.md",
             "Scaling Relations" => "calc/ising-scaling-relations.md",
             "Ising CFT Operators" => "calc/ising-cft-primary-operators.md",

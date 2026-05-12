@@ -104,7 +104,7 @@
 # ── Local site-resolved observables ───────────────────────────────────
 @register(
     Heisenberg1D,
-    MagnetizationXLocal,
+    MagnetizationXLocal{:equilibrium},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -189,4 +189,21 @@ end
     method=:dense_ed,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
+)
+
+# ── Spinon kinematics (issue #154 phase 1, Infinite) ──────────────────
+# Single-spinon dispersion + des Cloizeaux–Pearson 2-spinon continuum
+# edges are exposed as top-level helpers
+# (heisenberg_spinon_dispersion, heisenberg_two_spinon_lower_edge,
+#  heisenberg_two_spinon_upper_edge); only the dynamic structure factor
+# is registered as a Quantity here.
+@register(
+    Heisenberg1D,
+    ZZStructureFactor,
+    Infinite,
+    method=:muller_ansatz,
+    reliability=:medium,
+    tested_in="test/standalone/test_heisenberg_spinon.jl",
+    references=["des Cloizeaux–Pearson 1962", "Müller-Thomas-Beck-Bonner 1981"],
+    notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",
 )

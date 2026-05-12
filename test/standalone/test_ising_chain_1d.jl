@@ -45,11 +45,14 @@ end
 end
 
 @testset "IsingChain1D — CorrelationLength at h = 0 matches Ising 1925" begin
-    # ξ(β, 0) = 1 / log(coth βJ).
+    # ξ(β, 0) = 1 / log(coth βJ).  The transfer-matrix path computes
+    # λ_- = exp(βJ) - exp(-βJ), which loses a few floating-point ulps
+    # for βJ ≳ 5; the closed-form comparison is therefore checked at
+    # relative ~1e-12 (a few ulp of the ~200-valued ξ at βJ = 6).
     for β in (0.5, 1.0, 2.0, 3.0), J in (0.5, 1.0, 2.0)
         m = IsingChain1D(; J=J)
         ξ = QAtlas.fetch(m, CorrelationLength(), Infinite(); beta=β)
-        @test ξ ≈ 1 / log(coth(β * J)) atol = 1e-12
+        @test ξ ≈ 1 / log(coth(β * J)) rtol = 1e-12
     end
 end
 

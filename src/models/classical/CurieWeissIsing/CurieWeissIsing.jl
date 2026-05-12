@@ -85,24 +85,25 @@ end
 # Newton solver for the self-consistency equation m = tanh(βJ m).
 # Returns the nontrivial positive root for βJ > 1 and 0 for βJ ≤ 1
 # (paramagnetic phase).
-function _curie_weiss_solve_m(βJ::Real; tol::Real=1e-14, maxiter::Int=200)
+function _curie_weiss_solve_m(βJ::Real; tol::Real=1e-14, maxiter::Int=400)
     if βJ ≤ 1
         return 0.0
     end
-    # Initial guess: Landau expansion near T_c gives
-    #   m² ≈ 3 (βJ - 1) / (βJ)³  ⇒  m₀ ≈ √(3 (βJ - 1)) / (βJ)^{3/2}.
-    m = sqrt(3 * (βJ - 1)) / βJ^1.5
-    m = clamp(m, 1e-12, 1.0 - 1e-15)
+    # Fixed-point iteration m_{n+1} = tanh(βJ m_n).  At the stable
+    # non-trivial root the map's derivative is βJ (1 - tanh²(βJ m*)) < 1,
+    # so the iteration converges geometrically.  The trivial m = 0
+    # root has derivative βJ > 1 (repulsive for βJ > 1), so any strictly
+    # positive seed escapes it monotonically.  The earlier Newton+clamp
+    # variant overshot to the negative-m basin deep in the ordered phase
+    # (β ≫ 1/J) and snapped to the trivial 0 root.
+    #
+    # Seed: Landau leading-order m₀ ≈ √(3(βJ-1))/(βJ)^{3/2}, lifted to
+    # `tanh(βJ/2)` for βJ ≫ 1 so a single fixed-point step lands inside
+    # the contractive neighbourhood of m*.
+    m_landau = sqrt(3 * (βJ - 1)) / βJ^1.5
+    m = clamp(max(m_landau, tanh(βJ * 0.5)), 1e-12, 1.0 - 1e-15)
     for _ in 1:maxiter
-        s = tanh(βJ * m)
-        # f(m) = tanh(βJ m) - m,  f'(m) = βJ (1 - s²) - 1.
-        f = s - m
-        fp = βJ * (1 - s^2) - 1
-        # Near βJ → 1 from above, fp → 0; protect against degenerate step.
-        if abs(fp) < 1e-300
-            break
-        end
-        m_new = clamp(m - f / fp, 0.0, 1.0)
+        m_new = tanh(βJ * m)
         if abs(m_new - m) ≤ tol * max(1.0, abs(m_new))
             return m_new
         end

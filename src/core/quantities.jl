@@ -361,6 +361,22 @@ the inverse mass gap (`ξ = 1/(2|h - J|)`).
 struct CorrelationLength <: AbstractQuantity end
 
 """
+    StringOrderParameter() <: AbstractQuantity
+
+Kennedy-Tasaki non-local (string) order parameter
+
+    O_str = lim_{|i-j| -> infty} -<S^z_i exp[i pi sum_{i<k<j} S^z_k] S^z_j>
+
+for S=1 chains.  Detects the hidden Z_2 x Z_2 symmetry breaking that
+defines the Haldane phase (T. Kennedy and H. Tasaki, Phys. Rev. B **45**,
+304 (1992)).  At the AKLT point the closed-form value is O_str = 4/9
+(AKLT 1988), making it the canonical analytic test bed for any
+implementation that aims to detect topologically non-trivial gapped
+phases of integer-spin chains.
+"""
+struct StringOrderParameter <: AbstractQuantity end
+
+"""
     LuttingerParameter() <: AbstractQuantity
 
 Luttinger liquid parameter `K`.  Meaningful for critical 1D models

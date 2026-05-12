@@ -24,6 +24,7 @@ export TightBindingSpectrum
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
 export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
+export AKLT1D                                            # spin-1 BLBQ at AKLT point
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -45,6 +46,7 @@ export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
+export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
 export GGEValue                                          # quench long-time wrapper
@@ -97,6 +99,8 @@ include("models/quantum/Heisenberg/Heisenberg.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_observables.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_registry.jl")
+include("models/quantum/AKLT/AKLT1D.jl")
+include("models/quantum/AKLT/AKLT1D_registry.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")

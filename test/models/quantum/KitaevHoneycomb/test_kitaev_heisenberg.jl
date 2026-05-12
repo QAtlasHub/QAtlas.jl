@@ -3,7 +3,6 @@
 #
 # Verifies:
 #   * K-only isotropic point: MassGap = 0 (gapless Kitaev B-phase)
-#   * Anisotropic Kx >> Ky+Kz reduction: delegates correctly, gap > 0
 #   * J ≠ 0 raises DomainError (Phase 2 marker)
 #   * Γ ≠ 0 raises DomainError (Phase 2 marker)
 # ─────────────────────────────────────────────────────────────────────────────

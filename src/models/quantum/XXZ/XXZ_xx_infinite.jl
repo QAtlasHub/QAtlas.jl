@@ -208,9 +208,11 @@ function fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite; kwargs...)
         return _xxz1d_energy_heisenberg_af(J)
     elseif isapprox(Δ, -1.0; atol=1e-12)
         return _xxz1d_energy_heisenberg_fm(J)
+    elseif -1.0 < Δ < 1.0
+        return _xxz1d_energy_yang_yang(J, Δ)
     else
-        @warn "XXZ1D Energy: general-Δ Bethe ansatz not yet implemented; " *
-            "only Δ ∈ {-1, 0, 1} are exposed in this release." Δ = Δ
+        @warn "XXZ1D Energy: gapped regime |Δ| > 1 not yet implemented; " *
+            "use OBC dense ED at small N for a finite-size reference." Δ = Δ
         return NaN
     end
 end

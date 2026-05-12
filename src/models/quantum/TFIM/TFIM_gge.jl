@@ -60,7 +60,7 @@ using QuadGK: quadgk
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    _tfim_two_theta(k, J, h) -> Float64
+    _tfim_gge_two_theta(k, J, h) -> Float64
 
 The Bogoliubov double-angle `2 θ_k(h)` of the TFIM at momentum `k`,
 
@@ -70,7 +70,7 @@ The atan2 form keeps the angle on the principal branch through
 the critical point `h = J` and through `k = 0, π`, which a naive
 `atan(J sin k / (h - J cos k))` misses (the denominator changes sign).
 """
-@inline function _tfim_two_theta(k::Real, J::Real, h::Real)
+@inline function _tfim_gge_two_theta(k::Real, J::Real, h::Real)
     return atan(J * sin(k), h - J * cos(k))
 end
 
@@ -86,7 +86,7 @@ two-argument `atan` (atan2) for branch safety; we then divide by 2
 inside `sin` to get `θ_k(h0) − θ_k(hf)`.
 """
 @inline function _tfim_gge_occupation(k::Real, J::Real, h0::Real, hf::Real)
-    Δ = _tfim_two_theta(k, J, h0) - _tfim_two_theta(k, J, hf)
+    Δ = _tfim_gge_two_theta(k, J, h0) - _tfim_gge_two_theta(k, J, hf)
     return sin(Δ / 2)^2
 end
 

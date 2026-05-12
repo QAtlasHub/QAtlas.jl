@@ -13,7 +13,8 @@
 using QAtlas, Test
 
 @testset "ShastrySutherland — exact dimer E0/N = -3J'/8" begin
-    for Jp in (1.0, 2.0, 0.5), J in (0.0, 0.1, 0.3, 0.6, 0.675)
+    for Jp in (1.0, 2.0, 0.5), α in (0.0, 0.1, 0.3, 0.6, 0.675)
+        J = α * Jp
         m = ShastrySutherland(; J=J, Jp=Jp)
         E0 = QAtlas.fetch(m, Energy(:per_site), Infinite())
         @test E0 ≈ -3 * Jp / 8 atol = 1e-14

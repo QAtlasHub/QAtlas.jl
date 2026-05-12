@@ -501,6 +501,62 @@ here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
 
+# ─── Quench dynamics: Loschmidt echo / DQPT rate function ──────────────
+
+"""
+    LoschmidtEcho{M}() <: AbstractQuantity
+    LoschmidtEcho(:amplitude)
+    LoschmidtEcho(:rate)
+    LoschmidtRateFunction()        # alias for LoschmidtEcho{:rate}
+
+Loschmidt-echo family for sudden-quench dynamics.  After preparing
+`|ψ_0⟩` as the ground state of an "initial" model `H_0` and quenching to
+the "final" model `H_f` (passed as the first positional argument to
+`fetch`), the Loschmidt amplitude is
+
+    G(t) = ⟨ψ_0 | e^{-i H_f t} | ψ_0⟩,
+
+with the Loschmidt echo `L(t) = |G(t)|² ∈ [0, 1]` and the rate function
+
+    λ(t) = -log L(t) / N         (finite N)
+    λ(t) = -lim_{N→∞} log L(t)/N (thermodynamic limit / Infinite)
+
+Non-analytic cusps in `λ(t)` are dynamical quantum phase transitions
+(DQPT).  See Heyl, Polkovnikov, Kehrein, PRL 110, 135704 (2013) and the
+review Heyl, Rep. Prog. Phys. 81, 054001 (2018).
+
+The mode `M::Symbol ∈ (:amplitude, :rate)` is a phantom type parameter
+so that `:amplitude` (returns `L(t)`) and `:rate` (returns `λ(t)`)
+dispatch separately.  The convenience alias
+[`LoschmidtRateFunction`](@ref) is the only flavour defined for
+`Infinite`, since the `:amplitude` itself is identically zero in the
+thermodynamic limit (extensive cumulants).
+
+The pre-quench Hamiltonian is passed via the `initial` keyword on
+`fetch`, e.g.
+
+    fetch(TFIM(J=1.0, h=0.5), LoschmidtRateFunction(), Infinite();
+          initial=TFIM(J=1.0, h=2.0), t=1.0)
+"""
+struct LoschmidtEcho{M} <: AbstractQuantity
+    function LoschmidtEcho{M}() where {M}
+        M isa Symbol || error("LoschmidtEcho mode must be a Symbol, got $(typeof(M))")
+        M in (:amplitude, :rate) ||
+            error("unknown LoschmidtEcho mode :$M; expected :amplitude or :rate")
+        return new{M}()
+    end
+end
+LoschmidtEcho() = LoschmidtEcho{:rate}()
+LoschmidtEcho(m::Symbol) = LoschmidtEcho{m}()
+
+"""
+    const LoschmidtRateFunction = LoschmidtEcho{:rate}
+
+Convenience alias for the rate-function flavour
+`λ(t) = -log L(t)/N`.  See [`LoschmidtEcho`](@ref).
+"""
+const LoschmidtRateFunction = LoschmidtEcho{:rate}
+
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
 # `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,
 # `GrowthExponents`) are currently defined in their respective model /

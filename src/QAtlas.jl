@@ -51,6 +51,7 @@ export CentralCharge, LuttingerParameter, CorrelationLength
 export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
+export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper
 
 # --- TFIM Infinite dynamic helpers ---
@@ -100,6 +101,7 @@ include("models/quantum/TFIM/TFIM_sigma_x_quench.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
 include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
 include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
+include("models/quantum/TFIM/TFIM_loschmidt.jl")
 include("models/quantum/TFIM/TFIM_gge.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")

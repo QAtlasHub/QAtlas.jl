@@ -136,7 +136,7 @@
 # ── Site-resolved local observables ───────────────────────────────────
 @register(
     XXZ1D,
-    MagnetizationXLocal,
+    MagnetizationXLocal{:equilibrium},
     OBC,
     method=:dense_ed,
     reliability=:high,

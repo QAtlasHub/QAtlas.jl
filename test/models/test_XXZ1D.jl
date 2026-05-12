@@ -34,15 +34,29 @@ end
     @test e_gs ≈ e_af
 end
 
-@testset "XXZ1D — Energy outside the three canonical Δ is NaN + warning" begin
-    # The general-Δ Bethe-ansatz integral is deferred; for now XXZ1D
-    # advertises only Δ ∈ {-1, 0, 1} and returns NaN + a warning elsewhere.
-    for Δ in (-0.5, 0.3, 0.7, 1.5, 2.0)
-        e = @test_logs (:warn, r"general-Δ") QAtlas.fetch(
-            XXZ1D(; J=1.0, Δ=Δ), Energy(), Infinite()
-        )
-        @test isnan(e)
-    end
+@testset "XXZ1D — Energy at general -1 < Δ < 1 (Yang-Yang single integral)" begin
+    # Yang-Yang single-integral form, evaluated by QuadGK.  Validation
+    # touches the rational γ = π/3 point Δ = 1/2 where the literature
+    # value is the elementary -3/8 (Yang-Yang II 1966), and a sweep of
+    # generic γ across the interior of the gapless interval.
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.5), Energy(), Infinite()) ≈ -3 / 8 atol = 1e-10
+    @test QAtlas.fetch(XXZ1D(; J=2.5, Δ=0.5), Energy(), Infinite()) ≈ -2.5 * 3 / 8 atol =
+        1e-10
+
+    # Smooth, monotone decreasing in Δ across (-1, 1) — more antiferro-
+    # magnetic order means lower energy density.  Sample at non-canonical
+    # points to exercise the integral branch end-to-end.
+    Δs = -0.9:0.1:0.9
+    es = [QAtlas.fetch(XXZ1D(; J=1, Δ=Δ), Energy(), Infinite()) for Δ in Δs]
+    @test all(isfinite, es)
+    @test all(diff(es) .< 0)
+
+    # Boundary continuity: e₀ at Δ = ±0.99 sits between the Δ = ±1 closed
+    # forms and the central XX value, with the right sign.
+    e_near_p = QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.99), Energy(), Infinite())
+    @test (0.25 - log(2.0)) ≤ e_near_p ≤ -1 / π
+    e_near_m = QAtlas.fetch(XXZ1D(; J=1.0, Δ=-0.99), Energy(), Infinite())
+    @test -1 / π ≤ e_near_m ≤ -0.25
 end
 
 @testset "XXZ1D — Luttinger parameter K" begin
@@ -115,14 +129,18 @@ end
         1e-12
 end
 
-@testset "XXZ1D — gapped regime is NaN (general-Δ deferred)" begin
-    # |Δ| > 1: gapped; NaN + warning.  This is the same branch as the
-    # generic-Δ path above (single deferred-implementation warning);
-    # the test spells it out for documentation value.
-    e = @test_logs (:warn, r"general-Δ") QAtlas.fetch(
-        XXZ1D(; J=1.0, Δ=2.0), Energy(), Infinite()
-    )
-    @test isnan(e)
+@testset "XXZ1D — gapped regime |Δ| > 1 is NaN (Orbach series deferred)" begin
+    # |Δ| > 1 (Néel-like AF for Δ > 1, Ising-like FM for Δ < -1) is the
+    # gapped regime; the Bethe ansatz takes a different series form
+    # (Orbach 1958 / Walker 1959 / Yang-Yang III 1966) which is not yet
+    # implemented.  The closed-form path warns and returns NaN there;
+    # callers can use OBC dense ED for a finite-N reference.
+    for Δ in (-2.0, -1.5, 1.5, 2.0)
+        e = @test_logs (:warn, r"gapped regime") QAtlas.fetch(
+            XXZ1D(; J=1.0, Δ=Δ), Energy(), Infinite()
+        )
+        @test isnan(e)
+    end
 end
 
 @testset "XXZ1D — legacy Symbol dispatch routes to new API" begin

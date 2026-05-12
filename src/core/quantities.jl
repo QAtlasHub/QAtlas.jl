@@ -612,6 +612,7 @@ struct LoschmidtEcho{M} <: AbstractQuantity
 end
 LoschmidtEcho() = LoschmidtEcho{:rate}()
 LoschmidtEcho(m::Symbol) = LoschmidtEcho{m}()
+LoschmidtEcho(; mode::Symbol=:rate) = LoschmidtEcho{mode}()
 
 """
     const LoschmidtRateFunction = LoschmidtEcho{:rate}

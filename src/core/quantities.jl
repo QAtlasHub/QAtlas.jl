@@ -636,6 +636,38 @@ function fetch(model::AbstractQAtlasModel, ::Energy{:total}, bc::Union{OBC,PBC};
     return fetch(model, Energy{:per_site}(), bc; kwargs...) * _bc_size(bc, kwargs)
 end
 
+# ─── Charge / spin gaps (correlated electron systems) ──────────────────
+
+"""
+    ChargeGap() <: AbstractQuantity
+
+Charge (Mott) gap of an electron system,
+
+    Δ_c = E₀(N+1) + E₀(N-1) - 2 E₀(N),
+
+i.e. the energy cost of adding a particle plus the cost of removing
+one, equivalent to the gap between the half-filled ground state and
+the lowest charged excitation.  Strictly positive in a Mott insulator
+and exactly zero in a metal / superconductor.
+
+Implemented analytically for [](@ref) at half filling via
+the Lieb–Wu (1968) closed-form integral.
+"""
+struct ChargeGap <: AbstractQuantity end
+
+"""
+    SpinGap() <: AbstractQuantity
+
+Spin gap of an electron system,
+
+    Δ_s = E₀(S^z = 1) - E₀(S^z = 0),
+
+i.e. the lowest excitation energy at fixed total particle number that
+flips one spin.  Zero whenever the spinon branch is gapless (e.g. the
+half-filled 1D Hubbard chain — rigorous Lieb–Wu result), positive in a
+spin-gapped phase (Haldane chain, BCS superconductor, …).
+"""
+struct SpinGap <: AbstractQuantity end
 # ─── Quench / nonequilibrium long-time ensembles ────────────────────────
 
 """

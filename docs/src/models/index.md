@@ -13,4 +13,5 @@ Hamiltonian, all stored results with derivations and references, the
 - [Quantum Models](quantum/index.md)
   - [Transverse-Field Ising Model](quantum/tfim.md)
   - [Heisenberg Chain](quantum/heisenberg.md)
+  - [Hubbard1D Chain](quantum/hubbard1d.md)
   - [Tight-Binding Models](quantum/tightbinding/index.md)

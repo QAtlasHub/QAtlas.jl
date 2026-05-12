@@ -23,6 +23,7 @@ export TightBindingSpectrum
 # backward-compat top-level alias for `Honeycomb` (see src/deprecate/)
 # since the name does not collide with anything in Lattice2D.
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
+export Hubbard1D                                         # Lieb-Wu Bethe ansatz half-filling
 export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
@@ -42,6 +43,8 @@ export Implementation, implementation_status, implementation_status_markdown
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
+export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
+export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
@@ -127,6 +130,8 @@ include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_xx_quench.jl")  # XX (Δ=0) Loschmidt rate at Infinite (issue #148)
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
+include("models/quantum/Hubbard1D/Hubbard1D.jl")
+include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY for Hubbard1D
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
 include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
 

@@ -11,6 +11,7 @@ export SixVertex
 export IsingTriangular
 export CurieWeissIsing                                   # complete-graph mean-field Ising
 export IsingChain1D                                      # 1-D Ising chain (Ising 1925)
+export SpinIce                                           # pyrochlore Pauling 1935
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -106,6 +107,8 @@ include("models/classical/CurieWeissIsing/CurieWeissIsing.jl")
 include("models/classical/CurieWeissIsing/CurieWeissIsing_registry.jl")  # populates REGISTRY for CurieWeissIsing (#262)
 include("models/classical/IsingChain1D/IsingChain1D.jl")
 include("models/classical/IsingChain1D/IsingChain1D_registry.jl")        # populates REGISTRY for IsingChain1D (#262)
+include("models/classical/SpinIce/SpinIce.jl")
+include("models/classical/SpinIce/SpinIce_registry.jl")                  # populates REGISTRY for SpinIce (#257)
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

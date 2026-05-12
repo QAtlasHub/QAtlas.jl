@@ -23,9 +23,8 @@ end
 @testset "ShastrySutherland — independence of J inside dimer window" begin
     Jp = 1.0
     vals = [
-        QAtlas.fetch(
-            ShastrySutherland(; J=J, Jp=Jp), Energy(:per_site), Infinite()
-        ) for J in (0.0, 0.2, 0.4, 0.65)
+        QAtlas.fetch(ShastrySutherland(; J=J, Jp=Jp), Energy(:per_site), Infinite()) for
+        J in (0.0, 0.2, 0.4, 0.65)
     ]
     @test all(v -> isapprox(v, -3 / 8, atol=1e-14), vals)
 end

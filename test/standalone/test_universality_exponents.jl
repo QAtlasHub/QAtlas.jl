@@ -171,3 +171,37 @@ end
     @test 0.85 < e.ν < 0.90
     @test e.β_err > 0
 end
+
+# ═══════════════ KPZ higher dimensions (numerical) ════════════════════════════
+
+@testset "Universality: KPZ 2+1D (Pagnani–Parisi 2015 numerical)" begin
+    e = QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=2)
+    # Pagnani & Parisi, PRE 92, 010101(R) (2015)
+    @test 0.235 < e.β_growth < 0.245
+    @test 0.385 < e.α_rough < 0.400
+    @test 1.600 < e.z < 1.625
+    @test e.β_growth_err > 0
+    @test e.α_rough_err > 0
+    @test e.z_err > 0
+    # Galilean invariance α + z = 2 should hold within combined error.
+    # Use a generous 3 σ to absorb correlated estimation bias.
+    @test abs(e.α_rough + e.z - 2) < 3 * (e.α_rough_err + e.z_err)
+end
+
+@testset "Universality: KPZ 3+1D (Kelling–Ódor 2011 numerical)" begin
+    e = QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=3)
+    # Kelling & Ódor, PRE 84, 061150 (2011)
+    @test 0.16 < e.β_growth < 0.20
+    @test 0.29 < e.α_rough < 0.33
+    @test 1.49 < e.z < 1.53
+    @test e.β_growth_err > 0
+    # Note: Galilean invariance is NOT satisfied within quoted errors at d=3
+    # (α + z ≈ 1.82 vs 2.0).  This reflects open issues in the d≥3 KPZ
+    # literature; the stored values are best-numerical estimates, not a
+    # rigorous reference.  Therefore: no α + z = 2 assertion here.
+end
+
+@testset "Universality: KPZ d≥4 errors" begin
+    @test_throws ErrorException QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=4)
+    @test_throws ErrorException QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=5)
+end

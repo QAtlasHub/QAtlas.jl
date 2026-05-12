@@ -52,6 +52,7 @@ makedocs(;
                 "Heisenberg" => "models/quantum/heisenberg.md",
                 "Majumdar-Ghosh" => "models/quantum/majumdar_ghosh.md",
                 "XXZ" => "models/quantum/xxz.md",
+                "Hubbard1D" => "models/quantum/hubbard1d.md",
                 "Kitaev Honeycomb" => "models/quantum/kitaev-honeycomb.md",
                 "Kitaev1D" => "models/quantum/kitaev1d.md",
                 "Tight-Binding" => [
@@ -108,6 +109,7 @@ makedocs(;
             "Lieb Flat Band" => "calc/bloch-lieb-flat-band.md",
             "Calabrese-Cardy OBC/PBC" => "calc/calabrese-cardy-obc-vs-pbc.md",
             "TFIM Entanglement (Peschel)" => "calc/tfim-entanglement-peschel.md",
+            "TFIM Loschmidt + DQPT" => "calc/tfim-loschmidt.md",
             "TFIM GGE Quench" => "calc/tfim-gge.md",
             "AD from ln Z" => "calc/ad-thermodynamics-from-z.md",
             "Scaling Relations" => "calc/ising-scaling-relations.md",

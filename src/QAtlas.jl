@@ -7,6 +7,7 @@ export fetch
 
 # --- Classical Models ---
 export IsingSquare, PartitionFunction, CriticalTemperature, SpontaneousMagnetization
+export SixVertex
 export IsingTriangular
 
 # --- Quantum Models ---
@@ -23,6 +24,7 @@ export TightBindingSpectrum
 # backward-compat top-level alias for `Honeycomb` (see src/deprecate/)
 # since the name does not collide with anything in Lattice2D.
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
+export Hubbard1D                                         # Lieb-Wu Bethe ansatz half-filling
 export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
@@ -39,7 +41,11 @@ include("core/dense_ed.jl")
 export Implementation, implementation_status, implementation_status_markdown
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
+export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
+export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
+export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
+export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
@@ -47,10 +53,12 @@ export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
+export ConformalWeights, PrimaryFields
 export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export E8Spectrum
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
+export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper
 
 # --- TFIM Infinite dynamic helpers ---
@@ -63,6 +71,7 @@ export heisenberg_spinon_dispersion,
 # --- Universality Classes ---
 export Universality, CriticalExponents, GrowthExponents
 export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
+export MinimalModel, WZWSU2       # 2D rational-CFT dispatch tags
 include("universalities/Universality.jl")
 include("universalities/E8.jl")
 include("universalities/MeanField.jl")
@@ -71,6 +80,8 @@ include("universalities/KPZ.jl")
 include("universalities/Percolation.jl")
 include("universalities/Potts.jl")
 include("universalities/ONModel.jl")
+include("universalities/MinimalModel.jl")
+include("universalities/WZW.jl")
 include("universalities/CardyEntanglement.jl")
 
 # --- Models ---
@@ -81,6 +92,8 @@ include("universalities/CardyEntanglement.jl")
 include("models/classical/IsingSquare/IsingSquare.jl")
 include("models/classical/IsingSquare/IsingSquare_thermal.jl")
 include("models/classical/IsingSquare/IsingSquare_registry.jl")
+include("models/classical/SixVertex/SixVertex.jl")
+include("models/classical/SixVertex/SixVertex_registry.jl")
 include("models/classical/IsingTriangular/IsingTriangular.jl")
 include("models/classical/IsingTriangular/IsingTriangular_registry.jl")
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
@@ -100,6 +113,7 @@ include("models/quantum/TFIM/TFIM_sigma_x_quench.jl")
 include("models/quantum/TFIM/TFIM_entanglement.jl")
 include("models/quantum/TFIM/TFIM_cft_entanglement.jl")
 include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
+include("models/quantum/TFIM/TFIM_loschmidt.jl")
 include("models/quantum/TFIM/TFIM_gge.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
@@ -117,8 +131,12 @@ include("models/quantum/Kitaev1D/Kitaev1D_registry.jl")  # populates REGISTRY fo
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used by XXZ.jl dispatch
 include("models/quantum/XXZ/XXZ_thermal.jl")
+include("models/quantum/XXZ/XXZ_xx_infinite.jl")
+include("models/quantum/XXZ/XXZ_xx_quench.jl")  # XX (Δ=0) Loschmidt rate at Infinite (issue #148)
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
+include("models/quantum/Hubbard1D/Hubbard1D.jl")
+include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY for Hubbard1D
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
 include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
 

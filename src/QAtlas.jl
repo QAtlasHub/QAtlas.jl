@@ -62,6 +62,7 @@ include("universalities/KPZ.jl")
 include("universalities/Percolation.jl")
 include("universalities/Potts.jl")
 include("universalities/ONModel.jl")
+include("universalities/CardyEntanglement.jl")
 
 # --- Models ---
 # Layout: `<class>/<Model>/<Model>.jl` (with optional sibling axis files like

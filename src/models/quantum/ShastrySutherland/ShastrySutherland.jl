@@ -35,6 +35,11 @@
 #   - H. Kageyama et al., Phys. Rev. Lett. 82, 3168 (1999) — material.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Exact-dimer phase boundary alpha_c = J/J' below which the singlet-product
+# state is the exact ground state.  Numerical value 0.675(5) from Koga-Kawakami
+# (PRL 84, 4461, 2000); later series-expansion / iPEPS work (Corboz-Mila 2013;
+# Boos-Toldin 2019) refines this within the same band.  Revisit if a tighter
+# bound becomes the community consensus.
 const _SS_DIMER_PHASE_ALPHA_CRIT = 0.675
 
 """

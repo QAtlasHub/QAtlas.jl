@@ -9,6 +9,15 @@
 # where the couplings `J_ij` are i.i.d. Gaussian with mean 0 and
 # variance `J²` (units of `J = 1` are the textbook convention).
 #
+# Equivalent normalisations: writing the same Hamiltonian as
+#     H = -sum_{i<j} J_hat_ij sigma_i sigma_j,   J_hat_ij ~ N(0, J^2 / N)
+# (variance scales as 1/N, no explicit 1/sqrt(N) prefactor) gives the
+# same physics: the cavity-field variance at site i remains O(J^2) and
+# the spin-glass transition still sits at T_c = J.  The two conventions
+# differ only in whether the 1/sqrt(N) is absorbed into J_ij or kept in
+# the Hamiltonian; the textbook (SK 1975) uses the explicit prefactor
+# we follow here.
+#
 # At zero field the model has a continuous spin-glass transition at
 #
 #     T_c = J            (Sherrington-Kirkpatrick 1975)

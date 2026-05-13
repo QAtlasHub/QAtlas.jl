@@ -65,7 +65,8 @@ struct TTbar <: AbstractQAtlasModel
     c::Float64       # UV CFT central charge (preserved under TT̄)
     λ::Float64       # TT̄ coupling, dimension (length)²
     function TTbar(c::Real, λ::Real)
-        c > 0 || throw(DomainError(c, "TTbar requires UV central charge c > 0; got c = $c."))
+        c > 0 ||
+            throw(DomainError(c, "TTbar requires UV central charge c > 0; got c = $c."))
         # λ may be any real; positive λ is the "Hagedorn-like" branch,
         # negative λ is the "good-sign" branch.
         return new(Float64(c), Float64(λ))

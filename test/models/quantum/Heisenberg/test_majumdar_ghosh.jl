@@ -114,7 +114,7 @@ using Logging: with_logger, NullLogger
         for J in (0.5, 1.0, 3.0)
             m = MajumdarGhosh(; J=J)
             @test QAtlas.fetch(m, SpinGap(), Infinite()) ≈
-                  QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
+                QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
         end
     end
 end

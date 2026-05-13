@@ -67,7 +67,7 @@ function fetch(m::S1XXZ1D, ::MassGap, ::Infinite; J::Real=m.J, Δ::Real=m.Δ, kw
             DomainError(
                 Δ,
                 "S1XXZ1D MassGap: closed-form Haldane gap supported only at Δ = 1 " *
-                "(spin-1 Heisenberg, White 1992 DMRG). Δ ≠ 1 traverses XY1/large-Δ Néel " *
+                "(spin-1 Heisenberg, White-Huse 1993 DMRG). Δ ≠ 1 traverses XY1/large-Δ Néel " *
                 "phase diagram (Schulz 1986; Tzeng-Yang-Hsu 2017) — deferred to Phase 2. " *
                 "Got Δ = $Δ.",
             ),

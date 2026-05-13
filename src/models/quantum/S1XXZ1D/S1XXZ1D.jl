@@ -62,7 +62,7 @@ and a `DomainError` is raised — Phase 2 will plug in DMRG / TLL.
 """
 function fetch(m::S1XXZ1D, ::MassGap, ::Infinite; J::Real=m.J, Δ::Real=m.Δ, kwargs...)
     J > 0 || throw(DomainError(J, "S1XXZ1D MassGap requires J > 0; got J = $J."))
-    if !isapprox(Δ, 1.0; atol=1e-12)
+    if !isone(Δ)
         throw(
             DomainError(
                 Δ,

@@ -3,7 +3,7 @@ using QAtlas, Test
 @testset "S1XXZ1D — Δ=1 delegate to S1Heisenberg1D (Phase 1)" begin
     Δ_gap = QAtlas.fetch(S1XXZ1D(; J=1.0, Δ=1.0), MassGap(), Infinite())
     @test Δ_gap > 0
-    @test isapprox(Δ_gap, 0.41048; atol=1e-4)  # White 1992 DMRG Haldane gap
+    @test isapprox(Δ_gap, 0.41048; atol=1e-4)  # White-Huse 1993 DMRG Haldane gap (PRB 48, 3844)
     # Delegation invariant
     @test Δ_gap ≈ QAtlas.fetch(S1Heisenberg1D(; J=1.0), MassGap(), Infinite())
     # Linear in J

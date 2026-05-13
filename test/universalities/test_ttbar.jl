@@ -19,3 +19,10 @@ end
     m = TTbar(; c=1.0)
     @test_throws DomainError QAtlas.fetch(m, CentralCharge(), Infinite(); c=0.0)
 end
+
+@testset "TTbar — third-pass: c(λ) invariance scan at fixed seed c=1/2" begin
+    # Pick Ising-seed c = 1/2 and verify return is the seed across many λ.
+    for λ in (-100.0, -1.0, -1e-12, 0.0, 1e-12, 1.0, 100.0)
+        @test QAtlas.fetch(TTbar(; c=0.5, λ=λ), CentralCharge(), Infinite()) == 0.5
+    end
+end

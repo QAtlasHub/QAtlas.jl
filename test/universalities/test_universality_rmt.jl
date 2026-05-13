@@ -157,7 +157,7 @@ end
     # Default τ = Inf, ensemble = :GUE → plateau K = 1.
     @test QAtlas.fetch(Universality(:RMT), SpectralFormFactor()) == 1.0
     # Plateau holds for any τ ≥ 2π (Heisenberg time τ_H).
-    for τ in (2π, 2π + 1e-9, 10.0, 100.0, Inf)
+    for τ in (2π, 2π + 1e-9, 10π, 100π, Inf)
         @test QAtlas.fetch(Universality(:RMT), SpectralFormFactor(); τ=τ) == 1.0
     end
     # Explicit :GUE keyword behaves identically.

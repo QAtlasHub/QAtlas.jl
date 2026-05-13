@@ -18,8 +18,11 @@
 #
 #   e₀ / N = 0     (exact, J-independent)
 #
-# A rigorous bulk gap survives in the thermodynamic limit; the best
-# numerical lower bound (Garcia-Saez-Murg-Wei 2013; Pomata-Wei 2020) is
+# The bulk gap is conjectured to remain open in the thermodynamic limit,
+# supported by rigorous finite-size lower bounds (Pomata-Wei 2020;
+# Lemm-Sandvik-Wang 2020) — no strict TD-limit proof is known for the
+# bare honeycomb AKLT model. The best numerical lower bound
+# (Garcia-Saez-Murg-Wei 2013; Pomata-Wei 2020) is
 #
 #   Δ_2D-AKLT / J ≈ 0.10   (variational / DMRG; not in Phase 1).
 #

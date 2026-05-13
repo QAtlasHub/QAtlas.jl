@@ -11,7 +11,7 @@
 #   • MassGap at Infinite — gapless interior, exact closed form on the
 #     insulating side, t-scaling check.
 #   • FermiVelocity at Infinite — v_F = 2t at half-filling, √3 at μ = 1,
-#     t-linearity, DomainError in the gapped phase.
+#     t-linearity, returns 0 in the gapped phase (|μ| ≥ 2t).
 #   • Constructor — rejects t ≤ 0 with DomainError.
 # ─────────────────────────────────────────────────────────────────────────────
 

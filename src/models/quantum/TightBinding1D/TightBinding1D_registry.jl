@@ -34,5 +34,5 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
     references=["Ashcroft-Mermin 1976"],
-    notes="v_F = 2t sin(k_F) = 2t√(1 - μ²/(4t²)); DomainError outside |μ|<2t (no Fermi surface).",
+    notes="v_F = 2t sin(k_F) = 2t√(1 - μ²/(4t²)); returns 0 in gapped phase |μ| ≥ 2t (no Fermi surface; convention).",
 )

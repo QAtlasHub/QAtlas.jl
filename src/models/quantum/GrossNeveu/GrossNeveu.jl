@@ -19,11 +19,11 @@
 # Andrei-Lowenstein (1979) solved the model exactly by the Bethe
 # ansatz.
 #
-# This Phase-1 entry registers only the **UV free-fermion central
-# charge** `c = N` at `g = 0`.  The Andrei-Lowenstein exact S-matrix
-# and the renormalisation-scheme-dependent dynamical mass require
-# dedicated `SMatrix` / `BetaFunction` quantity types and are
-# tracked as Phase 2.
+# Phase 1 registered the **UV free-fermion central charge** `c = N`
+# at `g = 0`.  Phase 2 (#247) adds the large-N dynamical mass
+# `m_F = Λ exp(-π/(N g²))` (Gross-Neveu 1974) via `MassGap`.
+# The Andrei-Lowenstein exact S-matrix and full RG-flow handling for
+# `CentralCharge` at `g ≠ 0` remain tracked as Phase 3.
 #
 # References:
 #   - D. J. Gross, A. Neveu, Phys. Rev. D 10, 3235 (1974).
@@ -37,15 +37,17 @@
 (equivalently `O(2N)` Majorana symmetry) and four-fermion coupling
 `g ∈ ℝ`.  Asymptotically free for `N ≥ 1`.
 
-Phase 1 registers only the **UV free-fermion central charge** at
-`g = 0`.  Dynamical mass generation, the Andrei-Lowenstein exact
-S-matrix and the chiral condensate are tracked as Phase 2.
+Phase 1 registered the **UV free-fermion central charge** at
+`g = 0`.  Phase 2 (#247) adds the large-N dynamical mass
+`m_F = Λ exp(-π/(N g²))` via `MassGap`.  Andrei-Lowenstein exact
+S-matrix and the chiral condensate remain tracked as Phase 3.
 
 Quantities registered:
 
 | Quantity                       | BC         | Method                                |
 | ------------------------------ | ---------- | ------------------------------------- |
 | [`CentralCharge`](@ref)        | `Infinite` | analytic (`c = N` at the free point)  |
+| [`MassGap`](@ref)              | `Infinite` | analytic (`Λ exp(-π/(N g²))`, large-N)|
 
 # References
 

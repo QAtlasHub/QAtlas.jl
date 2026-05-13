@@ -103,6 +103,8 @@ using Logging: with_logger, NullLogger
 
     @testset "MajumdarGhosh — SpinGap rejects J ≤ 0 (Phase 2)" begin
         @test_throws DomainError QAtlas.fetch(MajumdarGhosh(), SpinGap(), Infinite(); J=0.0)
-        @test_throws DomainError QAtlas.fetch(MajumdarGhosh(), SpinGap(), Infinite(); J=-1.5)
+        @test_throws DomainError QAtlas.fetch(
+            MajumdarGhosh(), SpinGap(), Infinite(); J=-1.5
+        )
     end
 end

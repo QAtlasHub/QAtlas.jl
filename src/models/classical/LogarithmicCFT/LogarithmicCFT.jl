@@ -25,7 +25,6 @@ are deferred to Phase 2.
 """
 struct LogarithmicCFT <: AbstractQAtlasModel end
 
-
 """
     fetch(::LogarithmicCFT, ::CentralCharge, ::Infinite; kwargs...) -> Rational{Int}
 

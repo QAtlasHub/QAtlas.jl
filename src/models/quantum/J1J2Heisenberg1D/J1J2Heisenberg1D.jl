@@ -78,8 +78,7 @@ struct J1J2Heisenberg1D <: AbstractQAtlasModel
     J2::Float64
     function J1J2Heisenberg1D(J1::Real, J2::Real)
         J1 > 0 || throw(DomainError(J1, "J1J2Heisenberg1D requires J1 > 0; got J1 = $J1."))
-        J2 ≥ 0 ||
-            throw(DomainError(J2, "J1J2Heisenberg1D requires J2 ≥ 0; got J2 = $J2."))
+        J2 ≥ 0 || throw(DomainError(J2, "J1J2Heisenberg1D requires J2 ≥ 0; got J2 = $J2."))
         return new(Float64(J1), Float64(J2))
     end
 end
@@ -140,12 +139,10 @@ function fetch(
     J2::Real=m.J2,
     kwargs...,
 )
-    J1 > 0 || throw(
-        DomainError(J1, "J1J2Heisenberg1D Energy requires J1 > 0; got J1 = $J1.")
-    )
-    J2 ≥ 0 || throw(
-        DomainError(J2, "J1J2Heisenberg1D Energy requires J2 ≥ 0; got J2 = $J2.")
-    )
+    J1 > 0 ||
+        throw(DomainError(J1, "J1J2Heisenberg1D Energy requires J1 > 0; got J1 = $J1."))
+    J2 ≥ 0 ||
+        throw(DomainError(J2, "J1J2Heisenberg1D Energy requires J2 ≥ 0; got J2 = $J2."))
     j = J2 / J1
     if isapprox(j, 0.0; atol=1e-12)
         # j = 0 → pure Heisenberg.  Heisenberg1D exposes the Bethe-Hulthén

@@ -18,7 +18,7 @@ using QAtlas, Test
     @test QAtlas.fetch(PpIp2DSC(; Δ₀=2.0, μ=3.0), CentralCharge(), Infinite()) == 1 // 2
     # Cross-check: chiral Majorana edge CFT = Ising boundary CFT = MinimalModel(4, 3)
     @test QAtlas.fetch(PpIp2DSC(), CentralCharge(), Infinite()) ==
-          QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
+        QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
 end
 
 @testset "PpIp2DSC — TopologicalInvariant C = 1 (Phase 1)" begin

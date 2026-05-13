@@ -3,7 +3,7 @@
 #
 # Verifies:
 #   * Central charge exactly 6//7 (Rational, machine-precision agreement).
-#   * Result equals MinimalModel(6, 7)'s c (delegation invariant).
+#   * Result equals MinimalModel(7, 6)'s c (delegation invariant).
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
@@ -13,8 +13,8 @@ using QAtlas, Test
     @test c == 6 // 7
 end
 
-@testset "TricriticalPotts3 — equals MinimalModel(6, 7)" begin
+@testset "TricriticalPotts3 — equals MinimalModel(7, 6)" begin
     c_tp = QAtlas.fetch(TricriticalPotts3(), CentralCharge(), Infinite())
-    c_mm = QAtlas.fetch(QAtlas.MinimalModel(6, 7), CentralCharge(), Infinite())
+    c_mm = QAtlas.fetch(QAtlas.MinimalModel(7, 6), CentralCharge(), Infinite())
     @test c_tp == c_mm
 end

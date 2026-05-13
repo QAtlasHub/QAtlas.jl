@@ -106,12 +106,7 @@ neither phase boundary has a closed-form expression in `D/J`.
 - Y.-D. Tzeng, H.-H. Hung, Y.-C. Chen, M.-F. Yang, *Phys. Rev. B* **96**, 205104 (2017).
 """
 function fetch(
-    m::S1AnisotropicD1D,
-    ::MassGap,
-    ::Infinite;
-    J::Real=m.J,
-    D::Real=m.D,
-    kwargs...,
+    m::S1AnisotropicD1D, ::MassGap, ::Infinite; J::Real=m.J, D::Real=m.D, kwargs...
 )
     J > 0 || throw(DomainError(J, "S1AnisotropicD1D MassGap requires J > 0; got J = $J."))
     isapprox(D, 0.0; atol=1e-12) || throw(

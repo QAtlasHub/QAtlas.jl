@@ -66,16 +66,21 @@ struct ConformalBootstrap <: AbstractQAtlasModel end
 # ConformalWeights — Δ_σ, Δ_ε bootstrap reference values (KPSD 2014).
 # ═══════════════════════════════════════════════════════════════════════════════
 
-function fetch(::ConformalBootstrap, ::ConformalWeights, ::Infinite;
-               field::Symbol=:σ, kwargs...)
+function fetch(
+    ::ConformalBootstrap, ::ConformalWeights, ::Infinite; field::Symbol=:σ, kwargs...
+)
     if field == :σ
         return 0.51814894
     elseif field == :ε
         return 1.41262528
     else
-        throw(DomainError(field,
-            "ConformalBootstrap ConformalWeights: Phase 1 exposes only field=:σ (spin) " *
-            "and field=:ε (energy). Higher-spin and stress-tensor multiplets " *
-            "(Simmons-Duffin 2017) deferred to Phase 2. Got field=:$field."))
+        throw(
+            DomainError(
+                field,
+                "ConformalBootstrap ConformalWeights: Phase 1 exposes only field=:σ (spin) " *
+                "and field=:ε (energy). Higher-spin and stress-tensor multiplets " *
+                "(Simmons-Duffin 2017) deferred to Phase 2. Got field=:$field.",
+            ),
+        )
     end
 end

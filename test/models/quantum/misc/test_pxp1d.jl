@@ -13,10 +13,10 @@ using QAtlas, Test
 
 @testset "PXP1D — Energy{:per_site} reference value (Phase 1)" begin
     e0 = QAtlas.fetch(PXP1D(), Energy{:per_site}(), Infinite())
-    @test e0 ≈ -0.6516
+    @test isapprox(e0, -0.6516; atol=1e-4)  # literature precision -0.6516(2)
     @test e0 < 0
     # Linear in Ω
-    @test QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()) ≈ 2.5 * (-0.6516)
+    @test isapprox(QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()), 2.5 * (-0.6516); atol=2.5e-4)
 end
 
 @testset "PXP1D — rejects Ω ≤ 0 (Phase 1)" begin

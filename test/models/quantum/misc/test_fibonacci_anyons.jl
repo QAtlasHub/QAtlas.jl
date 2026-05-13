@@ -6,6 +6,8 @@ using QAtlas, Test
     @test γ ≈ 0.5 * log(2 + MathConstants.golden)
     # Numerical value (φ ≈ 1.6180, 2+φ ≈ 3.6180, log = 1.2862..., ÷ 2 ≈ 0.6431)
     @test γ ≈ 0.6429653906 atol=1e-9
+    # Cross-check against direct literal-sqrt formula (independent of MathConstants.golden)
+    @test γ ≈ 0.5 * log(2 + (1 + sqrt(5)) / 2) atol=1e-15
     # Equivalently γ = log √(1 + φ²) and log √(φ+2)
     φ = MathConstants.golden
     @test γ ≈ log(sqrt(1 + φ^2))

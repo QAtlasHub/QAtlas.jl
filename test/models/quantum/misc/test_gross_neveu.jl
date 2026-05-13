@@ -33,6 +33,10 @@ end
     # Linear in Λ
     @test QAtlas.fetch(GrossNeveu(; N=2, g=1.5), MassGap(), Infinite(); Λ=3.0) ≈
         3 * QAtlas.fetch(GrossNeveu(; N=2, g=1.5), MassGap(), Infinite(); Λ=1.0)
+    # Weak-coupling limit: g → 0⁺ ⇒ m_F → 0⁺ (essential singularity at g=0; dimensional transmutation).
+    @test QAtlas.fetch(GrossNeveu(; N=1, g=0.1), MassGap(), Infinite(); Λ=1.0) < 1e-100
+    # g=0.05 ⇒ exp(-π/0.0025) ≈ exp(-1256) which underflows to 0.0 exactly.
+    @test QAtlas.fetch(GrossNeveu(; N=1, g=0.05), MassGap(), Infinite(); Λ=1.0) == 0.0
 end
 
 @testset "GrossNeveu — MassGap rejects Λ, g, N out of domain (Phase 2)" begin

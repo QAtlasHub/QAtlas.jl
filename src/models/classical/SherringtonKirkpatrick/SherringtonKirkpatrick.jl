@@ -142,13 +142,9 @@ numerical value is mathematically established and known to 7 digits.
 - M. Talagrand, *Annals Math.* **163**, 221 (2006).
 """
 function fetch(
-    m::SherringtonKirkpatrick, ::Energy{:per_site}, ::Infinite;
-    J::Real=m.J, kwargs...,
+    m::SherringtonKirkpatrick, ::Energy{:per_site}, ::Infinite; J::Real=m.J, kwargs...
 )
-    J > 0 || throw(
-        DomainError(
-            J, "SherringtonKirkpatrick Energy requires J > 0; got J = $J."
-        ),
-    )
+    J > 0 ||
+        throw(DomainError(J, "SherringtonKirkpatrick Energy requires J > 0; got J = $J."))
     return J * _SK_PARISI_T0_ENERGY_DENSITY_PER_J
 end

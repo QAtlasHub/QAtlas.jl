@@ -20,10 +20,6 @@
     method=:variational_reference,
     reliability=:high,
     tested_in="test/models/classical/test_sherrington_kirkpatrick.jl",
-    references=[
-        "Parisi 1980",
-        "Crisanti-Rizzo 2002",
-        "Talagrand 2006",
-    ],
+    references=["Parisi 1980", "Crisanti-Rizzo 2002", "Talagrand 2006"],
     notes="e_0/J ≈ -0.7631667 (Crisanti-Rizzo 2002 high-precision Parisi full-RSB).",
 )

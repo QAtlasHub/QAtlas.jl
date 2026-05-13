@@ -160,7 +160,7 @@ ground-state scenario.  In the Kitaev-Preskill (2006) / Levin-Wen
     S(ρ_A) = α |∂A| − γ + O(|∂A|⁻¹),
 
 with `γ = log 𝒟` and total quantum dimension `𝒟 = √(Σ_a d_a²) = 2`
-for Z₂ topological order (four Abelian anyons `{1, e, m, ε}`, each
+for Z₂ topological order (four Abelian anyons `{1, e, m, ψ}`, each
 with `d_a = 1`).
 
 Reliability is `:medium` — the value is the Z₂ topological prediction

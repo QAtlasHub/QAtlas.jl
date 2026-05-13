@@ -81,7 +81,7 @@ the V = 0 limit (delegated Lieb–Wu) — the V ≠ 0 phase diagram is
 deferred to Phase 2.
 """
 function _extended_hubbard1d_check_v_zero(model::ExtendedHubbard1D)
-    if !isapprox(model.V, 0.0; atol=1e-12)
+    if !iszero(model.V)
         throw(
             DomainError(
                 model.V,

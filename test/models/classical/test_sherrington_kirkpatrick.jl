@@ -13,8 +13,10 @@ using QAtlas, Test
 end
 
 @testset "SherringtonKirkpatrick — J ≤ 0 returns 0" begin
-    @test QAtlas.fetch(SherringtonKirkpatrick(; J=0.0), CriticalTemperature(), Infinite()) ==
-        0.0
-    @test QAtlas.fetch(SherringtonKirkpatrick(; J=-1.5), CriticalTemperature(), Infinite()) ==
-        0.0
+    @test QAtlas.fetch(
+        SherringtonKirkpatrick(; J=0.0), CriticalTemperature(), Infinite()
+    ) == 0.0
+    @test QAtlas.fetch(
+        SherringtonKirkpatrick(; J=-1.5), CriticalTemperature(), Infinite()
+    ) == 0.0
 end

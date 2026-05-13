@@ -102,11 +102,7 @@ confirm with cylindrical DMRG).  Returned as `J × (-0.4386)`.
 - S. Yan, D. A. Huse, S. R. White, *Science* **332**, 1173 (2011).
 """
 function fetch(
-    m::KagomeHeisenbergAFM,
-    ::Energy{:per_site},
-    ::Infinite;
-    J::Real=m.J,
-    kwargs...,
+    m::KagomeHeisenbergAFM, ::Energy{:per_site}, ::Infinite; J::Real=m.J, kwargs...
 )
     J ≥ 0 || throw(
         DomainError(
@@ -143,8 +139,7 @@ upper bound; reliability is therefore `:medium`.
 function fetch(m::KagomeHeisenbergAFM, ::MassGap, ::Infinite; J::Real=m.J, kwargs...)
     J ≥ 0 || throw(
         DomainError(
-            J,
-            "KagomeHeisenbergAFM MassGap requires J ≥ 0 (AF convention); got J = $J.",
+            J, "KagomeHeisenbergAFM MassGap requires J ≥ 0 (AF convention); got J = $J."
         ),
     )
     return J * _KAGOME_AFM_SPIN_GAP_PER_J

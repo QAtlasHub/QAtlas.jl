@@ -12,9 +12,8 @@ using QAtlas, Test
         (5, 5, 5, big(2)^27),
     )
     for (Lx, Ly, Lz, expected) in cases
-        @test QAtlas.fetch(
-            XCube(), GroundStateDegeneracy(), PBC(); Lx=Lx, Ly=Ly, Lz=Lz
-        ) == expected
+        @test QAtlas.fetch(XCube(), GroundStateDegeneracy(), PBC(); Lx=Lx, Ly=Ly, Lz=Lz) ==
+            expected
     end
 end
 

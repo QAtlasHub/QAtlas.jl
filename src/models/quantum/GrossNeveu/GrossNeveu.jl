@@ -56,9 +56,8 @@ struct GrossNeveu <: AbstractQAtlasModel
     N::Int
     g::Float64
     function GrossNeveu(N::Integer, g::Real)
-        N ≥ 1 || throw(
-            DomainError(N, "GrossNeveu requires N ≥ 1 Dirac flavours; got N = $N."),
-        )
+        N ≥ 1 ||
+            throw(DomainError(N, "GrossNeveu requires N ≥ 1 Dirac flavours; got N = $N."))
         return new(Int(N), Float64(g))
     end
 end
@@ -86,12 +85,7 @@ non-zero coupling, deferring the RG-flow case to Phase 2.
 - D. J. Gross, A. Neveu, *Phys. Rev. D* **10**, 3235 (1974).
 """
 function fetch(
-    m::GrossNeveu,
-    ::CentralCharge,
-    ::Infinite;
-    N::Integer=m.N,
-    g::Real=m.g,
-    kwargs...,
+    m::GrossNeveu, ::CentralCharge, ::Infinite; N::Integer=m.N, g::Real=m.g, kwargs...
 )
     iszero(g) || throw(
         DomainError(

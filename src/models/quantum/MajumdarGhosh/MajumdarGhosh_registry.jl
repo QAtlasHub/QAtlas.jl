@@ -37,3 +37,14 @@
     references=["Shastry-Sutherland 1981", "White-Affleck 1996"],
     notes="method=:lower_bound → J/4 (Shastry-Sutherland); :numerical → 0.234 J (White-Affleck DMRG).",
 )
+
+@register(
+    MajumdarGhosh,
+    SpinGap,
+    Infinite,
+    method=:dmrg_reference,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
+    references=["White-Affleck 1996", "Eggert 1996"],
+    notes="Δ ≈ 0.234 J DMRG; Shastry-Sutherland 1981 bound Δ ≥ J/4 is trimer-sector only.",
+)

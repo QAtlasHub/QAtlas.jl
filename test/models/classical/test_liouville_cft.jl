@@ -46,9 +46,8 @@ end
 
 @testset "LiouvilleCFT — ConformalWeights identity (α = 0 ⇒ Δ = 0)" begin
     for b in (0.5, 1.0, 2.0, 3.7)
-        @test QAtlas.fetch(
-            LiouvilleCFT(; b=b), ConformalWeights(), Infinite(); α=0.0
-        ) ≈ 0.0 atol = 1e-14
+        @test QAtlas.fetch(LiouvilleCFT(; b=b), ConformalWeights(), Infinite(); α=0.0) ≈ 0.0 atol =
+            1e-14
     end
 end
 

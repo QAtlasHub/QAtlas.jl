@@ -177,6 +177,8 @@ the precise spin-liquid character is an open question.
 - H.-C. Jiang, Z. Wang, L. Balents, *Nature Phys.* **8**, 902 (2012).
 - S. Yan, D. A. Huse, S. R. White, *Science* **332**, 1173 (2011).
 """
-function fetch(::KagomeHeisenbergAFM, ::TopologicalEntanglementEntropy, ::Infinite; kwargs...)
+function fetch(
+    ::KagomeHeisenbergAFM, ::TopologicalEntanglementEntropy, ::Infinite; kwargs...
+)
     return log(2.0)
 end

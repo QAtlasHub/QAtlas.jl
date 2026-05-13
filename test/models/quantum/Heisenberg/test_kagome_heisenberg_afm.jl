@@ -31,5 +31,7 @@ end
     γ = QAtlas.fetch(KagomeHeisenbergAFM(), TopologicalEntanglementEntropy(), Infinite())
     @test γ ≈ log(2.0)
     # J-independence: γ is topological, not energy-scale-dependent
-    @test γ == QAtlas.fetch(KagomeHeisenbergAFM(; J=3.7), TopologicalEntanglementEntropy(), Infinite())
+    @test γ == QAtlas.fetch(
+        KagomeHeisenbergAFM(; J=3.7), TopologicalEntanglementEntropy(), Infinite()
+    )
 end

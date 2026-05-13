@@ -51,11 +51,11 @@ Quantities registered (Phase 1):
 
 | Quantity              | BC         | Method                                  |
 | --------------------- | ---------- | --------------------------------------- |
-| [`MassGap`](@ref)     | `Infinite` | analytic, α = Inf NN XX limit (Pfeuty)  |
+| [`MassGap`](@ref)     | `Infinite` | analytic, α = Inf NN XX limit (LSM)     |
 
 Phase 1 exposes only the `α = Inf` nearest-neighbour XX-in-transverse-field
-limit, whose mass gap is the closed form `Δ = 2·max(0, |h| - 2J)` (Pfeuty
-1970, isotropic XX limit of the XY chain).  Finite `α` raises
+limit, whose mass gap is the closed form `Δ = 2·max(0, |h| - 2J)`
+(Lieb-Schultz-Mattis 1961, isotropic XX limit of the XY chain; Pfeuty 1970 for the TFIM-context derivation).  Finite `α` raises
 `DomainError` pending the Phase 2 DMRG follow-up (Maghrebi-Gong-Gorshkov
 2017 for the XY chain power-law family).
 
@@ -79,7 +79,7 @@ end
 LongRangeXY1D(; J::Real=1.0, h::Real=0.0, α::Real=Inf) = LongRangeXY1D(J, h, α)
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Mass gap — α = ∞ NN XX-in-transverse-field closed form (Pfeuty 1970)
+# Mass gap — α = ∞ NN XX-in-transverse-field closed form (Lieb-Schultz-Mattis 1961; Pfeuty 1970 TFIM context)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
@@ -121,6 +121,6 @@ function fetch(
             ),
         )
     end
-    # α = ∞: nearest-neighbour XX in transverse field, JW closed form (Pfeuty 1970)
+    # α = ∞: nearest-neighbour XX in transverse field, JW closed form (Lieb-Schultz-Mattis 1961; Pfeuty 1970 TFIM context)
     return 2 * max(0.0, abs(h) - 2J)
 end

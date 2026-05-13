@@ -333,7 +333,8 @@ This is the `Δ → 1` limit of the XXZ Luttinger parameter
 - F. D. M. Haldane, *Phys. Rev. Lett.* **45**, 1358 (1980).
 """
 function fetch(::Heisenberg1D, ::LuttingerParameter, ::Infinite; J::Real=1.0, kwargs...)
-    J > 0 || throw(DomainError(J, "Heisenberg1D LuttingerParameter requires J > 0; got J = $J."))
+    J > 0 ||
+        throw(DomainError(J, "Heisenberg1D LuttingerParameter requires J > 0; got J = $J."))
     # Delegate to XXZ1D at Δ=1 — K is J-independent (only depends on Δ)
     return fetch(XXZ1D(; Δ=1.0), LuttingerParameter(), Infinite())
 end

@@ -67,7 +67,7 @@ end
     @test QAtlas.fetch(m, LuttingerParameter(), Infinite()) ≈ 0.5 atol = 1e-12
     # Delegation invariant: same value as XXZ1D(Δ=1) directly
     @test QAtlas.fetch(m, LuttingerParameter(), Infinite()) ≈
-          QAtlas.fetch(QAtlas.XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite()) atol =
+        QAtlas.fetch(QAtlas.XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite()) atol =
         1e-12
 end
 

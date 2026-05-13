@@ -101,7 +101,7 @@ universality and are deferred to Phase 2 — these calls raise
 - A. Honecker, M. Picco, P. Pujol, *Phys. Rev. Lett.* **87**, 047201 (2001).
 """
 function fetch(m::RandomBondIsing2D, ::CentralCharge, ::Infinite; p::Real=m.p, kwargs...)
-    if isapprox(p, 1.0; atol=1e-12)
+    if p == 1
         # Pure ferromagnetic critical line: 2D Ising universality.
         return QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
     elseif p ≥ 0 && p ≤ 1

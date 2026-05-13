@@ -31,3 +31,13 @@ end
     @test_throws DomainError RandomBondIsing2D(; p=-0.1)
     @test_throws DomainError RandomBondIsing2D(; p=1.5)
 end
+
+@testset "RandomBondIsing2D — strict p==1 boundary (no isapprox slack)" begin
+    # p = 1 - 1e-13 is NOT the pure FM critical line; must throw Phase-2 DomainError
+    @test_throws DomainError QAtlas.fetch(
+        RandomBondIsing2D(; p=1 - 1e-13), CentralCharge(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        RandomBondIsing2D(; p=prevfloat(1.0)), CentralCharge(), Infinite()
+    )
+end

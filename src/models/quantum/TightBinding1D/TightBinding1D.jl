@@ -86,8 +86,7 @@ struct TightBinding1D <: AbstractQAtlasModel
     t::Float64
     μ::Float64
     function TightBinding1D(t::Real, μ::Real)
-        t > 0 || throw(DomainError(t,
-            "TightBinding1D requires hopping t > 0; got t = $t."))
+        t > 0 || throw(DomainError(t, "TightBinding1D requires hopping t > 0; got t = $t."))
         return new(Float64(t), Float64(μ))
     end
 end
@@ -114,11 +113,9 @@ Ground-state energy per site in the thermodynamic limit:
 with `t > 0` enforced (DomainError otherwise).
 """
 function fetch(
-    m::TightBinding1D, ::Energy{:per_site}, ::Infinite;
-    t::Real=m.t, μ::Real=m.μ, kwargs...,
+    m::TightBinding1D, ::Energy{:per_site}, ::Infinite; t::Real=m.t, μ::Real=m.μ, kwargs...
 )
-    t > 0 || throw(DomainError(t,
-        "TightBinding1D Energy requires t > 0; got t = $t."))
+    t > 0 || throw(DomainError(t, "TightBinding1D Energy requires t > 0; got t = $t."))
     if μ ≤ -2t
         return 0.0                                 # empty band
     elseif μ ≥ 2t
@@ -146,11 +143,9 @@ band insulator for `|μ| > 2t`.  At `|μ| = 2t` the band edge touches
 the chemical potential exactly (Lifshitz transition), Δ = 0.
 """
 function fetch(
-    m::TightBinding1D, ::MassGap, ::Infinite;
-    t::Real=m.t, μ::Real=m.μ, kwargs...,
+    m::TightBinding1D, ::MassGap, ::Infinite; t::Real=m.t, μ::Real=m.μ, kwargs...
 )
-    t > 0 || throw(DomainError(t,
-        "TightBinding1D MassGap requires t > 0; got t = $t."))
+    t > 0 || throw(DomainError(t, "TightBinding1D MassGap requires t > 0; got t = $t."))
     return max(0.0, abs(float(μ)) - 2 * float(t))
 end
 
@@ -170,16 +165,19 @@ with `k_F = arccos(-μ/(2t))`.  Raises `DomainError` for `|μ| ≥ 2t`
 (no Fermi surface — use [`MassGap`](@ref) for the insulating regime).
 """
 function fetch(
-    m::TightBinding1D, ::FermiVelocity, ::Infinite;
-    t::Real=m.t, μ::Real=m.μ, kwargs...,
+    m::TightBinding1D, ::FermiVelocity, ::Infinite; t::Real=m.t, μ::Real=m.μ, kwargs...
 )
-    t > 0 || throw(DomainError(t,
-        "TightBinding1D FermiVelocity requires t > 0; got t = $t."))
+    t > 0 ||
+        throw(DomainError(t, "TightBinding1D FermiVelocity requires t > 0; got t = $t."))
     if abs(float(μ)) ≥ 2 * float(t)
-        throw(DomainError(μ,
-            "TightBinding1D FermiVelocity: no Fermi surface in insulating " *
-            "regime |μ| ≥ 2t (got μ = $μ, t = $t).  " *
-            "Use `MassGap` for the gapped phase instead."))
+        throw(
+            DomainError(
+                μ,
+                "TightBinding1D FermiVelocity: no Fermi surface in insulating " *
+                "regime |μ| ≥ 2t (got μ = $μ, t = $t).  " *
+                "Use `MassGap` for the gapped phase instead.",
+            ),
+        )
     end
     return 2 * float(t) * sqrt(1 - (float(μ))^2 / (4 * float(t)^2))
 end

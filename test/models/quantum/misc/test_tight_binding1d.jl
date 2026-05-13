@@ -16,13 +16,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
-using QAtlas:
-    TightBinding1D,
-    Energy,
-    MassGap,
-    FermiVelocity,
-    Infinite,
-    fetch
+using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, Infinite, fetch
 
 @testset "TightBinding1D" begin
 
@@ -32,9 +26,8 @@ using QAtlas:
         @test QAtlas.fetch(TightBinding1D(), Energy{:per_site}(), Infinite()) ≈ -2 / π
 
         # Linear in t at fixed μ/t: t = 3, μ = 0 → E/N = -6/π.
-        @test QAtlas.fetch(
-            TightBinding1D(; t=3.0), Energy{:per_site}(), Infinite()
-        ) ≈ -6 / π
+        @test QAtlas.fetch(TightBinding1D(; t=3.0), Energy{:per_site}(), Infinite()) ≈
+            -6 / π
 
         # Band-edge limits.  At μ = -2t the partial-filling integral collapses
         # smoothly to 0 (empty band); at μ = +2t to -μ (full band).
@@ -82,14 +75,11 @@ using QAtlas:
     @testset "FermiVelocity — v_F = 2t √(1 - μ²/(4t²))" begin
         # Half-filling: k_F = π/2, sin(k_F) = 1 → v_F = 2t.
         @test QAtlas.fetch(TightBinding1D(), FermiVelocity(), Infinite()) ≈ 2.0
-        @test QAtlas.fetch(
-            TightBinding1D(; t=3.0), FermiVelocity(), Infinite()
-        ) ≈ 6.0
+        @test QAtlas.fetch(TightBinding1D(; t=3.0), FermiVelocity(), Infinite()) ≈ 6.0
 
         # μ = 1, t = 1: sin(2π/3) = √3/2 → v_F = √3.
-        @test QAtlas.fetch(
-            TightBinding1D(; t=1.0, μ=1.0), FermiVelocity(), Infinite()
-        ) ≈ sqrt(3)
+        @test QAtlas.fetch(TightBinding1D(; t=1.0, μ=1.0), FermiVelocity(), Infinite()) ≈
+            sqrt(3)
 
         # No Fermi surface in the insulating regime — both signs of μ.
         @test_throws DomainError QAtlas.fetch(

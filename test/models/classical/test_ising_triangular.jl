@@ -113,6 +113,8 @@ end
     @test exp.α + 2 * exp.β + exp.γ == 2
     @test exp.γ == exp.β * (exp.δ - 1)
     @test exp.η == 2 - exp.γ // exp.ν
-    # Universality check: matches IsingSquare critical exponents (after #346 lands)
-    # — both are in the 2D Ising universality class.
+    # Universality check: matches IsingSquare critical exponents via the
+    # shared Universality(:Ising) delegation — both are in the 2D Ising
+    # universality class.  Direct IsingSquare cross-check enabled after #346 lands.
+    @test exp.β == QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2).β
 end

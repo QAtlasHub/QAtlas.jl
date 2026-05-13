@@ -19,6 +19,9 @@ using QAtlas, Test
     # Delegation invariant: identical payload as the universality entry.
     @test exp == QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
 
+    # Explicit central charge of the universality class — c = 1/2 (Onsager).
+    @test QAtlas.fetch(QAtlas.Universality(:Ising), CentralCharge(); d=2) == 1 // 2
+
     # Hyperscaling relations
     @test exp.α + 2 * exp.β + exp.γ == 2          # Rushbrooke
     @test exp.γ == exp.β * (exp.δ - 1)            # Widom

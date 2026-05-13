@@ -61,7 +61,7 @@ Quantities registered (Phase 1, all closed-form):
 | ------------------------------ | ---------- | ---------------------------------------- |
 | [`Energy`](@ref)`{:per_site}`  | `Infinite` | partial-filling integral / band edges    |
 | [`MassGap`](@ref)              | `Infinite` | `max(0, |μ| - 2t)`                       |
-| [`FermiVelocity`](@ref)        | `Infinite` | `2t √(1 - μ²/(4t²))` for `|μ| < 2t`      |
+| [`FermiVelocity`](@ref)        | `Infinite` | `2t √(1 - μ²/(4t²))` for `|μ| < 2t`, else 0 |
 
 # Examples
 
@@ -161,8 +161,9 @@ Fermi velocity in the metallic regime (`|μ| < 2t`):
 
     v_F = |∂ε/∂k|_{k_F} = 2t sin(k_F) = 2t √(1 - μ²/(4t²)),
 
-with `k_F = arccos(-μ/(2t))`.  Raises `DomainError` for `|μ| ≥ 2t`
-(no Fermi surface — use [`MassGap`](@ref) for the insulating regime).
+with `k_F = arccos(-μ/(2t))`.  In the gapped phase (`|μ| ≥ 2t`)
+there is no Fermi surface and `v_F = 0` is returned by convention
+(see [`MassGap`](@ref) for the insulating regime).
 """
 function fetch(
     m::TightBinding1D, ::FermiVelocity, ::Infinite; t::Real=m.t, μ::Real=m.μ, kwargs...
@@ -170,14 +171,8 @@ function fetch(
     t > 0 ||
         throw(DomainError(t, "TightBinding1D FermiVelocity requires t > 0; got t = $t."))
     if abs(float(μ)) ≥ 2 * float(t)
-        throw(
-            DomainError(
-                μ,
-                "TightBinding1D FermiVelocity: no Fermi surface in insulating " *
-                "regime |μ| ≥ 2t (got μ = $μ, t = $t).  " *
-                "Use `MassGap` for the gapped phase instead.",
-            ),
-        )
+        # Gapped phase: no Fermi surface, v_F = 0 by convention.
+        return 0.0
     end
     return 2 * float(t) * sqrt(1 - (float(μ))^2 / (4 * float(t)^2))
 end

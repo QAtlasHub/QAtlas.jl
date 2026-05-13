@@ -81,13 +81,14 @@ using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, Infinite, fetch
         @test QAtlas.fetch(TightBinding1D(; t=1.0, μ=1.0), FermiVelocity(), Infinite()) ≈
             sqrt(3)
 
-        # No Fermi surface in the insulating regime — both signs of μ.
-        @test_throws DomainError QAtlas.fetch(
+        # No Fermi surface in the insulating regime — both signs of μ
+        # return 0 by convention (gapped phase).
+        @test QAtlas.fetch(
             TightBinding1D(; t=1.0, μ=2.5), FermiVelocity(), Infinite()
-        )
-        @test_throws DomainError QAtlas.fetch(
+        ) == 0.0
+        @test QAtlas.fetch(
             TightBinding1D(; t=1.0, μ=-3.0), FermiVelocity(), Infinite()
-        )
+        ) == 0.0
     end
 
     # ────────────────────────── Constructor validation ─────────────────────────

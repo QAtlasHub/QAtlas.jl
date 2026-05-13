@@ -22,9 +22,7 @@ using QAtlas, Test
     # Delegation invariant: MixedFieldIsing1D at h_z = 0 matches TFIM directly.
     # TFIM stores (J, h) in struct fields, so the call signature is
     # `fetch(TFIM(; J, h=h_x), MassGap(), Infinite())`.
-    Δ_mf = QAtlas.fetch(
-        MixedFieldIsing1D(; J=1.5, h_x=0.7, h_z=0.0), MassGap(), Infinite()
-    )
+    Δ_mf = QAtlas.fetch(MixedFieldIsing1D(; J=1.5, h_x=0.7, h_z=0.0), MassGap(), Infinite())
     Δ_tfim = QAtlas.fetch(TFIM(; J=1.5, h=0.7), MassGap(), Infinite())
     @test Δ_mf ≈ Δ_tfim
     # Default constructor sits on the Phase-1 point (J = h_x = 1, h_z = 0; QCP)

@@ -49,8 +49,9 @@ struct MixedFieldIsing1D <: AbstractQAtlasModel
         return new(Float64(J), Float64(h_x), Float64(h_z))
     end
 end
-MixedFieldIsing1D(; J::Real=1.0, h_x::Real=1.0, h_z::Real=0.0) =
+function MixedFieldIsing1D(; J::Real=1.0, h_x::Real=1.0, h_z::Real=0.0)
     MixedFieldIsing1D(J, h_x, h_z)
+end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # MassGap, Infinite — Phase 1: delegate at h_z = 0, DomainError otherwise.
@@ -81,8 +82,7 @@ function fetch(
     h_z::Real=m.h_z,
     kwargs...,
 )
-    J > 0 ||
-        throw(DomainError(J, "MixedFieldIsing1D MassGap requires J > 0; got J = $J."))
+    J > 0 || throw(DomainError(J, "MixedFieldIsing1D MassGap requires J > 0; got J = $J."))
     if !isapprox(h_z, 0.0; atol=1e-12)
         throw(
             DomainError(

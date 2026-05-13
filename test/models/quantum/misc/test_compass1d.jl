@@ -25,3 +25,14 @@ end
     @test_throws DomainError Compass1D(; J_x=-1.0)
     @test_throws DomainError Compass1D(; J_y=0.0)
 end
+
+@testset "Compass1D — swap symmetry: Δ(J_x, J_y) == Δ(J_y, J_x)" begin
+    # True cross-check that the gap is |J_x − J_y| (symmetric in the
+    # exchange of the two bond types), not an asymmetric subtraction.
+    for (a, b) in ((1.0, 0.3), (0.7, 2.4), (1.5, 1.5), (0.01, 100.0))
+        Δ_ab = QAtlas.fetch(Compass1D(; J_x=a, J_y=b), MassGap(), Infinite())
+        Δ_ba = QAtlas.fetch(Compass1D(; J_x=b, J_y=a), MassGap(), Infinite())
+        @test Δ_ab == Δ_ba
+        @test Δ_ab == 2.0 * abs(a - b)
+    end
+end

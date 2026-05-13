@@ -213,7 +213,7 @@ universality class in the large-`N` thermodynamic limit, with
 QAtlas Phase 1 (issue #243) exposes only the GUE ensemble in the
 **late-time plateau** regime `τ ≥ 2π`, where the disorder-averaged
 SFF saturates universally to `K(τ→∞) = 1` (Mehta 2004 §16;
-Cotler-Hartman-Maldacena 2016, arXiv:1611.04650).
+Cotler et al. 2017, arXiv:1611.04650).
 
 The Mehta connection formula
 `K(τ) = (τ/(2π)) − (τ/(4π)) log|1 − τ/(2π)|`

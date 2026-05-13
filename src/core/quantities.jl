@@ -931,7 +931,7 @@ struct ChiralCondensate <: AbstractQuantity end
 Disorder-averaged spectral form factor
 `K(t) = ⟨|Σ_n e^{−iE_n t}|²⟩ / Z²`
 — the canonical late-time quantum-chaology diagnostic
-(Mehta 2004 §16; Cotler-Hartman-Maldacena 2016).
+(Mehta 2004 §16; Cotler et al. 2017).
 
 For GUE random-matrix-theory eigenvalues in the large-`N`
 thermodynamic limit, with rescaled time `τ = t / N`, the
@@ -951,7 +951,8 @@ sigma-model closed forms (Mehta 2004 §16) are deferred to Phase 2.
 # References
 - M. L. Mehta, *Random Matrices*, 3rd ed., Elsevier (2004), §16.
 - E. Brézin, S. Hikami, *Phys. Rev. E* **55**, 4067 (1997).
-- J. S. Cotler, A. Hartman, J. Maldacena et al., *JHEP* **05**, 118
-  (2017), arXiv:1611.04650 — ramp-plateau picture.
+- J. S. Cotler, G. Gur-Ari, M. Hanada, J. Polchinski, P. Saad,
+  S. H. Shenker, D. Stanford, A. Streicher, M. Tezuka,
+  *JHEP* **05**, 118 (2017), arXiv:1611.04650 — ramp-plateau picture.
 """
 struct SpectralFormFactor <: AbstractQuantity end

@@ -32,7 +32,7 @@ end
     # Delegation invariant: matches MinimalModel(7, 6) exactly
     for (r, s) in [(1, 1), (1, 2), (2, 1), (2, 2), (3, 3), (5, 6)]
         @test QAtlas.fetch(m, ConformalWeights(); r=r, s=s) ==
-              QAtlas.fetch(QAtlas.MinimalModel(7, 6), ConformalWeights(); r=r, s=s)
+            QAtlas.fetch(QAtlas.MinimalModel(7, 6), ConformalWeights(); r=r, s=s)
     end
 end
 

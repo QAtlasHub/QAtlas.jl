@@ -160,7 +160,7 @@ function fetch(
     Jz::Real=m.Jz,
     kwargs...,
 )
-    if !(isapprox(Jx, Jy; atol=1e-12) && isapprox(Jy, Jz; atol=1e-12))
+    if !(Jx == Jy == Jz)
         throw(
             DomainError(
                 (Jx, Jy, Jz),

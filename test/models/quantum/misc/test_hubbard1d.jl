@@ -121,4 +121,12 @@ end
     @test_throws DomainError QAtlas.fetch(
         Hubbard1D(; U=-1.0), LuttingerParameter(), Infinite()
     )
+    # Regression: strict iszero(U) — tiny non-zero U must NOT silently return K=1
+    # (K(U) is not analytic-equal to 1 for any U ≠ 0; Lieb-Wu integrals required).
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=1e-13), LuttingerParameter(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=-1e-13), LuttingerParameter(), Infinite()
+    )
 end

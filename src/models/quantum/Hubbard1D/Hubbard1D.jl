@@ -254,7 +254,7 @@ function fetch(
 )
     t > 0 ||
         throw(DomainError(t, "Hubbard1D LuttingerParameter requires t > 0; got t = $t."))
-    if !isapprox(U, 0.0; atol=1e-12)
+    if !iszero(U)
         throw(
             DomainError(
                 U,

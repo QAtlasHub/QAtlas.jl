@@ -12,3 +12,18 @@
     references=["Sherrington-Kirkpatrick 1975"],
     notes="T_c = J in 1/√N normalisation with J_ij ~ N(0, J²); 0 for J ≤ 0.",
 )
+
+@register(
+    SherringtonKirkpatrick,
+    Energy{:per_site},
+    Infinite,
+    method=:variational_reference,
+    reliability=:high,
+    tested_in="test/models/classical/test_sherrington_kirkpatrick.jl",
+    references=[
+        "Parisi 1980",
+        "Crisanti-Rizzo 2002",
+        "Talagrand 2006",
+    ],
+    notes="e_0/J ≈ -0.7631667 (Crisanti-Rizzo 2002 high-precision Parisi full-RSB).",
+)

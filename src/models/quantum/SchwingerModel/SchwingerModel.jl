@@ -120,14 +120,9 @@ Lagrangian is chirally symmetric, but the axial U(1) anomaly forces
 - S. Coleman, R. Jackiw, L. Susskind, *Annals Phys.* **93**, 267 (1975).
 """
 function fetch(
-    model::SchwingerModel,
-    ::ChiralCondensate,
-    ::Infinite;
-    e::Real=model.e,
-    kwargs...,
+    model::SchwingerModel, ::ChiralCondensate, ::Infinite; e::Real=model.e, kwargs...
 )
-    e > 0 || throw(
-        DomainError(e, "SchwingerModel ChiralCondensate requires e > 0; got e = $e."),
-    )
+    e > 0 ||
+        throw(DomainError(e, "SchwingerModel ChiralCondensate requires e > 0; got e = $e."))
     return -exp(MathConstants.eulergamma) * e / (2 * π^2)
 end

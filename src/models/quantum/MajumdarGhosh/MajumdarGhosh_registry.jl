@@ -11,7 +11,7 @@
     Infinite,
     method=:analytic,
     reliability=:high,
-    tested_in="test/standalone/test_majumdar_ghosh.jl",
+    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
     references=["Majumdar-Ghosh 1969"],
     notes="E₀/N = -3J/8 from the exact dimer-product ground state.",
 )
@@ -21,7 +21,7 @@
     PBC,
     method=:analytic,
     reliability=:high,
-    tested_in="test/standalone/test_majumdar_ghosh.jl",
+    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
     references=["Majumdar-Ghosh 1969"],
     notes="Size-independent: dimer-product state is an exact eigenstate for any even N.",
 )
@@ -33,7 +33,7 @@
     Infinite,
     method=:analytic,
     reliability=:high,
-    tested_in="test/standalone/test_majumdar_ghosh.jl",
+    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
     references=["Shastry-Sutherland 1981", "White-Affleck 1996"],
     notes="method=:lower_bound → J/4 (Shastry-Sutherland); :numerical → 0.234 J (White-Affleck DMRG).",
 )

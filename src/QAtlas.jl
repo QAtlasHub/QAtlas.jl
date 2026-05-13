@@ -18,6 +18,7 @@ export TricriticalPotts3                                 # M(6,7) minimal model 
 export LiouvilleCFT                                      # non-compact Liouville CFT (Polyakov 1981)
 export SchwingerModel                                    # 1+1-D QED (Schwinger 1962)
 export ChernSimons3D                                     # SU(N)_k Chern-Simons TQFT (Witten 1989)
+export SherringtonKirkpatrick                            # mean-field Ising spin glass (Sherrington-Kirkpatrick 1975)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -130,6 +131,8 @@ include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")
 include("models/quantum/ChernSimons3D/ChernSimons3D_registry.jl")        # populates REGISTRY for ChernSimons3D (#250)
+include("models/classical/SherringtonKirkpatrick/SherringtonKirkpatrick.jl")
+include("models/classical/SherringtonKirkpatrick/SherringtonKirkpatrick_registry.jl")  # populates REGISTRY for SherringtonKirkpatrick (#260)
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

@@ -33,6 +33,22 @@ using QAtlas, Test
     @test QAtlas.fetch(m, ConformalWeights(), Infinite()) ≈ 0.51814894 atol=1e-8
 end
 
+@testset "ConformalBootstrap — 3D Ising unitarity / relevance cross-check" begin
+    m = ConformalBootstrap()
+    Δ_σ = QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:σ)
+    Δ_ε = QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:ε)
+    # 3D scalar unitarity bound: Δ ≥ (d − 2)/2 = 1/2. Both σ and ε must satisfy it.
+    @test Δ_σ ≥ 0.5
+    @test Δ_ε ≥ 0.5
+    # Relevance: ε must be relevant (Δ_ε < d = 3), otherwise tuning T to T_c
+    # would not be possible (1 relevant Z_2-even operator at the Ising fixed point).
+    @test Δ_ε < 3
+    # η ≥ 0 (correlation function decays at least as fast as the free-field rate).
+    @test 2 * Δ_σ - 1 ≥ 0
+    # ν > 0 (correlation length diverges at the critical point).
+    @test 1 / (3 - Δ_ε) > 0
+end
+
 @testset "ConformalBootstrap — rejects unknown field (Phase 2)" begin
     m = ConformalBootstrap()
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:T)

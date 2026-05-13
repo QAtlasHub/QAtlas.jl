@@ -115,6 +115,10 @@ end
 end
 
 @testset "Hubbard1D — LuttingerParameter U ≠ 0 throws DomainError (Phase 2 deferral)" begin
-    @test_throws DomainError QAtlas.fetch(Hubbard1D(; U=4.0), LuttingerParameter(), Infinite())
-    @test_throws DomainError QAtlas.fetch(Hubbard1D(; U=-1.0), LuttingerParameter(), Infinite())
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=4.0), LuttingerParameter(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=-1.0), LuttingerParameter(), Infinite()
+    )
 end

@@ -243,13 +243,25 @@ and throws `DomainError` for any U ≠ 0.
 - E. H. Lieb, F. Y. Wu, *Phys. Rev. Lett.* **20**, 1445 (1968).
 - J. Voit, *Rep. Prog. Phys.* **58**, 977 (1995) — TLL review for Hubbard.
 """
-function fetch(m::Hubbard1D, ::LuttingerParameter, ::Infinite;
-               t::Real=m.t, U::Real=m.U, μ::Real=m.μ, kwargs...)
-    t > 0 || throw(DomainError(t, "Hubbard1D LuttingerParameter requires t > 0; got t = $t."))
+function fetch(
+    m::Hubbard1D,
+    ::LuttingerParameter,
+    ::Infinite;
+    t::Real=m.t,
+    U::Real=m.U,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 ||
+        throw(DomainError(t, "Hubbard1D LuttingerParameter requires t > 0; got t = $t."))
     if !isapprox(U, 0.0; atol=1e-12)
-        throw(DomainError(U,
-            "Hubbard1D LuttingerParameter: U ≠ 0 requires Lieb–Wu Bethe-ansatz K_ρ(U), " *
-            "K_σ(U) integrals (Voit 1995) — non-closed-form, deferred to Phase 2. Got U = $U."))
+        throw(
+            DomainError(
+                U,
+                "Hubbard1D LuttingerParameter: U ≠ 0 requires Lieb–Wu Bethe-ansatz K_ρ(U), " *
+                "K_σ(U) integrals (Voit 1995) — non-closed-form, deferred to Phase 2. Got U = $U.",
+            ),
+        )
     end
     return 1.0       # free-fermion limit
 end

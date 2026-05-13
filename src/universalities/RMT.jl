@@ -200,3 +200,58 @@ function fetch(::Universality{:RMT}, ::TracyWidom; β::Int, x::Real, kwargs...)
     end
     return _tw_interp(xf, ys)
 end
+
+# ─── Spectral form factor (large-N, GUE plateau; Phase 1 of issue #243) ──────
+
+"""
+    fetch(::Universality{:RMT}, ::SpectralFormFactor; ensemble::Symbol=:GUE, τ::Real=Inf) -> Float64
+
+Disorder-averaged spectral form factor `K(τ)` for the random-matrix
+universality class in the large-`N` thermodynamic limit, with
+`τ = t / N` (Heisenberg time `τ_H = 2π`).
+
+QAtlas Phase 1 (issue #243) exposes only the GUE ensemble in the
+**late-time plateau** regime `τ ≥ 2π`, where the disorder-averaged
+SFF saturates universally to `K(τ→∞) = 1` (Mehta 2004 §16;
+Cotler-Hartman-Maldacena 2016, arXiv:1611.04650).
+
+The Mehta connection formula
+`K(τ) = (τ/(2π)) − (τ/(4π)) log|1 − τ/(2π)|`
+on the ramp side `τ < 2π`, and the GOE / GSE sigma-model closed
+forms, are deferred to Phase 2.
+
+# Errors
+* `DomainError` if `ensemble ≠ :GUE` (GOE / GSE Phase 2).
+* `DomainError` if `τ < 2π` (ramp regime, Phase 2).
+"""
+function fetch(
+    ::Universality{:RMT},
+    ::SpectralFormFactor;
+    ensemble::Symbol=:GUE,
+    τ::Real=Inf,
+    kwargs...,
+)
+    if ensemble != :GUE
+        throw(
+            DomainError(
+                ensemble,
+                "Universality(:RMT)/SpectralFormFactor: Phase 1 supports only " *
+                "ensemble = :GUE.  GOE / GSE (sigma-model formulae, Mehta 2004 " *
+                "§16) are deferred to Phase 2 of issue #243.  Got ensemble = :" *
+                string(ensemble) * ".",
+            ),
+        )
+    end
+    if τ < 2π
+        throw(
+            DomainError(
+                τ,
+                "Universality(:RMT)/SpectralFormFactor: Phase 1 supports only " *
+                "the late-time plateau regime τ ≥ 2π (= Heisenberg time τ_H). " *
+                "The τ < 2π ramp K(τ) = τ/π and the Mehta connection formula " *
+                "are deferred to Phase 2 of issue #243.  Got τ = $τ.",
+            ),
+        )
+    end
+    return 1.0  # GUE late-time plateau (Mehta 2004 §16; CHM 2016)
+end

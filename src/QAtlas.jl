@@ -119,6 +119,7 @@ export Universality, CriticalExponents, GrowthExponents
 export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
 export MinimalModel, WZWSU2       # 2D rational-CFT dispatch tags
 export WignerSurmise, TracyWidom, MeanRatio  # RMT / Poisson level statistics (#151)
+export SpectralFormFactor  # RMT spectral form factor (#243)
 include("universalities/Universality.jl")
 include("universalities/E8.jl")
 include("universalities/MeanField.jl")

@@ -27,6 +27,22 @@ using QAtlas, Test
         QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
 end
 
+@testset "BCFT — exp(s) = g round-trip cross-check (Cardy 1989)" begin
+    m = BCFT()
+    # Recover g from log g and confront with the closed-form Ising Cardy values.
+    s_fixed = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
+    s_free  = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:free)
+    @test exp(s_fixed) ≈ 1 / sqrt(2) atol=1e-12
+    @test exp(s_free)  == 1.0
+    # Aliases collapse to the same g.
+    for st in (:fixed_plus, :fixed_minus, :identity, :vacuum, :epsilon, :energy)
+        s = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=st)
+        @test exp(s) ≈ 1 / sqrt(2) atol=1e-12
+    end
+    # |σ⟩ Cardy state is the physical free boundary: g_σ = 1.
+    @test exp(QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:sigma)) == 1.0
+end
+
 @testset "BCFT — rejects unknown Cardy state (Phase 1)" begin
     m = BCFT()
     @test_throws DomainError QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:invalid)

@@ -24,12 +24,8 @@ end
 end
 
 @testset "SchwingerModel — DomainError on e ≤ 0" begin
-    @test_throws DomainError QAtlas.fetch(
-        SchwingerModel(; e=0.0), MassGap(), Infinite()
-    )
-    @test_throws DomainError QAtlas.fetch(
-        SchwingerModel(; e=-1.0), MassGap(), Infinite()
-    )
+    @test_throws DomainError QAtlas.fetch(SchwingerModel(; e=0.0), MassGap(), Infinite())
+    @test_throws DomainError QAtlas.fetch(SchwingerModel(; e=-1.0), MassGap(), Infinite())
 end
 
 @testset "SchwingerModel — DomainError on m ≠ 0 (Phase 2)" begin

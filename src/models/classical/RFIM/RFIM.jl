@@ -88,16 +88,9 @@ raise `DomainError`.
 - J. Imbrie, *Comm. Math. Phys.* **98**, 145 (1985).
 """
 function fetch(
-    m::RFIM,
-    ::CriticalTemperature,
-    ::Infinite;
-    d::Int,
-    J::Real=m.J,
-    Δ::Real=m.Δ,
-    kwargs...,
+    m::RFIM, ::CriticalTemperature, ::Infinite; d::Int, J::Real=m.J, Δ::Real=m.Δ, kwargs...
 )
-    d ≥ 1 ||
-        throw(DomainError(d, "RFIM CriticalTemperature requires d ≥ 1; got d = $d."))
+    d ≥ 1 || throw(DomainError(d, "RFIM CriticalTemperature requires d ≥ 1; got d = $d."))
     Δ > 0 || throw(
         DomainError(
             Δ,

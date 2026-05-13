@@ -81,13 +81,7 @@ required (smaller tori fail the well-defined-stabiliser conditions).
 - K. Slagle, Y. B. Kim, *Phys. Rev. B* **96**, 195139 (2017).
 """
 function fetch(
-    ::XCube,
-    ::GroundStateDegeneracy,
-    ::PBC;
-    Lx::Int,
-    Ly::Int,
-    Lz::Int,
-    kwargs...,
+    ::XCube, ::GroundStateDegeneracy, ::PBC; Lx::Int, Ly::Int, Lz::Int, kwargs...
 )
     (Lx ≥ 2 && Ly ≥ 2 && Lz ≥ 2) || throw(
         DomainError(

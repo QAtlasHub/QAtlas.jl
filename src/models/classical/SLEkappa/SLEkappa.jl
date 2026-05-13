@@ -87,8 +87,6 @@ below zero diffusivity).
 - J. Cardy, *Annals Phys.* **318**, 81 (2005).
 """
 function fetch(m::SLEkappa, ::CentralCharge, ::Infinite; κ::Real=m.κ, kwargs...)
-    κ > 0 || throw(
-        DomainError(κ, "SLEkappa CentralCharge requires κ > 0; got κ = $κ."),
-    )
+    κ > 0 || throw(DomainError(κ, "SLEkappa CentralCharge requires κ > 0; got κ = $κ."))
     return (3κ - 8) * (6 - κ) / (2κ)
 end

@@ -5,7 +5,7 @@ using QAtlas, Test
     # Closed-form check
     @test γ ≈ 0.5 * log(2 + MathConstants.golden)
     # Numerical value (φ ≈ 1.6180, 2+φ ≈ 3.6180, log = 1.2862..., ÷ 2 ≈ 0.6431)
-    @test γ ≈ 0.6430741393  atol=1e-9
+    @test γ ≈ 0.6429653906  atol=1e-9
     # Equivalently γ = log √(1 + φ²) and log √(φ+2)
     φ = MathConstants.golden
     @test γ ≈ log(sqrt(1 + φ^2))

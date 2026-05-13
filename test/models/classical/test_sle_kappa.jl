@@ -41,8 +41,9 @@ end
 end
 
 @testset "SLEkappa — FractalDimension (Beffara 2008)" begin
-    for (κ, expected) in [(2.0, 5 / 4), (8 / 3, 4 / 3), (3.0, 11 / 8),
-        (4.0, 3 / 2), (6.0, 7 / 4), (8.0, 2.0)]
+    for (κ, expected) in [
+        (2.0, 5 / 4), (8 / 3, 4 / 3), (3.0, 11 / 8), (4.0, 3 / 2), (6.0, 7 / 4), (8.0, 2.0)
+    ]
         @test QAtlas.fetch(SLEkappa(; κ=κ), FractalDimension(), Infinite()) ≈ expected
     end
 end
@@ -55,5 +56,7 @@ end
 
 @testset "SLEkappa — FractalDimension rejects κ ≤ 0" begin
     @test_throws DomainError QAtlas.fetch(SLEkappa(; κ=0.0), FractalDimension(), Infinite())
-    @test_throws DomainError QAtlas.fetch(SLEkappa(; κ=2.0), FractalDimension(), Infinite(); κ=-1.0)
+    @test_throws DomainError QAtlas.fetch(
+        SLEkappa(; κ=2.0), FractalDimension(), Infinite(); κ=-1.0
+    )
 end

@@ -28,6 +28,17 @@ end
     )
 end
 
+@testset "S1AnisotropicD1D — tiny D (1e-13) is non-zero (iszero strictness)" begin
+    # Regression: boundary check must be exact iszero(D), not isapprox(...; atol=1e-12).
+    # Tiny but non-zero D crosses Gaussian/Ising transitions and has no closed form.
+    @test_throws DomainError QAtlas.fetch(
+        S1AnisotropicD1D(; J=1.0, D=1e-13), MassGap(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        S1AnisotropicD1D(; J=1.0, D=-1e-13), MassGap(), Infinite()
+    )
+end
+
 @testset "S1AnisotropicD1D — constructor guards" begin
     # J ≤ 0 rejected at construction time.
     @test_throws DomainError S1AnisotropicD1D(; J=0.0, D=0.0)

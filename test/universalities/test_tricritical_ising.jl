@@ -59,6 +59,6 @@ end
     # All 6 independent Kac primaries in API (r,s) labels
     for (r, s) in ((1, 1), (2, 2), (2, 1), (1, 2), (3, 2), (3, 1))
         @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=r, s=s) ==
-              QAtlas.fetch(mm, ConformalWeights(); r=r, s=s)
+            QAtlas.fetch(mm, ConformalWeights(); r=r, s=s)
     end
 end

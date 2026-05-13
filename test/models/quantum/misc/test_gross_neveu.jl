@@ -28,10 +28,11 @@ end
     # Λ=2, N=4, g=0.5 → 2·exp(-π/(4·0.25)) = 2·exp(-π)
     @test QAtlas.fetch(GrossNeveu(; N=4, g=0.5), MassGap(), Infinite(); Λ=2.0) ≈ 2 * exp(-π)
     # Asymptotic-free UV limit: g large → m_F → Λ
-    @test QAtlas.fetch(GrossNeveu(; N=1, g=10.0), MassGap(), Infinite(); Λ=1.0) ≈ exp(-π / 100)
+    @test QAtlas.fetch(GrossNeveu(; N=1, g=10.0), MassGap(), Infinite(); Λ=1.0) ≈
+        exp(-π / 100)
     # Linear in Λ
     @test QAtlas.fetch(GrossNeveu(; N=2, g=1.5), MassGap(), Infinite(); Λ=3.0) ≈
-          3 * QAtlas.fetch(GrossNeveu(; N=2, g=1.5), MassGap(), Infinite(); Λ=1.0)
+        3 * QAtlas.fetch(GrossNeveu(; N=2, g=1.5), MassGap(), Infinite(); Λ=1.0)
 end
 
 @testset "GrossNeveu — MassGap rejects Λ, g, N out of domain (Phase 2)" begin

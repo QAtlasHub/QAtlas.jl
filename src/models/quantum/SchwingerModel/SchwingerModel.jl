@@ -82,9 +82,7 @@ function fetch(
     m::Real=model.m,
     kwargs...,
 )
-    e > 0 || throw(
-        DomainError(e, "SchwingerModel MassGap requires e > 0; got e = $e."),
-    )
+    e > 0 || throw(DomainError(e, "SchwingerModel MassGap requires e > 0; got e = $e."))
     iszero(m) || throw(
         DomainError(
             m,

@@ -11,7 +11,8 @@
 using QAtlas, Test
 
 @testset "LiouvilleCFT — self-dual point b = 1 gives c = 25" begin
-    @test QAtlas.fetch(LiouvilleCFT(; b=1.0), CentralCharge(), Infinite()) ≈ 25.0 atol = 1e-14
+    @test QAtlas.fetch(LiouvilleCFT(; b=1.0), CentralCharge(), Infinite()) ≈ 25.0 atol =
+        1e-14
 end
 
 @testset "LiouvilleCFT — b ↔ 1/b duality" begin

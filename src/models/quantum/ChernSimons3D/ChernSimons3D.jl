@@ -64,9 +64,8 @@ struct ChernSimons3D <: AbstractQAtlasModel
         N ≥ 2 || throw(
             DomainError(N, "ChernSimons3D requires N ≥ 2 (SU(N) gauge group); got N = $N."),
         )
-        k ≥ 1 || throw(
-            DomainError(k, "ChernSimons3D requires integer level k ≥ 1; got k = $k."),
-        )
+        k ≥ 1 ||
+            throw(DomainError(k, "ChernSimons3D requires integer level k ≥ 1; got k = $k."))
         return new(Int(N), Int(k))
     end
 end

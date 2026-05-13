@@ -66,6 +66,7 @@ export DMIHeisenberg1D                                  # spin-½ Heisenberg + D
 export J1J2Heisenberg1D                              # spin-½ J₁-J₂ chain (#297)
 export MixedFieldIsing1D                            # TFIM + longitudinal field, non-integrable (#290)
 export XYh1D                                          # anisotropic XY + transverse field (LSM 1961, #292)
+export ExtendedHubbard1D                              # t-U-V Hubbard chain (#294)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -256,6 +257,8 @@ include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D.jl")
 include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D_registry.jl")  # populates REGISTRY for MixedFieldIsing1D (#290)
 include("models/quantum/XYh1D/XYh1D.jl")
 include("models/quantum/XYh1D/XYh1D_registry.jl")  # populates REGISTRY for XYh1D (#292)
+include("models/quantum/ExtendedHubbard1D/ExtendedHubbard1D.jl")
+include("models/quantum/ExtendedHubbard1D/ExtendedHubbard1D_registry.jl")  # populates REGISTRY for ExtendedHubbard1D (#294)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

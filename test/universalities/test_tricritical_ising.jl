@@ -52,3 +52,13 @@ end
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=0)
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=5)
 end
+
+@testset "TricriticalIsing — third-pass: full Kac table cross-check against MinimalModel(5,4)" begin
+    m = TricriticalIsing()
+    mm = QAtlas.MinimalModel(5, 4)
+    # All 6 independent Kac primaries in API (r,s) labels
+    for (r, s) in ((1, 1), (2, 2), (2, 1), (1, 2), (3, 2), (3, 1))
+        @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=r, s=s) ==
+              QAtlas.fetch(mm, ConformalWeights(); r=r, s=s)
+    end
+end

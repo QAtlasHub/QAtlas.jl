@@ -14,7 +14,10 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_extended_hubbard1d.jl",
-    references=["Lieb-Wu PRL 20, 1445 (1968)", "Voit Rep. Prog. Phys. 58, 977 (1995)",
-                "Nakamura PRB 61, 16377 (2000)"],
+    references=[
+        "Lieb-Wu PRL 20, 1445 (1968)",
+        "Voit Rep. Prog. Phys. 58, 977 (1995)",
+        "Nakamura PRB 61, 16377 (2000)",
+    ],
     notes="V=0 delegates to Hubbard1D at half filling (Lieb-Wu integral); V≠0 (CDW/SDW/BOW phase diagram) deferred to Phase 2.",
 )

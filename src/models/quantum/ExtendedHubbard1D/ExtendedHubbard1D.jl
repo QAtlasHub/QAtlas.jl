@@ -113,6 +113,7 @@ only supports the V = 0 limit, where the gap reduces to the Lieb–Wu
 """
 function fetch(model::ExtendedHubbard1D, ::ChargeGap, ::Infinite; kwargs...)
     _extended_hubbard1d_check_v_zero(model)
-    return fetch(Hubbard1D(; t=model.t, U=model.U, μ=model.U / 2),
-                 ChargeGap(), Infinite())
+    return fetch(
+        Hubbard1D(; t=model.t, U=model.U, μ=(model.U / 2)), ChargeGap(), Infinite()
+    )
 end

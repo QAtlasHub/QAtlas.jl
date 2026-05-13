@@ -12,12 +12,8 @@ using QAtlas, Test
 
 @testset "ExtendedHubbard1D — V=0 delegate to Hubbard1D (Phase 1)" begin
     for (t, U) in [(1.0, 4.0), (1.0, 8.0), (0.5, 2.0)]
-        Δ_eh = QAtlas.fetch(
-            ExtendedHubbard1D(; t=t, U=U, V=0.0), ChargeGap(), Infinite()
-        )
-        Δ_h = QAtlas.fetch(
-            Hubbard1D(; t=t, U=U, μ=U / 2), ChargeGap(), Infinite()
-        )
+        Δ_eh = QAtlas.fetch(ExtendedHubbard1D(; t=t, U=U, V=0.0), ChargeGap(), Infinite())
+        Δ_h = QAtlas.fetch(Hubbard1D(; t=t, U=U, μ=U / 2), ChargeGap(), Infinite())
         @test Δ_eh ≈ Δ_h
     end
 end

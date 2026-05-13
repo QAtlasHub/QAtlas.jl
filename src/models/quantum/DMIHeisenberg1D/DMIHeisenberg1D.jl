@@ -127,7 +127,7 @@ function fetch(
     m::DMIHeisenberg1D, ::Energy{:per_site}, ::Infinite; J::Real=m.J, D::Real=m.D, kwargs...
 )
     J > 0 || throw(DomainError(J, "DMIHeisenberg1D Energy requires J > 0; got J = $J."))
-    if !isapprox(D, 0.0; atol=1e-12)
+    if !iszero(D)
         throw(
             DomainError(
                 D,

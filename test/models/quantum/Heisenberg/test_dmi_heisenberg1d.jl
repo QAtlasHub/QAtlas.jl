@@ -35,3 +35,11 @@ end
     @test_throws DomainError DMIHeisenberg1D(; J=0.0)
     @test_throws DomainError DMIHeisenberg1D(; J=-1.5)
 end
+
+@testset "DMIHeisenberg1D — strict D=0 boundary (no isapprox)" begin
+    # A subnormal D must NOT silently delegate to Heisenberg1D. Phase-1
+    # delegate boundary is strict (iszero), matching KitaevHeisenberg.
+    @test_throws DomainError QAtlas.fetch(
+        DMIHeisenberg1D(; J=1.0, D=1e-13), Energy{:per_site}(), Infinite()
+    )
+end

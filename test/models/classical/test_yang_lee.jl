@@ -15,6 +15,8 @@ using QAtlas, Test
 @testset "YangLee — CentralCharge c = -22/5 (Phase 1, M(5,2))" begin
     c = QAtlas.fetch(YangLee(), CentralCharge(), Infinite())
     @test c == -22 // 5
+    @test c isa Rational
+    @test c isa Rational{Int}
     # Delegation invariant
     @test c == QAtlas.fetch(QAtlas.MinimalModel(5, 2), CentralCharge())
 end
@@ -24,10 +26,17 @@ end
     # Identity
     @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=1) == 0
     # The famous negative-dimension Yang-Lee primary
-    @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=2) == -1 // 5
+    h12 = QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=2)
+    @test h12 == -1 // 5
+    @test h12 isa Rational
     # Kac symmetry (1, s) ↔ (1, p - s) for p = 5
     @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=3) == -1 // 5
     @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=4) == 0
+    # Delegation invariant on each Kac primary (not just c)
+    for s in 1:4
+        @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=s) ==
+              QAtlas.fetch(QAtlas.MinimalModel(5, 2), ConformalWeights(); r=1, s=s)
+    end
 end
 
 @testset "YangLee — index range guards (Phase 1)" begin

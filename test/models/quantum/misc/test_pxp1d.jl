@@ -15,8 +15,7 @@ using QAtlas, Test
     @test e0 ≈ -0.6516
     @test e0 < 0
     # Linear in Ω
-    @test QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()) ≈
-        2.5 * (-0.6516)
+    @test QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()) ≈ 2.5 * (-0.6516)
 end
 
 @testset "PXP1D — rejects Ω ≤ 0 (Phase 1)" begin

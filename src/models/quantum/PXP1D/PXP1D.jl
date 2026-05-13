@@ -110,7 +110,6 @@ tighter literature consensus emerges.
 - C. J. Turner et al., *Nat. Phys.* **14**, 745 (2018) — quantum many-body scars.
 """
 function fetch(m::PXP1D, ::Energy{:per_site}, ::Infinite; Ω::Real=m.Ω, kwargs...)
-    Ω > 0 ||
-        throw(DomainError(Ω, "PXP1D Energy requires Ω > 0; got Ω = $Ω."))
+    Ω > 0 || throw(DomainError(Ω, "PXP1D Energy requires Ω > 0; got Ω = $Ω."))
     return Ω * _PXP1D_GROUND_STATE_ENERGY_DENSITY_PER_OMEGA
 end

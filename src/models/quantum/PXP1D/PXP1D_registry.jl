@@ -12,9 +12,7 @@
     reliability=:medium,
     tested_in="test/models/quantum/misc/test_pxp1d.jl",
     references=[
-        "Surace 2020",
-        "Lin-Motrunich 2019",
-        "Turner-Michailidis-Abanin-Papić-Serbyn 2018",
+        "Surace 2020", "Lin-Motrunich 2019", "Turner-Michailidis-Abanin-Papić-Serbyn 2018"
     ],
     notes="e_0/Ω ≈ -0.6516(2) thermodynamic-limit MPS reference.",
 )

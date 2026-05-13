@@ -45,5 +45,5 @@ end
 @testset "RandomBondIsing2D — third-pass: Universality{:Ising}/CentralCharge cross-check" begin
     # p=1 FM critical line: agree with Universality{:Ising}/CentralCharge (d=2)
     @test QAtlas.fetch(RandomBondIsing2D(; p=1.0), CentralCharge(), Infinite()) ==
-          QAtlas.fetch(QAtlas.Universality{:Ising}(), CentralCharge(); d=2)
+        QAtlas.fetch(QAtlas.Universality{:Ising}(), CentralCharge(); d=2)
 end

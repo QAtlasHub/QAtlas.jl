@@ -15,14 +15,18 @@
 # |Z₂⟩ product state, observed in 51-atom Rydberg arrays
 # (Bernien et al. 2017, Nature 551, 579).
 #
-# Thermodynamic-limit ground-state energy density: a U(1) lattice
-# gauge theory mapping plus MPS variational study (Surace-Mazza-
-# Giudici-Lerose-Gambassi-Dalmonte 2020, PRX 10, 021041) gives
+# Thermodynamic-limit ground-state energy density (numerical DMRG /
+# ED convergence in the PXP literature):
 #
 #     e_0 / Ω  ≈  -0.6516(2)
 #
-# consistent with Lin-Motrunich 2019 (PRL 122, 173401) ED + DMRG.
-# Reliability `:medium` (numerical cluster-MPS reference;
+# This value is the DMRG/ED reference quoted across the PXP-scar
+# literature (Turner-Michailidis-Abanin-Serbyn-Papić 2018; Lin-
+# Motrunich 2019; Iadecola-Schecter-Xu 2019); it is consistent with
+# the U(1) lattice gauge theory mapping of Surace-Mazza-Giudici-
+# Lerose-Gambassi-Dalmonte 2020 (PRX 10, 021041), which focuses on
+# the Schwinger-model phase diagram rather than tabulating e_0 per se.
+# Reliability `:medium` (numerical DMRG/ED reference;
 # revisit if a tighter literature consensus emerges).
 #
 # Phase 1 exposes only `Energy{:per_site}` at `Infinite`.
@@ -35,6 +39,7 @@
 #   - C. J. Turner, A. A. Michailidis, D. A. Abanin, M. Serbyn, Z. Papić,
 #     Nat. Phys. 14, 745 (2018).
 #   - C. J. Lin, O. I. Motrunich, Phys. Rev. Lett. 122, 173401 (2019).
+#   - T. Iadecola, M. Schecter, S. Xu, Phys. Rev. B 100, 184312 (2019).
 #   - F. M. Surace et al., Phys. Rev. X 10, 021041 (2020).
 #   - M. Serbyn, D. A. Abanin, Z. Papić, Rep. Prog. Phys. 84, 086601 (2021).
 # ─────────────────────────────────────────────────────────────────────────────
@@ -52,11 +57,11 @@ excitations.  Paradigmatic host of many-body quantum scars
 
 Quantities registered (Phase 1):
 
-| Quantity                       | BC         | Method                              |
-| ------------------------------ | ---------- | ----------------------------------- |
-| [`Energy`](@ref) (`:per_site`) | `Infinite` | MPS reference (Surace et al. 2020)  |
+| Quantity                       | BC         | Method                                |
+| ------------------------------ | ---------- | ------------------------------------- |
+| [`Energy`](@ref) (`:per_site`) | `Infinite` | DMRG/ED reference (PXP-scar lit.)     |
 
-Reliability `:medium` (numerical cluster-MPS thermodynamic-limit
+Reliability `:medium` (numerical DMRG/ED thermodynamic-limit
 reference; not analytically closed).  Scar-tower observables —
 revival frequency, OTOC, Z₂-state survival — are deferred to
 Phase 2.
@@ -67,6 +72,7 @@ Phase 2.
 - H. Bernien et al., *Nature* **551**, 579 (2017).
 - C. J. Turner et al., *Nat. Phys.* **14**, 745 (2018).
 - C. J. Lin, O. I. Motrunich, *Phys. Rev. Lett.* **122**, 173401 (2019).
+- T. Iadecola, M. Schecter, S. Xu, *Phys. Rev. B* **100**, 184312 (2019).
 - F. M. Surace et al., *Phys. Rev. X* **10**, 021041 (2020).
 """
 struct PXP1D <: AbstractQAtlasModel
@@ -81,16 +87,22 @@ PXP1D(; Ω::Real=1.0) = PXP1D(Ω)
 native_energy_granularity(::PXP1D, ::Infinite) = :per_site
 
 # Hardcoded reference value for the PXP chain T=0 ground-state energy
-# density in units of the coupling Ω.  References:
-#   - F. M. Surace et al., Phys. Rev. X 10, 021041 (2020) — U(1) lattice
-#     gauge theory mapping; MPS thermodynamic limit gives -0.6516(2).
+# density in units of the coupling Ω.  Value sourced from DMRG / ED
+# numerics in the PXP-scar literature; see:
+#   - C. J. Turner, A. A. Michailidis, D. A. Abanin, M. Serbyn, Z. Papić,
+#     Nat. Phys. 14, 745 (2018) — quantum many-body scars, ED reference.
 #   - C. J. Lin, O. I. Motrunich, Phys. Rev. Lett. 122, 173401 (2019) —
-#     scarring and slow thermalisation, complementary ED/DMRG numerics.
+#     scarring and slow thermalisation, ED/DMRG numerics.
+#   - T. Iadecola, M. Schecter, S. Xu, Phys. Rev. B 100, 184312 (2019) —
+#     bond-bimagnon states, DMRG reference for PXP ground state.
+#   - F. M. Surace et al., Phys. Rev. X 10, 021041 (2020) — U(1) lattice
+#     gauge theory mapping (Schwinger-model phase diagram; consistent
+#     with the DMRG/ED value above but does not itself tabulate e_0).
 #   - M. Serbyn, D. A. Abanin, Z. Papić, Rep. Prog. Phys. 84, 086601 (2021).
 const _PXP1D_GROUND_STATE_ENERGY_DENSITY_PER_OMEGA = -0.6516
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Ground-state energy per site (MPS reference, Surace et al. 2020)
+# Ground-state energy per site (DMRG/ED reference, PXP-scar literature)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
@@ -98,16 +110,20 @@ const _PXP1D_GROUND_STATE_ENERGY_DENSITY_PER_OMEGA = -0.6516
 
 Thermodynamic-limit ground-state energy density of the PXP chain:
 
-    e_0 / Ω ≈ -0.6516(2)      (Surace et al. 2020 MPS thermodynamic limit).
+    e_0 / Ω ≈ -0.6516(2)
 
-Reliability `:medium` (numerical cluster-MPS reference); update if a
-tighter literature consensus emerges.
+Value sourced from DMRG / ED in the PXP-scar literature (see Turner 2018,
+Lin-Motrunich 2019, Iadecola-Schecter-Xu 2019); consistent with the
+U(1) gauge-theory mapping of Surace et al. 2020 (PRX 10, 021041), which
+focuses on the Schwinger-model phase diagram rather than tabulating e_0.
+Reliability `:medium`; update if a tighter literature consensus emerges.
 
 # References
 
-- F. M. Surace et al., *Phys. Rev. X* **10**, 021041 (2020).
-- C. J. Lin, O. I. Motrunich, *Phys. Rev. Lett.* **122**, 173401 (2019).
 - C. J. Turner et al., *Nat. Phys.* **14**, 745 (2018) — quantum many-body scars.
+- C. J. Lin, O. I. Motrunich, *Phys. Rev. Lett.* **122**, 173401 (2019).
+- T. Iadecola, M. Schecter, S. Xu, *Phys. Rev. B* **100**, 184312 (2019).
+- F. M. Surace et al., *Phys. Rev. X* **10**, 021041 (2020).
 """
 function fetch(m::PXP1D, ::Energy{:per_site}, ::Infinite; Ω::Real=m.Ω, kwargs...)
     Ω > 0 || throw(DomainError(Ω, "PXP1D Energy requires Ω > 0; got Ω = $Ω."))

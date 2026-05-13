@@ -2,8 +2,9 @@
 # Standalone test: PXP1D — Rydberg-blockade chain (Phase 1).
 #
 # Verifies:
-#   * Energy{:per_site} at Infinite returns the hardcoded Surace 2020
-#     MPS thermodynamic-limit reference  e_0 / Ω ≈ -0.6516.
+#   * Energy{:per_site} at Infinite returns the hardcoded DMRG/ED
+#     thermodynamic-limit reference  e_0 / Ω ≈ -0.6516 (PXP-scar
+#     literature; see Turner 2018, Lin-Motrunich 2019, Iadecola 2019).
 #   * Linearity in the coupling Ω.
 #   * DomainError on non-positive Ω (constructor + fetch override).
 # ─────────────────────────────────────────────────────────────────────────────

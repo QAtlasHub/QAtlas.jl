@@ -152,9 +152,8 @@ function fetch(
             N, "ChernSimons3D PartitionFunction requires N ≥ 2 (SU(N)); got N = $N."
         ),
     )
-    k ≥ 1 || throw(
-        DomainError(k, "ChernSimons3D PartitionFunction requires k ≥ 1; got k = $k."),
-    )
+    k ≥ 1 ||
+        throw(DomainError(k, "ChernSimons3D PartitionFunction requires k ≥ 1; got k = $k."))
     p = k + N
     prefactor = float(N)^(-0.5) * float(p)^(-(N - 1) / 2)
     prod = 1.0

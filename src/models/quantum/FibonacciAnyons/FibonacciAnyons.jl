@@ -39,7 +39,7 @@ struct FibonacciAnyons <: AbstractQAtlasModel end
 Topological entanglement entropy of the Fibonacci-anyon non-Abelian
 topological order:
 
-    γ = log 𝒟 = (1/2) log(2 + φ)  ≈  0.6430741393
+    γ = log 𝒟 = (1/2) log(2 + φ)  ≈  0.6429653906
 
 where 𝒟 = √(d_1² + d_τ²) = √(1 + φ²) = √(φ + 2) is the total quantum
 dimension and φ = (1 + √5)/2 is the golden ratio (= d_τ, the

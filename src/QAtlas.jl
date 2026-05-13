@@ -70,6 +70,7 @@ export MixedFieldIsing1D                            # TFIM + longitudinal field,
 export XYh1D                                          # anisotropic XY + transverse field (LSM 1961, #292)
 export ExtendedHubbard1D                              # t-U-V Hubbard chain (#294)
 export FibonacciAnyons                            # non-Abelian Fibonacci anyons (#240)
+export PpIp2DSC                                     # 2D p+ip chiral superconductor (Read-Green 2000, #238)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -269,6 +270,8 @@ include("models/quantum/ExtendedHubbard1D/ExtendedHubbard1D.jl")
 include("models/quantum/ExtendedHubbard1D/ExtendedHubbard1D_registry.jl")  # populates REGISTRY for ExtendedHubbard1D (#294)
 include("models/quantum/FibonacciAnyons/FibonacciAnyons.jl")
 include("models/quantum/FibonacciAnyons/FibonacciAnyons_registry.jl")  # populates REGISTRY for FibonacciAnyons (#240)
+include("models/quantum/PpIp2DSC/PpIp2DSC.jl")
+include("models/quantum/PpIp2DSC/PpIp2DSC_registry.jl")  # populates REGISTRY for PpIp2DSC (#238)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

@@ -39,7 +39,7 @@ Quantities registered (Phases 1+2):
 | Quantity                       | BC         | Method                              |
 | ------------------------------ | ---------- | ----------------------------------- |
 | [`MassGap`](@ref)              | `Infinite` | analytic (`e/√π`, massless only)    |
-| [`ChiralCondensate`](@ref)    | `Infinite` | analytic (`-exp(γ_E)·e/(2π²)`, massless)  |
+| [`ChiralCondensate`](@ref)    | `Infinite` | analytic (`-exp(γ_E)·e/(2π^{3/2})`, massless)  |
 
 Massive `m > 0` Schwinger maps to massive sine-Gordon
 (Coleman-Jackiw-Susskind 1975) and is tracked as Phase 2.
@@ -103,7 +103,7 @@ end
 Anomaly-induced chiral condensate in the **massless** Schwinger model
 (Schwinger 1962; Coleman-Jackiw-Susskind 1975):
 
-    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π²),
+    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π^{3/2}),
 
 where `γ_E ≈ 0.5772156649` is the Euler-Mascheroni constant.  Negative
 by convention; magnitude scales linearly with the gauge coupling.
@@ -124,5 +124,5 @@ function fetch(
 )
     e > 0 ||
         throw(DomainError(e, "SchwingerModel ChiralCondensate requires e > 0; got e = $e."))
-    return -exp(MathConstants.eulergamma) * e / (2 * π^2)
+    return -exp(MathConstants.eulergamma) * e / (2 * π^(3/2))
 end

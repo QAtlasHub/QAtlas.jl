@@ -22,5 +22,5 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_schwinger_model.jl",
     references=["Schwinger 1962", "Coleman-Jackiw-Susskind 1975"],
-    notes="Massless ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π²); anomaly-induced spontaneous symmetry breaking.",
+    notes="Massless ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); anomaly-induced spontaneous symmetry breaking.",
 )

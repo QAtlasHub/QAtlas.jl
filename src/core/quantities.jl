@@ -916,7 +916,7 @@ Schwinger model is the canonical 1+1-D example: even though the
 classical Lagrangian is chirally symmetric, the anomaly forces a
 non-zero condensate
 
-    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π²),    m_γ = e/√π.
+    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π^{3/2}),    m_γ = e/√π.
 
 (Schwinger 1962; Coleman-Jackiw-Susskind 1975.)
 """

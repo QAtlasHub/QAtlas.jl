@@ -27,13 +27,19 @@ end
     @test QAtlas.fetch(TightBindingV1D(), FermiVelocity(), Infinite()) ≈ 2.0          # μ=0 → v_F = 2t
     @test QAtlas.fetch(TightBindingV1D(; t=3.0), FermiVelocity(), Infinite()) ≈ 6.0   # v_F = 2·3
     @test QAtlas.fetch(TightBindingV1D(; μ=1.0), FermiVelocity(), Infinite()) ≈ sqrt(3)
-    @test_throws DomainError QAtlas.fetch(TightBindingV1D(; μ=2.5), FermiVelocity(), Infinite())
-    @test_throws DomainError QAtlas.fetch(TightBindingV1D(; μ=-3.0), FermiVelocity(), Infinite())
+    @test_throws DomainError QAtlas.fetch(
+        TightBindingV1D(; μ=2.5), FermiVelocity(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        TightBindingV1D(; μ=-3.0), FermiVelocity(), Infinite()
+    )
 end
 
 @testset "TightBindingV1D — V≠0 throws DomainError (Phase 2 deferral)" begin
     @test_throws DomainError QAtlas.fetch(TightBindingV1D(; V=0.5), MassGap(), Infinite())
-    @test_throws DomainError QAtlas.fetch(TightBindingV1D(; V=-1.0), FermiVelocity(), Infinite())
+    @test_throws DomainError QAtlas.fetch(
+        TightBindingV1D(; V=-1.0), FermiVelocity(), Infinite()
+    )
 end
 
 @testset "TightBindingV1D — rejects t ≤ 0" begin

@@ -238,7 +238,8 @@ function fetch(
                 "Universality(:RMT)/SpectralFormFactor: Phase 1 supports only " *
                 "ensemble = :GUE.  GOE / GSE (sigma-model formulae, Mehta 2004 " *
                 "§16) are deferred to Phase 2 of issue #243.  Got ensemble = :" *
-                string(ensemble) * ".",
+                string(ensemble) *
+                ".",
             ),
         )
     end

@@ -90,11 +90,7 @@ distribution) and `T_c = 0` is returned.
 - D. Sherrington, S. Kirkpatrick, *Phys. Rev. Lett.* **35**, 1792 (1975).
 """
 function fetch(
-    m::SherringtonKirkpatrick,
-    ::CriticalTemperature,
-    ::Infinite;
-    J::Real=m.J,
-    kwargs...,
+    m::SherringtonKirkpatrick, ::CriticalTemperature, ::Infinite; J::Real=m.J, kwargs...
 )
     return J > 0 ? Float64(J) : 0.0
 end

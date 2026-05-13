@@ -107,4 +107,14 @@ using Logging: with_logger, NullLogger
             MajumdarGhosh(), SpinGap(), Infinite(); J=-1.5
         )
     end
+
+    @testset "MajumdarGhosh — third-pass: SpinGap == MassGap(method=:numerical) (SU(2) cross-check)" begin
+        # MG is SU(2)-symmetric; the lowest excitation is a triplet, so the
+        # spectral gap (MassGap, :numerical) equals the spin gap (S=0 → S=1).
+        for J in (0.5, 1.0, 3.0)
+            m = MajumdarGhosh(; J=J)
+            @test QAtlas.fetch(m, SpinGap(), Infinite()) ≈
+                  QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
+        end
+    end
 end

@@ -20,12 +20,12 @@ using QAtlas, Test
     @test QAtlas.fetch(ZnParafermion(; n=5), CentralCharge(), Infinite()) == 8 // 7
     @test QAtlas.fetch(ZnParafermion(; n=6), CentralCharge(), Infinite()) == 10 // 8
     # n → ∞ approaches c = 2
-    @test QAtlas.fetch(ZnParafermion(; n=1000), CentralCharge(), Infinite()) ≈ 2.0  atol=0.01
+    @test QAtlas.fetch(ZnParafermion(; n=1000), CentralCharge(), Infinite()) ≈ 2.0 atol=0.01
 end
 
 @testset "ZnParafermion — Ising at n=2 matches MinimalModel(4,3) (Phase 1)" begin
     @test QAtlas.fetch(ZnParafermion(; n=2), CentralCharge(), Infinite()) ==
-          QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
+        QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
 end
 
 @testset "ZnParafermion — rejects n < 2 (Phase 1)" begin

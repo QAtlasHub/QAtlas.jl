@@ -89,6 +89,7 @@ Returned as an exact `Rational{Int}`.
 - V. A. Fateev, A. B. Zamolodchikov, *Sov. Phys. JETP* **62**, 215 (1985).
 """
 function fetch(m::ZnParafermion, ::CentralCharge, ::Infinite; n::Integer=m.n, kwargs...)
-    n ≥ 2 || throw(DomainError(n, "ZnParafermion CentralCharge requires n ≥ 2; got n = $n."))
+    n ≥ 2 ||
+        throw(DomainError(n, "ZnParafermion CentralCharge requires n ≥ 2; got n = $n."))
     return Rational(2 * (n - 1), n + 2)
 end

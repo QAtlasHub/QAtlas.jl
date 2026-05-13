@@ -15,12 +15,19 @@ using QAtlas, Test
     e0 = QAtlas.fetch(PXP1D(), Energy{:per_site}(), Infinite())
     @test isapprox(e0, -0.6516; atol=1e-4)  # literature precision -0.6516(2)
     @test e0 < 0
+    @test e0 isa Float64
     # Linear in Ω
     @test isapprox(
         QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()),
         2.5 * (-0.6516);
         atol=2.5e-4,
     )
+    # Sign preserved across scales (Ω > 0 ⇒ e_0 < 0)
+    @test QAtlas.fetch(PXP1D(; Ω=10.0), Energy{:per_site}(), Infinite()) < 0
+    # Exact linearity ratio (no hidden additive constant)
+    e1 = QAtlas.fetch(PXP1D(; Ω=1.0), Energy{:per_site}(), Infinite())
+    e7 = QAtlas.fetch(PXP1D(; Ω=7.0), Energy{:per_site}(), Infinite())
+    @test isapprox(e7 / e1, 7.0; atol=1e-12)
 end
 
 @testset "PXP1D — rejects Ω ≤ 0 (Phase 1)" begin

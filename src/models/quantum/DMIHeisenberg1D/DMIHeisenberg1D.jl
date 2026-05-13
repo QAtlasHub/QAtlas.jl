@@ -124,15 +124,9 @@ single-source-of-truth in the `Heisenberg1D` delegate.
   spiral / twisted-XXZ mapping (deferred to Phase 2).
 """
 function fetch(
-    m::DMIHeisenberg1D,
-    ::Energy{:per_site},
-    ::Infinite;
-    J::Real=m.J,
-    D::Real=m.D,
-    kwargs...,
+    m::DMIHeisenberg1D, ::Energy{:per_site}, ::Infinite; J::Real=m.J, D::Real=m.D, kwargs...
 )
-    J > 0 ||
-        throw(DomainError(J, "DMIHeisenberg1D Energy requires J > 0; got J = $J."))
+    J > 0 || throw(DomainError(J, "DMIHeisenberg1D Energy requires J > 0; got J = $J."))
     if !isapprox(D, 0.0; atol=1e-12)
         throw(
             DomainError(

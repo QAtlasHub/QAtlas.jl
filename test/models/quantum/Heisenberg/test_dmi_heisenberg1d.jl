@@ -17,7 +17,7 @@ using QAtlas, Test
     @test QAtlas.fetch(DMIHeisenberg1D(), Energy{:per_site}(), Infinite()) ≈ 0.25 - log(2)
     # Linear in J
     @test QAtlas.fetch(DMIHeisenberg1D(; J=3.0, D=0.0), Energy{:per_site}(), Infinite()) ≈
-          3 * (0.25 - log(2))
+        3 * (0.25 - log(2))
     # Delegation matches Heisenberg1D directly (legacy GroundStateEnergyDensity API)
     @test e0 ≈ QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); J=1.0)
 end

@@ -31,9 +31,9 @@ end
     m = BCFT()
     # Recover g from log g and confront with the closed-form Ising Cardy values.
     s_fixed = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
-    s_free  = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:free)
+    s_free = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:free)
     @test exp(s_fixed) ≈ 1 / sqrt(2) atol=1e-12
-    @test exp(s_free)  == 1.0
+    @test exp(s_free) == 1.0
     # Aliases collapse to the same g.
     for st in (:fixed_plus, :fixed_minus, :identity, :vacuum, :epsilon, :energy)
         s = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=st)

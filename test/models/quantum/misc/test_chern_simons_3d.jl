@@ -75,6 +75,21 @@ end
     @test z31 ≈ 0.5773502691896258
 end
 
+@testset "ChernSimons3D — level-rank duality √N·Z(SU(N)_k) = √k·Z(SU(k)_N) (Phase 2)" begin
+    # Level-rank duality on S³ in the bare SU(N)_k = S_{0,0} normalisation
+    # holds up to a √(N/k) factor (cf. Naculich-Riggs-Schnitzer 1990,
+    # Mlawer-Naculich-Riggs-Schnitzer 1991): the dual partition
+    # functions agree after rescaling by √rank, which removes the
+    # SU(N) ↔ U(N) normalisation mismatch.  This catches N↔k swap
+    # symmetry of the product-over-positive-roots formula, which the
+    # SU(2)/SU(3) numerical specialisations alone do not exercise.
+    for (N, k) in [(2, 3), (2, 4), (3, 5), (4, 3), (5, 7)]
+        z_Nk = QAtlas.fetch(ChernSimons3D(; N=N, k=k), PartitionFunction(), Infinite())
+        z_kN = QAtlas.fetch(ChernSimons3D(; N=k, k=N), PartitionFunction(), Infinite())
+        @test sqrt(N) * z_Nk ≈ sqrt(k) * z_kN
+    end
+end
+
 @testset "ChernSimons3D — PartitionFunction rejects N<2 / k<1 via kwargs (Phase 2)" begin
     # Constructor rejects invalid (N,k) up-front, so to exercise the
     # in-fetch guard we override via kwargs on a valid base model.

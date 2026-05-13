@@ -45,9 +45,7 @@ end
 @testset "TightBindingV1D — tiny V (1e-13) is non-zero (iszero strictness)" begin
     # Regression: V boundary must be exact iszero(V), not isapprox(...; atol=1e-12).
     # Any non-zero V puts us on the interacting JW-XXZ branch (Phase 2).
-    @test_throws DomainError QAtlas.fetch(
-        TightBindingV1D(; V=1e-13), MassGap(), Infinite()
-    )
+    @test_throws DomainError QAtlas.fetch(TightBindingV1D(; V=1e-13), MassGap(), Infinite())
     @test_throws DomainError QAtlas.fetch(
         TightBindingV1D(; V=-1e-13), FermiVelocity(), Infinite()
     )

@@ -15,6 +15,6 @@ end
 
 @testset "TricriticalPotts3 — equals MinimalModel(7, 6)" begin
     c_tp = QAtlas.fetch(TricriticalPotts3(), CentralCharge(), Infinite())
-    c_mm = QAtlas.fetch(QAtlas.MinimalModel(7, 6), CentralCharge(), Infinite())
+    c_mm = QAtlas.fetch(QAtlas.MinimalModel(7, 6), CentralCharge())
     @test c_tp == c_mm
 end

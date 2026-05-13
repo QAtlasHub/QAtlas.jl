@@ -33,3 +33,23 @@ end
         SchwingerModel(; e=1.0, m=0.1), MassGap(), Infinite()
     )
 end
+
+@testset "SchwingerModel — ChiralCondensate (massless Schwinger anomaly, Phase 2)" begin
+    cond = QAtlas.fetch(SchwingerModel(; e=1.0), ChiralCondensate(), Infinite())
+    @test cond ≈ -exp(MathConstants.eulergamma) / (2 * π^2) atol = 1e-14
+    @test cond < 0  # conventional sign
+    # Linear in e
+    cond2 = QAtlas.fetch(SchwingerModel(; e=2.0), ChiralCondensate(), Infinite())
+    @test cond2 ≈ 2 * cond atol = 1e-14
+    # Verified numerical value at e=1 (Julia MathConstants.eulergamma)
+    @test cond ≈ -0.09023018277174372 atol = 1e-12
+end
+
+@testset "SchwingerModel — ChiralCondensate rejects e ≤ 0 (Phase 2)" begin
+    @test_throws DomainError QAtlas.fetch(
+        SchwingerModel(; e=1.0), ChiralCondensate(), Infinite(); e=0.0
+    )
+    @test_throws DomainError QAtlas.fetch(
+        SchwingerModel(; e=1.0), ChiralCondensate(), Infinite(); e=-1.5
+    )
+end

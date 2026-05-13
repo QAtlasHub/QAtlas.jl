@@ -13,3 +13,14 @@
     references=["Schwinger 1962"],
     notes="Massless Schwinger m_γ = e/√π via abelian bosonisation; m ≠ 0 raises DomainError (sine-Gordon dual, Phase 2).",
 )
+
+@register(
+    SchwingerModel,
+    ChiralCondensate,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_schwinger_model.jl",
+    references=["Schwinger 1962", "Coleman-Jackiw-Susskind 1975"],
+    notes="Massless ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π²); anomaly-induced spontaneous symmetry breaking.",
+)

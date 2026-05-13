@@ -13,6 +13,7 @@ export CurieWeissIsing                                   # complete-graph mean-f
 export IsingChain1D                                      # 1-D Ising chain (Ising 1925)
 export SpinIce                                           # pyrochlore Pauling 1935
 export TodaLattice                                       # 1-D Toda lattice (Toda 1967, integrable)
+export SLEkappa                                          # Schramm-Loewner Evolution SLE_κ (Schramm 2000)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -115,6 +116,8 @@ include("models/classical/SpinIce/SpinIce.jl")
 include("models/classical/SpinIce/SpinIce_registry.jl")                  # populates REGISTRY for SpinIce (#257)
 include("models/classical/TodaLattice/TodaLattice.jl")
 include("models/classical/TodaLattice/TodaLattice_registry.jl")          # populates REGISTRY for TodaLattice (#254)
+include("models/classical/SLEkappa/SLEkappa.jl")
+include("models/classical/SLEkappa/SLEkappa_registry.jl")                # populates REGISTRY for SLEkappa (#244)
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

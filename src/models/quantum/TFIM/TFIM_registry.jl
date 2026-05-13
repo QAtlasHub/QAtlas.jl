@@ -633,3 +633,15 @@
     references=["Gu IJMPB 24 4371 (2010)", "Damski PRB 87 165101 (2013)"],
     notes="χ_F/L = 1/(16(J²-h²)) (h<J), J²/(16h²(h²-J²)) (h>J); QuadGK, divergent at h=J.",
 )
+
+# ── Critical exponents (Phase 2 delegation to 2D Ising universality) ──
+@register(
+    TFIM,
+    CriticalExponents,
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_tfim_critical_exponents.jl",
+    references=["Onsager 1944", "Pfeuty 1970"],
+    notes="2D-Ising Onsager exponents (β=1/8, γ=7/4, ν=1) via TFIM↔2D-Ising mapping.",
+)

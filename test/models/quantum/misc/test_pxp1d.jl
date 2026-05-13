@@ -16,7 +16,11 @@ using QAtlas, Test
     @test isapprox(e0, -0.6516; atol=1e-4)  # literature precision -0.6516(2)
     @test e0 < 0
     # Linear in Ω
-    @test isapprox(QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()), 2.5 * (-0.6516); atol=2.5e-4)
+    @test isapprox(
+        QAtlas.fetch(PXP1D(; Ω=2.5), Energy{:per_site}(), Infinite()),
+        2.5 * (-0.6516);
+        atol=2.5e-4,
+    )
 end
 
 @testset "PXP1D — rejects Ω ≤ 0 (Phase 1)" begin

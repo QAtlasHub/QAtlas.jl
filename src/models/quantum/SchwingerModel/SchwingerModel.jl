@@ -16,10 +16,11 @@
 # (Coleman-Jackiw-Susskind 1975), giving direct contact with sine-
 # Gordon entries elsewhere in the atlas.
 #
-# This Phase-1 entry registers only the massless `m_γ = e/√π` mass
-# gap.  The chiral condensate, θ-vacuum structure, and massive
-# sine-Gordon duality require dedicated quantity types and are
-# tracked as Phase 2.
+# Phase 1 registered the massless `m_γ = e/√π` mass gap.  Phase 2
+# (#246) adds the anomaly-induced chiral condensate
+# `⟨ψ̄ψ⟩ = −exp(γ_E)·e/(2π^{3/2})` (Coleman-Jackiw-Susskind 1975)
+# via `ChiralCondensate`.  θ-vacuum structure and massive
+# sine-Gordon duality remain tracked as Phase 3.
 #
 # References:
 #   - J. Schwinger, Phys. Rev. 128, 2425 (1962).

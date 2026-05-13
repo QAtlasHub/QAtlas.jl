@@ -908,6 +908,8 @@ rate `p` and density `ρ`,
 — the canonical KPZ-class non-equilibrium observable.
 """
 struct SteadyStateCurrent <: AbstractQuantity end
+
+"""
     ChiralCondensate() <: AbstractQuantity
 
 Vacuum expectation value `⟨ψ̄ψ⟩` of a fermion bilinear, signalling

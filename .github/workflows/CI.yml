@@ -46,11 +46,63 @@ jobs:
         with:
           julia-args: "--threads=auto"
       - uses: julia-actions/julia-processcoverage@v1
+      - name: Compute artifact name
+        id: art
+        run: |
+          name="coverage-${{ matrix.group }}"
+          name="${name//[\/,]/_}"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.art.outputs.name }}
+          path: lcov.info
+          retention-days: 1
+          if-no-files-found: error
+
+  coverage:
+    name: Coverage (aggregated)
+    runs-on: ubuntu-latest
+    needs: test
+    if: always() && needs.test.result != 'cancelled'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          path: coverage-parts
+          pattern: coverage-*
+      - name: Install lcov
+        run: sudo apt-get update && sudo apt-get install -y lcov
+      - name: Merge per-group lcov reports
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find coverage-parts -name 'lcov.info' | sort)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "::error::No coverage artifacts found"
+            exit 1
+          fi
+          echo "Merging ${#files[@]} lcov reports:"
+          printf '  %s\n' "${files[@]}"
+          args=()
+          for f in "${files[@]}"; do
+            args+=(-a "$f")
+          done
+          lcov "${args[@]}" -o lcov.info
+          summary=$(lcov --summary lcov.info)
+          echo ""
+          echo "=== Merged coverage summary ==="
+          echo "$summary"
+          {
+            echo "## Merged coverage summary"
+            echo "(merged from ${#files[@]} matrix-job artifacts)"
+            echo ""
+            echo '```'
+            echo "$summary"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: codecov/codecov-action@v6
         with:
           file: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: ${{ matrix.group }}
           fail_ci_if_error: false
 
   all-tests:

@@ -48,6 +48,7 @@ export ShastrySutherland                                 # SrCu₂(BO₃)₂ 2D 
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
 export KitaevHeisenberg                                  # K-J-Γ honeycomb (α-RuCl₃, Rau-Lee-Kee 2014)
+export PXP1D                                            # Rydberg-blockade chain w/ scars (#300)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -202,6 +203,8 @@ include("models/quantum/HeisenbergXYZ/HeisenbergXYZ.jl")
 include("models/quantum/HeisenbergXYZ/HeisenbergXYZ_registry.jl")          # populates REGISTRY for HeisenbergXYZ (#253)
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg.jl")
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg_registry.jl")    # populates REGISTRY for KitaevHeisenberg (#256)
+include("models/quantum/PXP1D/PXP1D.jl")
+include("models/quantum/PXP1D/PXP1D_registry.jl")  # populates REGISTRY for PXP1D (#300)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

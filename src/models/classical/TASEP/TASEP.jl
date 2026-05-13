@@ -18,6 +18,8 @@
 # in later phases (issue #241).
 #
 # References:
+#   - M. Kardar, G. Parisi, Y.-C. Zhang,
+#     Phys. Rev. Lett. 56, 889 (1986) — KPZ universality class.
 #   - B. Derrida, M. R. Evans, V. Hakim, V. Pasquier,
 #     J. Phys. A 26, 1493 (1993).
 #   - B. Derrida, J. L. Lebowitz, Phys. Rev. Lett. 80, 209 (1998).
@@ -39,6 +41,8 @@ Quantities registered (Phase 1):
 
 # References
 
+- M. Kardar, G. Parisi, Y.-C. Zhang,
+  *Phys. Rev. Lett.* **56**, 889 (1986) — KPZ universality class.
 - B. Derrida, M. R. Evans, V. Hakim, V. Pasquier,
   *J. Phys. A* **26**, 1493 (1993).
 - B. Derrida, J. L. Lebowitz, *Phys. Rev. Lett.* **80**, 209 (1998).

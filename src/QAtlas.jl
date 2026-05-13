@@ -48,6 +48,7 @@ export ShastrySutherland                                 # SrCu₂(BO₃)₂ 2D 
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
 export KitaevHeisenberg                                  # K-J-Γ honeycomb (α-RuCl₃, Rau-Lee-Kee 2014)
+export DMIHeisenberg1D                                  # spin-½ Heisenberg + Dzyaloshinskii-Moriya (#298)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -202,6 +203,8 @@ include("models/quantum/HeisenbergXYZ/HeisenbergXYZ.jl")
 include("models/quantum/HeisenbergXYZ/HeisenbergXYZ_registry.jl")          # populates REGISTRY for HeisenbergXYZ (#253)
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg.jl")
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg_registry.jl")    # populates REGISTRY for KitaevHeisenberg (#256)
+include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D.jl")
+include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D_registry.jl")  # populates REGISTRY for DMIHeisenberg1D (#298)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

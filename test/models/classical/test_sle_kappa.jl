@@ -14,12 +14,12 @@ using QAtlas, Test
 
 @testset "SLEkappa — canonical fixed-point central charges" begin
     pairs = (
-        (κ=2.0,   c_exact=-2.0),     # LERW
-        (κ=8/3,   c_exact=0.0),       # SAW
-        (κ=3.0,   c_exact=1/2),       # Ising boundary
-        (κ=4.0,   c_exact=1.0),       # GFF
-        (κ=6.0,   c_exact=0.0),       # Percolation
-        (κ=8.0,   c_exact=-2.0),     # UST Peano
+        (κ=2.0, c_exact=-2.0),     # LERW
+        (κ=8/3, c_exact=0.0),       # SAW
+        (κ=3.0, c_exact=1/2),       # Ising boundary
+        (κ=4.0, c_exact=1.0),       # GFF
+        (κ=6.0, c_exact=0.0),       # Percolation
+        (κ=8.0, c_exact=-2.0),     # UST Peano
     )
     for (κ, c_exact) in pairs
         c = QAtlas.fetch(SLEkappa(; κ=κ), CentralCharge(), Infinite())

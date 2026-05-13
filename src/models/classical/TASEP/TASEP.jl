@@ -48,7 +48,8 @@ struct TASEP <: AbstractQAtlasModel
     ρ::Float64        # particle density
     function TASEP(p::Real, ρ::Real)
         p > 0 || throw(DomainError(p, "TASEP requires hopping rate p > 0; got p = $p."))
-        (0 ≤ ρ ≤ 1) || throw(DomainError(ρ, "TASEP requires density 0 ≤ ρ ≤ 1; got ρ = $ρ."))
+        (0 ≤ ρ ≤ 1) ||
+            throw(DomainError(ρ, "TASEP requires density 0 ≤ ρ ≤ 1; got ρ = $ρ."))
         return new(Float64(p), Float64(ρ))
     end
 end
@@ -78,8 +79,11 @@ Special points:
 
 - B. Derrida, J. L. Lebowitz, *Phys. Rev. Lett.* **80**, 209 (1998).
 """
-function fetch(m::TASEP, ::SteadyStateCurrent, ::Infinite; p::Real=m.p, ρ::Real=m.ρ, kwargs...)
+function fetch(
+    m::TASEP, ::SteadyStateCurrent, ::Infinite; p::Real=m.p, ρ::Real=m.ρ, kwargs...
+)
     p > 0 || throw(DomainError(p, "TASEP SteadyStateCurrent requires p > 0; got p = $p."))
-    (0 ≤ ρ ≤ 1) || throw(DomainError(ρ, "TASEP SteadyStateCurrent requires 0 ≤ ρ ≤ 1; got ρ = $ρ."))
+    (0 ≤ ρ ≤ 1) ||
+        throw(DomainError(ρ, "TASEP SteadyStateCurrent requires 0 ≤ ρ ≤ 1; got ρ = $ρ."))
     return p * ρ * (1 - ρ)
 end

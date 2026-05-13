@@ -886,7 +886,6 @@ class via the same data the `Universality{C}` entry exposes for
 """
 struct CasimirEnergyCorrection <: AbstractQuantity end
 
-
 """
     SteadyStateCurrent() <: AbstractQuantity
 

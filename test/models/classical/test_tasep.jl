@@ -6,7 +6,7 @@ using QAtlas, Test
     # Symmetric in ρ ↔ 1−ρ (particle-hole)
     for ρ in (0.1, 0.3, 0.7, 0.9)
         @test QAtlas.fetch(TASEP(; ρ=ρ), SteadyStateCurrent(), Infinite()) ≈
-              QAtlas.fetch(TASEP(; ρ=1-ρ), SteadyStateCurrent(), Infinite())
+            QAtlas.fetch(TASEP(; ρ=1-ρ), SteadyStateCurrent(), Infinite())
     end
     # Boundary: ρ = 0 or 1 → j = 0
     @test QAtlas.fetch(TASEP(; ρ=0.0), SteadyStateCurrent(), Infinite()) == 0.0

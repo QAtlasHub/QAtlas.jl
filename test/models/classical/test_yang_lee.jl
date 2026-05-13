@@ -35,7 +35,7 @@ end
     # Delegation invariant on each Kac primary (not just c)
     for s in 1:4
         @test QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=s) ==
-              QAtlas.fetch(QAtlas.MinimalModel(5, 2), ConformalWeights(); r=1, s=s)
+            QAtlas.fetch(QAtlas.MinimalModel(5, 2), ConformalWeights(); r=1, s=s)
     end
 end
 

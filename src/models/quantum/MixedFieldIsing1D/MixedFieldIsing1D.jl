@@ -83,7 +83,7 @@ function fetch(
     kwargs...,
 )
     J > 0 || throw(DomainError(J, "MixedFieldIsing1D MassGap requires J > 0; got J = $J."))
-    if !isapprox(h_z, 0.0; atol=1e-12)
+    if !iszero(h_z)
         throw(
             DomainError(
                 h_z,

@@ -42,3 +42,12 @@ end
     @test_throws DomainError MixedFieldIsing1D(; J=0.0)
     @test_throws DomainError MixedFieldIsing1D(; J=-1.0)
 end
+
+@testset "MixedFieldIsing1D — strict h_z=0 boundary (no isapprox)" begin
+    # A subnormal h_z must NOT silently delegate to TFIM. The Phase-1
+    # delegate boundary is strict (iszero), matching the KitaevHeisenberg
+    # convention. Even h_z = 1e-13 selects the non-integrable regime.
+    @test_throws DomainError QAtlas.fetch(
+        MixedFieldIsing1D(; J=1.0, h_x=1.0, h_z=1e-13), MassGap(), Infinite()
+    )
+end

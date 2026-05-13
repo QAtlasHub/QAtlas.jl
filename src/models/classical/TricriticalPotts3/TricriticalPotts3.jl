@@ -90,7 +90,7 @@ end
 Conformal weight `h_{r,s}` from the Kac table of the tricritical
 3-state Potts CFT, delegated to [`MinimalModel(7, 6)`](@ref):
 
-    h_{r,s}(p, p_prime) = ((p s - p_prime r)² - (p - p_prime)²) / (4 p p_prime),
+    h_{r,s}(p, p_prime) = ((p r - p_prime s)² - (p - p_prime)²) / (4 p p_prime),
 
 with `(p, p_prime) = (7, 6)` in QAtlas' `p > p_prime` convention.
 

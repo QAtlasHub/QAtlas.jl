@@ -92,9 +92,13 @@ function fetch(::BCFT, ::ResidualEntropy, ::Infinite; state::Symbol=:fixed, kwar
     elseif state === :sigma
         return -log(2) / 2   # log(1/√2)
     else
-        throw(DomainError(state,
-            "BCFT ResidualEntropy: Phase 1 supports Ising Cardy states only " *
-            "(:fixed_plus, :fixed_minus, :free, :sigma). Got state=:$state. " *
-            "Other CFTs and boundary states tracked as Phase 2."))
+        throw(
+            DomainError(
+                state,
+                "BCFT ResidualEntropy: Phase 1 supports Ising Cardy states only " *
+                "(:fixed_plus, :fixed_minus, :free, :sigma). Got state=:$state. " *
+                "Other CFTs and boundary states tracked as Phase 2.",
+            ),
+        )
     end
 end

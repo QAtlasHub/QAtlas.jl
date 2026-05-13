@@ -5,7 +5,7 @@ using QAtlas, Test
     # Fixed boundary state |1⟩: g = 1/√2  ⟹  log g = -log(2)/2 = -0.34657...
     s_fixed = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
     @test s_fixed ≈ -log(2) / 2
-    @test s_fixed ≈ -0.34657359  atol=1e-7
+    @test s_fixed ≈ -0.34657359 atol=1e-7
     # Equivalent aliases for ±
     @test QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed_plus) ≈ s_fixed
     @test QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed_minus) ≈ s_fixed
@@ -17,11 +17,13 @@ using QAtlas, Test
     @test QAtlas.fetch(m, ResidualEntropy(), Infinite()) ≈ s_fixed
     # g-theorem sanity: free is HIGHER (g=1) than fixed (g=1/√2 < 1)
     @test QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:free) >
-          QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
+        QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
 end
 
 @testset "BCFT — rejects unknown Cardy state (Phase 1)" begin
     m = BCFT()
     @test_throws DomainError QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:invalid)
-    @test_throws DomainError QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:something)
+    @test_throws DomainError QAtlas.fetch(
+        m, ResidualEntropy(), Infinite(); state=:something
+    )
 end

@@ -14,6 +14,7 @@ export IsingChain1D                                      # 1-D Ising chain (Isin
 export SpinIce                                           # pyrochlore Pauling 1935
 export TodaLattice                                       # 1-D Toda lattice (Toda 1967, integrable)
 export SLEkappa                                          # Schramm-Loewner Evolution SLE_κ (Schramm 2000)
+export TricriticalPotts3                                 # M(6,7) minimal model (Andrews-Baxter-Forrester 1984)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -118,6 +119,8 @@ include("models/classical/TodaLattice/TodaLattice.jl")
 include("models/classical/TodaLattice/TodaLattice_registry.jl")          # populates REGISTRY for TodaLattice (#254)
 include("models/classical/SLEkappa/SLEkappa.jl")
 include("models/classical/SLEkappa/SLEkappa_registry.jl")                # populates REGISTRY for SLEkappa (#244)
+include("models/classical/TricriticalPotts3/TricriticalPotts3.jl")
+include("models/classical/TricriticalPotts3/TricriticalPotts3_registry.jl")  # populates REGISTRY for TricriticalPotts3 (#245)
 include("models/quantum/tightbinding/regular/Honeycomb.jl")
 include("models/quantum/tightbinding/regular/Kagome.jl")
 include("models/quantum/tightbinding/regular/Lieb.jl")

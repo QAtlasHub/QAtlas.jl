@@ -98,14 +98,22 @@ function fetch(m::ZnClock, ::CentralCharge, ::Infinite; n::Integer=m.n, kwargs..
         # Z_3 = 3-state Potts universality.
         return QAtlas.fetch(QAtlas.MinimalModel(6, 5), CentralCharge())
     elseif n == 4
-        throw(DomainError(n,
-            "ZnClock CentralCharge: n = 4 (Ashkin-Teller line, continuous family of " *
-            "c = 1 CFTs) requires coupling specification (Kadanoff-Brown 1979). " *
-            "Deferred to Phase 2."))
+        throw(
+            DomainError(
+                n,
+                "ZnClock CentralCharge: n = 4 (Ashkin-Teller line, continuous family of " *
+                "c = 1 CFTs) requires coupling specification (Kadanoff-Brown 1979). " *
+                "Deferred to Phase 2.",
+            ),
+        )
     else  # n ≥ 5
-        throw(DomainError(n,
-            "ZnClock CentralCharge: n ≥ 5 (intermediate BKT phase, José-Kadanoff-" *
-            "Kirkpatrick-Nelson 1977) has a critical line of c = 1 CFTs between " *
-            "the low-T ordered and high-T disordered phases. Deferred to Phase 2."))
+        throw(
+            DomainError(
+                n,
+                "ZnClock CentralCharge: n ≥ 5 (intermediate BKT phase, José-Kadanoff-" *
+                "Kirkpatrick-Nelson 1977) has a critical line of c = 1 CFTs between " *
+                "the low-T ordered and high-T disordered phases. Deferred to Phase 2.",
+            ),
+        )
     end
 end

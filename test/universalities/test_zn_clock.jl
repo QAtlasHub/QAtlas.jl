@@ -6,13 +6,13 @@ using QAtlas, Test
     @test QAtlas.fetch(ZnClock(), CentralCharge(), Infinite()) == 1 // 2
     # Delegation invariant
     @test QAtlas.fetch(ZnClock(; n=2), CentralCharge(), Infinite()) ==
-          QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
+        QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
 end
 
 @testset "ZnClock — n=3 Potts universality (Phase 1)" begin
     @test QAtlas.fetch(ZnClock(; n=3), CentralCharge(), Infinite()) == 4 // 5
     @test QAtlas.fetch(ZnClock(; n=3), CentralCharge(), Infinite()) ==
-          QAtlas.fetch(QAtlas.MinimalModel(6, 5), CentralCharge())
+        QAtlas.fetch(QAtlas.MinimalModel(6, 5), CentralCharge())
 end
 
 @testset "ZnClock — n ≥ 4 throws DomainError (Phase 2 deferral)" begin

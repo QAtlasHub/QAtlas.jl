@@ -28,6 +28,12 @@ end
         QAtlas.fetch(QAtlas.MinimalModel(4, 3), CentralCharge())
 end
 
+@testset "ZnParafermion — Z_3 Potts at n=3 matches MinimalModel(6,5) (Phase 1)" begin
+    # 3-state Potts critical CFT: Z_3 parafermion = M(6, 5), both c = 4/5.
+    @test QAtlas.fetch(ZnParafermion(; n=3), CentralCharge(), Infinite()) ==
+        QAtlas.fetch(QAtlas.MinimalModel(6, 5), CentralCharge())
+end
+
 @testset "ZnParafermion — rejects n < 2 (Phase 1)" begin
     @test_throws DomainError ZnParafermion(; n=1)
     @test_throws DomainError ZnParafermion(; n=0)

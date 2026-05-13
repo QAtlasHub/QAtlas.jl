@@ -60,15 +60,18 @@ For `Δ ≠ 1` the result is not a closed-form literature constant
 (XY1 / large-Δ Néel phase diagram, Schulz 1986; Tzeng-Yang-Hsu 2017)
 and a `DomainError` is raised — Phase 2 will plug in DMRG / TLL.
 """
-function fetch(m::S1XXZ1D, ::MassGap, ::Infinite;
-               J::Real=m.J, Δ::Real=m.Δ, kwargs...)
+function fetch(m::S1XXZ1D, ::MassGap, ::Infinite; J::Real=m.J, Δ::Real=m.Δ, kwargs...)
     J > 0 || throw(DomainError(J, "S1XXZ1D MassGap requires J > 0; got J = $J."))
     if !isapprox(Δ, 1.0; atol=1e-12)
-        throw(DomainError(Δ,
-            "S1XXZ1D MassGap: closed-form Haldane gap supported only at Δ = 1 " *
-            "(spin-1 Heisenberg, White 1992 DMRG). Δ ≠ 1 traverses XY1/large-Δ Néel " *
-            "phase diagram (Schulz 1986; Tzeng-Yang-Hsu 2017) — deferred to Phase 2. " *
-            "Got Δ = $Δ."))
+        throw(
+            DomainError(
+                Δ,
+                "S1XXZ1D MassGap: closed-form Haldane gap supported only at Δ = 1 " *
+                "(spin-1 Heisenberg, White 1992 DMRG). Δ ≠ 1 traverses XY1/large-Δ Néel " *
+                "phase diagram (Schulz 1986; Tzeng-Yang-Hsu 2017) — deferred to Phase 2. " *
+                "Got Δ = $Δ.",
+            ),
+        )
     end
     return QAtlas.fetch(S1Heisenberg1D(; J=J), MassGap(), Infinite())
 end

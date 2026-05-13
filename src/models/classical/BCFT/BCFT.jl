@@ -116,12 +116,12 @@ supports Ising Cardy boundary states; other CFTs are Phase 2).
 """
 function fetch(::BCFT, ::ResidualEntropy, ::Infinite; state::Symbol=:fixed, kwargs...)
     if state === :fixed ||
-       state === :fixed_plus ||
-       state === :fixed_minus ||
-       state === :identity ||
-       state === :vacuum ||
-       state === :epsilon ||
-       state === :energy
+        state === :fixed_plus ||
+        state === :fixed_minus ||
+        state === :identity ||
+        state === :vacuum ||
+        state === :epsilon ||
+        state === :energy
         return -log(2) / 2   # log(1/√2) = -(1/2) log 2
     elseif state === :free || state === :sigma
         return 0.0            # log 1; |σ⟩ Cardy state ≡ physical free boundary

@@ -23,6 +23,7 @@ export KagomeHeisenbergAFM                              # Kagome S=1/2 AFM Z₂ 
 export RFIM                                              # Random-Field Ising Model (Imry-Ma 1975)
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
 export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
+export RandomBondIsing2D                                  # 2D ±J random-bond Ising / Edwards-Anderson (#232)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -131,6 +132,8 @@ include("models/classical/TricriticalPotts3/TricriticalPotts3.jl")
 include("models/classical/TricriticalPotts3/TricriticalPotts3_registry.jl")  # populates REGISTRY for TricriticalPotts3 (#245)
 include("models/classical/LiouvilleCFT/LiouvilleCFT.jl")
 include("models/classical/LiouvilleCFT/LiouvilleCFT_registry.jl")        # populates REGISTRY for LiouvilleCFT (#248)
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D.jl")
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D_registry.jl")  # populates REGISTRY for RandomBondIsing2D (#232)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")

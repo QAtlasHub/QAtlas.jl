@@ -110,12 +110,7 @@ Out-of-range `(r, s)` throws `DomainError` (inherited from
 - J. L. Cardy, *Phys. Rev. Lett.* **54**, 1354 (1985).
 """
 function fetch(
-    ::YangLee,
-    ::ConformalWeights,
-    ::Infinite;
-    r::Integer=1,
-    s::Integer=1,
-    kwargs...,
+    ::YangLee, ::ConformalWeights, ::Infinite; r::Integer=1, s::Integer=1, kwargs...
 )
     return QAtlas.fetch(QAtlas.MinimalModel(5, 2), ConformalWeights(); r=r, s=s)
 end

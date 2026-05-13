@@ -34,11 +34,13 @@ M(6, 7), realised on the lattice by Andrews-Baxter-Forrester (1984)
 RSOS models and by the q = 3 Potts model with dilution
 (Huse 1984).
 
-Quantities registered (Phase 1):
+Quantities registered:
 
-| Quantity                       | BC         | Method                         |
-| ------------------------------ | ---------- | ------------------------------ |
-| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(6,7) |
+| Quantity                       | BC         | Method                              |
+| ------------------------------ | ---------- | ----------------------------------- |
+| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(7, 6)     |
+| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(7, 6)     |
+| [`PrimaryFields`](@ref)        | `Infinite` | delegated to MinimalModel(7, 6)     |
 
 # References
 
@@ -75,4 +77,60 @@ function fetch(::TricriticalPotts3, ::CentralCharge, ::Infinite; kwargs...)
     # literature where the order is reversed).  c is symmetric in the
     # two arguments so the result is the same: 6/7.
     return QAtlas.fetch(QAtlas.MinimalModel(7, 6), CentralCharge())
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Conformal weights via MinimalModel(7, 6) delegation (Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::TricriticalPotts3, ::ConformalWeights; r::Integer, s::Integer, kwargs...)
+        -> Rational{Int}
+
+Conformal weight `h_{r,s}` from the Kac table of the tricritical
+3-state Potts CFT, delegated to [`MinimalModel(7, 6)`](@ref):
+
+    h_{r,s}(p, p_prime) = ((p s - p_prime r)² - (p - p_prime)²) / (4 p p_prime),
+
+with `(p, p_prime) = (7, 6)` in QAtlas' `p > p_prime` convention.
+
+Index ranges follow [`MinimalModel`](@ref): `1 ≤ r ≤ p_prime - 1 = 5`
+and `1 ≤ s ≤ p - 1 = 6`.  Returns `Rational{Int}`.
+
+Examples:
+
+- `h_{1,1} = 0`   (identity, lowest weight)
+- `h_{1,2} = 1/7` (energy operator ε)
+- `h_{2,1} = 3/8` (M(7,6) Kac (2,1))
+
+# References
+
+- A. A. Belavin, A. M. Polyakov, A. B. Zamolodchikov,
+  *Nucl. Phys. B* **241**, 333 (1984).
+- G. E. Andrews, R. J. Baxter, P. J. Forrester,
+  *J. Stat. Phys.* **35**, 193 (1984).
+"""
+function fetch(::TricriticalPotts3, ::ConformalWeights; r::Integer, s::Integer, kwargs...)
+    return QAtlas.fetch(QAtlas.MinimalModel(7, 6), ConformalWeights(); r=r, s=s)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Primary fields via MinimalModel(7, 6) delegation (Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::TricriticalPotts3, ::PrimaryFields; kwargs...) -> Vector{NamedTuple}
+
+Kac-table primary fields of the tricritical 3-state Potts CFT,
+delegated to [`MinimalModel(7, 6)`](@ref).  Returns the
+`((p_prime - 1) * (p - 1) / 2) = 15` independent primaries with
+their `(r, s)` labels and `h` weights.
+
+# References
+
+- A. A. Belavin, A. M. Polyakov, A. B. Zamolodchikov,
+  *Nucl. Phys. B* **241**, 333 (1984).
+"""
+function fetch(::TricriticalPotts3, ::PrimaryFields; kwargs...)
+    return QAtlas.fetch(QAtlas.MinimalModel(7, 6), PrimaryFields())
 end

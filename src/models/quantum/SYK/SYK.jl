@@ -70,9 +70,8 @@ the JT-gravity bulk dual.
 struct SYK <: AbstractQAtlasModel
     q::Int
     function SYK(q::Integer)
-        q ≥ 2 || throw(
-            DomainError(q, "SYK requires q-body coupling with q ≥ 2; got q = $q.")
-        )
+        q ≥ 2 ||
+            throw(DomainError(q, "SYK requires q-body coupling with q ≥ 2; got q = $q."))
         iseven(q) ||
             throw(DomainError(q, "SYK requires q even (Majorana indices); got q = $q."))
         return new(Int(q))
@@ -120,15 +119,9 @@ bilinear tower), are deferred to Phase 2.
 - J. Maldacena, D. Stanford, *Phys. Rev. D* **94**, 106002 (2016).
 """
 function fetch(
-    m::SYK,
-    ::ConformalWeights,
-    ::Infinite;
-    q::Integer=m.q,
-    field::Symbol=:ψ,
-    kwargs...,
+    m::SYK, ::ConformalWeights, ::Infinite; q::Integer=m.q, field::Symbol=:ψ, kwargs...
 )
-    q ≥ 2 ||
-        throw(DomainError(q, "SYK ConformalWeights requires q ≥ 2; got q = $q."))
+    q ≥ 2 || throw(DomainError(q, "SYK ConformalWeights requires q ≥ 2; got q = $q."))
     iseven(q) || throw(
         DomainError(
             q,

@@ -95,3 +95,42 @@ function fetch(
     )
     return N
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Dynamic fermion mass (large-N, Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::GrossNeveu, ::MassGap, ::Infinite; Λ::Real, N=m.N, g=m.g) -> Float64
+
+Dynamically generated fermion mass `m_F` in the large-N Gross-Neveu
+model (Gross-Neveu 1974):
+
+    m_F = Λ · exp(−π / (N · g²)).
+
+`Λ` is the renormalisation scheme's UV cutoff / dimensional-transmutation
+scale and is a **required keyword argument** — it is intentionally not
+stored on the `GrossNeveu` struct because the choice of scheme is up to
+the caller.  The exponential suppression at weak coupling is the
+textbook signature of asymptotic-freedom-driven mass-gap formation.
+
+`Λ > 0`, `g > 0`, `N ≥ 1` required (`DomainError` otherwise).
+
+# Examples
+
+- `fetch(GrossNeveu(; N=1, g=1.0), MassGap(), Infinite(); Λ=1.0)` → `exp(-π) ≈ 0.0432139`
+- `fetch(GrossNeveu(; N=2, g=1.0), MassGap(), Infinite(); Λ=1.0)` → `exp(-π/2) ≈ 0.2078796`
+
+# References
+
+- D. J. Gross, A. Neveu, *Phys. Rev. D* **10**, 3235 (1974).
+- N. Andrei, J. H. Lowenstein, *Phys. Rev. Lett.* **43**, 1698 (1979).
+"""
+function fetch(
+    m::GrossNeveu, ::MassGap, ::Infinite; Λ::Real, N::Integer=m.N, g::Real=m.g, kwargs...
+)
+    Λ > 0 || throw(DomainError(Λ, "GrossNeveu MassGap requires Λ > 0; got Λ = $Λ."))
+    g > 0 || throw(DomainError(g, "GrossNeveu MassGap requires g > 0; got g = $g."))
+    N ≥ 1 || throw(DomainError(N, "GrossNeveu MassGap requires N ≥ 1; got N = $N."))
+    return Λ * exp(-π / (N * g^2))
+end

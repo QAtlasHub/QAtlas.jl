@@ -63,9 +63,7 @@ struct PpIp2DSC <: AbstractQAtlasModel
     Δ₀::Float64
     μ::Float64
     function PpIp2DSC(Δ₀::Real, μ::Real)
-        Δ₀ > 0 || throw(
-            DomainError(Δ₀, "PpIp2DSC requires Δ₀ > 0; got Δ₀ = $Δ₀."),
-        )
+        Δ₀ > 0 || throw(DomainError(Δ₀, "PpIp2DSC requires Δ₀ > 0; got Δ₀ = $Δ₀."))
         μ > 0 || throw(
             DomainError(
                 μ,

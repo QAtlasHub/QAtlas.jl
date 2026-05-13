@@ -144,3 +144,39 @@ function fetch(m::KagomeHeisenbergAFM, ::MassGap, ::Infinite; J::Real=m.J, kwarg
     )
     return J * _KAGOME_AFM_SPIN_GAP_PER_J
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Topological entanglement entropy γ = log 2 (Z₂ scenario, Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::KagomeHeisenbergAFM, ::TopologicalEntanglementEntropy, ::Infinite; kwargs...)
+        -> Float64
+
+Topological entanglement entropy `γ = log 2` for the Z₂ spin-liquid
+ground-state scenario.  In the Kitaev-Preskill (2006) / Levin-Wen
+(2006) prescription,
+
+    S(ρ_A) = α |∂A| − γ + O(|∂A|⁻¹),
+
+with `γ = log 𝒟` and total quantum dimension `𝒟 = √(Σ_a d_a²) = 2`
+for Z₂ topological order (four Abelian anyons `{1, e, m, ε}`, each
+with `d_a = 1`).
+
+Reliability is `:medium` — the value is the Z₂ topological prediction
+(Yan-Huse-White 2011 DMRG; Jiang-Wang-Balents 2012 directly extracted
+`γ ≈ log 2` from DMRG entanglement scans), but the competing U(1)
+Dirac-spin-liquid scenario (Iqbal-Becca-Sorella-Poilblanc 2013)
+gives a gapless variational ground state with no topological order;
+the precise spin-liquid character is an open question.
+
+# References
+
+- A. Kitaev, J. Preskill, *Phys. Rev. Lett.* **96**, 110404 (2006).
+- M. Levin, X.-G. Wen, *Phys. Rev. Lett.* **96**, 110405 (2006).
+- H.-C. Jiang, Z. Wang, L. Balents, *Nature Phys.* **8**, 902 (2012).
+- S. Yan, D. A. Huse, S. R. White, *Science* **332**, 1173 (2011).
+"""
+function fetch(::KagomeHeisenbergAFM, ::TopologicalEntanglementEntropy, ::Infinite; kwargs...)
+    return log(2.0)
+end

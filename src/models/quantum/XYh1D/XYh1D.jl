@@ -97,13 +97,7 @@ Anisotropic `Jx ≠ Jy` raises `DomainError` — Phase 2.
 - P. Pfeuty, *Annals Phys.* **57**, 79 (1970).
 """
 function fetch(
-    m::XYh1D,
-    ::MassGap,
-    ::Infinite;
-    Jx::Real=m.Jx,
-    Jy::Real=m.Jy,
-    h::Real=m.h,
-    kwargs...,
+    m::XYh1D, ::MassGap, ::Infinite; Jx::Real=m.Jx, Jy::Real=m.Jy, h::Real=m.h, kwargs...
 )
     Jx > 0 || throw(DomainError(Jx, "XYh1D MassGap requires Jx > 0; got Jx = $Jx."))
     Jy > 0 || throw(DomainError(Jy, "XYh1D MassGap requires Jy > 0; got Jy = $Jy."))

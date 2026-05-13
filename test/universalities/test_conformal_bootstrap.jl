@@ -1,8 +1,11 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Universality test: ConformalBootstrap — 3D Ising Δ_σ, Δ_ε (KPSD 2014).
+# Universality test: ConformalBootstrap — 3D Ising Δ_σ, Δ_ε
+# (KPSD 2014 methodology; precise values KPSD-Vichi 2016 "Precision
+# Islands" / arXiv:1603.04436; Simmons-Duffin 2017 cross-check).
 #
 # Verifies:
-#   * Δ_σ and Δ_ε match the Kos-Poland-Simmons-Duffin 2014 reference values.
+#   * Δ_σ and Δ_ε match the KPSD-Vichi 2016 "Precision Islands"
+#     reference values (within the 2016 (10) uncertainty bars).
 #   * Sanity ordering Δ_σ < Δ_ε.
 #   * Derived 3D Ising exponents ν = 1/(3 − Δ_ε) ≈ 0.62997 and
 #     η = 2Δ_σ − 1 ≈ 0.03629.
@@ -12,7 +15,7 @@
 
 using QAtlas, Test
 
-@testset "ConformalBootstrap — 3D Ising Δ_σ, Δ_ε (Phase 1, KPSD 2014)" begin
+@testset "ConformalBootstrap — 3D Ising Δ_σ, Δ_ε (Phase 1, KPSD-Vichi 2016)" begin
     m = ConformalBootstrap()
     Δ_σ = QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:σ)
     Δ_ε = QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:ε)

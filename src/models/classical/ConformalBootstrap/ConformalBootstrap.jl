@@ -1,15 +1,21 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # ConformalBootstrap — the 3D Ising critical point pinned by the modular
-# conformal bootstrap (Kos-Poland-Simmons-Duffin 2014; Simmons-Duffin 2017;
-# Reehorst-Rychkov-Simmons-Duffin-Sirois-Su-van Rees 2021).
+# conformal bootstrap (Kos-Poland-Simmons-Duffin 2014 methodology;
+# Kos-Poland-Simmons-Duffin-Vichi 2016 "Precision Islands" — precise values;
+# Simmons-Duffin 2017 lightcone bootstrap cross-check).
 #
 # The 3D Ising universality class governs the liquid-vapour critical point,
 # uniaxial ferromagnets, and innumerable physical systems.  The bootstrap
 # fixes the scaling dimensions of the lowest scalar (σ) and energy (ε)
 # primaries with record precision:
 #
-#     Δ_σ = 0.51814894(2)            (KPSD 2014)
-#     Δ_ε = 1.41262528(29)           (KPSD 2014)
+#     Δ_σ = 0.5181489(10)            (KPSD 2016, "Precision Islands")
+#     Δ_ε = 1.412625(10)             (KPSD 2016, "Precision Islands")
+#
+# (KPSD 2014 introduced the mixed-correlator bootstrap method but
+# reported wider error bars; the precise (10) uncertainties above are
+# from KPSD 2016 / arXiv:1603.04436.  Cross-checked by Simmons-Duffin
+# 2017 lightcone bootstrap.)
 #
 # These two numbers yield the canonical 3D Ising critical exponents
 #
@@ -22,10 +28,14 @@
 #
 # References:
 #   - F. Kos, D. Poland, D. Simmons-Duffin,
-#     "Bootstrapping the O(N) vector models", JHEP 06 (2014) 091.
+#     "Bootstrapping the O(N) vector models", JHEP 06 (2014) 091
+#     (methodology; wider error bars).
+#   - F. Kos, D. Poland, D. Simmons-Duffin, A. Vichi,
+#     "Precision Islands in the Ising and O(N) Models",
+#     JHEP 08 (2016) 036; arXiv:1603.04436 (precise Δ_σ, Δ_ε).
 #   - D. Simmons-Duffin,
 #     "The Lightcone Bootstrap and the Spectrum of the 3D Ising CFT",
-#     JHEP 03 (2017) 086.
+#     JHEP 03 (2017) 086 (lightcone-bootstrap cross-check).
 #   - M. Reehorst, S. Rychkov, D. Simmons-Duffin, B. Sirois, N. Su,
 #     B. van Rees, "Navigator Function for the Conformal Bootstrap",
 #     SciPost Phys. 11 (2021) 072.
@@ -35,8 +45,10 @@
     ConformalBootstrap() <: AbstractQAtlasModel
 
 The 3D Ising critical point with high-precision conformal-bootstrap
-scaling dimensions (Kos-Poland-Simmons-Duffin 2014).  Parameterless:
-the 3D Ising universality class is unique.
+scaling dimensions.  Methodology: Kos-Poland-Simmons-Duffin 2014
+(mixed-correlator bootstrap).  Precise values: KPSD-Vichi 2016
+"Precision Islands" (arXiv:1603.04436).  Parameterless: the 3D
+Ising universality class is unique.
 
 Phase 1 ships only the 3D Ising universality class; other
 bootstrap-pinned CFTs (O(N) vector models, stress-tensor and
@@ -44,9 +56,9 @@ higher-spin multiplets, fermionic CFTs) are deferred to Phase 2.
 
 Quantities registered (Phase 1):
 
-| Quantity                       | BC         | Method                           |
-| ------------------------------ | ---------- | -------------------------------- |
-| [`ConformalWeights`](@ref)     | `Infinite` | bootstrap reference (KPSD 2014)  |
+| Quantity                       | BC         | Method                                  |
+| ------------------------------ | ---------- | --------------------------------------- |
+| [`ConformalWeights`](@ref)     | `Infinite` | bootstrap reference (KPSD 2016 islands) |
 
 Available kwargs for `ConformalWeights`:
 
@@ -55,15 +67,21 @@ Available kwargs for `ConformalWeights`:
 
 # References
 
-- F. Kos, D. Poland, D. Simmons-Duffin, *JHEP* **06** (2014) 091.
-- D. Simmons-Duffin, *JHEP* **03** (2017) 086.
+- F. Kos, D. Poland, D. Simmons-Duffin, *JHEP* **06** (2014) 091
+  — methodology (mixed-correlator bootstrap).
+- F. Kos, D. Poland, D. Simmons-Duffin, A. Vichi, *JHEP* **08**
+  (2016) 036; arXiv:1603.04436 — "Precision Islands", precise Δ_σ, Δ_ε.
+- D. Simmons-Duffin, *JHEP* **03** (2017) 086 — lightcone-bootstrap
+  cross-check.
 - M. Reehorst, S. Rychkov, D. Simmons-Duffin, B. Sirois, N. Su,
   B. van Rees, *SciPost Phys.* **11** (2021) 072.
 """
 struct ConformalBootstrap <: AbstractQAtlasModel end
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# ConformalWeights — Δ_σ, Δ_ε bootstrap reference values (KPSD 2014).
+# ConformalWeights — Δ_σ, Δ_ε bootstrap reference values
+# (KPSD 2014 methodology; precise (10) values from KPSD-Vichi 2016
+# "Precision Islands" / arXiv:1603.04436).
 # ═══════════════════════════════════════════════════════════════════════════════
 
 function fetch(

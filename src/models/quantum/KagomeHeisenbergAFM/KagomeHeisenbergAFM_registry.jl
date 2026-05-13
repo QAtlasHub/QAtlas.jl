@@ -36,6 +36,7 @@
         "Levin-Wen 2006",
         "Jiang-Wang-Balents 2012",
         "Yan-Huse-White 2011",
+        "Iqbal-Becca-Sorella-Poilblanc 2013",
     ],
     notes="γ = log 2 in the Z₂-spin-liquid scenario; competing U(1) Dirac scenario predicts γ = 0.",
 )

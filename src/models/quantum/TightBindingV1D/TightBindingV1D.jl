@@ -88,7 +88,7 @@ function fetch(
     kwargs...,
 )
     t > 0 || throw(DomainError(t, "TightBindingV1D MassGap requires t > 0; got t = $t."))
-    if !isapprox(V, 0.0; atol=1e-12)
+    if !iszero(V)
         throw(
             DomainError(
                 V,
@@ -128,7 +128,7 @@ function fetch(
 )
     t > 0 ||
         throw(DomainError(t, "TightBindingV1D FermiVelocity requires t > 0; got t = $t."))
-    if !isapprox(V, 0.0; atol=1e-12)
+    if !iszero(V)
         throw(
             DomainError(
                 V, "TightBindingV1D FermiVelocity: V ≠ 0 deferred to Phase 2. Got V = $V."

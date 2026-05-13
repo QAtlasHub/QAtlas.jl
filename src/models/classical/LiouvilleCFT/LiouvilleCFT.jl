@@ -83,9 +83,7 @@ half-line).
 - A. M. Polyakov, *Phys. Lett. B* **103**, 207 (1981).
 """
 function fetch(m::LiouvilleCFT, ::CentralCharge, ::Infinite; b::Real=m.b, kwargs...)
-    b > 0 || throw(
-        DomainError(b, "LiouvilleCFT CentralCharge requires b > 0; got b = $b."),
-    )
+    b > 0 || throw(DomainError(b, "LiouvilleCFT CentralCharge requires b > 0; got b = $b."))
     Q = b + 1 / b
     return 1 + 6 * Q^2
 end

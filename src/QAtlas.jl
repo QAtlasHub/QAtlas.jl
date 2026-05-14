@@ -31,6 +31,7 @@ export RandomBondIsing2D                                  # 2D ±J random-bond I
 export TTbar                                                # universal TT-bar deformation (#249)
 export TASEP                                                # totally asymmetric simple exclusion process (#241)
 export YangLee                                              # non-unitary CFT M(5,2), c=-22/5 (#234)
+export ConformalBootstrap                                   # 3D Ising bootstrap exponents (#236)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -175,6 +176,8 @@ include("models/classical/TASEP/TASEP.jl")
 include("models/classical/TASEP/TASEP_registry.jl")  # populates REGISTRY for TASEP (#241)
 include("models/classical/YangLee/YangLee.jl")
 include("models/classical/YangLee/YangLee_registry.jl")        # populates REGISTRY for YangLee (#234)
+include("models/classical/ConformalBootstrap/ConformalBootstrap.jl")
+include("models/classical/ConformalBootstrap/ConformalBootstrap_registry.jl")  # populates REGISTRY for ConformalBootstrap (#236)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")

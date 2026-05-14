@@ -21,10 +21,14 @@ jobs:
         version:
           - '1'
         group:
-          - core,universalities
+          - core
+          - universalities
           - models/classical
           - models/quantum/TFIM
-          - models/quantum/XXZ,models/quantum/Heisenberg,models/quantum/KitaevHoneycomb,models/quantum/misc
+          - models/quantum/XXZ
+          - models/quantum/Heisenberg
+          - models/quantum/KitaevHoneycomb
+          - models/quantum/misc
           - identities
           - verification/tightbinding
           - verification/tfim_ising

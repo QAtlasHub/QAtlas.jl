@@ -23,3 +23,20 @@
     references=["Yan-Huse-White 2011", "Iqbal-Becca-Sorella-Poilblanc 2013"],
     notes="Δ_s/J ≈ 0.13 (Z₂ scenario, YHW); competing VMC Dirac spin liquid suggests upper bound.",
 )
+
+@register(
+    KagomeHeisenbergAFM,
+    TopologicalEntanglementEntropy,
+    Infinite,
+    method=:analytic,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl",
+    references=[
+        "Kitaev-Preskill 2006",
+        "Levin-Wen 2006",
+        "Jiang-Wang-Balents 2012",
+        "Yan-Huse-White 2011",
+        "Iqbal-Becca-Sorella-Poilblanc 2013",
+    ],
+    notes="γ = log 2 in the Z₂-spin-liquid scenario; competing U(1) Dirac scenario predicts γ = 0.",
+)

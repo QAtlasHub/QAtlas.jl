@@ -15,6 +15,7 @@ export SpinIce                                           # pyrochlore Pauling 19
 export TodaLattice                                       # 1-D Toda lattice (Toda 1967, integrable)
 export SLEkappa                                          # Schramm-Loewner Evolution SLE_κ (Schramm 2000)
 export TricriticalPotts3                                 # M(6,7) minimal model (Andrews-Baxter-Forrester 1984)
+export TricriticalIsing                                  # M(5,4) unitary minimal model, c=7/10 (Belavin-Polyakov-Zamolodchikov 1984)
 export LiouvilleCFT                                      # non-compact Liouville CFT (Polyakov 1981)
 export SchwingerModel                                    # 1+1-D QED (Schwinger 1962)
 export ChernSimons3D                                     # SU(N)_k Chern-Simons TQFT (Witten 1989)
@@ -23,6 +24,7 @@ export KagomeHeisenbergAFM                              # Kagome S=1/2 AFM Z₂ 
 export RFIM                                              # Random-Field Ising Model (Imry-Ma 1975)
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
 export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
+export TASEP                                                # totally asymmetric simple exclusion process (#241)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -72,11 +74,13 @@ export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
+export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
+export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
@@ -130,8 +134,12 @@ include("models/classical/SLEkappa/SLEkappa.jl")
 include("models/classical/SLEkappa/SLEkappa_registry.jl")                # populates REGISTRY for SLEkappa (#244)
 include("models/classical/TricriticalPotts3/TricriticalPotts3.jl")
 include("models/classical/TricriticalPotts3/TricriticalPotts3_registry.jl")  # populates REGISTRY for TricriticalPotts3 (#245)
+include("models/classical/TricriticalIsing/TricriticalIsing.jl")
+include("models/classical/TricriticalIsing/TricriticalIsing_registry.jl")  # populates REGISTRY for TricriticalIsing
 include("models/classical/LiouvilleCFT/LiouvilleCFT.jl")
 include("models/classical/LiouvilleCFT/LiouvilleCFT_registry.jl")        # populates REGISTRY for LiouvilleCFT (#248)
+include("models/classical/TASEP/TASEP.jl")
+include("models/classical/TASEP/TASEP_registry.jl")  # populates REGISTRY for TASEP (#241)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")

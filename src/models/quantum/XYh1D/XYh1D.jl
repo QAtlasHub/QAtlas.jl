@@ -158,8 +158,10 @@ function fetch(
     h::Real=m.h,
     kwargs...,
 )
-    Jx > 0 || throw(DomainError(Jx, "XYh1D Energy{:per_site} requires Jx > 0; got Jx = $Jx."))
-    Jy > 0 || throw(DomainError(Jy, "XYh1D Energy{:per_site} requires Jy > 0; got Jy = $Jy."))
+    Jx > 0 ||
+        throw(DomainError(Jx, "XYh1D Energy{:per_site} requires Jx > 0; got Jx = $Jx."))
+    Jy > 0 ||
+        throw(DomainError(Jy, "XYh1D Energy{:per_site} requires Jy > 0; got Jy = $Jy."))
     if !isapprox(Jx, Jy; atol=1e-12)
         throw(
             DomainError(

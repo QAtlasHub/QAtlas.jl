@@ -150,3 +150,41 @@ end
     @test TracyWidom() isa QAtlas.AbstractQuantity
     @test MeanRatio() isa QAtlas.AbstractQuantity
 end
+
+# ─── Spectral form factor (Phase 1, GUE late-time plateau; issue #243) ───────
+
+@testset "RMT: SpectralFormFactor — GUE late-time plateau K(τ→∞) = 1" begin
+    # Default τ = Inf, ensemble = :GUE → plateau K = 1.
+    @test QAtlas.fetch(Universality(:RMT), SpectralFormFactor()) == 1.0
+    # Plateau holds for any τ ≥ 2π (Heisenberg time τ_H).
+    for τ in (2π, 2π + 1e-9, 10π, 100π, Inf)
+        @test QAtlas.fetch(Universality(:RMT), SpectralFormFactor(); τ=τ) == 1.0
+    end
+    # Explicit :GUE keyword behaves identically.
+    @test QAtlas.fetch(Universality(:RMT), SpectralFormFactor(); ensemble=:GUE, τ=Inf) ==
+        1.0
+end
+
+@testset "RMT: SpectralFormFactor — Phase 2 deferrals raise DomainError" begin
+    # Ramp regime τ < 2π is Phase 2.
+    for τ_bad in (0.0, 0.5, 1.0, π, 2π - 1e-6)
+        @test_throws DomainError QAtlas.fetch(
+            Universality(:RMT), SpectralFormFactor(); τ=τ_bad
+        )
+    end
+    # GOE / GSE ensembles are Phase 2.
+    @test_throws DomainError QAtlas.fetch(
+        Universality(:RMT), SpectralFormFactor(); ensemble=:GOE
+    )
+    @test_throws DomainError QAtlas.fetch(
+        Universality(:RMT), SpectralFormFactor(); ensemble=:GSE
+    )
+    # Unknown ensemble label also rejected.
+    @test_throws DomainError QAtlas.fetch(
+        Universality(:RMT), SpectralFormFactor(); ensemble=:CUE
+    )
+end
+
+@testset "RMT: SpectralFormFactor — exported quantity type" begin
+    @test SpectralFormFactor() isa QAtlas.AbstractQuantity
+end

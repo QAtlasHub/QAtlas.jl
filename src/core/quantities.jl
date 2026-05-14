@@ -923,3 +923,36 @@ non-zero condensate
 (Schwinger 1962; Coleman-Jackiw-Susskind 1975.)
 """
 struct ChiralCondensate <: AbstractQuantity end
+# ─── RMT spectral form factor (introduced for Universality{:RMT}, issue #243) ─
+
+"""
+    SpectralFormFactor() <: AbstractQuantity
+
+Disorder-averaged spectral form factor
+`K(t) = ⟨|Σ_n e^{−iE_n t}|²⟩ / Z²`
+— the canonical late-time quantum-chaology diagnostic
+(Mehta 2004 §16; Cotler et al. 2017).
+
+For GUE random-matrix-theory eigenvalues in the large-`N`
+thermodynamic limit, with rescaled time `τ = t / N`, the
+disorder-averaged SFF has the universal closed form
+
+* `K(τ) = (τ/(2π)) − (τ/(4π)) log|1 − τ/(2π)|`   for `τ ≤ 2π`
+* `K(τ) = 1`                                       for `τ ≥ 2π`
+
+so that `K` exhibits a linear ramp `K(τ) ≈ τ/π` for small `τ` and
+saturates to the universal plateau `K(τ→∞) = 1` for `τ` beyond
+the Heisenberg time `τ_H = 2π`.
+
+QAtlas Phase 1 (issue #243) exposes only the late-time plateau
+`τ ≥ τ_H` for the GUE ensemble; the ramp regime and the GOE/GSE
+sigma-model closed forms (Mehta 2004 §16) are deferred to Phase 2.
+
+# References
+- M. L. Mehta, *Random Matrices*, 3rd ed., Elsevier (2004), §16.
+- E. Brézin, S. Hikami, *Phys. Rev. E* **55**, 4067 (1997).
+- J. S. Cotler, G. Gur-Ari, M. Hanada, J. Polchinski, P. Saad,
+  S. H. Shenker, D. Stanford, A. Streicher, M. Tezuka,
+  *JHEP* **05**, 118 (2017), arXiv:1611.04650 — ramp-plateau picture.
+"""
+struct SpectralFormFactor <: AbstractQuantity end

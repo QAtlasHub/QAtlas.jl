@@ -895,3 +895,16 @@ class via the same data the `Universality{C}` entry exposes for
     will be exposed via a `ConformalTower` quantity once implemented.
 """
 struct CasimirEnergyCorrection <: AbstractQuantity end
+
+"""
+    SteadyStateCurrent() <: AbstractQuantity
+
+Steady-state mass / particle current `j` in a 1D non-equilibrium lattice
+gas (e.g. ASEP / TASEP, Derrida-Lebowitz 1998).  For TASEP at hopping
+rate `p` and density `ρ`,
+
+    j(ρ) = p ρ (1 − ρ)              (TASEP mean-field steady state)
+
+— the canonical KPZ-class non-equilibrium observable.
+"""
+struct SteadyStateCurrent <: AbstractQuantity end

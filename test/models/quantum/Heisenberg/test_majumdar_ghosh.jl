@@ -88,4 +88,33 @@ using Logging: with_logger, NullLogger
         @test GroundStateEnergyDensity in quantities
         @test MassGap in quantities
     end
+
+    @testset "MajumdarGhosh — SpinGap Δ ≈ 0.234 J (Phase 2, White-Affleck 1996)" begin
+        Δ = QAtlas.fetch(MajumdarGhosh(), SpinGap(), Infinite())
+        @test Δ ≈ 0.234
+        # Linear scaling with J
+        @test QAtlas.fetch(MajumdarGhosh(; J=3.0), SpinGap(), Infinite()) ≈ 3 * 0.234
+        @test QAtlas.fetch(MajumdarGhosh(; J=0.5), SpinGap(), Infinite()) ≈ 0.5 * 0.234
+        # SpinGap < Shastry-Sutherland trimer bound J/4 (DMRG < analytical sector bound, as expected)
+        @test Δ < 0.25
+        # SpinGap > strict Magnus 1991 absolute-gap bound 0.117 J
+        @test Δ > 0.117
+    end
+
+    @testset "MajumdarGhosh — SpinGap rejects J ≤ 0 (Phase 2)" begin
+        @test_throws DomainError QAtlas.fetch(MajumdarGhosh(), SpinGap(), Infinite(); J=0.0)
+        @test_throws DomainError QAtlas.fetch(
+            MajumdarGhosh(), SpinGap(), Infinite(); J=-1.5
+        )
+    end
+
+    @testset "MajumdarGhosh — third-pass: SpinGap == MassGap(method=:numerical) (SU(2) cross-check)" begin
+        # MG is SU(2)-symmetric; the lowest excitation is a triplet, so the
+        # spectral gap (MassGap, :numerical) equals the spin gap (S=0 → S=1).
+        for J in (0.5, 1.0, 3.0)
+            m = MajumdarGhosh(; J=J)
+            @test QAtlas.fetch(m, SpinGap(), Infinite()) ≈
+                QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
+        end
+    end
 end

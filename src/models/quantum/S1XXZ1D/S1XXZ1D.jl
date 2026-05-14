@@ -75,3 +75,35 @@ function fetch(m::S1XXZ1D, ::MassGap, ::Infinite; J::Real=m.J, Δ::Real=m.Δ, kw
     end
     return QAtlas.fetch(S1Heisenberg1D(; J=J), MassGap(), Infinite())
 end
+
+"""
+    fetch(model::S1XXZ1D, ::Energy{:per_site}, ::Infinite; J, Δ, kwargs...) -> Float64
+
+Ground-state energy per site of the spin-1 XXZ chain.
+
+Phase 1: supported only at the Heisenberg point `Δ = 1`, where the
+result is delegated to `S1Heisenberg1D`,
+
+    e₀ ≈ -1.40148403897 J   (White-Huse 1993 DMRG).
+
+For `Δ ≠ 1` no closed-form literature constant is available (XY1 /
+large-Δ Néel phase diagram, Schulz 1986; Tzeng-Yang-Hsu 2017); a
+`DomainError` is raised — Phase 2 will plug in DMRG / TLL.
+"""
+function fetch(
+    m::S1XXZ1D, ::Energy{:per_site}, ::Infinite; J::Real=m.J, Δ::Real=m.Δ, kwargs...
+)
+    J > 0 || throw(DomainError(J, "S1XXZ1D Energy{:per_site} requires J > 0; got J = $J."))
+    if !isone(Δ)
+        throw(
+            DomainError(
+                Δ,
+                "S1XXZ1D Energy{:per_site}: closed-form energy density supported only at Δ = 1 " *
+                "(spin-1 Heisenberg, White-Huse 1993 DMRG). Δ ≠ 1 traverses XY1/large-Δ Néel " *
+                "phase diagram (Schulz 1986; Tzeng-Yang-Hsu 2017) — deferred to Phase 2. " *
+                "Got Δ = $Δ.",
+            ),
+        )
+    end
+    return QAtlas.fetch(S1Heisenberg1D(; J=J), Energy(:per_site), Infinite())
+end

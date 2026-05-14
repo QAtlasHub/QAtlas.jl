@@ -13,3 +13,14 @@
     references=["White-Huse 1993", "Schulz 1986", "Tzeng-Yang-Hsu 2017"],
     notes="Δ=1 delegate to S1Heisenberg1D Haldane gap; Δ≠1 (XY1/large-Δ Néel) Phase 2.",
 )
+
+@register(
+    S1XXZ1D,
+    Energy{:per_site},
+    Infinite,
+    method=:s1_heisenberg_delegation,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_s1_xxz1d.jl",
+    references=["White-Huse 1993", "Schulz 1986", "Tzeng-Yang-Hsu 2017"],
+    notes="Δ=1 delegate to S1Heisenberg1D Energy{:per_site}; Δ≠1 (XY1/large-Δ Néel) Phase 2.",
+)

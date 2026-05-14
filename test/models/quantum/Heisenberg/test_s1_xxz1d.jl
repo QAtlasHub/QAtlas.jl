@@ -21,3 +21,28 @@ end
     @test_throws DomainError S1XXZ1D(; J=0.0)
     @test_throws DomainError S1XXZ1D(; J=-1.0)
 end
+
+@testset "S1XXZ1D — Δ=1 Energy{:per_site} delegate to S1Heisenberg1D (Phase 1)" begin
+    for J in (0.5, 1.0, 2.0, 3.7)
+        e_xxz = QAtlas.fetch(S1XXZ1D(; J=J, Δ=1.0), Energy(:per_site), Infinite())
+        e_hei = QAtlas.fetch(S1Heisenberg1D(; J=J), Energy(:per_site), Infinite())
+        @test e_xxz ≈ e_hei
+        @test e_xxz < 0
+    end
+    # Literature value at J=1
+    @test isapprox(
+        QAtlas.fetch(S1XXZ1D(; J=1.0, Δ=1.0), Energy(:per_site), Infinite()),
+        -1.40148403897;
+        atol=1e-10,
+    )
+end
+
+@testset "S1XXZ1D — Δ ≠ 1 Energy{:per_site} throws DomainError (Phase 2)" begin
+    @test_throws DomainError QAtlas.fetch(S1XXZ1D(; Δ=0.5), Energy(:per_site), Infinite())
+    @test_throws DomainError QAtlas.fetch(S1XXZ1D(; Δ=2.0), Energy(:per_site), Infinite())
+    @test_throws DomainError QAtlas.fetch(S1XXZ1D(; Δ=-1.0), Energy(:per_site), Infinite())
+    # isone(Δ) strictness regression
+    @test_throws DomainError QAtlas.fetch(
+        S1XXZ1D(; Δ=1.0 + 1e-13), Energy(:per_site), Infinite()
+    )
+end

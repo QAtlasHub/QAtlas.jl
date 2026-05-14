@@ -37,3 +37,14 @@
     references=["Lieb-Wu PRL 20, 1445 (1968)"],
     notes="Spinon branch is rigorously gapless at half filling — returns 0.0.",
 )
+
+@register(
+    Hubbard1D,
+    LuttingerParameter,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_hubbard1d.jl",
+    references=["Lieb-Wu PRL 20, 1445 (1968)", "Voit Rep. Prog. Phys. 58, 977 (1995)"],
+    notes="K=1 at U=0 free-fermion limit; finite-U Lieb-Wu Bethe ansatz K_ρ, K_σ deferred Phase 2.",
+)

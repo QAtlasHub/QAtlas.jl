@@ -26,3 +26,15 @@ end
         KagomeHeisenbergAFM(; J=-0.5), MassGap(), Infinite()
     )
 end
+
+@testset "KagomeHeisenbergAFM — TopologicalEntanglementEntropy = log 2 (Phase 2, Z₂)" begin
+    γ = QAtlas.fetch(KagomeHeisenbergAFM(), TopologicalEntanglementEntropy(), Infinite())
+    @test γ ≈ log(2.0)
+    # J-independence: γ is topological, not energy-scale-dependent
+    @test γ == QAtlas.fetch(
+        KagomeHeisenbergAFM(; J=3.7), TopologicalEntanglementEntropy(), Infinite()
+    )
+    # Z₂ sibling cross-check: ToricCode also has γ = log 2 (same Z₂ topological
+    # order, total quantum dimension 𝒟 = 2 ⇒ γ = log 𝒟 = log 2).
+    @test γ == QAtlas.fetch(ToricCode(), TopologicalEntanglementEntropy(), Infinite())
+end

@@ -27,11 +27,14 @@
 # (Parisi 1980; rigorously proven by Talagrand 2006).  Above T_c the
 # replica-symmetric paramagnetic solution holds with `q = 0`.
 #
-# This Phase-1 entry registers only `CriticalTemperature`.  The Parisi
-# free energy `f(β, h)`, the de Almeida-Thouless line `h_AT(T)`, and
-# the overlap distribution `P(q)` require dedicated quantity types
-# (function of either β or β + h, or a probability measure on `[0,1]`)
-# and are tracked as Phase 2.
+# Phase 1 registers `CriticalTemperature` (T_c = J).  Phase 2 adds the
+# Parisi T=0 ground-state energy density `e_0/J ≈ -0.7631667`
+# (full-RSB; Parisi 1980, Crisanti-Rizzo 2002, Talagrand 2006) as the
+# `Energy{:per_site}` at `Infinite` entry.  The finite-temperature
+# Parisi free energy `f(β, h)`, the de Almeida-Thouless line
+# `h_AT(T)`, and the overlap distribution `P(q)` require dedicated
+# quantity types (function of either β or β + h, or a probability
+# measure on `[0,1]`) and remain tracked for later phases.
 #
 # References:
 #   - D. Sherrington, S. Kirkpatrick, Phys. Rev. Lett. 35, 1792 (1975).
@@ -50,15 +53,19 @@ random-Gaussian-coupling sum
 
 whose spin-glass transition lies at `T_c = J`.
 
-Quantities registered (Phase 1):
+Quantities registered (Phases 1 and 2):
 
-| Quantity                       | BC         | Method        |
-| ------------------------------ | ---------- | ------------- |
-| [`CriticalTemperature`](@ref)  | `Infinite` | analytic      |
+| Quantity                       | BC         | Method                  |
+| ------------------------------ | ---------- | ----------------------- |
+| [`CriticalTemperature`](@ref)  | `Infinite` | analytic                |
+| [`Energy`](@ref) (`:per_site`) | `Infinite` | variational reference   |
 
-The Parisi full-RSB free energy `f(β, h)`, the de Almeida-Thouless
-line `h_AT(T)` and the overlap distribution `P(q)` are tracked as
-Phase 2.
+The Phase-2 `Energy{:per_site}` entry is the Parisi T=0 ground-state
+energy density `e_0/J ≈ -0.7631667` (Crisanti-Rizzo 2002
+high-precision evaluation of Parisi's full-RSB solution; Talagrand
+2006 rigorous proof).  The finite-temperature Parisi free energy
+`f(β, h)`, the de Almeida-Thouless line `h_AT(T)` and the overlap
+distribution `P(q)` remain tracked for later phases.
 
 # References
 
@@ -93,4 +100,51 @@ function fetch(
     m::SherringtonKirkpatrick, ::CriticalTemperature, ::Infinite; J::Real=m.J, kwargs...
 )
     return J > 0 ? Float64(J) : 0.0
+end
+
+# Native energy granularity at Infinite is per-site for the mean-field SK
+# spin glass (the Hamiltonian is extensive but the natural reference is
+# the per-spin energy density e_0/J in the thermodynamic limit).
+QAtlas.native_energy_granularity(::SherringtonKirkpatrick, ::Infinite) = :per_site
+
+# Hardcoded reference value for the SK T=0 Parisi full-RSB ground-state
+# energy density.  References:
+#   - G. Parisi, J. Phys. A 13, L115 (1980): full-RSB variational solution.
+#   - A. Crisanti, T. Rizzo, Phys. Rev. E 65, 046137 (2002): high-precision
+#     numerical evaluation gives e_0/J = -0.7631667 +/- 0.00001.
+#   - M. Talagrand, Annals Math. 163, 221 (2006): rigorous proof of the
+#     Parisi formula.
+# Update if a tighter literature consensus emerges (e.g. recent
+# Schmidt / Crisanti-Rizzo evaluations).
+const _SK_PARISI_T0_ENERGY_DENSITY_PER_J = -0.7631667
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Parisi T=0 ground-state energy density (full RSB, Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::SherringtonKirkpatrick, ::Energy{:per_site}, ::Infinite; J=m.J)
+        -> Float64
+
+Zero-temperature ground-state energy density of the mean-field SK
+spin glass under Parisi's full-replica-symmetry-breaking solution
+(Parisi 1980; rigorously proved by Talagrand 2006):
+
+    e_0 / J  ≈  -0.7631667 ± 0.00001    (Crisanti-Rizzo 2002).
+
+Returned as `J * (-0.7631667)`.  Reliability is `:high` since the
+numerical value is mathematically established and known to 7 digits.
+
+# References
+
+- G. Parisi, *J. Phys. A* **13**, L115 (1980).
+- A. Crisanti, T. Rizzo, *Phys. Rev. E* **65**, 046137 (2002).
+- M. Talagrand, *Annals Math.* **163**, 221 (2006).
+"""
+function fetch(
+    m::SherringtonKirkpatrick, ::Energy{:per_site}, ::Infinite; J::Real=m.J, kwargs...
+)
+    J > 0 ||
+        throw(DomainError(J, "SherringtonKirkpatrick Energy requires J > 0; got J = $J."))
+    return J * _SK_PARISI_T0_ENERGY_DENSITY_PER_J
 end

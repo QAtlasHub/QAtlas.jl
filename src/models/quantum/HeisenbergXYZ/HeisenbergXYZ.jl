@@ -121,3 +121,56 @@ function fetch(
     Δ = Jz / Jx
     return QAtlas.fetch(QAtlas.XXZ1D(; J=Jx, Δ=Δ), Energy{:per_site}(), Infinite())
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Luttinger parameter at the isotropic Heisenberg point (Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::HeisenbergXYZ, ::LuttingerParameter, ::Infinite;
+          Jx=m.Jx, Jy=m.Jy, Jz=m.Jz) -> Float64
+
+Luttinger-liquid parameter at the **isotropic Heisenberg point**
+`Jx = Jy = Jz`, delegated to `XXZ1D(Δ = 1)`:
+
+    K = 1/2          (SU(2)-symmetric AFM, Luther-Peschel 1975)
+
+The delegation chain is `HeisenbergXYZ → XXZ1D(Δ=1)` (matching the
+`Energy(:per_site)` reduction).  Once a dedicated
+`fetch(::Heisenberg1D, ::LuttingerParameter, ::Infinite)` lands on
+main (tracked separately), the intermediate `Heisenberg1D` hop can
+be reinstated; the final `K` is unchanged.
+
+For `Jx = Jy ≠ Jz` (XXZ axial anisotropy), use `XXZ1D` directly.
+For generic XYZ (Baxter 1972 elliptic / theta-function regime),
+defer to a later phase — this Phase-2 path throws `DomainError`
+for non-isotropic couplings.
+
+# References
+
+- A. Luther, I. Peschel, *Phys. Rev. B* **12**, 3908 (1975).
+- R. J. Baxter, *Ann. Phys.* **70**, 193 (1972) — elliptic XYZ.
+"""
+function fetch(
+    m::HeisenbergXYZ,
+    ::LuttingerParameter,
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    Jz::Real=m.Jz,
+    kwargs...,
+)
+    if !(Jx == Jy == Jz)
+        throw(
+            DomainError(
+                (Jx, Jy, Jz),
+                "HeisenbergXYZ LuttingerParameter: Phase 2 supports only the isotropic " *
+                "Heisenberg point Jx = Jy = Jz. Generic XYZ requires elliptic " *
+                "(Baxter 1972) machinery, deferred. Got (Jx, Jy, Jz) = ($Jx, $Jy, $Jz).",
+            ),
+        )
+    end
+    # Delegate to XXZ1D(Δ=1) — same target as the Heisenberg1D path
+    # (Heisenberg1D itself delegates to XXZ1D(Δ=1) once PR #347 lands).
+    return QAtlas.fetch(QAtlas.XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite())
+end

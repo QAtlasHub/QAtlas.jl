@@ -24,6 +24,7 @@ export KagomeHeisenbergAFM                              # Kagome S=1/2 AFM Z₂ 
 export RFIM                                              # Random-Field Ising Model (Imry-Ma 1975)
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
 export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
+export TASEP                                                # totally asymmetric simple exclusion process (#241)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -77,6 +78,7 @@ export CasimirEnergyCorrection                                              # CF
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
+export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
@@ -134,6 +136,8 @@ include("models/classical/TricriticalIsing/TricriticalIsing.jl")
 include("models/classical/TricriticalIsing/TricriticalIsing_registry.jl")  # populates REGISTRY for TricriticalIsing
 include("models/classical/LiouvilleCFT/LiouvilleCFT.jl")
 include("models/classical/LiouvilleCFT/LiouvilleCFT_registry.jl")        # populates REGISTRY for LiouvilleCFT (#248)
+include("models/classical/TASEP/TASEP.jl")
+include("models/classical/TASEP/TASEP_registry.jl")  # populates REGISTRY for TASEP (#241)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")

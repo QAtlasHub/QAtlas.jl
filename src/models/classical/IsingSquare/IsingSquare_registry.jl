@@ -109,3 +109,15 @@
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="Diverges at T_c (ln(1+√2)/2 ≈ 0.4407); finite elsewhere.",
 )
+
+# ── Phase 2: critical exponents at T_c (universality delegation) ─────
+@register(
+    IsingSquare,
+    CriticalExponents,
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/classical/test_IsingSquare_critical.jl",
+    references=["Onsager 1944"],
+    notes="2D Ising Onsager exponents (β=1/8, γ=7/4, ν=1) delegated to Universality(:Ising) at d=2.",
+)

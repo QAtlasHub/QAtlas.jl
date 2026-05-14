@@ -42,15 +42,17 @@
 group rank-plus-one and `k ∈ ℤ_{>0}` is the (integer) Chern-Simons
 level.
 
-Phase 1 exposes the **boundary WZW central charge** via the Sugawara
-construction.  Wilson-loop knot invariants and explicit 3-manifold
-partition functions are tracked as Phase 2.
+Phase 1 exposed the **boundary WZW central charge** via the Sugawara
+construction.  Phase 2 adds the closed-form `S³` partition function
+`Z(S³; SU(N)_k) = S_{0,0}` (Witten 1989 / Verlinde formula).  Wilson-loop
+knot invariants and modular `S` / `T` matrices remain tracked for later phases.
 
 Quantities registered:
 
-| Quantity                       | BC         | Method                                  |
-| ------------------------------ | ---------- | --------------------------------------- |
-| [`CentralCharge`](@ref)        | `Infinite` | analytic (Sugawara `k(N²-1)/(k+N)`)     |
+| Quantity                       | BC         | Method                                            |
+| ------------------------------ | ---------- | ------------------------------------------------- |
+| [`CentralCharge`](@ref)        | `Infinite` | analytic (Sugawara `k(N²-1)/(k+N)`)               |
+| [`PartitionFunction`](@ref)    | `Infinite` | analytic (Witten `Z(S³)` = modular `S_{0,0}`)     |
 
 # References
 
@@ -100,4 +102,65 @@ function fetch(
     kwargs...,
 )
     return Rational(k * (N^2 - 1), k + N)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Partition function on S³ — Witten 1989 / Verlinde S_{0,0} (Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::ChernSimons3D, ::PartitionFunction, ::Infinite; N=m.N, k=m.k) -> Float64
+
+Closed-form partition function of 3-D `SU(N)_k` Chern-Simons on the
+three-sphere `S³` (Witten 1989), equal to the `S_{0,0}` entry of the
+`SU(N)_k` modular S-matrix (Verlinde formula):
+
+    Z(S³; SU(N)_k) = N^{-1/2} (k + N)^{-(N-1)/2}
+                     ∏_{1 ≤ j < l ≤ N} 2 sin( π (l − j) / (k + N) ).
+
+For `SU(2)_k` this simplifies to `Z = √(2 / (k + 2)) · sin(π / (k + 2))`.
+
+# Boundary condition
+
+`Infinite()` — `S³` is a closed compact 3-manifold without boundary;
+no transfer-matrix BC label is meaningful, so the BC slot is the
+catch-all `Infinite` tag also used for thermodynamic-limit quantities
+elsewhere in QAtlas.
+
+# Verified values
+
+- `SU(2)_1`:  `Z = 1/√2 ≈ 0.7071067811865476`
+- `SU(2)_2`:  `Z = 1/2 = 0.5`
+- `SU(2)_3`:  `Z = √(2/5) · sin(π/5) ≈ 0.3717480344601845`
+- `SU(3)_1`:  `Z = 1/√3 ≈ 0.5773502691896258`
+
+# References
+
+- E. Witten, *Comm. Math. Phys.* **121**, 351 (1989).
+- E. P. Verlinde, *Nucl. Phys. B* **300**, 360 (1988).
+"""
+function fetch(
+    m::ChernSimons3D,
+    ::PartitionFunction,
+    ::Infinite;
+    N::Integer=m.N,
+    k::Integer=m.k,
+    kwargs...,
+)
+    N ≥ 2 || throw(
+        DomainError(
+            N, "ChernSimons3D PartitionFunction requires N ≥ 2 (SU(N)); got N = $N."
+        ),
+    )
+    k ≥ 1 ||
+        throw(DomainError(k, "ChernSimons3D PartitionFunction requires k ≥ 1; got k = $k."))
+    p = k + N
+    prefactor = float(N)^(-0.5) * float(p)^(-(N - 1) / 2)
+    prod = 1.0
+    for j in 1:(N - 1)
+        for l in (j + 1):N
+            prod *= 2 * sin(π * (l - j) / p)
+        end
+    end
+    return prefactor * prod
 end

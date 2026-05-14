@@ -151,8 +151,9 @@ function fetch(
     D::Real=m.D,
     kwargs...,
 )
-    J > 0 ||
-        throw(DomainError(J, "S1AnisotropicD1D Energy{:per_site} requires J > 0; got J = $J."))
+    J > 0 || throw(
+        DomainError(J, "S1AnisotropicD1D Energy{:per_site} requires J > 0; got J = $J.")
+    )
     iszero(D) || throw(
         DomainError(
             D,

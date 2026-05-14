@@ -30,6 +30,7 @@ export ZnParafermion                                       # Z_n parafermion CFT
 export RandomBondIsing2D                                  # 2D ±J random-bond Ising / Edwards-Anderson (#232)
 export TTbar                                                # universal TT-bar deformation (#249)
 export TASEP                                                # totally asymmetric simple exclusion process (#241)
+export YangLee                                              # non-unitary CFT M(5,2), c=-22/5 (#234)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -169,6 +170,8 @@ include("models/classical/TTbar/TTbar.jl")
 include("models/classical/TTbar/TTbar_registry.jl")  # populates REGISTRY for TTbar (#249)
 include("models/classical/TASEP/TASEP.jl")
 include("models/classical/TASEP/TASEP_registry.jl")  # populates REGISTRY for TASEP (#241)
+include("models/classical/YangLee/YangLee.jl")
+include("models/classical/YangLee/YangLee_registry.jl")        # populates REGISTRY for YangLee (#234)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")

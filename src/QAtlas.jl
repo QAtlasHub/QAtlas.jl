@@ -24,6 +24,7 @@ export KagomeHeisenbergAFM                              # Kagome S=1/2 AFM Z₂ 
 export RFIM                                              # Random-Field Ising Model (Imry-Ma 1975)
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
 export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
+export RandomBondIsing2D                                  # 2D ±J random-bond Ising / Edwards-Anderson (#232)
 export TTbar                                                # universal TT-bar deformation (#249)
 export TASEP                                                # totally asymmetric simple exclusion process (#241)
 
@@ -143,6 +144,8 @@ include("models/classical/TricriticalIsing/TricriticalIsing.jl")
 include("models/classical/TricriticalIsing/TricriticalIsing_registry.jl")  # populates REGISTRY for TricriticalIsing
 include("models/classical/LiouvilleCFT/LiouvilleCFT.jl")
 include("models/classical/LiouvilleCFT/LiouvilleCFT_registry.jl")        # populates REGISTRY for LiouvilleCFT (#248)
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D.jl")
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D_registry.jl")  # populates REGISTRY for RandomBondIsing2D (#232)
 include("models/classical/TTbar/TTbar.jl")
 include("models/classical/TTbar/TTbar_registry.jl")  # populates REGISTRY for TTbar (#249)
 include("models/classical/TASEP/TASEP.jl")

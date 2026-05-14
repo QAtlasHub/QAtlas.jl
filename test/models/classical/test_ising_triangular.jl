@@ -97,3 +97,24 @@ end
         @test S ≈ S_quadgk atol = 1e-12
     end
 end
+
+@testset "IsingTriangular — CriticalExponents = 2D Ising Onsager (Phase 2)" begin
+    m = IsingTriangular()
+    exp = QAtlas.fetch(m, CriticalExponents(), Infinite())
+    @test exp.α == 0
+    @test exp.β == 1 // 8
+    @test exp.γ == 7 // 4
+    @test exp.δ == 15
+    @test exp.ν == 1
+    @test exp.η == 1 // 4
+    # Delegation invariant
+    @test exp == QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
+    # Hyperscaling
+    @test exp.α + 2 * exp.β + exp.γ == 2
+    @test exp.γ == exp.β * (exp.δ - 1)
+    @test exp.η == 2 - exp.γ // exp.ν
+    # Universality check: matches IsingSquare critical exponents via the
+    # shared Universality(:Ising) delegation — both are in the 2D Ising
+    # universality class.  Direct IsingSquare cross-check enabled after #346 lands.
+    @test exp.β == QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2).β
+end

@@ -32,6 +32,7 @@ export TTbar                                                # universal TT-bar d
 export TASEP                                                # totally asymmetric simple exclusion process (#241)
 export YangLee                                              # non-unitary CFT M(5,2), c=-22/5 (#234)
 export ConformalBootstrap                                   # 3D Ising bootstrap exponents (#236)
+export ZnClock                                              # 2D Z_n clock model (#231)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -178,6 +179,8 @@ include("models/classical/YangLee/YangLee.jl")
 include("models/classical/YangLee/YangLee_registry.jl")        # populates REGISTRY for YangLee (#234)
 include("models/classical/ConformalBootstrap/ConformalBootstrap.jl")
 include("models/classical/ConformalBootstrap/ConformalBootstrap_registry.jl")  # populates REGISTRY for ConformalBootstrap (#236)
+include("models/classical/ZnClock/ZnClock.jl")
+include("models/classical/ZnClock/ZnClock_registry.jl")  # populates REGISTRY for ZnClock (#231)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")

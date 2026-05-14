@@ -86,9 +86,9 @@ end
     # By quantity instance
     @test implementation_status(Energy(:total)) == energy_total_rows
 
-    # Unregistered quantity returns empty (ConformalWeights has no
+    # Unregistered quantity returns empty (MeanRatio has no
     # fetch implementation yet, so the registry must not list it).
-    @test isempty(implementation_status(ConformalWeights()))
+    @test isempty(implementation_status(MeanRatio()))
 end
 
 @testset "implementation_status(queue) returns one row per registered triple" begin
@@ -96,7 +96,7 @@ end
     queue = [
         (m, Energy(:total), OBC(8)),       # registered
         (m, MassGap(), Infinite()),   # registered
-        (m, ConformalWeights(), OBC(8)),   # NOT registered → dropped
+        (m, MeanRatio(), OBC(8)),   # NOT registered → dropped
     ]
     rows = implementation_status(queue)
     @test length(rows) == 2
@@ -241,9 +241,9 @@ end
     # By quantity instance
     @test implementation_status(Energy(:total)) == energy_total_rows
 
-    # Unregistered quantity returns empty (FermiVelocity has no
+    # Unregistered quantity returns empty (WignerSurmise has no
     # fetch implementation yet, so the registry must not list it).
-    @test isempty(implementation_status(FermiVelocity()))
+    @test isempty(implementation_status(WignerSurmise()))
 end
 
 @testset "implementation_status(queue) returns one row per registered triple" begin
@@ -251,7 +251,7 @@ end
     queue = [
         (m, Energy(:total), OBC(8)),       # registered
         (m, MassGap(), Infinite()),   # registered
-        (m, FermiVelocity(), OBC(8)),   # NOT registered → dropped
+        (m, WignerSurmise(), OBC(8)),   # NOT registered → dropped
     ]
     rows = implementation_status(queue)
     @test length(rows) == 2

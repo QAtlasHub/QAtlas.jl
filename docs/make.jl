@@ -2,6 +2,8 @@ using QAtlas
 using Documenter
 using Downloads
 
+DocMeta.setdocmeta!(QAtlas, :DocTestSetup, :(using QAtlas); recursive=true)
+
 assets_dir = joinpath(@__DIR__, "src", "assets")
 mkpath(assets_dir)
 favicon_path = joinpath(assets_dir, "favicon.ico")
@@ -23,8 +25,8 @@ makedocs(;
         # ~80 new fetch methods).  Bump the size threshold instead of
         # splitting the autodocs page (the user explicitly preserved the
         # `Modules = [QAtlas]` API layout).
-        size_threshold=600_000,
-        size_threshold_warn=300_000,
+        size_threshold=1_000_000,
+        size_threshold_warn=600_000,
         mathengine=MathJax3(
             Dict(
                 :tex => Dict(
@@ -133,8 +135,6 @@ logo_path = joinpath(assets_dir, "logo.png")
 Downloads.download("https://github.com/sotashimozono.png", favicon_path)
 Downloads.download("https://github.com/sotashimozono.png", logo_path)
 
-DocMeta.setdocmeta!(QAtlas, :DocTestSetup, :(using QAtlas); recursive=true)
-
 makedocs(;
     doctest=true,
     sitename="QAtlas.jl",
@@ -149,8 +149,8 @@ makedocs(;
         # ~80 new fetch methods).  Bump the size threshold instead of
         # splitting the autodocs page (the user explicitly preserved the
         # `Modules = [QAtlas]` API layout).
-        size_threshold=600_000,
-        size_threshold_warn=300_000,
+        size_threshold=1_000_000,
+        size_threshold_warn=600_000,
         mathengine=MathJax3(
             Dict(
                 :tex => Dict(

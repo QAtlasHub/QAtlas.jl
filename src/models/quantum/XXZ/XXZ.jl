@@ -95,48 +95,6 @@ native_energy_granularity(::XXZ1D, ::Infinite) = :per_site
 # logic for Δ ∈ {-1, 0, 1} is preserved bit-for-bit there; general-Δ
 # Bethe-ansatz remains a v0.13 follow-up (issue #108).
 """
-    fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite) -> Float64
-
-Ground-state energy **per site** of the infinite XXZ chain in units of
-the Hamiltonian `J`, at zero temperature.
-
-# Coverage
-
-- **Critical / gapless regime** `-1 ≤ Δ ≤ 1`: closed form for the
-  three canonical points and the Yang–Yang single integral elsewhere:
-
-      Δ = -1:  -J/4                 (isotropic FM, saturated)
-      Δ =  0:  -J/π                 (XX, free fermion)
-      Δ =  1:  J (1/4 - ln 2)       (AF Heisenberg, Hulthén 1938)
-      otherwise (γ = arccos Δ):
-        e₀(Δ) = (J cos γ)/4 − J sin² γ
-                · ∫_{-∞}^{∞} dλ / [2 cosh(πλ)·(cosh(2γλ) − cos γ)]
-
-  Returned to ≈ 1e-12 relative accuracy via adaptive QuadGK.
-
-- **Gapped regime** `|Δ| > 1`: the Bethe ansatz takes a different
-  series form (Orbach 1958 / Walker 1959 / Yang–Yang 1966 III); the
-  closed-form path here emits a warning and returns `NaN`.  Use OBC
-  dense ED at small `N` for a finite-size reference in that regime.
-"""
-function fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite; kwargs...)
-    J, Δ = model.J, model.Δ
-    if isapprox(Δ, 0.0; atol=1e-12)
-        return _xxz1d_energy_free_fermion(J)
-    elseif isapprox(Δ, 1.0; atol=1e-12)
-        return _xxz1d_energy_heisenberg_af(J)
-    elseif isapprox(Δ, -1.0; atol=1e-12)
-        return _xxz1d_energy_heisenberg_fm(J)
-    elseif -1.0 < Δ < 1.0
-        return _xxz1d_energy_yang_yang(J, Δ)
-    else
-        @warn "XXZ1D Energy: gapped regime |Δ| > 1 not yet implemented; " *
-            "use OBC dense ED at small N for a finite-size reference." Δ = Δ
-        return NaN
-    end
-end
-
-"""
     fetch(model::XXZ1D, ::GroundStateEnergyDensity, ::Infinite) -> Float64
 
 Alias for [`fetch(::XXZ1D, ::Energy, ::Infinite)`](@ref) kept so that

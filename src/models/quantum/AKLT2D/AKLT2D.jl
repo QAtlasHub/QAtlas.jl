@@ -35,6 +35,14 @@
 #      and higher dimensions", cond-mat/0407066 (2004) — PEPS realisation.
 # ─────────────────────────────────────────────────────────────────────────────
 
+"""
+    AKLT2D(; J::Real = 1.0) <: AbstractQAtlasModel
+
+2D honeycomb-lattice Affleck-Kennedy-Lieb-Tasaki (AKLT) spin-3/2 valence-bond-solid
+model.  Frustration-free Hamiltonian whose unique gapped VBS ground state has exact
+energy density e0/N = 0 (J-independent); the 2D AKLT phase is the prototypical 2D
+symmetry-protected topological (SPT) state.  See file header for full references.
+"""
 struct AKLT2D <: AbstractQAtlasModel
     J::Float64
     function AKLT2D(J::Real)

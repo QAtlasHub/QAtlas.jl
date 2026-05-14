@@ -176,6 +176,13 @@ entanglement entropy on a simply-connected region,
     S(ρ_A) = α |∂A| − γ + O(|∂A|⁻¹).
 
 Independent of `J_e`, `J_m` (purely topological).
+
+# Example
+
+```jldoctest
+julia> QAtlas.fetch(ToricCode(), TopologicalEntanglementEntropy(), Infinite())
+0.6931471805599453
+```
 """
 function fetch(::ToricCode, ::TopologicalEntanglementEntropy, ::Infinite; kwargs...)
     return log(2.0)

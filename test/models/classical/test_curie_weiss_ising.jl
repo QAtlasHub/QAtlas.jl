@@ -86,3 +86,19 @@ end
         @test QAtlas.fetch(m, SpontaneousMagnetization(), Infinite(); beta=10.0) == 0.0
     end
 end
+
+@testset "CurieWeissIsing — CriticalExponents delegate to MeanField (Phase 2)" begin
+    m = CurieWeissIsing()
+    exp = QAtlas.fetch(m, CriticalExponents(), Infinite())
+    @test exp.α == 0
+    @test exp.β == 1 // 2
+    @test exp.γ == 1
+    @test exp.δ == 3
+    @test exp.ν == 1 // 2
+    @test exp.η == 0
+    # Delegation invariant
+    @test exp == QAtlas.fetch(QAtlas.MeanField(), CriticalExponents())
+    # Hyperscaling: Rushbrooke α + 2β + γ = 2; Widom γ = β(δ − 1)
+    @test exp.α + 2 * exp.β + exp.γ == 2
+    @test exp.γ == exp.β * (exp.δ - 1)
+end

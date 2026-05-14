@@ -15,6 +15,7 @@ export SpinIce                                           # pyrochlore Pauling 19
 export TodaLattice                                       # 1-D Toda lattice (Toda 1967, integrable)
 export SLEkappa                                          # Schramm-Loewner Evolution SLE_κ (Schramm 2000)
 export TricriticalPotts3                                 # M(6,7) minimal model (Andrews-Baxter-Forrester 1984)
+export TricriticalIsing                                  # M(5,4) unitary minimal model, c=7/10 (Belavin-Polyakov-Zamolodchikov 1984)
 export LiouvilleCFT                                      # non-compact Liouville CFT (Polyakov 1981)
 export SchwingerModel                                    # 1+1-D QED (Schwinger 1962)
 export ChernSimons3D                                     # SU(N)_k Chern-Simons TQFT (Witten 1989)
@@ -24,6 +25,11 @@ export RFIM                                              # Random-Field Ising Mo
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
 export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
 export LogarithmicCFT                                      # c=0 logarithmic CFT (polymer/percolation, #235)
+export BCFT                                              # Cardy boundary CFT + Affleck-Ludwig g (#237)
+export ZnParafermion                                       # Z_n parafermion CFT, Fateev-Zamolodchikov 1985 (#233)
+export RandomBondIsing2D                                  # 2D ±J random-bond Ising / Edwards-Anderson (#232)
+export TTbar                                                # universal TT-bar deformation (#249)
+export TASEP                                                # totally asymmetric simple exclusion process (#241)
 
 # --- Quantum Models ---
 export TFIM                                             # v0.13 concrete struct
@@ -47,6 +53,17 @@ export ShastrySutherland                                 # SrCu₂(BO₃)₂ 2D 
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
 export KitaevHeisenberg                                  # K-J-Γ honeycomb (α-RuCl₃, Rau-Lee-Kee 2014)
+export Cluster1D                                         # 1D Z₂×Z₂ SPT cluster Hamiltonian (Briegel-Raussendorf 2001)
+export TightBindingV1D                                # t-V spinless fermion chain (#296)
+export LongRangeIsing1D                                  # 1D power-law-decaying TFIM (#293)
+export TightBinding1D                                  # 1D spinless-fermion chain (#291)
+export LongRangeXY1D                                   # 1D power-law XY chain (#299)
+export Compass1D                                       # 1D alternating XX/YY compass chain (#295)
+export S1AnisotropicD1D                               # S=1 Heisenberg + single-ion D (#302)
+export DMIHeisenberg1D                                  # spin-½ Heisenberg + Dzyaloshinskii-Moriya (#298)
+export J1J2Heisenberg1D                              # spin-½ J₁-J₂ chain (#297)
+export MixedFieldIsing1D                            # TFIM + longitudinal field, non-integrable (#290)
+export XYh1D                                          # anisotropic XY + transverse field (LSM 1961, #292)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -72,11 +89,13 @@ export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
 export CentralCharge, LuttingerParameter, CorrelationLength
+export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
+export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
@@ -130,10 +149,22 @@ include("models/classical/SLEkappa/SLEkappa.jl")
 include("models/classical/SLEkappa/SLEkappa_registry.jl")                # populates REGISTRY for SLEkappa (#244)
 include("models/classical/TricriticalPotts3/TricriticalPotts3.jl")
 include("models/classical/TricriticalPotts3/TricriticalPotts3_registry.jl")  # populates REGISTRY for TricriticalPotts3 (#245)
+include("models/classical/TricriticalIsing/TricriticalIsing.jl")
+include("models/classical/TricriticalIsing/TricriticalIsing_registry.jl")  # populates REGISTRY for TricriticalIsing
 include("models/classical/LiouvilleCFT/LiouvilleCFT.jl")
 include("models/classical/LiouvilleCFT/LiouvilleCFT_registry.jl")        # populates REGISTRY for LiouvilleCFT (#248)
 include("models/classical/LogarithmicCFT/LogarithmicCFT.jl")
 include("models/classical/LogarithmicCFT/LogarithmicCFT_registry.jl")  # populates REGISTRY for LogarithmicCFT (#235)
+include("models/classical/BCFT/BCFT.jl")
+include("models/classical/BCFT/BCFT_registry.jl")  # populates REGISTRY for BCFT (#237)
+include("models/classical/ZnParafermion/ZnParafermion.jl")
+include("models/classical/ZnParafermion/ZnParafermion_registry.jl")  # populates REGISTRY for ZnParafermion (#233)
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D.jl")
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D_registry.jl")  # populates REGISTRY for RandomBondIsing2D (#232)
+include("models/classical/TTbar/TTbar.jl")
+include("models/classical/TTbar/TTbar_registry.jl")  # populates REGISTRY for TTbar (#249)
+include("models/classical/TASEP/TASEP.jl")
+include("models/classical/TASEP/TASEP_registry.jl")  # populates REGISTRY for TASEP (#241)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
 include("models/quantum/SchwingerModel/SchwingerModel_registry.jl")      # populates REGISTRY for SchwingerModel (#246)
 include("models/quantum/ChernSimons3D/ChernSimons3D.jl")
@@ -197,6 +228,28 @@ include("models/quantum/HeisenbergXYZ/HeisenbergXYZ.jl")
 include("models/quantum/HeisenbergXYZ/HeisenbergXYZ_registry.jl")          # populates REGISTRY for HeisenbergXYZ (#253)
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg.jl")
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg_registry.jl")    # populates REGISTRY for KitaevHeisenberg (#256)
+include("models/quantum/Cluster1D/Cluster1D.jl")
+include("models/quantum/Cluster1D/Cluster1D_registry.jl")  # populates REGISTRY for Cluster1D (#301)
+include("models/quantum/TightBindingV1D/TightBindingV1D.jl")
+include("models/quantum/TightBindingV1D/TightBindingV1D_registry.jl")  # populates REGISTRY for TightBindingV1D (#296)
+include("models/quantum/LongRangeIsing1D/LongRangeIsing1D.jl")
+include("models/quantum/LongRangeIsing1D/LongRangeIsing1D_registry.jl")  # populates REGISTRY for LongRangeIsing1D (#293)
+include("models/quantum/TightBinding1D/TightBinding1D.jl")
+include("models/quantum/TightBinding1D/TightBinding1D_registry.jl")  # populates REGISTRY for TightBinding1D (#291)
+include("models/quantum/LongRangeXY1D/LongRangeXY1D.jl")
+include("models/quantum/LongRangeXY1D/LongRangeXY1D_registry.jl")  # populates REGISTRY for LongRangeXY1D (#299)
+include("models/quantum/Compass1D/Compass1D.jl")
+include("models/quantum/Compass1D/Compass1D_registry.jl")  # populates REGISTRY for Compass1D (#295)
+include("models/quantum/S1AnisotropicD1D/S1AnisotropicD1D.jl")
+include("models/quantum/S1AnisotropicD1D/S1AnisotropicD1D_registry.jl")  # populates REGISTRY for S1AnisotropicD1D (#302)
+include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D.jl")
+include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D_registry.jl")  # populates REGISTRY for DMIHeisenberg1D (#298)
+include("models/quantum/J1J2Heisenberg1D/J1J2Heisenberg1D.jl")
+include("models/quantum/J1J2Heisenberg1D/J1J2Heisenberg1D_registry.jl")  # populates REGISTRY for J1J2Heisenberg1D (#297)
+include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D.jl")
+include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D_registry.jl")  # populates REGISTRY for MixedFieldIsing1D (#290)
+include("models/quantum/XYh1D/XYh1D.jl")
+include("models/quantum/XYh1D/XYh1D_registry.jl")  # populates REGISTRY for XYh1D (#292)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

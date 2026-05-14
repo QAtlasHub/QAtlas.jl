@@ -103,3 +103,30 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
         @test_throws DomainError QAtlas.fetch(m, SpinGap(), Infinite())
     end
 end
+
+@testset "Hubbard1D — LuttingerParameter free-fermion U=0 (Phase 2)" begin
+    # Default Hubbard1D has U=4 — construct explicit U=0
+    K = QAtlas.fetch(Hubbard1D(; U=0.0), LuttingerParameter(), Infinite())
+    @test K == 1.0
+    # Various t values — K is t-independent (universal LL value)
+    for t in (0.5, 1.0, 3.0)
+        @test QAtlas.fetch(Hubbard1D(; t=t, U=0.0), LuttingerParameter(), Infinite()) == 1.0
+    end
+end
+
+@testset "Hubbard1D — LuttingerParameter U ≠ 0 throws DomainError (Phase 2 deferral)" begin
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=4.0), LuttingerParameter(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=-1.0), LuttingerParameter(), Infinite()
+    )
+    # Regression: strict iszero(U) — tiny non-zero U must NOT silently return K=1
+    # (K(U) is not analytic-equal to 1 for any U ≠ 0; Lieb-Wu integrals required).
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=1e-13), LuttingerParameter(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        Hubbard1D(; U=-1e-13), LuttingerParameter(), Infinite()
+    )
+end

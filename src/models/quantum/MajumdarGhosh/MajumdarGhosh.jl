@@ -101,6 +101,13 @@ beyond the standard surface.
 # References
 
 - C. K. Majumdar, D. K. Ghosh, J. Math. Phys. **10**, 1388 (1969).
+
+# Example
+
+```jldoctest
+julia> QAtlas.fetch(MajumdarGhosh(), GroundStateEnergyDensity(), Infinite())
+-0.375
+```
 """
 function fetch(m::MajumdarGhosh, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
     return -3 * m.J / 8

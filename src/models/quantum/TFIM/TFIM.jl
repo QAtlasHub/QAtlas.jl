@@ -230,6 +230,13 @@ Central charge of the TFIM:
 - `c = 0`   in either gapped phase (`h ≠ J`) — no low-energy CFT description
 
 Criticality is detected by `|h/J - 1| ≤ 1e-6`.
+
+# Example
+
+```jldoctest
+julia> QAtlas.fetch(TFIM(), CentralCharge(), Infinite())
+0.5
+```
 """
 function fetch(model::TFIM, ::CentralCharge, ::Infinite; kwargs...)
     return abs(model.h / model.J - 1.0) ≤ 1e-6 ? 0.5 : 0.0

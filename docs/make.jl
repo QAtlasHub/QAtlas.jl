@@ -133,7 +133,10 @@ logo_path = joinpath(assets_dir, "logo.png")
 Downloads.download("https://github.com/sotashimozono.png", favicon_path)
 Downloads.download("https://github.com/sotashimozono.png", logo_path)
 
+DocMeta.setdocmeta!(QAtlas, :DocTestSetup, :(using QAtlas); recursive=true)
+
 makedocs(;
+    doctest=true,
     sitename="QAtlas.jl",
     repo=Remotes.GitHub("sotashimozono", "QAtlas.jl"),
     format=Documenter.HTML(;

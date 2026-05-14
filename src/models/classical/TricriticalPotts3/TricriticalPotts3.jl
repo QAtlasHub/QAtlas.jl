@@ -84,7 +84,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::TricriticalPotts3, ::ConformalWeights; r::Integer, s::Integer, kwargs...)
+    fetch(::TricriticalPotts3, ::ConformalWeights, ::Infinite; r::Integer, s::Integer, kwargs...)
         -> Rational{Int}
 
 Conformal weight `h_{r,s}` from the Kac table of the tricritical
@@ -110,7 +110,7 @@ Examples:
 - G. E. Andrews, R. J. Baxter, P. J. Forrester,
   *J. Stat. Phys.* **35**, 193 (1984).
 """
-function fetch(::TricriticalPotts3, ::ConformalWeights; r::Integer, s::Integer, kwargs...)
+function fetch(::TricriticalPotts3, ::ConformalWeights, ::Infinite; r::Integer, s::Integer, kwargs...)
     return QAtlas.fetch(QAtlas.MinimalModel(7, 6), ConformalWeights(); r=r, s=s)
 end
 
@@ -119,7 +119,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::TricriticalPotts3, ::PrimaryFields; kwargs...) -> Vector{NamedTuple}
+    fetch(::TricriticalPotts3, ::PrimaryFields, ::Infinite; kwargs...) -> Vector{NamedTuple}
 
 Kac-table primary fields of the tricritical 3-state Potts CFT,
 delegated to [`MinimalModel(7, 6)`](@ref).  Returns the
@@ -131,6 +131,6 @@ their `(r, s)` labels and `h` weights.
 - A. A. Belavin, A. M. Polyakov, A. B. Zamolodchikov,
   *Nucl. Phys. B* **241**, 333 (1984).
 """
-function fetch(::TricriticalPotts3, ::PrimaryFields; kwargs...)
+function fetch(::TricriticalPotts3, ::PrimaryFields, ::Infinite; kwargs...)
     return QAtlas.fetch(QAtlas.MinimalModel(7, 6), PrimaryFields())
 end

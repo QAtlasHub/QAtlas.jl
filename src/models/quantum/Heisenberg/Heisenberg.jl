@@ -310,3 +310,31 @@ end
 function fetch(::Heisenberg1D, ::MassGap, bc::Infinite; J::Real=1.0, kwargs...)
     return fetch(XXZ1D(; J=J, Δ=1.0), MassGap(), bc; kwargs...)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Luttinger parameter at the isotropic SU(2)-symmetric point (Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::Heisenberg1D, ::LuttingerParameter, ::Infinite; J=1.0) -> Float64
+
+Luttinger-liquid parameter `K = 1/2` of the spin-½ Heisenberg
+antiferromagnetic chain at the SU(2)-symmetric point — the exact
+Luther–Peschel 1975 / Affleck 1989 result.
+
+This is the `Δ → 1` limit of the XXZ Luttinger parameter
+`K_XXZ(Δ) = π / (2 arccos(−Δ))` (Haldane 1980); delegated to
+`XXZ1D(Δ=1.0)`.
+
+# References
+
+- A. Luther, I. Peschel, *Phys. Rev. B* **12**, 3908 (1975).
+- I. Affleck, *J. Phys. A* **22**, 1003 (1989).
+- F. D. M. Haldane, *Phys. Rev. Lett.* **45**, 1358 (1980).
+"""
+function fetch(::Heisenberg1D, ::LuttingerParameter, ::Infinite; J::Real=1.0, kwargs...)
+    J > 0 ||
+        throw(DomainError(J, "Heisenberg1D LuttingerParameter requires J > 0; got J = $J."))
+    # Delegate to XXZ1D at Δ=1 — K is J-independent (only depends on Δ)
+    return fetch(XXZ1D(; Δ=1.0), LuttingerParameter(), Infinite())
+end

@@ -110,7 +110,9 @@ Examples:
 - G. E. Andrews, R. J. Baxter, P. J. Forrester,
   *J. Stat. Phys.* **35**, 193 (1984).
 """
-function fetch(::TricriticalPotts3, ::ConformalWeights, ::Infinite; r::Integer, s::Integer, kwargs...)
+function fetch(
+    ::TricriticalPotts3, ::ConformalWeights, ::Infinite; r::Integer, s::Integer, kwargs...
+)
     return QAtlas.fetch(QAtlas.MinimalModel(7, 6), ConformalWeights(); r=r, s=s)
 end
 

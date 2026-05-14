@@ -172,3 +172,29 @@ function fetch(
     J > 0 || return 0.0     # AFM or zero coupling: no FM order on the complete graph.
     return _curie_weiss_solve_m(beta * J)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Critical exponents — mean-field (delegate to MeanField universality)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::CurieWeissIsing, ::CriticalExponents, ::Infinite; kwargs...) -> NamedTuple
+
+Mean-field (Landau-Ginzburg) critical exponents of the Curie-Weiss
+Ising / complete-graph Ising universality, delegated to
+[`MeanField`](@ref):
+
+    α = 0,  β = 1/2,  γ = 1,  δ = 3,  ν = 1/2,  η = 0.
+
+Hyperscaling (Rushbrooke `α + 2β + γ = 2`; Widom `γ = β(δ − 1)`) and
+the upper-critical dimension d_c = 4 (above which mean-field is exact)
+are encoded in these values.
+
+# References
+
+- L. D. Landau, *Phys. Z. Sowjet.* **11**, 26 (1937).
+- H. E. Stanley, *Introduction to Phase Transitions and Critical Phenomena* (1971).
+"""
+function fetch(::CurieWeissIsing, ::CriticalExponents, ::Infinite; kwargs...)
+    return QAtlas.fetch(QAtlas.MeanField(), CriticalExponents())
+end

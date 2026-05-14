@@ -234,3 +234,30 @@ Criticality is detected by `|h/J - 1| ≤ 1e-6`.
 function fetch(model::TFIM, ::CentralCharge, ::Infinite; kwargs...)
     return abs(model.h / model.J - 1.0) ≤ 1e-6 ? 0.5 : 0.0
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Critical exponents at the quantum critical point — delegate to 2D Ising universality
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::TFIM, ::CriticalExponents, ::Infinite; kwargs...) -> NamedTuple
+
+Onsager 2D-Ising critical exponents at the TFIM quantum critical
+point `h = J`, delegated to the existing `Universality(:Ising)`
+infrastructure at `d = 2`:
+
+    β = 1/8,  γ = 7/4,  δ = 15,  ν = 1,  α = 0,  η = 1/4.
+
+The 1D TFIM is exactly equivalent to the 2D classical Ising model via
+the quantum-classical mapping (Pfeuty 1970), so the universal critical
+exponents are identical to Onsager's 1944 result.
+
+# References
+
+- L. Onsager, *Phys. Rev.* **65**, 117 (1944) — 2D classical Ising exact solution.
+- P. Pfeuty, *Ann. Phys.* **57**, 79 (1970) — TFIM ↔ 2D Ising equivalence.
+- S. Sachdev, *Quantum Phase Transitions* (2nd ed., Cambridge 2011) — TFIM as canonical QPT example.
+"""
+function fetch(::TFIM, ::CriticalExponents, ::Infinite; kwargs...)
+    return QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
+end

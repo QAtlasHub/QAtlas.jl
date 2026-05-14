@@ -60,3 +60,33 @@ end
         HeisenbergXYZ(; Jx=0.0, Jy=0.0, Jz=1.0), Energy(:per_site), Infinite()
     )
 end
+
+@testset "HeisenbergXYZ — LuttingerParameter at isotropic point (Phase 2)" begin
+    # Isotropic SU(2) point: K = 1/2 (Luther-Peschel 1975).
+    # Strict ==: acos(1.0) == 0.0 in IEEE → π/(2π) == 0.5 exactly.
+    m = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.0)
+    @test QAtlas.fetch(m, LuttingerParameter(), Infinite()) == 0.5
+    # Delegation invariant: bit-identical to XXZ1D(Δ=1) directly.
+    @test QAtlas.fetch(m, LuttingerParameter(), Infinite()) ===
+        QAtlas.fetch(QAtlas.XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite())
+end
+
+@testset "HeisenbergXYZ — LuttingerParameter non-isotropic throws DomainError (Phase 2 deferral)" begin
+    # Jx = Jy ≠ Jz: axial anisotropy (use XXZ1D directly)
+    @test_throws DomainError QAtlas.fetch(
+        HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=0.5), LuttingerParameter(), Infinite()
+    )
+    # Generic XYZ: Baxter elliptic regime, deferred
+    @test_throws DomainError QAtlas.fetch(
+        HeisenbergXYZ(; Jx=1.0, Jy=0.7, Jz=0.5), LuttingerParameter(), Infinite()
+    )
+    # Regression: strict `Jx == Jy == Jz` — tiny deviations must NOT silently
+    # delegate to XXZ1D(Δ=1). K is not constant in a neighbourhood of the
+    # isotropic point (XXZ K(Δ) varies with Δ; XYZ requires Baxter elliptic).
+    @test_throws DomainError QAtlas.fetch(
+        HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.0 + 1e-13), LuttingerParameter(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        HeisenbergXYZ(; Jx=1.0, Jy=1.0 + 1e-13, Jz=1.0), LuttingerParameter(), Infinite()
+    )
+end

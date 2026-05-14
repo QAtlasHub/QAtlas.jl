@@ -49,6 +49,9 @@ export S1Heisenberg1D                                    # spin-1 (Haldane chain
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
 export KitaevHeisenberg                                  # K-J-Γ honeycomb (α-RuCl₃, Rau-Lee-Kee 2014)
 export DMIHeisenberg1D                                  # spin-½ Heisenberg + Dzyaloshinskii-Moriya (#298)
+export J1J2Heisenberg1D                              # spin-½ J₁-J₂ chain (#297)
+export MixedFieldIsing1D                            # TFIM + longitudinal field, non-integrable (#290)
+export XYh1D                                          # anisotropic XY + transverse field (LSM 1961, #292)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -205,6 +208,12 @@ include("models/quantum/KitaevHeisenberg/KitaevHeisenberg.jl")
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg_registry.jl")    # populates REGISTRY for KitaevHeisenberg (#256)
 include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D.jl")
 include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D_registry.jl")  # populates REGISTRY for DMIHeisenberg1D (#298)
+include("models/quantum/J1J2Heisenberg1D/J1J2Heisenberg1D.jl")
+include("models/quantum/J1J2Heisenberg1D/J1J2Heisenberg1D_registry.jl")  # populates REGISTRY for J1J2Heisenberg1D (#297)
+include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D.jl")
+include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D_registry.jl")  # populates REGISTRY for MixedFieldIsing1D (#290)
+include("models/quantum/XYh1D/XYh1D.jl")
+include("models/quantum/XYh1D/XYh1D_registry.jl")  # populates REGISTRY for XYh1D (#292)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

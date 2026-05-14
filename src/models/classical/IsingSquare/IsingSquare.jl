@@ -306,3 +306,31 @@ function fetch(
 )
     return fetch(m, q; β=β, J=J)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Critical exponents at T_c — delegate to 2D Ising Onsager universality
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::IsingSquare, ::CriticalExponents, ::Infinite; kwargs...) -> NamedTuple
+
+Onsager 1944 critical exponents of the 2D square-lattice Ising model
+at T_c (= 2J / log(1 + √2)):
+
+    α = 0,  β = 1/8,  γ = 7/4,  δ = 15,  ν = 1,  η = 1/4.
+
+Delegated to the existing `Universality(:Ising)` infrastructure at
+`d = 2`.  Rushbrooke (α + 2β + γ = 2), Widom (γ = β(δ − 1)), and
+Fisher (η = 2 − γ/ν) hyperscaling relations all check out.
+
+The returned NamedTuple also carries the central charge `c = 1//2`
+inherited from the CFT minimal model M(3,4) — same payload as
+`fetch(Universality(:Ising), CriticalExponents(); d=2)`.
+
+# References
+
+- L. Onsager, *Phys. Rev.* **65**, 117 (1944) — exact 2D Ising solution.
+"""
+function fetch(::IsingSquare, ::CriticalExponents, ::Infinite; kwargs...)
+    return QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
+end

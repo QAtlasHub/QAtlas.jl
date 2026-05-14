@@ -438,6 +438,16 @@ Future CFT classes may return different NamedTuple schemas (e.g.
 struct PrimaryFields <: AbstractQuantity end
 
 """
+    FractalDimension() <: AbstractQuantity
+
+Hausdorff dimension `d_H` of the random geometric set associated with
+a model — e.g. the SLE_κ curve's `d_H(κ) = min(2, 1 + κ/8)`
+(Beffara 2008).  Real-valued, dimensionless, capped at the ambient
+space dimension.
+"""
+struct FractalDimension <: AbstractQuantity end
+
+"""
     CorrelationLength() <: AbstractQuantity
 
 Two-point correlation length `ξ` controlling the exponential decay of
@@ -885,3 +895,16 @@ class via the same data the `Universality{C}` entry exposes for
     will be exposed via a `ConformalTower` quantity once implemented.
 """
 struct CasimirEnergyCorrection <: AbstractQuantity end
+
+"""
+    SteadyStateCurrent() <: AbstractQuantity
+
+Steady-state mass / particle current `j` in a 1D non-equilibrium lattice
+gas (e.g. ASEP / TASEP, Derrida-Lebowitz 1998).  For TASEP at hopping
+rate `p` and density `ρ`,
+
+    j(ρ) = p ρ (1 − ρ)              (TASEP mean-field steady state)
+
+— the canonical KPZ-class non-equilibrium observable.
+"""
+struct SteadyStateCurrent <: AbstractQuantity end

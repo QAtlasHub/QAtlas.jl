@@ -39,3 +39,24 @@ end
     @test_throws DomainError QAtlas.fetch(SLEkappa(; κ=0.0), CentralCharge(), Infinite())
     @test_throws DomainError QAtlas.fetch(SLEkappa(; κ=-1.5), CentralCharge(), Infinite())
 end
+
+@testset "SLEkappa — FractalDimension (Beffara 2008)" begin
+    for (κ, expected) in [
+        (2.0, 5 / 4), (8 / 3, 4 / 3), (3.0, 11 / 8), (4.0, 3 / 2), (6.0, 7 / 4), (8.0, 2.0)
+    ]
+        @test QAtlas.fetch(SLEkappa(; κ=κ), FractalDimension(), Infinite()) ≈ expected
+    end
+end
+
+@testset "SLEkappa — FractalDimension cap at κ ≥ 8" begin
+    for κ in (8.0, 12.0, 16.0, 100.0)
+        @test QAtlas.fetch(SLEkappa(; κ=κ), FractalDimension(), Infinite()) == 2.0
+    end
+end
+
+@testset "SLEkappa — FractalDimension rejects κ ≤ 0" begin
+    @test_throws DomainError QAtlas.fetch(SLEkappa(; κ=0.0), FractalDimension(), Infinite())
+    @test_throws DomainError QAtlas.fetch(
+        SLEkappa(; κ=2.0), FractalDimension(), Infinite(); κ=-1.0
+    )
+end

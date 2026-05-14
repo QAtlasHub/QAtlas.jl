@@ -22,10 +22,9 @@
 #         κ = 6  →  c = 0      (percolation cluster boundary)
 #         κ = 8  →  c = -2     (uniform-spanning-tree Peano curve).
 #
-# This Phase-1 entry registers `CentralCharge` only.  A
-# `FractalDimension` quantity (or generic `HausdorffDimension`)
-# requires a new core struct in `src/core/quantities.jl` and is
-# tracked as a follow-up phase.
+# This entry registers two analytic quantities:
+#   - `CentralCharge` (Phase 1) via the SLE-CFT correspondence,
+#   - `FractalDimension` (Phase 2) via Beffara's theorem.
 #
 # References:
 #   - O. Schramm, Israel J. Math. 118, 221 (2000).
@@ -42,14 +41,12 @@ curve) at parameter `κ > 0`.  Default `κ = 6` is the percolation
 cluster-boundary fixed point — the original Schramm prediction that
 launched the field.
 
-Quantities registered (Phase 1):
+Quantities registered:
 
-| Quantity                       | BC         | Method                              |
-| ------------------------------ | ---------- | ----------------------------------- |
-| [`CentralCharge`](@ref)        | `Infinite` | analytic (SLE-CFT correspondence)   |
-
-A `FractalDimension` quantity (Beffara 2008 `d_H = min(2, 1 + κ/8)`)
-requires a new core struct and is tracked as a follow-up phase.
+| Quantity                       | BC         | Method                                |
+| ------------------------------ | ---------- | ------------------------------------- |
+| [`CentralCharge`](@ref)        | `Infinite` | analytic (SLE-CFT correspondence)     |
+| [`FractalDimension`](@ref)     | `Infinite` | analytic (Beffara 2008)               |
 
 # References
 
@@ -89,4 +86,33 @@ below zero diffusivity).
 function fetch(m::SLEkappa, ::CentralCharge, ::Infinite; κ::Real=m.κ, kwargs...)
     κ > 0 || throw(DomainError(κ, "SLEkappa CentralCharge requires κ > 0; got κ = $κ."))
     return (3κ - 8) * (6 - κ) / (2κ)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Hausdorff dimension d_H(κ) = min(2, 1 + κ/8)  (Beffara 2008, Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::SLEkappa, ::FractalDimension, ::Infinite; κ=m.κ) -> Float64
+
+Hausdorff dimension of the SLE_κ random curve (Beffara 2008):
+
+    d_H(κ) = min(2, 1 + κ/8),    κ > 0.
+
+The cap at `d_H = 2` for `κ ≥ 8` reflects the space-filling regime
+(the SLE_κ curve becomes space-filling at κ = 8 and stays so beyond,
+so its Hausdorff dimension cannot exceed the ambient plane).
+Canonical fixed points evaluate to: `d_H(2)=5/4`, `d_H(8/3)=4/3`,
+`d_H(3)=11/8`, `d_H(4)=3/2`, `d_H(6)=7/4`, `d_H(8)=2`.
+
+`κ ≤ 0` raises `DomainError` (the SLE process is undefined at and
+below zero diffusivity).
+
+# References
+
+- V. Beffara, *Annals Probab.* **36**, 1421 (2008).
+"""
+function fetch(m::SLEkappa, ::FractalDimension, ::Infinite; κ::Real=m.κ, kwargs...)
+    κ > 0 || throw(DomainError(κ, "SLEkappa FractalDimension requires κ > 0; got κ = $κ."))
+    return min(2.0, 1.0 + κ / 8.0)
 end

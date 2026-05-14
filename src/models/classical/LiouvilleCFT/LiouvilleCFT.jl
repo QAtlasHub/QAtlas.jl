@@ -19,10 +19,10 @@
 # Zamolodchikov-Zamolodchikov 1996).  Vertex operator scaling
 # dimensions are `Δ_α = α(Q − α)`.
 #
-# Phase-1 entry registers only `CentralCharge`.  The DOZZ three-point
-# function and vertex-operator dimensions require new quantity types
-# (Mellin-Barnes integrals returning `Float64` over a (b, α_1, α_2, α_3)
-# parameter slice) and are tracked as Phase 2.
+# Phase 1 registered `CentralCharge`; Phase 2 adds the vertex-operator
+# conformal weight `Δ_α = α(Q − α)`.  The DOZZ three-point function
+# (Mellin-Barnes integral over (b, α_1, α_2, α_3)) requires a further
+# quantity type and is still deferred.
 #
 # References:
 #   - A. M. Polyakov, Phys. Lett. B 103, 207 (1981).
@@ -39,11 +39,12 @@ canonical self-dual point `b = 1` (background charge `Q = 2`,
 `c = 25`) is used as the default.  The `b ↔ 1/b` self-duality leaves
 both `Q` and `c` invariant.
 
-Quantities registered (Phase 1):
+Quantities registered:
 
-| Quantity                       | BC         | Method                           |
-| ------------------------------ | ---------- | -------------------------------- |
-| [`CentralCharge`](@ref)        | `Infinite` | analytic (`c = 1 + 6Q²`)         |
+| Quantity                          | BC         | Method                           |
+| --------------------------------- | ---------- | -------------------------------- |
+| [`CentralCharge`](@ref)           | `Infinite` | analytic (`c = 1 + 6Q²`)         |
+| [`ConformalWeights`](@ref)        | `Infinite` | analytic (`Δ_α = α(Q − α)`)      |
 
 # References
 
@@ -86,4 +87,55 @@ function fetch(m::LiouvilleCFT, ::CentralCharge, ::Infinite; b::Real=m.b, kwargs
     b > 0 || throw(DomainError(b, "LiouvilleCFT CentralCharge requires b > 0; got b = $b."))
     Q = b + 1 / b
     return 1 + 6 * Q^2
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Conformal weights (vertex operator dimensions)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::LiouvilleCFT, ::ConformalWeights, ::Infinite; α::Real, b=m.b) -> Float64
+
+Conformal (scaling) dimension of the Liouville vertex operator
+`V_α(z, z̄) = exp(2 α φ(z, z̄))` at coupling `b > 0` and continuous
+real momentum `α`:
+
+    Δ_α = α (Q − α),    Q = b + 1/b.
+
+Both holomorphic and antiholomorphic weights coincide
+(`h = h̄ = Δ_α`); the full scaling dimension of `V_α` is `2 Δ_α`.
+
+`Δ_α` is invariant under the Liouville reflection `α ↔ Q − α`
+(the vertex operators `V_α` and `V_{Q−α}` are identified up to
+the DOZZ reflection coefficient).
+
+Special values:
+
+- `α = 0`     → `Δ = 0`              (identity operator)
+- `α = Q/2`   → `Δ = Q²/4`           (boundary of the normalisable
+                                       real-α slice; "Seiberg bound")
+- `α = b`     → `Δ = b(Q − b) = 1`   (degenerate screening operator
+                                       `V_b`; conformal spin 1)
+- `α = 1/b`   → `Δ = (1/b)(Q − 1/b) = 1`
+                                      (dual screening `V_{1/b}`)
+- `α ↔ Q−α`   → `Δ_α = Δ_{Q−α}`     (reflection symmetry)
+
+`b ≤ 0` raises `DomainError` (the Liouville coupling is real and
+positive by convention).  `α` is unconstrained: it may be any real
+number, including the non-normalisable region `α < 0` or `α > Q/2`,
+where `Δ_α` still gives the formal scaling dimension.
+
+# References
+
+- A. M. Polyakov, *Phys. Lett. B* **103**, 207 (1981).
+- A. B. Zamolodchikov, A. B. Zamolodchikov,
+  *Nucl. Phys. B* **477**, 577 (1996).
+"""
+function fetch(
+    m::LiouvilleCFT, ::ConformalWeights, ::Infinite; α::Real, b::Real=m.b, kwargs...
+)
+    b > 0 ||
+        throw(DomainError(b, "LiouvilleCFT ConformalWeights requires b > 0; got b = $b."))
+    Q = b + 1 / b
+    return α * (Q - α)
 end

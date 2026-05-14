@@ -115,3 +115,70 @@ function fetch(
     J = (Jx + Jy) / 2  # = Jx = Jy in the XX slice
     return 2 * max(0.0, abs(h) - 2J)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Energy per site — closed-form XX limit (Jx = Jy), any h
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::XYh1D, ::Energy{:per_site}, ::Infinite;
+          Jx=m.Jx, Jy=m.Jy, h=m.h, kwargs...) -> Float64
+
+Ground-state energy per site of the LSM/Pfeuty XY chain in a
+transverse field, **restricted to the isotropic XX limit**
+`Jx = Jy = J`.  Via Jordan-Wigner the model maps to free spinless
+fermions with single-particle dispersion `ξ(k) = 2h − 4J cos k`; the
+ground state fills all modes with `ξ(k) < 0`.
+
+In the thermodynamic limit, with the LSM 1961 sign convention
+`H = −J Σ(σˣσˣ + σʸσʸ) − h Σ σᶻ`,
+
+* `h ≥ 2J`   (empty Fermi sea, all spins ↑): `E/N = −h`
+* `h ≤ −2J`  (full Fermi sea, all spins ↓): `E/N =  h`
+* `|h| < 2J` (partially filled, `k_F = arccos(h/2J)`):
+
+      E/N = −h + (2h/π) · arccos(h/(2J))
+                − (4J/π) · √(1 − (h/(2J))²).
+
+At `h = 0`: `E/N = −4J/π ≈ −1.27323954J` (Lieb-Schultz-Mattis 1961).
+
+Anisotropic `Jx ≠ Jy` raises `DomainError` — Phase 2.
+
+# References
+
+- E. Lieb, T. Schultz, D. Mattis, *Annals Phys.* **16**, 407 (1961).
+- P. Pfeuty, *Annals Phys.* **57**, 79 (1970).
+"""
+function fetch(
+    m::XYh1D,
+    ::Energy{:per_site},
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    h::Real=m.h,
+    kwargs...,
+)
+    Jx > 0 || throw(DomainError(Jx, "XYh1D Energy{:per_site} requires Jx > 0; got Jx = $Jx."))
+    Jy > 0 || throw(DomainError(Jy, "XYh1D Energy{:per_site} requires Jy > 0; got Jy = $Jy."))
+    if !isapprox(Jx, Jy; atol=1e-12)
+        throw(
+            DomainError(
+                (Jx, Jy),
+                "XYh1D Energy{:per_site}: anisotropic case (Jx ≠ Jy) requires " *
+                "integration of the full Bogoliubov dispersion " *
+                "√[(h-(Jx+Jy)cos k)² + (Jx-Jy)²sin²k] and is deferred to Phase 2. " *
+                "Phase 1 supports only the isotropic XX limit Jx = Jy.  " *
+                "Got (Jx, Jy) = ($Jx, $Jy).",
+            ),
+        )
+    end
+    J = (Jx + Jy) / 2  # = Jx = Jy in the XX slice
+    if h >= 2J
+        return -float(h)
+    elseif h <= -2J
+        return float(h)
+    else
+        x = h / (2J)
+        return -h + (2h / pi) * acos(x) - (4J / pi) * sqrt(1 - x * x)
+    end
+end

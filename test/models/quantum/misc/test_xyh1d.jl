@@ -35,3 +35,43 @@ end
     @test_throws DomainError XYh1D(; Jy=0.0)
     @test_throws DomainError XYh1D(; Jy=-1.0)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Energy{:per_site} — closed-form XX limit (Jx = Jy), any h.  LSM 1961.
+# ─────────────────────────────────────────────────────────────────────────────
+
+@testset "XYh1D — XX limit Energy{:per_site} (Phase 1)" begin
+    # h = 0, J = 1: E/N = -4/π  (Lieb-Schultz-Mattis 1961)
+    e0 = QAtlas.fetch(XYh1D(), Energy{:per_site}(), Infinite())
+    @test isapprox(e0, -4 / π; atol=1e-12)
+    @test isapprox(e0, -1.2732395447351628; atol=1e-12)
+
+    # J linearity at h = 0
+    for J in (0.5, 1.0, 2.0, 3.5)
+        e = QAtlas.fetch(XYh1D(; Jx=J, Jy=J, h=0.0), Energy{:per_site}(), Infinite())
+        @test isapprox(e, -4J / π; atol=1e-12)
+    end
+
+    # Fully polarised (|h| ≥ 2J): E/N = -|h|
+    @test QAtlas.fetch(XYh1D(; h=2.0), Energy{:per_site}(), Infinite()) ≈ -2.0
+    @test QAtlas.fetch(XYh1D(; h=3.0), Energy{:per_site}(), Infinite()) ≈ -3.0
+    @test QAtlas.fetch(XYh1D(; h=-2.0), Energy{:per_site}(), Infinite()) ≈ -2.0
+    @test QAtlas.fetch(XYh1D(; h=-5.0), Energy{:per_site}(), Infinite()) ≈ -5.0
+
+    # Continuity at h = 2J: formula matches polarised value
+    e_just_below = QAtlas.fetch(XYh1D(; h=2.0 - 1e-9), Energy{:per_site}(), Infinite())
+    @test isapprox(e_just_below, -2.0; atol=1e-4)
+
+    # Inside band: closed form against direct evaluation
+    let J = 1.0, h = 1.0
+        x = h / (2J)
+        ref = -h + (2h / π) * acos(x) - (4J / π) * sqrt(1 - x^2)
+        @test QAtlas.fetch(XYh1D(; h=h), Energy{:per_site}(), Infinite()) ≈ ref
+    end
+end
+
+@testset "XYh1D — Energy{:per_site} anisotropic throws (Phase 2)" begin
+    @test_throws DomainError QAtlas.fetch(
+        XYh1D(; Jx=1.0, Jy=0.5, h=0.0), Energy{:per_site}(), Infinite()
+    )
+end

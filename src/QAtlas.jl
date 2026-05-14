@@ -24,6 +24,8 @@ export KagomeHeisenbergAFM                              # Kagome S=1/2 AFM Z₂ 
 export RFIM                                              # Random-Field Ising Model (Imry-Ma 1975)
 export GrossNeveu                                        # 1+1-D O(2N) 4-fermion (Gross-Neveu 1974)
 export XCube                                              # fracton X-cube model (Vijay-Haah-Fu 2016)
+export RandomBondIsing2D                                  # 2D ±J random-bond Ising / Edwards-Anderson (#232)
+export TTbar                                                # universal TT-bar deformation (#249)
 export TASEP                                                # totally asymmetric simple exclusion process (#241)
 
 # --- Quantum Models ---
@@ -49,6 +51,11 @@ export S1Heisenberg1D                                    # spin-1 (Haldane chain
 export AKLT1D                                            # spin-1 BLBQ at AKLT point
 export KitaevHeisenberg                                  # K-J-Γ honeycomb (α-RuCl₃, Rau-Lee-Kee 2014)
 export Compass1D                                       # 1D alternating XX/YY compass chain (#295)
+export S1AnisotropicD1D                               # S=1 Heisenberg + single-ion D (#302)
+export DMIHeisenberg1D                                  # spin-½ Heisenberg + Dzyaloshinskii-Moriya (#298)
+export J1J2Heisenberg1D                              # spin-½ J₁-J₂ chain (#297)
+export MixedFieldIsing1D                            # TFIM + longitudinal field, non-integrable (#290)
+export XYh1D                                          # anisotropic XY + transverse field (LSM 1961, #292)
 
 # --- Core Implementation ---
 include("core/alias.jl")
@@ -138,6 +145,10 @@ include("models/classical/TricriticalIsing/TricriticalIsing.jl")
 include("models/classical/TricriticalIsing/TricriticalIsing_registry.jl")  # populates REGISTRY for TricriticalIsing
 include("models/classical/LiouvilleCFT/LiouvilleCFT.jl")
 include("models/classical/LiouvilleCFT/LiouvilleCFT_registry.jl")        # populates REGISTRY for LiouvilleCFT (#248)
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D.jl")
+include("models/classical/RandomBondIsing2D/RandomBondIsing2D_registry.jl")  # populates REGISTRY for RandomBondIsing2D (#232)
+include("models/classical/TTbar/TTbar.jl")
+include("models/classical/TTbar/TTbar_registry.jl")  # populates REGISTRY for TTbar (#249)
 include("models/classical/TASEP/TASEP.jl")
 include("models/classical/TASEP/TASEP_registry.jl")  # populates REGISTRY for TASEP (#241)
 include("models/quantum/SchwingerModel/SchwingerModel.jl")
@@ -205,6 +216,16 @@ include("models/quantum/KitaevHeisenberg/KitaevHeisenberg.jl")
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg_registry.jl")    # populates REGISTRY for KitaevHeisenberg (#256)
 include("models/quantum/Compass1D/Compass1D.jl")
 include("models/quantum/Compass1D/Compass1D_registry.jl")  # populates REGISTRY for Compass1D (#295)
+include("models/quantum/S1AnisotropicD1D/S1AnisotropicD1D.jl")
+include("models/quantum/S1AnisotropicD1D/S1AnisotropicD1D_registry.jl")  # populates REGISTRY for S1AnisotropicD1D (#302)
+include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D.jl")
+include("models/quantum/DMIHeisenberg1D/DMIHeisenberg1D_registry.jl")  # populates REGISTRY for DMIHeisenberg1D (#298)
+include("models/quantum/J1J2Heisenberg1D/J1J2Heisenberg1D.jl")
+include("models/quantum/J1J2Heisenberg1D/J1J2Heisenberg1D_registry.jl")  # populates REGISTRY for J1J2Heisenberg1D (#297)
+include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D.jl")
+include("models/quantum/MixedFieldIsing1D/MixedFieldIsing1D_registry.jl")  # populates REGISTRY for MixedFieldIsing1D (#290)
+include("models/quantum/XYh1D/XYh1D.jl")
+include("models/quantum/XYh1D/XYh1D_registry.jl")  # populates REGISTRY for XYh1D (#292)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)

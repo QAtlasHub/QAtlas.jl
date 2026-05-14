@@ -158,3 +158,31 @@ function fetch(m::IsingTriangular, ::ResidualEntropy, ::Infinite; J::Real=m.J)
         return 0.0
     end
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# fetch: critical exponents (universality delegation)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::IsingTriangular, ::CriticalExponents, ::Infinite; kwargs...) -> NamedTuple
+
+2D Ising universality critical exponents (Onsager 1944), shared by the
+square and triangular lattices via universality:
+
+    α = 0,  β = 1/8,  γ = 7/4,  δ = 15,  ν = 1,  η = 1/4.
+
+Delegated to `Universality(:Ising)` at `d = 2`.  The triangular and
+square 2D Ising lattices have different microscopic T_c (Onsager's
+``2/log(1+sqrt(2))`` for the square; Houtappel's ``4/log 3`` for the
+FM triangular) but identical universal exponents — the canonical
+textbook example of universality.
+
+# References
+
+- L. Onsager, *Phys. Rev.* **65**, 117 (1944).
+- R. M. F. Houtappel, *Physica* **16**, 425 (1950) — exact triangular-lattice
+  Ising solution.
+"""
+function fetch(::IsingTriangular, ::CriticalExponents, ::Infinite; kwargs...)
+    return QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
+end

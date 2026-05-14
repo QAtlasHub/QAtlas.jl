@@ -220,3 +220,48 @@ function fetch(model::Hubbard1D, ::SpinGap, ::Infinite; kwargs...)
     _hubbard1d_check_half_filling(model)
     return 0.0
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Luttinger parameter at U=0 (free-fermion limit, Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::Hubbard1D, ::LuttingerParameter, ::Infinite; t=m.t, U=m.U, μ=m.μ) -> Float64
+
+Luttinger-liquid parameter of the 1D Hubbard model in the **free-fermion
+limit** U = 0:
+
+    K = 1               (non-interacting spinful fermions; Voit 1995)
+
+For U > 0, the Lieb–Wu Bethe-ansatz solution gives a non-closed-form
+expression for both K_ρ (charge) and K_σ (spin); deferred to Phase 2
+(or Phase 3).  This entry exposes only the U = 0 free-fermion limit
+and throws `DomainError` for any U ≠ 0.
+
+# References
+
+- E. H. Lieb, F. Y. Wu, *Phys. Rev. Lett.* **20**, 1445 (1968).
+- J. Voit, *Rep. Prog. Phys.* **58**, 977 (1995) — TLL review for Hubbard.
+"""
+function fetch(
+    m::Hubbard1D,
+    ::LuttingerParameter,
+    ::Infinite;
+    t::Real=m.t,
+    U::Real=m.U,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 ||
+        throw(DomainError(t, "Hubbard1D LuttingerParameter requires t > 0; got t = $t."))
+    if !iszero(U)
+        throw(
+            DomainError(
+                U,
+                "Hubbard1D LuttingerParameter: U ≠ 0 requires Lieb–Wu Bethe-ansatz K_ρ(U), " *
+                "K_σ(U) integrals (Voit 1995) — non-closed-form, deferred to Phase 2. Got U = $U.",
+            ),
+        )
+    end
+    return 1.0       # free-fermion limit
+end

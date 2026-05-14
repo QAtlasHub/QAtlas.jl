@@ -908,3 +908,18 @@ rate `p` and density `ρ`,
 — the canonical KPZ-class non-equilibrium observable.
 """
 struct SteadyStateCurrent <: AbstractQuantity end
+
+"""
+    ChiralCondensate() <: AbstractQuantity
+
+Vacuum expectation value `⟨ψ̄ψ⟩` of a fermion bilinear, signalling
+spontaneous (anomalous) chiral-symmetry breaking.  The massless
+Schwinger model is the canonical 1+1-D example: even though the
+classical Lagrangian is chirally symmetric, the anomaly forces a
+non-zero condensate
+
+    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π^{3/2}),    m_γ = e/√π.
+
+(Schwinger 1962; Coleman-Jackiw-Susskind 1975.)
+"""
+struct ChiralCondensate <: AbstractQuantity end

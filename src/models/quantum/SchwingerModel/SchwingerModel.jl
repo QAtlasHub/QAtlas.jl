@@ -16,10 +16,11 @@
 # (Coleman-Jackiw-Susskind 1975), giving direct contact with sine-
 # Gordon entries elsewhere in the atlas.
 #
-# This Phase-1 entry registers only the massless `m_γ = e/√π` mass
-# gap.  The chiral condensate, θ-vacuum structure, and massive
-# sine-Gordon duality require dedicated quantity types and are
-# tracked as Phase 2.
+# Phase 1 registered the massless `m_γ = e/√π` mass gap.  Phase 2
+# (#246) adds the anomaly-induced chiral condensate
+# `⟨ψ̄ψ⟩ = −exp(γ_E)·e/(2π^{3/2})` (Coleman-Jackiw-Susskind 1975)
+# via `ChiralCondensate`.  θ-vacuum structure and massive
+# sine-Gordon duality remain tracked as Phase 3.
 #
 # References:
 #   - J. Schwinger, Phys. Rev. 128, 2425 (1962).
@@ -34,11 +35,12 @@
 the spectrum is exactly a free massive scalar with the Schwinger
 mass `m_γ = e/√π`.
 
-Quantities registered (Phase 1):
+Quantities registered (Phases 1+2):
 
 | Quantity                       | BC         | Method                              |
 | ------------------------------ | ---------- | ----------------------------------- |
 | [`MassGap`](@ref)              | `Infinite` | analytic (`e/√π`, massless only)    |
+| [`ChiralCondensate`](@ref)    | `Infinite` | analytic (`-exp(γ_E)·e/(2π^{3/2})`, massless)  |
 
 Massive `m > 0` Schwinger maps to massive sine-Gordon
 (Coleman-Jackiw-Susskind 1975) and is tracked as Phase 2.
@@ -90,4 +92,38 @@ function fetch(
         ),
     )
     return e / sqrt(π)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Chiral condensate ⟨ψ̄ψ⟩ — anomaly-induced (massless Schwinger, Phase 2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(::SchwingerModel, ::ChiralCondensate, ::Infinite; e=model.e) -> Float64
+
+Anomaly-induced chiral condensate in the **massless** Schwinger model
+(Schwinger 1962; Coleman-Jackiw-Susskind 1975):
+
+    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π^{3/2}),
+
+where `γ_E ≈ 0.5772156649` is the Euler-Mascheroni constant.  Negative
+by convention; magnitude scales linearly with the gauge coupling.
+The non-zero condensate is the canonical 1+1-D example of anomaly-
+induced spontaneous chiral-symmetry breaking: the classical
+Lagrangian is chirally symmetric, but the axial U(1) anomaly forces
+`⟨ψ̄ψ⟩ ≠ 0` in the quantum vacuum.
+
+`e > 0` required.
+
+# References
+
+- J. Schwinger, *Phys. Rev.* **128**, 2425 (1962).
+- S. Coleman, R. Jackiw, L. Susskind, *Annals Phys.* **93**, 267 (1975).
+"""
+function fetch(
+    model::SchwingerModel, ::ChiralCondensate, ::Infinite; e::Real=model.e, kwargs...
+)
+    e > 0 ||
+        throw(DomainError(e, "SchwingerModel ChiralCondensate requires e > 0; got e = $e."))
+    return -exp(MathConstants.eulergamma) * e / (2 * π^(3/2))
 end

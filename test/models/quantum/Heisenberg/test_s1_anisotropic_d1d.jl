@@ -46,3 +46,36 @@ end
     # D may be any real, including negative.
     @test S1AnisotropicD1D(; J=1.0, D=-1.5) isa S1AnisotropicD1D
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Energy{:per_site} — D = 0 delegate to S1Heisenberg1D (White-Huse 1993).
+# ─────────────────────────────────────────────────────────────────────────────
+
+@testset "S1AnisotropicD1D — D=0 Energy{:per_site} delegate" begin
+    for J in (0.5, 1.0, 2.0, 3.7)
+        m = S1AnisotropicD1D(; J=J, D=0.0)
+        e = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
+        e_delegate = QAtlas.fetch(S1Heisenberg1D(; J=J), Energy{:per_site}(), Infinite())
+        @test e ≈ e_delegate
+        @test isapprox(e, -1.40148403897 * J; atol=1e-10)
+    end
+end
+
+@testset "S1AnisotropicD1D — Energy{:per_site} D≠0 throws DomainError" begin
+    @test_throws DomainError QAtlas.fetch(
+        S1AnisotropicD1D(; J=1.0, D=0.1), Energy{:per_site}(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        S1AnisotropicD1D(; J=1.0, D=-0.5), Energy{:per_site}(), Infinite()
+    )
+end
+
+@testset "S1AnisotropicD1D — Energy{:per_site} tiny D (1e-13) strict iszero" begin
+    # Regression: boundary check must be exact iszero(D), not isapprox.
+    @test_throws DomainError QAtlas.fetch(
+        S1AnisotropicD1D(; J=1.0, D=1e-13), Energy{:per_site}(), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        S1AnisotropicD1D(; J=1.0, D=-1e-13), Energy{:per_site}(), Infinite()
+    )
+end

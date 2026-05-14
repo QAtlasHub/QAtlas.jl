@@ -19,3 +19,15 @@
     references=["White-Huse 1993", "Chen-Roncaglia 2008", "Tzeng-Yang-Hsu 2017"],
     notes="Phase 1: D = 0 delegate to S1Heisenberg1D (Δ ≈ 0.41048 J, DMRG numerical-exact). D ≠ 0 throws DomainError (Phase 2).",
 )
+
+# ── Infinite — Haldane per-site energy delegate (D = 0 only) ────────
+@register(
+    S1AnisotropicD1D,
+    Energy{:per_site},
+    Infinite,
+    method=:s1_heisenberg_delegation,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl",
+    references=["White-Huse 1993", "Chen-Roncaglia 2008", "Tzeng-Yang-Hsu 2017"],
+    notes="Phase 1: D = 0 delegate to S1Heisenberg1D (e₀ ≈ -1.40148 J, DMRG numerical-exact). D ≠ 0 throws DomainError (Phase 2).",
+)

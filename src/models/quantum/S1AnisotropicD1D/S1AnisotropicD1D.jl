@@ -122,3 +122,47 @@ function fetch(
     )
     return QAtlas.fetch(QAtlas.S1Heisenberg1D(; J=J), MassGap(), Infinite())
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Energy per site — D = 0 delegation to S1Heisenberg1D
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::S1AnisotropicD1D, ::Energy{:per_site}, ::Infinite;
+          J = m.J, D = m.D, kwargs...) -> Float64
+
+Ground-state energy per site of the spin-1 anisotropic chain at the
+**D = 0 reference point**, delegated to [`S1Heisenberg1D`](@ref):
+e₀ ≈ -1.40148403897 J (White-Huse 1993 DMRG, numerical-exact).
+
+`D ≠ 0` raises `DomainError` — same Phase 2 gate as `MassGap`.
+
+# References
+
+- S. R. White, D. A. Huse, *Phys. Rev. B* **48**, 3844 (1993).
+- Y.-C. Chen, R. Roncaglia, *J. Stat. Mech.* P10024 (2008).
+- Y.-D. Tzeng, H.-H. Hung, Y.-C. Chen, M.-F. Yang, *Phys. Rev. B* **96**, 205104 (2017).
+"""
+function fetch(
+    m::S1AnisotropicD1D,
+    ::Energy{:per_site},
+    ::Infinite;
+    J::Real=m.J,
+    D::Real=m.D,
+    kwargs...,
+)
+    J > 0 ||
+        throw(DomainError(J, "S1AnisotropicD1D Energy{:per_site} requires J > 0; got J = $J."))
+    iszero(D) || throw(
+        DomainError(
+            D,
+            "S1AnisotropicD1D Energy{:per_site}: closed-form reference available " *
+            "only at D = 0 (pure spin-1 Heisenberg, White-Huse 1993 DMRG " *
+            "e₀ ≈ -1.40148 J). Generic D introduces easy-axis (D < 0) Néel or " *
+            "large-D (D > 0) trivial phases separated from Haldane by Ising/Gaussian " *
+            "transitions; required DMRG references (Chen-Roncaglia 2008, " *
+            "Tzeng-Yang-Hsu 2017) are deferred to Phase 2. Got D = $D.",
+        ),
+    )
+    return QAtlas.fetch(QAtlas.S1Heisenberg1D(; J=J), Energy{:per_site}(), Infinite())
+end

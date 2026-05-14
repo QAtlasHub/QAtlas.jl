@@ -55,3 +55,47 @@ end
     @test_throws DomainError TightBindingV1D(; t=0.0)
     @test_throws DomainError TightBindingV1D(; t=-1.0)
 end
+
+@testset "TightBindingV1D — V=0 free-fermion Energy{:per_site} (Phase 1)" begin
+    # μ=0 (half-filling, J=t=1): e₀ = -2/π
+    e_hf = QAtlas.fetch(TightBindingV1D(), Energy(:per_site), Infinite())
+    @test isapprox(e_hf, -2 / pi; atol=1e-12)
+    @test isapprox(e_hf, -0.6366197723675814; atol=1e-12)
+
+    # Band edges: empty (μ=-2t) → 0; filled (μ=+2t) → -μ = -2
+    @test QAtlas.fetch(TightBindingV1D(; μ=-2.0), Energy(:per_site), Infinite()) == 0.0
+    @test QAtlas.fetch(TightBindingV1D(; μ=2.0), Energy(:per_site), Infinite()) == -2.0
+    # Deep insulating limits
+    @test QAtlas.fetch(TightBindingV1D(; μ=-5.0), Energy(:per_site), Infinite()) == 0.0
+    @test QAtlas.fetch(TightBindingV1D(; μ=5.0), Energy(:per_site), Infinite()) == -5.0
+
+    # t-linearity at μ=0: e₀(t, 0) = -2t/π
+    @test isapprox(
+        QAtlas.fetch(TightBindingV1D(; t=3.0), Energy(:per_site), Infinite()),
+        -2 * 3 / pi;
+        atol=1e-12,
+    )
+
+    # Continuity across band edges (one-sided)
+    e_just_inside = QAtlas.fetch(
+        TightBindingV1D(; μ=2.0 - 1e-9), Energy(:per_site), Infinite()
+    )
+    @test isapprox(e_just_inside, -2.0; atol=1e-6)
+    e_just_empty = QAtlas.fetch(
+        TightBindingV1D(; μ=-2.0 + 1e-9), Energy(:per_site), Infinite()
+    )
+    @test isapprox(e_just_empty, 0.0; atol=1e-6)
+end
+
+@testset "TightBindingV1D — Energy{:per_site} V≠0 / tiny-V DomainError (Phase 2 gate)" begin
+    @test_throws DomainError QAtlas.fetch(
+        TightBindingV1D(; V=0.5), Energy(:per_site), Infinite()
+    )
+    # iszero(V) strictness regression
+    @test_throws DomainError QAtlas.fetch(
+        TightBindingV1D(; V=1e-13), Energy(:per_site), Infinite()
+    )
+    @test_throws DomainError QAtlas.fetch(
+        TightBindingV1D(; V=-1e-13), Energy(:per_site), Infinite()
+    )
+end

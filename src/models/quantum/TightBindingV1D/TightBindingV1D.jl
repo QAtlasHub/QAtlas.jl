@@ -144,3 +144,56 @@ function fetch(
     )
     return 2t * sin(acos(-μ / (2t)))
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Energy per site — V = 0 free-fermion closed form
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::TightBindingV1D, ::Energy{:per_site}, ::Infinite;
+          t=m.t, V=m.V, μ=m.μ, kwargs...) -> Float64
+
+Ground-state energy density of the V = 0 tight-binding chain at T = 0:
+
+    e₀ = -2t/π · sin(k_F) - μ/π · k_F ,   k_F = arccos(-μ/(2t))   (|μ| < 2t)
+    e₀ = 0                                                          (μ ≤ -2t, empty band)
+    e₀ = -μ                                                         (μ ≥  2t, filled band)
+
+Obtained from `e₀ = (1/2π) ∫_{-k_F}^{k_F} ε(k) dk` with ε(k) = -2t cos(k) - μ.
+
+`V ≠ 0` raises `DomainError` (Phase 2 via JW ↔ XXZ1D).
+
+References:
+  - G. D. Mahan, *Many-Particle Physics* (3rd ed., 2000), Chapter 1.
+  - N. W. Ashcroft, N. D. Mermin, *Solid State Physics* (1976), Ch. 9.
+"""
+function fetch(
+    m::TightBindingV1D,
+    ::Energy{:per_site},
+    ::Infinite;
+    t::Real=m.t,
+    V::Real=m.V,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 || throw(
+        DomainError(t, "TightBindingV1D Energy{:per_site} requires t > 0; got t = $t.")
+    )
+    if !iszero(V)
+        throw(
+            DomainError(
+                V,
+                "TightBindingV1D Energy{:per_site}: V ≠ 0 (JW-equivalent to interacting XXZ, " *
+                "Yang-Yang 1966) deferred to Phase 2. Got V = $V.",
+            ),
+        )
+    end
+    if μ <= -2t
+        return 0.0
+    elseif μ >= 2t
+        return -float(μ)
+    else
+        k_F = acos(-μ / (2t))
+        return -(2t / pi) * sin(k_F) - (μ / pi) * k_F
+    end
+end

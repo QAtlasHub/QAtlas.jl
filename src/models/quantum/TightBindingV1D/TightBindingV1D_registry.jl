@@ -24,3 +24,14 @@
     references=["Ashcroft-Mermin 1976"],
     notes="V=0 free-fermion v_F = 2t sin(k_F); |μ|≥2t (no Fermi surface) DomainError.",
 )
+
+@register(
+    TightBindingV1D,
+    Energy{:per_site},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding_v1d.jl",
+    references=["Mahan 2000", "Ashcroft-Mermin 1976"],
+    notes="V=0 free-fermion e₀ = -(2t/π)sin(k_F) - (μ/π)k_F, k_F = arccos(-μ/2t); band-edge piecewise.",
+)

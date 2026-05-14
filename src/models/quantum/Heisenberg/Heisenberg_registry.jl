@@ -207,3 +207,15 @@ end
     references=["des Cloizeaux–Pearson 1962", "Müller-Thomas-Beck-Bonner 1981"],
     notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",
 )
+
+# ── Luttinger-liquid parameter at SU(2)-symmetric point (Phase 2) ─────
+@register(
+    Heisenberg1D,
+    LuttingerParameter,
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl",
+    references=["Luther-Peschel 1975", "Affleck 1989", "Haldane 1980"],
+    notes="K = 1/2 (SU(2)-symmetric Heisenberg AFM); delegate to XXZ1D(Δ=1).",
+)

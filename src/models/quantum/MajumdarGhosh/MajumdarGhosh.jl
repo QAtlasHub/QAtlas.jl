@@ -211,3 +211,43 @@ function fetch(
         )
     end
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Ground-state-to-first-excited spin gap — Phase-2 DMRG reference value
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Hardcoded DMRG reference for the Majumdar–Ghosh ground-state-to-first-
+# excited spin gap.  References:
+#   * S. R. White, I. Affleck, Phys. Rev. B 54, 9862 (1996) — DMRG study
+#     of the J1-J2 chain at the MG point, gap Δ ≈ 0.234 J.
+#   * S. Eggert, Phys. Rev. B 54, R9612 (1996) — DMRG cross-check.
+# (The Shastry-Sutherland 1981 analytical lower bound Δ ≥ J/4 = 0.25 J is
+# *larger* than the DMRG value, so SS must be read as a sector-specific
+# trimer-excitation bound rather than the absolute spectral gap.  Strict
+# absolute-gap bounds: Caspers-Magnus 1982 Δ ≥ 0.0975 J; Magnus 1991
+# Δ ≥ 0.117 J.)
+const _MAJUMDAR_GHOSH_SPIN_GAP_PER_J = 0.234
+
+"""
+    fetch(::MajumdarGhosh, ::SpinGap, ::Infinite; J=m.J) -> Float64
+
+Ground-state-to-first-excited spin gap of the Majumdar–Ghosh chain:
+
+    Δ ≈ 0.234 J        (White-Affleck 1996; Eggert 1996 DMRG cross-check)
+
+Returned as `J × 0.234`.  Reliability `:medium` (numerical DMRG, finite
+extrapolation uncertainty; the value should be revised if a tighter
+literature consensus emerges).  The analytical Shastry-Sutherland 1981
+bound Δ ≥ J/4 = 0.25 J is *larger* than the DMRG value, so the SS bound
+is a sector-specific trimer-excitation bound, not the absolute gap.
+
+# References
+
+- S. R. White, I. Affleck, *Phys. Rev. B* **54**, 9862 (1996).
+- S. Eggert, *Phys. Rev. B* **54**, R9612 (1996).
+- B. S. Shastry, B. Sutherland, *J. Phys. C* **14**, L765 (1981) — analytical bound.
+"""
+function fetch(m::MajumdarGhosh, ::SpinGap, ::Infinite; J::Real=m.J, kwargs...)
+    J > 0 || throw(DomainError(J, "MajumdarGhosh SpinGap requires J > 0; got J = $J."))
+    return J * _MAJUMDAR_GHOSH_SPIN_GAP_PER_J
+end

@@ -56,7 +56,7 @@ jobs:
           name="coverage-${{ matrix.group }}"
           name="${name//[\/,]/_}"
           echo "name=$name" >> "$GITHUB_OUTPUT"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.art.outputs.name }}
           path: lcov.info

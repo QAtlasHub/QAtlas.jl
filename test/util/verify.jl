@@ -102,7 +102,7 @@ function verify(
     @test isapprox(best, float(subject); atol=agree_within)
 
     if get(ENV, "QATLAS_EMIT", "0") == "1"
-        outdir = joinpath(@__DIR__, "..", ".ci-out")
+        outdir = get(ENV, "QATLAS_CIOUT_DIR", joinpath(@__DIR__, "..", ".ci-out"))
         mkpath(outdir)
         tf = get(ENV, "QATLAS_TEST_FILES", "")
         sid = isempty(tf) ? "all" : replace(string(hash(tf); base=16), '/' => '-')

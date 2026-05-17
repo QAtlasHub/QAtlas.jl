@@ -140,7 +140,7 @@ end
 # consolidate job merges these into the `ci-timings` orphan branch; the
 # planner LPT-bin-packs the next run from it (round-robin until then).
 if get(ENV, "QATLAS_EMIT", "0") == "1"
-    outdir = joinpath(@__DIR__, ".ci-out")
+    outdir = get(ENV, "QATLAS_CIOUT_DIR", joinpath(@__DIR__, ".ci-out"))
     mkpath(outdir)
     sid = if !isempty(_shard_spec)
         replace(_shard_spec, '/' => '-')

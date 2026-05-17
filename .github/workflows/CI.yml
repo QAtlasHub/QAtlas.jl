@@ -74,6 +74,10 @@ jobs:
       # so the persisted numbers reflect the heavier computation.
       QATLAS_TEST_PROFILE: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && 'full' || 'fast' }}
       QATLAS_EMIT: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && '1' || '0' }}
+      # julia-runtest sandboxes Pkg.test, so @__DIR__ points into a
+      # temp copy.  Pin the emit dir to the workspace so upload-artifact
+      # (which scans the workspace) actually finds the emitted files.
+      QATLAS_CIOUT_DIR: ${{ github.workspace }}/test/.ci-out
     steps:
       - uses: actions/checkout@v6
       - uses: julia-actions/setup-julia@v3
@@ -140,8 +144,8 @@ jobs:
             merged/timings.tsv | sort > merged/final.tsv
           rows=$(wc -l < merged/final.tsv)
           if [ "$rows" -lt 1 ]; then
-            echo "No timing rows merged — skipping push"
-            exit 0
+            echo "::error::push:main produced 0 timing rows — emit path broken (sandbox/QATLAS_CIOUT_DIR). Failing loudly instead of silent green."
+            exit 1
           fi
           echo "Merged timing rows: $rows"
           tmp=$(mktemp -d)
@@ -184,8 +188,8 @@ jobs:
             merged/all.jsonl > merged/evidence.jsonl || : > merged/evidence.jsonl
           rows=$(wc -l < merged/evidence.jsonl)
           if [ "$rows" -lt 1 ]; then
-            echo "No evidence cards merged — skipping push"
-            exit 0
+            echo "::error::push:main produced 0 verification cards — emit path broken (sandbox/QATLAS_CIOUT_DIR). Failing loudly instead of silent green."
+            exit 1
           fi
           echo "Merged evidence cards: $rows"
           tmp=$(mktemp -d)

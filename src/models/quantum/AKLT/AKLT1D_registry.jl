@@ -71,3 +71,25 @@
     tested_in="test/standalone/test_aklt.jl",
     notes="Full sorted spectrum from 3^N dense ED; N ≤ 8 (3^8 = 6561).",
 )
+
+# ── VBS ground-state correlations (Infinite, closed form) ────────────
+@register(
+    AKLT1D,
+    ZZCorrelation{:static},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt.jl",
+    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    notes="Exact VBS ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|} (r≠0), 2/3 (r=0); J-independent. ED in tests verifies finite-N convergence.",
+)
+@register(
+    AKLT1D,
+    ZZStructureFactor,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt.jl",
+    references=["Arovas-Auerbach-Haldane 1988"],
+    notes="Exact static structure factor S_zz(q) = 2(1-cos q)/(5+3 cos q); S(0)=0, S(π)=2; J-independent.",
+)

@@ -104,3 +104,100 @@ end
         end
     end
 end
+
+@testset "AKLT1D — exact VBS spin correlations (closed form, AKLT 1988)" begin
+    m = AKLT1D(; J=1.0)
+
+    @testset "ZZCorrelation{:static} closed form ⟨Sᶻ₀Sᶻ_r⟩" begin
+        # r = 0 : on-site ⟨(Sᶻ)²⟩ = 2/3 for S = 1 in the VBS
+        @test QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=0) ≈ 2 / 3 atol =
+            1e-14
+        # r ≠ 0 : (-1)^r (4/3) 3^{-|r|}
+        for r in 1:6
+            v = QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=r)
+            closed = (-1)^r * (4 / 3) * 3.0^(-r)
+            @test v ≈ closed atol = 1e-14
+        end
+        # even in r (depends only on |r|)
+        for r in 1:5
+            @test QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=(-r)) ≈
+                QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=r) atol = 1e-14
+        end
+        # alternating sign + exponential decay ratio is exactly 1/3
+        c1 = QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=1)
+        c2 = QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=2)
+        c3 = QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=3)
+        @test c1 < 0 && c2 > 0 && c3 < 0
+        @test abs(c2 / c1) ≈ 1 / 3 atol = 1e-14
+        @test abs(c3 / c2) ≈ 1 / 3 atol = 1e-14
+        # J-independent (VBS ground state is the same for every J > 0)
+        for J in (0.3, 1.0, 4.2)
+            @test QAtlas.fetch(
+                AKLT1D(; J=J), ZZCorrelation(; mode=:static), Infinite(); r=2
+            ) ≈ QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=2) atol = 1e-14
+        end
+    end
+
+    @testset "ZZStructureFactor closed form S_zz(q) = 2(1-cos q)/(5+3cos q)" begin
+        @test QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=0.0) ≈ 0.0 atol = 1e-14
+        @test QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=π / 2) ≈ 2 / 5 atol = 1e-14
+        @test QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=π) ≈ 2.0 atol = 1e-14
+        # S(0) = 0 is the total-Sᶻ conservation sum rule; peak at q = π
+        for q in range(0.1, π - 0.1; length=12)
+            S = QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=q)
+            @test 0.0 < S < 2.0
+            @test S < QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=π)
+        end
+        # 2π-periodic and even
+        @test QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=0.7) ≈
+            QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=0.7 + 2π) atol = 1e-12
+        @test QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=-0.7) ≈
+            QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=0.7) atol = 1e-14
+        # J-independent
+        @test QAtlas.fetch(AKLT1D(; J=2.6), ZZStructureFactor(), Infinite(); q=π) ≈ 2.0 atol =
+            1e-14
+    end
+
+    @testset "structure factor is the Fourier transform of the correlation" begin
+        # S_zz(q) = Σ_r e^{iqr} ⟨Sᶻ₀Sᶻ_r⟩; the closed form must equal the
+        # truncated lattice sum (geometric tail < 1e-12 by r = 40).
+        for q in (0.3, 1.0, 2.0, π)
+            Ssum = QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=0)
+            for r in 1:40
+                Ssum +=
+                    2 *
+                    cos(q * r) *
+                    QAtlas.fetch(m, ZZCorrelation(; mode=:static), Infinite(); r=r)
+            end
+            @test Ssum ≈ QAtlas.fetch(m, ZZStructureFactor(), Infinite(); q=q) atol = 1e-9
+        end
+    end
+
+    @testset "ED (test-only) converges to the closed-form correlation" begin
+        # The src value is the analytical AKLT-1988 closed form; dense ED
+        # is used HERE (tests only) purely to confirm a finite-N chain
+        # reproduces it.  The OBC ground manifold is 4-fold (edge spin-½);
+        # the bulk connected ⟨Sᶻ_i Sᶻ_{i+r}⟩ on a central site still
+        # tracks the infinite-chain closed form, the residual shrinking
+        # as the reference site moves away from the boundary.
+        using LinearAlgebra: Hermitian, eigen, I, kron
+        Sz = QAtlas._S1_z
+        idn(k) = Matrix{ComplexF64}(I, 3^k, 3^k)
+        for N in (6, 8)
+            H = QAtlas._aklt_hamiltonian_matrix(m, N, OBC(N))
+            ψ = eigen(Hermitian(H)).vectors[:, 1]   # a state in the GS manifold
+            i0 = cld(N, 2)                            # central reference site
+            szop(s) = kron(idn(s - 1), Sz, idn(N - s))
+            for r in (1, 2)
+                ed = real(ψ' * (szop(i0) * szop(i0 + r) * ψ))
+                closed = (-1)^r * (4 / 3) * 3.0^(-r)
+                # loose at N = 6, tighter at N = 8 — demonstrates convergence
+                tol = N == 6 ? 5e-2 : 1e-2
+                @test isapprox(ed, closed; atol=tol)
+            end
+            # on-site ⟨(Sᶻ)²⟩ → 2/3 only in the infinite VBS; finite-N + 4-fold OBC degeneracy leaves a few-e-3 residual (ED is a finite-N approximant of the analytic src value)
+            ed0 = real(ψ' * (szop(i0) * szop(i0) * ψ))
+            @test ed0 ≈ 2 / 3 atol = 5e-3
+        end
+    end
+end

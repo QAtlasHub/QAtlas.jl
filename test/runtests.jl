@@ -154,5 +154,6 @@ if get(ENV, "QATLAS_EMIT", "0") == "1"
             println(io, k, '\t', round(v; digits=4))
         end
     end
-    println("Emitted .ci-out/timings-$(sid).tsv ($(length(_TIMINGS)) entries)")
+    _tf = joinpath(outdir, "timings-$(sid).tsv")
+    println("Emitted timing TSV -> ", abspath(_tf), " (", length(_TIMINGS), " entries; exists=", isfile(_tf), ")")
 end

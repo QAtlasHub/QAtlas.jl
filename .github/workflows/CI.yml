@@ -91,6 +91,23 @@ jobs:
       - uses: julia-actions/julia-runtest@v1
         with:
           julia-args: "--threads=auto"
+      - name: Collect emitted ci-out into the workspace (push:main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          set -uo pipefail
+          dest="$GITHUB_WORKSPACE/test/.ci-out"
+          mkdir -p "$dest"
+          echo "QATLAS_CIOUT_DIR=$QATLAS_CIOUT_DIR  GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
+          found=$(find "$GITHUB_WORKSPACE" "$HOME/.julia" "$RUNNER_TEMP" /tmp \
+                    -maxdepth 9 \( -name 'timings-*.tsv' -o -name 'evidence-*.jsonl' \) \
+                    2>/dev/null | sort -u || true)
+          echo "--- located emitted files ---"; printf '%s\n' "$found"
+          if [ -n "$found" ]; then
+            printf '%s\n' "$found" | while IFS= read -r f; do
+              [ -n "$f" ] && [ -f "$f" ] && cp -fv "$f" "$dest/" || true
+            done
+          fi
+          echo "--- workspace test/.ci-out ---"; ls -la "$dest" 2>&1 || true
       - uses: julia-actions/julia-processcoverage@v1
       - uses: actions/upload-artifact@v7
         with:

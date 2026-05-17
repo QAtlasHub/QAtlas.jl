@@ -140,7 +140,7 @@ Closed-form bulk correlation length of the AKLT chain,
 
     ξ = 1 / log 3 ≈ 0.91024
 
-(AKLT 1988).  Connected `⟨S^z_0 S^z_r⟩` decays as `(−1)^r 4/9 · 3^{−r}`
+(AKLT 1988).  Connected `⟨S^z_0 S^z_r⟩` decays as `(−1)^r (4/3) · 3^{−|r|}`
 in the VBS state, giving `ξ = 1/log 3` independent of `J`.
 """
 function fetch(model::AKLT1D, ::CorrelationLength, ::Infinite; kwargs...)
@@ -203,4 +203,69 @@ function fetch(model::AKLT1D, ::ExactSpectrum, bc::OBC; N::Int=bc.N, kwargs...)
     N > 0 || throw(ArgumentError("AKLT1D ExactSpectrum: N must be positive (got $N)"))
     H = _aklt_hamiltonian_matrix(model, N, OBC(N))
     return sort(real.(eigvals(Hermitian(H))))
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VBS ground-state spin correlations — exact closed form (AKLT 1988)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# The AKLT valence-bond-solid ground state has an exactly known,
+# J-independent (the GS wavefunction is the same for every J > 0)
+# equal-time two-point function:
+#
+#     ⟨Sᶻ₀ Sᶻ_r⟩ = (−1)^r · (4/3) · 3^{−|r|}     (r ≠ 0),
+#     ⟨(Sᶻ)²⟩    = 2/3                            (r = 0, S = 1 on-site),
+#
+# equivalently ⟨S⃗₀·S⃗_r⟩ = (−1)^r · 4 · 3^{−|r|} by isotropy.  The decay
+# ratio 3^{−1} per step is exactly the origin of ξ = 1/log 3.  ⟨Sᶻ⟩ = 0
+# in the VBS, so this equal-time correlator is already the *connected*
+# one.  Its lattice Fourier transform is the static structure factor
+#
+#     S_zz(q) = Σ_r e^{iqr} ⟨Sᶻ₀ Sᶻ_r⟩ = 2(1 − cos q) / (5 + 3 cos q)
+#
+# (Arovas–Auerbach–Haldane 1988): S_zz(0) = 0 (total-Sᶻ conservation),
+# antiferromagnetic peak S_zz(π) = 2.
+#
+# References:
+#   I. Affleck, T. Kennedy, E. H. Lieb, H. Tasaki, Commun. Math. Phys.
+#     115, 477 (1988) — exact VBS two-point function.
+#   D. P. Arovas, A. Auerbach, F. D. M. Haldane, Phys. Rev. Lett. 60,
+#     531 (1988) — static structure factor of the AKLT chain.
+
+"""
+    fetch(model::AKLT1D, ::ZZCorrelation{:static}, ::Infinite; r::Integer) -> Float64
+
+Exact equal-time spin-z two-point function of the AKLT VBS ground
+state at separation `r`:
+
+    ⟨Sᶻ₀ Sᶻ_r⟩ = (−1)^r · (4/3) · 3^{−|r|}   (r ≠ 0),
+    ⟨(Sᶻ)²⟩    = 2/3                          (r = 0).
+
+Closed form (AKLT 1988); `J`-independent (the VBS ground state does not
+depend on `J > 0`).  Exponential decay with rate `log 3`, consistent
+with [`fetch(::AKLT1D, ::CorrelationLength, ::Infinite)`](@ref)
+`ξ = 1/log 3`.  Since `⟨Sᶻ⟩ = 0` in the VBS this equal-time value is
+already the connected correlation.
+"""
+function fetch(::AKLT1D, ::ZZCorrelation{:static}, ::Infinite; r::Integer, kwargs...)
+    r == 0 && return 2.0 / 3.0
+    a = abs(r)
+    return (iseven(a) ? 1.0 : -1.0) * (4.0 / 3.0) * 3.0^(-a)
+end
+
+"""
+    fetch(model::AKLT1D, ::ZZStructureFactor, ::Infinite; q::Real) -> Float64
+
+Exact static (equal-time) spin-z structure factor of the AKLT chain,
+
+    S_zz(q) = Σ_r e^{iqr} ⟨Sᶻ₀ Sᶻ_r⟩ = 2 (1 − cos q) / (5 + 3 cos q)
+
+(Arovas–Auerbach–Haldane 1988).  `S_zz(0) = 0` by total-`Sᶻ`
+conservation; antiferromagnetic peak `S_zz(π) = 2`.  `J`-independent.
+This is the lattice-Fourier sum of the closed-form
+[`ZZCorrelation`](@ref) `(−1)^r (4/3) 3^{−|r|}`.
+"""
+function fetch(::AKLT1D, ::ZZStructureFactor, ::Infinite; q::Real, kwargs...)
+    c = cos(q)
+    return 2.0 * (1.0 - c) / (5.0 + 3.0 * c)
 end

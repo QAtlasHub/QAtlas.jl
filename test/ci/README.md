@@ -83,6 +83,16 @@ suite must still run every test exactly once.
 - A new value runs in its own PR (assert-only); its timing/evidence is
   recorded only on the post-merge `push:main`.  It is "pending
   verification" until then — never silently absent.
+- **Degenerate ground states break single-vector ED routes.**  If the
+  model's GS manifold is degenerate (e.g. OBC AKLT is 4-fold from edge
+  modes), `eigen(...).vectors[:,1]` is an *arbitrary* member of that
+  manifold and a single-vector `⟨O_iO_j⟩` is **basis-dependent** — it
+  differs across BLAS/LAPACK builds (it bit us twice: the early AKLT
+  `⟨Sᶻ²⟩` and the pilot `S(π)`, Panza 0.011 vs GH-runner 0.065).  An
+  independent ED route must use a **basis-invariant** quantity:
+  `Tr(ρ_GS O_iO_j)` averaged over the whole degenerate eigenspace, or
+  a non-degenerate setup (PBC ring for AKLT).  Eigen*values* are fine
+  (the smallest is unique) — only eigen*vectors* need this care.
 
 ---
 

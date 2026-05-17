@@ -104,6 +104,15 @@ jobs:
           retention-days: 1
           if-no-files-found: warn
           overwrite: true
+      - name: Upload shard evidence cards (push:main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v7
+        with:
+          name: evidence-${{ matrix.sid }}
+          path: test/.ci-out/evidence-*.jsonl
+          retention-days: 1
+          if-no-files-found: warn
+          overwrite: true
 
   record-timings:
     name: Record timing history
@@ -145,6 +154,50 @@ jobs:
           git add timings.tsv
           git commit -q -m "ci: refresh test timings ($rows rows) [skip ci]"
           git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-timings
+
+  record-evidence:
+    name: Record verification evidence
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.result == 'success'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          path: evidence-parts
+          pattern: evidence-*
+      - name: Merge JSONL cards into the ci-evidence orphan branch
+        run: |
+          set -euo pipefail
+          mkdir -p merged
+          if git ls-remote --exit-code --heads origin ci-evidence >/dev/null 2>&1; then
+            git fetch --depth=1 origin ci-evidence
+            git show FETCH_HEAD:evidence.jsonl > merged/old.jsonl 2>/dev/null || : > merged/old.jsonl
+          else
+            : > merged/old.jsonl
+          fi
+          : > merged/new.jsonl
+          find evidence-parts -name 'evidence-*.jsonl' -exec cat {} + >> merged/new.jsonl || true
+          cat merged/old.jsonl merged/new.jsonl > merged/all.jsonl
+          jq -c -s 'reduce .[] as $c ({}; .[$c.hub + "|" + $c.route] = $c)
+                    | to_entries | sort_by(.key) | map(.value) | .[]' \
+            merged/all.jsonl > merged/evidence.jsonl || : > merged/evidence.jsonl
+          rows=$(wc -l < merged/evidence.jsonl)
+          if [ "$rows" -lt 1 ]; then
+            echo "No evidence cards merged — skipping push"
+            exit 0
+          fi
+          echo "Merged evidence cards: $rows"
+          tmp=$(mktemp -d)
+          cp merged/evidence.jsonl "$tmp/evidence.jsonl"
+          cd "$tmp"
+          git init -q
+          git config user.email "ci@qatlas"
+          git config user.name "qatlas-ci"
+          git checkout -q -b ci-evidence
+          git add evidence.jsonl
+          git commit -q -m "ci: refresh verification evidence ($rows cards) [skip ci]"
+          git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-evidence
 
   coverage:
     name: Coverage (aggregated)

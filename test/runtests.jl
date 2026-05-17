@@ -155,5 +155,13 @@ if get(ENV, "QATLAS_EMIT", "0") == "1"
         end
     end
     _tf = joinpath(outdir, "timings-$(sid).tsv")
-    println("Emitted timing TSV -> ", abspath(_tf), " (", length(_TIMINGS), " entries; exists=", isfile(_tf), ")")
+    println(
+        "Emitted timing TSV -> ",
+        abspath(_tf),
+        " (",
+        length(_TIMINGS),
+        " entries; exists=",
+        isfile(_tf),
+        ")",
+    )
 end

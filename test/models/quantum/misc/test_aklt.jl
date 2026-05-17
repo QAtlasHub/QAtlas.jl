@@ -201,3 +201,93 @@ end
         end
     end
 end
+
+# ----------------------------------------------------------------------------
+# Verification cards (pilot for the WHY-correct plane).
+#
+# Each `verify(...)` cross-checks a src closed form against a black-box
+# independent ED route rebuilt from the AKLT Hamiltonian
+# H = sum Si.Si+1 + (1/3)(Si.Si+1)^2 (spin-1) via generic_ed -- never a
+# QAtlas internal builder.
+#
+# The OBC AKLT ground state is 4-fold degenerate (two spin-1/2 edge
+# modes).  A single LAPACK eigenvector is an arbitrary member of that
+# manifold, so <Sz_i Sz_j> from one vector is basis-dependent and varies
+# across BLAS/LAPACK builds (Panza vs the GH runner gave 0.011 vs 0.065).
+# The independent route therefore uses the MANIFOLD-AVERAGED two-point
+# Tr(rho_GS Sz_i Sz_j) over the degenerate ground eigenspace -- a basis-
+# invariant, deterministic quantity.
+# ----------------------------------------------------------------------------
+@testset "AKLT1D -- verification cards (black-box ED, pilot)" begin
+    using LinearAlgebra: Hermitian, eigen, kron
+
+    Sx, Sy, Sz = spin_ops(1)
+    SS = kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz)
+    bond = SS + (1 / 3) * (SS * SS)
+    Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8), nightly=(6, 8))
+
+    function aklt_manifold(N)
+        F = eigen(Hermitian(Matrix(chain_hamiltonian(3, N, bond))))
+        E0 = F.values[1]
+        deg = findall(e -> isapprox(e, E0; atol=1e-8), F.values)
+        return F.values, [F.vectors[:, k] for k in deg]
+    end
+    function avg_zz(vecs, N, i, j)
+        return sum(two_point(psi, 3, N, Sz, i, j) for psi in vecs) / length(vecs)
+    end
+
+    verify(
+        AKLT1D(),
+        Energy(:per_site),
+        Infinite();
+        route=:ed_finite_size,
+        independent=[aklt_manifold(N)[1][1] / (N - 1) for N in Ns],
+        at=["N=$N" for N in Ns],
+        agree_within=1e-9,
+        refs=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    )
+
+    let r = 2
+        ind = Float64[]
+        for N in Ns
+            _, vecs = aklt_manifold(N)
+            i0 = cld(N, 2)
+            push!(ind, avg_zz(vecs, N, i0, i0 + r))
+        end
+        verify(
+            AKLT1D(),
+            ZZCorrelation(; mode=:static),
+            Infinite();
+            route=:ed_finite_size,
+            independent=ind,
+            at=["N=$N" for N in Ns],
+            agree_within=3e-2,
+            fetch_kw=(; r=r),
+            refs=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+        )
+    end
+
+    let q = pi
+        ind = Float64[]
+        for N in Ns
+            _, vecs = aklt_manifold(N)
+            i0 = cld(N, 2)
+            S = avg_zz(vecs, N, i0, i0)
+            for r in 1:(N - i0)
+                S += 2 * cos(q * r) * avg_zz(vecs, N, i0, i0 + r)
+            end
+            push!(ind, S)
+        end
+        verify(
+            AKLT1D(),
+            ZZStructureFactor(),
+            Infinite();
+            route=:ed_finite_size,
+            independent=ind,
+            at=["N=$N" for N in Ns],
+            agree_within=0.15,
+            fetch_kw=(; q=q),
+            refs=["Arovas-Auerbach-Haldane 1988"],
+        )
+    end
+end

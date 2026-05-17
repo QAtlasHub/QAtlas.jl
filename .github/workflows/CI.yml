@@ -11,57 +11,78 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write   # record-timings pushes the orphan ci-timings branch
+
 jobs:
   # ───────────────────────────────────────────────────────────────────────────
-  # Single source of truth for CI parallelism.  The test universe itself
-  # lives only in test/runtests.jl `ALL_DIRS` (+ its completeness guard);
-  # this job just decides HOW MANY balanced file-level shards to fan out
-  # into.  Change `N` here and nowhere else.
+  # Shard planner.  WHAT-to-run is the canonical universe (test/ci/
+  # universe.jl, single source of truth + completeness guard).  This job
+  # only decides HOW to split: it Longest-Processing-Time bin-packs the
+  # universe using the `ci-timings` orphan branch when present, else
+  # falls back to deterministic round-robin.  Change shard count N here
+  # and nowhere else.
   # ───────────────────────────────────────────────────────────────────────────
   plan:
     name: Plan shards
     runs-on: ubuntu-latest
     outputs:
-      shards: ${{ steps.gen.outputs.shards }}
+      plan: ${{ steps.gen.outputs.plan }}
     steps:
+      - uses: actions/checkout@v6
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: '1'
+          arch: x64
+      - name: Fetch timing history (best-effort)
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin ci-timings >/dev/null 2>&1; then
+            git fetch --depth=1 origin ci-timings
+            git show FETCH_HEAD:timings.tsv > timings.tsv 2>/dev/null \
+              && echo "Loaded $(wc -l < timings.tsv) timing rows" \
+              || { echo "ci-timings has no timings.tsv — round-robin"; : > timings.tsv; }
+          else
+            echo "no ci-timings branch yet — round-robin fallback"
+            : > timings.tsv
+          fi
       - id: gen
         run: |
           set -euo pipefail
           N=16
-          shards=$(jq -cn --argjson n "$N" '[range(1; $n + 1) | "\(.)/\($n)"]')
-          count=$(jq 'length' <<<"$shards")
+          plan=$(julia test/ci/plan_shards.jl "$N" timings.tsv)
+          count=$(jq 'length' <<<"$plan")
           if [ "$count" -lt 1 ]; then
-            echo "::error::shard plan produced an empty list (count=$count)"
+            echo "::error::plan_shards produced an empty plan (count=$count)"
             exit 1
           fi
-          echo "shards=$shards" >> "$GITHUB_OUTPUT"
-          echo "Fan-out: $count file-level shards -> $shards"
+          echo "plan=$plan" >> "$GITHUB_OUTPUT"
+          echo "Planned $count shards."
 
   test:
-    name: Julia 1 - shard ${{ matrix.shard }}
+    name: shard ${{ matrix.sid }}
     runs-on: ubuntu-latest
     needs: plan
     strategy:
       fail-fast: false
       matrix:
-        shard: ${{ fromJSON(needs.plan.outputs.shards) }}
+        include: ${{ fromJSON(needs.plan.outputs.plan) }}
     env:
-      # runtests.jl partitions the canonical ALL_DIRS file universe by
-      # round-robin "k/N"; the union of every shard is exactly the full
-      # suite (proven by construction + the completeness guard).
-      QATLAS_TEST_SHARD: ${{ matrix.shard }}
+      QATLAS_TEST_FILES: ${{ matrix.files }}
+      QATLAS_RUN_AQUA: ${{ matrix.aqua }}
+      # PR = fast merge gate (no emit).  push:main = full + emit timing
+      # so the persisted numbers reflect the heavier computation.
+      QATLAS_TEST_PROFILE: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && 'full' || 'fast' }}
+      QATLAS_EMIT: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && '1' || '0' }}
     steps:
       - uses: actions/checkout@v6
-      - name: Stable shard id (slash-free; survives partial re-runs)
-        id: sid
-        run: echo "id=$(echo '${{ matrix.shard }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: julia-actions/setup-julia@v3
         with:
           version: '1'
           arch: x64
       - uses: julia-actions/cache@v3
         with:
-          cache-name: shard-${{ steps.sid.outputs.id }}
+          cache-name: shard-${{ matrix.sid }}
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
         with:
@@ -69,11 +90,61 @@ jobs:
       - uses: julia-actions/julia-processcoverage@v1
       - uses: actions/upload-artifact@v7
         with:
-          name: coverage-shard-${{ steps.sid.outputs.id }}
+          name: coverage-${{ matrix.sid }}
           path: lcov.info
           retention-days: 1
           if-no-files-found: error
           overwrite: true
+      - name: Upload shard timing (push:main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v7
+        with:
+          name: timing-${{ matrix.sid }}
+          path: test/.ci-out/timings-*.tsv
+          retention-days: 1
+          if-no-files-found: warn
+          overwrite: true
+
+  record-timings:
+    name: Record timing history
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.result == 'success'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          path: timing-parts
+          pattern: timing-*
+      - name: Merge into the ci-timings orphan branch (latest value wins)
+        run: |
+          set -euo pipefail
+          mkdir -p merged
+          if git ls-remote --exit-code --heads origin ci-timings >/dev/null 2>&1; then
+            git fetch --depth=1 origin ci-timings
+            git show FETCH_HEAD:timings.tsv > merged/timings.tsv 2>/dev/null || : > merged/timings.tsv
+          else
+            : > merged/timings.tsv
+          fi
+          find timing-parts -name 'timings-*.tsv' -exec cat {} + >> merged/timings.tsv || true
+          awk -F'\t' 'NF==2{t[$1]=$2} END{for (k in t) print k"\t"t[k]}' \
+            merged/timings.tsv | sort > merged/final.tsv
+          rows=$(wc -l < merged/final.tsv)
+          if [ "$rows" -lt 1 ]; then
+            echo "No timing rows merged — skipping push"
+            exit 0
+          fi
+          echo "Merged timing rows: $rows"
+          tmp=$(mktemp -d)
+          cp merged/final.tsv "$tmp/timings.tsv"
+          cd "$tmp"
+          git init -q
+          git config user.email "ci@qatlas"
+          git config user.name "qatlas-ci"
+          git checkout -q -b ci-timings
+          git add timings.tsv
+          git commit -q -m "ci: refresh test timings ($rows rows) [skip ci]"
+          git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-timings
 
   coverage:
     name: Coverage (aggregated)
@@ -133,9 +204,9 @@ jobs:
             echo "Shard planning failed: ${{ needs.plan.result }}"
             exit 1
           fi
-          shards='${{ needs.plan.outputs.shards }}'
-          if [ -z "$shards" ] || [ "$shards" = "[]" ]; then
-            echo "Plan produced no shards ('$shards') — the test matrix would be empty"
+          plan='${{ needs.plan.outputs.plan }}'
+          if [ -z "$plan" ] || [ "$plan" = "[]" ]; then
+            echo "Plan produced no shards ('$plan') — the test matrix would be empty"
             exit 1
           fi
           if [ "${{ needs.test.result }}" != "success" ]; then

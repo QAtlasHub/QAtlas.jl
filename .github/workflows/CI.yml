@@ -26,10 +26,16 @@ jobs:
     steps:
       - id: gen
         run: |
+          set -euo pipefail
           N=16
           shards=$(jq -cn --argjson n "$N" '[range(1; $n + 1) | "\(.)/\($n)"]')
+          count=$(jq 'length' <<<"$shards")
+          if [ "$count" -lt 1 ]; then
+            echo "::error::shard plan produced an empty list (count=$count)"
+            exit 1
+          fi
           echo "shards=$shards" >> "$GITHUB_OUTPUT"
-          echo "Fan-out: $N file-level shards -> $shards"
+          echo "Fan-out: $count file-level shards -> $shards"
 
   test:
     name: Julia 1 - shard ${{ matrix.shard }}
@@ -46,13 +52,16 @@ jobs:
       QATLAS_TEST_SHARD: ${{ matrix.shard }}
     steps:
       - uses: actions/checkout@v6
+      - name: Stable shard id (slash-free; survives partial re-runs)
+        id: sid
+        run: echo "id=$(echo '${{ matrix.shard }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: julia-actions/setup-julia@v3
         with:
           version: '1'
           arch: x64
       - uses: julia-actions/cache@v3
         with:
-          cache-name: shard-${{ strategy.job-index }}
+          cache-name: shard-${{ steps.sid.outputs.id }}
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
         with:
@@ -60,10 +69,11 @@ jobs:
       - uses: julia-actions/julia-processcoverage@v1
       - uses: actions/upload-artifact@v7
         with:
-          name: coverage-shard-${{ strategy.job-index }}
+          name: coverage-shard-${{ steps.sid.outputs.id }}
           path: lcov.info
           retention-days: 1
           if-no-files-found: error
+          overwrite: true
 
   coverage:
     name: Coverage (aggregated)
@@ -121,6 +131,11 @@ jobs:
         run: |
           if [ "${{ needs.plan.result }}" != "success" ]; then
             echo "Shard planning failed: ${{ needs.plan.result }}"
+            exit 1
+          fi
+          shards='${{ needs.plan.outputs.shards }}'
+          if [ -z "$shards" ] || [ "$shards" = "[]" ]; then
+            echo "Plan produced no shards ('$shards') — the test matrix would be empty"
             exit 1
           fi
           if [ "${{ needs.test.result }}" != "success" ]; then

@@ -102,9 +102,16 @@ const _selected, _mode_desc, _run_aqua = if !isempty(_shard_spec)
     parts = split(_shard_spec, "/")
     length(parts) == 2 ||
         error("QATLAS_TEST_SHARD must be \"k/N\"; got $(repr(_shard_spec))")
-    k = parse(Int, parts[1])
-    n = parse(Int, parts[2])
+    k = tryparse(Int, strip(parts[1]))
+    n = tryparse(Int, strip(parts[2]))
+    (k !== nothing && n !== nothing) ||
+        error("QATLAS_TEST_SHARD must be integer \"k/N\"; got $(repr(_shard_spec))")
     (1 <= k <= n) || error("QATLAS_TEST_SHARD k/N needs 1 ≤ k ≤ N; got $k/$n")
+    n <= length(ALL_TEST_FILES) || error(
+        "QATLAS_TEST_SHARD N=$n exceeds the $(length(ALL_TEST_FILES))-file suite; " *
+        "shards $(length(ALL_TEST_FILES) + 1)..$n would run zero tests — lower " *
+        "the shard count N in .github/workflows/CI.yml.",
+    )
     sel = [tf for (i, tf) in enumerate(ALL_TEST_FILES) if ((i - 1) % n) + 1 == k]
     (sel, "SHARD $k/$n", k == 1)
 elseif !isempty(_test_group)

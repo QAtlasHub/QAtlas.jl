@@ -1,2 +1,4 @@
 docs/build/
 Manifest.toml
+# CI scratch: per-shard timing/evidence emitted under QATLAS_EMIT
+test/.ci-out/

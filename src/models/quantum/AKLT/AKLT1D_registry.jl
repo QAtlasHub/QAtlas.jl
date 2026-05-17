@@ -71,3 +71,44 @@
     tested_in="test/standalone/test_aklt.jl",
     notes="Full sorted spectrum from 3^N dense ED; N ≤ 8 (3^8 = 6561).",
 )
+
+# ── Energy / FreeEnergy / Entropy / SpecificHeat (OBC, dense ED) ──────
+# Finite-N exact finite-temperature thermodynamics from the 3^N spectrum
+# (the AKLT chain is not Bethe-ansatz integrable, so no Infinite closed
+# form; Infinite()+beta raises DomainError). Mirrors S1Heisenberg1D.
+@register(
+    AKLT1D,
+    Energy{:total},
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt.jl",
+    notes="Total ⟨H⟩(β) by dense ED on the 3^N Hilbert space; N ≤ 8. β→∞ → exact frustration-free E₀ = -(2J/3)(N-1).",
+)
+@register(
+    AKLT1D,
+    FreeEnergy,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt.jl",
+    notes="Per-site f(β) = -log Z/(Nβ); exact for N ≤ 8.",
+)
+@register(
+    AKLT1D,
+    ThermalEntropy,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt.jl",
+    notes="Per-site s(β); total N·s → log 4 as β→∞ (two spin-½ edge modes ⇒ singlet⊕triplet), → N log 3 as β→0.",
+)
+@register(
+    AKLT1D,
+    SpecificHeat,
+    OBC,
+    method=:dense_ed,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt.jl",
+    notes="Per-site c(β) = β² Var(H)/N from energy variance; Schottky peak, → 0 at both β→0 and β→∞.",
+)

@@ -204,3 +204,95 @@ function fetch(model::AKLT1D, ::ExactSpectrum, bc::OBC; N::Int=bc.N, kwargs...)
     H = _aklt_hamiltonian_matrix(model, N, OBC(N))
     return sort(real.(eigvals(Hermitian(H))))
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OBC finite-temperature thermodynamics — exact from the 3^N spectrum
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# The AKLT chain is not Bethe-ansatz integrable, so there is no closed-form
+# thermodynamic-limit free energy.  For finite N ≤ _MAX_ED_SITES_S1 the full
+# 3^N spectrum is accessible by dense ED, and every thermal observable is then
+# *exact* (Boltzmann sum, no truncation).  Mirrors the S1Heisenberg1D OBC
+# finite-T API one-to-one (same local Hilbert space and dense-ED budget).
+#
+# Limiting cross-checks the test-suite pins (AKLT-specific signatures):
+#   * β → ∞ : ⟨H⟩ → E₀ = −(2J/3)(N−1)  (frustration-free OBC GS, exact)
+#   * β → ∞ : total S → log 4           (two spin-½ edge modes ⇒ singlet⊕triplet)
+#   * β → 0 : total S → N log 3         (full spin-1 Hilbert space)
+#   * C(β) = β² Var(H) ≥ 0, → 0 at both β → 0 and β → ∞ (Schottky peak between)
+
+"""
+    fetch(model::AKLT1D, ::Energy{:total}, ::OBC; beta, N) -> Float64
+
+**Total** thermal energy `⟨H⟩_β = Tr(H e^{-βH}) / Tr(e^{-βH})` of the OBC
+AKLT chain at finite `N ≤ $(_MAX_ED_SITES_S1)`, computed by dense ED.  As
+`β → ∞` this converges to the exact frustration-free ground-state energy
+`E₀ = −(2J/3)(N−1)`.
+"""
+function fetch(model::AKLT1D, ::Energy{:total}, bc::OBC; beta::Real, N::Int=bc.N, kwargs...)
+    H = _aklt_hamiltonian_matrix(model, N, OBC(N))
+    return _ed_thermal_energy(H, beta)
+end
+
+"""
+    fetch(model::AKLT1D, ::FreeEnergy, ::OBC; beta, N) -> Float64
+
+Per-site Helmholtz free energy `f(β) = −log Z / (Nβ)` of the OBC AKLT
+chain (dense ED, exact for `N ≤ $(_MAX_ED_SITES_S1)`).
+"""
+function fetch(model::AKLT1D, ::FreeEnergy, bc::OBC; beta::Real, N::Int=bc.N, kwargs...)
+    H = _aklt_hamiltonian_matrix(model, N, OBC(N))
+    return _ed_thermal_free_energy(H, beta) / N
+end
+
+"""
+    fetch(model::AKLT1D, ::ThermalEntropy, ::OBC; beta, N) -> Float64
+
+Per-site Gibbs entropy `s(β) = β·(ε − f)` of the OBC AKLT chain.  As
+`β → ∞` the **total** entropy `N·s` → `log 4` — the AKLT signature of two
+free spin-½ edge modes (singlet ⊕ triplet); as `β → 0`, `N·s` → `N log 3`.
+"""
+function fetch(model::AKLT1D, ::ThermalEntropy, bc::OBC; beta::Real, N::Int=bc.N, kwargs...)
+    H = _aklt_hamiltonian_matrix(model, N, OBC(N))
+    return _ed_thermal_entropy(H, beta) / N
+end
+
+"""
+    fetch(model::AKLT1D, ::SpecificHeat, ::OBC; beta, N) -> Float64
+
+Per-site heat capacity `c(β) = β²·Var(H)/N` of the OBC AKLT chain,
+computed exactly from the energy variance in the eigenbasis (no numerical
+differentiation).  Non-negative; vanishes at both `β → 0` and `β → ∞`
+with a Schottky peak in between.
+"""
+function fetch(model::AKLT1D, ::SpecificHeat, bc::OBC; beta::Real, N::Int=bc.N, kwargs...)
+    H = _aklt_hamiltonian_matrix(model, N, OBC(N))
+    return _ed_thermal_specific_heat(H, beta) / N
+end
+
+"""
+    fetch(::AKLT1D, ::Union{Energy{:total},FreeEnergy,ThermalEntropy,SpecificHeat}, ::Infinite; beta, ...)
+
+The thermodynamic-limit finite-temperature thermodynamics of the AKLT
+chain has no closed form: the model is not Bethe-ansatz integrable and
+requires a quantum-transfer-matrix / TBA or finite-T DMRG treatment
+(deferred to a later phase).  Raises `DomainError`.  Use `OBC(N)` for an
+exact finite-N value.
+"""
+function fetch(
+    ::AKLT1D,
+    ::Union{Energy{:total},FreeEnergy,ThermalEntropy,SpecificHeat},
+    ::Infinite;
+    beta::Real,
+    kwargs...,
+)
+    throw(
+        DomainError(
+            beta,
+            "AKLT1D finite-temperature observables at Infinite() have no closed " *
+            "form (the AKLT chain is not Bethe-ansatz integrable); use OBC(N) " *
+            "dense ED for an exact finite-N value, or a quantum-transfer-matrix / " *
+            "finite-T DMRG treatment for the thermodynamic limit (Phase 2).",
+        ),
+    )
+end

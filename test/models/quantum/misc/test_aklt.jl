@@ -104,3 +104,74 @@ end
         end
     end
 end
+
+@testset "AKLT1D — OBC finite-temperature (dense ED, exact for N ≤ 8)" begin
+    m = AKLT1D(; J=1.0)
+
+    @testset "β → ∞ reproduces the exact frustration-free ground state" begin
+        # ⟨H⟩(β→∞) must converge to the EXACT OBC AKLT ground-state
+        # energy E₀ = -(2J/3)(N-1) (the VBS annihilates every bond
+        # projector, so there is no finite-size correction beyond the
+        # missing edge bond).
+        for N in (4, 6, 8)
+            E0 = -(2 / 3) * (N - 1)
+            E_inf = QAtlas.fetch(m, Energy(:total), OBC(N); beta=1.0e3)
+            @test E_inf ≈ E0 atol = 1e-6
+            # FreeEnergy → E₀ as β → ∞ (per-site × N)
+            f_inf = QAtlas.fetch(m, FreeEnergy(), OBC(N); beta=1.0e3)
+            @test f_inf * N ≈ E0 atol = 1e-2
+        end
+    end
+
+    @testset "β → ∞ entropy → log 4 (AKLT edge-mode signature)" begin
+        # Two free spin-½ edge modes ⇒ 4-fold degenerate OBC ground
+        # manifold (singlet ⊕ triplet). The residual TOTAL entropy is
+        # exactly log 4, independent of N and J.
+        for N in (4, 6, 8)
+            S_total = N * QAtlas.fetch(m, ThermalEntropy(), OBC(N); beta=1.0e3)
+            @test S_total ≈ log(4) atol = 1e-6
+        end
+        # J-independent: same residual entropy at a different coupling
+        S_J2 = 6 * QAtlas.fetch(AKLT1D(; J=2.0), ThermalEntropy(), OBC(6); beta=1.0e3)
+        @test S_J2 ≈ log(4) atol = 1e-6
+    end
+
+    @testset "β → 0 entropy → N log 3 (full spin-1 Hilbert space)" begin
+        for N in (4, 6, 8)
+            S_total = N * QAtlas.fetch(m, ThermalEntropy(), OBC(N); beta=1.0e-6)
+            @test S_total ≈ N * log(3) atol = 1e-4
+        end
+    end
+
+    @testset "SpecificHeat: non-negative, Schottky peak, vanishes at both ends" begin
+        for N in (4, 6, 8)
+            c0 = QAtlas.fetch(m, SpecificHeat(), OBC(N); beta=1.0e-6)
+            c_inf = QAtlas.fetch(m, SpecificHeat(), OBC(N); beta=1.0e3)
+            c_pk = QAtlas.fetch(m, SpecificHeat(), OBC(N); beta=1.0)
+            # → 0 at both extremes (fp-noise tolerance)
+            @test abs(c0) < 1e-6
+            @test abs(c_inf) < 1e-6
+            # finite Schottky-like peak in between, strictly positive
+            @test c_pk > 0.1
+            # heat capacity is a variance ⇒ non-negative (within fp)
+            for β in (0.1, 0.5, 1.0, 2.0, 5.0)
+                @test QAtlas.fetch(m, SpecificHeat(), OBC(N); beta=β) > -1e-9
+            end
+        end
+    end
+
+    @testset "zero-T Energy{:total} is exactly linear in J" begin
+        # ⟨H⟩ at fixed finite β is not exactly linear in J (β couples as
+        # βJ), but the β→∞ limit is the GS energy E₀ = -(2J/3)(N-1),
+        # which IS exactly linear in J.
+        E1_inf = QAtlas.fetch(AKLT1D(; J=1.0), Energy(:total), OBC(6); beta=1.0e3)
+        E2_inf = QAtlas.fetch(AKLT1D(; J=2.0), Energy(:total), OBC(6); beta=1.0e3)
+        @test E2_inf ≈ 2 * E1_inf atol = 1e-6
+    end
+
+    @testset "Infinite() + beta has no closed form ⇒ DomainError" begin
+        for Q in (Energy(:total), FreeEnergy(), ThermalEntropy(), SpecificHeat())
+            @test_throws DomainError QAtlas.fetch(m, Q, Infinite(); beta=1.0)
+        end
+    end
+end

@@ -143,9 +143,11 @@ function verify(
             _json_str(string(Dates.today())),
             "}",
         )
-        open(joinpath(outdir, "evidence-$(sid).jsonl"), "a") do io
+        _ef = joinpath(outdir, "evidence-$(sid).jsonl")
+        open(_ef, "a") do io
             println(io, card)
         end
+        @info "verify: emitted card" path = abspath(_ef) exists = isfile(_ef)
     end
     return subject
 end

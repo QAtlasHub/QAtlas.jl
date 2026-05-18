@@ -173,3 +173,42 @@ using QAtlas, Test
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Heisenberg1D spinon ZZStructureFactor — verification cards" begin
+    # Independent re-derivation of the Müller ansatz from the
+    # des Cloizeaux-Pearson two-spinon dispersion bounds (not read from src):
+    #   ε_L(q) = (π J / 2) |sin q|,  ε_U(q) = π J |sin(q/2)|
+    #   S^zz(q,ω) = Θ[ω-ε_L] Θ[ε_U-ω] / (2 √(ω² - ε_L²))
+    let J = 1.0, q = π / 2, ω = 2.0
+        εL = (π * J / 2) * abs(sin(q))
+        εU = π * J * abs(sin(q / 2))
+        @assert εL < ω < εU "pick (q,ω) inside the two-spinon continuum"
+        S_indep = 1 / (2 * sqrt(ω^2 - εL^2))
+        verify(
+            Heisenberg1D(),
+            ZZStructureFactor(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; q=q, ω=ω, J=J, method=:muller),
+            independent=S_indep,
+            agree_within=1e-12,
+            refs=["Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion"],
+        )
+    end
+
+    # Support boundary: S = 0 just above the upper continuum edge ε_U
+    let J = 1.0, q = π / 2
+        εU = π * J * abs(sin(q / 2))
+        verify(
+            Heisenberg1D(),
+            ZZStructureFactor(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; q=q, ω=εU + 0.5, J=J, method=:muller),
+            independent=0.0,
+            agree_within=1e-14,
+            refs=["Two-spinon continuum has compact support: S=0 for ω > ε_U(q)"],
+        )
+    end
+end

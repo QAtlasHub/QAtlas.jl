@@ -96,3 +96,49 @@ end
     v_heis_inf = QAtlas.fetch(Heisenberg1D(), MassGap(), Infinite())
     @test v_heis_inf == 0.0
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Heisenberg1D thermal OBC — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+
+    # MassGap in the gapless Luttinger liquid regime is exactly 0
+    verify(
+        Heisenberg1D(),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["Heisenberg chain is gapless (des Cloizeaux-Pearson 1962): gap = 0"],
+    )
+
+    # OBC thermal energy at N=4, beta=1 vs independent ED (thermo_from_spectrum)
+    let J = 1.0, N = 4, beta = 1.0
+        bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
+        E_ind, _, _, _ = thermo_from_spectrum(dense_spectrum(chain_hamiltonian(2, N, bond)), beta)
+        verify(
+            Heisenberg1D(),
+            Energy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta, J=J),
+            independent=E_ind,
+            agree_within=1e-9,
+            refs=["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"],
+        )
+    end
+
+    # Delegation invariant: Heisenberg1D thermal OBC === XXZ1D(Delta=1) at same J
+    let beta = 1.0, N = 4
+        verify(
+            Heisenberg1D(),
+            Energy(),
+            OBC(N);
+            route=:delegation_invariant,
+            fetch_kw=(; beta=beta, J=1.5),
+            independent=QAtlas.fetch(XXZ1D(; J=1.5, Δ=1.0), Energy(), OBC(N); beta=beta),
+            agree_within=1e-12,
+            refs=["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"],
+        )
+    end
+end

@@ -43,3 +43,33 @@ end
         DMIHeisenberg1D(; J=1.0, D=1e-13), Energy{:per_site}(), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "DMIHeisenberg1D — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+    heis_bond(J) = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
+    Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
+
+    # D=0 delegates to Heisenberg1D (Hulthen e0 = J(1/4 - log 2))
+    verify(
+        DMIHeisenberg1D(; J=1.0, D=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        agree_within=1e-12,
+        refs=["DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths"],
+    )
+
+    # Independent OBC ED convergence to the Hulthen value
+    verify(
+        DMIHeisenberg1D(; J=1.0, D=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:ed_finite_size,
+        independent=[dense_spectrum(chain_hamiltonian(2, N, heis_bond(1.0)))[1] / N for N in Ns],
+        at=["N=$N" for N in Ns],
+        agree_within=0.1,
+        refs=["Hulthen 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"],
+    )
+end

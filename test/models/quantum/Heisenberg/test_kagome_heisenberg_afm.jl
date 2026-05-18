@@ -38,3 +38,38 @@ end
     # order, total quantum dimension 𝒟 = 2 ⇒ γ = log 𝒟 = log 2).
     @test γ == QAtlas.fetch(ToricCode(), TopologicalEntanglementEntropy(), Infinite())
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "KagomeHeisenbergAFM — verification cards" begin
+    # The 2D kagome AFM is a frustrated quantum spin liquid with no
+    # closed form; all reference numbers are DMRG/iDMRG literature values.
+    verify(
+        KagomeHeisenbergAFM(; J=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-0.4386,
+        agree_within=5e-3,
+        refs=["Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J"],
+    )
+
+    verify(
+        KagomeHeisenbergAFM(; J=1.0),
+        MassGap(),
+        Infinite();
+        route=:literature_value,
+        independent=0.13,
+        agree_within=5e-2,
+        refs=["Depenbrock et al. 2012 DMRG: spin gap ≈ 0.13 J"],
+    )
+
+    verify(
+        KagomeHeisenbergAFM(; J=1.0),
+        TopologicalEntanglementEntropy(),
+        Infinite();
+        route=:literature_value,
+        independent=log(2),
+        agree_within=1e-6,
+        refs=["Z2 spin liquid: gamma = log 2 (Jiang-Wang-Balents 2012)"],
+    )
+end

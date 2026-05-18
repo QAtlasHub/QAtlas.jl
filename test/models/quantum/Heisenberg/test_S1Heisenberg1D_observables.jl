@@ -251,3 +251,45 @@ end
         @test ε ≈ E_total / N rtol=1e-12
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "S1Heisenberg1D observables — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1)  # spin-1, local dimension d=3
+    heis1_bond(J) = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
+
+    # Energy per site Infinite: White-Huse 1993 DMRG literature value
+    verify(
+        S1Heisenberg1D(; J=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-1.401484038971,
+        agree_within=1e-6,
+        refs=["White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain)"],
+    )
+
+    # Independent spin-1 OBC ED trend toward the DMRG thermodynamic value
+    let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8), nightly=(6, 8))
+        verify(
+            S1Heisenberg1D(; J=1.0),
+            Energy(:per_site),
+            Infinite();
+            route=:ed_finite_size,
+            independent=[dense_spectrum(chain_hamiltonian(3, N, heis1_bond(1.0)))[1] / N for N in Ns],
+            at=["N=$N" for N in Ns],
+            agree_within=0.3,
+            refs=["Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow)"],
+        )
+    end
+
+    # Haldane gap Infinite: White-Huse 1993 DMRG literature value
+    verify(
+        S1Heisenberg1D(; J=1.0),
+        MassGap(),
+        Infinite();
+        route=:literature_value,
+        independent=0.41048,
+        agree_within=1e-4,
+        refs=["White-Huse 1993 DMRG: Haldane gap Delta ≈ 0.41048 J"],
+    )
+end

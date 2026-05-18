@@ -79,3 +79,38 @@ end
         S1AnisotropicD1D(; J=1.0, D=-1e-13), Energy{:per_site}(), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "S1AnisotropicD1D — verification cards" begin
+    # D=0 delegates to S1Heisenberg1D (Haldane chain, White-Huse 1993).
+    verify(
+        S1AnisotropicD1D(; J=1.0, D=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(S1Heisenberg1D(; J=1.0), Energy(:per_site), Infinite()),
+        agree_within=1e-12,
+        refs=["S1AnisotropicD1D(D=0) delegates to S1Heisenberg1D: code paths must agree"],
+    )
+
+    verify(
+        S1AnisotropicD1D(; J=1.0, D=0.0),
+        MassGap(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(S1Heisenberg1D(; J=1.0), MassGap(), Infinite()),
+        agree_within=1e-12,
+        refs=["S1AnisotropicD1D(D=0) Haldane gap delegates to S1Heisenberg1D"],
+    )
+
+    # J-scaling linear at D=0
+    verify(
+        S1AnisotropicD1D(; J=2.0, D=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=2.0 * QAtlas.fetch(S1Heisenberg1D(; J=1.0), Energy(:per_site), Infinite()),
+        agree_within=1e-10,
+        refs=["Linear J scaling: e(2J) = 2 e(J) for spin-1 Heisenberg"],
+    )
+end

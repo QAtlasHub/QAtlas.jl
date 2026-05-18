@@ -11,3 +11,28 @@ using QAtlas, Test
     # Delegation invariant: bit-identical to XXZ1D at Δ=1
     @test K === QAtlas.fetch(QAtlas.XXZ1D(; Δ=1.0), LuttingerParameter(), Infinite())
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Heisenberg1D LuttingerParameter — verification cards" begin
+    # K = 1/2 at the SU(2) isotropic point (Luther-Peschel 1975)
+    verify(
+        Heisenberg1D(),
+        LuttingerParameter(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.5,
+        agree_within=1e-12,
+        refs=["Luther-Peschel 1975: K=1/2 at SU(2) isotropic point, J-independent"],
+    )
+
+    # Delegation invariant: Heisenberg1D === XXZ1D(Delta=1)
+    verify(
+        Heisenberg1D(),
+        LuttingerParameter(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite()),
+        agree_within=1e-14,
+        refs=["Heisenberg1D delegates to XXZ1D(Delta=1): two code paths must agree"],
+    )
+end

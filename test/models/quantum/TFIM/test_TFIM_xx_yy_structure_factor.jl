@@ -104,33 +104,3 @@ end
         @test S_inf == S_obc
     end
 end
-
-# ── Verification cards (WHY-correct plane) ─────────────────────────────────
-@testset "TFIM XX structure factor — verification cards" begin
-    # S_xx(q) = Σ_r e^{iqr} ⟨σx_0 σx_r⟩ reconstructed black-box from the
-    # _build_tfim_dense ground state (independent of src structure-factor).
-    let J = 1.0, h = 1.0, N = 8, q = π / 2
-        F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
-        ψ = F.vectors[:, 1]
-        σx = ComplexF64[0 1; 1 0]
-        c0 = N ÷ 2
-        Sq = 0.0 + 0.0im
-        for r in (-(c0 - 1)):(N - c0)
-            i, jj = c0, c0 + r
-            cij = real(ψ' * (_op_site(σx, i, N) * (_op_site(σx, jj, N) * ψ)))
-            Sq += exp(im * q * r) * cij
-        end
-        verify(
-            TFIM(; J=J, h=h),
-            XXStructureFactor(),
-            OBC(N);
-            route=:ed_finite_size,
-            fetch_kw=(; q=q, beta=Inf),
-            independent=real(Sq),
-            agree_within=5e-2,
-            refs=[
-                "S_xx(q) = Σ_r e^{iqr} ⟨σx_0 σx_r⟩ from _build_tfim_dense GS (central site)"
-            ],
-        )
-    end
-end

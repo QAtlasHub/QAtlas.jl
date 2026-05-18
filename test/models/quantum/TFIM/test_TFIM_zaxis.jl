@@ -130,18 +130,28 @@ end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
 @testset "TFIM z-axis — verification cards" begin
-    # MagnetizationZ ≡ 0 in any finite system: the Z2 spin-flip symmetry
-    # (σz -> -σz, σx -> σx) is unbroken without an explicit longitudinal
-    # field, so ⟨σz⟩ = 0 (independent symmetry argument, not src).
-    for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+    # Pfeuty 1970 spontaneous magnetization: m_z = (1 - (h/J)²)^{1/8}
+    # for h < J (ordered phase), and exactly 0 for h >= J.
+    for (J, h) in ((1.0, 0.3), (1.0, 0.5), (1.0, 0.8))
         verify(
             TFIM(; J=J, h=h),
             MagnetizationZ(),
             Infinite();
             route=:second_closed_form,
+            independent=(1 - (h / J)^2)^(1 / 8),
+            agree_within=1e-9,
+            refs=["Pfeuty 1970: m_z = (1 - (h/J)²)^{1/8} for h < J"],
+        )
+    end
+    for (J, h) in ((1.0, 1.0), (1.0, 2.0))
+        verify(
+            TFIM(; J=J, h=h),
+            MagnetizationZ(),
+            Infinite();
+            route=:limiting_case,
             independent=0.0,
-            agree_within=1e-12,
-            refs=["Unbroken Z2 (no longitudinal field): ⟨σz⟩ = 0"],
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: m_z = 0 for h >= J (disordered/critical)"],
         )
     end
 
@@ -149,9 +159,7 @@ end
     let J = 1.0, h = 1.0, N = 6, i = 2, j = 5
         F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
         ψ = F.vectors[:, 1]
-        Oi = _op_site(_SZ, i, N)
-        Oj = _op_site(_SZ, j, N)
-        zz_ed = real(ψ' * (Oi * (Oj * ψ)))
+        zz_ed = real(ψ' * (_op_site(_SZ, i, N) * (_op_site(_SZ, j, N) * ψ)))
         verify(
             TFIM(; J=J, h=h),
             ZZCorrelation(; mode=:static),

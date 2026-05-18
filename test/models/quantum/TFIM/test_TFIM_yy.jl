@@ -133,14 +133,15 @@ end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
 @testset "TFIM YY — verification cards" begin
-    # The TFIM Hamiltonian H = -J Σ σz σz - h Σ σx has no σy term, so
-    # ⟨σy⟩ = 0 identically by the Z2 symmetry (independent of src).
+    # TFIM has no σy term, so ⟨σy⟩ = 0 identically by Z2 symmetry.
+    # MagnetizationY is an OBC observable (no Infinite method).
     for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
         verify(
             TFIM(; J=J, h=h),
             MagnetizationY(),
-            Infinite();
+            OBC(6);
             route=:second_closed_form,
+            fetch_kw=(; beta=Inf),
             independent=0.0,
             agree_within=1e-12,
             refs=["TFIM has no σy term: ⟨σy⟩ = 0 by Z2 symmetry"],
@@ -152,9 +153,7 @@ end
         F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
         ψ = F.vectors[:, 1]
         σy = ComplexF64[0 -im; im 0]
-        Oi = _op_site(σy, i, N)
-        Oj = _op_site(σy, j, N)
-        yy_ed = real(ψ' * (Oi * (Oj * ψ)))
+        yy_ed = real(ψ' * (_op_site(σy, i, N) * (_op_site(σy, j, N) * ψ)))
         verify(
             TFIM(; J=J, h=h),
             YYCorrelation(; mode=:static),

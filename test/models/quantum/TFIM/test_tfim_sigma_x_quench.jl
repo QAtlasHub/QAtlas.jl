@@ -190,8 +190,9 @@ end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
 @testset "TFIM σx-quench — verification cards" begin
-    # t = 0: the quenched local σx expectation equals the initial-state
-    # equilibrium value (independent route: the static observable).
+    # t = 0: the quenched local σx equals the initial-state equilibrium
+    # value. Mirrors the existing test's exact signatures (beta=Inf
+    # required on the static MagnetizationX reference).
     let m0 = TFIM(; J=1.0, h=2.0), mf = TFIM(; J=1.0, h=0.5)
         verify(
             mf,
@@ -199,13 +200,13 @@ end
             Infinite();
             route=:limiting_case,
             fetch_kw=(; initial=m0, t=0.0),
-            independent=QAtlas.fetch(m0, MagnetizationX(), Infinite()),
+            independent=QAtlas.fetch(m0, MagnetizationX(), Infinite(); beta=Inf),
             agree_within=1e-8,
             refs=["t=0: ⟨σx⟩(0) equals the initial-state equilibrium magnetization"],
         )
     end
 
-    # No-quench: h0 = hf => time-independent, equals equilibrium value
+    # No-quench: h0 = hf => time-independent at the equilibrium value
     let m = TFIM(; J=1.0, h=1.3)
         verify(
             m,
@@ -213,7 +214,7 @@ end
             Infinite();
             route=:limiting_case,
             fetch_kw=(; initial=m, t=3.7),
-            independent=QAtlas.fetch(m, MagnetizationX(), Infinite()),
+            independent=QAtlas.fetch(m, MagnetizationX(), Infinite(); beta=Inf),
             agree_within=1e-8,
             refs=["No-quench: σx expectation is stationary at the equilibrium value"],
         )

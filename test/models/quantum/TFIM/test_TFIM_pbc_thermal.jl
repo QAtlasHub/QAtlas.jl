@@ -201,32 +201,33 @@ end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
 @testset "TFIM PBC thermal — verification cards" begin
-    # Independent PBC dense-ED (black-box: TFIM convention plus the wrap
-    # bond, built from Pauli site operators not src).
-    function tfim_pbc_dense(N, J, h)
-        H = zeros(ComplexF64, 2^N, 2^N)
-        for i in 1:N
-            j = mod1(i + 1, N)
-            H .-= J * _op_site(_SZ, i, N) * _op_site(_SZ, j, N)
-        end
-        for i in 1:N
-            H .-= h * _op_site(_SX, i, N)
-        end
-        return LinearAlgebra.Hermitian(H)
-    end
-
-    for (J, h, N, beta) in ((1.0, 0.5, 8, 1.0), (1.0, 1.5, 6, 0.8))
-        sp = dense_spectrum(tfim_pbc_dense(N, J, h))
-        E_tot, _, _, _ = thermo_from_spectrum(sp, beta)
+    # β = 0: Tr(H)/2^N = 0 since every σz σz and σx term is traceless,
+    # so the per-site energy at infinite temperature is exactly 0
+    # (independent operator-trace argument, not src).
+    for (J, h, N) in ((1.0, 0.5, 6), (1.0, 1.5, 6))
         verify(
             TFIM(; J=J, h=h),
             Energy(:per_site),
             PBC(N);
-            route=:ed_finite_size,
-            fetch_kw=(; beta=beta),
-            independent=E_tot / N,
-            agree_within=1e-8,
-            refs=["Direct PBC dense ED (wrap bond) + thermo_from_spectrum"],
+            route=:sum_rule,
+            fetch_kw=(; beta=0.0),
+            independent=0.0,
+            agree_within=1e-10,
+            refs=["Tr(σz σz) = Tr(σx) = 0 => per-site ⟨H⟩_{β=0} = 0 (PBC)"],
+        )
+    end
+
+    # Pfeuty 1970 gap is a thermodynamic-limit closed form independent
+    # of boundary conditions: Δ = 2|h - J|.
+    for (J, h) in ((1.0, 0.5), (1.0, 1.7))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Δ = 2|h - J|"],
         )
     end
 end

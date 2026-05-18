@@ -173,3 +173,33 @@ end
         @test matching[1].reliability === :high
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D Δ=0 LoschmidtEcho — verification cards" begin
+    # The XX Loschmidt rate lambda(t) = 0 identically for any (J0, Jf, t):
+    # both GS and evolved state are number eigenstates in the same plane-wave
+    # basis, so the Loschmidt amplitude |<psi0|e^{-iHt}|psi0>| = 1 exactly.
+    # The second closed form here is the free-fermion Slater-determinant
+    # argument: det(D0^dag U_f(t) D0) = exp(i*phase) with |.| = 1.
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        LoschmidtEcho(; mode=:rate),
+        Infinite();
+        route=:second_closed_form,
+        fetch_kw=(; initial=XXZ1D(; J=0.5, Δ=0.0), t=1.0),
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["Free-fermion Slater det: |L(t)| = 1 for same-sign J quench => lambda = 0"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        LoschmidtEcho(; mode=:rate),
+        Infinite();
+        route=:limiting_case,
+        fetch_kw=(; initial=XXZ1D(; J=1.0, Δ=0.0), t=2.5),
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["No-quench identity: H_initial = H_final => lambda(t) = 0 for all t"],
+    )
+end

@@ -170,3 +170,121 @@ end
     )
     @test K_sym ≈ 1.0 atol = 1e-12
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+
+    function xxz_bond(J, Δ)
+        return J * (kron(Sx, Sx) + kron(Sy, Sy) + Δ * kron(Sz, Sz))
+    end
+
+    function xxz_e0_ed(J, Δ, N)
+        return dense_spectrum(chain_hamiltonian(2, N, xxz_bond(J, Δ)))[1] / (N - 1)
+    end
+
+    Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        Energy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=[xxz_e0_ed(1.0, 0.0, N) for N in Ns],
+        at=["N=$N" for N in Ns],
+        agree_within=0.05,
+        refs=["Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion)"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=1.0),
+        Energy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=[xxz_e0_ed(1.0, 1.0, N) for N in Ns],
+        at=["N=$N" for N in Ns],
+        agree_within=0.05,
+        refs=["Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=-1.0),
+        Energy(),
+        Infinite();
+        route=:limiting_case,
+        independent=-0.25,
+        agree_within=1e-14,
+        refs=["FM saturation: all-aligned state is exact GS, e0 = -J/4"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.5),
+        Energy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=[xxz_e0_ed(1.0, 0.5, N) for N in Ns],
+        at=["N=$N" for N in Ns],
+        agree_within=0.05,
+        refs=["Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3)"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        LuttingerParameter(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["Jordan-Wigner free fermion: K=1 at Delta=0"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=1.0),
+        LuttingerParameter(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.5,
+        agree_within=1e-12,
+        refs=["Luther-Peschel 1975: K=1/2 at the SU(2) isotropic point"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        LuttingerVelocity(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["Free fermion eps(k)=J cos k: v_F=J at k_F=pi/2"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=1.0),
+        LuttingerVelocity(),
+        Infinite();
+        route=:limiting_case,
+        independent=π / 2,
+        agree_within=1e-12,
+        refs=["des Cloizeaux-Pearson 1962: u=piJ/2 at SU(2) isotropic point"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=1.0),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        agree_within=1e-12,
+        refs=["XXZ1D at Delta=1 === Heisenberg1D: two independent code paths must agree"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-14,
+        refs=["Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1"],
+    )
+end

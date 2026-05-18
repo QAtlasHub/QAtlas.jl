@@ -249,3 +249,63 @@ end
         @test c_ad ≈ c_var atol = 1e-9 rtol = 1e-9
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D OBC observables — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+
+    # MassGap in the critical Luttinger liquid regime is exactly 0
+    verify(
+        XXZ1D(; J=1.0, Δ=0.5),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["Luttinger liquid: gapless for |Delta| < 1 (Bethe ansatz exact)"],
+    )
+
+    # OBC thermal energy at N=4 vs independent ED (ZZ correlation at beta=1)
+    let J = 1.0, Delta = 0.5, N = 4, beta = 1.0
+        bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + Delta * kron(Sz, Sz))
+        H = chain_hamiltonian(2, N, bond)
+        evals = dense_spectrum(H)
+        E_ind, _, _, _ = thermo_from_spectrum(evals, beta)
+        verify(
+            XXZ1D(; J=J, Δ=Delta),
+            Energy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta),
+            independent=E_ind,
+            agree_within=1e-9,
+            refs=["OBC thermal energy from generic_ed thermo_from_spectrum"],
+        )
+    end
+
+    # SusceptibilityZZ at OBC(N=4) via independent ED (chi = beta*Var(Mz)/N)
+    let J = 1.0, Delta = 0.5, N = 4, beta = 1.0
+        bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + Delta * kron(Sz, Sz))
+        H = chain_hamiltonian(2, N, bond)
+        F = LinearAlgebra.eigen(H)
+        emin = minimum(F.values)
+        ws = exp.(-beta .* (F.values .- emin))
+        Z = sum(ws)
+        rho = F.vectors * LinearAlgebra.Diagonal(ComplexF64.(ws ./ Z)) * F.vectors'
+        sigma_z = 2 * Sz  # Pauli convention: QAtlas SusceptibilityZZ uses sigma_z, not Sz=sigma_z/2
+        Mz_op = sum(site_op(sigma_z, 2, N, i) for i in 1:N)
+        mz2 = real(LinearAlgebra.tr(rho * (Mz_op * Mz_op)))
+        mz1 = real(LinearAlgebra.tr(rho * Mz_op))
+        chi_ind = beta * (mz2 - mz1^2) / N
+        verify(
+            XXZ1D(; J=J, Δ=Delta),
+            SusceptibilityZZ(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta),
+            independent=chi_ind,
+            agree_within=1e-9,
+            refs=["chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian"],
+        )
+    end
+end

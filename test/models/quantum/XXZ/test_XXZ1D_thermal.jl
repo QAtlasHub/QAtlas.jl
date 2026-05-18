@@ -90,3 +90,52 @@ end
         QAtlas._MAX_ED_SITES + 1, 1 => QAtlas._σx
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D thermal OBC — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+
+    # Sum rule: Tr(H_XXZ) = 0 for OBC (all bond terms traceless) => <H>_{beta=0} = 0
+    verify(
+        XXZ1D(; J=1.0, Δ=0.5),
+        Energy(),
+        OBC(5);
+        route=:sum_rule,
+        fetch_kw=(; beta=0.0),
+        independent=0.0,
+        agree_within=1e-12,
+        refs=["Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless)"],
+    )
+
+    # Direct ED cross-check of thermal energy at N=4, beta=1
+    let J = 1.0, Delta = 0.7, N = 4, beta = 1.0
+        bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + Delta * kron(Sz, Sz))
+        H = chain_hamiltonian(2, N, bond)
+        E_ind, _, _, _ = thermo_from_spectrum(dense_spectrum(H), beta)
+        verify(
+            XXZ1D(; J=J, Δ=Delta),
+            Energy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta),
+            independent=E_ind,
+            agree_within=1e-9,
+            refs=["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"],
+        )
+    end
+
+    # Heisenberg1D (Delta=1) delegation: thermal energy must match XXZ1D(Delta=1)
+    let beta = 1.0, N = 4
+        xxz_E = QAtlas.fetch(XXZ1D(; J=1.5, Δ=1.0), Energy(), OBC(N); beta=beta)
+        verify(
+            Heisenberg1D(),
+            Energy(),
+            OBC(N);
+            route=:delegation_invariant,
+            fetch_kw=(; beta=beta, J=1.5),
+            independent=xxz_E,
+            agree_within=1e-12,
+            refs=["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"],
+        )
+    end
+end

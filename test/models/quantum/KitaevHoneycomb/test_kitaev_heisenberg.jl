@@ -40,3 +40,20 @@ end
         KitaevHeisenberg(; K=1.0, J=0.1, Γ=0.1), MassGap(), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "KitaevHeisenberg — verification cards" begin
+    # Pure Kitaev point (J=0, Γ=0): gapless Z2 spin liquid at the
+    # isotropic coupling => MassGap = 0 (Kitaev 2006).
+    for K in (0.5, 1.0, 2.0)
+        verify(
+            KitaevHeisenberg(; K=K, J=0.0, Γ=0.0),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-10,
+            refs=["Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0)"],
+        )
+    end
+end

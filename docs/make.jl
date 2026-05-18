@@ -79,6 +79,7 @@ makedocs(;
         ],
         "Verification" => [
             "verification/index.md",
+            "Atlas: TFIM (prototype)" => "atlas/tfim.md",
             "Cross-Checks" => "verification/cross-checks.md",
             "Entanglement" => "verification/entanglement.md",
             "Disordered" => "verification/disordered.md",
@@ -201,6 +202,7 @@ makedocs(;
         ],
         "Verification" => [
             "verification/index.md",
+            "Atlas: TFIM (prototype)" => "atlas/tfim.md",
             "Cross-Checks" => "verification/cross-checks.md",
             "Entanglement" => "verification/entanglement.md",
             "Disordered" => "verification/disordered.md",

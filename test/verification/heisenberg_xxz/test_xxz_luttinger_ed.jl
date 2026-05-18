@@ -135,3 +135,20 @@ const _XXZ_Ns = [8, 10, 12, 14]
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D Luttinger ED — verification cards" begin
+    # Bethe-ansatz Luttinger parameter K = π / (2(π - arccos Δ))
+    # (independent closed form, Haldane 1980).
+    for Δ in (-0.5, 0.0, 0.5, 1.0)
+        verify(
+            XXZ1D(; J=1.0, Δ=Δ),
+            LuttingerParameter(),
+            Infinite();
+            route=:second_closed_form,
+            independent=π / (2 * (π - acos(Δ))),
+            agree_within=1e-9,
+            refs=["Haldane 1980: K = π / (2(π - arccos Δ)) for the critical XXZ chain"],
+        )
+    end
+end

@@ -112,3 +112,19 @@ end
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM gap closure — verification cards" begin
+    # Pfeuty 1970: Δ = 2|h - J|, closing exactly at the critical point.
+    for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J)"],
+        )
+    end
+end

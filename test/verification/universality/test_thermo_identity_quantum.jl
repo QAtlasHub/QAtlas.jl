@@ -62,3 +62,23 @@ end
         @test isapprox(c_direct, c_ad; atol=1e-9, rtol=1e-9)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "thermo identity quantum — verification cards" begin
+    # Gibbs identity s = β(ε − f) cross-checks the independently
+    # implemented Energy / FreeEnergy / ThermalEntropy code paths.
+    let m = TFIM(; J=1.0, h=0.5), β = 1.3
+        ε = QAtlas.fetch(m, Energy(), Infinite(); beta=β)
+        f = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
+        verify(
+            m,
+            ThermalEntropy(),
+            Infinite();
+            route=:sum_rule,
+            fetch_kw=(; beta=β),
+            independent=β * (ε - f),
+            agree_within=1e-7,
+            refs=["Gibbs identity s = β(ε − f) across three independent code paths"],
+        )
+    end
+end

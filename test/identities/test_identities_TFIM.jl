@@ -78,3 +78,19 @@ end
         @test all(r.status === :pass for r in results)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM identities — verification cards" begin
+    # Pfeuty 1970 gap closed form (independent of src).
+    for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Δ = 2|h - J|"],
+        )
+    end
+end

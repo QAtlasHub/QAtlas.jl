@@ -58,3 +58,23 @@ end
         @test c ≈ -β^2 * dε rtol = 1e-3
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "KitaevHoneycomb identities — verification cards" begin
+    # Gibbs identity s = β(ε − f) cross-checks the three independently
+    # implemented thermodynamic functions on the Kitaev honeycomb model.
+    let m = KitaevHoneycomb(; Kx=1.0, Ky=1.0, Kz=1.0), Lx = 2, Ly = 2, β = 1.0
+        ε = QAtlas.fetch(m, Energy(:per_site), OBC(0); Lx=Lx, Ly=Ly, beta=β)
+        f = QAtlas.fetch(m, FreeEnergy(), OBC(0); Lx=Lx, Ly=Ly, beta=β)
+        verify(
+            m,
+            ThermalEntropy(),
+            OBC(0);
+            route=:sum_rule,
+            fetch_kw=(; Lx=Lx, Ly=Ly, beta=β),
+            independent=β * (ε - f),
+            agree_within=1e-7,
+            refs=["Gibbs identity s = β(ε − f) on the Kitaev honeycomb"],
+        )
+    end
+end

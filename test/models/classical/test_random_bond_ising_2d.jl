@@ -47,3 +47,18 @@ end
     @test QAtlas.fetch(RandomBondIsing2D(; p=1.0), CentralCharge(), Infinite()) ==
         QAtlas.fetch(QAtlas.Universality{:Ising}(), CentralCharge(); d=2)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "RandomBondIsing2D — verification cards" begin
+    # At p = 1 (pure FM) the model reduces to the clean 2D Ising
+    # universality: c = 1/2 (delegation invariant to MinimalModel(4,3)).
+    verify(
+        RandomBondIsing2D(; J=1.0, p=1.0),
+        CentralCharge(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=0.5,
+        agree_within=1e-12,
+        refs=["p=1 reduces to clean 2D Ising: c = 1/2 (M(4,3))"],
+    )
+end

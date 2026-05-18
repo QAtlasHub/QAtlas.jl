@@ -81,3 +81,49 @@ end
         @test M_scaled ≈ M2 atol = 1e-14
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingSquare Onsager-Yang — verification cards" begin
+    # Onsager 1944: Tc set by sinh(2 βc J) = 1 => Tc = 2J / log(1 + √2).
+    for J in (1.0, 2.0)
+        verify(
+            IsingSquare(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * J / log(1 + sqrt(2)),
+            agree_within=1e-10,
+            refs=["Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2)"],
+        )
+    end
+
+    # Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8} below Tc; 0 above.
+    let J = 1.0
+        βc = log(1 + sqrt(2)) / (2J)
+        for β in (1.1 * βc, 1.5 * βc, 2.0 * βc)
+            s = sinh(2 * β * J)
+            m_ind = (1 - s^(-4))^(1 / 8)
+            verify(
+                IsingSquare(; J=J),
+                SpontaneousMagnetization(),
+                Infinite();
+                route=:second_closed_form,
+                fetch_kw=(; β=β),
+                independent=m_ind,
+                agree_within=1e-9,
+                refs=["Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8"],
+            )
+        end
+        # T >= Tc: magnetization vanishes
+        verify(
+            IsingSquare(; J=J),
+            SpontaneousMagnetization(),
+            Infinite();
+            route=:limiting_case,
+            fetch_kw=(; β=0.9 * βc),
+            independent=0.0,
+            agree_within=1e-10,
+            refs=["Yang 1952: m = 0 for T >= Tc"],
+        )
+    end
+end

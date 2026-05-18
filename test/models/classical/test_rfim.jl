@@ -31,3 +31,21 @@ end
         RFIM(; Δ=1.0), CriticalTemperature(), Infinite(); d=0
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "RFIM — verification cards" begin
+    # Imry-Ma 1975: the lower critical dimension of the RFIM is 2, so
+    # for d <= 2 there is no finite-temperature order => Tc = 0.
+    for d in (1, 2)
+        verify(
+            RFIM(; Δ=0.5),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; d=d),
+            independent=0.0,
+            agree_within=1e-12,
+            refs=["Imry-Ma 1975: RFIM lower critical dimension is 2 => Tc = 0 for d ≤ 2"],
+        )
+    end
+end

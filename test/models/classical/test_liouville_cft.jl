@@ -88,3 +88,30 @@ end
         LiouvilleCFT(; b=-1.0), ConformalWeights(), Infinite(); α=0.5
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "LiouvilleCFT — verification cards" begin
+    # Liouville central charge c(b) = 1 + 6 (b + 1/b)² (independent formula)
+    for b in (0.5, 1.0, 1.7)
+        verify(
+            LiouvilleCFT(; b=b),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=1 + 6 * (b + 1 / b)^2,
+            agree_within=1e-9,
+            refs=["Liouville CFT: c = 1 + 6 (b + 1/b)²  (c=25 at b=1)"],
+        )
+    end
+
+    # Duality c(b) = c(1/b)
+    verify(
+        LiouvilleCFT(; b=2.0),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 + 6 * (0.5 + 1 / 0.5)^2,
+        agree_within=1e-9,
+        refs=["Liouville b <-> 1/b duality: c(2) = c(1/2)"],
+    )
+end

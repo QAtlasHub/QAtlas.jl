@@ -54,3 +54,29 @@ end
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:T)
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:O)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "ConformalBootstrap — verification cards" begin
+    # 3D Ising conformal bootstrap (Kos-Poland-Simmons-Duffin-Vichi 2016
+    # "Precision Islands"): Δ_σ ≈ 0.5181489, Δ_ε ≈ 1.412625 (literature).
+    verify(
+        ConformalBootstrap(),
+        ConformalWeights(),
+        Infinite();
+        route=:literature_value,
+        fetch_kw=(; field=:σ),
+        independent=0.5181489,
+        agree_within=1e-5,
+        refs=["KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_σ ≈ 0.5181489"],
+    )
+    verify(
+        ConformalBootstrap(),
+        ConformalWeights(),
+        Infinite();
+        route=:literature_value,
+        fetch_kw=(; field=:ε),
+        independent=1.412625,
+        agree_within=1e-4,
+        refs=["KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_ε ≈ 1.412625"],
+    )
+end

@@ -27,3 +27,27 @@ end
     @test_throws DomainError ZnClock(; n=0)
     @test_throws DomainError ZnClock(; n=-1)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "ZnClock — verification cards" begin
+    # n=2 clock = Ising = M(4,3): c = 1 - 6(p-q)²/(pq) = 1/2
+    verify(
+        ZnClock(; n=2),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 - 6 * (4 - 3)^2 // (4 * 3),
+        agree_within=1e-12,
+        refs=["n=2 clock = Ising = M(4,3): c = 1/2"],
+    )
+    # n=3 clock = 3-state Potts = M(6,5): c = 4/5
+    verify(
+        ZnClock(; n=3),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 - 6 * (6 - 5)^2 // (6 * 5),
+        agree_within=1e-12,
+        refs=["n=3 clock = 3-state Potts = M(6,5): c = 4/5"],
+    )
+end

@@ -135,7 +135,9 @@ end
             fetch_kw=(; beta=beta, J=1.5),
             independent=xxz_E,
             agree_within=1e-12,
-            refs=["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"],
+            refs=[
+                "Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"
+            ],
         )
     end
 end

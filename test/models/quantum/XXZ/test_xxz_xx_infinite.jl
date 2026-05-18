@@ -136,7 +136,9 @@ end
         Energy(),
         Infinite();
         route=:ed_finite_size,
-        independent=[dense_spectrum(chain_hamiltonian(2, N, bond_xx))[1] / (N - 1) for N in Ns],
+        independent=[
+            dense_spectrum(chain_hamiltonian(2, N, bond_xx))[1] / (N - 1) for N in Ns
+        ],
         at=["N=$N" for N in Ns],
         agree_within=0.05,
         refs=["Yang-Yang 1966 I: e0 = -J/pi for XX (Delta=0) free fermion"],

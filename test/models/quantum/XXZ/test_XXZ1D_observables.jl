@@ -305,7 +305,9 @@ end
             fetch_kw=(; beta=beta),
             independent=chi_ind,
             agree_within=1e-9,
-            refs=["chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian"],
+            refs=[
+                "chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian",
+            ],
         )
     end
 end

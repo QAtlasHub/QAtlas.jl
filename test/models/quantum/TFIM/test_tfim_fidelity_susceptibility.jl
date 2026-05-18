@@ -185,7 +185,9 @@ end
             route=:second_closed_form,
             independent=1 / (16 * (J^2 - h^2)),
             agree_within=1e-9,
-            refs=["BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2)"],
+            refs=[
+                "BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2)"
+            ],
         )
     end
     let J = 1.0, h = 2.0

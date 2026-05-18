@@ -128,7 +128,9 @@ end
             fetch_kw=(; q=q, beta=Inf),
             independent=real(Sq),
             agree_within=5e-2,
-            refs=["S_xx(q) = Σ_r e^{iqr} ⟨σx_0 σx_r⟩ from _build_tfim_dense GS (central site)"],
+            refs=[
+                "S_xx(q) = Σ_r e^{iqr} ⟨σx_0 σx_r⟩ from _build_tfim_dense GS (central site)"
+            ],
         )
     end
 end

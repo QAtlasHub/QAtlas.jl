@@ -139,7 +139,6 @@
     end
 end
 
-
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
 @testset "TFIM local — verification cards" begin
     # GS energy = lowest eigenvalue of the independent dense-ED matrix

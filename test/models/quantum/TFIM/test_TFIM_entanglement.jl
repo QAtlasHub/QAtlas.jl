@@ -159,7 +159,7 @@ end
         ψ = F.vectors[:, 1]
         Ψ = reshape(ψ, (2^ℓ, 2^(N - ℓ)))
         sv = LinearAlgebra.svdvals(Ψ)
-        S_ind = -sum(s -> (p = s^2; p > 1e-15 ? p * log(p) : 0.0), sv)
+        S_ind = -sum(s -> (p=s^2; p > 1e-15 ? p * log(p) : 0.0), sv)
         verify(
             TFIM(; J=J, h=h),
             VonNeumannEntropy(),

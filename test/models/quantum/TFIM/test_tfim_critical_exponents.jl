@@ -33,6 +33,8 @@ end
         route=:literature_value,
         independent=0.5,
         agree_within=1e-9,
-        refs=["Onsager 1944 / Pfeuty 1970: Ising universality, c = 1/2, nu = 1, beta = 1/8"],
+        refs=[
+            "Onsager 1944 / Pfeuty 1970: Ising universality, c = 1/2, nu = 1, beta = 1/8"
+        ],
     )
 end

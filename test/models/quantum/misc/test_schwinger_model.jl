@@ -53,3 +53,18 @@ end
         SchwingerModel(; e=1.0), ChiralCondensate(), Infinite(); e=-1.5
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "SchwingerModel — verification cards" begin
+    for e in (1.0, 2.0, 3.0)
+        verify(
+            SchwingerModel(; e=e, m=0.0),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=e / sqrt(pi),
+            agree_within=1e-9,
+            refs=["Massless Schwinger model: m_gamma = e / sqrt(pi) (exact)"],
+        )
+    end
+end

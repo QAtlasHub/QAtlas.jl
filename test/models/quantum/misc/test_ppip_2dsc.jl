@@ -32,3 +32,25 @@ end
     @test_throws DomainError PpIp2DSC(; μ=0.0)
     @test_throws DomainError PpIp2DSC(; μ=-1.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "PpIp2DSC — verification cards" begin
+    verify(
+        PpIp2DSC(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 // 2,
+        agree_within=1e-10,
+        refs=["Chiral p+ip edge: single chiral Majorana CFT c = 1/2"],
+    )
+    verify(
+        PpIp2DSC(),
+        TopologicalInvariant(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1,
+        agree_within=1e-10,
+        refs=["p+ip weak-pairing phase: first Chern number = 1"],
+    )
+end

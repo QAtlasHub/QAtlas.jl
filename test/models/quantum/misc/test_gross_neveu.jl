@@ -47,3 +47,18 @@ end
     @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); Λ=1.0, g=-0.5)
     @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); Λ=1.0, N=0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "GrossNeveu — verification cards" begin
+    for N in (1, 2, 5)
+        verify(
+            GrossNeveu(; N=N, g=0.0),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=N,
+            agree_within=1e-10,
+            refs=["UV free-fermion fixed point: c = N at g = 0"],
+        )
+    end
+end

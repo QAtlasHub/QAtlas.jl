@@ -32,3 +32,20 @@ end
         XCube(), GroundStateDegeneracy(), PBC(); Lx=2, Ly=0, Lz=2
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XCube — verification cards" begin
+    # X-cube fracton GSD on the 3-torus: log2(GSD) = 2(Lx+Ly+Lz) - 3.
+    for (Lx, Ly, Lz) in ((2, 2, 2), (3, 3, 3))
+        verify(
+            XCube(),
+            GroundStateDegeneracy(),
+            PBC();
+            route=:second_closed_form,
+            fetch_kw=(; Lx=Lx, Ly=Ly, Lz=Lz),
+            independent=2.0^(2 * (Lx + Ly + Lz) - 3),
+            agree_within=0.5,
+            refs=["X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3"],
+        )
+    end
+end

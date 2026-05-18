@@ -144,3 +144,34 @@ using QAtlas, Test
         @test_throws DomainError QAtlas.fetch(m, GroundStateDegeneracy(), PBC(0); genus=-3)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "ToricCode — verification cards" begin
+    verify(
+        ToricCode(; J_e=1.0, J_m=1.0),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-2.0,
+        agree_within=1e-10,
+        refs=["Kitaev 2003: toric-code e0 = -(J_e + J_m)"],
+    )
+    verify(
+        ToricCode(; J_e=1.0, J_m=1.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2.0,
+        agree_within=1e-10,
+        refs=["Toric-code gap = 2 min(J_e, J_m)"],
+    )
+    verify(
+        ToricCode(; J_e=1.0, J_m=1.0),
+        TopologicalEntanglementEntropy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=log(2),
+        agree_within=1e-10,
+        refs=["Z2 topological order: gamma = log 2 (Kitaev-Preskill)"],
+    )
+end

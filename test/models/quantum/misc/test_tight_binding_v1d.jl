@@ -99,3 +99,27 @@ end
         TightBindingV1D(; V=-1e-13), Energy(:per_site), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TightBindingV1D — verification cards" begin
+    # V = 0 free-fermion subspace: half-filling is gapless.
+    verify(
+        TightBindingV1D(),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["V=0 half-filled chain: gapless Fermi surface"],
+    )
+    # μ > 2t band insulator: gap = |μ| - 2t
+    verify(
+        TightBindingV1D(; μ=3.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-9,
+        refs=["V=0, μ>2t: band-insulator gap = |μ| - 2t"],
+    )
+end

@@ -97,3 +97,19 @@ end
     @test_throws DomainError QAtlas.fetch(m, PartitionFunction(), Infinite(); N=1)
     @test_throws DomainError QAtlas.fetch(m, PartitionFunction(), Infinite(); k=0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "ChernSimons3D — verification cards" begin
+    # SU(2)_k WZW central charge c = 3k/(k+2) (Knizhnik-Zamolodchikov).
+    for k in (1, 2, 3, 6)
+        verify(
+            ChernSimons3D(; N=2, k=k),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=3k // (k + 2),
+            agree_within=1e-10,
+            refs=["SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984)"],
+        )
+    end
+end

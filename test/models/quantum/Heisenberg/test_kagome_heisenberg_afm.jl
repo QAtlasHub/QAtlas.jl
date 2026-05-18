@@ -50,7 +50,9 @@ end
         route=:literature_value,
         independent=-0.4386,
         agree_within=5e-3,
-        refs=["Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J"],
+        refs=[
+            "Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J"
+        ],
     )
 
     verify(

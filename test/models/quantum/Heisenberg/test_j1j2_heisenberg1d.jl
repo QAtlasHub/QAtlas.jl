@@ -82,7 +82,9 @@ end
         Energy(:per_site),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(MajumdarGhosh(; J=1.0), GroundStateEnergyDensity(), Infinite()),
+        independent=QAtlas.fetch(
+            MajumdarGhosh(; J=1.0), GroundStateEnergyDensity(), Infinite()
+        ),
         agree_within=1e-12,
         refs=["J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8)"],
     )
@@ -97,7 +99,9 @@ end
             independent=[j1j2_pbc_e0(N, 1.0, 0.5) for N in Ns],
             at=["N=$N" for N in Ns],
             agree_within=1e-6,
-            refs=["Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N)"],
+            refs=[
+                "Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N)",
+            ],
         )
     end
 end

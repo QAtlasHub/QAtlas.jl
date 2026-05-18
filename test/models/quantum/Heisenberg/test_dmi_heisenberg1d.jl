@@ -67,7 +67,9 @@ end
         Energy(:per_site),
         Infinite();
         route=:ed_finite_size,
-        independent=[dense_spectrum(chain_hamiltonian(2, N, heis_bond(1.0)))[1] / N for N in Ns],
+        independent=[
+            dense_spectrum(chain_hamiltonian(2, N, heis_bond(1.0)))[1] / N for N in Ns
+        ],
         at=["N=$N" for N in Ns],
         agree_within=0.1,
         refs=["Hulthen 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"],

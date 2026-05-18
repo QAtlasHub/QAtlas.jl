@@ -275,10 +275,14 @@ end
             Energy(:per_site),
             Infinite();
             route=:ed_finite_size,
-            independent=[dense_spectrum(chain_hamiltonian(3, N, heis1_bond(1.0)))[1] / N for N in Ns],
+            independent=[
+                dense_spectrum(chain_hamiltonian(3, N, heis1_bond(1.0)))[1] / N for N in Ns
+            ],
             at=["N=$N" for N in Ns],
             agree_within=0.3,
-            refs=["Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow)"],
+            refs=[
+                "Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow)",
+            ],
         )
     end
 

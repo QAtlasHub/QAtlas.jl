@@ -119,7 +119,9 @@ end
     # OBC thermal energy at N=4, beta=1 vs independent spin-1 ED
     let J = 1.0, N = 4, beta = 1.0
         bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
-        E_ind, _, _, _ = thermo_from_spectrum(dense_spectrum(chain_hamiltonian(3, N, bond)), beta)
+        E_ind, _, _, _ = thermo_from_spectrum(
+            dense_spectrum(chain_hamiltonian(3, N, bond)), beta
+        )
         verify(
             S1Heisenberg1D(; J=J),
             Energy(),
@@ -128,7 +130,9 @@ end
             fetch_kw=(; beta=beta),
             independent=E_ind,
             agree_within=1e-9,
-            refs=["Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"],
+            refs=[
+                "Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum",
+            ],
         )
     end
 end

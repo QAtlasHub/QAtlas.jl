@@ -115,7 +115,9 @@ end
     # OBC thermal energy at N=4, beta=1 vs independent ED (thermo_from_spectrum)
     let J = 1.0, N = 4, beta = 1.0
         bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
-        E_ind, _, _, _ = thermo_from_spectrum(dense_spectrum(chain_hamiltonian(2, N, bond)), beta)
+        E_ind, _, _, _ = thermo_from_spectrum(
+            dense_spectrum(chain_hamiltonian(2, N, bond)), beta
+        )
         verify(
             Heisenberg1D(),
             Energy(),
@@ -138,7 +140,9 @@ end
             fetch_kw=(; beta=beta, J=1.5),
             independent=QAtlas.fetch(XXZ1D(; J=1.5, Δ=1.0), Energy(), OBC(N); beta=beta),
             agree_within=1e-12,
-            refs=["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"],
+            refs=[
+                "Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"
+            ],
         )
     end
 end

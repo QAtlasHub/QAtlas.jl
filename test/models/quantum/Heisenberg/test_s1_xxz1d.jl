@@ -76,7 +76,8 @@ end
         Energy(:per_site),
         Infinite();
         route=:delegation_invariant,
-        independent=3.0 * QAtlas.fetch(S1Heisenberg1D(; J=1.0), Energy(:per_site), Infinite()),
+        independent=3.0 *
+                    QAtlas.fetch(S1Heisenberg1D(; J=1.0), Energy(:per_site), Infinite()),
         agree_within=1e-10,
         refs=["Linear J scaling: e(3J) = 3 e(J) for spin-1 Heisenberg point"],
     )

@@ -127,3 +127,40 @@
         @test S_inf ≈ S_obc atol=1e-12
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM z-axis — verification cards" begin
+    # MagnetizationZ ≡ 0 in any finite system: the Z2 spin-flip symmetry
+    # (σz -> -σz, σx -> σx) is unbroken without an explicit longitudinal
+    # field, so ⟨σz⟩ = 0 (independent symmetry argument, not src).
+    for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+        verify(
+            TFIM(; J=J, h=h),
+            MagnetizationZ(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-12,
+            refs=["Unbroken Z2 (no longitudinal field): ⟨σz⟩ = 0"],
+        )
+    end
+
+    # ZZ static correlation at small N vs independent OBC dense ED
+    let J = 1.0, h = 1.0, N = 6, i = 2, j = 5
+        F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
+        ψ = F.vectors[:, 1]
+        Oi = _op_site(_SZ, i, N)
+        Oj = _op_site(_SZ, j, N)
+        zz_ed = real(ψ' * (Oi * (Oj * ψ)))
+        verify(
+            TFIM(; J=J, h=h),
+            ZZCorrelation(; mode=:static),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; i=i, j=j, beta=Inf),
+            independent=zz_ed,
+            agree_within=1e-8,
+            refs=["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state"],
+        )
+    end
+end

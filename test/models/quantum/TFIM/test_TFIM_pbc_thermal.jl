@@ -198,3 +198,35 @@ end
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM PBC thermal — verification cards" begin
+    # Independent PBC dense-ED (black-box: TFIM convention plus the wrap
+    # bond, built from Pauli site operators not src).
+    function tfim_pbc_dense(N, J, h)
+        H = zeros(ComplexF64, 2^N, 2^N)
+        for i in 1:N
+            j = mod1(i + 1, N)
+            H .-= J * _op_site(_SZ, i, N) * _op_site(_SZ, j, N)
+        end
+        for i in 1:N
+            H .-= h * _op_site(_SX, i, N)
+        end
+        return LinearAlgebra.Hermitian(H)
+    end
+
+    for (J, h, N, beta) in ((1.0, 0.5, 8, 1.0), (1.0, 1.5, 6, 0.8))
+        sp = dense_spectrum(tfim_pbc_dense(N, J, h))
+        E_tot, _, _, _ = thermo_from_spectrum(sp, beta)
+        verify(
+            TFIM(; J=J, h=h),
+            Energy(:per_site),
+            PBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta),
+            independent=E_tot / N,
+            agree_within=1e-8,
+            refs=["Direct PBC dense ED (wrap bond) + thermo_from_spectrum"],
+        )
+    end
+end

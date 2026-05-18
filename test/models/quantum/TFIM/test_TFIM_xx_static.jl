@@ -103,3 +103,23 @@ using QAtlas, Test, LinearAlgebra
         @test v_inf == v_obc
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM XX static — verification cards" begin
+    let J = 1.0, h = 1.0, N = 6, i = 2, j = 4
+        F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
+        ψ = F.vectors[:, 1]
+        σx = ComplexF64[0 1; 1 0]
+        xx_ed = real(ψ' * (_op_site(σx, i, N) * (_op_site(σx, j, N) * ψ)))
+        verify(
+            TFIM(; J=J, h=h),
+            XXCorrelation(; mode=:static),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; i=i, j=j, beta=Inf),
+            independent=xx_ed,
+            agree_within=1e-8,
+            refs=["Direct OBC dense-ED ⟨σx_i σx_j⟩ via _build_tfim_dense GS"],
+        )
+    end
+end

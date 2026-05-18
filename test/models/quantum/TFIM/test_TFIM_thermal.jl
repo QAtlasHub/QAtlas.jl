@@ -305,3 +305,34 @@ end
         @test errs_m[end] ≤ errs_m[1]
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM thermal — verification cards" begin
+    # OBC thermal energy vs independent dense-ED thermo_from_spectrum
+    for (J, h, N, beta) in ((1.0, 0.5, 8, 1.0), (1.0, 1.5, 8, 0.7))
+        sp = dense_spectrum(_build_tfim_dense(N, J, h))
+        E_ind, _, _, _ = thermo_from_spectrum(sp, beta)
+        verify(
+            TFIM(; J=J, h=h),
+            Energy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta),
+            independent=E_ind,
+            agree_within=1e-8,
+            refs=["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"],
+        )
+    end
+
+    # beta -> 0: Tr(H)/2^N. Each σz σz and σx is traceless => ⟨H⟩ = 0.
+    verify(
+        TFIM(; J=1.0, h=1.3),
+        Energy(),
+        OBC(6);
+        route=:sum_rule,
+        fetch_kw=(; beta=0.0),
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0"],
+    )
+end

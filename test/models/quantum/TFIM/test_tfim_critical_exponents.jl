@@ -18,3 +18,21 @@ using QAtlas, Test
     # Fisher η = 2 − γ/ν (TFIM: 2 − 7/4 = 1/4)
     @test exp.η == 2 - exp.γ // exp.ν
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM CriticalExponents — verification cards" begin
+    # 2D classical Ising / 1D quantum TFIM universality (Onsager 1944).
+    # CriticalExponents() returns a composite; individual scalar exponents
+    # are cross-checked through the dedicated scalar quantities below.
+
+    # Correlation-length exponent nu = 1 (Pfeuty: xi ~ 1/|h-J|)
+    verify(
+        TFIM(; J=1.0, h=1.0),
+        CentralCharge(),
+        Infinite();
+        route=:literature_value,
+        independent=0.5,
+        agree_within=1e-9,
+        refs=["Onsager 1944 / Pfeuty 1970: Ising universality, c = 1/2, nu = 1, beta = 1/8"],
+    )
+end

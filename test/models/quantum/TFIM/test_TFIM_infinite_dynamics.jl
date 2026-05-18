@@ -91,3 +91,30 @@ using QAtlas, Test
         @test isfinite(S_omega_sum)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM infinite-dynamics — verification cards" begin
+    # Pfeuty 1970 gap closed form (independent of src)
+    for (J, h) in ((1.0, 0.5), (1.0, 1.5), (2.0, 0.3))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Delta = 2|h - J|"],
+        )
+    end
+
+    # Critical point h = J: gap closes exactly (second-order QPT)
+    verify(
+        TFIM(; J=1.0, h=1.0),
+        MassGap(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["Ising QCP at h = J: gap closes (Pfeuty 1970)"],
+    )
+end

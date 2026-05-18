@@ -115,3 +115,25 @@ using QAtlas, Lattice2D, LinearAlgebra, Test
         @test_throws ArgumentError RenyiEntropy(1.0)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM Renyi — verification cards" begin
+    # Renyi-2 entropy at OBC vs direct SVD of the _build_tfim_dense GS.
+    for (J, h, N, ℓ) in ((1.0, 1.0, 8, 4), (1.0, 0.5, 8, 4))
+        F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
+        ψ = F.vectors[:, 1]
+        Ψ = reshape(ψ, (2^ℓ, 2^(N - ℓ)))
+        p = LinearAlgebra.svdvals(Ψ) .^ 2
+        S2_ind = -log(sum(p .^ 2))
+        verify(
+            TFIM(; J=J, h=h),
+            RenyiEntropy(2),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; ℓ=ℓ, beta=Inf),
+            independent=S2_ind,
+            agree_within=1e-8,
+            refs=["Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p²"],
+        )
+    end
+end

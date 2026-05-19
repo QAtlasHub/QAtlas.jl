@@ -1,12 +1,7 @@
 # test/harness/atlas/AtlasInventory.jl
-#
-# v2 framework (prototype, TFIM vertical slice). STATIC AST scan of the
-# existing v1 verify(...) cards: produces test/INVENTORY.jsonl with NO
-# card edits and NO test execution (M1: shard-independent, single job).
-#
-# Per card: hub = Model/Quantity/BC ; regime = controlled-vocab token ;
-# arity = point|curve|ensemble|not_applicable (B2) ; mechanism = v1 route ;
-# independence = structural|asserted (B1) ; discriminant = provenance (B1/M4).
+# v2 framework prototype. STATIC AST scan of existing verify(...) cards.
+# Hardened: non-Symbol kwarg keys are skipped; per-verify extraction is
+# wrapped so a non-parseable card is tallied (PARSE_FAILS) not a crash.
 module AtlasInventory
 
 using Base.Meta: parseall
@@ -14,6 +9,7 @@ using Base.Meta: parseall
 const _BS = Char(92)
 const _DQ = Char(34)
 const _NL = Char(10)
+const PARSE_FAILS = Tuple{String,String}[]
 
 struct Regime
     token::String
@@ -23,15 +19,15 @@ struct Regime
 end
 
 const TFIM_VOCAB = Regime[
-    Regime("@critical", "TFIM quantum critical point h = J", "point",
+    Regime("@critical", "TFIM critical point h = J", "point",
            p -> haskey(p, :h) && haskey(p, :J) && isapprox(p.h, p.J; atol=1e-12)),
-    Regime("@ordered", "ferromagnetic ordered phase h < J", "point",
+    Regime("@ordered", "ordered phase h < J", "point",
            p -> haskey(p, :h) && haskey(p, :J) && p.h < p.J),
-    Regime("@disordered", "paramagnetic disordered phase h > J", "point",
+    Regime("@disordered", "disordered phase h > J", "point",
            p -> haskey(p, :h) && haskey(p, :J) && p.h > p.J),
 ]
 
-const SWEEP = Regime("@sweep", "parametric sweep over h/J (curve)", "curve", _ -> false)
+const SWEEP = Regime("@sweep", "parametric sweep (curve)", "curve", _ -> false)
 
 _headsym(ex) = ex isa Expr && ex.head === :call ? ex.args[1] :
                ex isa Symbol ? ex : nothing
@@ -60,9 +56,11 @@ function _kwargs(callex)
     for a in callex.args
         if a isa Expr && a.head === :parameters
             for kw in a.args
-                kw isa Expr && kw.head === :kw && (d[kw.args[1]] = kw.args[2])
+                if kw isa Expr && kw.head === :kw && kw.args[1] isa Symbol
+                    d[kw.args[1]] = kw.args[2]
+                end
             end
-        elseif a isa Expr && a.head === :kw
+        elseif a isa Expr && a.head === :kw && a.args[1] isa Symbol
             d[a.args[1]] = a.args[2]
         end
     end
@@ -112,6 +110,30 @@ function _refs_text(ex)
     return string(ex)
 end
 
+function _handle_verify!(out, ex, file, testset)
+    pos = filter(a -> !(a isa Expr && a.head in (:parameters, :kw)), ex.args)[2:end]
+    length(pos) >= 3 || return
+    model, qty, bc = pos[1], pos[2], pos[3]
+    kw = _kwargs(ex)
+    route = get(kw, :route, nothing)
+    route isa QuoteNode && (route = route.value)
+    route isa Symbol || (route = :unknown)
+    refs = _refs_text(get(kw, :refs, nothing))
+    params = _literal_params(model)
+    reg = SWEEP
+    for r in TFIM_VOCAB
+        try
+            r.predicate(params) && (reg = r; break)
+        catch
+        end
+    end
+    ind, disc = _independence(route, get(kw, :refs, nothing))
+    hub = string(_headsym(model), "/", _headsym(qty), "/", _headsym(bc))
+    push!(out, Card(hub, reg.token, reg.arity, file, testset,
+                    string(route), ind, disc, refs))
+    return
+end
+
 function _scan_expr!(out, ex, file, testset)
     ex isa Expr || return
     if ex.head === :macrocall && ex.args[1] === Symbol("@testset")
@@ -125,26 +147,11 @@ function _scan_expr!(out, ex, file, testset)
         return
     end
     if ex.head === :call && _headsym(ex) === :verify
-        pos = filter(a -> !(a isa Expr && a.head in (:parameters, :kw)), ex.args)[2:end]
-        length(pos) >= 3 || return
-        model, qty, bc = pos[1], pos[2], pos[3]
-        kw = _kwargs(ex)
-        route = get(kw, :route, nothing)
-        route isa QuoteNode && (route = route.value)
-        route isa Symbol || (route = :unknown)
-        refs = _refs_text(get(kw, :refs, nothing))
-        params = _literal_params(model)
-        reg = SWEEP
-        for r in TFIM_VOCAB
-            try
-                r.predicate(params) && (reg = r; break)
-            catch
-            end
+        try
+            _handle_verify!(out, ex, file, testset)
+        catch err
+            push!(PARSE_FAILS, (file, string(testset, " :: ", typeof(err))))
         end
-        ind, disc = _independence(route, get(kw, :refs, nothing))
-        hub = string(_headsym(model), "/", _headsym(qty), "/", _headsym(bc))
-        push!(out, Card(hub, reg.token, reg.arity, file, testset,
-                        string(route), ind, disc, refs))
         return
     end
     for a in ex.args

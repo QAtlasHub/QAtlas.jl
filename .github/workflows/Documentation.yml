@@ -20,6 +20,8 @@ jobs:
           version: '1'
       - name: Install dependencies
         run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+      - name: Regenerate atlas view (pure scan; no test exec)
+        run: julia --startup-file=no docs/atlas/generate.jl
       - name: Build and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

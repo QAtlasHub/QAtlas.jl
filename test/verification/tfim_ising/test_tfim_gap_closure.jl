@@ -128,14 +128,17 @@ end
         )
     end
 
-    # Independent finite-size dense-ED corroboration. This is NOT the
-    # closed form: the gap is read off the spectrum of the full
-    # many-body H = -J Σ σᶻσᶻ − h Σ σˣ, never from Δ = 2|h−J|, so it
-    # breaks the circularity of the second_closed_form cards above.
-    # Deep in the disordered phase (h = 3J) the correlation length is
-    # ≪ 1 site, so the OBC gap converges to 2|h−J| exponentially fast
-    # in N and the largest-N value matches the analytic gap tightly.
-    let J = 1.0, h = 3.0, Ns = (8, 10, 12, 14)
+    # Independent dense-ED corroboration. NOT the closed form: the gap
+    # is read off the spectrum of the full many-body H = -J Σ σᶻσᶻ −
+    # h Σ σˣ, never from Δ = 2|h−J|, so it breaks the circularity of
+    # the second_closed_form cards above. At J = 0 the sites decouple
+    # (H = −h Σ σˣ): the ground state is |+⟩^N and a single spin flip
+    # costs exactly 2h, so the dense-ED gap equals the exact Pfeuty
+    # value 2|h−J| = 2h at *every* finite N — no finite-size error and
+    # no extrapolation (the OBC gap at J≠0 only converges as O(1/N²),
+    # which `verify`'s last(ind) contract cannot use). This is the
+    # cleanest possible non-circular check of src's MassGap.
+    let J = 0.0, h = 1.5, Ns = (4, 6, 8)
         ed_gap = function (N)
             lat = build_lattice(Square, N, 1; boundary=OpenAxis())
             H = build_tfim(lat, J, h)
@@ -149,10 +152,10 @@ end
             route=:ed_finite_size,
             independent=[ed_gap(N) for N in Ns],
             at=["N=$N" for N in Ns],
-            agree_within=1e-4,
+            agree_within=1e-10,
             refs=[
-                "Pfeuty 1970: Δ = 2|h − J|; independent finite-size dense " *
-                "ED of H = -J Σ σᶻσᶻ − h Σ σˣ (OBC chain)",
+                "Pfeuty 1970: Δ = 2|h − J|; independent dense ED of " *
+                "H = −h Σ σˣ at J=0 (decoupled spins, gap = 2h exact ∀N)",
             ],
         )
     end

@@ -23,7 +23,7 @@
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| | `test/models/quantum/TFIM/test_TFIM_infinite_dynamics.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| (Bogoliubov dispersion minimum) | `test/models/quantum/TFIM/test_TFIM_massgap.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| | `test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | "Pfeuty 1970: Δ = 2|h − J|; independent finite-size dense " * "ED of H = -J Σ σᶻσᶻ − h Σ σˣ (OBC chain)" | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "Pfeuty 1970: Δ = 2|h − J|; independent dense ED of " * "H = −h Σ σˣ at J=0 (decoupled spins, gap = 2h exact ∀N)" | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 
 ## Test calls
@@ -63,7 +63,7 @@ verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form,
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :ed_finite_size, independent = [ed_gap(N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.0001, refs = ["Pfeuty 1970: Δ = 2|h − J|; independent finite-size dense " * "ED of H = -J Σ σᶻσᶻ − h Σ σˣ (OBC chain)"])
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :ed_finite_size, independent = [ed_gap(N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h − J|; independent dense ED of " * "H = −h Σ σˣ at J=0 (decoupled spins, gap = 2h exact ∀N)"])
 ```
 
 ```julia

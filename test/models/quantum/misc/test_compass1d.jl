@@ -36,3 +36,18 @@ end
         @test Δ_ab == 2.0 * abs(a - b)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Compass1D — verification cards" begin
+    for (jx, jy) in ((1.0, 0.5), (2.0, 0.5), (1.0, 1.0))
+        verify(
+            Compass1D(; J_x=jx, J_y=jy),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(jx - jy),
+            agree_within=1e-10,
+            refs=["1D compass model gap = 2|J_x - J_y|"],
+        )
+    end
+end

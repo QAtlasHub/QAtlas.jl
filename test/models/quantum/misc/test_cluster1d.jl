@@ -28,3 +28,27 @@ end
     @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); J=0.0)
     @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); J=-2.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Cluster1D — verification cards" begin
+    for J in (0.5, 1.0, 3.0)
+        verify(
+            Cluster1D(; J=J),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=(-J),
+            agree_within=1e-12,
+            refs=["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"],
+        )
+        verify(
+            Cluster1D(; J=J),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2J,
+            agree_within=1e-12,
+            refs=["Cluster model gap = 2J"],
+        )
+    end
+end

@@ -75,3 +75,34 @@ end
         XYh1D(; Jx=1.0, Jy=0.5, h=0.0), Energy{:per_site}(), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XYh1D — verification cards" begin
+    verify(
+        XYh1D(),
+        Energy(:per_site),
+        Infinite();
+        route=:second_closed_form,
+        independent=-4 / pi,
+        agree_within=1e-9,
+        refs=["Lieb-Schultz-Mattis 1961: XX chain e0 = -4/pi (Pauli σ convention)"],
+    )
+    verify(
+        XYh1D(),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["XX limit h=0: gapless"],
+    )
+    verify(
+        XYh1D(; h=3.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2.0,
+        agree_within=1e-9,
+        refs=["Polarized |h|>2J: gap = 2(|h| - 2J)"],
+    )
+end

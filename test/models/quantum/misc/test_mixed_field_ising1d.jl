@@ -51,3 +51,19 @@ end
         MixedFieldIsing1D(; J=1.0, h_x=1.0, h_z=1e-13), MassGap(), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "MixedFieldIsing1D — verification cards" begin
+    # h_z = 0 reduces to TFIM: gap Δ = 2|h_x - J| (Pfeuty).
+    for (J, hx) in ((1.0, 2.0), (1.0, 3.0), (2.0, 1.0))
+        verify(
+            MixedFieldIsing1D(; J=J, h_x=hx, h_z=0.0),
+            MassGap(),
+            Infinite();
+            route=:delegation_invariant,
+            independent=2 * abs(hx - J),
+            agree_within=1e-9,
+            refs=["h_z=0 delegates to TFIM: Δ = 2|h_x - J| (Pfeuty 1970)"],
+        )
+    end
+end

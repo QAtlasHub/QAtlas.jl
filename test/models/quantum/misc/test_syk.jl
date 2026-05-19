@@ -42,3 +42,19 @@ end
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:O)
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); field=:ε)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "SYK — verification cards" begin
+    for q in (2, 4, 6, 8)
+        verify(
+            SYK(; q=q),
+            ConformalWeights(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; field=:ψ),
+            independent=1 // q,
+            agree_within=1e-10,
+            refs=["SYK IR Majorana conformal dimension Delta_psi = 1/q"],
+        )
+    end
+end

@@ -32,3 +32,19 @@ end
     @test_throws DomainError LongRangeIsing1D(; h=-1.0)
     @test_throws DomainError LongRangeIsing1D(; α=0.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "LongRangeIsing1D — verification cards" begin
+    # α = ∞ (NN limit) delegates to TFIM: gap Δ = 2|h - J| (Pfeuty).
+    for (J, h) in ((1.0, 2.0), (2.0, 0.5), (1.5, 0.7))
+        verify(
+            LongRangeIsing1D(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:delegation_invariant,
+            independent=2 * abs(h - J),
+            agree_within=1e-9,
+            refs=["α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970)"],
+        )
+    end
+end

@@ -43,3 +43,18 @@ end
         QAtlas.ShastrySutherland(; J=0.0, Jp=-1.0), Energy(:per_site), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "ShastrySutherland — verification cards" begin
+    for (J, Jp) in ((0.1, 1.0), (0.6, 2.0), (0.3, 1.5))
+        verify(
+            QAtlas.ShastrySutherland(; J=J, Jp=Jp),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=-3 * Jp / 8,
+            agree_within=1e-10,
+            refs=["Shastry-Sutherland 1981: exact dimer e0 = -3 Jp / 8 (dimer phase)"],
+        )
+    end
+end

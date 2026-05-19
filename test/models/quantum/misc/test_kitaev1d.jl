@@ -215,3 +215,37 @@ end
     @test isfinite(Δgap)
     @test Δgap > 0
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Kitaev1D — verification cards" begin
+    # Sweet spot (t=Δ, μ=0): bulk gap = 2|Δ|
+    verify(
+        Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2.0,
+        agree_within=1e-9,
+        refs=["Kitaev chain sweet spot: gap = 2|Δ|"],
+    )
+    # Trivial phase |μ|>2|t|: gap = |μ| - 2|t|
+    verify(
+        Kitaev1D(; μ=3.0, t=1.0, Δ=1.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-9,
+        refs=["Kitaev chain trivial phase: gap = ||μ| - 2|t||"],
+    )
+    # Critical point |μ|=2|t|: gapless
+    verify(
+        Kitaev1D(; μ=2.0, t=1.0, Δ=1.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-9,
+        refs=["Kitaev chain topological transition at |μ|=2|t|: gap = 0"],
+    )
+end

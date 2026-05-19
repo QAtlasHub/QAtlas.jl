@@ -16,3 +16,17 @@ using QAtlas, Test
     # since 2 = √4 > √(φ+2) = √3.618.  So γ_Fib < γ_Z2.
     @test γ < log(2)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "FibonacciAnyons — verification cards" begin
+    phi = (1 + sqrt(5)) / 2
+    verify(
+        FibonacciAnyons(),
+        TopologicalEntanglementEntropy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.5 * log(2 + phi),
+        agree_within=1e-9,
+        refs=["Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio"],
+    )
+end

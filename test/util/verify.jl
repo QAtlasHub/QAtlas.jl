@@ -72,7 +72,7 @@ _json_str(s) = '"' * replace(string(s), '\\' => "\\\\", '"' => "\\\"") * '"'
 # NaN/Inf-safe numeric emitter — a non-finite number is NEVER written as a
 # raw token (which is invalid JSON); it becomes null and the card status
 # is set to "divergent" instead (original critique item 5).
-_json_num(x) = (v = float(x); isfinite(v) ? string(v) : "null")
+_json_num(x) = (v=float(x); isfinite(v) ? string(v) : "null")
 
 function _json_arr(xs)
     return "[" * join((x isa Real ? _json_num(x) : _json_str(x) for x in xs), ",") * "]"
@@ -118,11 +118,16 @@ function _fit_rate(ind, atv, subj)
     return sum((Ns .- mx) .* (rs .- my)) / den
 end
 
-_v2_env() = string(
-    "julia-", VERSION,
-    "; runner=", get(ENV, "RUNNER_OS", "local"),
-    "; run=", get(ENV, "GITHUB_RUN_ID", ""),
-)
+function _v2_env()
+    string(
+        "julia-",
+        VERSION,
+        "; runner=",
+        get(ENV, "RUNNER_OS", "local"),
+        "; run=",
+        get(ENV, "GITHUB_RUN_ID", ""),
+    )
+end
 
 """
     verify(model, quantity, bc;
@@ -184,23 +189,56 @@ function verify(
         card = string(
             "{",
             "\"schema_version\":2,",
-            "\"hub\":", _json_str(_verify_hub(model, quantity, bc)), ",",
-            "\"route\":", _json_str(route), ",",
-            "\"mechanism\":", _json_str(route), ",",
-            "\"independence\":", _json_str(indep), ",",
-            "\"discriminant\":", _json_str(disc), ",",
-            "\"status\":", _json_str(status), ",",
-            "\"subject\":", _json_num(subj), ",",
-            "\"independent\":", _json_arr(ind), ",",
-            "\"at\":", _json_arr(atv), ",",
-            "\"abserr\":", _json_num(finite ? round(abserr; sigdigits=6) : NaN), ",",
-            "\"atol\":", _json_num(agree_within), ",",
-            "\"convergence_rate\":", _json_num(rate), ",",
-            "\"reliability\":", _json_str(reliability), ",",
-            "\"refs\":", _json_arr(refs), ",",
-            "\"commit\":", _json_str(_verify_commit()), ",",
-            "\"env\":", _json_str(_v2_env()), ",",
-            "\"date\":", _json_str(string(Dates.today())),
+            "\"hub\":",
+            _json_str(_verify_hub(model, quantity, bc)),
+            ",",
+            "\"route\":",
+            _json_str(route),
+            ",",
+            "\"mechanism\":",
+            _json_str(route),
+            ",",
+            "\"independence\":",
+            _json_str(indep),
+            ",",
+            "\"discriminant\":",
+            _json_str(disc),
+            ",",
+            "\"status\":",
+            _json_str(status),
+            ",",
+            "\"subject\":",
+            _json_num(subj),
+            ",",
+            "\"independent\":",
+            _json_arr(ind),
+            ",",
+            "\"at\":",
+            _json_arr(atv),
+            ",",
+            "\"abserr\":",
+            _json_num(finite ? round(abserr; sigdigits=6) : NaN),
+            ",",
+            "\"atol\":",
+            _json_num(agree_within),
+            ",",
+            "\"convergence_rate\":",
+            _json_num(rate),
+            ",",
+            "\"reliability\":",
+            _json_str(reliability),
+            ",",
+            "\"refs\":",
+            _json_arr(refs),
+            ",",
+            "\"commit\":",
+            _json_str(_verify_commit()),
+            ",",
+            "\"env\":",
+            _json_str(_v2_env()),
+            ",",
+            "\"date\":",
+            _json_str(string(Dates.today())),
             "}",
         )
         _ef = joinpath(outdir, "evidence-$(sid).jsonl")

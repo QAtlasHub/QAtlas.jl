@@ -20,9 +20,21 @@ struct Claim
     notes::String
 end
 
-_sym(ex) = ex isa Symbol ? string(ex) :
-           (ex isa Expr && ex.head === :curly ? string(ex.args[1]) :
-            ex isa Expr && ex.head === :call ? string(ex.args[1]) : string(ex))
+function _sym(ex)
+    if ex isa Symbol
+        string(ex)
+    else
+        (
+            if ex isa Expr && ex.head === :curly
+                string(ex.args[1])
+            elseif ex isa Expr && ex.head === :call
+                string(ex.args[1])
+            else
+                string(ex)
+            end
+        )
+    end
+end
 
 function _regkw(args)
     d = Dict{Symbol,Any}()
@@ -44,21 +56,29 @@ function _refs_text(ex)
 end
 
 function _walk!(out, ex)
-    ex isa Expr || return
+    ex isa Expr || return nothing
     if ex.head === :macrocall && ex.args[1] === Symbol("@register")
-        pos = filter(a -> !(a isa LineNumberNode) &&
-                          !(a isa Expr && a.head in (:kw, :(=))), ex.args)[2:end]
+        pos = filter(
+            a -> !(a isa LineNumberNode) && !(a isa Expr && a.head in (:kw, :(=))), ex.args
+        )[2:end]
         if length(pos) >= 3
             model, qty, bc = _sym(pos[1]), _sym(pos[2]), _sym(pos[3])
             kw = _regkw(ex.args)
-            push!(out, Claim(string(model, "/", qty, "/", bc),
-                model, qty, bc,
-                string(get(kw, :method, "")),
-                string(get(kw, :reliability, "")),
-                _refs_text(get(kw, :references, nothing)),
-                string(get(kw, :notes, ""))))
+            push!(
+                out,
+                Claim(
+                    string(model, "/", qty, "/", bc),
+                    model,
+                    qty,
+                    bc,
+                    string(get(kw, :method, "")),
+                    string(get(kw, :reliability, "")),
+                    _refs_text(get(kw, :references, nothing)),
+                    string(get(kw, :notes, "")),
+                ),
+            )
         end
-        return
+        return nothing
     end
     for a in ex.args
         _walk!(out, a)

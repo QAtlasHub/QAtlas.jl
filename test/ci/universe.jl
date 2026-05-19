@@ -30,7 +30,8 @@ _is_test_file(f) = startswith(f, "test_") && endswith(f, ".jl")
 # ALL_DIRS, and every ALL_DIRS entry must exist and be non-empty.  Runs
 # wherever this file is included (every shard + the planner) and fails
 # loudly — a test directory can never be added without being wired in.
-# `test_aqua.jl` at the test/ root is the only sanctioned exception.
+# `test_aqua.jl` at the test/ root and `test/harness/` (v2 atlas
+# infra, run by dedicated jobs) are the sanctioned exceptions.
 let
     enumerated = Set(ALL_DIRS)
     discovered = Set{String}()
@@ -38,6 +39,7 @@ let
         any(_is_test_file, files) || continue
         rel = replace(relpath(d, TEST_ROOT), '\\' => '/')
         rel == "." && continue  # test/ root: only test_aqua.jl, run specially
+        startswith(rel, "harness/") && continue  # test/harness/: infra run by dedicated CI jobs (sanctioned, like test_aqua.jl)
         push!(discovered, rel * "/")
     end
     leaked = sort(collect(setdiff(discovered, enumerated)))

@@ -262,6 +262,8 @@ jobs:
           version: '1'
       - name: Static scan must equal committed INVENTORY.jsonl (no test exec)
         run: julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+      - name: Atlas taxonomy + registry-parser unit tests
+        run: julia --startup-file=no test/harness/atlas/test_atlas_logic.jl
 
   all-tests:
     name: All tests passed

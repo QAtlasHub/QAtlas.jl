@@ -13,6 +13,7 @@ const _BS = Char(92)
 const _DQ = Char(34)
 const _NL = Char(10)
 const PARSE_FAILS = Tuple{String,String}[]
+const _ROOT = normpath(joinpath(@__DIR__, "..", "..", ".."))
 
 struct Regime
     token::String
@@ -270,6 +271,60 @@ function _independence(route::Symbol, refs)
     return (structural ? "structural" : "asserted"), disc
 end
 
+# ── R1 assurance taxonomy — single source of truth, typed ────────────
+# A mistyped level is now a compile/lookup error, not a silently
+# mis-bucketed hub. Used by docs/atlas/generate.jl and unit-tested by
+# test/harness/atlas/test_atlas_logic.jl.
+@enum AssuranceLevel begin
+    UNIVERSALITY_CORROBORATED
+    CORROBORATED_AT_P
+    COHERENT
+    CITED_ONLY
+    UNCORROBORATED_BUT_FEASIBLE
+end
+
+# Models where dense ED at a physically meaningful size is infeasible:
+# the published / DMRG value is the ceiling, so a missing in-repo ED
+# card is the honest frontier (cited-only), NOT an actionable gap.
+const ED_INFEASIBLE_MODELS = Set([
+    "KagomeHeisenbergAFM",
+    "ToricCode",
+    "XCube",
+    "SYK",
+    "ChernSimons3D",
+    "FibonacciAnyons",
+    "PpIp2DSC",
+    "AKLT2D",
+    "KitaevHoneycomb",
+])
+
+const MECH_UNIV = Set(["universality_consistency"])
+const MECH_EDP = Set(["ed_finite_size", "second_closed_form"])
+const MECH_COH = Set([
+    "delegation_invariant", "limiting_case", "sum_rule", "retype_formula", "unknown"
+])
+const MECH_CITED = Set(["literature_value"])
+
+# Highest achieved tier wins. Pure: (card mechanisms, model infeasible?).
+function assurance_level(mechs, model_ed_infeasible::Bool)::AssuranceLevel
+    isempty(intersect(mechs, MECH_UNIV)) || return UNIVERSALITY_CORROBORATED
+    isempty(intersect(mechs, MECH_EDP)) || return CORROBORATED_AT_P
+    isempty(intersect(mechs, MECH_COH)) || return COHERENT
+    isempty(intersect(mechs, MECH_CITED)) || return CITED_ONLY
+    model_ed_infeasible && return CITED_ONLY
+    return UNCORROBORATED_BUT_FEASIBLE
+end
+
+const _LEVEL_DISPLAY = Dict{AssuranceLevel,NTuple{3,String}}(
+    UNIVERSALITY_CORROBORATED => ("universality-corroborated", "🟣", "tip"),
+    CORROBORATED_AT_P => ("corroborated-at-p", "🟢", "tip"),
+    COHERENT => ("coherent", "🔵", "note"),
+    CITED_ONLY => ("cited-only", "⚪", "note"),
+    UNCORROBORATED_BUT_FEASIBLE => ("uncorroborated-but-feasible", "🟠", "warning"),
+)
+# (display name, badge emoji, Documenter admonition) for a level.
+level_display(l::AssuranceLevel) = _LEVEL_DISPLAY[l]
+
 function _jstr(s)
     t = replace(string(s), string(_BS) => string(_BS, _BS))
     t = replace(t, string(_DQ) => string(_BS, _DQ))
@@ -283,6 +338,7 @@ struct Card
     hub::String
     regime::String
     arity::String
+    plane::String
     file::String
     testset::String
     mechanism::String
@@ -290,15 +346,39 @@ struct Card
     discriminant::String
     refs::String
     srctext::String
+    function Card(
+        hub,
+        regime,
+        arity,
+        plane,
+        file,
+        testset,
+        mechanism,
+        independence,
+        discriminant,
+        refs,
+        srctext,
+    )
+        independence in ("structural", "asserted") ||
+            error("Card: invalid independence ", independence)
+        plane == "why" || error("Card: invalid plane ", plane)
+        return new(
+            hub,
+            regime,
+            arity,
+            plane,
+            file,
+            testset,
+            mechanism,
+            independence,
+            discriminant,
+            refs,
+            srctext,
+        )
+    end
 end
 
-function _refs_text(ex)
-    ex === nothing && return ""
-    if ex isa Expr && ex.head === :vect
-        return join((x isa String ? x : string(x) for x in ex.args), " | ")
-    end
-    return string(ex)
-end
+include(joinpath(@__DIR__, "_atlas_common.jl"))   # _refs_text (shared)
 
 function _handle_verify!(out, ex, file, testset)
     pos = filter(a -> !(a isa Expr && a.head in (:parameters, :kw)), ex.args)[2:end]
@@ -330,6 +410,7 @@ function _handle_verify!(out, ex, file, testset)
             hub,
             reg.token,
             reg.arity,
+            "why",
             file,
             testset,
             string(route),
@@ -369,8 +450,7 @@ end
 
 function scan_file(path::AbstractString)
     out = Card[]
-    parts = split(path, "QAtlas.jl/")
-    rel = length(parts) > 1 ? parts[end] : path
+    rel = replace(relpath(path, _ROOT), _BS => '/')
     try
         src = read(path, String)
         top = parseall(src; filename=path)
@@ -383,6 +463,7 @@ function scan_file(path::AbstractString)
 end
 
 function scan_dir(dir::AbstractString)
+    empty!(PARSE_FAILS)
     out = Card[]
     for (root, _, files) in walkdir(dir)
         for f in files
@@ -407,7 +488,7 @@ function to_jsonl(cards::Vector{Card})
                 ",",
                 _kv("arity", _jstr(c.arity)),
                 ",",
-                _kv("plane", _jstr("why")),
+                _kv("plane", _jstr(c.plane)),
                 ",",
                 _kv("mechanism", _jstr(c.mechanism)),
                 ",",
@@ -429,6 +510,12 @@ function to_jsonl(cards::Vector{Card})
     return String(take!(io))
 end
 
-write_inventory(path, cards) = write(path, to_jsonl(cards))
+# Idempotent: only touch the file when content actually changed, so a
+# docs build (a pure VIEW) never dirties a clean working tree.
+function write_inventory(path, cards)
+    s = to_jsonl(cards)
+    (!isfile(path) || read(path, String) != s) && write(path, s)
+    return nothing
+end
 
 end # module

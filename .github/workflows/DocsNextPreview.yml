@@ -18,6 +18,8 @@ jobs:
           version: '1'
       - name: INVENTORY drift guard (static scan, no test exec)
         run: julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+      - name: Atlas taxonomy + registry-parser unit tests
+        run: julia --startup-file=no test/harness/atlas/test_atlas_logic.jl
 
   docs-preview:
     runs-on: ubuntu-latest
@@ -29,7 +31,7 @@ jobs:
           version: '1'
       - name: Install docs env
         run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
-      - name: Regenerate TFIM atlas view
+      - name: Regenerate atlas view (pure scan; no test exec)
         run: julia --startup-file=no docs/atlas/generate.jl
       - name: Build docs (build-only, deploydocs is a no-op without token)
         run: julia --project=docs/ docs/make.jl

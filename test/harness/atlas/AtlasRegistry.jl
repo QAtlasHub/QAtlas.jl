@@ -47,13 +47,7 @@ function _regkw(args)
     return d
 end
 
-function _refs_text(ex)
-    ex === nothing && return ""
-    if ex isa Expr && ex.head === :vect
-        return join((x isa String ? x : string(x) for x in ex.args), " | ")
-    end
-    return string(ex)
-end
+include(joinpath(@__DIR__, "_atlas_common.jl"))   # _refs_text (shared)
 
 function _walk!(out, ex)
     ex isa Expr || return nothing

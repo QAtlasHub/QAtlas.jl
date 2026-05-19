@@ -127,4 +127,33 @@ end
             refs=["Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J)"],
         )
     end
+
+    # Independent finite-size dense-ED corroboration. This is NOT the
+    # closed form: the gap is read off the spectrum of the full
+    # many-body H = -J Σ σᶻσᶻ − h Σ σˣ, never from Δ = 2|h−J|, so it
+    # breaks the circularity of the second_closed_form cards above.
+    # Deep in the disordered phase (h = 3J) the correlation length is
+    # ≪ 1 site, so the OBC gap converges to 2|h−J| exponentially fast
+    # in N and the largest-N value matches the analytic gap tightly.
+    let J = 1.0, h = 3.0, Ns = (8, 10, 12, 14)
+        ed_gap = function (N)
+            lat = build_lattice(Square, N, 1; boundary=OpenAxis())
+            H = build_tfim(lat, J, h)
+            λ = sort(eigvals(Symmetric(H)))
+            return λ[2] - λ[1]
+        end
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:ed_finite_size,
+            independent=[ed_gap(N) for N in Ns],
+            at=["N=$N" for N in Ns],
+            agree_within=1e-4,
+            refs=[
+                "Pfeuty 1970: Δ = 2|h − J|; independent finite-size dense " *
+                "ED of H = -J Σ σᶻσᶻ − h Σ σˣ (OBC chain)",
+            ],
+        )
+    end
 end

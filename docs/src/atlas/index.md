@@ -8,7 +8,7 @@
 
     - 🟣 **universality-corroborated** — agreement checked against the universality class (exponents / central charge). Strongest, regime-spanning evidence.
     - 🟢 **corroborated-at-p** — an *independent* computation (finite-size ED extrapolation or a second closed form) reproduces the value at concrete parameter point(s) p.
-    - 🔵 **coherent** — an independent in-repo card exists and the value satisfies an internal invariant (sum rule / limiting case / delegation / retype), but no external value re-derives it.
+    - 🔵 **coherent** — an independent in-repo card exists and the value satisfies an internal invariant (sum rule / limiting case / delegation / retype, or an unrecognised/missing route), but no external value re-derives it.
     - ⚪ **cited-only** — backed only by a literature citation, or the model is ED-infeasible so a citation is the ceiling. The honest frontier — *neutral, not a penalty*.
     - 🟠 **uncorroborated-but-feasible** — `src` claims the hub, dense ED *is* feasible, yet no card checks it. **The only actionable risk.**
 

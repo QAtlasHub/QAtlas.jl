@@ -257,6 +257,12 @@ function _kwargs(callex)
     return d
 end
 
+# NOTE: `refs` here is the raw parsed AST node (an Expr or `nothing`),
+# so the lit:/cf: discriminant is the Julia-printed AST form. This
+# INTENTIONALLY differs from verify.jl `_v2_independence`, which sees
+# the runtime Vector{String} and pipe-joins it. The two artifacts
+# (static INVENTORY vs runtime evidence JSONL) are not byte-joinable on
+# `discriminant` — do not build a cross-join assuming they match.
 function _independence(route::Symbol, refs)
     structural = route in (:second_closed_form, :ed_finite_size, :literature_value)
     disc = if route === :ed_finite_size
@@ -306,7 +312,7 @@ const MECH_COH = Set([
 const MECH_CITED = Set(["literature_value"])
 
 # Highest achieved tier wins. Pure: (card mechanisms, model infeasible?).
-function assurance_level(mechs, model_ed_infeasible::Bool)::AssuranceLevel
+function assurance_level(mechs::AbstractSet, model_ed_infeasible::Bool)::AssuranceLevel
     isempty(intersect(mechs, MECH_UNIV)) || return UNIVERSALITY_CORROBORATED
     isempty(intersect(mechs, MECH_EDP)) || return CORROBORATED_AT_P
     isempty(intersect(mechs, MECH_COH)) || return COHERENT
@@ -360,8 +366,9 @@ struct Card
         srctext,
     )
         independence in ("structural", "asserted") ||
-            error("Card: invalid independence ", independence)
-        plane == "why" || error("Card: invalid plane ", plane)
+            throw(ArgumentError("Card: invalid independence $(independence)"))
+        arity in ("point", "curve") || throw(ArgumentError("Card: invalid arity $(arity)"))
+        plane == "why" || throw(ArgumentError("Card: invalid plane $(plane)"))
         return new(
             hub,
             regime,
@@ -394,7 +401,10 @@ function _handle_verify!(out, ex, file, testset)
     for r in get(MODEL_VOCAB, string(_headsym(model)), Regime[])
         try
             r.predicate(params) && (reg=r; break)
-        catch
+        catch err
+            @warn "regime predicate threw — card stays @sweep" model = string(
+                _headsym(model)
+            ) regime = r.token exception = err
         end
     end
     ind, disc = _independence(route, get(kw, :refs, nothing))

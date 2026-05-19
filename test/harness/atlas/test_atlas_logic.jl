@@ -105,3 +105,29 @@ end
     AtlasInventory.scan_dir(mktempdir())
     @test isempty(AtlasInventory.PARSE_FAILS)
 end
+
+@testset "scan_registry — malformed @register is skipped, not a crash" begin
+    mktempdir() do d
+        f = joinpath(d, "Bad_registry.jl")
+        write(
+            f,
+            """
+            @register(Foo, Energy)   # only 2 positionals — incomplete
+            @register(Foo, Energy, Infinite, method=:exact, reliability=:high)
+            """,
+        )
+        claims = scan_registry(f)              # must not throw
+        @test length(claims) == 1
+        @test first(claims).hub == "Foo/Energy/Infinite"
+    end
+end
+
+@testset "scan_file tallies a read failure (not silent, returns [])" begin
+    empty!(AtlasInventory.PARSE_FAILS)
+    missing_path = joinpath(mktempdir(), "does_not_exist.jl")
+    cards = AtlasInventory.scan_file(missing_path)   # read() SystemError
+    @test isempty(cards)                              # skipped, not crashed
+    @test !isempty(AtlasInventory.PARSE_FAILS)        # tallied loud, not silent
+    @test any(occursin("does_not_exist.jl", p[1]) for p in AtlasInventory.PARSE_FAILS)
+    empty!(AtlasInventory.PARSE_FAILS)                # clean global for later use
+end

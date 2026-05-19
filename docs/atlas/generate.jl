@@ -36,8 +36,10 @@ regfail = String[]
 for rf in regfiles
     try
         append!(claims, AtlasRegistry.scan_registry(rf))
-    catch
-        push!(regfail, replace(rf, ROOT * "/" => ""))
+    catch err
+        rel = replace(rf, ROOT * "/" => "")
+        @warn "registry parse failed (atlas will abort below)" file = rel exception = err
+        push!(regfail, rel)
     end
 end
 isempty(regfail) || error(
@@ -148,7 +150,8 @@ const LEGEND = string(
     "the value at concrete parameter point(s) p.\n",
     "    - 🔵 **coherent** — an independent in-repo card exists and the ",
     "value satisfies an internal invariant (sum rule / limiting case / ",
-    "delegation / retype), but no external value re-derives it.\n",
+    "delegation / retype, or an unrecognised/missing route), but no ",
+    "external value re-derives it.\n",
     "    - ⚪ **cited-only** — backed only by a literature citation, or ",
     "the model is ED-infeasible so a citation is the ceiling. The ",
     "honest frontier — *neutral, not a penalty*.\n",

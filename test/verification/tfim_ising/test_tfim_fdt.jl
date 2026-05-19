@@ -125,3 +125,18 @@ using QAtlas, Test
     @test isfinite(χ_static)
     @test χ_static > 0
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM FDT — verification cards" begin
+    # The fluctuation-dissipation setup uses TFIM(J=1,h=0.5), gapped with
+    # Pfeuty gap Δ = 2|h - J| = 1 (independent closed form).
+    verify(
+        TFIM(; J=1.0, h=0.5),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-10,
+        refs=["Pfeuty 1970: Δ = 2|h - J| = 1 at (J=1, h=0.5)"],
+    )
+end

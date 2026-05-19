@@ -29,3 +29,21 @@ const J_ISING = 1.0
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Ising 2x2 classical — verification cards" begin
+    # Transfer-matrix partition function vs brute-force exact_partition
+    # (independent enumeration of all 2^N spin configs).
+    for (L, β) in ((2, 0.3), (2, 0.5), (3, 0.4))
+        verify(
+            IsingSquare(; Lx=L, Ly=L, J=1.0),
+            PartitionFunction(),
+            PBC(0);
+            route=:ed_finite_size,
+            fetch_kw=(; β=β, Lx=L, Ly=L, J=1.0),
+            independent=exact_partition(L, L, 1.0, β),
+            agree_within=1e-6,
+            refs=["Brute-force Σ_σ exp(-βE) over all configs vs transfer matrix"],
+        )
+    end
+end

@@ -86,3 +86,20 @@ const J_ISING = 1.0
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Ising AD thermodynamics — verification cards" begin
+    # Partition function vs independent brute-force enumeration.
+    for (L, β) in ((2, 0.4), (3, 0.3))
+        verify(
+            IsingSquare(; Lx=L, Ly=L, J=1.0),
+            PartitionFunction(),
+            PBC(0);
+            route=:ed_finite_size,
+            fetch_kw=(; β=β, Lx=L, Ly=L, J=1.0),
+            independent=exact_partition(L, L, 1.0, β),
+            agree_within=1e-6,
+            refs=["Brute-force exact_partition cross-check of the transfer-matrix Z"],
+        )
+    end
+end

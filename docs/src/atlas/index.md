@@ -186,7 +186,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
 
 ### 🟢 `Cluster1D/MassGap/Infinite`
 
@@ -195,7 +195,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Cluster model gap = 2J | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Cluster model gap = 2J | `test/models/quantum/misc/test_cluster1d.jl` |
 
 ### 🟢 `Compass1D/MassGap/Infinite`
 
@@ -204,7 +204,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | 1D compass model gap = 2|J_x - J_y| | `test/models/quantum/misc/test_compass1d.jl` |
+| `@anisotropic` | `second_closed_form` | 🟢 structural | 1D compass model gap = 2|J_x - J_y| | `test/models/quantum/misc/test_compass1d.jl` |
 
 ### 🟢 `ConformalBootstrap/ConformalWeights/Infinite`
 
@@ -229,7 +229,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Mean-field: linearised self-consistency gives βc J = 1 => Tc = J | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Mean-field: linearised self-consistency gives βc J = 1 => Tc = J | `test/models/classical/test_curie_weiss_ising.jl` |
 
 ### 🟢 `CurieWeissIsing/SpontaneousMagnetization/Infinite`
 
@@ -238,7 +238,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Curie-Weiss self-consistency m = tanh(βJm), independent fixed point | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Curie-Weiss self-consistency m = tanh(βJm), independent fixed point | `test/models/classical/test_curie_weiss_ising.jl` |
 
 ### 🟢 `DMIHeisenberg1D/Energy/Infinite`
 
@@ -287,9 +287,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
-| `@sweep` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
+| `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
+| `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 
 ### ❌ `Heisenberg1D/EnergyLocal/OBC`
 
@@ -308,9 +308,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2) | `test/identities/test_identities_Heisenberg1D.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Hulthén 1938: e0 = 1/4 − log 2 | `test/identities/test_identities_Heisenberg1D.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence | `test/models/quantum/XXZ/test_bethe_ansatz.jl` |
+| `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2) | `test/identities/test_identities_Heisenberg1D.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e0 = 1/4 − log 2 | `test/identities/test_identities_Heisenberg1D.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence | `test/models/quantum/XXZ/test_bethe_ansatz.jl` |
 
 ### ⚠️ `Heisenberg1D/LuttingerParameter/Infinite`
 
@@ -319,8 +319,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | Heisenberg1D delegates to XXZ1D(Delta=1): two code paths must agree | `test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at SU(2) isotropic point, J-independent | `test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl` |
+| `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D delegates to XXZ1D(Delta=1): two code paths must agree | `test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at SU(2) isotropic point, J-independent | `test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl` |
 
 ### ❌ `Heisenberg1D/MagnetizationX/OBC`
 
@@ -359,7 +359,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Heisenberg chain is gapless (des Cloizeaux-Pearson 1962): gap = 0 | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg chain is gapless (des Cloizeaux-Pearson 1962): gap = 0 | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
 
 ### ❌ `Heisenberg1D/MassGap/OBC`
 
@@ -409,8 +409,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion | `test/models/quantum/Heisenberg/test_heisenberg_spinon.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Two-spinon continuum has compact support: S=0 for ω > ε_U(q) | `test/models/quantum/Heisenberg/test_heisenberg_spinon.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion | `test/models/quantum/Heisenberg/test_heisenberg_spinon.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Two-spinon continuum has compact support: S=0 for ω > ε_U(q) | `test/models/quantum/Heisenberg/test_heisenberg_spinon.jl` |
 
 ### 🟢 `HeisenbergXYZ/Energy/Infinite`
 
@@ -420,8 +420,8 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Hulthen 1938 via delegation to XXZ1D at Delta=1 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | Jordan-Wigner free fermion: XX limit Jz=0 gives e0 = -J/pi | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | FM saturation: Jz=-J gives e0 = -J/4 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
+| `@xx` | `limiting_case` | 🟡 asserted | Jordan-Wigner free fermion: XX limit Jz=0 gives e0 = -J/pi | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
+| `@xxz` | `limiting_case` | 🟡 asserted | FM saturation: Jz=-J gives e0 = -J/4 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 
 ### ⚠️ `HeisenbergXYZ/LuttingerParameter/Infinite`
 
@@ -430,7 +430,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | HeisenbergXYZ(isotropic) delegates to XXZ1D(Delta=1): K=1/2 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
+| `@isotropic` | `delegation_invariant` | 🟡 asserted | HeisenbergXYZ(isotropic) delegates to XXZ1D(Delta=1): K=1/2 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 
 ### ❌ `Hubbard1D/ChargeGap/Infinite`
 
@@ -463,7 +463,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Ising 1925: ξ = 1 / log(coth βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: ξ = 1 / log(coth βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
 
 ### ⚠️ `IsingChain1D/CriticalTemperature/Infinite`
 
@@ -472,7 +472,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | Ising 1925: no finite-T order in 1D, Tc = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `limiting_case` | 🟡 asserted | Ising 1925: no finite-T order in 1D, Tc = 0 | `test/models/classical/test_ising_chain_1d.jl` |
 
 ### 🟢 `IsingChain1D/FreeEnergy/Infinite`
 
@@ -481,7 +481,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
 
 ### ❌ `IsingSquare/CriticalExponents/Infinite`
 
@@ -496,10 +496,10 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) | `test/identities/test_identities_IsingSquare.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) ≈ 2.269185 (β=1/8 universality anchor) | `test/models/classical/test_IsingSquare_critical.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2) | `test/models/classical/test_ising_onsager_yang.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1 + √2) ≈ 2.269185 | `test/verification/universality/test_universality_cross_check.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) | `test/identities/test_identities_IsingSquare.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) ≈ 2.269185 (β=1/8 universality anchor) | `test/models/classical/test_IsingSquare_critical.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2) | `test/models/classical/test_ising_onsager_yang.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1 + √2) ≈ 2.269185 | `test/verification/universality/test_universality_cross_check.jl` |
 
 ### ⚠️ `IsingSquare/Energy/Infinite`
 
@@ -508,7 +508,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | T -> 0: all bonds satisfied, ε = -2J (square lattice, 2 bonds/site) | `test/models/classical/test_IsingSquare_thermal.jl` |
+| `@onsager` | `limiting_case` | 🟡 asserted | T -> 0: all bonds satisfied, ε = -2J (square lattice, 2 bonds/site) | `test/models/classical/test_IsingSquare_thermal.jl` |
 
 ### ❌ `IsingSquare/Energy/PBC`
 
@@ -529,7 +529,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs) | `test/models/classical/test_IsingSquare_thermal.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs) | `test/models/classical/test_IsingSquare_thermal.jl` |
 
 ### 🟢 `IsingSquare/PartitionFunction/PBC`
 
@@ -538,10 +538,10 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs) | `test/models/classical/test_ising_square_pfaffian.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | β = 0: all 2^N configs weight 1 => Z = 2^N | `test/models/classical/test_ising_square_pfaffian.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all configs vs transfer matrix | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Brute-force exact_partition cross-check of the transfer-matrix Z | `test/verification/tfim_ising/test_ising_ad_thermodynamics.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs) | `test/models/classical/test_ising_square_pfaffian.jl` |
+| `@onsager` | `limiting_case` | 🟡 asserted | β = 0: all 2^N configs weight 1 => Z = 2^N | `test/models/classical/test_ising_square_pfaffian.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all configs vs transfer matrix | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force exact_partition cross-check of the transfer-matrix Z | `test/verification/tfim_ising/test_ising_ad_thermodynamics.jl` |
 
 ### ❌ `IsingSquare/SpecificHeat/Infinite`
 
@@ -562,8 +562,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | Yang 1952: m = 0 for T >= Tc | `test/models/classical/test_ising_onsager_yang.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8 | `test/models/classical/test_ising_onsager_yang.jl` |
+| `@onsager` | `limiting_case` | 🟡 asserted | Yang 1952: m = 0 for T >= Tc | `test/models/classical/test_ising_onsager_yang.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8 | `test/models/classical/test_ising_onsager_yang.jl` |
 
 ### ⚠️ `IsingSquare/ThermalEntropy/Infinite`
 
@@ -572,7 +572,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | β -> 0: spins decouple, s -> log 2 | `test/models/classical/test_IsingSquare_thermal.jl` |
+| `@onsager` | `limiting_case` | 🟡 asserted | β -> 0: spins decouple, s -> log 2 | `test/models/classical/test_IsingSquare_thermal.jl` |
 
 ### ❌ `IsingSquare/ThermalEntropy/PBC`
 
@@ -593,8 +593,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | Wannier 1950: AFM triangular is fully frustrated, Tc = 0 | `test/models/classical/test_ising_triangular.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Houtappel 1950: FM triangular Tc = 4|J| / log 3 | `test/models/classical/test_ising_triangular.jl` |
+| `@triangular` | `limiting_case` | 🟡 asserted | Wannier 1950: AFM triangular is fully frustrated, Tc = 0 | `test/models/classical/test_ising_triangular.jl` |
+| `@triangular` | `second_closed_form` | 🟢 structural | Houtappel 1950: FM triangular Tc = 4|J| / log 3 | `test/models/classical/test_ising_triangular.jl` |
 
 ### 🟢 `IsingTriangular/ResidualEntropy/Infinite`
 
@@ -603,7 +603,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066 | `test/models/classical/test_ising_triangular.jl` |
+| `@triangular` | `second_closed_form` | 🟢 structural | Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066 | `test/models/classical/test_ising_triangular.jl` |
 
 ### 🟢 `J1J2Heisenberg1D/Energy/Infinite`
 
@@ -668,9 +668,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev chain sweet spot: gap = 2|Δ| | `test/models/quantum/misc/test_kitaev1d.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev chain trivial phase: gap = ||μ| - 2|t|| | `test/models/quantum/misc/test_kitaev1d.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev chain topological transition at |μ|=2|t|: gap = 0 | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@critical` | `second_closed_form` | 🟢 structural | Kitaev chain topological transition at |μ|=2|t|: gap = 0 | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev chain sweet spot: gap = 2|Δ| | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@trivial` | `second_closed_form` | 🟢 structural | Kitaev chain trivial phase: gap = ||μ| - 2|t|| | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ### ❌ `Kitaev1D/MassGap/OBC`
 
@@ -806,8 +806,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Exact MG dimer GS of the J1-J2 ring at J2=J/2 (even N), -3J/8 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: exact orthogonal-dimer product state, e0 = -3J/8 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `ed_finite_size` | 🟢 structural | Exact MG dimer GS of the J1-J2 ring at J2=J/2 (even N), -3J/8 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: exact orthogonal-dimer product state, e0 = -3J/8 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
 
 ### ❌ `MajumdarGhosh/GroundStateEnergyDensity/PBC`
 
@@ -822,7 +822,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
 
 ### ❌ `MajumdarGhosh/SpinGap/Infinite`
 
@@ -891,8 +891,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | S1AnisotropicD1D(D=0) delegates to S1Heisenberg1D: code paths must agree | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
-| `@sweep` | `delegation_invariant` | 🟡 asserted | Linear J scaling: e(2J) = 2 e(J) for spin-1 Heisenberg | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | S1AnisotropicD1D(D=0) delegates to S1Heisenberg1D: code paths must agree | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | Linear J scaling: e(2J) = 2 e(J) for spin-1 Heisenberg | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
 
 ### ⚠️ `S1AnisotropicD1D/MassGap/Infinite`
 
@@ -901,7 +901,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | S1AnisotropicD1D(D=0) Haldane gap delegates to S1Heisenberg1D | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | S1AnisotropicD1D(D=0) Haldane gap delegates to S1Heisenberg1D | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
 
 ### 🟢 `S1Heisenberg1D/Energy/Infinite`
 
@@ -910,9 +910,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain) | `test/identities/test_identities_S1Heisenberg1D.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow) | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
-| `@sweep` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain) | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
+| `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain) | `test/identities/test_identities_S1Heisenberg1D.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow) | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
+| `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain) | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
 
 ### 🟢 `S1Heisenberg1D/Energy/OBC`
 
@@ -921,8 +921,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J} | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J} | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
 
 ### ❌ `S1Heisenberg1D/EnergyLocal/OBC`
 
@@ -966,8 +966,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: Haldane gap Δ ≈ 0.41048 J | `test/identities/test_identities_S1Heisenberg1D.jl` |
-| `@sweep` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: Haldane gap Delta ≈ 0.41048 J | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
+| `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: Haldane gap Δ ≈ 0.41048 J | `test/identities/test_identities_S1Heisenberg1D.jl` |
+| `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: Haldane gap Delta ≈ 0.41048 J | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
 
 ### ❌ `S1Heisenberg1D/MassGap/OBC`
 
@@ -1034,8 +1034,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) delegates to S1Heisenberg1D: code paths must agree | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
-| `@sweep` | `delegation_invariant` | 🟡 asserted | Linear J scaling: e(3J) = 3 e(J) for spin-1 Heisenberg point | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) delegates to S1Heisenberg1D: code paths must agree | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | Linear J scaling: e(3J) = 3 e(J) for spin-1 Heisenberg point | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 
 ### ⚠️ `S1XXZ1D/MassGap/Infinite`
 
@@ -1044,7 +1044,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) Haldane gap delegates to S1Heisenberg1D | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) Haldane gap delegates to S1Heisenberg1D | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 
 ### 🟢 `SLEkappa/CentralCharge/Infinite`
 
@@ -1086,7 +1086,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Massless Schwinger model: m_gamma = e / sqrt(pi) (exact) | `test/models/quantum/misc/test_schwinger_model.jl` |
+| `@massless` | `second_closed_form` | 🟢 structural | Massless Schwinger model: m_gamma = e / sqrt(pi) (exact) | `test/models/quantum/misc/test_schwinger_model.jl` |
 
 ### ❌ `ShastrySutherland/Energy/Infinite`
 
@@ -1517,7 +1517,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Half-filled tight-binding chain: e0 = -2t/pi | `test/models/quantum/misc/test_tight_binding1d.jl` |
+| `@half_filling` | `second_closed_form` | 🟢 structural | Half-filled tight-binding chain: e0 = -2t/pi | `test/models/quantum/misc/test_tight_binding1d.jl` |
 
 ### ❌ `TightBinding1D/FermiVelocity/Infinite`
 
@@ -1532,8 +1532,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Half filling: gapless Fermi surface | `test/models/quantum/misc/test_tight_binding1d.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Band insulator mu > 2t: gap = |mu| - 2t | `test/models/quantum/misc/test_tight_binding1d.jl` |
+| `@band_insulator` | `second_closed_form` | 🟢 structural | Band insulator mu > 2t: gap = |mu| - 2t | `test/models/quantum/misc/test_tight_binding1d.jl` |
+| `@half_filling` | `second_closed_form` | 🟢 structural | Half filling: gapless Fermi surface | `test/models/quantum/misc/test_tight_binding1d.jl` |
 
 ### ❌ `TightBindingV1D/Energy/Infinite`
 
@@ -1663,7 +1663,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@free_fermion` | `second_closed_form` | 🟢 structural | Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 
 ### 🟢 `XXZ1D/Energy/Infinite`
 
@@ -1672,12 +1672,12 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | FM saturation: all-aligned state is exact GS, e0 = -J/4 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | XXZ FM point Δ=-1: aligned state exact, e0 = -J/4 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@fm` | `limiting_case` | 🟡 asserted | FM saturation: all-aligned state is exact GS, e0 = -J/4 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@fm` | `second_closed_form` | 🟢 structural | XXZ FM point Δ=-1: aligned state exact, e0 = -J/4 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@free_fermion` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@gapless` | `second_closed_form` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 
 ### 🟢 `XXZ1D/Energy/OBC`
 
@@ -1686,9 +1686,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@gapless` | `sum_rule` | 🟡 asserted | Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless) | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | OBC thermal energy from generic_ed thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
-| `@sweep` | `sum_rule` | 🟡 asserted | Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless) | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 
 ### ❌ `XXZ1D/EnergyLocal/OBC`
 
@@ -1714,8 +1714,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | No-quench identity: H_initial = H_final => lambda(t) = 0 for all t | `test/models/quantum/XXZ/test_xxz_xx_quench.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Free-fermion Slater det: |L(t)| = 1 for same-sign J quench => lambda = 0 | `test/models/quantum/XXZ/test_xxz_xx_quench.jl` |
+| `@free_fermion` | `limiting_case` | 🟡 asserted | No-quench identity: H_initial = H_final => lambda(t) = 0 for all t | `test/models/quantum/XXZ/test_xxz_xx_quench.jl` |
+| `@free_fermion` | `second_closed_form` | 🟢 structural | Free-fermion Slater det: |L(t)| = 1 for same-sign J quench => lambda = 0 | `test/models/quantum/XXZ/test_xxz_xx_quench.jl` |
 
 ### 🟢 `XXZ1D/LuttingerParameter/Infinite`
 
@@ -1724,8 +1724,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at the SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Jordan-Wigner free fermion: K=1 at Delta=0 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@free_fermion` | `second_closed_form` | 🟢 structural | Jordan-Wigner free fermion: K=1 at Delta=0 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at the SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Haldane 1980: K = π / (2(π - arccos Δ)) for the critical XXZ chain | `test/verification/heisenberg_xxz/test_xxz_luttinger_ed.jl` |
 
 ### 🟢 `XXZ1D/LuttingerVelocity/Infinite`
@@ -1735,8 +1735,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | des Cloizeaux-Pearson 1962: u=piJ/2 at SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Free fermion eps(k)=J cos k: v_F=J at k_F=pi/2 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@free_fermion` | `second_closed_form` | 🟢 structural | Free fermion eps(k)=J cos k: v_F=J at k_F=pi/2 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | des Cloizeaux-Pearson 1962: u=piJ/2 at SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 
 ### ❌ `XXZ1D/MagnetizationX/OBC`
 
@@ -1775,7 +1775,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Luttinger liquid: gapless for |Delta| < 1 (Bethe ansatz exact) | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+| `@gapless` | `second_closed_form` | 🟢 structural | Luttinger liquid: gapless for |Delta| < 1 (Bethe ansatz exact) | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
 
 ### ❌ `XXZ1D/MassGap/OBC`
 
@@ -1851,8 +1851,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@polarized` | `second_closed_form` | 🟢 structural | Polarized |h|>2J: gap = 2(|h| - 2J) | `test/models/quantum/misc/test_xyh1d.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | XX limit h=0: gapless | `test/models/quantum/misc/test_xyh1d.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Polarized |h|>2J: gap = 2(|h| - 2J) | `test/models/quantum/misc/test_xyh1d.jl` |
 
 ### 🟢 `YangLee/CentralCharge/Infinite`
 

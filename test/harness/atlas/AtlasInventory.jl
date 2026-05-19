@@ -1,7 +1,10 @@
 # test/harness/atlas/AtlasInventory.jl
-# v2 framework prototype. STATIC AST scan of existing verify(...) cards.
+# v2 framework. STATIC AST scan of existing verify(...) cards.
 # Hardened: non-Symbol kwarg keys are skipped; per-verify extraction is
 # wrapped so a non-parseable card is tallied (PARSE_FAILS) not a crash.
+# Step 3: per-model regime vocabulary (MODEL_VOCAB) — literal-param point
+# cards get a named physical regime; loop-variable sweeps stay @sweep
+# (a curve, the honest graceful behaviour).
 module AtlasInventory
 
 using Base.Meta: parseall
@@ -18,16 +21,93 @@ struct Regime
     predicate::Function
 end
 
-const TFIM_VOCAB = Regime[
-    Regime("@critical", "TFIM critical point h = J", "point",
-           p -> haskey(p, :h) && haskey(p, :J) && isapprox(p.h, p.J; atol=1e-12)),
-    Regime("@ordered", "ordered phase h < J", "point",
-           p -> haskey(p, :h) && haskey(p, :J) && p.h < p.J),
-    Regime("@disordered", "disordered phase h > J", "point",
-           p -> haskey(p, :h) && haskey(p, :J) && p.h > p.J),
-]
-
 const SWEEP = Regime("@sweep", "parametric sweep (curve)", "curve", _ -> false)
+
+# Defensive numeric accessor: missing key -> NaN so predicates on
+# loop-variable cards (empty params) simply fail -> @sweep.
+_pv(p, k) = haskey(p, k) ? float(getfield(p, k)) : NaN
+_eq(a, b) = isfinite(a) && isapprox(a, b; atol=1e-12)
+
+# Per-model controlled regime vocabulary. First matching predicate wins.
+# A `_ -> true` final entry is a model-level constant regime (the model
+# sits at one physical point regardless of scale params).
+const MODEL_VOCAB = Dict{String,Vector{Regime}}(
+    "TFIM" => Regime[
+        Regime("@critical", "TFIM quantum critical point h = J", "point",
+               p -> _eq(_pv(p, :h), _pv(p, :J))),
+        Regime("@ordered", "ferromagnetic ordered phase h < J", "point",
+               p -> _pv(p, :h) < _pv(p, :J)),
+        Regime("@disordered", "paramagnetic disordered phase h > J", "point",
+               p -> _pv(p, :h) > _pv(p, :J)),
+    ],
+    "XXZ1D" => Regime[
+        Regime("@free_fermion", "XX free-fermion point Δ = 0", "point",
+               p -> _eq(_pv(p, :Δ), 0.0)),
+        Regime("@su2", "isotropic Heisenberg point Δ = 1", "point",
+               p -> _eq(_pv(p, :Δ), 1.0)),
+        Regime("@fm", "ferromagnetic point Δ = -1", "point",
+               p -> _eq(_pv(p, :Δ), -1.0)),
+        Regime("@gapless", "critical Luttinger liquid |Δ| < 1", "curve",
+               p -> (d = _pv(p, :Δ); isfinite(d) && -1 < d < 1)),
+        Regime("@gapped", "gapped regime |Δ| > 1", "curve",
+               p -> (d = _pv(p, :Δ); isfinite(d) && abs(d) > 1)),
+    ],
+    "Heisenberg1D" => Regime[Regime("@su2", "SU(2) isotropic Heisenberg chain", "point", _ -> true)],
+    "HeisenbergXYZ" => Regime[
+        Regime("@isotropic", "isotropic point Jx = Jy = Jz", "point",
+               p -> _eq(_pv(p, :Jx), _pv(p, :Jy)) && _eq(_pv(p, :Jy), _pv(p, :Jz))),
+        Regime("@xx", "XX line Jz = 0, Jx = Jy", "point",
+               p -> _eq(_pv(p, :Jz), 0.0) && _eq(_pv(p, :Jx), _pv(p, :Jy))),
+        Regime("@xxz", "uniaxial XXZ line Jx = Jy", "curve",
+               p -> _eq(_pv(p, :Jx), _pv(p, :Jy))),
+    ],
+    "S1Heisenberg1D" => Regime[Regime("@haldane", "spin-1 Haldane phase", "point", _ -> true)],
+    "S1XXZ1D" => Regime[Regime("@haldane", "spin-1 Haldane (Δ=1)", "point", _ -> true)],
+    "S1AnisotropicD1D" => Regime[Regime("@haldane", "spin-1 Haldane (D=0)", "point", _ -> true)],
+    "MajumdarGhosh" => Regime[Regime("@dimer", "exact orthogonal-dimer point", "point", _ -> true)],
+    "Cluster1D" => Regime[Regime("@cluster", "cluster-state stabiliser point", "point", _ -> true)],
+    "Compass1D" => Regime[
+        Regime("@isotropic", "isotropic compass J_x = J_y", "point",
+               p -> _eq(_pv(p, :J_x), _pv(p, :J_y))),
+        Regime("@anisotropic", "anisotropic compass J_x ≠ J_y", "curve", _ -> true),
+    ],
+    "Kitaev1D" => Regime[
+        Regime("@critical", "topological transition |μ| = 2|t|", "point",
+               p -> _eq(abs(_pv(p, :μ)), 2 * abs(_pv(p, :t)))),
+        Regime("@topological", "topological phase |μ| < 2|t|", "curve",
+               p -> (m = _pv(p, :μ); t = _pv(p, :t); isfinite(m) && isfinite(t) && abs(m) < 2 * abs(t))),
+        Regime("@trivial", "trivial phase |μ| > 2|t|", "curve",
+               p -> (m = _pv(p, :μ); t = _pv(p, :t); isfinite(m) && isfinite(t) && abs(m) > 2 * abs(t))),
+    ],
+    "SchwingerModel" => Regime[
+        Regime("@massless", "massless Schwinger m = 0", "point",
+               p -> _eq(_pv(p, :m), 0.0)),
+        Regime("@massive", "massive Schwinger m ≠ 0", "curve",
+               p -> (m = _pv(p, :m); isfinite(m) && m != 0)),
+    ],
+    "TightBinding1D" => Regime[
+        Regime("@half_filling", "half filling μ = 0", "point",
+               p -> _eq(_pv(p, :μ), 0.0)),
+        Regime("@band_insulator", "band insulator |μ| > 2t", "curve",
+               p -> (m = _pv(p, :μ); t = _pv(p, :t); isfinite(m) && isfinite(t) && abs(m) > 2 * abs(t))),
+    ],
+    "TightBindingV1D" => Regime[
+        Regime("@half_filling", "V=0 half filling μ = 0", "point",
+               p -> _eq(_pv(p, :μ), 0.0)),
+        Regime("@band_insulator", "V=0 band insulator |μ| > 2t", "curve",
+               p -> (m = _pv(p, :μ); t = _pv(p, :t); isfinite(m) && isfinite(t) && abs(m) > 2 * abs(t))),
+    ],
+    "XYh1D" => Regime[
+        Regime("@xx", "XX limit h = 0", "point",
+               p -> _eq(_pv(p, :h), 0.0)),
+        Regime("@polarized", "polarized |h| > 2J", "curve",
+               p -> (h = _pv(p, :h); isfinite(h) && abs(h) > 2)),
+    ],
+    "IsingSquare" => Regime[Regime("@onsager", "2D Ising Onsager critical point", "point", _ -> true)],
+    "IsingChain1D" => Regime[Regime("@ising1d", "1D Ising (no finite-T order)", "point", _ -> true)],
+    "IsingTriangular" => Regime[Regime("@triangular", "triangular Ising (frustrated AFM)", "point", _ -> true)],
+    "CurieWeissIsing" => Regime[Regime("@mean_field", "mean-field complete-graph Ising", "point", _ -> true)],
+)
 
 _headsym(ex) = ex isa Expr && ex.head === :call ? ex.args[1] :
                ex isa Symbol ? ex : nothing
@@ -121,7 +201,7 @@ function _handle_verify!(out, ex, file, testset)
     refs = _refs_text(get(kw, :refs, nothing))
     params = _literal_params(model)
     reg = SWEEP
-    for r in TFIM_VOCAB
+    for r in get(MODEL_VOCAB, string(_headsym(model)), Regime[])
         try
             r.predicate(params) && (reg = r; break)
         catch

@@ -19,3 +19,19 @@ end
     @test_throws DomainError LongRangeXY1D(; J=-1.0)
     @test_throws DomainError LongRangeXY1D(; α=0.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "LongRangeXY1D — verification cards" begin
+    # α = ∞ NN XX chain is gapless for |h| <= 2J (free-fermion band).
+    for h in (0.0, 1.0, 2.0)
+        verify(
+            LongRangeXY1D(; h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-10,
+            refs=["NN XX chain: gapless for |h| <= 2J (free fermion)"],
+        )
+    end
+end

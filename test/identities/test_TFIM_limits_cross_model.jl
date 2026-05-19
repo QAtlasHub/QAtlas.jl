@@ -134,3 +134,22 @@ end
 # Heisenberg1D ↔ XXZ1D(Δ=1) cross-model equivalence is already verified
 # in `test/models/test_Heisenberg1D_thermal.jl` for every observable on
 # the delegator surface, so we do not duplicate it here.
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM limits cross-model — verification cards" begin
+    # At J = 0 the TFIM reduces to decoupled spins in a field:
+    # H = -h Σ σx, so the exact per-site energy is -h tanh(βh)
+    # (independent single-spin closed form, not src).
+    for (h, β) in ((1.0, 0.7), (0.5, 1.5), (2.0, 0.3))
+        verify(
+            TFIM(; J=0.0, h=h),
+            Energy(:per_site),
+            OBC(6);
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=-h * tanh(β * h),
+            agree_within=1e-8,
+            refs=["J=0 decoupled spins: ε = -h tanh(βh) per site"],
+        )
+    end
+end

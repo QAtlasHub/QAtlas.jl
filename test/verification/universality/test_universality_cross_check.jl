@@ -513,3 +513,17 @@ end
     @test isapprox(c0, corrN[end]; atol=5e-4)
     @test c1 < 0  # corrN approaches its limit from below at OBC critical TFIM
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "universality cross-check — verification cards" begin
+    # Onsager 1944 exact critical temperature of the 2D Ising model.
+    verify(
+        IsingSquare(; J=1.0),
+        CriticalTemperature(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2.0 / log(1 + sqrt(2)),
+        agree_within=1e-10,
+        refs=["Onsager 1944: Tc = 2J / log(1 + √2) ≈ 2.269185"],
+    )
+end

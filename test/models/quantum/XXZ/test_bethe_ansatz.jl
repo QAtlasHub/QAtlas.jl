@@ -32,3 +32,22 @@ using QAtlas, Test
     # For N=4: error ≈ |-0.5 − (-0.443)| ≈ 0.057
     @test abs(λ4[1] / 4 - e0) < 0.1
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Heisenberg1D GroundStateEnergyDensity — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+    bond_heis = kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz)
+    Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
+    ind = [dense_spectrum(chain_hamiltonian(2, N, bond_heis))[1] / (N - 1) for N in Ns]
+
+    verify(
+        Heisenberg1D(),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=ind,
+        at=["N=$N" for N in Ns],
+        agree_within=0.05,
+        refs=["Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence"],
+    )
+end

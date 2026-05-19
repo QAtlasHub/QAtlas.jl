@@ -44,3 +44,30 @@ end
     @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); J=0.0)
     @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); J=-1.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "SherringtonKirkpatrick — verification cards" begin
+    # Spin-glass transition Tc = J (mean-field saddle point)
+    for J in (1.0, 2.0)
+        verify(
+            SherringtonKirkpatrick(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=Float64(J),
+            agree_within=1e-12,
+            refs=["SK mean-field: spin-glass transition at Tc = J"],
+        )
+    end
+
+    # T=0 Parisi full-RSB ground-state energy density (literature numeric)
+    verify(
+        SherringtonKirkpatrick(; J=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-0.7631667,
+        agree_within=1e-4,
+        refs=["Crisanti-Rizzo 2002 / Parisi full-RSB: e0 ≈ -0.7631667 (J=1)"],
+    )
+end

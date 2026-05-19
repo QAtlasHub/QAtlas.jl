@@ -222,3 +222,21 @@ end
         @test abs(f_pbc - f_inf) / max(abs(f_inf), 1e-3) < 0.01
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "cross-BC scaling — verification cards" begin
+    # β = 0: every TFIM bond/field term is traceless => per-site
+    # ⟨H⟩_{β=0} = 0 exactly (independent operator-trace sum rule).
+    for bc in (Infinite(), OBC(8), PBC(8))
+        verify(
+            TFIM(; J=1.0, h=0.5),
+            Energy(:per_site),
+            bc;
+            route=:sum_rule,
+            fetch_kw=(; beta=0.0),
+            independent=0.0,
+            agree_within=1e-9,
+            refs=["Tr(σz σz)=Tr(σx)=0 => per-site ⟨H⟩_{β=0}=0 across all BC"],
+        )
+    end
+end

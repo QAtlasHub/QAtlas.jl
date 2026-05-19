@@ -179,3 +179,22 @@ end
         m_f, GGEValue(MagnetizationX()), Infinite(); initial=m_0_badJ
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM GGE — verification cards" begin
+    # No-quench identity: when the initial state IS the final-Hamiltonian
+    # ground state, the GGE expectation collapses to the T=0 GS value.
+    # Independent route: the GS energy density fetched directly.
+    let m = TFIM(; J=1.0, h=1.5)
+        verify(
+            m,
+            GGEValue(Energy()),
+            Infinite();
+            route=:limiting_case,
+            fetch_kw=(; initial=m),
+            independent=QAtlas.fetch(m, Energy(:per_site), Infinite()),
+            agree_within=1e-9,
+            refs=["No-quench GGE recovers the T=0 ground-state energy density"],
+        )
+    end
+end

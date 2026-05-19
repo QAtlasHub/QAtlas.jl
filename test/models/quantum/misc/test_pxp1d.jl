@@ -36,3 +36,16 @@ end
     m = PXP1D(; Ω=1.0)
     @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); Ω=0.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "PXP1D — verification cards" begin
+    verify(
+        PXP1D(),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-0.6516,
+        agree_within=5e-3,
+        refs=["PXP scar literature (Turner 2018 / Lin-Motrunich 2019): e0 ~ -0.6516"],
+    )
+end

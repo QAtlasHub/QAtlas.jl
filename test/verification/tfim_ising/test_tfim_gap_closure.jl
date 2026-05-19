@@ -112,3 +112,51 @@ end
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM gap closure — verification cards" begin
+    # Pfeuty 1970: Δ = 2|h - J|, closing exactly at the critical point.
+    for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J)"],
+        )
+    end
+
+    # Independent dense-ED corroboration. NOT the closed form: the gap
+    # is read off the spectrum of the full many-body H = -J Σ σᶻσᶻ −
+    # h Σ σˣ, never from Δ = 2|h−J|, so it breaks the circularity of
+    # the second_closed_form cards above. At J = 0 the sites decouple
+    # (H = −h Σ σˣ): the ground state is |+⟩^N and a single spin flip
+    # costs exactly 2h, so the dense-ED gap equals the exact Pfeuty
+    # value 2|h−J| = 2h at *every* finite N — no finite-size error and
+    # no extrapolation (the OBC gap at J≠0 only converges as O(1/N²),
+    # which `verify`'s last(ind) contract cannot use). This is the
+    # cleanest possible non-circular check of src's MassGap.
+    let J = 0.0, h = 1.5, Ns = (4, 6, 8)
+        ed_gap = function (N)
+            lat = build_lattice(Square, N, 1; boundary=OpenAxis())
+            H = build_tfim(lat, J, h)
+            λ = sort(eigvals(Symmetric(H)))
+            return λ[2] - λ[1]
+        end
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:ed_finite_size,
+            independent=[ed_gap(N) for N in Ns],
+            at=["N=$N" for N in Ns],
+            agree_within=1e-10,
+            refs=[
+                "Pfeuty 1970: Δ = 2|h − J|; independent dense ED of " *
+                "H = −h Σ σˣ at J=0 (decoupled spins, gap = 2h exact ∀N)",
+            ],
+        )
+    end
+end

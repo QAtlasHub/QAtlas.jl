@@ -102,3 +102,39 @@ end
     @test exp.α + 2 * exp.β + exp.γ == 2
     @test exp.γ == exp.β * (exp.δ - 1)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "CurieWeissIsing — verification cards" begin
+    # Mean-field critical temperature Tc = J (independent: the
+    # self-consistency m = tanh(βJm) linearises to βc J = 1 => Tc = J).
+    for J in (0.5, 1.0, 2.5)
+        verify(
+            CurieWeissIsing(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=J,
+            agree_within=1e-12,
+            refs=["Mean-field: linearised self-consistency gives βc J = 1 => Tc = J"],
+        )
+    end
+
+    # Spontaneous magnetization solves m = tanh(βJm); independently
+    # re-solved here by fixed-point iteration (not from src).
+    let J = 1.0, β = 2.0
+        m = 0.9
+        for _ in 1:200
+            m = tanh(β * J * m)
+        end
+        verify(
+            CurieWeissIsing(; J=J),
+            SpontaneousMagnetization(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=m,
+            agree_within=1e-8,
+            refs=["Curie-Weiss self-consistency m = tanh(βJm), independent fixed point"],
+        )
+    end
+end

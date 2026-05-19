@@ -50,3 +50,25 @@ end
         m, ResidualEntropy(), Infinite(); state=:something
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "BCFT — verification cards" begin
+    # The :fixed, :fixed_plus, :fixed_minus and :identity boundary
+    # conditions are physically the same g-factor; the boundary entropy
+    # must agree across these independently labelled states.
+    let m = BCFT()
+        s_ref = QAtlas.fetch(m, ResidualEntropy(), Infinite(); state=:fixed)
+        for st in (:fixed_plus, :fixed_minus, :identity)
+            verify(
+                m,
+                ResidualEntropy(),
+                Infinite();
+                route=:delegation_invariant,
+                fetch_kw=(; state=st),
+                independent=s_ref,
+                agree_within=1e-10,
+                refs=["Affleck-Ludwig g-theorem: equivalent boundary states share log g"],
+            )
+        end
+    end
+end

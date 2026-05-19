@@ -166,3 +166,35 @@ end
         @test λ ≈ 0.31693310885932685 atol = 1e-8
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM Loschmidt — verification cards" begin
+    # No-quench identity: H_initial = H_final => |L(t)| = 1, rate λ(t) = 0
+    # for every t (exact, independent of src).
+    let m = TFIM(; J=1.0, h=1.5)
+        for t in (0.5, 2.0, 7.3)
+            verify(
+                m,
+                LoschmidtRateFunction(),
+                Infinite();
+                route=:limiting_case,
+                fetch_kw=(; initial=m, t=t),
+                independent=0.0,
+                agree_within=1e-10,
+                refs=["No-quench: H0 = Hf => λ(t) = 0 for all t"],
+            )
+        end
+    end
+
+    # t = 0: L(0) = ⟨ψ0|ψ0⟩ = 1 trivially for any quench pair
+    verify(
+        TFIM(; J=1.0, h=0.5),
+        LoschmidtRateFunction(),
+        Infinite();
+        route=:limiting_case,
+        fetch_kw=(; initial=TFIM(; J=1.0, h=2.0), t=0.0),
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["t=0: |L(0)| = 1 so the rate function λ(0) = 0"],
+    )
+end

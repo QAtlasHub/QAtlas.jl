@@ -196,3 +196,23 @@ using ForwardDiff
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "KitaevHoneycomb thermal — verification cards" begin
+    # Gibbs identity s = β(ε − f) cross-checks the independently
+    # implemented Energy / FreeEnergy / ThermalEntropy code paths.
+    let m = KitaevHoneycomb(; Kx=1.0, Ky=1.0, Kz=1.0), β = 1.0
+        ε = QAtlas.fetch(m, Energy(:per_site), Infinite(); beta=β)
+        f = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
+        verify(
+            m,
+            ThermalEntropy(),
+            Infinite();
+            route=:sum_rule,
+            fetch_kw=(; beta=β),
+            independent=β * (ε - f),
+            agree_within=1e-6,
+            refs=["Gibbs identity s = β(ε − f) across three independent code paths"],
+        )
+    end
+end

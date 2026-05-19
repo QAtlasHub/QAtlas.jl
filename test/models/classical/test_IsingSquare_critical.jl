@@ -27,3 +27,19 @@ using QAtlas, Test
     @test exp.γ == exp.β * (exp.δ - 1)            # Widom
     @test exp.η == 2 - exp.γ // exp.ν             # Fisher
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingSquare critical — verification cards" begin
+    # CriticalExponents() returns a NamedTuple (non-scalar; covered by
+    # the delegation tests above).  The scalar Onsager Tc anchors the
+    # same critical point with an independent closed form.
+    verify(
+        IsingSquare(; J=1.0),
+        CriticalTemperature(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2.0 / log(1 + sqrt(2)),
+        agree_within=1e-10,
+        refs=["Onsager 1944: Tc = 2J / log(1+√2) ≈ 2.269185 (β=1/8 universality anchor)"],
+    )
+end

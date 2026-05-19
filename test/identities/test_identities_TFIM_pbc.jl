@@ -47,3 +47,29 @@ end
     results = verify_thermodynamic_identities(model, PBC(8); βs=βs, atol=1e-5)
     @test all(r.status === :pass for r in results)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM PBC identities — verification cards" begin
+    # β = 0: traceless terms => per-site ⟨H⟩ = 0 (PBC sum rule).
+    verify(
+        TFIM(; J=1.0, h=0.5),
+        Energy(:per_site),
+        PBC(6);
+        route=:sum_rule,
+        fetch_kw=(; beta=0.0),
+        independent=0.0,
+        agree_within=1e-9,
+        refs=["Tr(σz σz)=Tr(σx)=0 => per-site ⟨H⟩_{β=0}=0 (PBC)"],
+    )
+
+    # Pfeuty gap is boundary-independent in the thermodynamic limit.
+    verify(
+        TFIM(; J=1.0, h=0.5),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2 * abs(0.5 - 1.0),
+        agree_within=1e-10,
+        refs=["Pfeuty 1970: Δ = 2|h - J| (BC-independent)"],
+    )
+end

@@ -118,3 +118,44 @@ end
     # universality class.  Direct IsingSquare cross-check enabled after #346 lands.
     @test exp.β == QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2).β
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingTriangular — verification cards" begin
+    # FM (J < 0): Houtappel 1950 Tc = 4|J| / log 3
+    for J in (-1.0, -2.0)
+        verify(
+            IsingTriangular(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=4 * abs(J) / log(3),
+            agree_within=1e-9,
+            refs=["Houtappel 1950: FM triangular Tc = 4|J| / log 3"],
+        )
+    end
+
+    # AFM (J > 0): frustrated, no order (Wannier 1950) => Tc = 0
+    verify(
+        IsingTriangular(; J=1.0),
+        CriticalTemperature(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-12,
+        refs=["Wannier 1950: AFM triangular is fully frustrated, Tc = 0"],
+    )
+
+    # AFM residual entropy: Wannier integral S = (2/π) ∫_0^{π/3} log(2cosθ) dθ
+    let J = 1.0
+        S_w, _ = quadgk(θ -> log(2 * cos(θ)), 0, π / 3)
+        verify(
+            IsingTriangular(; J=J),
+            ResidualEntropy(),
+            Infinite();
+            route=:second_closed_form,
+            independent=(2 / π) * S_w,
+            agree_within=1e-6,
+            refs=["Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066"],
+        )
+    end
+end

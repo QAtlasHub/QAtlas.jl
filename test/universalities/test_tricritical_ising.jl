@@ -62,3 +62,18 @@ end
             QAtlas.fetch(mm, ConformalWeights(); r=r, s=s)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TricriticalIsing — verification cards" begin
+    # Tricritical Ising = minimal model M(5,4): c = 1 - 6(p-q)²/(pq)
+    # with (p,q)=(5,4) => c = 7/10 (independent Kac/minimal-model formula).
+    verify(
+        TricriticalIsing(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 - 6 * (5 - 4)^2 / (5 * 4),
+        agree_within=1e-12,
+        refs=["M(5,4): c = 1 - 6(p-q)²/(pq) = 7/10"],
+    )
+end

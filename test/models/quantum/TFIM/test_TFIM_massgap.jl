@@ -59,3 +59,35 @@ end
     Δ_new = QAtlas.fetch(TFIM(; J=1.0, h=3.0), MassGap(), OBC(24))
     @test Δ_legacy ≈ Δ_new
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM MassGap — verification cards" begin
+    # Pfeuty 1970: the TFIM mass gap is exactly 2|h - J| in the
+    # thermodynamic limit (independent closed form from the Bogoliubov
+    # dispersion min, not read from src).
+    for (J, h) in ((1.0, 0.5), (1.0, 2.0), (1.0, 0.0), (2.0, 0.7))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Delta = 2|h - J| (Bogoliubov dispersion minimum)"],
+        )
+    end
+
+    # Independent OBC dense-ED gap at small N (first excitation above GS)
+    let J = 1.0, h = 2.0, N = 8
+        sp = dense_spectrum(_build_tfim_dense(N, J, h))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            OBC(N);
+            route=:ed_finite_size,
+            independent=sp[2] - sp[1],
+            agree_within=1e-9,
+            refs=["Direct OBC dense ED first excitation via _build_tfim_dense"],
+        )
+    end
+end

@@ -200,3 +200,21 @@ end
     far_im_slope = (imag(c_p) - imag(c_m)) / (2δ)
     @test abs(far_im_slope) < 1e-10
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM dynamic symmetries — verification cards" begin
+    # The dynamic-correlator symmetry tested here rests on the TFIM
+    # Bogoliubov spectrum; its gap is the Pfeuty 1970 closed form
+    # Δ = 2|h - J| (independent of src).
+    for h in (0.5, 1.5, 2.0)
+        verify(
+            TFIM(; J=1.0, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - 1.0),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Δ = 2|h - J| (Bogoliubov dispersion minimum)"],
+        )
+    end
+end

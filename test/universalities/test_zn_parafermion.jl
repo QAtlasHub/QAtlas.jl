@@ -39,3 +39,20 @@ end
     @test_throws DomainError ZnParafermion(; n=0)
     @test_throws DomainError ZnParafermion(; n=-3)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "ZnParafermion — verification cards" begin
+    # Fateev-Zamolodchikov Z_n parafermion CFT: c = 2(n-1)/(n+2)
+    # (independent closed form).
+    for n in (2, 3, 4, 5)
+        verify(
+            ZnParafermion(; n=n),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * (n - 1) // (n + 2),
+            agree_within=1e-12,
+            refs=["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"],
+        )
+    end
+end

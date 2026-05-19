@@ -153,3 +153,21 @@ end
     @test S_default ≈ S_explicit atol = 1e-14
     @test S_default > 0  # non-trivial entanglement at criticality
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM quench entanglement — verification cards" begin
+    # t = 0: the quench entanglement entropy equals the entanglement of
+    # the initial ground state (independent route: equilibrium S_vN).
+    let m0 = TFIM(; J=1.0, h=2.0), mf = TFIM(; J=1.0, h=0.5), N = 8, ℓ = 4
+        verify(
+            mf,
+            VonNeumannEntropy(:quench),
+            OBC(N);
+            route=:limiting_case,
+            fetch_kw=(; initial=m0, ℓ=ℓ, t=0.0),
+            independent=QAtlas.fetch(m0, VonNeumannEntropy(), OBC(N); ℓ=ℓ, beta=Inf),
+            agree_within=1e-8,
+            refs=["t=0: quench EE equals the initial ground-state entanglement"],
+        )
+    end
+end

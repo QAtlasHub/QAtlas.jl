@@ -46,3 +46,62 @@ end
     @test_throws DomainError J1J2Heisenberg1D(; J1=-1.0, J2=0.5)
     @test_throws DomainError J1J2Heisenberg1D(; J1=1.0, J2=-0.1)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "J1J2Heisenberg1D — verification cards" begin
+    # Independent J1-J2 PBC ground-state energy density (spin-1/2),
+    # built black-box from site operators (never QAtlas internals).
+    function j1j2_pbc_e0(N, J1, J2)
+        Sx, Sy, Sz = spin_ops(1 // 2)
+        SS(i, j) =
+            site_op(Sx, 2, N, i) * site_op(Sx, 2, N, j) +
+            site_op(Sy, 2, N, i) * site_op(Sy, 2, N, j) +
+            site_op(Sz, 2, N, i) * site_op(Sz, 2, N, j)
+        H = zeros(ComplexF64, 2^N, 2^N)
+        for i in 1:N
+            H .+= J1 * SS(i, mod1(i + 1, N))
+            H .+= J2 * SS(i, mod1(i + 2, N))
+        end
+        return dense_spectrum(H)[1] / N
+    end
+
+    # j = 0 (pure Heisenberg): delegates to Heisenberg1D, e0 = J1(1/4 - log 2)
+    verify(
+        J1J2Heisenberg1D(; J1=1.0, J2=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        agree_within=1e-12,
+        refs=["J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938)"],
+    )
+
+    # j = 1/2 (Majumdar-Ghosh): delegates to MajumdarGhosh, e0 = -3 J1 / 8
+    verify(
+        J1J2Heisenberg1D(; J1=1.0, J2=0.5),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(
+            MajumdarGhosh(; J=1.0), GroundStateEnergyDensity(), Infinite()
+        ),
+        agree_within=1e-12,
+        refs=["J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8)"],
+    )
+
+    # j = 1/2 MG point: independent PBC ED -> exact dimer -3 J1 / 8 (even N)
+    let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))
+        verify(
+            J1J2Heisenberg1D(; J1=1.0, J2=0.5),
+            Energy(:per_site),
+            Infinite();
+            route=:ed_finite_size,
+            independent=[j1j2_pbc_e0(N, 1.0, 0.5) for N in Ns],
+            at=["N=$N" for N in Ns],
+            agree_within=1e-6,
+            refs=[
+                "Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N)",
+            ],
+        )
+    end
+end

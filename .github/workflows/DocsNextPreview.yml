@@ -1,0 +1,43 @@
+name: Docs (next preview)
+
+on:
+  push:
+    branches:
+      - next
+
+permissions:
+  contents: read
+
+jobs:
+  inventory-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: '1'
+      - name: INVENTORY drift guard (static scan, no test exec)
+        run: julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+      - name: Atlas taxonomy + registry-parser unit tests
+        run: julia --startup-file=no test/harness/atlas/test_atlas_logic.jl
+
+  docs-preview:
+    runs-on: ubuntu-latest
+    needs: inventory-drift
+    steps:
+      - uses: actions/checkout@v6
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: '1'
+      - name: Install docs env
+        run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+      - name: Regenerate atlas view (pure scan; no test exec)
+        run: julia --startup-file=no docs/atlas/generate.jl
+      - name: Build docs (build-only, deploydocs is a no-op without token)
+        run: julia --project=docs/ docs/make.jl
+      - name: Upload built site (trial deploy artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfim-atlas-docs
+          path: docs/build
+          if-no-files-found: error

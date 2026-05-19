@@ -15,3 +15,20 @@ using QAtlas, Test
         @test QAtlas.fetch(TodaLattice(; a=a, b=b), MassGap(), Infinite()) == 0.0
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TodaLattice — verification cards" begin
+    # The classical Toda chain has a gapless acoustic phonon branch:
+    # MassGap = 0 for all (a, b > 0) (integrable dispersion at q -> 0).
+    for (a, b) in ((1.0, 1.0), (2.0, 0.5), (0.7, 1.3))
+        verify(
+            TodaLattice(; a=a, b=b),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-12,
+            refs=["Toda chain acoustic branch is gapless: MassGap = 0"],
+        )
+    end
+end

@@ -98,3 +98,28 @@ end
     @test e_pos ≈ -1 / π atol = 1e-5
     @test e_neg ≈ -1 / π atol = 1e-5
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ Yang-Yang — verification cards" begin
+    # Yang-Yang 1966 II: at Δ = 1/2 (γ = π/3) the energy density is the
+    # elementary closed form e0 = -3J/8.
+    verify(
+        XXZ1D(; J=1.0, Δ=0.5),
+        Energy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-3 / 8,
+        agree_within=1e-9,
+        refs=["Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2"],
+    )
+    # FM point Δ = -1: exact saturated state e0 = -J/4.
+    verify(
+        XXZ1D(; J=1.0, Δ=-1.0),
+        Energy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-0.25,
+        agree_within=1e-12,
+        refs=["XXZ FM point Δ=-1: aligned state exact, e0 = -J/4"],
+    )
+end

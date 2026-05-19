@@ -10,3 +10,17 @@ using QAtlas, Test
     # Idempotent — no hidden state
     @test QAtlas.fetch(LogarithmicCFT(), CentralCharge(), Infinite()) === c
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "LogarithmicCFT — verification cards" begin
+    # Logarithmic CFT (c=0 / percolation-type): central charge is exactly 0.
+    verify(
+        LogarithmicCFT(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-12,
+        refs=["Logarithmic CFT: c = 0 (identity conformal dimension vanishes)"],
+    )
+end

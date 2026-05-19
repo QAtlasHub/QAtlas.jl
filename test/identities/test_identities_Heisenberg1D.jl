@@ -34,3 +34,30 @@ end
         @test r.abs_err < 1e-12
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "Heisenberg1D identities — verification cards" begin
+    # Heisenberg1D delegates to XXZ1D(Δ=1); both code paths must agree.
+    verify(
+        Heisenberg1D(),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(
+            XXZ1D(; J=1.0, Δ=1.0), GroundStateEnergyDensity(), Infinite()
+        ),
+        agree_within=1e-12,
+        refs=["Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2)"],
+    )
+
+    # Closed-form Hulthén value cross-check (second derivation).
+    verify(
+        Heisenberg1D(),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.25 - log(2.0),
+        agree_within=1e-12,
+        refs=["Hulthén 1938: e0 = 1/4 − log 2"],
+    )
+end

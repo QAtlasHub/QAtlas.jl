@@ -143,3 +143,28 @@ end
     # Default constructor lands on square ice.
     @test SixVertex() === SixVertex(1.0, 1.0, 1.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "SixVertex — verification cards" begin
+    # Square ice (a=b=c=1): Lieb 1967 residual entropy S = (3/2) log(4/3)
+    verify(
+        SixVertex(; a=1.0, b=1.0, c=1.0),
+        ResidualEntropy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=(3 / 2) * log(4 / 3),
+        agree_within=1e-9,
+        refs=["Lieb 1967: square-ice residual entropy S = (3/2) log(4/3) ≈ 0.4315"],
+    )
+
+    # Ferroelectric phase (Δ > 1, e.g. a large): f = -log(max(a,b)), S = 0
+    verify(
+        SixVertex(; a=3.0, b=1.0, c=1.0),
+        ResidualEntropy(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["Ferroelectric phase (Δ>1): frozen, residual entropy S = 0"],
+    )
+end

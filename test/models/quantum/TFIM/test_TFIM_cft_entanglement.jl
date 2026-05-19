@@ -102,3 +102,26 @@ using QAtlas, Test
         @test_throws ArgumentError QAtlas.fetch(model, RenyiEntropy(2.0), Infinite(); ℓ=0)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM CFT entanglement — verification cards" begin
+    # Ground-state von Neumann entropy at OBC vs direct Schmidt-SVD of the
+    # independent dense-ED ground vector (no src entanglement code).
+    for (J, h, N, ℓ) in ((1.0, 1.0, 8, 4), (1.0, 0.5, 8, 4))
+        F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
+        ψ = F.vectors[:, 1]
+        Ψ = reshape(ψ, (2^ℓ, 2^(N - ℓ)))
+        sv = LinearAlgebra.svdvals(Ψ)
+        S_ind = -sum(s -> (p=s^2; p > 1e-15 ? p * log(p) : 0.0), sv)
+        verify(
+            TFIM(; J=J, h=h),
+            VonNeumannEntropy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; ℓ=ℓ, beta=Inf),
+            independent=S_ind,
+            agree_within=1e-8,
+            refs=["Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J)"],
+        )
+    end
+end

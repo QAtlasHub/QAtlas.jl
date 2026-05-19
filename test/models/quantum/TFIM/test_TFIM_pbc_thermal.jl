@@ -198,3 +198,36 @@ end
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM PBC thermal — verification cards" begin
+    # β = 0: Tr(H)/2^N = 0 since every σz σz and σx term is traceless,
+    # so the per-site energy at infinite temperature is exactly 0
+    # (independent operator-trace argument, not src).
+    for (J, h, N) in ((1.0, 0.5, 6), (1.0, 1.5, 6))
+        verify(
+            TFIM(; J=J, h=h),
+            Energy(:per_site),
+            PBC(N);
+            route=:sum_rule,
+            fetch_kw=(; beta=0.0),
+            independent=0.0,
+            agree_within=1e-10,
+            refs=["Tr(σz σz) = Tr(σx) = 0 => per-site ⟨H⟩_{β=0} = 0 (PBC)"],
+        )
+    end
+
+    # Pfeuty 1970 gap is a thermodynamic-limit closed form independent
+    # of boundary conditions: Δ = 2|h - J|.
+    for (J, h) in ((1.0, 0.5), (1.0, 1.7))
+        verify(
+            TFIM(; J=J, h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(h - J),
+            agree_within=1e-10,
+            refs=["Pfeuty 1970: Δ = 2|h - J|"],
+        )
+    end
+end

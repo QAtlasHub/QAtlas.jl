@@ -90,3 +90,58 @@ end
         HeisenbergXYZ(; Jx=1.0, Jy=1.0 + 1e-13, Jz=1.0), LuttingerParameter(), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "HeisenbergXYZ — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+    Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
+
+    # Isotropic Heisenberg AF: E/site converges to J(1/4 - log 2)
+    let J = 1.0
+        bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
+        ind = [dense_spectrum(chain_hamiltonian(2, N, bond))[1] / (N - 1) for N in Ns]
+        verify(
+            HeisenbergXYZ(; Jx=J, Jy=J, Jz=J),
+            Energy(:per_site),
+            Infinite();
+            route=:ed_finite_size,
+            independent=ind,
+            at=["N=$N" for N in Ns],
+            agree_within=0.05,
+            refs=["Hulthen 1938 via delegation to XXZ1D at Delta=1"],
+        )
+    end
+
+    # XX limit (Jz=0): e0 = -J/pi (free fermion, Jordan-Wigner)
+    verify(
+        HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:limiting_case,
+        independent=-1 / π,
+        agree_within=1e-12,
+        refs=["Jordan-Wigner free fermion: XX limit Jz=0 gives e0 = -J/pi"],
+    )
+
+    # FM limit (Jz=-J): e0 = -J/4 (saturated ferromagnet, exact)
+    verify(
+        HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=-1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:limiting_case,
+        independent=-1 / 4,
+        agree_within=1e-12,
+        refs=["FM saturation: Jz=-J gives e0 = -J/4"],
+    )
+
+    # LuttingerParameter delegation invariant at isotropic SU(2) point
+    verify(
+        HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.0),
+        LuttingerParameter(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite()),
+        agree_within=1e-14,
+        refs=["HeisenbergXYZ(isotropic) delegates to XXZ1D(Delta=1): K=1/2"],
+    )
+end

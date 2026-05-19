@@ -138,3 +138,37 @@
         @test maximum(mx_loc) - minimum(mx_loc) > 1e-4
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM local — verification cards" begin
+    # GS energy = lowest eigenvalue of the independent dense-ED matrix
+    let J = 1.0, h = 1.5, N = 6
+        verify(
+            TFIM(; J=J, h=h),
+            Energy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=Inf),
+            independent=dense_spectrum(_build_tfim_dense(N, J, h))[1],
+            agree_within=1e-9,
+            refs=["GS energy = min eigenvalue of _build_tfim_dense (black-box ED)"],
+        )
+    end
+
+    # ZZ static correlation at OBC vs independent dense-ED ground state
+    let J = 1.0, h = 0.7, N = 6, i = 2, j = 4
+        F = LinearAlgebra.eigen(_build_tfim_dense(N, J, h))
+        ψ = F.vectors[:, 1]
+        zz_ed = real(ψ' * (_op_site(_SZ, i, N) * (_op_site(_SZ, j, N) * ψ)))
+        verify(
+            TFIM(; J=J, h=h),
+            ZZCorrelation(; mode=:static),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; i=i, j=j, beta=Inf),
+            independent=zz_ed,
+            agree_within=1e-8,
+            refs=["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense GS"],
+        )
+    end
+end

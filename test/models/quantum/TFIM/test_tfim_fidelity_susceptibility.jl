@@ -170,3 +170,35 @@ end
     χ_persite = QAtlas.fetch(m, FidelitySusceptibility(), OBC(32); per_site=true)
     @test χ_persite ≈ χ_total / 32 atol = 1e-12
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TFIM FidelitySusceptibility — verification cards" begin
+    # Bogoliubov-de Gennes closed form for the per-site fidelity
+    # susceptibility (independent re-derivation, not src):
+    #   ordered (h < J):    χ_F / L = 1 / (16 (J² − h²))
+    #   disordered (h > J): χ_F / L = J² / (16 h² (h² − J²))
+    let J = 1.0, h = 0.5
+        verify(
+            TFIM(; J=J, h=h),
+            FidelitySusceptibility(),
+            Infinite();
+            route=:second_closed_form,
+            independent=1 / (16 * (J^2 - h^2)),
+            agree_within=1e-9,
+            refs=[
+                "BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2)"
+            ],
+        )
+    end
+    let J = 1.0, h = 2.0
+        verify(
+            TFIM(; J=J, h=h),
+            FidelitySusceptibility(),
+            Infinite();
+            route=:second_closed_form,
+            independent=J^2 / (16 * h^2 * (h^2 - J^2)),
+            agree_within=1e-9,
+            refs=["BdG closed form: χ_F/L = J²/(16h²(h²−J²)) disordered phase"],
+        )
+    end
+end

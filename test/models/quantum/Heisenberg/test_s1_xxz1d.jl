@@ -46,3 +46,39 @@ end
         S1XXZ1D(; Δ=1.0 + 1e-13), Energy(:per_site), Infinite()
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "S1XXZ1D — verification cards" begin
+    # Delta=1 delegates to S1Heisenberg1D (Haldane chain, White-Huse 1993).
+    verify(
+        S1XXZ1D(; J=1.0, Δ=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(S1Heisenberg1D(; J=1.0), Energy(:per_site), Infinite()),
+        agree_within=1e-12,
+        refs=["S1XXZ1D(Delta=1) delegates to S1Heisenberg1D: code paths must agree"],
+    )
+
+    verify(
+        S1XXZ1D(; J=1.0, Δ=1.0),
+        MassGap(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(S1Heisenberg1D(; J=1.0), MassGap(), Infinite()),
+        agree_within=1e-12,
+        refs=["S1XXZ1D(Delta=1) Haldane gap delegates to S1Heisenberg1D"],
+    )
+
+    # J-scaling linear at the isotropic point
+    verify(
+        S1XXZ1D(; J=3.0, Δ=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:delegation_invariant,
+        independent=3.0 *
+                    QAtlas.fetch(S1Heisenberg1D(; J=1.0), Energy(:per_site), Infinite()),
+        agree_within=1e-10,
+        refs=["Linear J scaling: e(3J) = 3 e(J) for spin-1 Heisenberg point"],
+    )
+end

@@ -95,3 +95,34 @@ using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, Infinite, fetch
         @test_throws DomainError TightBinding1D(; t=-1.0)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TightBinding1D — verification cards" begin
+    verify(
+        TightBinding1D(; t=1.0, μ=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:second_closed_form,
+        independent=-2 / pi,
+        agree_within=1e-9,
+        refs=["Half-filled tight-binding chain: e0 = -2t/pi"],
+    )
+    verify(
+        TightBinding1D(; t=1.0, μ=0.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["Half filling: gapless Fermi surface"],
+    )
+    verify(
+        TightBinding1D(; t=1.0, μ=3.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-9,
+        refs=["Band insulator mu > 2t: gap = |mu| - 2t"],
+    )
+end

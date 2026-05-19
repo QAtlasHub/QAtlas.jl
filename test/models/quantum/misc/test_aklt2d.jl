@@ -16,3 +16,18 @@ end
     m = AKLT2D(; J=1.0)
     @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); J=0.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "AKLT2D — verification cards" begin
+    for J in (0.5, 1.0, 2.5)
+        verify(
+            AKLT2D(; J=J),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-12,
+            refs=["Frustration-free: sum of non-negative projectors => e0 = 0"],
+        )
+    end
+end

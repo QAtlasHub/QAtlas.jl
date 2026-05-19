@@ -284,3 +284,18 @@ end
         @test E_fl ≈ E_ed rtol = 1e-10
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "KitaevHoneycomb — verification cards" begin
+    # Isotropic Kitaev honeycomb ground-state energy density: the exact
+    # Kitaev-2006 Brillouin-zone integral value (literature constant).
+    verify(
+        KitaevHoneycomb(; Kx=1.0, Ky=1.0, Kz=1.0),
+        Energy(),
+        Infinite();
+        route=:literature_value,
+        independent=-0.7872986216706852,
+        agree_within=1e-6,
+        refs=["Kitaev 2006: isotropic honeycomb e0 ≈ -0.78729862 |K|"],
+    )
+end

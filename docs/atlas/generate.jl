@@ -5,10 +5,11 @@
 # R1 (ratified, Discussion #379): five-level assurance taxonomy
 #   {universality-corroborated, corroborated-at-p, coherent, cited-only,
 #    uncorroborated-but-feasible} with an ED-feasible / ED-infeasible
-#   denominator split, so the headline corroboration rate is neither
-#   gamed nor unfairly punished on frontier models where dense ED is
-#   computationally infeasible. Only `uncorroborated-but-feasible` is an
-#   actionable risk; `cited-only` is the honest frontier, not a penalty.
+#   denominator split. Only `uncorroborated-but-feasible` is actionable;
+#   `cited-only` is the honest frontier, not a penalty.
+# R5 (ratified): Model/Quantity/BC@regime is the locked schema. Faceted
+#   indices under docs/src/atlas/by/ (model / quantity / bc / level /
+#   mechanism / regime); full-text search is Documenter's built-in bar.
 # Step 4a/4b kept: one per-hub page (docs/src/atlas/hubs/<slug>.md) with
 # the exact reconstructed verify(...) call; index drills down by model.
 const ROOT = normpath(joinpath(@__DIR__, "..", ".."))
@@ -103,6 +104,26 @@ n_struct = length(L_UNIV) + length(L_EDP)            # external independent
 n_inrepo = n_struct + length(L_COH)                  # any executed card
 rate_struct = nfeas == 0 ? 0.0 : round(100 * n_struct / nfeas; digits=1)
 rate_inrepo = nfeas == 0 ? 0.0 : round(100 * n_inrepo / nfeas; digits=1)
+
+# ── R5 facets ────────────────────────────────────────────────────────
+facet_link(h) = string(badgeof(h), " [`", h, "`](../hubs/",
+                        slugof(h), ".md) — ", levname(h))
+function group_by(keyfn)
+    g = Dict{String,Vector{String}}()
+    for h in claimed
+        for k in keyfn(h)
+            push!(get!(g, string(k), String[]), h)
+        end
+    end
+    return g
+end
+G_model  = group_by(h -> [modelof(h)])
+G_quant  = group_by(h -> [quantof(h)])
+G_bc     = group_by(h -> [bcof(h)])
+G_level  = group_by(h -> [levname(h)])
+G_mech   = group_by(h -> (M = collect(mechsof(h)); isempty(M) ? ["(no card)"] : M))
+G_regime = group_by(h -> (r = unique(c.regime for c in cardsof(h));
+                          isempty(r) ? ["(no card)"] : r))
 
 const BANNER = string(
     "!!! note \"Provisional v2 view — RES not wired\"\n",
@@ -215,6 +236,62 @@ for h in claimed
     write(joinpath(hubsdir, slugof(h) * ".md"), String(take!(hio)))
 end
 
+# ── faceted index pages (R5) ─────────────────────────────────────────
+bydir = joinpath(ROOT, "docs", "src", "atlas", "by")
+mkpath(bydir)
+function write_facet(fname, title, groups, blurb)
+    fio = IOBuffer()
+    FP(s...) = println(fio, string(s...))
+    FP("# ", title)
+    FP("")
+    FP(BANNER)
+    FP("")
+    FP(blurb)
+    FP("")
+    for k in sort(collect(keys(groups)))
+        hs = sort(groups[k])
+        FP("## `", k, "` (", length(hs), ")")
+        FP("")
+        for h in hs
+            FP("- ", facet_link(h))
+        end
+        FP("")
+    end
+    FP("[← back to the Atlas index](../index.md)")
+    write(joinpath(bydir, fname), String(take!(fio)))
+end
+write_facet("model.md", "Atlas — by model", G_model,
+            "Every `src`-claimed hub grouped by model.")
+write_facet("quantity.md", "Atlas — by quantity", G_quant,
+            "Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC schema).")
+write_facet("bc.md", "Atlas — by boundary condition", G_bc,
+            "Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).")
+write_facet("level.md", "Atlas — by assurance level", G_level,
+            "Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only actionable bucket.")
+write_facet("mechanism.md", "Atlas — by corroboration mechanism", G_mech,
+            "Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.")
+write_facet("regime.md", "Atlas — by regime", G_regime,
+            "Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).")
+byidx = IOBuffer()
+BI(s...) = println(byidx, string(s...))
+BI("# Atlas — faceted search")
+BI("")
+BI(BANNER)
+BI("")
+BI("Full-text search is the bar at the top of every page (Documenter ",
+   "built-in — indexes every hub and facet page). Faceted indices over ",
+   "the locked **Model / Quantity / BC @ regime** schema:")
+BI("")
+BI("- [By model](model.md) — ", length(G_model), " models")
+BI("- [By quantity](quantity.md) — ", length(G_quant), " observables")
+BI("- [By boundary condition](bc.md) — ", length(G_bc), " BCs")
+BI("- [By assurance level](level.md) — R1 taxonomy")
+BI("- [By corroboration mechanism](mechanism.md) — verify `route`")
+BI("- [By regime](regime.md) — resolved physical regimes")
+BI("")
+BI("[← back to the Atlas index](../index.md)")
+write(joinpath(bydir, "index.md"), String(take!(byidx)))
+
 # ── atlas index ──────────────────────────────────────────────────────
 io = IOBuffer()
 P(s...) = println(io, string(s...))
@@ -243,6 +320,14 @@ P("")
 P("**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **",
   rate_struct, "%** · **in-repo-verified rate** (incl. 🔵 coherent): **",
   rate_inrepo, "%**")
+P("")
+P("## Browse by facet")
+P("")
+P("[**Faceted search →**](by/index.md) · ",
+  "[by model](by/model.md) · [by quantity](by/quantity.md) · ",
+  "[by BC](by/bc.md) · [by level](by/level.md) · ",
+  "[by mechanism](by/mechanism.md) · [by regime](by/regime.md). ",
+  "Full-text search is the top bar (Documenter built-in).")
 P("")
 P("## 🟠 R1 risk-linter — actionable only")
 P("")
@@ -298,7 +383,7 @@ end
 out = joinpath(ROOT, "docs", "src", "atlas", "index.md")
 mkpath(dirname(out))
 write(out, String(take!(io)))
-println("wrote ", out, " + ", length(claimed), " per-hub pages  models=",
+println("wrote ", out, " + ", length(claimed), " per-hub pages + 7 facet pages  models=",
         length(models), " hubs=", length(claimed), " cards=", length(cards),
         " regfail=", length(regfail), "  R1[univ=", length(L_UNIV),
         " edp=", length(L_EDP), " coh=", length(L_COH),

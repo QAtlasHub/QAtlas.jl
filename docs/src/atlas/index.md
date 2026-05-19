@@ -32,6 +32,10 @@
 
 **Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.0%**
 
+## Browse by facet
+
+[**Faceted search →**](by/index.md) · [by model](by/model.md) · [by quantity](by/quantity.md) · [by BC](by/bc.md) · [by level](by/level.md) · [by mechanism](by/mechanism.md) · [by regime](by/regime.md). Full-text search is the top bar (Documenter built-in).
+
 ## 🟠 R1 risk-linter — actionable only
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.

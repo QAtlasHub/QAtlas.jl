@@ -43,3 +43,19 @@ end
     @test all(r.status !== :fail for r in results)
     @test count(r -> r.status === :skipped, results) == 3
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingSquare identities — verification cards" begin
+    # Onsager 1944 critical temperature: sinh(2 βc J) = 1.
+    for J in (1.0, 2.0)
+        verify(
+            IsingSquare(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * J / log(1 + sqrt(2)),
+            agree_within=1e-10,
+            refs=["Onsager 1944: Tc = 2J / log(1+√2)"],
+        )
+    end
+end

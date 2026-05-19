@@ -75,3 +75,28 @@ end
         @test all(r.status !== :fail for r in results)
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D identities — verification cards" begin
+    # FM point Δ = -1: exact saturated ground state, e0 = -J/4.
+    verify(
+        XXZ1D(; J=1.0, Δ=-1.0),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-0.25,
+        agree_within=1e-12,
+        refs=["XXZ FM point Δ=-1: aligned state exact, e0 = -J/4"],
+    )
+
+    # Δ = 1 ≡ Heisenberg1D (independent code path).
+    verify(
+        XXZ1D(; J=1.0, Δ=1.0),
+        GroundStateEnergyDensity(),
+        Infinite();
+        route=:delegation_invariant,
+        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        agree_within=1e-12,
+        refs=["XXZ1D(Δ=1) ≡ Heisenberg1D: independent code paths must agree"],
+    )
+end

@@ -44,3 +44,28 @@ end
         @test r.abs_err < 1e-12
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "S1Heisenberg1D identities — verification cards" begin
+    # White-Huse 1993 DMRG Haldane-chain energy density (literature).
+    verify(
+        S1Heisenberg1D(; J=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-1.401484038971,
+        agree_within=1e-6,
+        refs=["White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain)"],
+    )
+
+    # Haldane gap literature value.
+    verify(
+        S1Heisenberg1D(; J=1.0),
+        MassGap(),
+        Infinite();
+        route=:literature_value,
+        independent=0.41048,
+        agree_within=1e-4,
+        refs=["White-Huse 1993 DMRG: Haldane gap Δ ≈ 0.41048 J"],
+    )
+end

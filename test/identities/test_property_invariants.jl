@@ -244,3 +244,24 @@ end
         @test abs(c_xx) ≤ 1 + 1e-10
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "property invariants — verification cards" begin
+    # Gibbs identity s = β(ε − f): the entropy is cross-checked against
+    # the independently-implemented Energy and FreeEnergy via the
+    # thermodynamic sum rule (three separate code paths must agree).
+    let m = TFIM(; J=1.0, h=0.5), β = 1.3, N = 6
+        ε = QAtlas.fetch(m, Energy(:per_site), OBC(N); beta=β)
+        f = QAtlas.fetch(m, FreeEnergy(), OBC(N); beta=β)
+        verify(
+            m,
+            ThermalEntropy(),
+            OBC(N);
+            route=:sum_rule,
+            fetch_kw=(; beta=β),
+            independent=β * (ε - f),
+            agree_within=1e-7,
+            refs=["Gibbs identity s = β(ε − f) across Energy/FreeEnergy/Entropy paths"],
+        )
+    end
+end

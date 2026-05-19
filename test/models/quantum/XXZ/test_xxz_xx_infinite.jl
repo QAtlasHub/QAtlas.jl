@@ -123,3 +123,52 @@ end
         @test isnan(QAtlas.fetch(m, Energy(), Infinite(); beta=1.0))
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "XXZ1D Δ=0 Infinite — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1 // 2)
+    bond_xx = kron(Sx, Sx) + kron(Sy, Sy)  # J=1, Delta=0
+    Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
+
+    # Ground-state energy density converges to -1/pi
+    verify(
+        _XX,
+        Energy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=[
+            dense_spectrum(chain_hamiltonian(2, N, bond_xx))[1] / (N - 1) for N in Ns
+        ],
+        at=["N=$N" for N in Ns],
+        agree_within=0.05,
+        refs=["Yang-Yang 1966 I: e0 = -J/pi for XX (Delta=0) free fermion"],
+    )
+
+    # High-T entropy per site approaches log(2) as beta -> 0
+    verify(
+        _XX,
+        ThermalEntropy(),
+        Infinite();
+        route=:limiting_case,
+        fetch_kw=(; beta=0.01),
+        independent=log(2),
+        agree_within=2e-4,
+        refs=["High-T paramagnet: S/site -> log(2) as beta -> 0 (each spin doublet)"],
+    )
+
+    # Gibbs identity s = beta*(e - f): sum rule card for FreeEnergy
+    let beta = 1.0
+        e = QAtlas.fetch(_XX, Energy(), Infinite(); beta=beta)
+        s = QAtlas.fetch(_XX, ThermalEntropy(), Infinite(); beta=beta)
+        verify(
+            _XX,
+            FreeEnergy(),
+            Infinite();
+            route=:sum_rule,
+            fetch_kw=(; beta=beta),
+            independent=e - s / beta,
+            agree_within=1e-9,
+            refs=["Gibbs identity: f = e - s/beta (thermodynamic sum rule)"],
+        )
+    end
+end

@@ -18,6 +18,11 @@ include(joinpath(ROOT, "test", "harness", "atlas", "AtlasRegistry.jl"))
 using .AtlasInventory, .AtlasRegistry
 
 cards = AtlasInventory.scan_dir(joinpath(ROOT, "test"))
+isempty(AtlasInventory.PARSE_FAILS) || error(
+    "AtlasInventory PARSE_FAILS — refusing to write a partial INVENTORY or ",
+    "emit a misleadingly-incomplete view: ",
+    AtlasInventory.PARSE_FAILS,
+)
 AtlasInventory.write_inventory(joinpath(ROOT, "test", "INVENTORY.jsonl"), cards)
 
 regfiles = String[]
@@ -35,6 +40,11 @@ for rf in regfiles
         push!(regfail, replace(rf, ROOT * "/" => ""))
     end
 end
+isempty(regfail) || error(
+    "Registry parse failures — refusing to emit a misleadingly-empty atlas ",
+    "(a malformed *_registry.jl silently drops its whole claim set): ",
+    regfail,
+)
 
 bycard = Dict{String,Vector{AtlasInventory.Card}}()
 for c in cards
@@ -91,10 +101,19 @@ function levelof(h)
         return ("uncorroborated-but-feasible", "🟠", "warning")
     end
 end
-levname(h) = levelof(h)[1]
-badgeof(h) = levelof(h)[2]
+const _LEVEL_CACHE = Dict{String,Tuple{String,String,String}}()
+levelof_cached(h) = get!(() -> levelof(h), _LEVEL_CACHE, h)
+levname(h) = levelof_cached(h)[1]
+badgeof(h) = levelof_cached(h)[2]
 
 models = sort(unique(modelof(h) for h in claimed))
+let stale = setdiff(ED_INFEASIBLE_MODELS, Set(models))
+    isempty(stale) || @warn string(
+        "ED_INFEASIBLE_MODELS has entries absent from claimed models ",
+        "(stale / renamed in src?) — risk denominator may be skewed: ",
+        sort(collect(stale)),
+    )
+end
 clby = Dict{String,Vector{AtlasRegistry.Claim}}()
 for c in claims
     push!(get!(clby, c.hub, AtlasRegistry.Claim[]), c)
@@ -178,7 +197,7 @@ mkpath(hubsdir)
 for h in claimed
     cl = first(clby[h])
     cs = cardsof(h)
-    lev, bdg, adm = levelof(h)
+    lev, bdg, adm = levelof_cached(h)
     hio = IOBuffer()
     HP(s...) = println(hio, string(s...))
     HP("# ", bdg, " `", h, "`")
@@ -457,13 +476,6 @@ for m in models
     )
 end
 P("")
-if !isempty(regfail)
-    P("!!! warning \"Registry parse failures (", length(regfail), ")\"")
-    for r in regfail
-        P("    - `", r, "`")
-    end
-    P("")
-end
 P("## Hubs (", length(claimed), ") — select to drill down")
 P("")
 for m in models

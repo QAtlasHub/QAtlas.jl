@@ -369,11 +369,16 @@ end
 
 function scan_file(path::AbstractString)
     out = Card[]
-    src = read(path, String)
-    top = parseall(src; filename=path)
     parts = split(path, "QAtlas.jl/")
     rel = length(parts) > 1 ? parts[end] : path
-    _scan_expr!(out, top, rel, "")
+    try
+        src = read(path, String)
+        top = parseall(src; filename=path)
+        _scan_expr!(out, top, rel, "")
+    catch err
+        push!(PARSE_FAILS, (rel, string("scan_file :: ", typeof(err))))
+        return Card[]
+    end
     return out
 end
 

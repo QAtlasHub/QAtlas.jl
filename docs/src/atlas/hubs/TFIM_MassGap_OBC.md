@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED first excitation via _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_massgap.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), MassGap(), OBC(N); route = :ed_finite_size, independent = sp[2] - sp[1], agree_within = 1.0e-9, refs = ["Direct OBC dense ED first excitation via _build_tfim_dense"])
+```
+
 
 ## Assurance (provisional)
 

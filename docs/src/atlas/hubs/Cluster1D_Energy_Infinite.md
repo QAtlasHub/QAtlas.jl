@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@cluster` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Cluster1D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-12, refs = ["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"])
+```
+
 
 ## Assurance (provisional)
 

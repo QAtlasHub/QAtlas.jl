@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Z2 topological order: gamma = log 2 (Kitaev-Preskill) | `test/models/quantum/misc/test_toric_code.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(ToricCode(; J_e = 1.0, J_m = 1.0), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["Z2 topological order: gamma = log 2 (Kitaev-Preskill)"])
+```
+
 
 ## Assurance (provisional)
 

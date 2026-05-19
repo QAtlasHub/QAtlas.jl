@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | NN XX chain: gapless for |h| <= 2J (free fermion) | `test/models/quantum/misc/test_long_range_xy1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(LongRangeXY1D(; h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["NN XX chain: gapless for |h| <= 2J (free fermion)"])
+```
+
 
 ## Assurance (provisional)
 

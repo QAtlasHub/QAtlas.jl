@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3 | `test/models/quantum/misc/test_x_cube.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XCube(), GroundStateDegeneracy(), PBC(); route = :second_closed_form, fetch_kw = (; Lx = Lx, Ly = Ly, Lz = Lz), independent = 2.0 ^ (2 * (Lx + Ly + Lz) - 3), agree_within = 0.5, refs = ["X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3"])
+```
+
 
 ## Assurance (provisional)
 

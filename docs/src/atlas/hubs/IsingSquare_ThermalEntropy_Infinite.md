@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@onsager` | `limiting_case` | 🟡 asserted | β -> 0: spins decouple, s -> log 2 | `test/models/classical/test_IsingSquare_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingSquare(; J = 1.0), ThermalEntropy(), Infinite(); route = :limiting_case, fetch_kw = (; beta = 0.0001), independent = log(2), agree_within = 0.001, refs = ["β -> 0: spins decouple, s -> log 2"])
+```
+
 
 ## Assurance (provisional)
 

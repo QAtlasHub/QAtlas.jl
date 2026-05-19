@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | SK mean-field: spin-glass transition at Tc = J | `test/models/classical/test_sherrington_kirkpatrick.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SherringtonKirkpatrick(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = Float64(J), agree_within = 1.0e-12, refs = ["SK mean-field: spin-glass transition at Tc = J"])
+```
+
 
 ## Assurance (provisional)
 

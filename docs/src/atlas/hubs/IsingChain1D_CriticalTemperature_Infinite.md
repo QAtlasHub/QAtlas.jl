@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `limiting_case` | 🟡 asserted | Ising 1925: no finite-T order in 1D, Tc = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingChain1D(; J = 1.0), CriticalTemperature(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-12, refs = ["Ising 1925: no finite-T order in 1D, Tc = 0"])
+```
+
 
 ## Assurance (provisional)
 

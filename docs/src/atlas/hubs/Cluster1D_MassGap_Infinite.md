@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@cluster` | `second_closed_form` | 🟢 structural | Cluster model gap = 2J | `test/models/quantum/misc/test_cluster1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Cluster1D(; J = J), MassGap(), Infinite(); route = :second_closed_form, independent = 2J, agree_within = 1.0e-12, refs = ["Cluster model gap = 2J"])
+```
+
 
 ## Assurance (provisional)
 

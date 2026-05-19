@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Yang-Lee edge = M(5,2): c = 1 - 6(p-p')²/(pp') = -22/5 | `test/models/classical/test_yang_lee.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(YangLee(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 - (6 * (5 - 2) ^ 2) / (5 * 2), agree_within = 1.0e-12, refs = ["Yang-Lee edge = M(5,2): c = 1 - 6(p-p')²/(pp') = -22/5"])
+```
+
 
 ## Assurance (provisional)
 

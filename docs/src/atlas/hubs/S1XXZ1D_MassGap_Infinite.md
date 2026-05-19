@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@haldane` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) Haldane gap delegates to S1Heisenberg1D | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(S1XXZ1D(; J = 1.0, Δ = 1.0), MassGap(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(S1Heisenberg1D(; J = 1.0), MassGap(), Infinite()), agree_within = 1.0e-12, refs = ["S1XXZ1D(Delta=1) Haldane gap delegates to S1Heisenberg1D"])
+```
+
 
 ## Assurance (provisional)
 

@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2) | `test/models/quantum/TFIM/test_tfim_fidelity_susceptibility.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | BdG closed form: χ_F/L = J²/(16h²(h²−J²)) disordered phase | `test/models/quantum/TFIM/test_tfim_fidelity_susceptibility.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), FidelitySusceptibility(), Infinite(); route = :second_closed_form, independent = 1 / (16 * (J ^ 2 - h ^ 2)), agree_within = 1.0e-9, refs = ["BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), FidelitySusceptibility(), Infinite(); route = :second_closed_form, independent = J ^ 2 / (16 * h ^ 2 * (h ^ 2 - J ^ 2)), agree_within = 1.0e-9, refs = ["BdG closed form: χ_F/L = J²/(16h²(h²−J²)) disordered phase"])
+```
+
 
 ## Assurance (provisional)
 

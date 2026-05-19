@@ -15,6 +15,22 @@
 | `@critical` | `second_closed_form` | 🟢 structural | Kitaev chain topological transition at |μ|=2|t|: gap = 0 | `test/models/quantum/misc/test_kitaev1d.jl` |
 | `@topological` | `second_closed_form` | 🟢 structural | Kitaev chain sweet spot: gap = 2|Δ| | `test/models/quantum/misc/test_kitaev1d.jl` |
 | `@trivial` | `second_closed_form` | 🟢 structural | Kitaev chain trivial phase: gap = ||μ| - 2|t|| | `test/models/quantum/misc/test_kitaev1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Kitaev1D(; μ = 2.0, t = 1.0, Δ = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Kitaev chain topological transition at |μ|=2|t|: gap = 0"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 2.0, agree_within = 1.0e-9, refs = ["Kitaev chain sweet spot: gap = 2|Δ|"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 3.0, t = 1.0, Δ = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-9, refs = ["Kitaev chain trivial phase: gap = ||μ| - 2|t||"])
+```
+
 
 ## Assurance (provisional)
 

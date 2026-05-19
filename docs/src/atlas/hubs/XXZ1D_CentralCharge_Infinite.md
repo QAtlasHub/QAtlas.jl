@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@free_fermion` | `second_closed_form` | 🟢 structural | Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-14, refs = ["Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1"])
+```
+
 
 ## Assurance (provisional)
 

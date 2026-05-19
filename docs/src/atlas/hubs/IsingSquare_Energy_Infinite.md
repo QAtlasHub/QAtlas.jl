@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@onsager` | `limiting_case` | 🟡 asserted | T -> 0: all bonds satisfied, ε = -2J (square lattice, 2 bonds/site) | `test/models/classical/test_IsingSquare_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingSquare(; J = 1.0), Energy(:per_site), Infinite(); route = :limiting_case, fetch_kw = (; beta = 20.0), independent = -2.0, agree_within = 1.0e-6, refs = ["T -> 0: all bonds satisfied, ε = -2J (square lattice, 2 bonds/site)"])
+```
+
 
 ## Assurance (provisional)
 

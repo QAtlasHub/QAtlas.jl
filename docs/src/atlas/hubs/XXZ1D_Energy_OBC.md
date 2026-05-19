@@ -15,6 +15,22 @@
 | `@gapless` | `sum_rule` | 🟡 asserted | Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless) | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | OBC thermal energy from generic_ed thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), OBC(5); route = :sum_rule, fetch_kw = (; beta = 0.0), independent = 0.0, agree_within = 1.0e-12, refs = ["Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless)"])
+```
+
+```julia
+verify(XXZ1D(; J = J, Δ = Delta), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["OBC thermal energy from generic_ed thermo_from_spectrum"])
+```
+
+```julia
+verify(XXZ1D(; J = J, Δ = Delta), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
+```
+
 
 ## Assurance (provisional)
 

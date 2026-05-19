@@ -15,6 +15,22 @@
 | `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/core/test_verify_harness.jl` |
 | `@sweep` | `retype_formula` | 🟡 asserted | x | `test/core/test_verify_harness.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = ed_eps, at = ["N=$(N)" for N = Ns], agree_within = 1.0e-9, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
+```
+
+```julia
+verify(AKLT1D(), Energy(:per_site), Infinite(); route = :retype_formula, independent = [-2 / 3], agree_within = 1.0e-9, refs = ["x"])
+```
+
+```julia
+verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [((aklt_manifold(N))[1])[1] / (N - 1) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-9, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
+```
+
 
 ## Assurance (provisional)
 

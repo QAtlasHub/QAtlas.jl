@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | M(5,4): c = 1 - 6(p-q)²/(pq) = 7/10 | `test/universalities/test_tricritical_ising.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TricriticalIsing(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 - (6 * (5 - 4) ^ 2) / (5 * 4), agree_within = 1.0e-12, refs = ["M(5,4): c = 1 - 6(p-q)²/(pq) = 7/10"])
+```
+
 
 ## Assurance (provisional)
 

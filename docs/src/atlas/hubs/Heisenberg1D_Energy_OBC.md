@@ -15,6 +15,22 @@
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Heisenberg1D(), Energy(), OBC(N); route = :delegation_invariant, fetch_kw = (; beta = beta, J = 1.5), independent = QAtlas.fetch(XXZ1D(; J = 1.5, Δ = 1.0), Energy(), OBC(N); beta = beta), agree_within = 1.0e-12, refs = ["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"])
+```
+
+```julia
+verify(Heisenberg1D(), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta, J = J), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
+```
+
+```julia
+verify(Heisenberg1D(), Energy(), OBC(N); route = :delegation_invariant, fetch_kw = (; beta = beta, J = 1.5), independent = xxz_E, agree_within = 1.0e-12, refs = ["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"])
+```
+
 
 ## Assurance (provisional)
 

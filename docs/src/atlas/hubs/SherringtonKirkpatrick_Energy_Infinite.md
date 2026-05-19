@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Crisanti-Rizzo 2002 / Parisi full-RSB: e0 ≈ -0.7631667 (J=1) | `test/models/classical/test_sherrington_kirkpatrick.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SherringtonKirkpatrick(; J = 1.0), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.7631667, agree_within = 0.0001, refs = ["Crisanti-Rizzo 2002 / Parisi full-RSB: e0 ≈ -0.7631667 (J=1)"])
+```
+
 
 ## Assurance (provisional)
 

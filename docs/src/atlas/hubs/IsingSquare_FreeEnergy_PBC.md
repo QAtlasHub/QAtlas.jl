@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs) | `test/models/classical/test_IsingSquare_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingSquare(; Lx = L, Ly = L, J = 1.0), FreeEnergy(), PBC(0); route = :ed_finite_size, fetch_kw = (; beta = β, Lx = L, Ly = L, J = 1.0), independent = (-(1 / β) * log(Z)) / (L * L), agree_within = 1.0e-6, refs = ["Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs)"])
+```
+
 
 ## Assurance (provisional)
 

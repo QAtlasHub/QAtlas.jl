@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@mean_field` | `second_closed_form` | 🟢 structural | Mean-field: linearised self-consistency gives βc J = 1 => Tc = J | `test/models/classical/test_curie_weiss_ising.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(CurieWeissIsing(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = J, agree_within = 1.0e-12, refs = ["Mean-field: linearised self-consistency gives βc J = 1 => Tc = J"])
+```
+
 
 ## Assurance (provisional)
 

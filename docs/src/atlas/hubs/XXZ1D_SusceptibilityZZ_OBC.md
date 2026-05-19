@@ -12,6 +12,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = J, Δ = Delta), SusceptibilityZZ(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = chi_ind, agree_within = 1.0e-9, refs = ["chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian"])
+```
+
 
 ## Assurance (provisional)
 

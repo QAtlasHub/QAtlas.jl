@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.03, fetch_kw = (; r = r), refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
+```
+
 
 ## Assurance (provisional)
 

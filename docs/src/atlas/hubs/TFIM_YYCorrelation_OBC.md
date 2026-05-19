@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense-ED ⟨σy_i σy_j⟩ via _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_yy.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), YYCorrelation(; mode = :static), OBC(N); route = :ed_finite_size, fetch_kw = (; i = i, j = j, beta = Inf), independent = yy_ed, agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σy_i σy_j⟩ via _build_tfim_dense ground state"])
+```
+
 
 ## Assurance (provisional)
 

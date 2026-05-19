@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2) | `test/universalities/test_zn_parafermion.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(ZnParafermion(; n = n), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2 * (n - 1) // (n + 2), agree_within = 1.0e-12, refs = ["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"])
+```
+
 
 ## Assurance (provisional)
 

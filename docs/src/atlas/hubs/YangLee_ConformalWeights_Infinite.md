@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Cardy 1985: Yang-Lee edge singularity primary h_{1,2} = -1/5 | `test/models/classical/test_yang_lee.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(YangLee(), ConformalWeights(), Infinite(); route = :literature_value, fetch_kw = (; r = 1, s = 2), independent = -1 / 5, agree_within = 1.0e-12, refs = ["Cardy 1985: Yang-Lee edge singularity primary h_{1,2} = -1/5"])
+```
+
 
 ## Assurance (provisional)
 

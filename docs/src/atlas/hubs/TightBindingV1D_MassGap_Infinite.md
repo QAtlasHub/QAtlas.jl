@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | V=0 half-filled chain: gapless Fermi surface | `test/models/quantum/misc/test_tight_binding_v1d.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | V=0, μ>2t: band-insulator gap = |μ| - 2t | `test/models/quantum/misc/test_tight_binding_v1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TightBindingV1D(), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["V=0 half-filled chain: gapless Fermi surface"])
+```
+
+```julia
+verify(TightBindingV1D(; μ = 3.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-9, refs = ["V=0, μ>2t: band-insulator gap = |μ| - 2t"])
+```
+
 
 ## Assurance (provisional)
 

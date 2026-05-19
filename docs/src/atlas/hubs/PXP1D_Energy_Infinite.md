@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | PXP scar literature (Turner 2018 / Lin-Motrunich 2019): e0 ~ -0.6516 | `test/models/quantum/misc/test_pxp1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(PXP1D(), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.6516, agree_within = 0.005, refs = ["PXP scar literature (Turner 2018 / Lin-Motrunich 2019): e0 ~ -0.6516"])
+```
+
 
 ## Assurance (provisional)
 

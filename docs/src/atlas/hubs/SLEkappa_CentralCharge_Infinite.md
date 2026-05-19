@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [$(name) at κ=$(κ)]" | `test/models/classical/test_sle_kappa.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SLEkappa(; κ = κ), CentralCharge(), Infinite(); route = :second_closed_form, independent = c_ind, agree_within = 1.0e-9, refs = ["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [$(name) at κ=$(κ)]"])
+```
+
 
 ## Assurance (provisional)
 

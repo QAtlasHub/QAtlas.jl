@@ -15,6 +15,22 @@
 | `@free_fermion` | `second_closed_form` | 🟢 structural | Jordan-Wigner free fermion: K=1 at Delta=0 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@su2` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at the SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Haldane 1980: K = π / (2(π - arccos Δ)) for the critical XXZ chain | `test/verification/heisenberg_xxz/test_xxz_luttinger_ed.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.0), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["Jordan-Wigner free fermion: K=1 at Delta=0"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 1.0), LuttingerParameter(), Infinite(); route = :limiting_case, independent = 0.5, agree_within = 1.0e-12, refs = ["Luther-Peschel 1975: K=1/2 at the SU(2) isotropic point"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = Δ), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = π / (2 * (π - acos(Δ))), agree_within = 1.0e-9, refs = ["Haldane 1980: K = π / (2(π - arccos Δ)) for the critical XXZ chain"])
+```
+
 
 ## Assurance (provisional)
 

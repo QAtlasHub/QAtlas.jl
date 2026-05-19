@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@free_fermion` | `limiting_case` | 🟡 asserted | No-quench identity: H_initial = H_final => lambda(t) = 0 for all t | `test/models/quantum/XXZ/test_xxz_xx_quench.jl` |
 | `@free_fermion` | `second_closed_form` | 🟢 structural | Free-fermion Slater det: |L(t)| = 1 for same-sign J quench => lambda = 0 | `test/models/quantum/XXZ/test_xxz_xx_quench.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.0), LoschmidtEcho(; mode = :rate), Infinite(); route = :limiting_case, fetch_kw = (; initial = XXZ1D(; J = 1.0, Δ = 0.0), t = 2.5), independent = 0.0, agree_within = 1.0e-14, refs = ["No-quench identity: H_initial = H_final => lambda(t) = 0 for all t"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.0), LoschmidtEcho(; mode = :rate), Infinite(); route = :second_closed_form, fetch_kw = (; initial = XXZ1D(; J = 0.5, Δ = 0.0), t = 1.0), independent = 0.0, agree_within = 1.0e-14, refs = ["Free-fermion Slater det: |L(t)| = 1 for same-sign J quench => lambda = 0"])
+```
+
 
 ## Assurance (provisional)
 

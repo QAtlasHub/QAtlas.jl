@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003: toric-code e0 = -(J_e + J_m) | `test/models/quantum/misc/test_toric_code.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(ToricCode(; J_e = 1.0, J_m = 1.0), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-10, refs = ["Kitaev 2003: toric-code e0 = -(J_e + J_m)"])
+```
+
 
 ## Assurance (provisional)
 

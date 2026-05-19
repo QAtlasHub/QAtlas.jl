@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@haldane` | `delegation_invariant` | 🟡 asserted | S1AnisotropicD1D(D=0) delegates to S1Heisenberg1D: code paths must agree | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
 | `@haldane` | `delegation_invariant` | 🟡 asserted | Linear J scaling: e(2J) = 2 e(J) for spin-1 Heisenberg | `test/models/quantum/Heisenberg/test_s1_anisotropic_d1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(S1AnisotropicD1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite()), agree_within = 1.0e-12, refs = ["S1AnisotropicD1D(D=0) delegates to S1Heisenberg1D: code paths must agree"])
+```
+
+```julia
+verify(S1AnisotropicD1D(; J = 2.0, D = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = 2.0 * QAtlas.fetch(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite()), agree_within = 1.0e-10, refs = ["Linear J scaling: e(2J) = 2 e(J) for spin-1 Heisenberg"])
+```
+
 
 ## Assurance (provisional)
 

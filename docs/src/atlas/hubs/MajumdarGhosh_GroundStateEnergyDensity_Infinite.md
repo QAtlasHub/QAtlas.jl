@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@dimer` | `ed_finite_size` | 🟢 structural | Exact MG dimer GS of the J1-J2 ring at J2=J/2 (even N), -3J/8 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
 | `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: exact orthogonal-dimer product state, e0 = -3J/8 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), Infinite(); route = :ed_finite_size, independent = [mg_pbc_e0(N, 1.0) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-6, refs = ["Exact MG dimer GS of the J1-J2 ring at J2=J/2 (even N), -3J/8"])
+```
+
+```julia
+verify(MajumdarGhosh(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-3J) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: exact orthogonal-dimer product state, e0 = -3J/8"])
+```
+
 
 ## Assurance (provisional)
 

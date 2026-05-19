@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@free_fermion` | `second_closed_form` | 🟢 structural | Free fermion eps(k)=J cos k: v_F=J at k_F=pi/2 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@su2` | `limiting_case` | 🟡 asserted | des Cloizeaux-Pearson 1962: u=piJ/2 at SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.0), LuttingerVelocity(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["Free fermion eps(k)=J cos k: v_F=J at k_F=pi/2"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 1.0), LuttingerVelocity(), Infinite(); route = :limiting_case, independent = π / 2, agree_within = 1.0e-12, refs = ["des Cloizeaux-Pearson 1962: u=piJ/2 at SU(2) isotropic point"])
+```
+
 
 ## Assurance (provisional)
 

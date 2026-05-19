@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@anisotropic` | `second_closed_form` | 🟢 structural | 1D compass model gap = 2|J_x - J_y| | `test/models/quantum/misc/test_compass1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Compass1D(; J_x = jx, J_y = jy), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(jx - jy), agree_within = 1.0e-10, refs = ["1D compass model gap = 2|J_x - J_y|"])
+```
+
 
 ## Assurance (provisional)
 

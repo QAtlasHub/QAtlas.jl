@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@massless` | `second_closed_form` | 🟢 structural | Massless Schwinger model: m_gamma = e / sqrt(pi) (exact) | `test/models/quantum/misc/test_schwinger_model.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SchwingerModel(; e = e, m = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = e / sqrt(pi), agree_within = 1.0e-9, refs = ["Massless Schwinger model: m_gamma = e / sqrt(pi) (exact)"])
+```
+
 
 ## Assurance (provisional)
 

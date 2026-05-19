@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Empty/full lattice carries no current: j(0)=j(1)=0 | `test/models/classical/test_tasep.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TASEP mean-field steady state current j = p ρ (1-ρ) | `test/models/classical/test_tasep.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TASEP(; p = 1.0, ρ = 0.0), SteadyStateCurrent(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-12, refs = ["Empty/full lattice carries no current: j(0)=j(1)=0"])
+```
+
+```julia
+verify(TASEP(; p = p, ρ = ρ), SteadyStateCurrent(), Infinite(); route = :second_closed_form, independent = p * ρ * (1 - ρ), agree_within = 1.0e-12, refs = ["TASEP mean-field steady state current j = p ρ (1-ρ)"])
+```
+
 
 ## Assurance (provisional)
 

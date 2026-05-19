@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingChain1D(; J = J), FreeEnergy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = -(1 / β) * log(2 * cosh(β * J)), agree_within = 1.0e-10, refs = ["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"])
+```
+
 
 ## Assurance (provisional)
 

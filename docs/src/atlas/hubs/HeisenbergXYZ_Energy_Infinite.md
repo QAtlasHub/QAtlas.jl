@@ -15,6 +15,22 @@
 | `@sweep` | `ed_finite_size` | 🟢 structural | Hulthen 1938 via delegation to XXZ1D at Delta=1 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 | `@xx` | `limiting_case` | 🟡 asserted | Jordan-Wigner free fermion: XX limit Jz=0 gives e0 = -J/pi | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 | `@xxz` | `limiting_case` | 🟡 asserted | FM saturation: Jz=-J gives e0 = -J/4 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(HeisenbergXYZ(; Jx = J, Jy = J, Jz = J), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938 via delegation to XXZ1D at Delta=1"])
+```
+
+```julia
+verify(HeisenbergXYZ(; Jx = 1.0, Jy = 1.0, Jz = 0.0), Energy(:per_site), Infinite(); route = :limiting_case, independent = -1 / π, agree_within = 1.0e-12, refs = ["Jordan-Wigner free fermion: XX limit Jz=0 gives e0 = -J/pi"])
+```
+
+```julia
+verify(HeisenbergXYZ(; Jx = 1.0, Jy = 1.0, Jz = -1.0), Energy(:per_site), Infinite(); route = :limiting_case, independent = -1 / 4, agree_within = 1.0e-12, refs = ["FM saturation: Jz=-J gives e0 = -J/4"])
+```
+
 
 ## Assurance (provisional)
 

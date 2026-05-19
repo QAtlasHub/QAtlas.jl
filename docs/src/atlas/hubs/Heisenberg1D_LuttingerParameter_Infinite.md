@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D delegates to XXZ1D(Delta=1): two code paths must agree | `test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl` |
 | `@su2` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at SU(2) isotropic point, J-independent | `test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Heisenberg1D(), LuttingerParameter(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(XXZ1D(; J = 1.0, Δ = 1.0), LuttingerParameter(), Infinite()), agree_within = 1.0e-14, refs = ["Heisenberg1D delegates to XXZ1D(Delta=1): two code paths must agree"])
+```
+
+```julia
+verify(Heisenberg1D(), LuttingerParameter(), Infinite(); route = :limiting_case, independent = 0.5, agree_within = 1.0e-12, refs = ["Luther-Peschel 1975: K=1/2 at SU(2) isotropic point, J-independent"])
+```
+
 
 ## Assurance (provisional)
 

@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | n=2 clock = Ising = M(4,3): c = 1/2 | `test/universalities/test_zn_clock.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | n=3 clock = 3-state Potts = M(6,5): c = 4/5 | `test/universalities/test_zn_clock.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(ZnClock(; n = 2), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 - 6 * (4 - 3) ^ 2 // (4 * 3), agree_within = 1.0e-12, refs = ["n=2 clock = Ising = M(4,3): c = 1/2"])
+```
+
+```julia
+verify(ZnClock(; n = 3), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 - 6 * (6 - 5) ^ 2 // (6 * 5), agree_within = 1.0e-12, refs = ["n=3 clock = 3-state Potts = M(6,5): c = 4/5"])
+```
+
 
 ## Assurance (provisional)
 

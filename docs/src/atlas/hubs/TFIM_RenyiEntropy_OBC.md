@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p² | `test/models/quantum/TFIM/test_TFIM_renyi.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), RenyiEntropy(2), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S2_ind, agree_within = 1.0e-8, refs = ["Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p²"])
+```
+
 
 ## Assurance (provisional)
 

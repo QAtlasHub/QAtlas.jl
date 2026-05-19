@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio | `test/models/quantum/misc/test_fibonacci_anyons.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(2 + phi), agree_within = 1.0e-9, refs = ["Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio"])
+```
+
 
 ## Assurance (provisional)
 

@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@band_insulator` | `second_closed_form` | 🟢 structural | Band insulator mu > 2t: gap = |mu| - 2t | `test/models/quantum/misc/test_tight_binding1d.jl` |
 | `@half_filling` | `second_closed_form` | 🟢 structural | Half filling: gapless Fermi surface | `test/models/quantum/misc/test_tight_binding1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TightBinding1D(; t = 1.0, μ = 3.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-9, refs = ["Band insulator mu > 2t: gap = |mu| - 2t"])
+```
+
+```julia
+verify(TightBinding1D(; t = 1.0, μ = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Half filling: gapless Fermi surface"])
+```
+
 
 ## Assurance (provisional)
 

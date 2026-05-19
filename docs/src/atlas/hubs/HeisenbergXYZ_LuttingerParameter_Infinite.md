@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@isotropic` | `delegation_invariant` | 🟡 asserted | HeisenbergXYZ(isotropic) delegates to XXZ1D(Delta=1): K=1/2 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(HeisenbergXYZ(; Jx = 1.0, Jy = 1.0, Jz = 1.0), LuttingerParameter(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(XXZ1D(; J = 1.0, Δ = 1.0), LuttingerParameter(), Infinite()), agree_within = 1.0e-14, refs = ["HeisenbergXYZ(isotropic) delegates to XXZ1D(Delta=1): K=1/2"])
+```
+
 
 ## Assurance (provisional)
 

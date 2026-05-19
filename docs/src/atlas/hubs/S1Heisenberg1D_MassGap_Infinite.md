@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: Haldane gap Δ ≈ 0.41048 J | `test/identities/test_identities_S1Heisenberg1D.jl` |
 | `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: Haldane gap Delta ≈ 0.41048 J | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(S1Heisenberg1D(; J = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 0.41048, agree_within = 0.0001, refs = ["White-Huse 1993 DMRG: Haldane gap Δ ≈ 0.41048 J"])
+```
+
+```julia
+verify(S1Heisenberg1D(; J = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 0.41048, agree_within = 0.0001, refs = ["White-Huse 1993 DMRG: Haldane gap Delta ≈ 0.41048 J"])
+```
+
 
 ## Assurance (provisional)
 

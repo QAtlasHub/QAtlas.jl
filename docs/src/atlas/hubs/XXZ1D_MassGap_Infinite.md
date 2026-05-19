@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@gapless` | `second_closed_form` | 🟢 structural | Luttinger liquid: gapless for |Delta| < 1 (Bethe ansatz exact) | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-14, refs = ["Luttinger liquid: gapless for |Delta| < 1 (Bethe ansatz exact)"])
+```
+
 
 ## Assurance (provisional)
 

@@ -92,6 +92,18 @@ for h in claimed
                c.refs, " | `", c.file, "` |")
         end
     end
+    if !isempty(cs)
+        HP("## Test calls")
+        HP("")
+        HP("_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_")
+        HP("")
+        for c in cs
+            HP("```julia")
+            HP(c.srctext)
+            HP("```")
+            HP("")
+        end
+    end
     HP("")
     HP("## Assurance (provisional)")
     HP("")

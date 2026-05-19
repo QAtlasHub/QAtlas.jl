@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Liouville CFT: c = 1 + 6 (b + 1/b)²  (c=25 at b=1) | `test/models/classical/test_liouville_cft.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Liouville b <-> 1/b duality: c(2) = c(1/2) | `test/models/classical/test_liouville_cft.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(LiouvilleCFT(; b = b), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 + 6 * (b + 1 / b) ^ 2, agree_within = 1.0e-9, refs = ["Liouville CFT: c = 1 + 6 (b + 1/b)² (c=25 at b=1)"])
+```
+
+```julia
+verify(LiouvilleCFT(; b = 2.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 + 6 * (0.5 + 1 / 0.5) ^ 2, agree_within = 1.0e-9, refs = ["Liouville b <-> 1/b duality: c(2) = c(1/2)"])
+```
+
 
 ## Assurance (provisional)
 

@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Kitaev 2006: isotropic honeycomb e0 ≈ -0.78729862 |K| | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), Energy(), Infinite(); route = :literature_value, independent = -0.7872986216706852, agree_within = 1.0e-6, refs = ["Kitaev 2006: isotropic honeycomb e0 ≈ -0.78729862 |K|"])
+```
+
 
 ## Assurance (provisional)
 

@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970) | `test/models/quantum/misc/test_long_range_ising1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(LongRangeIsing1D(; J = J, h = h), MassGap(), Infinite(); route = :delegation_invariant, independent = 2 * abs(h - J), agree_within = 1.0e-9, refs = ["α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970)"])
+```
+
 
 ## Assurance (provisional)
 

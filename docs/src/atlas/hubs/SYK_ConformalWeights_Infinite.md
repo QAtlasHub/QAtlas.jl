@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | SYK IR Majorana conformal dimension Delta_psi = 1/q | `test/models/quantum/misc/test_syk.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SYK(; q = q), ConformalWeights(), Infinite(); route = :second_closed_form, fetch_kw = (; field = :ψ), independent = 1 // q, agree_within = 1.0e-10, refs = ["SYK IR Majorana conformal dimension Delta_psi = 1/q"])
+```
+
 
 ## Assurance (provisional)
 

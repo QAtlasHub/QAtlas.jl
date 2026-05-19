@@ -14,6 +14,22 @@
 | `@sweep` | `limiting_case` | 🟡 asserted | t=0 limit: ⟨σz_i(0) σz_j⟩ = static GS correlator (dense ED) | `test/models/quantum/TFIM/test_TFIM_dynamics.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense GS | `test/models/quantum/TFIM/test_TFIM_local.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_zaxis.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), ZZCorrelation(; mode = :dynamic), OBC(N); route = :limiting_case, fetch_kw = (; i = i, j = j, t = 0.0), independent = zz0, agree_within = 1.0e-8, refs = ["t=0 limit: ⟨σz_i(0) σz_j⟩ = static GS correlator (dense ED)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), ZZCorrelation(; mode = :static), OBC(N); route = :ed_finite_size, fetch_kw = (; i = i, j = j, beta = Inf), independent = zz_ed, agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense GS"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), ZZCorrelation(; mode = :static), OBC(N); route = :ed_finite_size, fetch_kw = (; i = i, j = j, beta = Inf), independent = zz_ed, agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state"])
+```
+
 
 ## Assurance (provisional)
 

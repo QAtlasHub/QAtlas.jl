@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Z2 spin liquid: gamma = log 2 (Jiang-Wang-Balents 2012) | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(KagomeHeisenbergAFM(; J = 1.0), TopologicalEntanglementEntropy(), Infinite(); route = :literature_value, independent = log(2), agree_within = 1.0e-6, refs = ["Z2 spin liquid: gamma = log 2 (Jiang-Wang-Balents 2012)"])
+```
+
 
 ## Assurance (provisional)
 

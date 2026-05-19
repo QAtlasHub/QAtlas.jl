@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Arovas-Auerbach-Haldane 1988 | `test/models/quantum/misc/test_aklt.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.15, fetch_kw = (; q = q), refs = ["Arovas-Auerbach-Haldane 1988"])
+```
+
 
 ## Assurance (provisional)
 

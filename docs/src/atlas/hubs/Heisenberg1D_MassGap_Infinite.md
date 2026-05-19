@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@su2` | `second_closed_form` | 🟢 structural | Heisenberg chain is gapless (des Cloizeaux-Pearson 1962): gap = 0 | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Heisenberg1D(), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-14, refs = ["Heisenberg chain is gapless (des Cloizeaux-Pearson 1962): gap = 0"])
+```
+
 
 ## Assurance (provisional)
 

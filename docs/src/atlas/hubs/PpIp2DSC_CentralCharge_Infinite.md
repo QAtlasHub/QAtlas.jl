@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Chiral p+ip edge: single chiral Majorana CFT c = 1/2 | `test/models/quantum/misc/test_ppip_2dsc.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(PpIp2DSC(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 // 2, agree_within = 1.0e-10, refs = ["Chiral p+ip edge: single chiral Majorana CFT c = 1/2"])
+```
+
 
 ## Assurance (provisional)
 

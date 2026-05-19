@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Ferroelectric phase (Δ>1): frozen, residual entropy S = 0 | `test/models/classical/test_six_vertex.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Lieb 1967: square-ice residual entropy S = (3/2) log(4/3) ≈ 0.4315 | `test/models/classical/test_six_vertex.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SixVertex(; a = 3.0, b = 1.0, c = 1.0), ResidualEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["Ferroelectric phase (Δ>1): frozen, residual entropy S = 0"])
+```
+
+```julia
+verify(SixVertex(; a = 1.0, b = 1.0, c = 1.0), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = (3 / 2) * log(4 / 3), agree_within = 1.0e-9, refs = ["Lieb 1967: square-ice residual entropy S = (3/2) log(4/3) ≈ 0.4315"])
+```
+
 
 ## Assurance (provisional)
 

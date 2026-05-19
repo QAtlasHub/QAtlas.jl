@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | p+ip weak-pairing phase: first Chern number = 1 | `test/models/quantum/misc/test_ppip_2dsc.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(PpIp2DSC(), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = 1, agree_within = 1.0e-10, refs = ["p+ip weak-pairing phase: first Chern number = 1"])
+```
+
 
 ## Assurance (provisional)
 

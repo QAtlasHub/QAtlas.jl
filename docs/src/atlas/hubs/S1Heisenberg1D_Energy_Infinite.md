@@ -15,6 +15,22 @@
 | `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain) | `test/identities/test_identities_S1Heisenberg1D.jl` |
 | `@haldane` | `ed_finite_size` | 🟢 structural | Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow) | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
 | `@haldane` | `literature_value` | 🟢 structural | White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain) | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :literature_value, independent = -1.401484038971, agree_within = 1.0e-6, refs = ["White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain)"])
+```
+
+```julia
+verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(3, N, heis1_bond(1.0))))[1] / N for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.3, refs = ["Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow)"])
+```
+
+```julia
+verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :literature_value, independent = -1.401484038971, agree_within = 1.0e-6, refs = ["White-Huse 1993 DMRG: e ≈ -1.401484 J (spin-1 Haldane chain)"])
+```
+
 
 ## Assurance (provisional)
 

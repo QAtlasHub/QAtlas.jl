@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_σ ≈ 0.5181489 | `test/universalities/test_conformal_bootstrap.jl` |
 | `@sweep` | `literature_value` | 🟢 structural | KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_ε ≈ 1.412625 | `test/universalities/test_conformal_bootstrap.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(ConformalBootstrap(), ConformalWeights(), Infinite(); route = :literature_value, fetch_kw = (; field = :σ), independent = 0.5181489, agree_within = 1.0e-5, refs = ["KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_σ ≈ 0.5181489"])
+```
+
+```julia
+verify(ConformalBootstrap(), ConformalWeights(), Infinite(); route = :literature_value, fetch_kw = (; field = :ε), independent = 1.412625, agree_within = 0.0001, refs = ["KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_ε ≈ 1.412625"])
+```
+
 
 ## Assurance (provisional)
 

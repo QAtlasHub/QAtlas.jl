@@ -15,6 +15,22 @@
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2) | `test/identities/test_identities_Heisenberg1D.jl` |
 | `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e0 = 1/4 − log 2 | `test/identities/test_identities_Heisenberg1D.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence | `test/models/quantum/XXZ/test_bethe_ansatz.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(XXZ1D(; J = 1.0, Δ = 1.0), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2)"])
+```
+
+```julia
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = 0.25 - log(2.0), agree_within = 1.0e-12, refs = ["Hulthén 1938: e0 = 1/4 − log 2"])
+```
+
+```julia
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence"])
+```
+
 
 ## Assurance (provisional)
 

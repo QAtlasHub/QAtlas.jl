@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@triangular` | `limiting_case` | 🟡 asserted | Wannier 1950: AFM triangular is fully frustrated, Tc = 0 | `test/models/classical/test_ising_triangular.jl` |
 | `@triangular` | `second_closed_form` | 🟢 structural | Houtappel 1950: FM triangular Tc = 4|J| / log 3 | `test/models/classical/test_ising_triangular.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingTriangular(; J = 1.0), CriticalTemperature(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-12, refs = ["Wannier 1950: AFM triangular is fully frustrated, Tc = 0"])
+```
+
+```julia
+verify(IsingTriangular(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (4 * abs(J)) / log(3), agree_within = 1.0e-9, refs = ["Houtappel 1950: FM triangular Tc = 4|J| / log 3"])
+```
+
 
 ## Assurance (provisional)
 

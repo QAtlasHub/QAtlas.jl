@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | UV free-fermion fixed point: c = N at g = 0 | `test/models/quantum/misc/test_gross_neveu.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(GrossNeveu(; N = N, g = 0.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = N, agree_within = 1.0e-10, refs = ["UV free-fermion fixed point: c = N at g = 0"])
+```
+
 
 ## Assurance (provisional)
 

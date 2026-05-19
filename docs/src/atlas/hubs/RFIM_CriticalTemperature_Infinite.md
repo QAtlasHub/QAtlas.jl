@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Imry-Ma 1975: RFIM lower critical dimension is 2 => Tc = 0 for d ≤ 2 | `test/models/classical/test_rfim.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(RFIM(; Δ = 0.5), CriticalTemperature(), Infinite(); route = :second_closed_form, fetch_kw = (; d = d), independent = 0.0, agree_within = 1.0e-12, refs = ["Imry-Ma 1975: RFIM lower critical dimension is 2 => Tc = 0 for d ≤ 2"])
+```
+
 
 ## Assurance (provisional)
 

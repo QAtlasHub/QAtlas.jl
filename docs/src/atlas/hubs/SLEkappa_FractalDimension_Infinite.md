@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8 | `test/models/classical/test_sle_kappa.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SLEkappa(; κ = κ), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + κ / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
+```
+
 
 ## Assurance (provisional)
 

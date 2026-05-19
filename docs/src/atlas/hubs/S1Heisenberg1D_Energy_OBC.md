@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@haldane` | `ed_finite_size` | 🟢 structural | Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
 | `@haldane` | `second_closed_form` | 🟢 structural | Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J} | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(S1Heisenberg1D(; J = J), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
+```
+
+```julia
+verify(S1Heisenberg1D(; J = J), Energy(), OBC(2); route = :second_closed_form, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J}"])
+```
+
 
 ## Assurance (provisional)
 

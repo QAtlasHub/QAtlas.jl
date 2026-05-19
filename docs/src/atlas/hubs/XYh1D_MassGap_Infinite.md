@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@polarized` | `second_closed_form` | 🟢 structural | Polarized |h|>2J: gap = 2(|h| - 2J) | `test/models/quantum/misc/test_xyh1d.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | XX limit h=0: gapless | `test/models/quantum/misc/test_xyh1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XYh1D(; h = 3.0), MassGap(), Infinite(); route = :second_closed_form, independent = 2.0, agree_within = 1.0e-9, refs = ["Polarized |h|>2J: gap = 2(|h| - 2J)"])
+```
+
+```julia
+verify(XYh1D(), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XX limit h=0: gapless"])
+```
+
 
 ## Assurance (provisional)
 

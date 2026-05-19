@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(MajumdarGhosh(; J = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 0.234, agree_within = 0.005, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J"])
+```
+
 
 ## Assurance (provisional)
 

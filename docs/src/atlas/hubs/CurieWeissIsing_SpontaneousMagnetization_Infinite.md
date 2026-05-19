@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@mean_field` | `second_closed_form` | 🟢 structural | Curie-Weiss self-consistency m = tanh(βJm), independent fixed point | `test/models/classical/test_curie_weiss_ising.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(CurieWeissIsing(; J = J), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = m, agree_within = 1.0e-8, refs = ["Curie-Weiss self-consistency m = tanh(βJm), independent fixed point"])
+```
+
 
 ## Assurance (provisional)
 

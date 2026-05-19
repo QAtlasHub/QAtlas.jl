@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths"])
+```
+
+```julia
+verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(2, N, heis_bond(1.0))))[1] / N for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.1, refs = ["Hulthen 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"])
+```
+
 
 ## Assurance (provisional)
 

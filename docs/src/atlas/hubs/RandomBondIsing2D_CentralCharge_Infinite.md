@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | p=1 reduces to clean 2D Ising: c = 1/2 (M(4,3)) | `test/models/classical/test_random_bond_ising_2d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(RandomBondIsing2D(; J = 1.0, p = 1.0), CentralCharge(), Infinite(); route = :delegation_invariant, independent = 0.5, agree_within = 1.0e-12, refs = ["p=1 reduces to clean 2D Ising: c = 1/2 (M(4,3))"])
+```
+
 
 ## Assurance (provisional)
 

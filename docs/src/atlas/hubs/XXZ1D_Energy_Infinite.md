@@ -18,6 +18,34 @@
 | `@gapless` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@gapless` | `second_closed_form` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = -1.0), Energy(), Infinite(); route = :limiting_case, independent = -0.25, agree_within = 1.0e-14, refs = ["FM saturation: all-aligned state is exact GS, e0 = -J/4"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = -1.0), Energy(), Infinite(); route = :second_closed_form, independent = -0.25, agree_within = 1.0e-12, refs = ["XXZ FM point Δ=-1: aligned state exact, e0 = -J/4"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.0), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 0.0, N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion)"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 0.5, N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3)"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :second_closed_form, independent = -3 / 8, agree_within = 1.0e-9, refs = ["Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 1.0), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 1.0, N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1"])
+```
+
 
 ## Assurance (provisional)
 

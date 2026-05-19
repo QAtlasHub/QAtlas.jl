@@ -16,6 +16,26 @@
 | `@onsager` | `limiting_case` | 🟡 asserted | β = 0: all 2^N configs weight 1 => Z = 2^N | `test/models/classical/test_ising_square_pfaffian.jl` |
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all configs vs transfer matrix | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force exact_partition cross-check of the transfer-matrix Z | `test/verification/tfim_ising/test_ising_ad_thermodynamics.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingSquare(; Lx = L, Ly = L, J = J), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = L, Ly = L, J = J), independent = exact_partition(L, L, J, β), agree_within = 1.0e-6, refs = ["Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs)"])
+```
+
+```julia
+verify(IsingSquare(; Lx = 3, Ly = 3, J = 1.0), PartitionFunction(), PBC(0); route = :limiting_case, fetch_kw = (; β = 0.0, Lx = 3, Ly = 3, J = 1.0), independent = 2.0 ^ 9, agree_within = 1.0e-6, refs = ["β = 0: all 2^N configs weight 1 => Z = 2^N"])
+```
+
+```julia
+verify(IsingSquare(; Lx = L, Ly = L, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = L, Ly = L, J = 1.0), independent = exact_partition(L, L, 1.0, β), agree_within = 1.0e-6, refs = ["Brute-force Σ_σ exp(-βE) over all configs vs transfer matrix"])
+```
+
+```julia
+verify(IsingSquare(; Lx = L, Ly = L, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = L, Ly = L, J = 1.0), independent = exact_partition(L, L, 1.0, β), agree_within = 1.0e-6, refs = ["Brute-force exact_partition cross-check of the transfer-matrix Z"])
+```
+
 
 ## Assurance (provisional)
 

@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(KagomeHeisenbergAFM(; J = 1.0), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.4386, agree_within = 0.005, refs = ["Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J"])
+```
+
 
 ## Assurance (provisional)
 

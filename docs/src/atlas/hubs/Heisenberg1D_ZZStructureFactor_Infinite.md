@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@su2` | `second_closed_form` | 🟢 structural | Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion | `test/models/quantum/Heisenberg/test_heisenberg_spinon.jl` |
 | `@su2` | `second_closed_form` | 🟢 structural | Two-spinon continuum has compact support: S=0 for ω > ε_U(q) | `test/models/quantum/Heisenberg/test_heisenberg_spinon.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, fetch_kw = (; q = q, ω = ω, J = J, method = :muller), independent = S_indep, agree_within = 1.0e-12, refs = ["Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion"])
+```
+
+```julia
+verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, fetch_kw = (; q = q, ω = εU + 0.5, J = J, method = :muller), independent = 0.0, agree_within = 1.0e-14, refs = ["Two-spinon continuum has compact support: S=0 for ω > ε_U(q)"])
+```
+
 
 ## Assurance (provisional)
 

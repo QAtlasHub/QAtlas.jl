@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@ordered` | `sum_rule` | 🟡 asserted | Tr(σz σz)=Tr(σx)=0 => per-site ⟨H⟩_{β=0}=0 (PBC) | `test/identities/test_identities_TFIM_pbc.jl` |
 | `@sweep` | `sum_rule` | 🟡 asserted | Tr(σz σz) = Tr(σx) = 0 => per-site ⟨H⟩_{β=0} = 0 (PBC) | `test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = 1.0, h = 0.5), Energy(:per_site), PBC(6); route = :sum_rule, fetch_kw = (; beta = 0.0), independent = 0.0, agree_within = 1.0e-9, refs = ["Tr(σz σz)=Tr(σx)=0 => per-site ⟨H⟩_{β=0}=0 (PBC)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), Energy(:per_site), PBC(N); route = :sum_rule, fetch_kw = (; beta = 0.0), independent = 0.0, agree_within = 1.0e-10, refs = ["Tr(σz σz) = Tr(σx) = 0 => per-site ⟨H⟩_{β=0} = 0 (PBC)"])
+```
+
 
 ## Assurance (provisional)
 

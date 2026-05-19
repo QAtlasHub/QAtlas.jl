@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Lieb-Schultz-Mattis 1961: XX chain e0 = -4/pi (Pauli σ convention) | `test/models/quantum/misc/test_xyh1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(XYh1D(), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -4 / pi, agree_within = 1.0e-9, refs = ["Lieb-Schultz-Mattis 1961: XX chain e0 = -4/pi (Pauli σ convention)"])
+```
+
 
 ## Assurance (provisional)
 

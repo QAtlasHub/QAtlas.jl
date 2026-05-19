@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Pfeuty 1970: m_z = 0 for h >= J (disordered/critical) | `test/models/quantum/TFIM/test_TFIM_zaxis.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)²)^{1/8} for h < J | `test/models/quantum/TFIM/test_TFIM_zaxis.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), MagnetizationZ(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["Pfeuty 1970: m_z = 0 for h >= J (disordered/critical)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), MagnetizationZ(), Infinite(); route = :second_closed_form, independent = (1 - (h / J) ^ 2) ^ (1 / 8), agree_within = 1.0e-9, refs = ["Pfeuty 1970: m_z = (1 - (h/J)²)^{1/8} for h < J"])
+```
+
 
 ## Assurance (provisional)
 

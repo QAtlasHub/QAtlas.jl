@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@triangular` | `second_closed_form` | 🟢 structural | Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066 | `test/models/classical/test_ising_triangular.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingTriangular(; J = J), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = (2 / π) * S_w, agree_within = 1.0e-6, refs = ["Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066"])
+```
+
 
 ## Assurance (provisional)
 

@@ -21,6 +21,46 @@
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| (Bogoliubov dispersion minimum) | `test/models/quantum/TFIM/test_TFIM_massgap.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| | `test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = 1.0, h = 1.0), MassGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["Ising QCP at h = J: gap closes (Pfeuty 1970)"])
+```
+
+```julia
+verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(0.5 - 1.0), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J| (BC-independent)"])
+```
+
+```julia
+verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J| = 1 at (J=1, h=0.5)"])
+```
+
+```julia
+verify(TFIM(; J = 1.0, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - 1.0), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J| (Bogoliubov dispersion minimum)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - J), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J|"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - J), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Delta = 2|h - J|"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - J), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Delta = 2|h - J| (Bogoliubov dispersion minimum)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - J), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J|"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - J), agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J)"])
+```
+
 
 ## Assurance (provisional)
 

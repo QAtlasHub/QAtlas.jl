@@ -180,6 +180,7 @@ struct Card
     independence::String
     discriminant::String
     refs::String
+    srctext::String
 end
 
 function _refs_text(ex)
@@ -209,8 +210,13 @@ function _handle_verify!(out, ex, file, testset)
     end
     ind, disc = _independence(route, get(kw, :refs, nothing))
     hub = string(_headsym(model), "/", _headsym(qty), "/", _headsym(bc))
+    srctext = try
+        replace(string(ex), r"\s+" => " ")
+    catch
+        "verify(...)"
+    end
     push!(out, Card(hub, reg.token, reg.arity, file, testset,
-                    string(route), ind, disc, refs))
+                    string(route), ind, disc, refs, srctext))
     return
 end
 
@@ -274,7 +280,8 @@ function to_jsonl(cards::Vector{Card})
             _kv("discriminant", _jstr(c.discriminant)), ",",
             _kv("file", _jstr(c.file)), ",",
             _kv("testset", _jstr(c.testset)), ",",
-            _kv("refs", _jstr(c.refs)), "}"))
+            _kv("refs", _jstr(c.refs)), ",",
+            _kv("srctext", _jstr(c.srctext)), "}"))
     end
     return String(take!(io))
 end

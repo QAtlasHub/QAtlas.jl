@@ -17,6 +17,30 @@
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense (black-box ED) | `test/models/quantum/TFIM/test_TFIM_local.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = 1.0, h = 1.3), Energy(), OBC(6); route = :sum_rule, fetch_kw = (; beta = 0.0), independent = 0.0, agree_within = 1.0e-10, refs = ["Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, h = h), Energy(:per_site), OBC(6); route = :second_closed_form, fetch_kw = (; beta = β), independent = -h * tanh(β * h), agree_within = 1.0e-8, refs = ["J=0 decoupled spins: ε = -h tanh(βh) per site"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = Inf), independent = (dense_spectrum(_build_tfim_dense(N, J, h)))[1], agree_within = 1.0e-9, refs = ["GS energy = min eigenvalue of _build_tfim_dense"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = Inf), independent = (dense_spectrum(_build_tfim_dense(N, J, h)))[1], agree_within = 1.0e-9, refs = ["GS energy = min eigenvalue of _build_tfim_dense (black-box ED)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-8, refs = ["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"])
+```
+
 
 ## Assurance (provisional)
 

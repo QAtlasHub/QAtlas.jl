@@ -14,6 +14,18 @@
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J) | `test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct Schmidt-SVD of the _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_entanglement.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = J, h = h), VonNeumannEntropy(), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S_ind, agree_within = 1.0e-8, refs = ["Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), VonNeumannEntropy(), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S_ind, agree_within = 1.0e-8, refs = ["Direct Schmidt-SVD of the _build_tfim_dense ground state"])
+```
+
 
 ## Assurance (provisional)
 

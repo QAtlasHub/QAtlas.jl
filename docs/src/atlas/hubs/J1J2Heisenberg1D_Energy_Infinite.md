@@ -15,6 +15,22 @@
 | `@sweep` | `delegation_invariant` | 🟡 asserted | J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938) | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
 | `@sweep` | `delegation_invariant` | 🟡 asserted | J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8) | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N) | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938)"])
+```
+
+```julia
+verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8)"])
+```
+
+```julia
+verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [j1j2_pbc_e0(N, 1.0, 0.5) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-6, refs = ["Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N)"])
+```
+
 
 ## Assurance (provisional)
 

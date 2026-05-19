@@ -13,6 +13,14 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | M(7,6): c = 1 - 6(p-q)²/(pq) = 6/7 | `test/universalities/test_tricritical_potts3.jl` |
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TricriticalPotts3(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 - (6 * (7 - 6) ^ 2) / (7 * 6), agree_within = 1.0e-12, refs = ["M(7,6): c = 1 - 6(p-q)²/(pq) = 6/7"])
+```
+
 
 ## Assurance (provisional)
 

@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (142)
+## `(no card)` (140)
 
 - 🟠 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
@@ -59,8 +59,6 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - ⚪ [`KitaevHoneycomb/ThermalEntropy/Infinite`](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — cited-only
 - ⚪ [`KitaevHoneycomb/ThermalEntropy/OBC`](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — cited-only
 - 🟠 [`LiouvilleCFT/ConformalWeights/Infinite`](../hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](../hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) — uncorroborated-but-feasible
-- 🟠 [`MajumdarGhosh/SpinGap/Infinite`](../hubs/MajumdarGhosh_SpinGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/EnergyLocal/OBC`](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/FreeEnergy/OBC`](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationX/OBC`](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
@@ -166,7 +164,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🔵 [`S1XXZ1D/Energy/Infinite`](../hubs/S1XXZ1D_Energy_Infinite.md) — coherent
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](../hubs/S1XXZ1D_MassGap_Infinite.md) — coherent
 
-## `ed_finite_size` (24)
+## `ed_finite_size` (25)
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
@@ -179,6 +177,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`IsingSquare/PartitionFunction/PBC`](../hubs/IsingSquare_PartitionFunction_PBC.md) — corroborated-at-p
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/Infinite`](../hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
+- 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](../hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/Energy/Infinite`](../hubs/S1Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/Energy/OBC`](../hubs/S1Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/Energy/OBC`](../hubs/TFIM_Energy_OBC.md) — corroborated-at-p
@@ -213,7 +212,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
 
-## `literature_value` (12)
+## `literature_value` (13)
 
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only
 - ⚪ [`KagomeHeisenbergAFM/Energy/Infinite`](../hubs/KagomeHeisenbergAFM_Energy_Infinite.md) — cited-only
@@ -221,6 +220,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - ⚪ [`KagomeHeisenbergAFM/TopologicalEntanglementEntropy/Infinite`](../hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md) — cited-only
 - ⚪ [`KitaevHoneycomb/Energy/Infinite`](../hubs/KitaevHoneycomb_Energy_Infinite.md) — cited-only
 - ⚪ [`MajumdarGhosh/MassGap/Infinite`](../hubs/MajumdarGhosh_MassGap_Infinite.md) — cited-only
+- ⚪ [`MajumdarGhosh/SpinGap/Infinite`](../hubs/MajumdarGhosh_SpinGap_Infinite.md) — cited-only
 - ⚪ [`PXP1D/Energy/Infinite`](../hubs/PXP1D_Energy_Infinite.md) — cited-only
 - 🟢 [`S1Heisenberg1D/Energy/Infinite`](../hubs/S1Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - ⚪ [`S1Heisenberg1D/MassGap/Infinite`](../hubs/S1Heisenberg1D_MassGap_Infinite.md) — cited-only

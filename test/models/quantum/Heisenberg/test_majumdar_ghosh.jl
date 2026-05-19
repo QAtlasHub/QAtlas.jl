@@ -177,4 +177,35 @@ end
         agree_within=5e-3,
         refs=["White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J"],
     )
+
+    # PBC bc: same exact MG dimer GS but bc=PBC, so the
+    # MajumdarGhosh/GroundStateEnergyDensity/PBC hub is corroborated
+    # (independent J1-J2 ring ED via mg_pbc_e0; -3J/8 size-independent).
+    let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))
+        verify(
+            MajumdarGhosh(; J=1.0),
+            GroundStateEnergyDensity(),
+            PBC(8);
+            route=:ed_finite_size,
+            independent=[mg_pbc_e0(N, 1.0) for N in Ns],
+            at=["N=$N" for N in Ns],
+            agree_within=1e-6,
+            refs=[
+                "Exact MG dimer GS of the J1-J2 ring at J2=J/2 " *
+                "(even N), e0 = -3J/8 size-independent",
+            ],
+        )
+    end
+
+    # SpinGap Infinite: White-Affleck/Eggert DMRG literature value
+    # (no closed form; matches src method=:dmrg_reference).
+    verify(
+        MajumdarGhosh(; J=1.0),
+        SpinGap(),
+        Infinite();
+        route=:literature_value,
+        independent=0.234,
+        agree_within=5e-3,
+        refs=["White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J"],
+    )
 end

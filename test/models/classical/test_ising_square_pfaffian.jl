@@ -67,3 +67,33 @@ using QAtlas, Test
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingSquare PartitionFunction — verification cards" begin
+    # Brute-force exact_partition (independent of the transfer-matrix
+    # / Pfaffian path) on small PBC lattices.
+    for (L, β, J) in ((3, 0.3, 1.0), (3, 0.5, 1.0), (4, 0.2, 1.0))
+        verify(
+            IsingSquare(; Lx=L, Ly=L, J=J),
+            PartitionFunction(),
+            PBC(0);
+            route=:ed_finite_size,
+            fetch_kw=(; β=β, Lx=L, Ly=L, J=J),
+            independent=exact_partition(L, L, J, β),
+            agree_within=1e-6,
+            refs=["Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs)"],
+        )
+    end
+
+    # β = 0: every configuration has weight 1 => Z = 2^(Lx·Ly)
+    verify(
+        IsingSquare(; Lx=3, Ly=3, J=1.0),
+        PartitionFunction(),
+        PBC(0);
+        route=:limiting_case,
+        fetch_kw=(; β=0.0, Lx=3, Ly=3, J=1.0),
+        independent=2.0^9,
+        agree_within=1e-6,
+        refs=["β = 0: all 2^N configs weight 1 => Z = 2^N"],
+    )
+end

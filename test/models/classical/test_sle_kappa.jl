@@ -60,3 +60,33 @@ end
         SLEkappa(; κ=2.0), FractalDimension(), Infinite(); κ=-1.0
     )
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "SLEkappa — verification cards" begin
+    # SLE central charge c(κ) = (3κ - 8)(6 - κ) / (2κ) (independent formula)
+    for (κ, name) in ((3.0, "Ising"), (8 / 3, "SAW"), (4.0, "GFF"), (6.0, "percolation"))
+        c_ind = (3κ - 8) * (6 - κ) / (2κ)
+        verify(
+            SLEkappa(; κ=κ),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=c_ind,
+            agree_within=1e-9,
+            refs=["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [$name at κ=$κ]"],
+        )
+    end
+
+    # Beffara 2008 fractal dimension D = 1 + κ/8 (κ < 8)
+    for κ in (2.0, 8 / 3, 3.0, 4.0, 6.0)
+        verify(
+            SLEkappa(; κ=κ),
+            FractalDimension(),
+            Infinite();
+            route=:second_closed_form,
+            independent=1 + κ / 8,
+            agree_within=1e-9,
+            refs=["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"],
+        )
+    end
+end

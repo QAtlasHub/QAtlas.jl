@@ -18,3 +18,17 @@ using QAtlas, Test
     @test S_per_spin < 0.20479
     @test S_per_spin > 0.20         # comfortably above the Pauling −1 % band
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "SpinIce — verification cards" begin
+    # Pauling 1935 ice-rule residual entropy S = (1/2) log(3/2)
+    verify(
+        SpinIce(),
+        ResidualEntropy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.5 * log(3 / 2),
+        agree_within=1e-9,
+        refs=["Pauling 1935: ice-rule residual entropy S = (1/2) log(3/2) ≈ 0.2027"],
+    )
+end

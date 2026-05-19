@@ -116,3 +116,45 @@ end
         @test c_fetch ≈ c_ad rtol = 1e-2  # central-diff vs ForwardDiff slack
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingSquare thermal — verification cards" begin
+    # Energy density low-T limit: every bond aligned => ε -> -2J
+    verify(
+        IsingSquare(; J=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:limiting_case,
+        fetch_kw=(; beta=20.0),
+        independent=-2.0,
+        agree_within=1e-6,
+        refs=["T -> 0: all bonds satisfied, ε = -2J (square lattice, 2 bonds/site)"],
+    )
+
+    # High-T entropy per site -> log 2 (free spins)
+    verify(
+        IsingSquare(; J=1.0),
+        ThermalEntropy(),
+        Infinite();
+        route=:limiting_case,
+        fetch_kw=(; beta=1e-4),
+        independent=log(2),
+        agree_within=1e-3,
+        refs=["β -> 0: spins decouple, s -> log 2"],
+    )
+
+    # PBC free energy vs brute-force exact partition: f = -(1/β) log Z / N
+    for (L, β) in ((3, 0.3), (3, 0.5))
+        Z = exact_partition(L, L, 1.0, β)
+        verify(
+            IsingSquare(; Lx=L, Ly=L, J=1.0),
+            FreeEnergy(),
+            PBC(0);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=β, Lx=L, Ly=L, J=1.0),
+            independent=-(1 / β) * log(Z) / (L * L),
+            agree_within=1e-6,
+            refs=["Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs)"],
+        )
+    end
+end

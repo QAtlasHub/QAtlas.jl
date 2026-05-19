@@ -87,3 +87,45 @@ end
     @test_throws DomainError QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=0)
     @test_throws DomainError QAtlas.fetch(m, CorrelationLength(), Infinite(); beta=-1.0)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "IsingChain1D — verification cards" begin
+    # 1D Ising has no finite-T transition (Mermin-Wagner / Ising 1925).
+    verify(
+        IsingChain1D(; J=1.0),
+        CriticalTemperature(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-12,
+        refs=["Ising 1925: no finite-T order in 1D, Tc = 0"],
+    )
+
+    # h=0 free energy: f = -(1/β) log(2 cosh βJ) (independent closed form)
+    for (J, β) in ((1.0, 0.5), (1.0, 2.0), (1.7, 1.0))
+        verify(
+            IsingChain1D(; J=J),
+            FreeEnergy(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=-(1 / β) * log(2 * cosh(β * J)),
+            agree_within=1e-10,
+            refs=["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"],
+        )
+    end
+
+    # h=0 correlation length: ξ = 1 / log(coth βJ)
+    for (J, β) in ((1.0, 1.0), (1.0, 2.0))
+        verify(
+            IsingChain1D(; J=J),
+            CorrelationLength(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=1 / log(coth(β * J)),
+            agree_within=1e-9,
+            refs=["Ising 1925: ξ = 1 / log(coth βJ) at h = 0"],
+        )
+    end
+end

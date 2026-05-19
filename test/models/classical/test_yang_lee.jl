@@ -46,3 +46,29 @@ end
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=0)
     @test_throws DomainError QAtlas.fetch(m, ConformalWeights(), Infinite(); r=1, s=5)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "YangLee — verification cards" begin
+    # M(5,2) minimal model: c = 1 - 6(p-p')²/(p p') with p=5, p'=2
+    verify(
+        YangLee(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 - 6 * (5 - 2)^2 / (5 * 2),
+        agree_within=1e-12,
+        refs=["Yang-Lee edge = M(5,2): c = 1 - 6(p-p')²/(pp') = -22/5"],
+    )
+
+    # Yang-Lee edge primary conformal weight h = -1/5 (Cardy 1985)
+    verify(
+        YangLee(),
+        ConformalWeights(),
+        Infinite();
+        route=:literature_value,
+        fetch_kw=(; r=1, s=2),
+        independent=-1 / 5,
+        agree_within=1e-12,
+        refs=["Cardy 1985: Yang-Lee edge singularity primary h_{1,2} = -1/5"],
+    )
+end

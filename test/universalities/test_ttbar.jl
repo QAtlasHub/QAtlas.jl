@@ -26,3 +26,29 @@ end
         @test QAtlas.fetch(TTbar(; c=0.5, λ=λ), CentralCharge(), Infinite()) == 0.5
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TTbar — verification cards" begin
+    # The TTbar deformation preserves the central charge: c is the
+    # undeformed seed value for any λ (independent of src).
+    verify(
+        TTbar(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["TTbar is a marginal deformation: c invariant (default seed c=1)"],
+    )
+    for c0 in (0.5, 1.5, 2.0)
+        verify(
+            TTbar(; c=c0, λ=0.7),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=c0,
+            agree_within=1e-12,
+            refs=["TTbar preserves the seed central charge c for any λ"],
+        )
+    end
+end

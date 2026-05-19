@@ -55,3 +55,18 @@ end
     # Identity primary appears with h = 0
     @test any(x -> x.h == 0, pf_tp)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "TricriticalPotts3 — verification cards" begin
+    # Tricritical 3-state Potts = minimal model M(7,6): c = 6/7
+    # (independent Kac/minimal-model formula 1 - 6(p-q)²/(pq)).
+    verify(
+        TricriticalPotts3(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1 - 6 * (7 - 6)^2 / (7 * 6),
+        agree_within=1e-12,
+        refs=["M(7,6): c = 1 - 6(p-q)²/(pq) = 6/7"],
+    )
+end

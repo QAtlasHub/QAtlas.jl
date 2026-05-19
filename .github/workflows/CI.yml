@@ -252,10 +252,21 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
 
+  inventory-drift:
+    name: INVENTORY drift guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: '1'
+      - name: Static scan must equal committed INVENTORY.jsonl (no test exec)
+        run: julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+
   all-tests:
     name: All tests passed
     runs-on: ubuntu-latest
-    needs: [plan, test]
+    needs: [plan, test, inventory-drift]
     if: always()
     steps:
       - name: Check plan + every shard passed
@@ -271,6 +282,10 @@ jobs:
           fi
           if [ "${{ needs.test.result }}" != "success" ]; then
             echo "One or more test shards failed: ${{ needs.test.result }}"
+            exit 1
+          fi
+          if [ "${{ needs.inventory-drift.result }}" != "success" ]; then
+            echo "INVENTORY drift / parse-fail guard failed: ${{ needs.inventory-drift.result }}"
             exit 1
           fi
           echo "All shards green."

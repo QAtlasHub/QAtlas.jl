@@ -93,3 +93,46 @@ end
     )
     @test_throws ArgumentError QAtlas._s1_heisenberg_hamiltonian_matrix(S1Heisenberg1D(), 1)
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "S1Heisenberg1D thermal OBC — verification cards" begin
+    Sx, Sy, Sz = spin_ops(1)  # spin-1, local dimension d=3
+
+    # N=2 dimer: exact spin-1 bond spectrum [-2J (singlet x1),
+    # -J (triplet x3), +J (quintet x5)].  Independent thermal energy
+    # from this exact 9-level spectrum.
+    let J = 1.0, beta = 1.0
+        evals = vcat(fill(-2J, 1), fill(-J, 3), fill(J, 5))
+        E_ind, _, _, _ = thermo_from_spectrum(evals, beta)
+        verify(
+            S1Heisenberg1D(; J=J),
+            Energy(),
+            OBC(2);
+            route=:second_closed_form,
+            fetch_kw=(; beta=beta),
+            independent=E_ind,
+            agree_within=1e-9,
+            refs=["Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J}"],
+        )
+    end
+
+    # OBC thermal energy at N=4, beta=1 vs independent spin-1 ED
+    let J = 1.0, N = 4, beta = 1.0
+        bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
+        E_ind, _, _, _ = thermo_from_spectrum(
+            dense_spectrum(chain_hamiltonian(3, N, bond)), beta
+        )
+        verify(
+            S1Heisenberg1D(; J=J),
+            Energy(),
+            OBC(N);
+            route=:ed_finite_size,
+            fetch_kw=(; beta=beta),
+            independent=E_ind,
+            agree_within=1e-9,
+            refs=[
+                "Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum",
+            ],
+        )
+    end
+end

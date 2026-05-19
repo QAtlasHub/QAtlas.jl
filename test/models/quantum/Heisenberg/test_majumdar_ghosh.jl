@@ -118,3 +118,63 @@ using Logging: with_logger, NullLogger
         end
     end
 end
+
+# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+@testset "MajumdarGhosh — verification cards" begin
+    # Independent J1-J2 PBC ground-state energy density (spin-1/2),
+    # built black-box from site operators (J2 locked to J/2 by MG).
+    function mg_pbc_e0(N, J)
+        Sx, Sy, Sz = spin_ops(1 // 2)
+        SS(i, j) =
+            site_op(Sx, 2, N, i) * site_op(Sx, 2, N, j) +
+            site_op(Sy, 2, N, i) * site_op(Sy, 2, N, j) +
+            site_op(Sz, 2, N, i) * site_op(Sz, 2, N, j)
+        H = zeros(ComplexF64, 2^N, 2^N)
+        for i in 1:N
+            H .+= J * SS(i, mod1(i + 1, N))
+            H .+= (J / 2) * SS(i, mod1(i + 2, N))
+        end
+        return dense_spectrum(H)[1] / N
+    end
+
+    # GroundStateEnergyDensity Infinite: exact dimer product state -3J/8.
+    # Independent closed form: each NN singlet has <S.S> = -3/4; the
+    # dimer covering gives e0 = J*(-3/4)/2 = -3J/8 (NNN terms vanish on
+    # orthogonal dimers).  J-scaling linear.
+    for J in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            MajumdarGhosh(; J=J),
+            GroundStateEnergyDensity(),
+            Infinite();
+            route=:second_closed_form,
+            independent=-3 * J / 8,
+            agree_within=1e-14,
+            refs=["Majumdar-Ghosh 1969: exact orthogonal-dimer product state, e0 = -3J/8"],
+        )
+    end
+
+    # PBC even N: dimer state is the exact GS, E0/N = -3J/8 size-independent
+    let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))
+        verify(
+            MajumdarGhosh(; J=1.0),
+            GroundStateEnergyDensity(),
+            Infinite();
+            route=:ed_finite_size,
+            independent=[mg_pbc_e0(N, 1.0) for N in Ns],
+            at=["N=$N" for N in Ns],
+            agree_within=1e-6,
+            refs=["Exact MG dimer GS of the J1-J2 ring at J2=J/2 (even N), -3J/8"],
+        )
+    end
+
+    # MassGap Infinite: White-Affleck DMRG literature value
+    verify(
+        MajumdarGhosh(; J=1.0),
+        MassGap(),
+        Infinite();
+        route=:literature_value,
+        independent=0.234,
+        agree_within=5e-3,
+        refs=["White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J"],
+    )
+end

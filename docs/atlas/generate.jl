@@ -1,9 +1,16 @@
 # docs/atlas/generate.jl
 # docs-as-view (repo-wide). Pure VIEW over {all *_registry.jl claims} +
 # {whole test/ INVENTORY}. No src change, no test execution, fetch/register
-# framework untouched. M3 risk-linter (structural-only anti-join).
-# Step 4a: also emits one per-hub page (docs/src/atlas/hubs/<slug>.md);
-# the index lists hubs as links grouped by model (drill-down UX).
+# framework untouched.
+# R1 (ratified, Discussion #379): five-level assurance taxonomy
+#   {universality-corroborated, corroborated-at-p, coherent, cited-only,
+#    uncorroborated-but-feasible} with an ED-feasible / ED-infeasible
+#   denominator split, so the headline corroboration rate is neither
+#   gamed nor unfairly punished on frontier models where dense ED is
+#   computationally infeasible. Only `uncorroborated-but-feasible` is an
+#   actionable risk; `cited-only` is the honest frontier, not a penalty.
+# Step 4a/4b kept: one per-hub page (docs/src/atlas/hubs/<slug>.md) with
+# the exact reconstructed verify(...) call; index drills down by model.
 const ROOT = normpath(joinpath(@__DIR__, "..", ".."))
 include(joinpath(ROOT, "test", "harness", "atlas", "AtlasInventory.jl"))
 include(joinpath(ROOT, "test", "harness", "atlas", "AtlasRegistry.jl"))
@@ -32,32 +39,104 @@ bycard = Dict{String,Vector{AtlasInventory.Card}}()
 for c in cards
     push!(get!(bycard, c.hub, AtlasInventory.Card[]), c)
 end
-nstruct(h) = count(c -> c.independence == "structural", get(bycard, h, AtlasInventory.Card[]))
-nassert(h) = count(c -> c.independence == "asserted", get(bycard, h, AtlasInventory.Card[]))
+cardsof(h) = get(bycard, h, AtlasInventory.Card[])
+mechsof(h) = Set(c.mechanism for c in cardsof(h))
 
 claimed = sort(unique(c.hub for c in claims))
-covered = filter(h -> nstruct(h) > 0, claimed)
-assertonly = filter(h -> nstruct(h) == 0 && nassert(h) > 0, claimed)
-uncov = filter(h -> nstruct(h) == 0 && nassert(h) == 0, claimed)
-
 modelof(h) = first(split(h, "/"))
-models = sort(unique(modelof(h) for h in claimed))
-badgeof(h) = isempty(get(bycard, h, AtlasInventory.Card[])) ? "❌" :
-             (nstruct(h) > 0 ? "🟢" : "⚠️")
-slugof(h) = replace(h, r"[^A-Za-z0-9]" => "_")
+quantof(h) = (p = split(h, "/"); length(p) >= 2 ? p[2] : "?")
+bcof(h)    = (p = split(h, "/"); length(p) >= 3 ? p[3] : "?")
+slugof(h)  = replace(h, r"[^A-Za-z0-9]" => "_")
 
+# ── R1 taxonomy ──────────────────────────────────────────────────────
+# Models where dense exact diagonalisation at a physically meaningful
+# size is computationally infeasible: the published / DMRG literature
+# value is the ceiling, so the absence of an in-repo ED card is the
+# honest frontier (cited-only), NOT an actionable gap.
+const ED_INFEASIBLE_MODELS = Set([
+    "KagomeHeisenbergAFM", "ToricCode", "XCube", "SYK", "ChernSimons3D",
+    "FibonacciAnyons", "PpIp2DSC", "AKLT2D", "KitaevHoneycomb",
+])
+ed_infeasible(h) = modelof(h) in ED_INFEASIBLE_MODELS
+
+const MECH_UNIV  = Set(["universality_consistency"])
+const MECH_EDP   = Set(["ed_finite_size", "second_closed_form"])
+const MECH_COH   = Set(["delegation_invariant", "limiting_case",
+                        "sum_rule", "retype_formula", "unknown"])
+const MECH_CITED = Set(["literature_value"])
+
+# Highest achieved tier wins. Returns (level, badge, admonition).
+function levelof(h)
+    M = mechsof(h)
+    if !isempty(intersect(M, MECH_UNIV))
+        return ("universality-corroborated", "🟣", "tip")
+    elseif !isempty(intersect(M, MECH_EDP))
+        return ("corroborated-at-p", "🟢", "tip")
+    elseif !isempty(intersect(M, MECH_COH))
+        return ("coherent", "🔵", "note")
+    elseif !isempty(intersect(M, MECH_CITED))
+        return ("cited-only", "⚪", "note")
+    elseif ed_infeasible(h)
+        return ("cited-only", "⚪", "note")
+    else
+        return ("uncorroborated-but-feasible", "🟠", "warning")
+    end
+end
+levname(h) = levelof(h)[1]
+badgeof(h) = levelof(h)[2]
+
+models = sort(unique(modelof(h) for h in claimed))
 clby = Dict{String,Vector{AtlasRegistry.Claim}}()
 for c in claims
     push!(get!(clby, c.hub, AtlasRegistry.Claim[]), c)
 end
 
+L_UNIV  = filter(h -> levname(h) == "universality-corroborated", claimed)
+L_EDP   = filter(h -> levname(h) == "corroborated-at-p", claimed)
+L_COH   = filter(h -> levname(h) == "coherent", claimed)
+L_CITED = filter(h -> levname(h) == "cited-only", claimed)
+L_RISK  = filter(h -> levname(h) == "uncorroborated-but-feasible", claimed)
+
+ed_feasible_claimed = filter(h -> !ed_infeasible(h), claimed)
+nfeas = length(ed_feasible_claimed)
+n_struct = length(L_UNIV) + length(L_EDP)            # external independent
+n_inrepo = n_struct + length(L_COH)                  # any executed card
+rate_struct = nfeas == 0 ? 0.0 : round(100 * n_struct / nfeas; digits=1)
+rate_inrepo = nfeas == 0 ? 0.0 : round(100 * n_inrepo / nfeas; digits=1)
+
 const BANNER = string(
-    "!!! note \"Provisional v2 view\"\n",
+    "!!! note \"Provisional v2 view — RES not wired\"\n",
     "    Generated by `docs/atlas/generate.jl` — a pure VIEW over the ",
     "registry claims + static `test/INVENTORY.jsonl`. No source/test ",
     "executed; `fetch`/`@register` untouched. Assurance labels are ",
-    "PROVISIONAL (RES not wired — residuals/confidence not yet shown; ",
-    "`@sweep` = a graceful regime-resolution gap, not card omission).",
+    "PROVISIONAL: residuals / confidence are not shown yet (RES not ",
+    "wired); `@sweep` = a graceful regime-resolution gap, not card ",
+    "omission.",
+)
+
+const LEGEND = string(
+    "!!! info \"Assurance taxonomy (R1, ratified — Discussion #379)\"\n",
+    "    Five honest levels, highest achieved tier wins:\n\n",
+    "    - 🟣 **universality-corroborated** — agreement checked against ",
+    "the universality class (exponents / central charge). Strongest, ",
+    "regime-spanning evidence.\n",
+    "    - 🟢 **corroborated-at-p** — an *independent* computation ",
+    "(finite-size ED extrapolation or a second closed form) reproduces ",
+    "the value at concrete parameter point(s) p.\n",
+    "    - 🔵 **coherent** — an independent in-repo card exists and the ",
+    "value satisfies an internal invariant (sum rule / limiting case / ",
+    "delegation), but no external value re-derives it.\n",
+    "    - ⚪ **cited-only** — backed only by a literature citation, or ",
+    "the model is ED-infeasible so a citation is the ceiling. The ",
+    "honest frontier — *neutral, not a penalty*.\n",
+    "    - 🟠 **uncorroborated-but-feasible** — `src` claims the hub, ",
+    "dense ED *is* feasible, yet no card checks it. **The only ",
+    "actionable risk.**\n\n",
+    "    Denominator split: the corroboration rate is taken over ",
+    "ED-*feasible* claimed hubs only. ED-infeasible models ",
+    "(`", join(sort(collect(ED_INFEASIBLE_MODELS)), "`, `"), "`) ",
+    "are excluded from the risk denominator — their ceiling is the ",
+    "published / DMRG value.",
 )
 
 # ── per-hub pages ────────────────────────────────────────────────────
@@ -65,12 +144,29 @@ hubsdir = joinpath(ROOT, "docs", "src", "atlas", "hubs")
 mkpath(hubsdir)
 for h in claimed
     cl = first(clby[h])
-    cs = get(bycard, h, AtlasInventory.Card[])
+    cs = cardsof(h)
+    lev, bdg, adm = levelof(h)
     hio = IOBuffer()
     HP(s...) = println(hio, string(s...))
-    HP("# ", badgeof(h), " `", h, "`")
+    HP("# ", bdg, " `", h, "`")
     HP("")
     HP(BANNER)
+    HP("")
+    HP("!!! ", adm, " \"Assurance level: ", lev, "\"")
+    if lev == "uncorroborated-but-feasible"
+        HP("    `src` claims this hub and dense ED is feasible, but no ",
+           "corroboration card exists. **Actionable**: add a ",
+           "`route = :ed_finite_size` or `:second_closed_form` card.")
+    elseif lev == "cited-only"
+        HP("    Backed only by a literature citation",
+           ed_infeasible(h) ? " (model is ED-infeasible — this is the ceiling)." :
+           " — no in-repo independent re-derivation yet.")
+    elseif lev == "coherent"
+        HP("    An independent card exists and the value satisfies an ",
+           "internal invariant; no external value re-derives it yet.")
+    else
+        HP("    Independently corroborated. See the cards below.")
+    end
     HP("")
     HP("## `src` claim")
     HP("")
@@ -81,8 +177,10 @@ for h in claimed
     HP("## Corroboration")
     HP("")
     if isempty(cs)
-        HP("_No corroboration card — flagged by the leverage risk-linter ",
-           "(`src` claims this hub but no independent card exists)._")
+        HP("_No corroboration card._ ",
+           ed_infeasible(h) ?
+           "Model is ED-infeasible — frontier (cited-only), not a gap." :
+           "Flagged by the R1 risk-linter (`src` claims this hub, ED is feasible, no independent card).")
     else
         HP("| regime | mechanism | independence | refs | file |")
         HP("|---|---|---|---|---|")
@@ -93,6 +191,7 @@ for h in claimed
         end
     end
     if !isempty(cs)
+        HP("")
         HP("## Test calls")
         HP("")
         HP("_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_")
@@ -107,7 +206,9 @@ for h in claimed
     HP("")
     HP("## Assurance (provisional)")
     HP("")
-    HP("- structural cards: ", nstruct(h), " · asserted cards: ", nassert(h))
+    HP("- level: **", lev, "** ", bdg)
+    HP("- cards: ", length(cs),
+       " · model ED-", ed_infeasible(h) ? "infeasible (frontier)" : "feasible")
     HP("- RES not wired — measured residuals / confidence are not shown yet.")
     HP("")
     HP("[← back to the Atlas index](../index.md)")
@@ -121,40 +222,57 @@ P("# QAtlas — Verified Exact-Solution Atlas")
 P("")
 P(BANNER)
 P("")
+P(LEGEND)
+P("")
 P("## Coverage (all models)")
 P("")
 P("| | count |")
 P("|---|---|")
 P("| Hubs `src` claims (registry) | ", length(claimed), " |")
-P("| With >=1 **structural** corroboration | ", length(covered), " |")
-P("| Only **asserted** (honor-system) | ", length(assertonly), " |")
-P("| **Uncorroborated** (risk) | ", length(uncov), " |")
+P("| ED-feasible claimed (risk denominator) | ", nfeas, " |")
+P("| ED-infeasible claimed (frontier, excluded) | ", length(claimed) - nfeas, " |")
+P("| 🟣 universality-corroborated | ", length(L_UNIV), " |")
+P("| 🟢 corroborated-at-p | ", length(L_EDP), " |")
+P("| 🔵 coherent | ", length(L_COH), " |")
+P("| ⚪ cited-only (frontier — neutral) | ", length(L_CITED), " |")
+P("| 🟠 uncorroborated-but-feasible (**actionable risk**) | ", length(L_RISK), " |")
 P("| Inventory cards scanned (whole test/) | ", length(cards), " |")
 P("| Registry files parsed | ", length(regfiles) - length(regfail), " / ", length(regfiles), " |")
 P("| Models | ", length(models), " |")
 P("")
-P("## ⚠️ Leverage risk-linter (structural-only anti-join, M3)")
+P("**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **",
+  rate_struct, "%** · **in-repo-verified rate** (incl. 🔵 coherent): **",
+  rate_inrepo, "%**")
 P("")
-P("`src` claims the hub **and** zero *structural* corroboration cards. ",
-  "`:sum_rule` / `:delegation` / `:limiting_case` are honor-system and do ",
-  "not clear this flag.")
+P("## 🟠 R1 risk-linter — actionable only")
 P("")
-P("| count | bucket |")
-P("|---|---|")
-P("| ", length(uncov), " | ❌ uncorroborated (src claims; no card) |")
-P("| ", length(assertonly), " | ⚠️ asserted-only (honor-system only) |")
-P("| ", length(covered), " | 🟢 structurally corroborated |")
+P("`src` claims the hub, the model is ED-**feasible**, yet zero ",
+  "corroboration cards exist. `cited-only` (frontier) and ED-infeasible ",
+  "hubs are **not** listed here — they are the honest ceiling, not a gap.")
+P("")
+if isempty(L_RISK)
+    P("!!! tip \"No actionable risk\"")
+    P("    Every ED-feasible claimed hub has at least one corroboration card.")
+else
+    P("!!! warning \"", length(L_RISK), " actionable hub(s)\"")
+    for h in sort(L_RISK)
+        P("    - [`", h, "`](hubs/", slugof(h), ".md)")
+    end
+end
 P("")
 P("## Per-model breakdown")
 P("")
-P("| model | claimed | structural | asserted-only | uncorroborated |")
-P("|---|---|---|---|---|")
+P("| model | claimed | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED |")
+P("|---|---|---|---|---|---|---|---|")
 for m in models
     hs = filter(h -> modelof(h) == m, claimed)
-    P("| `", m, "` | ", length(hs), " | ",
-      count(h -> nstruct(h) > 0, hs), " | ",
-      count(h -> nstruct(h) == 0 && nassert(h) > 0, hs), " | ",
-      count(h -> nstruct(h) == 0 && nassert(h) == 0, hs), " |")
+    P("| `", m, "` | ", length(hs),
+      " | ", count(h -> levname(h) == "universality-corroborated", hs),
+      " | ", count(h -> levname(h) == "corroborated-at-p", hs),
+      " | ", count(h -> levname(h) == "coherent", hs),
+      " | ", count(h -> levname(h) == "cited-only", hs),
+      " | ", count(h -> levname(h) == "uncorroborated-but-feasible", hs),
+      " | ", (m in ED_INFEASIBLE_MODELS ? "infeasible" : "feasible"), " |")
 end
 P("")
 if !isempty(regfail)
@@ -172,7 +290,7 @@ for m in models
     P("")
     for h in hs
         P("- ", badgeof(h), " [`", h, "`](hubs/", slugof(h), ".md) — ",
-          "structural ", nstruct(h), " / asserted ", nassert(h))
+          levname(h))
     end
     P("")
 end
@@ -182,5 +300,8 @@ mkpath(dirname(out))
 write(out, String(take!(io)))
 println("wrote ", out, " + ", length(claimed), " per-hub pages  models=",
         length(models), " hubs=", length(claimed), " cards=", length(cards),
-        " regfail=", length(regfail), " (struct=", length(covered),
-        " assertonly=", length(assertonly), " uncov=", length(uncov), ")")
+        " regfail=", length(regfail), "  R1[univ=", length(L_UNIV),
+        " edp=", length(L_EDP), " coh=", length(L_COH),
+        " cited=", length(L_CITED), " risk=", length(L_RISK),
+        "] feas=", nfeas, " rate_struct=", rate_struct,
+        " rate_inrepo=", rate_inrepo)

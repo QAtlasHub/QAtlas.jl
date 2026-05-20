@@ -136,13 +136,9 @@ end
         refs=["Ashcroft-Mermin 1976: v_F = 2 t sin(k_F); V=0 half-filling"],
     )
     # V=0 free-fermion e₀ = -(2t/π) sin(k_F) - (μ/π) k_F; default ⇒ -2/π.
-    # NOTE: the TightBindingV1D registry only declares Energy{:per_site} for
-    # Infinite (no native_energy_granularity dispatch defined), so we must
-    # name the granularity explicitly here. This also matches the convention
-    # used throughout the rest of this file's Phase 1 testsets.
     verify(
         TightBindingV1D(),
-        Energy(:per_site),
+        Energy(),
         Infinite();
         route=:second_closed_form,
         independent=-2 / π,
@@ -150,4 +146,3 @@ end
         refs=["Mahan 2000; Ashcroft-Mermin 1976: e₀ = -(2t/π) sin(k_F) - (μ/π) k_F"],
     )
 end
-

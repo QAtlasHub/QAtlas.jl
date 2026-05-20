@@ -139,4 +139,3 @@ end
         refs=["Ashcroft-Mermin 1976: v_F = 2 t sin(k_F); μ=0 half-filling"],
     )
 end
-

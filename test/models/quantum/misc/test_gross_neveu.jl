@@ -72,8 +72,7 @@ end
         route=:second_closed_form,
         independent=exp(-π),
         agree_within=1e-12,
-        refs=["Gross-Neveu 1974 (large-N saddle point): m_F = Λ exp(-π/(N g²))"],
+        refs=["Gross-Neveu 1974; Andrei-Lowenstein 1979: m_F = Λ exp(-π/(N g²))"],
         fetch_kw=(; Λ=1.0),
     )
 end
-

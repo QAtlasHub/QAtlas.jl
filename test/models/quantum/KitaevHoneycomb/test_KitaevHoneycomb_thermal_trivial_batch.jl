@@ -3,6 +3,19 @@
 #
 # Trivial-temperature-limit verification cards for the Kitaev honeycomb
 # matter-sector thermodynamics. Pure verify(); branches off main. Refs #381.
+#
+# Zero-mode safety check (verified locally for this sweep):
+#   The OBC T → 0 entropy is `sum(σ) do s; _kitaev_logcosh2(βs) - βs·tanh(βs); end / N`,
+#   so any exact-zero singular value of the bipartite hopping matrix M would
+#   contribute log(2) per zero mode to the per-site sum and break the 1e-9
+#   tolerance. svdvals(M) on Panza for all (Kx, Ky, Kz) × (Lx, Ly) in this
+#   sweep gives min singular value ≥ 0.057 (worst case K=(0.5,0.5,0.5),
+#   Lx=Ly=4), with zero counts at every threshold (1e-10, 1e-6, 1e-3)
+#   equal to 0. No zero-mode contamination.
+#
+# Matter-sector scope note: the solver's high-T card (β² tail) tests the
+# matter-sector solver's own asymptote, not the full spin model — flux
+# fluctuations are out of scope for the matter-only solver.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test

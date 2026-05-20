@@ -15,14 +15,14 @@ using QAtlas, Test
             for β in (1.0, 10.0)
                 for q in (MagnetizationX(), MagnetizationY(), MagnetizationZ())
                     verify(
-                        S1Heisenberg1D(),
+                        S1Heisenberg1D(; J=J),
                         q,
                         OBC(N);
-                        route=:second_closed_form,
+                        route=:limiting_case,
                         independent=0.0,
                         agree_within=1e-10,
                         refs=["SU(2) symmetry of S=1 Heisenberg: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble"],
-                        fetch_kw=(; J=J, beta=β),
+                        fetch_kw=(; beta=β),
                     )
                 end
             end

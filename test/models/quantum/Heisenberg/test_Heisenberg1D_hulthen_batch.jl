@@ -18,12 +18,13 @@ using QAtlas, Test
     # storing the constant vs. recomputing it.
     for J in (0.5, 2.0, 3.0)
         verify(
-            Heisenberg1D(; J=J),
+            Heisenberg1D(),
             GroundStateEnergyDensity(),
             Infinite();
             route=:second_closed_form,
             independent=J * (1 / 4 - log(2)),
             agree_within=1e-14,
+            fetch_kw=(; J=J),
             refs=["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"],
         )
     end

@@ -3,7 +3,10 @@
 #
 # Single-site entanglement entropy of the OBC S=1 Heisenberg chain: by
 # SU(2) symmetry ρ₁ = I/3 (3 m=±1,0 states maximally mixed) so
-# S_vN(ℓ=1) = S_α(ℓ=1) = log 3 for ALL J, N, β.
+# S_vN(ℓ=1) = S_α(ℓ=1) = log 3 for ALL J, N, β. (The Haldane edge
+# quartet on OBC is itself SU(2)-symmetric — a thermal mixture of
+# the four degenerate GS components — so the bulk argument applies
+# unchanged at any β.)
 # Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
 

@@ -24,3 +24,18 @@ end
         refs=["Logarithmic CFT: c = 0 (identity conformal dimension vanishes)"],
     )
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "LogarithmicCFT — CentralCharge (#381 batch 3)" begin
+    # Default LogarithmicCFT registers c = 0 (the canonical c=0 LogCFT
+    # examples: percolation, dilute polymers / SAW; cf. Cardy 1999).
+    verify(
+        LogarithmicCFT(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0//1,
+        agree_within=0,
+        refs=["Cardy 1999: canonical c=0 LogCFTs (percolation, SAW)"],
+    )
+end
+

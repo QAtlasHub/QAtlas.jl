@@ -40,6 +40,10 @@
 #     spin-½ Heisenberg-DM chain.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     DMIHeisenberg1D(; J::Real = 1.0, D::Real = 0.0) <: AbstractQAtlasModel
 

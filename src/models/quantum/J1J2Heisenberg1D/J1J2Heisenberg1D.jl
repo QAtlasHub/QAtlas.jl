@@ -41,6 +41,10 @@
 #     short-range order.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     J1J2Heisenberg1D(; J1::Real = 1.0, J2::Real = 0.5) <: AbstractQAtlasModel
 

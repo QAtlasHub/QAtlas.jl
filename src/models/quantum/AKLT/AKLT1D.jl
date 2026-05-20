@@ -38,6 +38,10 @@
 #     Phys. Rev. B 88, 245118 (2013); arXiv:1308.3631 — DMRG gap.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 using LinearAlgebra: I, Hermitian, eigvals, kron
 
 """

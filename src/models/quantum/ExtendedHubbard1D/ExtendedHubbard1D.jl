@@ -25,6 +25,11 @@
 #     diagram of the U-V chain at half filling.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     ExtendedHubbard1D(; t::Real = 1.0, U::Real = 4.0, V::Real = 0.0)
         <: AbstractQAtlasModel

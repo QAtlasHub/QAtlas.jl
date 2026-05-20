@@ -44,6 +44,11 @@
 #   - M. Serbyn, D. A. Abanin, Z. Papić, Rep. Prog. Phys. 84, 086601 (2021).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ with Rydberg blockade projectors P_i = (1 - σ^z_i)/2
+#   Observable:  Spin S = σ/2 for MagnetizationX/Y/Z-family; occupation n ∈ [0,1] for density-family
+#   Reference:   docs/src/conventions.md §Hard-core boson / Rydberg
+
 """
     PXP1D(; Ω::Real = 1.0) <: AbstractQAtlasModel
 

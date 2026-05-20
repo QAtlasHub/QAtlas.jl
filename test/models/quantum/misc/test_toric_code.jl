@@ -178,19 +178,22 @@ end
 
 # ── additional verification card (#381 batch) ─────────────────────────────
 @testset "ToricCode — GroundStateDegeneracy/PBC (#381 batch)" begin
-    # Kitaev 2003 §5: GSD(g) = 4^g on a closed orientable surface of genus
-    # g. Independent of J_e, J_m — purely topological (dim H¹(Σ_g; Z₂) = 2g,
-    # so 2^{2g} = 4^g logical states). Sphere g=0 ⇒ unique GS; torus g=1
-    # ⇒ canonical 4-fold; double torus g=2 ⇒ 16.
+    # Kitaev 2003 §4.1: GSD(g) = 4^g on a closed orientable surface of
+    # genus g. Independent of J_e, J_m — purely topological
+    # (dim H₁(Σ_g; Z₂) = 2g, so 2^{2g} = 4^g logical states; logical
+    # operators are labelled by first homology classes). Sphere g=0 ⇒
+    # unique GS; torus g=1 ⇒ canonical 4-fold; double torus g=2 ⇒ 16.
+    # PBC(0) matches the call style used by the existing testsets above
+    # (PBC() and PBC(0) dispatch identically for this hub).
     for genus in (0, 1, 2, 3)
         verify(
             ToricCode(; J_e=1.0, J_m=1.0),
             GroundStateDegeneracy(),
-            PBC();
+            PBC(0);
             route=:second_closed_form,
             independent=4^genus,
             agree_within=0,
-            refs=["Kitaev 2003 §5: ToricCode GSD = 4^g (genus-g closed surface, purely topological)"],
+            refs=["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"],
             fetch_kw=(; genus=genus),
         )
     end
@@ -199,11 +202,11 @@ end
         verify(
             ToricCode(; J_e=J_e, J_m=J_m),
             GroundStateDegeneracy(),
-            PBC();
+            PBC(0);
             route=:second_closed_form,
             independent=4,
             agree_within=0,
-            refs=["Kitaev 2003: GSD is purely topological — independent of J_e, J_m"],
+            refs=["Kitaev 2003 §4.1: GSD is purely topological — independent of J_e, J_m"],
             fetch_kw=(; genus=1),
         )
     end

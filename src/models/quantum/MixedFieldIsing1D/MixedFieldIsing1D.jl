@@ -26,6 +26,10 @@
 #   - Banuls, Cirac & Hastings, Phys. Rev. Lett. 106, 050405 (2011)
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     MixedFieldIsing1D(; J = 1.0, h_x = 1.0, h_z = 0.0) <: AbstractQAtlasModel
 

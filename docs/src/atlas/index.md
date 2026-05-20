@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 100 |
+| 🟢 corroborated-at-p | 98 |
 | 🔵 coherent | 13 |
 | ⚪ cited-only (frontier — neutral) | 24 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 110 |
-| Inventory cards scanned (whole test/) | 220 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 112 |
+| Inventory cards scanned (whole test/) | 218 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **45.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **51.1%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **44.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **50.2%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "110 actionable hub(s)"
+!!! warning "112 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
@@ -110,10 +110,12 @@
     - [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
     - [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
     - [`TFIM/MagnetizationZLocal/OBC`](hubs/TFIM_MagnetizationZLocal_OBC.md)
+    - [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md)
     - [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
     - [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md)
     - [`TFIM/SpecificHeat/OBC`](hubs/TFIM_SpecificHeat_OBC.md)
     - [`TFIM/SpecificHeat/PBC`](hubs/TFIM_SpecificHeat_PBC.md)
+    - [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md)
     - [`TFIM/SusceptibilityXX/Infinite`](hubs/TFIM_SusceptibilityXX_Infinite.md)
     - [`TFIM/SusceptibilityXX/OBC`](hubs/TFIM_SusceptibilityXX_OBC.md)
     - [`TFIM/SusceptibilityXX/PBC`](hubs/TFIM_SusceptibilityXX_PBC.md)
@@ -200,7 +202,7 @@
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 53 | 0 | 14 | 1 | 0 | 38 | feasible |
+| `TFIM` | 53 | 0 | 12 | 1 | 0 | 40 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
 | `TightBindingV1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
@@ -518,13 +520,13 @@
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md) — corroborated-at-p
-- 🟢 [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md) — corroborated-at-p
+- 🟠 [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/OBC`](hubs/TFIM_SpecificHeat_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/PBC`](hubs/TFIM_SpecificHeat_PBC.md) — uncorroborated-but-feasible
-- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟠 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/OBC`](hubs/TFIM_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/PBC`](hubs/TFIM_SusceptibilityXX_PBC.md) — uncorroborated-but-feasible

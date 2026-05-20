@@ -38,6 +38,11 @@
 #     Chapter 9 (tight-binding bands).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     TightBindingV1D(t::Real, V::Real, μ::Real)
     TightBindingV1D(; t=1.0, V=0.0, μ=0.0)
@@ -60,6 +65,17 @@ struct TightBindingV1D <: AbstractQAtlasModel
     end
 end
 TightBindingV1D(; t::Real=1.0, V::Real=0.0, μ::Real=0.0) = TightBindingV1D(t, V, μ)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Energy granularity dispatch (see src/core/quantities.jl)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Required so generic <-> per-site Energy conversions know that
+# fetch(model::TightBindingV1D, ::Energy{:per_site}, ::Infinite) is the
+# natively-implemented granularity; without this entry the verify()
+# harness throws MethodError at the granularity-dispatch step (root
+# cause of CI shard s07 fail across PRs #383-#387 and #447).
+QAtlas.native_energy_granularity(::TightBindingV1D, ::Infinite) = :per_site
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Mass gap — V = 0 free-fermion closed form

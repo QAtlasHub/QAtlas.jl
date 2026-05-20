@@ -36,6 +36,10 @@
 #     205104 (2017) — phase boundary refinement & string order parameter.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     S1AnisotropicD1D(; J::Real = 1.0, D::Real = 0.0) <: AbstractQAtlasModel
 

@@ -22,6 +22,10 @@
 #   T. Kennedy and H. Tasaki, Phys. Rev. B 45, 304 (1992) — string order.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 using LinearAlgebra: I, Diagonal, Hermitian, eigen, eigvals, kron, tr
 
 """

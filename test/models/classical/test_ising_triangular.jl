@@ -159,3 +159,31 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 2) ─────────────────────────
+@testset "IsingTriangular — additional cards (#381 batch 2)" begin
+    # CriticalTemperature: AF triangular Ising is fully frustrated ⇒ no LRO,
+    # T_c = 0 (Wannier 1950).
+    for J in (0.5, 1.0, 2.0)
+        verify(
+            IsingTriangular(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=0,
+            refs=["Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"],
+        )
+    end
+    # ResidualEntropy at T=0 of AF triangular Ising: Wannier 1950
+    # closed form S/N = (2/π) ∫_0^(π/3) log(2 cos ω) dω ≈ 0.32306594...
+    verify(
+        IsingTriangular(; J=1.0),
+        ResidualEntropy(),
+        Infinite();
+        route=:literature_value,
+        independent=0.3230659669304534,
+        agree_within=1e-6,
+        refs=["Wannier 1950: AF triangular Ising T=0 residual entropy = 0.32306594... per spin"],
+    )
+end
+

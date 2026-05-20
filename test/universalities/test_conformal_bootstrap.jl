@@ -80,3 +80,24 @@ end
         refs=["KPSD-Vichi 2016 Precision Islands: 3D Ising Δ_ε ≈ 1.412625"],
     )
 end
+# ── additional verification cards (#381 batch 6) ─────────────────────────
+@testset "ConformalBootstrap — 3D Ising Δσ (#381 batch 6)" begin
+    # Numerical conformal bootstrap precision value for the 3D Ising
+    # spin operator scaling dimension (Kos-Poland-Simmons-Duffin 2014
+    # PRD 86 025022; refined to ~10 digits by Simmons-Duffin 2017):
+    # Δσ ≈ 0.5181489.
+    verify(
+        ConformalBootstrap(),
+        ConformalWeights(),
+        Infinite();
+        route=:literature_value,
+        independent=0.5181489,
+        agree_within=1e-6,
+        refs=[
+            "Kos-Poland-Simmons-Duffin 2014 PRD 86 025022: 3D Ising spin op Δσ ≈ 0.5181489 (numerical bootstrap)",
+            "Simmons-Duffin 2017 JHEP 03 086: refined Δσ = 0.518148806(24)",
+        ],
+        fetch_kw=(; field=:σ),
+    )
+end
+

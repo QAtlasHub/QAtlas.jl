@@ -52,3 +52,19 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "TTbar — CentralCharge preserved (#381 batch 3)" begin
+    # TT̄ deformation is an irrelevant flow that preserves the UV central
+    # charge of the seed CFT (Smirnov-Zamolodchikov 2017; Cavaglià et al
+    # 2016). Default seed c = 1.
+    verify(
+        TTbar(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["Smirnov-Zamolodchikov 2017; Cavaglià et al 2016: TT̄ deformation preserves seed CFT central charge"],
+    )
+end
+

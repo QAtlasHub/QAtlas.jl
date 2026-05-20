@@ -28,6 +28,10 @@
 # Dispatch tags
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     Heisenberg1D
 

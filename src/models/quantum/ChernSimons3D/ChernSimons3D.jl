@@ -35,6 +35,11 @@
 #   - V. G. Knizhnik, A. B. Zamolodchikov, Nucl. Phys. B 247, 83 (1984).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Stabilizer / operator product
+#   Observable:  Operator-product expectations (Wilson loops, GSD, TEE, S-matrix entries); convention-free
+#   Reference:   docs/src/conventions.md §Topological / operator-product
+
 """
     ChernSimons3D(; N::Integer = 2, k::Integer = 1) <: AbstractQAtlasModel
 

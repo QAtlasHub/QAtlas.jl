@@ -68,3 +68,27 @@ end
         )
     end
 end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "SchwingerModel — ChiralCondensate closed form (#381 batch)" begin
+    # Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13 and
+    # Lowenstein-Swieca 1971 (Ann. Phys. 68, 172): in the massless 1+1-D
+    # Schwinger model the axial U(1) anomaly drives a finite vacuum
+    # condensate ⟨ψ̄ψ⟩ = -exp(γ_E) · e / (2π^{3/2}). Linear in e.
+    # (Schwinger 1962 derived the photon mass gap, NOT this condensate;
+    # do not re-attribute the condensate result to Schwinger 1962.)
+    γ_E = MathConstants.eulergamma
+    # e-sweep matches the MassGap sibling card (#381 batch): {0.5, 1.0, 2.0, 3.7}.
+    for e in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            SchwingerModel(; e=e, m=0.0),
+            ChiralCondensate(),
+            Infinite();
+            route=:second_closed_form,
+            independent=-exp(γ_E) * e / (2 * π^(3/2)),
+            agree_within=1e-12,
+            refs=["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"],
+        )
+    end
+end
+

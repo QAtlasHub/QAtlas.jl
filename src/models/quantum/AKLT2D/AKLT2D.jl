@@ -35,6 +35,10 @@
 #      and higher dimensions", cond-mat/0407066 (2004) — PEPS realisation.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     AKLT2D(; J::Real = 1.0) <: AbstractQAtlasModel
 

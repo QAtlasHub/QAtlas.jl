@@ -23,14 +23,14 @@
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 98 |
-| 🔵 coherent | 14 |
+| 🔵 coherent | 13 |
 | ⚪ cited-only (frontier — neutral) | 24 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 111 |
-| Inventory cards scanned (whole test/) | 220 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 112 |
+| Inventory cards scanned (whole test/) | 218 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **44.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **50.7%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **44.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **50.2%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "111 actionable hub(s)"
+!!! warning "112 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
@@ -60,6 +60,7 @@
     - [`Heisenberg1D/SusceptibilityZZ/OBC`](hubs/Heisenberg1D_SusceptibilityZZ_OBC.md)
     - [`Heisenberg1D/ThermalEntropy/OBC`](hubs/Heisenberg1D_ThermalEntropy_OBC.md)
     - [`Heisenberg1D/VonNeumannEntropy/OBC`](hubs/Heisenberg1D_VonNeumannEntropy_OBC.md)
+    - [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
     - [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md)
     - [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md)
     - [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md)
@@ -171,7 +172,7 @@
 | `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Heisenberg1D` | 21 | 0 | 4 | 1 | 0 | 16 | feasible |
 | `HeisenbergXYZ` | 2 | 0 | 1 | 1 | 0 | 0 | feasible |
-| `Hubbard1D` | 4 | 0 | 0 | 1 | 0 | 3 | feasible |
+| `Hubbard1D` | 4 | 0 | 0 | 0 | 0 | 4 | feasible |
 | `IsingChain1D` | 3 | 0 | 2 | 1 | 0 | 0 | feasible |
 | `IsingSquare` | 12 | 0 | 4 | 2 | 0 | 6 | feasible |
 | `IsingTriangular` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
@@ -309,7 +310,7 @@
 
 ### `Hubbard1D` (4)
 
-- 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
+- 🟠 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — uncorroborated-but-feasible

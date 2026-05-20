@@ -87,7 +87,9 @@ end
         route=:literature_value,
         independent=-0.4386,
         agree_within=1e-3,
-        refs=["Yan-Huse-White 2011 Science 332 1173: Kagome HAFM DMRG e₀ ≈ -0.4386 per spin"],
+        refs=[
+            "Yan-Huse-White 2011 Science 332 1173: Kagome HAFM DMRG e₀ ≈ -0.4386 per spin"
+        ],
     )
     verify(
         KagomeHeisenbergAFM(),
@@ -112,7 +114,8 @@ end
         route=:literature_value,
         independent=log(2),
         agree_within=1e-12,
-        refs=["Yan-Huse-White 2011; Depenbrock et al. 2012: Kagome HAFM Z2 spin liquid ⇒ TEE = log 2"],
+        refs=[
+            "Yan-Huse-White 2011; Depenbrock et al. 2012: Kagome HAFM Z2 spin liquid ⇒ TEE = log 2",
+        ],
     )
 end
-

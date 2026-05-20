@@ -15,8 +15,12 @@ using QAtlas, Test
 @testset "TFIM — LoschmidtEcho rate function at t=0 = 0 (#381 batch)" begin
     # /Infinite
     for (J, h_i, h_f) in (
-        (1.0, 0.5, 1.0), (1.0, 0.5, 2.0), (1.0, 1.5, 1.0), (1.0, 1.5, 2.0),
-        (2.0, 0.5, 3.0), (0.5, 2.0, 1.0),
+        (1.0, 0.5, 1.0),
+        (1.0, 0.5, 2.0),
+        (1.0, 1.5, 1.0),
+        (1.0, 1.5, 2.0),
+        (2.0, 0.5, 3.0),
+        (0.5, 2.0, 1.0),
     )
         verify(
             TFIM(; J=J, h=h_f),
@@ -25,7 +29,9 @@ using QAtlas, Test
             route=:second_closed_form,
             independent=0.0,
             agree_within=1e-10,
-            refs=["Loschmidt rate function r(t) = -(1/N) log |⟨ψ₀|e^{-iHt}|ψ₀⟩|² ⇒ r(t=0) = 0 (identity evolution, normalized state)"],
+            refs=[
+                "Loschmidt rate function r(t) = -(1/N) log |⟨ψ₀|e^{-iHt}|ψ₀⟩|² ⇒ r(t=0) = 0 (identity evolution, normalized state)",
+            ],
             fetch_kw=(; initial=TFIM(; J=J, h=h_i), t=0.0),
         )
         # /OBC
@@ -37,7 +43,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=0.0,
                 agree_within=1e-10,
-                refs=["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"],
+                refs=[
+                    "Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)",
+                ],
                 fetch_kw=(; initial=TFIM(; J=J, h=h_i), t=0.0),
             )
         end

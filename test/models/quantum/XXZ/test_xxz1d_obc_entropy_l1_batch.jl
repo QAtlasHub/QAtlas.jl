@@ -22,7 +22,9 @@ using QAtlas, Test
                     route=:second_closed_form,
                     independent=log(2),
                     agree_within=1e-10,
-                    refs=["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"],
+                    refs=[
+                        "XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β",
+                    ],
                     fetch_kw=(; J=J, Δ=Δ, ℓ=1, beta=β),
                 )
                 for α in (2, 3)
@@ -33,7 +35,9 @@ using QAtlas, Test
                         route=:second_closed_form,
                         independent=log(2),
                         agree_within=1e-10,
-                        refs=["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"],
+                        refs=[
+                            "XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index",
+                        ],
                         fetch_kw=(; J=J, Δ=Δ, ℓ=1, beta=β),
                     )
                 end

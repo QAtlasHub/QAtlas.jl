@@ -17,6 +17,8 @@
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J) | `test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct Schmidt-SVD of the _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_entanglement.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
 
 ## Test calls
 
@@ -30,11 +32,19 @@ verify(TFIM(; J = J, h = h), VonNeumannEntropy(), OBC(N); route = :ed_finite_siz
 verify(TFIM(; J = J, h = h), VonNeumannEntropy(), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S_ind, agree_within = 1.0e-8, refs = ["Direct Schmidt-SVD of the _build_tfim_dense ground state"])
 ```
 
+```julia
+verify(TFIM(; J = 0.0, h = h), VonNeumannEntropy(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = J, h = 0.0), VonNeumannEntropy(), OBC(N); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = β))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

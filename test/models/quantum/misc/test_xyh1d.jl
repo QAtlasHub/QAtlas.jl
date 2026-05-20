@@ -131,7 +131,8 @@ end
         route=:second_closed_form,
         independent=0.0,
         agree_within=1e-12,
-        refs=["Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h| < 2J (here J=1, so |h|<2) ⇒ Δ = 0"],
+        refs=[
+            "Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h| < 2J (here J=1, so |h|<2) ⇒ Δ = 0",
+        ],
     )
 end
-

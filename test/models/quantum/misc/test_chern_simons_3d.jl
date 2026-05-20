@@ -159,4 +159,3 @@ end
         refs=["Witten 1989: Z(S³; SU(3)_1) = 1/√3 (Verlinde S₀₀ closed form)"],
     )
 end
-

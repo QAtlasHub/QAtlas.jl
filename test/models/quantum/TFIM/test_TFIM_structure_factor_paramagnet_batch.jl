@@ -32,7 +32,9 @@ using QAtlas, Test
                     route=:limiting_case,
                     independent=1.0,
                     agree_within=1e-2,
-                    refs=["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"],
+                    refs=[
+                        "TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis",
+                    ],
                     fetch_kw=(; q=q_val, beta=HIGH_T_BETA),
                 )
                 # /OBC (uses bc.N for the system size)
@@ -44,7 +46,9 @@ using QAtlas, Test
                         route=:limiting_case,
                         independent=1.0,
                         agree_within=1e-2,
-                        refs=["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"],
+                        refs=[
+                            "TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)",
+                        ],
                         fetch_kw=(; q=q_val, beta=HIGH_T_BETA),
                     )
                 end

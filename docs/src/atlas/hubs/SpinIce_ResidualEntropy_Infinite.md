@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Pauling 1935: ice-rule residual entropy S = (1/2) log(3/2) ≈ 0.2027 | `test/models/classical/test_spin_ice.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pauling 1935: spin-ice T=0 residual entropy = (1/2) log(3/2) per spin | `test/models/classical/test_spin_ice.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(SpinIce(), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(3 / 2), agree_within = 1.0e-9, refs = ["Pauling 1935: ice-rule residual entropy S = (1/2) log(3/2) ≈ 0.2027"])
 ```
 
+```julia
+verify(SpinIce(), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = log(3 / 2) / 2, agree_within = 1.0e-12, refs = ["Pauling 1935: spin-ice T=0 residual entropy = (1/2) log(3/2) per spin"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

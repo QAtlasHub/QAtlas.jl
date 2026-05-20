@@ -193,7 +193,9 @@ end
             route=:second_closed_form,
             independent=4^genus,
             agree_within=0,
-            refs=["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"],
+            refs=[
+                "Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)",
+            ],
             fetch_kw=(; genus=genus),
         )
     end
@@ -211,4 +213,3 @@ end
         )
     end
 end
-

@@ -83,8 +83,9 @@ end
             route=:limiting_case,
             independent=0.0,
             agree_within=1e-9,
-            refs=["TFIM critical line h_x=J (Pfeuty 1970) ⇒ MFI at h_z=0, h_x=J gives MassGap = 0"],
+            refs=[
+                "TFIM critical line h_x=J (Pfeuty 1970) ⇒ MFI at h_z=0, h_x=J gives MassGap = 0",
+            ],
         )
     end
 end
-

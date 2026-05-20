@@ -15,6 +15,8 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
 
 ## Test calls
 
@@ -24,11 +26,19 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(XXZ1D(; J = J, Δ = Delta), SusceptibilityZZ(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = chi_ind, agree_within = 1.0e-9, refs = ["chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian"])
 ```
 
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; J = J, Δ = Δ, beta = BETA))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(N); route = :second_closed_form, independent = BETA / N, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; J = J, Δ = Δ, beta = BETA))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

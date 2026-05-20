@@ -21,7 +21,9 @@ using QAtlas, Test
                         route=:limiting_case,
                         independent=0.0,
                         agree_within=1e-10,
-                        refs=["SU(2) symmetry of S=1 Heisenberg: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble"],
+                        refs=[
+                            "SU(2) symmetry of S=1 Heisenberg: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble",
+                        ],
                         fetch_kw=(; beta=β),
                     )
                 end

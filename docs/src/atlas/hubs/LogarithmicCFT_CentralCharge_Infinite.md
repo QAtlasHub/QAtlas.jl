@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Logarithmic CFT: c = 0 (identity conformal dimension vanishes) | `test/models/classical/test_logarithmic_cft.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Cardy 1999: canonical c=0 LogCFTs (percolation, SAW) | `test/models/classical/test_logarithmic_cft.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(LogarithmicCFT(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Logarithmic CFT: c = 0 (identity conformal dimension vanishes)"])
 ```
 
+```julia
+verify(LogarithmicCFT(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 0 // 1, agree_within = 0, refs = ["Cardy 1999: canonical c=0 LogCFTs (percolation, SAW)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

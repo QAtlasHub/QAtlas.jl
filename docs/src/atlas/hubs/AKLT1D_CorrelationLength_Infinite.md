@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ξ = 1/log 3 from VBS transfer matrix | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨S^z_0 S^z_r⟩ = (-1)^r (4/3) 3^{-r} ⇒ ξ = 1/log 3 | `test/models/quantum/misc/test_aklt.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(AKLT1D(), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / log(3), agree_within = 1.0e-12, refs = ["AKLT 1988: ξ = 1/log 3 from VBS transfer matrix"])
 ```
 
+```julia
+verify(AKLT1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / log(3), agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨S^z_0 S^z_r⟩ = (-1)^r (4/3) 3^{-r} ⇒ ξ = 1/log 3"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

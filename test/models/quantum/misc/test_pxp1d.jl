@@ -50,7 +50,6 @@ end
     )
 end
 
-
 # ── additional verification cards (#381 batch 4) ─────────────────────────
 @testset "PXP1D — Energy DMRG reference (#381 batch 4)" begin
     # PXP model GS energy density e_0 ≈ -0.6516 (Lin-Motrunich 2019 DMRG,
@@ -65,4 +64,3 @@ end
         refs=["Lin-Motrunich 2019 PRL 122 173401: PXP DMRG GS energy density ≈ -0.6516"],
     )
 end
-

@@ -32,7 +32,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=0.0,
                 agree_within=1e-10,
-                refs=["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"],
+                refs=[
+                    "TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"
+                ],
                 fetch_kw=(; ℓ=1, beta=1e6),
             )
             for α in (2, 3)
@@ -64,7 +66,9 @@ using QAtlas, Test
                     route=:second_closed_form,
                     independent=log(2),
                     agree_within=1e-10,
-                    refs=["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"],
+                    refs=[
+                        "TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β",
+                    ],
                     fetch_kw=(; ℓ=1, beta=β),
                 )
                 for α in (2, 3)
@@ -75,7 +79,9 @@ using QAtlas, Test
                         route=:second_closed_form,
                         independent=log(2),
                         agree_within=1e-10,
-                        refs=["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"],
+                        refs=[
+                            "TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β",
+                        ],
                         fetch_kw=(; ℓ=1, beta=β),
                     )
                 end

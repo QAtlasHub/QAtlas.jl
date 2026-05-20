@@ -21,7 +21,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=0.0,
                 agree_within=1e-10,
-                refs=["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"],
+                refs=[
+                    "Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly",
+                ],
                 fetch_kw=(; J=J),
             )
         end

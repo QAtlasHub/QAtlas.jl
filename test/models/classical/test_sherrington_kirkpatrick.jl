@@ -84,8 +84,9 @@ end
             route=:second_closed_form,
             independent=Float64(J),
             agree_within=1e-12,
-            refs=["Sherrington-Kirkpatrick 1975: SK spin-glass T_c = J in mean field (k_B = 1)"],
+            refs=[
+                "Sherrington-Kirkpatrick 1975: SK spin-glass T_c = J in mean field (k_B = 1)",
+            ],
         )
     end
 end
-

@@ -70,7 +70,8 @@ end
     # closed-form path is bit-identical for all sweep points in IEEE 754.
     # Sweep includes (0.674, 1.0) just below the dimer-phase boundary α_c ≈ 0.675
     # (Koga-Kawakami 2000) as a regression guard for the phase-boundary logic.
-    for (J, Jp) in ((0.0, 1.0), (0.3, 1.0), (0.674, 1.0), (0.0, 2.0), (0.5, 2.0), (1.0, 2.0))
+    for (J, Jp) in
+        ((0.0, 1.0), (0.3, 1.0), (0.674, 1.0), (0.0, 2.0), (0.5, 2.0), (1.0, 2.0))
         verify(
             ShastrySutherland(; J=J, Jp=Jp),
             Energy(:per_site),
@@ -78,8 +79,9 @@ end
             route=:second_closed_form,
             independent=-3 * Jp / 8,
             agree_within=1e-14,
-            refs=["Shastry-Sutherland 1981 / Koga-Kawakami 2000: exact dimer phase e₀ = -3J'/8 for α ≤ α_c ≈ 0.675"],
+            refs=[
+                "Shastry-Sutherland 1981 / Koga-Kawakami 2000: exact dimer phase e₀ = -3J'/8 for α ≤ α_c ≈ 0.675",
+            ],
         )
     end
 end
-

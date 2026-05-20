@@ -64,7 +64,8 @@ end
         route=:second_closed_form,
         independent=1.0,
         agree_within=1e-12,
-        refs=["Smirnov-Zamolodchikov 2017; Cavaglià et al 2016: TT̄ deformation preserves seed CFT central charge"],
+        refs=[
+            "Smirnov-Zamolodchikov 2017; Cavaglià et al 2016: TT̄ deformation preserves seed CFT central charge",
+        ],
     )
 end
-

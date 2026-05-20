@@ -23,9 +23,11 @@ using QAtlas, Test
             FreeEnergy(),
             Infinite();
             route=:second_closed_form,
-            independent=-J,
+            independent=(-J),
             agree_within=1e-5,
-            refs=["Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀"],
+            refs=[
+                "Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀"
+            ],
             fetch_kw=(; beta=BETA),
         )
         verify(
@@ -33,9 +35,11 @@ using QAtlas, Test
             FreeEnergy(),
             Infinite();
             route=:second_closed_form,
-            independent=-J,
+            independent=(-J),
             agree_within=1e-5,
-            refs=["Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀"],
+            refs=[
+                "Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀"
+            ],
             fetch_kw=(; beta=BETA),
         )
         verify(
@@ -60,7 +64,7 @@ using QAtlas, Test
                 FreeEnergy(),
                 OBC(N);
                 route=:second_closed_form,
-                independent=-h,
+                independent=(-h),
                 agree_within=1e-12,
                 refs=["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"],
                 fetch_kw=(; beta=BETA),
@@ -79,7 +83,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=-(N - 1) * J / N,
                 agree_within=1e-5,
-                refs=["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"],
+                refs=[
+                    "TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)",
+                ],
                 fetch_kw=(; beta=BETA),
             )
         end
@@ -93,7 +99,7 @@ using QAtlas, Test
                 FreeEnergy(),
                 PBC(N);
                 route=:second_closed_form,
-                independent=-J,
+                independent=(-J),
                 agree_within=1e-5,
                 refs=["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"],
                 fetch_kw=(; beta=BETA),
@@ -109,7 +115,7 @@ using QAtlas, Test
                 FreeEnergy(),
                 PBC(N);
                 route=:second_closed_form,
-                independent=-h,
+                independent=(-h),
                 agree_within=1e-5,
                 refs=["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"],
                 fetch_kw=(; beta=BETA),

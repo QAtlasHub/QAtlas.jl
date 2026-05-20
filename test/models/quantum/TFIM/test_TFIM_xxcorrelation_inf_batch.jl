@@ -44,7 +44,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-3,
-                refs=["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"],
+                refs=[
+                    "TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)",
+                ],
                 fetch_kw=(; beta=HIGH_T_BETA, i=i, j=j),
             )
         end

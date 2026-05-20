@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Frustration-free: sum of non-negative projectors => e0 = 0 | `test/models/quantum/misc/test_aklt2d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: 2D AKLT honeycomb is frustration-free ⇒ e₀ = 0 exactly | `test/models/quantum/misc/test_aklt2d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(AKLT2D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Frustration-free: sum of non-negative projectors => e0 = 0"])
 ```
 
+```julia
+verify(AKLT2D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["AKLT 1988: 2D AKLT honeycomb is frustration-free ⇒ e₀ = 0 exactly"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

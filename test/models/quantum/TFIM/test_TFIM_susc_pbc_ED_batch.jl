@@ -19,8 +19,7 @@ using QAtlas, Test, LinearAlgebra
 
 include(joinpath(@__DIR__, "..", "..", "..", "util", "generic_ed.jl"))
 
-let Sx = spin_ops(1//2)[1],
-    Sz = spin_ops(1//2)[3]
+let Sx = spin_ops(1//2)[1], Sz = spin_ops(1//2)[3]
     sigmax = 2 * Sx
     sigmaz = 2 * Sz
 
@@ -55,7 +54,9 @@ let Sx = spin_ops(1//2)[1],
                         independent=ed_val,
                         at=["N=$(N)"],
                         agree_within=1e-9,
-                        refs=["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"],
+                        refs=[
+                            "ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N",
+                        ],
                         fetch_kw=(; beta=beta),
                     )
                 end

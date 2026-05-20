@@ -18,14 +18,16 @@ function _brute_ising_thermo(Lx::Int, Ly::Int, J::Real, beta::Real)
     Z = 0.0
     sumE = 0.0
     sumE2 = 0.0
-    for s in 0:(2^N - 1)
+    for s in 0:(2 ^ N - 1)
         spin = [((s >> k) & 1) == 1 ? 1.0 : -1.0 for k in 0:(N - 1)]
         E = 0.0
         for i in 1:Lx, j in 1:Ly
             idx = (i - 1) * Ly + j
-            i2 = i % Lx + 1; idx2 = (i2 - 1) * Ly + j
+            i2 = i % Lx + 1;
+            idx2 = (i2 - 1) * Ly + j
             E += -J * spin[idx] * spin[idx2]
-            j2 = j % Ly + 1; idx2 = (i - 1) * Ly + j2
+            j2 = j % Ly + 1;
+            idx2 = (i - 1) * Ly + j2
             E += -J * spin[idx] * spin[idx2]
         end
         w = exp(-beta * E)
@@ -57,7 +59,9 @@ end
                     independent=ed_E,
                     at=["LxLy=$(Lx)x$(Ly)"],
                     agree_within=1e-9,
-                    refs=["Brute-force ED: enumerate all 2^(Lx·Ly) configs, canonical ⟨H⟩_β/N on the torus"],
+                    refs=[
+                        "Brute-force ED: enumerate all 2^(Lx·Ly) configs, canonical ⟨H⟩_β/N on the torus",
+                    ],
                     fetch_kw=(; beta=beta),
                 )
                 verify(

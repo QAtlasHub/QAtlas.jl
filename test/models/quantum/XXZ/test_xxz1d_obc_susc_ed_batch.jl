@@ -22,9 +22,7 @@ using QAtlas, Test, LinearAlgebra
 
 include(joinpath(@__DIR__, "..", "..", "..", "util", "generic_ed.jl"))
 
-let Sx_op = spin_ops(1//2)[1],
-    Sy_op = spin_ops(1//2)[2],
-    Sz_op = spin_ops(1//2)[3]
+let Sx_op = spin_ops(1//2)[1], Sy_op = spin_ops(1//2)[2], Sz_op = spin_ops(1//2)[3]
     sigmax = 2 * Sx_op
     sigmay = 2 * Sy_op
     sigmaz = 2 * Sz_op
@@ -63,7 +61,9 @@ let Sx_op = spin_ops(1//2)[1],
                             independent=ed_val,
                             at=["N=$(N)"],
                             agree_within=1e-9,
-                            refs=["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute beta*Var(M_alpha)/N (alpha=$(axis_name)). Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force ED at finite β)."],
+                            refs=[
+                                "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute beta*Var(M_alpha)/N (alpha=$(axis_name)). Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force ED at finite β).",
+                            ],
                             fetch_kw=(; J=J, Δ=dz, beta=beta),
                         )
                     end

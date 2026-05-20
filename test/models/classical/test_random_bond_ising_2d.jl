@@ -74,7 +74,8 @@ end
         route=:literature_value,
         independent=1//2,
         agree_within=0,
-        refs=["Nishimori 1981 / Honecker-Picco-Pujol 2001: 2D RBI Nishimori line ⇒ c = 1/2 (Ising universality)"],
+        refs=[
+            "Nishimori 1981 / Honecker-Picco-Pujol 2001: 2D RBI Nishimori line ⇒ c = 1/2 (Ising universality)",
+        ],
     )
 end
-

@@ -67,8 +67,9 @@ end
             route=:second_closed_form,
             independent=2 * abs(Jx - Jy),
             agree_within=1e-12,
-            refs=["Brzezicki-Dziarmaga-Oles 2007 PRB 75 134415: Δ = 2|J_x - J_y| (JW-dual dimerised Kitaev chain)"],
+            refs=[
+                "Brzezicki-Dziarmaga-Oles 2007 PRB 75 134415: Δ = 2|J_x - J_y| (JW-dual dimerised Kitaev chain)",
+            ],
         )
     end
 end
-

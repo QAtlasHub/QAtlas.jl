@@ -43,7 +43,8 @@ end
         route=:second_closed_form,
         independent=0.0,
         agree_within=1e-12,
-        refs=["Flaschka 1974 / Henon 1974: integrable Toda lattice with acoustic phonons ⇒ MassGap = 0"],
+        refs=[
+            "Flaschka 1974 / Henon 1974: integrable Toda lattice with acoustic phonons ⇒ MassGap = 0",
+        ],
     )
 end
-

@@ -20,7 +20,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=0.0,
                 agree_within=1e-10,
-                refs=["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"],
+                refs=[
+                    "XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0",
+                ],
                 fetch_kw=(; J=J, Δ=Δ),
             )
         end

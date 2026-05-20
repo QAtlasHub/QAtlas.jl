@@ -18,6 +18,7 @@
 | `@gapless` | `sum_rule` | 🟡 asserted | Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless) | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | OBC thermal energy from generic_ed thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
 
@@ -35,11 +36,15 @@ verify(XXZ1D(; J = J, Δ = Delta), Energy(), OBC(N); route = :ed_finite_size, fe
 verify(XXZ1D(; J = J, Δ = Delta), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
 ```
 
+```julia
+verify(XXZ1D(; J = J, Δ = dz), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; beta = beta))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

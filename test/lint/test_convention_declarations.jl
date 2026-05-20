@@ -20,12 +20,12 @@
 
 using Test
 
-const _STRUCT_RE   = r"struct\s+\S+\s*(\{[^}]*\})?\s*<:\s*AbstractQAtlasModel"
-const _CONV_RE     = r"^\s*#\s*CONVENTION\s*$"
-const _USING_RE    = r"^\s*using\b"
-const _COMMENT_RE  = r"^\s*#"
-const _PKG_ROOT    = normpath(joinpath(@__DIR__, "..", ".."))
-const _SCAN_ROOT   = joinpath(_PKG_ROOT, "src", "models", "quantum")
+const _STRUCT_RE = r"struct\s+\S+\s*(\{[^}]*\})?\s*<:\s*AbstractQAtlasModel"
+const _CONV_RE = r"^\s*#\s*CONVENTION\s*$"
+const _USING_RE = r"^\s*using\b"
+const _COMMENT_RE = r"^\s*#"
+const _PKG_ROOT = normpath(joinpath(@__DIR__, "..", ".."))
+const _SCAN_ROOT = joinpath(_PKG_ROOT, "src", "models", "quantum")
 
 "Collect every `.jl` file under `src/models/quantum/`."
 function _collect_model_files(root::AbstractString)
@@ -51,8 +51,7 @@ function _audit(path::AbstractString)
         c = 0
         for j in (conv_idx + 1):min(conv_idx + 10, length(lines))
             ln = lines[j]
-            if occursin(_COMMENT_RE, ln) && !isempty(strip(ln)) &&
-               strip(ln) != "#"
+            if occursin(_COMMENT_RE, ln) && !isempty(strip(ln)) && strip(ln) != "#"
                 c += 1
                 if c >= 2
                     followed_by_two_comments = true
@@ -68,8 +67,7 @@ function _audit(path::AbstractString)
 
     # Header MUST precede first `using` or model `struct` line.
     first_code_idx = findfirst(
-        ln -> occursin(_USING_RE, ln) || occursin(_STRUCT_RE, ln),
-        lines,
+        ln -> occursin(_USING_RE, ln) || occursin(_STRUCT_RE, ln), lines
     )
     before_code = if has_convention && first_code_idx !== nothing
         conv_idx < first_code_idx
@@ -86,8 +84,8 @@ end
     files = _collect_model_files(_SCAN_ROOT)
     @test !isempty(files)
 
-    missing_header   = String[]
-    short_header     = String[]
+    missing_header = String[]
+    short_header = String[]
     misplaced_header = String[]
 
     for f in files
@@ -98,7 +96,7 @@ end
             push!(missing_header, rel)
         else
             rep.followed_by_two_comments || push!(short_header, rel)
-            rep.before_code             || push!(misplaced_header, rel)
+            rep.before_code || push!(misplaced_header, rel)
         end
     end
 

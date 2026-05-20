@@ -21,7 +21,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-9,
-                refs=["S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit)"],
+                refs=[
+                    "S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit)",
+                ],
                 fetch_kw=(; beta=LOW_T_BETA),
             )
             verify(
@@ -61,7 +63,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=-log(3) / HIGH_T_BETA,
                 agree_within=1e-2,
-                refs=["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet f/N = -T log 3 = -log(3)/β"],
+                refs=[
+                    "S1Heisenberg1D OBC T → ∞: spin-1 paramagnet f/N = -T log 3 = -log(3)/β"
+                ],
                 fetch_kw=(; beta=HIGH_T_BETA),
             )
         end

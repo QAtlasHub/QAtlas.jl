@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Yang-Lee edge = M(5,2): c = 1 - 6(p-p')²/(pp') = -22/5 | `test/models/classical/test_yang_lee.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Cardy 1985: Yang-Lee edge is the M(2,5) minimal model ⇒ c = -22/5 | `test/models/classical/test_yang_lee.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(YangLee(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 - (6 * (5 - 2) ^ 2) / (5 * 2), agree_within = 1.0e-12, refs = ["Yang-Lee edge = M(5,2): c = 1 - 6(p-p')²/(pp') = -22/5"])
 ```
 
+```julia
+verify(YangLee(), CentralCharge(), Infinite(); route = :second_closed_form, independent = -22 // 5, agree_within = 0, refs = ["Cardy 1985: Yang-Lee edge is the M(2,5) minimal model ⇒ c = -22/5"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

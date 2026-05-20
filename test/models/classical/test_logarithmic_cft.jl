@@ -38,4 +38,3 @@ end
         refs=["Cardy 1999: canonical c=0 LogCFTs (percolation, SAW)"],
     )
 end
-

@@ -38,7 +38,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=iseven(N) ? 0.0 : log(2.0) / N,
                 agree_within=1e-9,
-                refs=["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"],
+                refs=[
+                    "Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N",
+                ],
                 fetch_kw=(; J=J, beta=LOW_T_BETA),
             )
             verify(
@@ -82,7 +84,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=-log(2) / HIGH_T_BETA,
                 agree_within=5e-3 * J^2,
-                refs=["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"],
+                refs=[
+                    "Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²",
+                ],
                 fetch_kw=(; J=J, beta=HIGH_T_BETA),
             )
         end

@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988: e0 = -2J/3 | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3 | `test/models/quantum/misc/test_aklt.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(AKLT1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-2J) / 3, agree_within = 1.0e-14, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988: e0 = -2J/3"])
 ```
 
+```julia
+verify(AKLT1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-2J) / 3, agree_within = 1.0e-14, refs = ["AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

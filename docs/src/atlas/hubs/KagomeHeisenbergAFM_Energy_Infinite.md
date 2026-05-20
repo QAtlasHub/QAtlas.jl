@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | Yan-Huse-White 2011 Science 332 1173: Kagome HAFM DMRG e₀ ≈ -0.4386 per spin | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(KagomeHeisenbergAFM(; J = 1.0), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.4386, agree_within = 0.005, refs = ["Yan-Huse-White 2011; Depenbrock-McCulloch-Schollwöck 2012 DMRG: e ≈ -0.4386 J"])
 ```
 
+```julia
+verify(KagomeHeisenbergAFM(), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.4386, agree_within = 0.001, refs = ["Yan-Huse-White 2011 Science 332 1173: Kagome HAFM DMRG e₀ ≈ -0.4386 per spin"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -202,10 +202,7 @@ end
     # TopologicalInvariant/Infinite (Kitaev 2001 Pfaffian Z2): ν = sgn(μ² − 4t²).
     # |μ| < 2|t| ⇒ topological (ν = −1); |μ| > 2|t| ⇒ trivial (ν = +1).
     for (μ, t, Δ, ν_expected) in (
-        (0.0, 1.0, 1.0, -1),
-        (0.5, 1.0, 1.0, -1),
-        (3.0, 1.0, 1.0, +1),
-        (-3.0, 1.0, 0.5, +1),
+        (0.0, 1.0, 1.0, -1), (0.5, 1.0, 1.0, -1), (3.0, 1.0, 1.0, +1), (-3.0, 1.0, 0.5, +1)
     )
         verify(
             Kitaev1D(; μ=μ, t=t, Δ=Δ),
@@ -226,9 +223,11 @@ end
             Energy(:per_site),
             Infinite();
             route=:second_closed_form,
-            independent=-t,
+            independent=(-t),
             agree_within=1e-9,
-            refs=["Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"],
+            refs=[
+                "Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"
+            ],
         )
     end
 
@@ -241,7 +240,9 @@ end
         route=:second_closed_form,
         independent=0.5,
         agree_within=1e-12,
-        refs=["Kitaev 2001 sweet spot (μ=0, t=Δ): bulk gap = 2|Δ|, general ξ = 1/Δ_gap ⇒ ξ = 1/(2|Δ|)"],
+        refs=[
+            "Kitaev 2001 sweet spot (μ=0, t=Δ): bulk gap = 2|Δ|, general ξ = 1/Δ_gap ⇒ ξ = 1/(2|Δ|)",
+        ],
     )
     # Trivial phase (μ=3, t=1, Δ=1): gap = |μ|−2|t| = 1 ⇒ ξ = 1.
     verify(
@@ -265,8 +266,9 @@ end
             route=:second_closed_form,
             independent=0.0,
             agree_within=1e-10,
-            refs=["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"],
+            refs=[
+                "Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)",
+            ],
         )
     end
 end
-

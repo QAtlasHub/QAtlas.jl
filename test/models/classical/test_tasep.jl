@@ -67,4 +67,3 @@ end
         refs=["Derrida 1998: TASEP steady-state J = ρ(1-ρ), max at ρ=1/2 ⇒ J = 1/4"],
     )
 end
-

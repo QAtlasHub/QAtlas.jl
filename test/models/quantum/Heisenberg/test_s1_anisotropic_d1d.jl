@@ -132,7 +132,9 @@ end
             route=:delegation_invariant,
             independent=-1.40148403897 * J,
             agree_within=1e-6,
-            refs=["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (D=0 delegation; J-linear scaling)"],
+            refs=[
+                "White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (D=0 delegation; J-linear scaling)",
+            ],
         )
         verify(
             S1AnisotropicD1D(; J=J, D=0.0),
@@ -141,8 +143,9 @@ end
             route=:delegation_invariant,
             independent=0.41048 * J,
             agree_within=1e-3,
-            refs=["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (D=0 delegation; J-linear scaling)"],
+            refs=[
+                "White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (D=0 delegation; J-linear scaling)",
+            ],
         )
     end
 end
-

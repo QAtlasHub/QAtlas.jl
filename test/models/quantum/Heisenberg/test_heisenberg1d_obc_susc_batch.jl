@@ -23,7 +23,9 @@ using QAtlas, Test
                     route=:second_closed_form,
                     independent=0.0,
                     agree_within=1e-8,
-                    refs=["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"],
+                    refs=[
+                        "Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0",
+                    ],
                     fetch_kw=(; J=J, beta=LOW_T_BETA),
                 )
             end

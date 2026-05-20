@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio | `test/models/quantum/misc/test_fibonacci_anyons.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio) | `test/models/quantum/misc/test_fibonacci_anyons.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(2 + phi), agree_within = 1.0e-9, refs = ["Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio"])
 ```
 
+```julia
+verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(1 + phi ^ 2), agree_within = 1.0e-12, refs = ["Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

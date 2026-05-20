@@ -55,7 +55,9 @@ using QAtlas, Test
             route=:limiting_case,
             independent=0.0,
             agree_within=1e-4,
-            refs=["KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum)"],
+            refs=[
+                "KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum)"
+            ],
             fetch_kw=(; beta=HIGH_T_BETA),
         )
         # OBC variants at T → 0

@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@anisotropic` | `second_closed_form` | 🟢 structural | 1D compass model gap = 2|J_x - J_y| | `test/models/quantum/misc/test_compass1d.jl` |
+| `@anisotropic` | `second_closed_form` | 🟢 structural | Brzezicki-Dziarmaga-Oles 2007 PRB 75 134415: Δ = 2|J_x - J_y| (JW-dual dimerised Kitaev chain) | `test/models/quantum/misc/test_compass1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(Compass1D(; J_x = jx, J_y = jy), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(jx - jy), agree_within = 1.0e-10, refs = ["1D compass model gap = 2|J_x - J_y|"])
 ```
 
+```julia
+verify(Compass1D(; J_x = Jx, J_y = Jy), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(Jx - Jy), agree_within = 1.0e-12, refs = ["Brzezicki-Dziarmaga-Oles 2007 PRB 75 134415: Δ = 2|J_x - J_y| (JW-dual dimerised Kitaev chain)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

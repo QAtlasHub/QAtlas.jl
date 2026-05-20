@@ -86,4 +86,3 @@ end
         refs=["Cardy 1985: Yang-Lee edge is the M(2,5) minimal model ⇒ c = -22/5"],
     )
 end
-

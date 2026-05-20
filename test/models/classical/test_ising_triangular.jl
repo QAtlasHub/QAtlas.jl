@@ -171,7 +171,9 @@ end
             route=:second_closed_form,
             independent=0.0,
             agree_within=0,
-            refs=["Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"],
+            refs=[
+                "Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"
+            ],
         )
     end
     # ResidualEntropy at T=0 of AF triangular Ising: Wannier 1950
@@ -183,7 +185,8 @@ end
         route=:literature_value,
         independent=0.3230659669304534,
         agree_within=1e-6,
-        refs=["Wannier 1950: AF triangular Ising T=0 residual entropy = 0.32306594... per spin"],
+        refs=[
+            "Wannier 1950: AF triangular Ising T=0 residual entropy = 0.32306594... per spin",
+        ],
     )
 end
-

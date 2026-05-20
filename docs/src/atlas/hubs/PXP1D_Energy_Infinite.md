@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | PXP scar literature (Turner 2018 / Lin-Motrunich 2019): e0 ~ -0.6516 | `test/models/quantum/misc/test_pxp1d.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | Lin-Motrunich 2019 PRL 122 173401: PXP DMRG GS energy density ≈ -0.6516 | `test/models/quantum/misc/test_pxp1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(PXP1D(), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.6516, agree_within = 0.005, refs = ["PXP scar literature (Turner 2018 / Lin-Motrunich 2019): e0 ~ -0.6516"])
 ```
 
+```julia
+verify(PXP1D(), Energy(:per_site), Infinite(); route = :literature_value, independent = -0.6516, agree_within = 0.001, refs = ["Lin-Motrunich 2019 PRL 122 173401: PXP DMRG GS energy density ≈ -0.6516"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -190,9 +190,11 @@ end
         FreeEnergy(),
         Infinite();
         route=:lieb_ferroelectric,
-        independent=-log(3.0),
+        independent=(-log(3.0)),
         agree_within=1e-14,
-        refs=["Lieb 1967c Phys. Rev. Lett. 19, 108: KDP/FE phase f = -log max(a,b) (frozen GS)"],
+        refs=[
+            "Lieb 1967c Phys. Rev. Lett. 19, 108: KDP/FE phase f = -log max(a,b) (frozen GS)",
+        ],
     )
 
     # (a, b, c) = (1, 3, 1) → same by a↔b symmetry; f = -log 3.
@@ -201,7 +203,7 @@ end
         FreeEnergy(),
         Infinite();
         route=:lieb_ferroelectric,
-        independent=-log(3.0),
+        independent=(-log(3.0)),
         agree_within=1e-14,
         refs=["Lieb 1967c: FE-phase f = -log max(a,b); a↔b symmetry"],
     )
@@ -212,7 +214,7 @@ end
         FreeEnergy(),
         Infinite();
         route=:lieb_ferroelectric,
-        independent=-log(4.0),
+        independent=(-log(4.0)),
         agree_within=1e-14,
         refs=["Lieb 1967c: FE-phase f = -log max(a,b)"],
     )
@@ -229,10 +231,11 @@ end
             FreeEnergy(),
             Infinite();
             route=:lieb_ferroelectric,
-            independent=-log(a_kdp),
+            independent=(-log(a_kdp)),
             agree_within=1e-14,
-            refs=["Lieb 1967c: KDP boundary Δ=1 approached from FE side; f = -log max(a,b)"],
+            refs=[
+                "Lieb 1967c: KDP boundary Δ=1 approached from FE side; f = -log max(a,b)"
+            ],
         )
     end
 end
-

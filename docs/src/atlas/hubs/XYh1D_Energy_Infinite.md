@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Lieb-Schultz-Mattis 1961: XX chain e0 = -4/pi (Pauli σ convention) | `test/models/quantum/misc/test_xyh1d.jl` |
+| `@xx` | `second_closed_form` | 🟢 structural | Lieb-Schultz-Mattis 1961: free XY chain (h=0) e₀ = -4/π per spin | `test/models/quantum/misc/test_xyh1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(XYh1D(), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -4 / pi, agree_within = 1.0e-9, refs = ["Lieb-Schultz-Mattis 1961: XX chain e0 = -4/pi (Pauli σ convention)"])
 ```
 
+```julia
+verify(XYh1D(; h = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -4 / π, agree_within = 1.0e-12, refs = ["Lieb-Schultz-Mattis 1961: free XY chain (h=0) e₀ = -4/π per spin"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

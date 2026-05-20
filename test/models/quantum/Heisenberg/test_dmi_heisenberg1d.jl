@@ -90,8 +90,9 @@ end
             route=:second_closed_form,
             independent=J * (1/4 - log(2)),
             agree_within=1e-14,
-            refs=["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"],
+            refs=[
+                "Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)",
+            ],
         )
     end
 end
-

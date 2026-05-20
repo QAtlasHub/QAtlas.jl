@@ -85,7 +85,11 @@ function _json_num(x)
     # Complex-with-negligible-imag -> real part (correlators of
     # Hermitian operators are real up to round-off); genuinely
     # complex or non-finite -> null (never a raw "0.4 + 0.0im").
-    r = x isa Complex ? (abs(imag(x)) <= _IMAG_NOISE_RTOL * max(1.0, abs(real(x))) ? real(x) : NaN) : x
+    r = if x isa Complex
+        (abs(imag(x)) <= _IMAG_NOISE_RTOL * max(1.0, abs(real(x))) ? real(x) : NaN)
+    else
+        x
+    end
     v = float(r)
     return isfinite(v) ? string(v) : "null"
 end

@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Depenbrock et al. 2012 DMRG: spin gap ≈ 0.13 J | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | Yan-Huse-White 2011: Kagome HAFM singlet-triplet gap Δ ≈ 0.13 J (DMRG) | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(KagomeHeisenbergAFM(; J = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 0.13, agree_within = 0.05, refs = ["Depenbrock et al. 2012 DMRG: spin gap ≈ 0.13 J"])
 ```
 
+```julia
+verify(KagomeHeisenbergAFM(), MassGap(), Infinite(); route = :literature_value, independent = 0.13, agree_within = 0.01, refs = ["Yan-Huse-White 2011: Kagome HAFM singlet-triplet gap Δ ≈ 0.13 J (DMRG)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

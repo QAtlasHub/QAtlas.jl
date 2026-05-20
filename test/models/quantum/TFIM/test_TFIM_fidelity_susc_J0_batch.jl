@@ -22,7 +22,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=0.0,
                 agree_within=1e-12,
-                refs=["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"],
+                refs=[
+                    "χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)",
+                ],
             )
         end
     end

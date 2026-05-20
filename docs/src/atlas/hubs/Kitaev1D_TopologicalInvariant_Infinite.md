@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | "Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)" | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(Kitaev1D(; μ = μ, t = t, Δ = Δ), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = ν_closed, agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
 ```
 
+```julia
+verify(Kitaev1D(; μ = μ, t = t, Δ = Δ), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = ν_expected, agree_within = 0, refs = ["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

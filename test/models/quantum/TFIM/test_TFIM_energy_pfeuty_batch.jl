@@ -19,7 +19,7 @@ using QAtlas, Test
             Energy(:per_site),
             Infinite();
             route=:second_closed_form,
-            independent=-abs(J),
+            independent=(-abs(J)),
             agree_within=1e-9,
             refs=["Pfeuty 1970: at h=0 dispersion is flat Λ(k)=2|J| ⇒ ε₀ = -|J|"],
         )
@@ -32,7 +32,7 @@ using QAtlas, Test
             Energy(:per_site),
             Infinite();
             route=:second_closed_form,
-            independent=-h,
+            independent=(-h),
             agree_within=1e-9,
             refs=["Pfeuty 1970: at J=0 dispersion is flat Λ(k)=2h ⇒ ε₀ = -h"],
         )

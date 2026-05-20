@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | García-Saez-Murg-Verstraete 2013: Haldane gap Δ ≈ 0.350 J (DMRG) | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG) | `test/models/quantum/misc/test_aklt.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(AKLT1D(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.35J, agree_within = 0.001 * max(1.0, J), refs = ["García-Saez-Murg-Verstraete 2013: Haldane gap Δ ≈ 0.350 J (DMRG)"])
 ```
 
+```julia
+verify(AKLT1D(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.35J, agree_within = 0.005, refs = ["García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -87,8 +87,9 @@ end
             route=:second_closed_form,
             independent=-exp(γ_E) * e / (2 * π^(3/2)),
             agree_within=1e-12,
-            refs=["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"],
+            refs=[
+                "Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)",
+            ],
         )
     end
 end
-

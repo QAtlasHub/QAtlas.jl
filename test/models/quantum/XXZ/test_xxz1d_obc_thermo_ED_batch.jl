@@ -20,10 +20,7 @@ using QAtlas, Test, LinearAlgebra
 
 include(joinpath(@__DIR__, "..", "..", "..", "util", "generic_ed.jl"))
 
-let Sx = spin_ops(1//2)[1],
-    Sy = spin_ops(1//2)[2],
-    Sz = spin_ops(1//2)[3]
-
+let Sx = spin_ops(1//2)[1], Sy = spin_ops(1//2)[2], Sz = spin_ops(1//2)[3]
     function ed_xxz_thermo_per_site(N::Int, J::Real, dz::Real, beta::Real)
         bond = J * (kron(Sx, Sx) + kron(Sy, Sy) + dz * kron(Sz, Sz))
         H = chain_hamiltonian(2, N, bond)
@@ -45,7 +42,9 @@ let Sx = spin_ops(1//2)[1],
                         independent=ed_E,
                         at=["N=$(N)"],
                         agree_within=1e-9,
-                        refs=["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"],
+                        refs=[
+                            "ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum",
+                        ],
                         fetch_kw=(; beta=beta),
                     )
                     verify(

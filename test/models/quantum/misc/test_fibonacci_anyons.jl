@@ -44,7 +44,8 @@ end
         route=:second_closed_form,
         independent=0.5 * log(1 + phi^2),
         agree_within=1e-12,
-        refs=["Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio)"],
+        refs=[
+            "Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio)",
+        ],
     )
 end
-

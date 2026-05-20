@@ -15,14 +15,14 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: ξ = 1/log(max(J,h)/min(J,h)) (TFIM gapped phases) | `test/models/quantum/TFIM/test_TFIM_correlation_length_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448 | `test/models/quantum/TFIM/test_TFIM_correlation_length_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), CorrelationLength(), Infinite(); route = :second_closed_form, independent = ξ_closed, agree_within = 1.0e-12, refs = ["Pfeuty 1970: ξ = 1/log(max(J,h)/min(J,h)) (TFIM gapped phases)"])
+verify(TFIM(; J = J, h = h), CorrelationLength(), Infinite(); route = :second_closed_form, independent = ξ_closed, agree_within = 1.0e-12, refs = ["TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448"])
 ```
 
 

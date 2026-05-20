@@ -36,7 +36,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-9,
-                refs=["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"],
+                refs=[
+                    "TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0",
+                ],
                 fetch_kw=(; beta=LOW_T_BETA),
             )
             verify(
@@ -46,7 +48,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-5,
-                refs=["TFIM OBC unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet finite-size splitting)"],
+                refs=[
+                    "TFIM OBC unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet finite-size splitting)",
+                ],
                 fetch_kw=(; beta=LOW_T_BETA),
             )
             # PBC only in the ordered phase h < J (parity-sector bug in disordered phase).
@@ -58,7 +62,9 @@ using QAtlas, Test
                     route=:limiting_case,
                     independent=0.0,
                     agree_within=1e-5,
-                    refs=["TFIM PBC ordered phase (h<J) unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet splitting)"],
+                    refs=[
+                        "TFIM PBC ordered phase (h<J) unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet splitting)",
+                    ],
                     fetch_kw=(; beta=LOW_T_BETA),
                 )
             end

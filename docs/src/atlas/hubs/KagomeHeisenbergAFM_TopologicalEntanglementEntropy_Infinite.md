@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `literature_value` | 🟢 structural | Z2 spin liquid: gamma = log 2 (Jiang-Wang-Balents 2012) | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | Yan-Huse-White 2011; Depenbrock et al. 2012: Kagome HAFM Z2 spin liquid ⇒ TEE = log 2 | `test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(KagomeHeisenbergAFM(; J = 1.0), TopologicalEntanglementEntropy(), Infinite(); route = :literature_value, independent = log(2), agree_within = 1.0e-6, refs = ["Z2 spin liquid: gamma = log 2 (Jiang-Wang-Balents 2012)"])
 ```
 
+```julia
+verify(KagomeHeisenbergAFM(), TopologicalEntanglementEntropy(), Infinite(); route = :literature_value, independent = log(2), agree_within = 1.0e-12, refs = ["Yan-Huse-White 2011; Depenbrock et al. 2012: Kagome HAFM Z2 spin liquid ⇒ TEE = log 2"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

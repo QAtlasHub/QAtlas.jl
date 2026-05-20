@@ -15,21 +15,31 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot (μ=0, t=Δ): bulk gap = 2|Δ|, general ξ = 1/Δ_gap ⇒ ξ = 1/(2|Δ|) | `test/models/quantum/misc/test_kitaev1d.jl` |
 | `@trivial` | `second_closed_form` | 🟢 structural | Kitaev chain trivial μ=3, t=Δ=1: bulk gap = 1 ⇒ ξ = 1/Δ_gap = 1 | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@trivial` | `second_closed_form` | 🟢 structural | Kitaev 2001 trivial phase: bulk gap = |μ|−2|t| ⇒ ξ = 1/(|μ|−2|t|) | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 0.5, agree_within = 1.0e-12, refs = ["Kitaev 2001 sweet spot (μ=0, t=Δ): bulk gap = 2|Δ|, general ξ = 1/Δ_gap ⇒ ξ = 1/(2|Δ|)"])
+```
+
+```julia
 verify(Kitaev1D(; μ = 3.0, t = 1.0, Δ = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-9, refs = ["Kitaev chain trivial μ=3, t=Δ=1: bulk gap = 1 ⇒ ξ = 1/Δ_gap = 1"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 3.0, t = 1.0, Δ = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["Kitaev 2001 trivial phase: bulk gap = |μ|−2|t| ⇒ ξ = 1/(|μ|−2|t|)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

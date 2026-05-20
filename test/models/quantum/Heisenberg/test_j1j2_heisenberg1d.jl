@@ -118,8 +118,9 @@ end
             route=:second_closed_form,
             independent=-3 * J1 / 8,
             agree_within=1e-14,
-            refs=["Majumdar-Ghosh 1969: at J2 = J1/2 GS is exact dimer-product state ⇒ e₀ = -3J1/8"],
+            refs=[
+                "Majumdar-Ghosh 1969: at J2 = J1/2 GS is exact dimer-product state ⇒ e₀ = -3J1/8",
+            ],
         )
     end
 end
-

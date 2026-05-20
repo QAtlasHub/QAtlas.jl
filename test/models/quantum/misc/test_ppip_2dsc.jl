@@ -69,4 +69,3 @@ end
         refs=["Read-Green 2000; Kitaev 2003: chiral p+ip SC has Majorana edge ⇒ c = 1/2"],
     )
 end
-

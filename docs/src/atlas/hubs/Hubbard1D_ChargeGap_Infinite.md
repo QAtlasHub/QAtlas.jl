@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞ | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U) | `test/models/quantum/misc/test_hubbard1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(Hubbard1D(; t = t, U = U, μ = U / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = asymptote, agree_within = 0.02, refs = ["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"])
 ```
 
+```julia
+verify(Hubbard1D(; t = t, U = U, μ = U / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

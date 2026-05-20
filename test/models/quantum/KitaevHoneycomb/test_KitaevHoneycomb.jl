@@ -329,8 +329,9 @@ end
             route=:second_closed_form,
             independent=Δ_expected,
             agree_within=1e-12,
-            refs=["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"],
+            refs=[
+                "Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others",
+            ],
         )
     end
 end
-

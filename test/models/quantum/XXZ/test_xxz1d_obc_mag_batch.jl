@@ -29,7 +29,9 @@ using QAtlas, Test
                         route=:limiting_case,
                         independent=0.0,
                         agree_within=1e-10,
-                        refs=["XXZ1D OBC: Z₂ spin-flip (∏σˣ) ⇒ ⟨Sᶻ⟩ = 0; U(1) z-rotation ⇒ ⟨Sˣ⟩ = ⟨Sʸ⟩ = 0 (no field)"],
+                        refs=[
+                            "XXZ1D OBC: Z₂ spin-flip (∏σˣ) ⇒ ⟨Sᶻ⟩ = 0; U(1) z-rotation ⇒ ⟨Sˣ⟩ = ⟨Sʸ⟩ = 0 (no field)",
+                        ],
                         fetch_kw=(; beta=β),
                     )
                 end

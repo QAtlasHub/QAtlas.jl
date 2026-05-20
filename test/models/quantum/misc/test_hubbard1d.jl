@@ -145,11 +145,12 @@ end
             route=:limiting_case,
             independent=asymptote,
             agree_within=2e-2,
-            refs=["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"],
+            refs=[
+                "Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞",
+            ],
         )
     end
 end
-
 
 # ── additional verification cards (#381 batch) ─────────────────────────────
 # Scope note: GroundStateEnergyDensity at U → 0 was deliberately omitted
@@ -167,7 +168,9 @@ end
             route=:second_closed_form,
             independent=0.0,
             agree_within=0,
-            refs=["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"],
+            refs=[
+                "Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)",
+            ],
         )
     end
 
@@ -188,8 +191,9 @@ end
             route=:limiting_case,
             independent=0.0,
             agree_within=1e-4,
-            refs=["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"],
+            refs=[
+                "Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"
+            ],
         )
     end
 end
-

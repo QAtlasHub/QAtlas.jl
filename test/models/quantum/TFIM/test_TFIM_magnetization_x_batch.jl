@@ -23,7 +23,9 @@ using QAtlas, Test
             route=:second_closed_form,
             independent=1.0,
             agree_within=1e-12,
-            refs=["TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1"],
+            refs=[
+                "TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1",
+            ],
             fetch_kw=(; beta=BETA),
         )
         # /OBC(N), /PBC(N) — same in any geometry at J=0 (no Ising coupling)
@@ -35,7 +37,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=1.0,
                 agree_within=1e-12,
-                refs=["TFIM at J=0, OBC: BC-independent — GS still fully x-polarised ⇒ <σ^x> = 1"],
+                refs=[
+                    "TFIM at J=0, OBC: BC-independent — GS still fully x-polarised ⇒ <σ^x> = 1",
+                ],
                 fetch_kw=(; beta=BETA),
             )
             verify(
@@ -45,7 +49,9 @@ using QAtlas, Test
                 route=:second_closed_form,
                 independent=1.0,
                 agree_within=1e-12,
-                refs=["TFIM at J=0, PBC: BC-independent — GS still fully x-polarised ⇒ <σ^x> = 1"],
+                refs=[
+                    "TFIM at J=0, PBC: BC-independent — GS still fully x-polarised ⇒ <σ^x> = 1",
+                ],
                 fetch_kw=(; beta=BETA),
             )
         end
@@ -63,7 +69,9 @@ using QAtlas, Test
             route=:second_closed_form,
             independent=0.0,
             agree_within=1e-12,
-            refs=["TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value)"],
+            refs=[
+                "TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value)",
+            ],
             fetch_kw=(; beta=BETA),
         )
         # /OBC(N), /PBC(N) at h = 0: finite-N TFIM GS preserves Z₂ exactly,

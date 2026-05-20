@@ -67,9 +67,11 @@ end
             Energy(:per_site),
             Infinite();
             route=:second_closed_form,
-            independent=-J,
+            independent=(-J),
             agree_within=1e-12,
-            refs=["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"],
+            refs=[
+                "Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J",
+            ],
         )
         verify(
             Cluster1D(; J=J),
@@ -78,8 +80,9 @@ end
             route=:second_closed_form,
             independent=2 * J,
             agree_within=1e-12,
-            refs=["Briegel-Raussendorf 2001: minimal excitation above cluster GS costs 2J ⇒ Δ = 2J"],
+            refs=[
+                "Briegel-Raussendorf 2001: minimal excitation above cluster GS costs 2J ⇒ Δ = 2J",
+            ],
         )
     end
 end
-

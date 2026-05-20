@@ -140,7 +140,9 @@ end
             route=:second_closed_form,
             independent=0.0,
             agree_within=0,
-            refs=["Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0"],
+            refs=[
+                "Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0",
+            ],
         )
     end
     # FreeEnergy: f(β) = -(1/β) log(2 cosh(βJ)) (Ising 1925; standard result).
@@ -170,4 +172,3 @@ end
         )
     end
 end
-

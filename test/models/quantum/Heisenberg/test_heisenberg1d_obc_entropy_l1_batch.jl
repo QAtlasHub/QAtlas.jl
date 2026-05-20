@@ -22,7 +22,9 @@ using QAtlas, Test
                     route=:second_closed_form,
                     independent=log(2),
                     agree_within=1e-10,
-                    refs=["Heisenberg1D SU(2) symmetry: ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, N, β"],
+                    refs=[
+                        "Heisenberg1D SU(2) symmetry: ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, N, β",
+                    ],
                     fetch_kw=(; J=J, ℓ=1, beta=β),
                 )
                 for α in (2, 3)
@@ -33,7 +35,9 @@ using QAtlas, Test
                         route=:second_closed_form,
                         independent=log(2),
                         agree_within=1e-10,
-                        refs=["Heisenberg1D SU(2): ρ₁ = I/2 (maximally mixed) ⇒ S_α(ℓ=1) = log 2 for all Rényi index α"],
+                        refs=[
+                            "Heisenberg1D SU(2): ρ₁ = I/2 (maximally mixed) ⇒ S_α(ℓ=1) = log 2 for all Rényi index α",
+                        ],
                         fetch_kw=(; J=J, ℓ=1, beta=β),
                     )
                 end

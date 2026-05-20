@@ -47,4 +47,3 @@ end
         refs=["Pauling 1935: spin-ice T=0 residual entropy = (1/2) log(3/2) per spin"],
     )
 end
-

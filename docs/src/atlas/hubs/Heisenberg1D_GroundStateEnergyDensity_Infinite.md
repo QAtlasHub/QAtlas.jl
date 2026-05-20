@@ -33,7 +33,7 @@ verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_c
 ```
 
 ```julia
-verify(Heisenberg1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = J * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = J * (1 / 4 - log(2)), agree_within = 1.0e-14, fetch_kw = (; J = J), refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
 ```
 
 ```julia

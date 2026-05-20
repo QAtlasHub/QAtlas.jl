@@ -17,8 +17,7 @@ using QAtlas, Test, LinearAlgebra
 
 include(joinpath(@__DIR__, "..", "..", "..", "util", "generic_ed.jl"))
 
-let Sx = spin_ops(1//2)[1],
-    Sz = spin_ops(1//2)[3]
+let Sx = spin_ops(1//2)[1], Sz = spin_ops(1//2)[3]
     sigmax = 2 * Sx
     sigmaz = 2 * Sz
 
@@ -51,7 +50,9 @@ let Sx = spin_ops(1//2)[1],
                             independent=ed_val,
                             at=["N=$(N)"],
                             agree_within=1e-9,
-                            refs=["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum ($(lab))"],
+                            refs=[
+                                "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum ($(lab))",
+                            ],
                             fetch_kw=(; beta=beta),
                         )
                     end

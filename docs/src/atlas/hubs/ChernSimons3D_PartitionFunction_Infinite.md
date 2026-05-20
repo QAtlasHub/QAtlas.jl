@@ -13,12 +13,38 @@
 
 ## Corroboration
 
-_No corroboration card._ Model is ED-infeasible — frontier (cited-only), not a gap.
+| regime | mechanism | independence | refs | file |
+|---|---|---|---|---|
+| `@sweep` | `multi_root_product` | 🟡 asserted | Witten 1989: Z(S³; SU(3)_1) = 1/√3 (Verlinde S₀₀ closed form) | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+| `@sweep` | `single_root_specialisation` | 🟡 asserted | Witten 1989: Z(S³; SU(2)_1) = sqrt(2/3)·sin(π/3) → 1/√2 | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+| `@sweep` | `single_root_specialisation` | 🟡 asserted | Witten 1989: Z(S³; SU(2)_2) = sqrt(2/4)·sin(π/4) → 1/2 | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+| `@sweep` | `single_root_specialisation` | 🟡 asserted | Witten 1989: Z(S³; SU(2)_3) = sqrt(2/5)·sin(π/5) | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(ChernSimons3D(; N = 3, k = 1), PartitionFunction(), Infinite(); route = :multi_root_product, independent = 1 / sqrt(3), agree_within = 1.0e-14, refs = ["Witten 1989: Z(S³; SU(3)_1) = 1/√3 (Verlinde S₀₀ closed form)"])
+```
+
+```julia
+verify(ChernSimons3D(; N = 2, k = 1), PartitionFunction(), Infinite(); route = :single_root_specialisation, independent = 1 / sqrt(2), agree_within = 1.0e-14, refs = ["Witten 1989: Z(S³; SU(2)_1) = sqrt(2/3)·sin(π/3) → 1/√2"])
+```
+
+```julia
+verify(ChernSimons3D(; N = 2, k = 2), PartitionFunction(), Infinite(); route = :single_root_specialisation, independent = 0.5, agree_within = 1.0e-14, refs = ["Witten 1989: Z(S³; SU(2)_2) = sqrt(2/4)·sin(π/4) → 1/2"])
+```
+
+```julia
+verify(ChernSimons3D(; N = 2, k = 3), PartitionFunction(), Infinite(); route = :single_root_specialisation, independent = sqrt(2 / 5) * sin(π / 5), agree_within = 1.0e-14, refs = ["Witten 1989: Z(S³; SU(2)_3) = sqrt(2/5)·sin(π/5)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 0 · model ED-infeasible (frontier)
+- cards: 4 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

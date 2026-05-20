@@ -45,7 +45,9 @@ using QAtlas, Test
             route=:limiting_case,
             independent=0.0,
             agree_within=1e-4,
-            refs=["TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system)"],
+            refs=[
+                "TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system)",
+            ],
             fetch_kw=(; beta=HIGH_T_BETA),
         )
         for N in (8, 12)
@@ -56,7 +58,9 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-9,
-                refs=["TFIM OBC, T → 0: c = 0 exactly (gap → exponentially small heat capacity)"],
+                refs=[
+                    "TFIM OBC, T → 0: c = 0 exactly (gap → exponentially small heat capacity)",
+                ],
                 fetch_kw=(; beta=LOW_T_BETA),
             )
             verify(
@@ -79,7 +83,9 @@ using QAtlas, Test
                     route=:limiting_case,
                     independent=0.0,
                     agree_within=1e-9,
-                    refs=["TFIM PBC, T → 0: c = 0 exactly (h < J regime to avoid parity-sector bug)"],
+                    refs=[
+                        "TFIM PBC, T → 0: c = 0 exactly (h < J regime to avoid parity-sector bug)",
+                    ],
                     fetch_kw=(; beta=LOW_T_BETA),
                 )
                 verify(
@@ -89,7 +95,9 @@ using QAtlas, Test
                     route=:limiting_case,
                     independent=0.0,
                     agree_within=1e-4,
-                    refs=["TFIM PBC, T → ∞: c → 0 as β² (h < J regime to avoid parity-sector bug)"],
+                    refs=[
+                        "TFIM PBC, T → ∞: c → 0 as β² (h < J regime to avoid parity-sector bug)",
+                    ],
                     fetch_kw=(; beta=HIGH_T_BETA),
                 )
             end

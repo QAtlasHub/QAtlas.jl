@@ -280,7 +280,9 @@ end
             route=:second_closed_form,
             independent=-2 * J / 3,
             agree_within=1e-14,
-            refs=["AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3"],
+            refs=[
+                "AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3",
+            ],
         )
     end
 
@@ -308,7 +310,9 @@ end
             route=:second_closed_form,
             independent=4 / 9,
             agree_within=1e-14,
-            refs=["Kennedy-Tasaki 1992 on AKLT VBS: O_str = -⟨S^z_i e^{iπ Σ S^z_k} S^z_j⟩ → 4/9 at r → ∞"],
+            refs=[
+                "Kennedy-Tasaki 1992 on AKLT VBS: O_str = -⟨S^z_i e^{iπ Σ S^z_k} S^z_j⟩ → 4/9 at r → ∞",
+            ],
         )
     end
 
@@ -329,8 +333,9 @@ end
             route=:literature_value,
             independent=0.350 * J,
             agree_within=5e-3,
-            refs=["García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG)"],
+            refs=[
+                "García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG)",
+            ],
         )
     end
 end
-

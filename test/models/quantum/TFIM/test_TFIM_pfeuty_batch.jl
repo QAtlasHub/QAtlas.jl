@@ -60,7 +60,9 @@ using QAtlas, Test
             route=:second_closed_form,
             independent=2 * abs(h - J),
             agree_within=1e-12,
-            refs=["Pfeuty 1970: Δ = 2|h − J| (thermodynamic-limit BdG gap; PBC/OBC kernels at finite N differ — see TFIM.jl docstring)"],
+            refs=[
+                "Pfeuty 1970: Δ = 2|h − J| (thermodynamic-limit BdG gap; PBC/OBC kernels at finite N differ — see TFIM.jl docstring)",
+            ],
         )
     end
 end

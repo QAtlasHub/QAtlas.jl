@@ -19,7 +19,9 @@ using QAtlas, Test
             route=:limiting_case,
             independent=-4 * t / π,
             agree_within=1e-3,
-            refs=["Essler et al. 2005 (Lieb-Wu Eq. 1.21): e_0 = -4t/π at U → 0 half-filling (two decoupled tight-binding chains)"],
+            refs=[
+                "Essler et al. 2005 (Lieb-Wu Eq. 1.21): e_0 = -4t/π at U → 0 half-filling (two decoupled tight-binding chains)",
+            ],
         )
     end
 end

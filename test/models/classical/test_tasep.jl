@@ -54,6 +54,9 @@ end
 @testset "TASEP — additional cards (#381 batch 2)" begin
     # Mean-field steady-state current of TASEP at density ρ on the
     # half-filled ring is J = ρ(1-ρ), max J = 1/4 at ρ = 1/2 (Derrida 1998).
+    # NOTE: TASEP() defaults to (p=1.0, ρ=0.5) per the struct constructor
+    # (src/models/classical/TASEP/TASEP.jl), i.e. the half-filled maximal-
+    # current point — exactly what this card is checking.
     verify(
         TASEP(),
         SteadyStateCurrent(),

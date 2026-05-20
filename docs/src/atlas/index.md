@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 82 |
+| 🟢 corroborated-at-p | 83 |
 | 🔵 coherent | 13 |
 | ⚪ cited-only (frontier — neutral) | 22 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 130 |
-| Inventory cards scanned (whole test/) | 196 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 129 |
+| Inventory cards scanned (whole test/) | 197 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.0%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.4%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "130 actionable hub(s)"
+!!! warning "129 actionable hub(s)"
     - [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
@@ -83,7 +83,6 @@
     - [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
     - [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
     - [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md)
-    - [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md)
     - [`MajumdarGhosh/SpinGap/Infinite`](hubs/MajumdarGhosh_SpinGap_Infinite.md)
     - [`S1Heisenberg1D/EnergyLocal/OBC`](hubs/S1Heisenberg1D_EnergyLocal_OBC.md)
     - [`S1Heisenberg1D/FreeEnergy/OBC`](hubs/S1Heisenberg1D_FreeEnergy_OBC.md)
@@ -203,7 +202,7 @@
 | `LogarithmicCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `LongRangeIsing1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `LongRangeXY1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `MajumdarGhosh` | 4 | 0 | 1 | 0 | 1 | 2 | feasible |
+| `MajumdarGhosh` | 4 | 0 | 2 | 0 | 1 | 1 | feasible |
 | `MixedFieldIsing1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `PXP1D` | 1 | 0 | 0 | 0 | 1 | 0 | feasible |
 | `PpIp2DSC` | 2 | 0 | 2 | 0 | 0 | 0 | infeasible |
@@ -416,7 +415,7 @@
 ### `MajumdarGhosh` (4)
 
 - 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/Infinite`](hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
-- 🟠 [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) — corroborated-at-p
 - ⚪ [`MajumdarGhosh/MassGap/Infinite`](hubs/MajumdarGhosh_MassGap_Infinite.md) — cited-only
 - 🟠 [`MajumdarGhosh/SpinGap/Infinite`](hubs/MajumdarGhosh_SpinGap_Infinite.md) — uncorroborated-but-feasible
 

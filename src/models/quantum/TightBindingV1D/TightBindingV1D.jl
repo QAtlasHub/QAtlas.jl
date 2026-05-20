@@ -38,6 +38,11 @@
 #     Chapter 9 (tight-binding bands).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     TightBindingV1D(t::Real, V::Real, μ::Real)
     TightBindingV1D(; t=1.0, V=0.0, μ=0.0)

@@ -31,6 +31,10 @@
 #       *Phys. Rev. Lett.* **113**, 030601 (2014).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     LongRangeIsing1D(; J::Real = 1.0, h::Real = 1.0, α::Real = Inf)
         <: AbstractQAtlasModel

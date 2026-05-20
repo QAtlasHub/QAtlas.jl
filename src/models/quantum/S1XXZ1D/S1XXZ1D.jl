@@ -25,6 +25,10 @@
 #   Y.-C. Tzeng, H. Yang, M.-F. Yang, Phys. Rev. B 96, 064419 (2017).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     S1XXZ1D(; J::Real = 1.0, Δ::Real = 1.0) <: AbstractQAtlasModel
 

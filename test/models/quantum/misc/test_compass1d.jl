@@ -51,3 +51,21 @@ end
         )
     end
 end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "Compass1D — MassGap closed form (#381 batch)" begin
+    # Brzezicki-Dziarmaga-Oles 2007: Δ = 2|J_x - J_y| (Jordan-Wigner dual of
+    # the dimerised Kitaev chain). Gap closes at J_x = J_y (first-order QPT).
+    for (Jx, Jy) in ((1.0, 0.5), (1.0, 2.0), (0.7, 0.3), (2.0, 1.0))
+        verify(
+            Compass1D(; J_x=Jx, J_y=Jy),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * abs(Jx - Jy),
+            agree_within=1e-14,
+            refs=["Brzezicki-Dziarmaga-Oles 2007 PRB 75 134415: Δ = 2|J_x - J_y| (JW-dual dimerised Kitaev chain)"],
+        )
+    end
+end
+

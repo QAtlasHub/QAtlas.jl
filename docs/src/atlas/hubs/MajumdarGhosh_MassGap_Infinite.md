@@ -15,21 +15,26 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(MajumdarGhosh(; J = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 0.234, agree_within = 0.005, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J"])
+verify(MajumdarGhosh(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.234J, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"])
+```
+
+```julia
+verify(MajumdarGhosh(; J = J), MassGap(), Infinite(); route = :literature_value, independent = J / 4, agree_within = 1.0e-14, refs = ["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"], fetch_kw = (; method = :trimer_bound))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

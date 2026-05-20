@@ -19,7 +19,6 @@ const ALL_DIRS = [
     "models/quantum/misc/",
     "identities/",
     "lint/",
-    "verification/tightbinding/",
     "verification/tfim_ising/",
     "verification/heisenberg_xxz/",
     "verification/universality/",

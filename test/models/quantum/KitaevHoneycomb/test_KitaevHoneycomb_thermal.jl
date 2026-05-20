@@ -220,18 +220,33 @@ end
 @testset "KitaevHoneycomb — FreeEnergy/Infinite T→0 delegation (#381 batch 7)" begin
     # At T → 0 (β → ∞) the free energy density equals the ground-state
     # energy density: f(β→∞) = ε₀.
+    # Reference values are precomputed Energy(:per_site) per-coupling
+    # results inlined here rather than re-fetched at test time —
+    # a pre-fetch outside verify() would bypass the route's failure-
+    # handling contract (same anti-pattern flagged for the EH card in
+    # PR #446 review item C2).
+    # Provenance: values regenerated via
+    #   QAtlas.fetch(KitaevHoneycomb(; Kx, Ky, Kz), Energy(:per_site), Infinite())
+    # on Panza @ feat/cards-batch7-381 (2026-05-20).
     BETA = 1e6
+    refs_by_K = Dict(
+        (1.0, 1.0, 1.0) => -0.7872986216706852,
+        (1.0, 1.0, 2.0) => -1.1329537974780963,
+        (0.5, 0.5, 0.5) => -0.3936493108353426,
+    )
     for (Kx, Ky, Kz) in ((1.0, 1.0, 1.0), (1.0, 1.0, 2.0), (0.5, 0.5, 0.5))
         m = KitaevHoneycomb(; Kx=Kx, Ky=Ky, Kz=Kz)
-        ref_E = QAtlas.fetch(m, Energy(:per_site), Infinite())
         verify(
             m,
             FreeEnergy(),
             Infinite();
             route=:delegation_invariant,
-            independent=ref_E,
+            independent=refs_by_K[(Kx, Ky, Kz)],
             agree_within=1e-9,
-            refs=["Thermodynamic identity: F(β→∞) = E_GS per site"],
+            refs=[
+                "Thermodynamic identity: F(β→∞) = E_GS per site",
+                "structural delegation test (1e-9 = thermal-residual tolerance vs precomputed Energy(:per_site) reference, not physics derivation)",
+            ],
             fetch_kw=(; beta=BETA),
         )
     end

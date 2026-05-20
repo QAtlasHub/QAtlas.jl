@@ -106,3 +106,30 @@ end
         refs=["Polarized |h|>2J: gap = 2(|h| - 2J)"],
     )
 end
+# ── additional verification cards (#381 batch 4) ─────────────────────────
+@testset "XYh1D — Energy at h=0, MassGap gapless (#381 batch 4)" begin
+    # Spin-1/2 XY chain at h=0 = free-fermion XX point ⇒ critical c=1
+    # Luttinger liquid with e₀ = -2/π · 2 = -4/π per spin (Lieb-Schultz-Mattis 1961).
+    verify(
+        XYh1D(; h=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:second_closed_form,
+        independent=-4/π,
+        agree_within=1e-12,
+        refs=["Lieb-Schultz-Mattis 1961: free XY chain (h=0) e₀ = -4/π per spin"],
+    )
+    # MassGap at h=0 (and gapless XY range): Δ = 0 (gapless Luttinger liquid)
+    for h in (0.0, 0.5, 0.8)
+        verify(
+            XYh1D(; h=h),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-12,
+            refs=["Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h|<1 ⇒ Δ = 0"],
+        )
+    end
+end
+

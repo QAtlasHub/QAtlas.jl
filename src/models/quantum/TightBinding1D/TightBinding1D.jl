@@ -46,6 +46,11 @@
 #     Harcourt College Publishers (1976), chapter 9.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     TightBinding1D(; t::Real = 1.0, μ::Real = 0.0) <: AbstractQAtlasModel
 

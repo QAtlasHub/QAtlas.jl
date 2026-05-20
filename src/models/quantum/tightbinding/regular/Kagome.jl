@@ -26,6 +26,11 @@
 #     topology in frustrated hopping models", Phys. Rev. B 78, 125104 (2008).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 using LinearAlgebra: Symmetric, eigvals
 
 # ═══════════════════════════════════════════════════════════════════════════════

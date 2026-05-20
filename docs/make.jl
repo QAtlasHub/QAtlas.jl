@@ -41,6 +41,7 @@ makedocs(;
     modules=[QAtlas],
     pages=[
         "Home" => "index.md",
+        "Conventions" => "conventions.md",
         "Models" => [
             "models/index.md",
             "Classical" => [
@@ -166,6 +167,7 @@ makedocs(;
     modules=[QAtlas],
     pages=[
         "Home" => "index.md",
+        "Conventions" => "conventions.md",
         "Models" => [
             "models/index.md",
             "Classical" => [

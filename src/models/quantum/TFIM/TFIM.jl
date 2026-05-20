@@ -15,6 +15,10 @@
 # `src/deprecate/legacy_tfim.jl`.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 using LinearAlgebra: eigvals, Symmetric
 using QuadGK: quadgk
 

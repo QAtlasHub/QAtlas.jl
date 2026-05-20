@@ -27,6 +27,11 @@
 #   - S. Coleman, R. Jackiw, L. Susskind, Annals Phys. 93, 267 (1975).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     SchwingerModel(; e::Real = 1.0, m::Real = 0.0) <: AbstractQAtlasModel
 

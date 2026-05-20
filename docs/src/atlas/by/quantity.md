@@ -30,7 +30,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 ## `ChargeGap` (2)
 
 - 🟠 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`Hubbard1D/ChargeGap/Infinite`](../hubs/Hubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`Hubbard1D/ChargeGap/Infinite`](../hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
 
 ## `ChiralCondensate` (1)
 

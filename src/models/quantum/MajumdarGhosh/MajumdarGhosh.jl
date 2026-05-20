@@ -48,6 +48,10 @@
 #     Δ ≈ 0.234 J at the MG point.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     MajumdarGhosh(; J::Real = 1.0) <: AbstractQAtlasModel
 

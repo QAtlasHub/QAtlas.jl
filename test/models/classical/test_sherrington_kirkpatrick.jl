@@ -71,3 +71,21 @@ end
         refs=["Crisanti-Rizzo 2002 / Parisi full-RSB: e0 ≈ -0.7631667 (J=1)"],
     )
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "SherringtonKirkpatrick — CriticalTemperature (#381 batch 3)" begin
+    # Sherrington-Kirkpatrick spin glass mean-field critical temperature
+    # T_c = J (in J-units, k_B = 1) — replica-symmetric and full-RSB
+    # transition (Sherrington-Kirkpatrick 1975; Parisi 1979).
+    for J in (0.5, 1.0, 2.0)
+        verify(
+            SherringtonKirkpatrick(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=Float64(J),
+            agree_within=1e-12,
+            refs=["Sherrington-Kirkpatrick 1975: SK spin-glass T_c = J in mean field (k_B = 1)"],
+        )
+    end
+end
+

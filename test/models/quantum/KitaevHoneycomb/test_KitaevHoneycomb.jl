@@ -309,8 +309,11 @@ end
     for (Kx, Ky, Kz, Δ_expected) in (
         # Gapless isotropic / B-phase points: Δ = 0
         (1.0, 1.0, 1.0, 0.0),
-        (1.0, 1.0, 1.5, 0.0),     # |Kz|=1.5 ≤ 1+1 = 2
-        (0.5, 0.5, 0.9, 0.0),     # gapless boundary inside
+        (1.0, 1.0, 1.5, 0.0),     # gapless interior: |Kz|=1.5 < 1+1 = 2
+        (0.5, 0.5, 0.9, 0.0),     # gapless interior: |Kz|=0.9 < 0.5+0.5 = 1.0
+        # True B-phase boundary: |K_max| = sum_of_others (Δ = 0 by the max(·,0) clamp).
+        (1.0, 1.0, 2.0, 0.0),     # boundary: |Kz|=2.0 = 1+1
+        (0.5, 0.5, 1.0, 0.0),     # boundary: |Kz|=1.0 = 0.5+0.5
         # Gapped A_z phase: Kz > Kx + Ky
         (1.0, 1.0, 3.0, 2 * (3.0 - 2.0)),  # = 2.0
         (0.5, 0.5, 2.0, 2 * (2.0 - 1.0)),  # = 2.0

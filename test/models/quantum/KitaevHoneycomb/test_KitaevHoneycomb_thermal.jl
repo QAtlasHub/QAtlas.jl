@@ -216,3 +216,24 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 7) ─────────────────────────
+@testset "KitaevHoneycomb — FreeEnergy/Infinite T→0 delegation (#381 batch 7)" begin
+    # At T → 0 (β → ∞) the free energy density equals the ground-state
+    # energy density: f(β→∞) = ε₀.
+    BETA = 1e6
+    for (Kx, Ky, Kz) in ((1.0, 1.0, 1.0), (1.0, 1.0, 2.0), (0.5, 0.5, 0.5))
+        m = KitaevHoneycomb(; Kx=Kx, Ky=Ky, Kz=Kz)
+        ref_E = QAtlas.fetch(m, Energy(:per_site), Infinite())
+        verify(
+            m,
+            FreeEnergy(),
+            Infinite();
+            route=:delegation_invariant,
+            independent=ref_E,
+            agree_within=1e-9,
+            refs=["Thermodynamic identity: F(β→∞) = E_GS per site"],
+            fetch_kw=(; beta=BETA),
+        )
+    end
+end
+

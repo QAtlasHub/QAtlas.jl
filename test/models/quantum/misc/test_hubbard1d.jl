@@ -130,3 +130,23 @@ end
         Hubbard1D(; U=-1e-13), LuttingerParameter(), Infinite()
     )
 end
+# ── additional verification cards (#381 batch 7) ─────────────────────────
+@testset "Hubbard1D — ChargeGap U→∞ asymptote (#381 batch 7)" begin
+    # Lieb-Wu (1968) U → ∞ asymptotic expansion of the Mott gap:
+    #   Δ_c ≈ U - 4t + 8 t² ln(2) / U
+    # (Essler et al. 2005 Eq. 6.A.66). At U=16, t=1 src/asy difference
+    # is ~1.7e-3 (next-order O(1/U²) correction).
+    for (t, U) in ((1.0, 16.0), (1.0, 24.0), (0.5, 12.0))
+        asymptote = U - 4*t + 8 * t^2 * log(2) / U
+        verify(
+            Hubbard1D(; t=t, U=U, μ=U/2),
+            ChargeGap(),
+            Infinite();
+            route=:limiting_case,
+            independent=asymptote,
+            agree_within=2e-2,
+            refs=["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"],
+        )
+    end
+end
+

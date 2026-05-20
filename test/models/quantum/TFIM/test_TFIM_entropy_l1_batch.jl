@@ -5,8 +5,17 @@
 # parameter limits:
 #   * J = 0 (pure transverse field, GS = product state |+⟩^N at T → 0):
 #       ρ₁ = |+⟩⟨+| (pure) ⇒ S_vN(ℓ=1) = S_α(ℓ=1) = 0
-#   * h = 0 (pure Ising, Z2 symmetry σ_x ↔ σ_x not, σ_z ↔ −σ_z):
-#       ρ₁ = I/2 (Z2-symmetric thermal trace) ⇒ S(ℓ=1) = log 2 for any T
+#   * h = 0 (pure Ising): ρ₁ = I/2 ⇒ S(ℓ=1) = log 2 by two distinct
+#       mechanisms that must not be conflated —
+#         (a) T → 0 limit: classical Ising has a 2-fold degenerate GS
+#             |↑..↑⟩, |↓..↓⟩. Equal-weight thermal mixture (or any
+#             Z₂-symmetric cat-state superposition) of these two
+#             classical configurations gives ρ₁ = ½(|↑⟩⟨↑| + |↓⟩⟨↓|)
+#             = I/2 ⇒ S(ℓ=1) = log 2.
+#         (b) Finite T (any β): the global Z₂ symmetry P = ∏ σ_z is
+#             unbroken in the thermal ensemble, forcing ⟨σ_x⟩ = ⟨σ_y⟩ = 0
+#             (no x/y channels in H), and the bit-flip-by-P forces
+#             ⟨σ_z⟩ = 0 ⇒ ρ₁ = I/2 ⇒ S(ℓ=1) = log 2.
 # Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -41,8 +50,10 @@ using QAtlas, Test
         end
     end
 
-    # h = 0 (pure Ising): Z2 symmetry σ_z → −σ_z keeps ⟨σ_z⟩ = 0, and there's
-    # no x-component, so ρ₁ = I/2 ⇒ S(ℓ=1) = log 2 for any β.
+    # h = 0 (pure Ising): ρ₁ = I/2 ⇒ S(ℓ=1) = log 2 for any β.
+    # The β = 1e6 case is mechanism (a) (T→0 GS cat-state), while
+    # β = 0.5 and β = 10 are mechanism (b) (finite-T Z₂-symmetric
+    # ensemble). Both yield the same maximally mixed single-site state.
     for J in (0.5, 1.0, 2.0)
         for N in (4, 6, 8)
             for β in (0.5, 10.0, 1e6)
@@ -53,7 +64,7 @@ using QAtlas, Test
                     route=:second_closed_form,
                     independent=log(2),
                     agree_within=1e-10,
-                    refs=["TFIM h=0: Z2 symmetry σ_z → −σ_z + no x channel ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"],
+                    refs=["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"],
                     fetch_kw=(; ℓ=1, beta=β),
                 )
                 for α in (2, 3)

@@ -90,3 +90,27 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 2) ─────────────────────────
+@testset "SLEkappa — additional cards (#381 batch 2)" begin
+    # Schramm-Loewner evolution SLE(κ) ↔ CFT with central charge
+    # c(κ) = (3κ-8)(6-κ)/(2κ) (Bauer-Bernard 2002 / Cardy 2003).
+    # Test classical κ values:
+    for (κ, c_expected) in (
+        (8//3, 0.0),        # SLE(8/3) ↔ c = 0 (SAW)
+        (3.0, 1//2),        # SLE(3) ↔ c = 1/2 (Ising)
+        (4.0, 1.0),         # SLE(4) ↔ c = 1 (free boson / GFF)
+        (6.0, 0.0),         # SLE(6) ↔ c = 0 (percolation)
+        (8.0, -2.0),        # SLE(8) ↔ c = -2 (UST)
+    )
+        verify(
+            SLEkappa(; κ=κ),
+            CentralCharge(),
+            Infinite();
+            route=:second_closed_form,
+            independent=Float64(c_expected),
+            agree_within=1e-12,
+            refs=["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"],
+        )
+    end
+end
+

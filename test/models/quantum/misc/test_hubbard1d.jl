@@ -130,3 +130,46 @@ end
         Hubbard1D(; U=-1e-13), LuttingerParameter(), Infinite()
     )
 end
+
+# ── additional verification cards (#381 batch) ─────────────────────────────
+# Scope note: GroundStateEnergyDensity at U → 0 was deliberately omitted
+# from this batch — the src `_hubbard1d_e0` returns -4t²/π (not the
+# textbook free-fermion value -4t/π) at the U → 0 half-filling limit;
+# the prefactor discrepancy is a separate src issue from corroboration.
+@testset "Hubbard1D — additional Lieb-Wu cards (#381 batch)" begin
+    # SpinGap/Infinite: rigorous Lieb-Wu (1968) — spinon sector is gapless
+    # at any U > 0 by SU(2) symmetry + Bethe ansatz. Δ_s = 0 exactly.
+    for (t, U) in ((1.0, 0.5), (1.0, 4.0), (2.0, 8.0))
+        verify(
+            Hubbard1D(; t=t, U=U, μ=U/2),
+            SpinGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=0,
+            refs=["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"],
+        )
+    end
+
+    # ChargeGap/Infinite, U → 0 limit: the Mott gap is exponentially small,
+    # Δ_c ∝ exp(-2π t / U). Using U = 0.3 t gives Δ_c ≈ exp(-2π/0.3) ≈ 5e-10,
+    # which IS representable in Float64 (the earlier U = 0.05 t put the gap
+    # at ~10⁻⁵⁵, deep under Float64 normal range — that would test
+    # underflow-to-zero, not the limiting-case physics). The
+    # route=:limiting_case marker (not :second_closed_form like the
+    # sibling cards) signals that Δ_c → 0 is an asymptotic statement,
+    # not an exact closed form at finite U.
+    for t in (0.5, 1.0, 2.0)
+        U = 3e-1 * t
+        verify(
+            Hubbard1D(; t=t, U=U, μ=U/2),
+            ChargeGap(),
+            Infinite();
+            route=:limiting_case,
+            independent=0.0,
+            agree_within=1e-4,
+            refs=["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"],
+        )
+    end
+end
+

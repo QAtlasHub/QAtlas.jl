@@ -36,6 +36,11 @@
 #   - A. Y. Kitaev, *Ann. Phys.* **321**, 2 (2006).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     PpIp2DSC(; Δ₀::Real = 1.0, μ::Real = 1.0) <: AbstractQAtlasModel
 

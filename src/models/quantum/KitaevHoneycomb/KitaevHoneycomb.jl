@@ -49,6 +49,10 @@
 #   - E. H. Lieb, PRL 73, 2158 (1994) — flux-free ground state.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 using LinearAlgebra: svdvals
 using QuadGK: quadgk
 

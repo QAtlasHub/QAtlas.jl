@@ -33,6 +33,10 @@
 #     — relation to two coupled Kitaev chains.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     Cluster1D(; J::Real = 1.0) <: AbstractQAtlasModel
 

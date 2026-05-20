@@ -40,6 +40,11 @@
 # (PRL 84, 4461, 2000); later series-expansion / iPEPS work (Corboz-Mila 2013;
 # Boos-Toldin 2019) refines this within the same band.  Revisit if a tighter
 # bound becomes the community consensus.
+
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 const _SS_DIMER_PHASE_ALPHA_CRIT = 0.675
 
 """

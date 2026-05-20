@@ -29,6 +29,10 @@
 #   - L. D. Faddeev, L. A. Takhtajan, J. Soviet Math. 24, 241 (1984).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     HeisenbergXYZ(; Jx::Real = 1.0, Jy::Real = 1.0, Jz::Real = 1.0)
         <: AbstractQAtlasModel

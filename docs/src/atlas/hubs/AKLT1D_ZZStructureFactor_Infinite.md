@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Arovas-Auerbach-Haldane 1988 | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q) | `test/models/quantum/misc/test_aklt.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.15, fetch_kw = (; q = q), refs = ["Arovas-Auerbach-Haldane 1988"])
 ```
 
+```julia
+verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, independent = closed, agree_within = 1.0e-14, refs = ["Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q)"], fetch_kw = (; q = q))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

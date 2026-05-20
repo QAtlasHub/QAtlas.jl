@@ -108,6 +108,7 @@ include(joinpath(@__DIR__, "util", "bloch.jl"))
 include(joinpath(@__DIR__, "util", "tfim_dense_ed.jl"))
 include(joinpath(@__DIR__, "util", "thermodynamic_identities.jl"))
 include(joinpath(@__DIR__, "util", "generic_ed.jl"))
+include(joinpath(@__DIR__, "util", "extrapolate.jl"))
 include(joinpath(@__DIR__, "util", "verify.jl"))
 
 # Per-file wall-time, captured for the timing plane (HOW-to-split).

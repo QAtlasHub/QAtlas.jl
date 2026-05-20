@@ -1,8 +1,14 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl
 #
-# Trivial-temperature-limit verification cards for the OBC XXZ1D chain
-# (spin-1/2). Pure verify(); branches off main. Refs #381.
+# Trivial-temperature-limit verification cards for the OBC XXZ1D chain.
+#
+# Note: (J, Δ) enter only the subleading corrections; the high-T leading
+# values (s = log 2 per site, c → 0 as β², f/N = -log(2)/β) are purely
+# combinatorial (from the trace) and independent of the couplings. The
+# (J, Δ) sweep therefore validates the same closed-form across the phase
+# diagram rather than probing coupling-dependent leading behavior.
+# Spin-1/2. Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test

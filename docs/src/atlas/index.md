@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 90 |
+| 🟢 corroborated-at-p | 98 |
 | 🔵 coherent | 13 |
 | ⚪ cited-only (frontier — neutral) | 24 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 120 |
-| Inventory cards scanned (whole test/) | 209 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 112 |
+| Inventory cards scanned (whole test/) | 217 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **40.7%** · **in-repo-verified rate** (incl. 🔵 coherent): **46.6%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **44.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **50.2%**
 
 ## Browse by facet
 
@@ -40,12 +40,10 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "120 actionable hub(s)"
+!!! warning "112 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
-    - [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
-    - [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
     - [`Heisenberg1D/FreeEnergy/OBC`](hubs/Heisenberg1D_FreeEnergy_OBC.md)
     - [`Heisenberg1D/MagnetizationX/OBC`](hubs/Heisenberg1D_MagnetizationX_OBC.md)
@@ -74,7 +72,6 @@
     - [`IsingSquare/ThermalEntropy/PBC`](hubs/IsingSquare_ThermalEntropy_PBC.md)
     - [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
     - [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
-    - [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md)
     - [`S1Heisenberg1D/EnergyLocal/OBC`](hubs/S1Heisenberg1D_EnergyLocal_OBC.md)
     - [`S1Heisenberg1D/FreeEnergy/OBC`](hubs/S1Heisenberg1D_FreeEnergy_OBC.md)
     - [`S1Heisenberg1D/MagnetizationX/OBC`](hubs/S1Heisenberg1D_MagnetizationX_OBC.md)
@@ -136,12 +133,7 @@
     - [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md)
     - [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md)
     - [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md)
-    - [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md)
-    - [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md)
-    - [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md)
-    - [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md)
     - [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
-    - [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
     - [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
     - [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md)
     - [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
@@ -168,7 +160,7 @@
 |---|---|---|---|---|---|---|---|
 | `AKLT1D` | 8 | 0 | 6 | 0 | 1 | 1 | feasible |
 | `AKLT2D` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `BCFT` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
+| `BCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ChernSimons3D` | 2 | 0 | 1 | 0 | 1 | 0 | infeasible |
 | `Cluster1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Compass1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -177,7 +169,7 @@
 | `DMIHeisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ExtendedHubbard1D` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
 | `FibonacciAnyons` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `GrossNeveu` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
+| `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Heisenberg1D` | 21 | 0 | 4 | 1 | 0 | 16 | feasible |
 | `HeisenbergXYZ` | 2 | 0 | 1 | 1 | 0 | 0 | feasible |
 | `Hubbard1D` | 4 | 0 | 0 | 0 | 0 | 4 | feasible |
@@ -189,7 +181,7 @@
 | `Kitaev1D` | 6 | 0 | 5 | 0 | 0 | 1 | feasible |
 | `KitaevHeisenberg` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `KitaevHoneycomb` | 10 | 0 | 0 | 0 | 10 | 0 | infeasible |
-| `LiouvilleCFT` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
+| `LiouvilleCFT` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `LogarithmicCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `LongRangeIsing1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `LongRangeXY1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -212,12 +204,12 @@
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TFIM` | 53 | 0 | 12 | 1 | 0 | 40 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TightBinding1D` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
-| `TightBindingV1D` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
+| `TightBinding1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
+| `TightBindingV1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ToricCode` | 5 | 0 | 3 | 0 | 2 | 0 | infeasible |
-| `TricriticalIsing` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
-| `TricriticalPotts3` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
+| `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
+| `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `XXZ1D` | 26 | 0 | 8 | 0 | 0 | 18 | feasible |
 | `XYh1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
@@ -244,7 +236,7 @@
 
 ### `BCFT` (1)
 
-- 🟠 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
 
 ### `ChernSimons3D` (2)
 
@@ -285,7 +277,7 @@
 ### `GrossNeveu` (2)
 
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 
 ### `Heisenberg1D` (21)
 
@@ -389,7 +381,7 @@
 ### `LiouvilleCFT` (2)
 
 - 🟢 [`LiouvilleCFT/CentralCharge/Infinite`](hubs/LiouvilleCFT_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — corroborated-at-p
 
 ### `LogarithmicCFT` (1)
 
@@ -564,13 +556,13 @@
 ### `TightBinding1D` (3)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
-- 🟠 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
 
 ### `TightBindingV1D` (3)
 
-- 🟠 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBindingV1D/MassGap/Infinite`](hubs/TightBindingV1D_MassGap_Infinite.md) — corroborated-at-p
 
 ### `TodaLattice` (1)
@@ -588,13 +580,13 @@
 ### `TricriticalIsing` (3)
 
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](hubs/TricriticalIsing_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 
 ### `TricriticalPotts3` (3)
 
 - 🟢 [`TricriticalPotts3/CentralCharge/Infinite`](hubs/TricriticalPotts3_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 
 ### `XCube` (1)

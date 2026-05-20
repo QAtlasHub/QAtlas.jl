@@ -48,7 +48,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](../hubs/S1XXZ1D_MassGap_Infinite.md) — coherent
 - 🔵 [`TFIM/Energy/PBC`](../hubs/TFIM_Energy_PBC.md) — coherent
 
-## `corroborated-at-p` (90)
+## `corroborated-at-p` (98)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -57,6 +57,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`BCFT/ResidualEntropy/Infinite`](../hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`Cluster1D/Energy/Infinite`](../hubs/Cluster1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Cluster1D/MassGap/Infinite`](../hubs/Cluster1D_MassGap_Infinite.md) — corroborated-at-p
@@ -66,6 +67,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟢 [`GrossNeveu/MassGap/Infinite`](../hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/MassGap/Infinite`](../hubs/Heisenberg1D_MassGap_Infinite.md) — corroborated-at-p
@@ -87,6 +89,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`KitaevHeisenberg/MassGap/Infinite`](../hubs/KitaevHeisenberg_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`LiouvilleCFT/CentralCharge/Infinite`](../hubs/LiouvilleCFT_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟢 [`LiouvilleCFT/ConformalWeights/Infinite`](../hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`LogarithmicCFT/CentralCharge/Infinite`](../hubs/LogarithmicCFT_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`LongRangeXY1D/MassGap/Infinite`](../hubs/LongRangeXY1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/Infinite`](../hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
@@ -118,14 +121,19 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TTbar/CentralCharge/Infinite`](../hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBinding1D/FermiVelocity/Infinite`](../hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](../hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBindingV1D/Energy/Infinite`](../hubs/TightBindingV1D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBindingV1D/FermiVelocity/Infinite`](../hubs/TightBindingV1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBindingV1D/MassGap/Infinite`](../hubs/TightBindingV1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TodaLattice/MassGap/Infinite`](../hubs/TodaLattice_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/GroundStateEnergyDensity/Infinite`](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/MassGap/Infinite`](../hubs/ToricCode_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/TopologicalEntanglementEntropy/Infinite`](../hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](../hubs/TricriticalIsing_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟢 [`TricriticalIsing/ConformalWeights/Infinite`](../hubs/TricriticalIsing_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalPotts3/CentralCharge/Infinite`](../hubs/TricriticalPotts3_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](../hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](../hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -141,13 +149,11 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (120)
+## `uncorroborated-but-feasible` (112)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`BCFT/ResidualEntropy/Infinite`](../hubs/BCFT_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`GrossNeveu/MassGap/Infinite`](../hubs/GrossNeveu_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationX/OBC`](../hubs/Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
@@ -176,7 +182,6 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`IsingSquare/ThermalEntropy/PBC`](../hubs/IsingSquare_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](../hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kitaev1D/Energy/Infinite`](../hubs/Kitaev1D_Energy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`LiouvilleCFT/ConformalWeights/Infinite`](../hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/EnergyLocal/OBC`](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/FreeEnergy/OBC`](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationX/OBC`](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
@@ -238,12 +243,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](../hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](../hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TightBinding1D/FermiVelocity/Infinite`](../hubs/TightBinding1D_FermiVelocity_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TightBindingV1D/Energy/Infinite`](../hubs/TightBindingV1D_Energy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TightBindingV1D/FermiVelocity/Infinite`](../hubs/TightBindingV1D_FermiVelocity_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TricriticalIsing/ConformalWeights/Infinite`](../hubs/TricriticalIsing_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TricriticalPotts3/ConformalWeights/Infinite`](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](../hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/FreeEnergy/Infinite`](../hubs/XXZ1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible

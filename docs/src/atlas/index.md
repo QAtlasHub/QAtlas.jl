@@ -26,7 +26,7 @@
 | 🔵 coherent | 14 |
 | ⚪ cited-only (frontier — neutral) | 24 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 111 |
-| Inventory cards scanned (whole test/) | 219 |
+| Inventory cards scanned (whole test/) | 220 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 

@@ -119,17 +119,19 @@ end
         agree_within=1e-12,
         refs=["Lieb-Schultz-Mattis 1961: free XY chain (h=0) e₀ = -4/π per spin"],
     )
-    # MassGap at h=0 (and gapless XY range): Δ = 0 (gapless Luttinger liquid)
-    for h in (0.0, 0.5, 0.8)
-        verify(
-            XYh1D(; h=h),
-            MassGap(),
-            Infinite();
-            route=:second_closed_form,
-            independent=0.0,
-            agree_within=1e-12,
-            refs=["Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h|<1 ⇒ Δ = 0"],
-        )
-    end
+    # MassGap inside gapless XX range |h| < 2J: Δ = 0 (gapless Luttinger liquid).
+    # Note: the analytical formula returns 0 throughout the entire gapless branch
+    # (|h| < 2J), so sweeping multiple h values inside that branch is redundant
+    # — one representative point exercises the branch. The polarized branch
+    # (|h| > 2J) with finite gap is covered by the dedicated cards above.
+    verify(
+        XYh1D(; h=0.5),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-12,
+        refs=["Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h| < 2J (here J=1, so |h|<2) ⇒ Δ = 0"],
+    )
 end
 

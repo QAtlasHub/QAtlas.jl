@@ -65,7 +65,12 @@ end
     # (Koga-Kawakami 2000) the GS is the exact product of singlets on the
     # diagonal J' bonds; orthogonality cancels the J nearest-neighbour bond
     # contribution, giving e₀ = -3 J' / 8 independent of J.
-    for (J, Jp) in ((0.0, 1.0), (0.3, 1.0), (0.0, 2.0), (0.5, 2.0), (1.0, 2.0))
+    # agree_within=1e-14 is tighter than the file’s pre-existing 1e-10 floor:
+    # both card (-3*Jp/8) and hub evaluate the same single multiply+divide, so the
+    # closed-form path is bit-identical for all sweep points in IEEE 754.
+    # Sweep includes (0.674, 1.0) just below the dimer-phase boundary α_c ≈ 0.675
+    # (Koga-Kawakami 2000) as a regression guard for the phase-boundary logic.
+    for (J, Jp) in ((0.0, 1.0), (0.3, 1.0), (0.674, 1.0), (0.0, 2.0), (0.5, 2.0), (1.0, 2.0))
         verify(
             ShastrySutherland(; J=J, Jp=Jp),
             Energy(:per_site),

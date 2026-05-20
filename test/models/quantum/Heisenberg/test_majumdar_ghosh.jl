@@ -178,3 +178,20 @@ end
         refs=["White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J"],
     )
 end
+# ── additional verification cards (#381 batch 6) ─────────────────────────
+@testset "MajumdarGhosh — SpinGap White-Affleck (#381 batch 6)" begin
+    # Spin-1/2 J1-J2 chain at MG point J2 = J1/2: White-Affleck 1996 DMRG
+    # singlet-triplet spin gap Δ_S ≈ 0.234 J.
+    for J in (0.5, 1.0, 2.0)
+        verify(
+            MajumdarGhosh(; J=J),
+            SpinGap(),
+            Infinite();
+            route=:literature_value,
+            independent=0.234 * J,
+            agree_within=5e-3,
+            refs=["White-Affleck 1996 PRB 54 9862: MG point singlet-triplet spin gap Δ_S ≈ 0.234 J (DMRG)"],
+        )
+    end
+end
+

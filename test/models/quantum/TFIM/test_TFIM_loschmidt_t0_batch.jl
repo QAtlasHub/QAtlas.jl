@@ -4,6 +4,9 @@
 # Loschmidt-echo rate function r(t) = -(1/N) log |⟨ψ₀|e^{-iHt}|ψ₀⟩|² at
 # t = 0: the time-evolution operator is identity, so ⟨ψ₀|ψ₀⟩ = 1 and
 # r(0) = 0 identically, for ANY initial-final TFIM pair.
+# Follow-up: a non-trivial h_i ≠ h_f quench at finite t (probing DQPT
+# zeros of the Loschmidt amplitude across the quantum critical point
+# h_c = J) would be the natural next regression card.
 # Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
 

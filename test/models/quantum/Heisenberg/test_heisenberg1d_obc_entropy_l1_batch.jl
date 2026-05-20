@@ -2,9 +2,10 @@
 # test/models/quantum/Heisenberg/test_heisenberg1d_obc_entropy_l1_batch.jl
 #
 # Single-site entanglement entropy of the OBC spin-1/2 Heisenberg chain
-# is parameter-/temperature-independent: by SU(2) symmetry the reduced
-# density matrix of any single site is ρ₁ = I/2 (full SU(2) average over
-# orientations), so S_vN(ℓ=1) = S_α(ℓ=1) = log 2 for ALL J, N, β.
+# is parameter-/temperature-independent: by SU(2) symmetry + Schur’s lemma
+# the reduced density matrix of any single site is ρ₁ = I/2 (the unique
+# SU(2)-invariant state on a single spin-1/2), so S_vN(ℓ=1) = S_α(ℓ=1) =
+# log 2 for ALL J, N, β.
 # Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
 

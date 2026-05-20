@@ -21,7 +21,7 @@ using QAtlas, Test
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-9,
-                refs=["S1Heisenberg1D OBC T → 0: gapped Haldane GS ⇒ s = 0 exactly"],
+                refs=["S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit)"],
                 fetch_kw=(; J=J, beta=LOW_T_BETA),
             )
             verify(

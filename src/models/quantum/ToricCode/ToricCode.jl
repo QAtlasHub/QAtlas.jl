@@ -72,6 +72,11 @@
 #     Rev. Mod. Phys. 80, 1083 (2008).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Stabilizer / operator product
+#   Observable:  Operator-product expectations (Wilson loops, GSD, TEE, S-matrix entries); convention-free
+#   Reference:   docs/src/conventions.md §Topological / operator-product
+
 """
     ToricCode(; J_e::Real = 1.0, J_m::Real = 1.0) <: AbstractQAtlasModel
 

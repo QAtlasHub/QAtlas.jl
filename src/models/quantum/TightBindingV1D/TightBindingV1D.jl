@@ -62,6 +62,17 @@ end
 TightBindingV1D(; t::Real=1.0, V::Real=0.0, μ::Real=0.0) = TightBindingV1D(t, V, μ)
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Energy granularity dispatch (see src/core/quantities.jl)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Required so generic <-> per-site Energy conversions know that
+# fetch(model::TightBindingV1D, ::Energy{:per_site}, ::Infinite) is the
+# natively-implemented granularity; without this entry the verify()
+# harness throws MethodError at the granularity-dispatch step (root
+# cause of CI shard s07 fail across PRs #383-#387 and #447).
+QAtlas.native_energy_granularity(::TightBindingV1D, ::Infinite) = :per_site
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Mass gap — V = 0 free-fermion closed form
 # ═══════════════════════════════════════════════════════════════════════════════
 

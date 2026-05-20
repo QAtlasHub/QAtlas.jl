@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 83 |
+| 🟢 corroborated-at-p | 86 |
 | 🔵 coherent | 13 |
-| ⚪ cited-only (frontier — neutral) | 23 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 128 |
-| Inventory cards scanned (whole test/) | 199 |
+| ⚪ cited-only (frontier — neutral) | 24 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 124 |
+| Inventory cards scanned (whole test/) | 205 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.4%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **38.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **44.8%**
 
 ## Browse by facet
 
@@ -40,12 +40,8 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "128 actionable hub(s)"
-    - [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
+!!! warning "124 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
-    - [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
-    - [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md)
-    - [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md)
     - [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
@@ -174,7 +170,7 @@
 
 | model | claimed | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED |
 |---|---|---|---|---|---|---|---|
-| `AKLT1D` | 8 | 0 | 3 | 0 | 0 | 5 | feasible |
+| `AKLT1D` | 8 | 0 | 6 | 0 | 1 | 1 | feasible |
 | `AKLT2D` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `BCFT` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
 | `ChernSimons3D` | 2 | 0 | 1 | 0 | 1 | 0 | infeasible |
@@ -237,12 +233,12 @@
 
 ### `AKLT1D` (8)
 
-- 🟠 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
+- ⚪ [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md) — cited-only
+- 🟢 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 

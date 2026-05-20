@@ -5,6 +5,15 @@
 # ρ = I / 2^N, which gives ⟨σ^α_i σ^α_j⟩ = δ_{ij} (uncorrelated) and
 # therefore S_αα(q) = Σ_r e^{iqr} ⟨σ^α_0 σ^α_r⟩ → 1 for all q, all axes,
 # any BC. Pure verify(); branches off main. Refs #381.
+#
+# TODO(#438): This card uses the σ-matrix convention (⟨σ^α⟩² = 1 ⇒
+# independent = 1.0). Under the project-wide spin-S convention policy
+# being rolled out in PR #438 (docs/src/conventions.md), TFIM observable
+# returns must be reported in S = σ/2 units, which would change the
+# expected paramagnet value to ⟨S^α_i S^α_j⟩|_{i=j} = 1/4. Migrate this
+# file (independent = 0.25, tighten agree_within to 1e-9) once #438
+# merges; until then the σ convention is internally consistent with the
+# current TFIM structure-factor implementation.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test

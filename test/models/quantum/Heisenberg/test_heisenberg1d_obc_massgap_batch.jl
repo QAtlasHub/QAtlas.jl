@@ -13,6 +13,7 @@ using QAtlas, Test
 @testset "Heisenberg1D — MassGap/OBC at odd N = 0 (doublet GS) (#381 batch)" begin
     for J in (0.5, 1.0, 2.0)
         for N in (3, 5, 7)  # odd ⇒ S_total = 1/2 doublet ⇒ Δ = 0
+            # evals[2]-evals[1] on the degenerate doublet gives machine-precision zero
             verify(
                 Heisenberg1D(),
                 MassGap(),

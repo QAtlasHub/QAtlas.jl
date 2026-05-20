@@ -75,3 +75,21 @@ end
         refs=["Hulthen 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"],
     )
 end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "DMIHeisenberg1D — Energy at D=0 Hulthén limit (#381 batch)" begin
+    # Phase 1: DMI Heisenberg at D=0 reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)
+    # (Hulthén 1938 Bethe-ansatz exact). Linear in J.
+    for J in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            DMIHeisenberg1D(; J=J, D=0.0),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=J * (1/4 - log(2)),
+            agree_within=1e-14,
+            refs=["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"],
+        )
+    end
+end
+

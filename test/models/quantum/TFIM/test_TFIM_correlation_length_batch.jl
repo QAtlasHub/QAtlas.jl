@@ -13,7 +13,14 @@ using QAtlas, Test
     # (gapped ordered/disordered phases; TFIM self-duality gives the
     # same ξ at (J,h) and (h,J)). h = J is the critical point ξ = ∞,
     # excluded.
-    for (J, h) in ((1.0, 0.5), (1.0, 2.0), (2.0, 1.0))
+    # NOTE: the three pairs are chosen so that max/min ∈ {2, 3, 4}
+    # produces three numerically distinct ξ values
+    # (1/log 2, 1/log 3, 1/log 4 ≈ 1.4427, 0.9102, 0.7213). A previous
+    # parameterisation (1,0.5),(1,2),(2,1) all collapsed to max/min=2 —
+    # a hub that returned 1/log(2) regardless of input would have
+    # silently passed. TFIM self-duality (ξ(J,h)=ξ(h,J)) is unchanged
+    # and continues to be tested implicitly via the symmetric formula.
+    for (J, h) in ((1.0, 2.0), (1.0, 3.0), (1.0, 4.0))
         ξ_closed = 1 / log(max(J, h) / min(J, h))
         verify(
             TFIM(; J=J, h=h),

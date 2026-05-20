@@ -11,7 +11,7 @@
 using QAtlas, Test
 
 @testset "XXZ1D — MassGap/OBC at odd N = 0 (doublet GS) (#381 batch)" begin
-    for (J, Δ) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (2.0, -0.5))
+    for (J, Δ) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (2.0, -0.5), (1.0, -2.0))
         for N in (3, 5, 7)
             verify(
                 XXZ1D(),

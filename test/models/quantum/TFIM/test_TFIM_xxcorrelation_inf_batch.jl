@@ -7,6 +7,11 @@
 #   * i ≠ j at T → ∞: the maximally mixed state ρ = I/2^N gives
 #            ⟨σ^x_i σ^x_j⟩ = 0 for any i ≠ j (uncorrelated paramagnet).
 # Pure verify(); branches off main. Refs #381.
+#
+# TODO(#438): this card uses the σ (Pauli) convention for XXCorrelation. Once
+# PR #438 merges and the hub switches to the S (spin) convention, divide all
+# `independent` targets by 4 (⟨S^α_i S^α_j⟩ = ⟨σ^α_i σ^α_j⟩ / 4 for spin-1/2):
+# the i=j target becomes 1/4 and the high-T i≠j target stays 0.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test

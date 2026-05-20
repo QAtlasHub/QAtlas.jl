@@ -70,3 +70,17 @@ end
         refs=["M(7,6): c = 1 - 6(p-q)²/(pq) = 6/7"],
     )
 end
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "TricriticalPotts3 — additional verification cards (#381 batch)" begin
+    # Identity primary h_{1,1} = 0 (Kac formula, M(7,6)).
+    verify(
+        TricriticalPotts3(),
+        ConformalWeights(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["BPZ 1984; Andrews-Baxter-Forrester 1984: identity h_{1,1} = 0 in M(7,6)"],
+        fetch_kw=(; r=1, s=1),
+    )
+end

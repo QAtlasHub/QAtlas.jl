@@ -39,6 +39,11 @@ const _VERIFY_ROUTES = (
 # review B1: only these routes are mechanically independent of `src`.
 const _STRUCTURAL_ROUTES = (:ed_finite_size, :second_closed_form, :literature_value)
 
+# Relative tolerance for treating a Complex value with negligible imaginary
+# part as real in JSON emit (e.g. correlators of Hermitian operators that
+# carry a few ULPs of round-off in the imaginary direction).
+const _IMAG_NOISE_RTOL = 1e-9
+
 _verify_typename(x) = string(nameof(typeof(x)))
 
 function _verify_hub(model, quantity, bc)
@@ -72,10 +77,17 @@ _json_str(s) = '"' * replace(string(s), '\\' => "\\\\", '"' => "\\\"") * '"'
 # NaN/Inf-safe numeric emitter — a non-finite number is NEVER written as a
 # raw token (which is invalid JSON); it becomes null and the card status
 # is set to "divergent" instead (original critique item 5).
-_json_num(x) = (v=float(x); isfinite(v) ? string(v) : "null")
+function _json_num(x)
+    # Complex-with-negligible-imag -> real part (correlators of
+    # Hermitian operators are real up to round-off); genuinely
+    # complex or non-finite -> null (never a raw "0.4 + 0.0im").
+    r = x isa Complex ? (abs(imag(x)) <= _IMAG_NOISE_RTOL * max(1.0, abs(real(x))) ? real(x) : NaN) : x
+    v = float(r)
+    return isfinite(v) ? string(v) : "null"
+end
 
 function _json_arr(xs)
-    return "[" * join((x isa Real ? _json_num(x) : _json_str(x) for x in xs), ",") * "]"
+    return "[" * join((x isa Number ? _json_num(x) : _json_str(x) for x in xs), ",") * "]"
 end
 
 # review B1: (independence-class, provenance discriminant) from the route.

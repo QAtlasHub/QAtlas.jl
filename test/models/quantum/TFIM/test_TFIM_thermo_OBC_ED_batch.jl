@@ -1,0 +1,54 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl
+#
+# ED-independent structural corroboration for TFIM/{Energy,FreeEnergy,
+# ThermalEntropy,SpecificHeat}/OBC at arbitrary β. Probe shows src
+# matches ED to ~1e-15. Pure verify(); branches off main. Refs #381.
+# ─────────────────────────────────────────────────────────────────────────────
+
+using QAtlas, Test, LinearAlgebra
+
+include(joinpath(@__DIR__, "..", "..", "..", "util", "generic_ed.jl"))
+
+let Sx = spin_ops(1//2)[1],
+    Sz = spin_ops(1//2)[3]
+    sigmax = 2 * Sx
+    sigmaz = 2 * Sz
+
+    function ed_tfim_thermo_obc(N::Int, J::Real, h::Real, beta::Real)
+        bond = -J * kron(sigmaz, sigmaz)
+        onsite = -h * sigmax
+        H = chain_hamiltonian(2, N, bond; onsite=onsite)
+        evals = dense_spectrum(H)
+        E, F, S, C = thermo_from_spectrum(evals, beta)
+        return E/N, F/N, S/N, C/N
+    end
+
+    @testset "TFIM — Energy + thermo/OBC vs ED at arbitrary β (#381 batch)" begin
+        for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+            for N in (4, 6, 8)
+                for beta in (0.5, 2.0, 5.0)
+                    ed_E, ed_F, ed_S, ed_C = ed_tfim_thermo_obc(N, J, h, beta)
+                    for (qty, ed_val, lab) in (
+                        (Energy(:per_site), ed_E, "E"),
+                        (FreeEnergy(), ed_F, "F"),
+                        (ThermalEntropy(), ed_S, "S"),
+                        (SpecificHeat(), ed_C, "C"),
+                    )
+                        verify(
+                            TFIM(; J=J, h=h),
+                            qty,
+                            OBC(N);
+                            route=:ed_finite_size,
+                            independent=ed_val,
+                            at=["N=$(N)"],
+                            agree_within=1e-9,
+                            refs=["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum ($(lab))"],
+                            fetch_kw=(; beta=beta),
+                        )
+                    end
+                end
+            end
+        end
+    end
+end

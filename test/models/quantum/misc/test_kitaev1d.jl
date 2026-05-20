@@ -196,3 +196,77 @@ end
         refs=["Kitaev sweet spot μ=0, t=Δ=1: OBC gap ≈ 0 (Majorana edge mode)"],
     )
 end
+
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "Kitaev1D — additional closed-form cards (#381 batch)" begin
+    # TopologicalInvariant/Infinite (Kitaev 2001 Pfaffian Z2): ν = sgn(μ² − 4t²).
+    # |μ| < 2|t| ⇒ topological (ν = −1); |μ| > 2|t| ⇒ trivial (ν = +1).
+    for (μ, t, Δ, ν_expected) in (
+        (0.0, 1.0, 1.0, -1),
+        (0.5, 1.0, 1.0, -1),
+        (3.0, 1.0, 1.0, +1),
+        (-3.0, 1.0, 0.5, +1),
+    )
+        verify(
+            Kitaev1D(; μ=μ, t=t, Δ=Δ),
+            TopologicalInvariant(),
+            Infinite();
+            route=:second_closed_form,
+            independent=ν_expected,
+            agree_within=0,
+            refs=["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"],
+        )
+    end
+
+    # Energy/Infinite sweet-spot closed form: μ = 0, t = Δ ⇒ E(k) = 2t,
+    # so ε₀ = −(1/2π) ∫₀^π E(k) dk = −(1/2π)·2t·π = −t. Independent of integral.
+    for t in (0.5, 1.0, 2.0)
+        verify(
+            Kitaev1D(; μ=0.0, t=t, Δ=t),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=-t,
+            agree_within=1e-9,
+            refs=["Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"],
+        )
+    end
+
+    # CorrelationLength/Infinite = 1 / bulk gap (gapped phases).
+    # Sweet spot (μ=0, t=Δ=1): gap = 2 ⇒ ξ = 1/2.
+    verify(
+        Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
+        CorrelationLength(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.5,
+        agree_within=1e-12,
+        refs=["Kitaev 2001 sweet spot (μ=0, t=Δ): bulk gap = 2|Δ|, general ξ = 1/Δ_gap ⇒ ξ = 1/(2|Δ|)"],
+    )
+    # Trivial phase (μ=3, t=1, Δ=1): gap = |μ|−2|t| = 1 ⇒ ξ = 1.
+    verify(
+        Kitaev1D(; μ=3.0, t=1.0, Δ=1.0),
+        CorrelationLength(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["Kitaev 2001 trivial phase: bulk gap = |μ|−2|t| ⇒ ξ = 1/(|μ|−2|t|)"],
+    )
+
+    # EdgeModeEnergy/OBC at the exact sweet spot (μ=0, t=Δ): the two
+    # end-localised Majorana modes do NOT hybridise — the lowest BdG
+    # eigenvalue is exactly 0 for any N (Kitaev 2001, original example).
+    for N in (6, 8, 16, 32)
+        verify(
+            Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
+            EdgeModeEnergy(),
+            OBC(N);
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=1e-10,
+            refs=["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"],
+        )
+    end
+end
+

@@ -22,7 +22,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), PBC(8); route = :ed_finite_size, independent = [mg_pbc_e0(N, 1.0) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-6, refs = ["Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent"])
+verify(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), PBC(8); route = :ed_finite_size, independent = [mg_pbc_e0(N, 1.0) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-12, refs = ["Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent"])
 ```
 
 

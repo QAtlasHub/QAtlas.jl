@@ -189,6 +189,24 @@ end
         )
     end
 end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "MajumdarGhosh — GroundStateEnergyDensity/PBC closed-form (#381 batch)" begin
+    # The dimer-product state is an exact eigenstate of the J1-J2 ring at
+    # J2 = J/2 for any even N (Majumdar-Ghosh 1969), so e0 = -3J/8 is
+    # size-independent on PBC.
+    for N in (6, 8, 10, 12)
+        for J in (0.5, 1.0, 2.0)
+            verify(
+                MajumdarGhosh(; J=J),
+                GroundStateEnergyDensity(),
+                PBC(N);
+                route=:second_closed_form,
+                independent=-3 * J / 8,
+                agree_within=1e-14,
+                refs=["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"],
+            )
+        end
 # ── additional verification cards (#381 batch 6) ─────────────────────────
 @testset "MajumdarGhosh — SpinGap White-Affleck (#381 batch 6)" begin
     # Spin-1/2 J1-J2 chain at MG point J2 = J1/2: White-Affleck 1996 DMRG

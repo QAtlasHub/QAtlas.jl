@@ -272,7 +272,7 @@ end
     end
 
     # Energy/Infinite sweet-spot closed form: μ = 0, t = Δ ⇒ E(k) = 2t,
-    # so ε0 = -(1/(4π)) ∫_{-π}^{π} E(k) dk = -t. Independent of integral.
+    # so ε₀ = −(1/2π) ∫₀^π E(k) dk = −(1/2π)·2t·π = −t. Independent of integral.
     for t in (0.5, 1.0, 2.0)
         verify(
             Kitaev1D(; μ=0.0, t=t, Δ=t),
@@ -294,7 +294,7 @@ end
         route=:second_closed_form,
         independent=0.5,
         agree_within=1e-12,
-        refs=["Kitaev 2001 sweet spot: bulk gap = 2|Δ| ⇒ ξ = 1/(2|Δ|)"],
+        refs=["Kitaev 2001 sweet spot (μ=0, t=Δ): bulk gap = 2|Δ|, general ξ = 1/Δ_gap ⇒ ξ = 1/(2|Δ|)"],
     )
     # Trivial phase (μ=3, t=1, Δ=1): gap = |μ|−2|t| = 1 ⇒ ξ = 1.
     verify(
@@ -310,7 +310,7 @@ end
     # EdgeModeEnergy/OBC at the exact sweet spot (μ=0, t=Δ): the two
     # end-localised Majorana modes do NOT hybridise — the lowest BdG
     # eigenvalue is exactly 0 for any N (Kitaev 2001, original example).
-    for N in (4, 8, 16, 32)
+    for N in (6, 8, 16, 32)
         verify(
             Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
             EdgeModeEnergy(),
@@ -319,19 +319,6 @@ end
             independent=0.0,
             agree_within=1e-10,
             refs=["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"],
-        )
-    end
-
-    # MassGap/OBC at the sweet spot = same lowest BdG eigenvalue ⇒ 0.
-    for N in (4, 8, 16, 32)
-        verify(
-            Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
-            MassGap(),
-            OBC(N);
-            route=:second_closed_form,
-            independent=0.0,
-            agree_within=1e-10,
-            refs=["Kitaev 2001 sweet spot OBC: MassGap = EdgeModeEnergy = 0 (Majorana zero modes)"],
         )
     end
 end

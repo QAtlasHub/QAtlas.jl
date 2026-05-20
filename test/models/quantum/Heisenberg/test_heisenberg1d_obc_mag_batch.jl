@@ -21,7 +21,7 @@ using QAtlas, Test
                         Heisenberg1D(),
                         q,
                         OBC(N);
-                        route=:second_closed_form,
+                        route=:limiting_case,
                         independent=0.0,
                         agree_within=1e-10,
                         refs=["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"],

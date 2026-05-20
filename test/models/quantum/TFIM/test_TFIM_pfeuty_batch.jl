@@ -45,20 +45,22 @@ using QAtlas, Test
         )
     end
 
-    # MassGap/PBC: Δ = 2|h − J|, BC-independent (Pfeuty 1970).
-    # NOTE: src returns the analytical Bogoliubov gap formula for any N
-    # (not an ED finite-system spectrum), so BC and N are irrelevant to
-    # the comparison — the 1e-12 tolerance is formula-vs-formula, not
-    # finite-size-convergence.
+    # MassGap/Infinite: Δ = 2|h − J| (Pfeuty 1970, thermodynamic-limit
+    # quasi-particle gap from the BdG dispersion). The closed form ONLY
+    # applies to the Infinite() dispatch — PBC(N) and OBC(N) drop back
+    # to finite-N BdG / sector-comparison kernels whose values differ
+    # substantially at small N (the ordered-phase doublet splitting is
+    # exponentially small in N, and the critical-point gap is the CFT
+    # 1/N correction). Card asserts the Infinite closed form.
     for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
         verify(
             TFIM(; J=J, h=h),
             MassGap(),
-            PBC(8);
+            Infinite();
             route=:second_closed_form,
             independent=2 * abs(h - J),
             agree_within=1e-12,
-            refs=["Pfeuty 1970: Δ = 2|h − J| (BC-independent)"],
+            refs=["Pfeuty 1970: Δ = 2|h − J| (thermodynamic-limit BdG gap; PBC/OBC kernels at finite N differ — see TFIM.jl docstring)"],
         )
     end
 end

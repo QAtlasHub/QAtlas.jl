@@ -93,8 +93,11 @@ end
         route=:literature_value,
         independent=0.5181489,
         agree_within=1e-6,
-        refs=["Kos-Poland-Simmons-Duffin 2014 PRD 86 025022: 3D Ising spin op Δσ ≈ 0.5181489 (numerical bootstrap)"],
-        fetch_kw=(; r=1, s=1),
+        refs=[
+            "Kos-Poland-Simmons-Duffin 2014 PRD 86 025022: 3D Ising spin op Δσ ≈ 0.5181489 (numerical bootstrap)",
+            "Simmons-Duffin 2017 JHEP 03 086: refined Δσ = 0.518148806(24)",
+        ],
+        fetch_kw=(; field=:σ),
     )
 end
 

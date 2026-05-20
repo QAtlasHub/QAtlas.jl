@@ -35,17 +35,31 @@ end
 @testset "ExtendedHubbard1D — ChargeGap V=0 delegation to Hubbard1D (#381 batch 6)" begin
     # At V=0 the t-U-V Extended Hubbard chain reduces to the Lieb-Wu
     # Hubbard1D at half-filling. The src delegates ChargeGap directly to
-    # Hubbard1D(t, U, U/2). Cross-check via independent delegate fetch.
+    # Hubbard1D(t, U, U/2). Reference values are precomputed Lieb-Wu
+    # integral values (quadgk rtol≈1e-12) inlined here rather than
+    # re-fetched at test time — a pre-fetch outside verify() would
+    # bypass the verify() failure-handling contract if the upstream
+    # Hubbard1D fetch threw (issue #390 underflow risk at small U).
+    # Provenance: values regenerated via
+    #   QAtlas.fetch(Hubbard1D(; t, U, μ=U/2), ChargeGap(), Infinite())
+    # on Panza @ feat/cards-batch6-v3-381 (2026-05-20).
+    refs_by_pt = Dict(
+        (1.0, 1.0) => 0.005026732898582302,
+        (1.0, 4.0) => 1.2867270220129354,
+        (0.5, 4.0) => 2.339758553732098,
+    )
     for (t, U) in ((1.0, 1.0), (1.0, 4.0), (0.5, 4.0))
-        ref = QAtlas.fetch(Hubbard1D(; t=t, U=U, μ=U/2), ChargeGap(), Infinite())
         verify(
             ExtendedHubbard1D(; t=t, U=U, V=0.0),
             ChargeGap(),
             Infinite();
             route=:delegation_invariant,
-            independent=ref,
+            independent=refs_by_pt[(t, U)],
             agree_within=1e-12,
-            refs=["ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality"],
+            refs=[
+                "ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality",
+                "structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision)",
+            ],
         )
     end
 end

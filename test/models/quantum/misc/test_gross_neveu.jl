@@ -62,3 +62,18 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "GrossNeveu — additional verification cards (#381 batch)" begin
+    # Large-N dynamic mass m_F = Λ exp(-π / (N g²)); at N=1, g=1, Λ=1 → exp(-π).
+    verify(
+        GrossNeveu(; N=1, g=1.0),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=exp(-π),
+        agree_within=1e-12,
+        refs=["Gross-Neveu 1974; Andrei-Lowenstein 1979: m_F = Λ exp(-π/(N g²))"],
+        fetch_kw=(; Λ=1.0),
+    )
+end
+

@@ -77,3 +77,18 @@ end
         refs=["M(5,4): c = 1 - 6(p-q)²/(pq) = 7/10"],
     )
 end
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "TricriticalIsing — additional verification cards (#381 batch)" begin
+    # Identity primary h_{1,1} = 0 (Kac formula, M(5,4)).
+    verify(
+        TricriticalIsing(),
+        ConformalWeights(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["BPZ 1984; Friedan-Qiu-Shenker 1984: identity h_{1,1} = 0 in M(5,4)"],
+        fetch_kw=(; r=1, s=1),
+    )
+end
+

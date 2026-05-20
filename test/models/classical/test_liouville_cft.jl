@@ -115,3 +115,19 @@ end
         refs=["Liouville b <-> 1/b duality: c(2) = c(1/2)"],
     )
 end
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "LiouvilleCFT — additional verification cards (#381 batch)" begin
+    # Vertex operator weight Δ_α = α(Q - α), Q = b + 1/b.
+    # At b=1, α=1: Q=2, Δ = 1*(2-1) = 1.
+    verify(
+        LiouvilleCFT(; b=1.0),
+        ConformalWeights(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["Polyakov 1981; ZZ 1996: Δ_α = α(Q-α), Q = b + 1/b"],
+        fetch_kw=(; α=1.0),
+    )
+end
+

@@ -15,54 +15,54 @@ using QAtlas, Test
     for J in (0.5, 1.0, 2.0)
         for N in (3, 4, 5)
             verify(
-                S1Heisenberg1D(),
+                S1Heisenberg1D(; J=J),
                 ThermalEntropy(),
                 OBC(N);
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-9,
                 refs=["S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit)"],
-                fetch_kw=(; J=J, beta=LOW_T_BETA),
+                fetch_kw=(; beta=LOW_T_BETA),
             )
             verify(
-                S1Heisenberg1D(),
+                S1Heisenberg1D(; J=J),
                 ThermalEntropy(),
                 OBC(N);
                 route=:limiting_case,
                 independent=log(3),
                 agree_within=1e-5,
                 refs=["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"],
-                fetch_kw=(; J=J, beta=HIGH_T_BETA),
+                fetch_kw=(; beta=HIGH_T_BETA),
             )
             verify(
-                S1Heisenberg1D(),
+                S1Heisenberg1D(; J=J),
                 SpecificHeat(),
                 OBC(N);
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-9,
                 refs=["S1Heisenberg1D OBC T → 0: gap suppression ⇒ c = 0 exactly"],
-                fetch_kw=(; J=J, beta=LOW_T_BETA),
+                fetch_kw=(; beta=LOW_T_BETA),
             )
             verify(
-                S1Heisenberg1D(),
+                S1Heisenberg1D(; J=J),
                 SpecificHeat(),
                 OBC(N);
                 route=:limiting_case,
                 independent=0.0,
                 agree_within=1e-4,
                 refs=["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"],
-                fetch_kw=(; J=J, beta=HIGH_T_BETA),
+                fetch_kw=(; beta=HIGH_T_BETA),
             )
             verify(
-                S1Heisenberg1D(),
+                S1Heisenberg1D(; J=J),
                 FreeEnergy(),
                 OBC(N);
                 route=:limiting_case,
                 independent=-log(3) / HIGH_T_BETA,
                 agree_within=1e-2,
                 refs=["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet f/N = -T log 3 = -log(3)/β"],
-                fetch_kw=(; J=J, beta=HIGH_T_BETA),
+                fetch_kw=(; beta=HIGH_T_BETA),
             )
         end
     end

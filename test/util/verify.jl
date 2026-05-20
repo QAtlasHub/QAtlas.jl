@@ -34,6 +34,10 @@ const _VERIFY_ROUTES = (
     :limiting_case,         # a known independent value at a special point
     :literature_value,      # a published numeric (DMRG/MC) cross-check
     :second_closed_form,    # an independent closed form, different derivation
+    :lieb_square_ice,       # Lieb 1967a square-ice closed form (SixVertex disordered diag)
+    :lieb_ferroelectric,    # Lieb 1967c frozen-GS FE closed form (SixVertex Δ>1)
+    :single_root_specialisation,  # specialised single-positive-root closed form (e.g. SU(2)_k Verlinde S₀₀)
+    :multi_root_product,    # multi-positive-root product closed form (e.g. SU(N≥3)_k Verlinde S₀₀)
 )
 
 # review B1: only these routes are mechanically independent of `src`.

@@ -30,6 +30,11 @@
 #   - N. Andrei, J. H. Lowenstein, Phys. Rev. Lett. 43, 1698 (1979).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     GrossNeveu(; N::Integer = 1, g::Real = 0.0) <: AbstractQAtlasModel
 

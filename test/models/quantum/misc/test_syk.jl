@@ -58,3 +58,20 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "SYK — ConformalWeights (#381 batch 3)" begin
+    # SYK_q model has conformal weight h = 1/q in the IR fixed point
+    # (Sachdev-Ye 1993; Maldacena-Stanford 2016).
+    for q in (2, 4, 6, 8)
+        verify(
+            SYK(; q=q),
+            ConformalWeights(),
+            Infinite();
+            route=:second_closed_form,
+            independent=1//q,
+            agree_within=0,
+            refs=["Sachdev-Ye 1993 / Maldacena-Stanford 2016: SYK_q IR conformal weight h = 1/q"],
+        )
+    end
+end
+

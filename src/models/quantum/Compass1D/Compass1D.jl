@@ -31,6 +31,10 @@
 #     of Physics 321, 2 (2006) — JW-dual dimerised Kitaev chain.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     Compass1D(; J_x::Real = 1.0, J_y::Real = 1.0) <: AbstractQAtlasModel
 

@@ -54,3 +54,19 @@ end
         refs=["p+ip weak-pairing phase: first Chern number = 1"],
     )
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "PpIp2DSC — CentralCharge (#381 batch 3)" begin
+    # Chiral p+ip 2D superconductor has Majorana edge mode ⇒ boundary CFT
+    # is the chiral Ising/free-Majorana with c = 1/2 (Read-Green 2000;
+    # Kitaev 2003).
+    verify(
+        PpIp2DSC(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1//2,
+        agree_within=0,
+        refs=["Read-Green 2000; Kitaev 2003: chiral p+ip SC has Majorana edge ⇒ c = 1/2"],
+    )
+end
+

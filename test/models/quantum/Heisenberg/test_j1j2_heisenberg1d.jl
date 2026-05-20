@@ -105,3 +105,21 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "J1J2Heisenberg1D — Majumdar-Ghosh point Energy (#381 batch 3)" begin
+    # At J2 = J1/2 the J1-J2 chain is at the Majumdar-Ghosh point: GS is
+    # the exact dimer-product state, e₀ = -3 J1 / 8 per spin (independent of
+    # any size).
+    for J1 in (0.5, 1.0, 2.0)
+        verify(
+            J1J2Heisenberg1D(; J1=J1, J2=J1/2),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=-3 * J1 / 8,
+            agree_within=1e-14,
+            refs=["Majumdar-Ghosh 1969: at J2 = J1/2 GS is exact dimer-product state ⇒ e₀ = -3J1/8"],
+        )
+    end
+end
+

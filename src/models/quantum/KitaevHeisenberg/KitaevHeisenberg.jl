@@ -32,6 +32,10 @@
 #     077204 (2014).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Pauli σ (this file)
+#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     KitaevHeisenberg(; K::Real = 1.0, J::Real = 0.0, Γ::Real = 0.0)
         <: AbstractQAtlasModel

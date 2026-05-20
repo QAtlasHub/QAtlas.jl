@@ -36,6 +36,11 @@
 #   - J. Maldacena, D. Stanford, Phys. Rev. D 94, 106002 (2016).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     SYK(; q::Integer = 4) <: AbstractQAtlasModel
 

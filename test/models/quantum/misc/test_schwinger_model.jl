@@ -68,3 +68,23 @@ end
         )
     end
 end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "SchwingerModel — ChiralCondensate closed form (#381 batch)" begin
+    # Schwinger 1962 / Coleman-Jackiw-Susskind 1975: in the massless 1+1-D
+    # Schwinger model the axial U(1) anomaly drives a finite vacuum
+    # condensate ⟨ψ̄ψ⟩ = -exp(γ_E) · e / (2π^{3/2}). Linear in e.
+    γ_E = MathConstants.eulergamma
+    for e in (0.5, 1.0, 2.0)
+        verify(
+            SchwingerModel(; e=e, m=0.0),
+            ChiralCondensate(),
+            Infinite();
+            route=:second_closed_form,
+            independent=-exp(γ_E) * e / (2 * π^(3/2)),
+            agree_within=1e-14,
+            refs=["Schwinger 1962; Coleman-Jackiw-Susskind 1975: ⟨ψ̄ψ⟩ = -e^{γ_E} · e / (2π^{3/2}) (anomaly-induced, massless point)"],
+        )
+    end
+end
+

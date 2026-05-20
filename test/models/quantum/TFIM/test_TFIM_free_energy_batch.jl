@@ -10,6 +10,9 @@
 using QAtlas, Test
 
 @testset "TFIM — FreeEnergy trivial limits (#381 batch)" begin
+    # β = 1e6 (not Inf): _logcosh2(β·E/2) NaNs at Inf. 1e6 is large enough that the
+    # β-suppressed BdG zero-mode residual log(2)/(Nβ) at h=0 OBC is ~7e-7/N, well within
+    # the agree_within=1e-5 ordered-phase tolerance below (do not tighten).
     BETA = 1e6
 
     # /Infinite at three Pfeuty special points (matches PR #389 GSE values):
@@ -48,7 +51,8 @@ using QAtlas, Test
     end
 
     # /OBC at J = 0: each spin contributes -h regardless of boundaries,
-    # so f/N = -h exactly for any N.
+    # so f/N = -h exactly for any N. Flat dispersion ⇒ machine-precision
+    # agreement, no BdG zero-mode residual; use agree_within=1e-12 (vs 1e-5 elsewhere).
     for h in (0.5, 1.0, 2.0)
         for N in (8, 12, 16)
             verify(

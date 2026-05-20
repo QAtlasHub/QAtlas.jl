@@ -82,3 +82,29 @@ end
         refs=["Linear J scaling: e(3J) = 3 e(J) for spin-1 Heisenberg point"],
     )
 end
+# ── additional verification cards (#381 batch 5) ─────────────────────────
+@testset "S1XXZ1D — Δ=1 isotropic Haldane reduction (#381 batch 5)" begin
+    # At Δ=1 the spin-1 XXZ chain reduces to the SU(2)-symmetric S=1
+    # Heisenberg AF, the Haldane chain. DMRG (White 1993, PRL 69 2863):
+    #   e₀ ≈ -1.401484038971   per site
+    #   Δ_Haldane ≈ 0.41048      gap (Wang-Qin-Hu 2012 refinement)
+    verify(
+        S1XXZ1D(; J=1.0, Δ=1.0),
+        Energy(:per_site),
+        Infinite();
+        route=:limiting_case,
+        independent=-1.40148403897,
+        agree_within=1e-6,
+        refs=["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 (Δ=1 isotropic reduction of XXZ)"],
+    )
+    verify(
+        S1XXZ1D(; J=1.0, Δ=1.0),
+        MassGap(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.41048,
+        agree_within=1e-3,
+        refs=["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 J"],
+    )
+end
+

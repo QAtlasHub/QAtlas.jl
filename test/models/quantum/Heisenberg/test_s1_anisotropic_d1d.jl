@@ -115,3 +115,28 @@ end
         refs=["Linear J scaling: e(2J) = 2 e(J) for spin-1 Heisenberg"],
     )
 end
+# ── additional verification cards (#381 batch 5) ─────────────────────────
+@testset "S1AnisotropicD1D — D=0 isotropic Haldane reduction (#381 batch 5)" begin
+    # At D=0 the S=1 single-ion anisotropy chain reduces to the
+    # SU(2)-symmetric S=1 Heisenberg AF, the Haldane chain.
+    # DMRG (White 1993): e₀ ≈ -1.40148, Haldane gap ≈ 0.41048 J.
+    verify(
+        S1AnisotropicD1D(; J=1.0, D=0.0),
+        Energy(:per_site),
+        Infinite();
+        route=:limiting_case,
+        independent=-1.40148403897,
+        agree_within=1e-6,
+        refs=["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 (D=0 reduction of single-ion anisotropy chain)"],
+    )
+    verify(
+        S1AnisotropicD1D(; J=1.0, D=0.0),
+        MassGap(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.41048,
+        agree_within=1e-3,
+        refs=["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 J"],
+    )
+end
+

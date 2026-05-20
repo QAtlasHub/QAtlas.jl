@@ -49,7 +49,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](../hubs/IsingChain1D_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟠 [`Kitaev1D/CorrelationLength/Infinite`](../hubs/Kitaev1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`Kitaev1D/CorrelationLength/Infinite`](../hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/CorrelationLength/Infinite`](../hubs/TFIM_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
 
 ## `CriticalExponents` (4)
@@ -70,7 +70,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `EdgeModeEnergy` (1)
 
-- 🟠 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 
 ## `Energy` (29)
 
@@ -233,7 +233,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`Heisenberg1D/MassGap/OBC`](../hubs/Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - ⚪ [`KagomeHeisenbergAFM/MassGap/Infinite`](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) — cited-only
 - 🟢 [`Kitaev1D/MassGap/Infinite`](../hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
-- 🟠 [`Kitaev1D/MassGap/OBC`](../hubs/Kitaev1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Kitaev1D/MassGap/OBC`](../hubs/Kitaev1D_MassGap_OBC.md) — corroborated-at-p
 - 🟢 [`KitaevHeisenberg/MassGap/Infinite`](../hubs/KitaevHeisenberg_MassGap_Infinite.md) — corroborated-at-p
 - ⚪ [`KitaevHoneycomb/MassGap/Infinite`](../hubs/KitaevHoneycomb_MassGap_Infinite.md) — cited-only
 - 🔵 [`LongRangeIsing1D/MassGap/Infinite`](../hubs/LongRangeIsing1D_MassGap_Infinite.md) — coherent
@@ -360,7 +360,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `TopologicalInvariant` (2)
 
-- 🟠 [`Kitaev1D/TopologicalInvariant/Infinite`](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
 ## `VonNeumannEntropy` (5)

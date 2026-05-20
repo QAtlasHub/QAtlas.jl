@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 82 |
+| 🟢 corroborated-at-p | 83 |
 | 🔵 coherent | 13 |
 | ⚪ cited-only (frontier — neutral) | 22 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 130 |
-| Inventory cards scanned (whole test/) | 196 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 129 |
+| Inventory cards scanned (whole test/) | 197 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.0%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.4%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "130 actionable hub(s)"
+!!! warning "129 actionable hub(s)"
     - [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
@@ -106,7 +106,6 @@
     - [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md)
     - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
     - [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
-    - [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
     - [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
@@ -220,7 +219,7 @@
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 53 | 0 | 12 | 1 | 0 | 40 | feasible |
+| `TFIM` | 53 | 0 | 13 | 1 | 0 | 39 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `TightBindingV1D` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
@@ -514,7 +513,7 @@
 ### `TFIM` (53)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md) — corroborated-at-p

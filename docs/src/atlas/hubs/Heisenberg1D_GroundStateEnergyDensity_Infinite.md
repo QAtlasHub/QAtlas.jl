@@ -17,6 +17,7 @@
 |---|---|---|---|---|
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2) | `test/identities/test_identities_Heisenberg1D.jl` |
 | `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e0 = 1/4 − log 2 | `test/identities/test_identities_Heisenberg1D.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact | `test/models/quantum/Heisenberg/test_Heisenberg1D_hulthen_batch.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence | `test/models/quantum/XXZ/test_bethe_ansatz.jl` |
 
 ## Test calls
@@ -32,6 +33,10 @@ verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_c
 ```
 
 ```julia
+verify(Heisenberg1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = J * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
+```
+
+```julia
 verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence"])
 ```
 
@@ -39,7 +44,7 @@ verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :ed_finit
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

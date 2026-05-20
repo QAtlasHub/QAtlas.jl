@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (142)
+## `(no card)` (140)
 
 - 🟠 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
@@ -99,12 +99,10 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`TFIM/MagnetizationXLocal/Infinite`](../hubs/TFIM_MagnetizationXLocal_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](../hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](../hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/OBC`](../hubs/TFIM_SpecificHeat_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/PBC`](../hubs/TFIM_SpecificHeat_PBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](../hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — uncorroborated-but-feasible
@@ -232,7 +230,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 
-## `second_closed_form` (64)
+## `second_closed_form` (66)
 
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p
@@ -276,6 +274,8 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`TFIM/MagnetizationY/OBC`](../hubs/TFIM_MagnetizationY_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](../hubs/TFIM_MagnetizationZ_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — corroborated-at-p
+- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`TTbar/CentralCharge/Infinite`](../hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](../hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p

@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (142)
+## `(no card)` (140)
 
 - 🟠 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
@@ -99,12 +99,10 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`TFIM/MagnetizationXLocal/Infinite`](../hubs/TFIM_MagnetizationXLocal_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](../hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](../hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/OBC`](../hubs/TFIM_SpecificHeat_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpecificHeat/PBC`](../hubs/TFIM_SpecificHeat_PBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](../hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — uncorroborated-but-feasible
@@ -259,7 +257,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
 
-## `@sweep` (65)
+## `@sweep` (67)
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
@@ -303,7 +301,9 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](../hubs/TFIM_MagnetizationZ_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/OBC`](../hubs/TFIM_MassGap_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — corroborated-at-p
 - 🟢 [`TFIM/RenyiEntropy/OBC`](../hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](../hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](../hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](../hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p

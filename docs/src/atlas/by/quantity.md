@@ -247,7 +247,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`SchwingerModel/MassGap/Infinite`](../hubs/SchwingerModel_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/OBC`](../hubs/TFIM_MassGap_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](../hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBindingV1D/MassGap/Infinite`](../hubs/TightBindingV1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TodaLattice/MassGap/Infinite`](../hubs/TodaLattice_MassGap_Infinite.md) — corroborated-at-p
@@ -304,7 +304,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingSquare/SpontaneousMagnetization/Infinite`](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
-- 🟠 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 
 ## `SteadyStateCurrent` (1)
 

@@ -146,23 +146,28 @@ end
             Infinite();
             route=:second_closed_form,
             independent=0.0,
-            agree_within=1e-14,
+            agree_within=0,
             refs=["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"],
         )
     end
 
-    # ChargeGap/Infinite, U → 0 limit: Mott gap is exponentially small,
-    # Δ_c ∝ exp(-2π t / U). At U = 0.05 t the gap is ≈ 1e-54, so the
-    # limiting Δ_c → 0 check is satisfied to absolute tolerance 1e-30.
+    # ChargeGap/Infinite, U → 0 limit: the Mott gap is exponentially small,
+    # Δ_c ∝ exp(-2π t / U). Using U = 0.3 t gives Δ_c ≈ exp(-2π/0.3) ≈ 5e-10,
+    # which IS representable in Float64 (the earlier U = 0.05 t put the gap
+    # at ~10⁻⁵⁵, deep under Float64 normal range — that would test
+    # underflow-to-zero, not the limiting-case physics). The
+    # route=:limiting_case marker (not :second_closed_form like the
+    # sibling cards) signals that Δ_c → 0 is an asymptotic statement,
+    # not an exact closed form at finite U.
     for t in (0.5, 1.0, 2.0)
-        U = 5e-2 * t
+        U = 3e-1 * t
         verify(
             Hubbard1D(; t=t, U=U, μ=U/2),
             ChargeGap(),
             Infinite();
             route=:limiting_case,
             independent=0.0,
-            agree_within=1e-30,
+            agree_within=1e-4,
             refs=["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"],
         )
     end

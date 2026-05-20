@@ -3,8 +3,8 @@
 #
 # ED-independent structural corroboration for S1Heisenberg1D OBC
 # thermodynamic observables at arbitrary β. Builds H from scratch with
-# spin-1 primitives, takes full spectrum (capped by N≤5 since 3^5=243),
-# computes per-site (E, F, S, C). Refs #381.
+# spin-1 primitives, takes full spectrum (N≤5; 3^5=243 is still fast for full
+# spectrum), computes per-site (E, F, S, C). Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test, LinearAlgebra
@@ -25,7 +25,7 @@ let Sx = spin_ops(1)[1],
 
     @testset "S1Heisenberg1D — Energy + thermo/OBC vs ED at arbitrary β (#381 batch)" begin
         for J in (0.5, 1.0, 2.0)
-            for N in (3, 4)  # 3^4 = 81, 3^5 = 243; keep N ≤ 4 for fast CI
+            for N in (3, 4, 5)  # 3^5 = 243; still fast for full spectrum
                 for beta in (0.5, 2.0, 5.0)
                     ed_E, ed_F, ed_S, ed_C = ed_s1h_thermo_per_site(N, J, beta)
                     verify(

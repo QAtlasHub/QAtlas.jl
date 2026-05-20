@@ -299,3 +299,35 @@ end
         refs=["Kitaev 2006: isotropic honeycomb e0 ≈ -0.78729862 |K|"],
     )
 end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "KitaevHoneycomb — MassGap/Infinite closed form (#381 batch)" begin
+    # Kitaev 2006: Δ = 2 · max(|K_max| − |K_others_sum|, 0).
+    # In gapless A/B/C phase (|K_γ| ≤ sum of others for all γ) ⇒ Δ = 0.
+    # In gapped A_γ phase (one |K_γ| exceeds the sum of the other two) the
+    # excess sets the single-Majorana gap.
+    for (Kx, Ky, Kz, Δ_expected) in (
+        # Gapless isotropic / B-phase points: Δ = 0
+        (1.0, 1.0, 1.0, 0.0),
+        (1.0, 1.0, 1.5, 0.0),     # |Kz|=1.5 ≤ 1+1 = 2
+        (0.5, 0.5, 0.9, 0.0),     # gapless boundary inside
+        # Gapped A_z phase: Kz > Kx + Ky
+        (1.0, 1.0, 3.0, 2 * (3.0 - 2.0)),  # = 2.0
+        (0.5, 0.5, 2.0, 2 * (2.0 - 1.0)),  # = 2.0
+        # Gapped A_x phase: Kx > Ky + Kz
+        (3.0, 1.0, 1.0, 2.0),
+        # Gapped A_y phase: Ky > Kx + Kz
+        (0.5, 4.0, 0.5, 2 * (4.0 - 1.0)),  # = 6.0
+    )
+        verify(
+            KitaevHoneycomb(; Kx=Kx, Ky=Ky, Kz=Kz),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=Δ_expected,
+            agree_within=1e-12,
+            refs=["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"],
+        )
+    end
+end
+

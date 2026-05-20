@@ -35,7 +35,7 @@ using QAtlas, Test
                 OBC(N);
                 route=:second_closed_form,
                 independent=BETA / N,
-                agree_within=1e-9,
+                agree_within=1e-6,  # odd-N branch: independent=β/N=1e5..3e5; relative ~3e-15 floor is borderline
                 refs=["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"],
                 fetch_kw=(; J=J, Δ=Δ, beta=BETA),
             )

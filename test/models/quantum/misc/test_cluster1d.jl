@@ -52,3 +52,30 @@ end
         )
     end
 end
+
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "Cluster1D — Energy + MassGap closed forms (#381 batch)" begin
+    # Every stabilizer K_i = σ^z_{i-1} σ^x_i σ^z_{i+1} contributes -J in
+    # the cluster-state GS ⇒ E₀/N = -J. Single K_i flip costs 2J ⇒ Δ = 2J.
+    for J in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            Cluster1D(; J=J),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=-J,
+            agree_within=1e-14,
+            refs=["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"],
+        )
+        verify(
+            Cluster1D(; J=J),
+            MassGap(),
+            Infinite();
+            route=:second_closed_form,
+            independent=2 * J,
+            agree_within=1e-14,
+            refs=["Cluster Hamiltonian: single stabilizer flip K_i: +1 → -1 costs 2J ⇒ Δ = 2J"],
+        )
+    end
+end
+

@@ -22,7 +22,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(MajumdarGhosh(; J = 1.0), SpinGap(), Infinite(); route = :literature_value, independent = 0.234, agree_within = 0.005, refs = ["White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J"])
+verify(MajumdarGhosh(; J = J), SpinGap(), Infinite(); route = :literature_value, independent = 0.234J, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J"])
 ```
 
 

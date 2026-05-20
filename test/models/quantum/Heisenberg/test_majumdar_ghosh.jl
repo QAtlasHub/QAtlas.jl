@@ -1,87 +1,50 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Standalone test: Majumdar–Ghosh chain (S = 1/2 J₁–J₂ at J₂/J₁ = 1/2)
+# Test: Majumdar–Ghosh chain (S = 1/2 J₁–J₂ at J₂/J₁ = 1/2)
 #
-# Verify the exact dimer-product ground-state energy density E₀/N = −3J/8
-# (Majumdar–Ghosh 1969), the analytical Shastry–Sutherland (1981) gap
-# lower bound Δ ≥ J/4, and the White–Affleck (1996) DMRG numerical gap
-# Δ ≈ 0.234 J.
+# Values are verified by the verify() cards below (the new system). This
+# file retains ONLY the structural / error / identity / relational guards
+# that verify() architecturally cannot express (`@test_throws`,
+# constructor invariants, registry sanity, deprecation-alias behaviour,
+# SU(2) cross-checks, strict bounds). Legacy hand-rolled value @testsets
+# are deleted — superseded by the verification cards.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
 using Logging: with_logger, NullLogger
 
-@testset "MajumdarGhosh: ground state and gap" begin
-    @testset "GroundStateEnergyDensity (Infinite) — exact dimer GS" begin
-        # J = 1: closed-form -3/8 (size-independent dimer-product state)
-        m = MajumdarGhosh()
-        e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
-        @test e0 == -3 / 8
-
-        # J scaling: E₀/N is linear in J
-        for Jval in (0.5, 2.0, 3.7)
-            mJ = MajumdarGhosh(; J=Jval)
-            @test QAtlas.fetch(mJ, GroundStateEnergyDensity(), Infinite()) == -3 * Jval / 8
-        end
-
-        # Constructor variants must agree
+@testset "MajumdarGhosh — structural / error / identity guards" begin
+    @testset "Constructor variants agree" begin
         @test MajumdarGhosh(1.0).J == MajumdarGhosh(; J=1.0).J
     end
 
-    @testset "GroundStateEnergyDensity (PBC) — size-independent" begin
+    @testset "GSED PBC — odd N rejected, N-kwarg form callable" begin
         m = MajumdarGhosh(; J=1.0)
-        for N in (4, 8, 12, 16)
-            e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(N))
-            @test e0 == -3 / 8
-        end
-
-        # Odd N is rejected (no consistent dimer covering on a ring).
         @test_throws DomainError QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(5))
-
-        # N kwarg form also works.
-        @test QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(); N=8) == -3 / 8
+        # N-kwarg API form reachable (value covered by verify cards below).
+        @test QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(); N=8) isa Real
     end
 
-    @testset "MassGap (Infinite) — :numerical default + :trimer_bound + legacy alias" begin
+    @testset "MassGap method dispatch & deprecation" begin
         m = MajumdarGhosh(; J=1.0)
-
-        # Default method is now :numerical (the actual DMRG ground-state-
-        # to-first-excited gap, ≈ 0.234 J).  Switched from the previous
-        # :lower_bound default after PR review noted that the SS 1981
-        # J/4 value exceeds the true gap and is best read as a sector-
-        # specific bound.
-        Δ_default = QAtlas.fetch(m, MassGap(), Infinite())
-        Δ_num_explicit = QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
-        @test Δ_default == Δ_num_explicit
-        @test Δ_default ≈ 0.234 atol = 1e-14
-
-        # Shastry-Sutherland trimer-sector bound.
+        Δ_num = QAtlas.fetch(m, MassGap(), Infinite(); method=:numerical)
         Δ_trimer = QAtlas.fetch(m, MassGap(), Infinite(); method=:trimer_bound)
-        @test Δ_trimer ≈ 0.25 atol = 1e-14
-        @test Δ_trimer > Δ_num_explicit  # SS bound numerically exceeds the actual gap
-
-        # Legacy :lower_bound alias still resolves to J/4 (with a one-shot
-        # @warn pointing callers to :trimer_bound).  Wrapped to silence
-        # the deprecation warning during regression testing.
+        # Default routes to :numerical (no fetch_kw == same path).
+        @test QAtlas.fetch(m, MassGap(), Infinite()) == Δ_num
+        # Strict relational: SS-1981 trimer-sector bound exceeds the
+        # actual gap (cannot be expressed by a single-value verify card).
+        @test Δ_trimer > Δ_num
+        # Legacy :lower_bound alias resolves to J/4 with a one-shot @warn
+        # (deprecation behaviour; not a verify-card concern).
         Δ_legacy = with_logger(NullLogger()) do
             QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)
         end
         @test Δ_legacy ≈ 0.25 atol = 1e-14
-
-        # J scaling for both physical methods.
-        for Jval in (0.5, 2.0, 3.7)
-            mJ = MajumdarGhosh(; J=Jval)
-            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:trimer_bound) == Jval / 4
-            @test QAtlas.fetch(mJ, MassGap(), Infinite(); method=:numerical) ≈ 0.234 * Jval atol =
-                1e-14
-        end
-
         # Unsupported method symbols raise DomainError.
         @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); method=:dmrg_strict)
         @test_throws DomainError QAtlas.fetch(m, MassGap(), Infinite(); method=:bogus)
     end
 
-    @testset "Registry rows" begin
-        # Basic sanity that the registry knows about MajumdarGhosh.
+    @testset "Registry knows about MajumdarGhosh" begin
         rows = QAtlas.implementation_status(MajumdarGhosh)
         @test !isempty(rows)
         quantities = unique(r.quantity for r in rows)
@@ -89,28 +52,22 @@ using Logging: with_logger, NullLogger
         @test MassGap in quantities
     end
 
-    @testset "MajumdarGhosh — SpinGap Δ ≈ 0.234 J (Phase 2, White-Affleck 1996)" begin
+    @testset "SpinGap — strict bounds, DomainError, SU(2) identity" begin
+        # Strict bounds (relational; not single-value verify cards):
+        #   Δ < J/4  (Shastry-Sutherland 1981 trimer-sector bound)
+        #   Δ > 0.117 J  (Magnus 1991 strict absolute-gap bound)
         Δ = QAtlas.fetch(MajumdarGhosh(), SpinGap(), Infinite())
-        @test Δ ≈ 0.234
-        # Linear scaling with J
-        @test QAtlas.fetch(MajumdarGhosh(; J=3.0), SpinGap(), Infinite()) ≈ 3 * 0.234
-        @test QAtlas.fetch(MajumdarGhosh(; J=0.5), SpinGap(), Infinite()) ≈ 0.5 * 0.234
-        # SpinGap < Shastry-Sutherland trimer bound J/4 (DMRG < analytical sector bound, as expected)
         @test Δ < 0.25
-        # SpinGap > strict Magnus 1991 absolute-gap bound 0.117 J
         @test Δ > 0.117
-    end
 
-    @testset "MajumdarGhosh — SpinGap rejects J ≤ 0 (Phase 2)" begin
+        # SpinGap rejects J ≤ 0.
         @test_throws DomainError QAtlas.fetch(MajumdarGhosh(), SpinGap(), Infinite(); J=0.0)
         @test_throws DomainError QAtlas.fetch(
             MajumdarGhosh(), SpinGap(), Infinite(); J=-1.5
         )
-    end
 
-    @testset "MajumdarGhosh — third-pass: SpinGap == MassGap(method=:numerical) (SU(2) cross-check)" begin
-        # MG is SU(2)-symmetric; the lowest excitation is a triplet, so the
-        # spectral gap (MassGap, :numerical) equals the spin gap (S=0 → S=1).
+        # SU(2) identity: MG is SU(2)-symmetric, so the spectral gap
+        # equals the spin gap (S=0 → S=1 triplet excitation).
         for J in (0.5, 1.0, 3.0)
             m = MajumdarGhosh(; J=J)
             @test QAtlas.fetch(m, SpinGap(), Infinite()) ≈
@@ -137,10 +94,8 @@ end
         return dense_spectrum(H)[1] / N
     end
 
-    # GroundStateEnergyDensity Infinite: exact dimer product state -3J/8.
-    # Independent closed form: each NN singlet has <S.S> = -3/4; the
-    # dimer covering gives e0 = J*(-3/4)/2 = -3J/8 (NNN terms vanish on
-    # orthogonal dimers).  J-scaling linear.
+    # GSED Infinite: closed-form -3J/8 (each NN singlet ⟨S·S⟩ = -3/4; the
+    # orthogonal-dimer covering gives e0 = -3J/8). J-scaling linear.
     for J in (0.5, 1.0, 2.0, 3.7)
         verify(
             MajumdarGhosh(; J=J),
@@ -153,7 +108,9 @@ end
         )
     end
 
-    # PBC even N: dimer state is the exact GS, E0/N = -3J/8 size-independent
+    # GSED Infinite ed_finite_size: independent J1-J2 ring ED via mg_pbc_e0,
+    # exact ∀ even N (dimer state is the exact GS); non-circular vs the
+    # closed form above.
     let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))
         verify(
             MajumdarGhosh(; J=1.0),
@@ -167,20 +124,8 @@ end
         )
     end
 
-    # MassGap Infinite: White-Affleck DMRG literature value
-    verify(
-        MajumdarGhosh(; J=1.0),
-        MassGap(),
-        Infinite();
-        route=:literature_value,
-        independent=0.234,
-        agree_within=5e-3,
-        refs=["White-Affleck 1996 DMRG; Eggert 1996: Delta ≈ 0.234 J"],
-    )
-
-    # PBC bc: same exact MG dimer GS but bc=PBC, so the
-    # MajumdarGhosh/GroundStateEnergyDensity/PBC hub is corroborated
-    # (independent J1-J2 ring ED via mg_pbc_e0; -3J/8 size-independent).
+    # GSED PBC ed_finite_size: same independent ED with bc=PBC, so the
+    # MajumdarGhosh/GroundStateEnergyDensity/PBC hub is corroborated.
     let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))
         verify(
             MajumdarGhosh(; J=1.0),
@@ -197,15 +142,46 @@ end
         )
     end
 
-    # SpinGap Infinite: White-Affleck/Eggert DMRG literature value
-    # (no closed form; matches src method=:dmrg_reference).
-    verify(
-        MajumdarGhosh(; J=1.0),
-        SpinGap(),
-        Infinite();
-        route=:literature_value,
-        independent=0.234,
-        agree_within=5e-3,
-        refs=["White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J"],
-    )
+    # MassGap Infinite (:numerical default = White-Affleck DMRG ≈ 0.234 J).
+    # J-scaling linear; src returns the literal 0.234*J to machine precision.
+    # Replaces legacy J-loop value assertions.
+    for J in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            MajumdarGhosh(; J=J),
+            MassGap(),
+            Infinite();
+            route=:literature_value,
+            independent=0.234 * J,
+            agree_within=1e-14,
+            refs=["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"],
+        )
+    end
+
+    # MassGap Infinite (:trimer_bound = J/4, Shastry-Sutherland 1981).
+    # Replaces legacy :trimer_bound value + J-scale tests.
+    for J in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            MajumdarGhosh(; J=J),
+            MassGap(),
+            Infinite();
+            route=:literature_value,
+            independent=J / 4,
+            agree_within=1e-14,
+            refs=["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"],
+            fetch_kw=(; method=:trimer_bound),
+        )
+    end
+
+    # SpinGap Infinite (White-Affleck/Eggert DMRG ≈ 0.234 J), J-linear.
+    for J in (0.5, 1.0, 3.0)
+        verify(
+            MajumdarGhosh(; J=J),
+            SpinGap(),
+            Infinite();
+            route=:literature_value,
+            independent=0.234 * J,
+            agree_within=1e-14,
+            refs=["White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J"],
+        )
+    end
 end

@@ -23,7 +23,7 @@ using QAtlas, Test
             Infinite();
             route=:second_closed_form,
             independent=J * (1 / 4 - log(2)),
-            agree_within=1e-12,
+            agree_within=1e-14,
             refs=["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"],
         )
     end

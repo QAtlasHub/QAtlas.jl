@@ -11,15 +11,17 @@ using QAtlas, Test
 
 @testset "TFIM — Energy/Infinite Pfeuty special points (#381 batch)" begin
     # h = 0 (pure ferromagnet): Λ(k) = 2|J|, ε₀ = -|J|.
-    for J in (0.5, 1.0, 2.0)
+    # Include a negative-J point so the card distinguishes ε₀ = -|J| from
+    # a hub that mistakenly returns -J.
+    for J in (-1.0, 0.5, 1.0, 2.0)
         verify(
             TFIM(; J=J, h=0.0),
             Energy(:per_site),
             Infinite();
             route=:second_closed_form,
-            independent=-J,
+            independent=-abs(J),
             agree_within=1e-9,
-            refs=["Pfeuty 1970: at h=0 dispersion is flat Λ(k)=2J ⇒ ε₀ = -J"],
+            refs=["Pfeuty 1970: at h=0 dispersion is flat Λ(k)=2|J| ⇒ ε₀ = -|J|"],
         )
     end
 
@@ -36,8 +38,11 @@ using QAtlas, Test
         )
     end
 
-    # Critical point h = J: ∫₀^π √(2J²(1-cos k)) dk = 2J·∫₀^π sin(k/2)dk = 4J
-    # ⇒ ε₀ = -(1/π)·2J·∫₀^π sin(k/2)dk = -4J/π.
+    # Critical point h = J. The integrand simplifies via the half-angle
+    # identity √(2(1−cos k)) = 2|sin(k/2)| (k ∈ [0,π] ⇒ sin(k/2) ≥ 0), so
+    #   √(J²+h²−2Jh cos k)|_{h=J} = √(2J²(1−cos k)) = 2|J|·sin(k/2).
+    # Then ∫₀^π 2J sin(k/2) dk = 2J·[−2 cos(k/2)]₀^π = 2J·2 = 4J,
+    # giving ε₀ = −(1/π)·4J = −4J/π.
     for J in (0.5, 1.0, 2.0)
         verify(
             TFIM(; J=J, h=J),

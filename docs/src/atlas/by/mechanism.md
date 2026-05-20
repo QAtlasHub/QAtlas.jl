@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (124)
+## `(no card)` (123)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
@@ -27,7 +27,6 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Hubbard1D/ChargeGap/Infinite`](../hubs/Hubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](../hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/LuttingerParameter/Infinite`](../hubs/Hubbard1D_LuttingerParameter_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/SpinGap/Infinite`](../hubs/Hubbard1D_SpinGap_Infinite.md) — uncorroborated-but-feasible
@@ -176,10 +175,11 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`XXZ1D/Energy/OBC`](../hubs/XXZ1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 
-## `limiting_case` (17)
+## `limiting_case` (18)
 
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
 - 🟢 [`HeisenbergXYZ/Energy/Infinite`](../hubs/HeisenbergXYZ_Energy_Infinite.md) — corroborated-at-p
+- 🔵 [`Hubbard1D/ChargeGap/Infinite`](../hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
 - 🔵 [`IsingChain1D/CriticalTemperature/Infinite`](../hubs/IsingChain1D_CriticalTemperature_Infinite.md) — coherent
 - 🔵 [`IsingSquare/Energy/Infinite`](../hubs/IsingSquare_Energy_Infinite.md) — coherent
 - 🟢 [`IsingSquare/PartitionFunction/PBC`](../hubs/IsingSquare_PartitionFunction_PBC.md) — corroborated-at-p

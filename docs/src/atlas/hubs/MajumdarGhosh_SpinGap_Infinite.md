@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 PRB 54 9862: MG point singlet-triplet spin gap Δ_S ≈ 0.234 J (DMRG) | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(MajumdarGhosh(; J = J), SpinGap(), Infinite(); route = :literature_value, independent = 0.234J, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J"])
 ```
 
+```julia
+verify(MajumdarGhosh(; J = J), SpinGap(), Infinite(); route = :literature_value, independent = 0.234J, agree_within = 0.005, refs = ["White-Affleck 1996 PRB 54 9862: MG point singlet-triplet spin gap Δ_S ≈ 0.234 J (DMRG)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

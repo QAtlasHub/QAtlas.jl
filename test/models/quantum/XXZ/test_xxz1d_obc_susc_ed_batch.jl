@@ -12,6 +12,8 @@
 # tested — including a clear SU(2) violation at Δ=1.0 where ED gives
 # χ_x = χ_y = χ_z but src gives χ_x = χ_y ≠ χ_z. This batch is filed as
 # a "bug-surfacing" card: CI failure is the intended diagnostic signal.
+# Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force
+# ED at finite β).
 #
 # Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -61,7 +63,7 @@ let Sx_op = spin_ops(1//2)[1],
                             independent=ed_val,
                             at=["N=$(N)"],
                             agree_within=1e-9,
-                            refs=["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute beta*Var(M_alpha)/N (alpha=$(axis_name))"],
+                            refs=["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute beta*Var(M_alpha)/N (alpha=$(axis_name)). Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force ED at finite β)."],
                             fetch_kw=(; J=J, Δ=dz, beta=beta),
                         )
                     end

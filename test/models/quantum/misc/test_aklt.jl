@@ -337,7 +337,14 @@ end
     end
 
     # MassGap/Infinite: Haldane gap Δ ≈ 0.350 J — DMRG literature value
-    # (García-Saez/Murg/Verstraete 2013); no closed form.
+    # (García-Saez/Murg/Verstraete 2013, PRB 88, 245118); no closed form.
+    #
+    # IMPORTANT — agree_within=5e-3 is the DMRG literature uncertainty floor
+    # (García-Saez–Murg–Verstraete report Δ/J ≈ 0.3502 ± 0.0001; ~25× their
+    # quoted uncertainty gives headroom for hub-stored precision choices
+    # between 0.350 and 0.35048). This tolerance is INTENTIONALLY loose and
+    # should NOT be tightened by future maintainers without a new high-
+    # precision DMRG/MERA result superseding GMV 2013.
     for J in (1.0, 2.0)
         verify(
             AKLT1D(; J=J),

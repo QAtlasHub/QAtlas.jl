@@ -168,3 +168,53 @@ end
         refs=["Ferroelectric phase (Δ>1): frozen, residual entropy S = 0"],
     )
 end
+
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "SixVertex — FreeEnergy closed forms (#381 batch)" begin
+    # Square-ice point a=b=c=1 (Δ=1/2, disordered): f = -(3/2) log(4/3)
+    # (Lieb 1967a — same magnitude as the residual entropy, opposite sign).
+    verify(
+        SixVertex(; a=1.0, b=1.0, c=1.0),
+        FreeEnergy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-(3/2) * log(4/3),
+        agree_within=1e-14,
+        refs=["Lieb 1967a Phys. Rev. 162: square-ice f = -(3/2) log(4/3)"],
+    )
+
+    # Ferroelectric phase Δ>1: f = -log max(a,b) (Lieb 1967c).
+    # (a, b, c) = (3, 1, 1) → Δ = (9+1-1)/(6) = 1.5 > 1; f = -log 3.
+    verify(
+        SixVertex(; a=3.0, b=1.0, c=1.0),
+        FreeEnergy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-log(3.0),
+        agree_within=1e-14,
+        refs=["Lieb 1967c Phys. Rev. Lett. 19, 108: KDP/FE phase f = -log max(a,b) (frozen GS)"],
+    )
+
+    # (a, b, c) = (1, 3, 1) → same by a↔b symmetry; f = -log 3.
+    verify(
+        SixVertex(; a=1.0, b=3.0, c=1.0),
+        FreeEnergy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-log(3.0),
+        agree_within=1e-14,
+        refs=["Lieb 1967c: FE-phase f = -log max(a,b); a↔b symmetry"],
+    )
+
+    # (a, b, c) = (2, 4, 1) → Δ = (4+16-1)/16 = 19/16 > 1; f = -log 4.
+    verify(
+        SixVertex(; a=2.0, b=4.0, c=1.0),
+        FreeEnergy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-log(4.0),
+        agree_within=1e-14,
+        refs=["Lieb 1967c: FE-phase f = -log max(a,b)"],
+    )
+end
+

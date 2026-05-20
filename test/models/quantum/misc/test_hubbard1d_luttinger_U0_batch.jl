@@ -18,7 +18,7 @@ using QAtlas, Test
             route=:second_closed_form,
             independent=1.0,
             agree_within=1e-14,
-            refs=["At U=0 the Hubbard model is a free spinful fermion at half-filling ⇒ Luttinger parameter K = 1 (free-boson value)"],
+            refs=["At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains)"],
         )
     end
 end

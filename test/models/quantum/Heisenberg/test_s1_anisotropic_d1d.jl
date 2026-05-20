@@ -117,26 +117,32 @@ end
 end
 # ── additional verification cards (#381 batch 5) ─────────────────────────
 @testset "S1AnisotropicD1D — D=0 isotropic Haldane reduction (#381 batch 5)" begin
-    # At D=0 the S=1 single-ion anisotropy chain reduces to the
-    # SU(2)-symmetric S=1 Heisenberg AF, the Haldane chain.
-    # DMRG (White 1993): e₀ ≈ -1.40148, Haldane gap ≈ 0.41048 J.
-    verify(
-        S1AnisotropicD1D(; J=1.0, D=0.0),
-        Energy(:per_site),
-        Infinite();
-        route=:limiting_case,
-        independent=-1.40148403897,
-        agree_within=1e-6,
-        refs=["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 (D=0 reduction of single-ion anisotropy chain)"],
-    )
-    verify(
-        S1AnisotropicD1D(; J=1.0, D=0.0),
-        MassGap(),
-        Infinite();
-        route=:limiting_case,
-        independent=0.41048,
-        agree_within=1e-3,
-        refs=["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 J"],
-    )
+    # At D=0 the S=1 single-ion anisotropy chain delegates to the
+    # SU(2)-symmetric S=1 Heisenberg AF (the Haldane chain).
+    # DMRG (White 1993): e₀ ≈ -1.40148 J, Haldane gap ≈ 0.41048 J.
+    # route=:delegation_invariant captures the actual test semantics
+    # (code-path delegation at D=0) more accurately than :limiting_case.
+    # J-scan covers default J=1 and one off-default point J=2 to verify
+    # the delegation respects linear J scaling.
+    for J in (1.0, 2.0)
+        verify(
+            S1AnisotropicD1D(; J=J, D=0.0),
+            Energy(:per_site),
+            Infinite();
+            route=:delegation_invariant,
+            independent=-1.40148403897 * J,
+            agree_within=1e-6,
+            refs=["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (D=0 delegation; J-linear scaling)"],
+        )
+        verify(
+            S1AnisotropicD1D(; J=J, D=0.0),
+            MassGap(),
+            Infinite();
+            route=:delegation_invariant,
+            independent=0.41048 * J,
+            agree_within=1e-3,
+            refs=["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (D=0 delegation; J-linear scaling)"],
+        )
+    end
 end
 

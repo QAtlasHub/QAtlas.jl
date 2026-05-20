@@ -134,7 +134,11 @@ end
             route=:ed_finite_size,
             independent=[mg_pbc_e0(N, 1.0) for N in Ns],
             at=["N=$N" for N in Ns],
-            agree_within=1e-6,
+            # Dimer product state is the exact GS of the MG ring (J2=J/2)
+            # for every even N, so the size-by-size residual is at machine
+            # precision; 1e-12 is tight enough to catch real bugs but stays
+            # well clear of accumulated float round-off in the ED solver.
+            agree_within=1e-12,
             refs=[
                 "Exact MG dimer GS of the J1-J2 ring at J2=J/2 " *
                 "(even N), e0 = -3J/8 size-independent",

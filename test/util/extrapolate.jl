@@ -40,6 +40,23 @@ thermodynamic limit `N → ∞`, modelling the tail as a series in
 `1 / N^power`. `value` is the extrapolated `N→∞` estimate; `uncertainty`
 is `|value − value_one_order_lower|`, a conservative proxy for the
 extrapolation error (use it to choose a defensible `agree_within`).
+
+# Example: calibrating `agree_within` from `uncertainty`
+
+A conservative rule of thumb is `agree_within = 5 * r.uncertainty` —
+five times the successive-approximant gap, so that a fit which is
+already converged to its reported `value` cannot trip a false positive
+from one extra order of round-off:
+
+```julia
+r = extrapolate_inf(Ns, vals; power=2)
+verify(model, quantity, bc;
+    route=:ed_finite_size,
+    independent=r.value,
+    agree_within=5 * r.uncertainty,
+    refs=[...],
+)
+```
 """
 function extrapolate_inf(
     Ns::AbstractVector{<:Real}, vals::AbstractVector{<:Real}; power::Integer=1

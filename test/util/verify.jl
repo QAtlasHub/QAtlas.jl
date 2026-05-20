@@ -39,6 +39,11 @@ const _VERIFY_ROUTES = (
 # review B1: only these routes are mechanically independent of `src`.
 const _STRUCTURAL_ROUTES = (:ed_finite_size, :second_closed_form, :literature_value)
 
+# Relative tolerance for treating a Complex value with negligible imaginary
+# part as real in JSON emit (e.g. correlators of Hermitian operators that
+# carry a few ULPs of round-off in the imaginary direction).
+const _IMAG_NOISE_RTOL = 1e-9
+
 _verify_typename(x) = string(nameof(typeof(x)))
 
 function _verify_hub(model, quantity, bc)
@@ -76,7 +81,7 @@ function _json_num(x)
     # Complex-with-negligible-imag -> real part (correlators of
     # Hermitian operators are real up to round-off); genuinely
     # complex or non-finite -> null (never a raw "0.4 + 0.0im").
-    r = x isa Complex ? (abs(imag(x)) <= 1e-9 * max(1.0, abs(real(x))) ? real(x) : NaN) : x
+    r = x isa Complex ? (abs(imag(x)) <= _IMAG_NOISE_RTOL * max(1.0, abs(real(x))) ? real(x) : NaN) : x
     v = float(r)
     return isfinite(v) ? string(v) : "null"
 end

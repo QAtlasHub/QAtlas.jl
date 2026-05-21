@@ -15,19 +15,19 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `literature_value` | 🟢 structural | García-Saez-Murg-Verstraete 2013: Haldane gap Δ ≈ 0.350 J (DMRG) | `test/models/quantum/misc/test_aklt.jl` |
-| `@sweep` | `literature_value` | 🟢 structural | García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG) | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG) | `test/models/quantum/misc/test_aklt_verify_closed_form.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | García-Saez-Murg-Verstraete 2013: Haldane gap Δ ≈ 0.350 J (DMRG) | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.35J, agree_within = 0.001 * max(1.0, J), refs = ["García-Saez-Murg-Verstraete 2013: Haldane gap Δ ≈ 0.350 J (DMRG)"])
+verify(AKLT1D(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.35J, agree_within = 0.005, refs = ["García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG)"])
 ```
 
 ```julia
-verify(AKLT1D(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.35J, agree_within = 0.005, refs = ["García-Saez–Murg–Verstraete 2013 (PRB 88, 245118): AKLT Haldane gap Δ ≈ 0.350 J (DMRG)"])
+verify(AKLT1D(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.35J, agree_within = 0.001 * max(1.0, J), refs = ["García-Saez-Murg-Verstraete 2013: Haldane gap Δ ≈ 0.350 J (DMRG)"])
 ```
 
 

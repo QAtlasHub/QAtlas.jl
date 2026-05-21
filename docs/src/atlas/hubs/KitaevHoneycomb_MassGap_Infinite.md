@@ -15,7 +15,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
 
 ## Test calls
 

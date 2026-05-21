@@ -15,19 +15,19 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Kennedy-Tasaki 1992: O_str = 4/9 (hidden Z₂×Z₂ in Haldane phase) | `test/models/quantum/misc/test_aklt.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Kennedy-Tasaki 1992 on AKLT VBS: O_str = -⟨S^z_i e^{iπ Σ S^z_k} S^z_j⟩ → 4/9 at r → ∞ | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kennedy-Tasaki 1992 on AKLT VBS: O_str = -⟨S^z_i e^{iπ Σ S^z_k} S^z_j⟩ → 4/9 at r → ∞ | `test/models/quantum/misc/test_aklt_verify_closed_form.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kennedy-Tasaki 1992: O_str = 4/9 (hidden Z₂×Z₂ in Haldane phase) | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(), StringOrderParameter(), Infinite(); route = :second_closed_form, independent = 4 / 9, agree_within = 1.0e-14, refs = ["Kennedy-Tasaki 1992: O_str = 4/9 (hidden Z₂×Z₂ in Haldane phase)"])
+verify(AKLT1D(; J = J), StringOrderParameter(), Infinite(); route = :second_closed_form, independent = 4 / 9, agree_within = 1.0e-14, refs = ["Kennedy-Tasaki 1992 on AKLT VBS: O_str = -⟨S^z_i e^{iπ Σ S^z_k} S^z_j⟩ → 4/9 at r → ∞"])
 ```
 
 ```julia
-verify(AKLT1D(; J = J), StringOrderParameter(), Infinite(); route = :second_closed_form, independent = 4 / 9, agree_within = 1.0e-14, refs = ["Kennedy-Tasaki 1992 on AKLT VBS: O_str = -⟨S^z_i e^{iπ Σ S^z_k} S^z_j⟩ → 4/9 at r → ∞"])
+verify(AKLT1D(), StringOrderParameter(), Infinite(); route = :second_closed_form, independent = 4 / 9, agree_within = 1.0e-14, refs = ["Kennedy-Tasaki 1992: O_str = 4/9 (hidden Z₂×Z₂ in Haldane phase)"])
 ```
 
 

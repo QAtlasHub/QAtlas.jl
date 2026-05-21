@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 136 |
-| 🔵 coherent | 25 |
+| 🟢 corroborated-at-p | 138 |
+| 🔵 coherent | 26 |
 | ⚪ cited-only (frontier — neutral) | 18 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 68 |
-| Inventory cards scanned (whole test/) | 384 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 65 |
+| Inventory cards scanned (whole test/) | 387 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **61.5%** · **in-repo-verified rate** (incl. 🔵 coherent): **72.9%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **74.2%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "68 actionable hub(s)"
+!!! warning "65 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
@@ -89,10 +89,7 @@
     - [`TFIM/SusceptibilityZZ/Infinite`](hubs/TFIM_SusceptibilityZZ_Infinite.md)
     - [`TFIM/SusceptibilityZZ/OBC`](hubs/TFIM_SusceptibilityZZ_OBC.md)
     - [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
-    - [`TFIM/XXStructureFactor/Infinite`](hubs/TFIM_XXStructureFactor_Infinite.md)
-    - [`TFIM/XXStructureFactor/OBC`](hubs/TFIM_XXStructureFactor_OBC.md)
     - [`TFIM/YYStructureFactor/Infinite`](hubs/TFIM_YYStructureFactor_Infinite.md)
-    - [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md)
     - [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md)
     - [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md)
     - [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
@@ -158,7 +155,7 @@
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 53 | 0 | 26 | 7 | 0 | 20 | feasible |
+| `TFIM` | 53 | 0 | 28 | 8 | 0 | 17 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
 | `TightBindingV1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
@@ -496,11 +493,11 @@
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/Infinite`](hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/XXStructureFactor/Infinite`](hubs/TFIM_XXStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/OBC`](hubs/TFIM_XXStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/XXStructureFactor/Infinite`](hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/XXStructureFactor/OBC`](hubs/TFIM_XXStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/YYStructureFactor/Infinite`](hubs/TFIM_YYStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible

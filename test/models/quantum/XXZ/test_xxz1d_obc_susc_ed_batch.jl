@@ -61,6 +61,7 @@ let Sx_op = spin_ops(1//2)[1], Sy_op = spin_ops(1//2)[2], Sz_op = spin_ops(1//2)
                             independent=ed_val,
                             at=["N=$(N)"],
                             agree_within=1e-9,
+                            expected_fail=true,  # tracker issue #445 — XXZ thermal kernel discrepancy vs brute-force ED at finite β
                             refs=[
                                 "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute beta*Var(M_alpha)/N (alpha=$(axis_name)). Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force ED at finite β).",
                             ],

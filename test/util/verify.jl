@@ -25,7 +25,7 @@
 # profile) is the heavier computation and the only writer of cards.
 
 using Dates: Dates
-using Test: @test
+using Test: @test, @test_broken
 
 const _VERIFY_ROUTES = (
     :ed_finite_size,        # exact diagonalisation, finite-N → closed form
@@ -152,7 +152,8 @@ end
 """
     verify(model, quantity, bc;
            route, independent, agree_within,
-           refs, reliability=:high, fetch_kw=(;), at=nothing) -> subject
+           refs, reliability=:high, fetch_kw=(;), at=nothing,
+           expected_fail=false) -> subject
 
 Black-box-verify the src value `fetch(model, quantity, bc; fetch_kw...)`
 against an `independent` numeric (scalar or convergence vector) obtained
@@ -173,6 +174,7 @@ function verify(
     reliability::Symbol=:high,
     fetch_kw::NamedTuple=(;),
     at=nothing,
+    expected_fail::Bool=false,
 )
     route in _VERIFY_ROUTES ||
         error("verify: route must be one of $(_VERIFY_ROUTES); got $(repr(route))")
@@ -185,7 +187,14 @@ function verify(
     best = last(ind)                  # convergence: largest-N / final value
     abserr = abs(best - float(subject))
 
-    @test isapprox(best, float(subject); atol=agree_within)
+    if expected_fail
+        # bug-surfacing card: @test_broken expects this to fail and will
+        # alert when src is fixed (the test passes despite being marked
+        # broken, prompting promotion back to @test).
+        @test_broken isapprox(best, float(subject); atol=agree_within)
+    else
+        @test isapprox(best, float(subject); atol=agree_within)
+    end
 
     if get(ENV, "QATLAS_EMIT", "0") == "1"
         outdir = get(ENV, "QATLAS_CIOUT_DIR", joinpath(@__DIR__, "..", ".ci-out"))

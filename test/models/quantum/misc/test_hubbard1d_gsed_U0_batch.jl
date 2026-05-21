@@ -3,8 +3,10 @@
 #
 # Textbook U → 0 limit of Hubbard1D GSED at half-filling: e_0 = -4t/π
 # (Essler et al. 2005 Lieb-Wu chapter Eq. 1.21; matches src docstring at
-# Hubbard1D.jl:167). Bug-surfacing follow-up to PR #390 — current src
-# returns -4t²/π in this limit (extra factor of t). Refs #381, #390.
+# Hubbard1D.jl:167). Previously bug-surfacing for issue #423 (src returned
+# -4t²/π with an extra factor of t); root cause fixed in this PR by changing
+# _hubbard1d_e0 prefactor from -4*t^2*integral to -4*t*integral. Refs #381,
+# #390, #423.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test

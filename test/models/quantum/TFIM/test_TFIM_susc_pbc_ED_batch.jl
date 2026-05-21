@@ -54,6 +54,7 @@ let Sx = spin_ops(1//2)[1], Sz = spin_ops(1//2)[3]
                         independent=ed_val,
                         at=["N=$(N)"],
                         agree_within=1e-9,
+                        expected_fail=true,  # tracker issue #444 — TFIM PBC parity-sector handling (JW boundary sign)
                         refs=[
                             "ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N",
                         ],

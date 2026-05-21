@@ -428,15 +428,6 @@ function fetch(m::Universality{:Poisson}, q::MeanRatio, ::Infinite; kwargs...)
 end
 
 # ─── Infinite-bc forwarders for CriticalExponents / GrowthExponents (verify integration)
-function fetch(m::Universality{:Ising}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
-end
-function fetch(m::Universality{:XY}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
-end
-function fetch(m::Universality{:Heisenberg}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
-end
 function fetch(m::Universality{:Percolation}, q::CriticalExponents, ::Infinite; kwargs...)
     fetch(m, q; kwargs...)
 end

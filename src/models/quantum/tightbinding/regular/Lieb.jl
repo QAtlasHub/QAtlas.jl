@@ -120,3 +120,47 @@ function fetch(
     end
     return sort!(eigs)
 end
+
+# ─── Scalar invariants for verify() integration ────────────────────────────
+#
+# Sister to TightBindingChecksum + TightBindingMaxEnergy on Honeycomb.
+# Quantities defined in Honeycomb.jl; this file forwards them through
+# Lieb's TightBindingSpectrum.
+
+"""
+    fetch(::Lieb, ::TightBindingChecksum, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`Σ λᵢ² = tr(H²)` for the Lx × Ly Lieb-lattice PBC TB spectrum. Lieb has
+3 sites per unit cell (1 corner + 2 edge) with coordinations 4, 2, 2;
+`n_NN_bonds = 4 · Lx · Ly` and `tr(H²) = 8 · t² · Lx · Ly`.
+"""
+function fetch(
+    m::Lieb,
+    ::TightBindingChecksum,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return sum(abs2, eigs)
+end
+
+"""
+    fetch(::Lieb, ::TightBindingMaxEnergy, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`max(λᵢ)` for the Lx × Ly Lieb PBC TB spectrum. The dispersive bands
+`±E(k) = ±2|t|·√(cos²(θ₁/2) + cos²(θ₂/2))` saturate at the Γ point
+(θ₁=θ₂=0), giving `max(spectrum) = 2√2 · |t|`, independent of Lx, Ly.
+"""
+function fetch(
+    m::Lieb,
+    ::TightBindingMaxEnergy,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return maximum(eigs)
+end

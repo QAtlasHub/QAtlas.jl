@@ -55,6 +55,19 @@ end
 
 const J_ISING = 1.0
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 2 zero-legacy review (PR #449): the per-iteration raw @test loop below
+# stays raw on purpose. It cross-checks AutoDiff-derived thermodynamic moments
+# (∂(log Z)/∂β, ∂²(log Z)/∂β², ∂(log Z)/∂J) against brute-force ensemble
+# averages — both sides traverse the SAME PartitionFunction code path
+# (direct fetch vs ForwardDiff propagation), so this is an internal AD-
+# consistency check rather than independent corroboration. IsingSquare has
+# no SpecificHeat / Energy hub for the derived quantities to be `subject` of
+# a verify card; PartitionFunction itself is already pinned both here and in
+# test_ising_2x2_classical.jl. Migration is bounded by hub coverage, not
+# overlooked.
+# ─────────────────────────────────────────────────────────────────────────────
+
 @testset "IsingSquare — thermodynamics from log Z (ForwardDiff)" begin
     for (Lx, Ly) in [(2, 2), (2, 3), (3, 3)]
         @testset "$(Lx)×$(Ly) square PBC" begin

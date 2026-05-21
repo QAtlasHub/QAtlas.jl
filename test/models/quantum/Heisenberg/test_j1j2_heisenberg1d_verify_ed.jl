@@ -4,11 +4,13 @@
 # at the MG point (PBC, N=6,8,10,12 with dense Hermitian eigvals; dominated
 # by N=12 = 4096-dim). Isolated so it parallelises in its own shard.
 
-using QAtlas, Test
+using QAtlas, Test, KrylovKit, Random
 
 @testset "J1J2Heisenberg1D — verify (MG point PBC ED N=6,8,10,12)" begin
     # Independent J1-J2 PBC ground-state energy density (spin-1/2),
     # built black-box from site operators (never QAtlas internals).
+    # Sparse Lanczos GS — only lowest eigenpair needed, drops N=12 from
+    # ~4 min (full eigvals) to ~1 s.
     function j1j2_pbc_e0(N, J1, J2)
         Sx, Sy, Sz = spin_ops(1 // 2)
         SS(i, j) =
@@ -20,7 +22,17 @@ using QAtlas, Test
             H .+= J1 * SS(i, mod1(i + 1, N))
             H .+= J2 * SS(i, mod1(i + 2, N))
         end
-        return dense_spectrum(H)[1] / N
+        D = 2^N
+        vals, _, _ = eigsolve(
+            H,
+            randn(MersenneTwister(0), ComplexF64, D),
+            1,
+            :SR;
+            ishermitian=true,
+            krylovdim=30,
+            tol=1e-12,
+        )
+        return real(vals[1]) / N
     end
 
     # j = 1/2 MG point: independent PBC ED -> exact dimer -3 J1 / 8 (even N)

@@ -6,9 +6,11 @@
 # dominated by the dense-eigvals call at N=12 (4096-dim Hermitian).
 # ─────────────────────────────────────────────────────────────────────────────
 
-using QAtlas, Test
+using QAtlas, Test, KrylovKit, Random
 
 @testset "MajumdarGhosh — verify (PBC ED N=6,8,10,12)" begin
+    # Sparse Lanczos GS — see _verify_ed_infinite.jl header for the
+    # O(D³) → O(nnz·k) rationale (N=12: ~4 min → ~1 s).
     function mg_pbc_e0(N, J)
         Sx, Sy, Sz = spin_ops(1 // 2)
         SS(i, j) =
@@ -20,7 +22,17 @@ using QAtlas, Test
             H .+= J * SS(i, mod1(i + 1, N))
             H .+= (J / 2) * SS(i, mod1(i + 2, N))
         end
-        return dense_spectrum(H)[1] / N
+        D = 2^N
+        vals, _, _ = eigsolve(
+            H,
+            randn(MersenneTwister(0), ComplexF64, D),
+            1,
+            :SR;
+            ishermitian=true,
+            krylovdim=30,
+            tol=1e-12,
+        )
+        return real(vals[1]) / N
     end
 
     let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))

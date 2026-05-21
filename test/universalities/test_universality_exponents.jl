@@ -1,8 +1,13 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Standalone test: universality class critical exponents
 #
-# Verify exact (rational) and numerical exponents, and check standard
-# scaling relations.
+# Migrated from pure-legacy @test to verify()-first (PR #449 phase B,
+# zero-legacy end-state). Exact rational exponents become verify() cards
+# via subject_extract = e -> getproperty(e, field); numerical bounded
+# ranges, _err positivity, scaling-relation helper identities, KPZ
+# higher-d numerical estimates, and Mermin-Wagner / KPZ d>=4 error paths
+# stay raw @test (verify() is scalar-only and cannot represent
+# inequalities or error-throwing dispatches).
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
@@ -14,47 +19,45 @@ function check_scaling_relations(e; d::Int=0)
     @test e.γ == e.β * (e.δ - 1)                    # Widom
     @test e.γ == e.ν * (2 - e.η)                    # Fisher
     if d > 0
-        @test 2 - e.α ≈ d * e.ν atol = 1e-10       # Josephson (hyperscaling)
+        @test 2 - e.α ≈ d * e.ν atol = 1e-10        # Josephson
     end
 end
 
-# `atol = 0.01` is a *physics-imposed* floor, not laziness — see #118 audit.
-#
-# The 3D bootstrap exponents we ship (Ising / XY / Heisenberg) inherit the
-# precision of their source data (KPSDV 2016 etc.).  Worst-case residuals
-# of `α + 2β + γ - 2`, `γ - β(δ-1)`, `γ - ν(2-η)`, `2 - α - dν` measured
-# at PR time:
-#
-#   3D Ising       — max ≈ 1.0e-5  (could tighten to atol = 1e-4)
-#   3D XY          — max ≈ 7.1e-5  (could tighten to atol = 1e-3)
-#   3D Heisenberg  — max ≈ 4.5e-4  (cannot tighten below atol ≈ 1e-3)
-#
-# Heisenberg sets the floor: tightening per call site would only shave a
-# factor or two off the loosest class while opening every numerical-data
-# refresh to spurious failures.  The single `atol = 0.01` here gives ~20×
-# margin uniformly and stays robust to upstream value updates.  This is
-# the (a)/(b)/(c)-style classification from #118: a deliberately soft
-# tolerance with a one-line justification.
 function check_scaling_relations_approx(e; d::Int=0)
-    @test e.α + 2 * e.β + e.γ ≈ 2 atol = 0.01      # Rushbrooke
-    @test e.γ ≈ e.β * (e.δ - 1) atol = 0.01         # Widom
-    @test e.γ ≈ e.ν * (2 - e.η) atol = 0.01         # Fisher
+    @test e.α + 2 * e.β + e.γ ≈ 2 atol = 0.01
+    @test e.γ ≈ e.β * (e.δ - 1) atol = 0.01
+    @test e.γ ≈ e.ν * (2 - e.η) atol = 0.01
     if d > 0
-        @test 2 - e.α ≈ d * e.ν atol = 0.01         # Josephson
+        @test 2 - e.α ≈ d * e.ν atol = 0.01
     end
 end
 
-# ═══════════════════ Exact universality classes (Rational) ═══════════════════
+# ═══════════════════ Exact universality classes (verify) ═════════════════════
 
 @testset "Universality: 2D Ising (exact)" begin
     e = QAtlas.fetch(Universality(:Ising), CriticalExponents(); d=2)
-    @test e.β == 1 // 8
-    @test e.ν == 1 // 1
-    @test e.γ == 7 // 4
-    @test e.η == 1 // 4
-    @test e.δ == 15 // 1
-    @test e.α == 0 // 1
-    @test e.c == 1 // 2
+    for (field, lit) in (
+        (:β, 1 // 8),
+        (:ν, 1 // 1),
+        (:γ, 7 // 4),
+        (:η, 1 // 4),
+        (:δ, 15 // 1),
+        (:α, 0 // 1),
+        (:c, 1 // 2),
+    )
+        verify(
+            Universality(:Ising),
+            CriticalExponents(),
+            Infinite();
+            route=:literature_value,
+            independent=lit,
+            agree_within=0,
+            at=["d=2", "field=$(field)"],
+            refs=["Onsager 1944 / Pfeuty 1970: 2D Ising exact exponent $(field) = $(lit)"],
+            fetch_kw=(; d=2),
+            subject_extract=e -> getproperty(e, field),
+        )
+    end
     check_scaling_relations(e; d=2)
 end
 
@@ -65,60 +68,117 @@ end
 end
 
 @testset "Universality: Mean-field (exact)" begin
-    e = QAtlas.fetch(MeanField(), CriticalExponents())
-    @test e.β == 1 // 2
-    @test e.ν == 1 // 2
-    @test e.γ == 1 // 1
-    @test e.η == 0 // 1
-    @test e.δ == 3 // 1
-    @test e.α == 0 // 1
-    check_scaling_relations(e)
+    for (field, lit) in
+        ((:β, 1 // 2), (:ν, 1 // 2), (:γ, 1 // 1), (:η, 0 // 1), (:δ, 3 // 1), (:α, 0 // 1))
+        verify(
+            MeanField(),
+            CriticalExponents(),
+            Infinite();
+            route=:literature_value,
+            independent=lit,
+            agree_within=0,
+            at=["field=$(field)"],
+            refs=["Landau mean-field / upper critical d: $(field) = $(lit)"],
+            subject_extract=e -> getproperty(e, field),
+        )
+    end
+    check_scaling_relations(QAtlas.fetch(MeanField(), CriticalExponents()))
 end
 
 @testset "Universality: Ising d≥4 = Mean-field" begin
     e_mf = QAtlas.fetch(MeanField(), CriticalExponents())
-    for d in [4, 5, 100]
+    for d in (4, 5, 100)
         e = QAtlas.fetch(Universality(:Ising), CriticalExponents(); d=d)
         @test e == e_mf
     end
 end
 
 @testset "Universality: 2D Percolation (exact)" begin
+    for (field, lit) in (
+        (:α, -2 // 3),
+        (:β, 5 // 36),
+        (:γ, 43 // 18),
+        (:δ, 91 // 5),
+        (:ν, 4 // 3),
+        (:η, 5 // 24),
+    )
+        verify(
+            Universality(:Percolation),
+            CriticalExponents(),
+            Infinite();
+            route=:literature_value,
+            independent=lit,
+            agree_within=0,
+            at=["d=2", "field=$(field)"],
+            refs=[
+                "Stauffer-Aharony / den Nijs 1979: 2D Percolation exact $(field) = $(lit)"
+            ],
+            fetch_kw=(; d=2),
+            subject_extract=e -> getproperty(e, field),
+        )
+    end
     e = QAtlas.fetch(Universality(:Percolation), CriticalExponents(); d=2)
-    @test e.α == -2 // 3
-    @test e.β == 5 // 36
-    @test e.γ == 43 // 18
-    @test e.δ == 91 // 5
-    @test e.ν == 4 // 3
-    @test e.η == 5 // 24
     check_scaling_relations(e; d=2)
 end
 
 @testset "Universality: 3-state Potts d=2 (exact)" begin
+    for (field, lit) in ((:β, 1 // 9), (:ν, 5 // 6), (:η, 4 // 15), (:δ, 14 // 1))
+        verify(
+            Universality(:Potts3),
+            CriticalExponents(),
+            Infinite();
+            route=:literature_value,
+            independent=lit,
+            agree_within=0,
+            at=["d=2", "field=$(field)"],
+            refs=["Dotsenko 1984 / DFMS §7.4: 2D 3-state Potts $(field) = $(lit)"],
+            fetch_kw=(; d=2),
+            subject_extract=e -> getproperty(e, field),
+        )
+    end
     e = QAtlas.fetch(Universality(:Potts3), CriticalExponents(); d=2)
-    @test e.β == 1 // 9
-    @test e.ν == 5 // 6
-    @test e.η == 4 // 15
-    @test e.δ == 14 // 1
     check_scaling_relations(e; d=2)
 end
 
 @testset "Universality: 4-state Potts d=2 (exact)" begin
+    for (field, lit) in ((:β, 1 // 12), (:ν, 2 // 3), (:η, 1 // 4), (:δ, 15 // 1))
+        verify(
+            Universality(:Potts4),
+            CriticalExponents(),
+            Infinite();
+            route=:literature_value,
+            independent=lit,
+            agree_within=0,
+            at=["d=2", "field=$(field)"],
+            refs=[
+                "DFMS §12.3: 2D 4-state Potts (marginal compact boson) $(field) = $(lit)"
+            ],
+            fetch_kw=(; d=2),
+            subject_extract=e -> getproperty(e, field),
+        )
+    end
     e = QAtlas.fetch(Universality(:Potts4), CriticalExponents(); d=2)
-    @test e.β == 1 // 12
-    @test e.ν == 2 // 3
-    @test e.η == 1 // 4
-    @test e.δ == 15 // 1
     check_scaling_relations(e; d=2)
 end
 
 @testset "Universality: KPZ 1+1D (exact growth exponents)" begin
+    for (field, lit) in ((:β_growth, 1 // 3), (:α_rough, 1 // 2), (:z, 3 // 2))
+        verify(
+            Universality(:KPZ),
+            GrowthExponents(),
+            Infinite();
+            route=:literature_value,
+            independent=lit,
+            agree_within=0,
+            at=["d=1", "field=$(field)"],
+            refs=["KPZ 1+1D exact (Kardar-Parisi-Zhang 1986): $(field) = $(lit)"],
+            fetch_kw=(; d=1),
+            subject_extract=e -> getproperty(e, field),
+        )
+    end
     e = QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=1)
-    @test e.β_growth == 1 // 3
-    @test e.α_rough == 1 // 2
-    @test e.z == 3 // 2
-    @test e.α_rough + e.z == 2              # Galilean invariance
-    @test e.β_growth == e.α_rough / e.z     # β = α / z
+    @test e.α_rough + e.z == 2              # Galilean invariance (derived identity, raw)
+    @test e.β_growth == e.α_rough / e.z     # β = α / z (derived, raw)
 end
 
 @testset "Universality: KPZ1D() backward compat" begin
@@ -127,7 +187,7 @@ end
     @test e_old == e_new
 end
 
-# ═══════════════ Numerical universality classes (Float64 + _err) ═════════════
+# ═══════════════ Numerical universality classes — kept raw ════════════════════
 
 @testset "Universality: 3D Ising (conformal bootstrap)" begin
     e = QAtlas.fetch(Universality(:Ising), CriticalExponents(); d=3)
@@ -155,8 +215,18 @@ end
 end
 
 @testset "Universality: XY d=2 is BKT" begin
-    e = QAtlas.fetch(Universality(:XY), CriticalExponents(); d=2)
-    @test e.η == 1 // 4
+    verify(
+        Universality(:XY),
+        CriticalExponents(),
+        Infinite();
+        route=:literature_value,
+        independent=1 // 4,
+        agree_within=0,
+        at=["d=2", "field=η"],
+        refs=["Kosterlitz 1974 BKT: η = 1/4 at the universal jump"],
+        fetch_kw=(; d=2),
+        subject_extract=e -> e.η,
+    )
 end
 
 @testset "Universality: Heisenberg d=2 → Mermin-Wagner error" begin
@@ -172,33 +242,25 @@ end
     @test e.β_err > 0
 end
 
-# ═══════════════ KPZ higher dimensions (numerical) ════════════════════════════
+# ═══════════════ KPZ higher dimensions (numerical) ────────────────────────────
 
-@testset "Universality: KPZ 2+1D (Pagnani–Parisi 2015 numerical)" begin
+@testset "Universality: KPZ 2+1D (Pagnani-Parisi 2015 numerical)" begin
     e = QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=2)
-    # Pagnani & Parisi, PRE 92, 010101(R) (2015)
     @test 0.235 < e.β_growth < 0.245
     @test 0.385 < e.α_rough < 0.400
     @test 1.600 < e.z < 1.625
     @test e.β_growth_err > 0
     @test e.α_rough_err > 0
     @test e.z_err > 0
-    # Galilean invariance α + z = 2 should hold within combined error.
-    # Use a generous 3 σ to absorb correlated estimation bias.
     @test abs(e.α_rough + e.z - 2) < 3 * (e.α_rough_err + e.z_err)
 end
 
-@testset "Universality: KPZ 3+1D (Kelling–Ódor 2011 numerical)" begin
+@testset "Universality: KPZ 3+1D (Kelling-Ódor 2011 numerical)" begin
     e = QAtlas.fetch(Universality(:KPZ), GrowthExponents(); d=3)
-    # Kelling & Ódor, PRE 84, 061150 (2011)
     @test 0.16 < e.β_growth < 0.20
     @test 0.29 < e.α_rough < 0.33
     @test 1.49 < e.z < 1.53
     @test e.β_growth_err > 0
-    # Note: Galilean invariance is NOT satisfied within quoted errors at d=3
-    # (α + z ≈ 1.82 vs 2.0).  This reflects open issues in the d≥3 KPZ
-    # literature; the stored values are best-numerical estimates, not a
-    # rigorous reference.  Therefore: no α + z = 2 assertion here.
 end
 
 @testset "Universality: KPZ d≥4 errors" begin

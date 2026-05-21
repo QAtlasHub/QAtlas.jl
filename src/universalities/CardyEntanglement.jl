@@ -403,3 +403,29 @@ end
 function fetch(m::Universality{:Poisson}, q::MeanRatio, ::Infinite; kwargs...)
     fetch(m, q; kwargs...)
 end
+
+# ─── Infinite-bc forwarders for CriticalExponents / GrowthExponents (verify integration)
+function fetch(m::Universality{:Ising}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:XY}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Heisenberg}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Percolation}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Potts3}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Potts4}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:KPZ}, q::GrowthExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+fetch(m::MeanField, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+fetch(m::Ising2D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+fetch(m::KPZ1D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)

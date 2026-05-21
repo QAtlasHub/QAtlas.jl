@@ -15,8 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Arovas-Auerbach-Haldane 1988 | `test/models/quantum/misc/test_aklt.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q) | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Arovas-Auerbach-Haldane 1988 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q) | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 

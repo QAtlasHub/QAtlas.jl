@@ -15,8 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 

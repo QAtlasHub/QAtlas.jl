@@ -170,3 +170,40 @@ function fetch(
     eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
     return sum(abs2, eigs)
 end
+
+"""
+    TightBindingMaxEnergy() <: AbstractQuantity
+
+Largest single-particle eigenvalue of the tight-binding Bloch
+Hamiltonian, i.e. `max(λᵢ)`.  For the chiral honeycomb this equals
+`|t| · max_k |f(k)| = 3|t|` (saturated at the Γ point where the three
+nearest-neighbor phases add coherently), independent of `Lx` and `Ly`
+as long as the Γ point is on the discrete momentum grid (always true
+for PBC with `Lx, Ly ≥ 1`).
+
+Sister scalar to `TightBindingChecksum` (which captures `Σλᵢ² = tr(H²)`
+and is invariant under chiral pair sign-flips).  The two together
+discriminate any single-eigenvalue perturbation: a sign error on a
+hopping displacement that flips a chiral pair changes neither the
+checksum nor the bandwidth at Γ only if it doesn't reach the Γ point —
+making them jointly sensitive to a broader class of typos.
+"""
+struct TightBindingMaxEnergy <: AbstractQuantity end
+
+"""
+    fetch(::Honeycomb, ::TightBindingMaxEnergy, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`max(λᵢ)` for the Lx × Ly honeycomb PBC tight-binding spectrum.
+Forwards through `TightBindingSpectrum`.
+"""
+function fetch(
+    m::Honeycomb,
+    ::TightBindingMaxEnergy,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return maximum(eigs)
+end

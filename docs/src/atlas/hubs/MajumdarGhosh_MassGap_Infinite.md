@@ -15,8 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
-| `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
 
 ## Test calls
 

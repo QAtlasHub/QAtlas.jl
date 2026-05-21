@@ -15,8 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@dimer` | `ed_finite_size` | 🟢 structural | "Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent" | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
-| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `ed_finite_size` | 🟢 structural | "Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent" | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_pbc.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
 
 ## Test calls
 

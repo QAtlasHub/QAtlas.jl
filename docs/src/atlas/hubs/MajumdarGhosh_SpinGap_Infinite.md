@@ -15,8 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
-| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 PRB 54 9862: MG point singlet-triplet spin gap Δ_S ≈ 0.234 J (DMRG) | `test/models/quantum/Heisenberg/test_majumdar_ghosh.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: spin gap Δ ≈ 0.234 J | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 PRB 54 9862: MG point singlet-triplet spin gap Δ_S ≈ 0.234 J (DMRG) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
 
 ## Test calls
 

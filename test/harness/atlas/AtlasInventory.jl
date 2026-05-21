@@ -476,6 +476,10 @@ function scan_dir(dir::AbstractString)
     empty!(PARSE_FAILS)
     out = Card[]
     for (root, _, files) in walkdir(dir)
+        # test/util_verify/ holds unit tests OF the verify() harness
+        # itself; its verify(...) calls target stub models and MUST
+        # NOT enter the inventory (else stubs leak into hub counts).
+        occursin(joinpath("test", "util_verify"), root) && continue
         for f in files
             endswith(f, ".jl") || continue
             append!(out, scan_file(joinpath(root, f)))

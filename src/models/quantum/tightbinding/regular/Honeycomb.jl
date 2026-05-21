@@ -130,3 +130,43 @@ function fetch(
     end
     return sort!(eigs)
 end
+
+# ─── Scalar invariants for verify() integration ────────────────────────────
+#
+# The full Bloch spectrum is a Vector{Float64}; verify() works on scalars.
+# Exposing a chiral-symmetry-pinned scalar reduction lets cross-validate
+# the closed-form spectrum against (a) the analytical tr(H²) identity and
+# (b) the real-space ED ground truth (via Lattice2D.build_tight_binding,
+# in test/util/tight_binding.jl), without leaving the verify() framework.
+
+"""
+    TightBindingChecksum() <: AbstractQuantity
+
+Sum of squared single-particle eigenvalues `Σ λᵢ²` of the
+tight-binding Bloch Hamiltonian, i.e. `tr(H²)`.  For a chiral
+(bipartite) lattice this equals `2 t² · n_NN_bonds`, an analytical
+identity independent of `Lx`, `Ly`, or k-grid details — a strong
+sanity invariant on top of the spectrum closed form.
+"""
+struct TightBindingChecksum <: AbstractQuantity end
+
+"""
+    fetch(::Honeycomb, ::TightBindingChecksum, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`Σ λᵢ² = tr(H²)` for the Lx × Ly honeycomb PBC tight-binding spectrum.
+Forwards through TightBindingSpectrum so it always agrees with the
+spectrum closed form by construction; verify() cards then pin it
+against the chiral-symmetry identity `2 t² · 3 · Lx · Ly` and against
+the real-space ED ground truth.
+"""
+function fetch(
+    m::Honeycomb,
+    ::TightBindingChecksum,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return sum(abs2, eigs)
+end

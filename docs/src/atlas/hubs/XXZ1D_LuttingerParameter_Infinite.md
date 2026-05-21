@@ -17,6 +17,7 @@
 |---|---|---|---|---|
 | `@free_fermion` | `second_closed_form` | 🟢 structural | Jordan-Wigner free fermion: K=1 at Delta=0 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@su2` | `limiting_case` | 🟡 asserted | Luther-Peschel 1975: K=1/2 at the SU(2) isotropic point | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "Independent sparse-ED bipartite-fluctuation extraction at N ∈ $(_XXZ_Ns), 1/N-extrapolated (Rachel-LeHur 2012; Song-Rachel-LeHur 2010) — cross-checks the Bethe-ansatz closed form K(Δ) = π / (2(π − arccos Δ))" | `test/verification/heisenberg_xxz/test_xxz_luttinger_ed.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Haldane 1980: K = π / (2(π - arccos Δ)) for the critical XXZ chain | `test/verification/heisenberg_xxz/test_xxz_luttinger_ed.jl` |
 
 ## Test calls
@@ -32,6 +33,10 @@ verify(XXZ1D(; J = 1.0, Δ = 1.0), LuttingerParameter(), Infinite(); route = :li
 ```
 
 ```julia
+verify(XXZ1D(; J = 1.0, Δ = Δ), LuttingerParameter(), Infinite(); route = :ed_finite_size, independent = K_inf, agree_within = rtol, at = ["Δ=$(Δ)", "Ns=$(_XXZ_Ns)"], refs = ["Independent sparse-ED bipartite-fluctuation extraction at N ∈ $(_XXZ_Ns), 1/N-extrapolated (Rachel-LeHur 2012; Song-Rachel-LeHur 2010) — cross-checks the Bethe-ansatz closed form K(Δ) = π / (2(π − arccos Δ))"])
+```
+
+```julia
 verify(XXZ1D(; J = 1.0, Δ = Δ), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = π / (2 * (π - acos(Δ))), agree_within = 1.0e-9, refs = ["Haldane 1980: K = π / (2(π - arccos Δ)) for the critical XXZ chain"])
 ```
 
@@ -39,7 +44,7 @@ verify(XXZ1D(; J = 1.0, Δ = Δ), LuttingerParameter(), Infinite(); route = :sec
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

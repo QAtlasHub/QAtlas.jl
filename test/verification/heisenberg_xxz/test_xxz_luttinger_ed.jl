@@ -97,7 +97,11 @@ end
 const _XXZ_Ns = [8, 10, 12, 14]
 
 @testset "XXZ1D Luttinger K — independent ED verification" begin
-    @testset "Per-Δ: extrapolated K matches the closed-form K(Δ)" begin
+    # ── Per-Δ extrapolated K vs closed form: now verify() cards ──────────
+    # (migrated from raw @test in PR #449 phase 2; FSS-direction sanity
+    # check kept as raw @test since it asserts a multi-N inequality, which
+    # verify() — scalar-by-design — cannot represent.)
+    @testset "Per-Δ: ED-extrapolated K verified against closed-form K(Δ)" begin
         # Each Δ carries its own tolerance: free-fermion and FM side
         # converge cleanly; the AF side (Δ > 0, away from Heisenberg) has
         # slower convergence because sub-leading corrections pick up a
@@ -105,28 +109,38 @@ const _XXZ_Ns = [8, 10, 12, 14]
         # not fully remove at N ≤ 14.
         cases = [
             (-0.5, 0.03),  # K_exact = 3/2
-            (0.0, 0.03),  # K_exact = 1   (XX, free fermion)
-            (0.5, 0.12),  # K_exact = 3/4 (subleading AF corrections)
+            (0.0, 0.03),   # K_exact = 1   (XX, free fermion)
+            (0.5, 0.12),   # K_exact = 3/4 (subleading AF corrections)
         ]
         for (Δ, rtol) in cases
-            K_exact = QAtlas.fetch(XXZ1D(; J=1.0, Δ=Δ), LuttingerParameter(), Infinite())
             Ks = [_extract_K(N, Δ) for N in _XXZ_Ns]
             K_inf, _ = _linfit([1.0 / N for N in _XXZ_Ns], Ks)
+            verify(
+                XXZ1D(; J=1.0, Δ=Δ),
+                LuttingerParameter(),
+                Infinite();
+                route=:ed_finite_size,
+                independent=K_inf,
+                agree_within=rtol,
+                at=["Δ=$(Δ)", "Ns=$(_XXZ_Ns)"],
+                refs=[
+                    "Independent sparse-ED bipartite-fluctuation extraction at N ∈ $(_XXZ_Ns), 1/N-extrapolated (Rachel-LeHur 2012; Song-Rachel-LeHur 2010) — cross-checks the Bethe-ansatz closed form K(Δ) = π / (2(π − arccos Δ))",
+                ],
+            )
 
-            @test K_inf ≈ K_exact rtol = rtol
-
-            # Error at the largest N is smaller than at the smallest:
-            # sanity check on the finite-size scaling direction.
+            # FSS direction sanity (largest-N residual must beat smallest-N):
+            # not representable as a single scalar pin — kept raw.
+            K_exact = QAtlas.fetch(XXZ1D(; J=1.0, Δ=Δ), LuttingerParameter(), Infinite())
             @test abs(Ks[end] - K_exact) < abs(Ks[1] - K_exact)
         end
     end
 
-    @testset "K is monotone decreasing in Δ at each finite N" begin
+    @testset "K is monotone decreasing in Δ at each finite N (structural)" begin
         # K = π / [2(π − γ)] with γ = arccos(Δ) is a strictly decreasing
         # function of Δ on the critical regime Δ ∈ (−1, 1). The ED
         # extraction must reproduce this ordering pointwise in N, even
         # where the individual K(N) values are offset from the infinite-N
-        # closed form.
+        # closed form. Multi-point ordering — kept raw.
         for N in _XXZ_Ns
             K_minus = _extract_K(N, -0.5)
             K_zero = _extract_K(N, 0.0)

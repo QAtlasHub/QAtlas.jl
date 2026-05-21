@@ -44,7 +44,9 @@ Test.finish(ts::_CaptureSet) = ts
     # (a) expected_fail=true + actual mismatch → Broken, not Error.
     let res = @testset _CaptureSet "ef_fail_broken" begin
             verify(
-                _EFStub(1.0), Energy(:per_site), OBC(4);
+                _EFStub(1.0),
+                Energy(:per_site),
+                OBC(4);
                 route=:ed_finite_size,
                 independent=2.0,
                 agree_within=1e-9,
@@ -53,14 +55,16 @@ Test.finish(ts::_CaptureSet) = ts
             )
         end
         @test count(r -> r isa Test.Broken, res.results) == 1
-        @test count(r -> r isa Test.Pass,   res.results) == 0
-        @test count(r -> r isa Test.Error,  res.results) == 0
+        @test count(r -> r isa Test.Pass, res.results) == 0
+        @test count(r -> r isa Test.Error, res.results) == 0
     end
 
     # (b) expected_fail=true + actual match → "Unexpected Pass" Error.
     let res = @testset _CaptureSet "ef_unexpected_pass" begin
             verify(
-                _EFStub(1.0), Energy(:per_site), OBC(4);
+                _EFStub(1.0),
+                Energy(:per_site),
+                OBC(4);
                 route=:ed_finite_size,
                 independent=1.0,
                 agree_within=1e-9,
@@ -68,21 +72,23 @@ Test.finish(ts::_CaptureSet) = ts
                 expected_fail=true,
             )
         end
-        @test count(r -> r isa Test.Error,  res.results) == 1
+        @test count(r -> r isa Test.Error, res.results) == 1
         @test count(r -> r isa Test.Broken, res.results) == 0
     end
 
     # Sanity: expected_fail=false (default) with a match is a plain Pass.
     let res = @testset _CaptureSet "ef_default_pass" begin
             verify(
-                _EFStub(1.0), Energy(:per_site), OBC(4);
+                _EFStub(1.0),
+                Energy(:per_site),
+                OBC(4);
                 route=:ed_finite_size,
                 independent=1.0,
                 agree_within=1e-9,
                 refs=["stub: default expected_fail=false with matching independent"],
             )
         end
-        @test count(r -> r isa Test.Pass,   res.results) == 1
+        @test count(r -> r isa Test.Pass, res.results) == 1
         @test count(r -> r isa Test.Broken, res.results) == 0
     end
 end
@@ -91,10 +97,14 @@ end
 #     directory and check the produced JSONL carries the new flag.
 @testset "verify expected_fail — JSONL emit records the flag" begin
     mktempdir() do dir
-        withenv("QATLAS_EMIT" => "1", "QATLAS_CIOUT_DIR" => dir, "QATLAS_TEST_FILES" => "") do
+        withenv(
+            "QATLAS_EMIT" => "1", "QATLAS_CIOUT_DIR" => dir, "QATLAS_TEST_FILES" => ""
+        ) do
             local res_broken = @testset _CaptureSet "emit_ef_true" begin
                 verify(
-                    _EFStub(1.0), Energy(:per_site), OBC(4);
+                    _EFStub(1.0),
+                    Energy(:per_site),
+                    OBC(4);
                     route=:ed_finite_size,
                     independent=2.0,
                     agree_within=1e-9,
@@ -105,7 +115,9 @@ end
             @test count(r -> r isa Test.Broken, res_broken.results) == 1
 
             verify(
-                _EFStub(2.0), Energy(:per_site), OBC(4);
+                _EFStub(2.0),
+                Energy(:per_site),
+                OBC(4);
                 route=:ed_finite_size,
                 independent=2.0,
                 agree_within=1e-9,
@@ -117,7 +129,7 @@ end
         @test !isempty(files)
         body = join((read(joinpath(dir, f), String) for f in files), "\n")
 
-        @test occursin("\"expected_fail\":true",  body)
+        @test occursin("\"expected_fail\":true", body)
         @test occursin("\"expected_fail\":false", body)
 
         @test occursin("\"status\":\"fail\"", body)

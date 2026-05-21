@@ -17,6 +17,7 @@ const ALL_DIRS = [
     "models/quantum/Heisenberg/",
     "models/quantum/KitaevHoneycomb/",
     "models/quantum/misc/",
+    "models/quantum/tightbinding/",
     "identities/",
     "lint/",
     "verification/tfim_ising/",

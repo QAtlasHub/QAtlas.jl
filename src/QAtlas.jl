@@ -42,6 +42,7 @@ export KitaevHoneycomb                                  # spin-½ Kitaev honeyco
 export Kitaev1D                                         # 1D p-wave Majorana wire (Kitaev 2001)
 export ToricCode                                         # Kitaev 2003 Z₂ surface code
 export TightBindingSpectrum
+export TightBindingChecksum, TightBindingMaxEnergy  # scalar invariants for verify()
 # NOTE: `Honeycomb`, `Kagome`, `Lieb`, `Triangular` are NOT exported —
 # they all conflict with Lattice2D's topology types of the same name.
 # Access them as `QAtlas.Honeycomb()` / `QAtlas.Kagome()` / etc. in code

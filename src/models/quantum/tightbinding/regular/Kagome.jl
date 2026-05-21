@@ -116,3 +116,52 @@ function fetch(
     end
     return sort!(eigs)
 end
+
+# ─── Scalar invariants for verify() integration ────────────────────────────
+#
+# Sister to TightBindingChecksum + TightBindingMaxEnergy on Honeycomb.
+# The quantities themselves are defined in Honeycomb.jl; this file just
+# adds Kagome dispatches that forward through TightBindingSpectrum, so
+# verify() cards can pin (a) tr(H²) against the universal NN-bond
+# identity 2 t² · n_NN_bonds and (b) max(spectrum) against the kagome
+# flat-band value +2t.
+
+"""
+    fetch(::Kagome, ::TightBindingChecksum, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`Σ λᵢ² = tr(H²)` for the Lx × Ly kagome PBC TB spectrum.  Each unit
+cell has 3 sites with coordination 4 (two within-cell and two cross-cell
+nearest-neighbour bonds), giving `n_NN_bonds = 6 · Lx · Ly` and
+`tr(H²) = 12 · t² · Lx · Ly`.
+"""
+function fetch(
+    m::Kagome,
+    ::TightBindingChecksum,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return sum(abs2, eigs)
+end
+
+"""
+    fetch(::Kagome, ::TightBindingMaxEnergy, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`max(λᵢ)` for the Lx × Ly kagome PBC TB spectrum.  The exactly flat
+band sits at `+2t` (degenerate `Lx · Ly` times for k ≠ Γ and once more
+at Γ from the dispersive-flat band touching), so `max(spectrum) = 2·|t|`
+for any `Lx, Ly ≥ 1`.
+"""
+function fetch(
+    m::Kagome,
+    ::TightBindingMaxEnergy,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return maximum(eigs)
+end

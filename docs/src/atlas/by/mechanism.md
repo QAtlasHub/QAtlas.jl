@@ -188,10 +188,11 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`XXZ1D/SpecificHeat/OBC`](../hubs/XXZ1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
 
-## `literature_value` (16)
+## `literature_value` (17)
 
 - ⚪ [`AKLT1D/MassGap/Infinite`](../hubs/AKLT1D_MassGap_Infinite.md) — cited-only
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only
+- 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) — corroborated-at-p
 - ⚪ [`KagomeHeisenbergAFM/Energy/Infinite`](../hubs/KagomeHeisenbergAFM_Energy_Infinite.md) — cited-only
 - ⚪ [`KagomeHeisenbergAFM/MassGap/Infinite`](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) — cited-only

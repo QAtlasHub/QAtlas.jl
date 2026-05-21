@@ -92,3 +92,14 @@ function fetch(::Universality{:Ising}, ::CriticalExponents; d::Int, kwargs...)
     end
     return error("Ising universality: d=$d not supported (d ∈ {2, 3, ≥4}).")
 end
+
+# ─── Infinite-bc forwarding for verify() integration ───────────────────────
+#
+# CriticalExponents is a universality-class property, not a finite-lattice
+# observable; the Infinite-bc dispatch below lets verify() cards pin
+# individual exponent fields via the standard 3-arg signature shared by
+# all literature-pin hubs.
+
+function fetch(m::Universality{:Ising}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end

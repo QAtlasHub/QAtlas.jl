@@ -153,7 +153,7 @@ end
     verify(model, quantity, bc;
            route, independent, agree_within,
            refs, reliability=:high, fetch_kw=(;), at=nothing,
-           expected_fail=false) -> subject
+           expected_fail=false, subject_extract=nothing) -> subject
 
 Black-box-verify the src value `fetch(model, quantity, bc; fetch_kw...)`
 against an `independent` numeric (scalar or convergence vector) obtained
@@ -183,7 +183,8 @@ function verify(
     # ── the ONLY src touch-point: subject is fetched, never re-typed ──
     # subject_extract (optional) projects a non-scalar fetched value
     # (Vector, NamedTuple, container) to a single Float64 so verify()
-    # can pin a specific component — e.g. E8Spectrum[3].
+    # can pin a specific component — e.g. E8Spectrum[3] or
+    # CriticalExponents.β.
     raw = QAtlas.fetch(model, quantity, bc; fetch_kw...)
     subject = subject_extract === nothing ? raw : subject_extract(raw)
 

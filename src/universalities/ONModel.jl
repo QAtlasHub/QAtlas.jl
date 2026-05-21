@@ -82,3 +82,11 @@ function fetch(::Universality{:Heisenberg}, ::CriticalExponents; d::Int, kwargs.
     end
     return error("Heisenberg universality: d=$d not supported.")
 end
+
+# ─── Infinite-bc forwarding for verify() integration ───────────────────────
+function fetch(m::Universality{:XY}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Heisenberg}, q::CriticalExponents, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end

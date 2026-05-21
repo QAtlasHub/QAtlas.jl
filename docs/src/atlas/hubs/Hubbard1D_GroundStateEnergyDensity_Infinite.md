@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Essler et al. 2005 (Lieb-Wu Eq. 1.21): e_0 = -4t/π at U → 0 half-filling (two decoupled tight-binding chains) | `test/models/quantum/misc/test_hubbard1d_gsed_U0_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968 / Essler et al. 2005: e_0 → -4t² log(2) / U at U → ∞ (Heisenberg-AFM reduction); t ≠ 1 distinguishes the t prefactor from t² | `test/models/quantum/misc/test_hubbard1d_gsed_U0_batch.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(Hubbard1D(; t = t, U = U, μ = U / 2), GroundStateEnergyDensity(), Infinite(); route = :limiting_case, independent = (-4t) / π, agree_within = 0.001, refs = ["Essler et al. 2005 (Lieb-Wu Eq. 1.21): e_0 = -4t/π at U → 0 half-filling (two decoupled tight-binding chains)"])
 ```
 
+```julia
+verify(Hubbard1D(; t = t, U = U, μ = U / 2), GroundStateEnergyDensity(), Infinite(); route = :limiting_case, independent = (-4 * t ^ 2 * log(2)) / U, agree_within = 0.0001, refs = ["Lieb-Wu 1968 / Essler et al. 2005: e_0 → -4t² log(2) / U at U → ∞ (Heisenberg-AFM reduction); t ≠ 1 distinguishes the t prefactor from t²"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

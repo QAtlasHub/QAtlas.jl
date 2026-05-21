@@ -228,7 +228,10 @@ end
 # paramagnetic point h = 2J are covered.
 # ═══════════════════════════════════════════════════════════════════════════════
 
-@testset "Cross-check: TFIM sparse ED ↔ BdG E₀ at N=14, 16 (OBC)" begin
+@testset "Cross-check: TFIM sparse ED ↔ BdG E₀ at N=14, 16 (OBC) — verify cards" begin
+    # Migrated from raw @test to verify :ed_finite_size (PR #449 phase 2).
+    # 4 cards: (J,h) ∈ {(1,1),(1,2)} × N ∈ {14,16}. Subject = QAtlas BdG
+    # Energy OBC; independent = real-space sparse-ED ground state.
     for (J, h) in [(1.0, 1.0), (1.0, 2.0)]
         for N in (14, 16)
             lat = build_lattice(Square, N, 1; boundary=OpenAxis())
@@ -237,10 +240,18 @@ end
                 H, randn(2^N), 1, :SR; issymmetric=true, tol=1e-11, krylovdim=30
             )
             info.converged < 1 && error("sparse ED failed to converge at N = $N")
-            E0_ed = vals[1]
-
-            E0_bdg = QAtlas.fetch(TFIM(; J=J, h=h), Energy(), OBC(; N=N))
-            @test E0_ed ≈ E0_bdg rtol = 1e-8
+            verify(
+                TFIM(; J=J, h=h),
+                Energy(),
+                OBC(N);
+                route=:ed_finite_size,
+                independent=vals[1],
+                agree_within=1e-8,
+                at=["J=$(J)", "h=$(h)", "N=$(N)"],
+                refs=[
+                    "Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)",
+                ],
+            )
         end
     end
 end
@@ -514,7 +525,17 @@ end
     @test c1 < 0  # corrN approaches its limit from below at OBC critical TFIM
 end
 
-# ── Verification cards (WHY-correct plane) ─────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Verification cards (WHY-correct plane)
+#
+# Phase 2 zero-legacy scope (PR #449): the cross-check testsets above are
+# largely extraction-style — they recover universal exponents (β, z, νz, α,
+# c) from log-log slopes / finite-size fits of QAtlas fetches at multiple
+# parameters. verify() is scalar-by-design: one fetch ↔ one independent
+# value. Multi-point extraction does not collapse to a single (model,
+# quantity, bc) hub pin, so those testsets stay raw on purpose. The
+# valuable single-pin items are captured below.
+# ─────────────────────────────────────────────────────────────────────────────
 @testset "universality cross-check — verification cards" begin
     # Onsager 1944 exact critical temperature of the 2D Ising model.
     verify(
@@ -525,5 +546,21 @@ end
         independent=2.0 / log(1 + sqrt(2)),
         agree_within=1e-10,
         refs=["Onsager 1944: Tc = 2J / log(1 + √2) ≈ 2.269185"],
+    )
+
+    # Thermodynamic-limit OBC TFIM at criticality: e_∞ = -4J/π from the
+    # integral of the BdG dispersion Λ(k) = 2J|sin k| over the Brillouin
+    # zone (Pfeuty 1970). This anchors the N → ∞ behaviour that the
+    # raw @test sweep above checks via finite-N approach.
+    verify(
+        TFIM(; J=1.0, h=1.0),
+        Energy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-4 / π,
+        agree_within=1e-10,
+        refs=[
+            "Critical OBC TFIM at h=J=1: e_∞ = -(2/π)·2J = -4J/π (BdG dispersion integral, Pfeuty 1970)",
+        ],
     )
 end

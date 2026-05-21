@@ -15,7 +15,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `literature_value` | 🟢 structural | Kitaev 2006: isotropic honeycomb e0 ≈ -0.78729862 |K| | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | Kitaev 2006: isotropic honeycomb e0 ≈ -0.78729862 |K| | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
 
 ## Test calls
 

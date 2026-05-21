@@ -75,3 +75,47 @@ end
         refs=["Z2 spin liquid: gamma = log 2 (Jiang-Wang-Balents 2012)"],
     )
 end
+# ── additional verification cards (#381 batch 4) ─────────────────────────
+@testset "KagomeHeisenbergAFM — DMRG Energy + MassGap (#381 batch 4)" begin
+    # Kagome Heisenberg AF DMRG: e₀ ≈ -0.4386 per spin and singlet-triplet
+    # gap Δ ≈ 0.13 J (Yan-Huse-White 2011 Science 332, 1173;
+    # Depenbrock-McCulloch-Schollwöck 2012 PRL 109, 067201).
+    verify(
+        KagomeHeisenbergAFM(),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-0.4386,
+        agree_within=1e-3,
+        refs=[
+            "Yan-Huse-White 2011 Science 332 1173: Kagome HAFM DMRG e₀ ≈ -0.4386 per spin"
+        ],
+    )
+    verify(
+        KagomeHeisenbergAFM(),
+        MassGap(),
+        Infinite();
+        route=:literature_value,
+        independent=0.13,
+        agree_within=1e-2,
+        refs=["Yan-Huse-White 2011: Kagome HAFM singlet-triplet gap Δ ≈ 0.13 J (DMRG)"],
+    )
+end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "KagomeHeisenbergAFM — TEE Z2 spin liquid (#381 batch 3)" begin
+    # KagomeHeisenberg AF is widely believed to realise a Z2 topological
+    # spin liquid (Yan-Huse-White 2011 DMRG; Depenbrock-McCulloch-Schollwöck
+    # 2012). Z2 topological order ⇒ total quantum dimension D = 2 ⇒
+    # TEE γ = log D = log 2.
+    verify(
+        KagomeHeisenbergAFM(),
+        TopologicalEntanglementEntropy(),
+        Infinite();
+        route=:literature_value,
+        independent=log(2),
+        agree_within=1e-12,
+        refs=[
+            "Yan-Huse-White 2011; Depenbrock et al. 2012: Kagome HAFM Z2 spin liquid ⇒ TEE = log 2",
+        ],
+    )
+end

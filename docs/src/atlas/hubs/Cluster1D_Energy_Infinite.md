@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@cluster` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J | `test/models/quantum/misc/test_cluster1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(Cluster1D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-12, refs = ["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"])
 ```
 
+```julia
+verify(Cluster1D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-12, refs = ["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -17,6 +17,7 @@
 |---|---|---|---|---|
 | `@polarized` | `second_closed_form` | 🟢 structural | Polarized |h|>2J: gap = 2(|h| - 2J) | `test/models/quantum/misc/test_xyh1d.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | XX limit h=0: gapless | `test/models/quantum/misc/test_xyh1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h| < 2J (here J=1, so |h|<2) ⇒ Δ = 0 | `test/models/quantum/misc/test_xyh1d.jl` |
 
 ## Test calls
 
@@ -30,11 +31,15 @@ verify(XYh1D(; h = 3.0), MassGap(), Infinite(); route = :second_closed_form, ind
 verify(XYh1D(), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XX limit h=0: gapless"])
 ```
 
+```julia
+verify(XYh1D(; h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Lieb-Schultz-Mattis 1961: XY chain in gapless Luttinger-liquid range |h| < 2J (here J=1, so |h|<2) ⇒ Δ = 0"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

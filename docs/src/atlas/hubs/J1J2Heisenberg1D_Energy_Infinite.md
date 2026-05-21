@@ -18,6 +18,7 @@
 | `@sweep` | `delegation_invariant` | 🟡 asserted | J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938) | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
 | `@sweep` | `delegation_invariant` | 🟡 asserted | J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8) | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N) | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: at J2 = J1/2 GS is exact dimer-product state ⇒ e₀ = -3J1/8 | `test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl` |
 
 ## Test calls
 
@@ -35,11 +36,15 @@ verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); ro
 verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [j1j2_pbc_e0(N, 1.0, 0.5) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-6, refs = ["Majumdar-Ghosh 1969: exact dimer GS, E0/N = -3J/8 size-independent (PBC even N)"])
 ```
 
+```julia
+verify(J1J2Heisenberg1D(; J1 = J1, J2 = J1 / 2), Energy(:per_site), Infinite(); route = :second_closed_form, independent = (-3J1) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: at J2 = J1/2 GS is exact dimer-product state ⇒ e₀ = -3J1/8"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

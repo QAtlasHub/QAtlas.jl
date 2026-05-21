@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 82 |
-| 🔵 coherent | 13 |
-| ⚪ cited-only (frontier — neutral) | 22 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 130 |
-| Inventory cards scanned (whole test/) | 218 |
+| 🟢 corroborated-at-p | 138 |
+| 🔵 coherent | 27 |
+| ⚪ cited-only (frontier — neutral) | 18 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 64 |
+| Inventory cards scanned (whole test/) | 482 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **37.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **43.0%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **74.7%**
 
 ## Browse by facet
 
@@ -40,36 +40,19 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "130 actionable hub(s)"
-    - [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
+!!! warning "64 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
-    - [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
-    - [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md)
-    - [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md)
-    - [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
-    - [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
-    - [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
-    - [`Heisenberg1D/FreeEnergy/OBC`](hubs/Heisenberg1D_FreeEnergy_OBC.md)
     - [`Heisenberg1D/MagnetizationX/OBC`](hubs/Heisenberg1D_MagnetizationX_OBC.md)
     - [`Heisenberg1D/MagnetizationXLocal/OBC`](hubs/Heisenberg1D_MagnetizationXLocal_OBC.md)
     - [`Heisenberg1D/MagnetizationY/OBC`](hubs/Heisenberg1D_MagnetizationY_OBC.md)
     - [`Heisenberg1D/MagnetizationYLocal/OBC`](hubs/Heisenberg1D_MagnetizationYLocal_OBC.md)
     - [`Heisenberg1D/MagnetizationZ/OBC`](hubs/Heisenberg1D_MagnetizationZ_OBC.md)
     - [`Heisenberg1D/MagnetizationZLocal/OBC`](hubs/Heisenberg1D_MagnetizationZLocal_OBC.md)
-    - [`Heisenberg1D/MassGap/OBC`](hubs/Heisenberg1D_MassGap_OBC.md)
-    - [`Heisenberg1D/RenyiEntropy/OBC`](hubs/Heisenberg1D_RenyiEntropy_OBC.md)
-    - [`Heisenberg1D/SpecificHeat/OBC`](hubs/Heisenberg1D_SpecificHeat_OBC.md)
     - [`Heisenberg1D/SusceptibilityXX/OBC`](hubs/Heisenberg1D_SusceptibilityXX_OBC.md)
     - [`Heisenberg1D/SusceptibilityYY/OBC`](hubs/Heisenberg1D_SusceptibilityYY_OBC.md)
     - [`Heisenberg1D/SusceptibilityZZ/OBC`](hubs/Heisenberg1D_SusceptibilityZZ_OBC.md)
-    - [`Heisenberg1D/ThermalEntropy/OBC`](hubs/Heisenberg1D_ThermalEntropy_OBC.md)
-    - [`Heisenberg1D/VonNeumannEntropy/OBC`](hubs/Heisenberg1D_VonNeumannEntropy_OBC.md)
-    - [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
-    - [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md)
-    - [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md)
-    - [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md)
     - [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
     - [`IsingSquare/Energy/PBC`](hubs/IsingSquare_Energy_PBC.md)
     - [`IsingSquare/FreeEnergy/Infinite`](hubs/IsingSquare_FreeEnergy_Infinite.md)
@@ -77,159 +60,110 @@
     - [`IsingSquare/SpecificHeat/PBC`](hubs/IsingSquare_SpecificHeat_PBC.md)
     - [`IsingSquare/ThermalEntropy/PBC`](hubs/IsingSquare_ThermalEntropy_PBC.md)
     - [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
-    - [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
-    - [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
-    - [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
-    - [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
-    - [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
-    - [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md)
-    - [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md)
-    - [`MajumdarGhosh/SpinGap/Infinite`](hubs/MajumdarGhosh_SpinGap_Infinite.md)
     - [`S1Heisenberg1D/EnergyLocal/OBC`](hubs/S1Heisenberg1D_EnergyLocal_OBC.md)
-    - [`S1Heisenberg1D/FreeEnergy/OBC`](hubs/S1Heisenberg1D_FreeEnergy_OBC.md)
     - [`S1Heisenberg1D/MagnetizationX/OBC`](hubs/S1Heisenberg1D_MagnetizationX_OBC.md)
     - [`S1Heisenberg1D/MagnetizationXLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md)
     - [`S1Heisenberg1D/MagnetizationY/OBC`](hubs/S1Heisenberg1D_MagnetizationY_OBC.md)
     - [`S1Heisenberg1D/MagnetizationZ/OBC`](hubs/S1Heisenberg1D_MagnetizationZ_OBC.md)
     - [`S1Heisenberg1D/MagnetizationZLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md)
     - [`S1Heisenberg1D/MassGap/OBC`](hubs/S1Heisenberg1D_MassGap_OBC.md)
-    - [`S1Heisenberg1D/RenyiEntropy/OBC`](hubs/S1Heisenberg1D_RenyiEntropy_OBC.md)
-    - [`S1Heisenberg1D/SpecificHeat/OBC`](hubs/S1Heisenberg1D_SpecificHeat_OBC.md)
     - [`S1Heisenberg1D/SusceptibilityXX/OBC`](hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md)
     - [`S1Heisenberg1D/SusceptibilityYY/OBC`](hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md)
     - [`S1Heisenberg1D/SusceptibilityZZ/OBC`](hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md)
-    - [`S1Heisenberg1D/ThermalEntropy/OBC`](hubs/S1Heisenberg1D_ThermalEntropy_OBC.md)
-    - [`S1Heisenberg1D/VonNeumannEntropy/OBC`](hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md)
     - [`S1Heisenberg1D/XXCorrelation/OBC`](hubs/S1Heisenberg1D_XXCorrelation_OBC.md)
     - [`S1Heisenberg1D/YYCorrelation/OBC`](hubs/S1Heisenberg1D_YYCorrelation_OBC.md)
     - [`S1Heisenberg1D/ZZCorrelation/OBC`](hubs/S1Heisenberg1D_ZZCorrelation_OBC.md)
-    - [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md)
     - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
     - [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
-    - [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
-    - [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
-    - [`TFIM/FidelitySusceptibility/OBC`](hubs/TFIM_FidelitySusceptibility_OBC.md)
-    - [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md)
-    - [`TFIM/FreeEnergy/OBC`](hubs/TFIM_FreeEnergy_OBC.md)
-    - [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md)
     - [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
-    - [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md)
-    - [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md)
-    - [`TFIM/MagnetizationX/Infinite`](hubs/TFIM_MagnetizationX_Infinite.md)
-    - [`TFIM/MagnetizationX/OBC`](hubs/TFIM_MagnetizationX_OBC.md)
-    - [`TFIM/MagnetizationX/PBC`](hubs/TFIM_MagnetizationX_PBC.md)
     - [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
     - [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
     - [`TFIM/MagnetizationZLocal/OBC`](hubs/TFIM_MagnetizationZLocal_OBC.md)
     - [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md)
     - [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
-    - [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md)
-    - [`TFIM/SpecificHeat/OBC`](hubs/TFIM_SpecificHeat_OBC.md)
-    - [`TFIM/SpecificHeat/PBC`](hubs/TFIM_SpecificHeat_PBC.md)
-    - [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md)
     - [`TFIM/SusceptibilityXX/Infinite`](hubs/TFIM_SusceptibilityXX_Infinite.md)
     - [`TFIM/SusceptibilityXX/OBC`](hubs/TFIM_SusceptibilityXX_OBC.md)
-    - [`TFIM/SusceptibilityXX/PBC`](hubs/TFIM_SusceptibilityXX_PBC.md)
     - [`TFIM/SusceptibilityYY/OBC`](hubs/TFIM_SusceptibilityYY_OBC.md)
     - [`TFIM/SusceptibilityZZ/Infinite`](hubs/TFIM_SusceptibilityZZ_Infinite.md)
     - [`TFIM/SusceptibilityZZ/OBC`](hubs/TFIM_SusceptibilityZZ_OBC.md)
-    - [`TFIM/ThermalEntropy/Infinite`](hubs/TFIM_ThermalEntropy_Infinite.md)
-    - [`TFIM/ThermalEntropy/OBC`](hubs/TFIM_ThermalEntropy_OBC.md)
-    - [`TFIM/ThermalEntropy/PBC`](hubs/TFIM_ThermalEntropy_PBC.md)
     - [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
-    - [`TFIM/XXCorrelation/Infinite`](hubs/TFIM_XXCorrelation_Infinite.md)
-    - [`TFIM/XXStructureFactor/Infinite`](hubs/TFIM_XXStructureFactor_Infinite.md)
-    - [`TFIM/XXStructureFactor/OBC`](hubs/TFIM_XXStructureFactor_OBC.md)
-    - [`TFIM/YYStructureFactor/Infinite`](hubs/TFIM_YYStructureFactor_Infinite.md)
-    - [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md)
     - [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md)
     - [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md)
-    - [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md)
-    - [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md)
-    - [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md)
-    - [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md)
     - [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
-    - [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
     - [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
     - [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md)
     - [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
-    - [`XXZ1D/FreeEnergy/OBC`](hubs/XXZ1D_FreeEnergy_OBC.md)
     - [`XXZ1D/MagnetizationX/OBC`](hubs/XXZ1D_MagnetizationX_OBC.md)
     - [`XXZ1D/MagnetizationXLocal/OBC`](hubs/XXZ1D_MagnetizationXLocal_OBC.md)
     - [`XXZ1D/MagnetizationY/OBC`](hubs/XXZ1D_MagnetizationY_OBC.md)
     - [`XXZ1D/MagnetizationYLocal/OBC`](hubs/XXZ1D_MagnetizationYLocal_OBC.md)
     - [`XXZ1D/MagnetizationZ/OBC`](hubs/XXZ1D_MagnetizationZ_OBC.md)
     - [`XXZ1D/MagnetizationZLocal/OBC`](hubs/XXZ1D_MagnetizationZLocal_OBC.md)
-    - [`XXZ1D/MassGap/OBC`](hubs/XXZ1D_MassGap_OBC.md)
-    - [`XXZ1D/RenyiEntropy/OBC`](hubs/XXZ1D_RenyiEntropy_OBC.md)
     - [`XXZ1D/SpecificHeat/Infinite`](hubs/XXZ1D_SpecificHeat_Infinite.md)
-    - [`XXZ1D/SpecificHeat/OBC`](hubs/XXZ1D_SpecificHeat_OBC.md)
     - [`XXZ1D/SusceptibilityXX/OBC`](hubs/XXZ1D_SusceptibilityXX_OBC.md)
     - [`XXZ1D/SusceptibilityYY/OBC`](hubs/XXZ1D_SusceptibilityYY_OBC.md)
     - [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md)
-    - [`XXZ1D/ThermalEntropy/OBC`](hubs/XXZ1D_ThermalEntropy_OBC.md)
-    - [`XXZ1D/VonNeumannEntropy/OBC`](hubs/XXZ1D_VonNeumannEntropy_OBC.md)
 
 ## Per-model breakdown
 
 | model | claimed | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED |
 |---|---|---|---|---|---|---|---|
-| `AKLT1D` | 8 | 0 | 3 | 0 | 0 | 5 | feasible |
+| `AKLT1D` | 8 | 0 | 6 | 0 | 1 | 1 | feasible |
 | `AKLT2D` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `BCFT` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
+| `BCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ChernSimons3D` | 2 | 0 | 1 | 0 | 1 | 0 | infeasible |
 | `Cluster1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Compass1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ConformalBootstrap` | 1 | 0 | 0 | 0 | 1 | 0 | feasible |
 | `CurieWeissIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `DMIHeisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `ExtendedHubbard1D` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
+| `ExtendedHubbard1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `FibonacciAnyons` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `GrossNeveu` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
-| `Heisenberg1D` | 21 | 0 | 4 | 1 | 0 | 16 | feasible |
+| `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
+| `Heisenberg1D` | 21 | 0 | 10 | 1 | 0 | 10 | feasible |
 | `HeisenbergXYZ` | 2 | 0 | 1 | 1 | 0 | 0 | feasible |
-| `Hubbard1D` | 4 | 0 | 0 | 0 | 0 | 4 | feasible |
-| `IsingChain1D` | 3 | 0 | 2 | 1 | 0 | 0 | feasible |
+| `Hubbard1D` | 4 | 0 | 2 | 2 | 0 | 0 | feasible |
+| `IsingChain1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
 | `IsingSquare` | 12 | 0 | 4 | 2 | 0 | 6 | feasible |
 | `IsingTriangular` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `J1J2Heisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `KagomeHeisenbergAFM` | 3 | 0 | 0 | 0 | 3 | 0 | infeasible |
-| `Kitaev1D` | 6 | 0 | 1 | 0 | 0 | 5 | feasible |
+| `Kitaev1D` | 6 | 0 | 6 | 0 | 0 | 0 | feasible |
 | `KitaevHeisenberg` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `KitaevHoneycomb` | 10 | 0 | 0 | 0 | 10 | 0 | infeasible |
-| `LiouvilleCFT` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
+| `KitaevHoneycomb` | 10 | 0 | 1 | 4 | 5 | 0 | infeasible |
+| `LiouvilleCFT` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `LogarithmicCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `LongRangeIsing1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `LongRangeXY1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `MajumdarGhosh` | 4 | 0 | 1 | 0 | 1 | 2 | feasible |
+| `MajumdarGhosh` | 4 | 0 | 2 | 0 | 2 | 0 | feasible |
 | `MixedFieldIsing1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `PXP1D` | 1 | 0 | 0 | 0 | 1 | 0 | feasible |
 | `PpIp2DSC` | 2 | 0 | 2 | 0 | 0 | 0 | infeasible |
 | `RFIM` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `RandomBondIsing2D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `S1AnisotropicD1D` | 2 | 0 | 0 | 2 | 0 | 0 | feasible |
-| `S1Heisenberg1D` | 21 | 0 | 2 | 0 | 1 | 18 | feasible |
+| `S1Heisenberg1D` | 21 | 0 | 7 | 0 | 1 | 13 | feasible |
 | `S1XXZ1D` | 2 | 0 | 0 | 2 | 0 | 0 | feasible |
 | `SLEkappa` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `SYK` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `SchwingerModel` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
+| `SchwingerModel` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `ShastrySutherland` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
 | `SherringtonKirkpatrick` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 53 | 0 | 12 | 1 | 0 | 40 | feasible |
+| `TFIM` | 53 | 0 | 28 | 9 | 0 | 16 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TightBinding1D` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
-| `TightBindingV1D` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
+| `TightBinding1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
+| `TightBindingV1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `ToricCode` | 5 | 0 | 3 | 0 | 2 | 0 | infeasible |
-| `TricriticalIsing` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
-| `TricriticalPotts3` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
+| `ToricCode` | 5 | 0 | 4 | 0 | 1 | 0 | infeasible |
+| `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
+| `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `XXZ1D` | 26 | 0 | 8 | 0 | 0 | 18 | feasible |
+| `XXZ1D` | 26 | 0 | 14 | 0 | 0 | 12 | feasible |
 | `XYh1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `YangLee` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -239,12 +173,12 @@
 
 ### `AKLT1D` (8)
 
-- 🟠 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
+- ⚪ [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md) — cited-only
+- 🟢 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 
@@ -254,7 +188,7 @@
 
 ### `BCFT` (1)
 
-- 🟠 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
 
 ### `ChernSimons3D` (2)
 
@@ -286,7 +220,7 @@
 
 ### `ExtendedHubbard1D` (1)
 
-- 🟠 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 
 ### `FibonacciAnyons` (1)
 
@@ -295,13 +229,13 @@
 ### `GrossNeveu` (2)
 
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 
 ### `Heisenberg1D` (21)
 
 - 🟢 [`Heisenberg1D/Energy/OBC`](hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/FreeEnergy/OBC`](hubs/Heisenberg1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/FreeEnergy/OBC`](hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
 - 🟠 [`Heisenberg1D/MagnetizationX/OBC`](hubs/Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
@@ -311,14 +245,14 @@
 - 🟠 [`Heisenberg1D/MagnetizationZ/OBC`](hubs/Heisenberg1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationZLocal/OBC`](hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/MassGap/Infinite`](hubs/Heisenberg1D_MassGap_Infinite.md) — corroborated-at-p
-- 🟠 [`Heisenberg1D/MassGap/OBC`](hubs/Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/RenyiEntropy/OBC`](hubs/Heisenberg1D_RenyiEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/SpecificHeat/OBC`](hubs/Heisenberg1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/MassGap/OBC`](hubs/Heisenberg1D_MassGap_OBC.md) — corroborated-at-p
+- 🟢 [`Heisenberg1D/RenyiEntropy/OBC`](hubs/Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`Heisenberg1D/SpecificHeat/OBC`](hubs/Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/SusceptibilityXX/OBC`](hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SusceptibilityYY/OBC`](hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/ThermalEntropy/OBC`](hubs/Heisenberg1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/VonNeumannEntropy/OBC`](hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 
 ### `HeisenbergXYZ` (2)
@@ -328,15 +262,15 @@
 
 ### `Hubbard1D` (4)
 
-- 🟠 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
+- 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — coherent
+- 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — corroborated-at-p
+- 🟢 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 
 ### `IsingChain1D` (3)
 
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](hubs/IsingChain1D_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🔵 [`IsingChain1D/CriticalTemperature/Infinite`](hubs/IsingChain1D_CriticalTemperature_Infinite.md) — coherent
+- 🟢 [`IsingChain1D/CriticalTemperature/Infinite`](hubs/IsingChain1D_CriticalTemperature_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/FreeEnergy/Infinite`](hubs/IsingChain1D_FreeEnergy_Infinite.md) — corroborated-at-p
 
 ### `IsingSquare` (12)
@@ -372,12 +306,12 @@
 
 ### `Kitaev1D` (6)
 
-- 🟠 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
+- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
-- 🟠 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md) — corroborated-at-p
+- 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
 ### `KitaevHeisenberg` (1)
 
@@ -390,16 +324,16 @@
 - ⚪ [`KitaevHoneycomb/Energy/PBC`](hubs/KitaevHoneycomb_Energy_PBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/FreeEnergy/Infinite`](hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) — cited-only
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](hubs/KitaevHoneycomb_FreeEnergy_OBC.md) — cited-only
-- ⚪ [`KitaevHoneycomb/MassGap/Infinite`](hubs/KitaevHoneycomb_MassGap_Infinite.md) — cited-only
-- ⚪ [`KitaevHoneycomb/SpecificHeat/Infinite`](hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) — cited-only
-- ⚪ [`KitaevHoneycomb/SpecificHeat/OBC`](hubs/KitaevHoneycomb_SpecificHeat_OBC.md) — cited-only
-- ⚪ [`KitaevHoneycomb/ThermalEntropy/Infinite`](hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — cited-only
-- ⚪ [`KitaevHoneycomb/ThermalEntropy/OBC`](hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — cited-only
+- 🟢 [`KitaevHoneycomb/MassGap/Infinite`](hubs/KitaevHoneycomb_MassGap_Infinite.md) — corroborated-at-p
+- 🔵 [`KitaevHoneycomb/SpecificHeat/Infinite`](hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) — coherent
+- 🔵 [`KitaevHoneycomb/SpecificHeat/OBC`](hubs/KitaevHoneycomb_SpecificHeat_OBC.md) — coherent
+- 🔵 [`KitaevHoneycomb/ThermalEntropy/Infinite`](hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — coherent
+- 🔵 [`KitaevHoneycomb/ThermalEntropy/OBC`](hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — coherent
 
 ### `LiouvilleCFT` (2)
 
 - 🟢 [`LiouvilleCFT/CentralCharge/Infinite`](hubs/LiouvilleCFT_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md) — corroborated-at-p
 
 ### `LogarithmicCFT` (1)
 
@@ -416,9 +350,9 @@
 ### `MajumdarGhosh` (4)
 
 - 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/Infinite`](hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
-- 🟠 [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`MajumdarGhosh/GroundStateEnergyDensity/PBC`](hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) — corroborated-at-p
 - ⚪ [`MajumdarGhosh/MassGap/Infinite`](hubs/MajumdarGhosh_MassGap_Infinite.md) — cited-only
-- 🟠 [`MajumdarGhosh/SpinGap/Infinite`](hubs/MajumdarGhosh_SpinGap_Infinite.md) — uncorroborated-but-feasible
+- ⚪ [`MajumdarGhosh/SpinGap/Infinite`](hubs/MajumdarGhosh_SpinGap_Infinite.md) — cited-only
 
 ### `MixedFieldIsing1D` (1)
 
@@ -451,7 +385,7 @@
 - 🟢 [`S1Heisenberg1D/Energy/Infinite`](hubs/S1Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/Energy/OBC`](hubs/S1Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`S1Heisenberg1D/EnergyLocal/OBC`](hubs/S1Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/FreeEnergy/OBC`](hubs/S1Heisenberg1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/FreeEnergy/OBC`](hubs/S1Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟠 [`S1Heisenberg1D/MagnetizationX/OBC`](hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationXLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationY/OBC`](hubs/S1Heisenberg1D_MagnetizationY_OBC.md) — uncorroborated-but-feasible
@@ -459,13 +393,13 @@
 - 🟠 [`S1Heisenberg1D/MagnetizationZLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - ⚪ [`S1Heisenberg1D/MassGap/Infinite`](hubs/S1Heisenberg1D_MassGap_Infinite.md) — cited-only
 - 🟠 [`S1Heisenberg1D/MassGap/OBC`](hubs/S1Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/RenyiEntropy/OBC`](hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/SpecificHeat/OBC`](hubs/S1Heisenberg1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/RenyiEntropy/OBC`](hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/SpecificHeat/OBC`](hubs/S1Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟠 [`S1Heisenberg1D/SusceptibilityXX/OBC`](hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/SusceptibilityYY/OBC`](hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/SusceptibilityZZ/OBC`](hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/ThermalEntropy/OBC`](hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/VonNeumannEntropy/OBC`](hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/ThermalEntropy/OBC`](hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/VonNeumannEntropy/OBC`](hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`S1Heisenberg1D/XXCorrelation/OBC`](hubs/S1Heisenberg1D_XXCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/YYCorrelation/OBC`](hubs/S1Heisenberg1D_YYCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/ZZCorrelation/OBC`](hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) — uncorroborated-but-feasible
@@ -486,7 +420,7 @@
 
 ### `SchwingerModel` (2)
 
-- 🟠 [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md) — corroborated-at-p
 - 🟢 [`SchwingerModel/MassGap/Infinite`](hubs/SchwingerModel_MassGap_Infinite.md) — corroborated-at-p
 
 ### `ShastrySutherland` (1)
@@ -514,23 +448,23 @@
 ### `TFIM` (53)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md) — corroborated-at-p
 - 🔵 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md) — coherent
 - 🟠 [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/FidelitySusceptibility/Infinite`](hubs/TFIM_FidelitySusceptibility_Infinite.md) — corroborated-at-p
-- 🟠 [`TFIM/FidelitySusceptibility/OBC`](hubs/TFIM_FidelitySusceptibility_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/FreeEnergy/OBC`](hubs/TFIM_FreeEnergy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/FidelitySusceptibility/OBC`](hubs/TFIM_FidelitySusceptibility_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/FreeEnergy/OBC`](hubs/TFIM_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟠 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/MagnetizationX/Infinite`](hubs/TFIM_MagnetizationX_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/MagnetizationX/OBC`](hubs/TFIM_MagnetizationX_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/MagnetizationX/PBC`](hubs/TFIM_MagnetizationX_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/MagnetizationX/Infinite`](hubs/TFIM_MagnetizationX_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/MagnetizationX/OBC`](hubs/TFIM_MagnetizationX_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/MagnetizationX/PBC`](hubs/TFIM_MagnetizationX_PBC.md) — corroborated-at-p
 - 🟠 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/MagnetizationY/OBC`](hubs/TFIM_MagnetizationY_OBC.md) — corroborated-at-p
@@ -541,28 +475,28 @@
 - 🟠 [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/SpecificHeat/OBC`](hubs/TFIM_SpecificHeat_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/SpecificHeat/PBC`](hubs/TFIM_SpecificHeat_PBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md) — coherent
+- 🔵 [`TFIM/SpecificHeat/OBC`](hubs/TFIM_SpecificHeat_OBC.md) — coherent
+- 🔵 [`TFIM/SpecificHeat/PBC`](hubs/TFIM_SpecificHeat_PBC.md) — coherent
+- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/OBC`](hubs/TFIM_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/SusceptibilityXX/PBC`](hubs/TFIM_SusceptibilityXX_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/SusceptibilityXX/PBC`](hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityYY/OBC`](hubs/TFIM_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/Infinite`](hubs/TFIM_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/OBC`](hubs/TFIM_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/ThermalEntropy/Infinite`](hubs/TFIM_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/ThermalEntropy/OBC`](hubs/TFIM_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/ThermalEntropy/PBC`](hubs/TFIM_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/ThermalEntropy/Infinite`](hubs/TFIM_ThermalEntropy_Infinite.md) — coherent
+- 🔵 [`TFIM/ThermalEntropy/OBC`](hubs/TFIM_ThermalEntropy_OBC.md) — coherent
+- 🔵 [`TFIM/ThermalEntropy/PBC`](hubs/TFIM_ThermalEntropy_PBC.md) — coherent
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/XXCorrelation/Infinite`](hubs/TFIM_XXCorrelation_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/XXCorrelation/Infinite`](hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/XXStructureFactor/Infinite`](hubs/TFIM_XXStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/OBC`](hubs/TFIM_XXStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/XXStructureFactor/Infinite`](hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/XXStructureFactor/OBC`](hubs/TFIM_XXStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/YYStructureFactor/Infinite`](hubs/TFIM_YYStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/YYStructureFactor/Infinite`](hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/YYStructureFactor/OBC`](hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible
@@ -574,13 +508,13 @@
 ### `TightBinding1D` (3)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
-- 🟠 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
 
 ### `TightBindingV1D` (3)
 
-- 🟠 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBindingV1D/MassGap/Infinite`](hubs/TightBindingV1D_MassGap_Infinite.md) — corroborated-at-p
 
 ### `TodaLattice` (1)
@@ -590,7 +524,7 @@
 ### `ToricCode` (5)
 
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
-- ⚪ [`ToricCode/GroundStateDegeneracy/PBC`](hubs/ToricCode_GroundStateDegeneracy_PBC.md) — cited-only
+- 🟢 [`ToricCode/GroundStateDegeneracy/PBC`](hubs/ToricCode_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 - 🟢 [`ToricCode/GroundStateEnergyDensity/Infinite`](hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/MassGap/Infinite`](hubs/ToricCode_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/TopologicalEntanglementEntropy/Infinite`](hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
@@ -598,13 +532,13 @@
 ### `TricriticalIsing` (3)
 
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](hubs/TricriticalIsing_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 
 ### `TricriticalPotts3` (3)
 
 - 🟢 [`TricriticalPotts3/CentralCharge/Infinite`](hubs/TricriticalPotts3_CentralCharge_Infinite.md) — corroborated-at-p
-- 🟠 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 
 ### `XCube` (1)
@@ -618,7 +552,7 @@
 - 🟢 [`XXZ1D/Energy/OBC`](hubs/XXZ1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`XXZ1D/FreeEnergy/OBC`](hubs/XXZ1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`XXZ1D/FreeEnergy/OBC`](hubs/XXZ1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](hubs/XXZ1D_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
@@ -629,16 +563,16 @@
 - 🟠 [`XXZ1D/MagnetizationZ/OBC`](hubs/XXZ1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/MagnetizationZLocal/OBC`](hubs/XXZ1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/MassGap/Infinite`](hubs/XXZ1D_MassGap_Infinite.md) — corroborated-at-p
-- 🟠 [`XXZ1D/MassGap/OBC`](hubs/XXZ1D_MassGap_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`XXZ1D/RenyiEntropy/OBC`](hubs/XXZ1D_RenyiEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`XXZ1D/MassGap/OBC`](hubs/XXZ1D_MassGap_OBC.md) — corroborated-at-p
+- 🟢 [`XXZ1D/RenyiEntropy/OBC`](hubs/XXZ1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`XXZ1D/SpecificHeat/OBC`](hubs/XXZ1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`XXZ1D/SpecificHeat/OBC`](hubs/XXZ1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/SusceptibilityXX/OBC`](hubs/XXZ1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SusceptibilityYY/OBC`](hubs/XXZ1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`XXZ1D/ThermalEntropy/OBC`](hubs/XXZ1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`XXZ1D/VonNeumannEntropy/OBC`](hubs/XXZ1D_VonNeumannEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`XXZ1D/ThermalEntropy/OBC`](hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`XXZ1D/VonNeumannEntropy/OBC`](hubs/XXZ1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 
 ### `XYh1D` (2)
 

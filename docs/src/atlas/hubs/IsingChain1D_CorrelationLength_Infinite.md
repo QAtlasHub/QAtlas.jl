@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: ξ = 1 / log(coth βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(IsingChain1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = 1 / log(coth(β * J)), agree_within = 1.0e-9, refs = ["Ising 1925: ξ = 1 / log(coth βJ) at h = 0"])
 ```
 
+```julia
+verify(IsingChain1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, independent = -1 / log(tanh(β * J)), agree_within = 1.0e-12, refs = ["Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing"], fetch_kw = (; beta = β))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

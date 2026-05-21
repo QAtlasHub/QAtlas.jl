@@ -17,6 +17,7 @@
 |---|---|---|---|---|
 | `@haldane` | `ed_finite_size` | 🟢 structural | Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
 | `@haldane` | `second_closed_form` | 🟢 structural | Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J} | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
 
@@ -30,11 +31,15 @@ verify(S1Heisenberg1D(; J = J), Energy(), OBC(N); route = :ed_finite_size, fetch
 verify(S1Heisenberg1D(; J = J), Energy(), OBC(2); route = :second_closed_form, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J}"])
 ```
 
+```julia
+verify(S1Heisenberg1D(; J = J), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; beta = beta))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

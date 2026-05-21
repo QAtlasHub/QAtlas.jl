@@ -25,7 +25,7 @@
 # profile) is the heavier computation and the only writer of cards.
 
 using Dates: Dates
-using Test: @test
+using Test: @test, @test_broken
 
 const _VERIFY_ROUTES = (
     :ed_finite_size,        # exact diagonalisation, finite-N → closed form
@@ -34,10 +34,19 @@ const _VERIFY_ROUTES = (
     :limiting_case,         # a known independent value at a special point
     :literature_value,      # a published numeric (DMRG/MC) cross-check
     :second_closed_form,    # an independent closed form, different derivation
+    :lieb_square_ice,       # Lieb 1967a square-ice closed form (SixVertex disordered diag)
+    :lieb_ferroelectric,    # Lieb 1967c frozen-GS FE closed form (SixVertex Δ>1)
+    :single_root_specialisation,  # specialised single-positive-root closed form (e.g. SU(2)_k Verlinde S₀₀)
+    :multi_root_product,    # multi-positive-root product closed form (e.g. SU(N≥3)_k Verlinde S₀₀)
 )
 
 # review B1: only these routes are mechanically independent of `src`.
 const _STRUCTURAL_ROUTES = (:ed_finite_size, :second_closed_form, :literature_value)
+
+# Relative tolerance for treating a Complex value with negligible imaginary
+# part as real in JSON emit (e.g. correlators of Hermitian operators that
+# carry a few ULPs of round-off in the imaginary direction).
+const _IMAG_NOISE_RTOL = 1e-9
 
 _verify_typename(x) = string(nameof(typeof(x)))
 
@@ -72,10 +81,21 @@ _json_str(s) = '"' * replace(string(s), '\\' => "\\\\", '"' => "\\\"") * '"'
 # NaN/Inf-safe numeric emitter — a non-finite number is NEVER written as a
 # raw token (which is invalid JSON); it becomes null and the card status
 # is set to "divergent" instead (original critique item 5).
-_json_num(x) = (v=float(x); isfinite(v) ? string(v) : "null")
+function _json_num(x)
+    # Complex-with-negligible-imag -> real part (correlators of
+    # Hermitian operators are real up to round-off); genuinely
+    # complex or non-finite -> null (never a raw "0.4 + 0.0im").
+    r = if x isa Complex
+        (abs(imag(x)) <= _IMAG_NOISE_RTOL * max(1.0, abs(real(x))) ? real(x) : NaN)
+    else
+        x
+    end
+    v = float(r)
+    return isfinite(v) ? string(v) : "null"
+end
 
 function _json_arr(xs)
-    return "[" * join((x isa Real ? _json_num(x) : _json_str(x) for x in xs), ",") * "]"
+    return "[" * join((x isa Number ? _json_num(x) : _json_str(x) for x in xs), ",") * "]"
 end
 
 # review B1: (independence-class, provenance discriminant) from the route.
@@ -133,7 +153,7 @@ end
     verify(model, quantity, bc;
            route, independent, agree_within,
            refs, reliability=:high, fetch_kw=(;), at=nothing,
-           subject_extract=nothing) -> subject
+           expected_fail=false, subject_extract=nothing) -> subject
 
 Black-box-verify the src value `fetch(model, quantity, bc; fetch_kw...)`
 against an `independent` numeric (scalar or convergence vector) obtained
@@ -154,6 +174,7 @@ function verify(
     reliability::Symbol=:high,
     fetch_kw::NamedTuple=(;),
     at=nothing,
+    expected_fail::Bool=false,
     subject_extract::Union{Nothing,Function}=nothing,
 )
     route in _VERIFY_ROUTES ||
@@ -161,8 +182,9 @@ function verify(
 
     # ── the ONLY src touch-point: subject is fetched, never re-typed ──
     # subject_extract (optional) projects a non-scalar fetched value
-    # (NamedTuple, container, etc.) to a single Float64 so verify()
-    # can pin a specific field — e.g. CriticalExponents.β.
+    # (Vector, NamedTuple, container) to a single Float64 so verify()
+    # can pin a specific component — e.g. E8Spectrum[3] or
+    # CriticalExponents.β.
     raw = QAtlas.fetch(model, quantity, bc; fetch_kw...)
     subject = subject_extract === nothing ? raw : subject_extract(raw)
 
@@ -171,7 +193,14 @@ function verify(
     best = last(ind)                  # convergence: largest-N / final value
     abserr = abs(best - float(subject))
 
-    @test isapprox(best, float(subject); atol=agree_within)
+    if expected_fail
+        # bug-surfacing card: @test_broken expects this to fail and will
+        # alert when src is fixed (the test passes despite being marked
+        # broken, prompting promotion back to @test).
+        @test_broken isapprox(best, float(subject); atol=agree_within)
+    else
+        @test isapprox(best, float(subject); atol=agree_within)
+    end
 
     if get(ENV, "QATLAS_EMIT", "0") == "1"
         outdir = get(ENV, "QATLAS_CIOUT_DIR", joinpath(@__DIR__, "..", ".ci-out"))
@@ -212,6 +241,9 @@ function verify(
             ",",
             "\"status\":",
             _json_str(status),
+            ",",
+            "\"expected_fail\":",
+            (expected_fail ? "true" : "false"),
             ",",
             "\"subject\":",
             _json_num(subj),

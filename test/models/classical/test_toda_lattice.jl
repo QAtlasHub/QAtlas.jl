@@ -32,3 +32,19 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "TodaLattice — MassGap gapless (#381 batch 3)" begin
+    # Classical Toda lattice is integrable (Flaschka 1974; Henon 1974) with
+    # acoustic phonons at low momentum ⇒ no gap, Δ = 0.
+    verify(
+        TodaLattice(),
+        MassGap(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.0,
+        agree_within=1e-12,
+        refs=[
+            "Flaschka 1974 / Henon 1974: integrable Toda lattice with acoustic phonons ⇒ MassGap = 0",
+        ],
+    )
+end

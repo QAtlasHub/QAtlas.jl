@@ -62,3 +62,20 @@ end
         refs=["p=1 reduces to clean 2D Ising: c = 1/2 (M(4,3))"],
     )
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "RandomBondIsing2D — CentralCharge along Nishimori line (#381 batch 3)" begin
+    # Along the Nishimori line the 2D random-bond Ising critical point is in
+    # the pure 2D Ising universality class ⇒ c = 1/2 (Nishimori 1981;
+    # Honecker-Picco-Pujol 2001 numerics).
+    verify(
+        RandomBondIsing2D(),
+        CentralCharge(),
+        Infinite();
+        route=:literature_value,
+        independent=1//2,
+        agree_within=0,
+        refs=[
+            "Nishimori 1981 / Honecker-Picco-Pujol 2001: 2D RBI Nishimori line ⇒ c = 1/2 (Ising universality)",
+        ],
+    )
+end

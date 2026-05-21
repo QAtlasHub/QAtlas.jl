@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@half_filling` | `second_closed_form` | 🟢 structural | Half-filled tight-binding chain: e0 = -2t/pi | `test/models/quantum/misc/test_tight_binding1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Ashcroft-Mermin 1976: 1D free spinless fermion half-filling e₀ = -2t/π | `test/models/quantum/misc/test_tight_binding1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(TightBinding1D(; t = 1.0, μ = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -2 / pi, agree_within = 1.0e-9, refs = ["Half-filled tight-binding chain: e0 = -2t/pi"])
 ```
 
+```julia
+verify(TightBinding1D(; t = t), Energy(:per_site), Infinite(); route = :second_closed_form, independent = (-2t) / π, agree_within = 1.0e-12, refs = ["Ashcroft-Mermin 1976: 1D free spinless fermion half-filling e₀ = -2t/π"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

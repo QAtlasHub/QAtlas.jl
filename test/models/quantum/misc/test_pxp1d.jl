@@ -49,3 +49,18 @@ end
         refs=["PXP scar literature (Turner 2018 / Lin-Motrunich 2019): e0 ~ -0.6516"],
     )
 end
+
+# ── additional verification cards (#381 batch 4) ─────────────────────────
+@testset "PXP1D — Energy DMRG reference (#381 batch 4)" begin
+    # PXP model GS energy density e_0 ≈ -0.6516 (Lin-Motrunich 2019 DMRG,
+    # PRL 122, 173401; matches src tabulated value).
+    verify(
+        PXP1D(),
+        Energy(:per_site),
+        Infinite();
+        route=:literature_value,
+        independent=-0.6516,
+        agree_within=1e-3,
+        refs=["Lin-Motrunich 2019 PRL 122 173401: PXP DMRG GS energy density ≈ -0.6516"],
+    )
+end

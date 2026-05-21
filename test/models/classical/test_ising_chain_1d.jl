@@ -129,3 +129,46 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 2) ─────────────────────────
+@testset "IsingChain1D — additional closed-form cards (#381 batch 2)" begin
+    # CriticalTemperature: 1D Ising has no LRO at any T > 0 ⇒ T_c = 0 (Ising 1925).
+    for J in (0.5, 1.0, 2.0)
+        verify(
+            IsingChain1D(; J=J),
+            CriticalTemperature(),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=0,
+            refs=[
+                "Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0",
+            ],
+        )
+    end
+    # FreeEnergy: f(β) = -(1/β) log(2 cosh(βJ)) (Ising 1925; standard result).
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 1.0))
+        verify(
+            IsingChain1D(; J=J),
+            FreeEnergy(),
+            Infinite();
+            route=:second_closed_form,
+            independent=-(1/β) * log(2 * cosh(β*J)),
+            agree_within=1e-12,
+            refs=["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"],
+            fetch_kw=(; beta=β),
+        )
+    end
+    # CorrelationLength: ξ(β) = -1/log(tanh(βJ)) (Ising/Kramers-Wannier closed form).
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0))
+        verify(
+            IsingChain1D(; J=J),
+            CorrelationLength(),
+            Infinite();
+            route=:second_closed_form,
+            independent=-1/log(tanh(β*J)),
+            agree_within=1e-12,
+            refs=["Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing"],
+            fetch_kw=(; beta=β),
+        )
+    end
+end

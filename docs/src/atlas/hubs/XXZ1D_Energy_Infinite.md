@@ -19,7 +19,12 @@
 | `@fm` | `second_closed_form` | 🟢 structural | XXZ FM point Δ=-1: aligned state exact, e0 = -J/4 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
 | `@free_fermion` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@gapless` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
-| `@gapless` | `second_closed_form` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | Independent OBC dense-ED ground-state energies at N=8,10,12 then 1/N-extrapolated (edge-defect leading correction); cross-checks the Yang-Yang single-integral closed form at Δ = 1/2 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@gapless` | `limiting_case` | 🟡 asserted | Heisenberg AF Δ→1⁻ limit: e0 → 1/4 − log 2 (des Cloizeaux-Pearson 1962) | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@gapless` | `limiting_case` | 🟡 asserted | FM Δ→-1⁺ limit: e0 → -J/4 (aligned saturated state, continuous from Δ = -1) | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@gapless` | `limiting_case` | 🟡 asserted | XX free-fermion limit: e0 = -J/π at Δ = 0 (Lieb-Schultz-Mattis 1961); Yang-Yang continuous from Δ → 0⁺ | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@gapless` | `limiting_case` | 🟡 asserted | XX free-fermion limit: e0 = -J/π at Δ = 0; Yang-Yang continuous from Δ → 0⁻ | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
+| `@gapless` | `second_closed_form` | 🟢 structural | Yang-Yang 1966 II eq.(4.4): e0 = -3J/8 at Δ = 1/2 (γ = π/3) | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 
 ## Test calls
@@ -43,7 +48,27 @@ verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size
 ```
 
 ```julia
-verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :second_closed_form, independent = -3 / 8, agree_within = 1.0e-9, refs = ["Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2"])
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size, independent = intercept, agree_within = 0.005, at = ["Ns=$(Ns)"], refs = ["Independent OBC dense-ED ground-state energies at N=8,10,12 then 1/N-extrapolated (edge-defect leading correction); cross-checks the Yang-Yang single-integral closed form at Δ = 1/2"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.999), Energy(), Infinite(); route = :limiting_case, independent = 0.25 - log(2.0), agree_within = 0.001, at = ["Δ=0.999"], refs = ["Heisenberg AF Δ→1⁻ limit: e0 → 1/4 − log 2 (des Cloizeaux-Pearson 1962)"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = -0.999), Energy(), Infinite(); route = :limiting_case, independent = -0.25, agree_within = 0.001, at = ["Δ=-0.999"], refs = ["FM Δ→-1⁺ limit: e0 → -J/4 (aligned saturated state, continuous from Δ = -1)"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 1.0e-6), Energy(), Infinite(); route = :limiting_case, independent = -1 / π, agree_within = 1.0e-5, at = ["Δ=1e-6"], refs = ["XX free-fermion limit: e0 = -J/π at Δ = 0 (Lieb-Schultz-Mattis 1961); Yang-Yang continuous from Δ → 0⁺"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = -1.0e-6), Energy(), Infinite(); route = :limiting_case, independent = -1 / π, agree_within = 1.0e-5, at = ["Δ=-1e-6"], refs = ["XX free-fermion limit: e0 = -J/π at Δ = 0; Yang-Yang continuous from Δ → 0⁻"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :second_closed_form, independent = -3 / 8, agree_within = 1.0e-10, refs = ["Yang-Yang 1966 II eq.(4.4): e0 = -3J/8 at Δ = 1/2 (γ = π/3)"])
 ```
 
 ```julia
@@ -54,7 +79,7 @@ verify(XXZ1D(; J = 1.0, Δ = 1.0), Energy(), Infinite(); route = :ed_finite_size
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 6 · model ED-feasible
+- cards: 11 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

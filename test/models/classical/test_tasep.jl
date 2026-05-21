@@ -50,3 +50,20 @@ end
         refs=["Empty/full lattice carries no current: j(0)=j(1)=0"],
     )
 end
+# ── additional verification cards (#381 batch 2) ─────────────────────────
+@testset "TASEP — additional cards (#381 batch 2)" begin
+    # Mean-field steady-state current of TASEP at density ρ on the
+    # half-filled ring is J = ρ(1-ρ), max J = 1/4 at ρ = 1/2 (Derrida 1998).
+    # NOTE: TASEP() defaults to (p=1.0, ρ=0.5) per the struct constructor
+    # (src/models/classical/TASEP/TASEP.jl), i.e. the half-filled maximal-
+    # current point — exactly what this card is checking.
+    verify(
+        TASEP(),
+        SteadyStateCurrent(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.25,
+        agree_within=1e-12,
+        refs=["Derrida 1998: TASEP steady-state J = ρ(1-ρ), max at ρ=1/2 ⇒ J = 1/4"],
+    )
+end

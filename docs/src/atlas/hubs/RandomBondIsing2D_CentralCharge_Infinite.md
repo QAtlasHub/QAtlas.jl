@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | p=1 reduces to clean 2D Ising: c = 1/2 (M(4,3)) | `test/models/classical/test_random_bond_ising_2d.jl` |
+| `@sweep` | `literature_value` | 🟢 structural | Nishimori 1981 / Honecker-Picco-Pujol 2001: 2D RBI Nishimori line ⇒ c = 1/2 (Ising universality) | `test/models/classical/test_random_bond_ising_2d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(RandomBondIsing2D(; J = 1.0, p = 1.0), CentralCharge(), Infinite(); route = :delegation_invariant, independent = 0.5, agree_within = 1.0e-12, refs = ["p=1 reduces to clean 2D Ising: c = 1/2 (M(4,3))"])
 ```
 
+```julia
+verify(RandomBondIsing2D(), CentralCharge(), Infinite(); route = :literature_value, independent = 1 // 2, agree_within = 0, refs = ["Nishimori 1981 / Honecker-Picco-Pujol 2001: 2D RBI Nishimori line ⇒ c = 1/2 (Ising universality)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

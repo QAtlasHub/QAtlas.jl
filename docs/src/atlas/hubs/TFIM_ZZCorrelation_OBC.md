@@ -14,9 +14,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | t=0 limit: ⟨σz_i(0) σz_j⟩ = static GS correlator (dense ED) | `test/models/quantum/TFIM/test_TFIM_dynamics.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | t=0 limit: ⟨σz_i(0) σz_j⟩ = static GS correlator (dense ED) | `test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense GS | `test/models/quantum/TFIM/test_TFIM_local.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_zaxis.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl` |
 
 ## Test calls
 

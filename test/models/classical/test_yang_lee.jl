@@ -72,3 +72,17 @@ end
         refs=["Cardy 1985: Yang-Lee edge singularity primary h_{1,2} = -1/5"],
     )
 end
+# ── additional verification cards (#381 batch 2) ─────────────────────────
+@testset "YangLee — additional cards (#381 batch 2)" begin
+    # Yang-Lee edge singularity is the M(2,5) non-unitary minimal model
+    # with central charge c = -22/5 (Cardy 1985, Yang-Lee 1952).
+    verify(
+        YangLee(),
+        CentralCharge(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-22//5,
+        agree_within=0,
+        refs=["Cardy 1985: Yang-Lee edge is the M(2,5) minimal model ⇒ c = -22/5"],
+    )
+end

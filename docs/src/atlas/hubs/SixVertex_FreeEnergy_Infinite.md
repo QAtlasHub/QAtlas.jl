@@ -13,12 +13,43 @@
 
 ## Corroboration
 
-_No corroboration card._ Flagged by the R1 risk-linter (`src` claims this hub, ED is feasible, no independent card).
+| regime | mechanism | independence | refs | file |
+|---|---|---|---|---|
+| `@sweep` | `lieb_ferroelectric` | 🟡 asserted | Lieb 1967c Phys. Rev. Lett. 19, 108: KDP/FE phase f = -log max(a,b) (frozen GS) | `test/models/classical/test_six_vertex.jl` |
+| `@sweep` | `lieb_ferroelectric` | 🟡 asserted | Lieb 1967c: FE-phase f = -log max(a,b); a↔b symmetry | `test/models/classical/test_six_vertex.jl` |
+| `@sweep` | `lieb_ferroelectric` | 🟡 asserted | Lieb 1967c: FE-phase f = -log max(a,b) | `test/models/classical/test_six_vertex.jl` |
+| `@sweep` | `lieb_ferroelectric` | 🟡 asserted | Lieb 1967c: KDP boundary Δ=1 approached from FE side; f = -log max(a,b) | `test/models/classical/test_six_vertex.jl` |
+| `@sweep` | `lieb_square_ice` | 🟡 asserted | Lieb 1967a Phys. Rev. 162: square-ice f = -(3/2) log(4/3) | `test/models/classical/test_six_vertex.jl` |
+
+## Test calls
+
+_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(SixVertex(; a = 3.0, b = 1.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_ferroelectric, independent = -(log(3.0)), agree_within = 1.0e-14, refs = ["Lieb 1967c Phys. Rev. Lett. 19, 108: KDP/FE phase f = -log max(a,b) (frozen GS)"])
+```
+
+```julia
+verify(SixVertex(; a = 1.0, b = 3.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_ferroelectric, independent = -(log(3.0)), agree_within = 1.0e-14, refs = ["Lieb 1967c: FE-phase f = -log max(a,b); a↔b symmetry"])
+```
+
+```julia
+verify(SixVertex(; a = 2.0, b = 4.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_ferroelectric, independent = -(log(4.0)), agree_within = 1.0e-14, refs = ["Lieb 1967c: FE-phase f = -log max(a,b)"])
+```
+
+```julia
+verify(SixVertex(; a = a_kdp, b = 1.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_ferroelectric, independent = -(log(a_kdp)), agree_within = 1.0e-14, refs = ["Lieb 1967c: KDP boundary Δ=1 approached from FE side; f = -log max(a,b)"])
+```
+
+```julia
+verify(SixVertex(; a = 1.0, b = 1.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_square_ice, independent = -(3 / 2) * log(4 / 3), agree_within = 1.0e-14, refs = ["Lieb 1967a Phys. Rev. 162: square-ice f = -(3/2) log(4/3)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **uncorroborated-but-feasible** 🟠
-- cards: 0 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

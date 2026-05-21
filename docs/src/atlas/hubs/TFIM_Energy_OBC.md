@@ -17,9 +17,13 @@
 |---|---|---|---|---|
 | `@disordered` | `sum_rule` | 🟡 asserted | Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0 | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | J=0 decoupled spins: ε = -h tanh(βh) per site | `test/identities/test_TFIM_limits_cross_model.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense (black-box ED) | `test/models/quantum/TFIM/test_TFIM_local.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12) | `test/verification/universality/test_universality_cross_check.jl` |
 
 ## Test calls
 
@@ -45,11 +49,27 @@ verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw
 verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-8, refs = ["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"])
 ```
 
+```julia
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = E0_ed, agree_within = max(1.0e-12, 1.0e-10 * abs(E0_ed)), at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; J = J, h = 0.0), Energy(), OBC(N); route = :limiting_case, independent = -J * (N - 1), agree_within = 1.0e-12, at = ["J=$(J)", "h=0.0", "N=$(N)"], refs = ["Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h_large), Energy(), OBC(N); route = :limiting_case, independent = E0_pt, agree_within = max(1.0e-12, 1.0e-9 * abs(E0_pt)), at = ["J=$(J)", "h=$(h_large)", "N=$(N)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 5 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -67,3 +67,25 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 6) ─────────────────────────
+@testset "MixedFieldIsing1D — TFIM critical line MassGap = 0 (#381 batch 6)" begin
+    # At h_z=0 the mixed-field Ising H = -J Σ σ^z σ^z - h_x Σ σ^x reduces
+    # to TFIM, which is gapless on the critical line h_x = J. The struct
+    # uses fields (J, h_x, h_z); MFI at h_x=J, h_z=0 gives Δ = 0.
+    # Single J point: 2|h_x - J| = 0.0 identically at h_x = J for any J;
+    # a multi-J sweep would collapse to identical zero residuals on the
+    # same closed-form code path and adds no discriminating power.
+    let J = 1.0
+        verify(
+            MixedFieldIsing1D(; J=J, h_x=J, h_z=0.0),
+            MassGap(),
+            Infinite();
+            route=:limiting_case,
+            independent=0.0,
+            agree_within=1e-9,
+            refs=[
+                "TFIM critical line h_x=J (Pfeuty 1970) ⇒ MFI at h_z=0, h_x=J gives MassGap = 0",
+            ],
+        )
+    end
+end

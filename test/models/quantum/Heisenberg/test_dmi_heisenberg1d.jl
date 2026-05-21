@@ -50,7 +50,7 @@ end
     heis_bond(J) = J * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))
     Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
 
-    # D=0 delegates to Heisenberg1D (Hulthen e0 = J(1/4 - log 2))
+    # D=0 delegates to Heisenberg1D (Hulthén e0 = J(1/4 - log 2))
     verify(
         DMIHeisenberg1D(; J=1.0, D=0.0),
         Energy(:per_site),
@@ -61,7 +61,7 @@ end
         refs=["DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths"],
     )
 
-    # Independent OBC ED convergence to the Hulthen value
+    # Independent OBC ED convergence to the Hulthén value
     verify(
         DMIHeisenberg1D(; J=1.0, D=0.0),
         Energy(:per_site),
@@ -72,6 +72,27 @@ end
         ],
         at=["N=$N" for N in Ns],
         agree_within=0.1,
-        refs=["Hulthen 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"],
+        refs=["Hulthén 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"],
     )
+end
+
+# ── additional verification card (#381 batch) ─────────────────────────────
+@testset "DMIHeisenberg1D — Energy at D=0 Hulthén limit (#381 batch)" begin
+    # Phase 1: DMI Heisenberg at D=0 reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)
+    # (Hulthén 1938 Bethe-ansatz exact). Linear in J.
+    # Note: J=1.0 intentionally overlaps the :delegation_invariant card above
+    # as a cross-route consistency check (closed-form vs Heisenberg1D fetch).
+    for J in (0.5, 1.0, 2.0, 3.7)
+        verify(
+            DMIHeisenberg1D(; J=J, D=0.0),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=J * (1/4 - log(2)),
+            agree_within=1e-14,
+            refs=[
+                "Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)",
+            ],
+        )
+    end
 end

@@ -31,3 +31,20 @@ end
         )
     end
 end
+# ── additional verification cards (#381 batch 4) ─────────────────────────
+@testset "AKLT2D — Energy frustration-free (#381 batch 4)" begin
+    # 2D AKLT on honeycomb: H is a sum of non-negative spin-3 projectors,
+    # VBS state is in the kernel of every term ⇒ frustration-free
+    # GS with exact e₀ = 0 (AKLT 1988).
+    for J in (0.5, 1.0, 2.0)
+        verify(
+            AKLT2D(; J=J),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=0.0,
+            agree_within=0,
+            refs=["AKLT 1988: 2D AKLT honeycomb is frustration-free ⇒ e₀ = 0 exactly"],
+        )
+    end
+end

@@ -35,6 +35,10 @@
 #     Phys. Rev. B 87, 060405(R) (2013).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Spin S (this file)
+#   Observable:  Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 """
     KagomeHeisenbergAFM(; J::Real = 1.0) <: AbstractQAtlasModel
 

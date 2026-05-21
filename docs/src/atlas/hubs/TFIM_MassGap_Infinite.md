@@ -17,12 +17,13 @@
 |---|---|---|---|---|
 | `@critical` | `limiting_case` | 🟡 asserted | Ising QCP at h = J: gap closes (Pfeuty 1970) | `test/models/quantum/TFIM/test_TFIM_infinite_dynamics.jl` |
 | `@ordered` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (BC-independent) | `test/identities/test_identities_TFIM_pbc.jl` |
-| `@ordered` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| = 1 at (J=1, h=0.5) | `test/verification/tfim_ising/test_tfim_fdt.jl` |
+| `@ordered` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| = 1 at (J=1, h=0.5) | `test/verification/tfim_ising/test_tfim_fdt_verify.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (Bogoliubov dispersion minimum) | `test/identities/test_TFIM_dynamic_symmetries.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| | `test/identities/test_identities_TFIM.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| | `test/models/quantum/TFIM/test_TFIM_infinite_dynamics.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| (Bogoliubov dispersion minimum) | `test/models/quantum/TFIM/test_TFIM_massgap.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| | `test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h − J| (thermodynamic-limit BdG gap; PBC/OBC kernels at finite N differ — see TFIM.jl docstring) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | "Pfeuty 1970: Δ = 2|h − J|; independent dense ED of " * "H = −h Σ σˣ at J=0 (decoupled spins, gap = 2h exact ∀N)" | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (= 0 at the QCP h = J) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 
@@ -39,7 +40,7 @@ verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_f
 ```
 
 ```julia
-verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J| = 1 at (J=1, h=0.5)"])
+verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["Pfeuty 1970: Delta = 2|h - J| = 1 at (J=1, h=0.5)"])
 ```
 
 ```julia
@@ -63,6 +64,10 @@ verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form,
 ```
 
 ```julia
+verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * abs(h - J), agree_within = 1.0e-12, refs = ["Pfeuty 1970: Δ = 2|h − J| (thermodynamic-limit BdG gap; PBC/OBC kernels at finite N differ — see TFIM.jl docstring)"])
+```
+
+```julia
 verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :ed_finite_size, independent = [ed_gap(N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h − J|; independent dense ED of " * "H = −h Σ σˣ at J=0 (decoupled spins, gap = 2h exact ∀N)"])
 ```
 
@@ -74,7 +79,7 @@ verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form,
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 10 · model ED-feasible
+- cards: 11 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

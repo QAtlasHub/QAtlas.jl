@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | SK mean-field: spin-glass transition at Tc = J | `test/models/classical/test_sherrington_kirkpatrick.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Sherrington-Kirkpatrick 1975: SK spin-glass T_c = J in mean field (k_B = 1) | `test/models/classical/test_sherrington_kirkpatrick.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(SherringtonKirkpatrick(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = Float64(J), agree_within = 1.0e-12, refs = ["SK mean-field: spin-glass transition at Tc = J"])
 ```
 
+```julia
+verify(SherringtonKirkpatrick(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = Float64(J), agree_within = 1.0e-12, refs = ["Sherrington-Kirkpatrick 1975: SK spin-glass T_c = J in mean field (k_B = 1)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

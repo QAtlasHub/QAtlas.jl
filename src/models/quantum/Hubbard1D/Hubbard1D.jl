@@ -40,6 +40,11 @@
 #     reminiscence", Physica A 321, 1 (2003).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 using QuadGK: quadgk
 using SpecialFunctions: besselj0, besselj1
 
@@ -133,7 +138,7 @@ function _hubbard1d_e0(t::Float64, U::Float64)::Float64
     integral, _ = quadgk(
         ω -> _hubbard1d_e0_integrand(ω, t, U), 0.0, Inf; rtol=1e-12, atol=1e-14
     )
-    return -4.0 * t^2 * integral
+    return -4.0 * t * integral
 end
 
 """

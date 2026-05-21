@@ -15,11 +15,16 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@triangular` | `literature_value` | 🟢 structural | Wannier 1950: AF triangular Ising T=0 residual entropy = 0.32306594... per spin | `test/models/classical/test_ising_triangular.jl` |
 | `@triangular` | `second_closed_form` | 🟢 structural | Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066 | `test/models/classical/test_ising_triangular.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(IsingTriangular(; J = 1.0), ResidualEntropy(), Infinite(); route = :literature_value, independent = 0.3230659669304534, agree_within = 1.0e-6, refs = ["Wannier 1950: AF triangular Ising T=0 residual entropy = 0.32306594... per spin"])
+```
 
 ```julia
 verify(IsingTriangular(; J = J), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = (2 / π) * S_w, agree_within = 1.0e-6, refs = ["Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066"])
@@ -29,7 +34,7 @@ verify(IsingTriangular(; J = J), ResidualEntropy(), Infinite(); route = :second_
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Chiral p+ip edge: single chiral Majorana CFT c = 1/2 | `test/models/quantum/misc/test_ppip_2dsc.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Read-Green 2000; Kitaev 2003: chiral p+ip SC has Majorana edge ⇒ c = 1/2 | `test/models/quantum/misc/test_ppip_2dsc.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(PpIp2DSC(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 // 2, agree_within = 1.0e-10, refs = ["Chiral p+ip edge: single chiral Majorana CFT c = 1/2"])
 ```
 
+```julia
+verify(PpIp2DSC(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1 // 2, agree_within = 0, refs = ["Read-Green 2000; Kitaev 2003: chiral p+ip SC has Majorana edge ⇒ c = 1/2"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

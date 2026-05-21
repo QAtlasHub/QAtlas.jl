@@ -113,3 +113,49 @@ end
         )
     end
 end
+
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "ChernSimons3D — PartitionFunction Z(S³) closed forms (#381 batch)" begin
+    # Witten 1989 / Verlinde S_{0,0}: Z(S³; SU(N)_k) = N^{-1/2} (k+N)^{-(N-1)/2}
+    # ∏_{1≤j<l≤N} 2 sin(π(l-j)/(k+N)). Reproduced low-rank closed forms below.
+    # SU(2)_1: Z = 1/√2
+    verify(
+        ChernSimons3D(; N=2, k=1),
+        PartitionFunction(),
+        Infinite();
+        route=:single_root_specialisation,
+        independent=1/sqrt(2),
+        agree_within=1e-14,
+        refs=["Witten 1989: Z(S³; SU(2)_1) = sqrt(2/3)·sin(π/3) → 1/√2"],
+    )
+    # SU(2)_2: Z = 1/2
+    verify(
+        ChernSimons3D(; N=2, k=2),
+        PartitionFunction(),
+        Infinite();
+        route=:single_root_specialisation,
+        independent=0.5,
+        agree_within=1e-14,
+        refs=["Witten 1989: Z(S³; SU(2)_2) = sqrt(2/4)·sin(π/4) → 1/2"],
+    )
+    # SU(2)_3: Z = √(2/5) · sin(π/5)
+    verify(
+        ChernSimons3D(; N=2, k=3),
+        PartitionFunction(),
+        Infinite();
+        route=:single_root_specialisation,
+        independent=sqrt(2/5) * sin(π/5),
+        agree_within=1e-14,
+        refs=["Witten 1989: Z(S³; SU(2)_3) = sqrt(2/5)·sin(π/5)"],
+    )
+    # SU(3)_1: Z = 1/√3
+    verify(
+        ChernSimons3D(; N=3, k=1),
+        PartitionFunction(),
+        Infinite();
+        route=:multi_root_product,
+        independent=1/sqrt(3),
+        agree_within=1e-14,
+        refs=["Witten 1989: Z(S³; SU(3)_1) = 1/√3 (Verlinde S₀₀ closed form)"],
+    )
+end

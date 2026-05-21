@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | SYK IR Majorana conformal dimension Delta_psi = 1/q | `test/models/quantum/misc/test_syk.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Sachdev-Ye 1993 / Maldacena-Stanford 2016: SYK_q IR conformal weight h = 1/q | `test/models/quantum/misc/test_syk.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(SYK(; q = q), ConformalWeights(), Infinite(); route = :second_closed_form, fetch_kw = (; field = :ψ), independent = 1 // q, agree_within = 1.0e-10, refs = ["SYK IR Majorana conformal dimension Delta_psi = 1/q"])
 ```
 
+```julia
+verify(SYK(; q = q), ConformalWeights(), Infinite(); route = :second_closed_form, independent = 1 // q, agree_within = 0, refs = ["Sachdev-Ye 1993 / Maldacena-Stanford 2016: SYK_q IR conformal weight h = 1/q"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

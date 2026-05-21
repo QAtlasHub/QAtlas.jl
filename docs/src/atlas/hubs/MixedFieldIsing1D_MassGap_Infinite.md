@@ -16,6 +16,7 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | h_z=0 delegates to TFIM: Δ = 2|h_x - J| (Pfeuty 1970) | `test/models/quantum/misc/test_mixed_field_ising1d.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM critical line h_x=J (Pfeuty 1970) ⇒ MFI at h_z=0, h_x=J gives MassGap = 0 | `test/models/quantum/misc/test_mixed_field_ising1d.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(MixedFieldIsing1D(; J = J, h_x = hx, h_z = 0.0), MassGap(), Infinite(); route = :delegation_invariant, independent = 2 * abs(hx - J), agree_within = 1.0e-9, refs = ["h_z=0 delegates to TFIM: Δ = 2|h_x - J| (Pfeuty 1970)"])
 ```
 
+```julia
+verify(MixedFieldIsing1D(; J = J, h_x = J, h_z = 0.0), MassGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM critical line h_x=J (Pfeuty 1970) ⇒ MFI at h_z=0, h_x=J gives MassGap = 0"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -15,7 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
@@ -25,11 +26,15 @@ _The exact `verify(...)` call the harness executed for this hub (reconstructed f
 verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.03, fetch_kw = (; r = r), refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
 ```
 
+```julia
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = closed, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; r = r))
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

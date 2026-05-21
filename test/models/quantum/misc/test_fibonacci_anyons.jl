@@ -30,3 +30,22 @@ end
         refs=["Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio"],
     )
 end
+# ── additional verification cards (#381 batch 3) ─────────────────────────
+@testset "FibonacciAnyons — TopologicalEntanglementEntropy (#381 batch 3)" begin
+    # Fibonacci anyon model: only two anyons {1, τ} with quantum
+    # dimensions d_1 = 1, d_τ = φ = (1+√5)/2 (golden ratio).
+    # Total quantum dimension D = √(1 + φ²) = √((5+√5)/2).
+    # Kitaev-Preskill / Levin-Wen TEE = log D = (1/2) log(1 + φ²).
+    phi = (1 + sqrt(5)) / 2
+    verify(
+        FibonacciAnyons(),
+        TopologicalEntanglementEntropy(),
+        Infinite();
+        route=:second_closed_form,
+        independent=0.5 * log(1 + phi^2),
+        agree_within=1e-12,
+        refs=[
+            "Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio)",
+        ],
+    )
+end

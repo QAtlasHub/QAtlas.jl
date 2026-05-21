@@ -410,7 +410,11 @@ function _handle_verify!(out, ex, file, testset)
     ind, disc = _independence(route, get(kw, :refs, nothing))
     hub = string(_headsym(model), "/", _headsym(qty), "/", _headsym(bc))
     srctext = try
-        replace(string(ex), r"\s+" => " ")
+        # Strip Julia auto-injected `#= file:line =#` location comments
+        # before whitespace-normalising; otherwise host-absolute paths
+        # baked into anonymous-closure expressions drift between dev
+        # and CI runners.
+        replace(replace(string(ex), r"#=.*?=#" => ""), r"\s+" => " ")
     catch
         "verify(...)"
     end
@@ -476,6 +480,10 @@ function scan_dir(dir::AbstractString)
     empty!(PARSE_FAILS)
     out = Card[]
     for (root, _, files) in walkdir(dir)
+        # test/util_verify/ holds unit tests OF the verify() harness
+        # itself; its verify(...) calls target stub models and MUST
+        # NOT enter the inventory (else stubs leak into hub counts).
+        occursin(joinpath("test", "util_verify"), root) && continue
         for f in files
             endswith(f, ".jl") || continue
             append!(out, scan_file(joinpath(root, f)))

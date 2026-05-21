@@ -16,34 +16,33 @@ using QAtlas, Test
 
 const J_ISING = 1.0
 
-@testset "IsingSquare — transfer-matrix vs brute-force" begin
+# ─────────────────────────────────────────────────────────────────────────────
+# Migrated from raw @test to verify()-first (PR #449 phase 2 zero-legacy).
+# Each (Lx, Ly, β) pair in the brute-force vs transfer-matrix sweep becomes
+# an :ed_finite_size verify card; the sweep is the full pre-migration grid
+# {(2,2), (2,3), (3,3)} × {0.0, 0.1, 0.2, 0.44, 1.0, 2.0} = 18 pins.
+# ─────────────────────────────────────────────────────────────────────────────
+@testset "IsingSquare — transfer-matrix vs brute-force (verify cards)" begin
     for (Lx, Ly) in [(2, 2), (2, 3), (3, 3)]
-        @testset "$(Lx)×$(Ly) square PBC" begin
-            for β in [0.0, 0.1, 0.2, 0.44, 1.0, 2.0]
-                Z_bf = exact_partition(Lx, Ly, J_ISING, β)
-                Z_tm = QAtlas.fetch(
-                    IsingSquare(), PartitionFunction(); Lx=Lx, Ly=Ly, β=β, J=J_ISING
-                )
-                @test Z_tm ≈ Z_bf rtol = 1e-10
-            end
+        for β in [0.0, 0.1, 0.2, 0.44, 1.0, 2.0]
+            Z_bf = exact_partition(Lx, Ly, J_ISING, β)
+            # `verify`'s `agree_within` is absolute. The legacy @test used
+            # relative tol 1e-10, which at β=2 and 3×3 yields Z ~ exp(12) ~
+            # 1.6e5 — absolute 1e-10 is unattainable. Scale by |Z_bf| to
+            # emulate the original relative tolerance.
+            verify(
+                IsingSquare(; Lx=Lx, Ly=Ly, J=J_ISING),
+                PartitionFunction(),
+                PBC(0);
+                route=:ed_finite_size,
+                fetch_kw=(; β=β, Lx=Lx, Ly=Ly, J=J_ISING),
+                independent=Z_bf,
+                agree_within=1e-10 * max(1.0, abs(Z_bf)),
+                at=["Lx=$(Lx)", "Ly=$(Ly)", "β=$(β)"],
+                refs=[
+                    "Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z",
+                ],
+            )
         end
-    end
-end
-
-# ── Verification cards (WHY-correct plane) ─────────────────────────────────
-@testset "Ising 2x2 classical — verification cards" begin
-    # Transfer-matrix partition function vs brute-force exact_partition
-    # (independent enumeration of all 2^N spin configs).
-    for (L, β) in ((2, 0.3), (2, 0.5), (3, 0.4))
-        verify(
-            IsingSquare(; Lx=L, Ly=L, J=1.0),
-            PartitionFunction(),
-            PBC(0);
-            route=:ed_finite_size,
-            fetch_kw=(; β=β, Lx=L, Ly=L, J=1.0),
-            independent=exact_partition(L, L, 1.0, β),
-            agree_within=1e-6,
-            refs=["Brute-force Σ_σ exp(-βE) over all configs vs transfer matrix"],
-        )
     end
 end

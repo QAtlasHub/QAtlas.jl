@@ -19,6 +19,7 @@
 | `@su2` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(Sx⊗Sx+Sy⊗Sy+Sz⊗Sz)), minimum eigenvalue (small-N gap exact at β=1e6) | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_small_n_gs_ed_batch.jl` |
 | `@su2` | `literature_value` | 🟢 structural | Heisenberg dimer (N=2): unique singlet GS, E0_total = -3J/4 ⇒ E0_per_site = -3J/8 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_small_n_gs_ed_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(Sx⊗Sx+Sy⊗Sy+Sz⊗Sz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 
 ## Test calls
@@ -42,6 +43,10 @@ verify(Heisenberg1D(), Energy(:per_site), OBC(2); route = :literature_value, ind
 ```
 
 ```julia
+verify(Heisenberg1D(), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)", "β=$(beta)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(Sx⊗Sx+Sy⊗Sy+Sz⊗Sz)), thermo_from_spectrum"], fetch_kw = (; J = J, beta = beta))
+```
+
+```julia
 verify(Heisenberg1D(), Energy(), OBC(N); route = :delegation_invariant, fetch_kw = (; beta = beta, J = 1.5), independent = xxz_E, agree_within = 1.0e-12, refs = ["Heisenberg1D thermal OBC delegates to XXZ1D(Delta=1): same J must match"])
 ```
 
@@ -49,7 +54,7 @@ verify(Heisenberg1D(), Energy(), OBC(N); route = :delegation_invariant, fetch_kw
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 5 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -34,6 +34,11 @@
 # Dispatch tags
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# CONVENTION
+#   Hamiltonian: Fermion bilinears c†c
+#   Observable:  Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2
+#   Reference:   docs/src/conventions.md §Fermion convention
+
 """
     Honeycomb(; t::Real = 1.0, Lx::Int = 0, Ly::Int = 0) <: AbstractQAtlasModel
 

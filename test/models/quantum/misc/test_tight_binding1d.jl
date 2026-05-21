@@ -126,3 +126,32 @@ end
         refs=["Band insulator mu > 2t: gap = |mu| - 2t"],
     )
 end
+# ── additional verification cards (#381 batch) ─────────────────────────────
+@testset "TightBinding1D — additional verification cards (#381 batch)" begin
+    # Free-fermion v_F = 2 t sin(k_F); default t=1, μ=0 ⇒ k_F = π/2 ⇒ v_F = 2.
+    verify(
+        TightBinding1D(),
+        FermiVelocity(),
+        Infinite();
+        route=:second_closed_form,
+        independent=2.0,
+        agree_within=1e-12,
+        refs=["Ashcroft-Mermin 1976: v_F = 2 t sin(k_F); μ=0 half-filling"],
+    )
+end
+# ── additional verification cards (#381 batch 7) ─────────────────────────
+@testset "TightBinding1D — Energy/Infinite free fermion (#381 batch 7)" begin
+    # Free spinless fermion at half-filling: e₀ = -(2t/π) sin(π·n_filling)
+    # = -(2t/π) sin(π/2) = -2t/π (Ashcroft-Mermin 1976).
+    for t in (0.5, 1.0, 2.0)
+        verify(
+            TightBinding1D(; t=t),
+            Energy(:per_site),
+            Infinite();
+            route=:second_closed_form,
+            independent=-2 * t / π,
+            agree_within=1e-12,
+            refs=["Ashcroft-Mermin 1976: 1D free spinless fermion half-filling e₀ = -2t/π"],
+        )
+    end
+end

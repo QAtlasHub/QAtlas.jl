@@ -9,6 +9,7 @@ const TEST_ROOT = dirname(@__DIR__)   # test/ci/ → test/
 
 const ALL_DIRS = [
     "core/",
+    "util_verify/",
     "universalities/",
     "models/classical/",
     "models/quantum/TFIM/",
@@ -18,7 +19,7 @@ const ALL_DIRS = [
     "models/quantum/misc/",
     "models/quantum/tightbinding/",
     "identities/",
-    "verification/tightbinding/",
+    "lint/",
     "verification/tfim_ising/",
     "verification/heisenberg_xxz/",
     "verification/universality/",

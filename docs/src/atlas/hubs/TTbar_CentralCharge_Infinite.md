@@ -17,6 +17,7 @@
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | TTbar is a marginal deformation: c invariant (default seed c=1) | `test/universalities/test_ttbar.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TTbar preserves the seed central charge c for any λ | `test/universalities/test_ttbar.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Smirnov-Zamolodchikov 2017; Cavaglià et al 2016: TT̄ deformation preserves seed CFT central charge | `test/universalities/test_ttbar.jl` |
 
 ## Test calls
 
@@ -30,11 +31,15 @@ verify(TTbar(), CentralCharge(), Infinite(); route = :second_closed_form, indepe
 verify(TTbar(; c = c0, λ = 0.7), CentralCharge(), Infinite(); route = :second_closed_form, independent = c0, agree_within = 1.0e-12, refs = ["TTbar preserves the seed central charge c for any λ"])
 ```
 
+```julia
+verify(TTbar(), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["Smirnov-Zamolodchikov 2017; Cavaglià et al 2016: TT̄ deformation preserves seed CFT central charge"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

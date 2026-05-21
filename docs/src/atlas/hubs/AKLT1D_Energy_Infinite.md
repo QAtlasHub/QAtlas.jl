@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/core/test_verify_harness.jl` |
 | `@sweep` | `retype_formula` | 🟡 asserted | x | `test/core/test_verify_harness.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 

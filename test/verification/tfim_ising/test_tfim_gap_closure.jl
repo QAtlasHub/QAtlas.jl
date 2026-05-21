@@ -13,19 +13,30 @@
 
 using QAtlas, Lattice2D, LinearAlgebra, Test
 
-@testset "TFIM — ED ground state vs BdG analytical" begin
+@testset "TFIM — ED ground state vs BdG analytical (verify cards + structural)" begin
     for N in [4, 6, 8]
         lat = build_lattice(Square, N, 1; boundary=OpenAxis())
+        # Lattice2D structural sanity — not a QAtlas hub, kept raw.
         @test num_sites(lat) == N
         @test length(collect(bonds(lat))) == N - 1
 
-        @testset "N=$N OBC — E₀ match" begin
+        @testset "N=$N OBC — E₀ verify cards" begin
             for (J, h) in [(1.0, 0.0), (1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 1.5)]
                 H = build_tfim(lat, J, h)
                 λ = sort(eigvals(Symmetric(H)))
                 E0_ed = λ[1]
-                E0_analytical = QAtlas.fetch(TFIM(; J=J, h=h), Energy(), OBC(; N=N))
-                @test E0_ed ≈ E0_analytical rtol = 1e-10
+                verify(
+                    TFIM(; J=J, h=h),
+                    Energy(),
+                    OBC(N);
+                    route=:ed_finite_size,
+                    independent=E0_ed,
+                    agree_within=1e-10,
+                    at=["J=$(J)", "h=$(h)", "N=$(N)"],
+                    refs=[
+                        "Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC",
+                    ],
+                )
             end
         end
     end
@@ -76,38 +87,51 @@ end
         @test gap_ordered < 1e-3      # exponentially small for N=6
     end
 
-    @testset "Limiting cases" begin
+    @testset "Limiting cases (verify cards + structural)" begin
         N = 6
         lat = build_lattice(Square, N, 1; boundary=OpenAxis())
 
-        # h = 0: classical Ising, E₀ = -J(N-1), doubly degenerate
+        # h = 0: classical Ising, E₀ = -J(N-1), doubly degenerate.
+        verify(
+            TFIM(; J=J, h=0.0),
+            Energy(),
+            OBC(N);
+            route=:limiting_case,
+            independent=-J * (N - 1),
+            agree_within=1e-12,
+            at=["J=$(J)", "h=0.0", "N=$(N)"],
+            refs=[
+                "Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED)",
+            ],
+        )
+        # 2-fold degeneracy + gap to first excited — multi-eigenvalue
+        # structural property, kept raw.
         H0 = build_tfim(lat, J, 0.0)
         λ0 = sort(eigvals(Symmetric(H0)))
-        @test λ0[1] ≈ -J * (N - 1) atol = 1e-12
-        @test λ0[2] ≈ -J * (N - 1) atol = 1e-12  # 2-fold degenerate
-        @test λ0[3] > λ0[1] + 1e-10               # gap to excited state
+        @test λ0[2] ≈ -J * (N - 1) atol = 1e-12
+        @test λ0[3] > λ0[1] + 1e-10
 
         # Strong-field limit: at large h the σˣ-eigenstate |+...+⟩ is the
-        # unperturbed ground state with E₀⁽⁰⁾ = -hN.  Treating the Ising
-        # term V = -J Σ σᶻᵢσᶻᵢ₊₁ as a perturbation, second-order
-        # Rayleigh–Schrödinger gives one excited state per bond at gap
-        # 4h with matrix element |⟨n|V|0⟩|² = J², so
-        #
+        # unperturbed ground state. Second-order Rayleigh–Schrödinger gives
         #     E₀ ≈ -hN - J²(N - 1) / (4h)   + O(J⁴/h³)
-        #
-        # Empirically the PT² formula matches the dense ED to machine
-        # precision (~1e-10 relative) once h ≥ 100·J, with the residual
-        # the next-order O(J⁴/h³) correction.  The previous test
-        # compared to the unperturbed -hN with `rtol = 0.01` — 500×
-        # looser than the empirical leading-order residual at h = 100,
-        # so it would silently accept a wrong sign or prefactor in the
-        # σᶻ coupling.  Replace with the PT² reference at h ∈ {100, 1000}.
+        # which the dense ED satisfies to ~1e-10 once h ≥ 100·J.
         for h_large in (100.0, 1000.0)
+            E0_pt = -h_large * N - J^2 * (N - 1) / (4 * h_large)
+            verify(
+                TFIM(; J=J, h=h_large),
+                Energy(),
+                OBC(N);
+                route=:limiting_case,
+                independent=E0_pt,
+                agree_within=1e-9,
+                at=["J=$(J)", "h=$(h_large)", "N=$(N)"],
+                refs=[
+                    "Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)",
+                ],
+            )
+            # Sign/sense check: PT² lowers E₀ below -hN unperturbed.
             H_large = build_tfim(lat, J, h_large)
             λ_large = sort(eigvals(Symmetric(H_large)))
-            E0_pt = -h_large * N - J^2 * (N - 1) / (4 * h_large)
-            @test λ_large[1] ≈ E0_pt rtol = 1e-9
-            # Sign/sense check: PT² lowers E₀ below the unperturbed value.
             @test λ_large[1] < -h_large * N
         end
     end

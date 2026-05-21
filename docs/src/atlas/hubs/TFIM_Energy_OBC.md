@@ -20,6 +20,9 @@
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense (black-box ED) | `test/models/quantum/TFIM/test_TFIM_local.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 
 ## Test calls
 
@@ -45,11 +48,23 @@ verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw
 verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-8, refs = ["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"])
 ```
 
+```julia
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = E0_ed, agree_within = 1.0e-10, at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; J = J, h = 0.0), Energy(), OBC(N); route = :limiting_case, independent = -J * (N - 1), agree_within = 1.0e-12, at = ["J=$(J)", "h=0.0", "N=$(N)"], refs = ["Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED)"])
+```
+
+```julia
+verify(TFIM(; J = J, h = h_large), Energy(), OBC(N); route = :limiting_case, independent = E0_pt, agree_within = 1.0e-9, at = ["J=$(J)", "h=$(h_large)", "N=$(N)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 5 · model ED-feasible
+- cards: 8 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

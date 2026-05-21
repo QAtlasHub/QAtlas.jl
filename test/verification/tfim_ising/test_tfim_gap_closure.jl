@@ -31,7 +31,8 @@ using QAtlas, Lattice2D, LinearAlgebra, Test
                     OBC(N);
                     route=:ed_finite_size,
                     independent=E0_ed,
-                    agree_within=1e-10,
+                    # Legacy used rtol=1e-10; emulate via |E0_ed|-scaling.
+                    agree_within=max(1e-12, 1e-10 * abs(E0_ed)),
                     at=["J=$(J)", "h=$(h)", "N=$(N)"],
                     refs=[
                         "Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC",
@@ -123,7 +124,8 @@ end
                 OBC(N);
                 route=:limiting_case,
                 independent=E0_pt,
-                agree_within=1e-9,
+                # Legacy used rtol=1e-9 (|E0_pt| ~ hN ~ 6e3 at h=1000).
+                agree_within=max(1e-12, 1e-9 * abs(E0_pt)),
                 at=["J=$(J)", "h=$(h_large)", "N=$(N)"],
                 refs=[
                     "Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)",

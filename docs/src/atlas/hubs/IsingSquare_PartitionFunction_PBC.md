@@ -33,7 +33,7 @@ verify(IsingSquare(; Lx = 3, Ly = 3, J = 1.0), PartitionFunction(), PBC(0); rout
 ```
 
 ```julia
-verify(IsingSquare(; Lx = Lx, Ly = Ly, J = J_ISING), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = Lx, Ly = Ly, J = J_ISING), independent = exact_partition(Lx, Ly, J_ISING, β), agree_within = 1.0e-10, at = ["Lx=$(Lx)", "Ly=$(Ly)", "β=$(β)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+verify(IsingSquare(; Lx = Lx, Ly = Ly, J = J_ISING), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = Lx, Ly = Ly, J = J_ISING), independent = Z_bf, agree_within = 1.0e-10 * max(1.0, abs(Z_bf)), at = ["Lx=$(Lx)", "Ly=$(Ly)", "β=$(β)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
 ```
 
 ```julia

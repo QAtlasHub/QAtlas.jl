@@ -50,7 +50,7 @@ verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = E0_ed, agree_within = 1.0e-10, at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = E0_ed, agree_within = max(1.0e-12, 1.0e-10 * abs(E0_ed)), at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
 ```
 
 ```julia
@@ -58,11 +58,11 @@ verify(TFIM(; J = J, h = 0.0), Energy(), OBC(N); route = :limiting_case, indepen
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h_large), Energy(), OBC(N); route = :limiting_case, independent = E0_pt, agree_within = 1.0e-9, at = ["J=$(J)", "h=$(h_large)", "N=$(N)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
+verify(TFIM(; J = J, h = h_large), Energy(), OBC(N); route = :limiting_case, independent = E0_pt, agree_within = max(1.0e-12, 1.0e-9 * abs(E0_pt)), at = ["J=$(J)", "h=$(h_large)", "N=$(N)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = vals[1], agree_within = 1.0e-8, at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
+verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
 ```
 
 

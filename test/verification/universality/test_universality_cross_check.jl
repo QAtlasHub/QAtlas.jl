@@ -246,7 +246,8 @@ end
                 OBC(N);
                 route=:ed_finite_size,
                 independent=vals[1],
-                agree_within=1e-8,
+                # Legacy used rtol=1e-8 (|E0| ~ 2N ~ 32 at N=16).
+                agree_within=max(1e-10, 1e-8 * abs(vals[1])),
                 at=["J=$(J)", "h=$(h)", "N=$(N)"],
                 refs=[
                     "Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)",

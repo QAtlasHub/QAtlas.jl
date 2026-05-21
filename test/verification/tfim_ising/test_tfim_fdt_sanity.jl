@@ -9,6 +9,15 @@
 
 using QAtlas, Test
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 2 zero-legacy review (PR #449): all four @test below stay raw on
+# purpose. χ'' antisymmetry compares two fetches (no single-pin subject);
+# @test_throws asserts a dispatch error (verify cannot model error-outcomes);
+# isfinite / > 0 are structural predicates on a single fetch. None map to a
+# verify() card. The value pin (Pfeuty Δ = 2|h-J|) is covered by the
+# sibling test_tfim_fdt_verify.jl.
+# ─────────────────────────────────────────────────────────────────────────────
+
 @testset "TFIM Infinite() SusceptibilityZZ dynamic-branch sanity" begin
     N_proxy = 24
     t_max = 10.0

@@ -15,8 +15,8 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | Pfeuty 1970: m_z = 0 for h >= J (disordered/critical) | `test/models/quantum/TFIM/test_TFIM_zaxis.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)²)^{1/8} for h < J | `test/models/quantum/TFIM/test_TFIM_zaxis.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Pfeuty 1970: m_z = 0 for h >= J (disordered/critical) | `test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)²)^{1/8} for h < J | `test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl` |
 
 ## Test calls
 

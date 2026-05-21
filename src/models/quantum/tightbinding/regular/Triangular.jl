@@ -104,3 +104,52 @@ function fetch(
     end
     return sort!(eigs)
 end
+
+# ─── Scalar invariants for verify() integration ────────────────────────────
+#
+# Sister to TightBindingChecksum + TightBindingMaxEnergy on Honeycomb.
+# Quantities defined in Honeycomb.jl; forwarded here for Triangular.
+#
+# Note: Triangular is NOT bipartite. max(spectrum) saturates only at the
+# K-point (θ₁=θ₂=2π/3), which is on the Lx × Ly k-grid only when both
+# Lx, Ly are multiples of 3. So MaxEnergy is exposed for cross-check
+# against real-space ED but has no Lx,Ly-independent literature value.
+# Checksum tr(H²) = 2 t² · n_NN_bonds = 6 t² Lx Ly always holds.
+
+"""
+    fetch(::Triangular, ::TightBindingChecksum, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`Σ λᵢ² = tr(H²)` for the Lx × Ly triangular PBC TB spectrum. Each site
+has 6 NN ⇒ `n_NN_bonds = 3 · Lx · Ly` and `tr(H²) = 6 · t² · Lx · Ly`.
+"""
+function fetch(
+    m::Triangular,
+    ::TightBindingChecksum,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return sum(abs2, eigs)
+end
+
+"""
+    fetch(::Triangular, ::TightBindingMaxEnergy, ::Infinite; Lx, Ly, t=1.0) -> Float64
+
+`max(λᵢ)` for the Lx × Ly triangular PBC TB spectrum. Maximum reaches
+`+3 t` only when the K-point is on the discrete grid (both Lx, Ly
+multiples of 3); otherwise it is strictly less. Exposed for ED cross-
+check rather than as a closed-form literature pin.
+"""
+function fetch(
+    m::Triangular,
+    ::TightBindingMaxEnergy,
+    ::Infinite;
+    Lx::Integer=m.Lx,
+    Ly::Integer=m.Ly,
+    t::Real=m.t,
+)
+    eigs = fetch(m, TightBindingSpectrum(); Lx=Lx, Ly=Ly, t=t)
+    return maximum(eigs)
+end

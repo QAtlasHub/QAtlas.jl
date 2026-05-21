@@ -387,3 +387,26 @@ function fetch(
     c_eff = _cardy_renyi_c(c, q.α)
     return (c_eff / 3) * log(ℓ)
 end
+
+# ─── Infinite bc forwarding for verify() integration ───────────────────────
+#
+# Universality{C}/CentralCharge is a property of an emergent CFT, not of a
+# finite lattice with boundary conditions. The forwards below let verify()
+# cards quote these literature values with the standard 3-arg signature
+# (model, quantity, bc) used by every other CentralCharge hub.
+
+function fetch(m::Universality{:Ising}, q::CentralCharge, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Potts3}, q::CentralCharge, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Potts4}, q::CentralCharge, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:XY}, q::CentralCharge, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Heisenberg}, q::CentralCharge, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end

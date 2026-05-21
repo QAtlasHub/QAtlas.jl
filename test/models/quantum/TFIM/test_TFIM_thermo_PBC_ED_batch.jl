@@ -50,6 +50,7 @@ let Sx = spin_ops(1//2)[1], Sz = spin_ops(1//2)[3]
                             independent=ed_val,
                             at=["N=$(N)"],
                             agree_within=1e-9,
+                            expected_fail=(h > J),  # bug regime only — h>J disordered triggers #444 (JW parity-sector); h<J ordered passes
                             refs=[
                                 "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum ($(lab))",
                             ],

@@ -41,33 +41,30 @@ using QAtlas, Test
                 ],
                 fetch_kw=(; beta=LOW_T_BETA),
             )
-            verify(
-                TFIM(; J=J, h=h),
-                ThermalEntropy(),
-                OBC(; N=N);
-                route=:limiting_case,
-                independent=0.0,
-                agree_within=1e-5,
-                refs=[
-                    "TFIM OBC unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet finite-size splitting)",
-                ],
-                fetch_kw=(; beta=LOW_T_BETA),
-            )
-            # PBC only in the ordered phase h < J (parity-sector bug in disordered phase).
-            if h < J
+            # Ordered-phase (h<J) finite-N OBC has Z2-doublet s ~ log(2)/N
+            # (0.043 at N=16, h=0.5) — NOT trivially zero. Restrict the s=0
+            # low-T finite-N OBC card to the disordered phase, where the
+            # field-induced gap gives a unique GS and s = 0 truly.
+            if h > J
                 verify(
                     TFIM(; J=J, h=h),
                     ThermalEntropy(),
-                    PBC(; N=N);
+                    OBC(; N=N);
                     route=:limiting_case,
                     independent=0.0,
-                    agree_within=1e-5,
+                    agree_within=1e-9,
                     refs=[
-                        "TFIM PBC ordered phase (h<J) unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet splitting)",
+                        "TFIM OBC disordered phase (h>J) unique GS at T → 0 ⇒ s = 0 (gap = 2(h-J), no doublet residue)",
                     ],
                     fetch_kw=(; beta=LOW_T_BETA),
                 )
             end
+            # PBC finite-N low-T s=0 card dropped:
+            #   * h<J (ordered) PBC has Z2-doublet entropy s ~ log(2)/N
+            #     (~0.06 at N=8, ~0.04 at N=16) — not trivially zero.
+            #   * h>J (disordered) PBC has the parity-sector convention bug
+            #     documented in test_TFIM_pbc_thermal.jl.
+            # No PBC regime admits the s=0 low-T claim at finite N.
         end
     end
 

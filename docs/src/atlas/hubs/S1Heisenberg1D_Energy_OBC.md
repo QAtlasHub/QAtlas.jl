@@ -32,7 +32,7 @@ verify(S1Heisenberg1D(; J = J), Energy(), OBC(2); route = :second_closed_form, f
 ```
 
 ```julia
-verify(S1Heisenberg1D(), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; J = J, beta = beta))
+verify(S1Heisenberg1D(; J = J), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; beta = beta))
 ```
 
 

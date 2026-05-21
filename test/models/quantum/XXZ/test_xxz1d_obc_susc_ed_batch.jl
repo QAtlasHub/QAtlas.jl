@@ -7,13 +7,15 @@
 #   χ_αα = β · Var(M_α) / N,  M_α = Σ σ^α_i
 # in the canonical ensemble.  No QAtlas thermal kernel touched.
 #
-# NOTE (2026-05-20): A preliminary probe shows the current src implementation
-# returns values that DIFFER from the ED reference across every (Δ, N, β)
-# tested — including a clear SU(2) violation at Δ=1.0 where ED gives
-# χ_x = χ_y = χ_z but src gives χ_x = χ_y ≠ χ_z. This batch is filed as
-# a "bug-surfacing" card: CI failure is the intended diagnostic signal.
-# Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force
-# ED at finite β).
+# NOTE: This card was previously filed as bug-surfacing for what looked like
+# an XXZ thermal kernel SU(2) violation (tracker issue #445). Root cause
+# turned out to be a J/Δ kwarg-swallow on the card side, NOT a kernel
+# bug — XXZ1D has J::Float64 and Δ::Float64 struct fields and the fetch
+# dispatch reads model.J / model.Δ; passing J/Δ via fetch_kw was silently
+# absorbed by the `kwargs...` slurp. Switching to the struct constructor
+# XXZ1D(; J=J, Δ=dz) makes the card agree with the ED reference to
+# machine precision. Same bug pattern as #404 / #405 / #409 / #410 / s13.
+# Issue #445 can be closed.
 #
 # Pure verify(); branches off main. Refs #381.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -54,7 +56,7 @@ let Sx_op = spin_ops(1//2)[1], Sy_op = spin_ops(1//2)[2], Sz_op = spin_ops(1//2)
                     )
                         ed_val = ed_xxz_chi(N, J, dz, beta, sigma_alpha)
                         verify(
-                            XXZ1D(),
+                            XXZ1D(; J=J, Δ=dz),
                             qty,
                             OBC(N);
                             route=:ed_finite_size,
@@ -62,9 +64,9 @@ let Sx_op = spin_ops(1//2)[1], Sy_op = spin_ops(1//2)[2], Sz_op = spin_ops(1//2)
                             at=["N=$(N)"],
                             agree_within=1e-9,
                             refs=[
-                                "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute beta*Var(M_alpha)/N (alpha=$(axis_name)). Refs: tracker issue #445 (XXZ1D thermal kernel discrepancy vs brute-force ED at finite β).",
+                                "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=$(axis_name))",
                             ],
-                            fetch_kw=(; J=J, Δ=dz, beta=beta),
+                            fetch_kw=(; beta=beta),
                         )
                     end
                 end

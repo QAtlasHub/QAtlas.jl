@@ -21,7 +21,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), SusceptibilityXX(), PBC(N); route = :ed_finite_size, independent = ed_val, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; beta = beta))
+verify(TFIM(; J = J, h = h), SusceptibilityXX(), PBC(N); route = :ed_finite_size, independent = ed_val, at = ["N=$(N)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; beta = beta))
 ```
 
 

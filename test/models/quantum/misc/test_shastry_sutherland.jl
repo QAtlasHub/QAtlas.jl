@@ -73,7 +73,7 @@ end
     for (J, Jp) in
         ((0.0, 1.0), (0.3, 1.0), (0.674, 1.0), (0.0, 2.0), (0.5, 2.0), (1.0, 2.0))
         verify(
-            ShastrySutherland(; J=J, Jp=Jp),
+            QAtlas.ShastrySutherland(; J=J, Jp=Jp),
             Energy(:per_site),
             Infinite();
             route=:second_closed_form,

@@ -14,7 +14,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
 | `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
 | `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 
@@ -23,7 +23,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit)"], fetch_kw = (; beta = LOW_T_BETA))
+verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :limiting_case, independent = if iseven(N) 0.0 else log(3) / N end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = LOW_T_BETA))
 ```
 
 ```julia
@@ -31,7 +31,7 @@ verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :limiting_case
 ```
 
 ```julia
-verify(S1Heisenberg1D(), ThermalEntropy(), OBC(N); route = :ed_finite_size, independent = ed_S, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; J = J, beta = beta))
+verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :ed_finite_size, independent = ed_S, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; beta = beta))
 ```
 
 

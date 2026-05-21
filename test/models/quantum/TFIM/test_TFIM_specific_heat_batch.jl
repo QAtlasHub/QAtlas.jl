@@ -51,18 +51,25 @@ using QAtlas, Test
             fetch_kw=(; beta=HIGH_T_BETA),
         )
         for N in (8, 12)
-            verify(
-                TFIM(; J=J, h=h),
-                SpecificHeat(),
-                OBC(N);
-                route=:limiting_case,
-                independent=0.0,
-                agree_within=1e-9,
-                refs=[
-                    "TFIM OBC, T → 0: c = 0 exactly (gap → exponentially small heat capacity)",
-                ],
-                fetch_kw=(; beta=LOW_T_BETA),
-            )
+            # Ordered-phase (h<J) finite-N OBC has a Z2-doublet splitting
+            # delta ~ h^N (cat-state level pair); at N=8, h=0.5, delta ~ 0.004,
+            # so beta*delta ~ 0.4 at LOW_T_BETA=100 and c is NOT exponentially
+            # small. Restrict low-T finite-N c=0 claim to the disordered phase
+            # (h>J) where Delta = 2(h-J) gives beta*Delta >> 1 truly.
+            if h > J
+                verify(
+                    TFIM(; J=J, h=h),
+                    SpecificHeat(),
+                    OBC(N);
+                    route=:limiting_case,
+                    independent=0.0,
+                    agree_within=1e-9,
+                    refs=[
+                        "TFIM OBC disordered phase (h>J), T → 0: c = 0 exactly (field-induced gap exponentially suppresses c)",
+                    ],
+                    fetch_kw=(; beta=LOW_T_BETA),
+                )
+            end
             verify(
                 TFIM(; J=J, h=h),
                 SpecificHeat(),
@@ -73,21 +80,14 @@ using QAtlas, Test
                 refs=["TFIM OBC, T → ∞: c → 0 as β² (high-T tail)"],
                 fetch_kw=(; beta=HIGH_T_BETA),
             )
-            # PBC cards restricted to h < J (see header note re: parity-sector bug
-            # documented in test_TFIM_pbc_thermal.jl for h > J disordered phase).
+            # PBC finite-N low-T card dropped entirely:
+            #   * h<J (ordered) finite-N PBC has Z2-doublet residue (same as OBC).
+            #   * h>J (disordered) finite-N PBC has the documented parity-sector
+            #     convention bug from test_TFIM_pbc_thermal.jl.
+            # No PBC regime admits the c=0 trivial-limit claim at finite N here.
+            # High-T (T -> infty) PBC card retained — finite N is fine in that
+            # limit because the spectrum decouples from sector mixing.
             if h < J
-                verify(
-                    TFIM(; J=J, h=h),
-                    SpecificHeat(),
-                    PBC(N);
-                    route=:limiting_case,
-                    independent=0.0,
-                    agree_within=1e-9,
-                    refs=[
-                        "TFIM PBC, T → 0: c = 0 exactly (h < J regime to avoid parity-sector bug)",
-                    ],
-                    fetch_kw=(; beta=LOW_T_BETA),
-                )
                 verify(
                     TFIM(; J=J, h=h),
                     SpecificHeat(),

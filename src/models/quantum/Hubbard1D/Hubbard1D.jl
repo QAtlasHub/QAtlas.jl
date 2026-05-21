@@ -138,7 +138,7 @@ function _hubbard1d_e0(t::Float64, U::Float64)::Float64
     integral, _ = quadgk(
         ω -> _hubbard1d_e0_integrand(ω, t, U), 0.0, Inf; rtol=1e-12, atol=1e-14
     )
-    return -4.0 * t^2 * integral
+    return -4.0 * t * integral
 end
 
 """

@@ -14,16 +14,11 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM PBC ordered phase (h<J) unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet splitting) | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM PBC at T → ∞: s → log 2 per site | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
-
-```julia
-verify(TFIM(; J = J, h = h), ThermalEntropy(), PBC(; N = N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-5, refs = ["TFIM PBC ordered phase (h<J) unique GS at T → 0 ⇒ s = 0 (tolerance 1e-5 absorbs Z₂-doublet splitting)"], fetch_kw = (; beta = LOW_T_BETA))
-```
 
 ```julia
 verify(TFIM(; J = J, h = h), ThermalEntropy(), PBC(; N = N); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["TFIM PBC at T → ∞: s → log 2 per site"], fetch_kw = (; beta = HIGH_T_BETA))
@@ -33,7 +28,7 @@ verify(TFIM(; J = J, h = h), ThermalEntropy(), PBC(; N = N); route = :limiting_c
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-feasible
+- cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -14,7 +14,6 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → 0: gap suppression ⇒ c = 0 exactly | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
 | `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
 | `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 
@@ -23,22 +22,18 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["S1Heisenberg1D OBC T → 0: gap suppression ⇒ c = 0 exactly"], fetch_kw = (; beta = LOW_T_BETA))
-```
-
-```julia
 verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = HIGH_T_BETA))
 ```
 
 ```julia
-verify(S1Heisenberg1D(), SpecificHeat(), OBC(N); route = :ed_finite_size, independent = ed_C, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; J = J, beta = beta))
+verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :ed_finite_size, independent = ed_C, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; beta = beta))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

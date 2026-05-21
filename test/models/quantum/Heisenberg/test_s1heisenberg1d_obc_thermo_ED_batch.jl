@@ -26,7 +26,7 @@ let Sx = spin_ops(1)[1], Sy = spin_ops(1)[2], Sz = spin_ops(1)[3]
                 for beta in (0.5, 2.0, 5.0)
                     ed_E, ed_F, ed_S, ed_C = ed_s1h_thermo_per_site(N, J, beta)
                     verify(
-                        S1Heisenberg1D(),
+                        S1Heisenberg1D(; J=J),
                         Energy(:per_site),
                         OBC(N);
                         route=:ed_finite_size,
@@ -36,10 +36,10 @@ let Sx = spin_ops(1)[1], Sy = spin_ops(1)[2], Sz = spin_ops(1)[3]
                         refs=[
                             "ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum",
                         ],
-                        fetch_kw=(; J=J, beta=beta),
+                        fetch_kw=(; beta=beta),
                     )
                     verify(
-                        S1Heisenberg1D(),
+                        S1Heisenberg1D(; J=J),
                         FreeEnergy(),
                         OBC(N);
                         route=:ed_finite_size,
@@ -47,10 +47,10 @@ let Sx = spin_ops(1)[1], Sy = spin_ops(1)[2], Sz = spin_ops(1)[3]
                         at=["N=$(N)"],
                         agree_within=1e-9,
                         refs=["ED black-box (spin-1): full-spectrum log-sum-exp F/N"],
-                        fetch_kw=(; J=J, beta=beta),
+                        fetch_kw=(; beta=beta),
                     )
                     verify(
-                        S1Heisenberg1D(),
+                        S1Heisenberg1D(; J=J),
                         ThermalEntropy(),
                         OBC(N);
                         route=:ed_finite_size,
@@ -58,10 +58,10 @@ let Sx = spin_ops(1)[1], Sy = spin_ops(1)[2], Sz = spin_ops(1)[3]
                         at=["N=$(N)"],
                         agree_within=1e-9,
                         refs=["ED black-box (spin-1): S = β·(E - F) from full spectrum"],
-                        fetch_kw=(; J=J, beta=beta),
+                        fetch_kw=(; beta=beta),
                     )
                     verify(
-                        S1Heisenberg1D(),
+                        S1Heisenberg1D(; J=J),
                         SpecificHeat(),
                         OBC(N);
                         route=:ed_finite_size,
@@ -69,7 +69,7 @@ let Sx = spin_ops(1)[1], Sy = spin_ops(1)[2], Sz = spin_ops(1)[3]
                         at=["N=$(N)"],
                         agree_within=1e-9,
                         refs=["ED black-box (spin-1): C = β²·Var(E) from full spectrum"],
-                        fetch_kw=(; J=J, beta=beta),
+                        fetch_kw=(; beta=beta),
                     )
                 end
             end

@@ -31,7 +31,7 @@ verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :limiting_case, 
 ```
 
 ```julia
-verify(S1Heisenberg1D(), SpecificHeat(), OBC(N); route = :ed_finite_size, independent = ed_C, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; J = J, beta = beta))
+verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :ed_finite_size, independent = ed_C, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; beta = beta))
 ```
 
 

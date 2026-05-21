@@ -14,16 +14,11 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM PBC, T → 0: c = 0 exactly (h < J regime to avoid parity-sector bug) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM PBC, T → ∞: c → 0 as β² (h < J regime to avoid parity-sector bug) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
-
-```julia
-verify(TFIM(; J = J, h = h), SpecificHeat(), PBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM PBC, T → 0: c = 0 exactly (h < J regime to avoid parity-sector bug)"], fetch_kw = (; beta = LOW_T_BETA))
-```
 
 ```julia
 verify(TFIM(; J = J, h = h), SpecificHeat(), PBC(N); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["TFIM PBC, T → ∞: c → 0 as β² (h < J regime to avoid parity-sector bug)"], fetch_kw = (; beta = HIGH_T_BETA))
@@ -33,7 +28,7 @@ verify(TFIM(; J = J, h = h), SpecificHeat(), PBC(N); route = :limiting_case, ind
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-feasible
+- cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

@@ -31,7 +31,7 @@ verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :limiting_case
 ```
 
 ```julia
-verify(S1Heisenberg1D(), ThermalEntropy(), OBC(N); route = :ed_finite_size, independent = ed_S, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; J = J, beta = beta))
+verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :ed_finite_size, independent = ed_S, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; beta = beta))
 ```
 
 

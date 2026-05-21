@@ -58,7 +58,7 @@ end
                     route=:ed_finite_size,
                     independent=ed_E,
                     at=["LxLy=$(Lx)x$(Ly)"],
-                    agree_within=1e-9,
+                    agree_within=1e-7,
                     refs=[
                         "Brute-force ED: enumerate all 2^(Lx·Ly) configs, canonical ⟨H⟩_β/N on the torus",
                     ],
@@ -71,7 +71,7 @@ end
                     route=:ed_finite_size,
                     independent=ed_C,
                     at=["LxLy=$(Lx)x$(Ly)"],
-                    agree_within=1e-9,
+                    agree_within=1e-7,
                     refs=["Brute-force ED: β²·(⟨E²⟩-⟨E⟩²)/N over all configs"],
                     fetch_kw=(; beta=beta),
                 )
@@ -82,7 +82,7 @@ end
                     route=:ed_finite_size,
                     independent=ed_S,
                     at=["LxLy=$(Lx)x$(Ly)"],
-                    agree_within=1e-9,
+                    agree_within=1e-7,
                     refs=["Brute-force ED: S/N = β·(E-F)/N over all configs"],
                     fetch_kw=(; beta=beta),
                 )

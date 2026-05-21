@@ -14,7 +14,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC, T → 0: c = 0 exactly (gap → exponentially small heat capacity) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC disordered phase (h>J), T → 0: c = 0 exactly (field-induced gap exponentially suppresses c) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC, T → ∞: c → 0 as β² (high-T tail) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
 
 ## Test calls
@@ -22,7 +22,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM OBC, T → 0: c = 0 exactly (gap → exponentially small heat capacity)"], fetch_kw = (; beta = LOW_T_BETA))
+verify(TFIM(; J = J, h = h), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM OBC disordered phase (h>J), T → 0: c = 0 exactly (field-induced gap exponentially suppresses c)"], fetch_kw = (; beta = LOW_T_BETA))
 ```
 
 ```julia

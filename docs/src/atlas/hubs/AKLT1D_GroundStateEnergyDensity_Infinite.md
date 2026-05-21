@@ -15,19 +15,19 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988: e0 = -2J/3 | `test/models/quantum/misc/test_aklt.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3 | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3 | `test/models/quantum/misc/test_aklt_verify_closed_form.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988: e0 = -2J/3 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-2J) / 3, agree_within = 1.0e-14, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988: e0 = -2J/3"])
+verify(AKLT1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-2J) / 3, agree_within = 1.0e-14, refs = ["AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3"])
 ```
 
 ```julia
-verify(AKLT1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-2J) / 3, agree_within = 1.0e-14, refs = ["AKLT 1988: VBS ground state is the exact null space of every bond P₂ projector ⇒ e₀ = -2J/3"])
+verify(AKLT1D(; J = J), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = (-2J) / 3, agree_within = 1.0e-14, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988: e0 = -2J/3"])
 ```
 
 

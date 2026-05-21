@@ -15,19 +15,19 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ξ = 1/log 3 from VBS transfer matrix | `test/models/quantum/misc/test_aklt.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨S^z_0 S^z_r⟩ = (-1)^r (4/3) 3^{-r} ⇒ ξ = 1/log 3 | `test/models/quantum/misc/test_aklt.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨S^z_0 S^z_r⟩ = (-1)^r (4/3) 3^{-r} ⇒ ξ = 1/log 3 | `test/models/quantum/misc/test_aklt_verify_closed_form.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ξ = 1/log 3 from VBS transfer matrix | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / log(3), agree_within = 1.0e-12, refs = ["AKLT 1988: ξ = 1/log 3 from VBS transfer matrix"])
+verify(AKLT1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / log(3), agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨S^z_0 S^z_r⟩ = (-1)^r (4/3) 3^{-r} ⇒ ξ = 1/log 3"])
 ```
 
 ```julia
-verify(AKLT1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / log(3), agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨S^z_0 S^z_r⟩ = (-1)^r (4/3) 3^{-r} ⇒ ξ = 1/log 3"])
+verify(AKLT1D(), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / log(3), agree_within = 1.0e-12, refs = ["AKLT 1988: ξ = 1/log 3 from VBS transfer matrix"])
 ```
 
 

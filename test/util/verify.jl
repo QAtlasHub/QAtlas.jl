@@ -132,7 +132,8 @@ end
 """
     verify(model, quantity, bc;
            route, independent, agree_within,
-           refs, reliability=:high, fetch_kw=(;), at=nothing) -> subject
+           refs, reliability=:high, fetch_kw=(;), at=nothing,
+           subject_extract=nothing) -> subject
 
 Black-box-verify the src value `fetch(model, quantity, bc; fetch_kw...)`
 against an `independent` numeric (scalar or convergence vector) obtained
@@ -153,12 +154,17 @@ function verify(
     reliability::Symbol=:high,
     fetch_kw::NamedTuple=(;),
     at=nothing,
+    subject_extract::Union{Nothing,Function}=nothing,
 )
     route in _VERIFY_ROUTES ||
         error("verify: route must be one of $(_VERIFY_ROUTES); got $(repr(route))")
 
     # ── the ONLY src touch-point: subject is fetched, never re-typed ──
-    subject = QAtlas.fetch(model, quantity, bc; fetch_kw...)
+    # subject_extract (optional) projects a non-scalar fetched value
+    # (NamedTuple, container, etc.) to a single Float64 so verify()
+    # can pin a specific field — e.g. CriticalExponents.β.
+    raw = QAtlas.fetch(model, quantity, bc; fetch_kw...)
+    subject = subject_extract === nothing ? raw : subject_extract(raw)
 
     ind =
         independent isa AbstractVector ? collect(float.(independent)) : [float(independent)]

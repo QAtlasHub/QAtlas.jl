@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | `@critical` | `limiting_case` | 🟡 asserted | Ising QCP at h = J: gap closes (Pfeuty 1970) | `test/models/quantum/TFIM/test_TFIM_infinite_dynamics.jl` |
 | `@ordered` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (BC-independent) | `test/identities/test_identities_TFIM_pbc.jl` |
-| `@ordered` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| = 1 at (J=1, h=0.5) | `test/verification/tfim_ising/test_tfim_fdt.jl` |
+| `@ordered` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| = 1 at (J=1, h=0.5) | `test/verification/tfim_ising/test_tfim_fdt_verify.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| (Bogoliubov dispersion minimum) | `test/identities/test_TFIM_dynamic_symmetries.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Δ = 2|h - J| | `test/identities/test_identities_TFIM.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: Delta = 2|h - J| | `test/models/quantum/TFIM/test_TFIM_infinite_dynamics.jl` |
@@ -40,7 +40,7 @@ verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_f
 ```
 
 ```julia
-verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["Pfeuty 1970: Δ = 2|h - J| = 1 at (J=1, h=0.5)"])
+verify(TFIM(; J = 1.0, h = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["Pfeuty 1970: Delta = 2|h - J| = 1 at (J=1, h=0.5)"])
 ```
 
 ```julia

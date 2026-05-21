@@ -9,7 +9,12 @@
 # (deleted test/verification/tightbinding/test_triangular_tight_binding.jl).
 # Reuses TightBindingChecksum + TightBindingMaxEnergy from PR #453.
 #
-# Triangular is NOT bipartite. n_NN_bonds = 6 NN/site × Lx·Ly / 2 = 3·Lx·Ly.
+# Triangular is NOT bipartite. The identity tr(H²) = 6 t² Lx Ly comes from
+# the discrete-BZ average <cos²(2π m / L)>_m = L/2 which holds exactly only
+# for L ≥ 3 (at L=2 the two k-points give cos(0)² + cos(π)² = 2 = L, so
+# the average is 1 not 1/2 and the formula overcounts by 2×). Test grid
+# restricted to (Lx, Ly) ≥ 3.
+# n_NN_bonds counting holds at any Lx, Ly: 6 NN/site × Lx·Ly / 2 = 3·Lx·Ly.
 # max(spectrum) reaches +3·t only when both Lx, Ly are multiples of 3
 # (K-point on grid); otherwise it is strictly less, so no Lx,Ly-independent
 # literature pin is possible — the MaxEnergy hub is exercised only via
@@ -31,7 +36,7 @@ using Lattice2D: Triangular as L2D_Triangular
 include(joinpath(@__DIR__, "..", "..", "..", "util", "tight_binding.jl"))
 
 @testset "Triangular TB — TightBindingChecksum literature pin (補完 after #449)" begin
-    for (Lx, Ly) in ((2, 2), (2, 3), (3, 3), (3, 4))
+    for (Lx, Ly) in ((3, 3), (3, 4), (4, 4))
         for t in (1.0, 1.5)
             verify(
                 QAtlas.Triangular(),
@@ -51,7 +56,7 @@ include(joinpath(@__DIR__, "..", "..", "..", "util", "tight_binding.jl"))
 end
 
 @testset "Triangular TB — TightBindingChecksum vs real-space ED (補完 after #449)" begin
-    for (Lx, Ly) in ((2, 2), (2, 3), (3, 3), (3, 4))
+    for (Lx, Ly) in ((3, 3), (3, 4), (4, 4))
         for t in (1.0, 1.5)
             lat = build_lattice(L2D_Triangular, Lx, Ly)
             H = build_tight_binding(lat, t)
@@ -75,7 +80,7 @@ end
 end
 
 @testset "Triangular TB — TightBindingMaxEnergy vs real-space ED (補完 after #449)" begin
-    for (Lx, Ly) in ((2, 2), (2, 3), (3, 3), (3, 4))
+    for (Lx, Ly) in ((3, 3), (3, 4), (4, 4))
         for t in (1.0, 1.5)
             lat = build_lattice(L2D_Triangular, Lx, Ly)
             H = build_tight_binding(lat, t)

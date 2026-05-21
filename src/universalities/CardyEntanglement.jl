@@ -387,3 +387,19 @@ function fetch(
     c_eff = _cardy_renyi_c(c, q.α)
     return (c_eff / 3) * log(ℓ)
 end
+
+# ─── Infinite-bc forwarders for RMT / Poisson quantities (verify integration)
+function fetch(m::Universality{:RMT}, q::WignerSurmise, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+fetch(m::Universality{:RMT}, q::TracyWidom, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+fetch(m::Universality{:RMT}, q::MeanRatio, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+function fetch(m::Universality{:RMT}, q::SpectralFormFactor, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Poisson}, q::WignerSurmise, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:Poisson}, q::MeanRatio, ::Infinite; kwargs...)
+    fetch(m, q; kwargs...)
+end

@@ -22,15 +22,15 @@
 | ED-feasible claimed (risk denominator) | 221 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 137 |
+| 🟢 corroborated-at-p | 136 |
 | 🔵 coherent | 25 |
 | ⚪ cited-only (frontier — neutral) | 18 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 67 |
-| Inventory cards scanned (whole test/) | 384 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 68 |
+| Inventory cards scanned (whole test/) | 382 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **73.3%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **61.5%** · **in-repo-verified rate** (incl. 🔵 coherent): **72.9%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "67 actionable hub(s)"
+!!! warning "68 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
@@ -73,6 +73,7 @@
     - [`S1Heisenberg1D/XXCorrelation/OBC`](hubs/S1Heisenberg1D_XXCorrelation_OBC.md)
     - [`S1Heisenberg1D/YYCorrelation/OBC`](hubs/S1Heisenberg1D_YYCorrelation_OBC.md)
     - [`S1Heisenberg1D/ZZCorrelation/OBC`](hubs/S1Heisenberg1D_ZZCorrelation_OBC.md)
+    - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
     - [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
@@ -152,7 +153,7 @@
 | `SLEkappa` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `SYK` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `SchwingerModel` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
-| `ShastrySutherland` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
+| `ShastrySutherland` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
 | `SherringtonKirkpatrick` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -428,7 +429,7 @@
 
 ### `ShastrySutherland` (1)
 
-- 🟢 [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md) — uncorroborated-but-feasible
 
 ### `SherringtonKirkpatrick` (2)
 

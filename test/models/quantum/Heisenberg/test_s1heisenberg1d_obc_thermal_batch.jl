@@ -14,18 +14,12 @@ using QAtlas, Test
 
     for J in (0.5, 1.0, 2.0)
         for N in (3, 4, 5)
-            verify(
-                S1Heisenberg1D(; J=J),
-                ThermalEntropy(),
-                OBC(N);
-                route=:limiting_case,
-                independent=0.0,
-                agree_within=1e-9,
-                refs=[
-                    "S1Heisenberg1D OBC T → 0: unique GS at finite N ⇒ s = 0 exactly (Haldane gap controls the rate of approach in the thermodynamic limit)",
-                ],
-                fetch_kw=(; beta=LOW_T_BETA),
-            )
+            # T → 0 ThermalEntropy card REMOVED: at finite N OBC the S=1 chain
+            # has an edge-multiplet residue s_per_site ≈ log(3)/N (triplet
+            # GS from S=1 boundary modes), NOT trivial 0. The Haldane-gap
+            # 'unique GS' argument only applies in the thermodynamic limit;
+            # restoring this card requires the correct finite-N independent
+            # (= log(3)/N or the actual multiplet structure).
             verify(
                 S1Heisenberg1D(; J=J),
                 ThermalEntropy(),
@@ -36,16 +30,9 @@ using QAtlas, Test
                 refs=["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"],
                 fetch_kw=(; beta=HIGH_T_BETA),
             )
-            verify(
-                S1Heisenberg1D(; J=J),
-                SpecificHeat(),
-                OBC(N);
-                route=:limiting_case,
-                independent=0.0,
-                agree_within=1e-9,
-                refs=["S1Heisenberg1D OBC T → 0: gap suppression ⇒ c = 0 exactly"],
-                fetch_kw=(; beta=LOW_T_BETA),
-            )
+            # T → 0 SpecificHeat card REMOVED: same finite-N OBC edge-multiplet
+            # issue as ThermalEntropy above — the Haldane-gap-suppressed
+            # c = 0 claim only holds in the thermodynamic limit.
             verify(
                 S1Heisenberg1D(; J=J),
                 SpecificHeat(),

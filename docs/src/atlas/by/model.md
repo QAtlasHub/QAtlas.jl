@@ -259,7 +259,7 @@ Every `src`-claimed hub grouped by model.
 
 ## `ShastrySutherland` (1)
 
-- 🟢 [`ShastrySutherland/Energy/Infinite`](../hubs/ShastrySutherland_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`ShastrySutherland/Energy/Infinite`](../hubs/ShastrySutherland_Energy_Infinite.md) — uncorroborated-but-feasible
 
 ## `SherringtonKirkpatrick` (2)
 

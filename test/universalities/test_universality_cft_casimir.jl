@@ -93,7 +93,7 @@ using QAtlas, Test
             Universality(:Potts3),
             CasimirEnergyCorrection(),
             PBC();
-            route=:literature_value,
+            route=:second_closed_form,
             independent=-π * (4 // 5) / 60,
             agree_within=1e-12,
             refs=[
@@ -106,7 +106,7 @@ using QAtlas, Test
             Universality(:Potts4),
             CasimirEnergyCorrection(),
             PBC();
-            route=:literature_value,
+            route=:second_closed_form,
             independent=-π / 60,
             agree_within=1e-12,
             refs=[
@@ -119,7 +119,7 @@ using QAtlas, Test
             Universality(:XY),
             CasimirEnergyCorrection(),
             PBC();
-            route=:literature_value,
+            route=:second_closed_form,
             independent=-π / 60,
             agree_within=1e-12,
             refs=[
@@ -132,7 +132,7 @@ using QAtlas, Test
             Universality(:Heisenberg),
             CasimirEnergyCorrection(),
             PBC();
-            route=:literature_value,
+            route=:second_closed_form,
             independent=-π / 60,
             agree_within=1e-12,
             refs=[

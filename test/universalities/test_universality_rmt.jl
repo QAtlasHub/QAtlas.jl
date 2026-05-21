@@ -134,17 +134,9 @@ end
             fetch_kw=(; s=s),
         )
     end
-    verify(
-        Universality(:Poisson),
-        WignerSurmise(),
-        Infinite();
-        route=:literature_value,
-        independent=1 / exp(1),
-        agree_within=1e-12,
-        at=["s=1.0"],
-        refs=["Poisson reference: P(1) = 1/e ≈ 0.3679..."],
-        fetch_kw=(; s=1.0),
-    )
+    # NOTE: the standalone P(1) = 1/e card was redundant with the sweep
+    # entry at s=1.0 (algebraically identical: exp(-1) = 1/e) and is
+    # omitted to avoid a duplicate INVENTORY card.
 end
 
 @testset "Poisson: ⟨r⟩ = 2 log 2 - 1 (closed form, verify)" begin

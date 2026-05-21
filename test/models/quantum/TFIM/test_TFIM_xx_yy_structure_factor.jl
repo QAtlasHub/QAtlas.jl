@@ -95,6 +95,27 @@ end
     end
 end
 
+@testset "TFIM YYStructureFactor Infinite — N_proxy pass-through (verify migration)" begin
+    h, β, q = 0.7, 1.0, π / 3
+    for N_proxy in (40, 80)
+        verify(
+            TFIM(; J=1.0, h=h),
+            YYStructureFactor(),
+            Infinite();
+            route=:delegation_invariant,
+            independent=QAtlas.fetch(
+                TFIM(; J=1.0, h=h), YYStructureFactor(), OBC(N_proxy); beta=β, q=q
+            ),
+            agree_within=0.0,
+            at=["N_proxy=$(N_proxy)"],
+            refs=[
+                "Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared)",
+            ],
+            fetch_kw=(; beta=β, q=q, N_proxy=N_proxy),
+        )
+    end
+end
+
 # ── Structural invariants (NOT single-value hub pins; kept as raw @test) ───
 #
 # verify() is scalar-by-design (one fetch ↔ one independent). The blocks

@@ -219,11 +219,13 @@ end
         Universality(:XY),
         CriticalExponents(),
         Infinite();
-        route=:literature_value,
+        route=:second_closed_form,
         independent=1 // 4,
         agree_within=0,
         at=["d=2", "field=η"],
-        refs=["Kosterlitz 1974 BKT: η = 1/4 at the universal jump"],
+        refs=[
+            "Kosterlitz 1974 BKT: exact RG fixed-point value η = 1/4 at the universal jump"
+        ],
         fetch_kw=(; d=2),
         subject_extract=e -> e.η,
     )

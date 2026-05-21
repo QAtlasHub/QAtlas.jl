@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | `@disordered` | `sum_rule` | 🟡 asserted | Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0 | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | J=0 decoupled spins: ε = -h tanh(βh) per site | `test/identities/test_TFIM_limits_cross_model.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense (black-box ED) | `test/models/quantum/TFIM/test_TFIM_local.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
 

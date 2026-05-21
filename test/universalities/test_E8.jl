@@ -1,107 +1,117 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# E8 spectrum (Zamolodchikov 1989) — value pins via verify(), structural
+# guards + legacy-alias deprecation shims via raw @test.
+#
+# Migrated from pure-legacy @test to verify()-first (PR #449 phase B,
+# zero-legacy end-state). E8Spectrum returns a Vector{Float64} of 8 mass
+# ratios; verify() takes a scalar so subject_extract = m -> m[i] projects
+# each component. Coldea et al. (Science 2010) measured the m₂/m₁ = φ
+# ratio in CoNb₂O₆ — that experimental cross-check anchors the literature
+# routes here.
+# ─────────────────────────────────────────────────────────────────────────────
+
+using QAtlas, Test
+
 @testset "E8 Spectrum Logic" begin
-    # ───────────────────────────────────────────────────────────────────
-    # 1. Structural sanity: 8 masses, ordered, m₁ = 1, all positive.
-    # ───────────────────────────────────────────────────────────────────
+    # ── Structural sanity (length, ordering, positivity) — raw @test
+    # (multi-element invariants of the Vector, not single-value hub pins)
     @testset "Structure" begin
         masses = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
         @test length(masses) == 8
         @test masses[1] == 1.0
         @test all(masses .> 0)
-        @test issorted(masses)  # 質量は昇順であるべき
+        @test issorted(masses)
     end
 
-    # ───────────────────────────────────────────────────────────────────
-    # 2. Golden-ratio identity m₂/m₁ = φ — hallmark of E₈ symmetry,
-    #    measured experimentally in Coldea et al., Science 327, 177 (2010).
-    # ───────────────────────────────────────────────────────────────────
-    @testset "Golden Ratio Relationship" begin
-        masses = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
-        ϕ = (1 + sqrt(5)) / 2
-        @test masses[2] ≈ ϕ atol = 1e-15
-    end
+    # ── Golden ratio m₂/m₁ = φ — Coldea et al. Science 327, 177 (2010) ──────
+    verify(
+        E8(),
+        E8Spectrum(),
+        Infinite();
+        route=:literature_value,
+        independent=(1 + sqrt(5)) / 2,
+        agree_within=1e-15,
+        refs=[
+            "Coldea et al., Science 327, 177 (2010): m₂/m₁ = φ measured in CoNb₂O₆ Ising chain at h=h_c",
+        ],
+        subject_extract=m -> m[2],
+    )
 
-    # ───────────────────────────────────────────────────────────────────
-    # 3. Literature cross-check: every stored mass must equal the
-    #    closed-form Zamolodchikov (1989) / Delfino (2004) expression
-    #    to machine precision. The expressions below are derived
-    #    independently in `docs/src/calc/e8-mass-spectrum-derivation.md`
-    #    (Perron-Frobenius eigenvector of the E₈ Cartan matrix + Dorey
-    #    fusion rules). Any sign flip, coefficient drift, or angle
-    #    typo in `get_e8_mass_ratios()` is caught here.
-    #
-    #    Historical note: v0.13.4 and earlier silently returned
-    #    `m₇, m₈` with a factor-of-2 error (the `4 · ϕ² · cos(…)`
-    #    spelling of the original implementation collapses to
-    #    `2 · ϕ² · cos(…)` once the definition of φ is expanded).
-    #    This testset would have failed on that code — kept as a
-    #    regression guard.
-    # ───────────────────────────────────────────────────────────────────
+    # ── Closed-form mass spectrum (Zamolodchikov 1989, Delfino 2004) ────────
     @testset "Closed-form expressions (Zamolodchikov 1989, Delfino 2004)" begin
-        masses = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
         ϕ = 2 * cos(π / 5)
-
-        @test masses[1] == 1.0
-        @test masses[2] ≈ ϕ atol = 1e-14
-        @test masses[3] ≈ 2 * cos(π / 30) atol = 1e-14
-        @test masses[4] ≈ 2 * cos(7π / 30) * ϕ atol = 1e-14
-        @test masses[5] ≈ 2 * cos(2π / 15) * ϕ atol = 1e-14
-        @test masses[6] ≈ 2 * cos(π / 30) * ϕ atol = 1e-14
-        @test masses[7] ≈ 2 * cos(7π / 30) * ϕ^2 atol = 1e-14
-        @test masses[8] ≈ 2 * cos(2π / 15) * ϕ^2 atol = 1e-14
+        closedforms = [
+            ("m1=1", 1.0, m -> m[1]),
+            ("m2=ϕ", ϕ, m -> m[2]),
+            ("m3", 2 * cos(π / 30), m -> m[3]),
+            ("m4=2c(7π/30)ϕ", 2 * cos(7π / 30) * ϕ, m -> m[4]),
+            ("m5=2c(2π/15)ϕ", 2 * cos(2π / 15) * ϕ, m -> m[5]),
+            ("m6=2c(π/30)ϕ", 2 * cos(π / 30) * ϕ, m -> m[6]),
+            ("m7=2c(7π/30)ϕ²", 2 * cos(7π / 30) * ϕ^2, m -> m[7]),
+            ("m8=2c(2π/15)ϕ²", 2 * cos(2π / 15) * ϕ^2, m -> m[8]),
+        ]
+        for (label, expected, extract) in closedforms
+            verify(
+                E8(),
+                E8Spectrum(),
+                Infinite();
+                route=:second_closed_form,
+                independent=expected,
+                agree_within=1e-14,
+                at=[label],
+                refs=[
+                    "Zamolodchikov 1989 + Delfino 2004: Perron-Frobenius eigenvector of the E₈ Cartan matrix gives the 8-mass spectrum in closed form; see docs/src/calc/e8-mass-spectrum-derivation.md",
+                ],
+                subject_extract=extract,
+            )
+        end
     end
 
-    # ───────────────────────────────────────────────────────────────────
-    # 4. Decimal-level cross-check against the tabulated literature
-    #    values (Delfino 2004 review, eq. (4.14); Zamolodchikov 1989
-    #    Table 2).  These are the six-digit numbers every subsequent
-    #    paper and textbook quotes.  A trivial coefficient bug in the
-    #    mass formula would shift them by O(1), so a tight atol is
-    #    effective.
-    # ───────────────────────────────────────────────────────────────────
+    # ── Tabulated decimal values (Delfino 2004, eq. 4.14) ───────────────────
     @testset "Tabulated decimal values (Delfino 2004, eq. 4.14)" begin
-        masses = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
         expected = [
             1.000000, 1.618034, 1.989044, 2.404867, 2.956295, 3.218340, 3.891157, 4.783386
         ]
         for i in 1:8
-            @test masses[i] ≈ expected[i] atol = 1e-5
+            verify(
+                E8(),
+                E8Spectrum(),
+                Infinite();
+                route=:literature_value,
+                independent=expected[i],
+                agree_within=1e-5,
+                at=["m$(i)"],
+                refs=[
+                    "Delfino 2004 eq. (4.14) / Zamolodchikov 1989 Table 2: six-digit tabulated value of m_$(i)",
+                ],
+                subject_extract=m -> m[i],
+            )
         end
     end
 
-    # ───────────────────────────────────────────────────────────────────
-    # 5. Fusion-rule cross-check: several pairs of masses are linked by
-    #    the on-shell bootstrap fusion `a × b → c`, which forces
-    #    multiplicative identities between mass ratios. Two clean ones
-    #    (Zamolodchikov 1989, §5; Delfino 2004 Table 2):
-    #
-    #      m₆ / (m₂ m₃)  = 1         (fusion 2 × 3 → 6)
-    #      m₇ / (m₂ m₄)  = 1         (fusion 2 × 4 → 7)
-    #      m₈ / (m₂ m₅)  = 1         (fusion 2 × 5 → 8)
-    #
-    #    These have to hold exactly (up to floating-point round-off) in
-    #    the closed-form spectrum, independent of the derivation path,
-    #    so they are a strong internal cross-check that the stored
-    #    values are consistent with the integrable-field-theory
-    #    bootstrap.
-    # ───────────────────────────────────────────────────────────────────
+    # ── Fusion-rule multiplicative identities (Zamolodchikov 1989 §5) ───────
     @testset "Fusion-rule multiplicative identities" begin
-        m = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
-        @test m[6] ≈ m[2] * m[3] atol = 1e-14
-        @test m[7] ≈ m[2] * m[4] atol = 1e-14
-        @test m[8] ≈ m[2] * m[5] atol = 1e-14
+        m_ref = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
+        for (i, j, k) in ((2, 3, 6), (2, 4, 7), (2, 5, 8))
+            verify(
+                E8(),
+                E8Spectrum(),
+                Infinite();
+                route=:delegation_invariant,
+                independent=m_ref[i] * m_ref[j],
+                agree_within=1e-14,
+                at=["fusion $(i)×$(j)→$(k)"],
+                refs=[
+                    "Zamolodchikov 1989 §5 / Delfino 2004 Table 2: on-shell bootstrap fusion a×b→c forces m_c = m_a m_b for these triples",
+                ],
+                subject_extract=m -> m[k],
+            )
+        end
     end
 
-    # ───────────────────────────────────────────────────────────────────
-    # 6. Legacy Symbol-dispatch routes the aliases `:mass_ratios`,
-    #    `:E8_masses`, `:mass_ratio` all canonicalise to `:E8_spectrum`
-    #    and forward to `E8Spectrum`.  The shim emits a one-shot
-    #    `@info` per (model, quantity) pair; wrap every legacy call
-    #    with `@test_logs` so the deprecation notices do not leak into
-    #    CI output.
-    # ───────────────────────────────────────────────────────────────────
+    # ── Legacy Symbol-dispatch shim — kept raw (tests deprecation @info path)
     @testset "Aliases" begin
         expected = QAtlas.fetch(E8(), E8Spectrum(), Infinite())
-
         @test @test_logs (:info, r"symbol-dispatch") QAtlas.fetch(:E8, :mass_ratios) ==
             expected
         @test @test_logs (:info, r"symbol-dispatch") QAtlas.fetch(:E8, :E8_masses) ==

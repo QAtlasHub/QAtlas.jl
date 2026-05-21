@@ -410,7 +410,11 @@ function _handle_verify!(out, ex, file, testset)
     ind, disc = _independence(route, get(kw, :refs, nothing))
     hub = string(_headsym(model), "/", _headsym(qty), "/", _headsym(bc))
     srctext = try
-        replace(string(ex), r"\s+" => " ")
+        # Strip Julia auto-injected `#= file:line =#` location comments
+        # before whitespace-normalising; otherwise host-absolute paths
+        # baked into anonymous-closure expressions drift between dev
+        # and CI runners.
+        replace(replace(string(ex), r"#=.*?=#" => ""), r"\s+" => " ")
     catch
         "verify(...)"
     end

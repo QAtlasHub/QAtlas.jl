@@ -175,12 +175,17 @@ function verify(
     fetch_kw::NamedTuple=(;),
     at=nothing,
     expected_fail::Bool=false,
+    subject_extract::Union{Nothing,Function}=nothing,
 )
     route in _VERIFY_ROUTES ||
         error("verify: route must be one of $(_VERIFY_ROUTES); got $(repr(route))")
 
     # ── the ONLY src touch-point: subject is fetched, never re-typed ──
-    subject = QAtlas.fetch(model, quantity, bc; fetch_kw...)
+    # subject_extract (optional) projects a non-scalar fetched value
+    # (Vector, NamedTuple, container) to a single Float64 so verify()
+    # can pin a specific component — e.g. E8Spectrum[3].
+    raw = QAtlas.fetch(model, quantity, bc; fetch_kw...)
+    subject = subject_extract === nothing ? raw : subject_extract(raw)
 
     ind =
         independent isa AbstractVector ? collect(float.(independent)) : [float(independent)]

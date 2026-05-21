@@ -326,11 +326,11 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](../hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/Infinite`](../hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](../hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](../hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](../hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](../hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible

@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (72)
+## `(no card)` (68)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -58,10 +58,6 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`TFIM/SusceptibilityZZ/Infinite`](../hubs/TFIM_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/OBC`](../hubs/TFIM_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](../hubs/TFIM_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](../hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](../hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
@@ -80,7 +76,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`XXZ1D/SusceptibilityYY/OBC`](../hubs/XXZ1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 
-## `delegation_invariant` (14)
+## `delegation_invariant` (16)
 
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
@@ -96,8 +92,10 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🔵 [`S1AnisotropicD1D/MassGap/Infinite`](../hubs/S1AnisotropicD1D_MassGap_Infinite.md) — coherent
 - 🔵 [`S1XXZ1D/Energy/Infinite`](../hubs/S1XXZ1D_Energy_Infinite.md) — coherent
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](../hubs/S1XXZ1D_MassGap_Infinite.md) — coherent
+- 🔵 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
+- 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
 
-## `ed_finite_size` (35)
+## `ed_finite_size` (38)
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
@@ -126,11 +124,14 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](../hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](../hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](../hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
+- 🟢 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/OBC`](../hubs/XXZ1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/FreeEnergy/OBC`](../hubs/XXZ1D_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/SpecificHeat/OBC`](../hubs/XXZ1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
@@ -143,7 +144,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 
 - 🟠 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 
-## `limiting_case` (40)
+## `limiting_case` (41)
 
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
@@ -168,6 +169,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`S1Heisenberg1D/ThermalEntropy/OBC`](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/Energy/OBC`](../hubs/TFIM_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](../hubs/TFIM_MagnetizationZ_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 - 🔵 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — coherent

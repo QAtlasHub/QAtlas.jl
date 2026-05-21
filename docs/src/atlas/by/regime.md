@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (72)
+## `(no card)` (68)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -58,10 +58,6 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`TFIM/SusceptibilityZZ/Infinite`](../hubs/TFIM_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/OBC`](../hubs/TFIM_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](../hubs/TFIM_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](../hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](../hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
@@ -93,10 +89,11 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`Cluster1D/Energy/Infinite`](../hubs/Cluster1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Cluster1D/MassGap/Infinite`](../hubs/Cluster1D_MassGap_Infinite.md) — corroborated-at-p
 
-## `@critical` (3)
+## `@critical` (4)
 
 - 🟢 [`Kitaev1D/MassGap/Infinite`](../hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CentralCharge/Infinite`](../hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/Energy/Infinite`](../hubs/TFIM_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 
 ## `@dimer` (4)
@@ -203,7 +200,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
 
-## `@sweep` (119)
+## `@sweep` (123)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -291,7 +288,11 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](../hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/Infinite`](../hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](../hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
+- 🔵 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](../hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
+- 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
+- 🟢 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TTbar/CentralCharge/Infinite`](../hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p

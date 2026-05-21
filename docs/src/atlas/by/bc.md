@@ -119,8 +119,8 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🔵 [`TFIM/ThermalEntropy/Infinite`](../hubs/TFIM_ThermalEntropy_Infinite.md) — coherent
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](../hubs/TFIM_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/XXCorrelation/Infinite`](../hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
-- 🟠 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
+- 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
 - 🟠 [`TFIM/ZZStructureFactor/Infinite`](../hubs/TFIM_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TTbar/CentralCharge/Infinite`](../hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
@@ -219,9 +219,9 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🔵 [`TFIM/ThermalEntropy/OBC`](../hubs/TFIM_ThermalEntropy_OBC.md) — coherent
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](../hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](../hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/XXStructureFactor/OBC`](../hubs/TFIM_XXStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](../hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
-- 🟠 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/ZZStructureFactor/OBC`](../hubs/TFIM_ZZStructureFactor_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/Energy/OBC`](../hubs/XXZ1D_Energy_OBC.md) — corroborated-at-p

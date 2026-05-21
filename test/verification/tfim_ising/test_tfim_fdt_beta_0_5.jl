@@ -9,7 +9,7 @@
 
 using QAtlas, Test
 
-@testset "FDT residual at TFIM Infinite(), β = 0.5" begin
+@testset "FDT residual at TFIM Infinite(), β = 0.5 (verify cards per ω)" begin
     # CI-budget proxy parameters identical to the pre-split file.
     N_proxy = 24
     t_max = 10.0
@@ -20,21 +20,12 @@ using QAtlas, Test
     ω_grid = collect(range(0.6, 3.0; length=5))
     β = 0.5
 
-    S_vals = [
-        QAtlas.fetch(
-            model,
-            ZZStructureFactor(),
-            Infinite();
-            beta=β,
-            q=q,
-            ω=ω,
-            N_proxy=N_proxy,
-            t_max=t_max,
-            dt=dt,
-        ) for ω in ω_grid
-    ]
-    χpp_vals = [
-        QAtlas.fetch(
+    # Migrated from aggregate `@test rel_residual < 1e-1` to per-ω verify
+    # :sum_rule cards (PR #449 phase 2 zero-legacy). Each ω becomes one
+    # card: subject = S_zz(q,ω;β), independent = 2 χ''(q,ω;β) / (1-e^{-βω}).
+    # Loose 5e-2 absolute tolerance (proxy params are coarse on purpose).
+    for ω in ω_grid
+        χpp = QAtlas.fetch(
             model,
             SusceptibilityZZ(),
             Infinite();
@@ -44,14 +35,19 @@ using QAtlas, Test
             N_proxy=N_proxy,
             t_max=t_max,
             dt=dt,
-        ) for ω in ω_grid
-    ]
-
-    FDT_vals = [2 * χpp / (1 - exp(-β * ω)) for (χpp, ω) in zip(χpp_vals, ω_grid)]
-
-    denom = maximum(abs, S_vals)
-    rel_residual = maximum(abs, S_vals .- FDT_vals) / denom
-
-    # 1e-1 budget at (N_proxy=24, t_max=10, dt=0.1) — see pre-split header.
-    @test rel_residual < 1e-1
+        )
+        verify(
+            model,
+            ZZStructureFactor(),
+            Infinite();
+            route=:sum_rule,
+            fetch_kw=(; beta=β, q=q, ω=ω, N_proxy=N_proxy, t_max=t_max, dt=dt),
+            independent=2 * χpp / (1 - exp(-β * ω)),
+            agree_within=5e-2,
+            at=["β=$(β)", "q=$(q)", "ω=$(ω)"],
+            refs=[
+                "Kubo FDT: S_zz(q,ω;β) = 2 χ''_zz(q,ω;β) / (1 − e^{-βω}); proxy params N_proxy=24, t_max=10, dt=0.1 (Mahan ch.3)",
+            ],
+        )
+    end
 end

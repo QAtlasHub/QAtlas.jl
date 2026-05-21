@@ -15,6 +15,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@critical` | `second_closed_form` | 🟢 structural | Critical OBC TFIM at h=J=1: e_∞ = -(2/π)·2J = -4J/π (BdG dispersion integral, Pfeuty 1970) | `test/verification/universality/test_universality_cross_check.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=0 dispersion is flat Λ(k)=2|J| ⇒ ε₀ = -|J| | `test/models/quantum/TFIM/test_TFIM_energy_pfeuty_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at J=0 dispersion is flat Λ(k)=2h ⇒ ε₀ = -h | `test/models/quantum/TFIM/test_TFIM_energy_pfeuty_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=J critical point ε₀ = -4J/π (closed-form integral) | `test/models/quantum/TFIM/test_TFIM_energy_pfeuty_batch.jl` |
@@ -22,6 +23,10 @@
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(TFIM(; J = 1.0, h = 1.0), Energy(), Infinite(); route = :second_closed_form, independent = -4 / π, agree_within = 1.0e-10, refs = ["Critical OBC TFIM at h=J=1: e_∞ = -(2/π)·2J = -4J/π (BdG dispersion integral, Pfeuty 1970)"])
+```
 
 ```julia
 verify(TFIM(; J = J, h = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -(abs(J)), agree_within = 1.0e-9, refs = ["Pfeuty 1970: at h=0 dispersion is flat Λ(k)=2|J| ⇒ ε₀ = -|J|"])
@@ -39,7 +44,7 @@ verify(TFIM(; J = J, h = J), Energy(:per_site), Infinite(); route = :second_clos
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 [← back to the Atlas index](../index.md)

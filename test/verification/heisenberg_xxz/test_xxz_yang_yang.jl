@@ -58,60 +58,110 @@ function _obc_xxz_ground_state(N::Int, Δ::Real; J::Real=1.0)
     return real(minimum(eigvals(Hermitian(H))))
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Migrated from raw @test to verify()-first (PR #449 phase 2 zero-legacy).
+# Closed-form pins, limiting-case pins, and the OBC-ED extrapolation cross-
+# check are now verify cards. The `all(isfinite, es_per_site)` structural
+# sweep stays raw (multi-point property, not a single-scalar pin).
+# ─────────────────────────────────────────────────────────────────────────────
+
 @testset "XXZ1D — Yang-Yang vs OBC dense-ED extrapolation (Δ=1/2)" begin
     # Closed-form Yang-Yang value at γ = π/3 (Δ = 1/2): -3J/8 (rational).
-    e_yy = QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.5), Energy(), Infinite())
-    @test e_yy ≈ -3 / 8 atol = 1e-10
-
-    # OBC finite-N ground-state energies per site at N = 8, 10, 12.
-    Ns = [8, 10, 12]
-    es_per_site = [_obc_xxz_ground_state(N, 0.5; J=1.0) / N for N in Ns]
-
-    # OBC has 1/N leading correction (edge defects); fit y = a + b·(1/N).
-    intercept, _ = _yy_linfit([1 / N for N in Ns], es_per_site)
-
-    # Sanity: every finite-N value is finite and lies above the
-    # thermodynamic-limit value by O(1/N).
-    @test all(isfinite, es_per_site)
-    @test intercept ≈ -3 / 8 atol = 5e-3
-
-    # Direct cross-check: Yang-Yang and the 1/N-extrapolation agree
-    # within the same loose tolerance (independent code paths).
-    @test intercept ≈ e_yy atol = 5e-3
-end
-
-@testset "XXZ1D — Yang-Yang Δ → ±1 limits agree with closed forms" begin
-    # Approach the boundaries from inside (γ → 0 and γ → π).
-    e_p = QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.999), Energy(), Infinite())
-    e_p_exact = 0.25 - log(2.0)
-    @test e_p ≈ e_p_exact atol = 1e-3
-
-    e_m = QAtlas.fetch(XXZ1D(; J=1.0, Δ=-0.999), Energy(), Infinite())
-    e_m_exact = -0.25
-    @test e_m ≈ e_m_exact atol = 1e-3
-end
-
-@testset "XXZ1D — Yang-Yang Δ = 0 limit agrees with free-fermion -J/π" begin
-    # Approach γ = π/2 from both sides.
-    e_pos = QAtlas.fetch(XXZ1D(; J=1.0, Δ=1e-6), Energy(), Infinite())
-    e_neg = QAtlas.fetch(XXZ1D(; J=1.0, Δ=-1e-6), Energy(), Infinite())
-    @test e_pos ≈ -1 / π atol = 1e-5
-    @test e_neg ≈ -1 / π atol = 1e-5
-end
-
-# ── Verification cards (WHY-correct plane) ─────────────────────────────────
-@testset "XXZ Yang-Yang — verification cards" begin
-    # Yang-Yang 1966 II: at Δ = 1/2 (γ = π/3) the energy density is the
-    # elementary closed form e0 = -3J/8.
     verify(
         XXZ1D(; J=1.0, Δ=0.5),
         Energy(),
         Infinite();
         route=:second_closed_form,
         independent=-3 / 8,
-        agree_within=1e-9,
-        refs=["Yang-Yang 1966 II: e0 = -3J/8 at Δ = 1/2"],
+        agree_within=1e-10,
+        refs=["Yang-Yang 1966 II eq.(4.4): e0 = -3J/8 at Δ = 1/2 (γ = π/3)"],
     )
+
+    # OBC finite-N ground-state energies per site at N = 8, 10, 12.
+    Ns = [8, 10, 12]
+    es_per_site = [_obc_xxz_ground_state(N, 0.5; J=1.0) / N for N in Ns]
+
+    # Sanity: every finite-N value is finite and lies above the
+    # thermodynamic-limit value by O(1/N). Multi-point structural — raw.
+    @test all(isfinite, es_per_site)
+
+    # OBC has 1/N leading correction (edge defects); fit y = a + b·(1/N).
+    intercept, _ = _yy_linfit([1 / N for N in Ns], es_per_site)
+    verify(
+        XXZ1D(; J=1.0, Δ=0.5),
+        Energy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=intercept,
+        agree_within=5e-3,
+        at=["Ns=$(Ns)"],
+        refs=[
+            "Independent OBC dense-ED ground-state energies at N=8,10,12 then 1/N-extrapolated (edge-defect leading correction); cross-checks the Yang-Yang single-integral closed form at Δ = 1/2",
+        ],
+    )
+end
+
+@testset "XXZ1D — Yang-Yang Δ → 1⁻ limit agrees with Heisenberg AF closed form" begin
+    # Approach γ → 0 from inside.
+    verify(
+        XXZ1D(; J=1.0, Δ=0.999),
+        Energy(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.25 - log(2.0),
+        agree_within=1e-3,
+        at=["Δ=0.999"],
+        refs=["Heisenberg AF Δ→1⁻ limit: e0 → 1/4 − log 2 (des Cloizeaux-Pearson 1962)"],
+    )
+end
+
+@testset "XXZ1D — Yang-Yang Δ → -1⁺ limit agrees with FM saturated state" begin
+    # Approach γ → π from inside (the FM saturated state e0 = -J/4 is
+    # also exact at Δ = -1; this card pins the continuous-Δ limit).
+    verify(
+        XXZ1D(; J=1.0, Δ=-0.999),
+        Energy(),
+        Infinite();
+        route=:limiting_case,
+        independent=-0.25,
+        agree_within=1e-3,
+        at=["Δ=-0.999"],
+        refs=[
+            "FM Δ→-1⁺ limit: e0 → -J/4 (aligned saturated state, continuous from Δ = -1)"
+        ],
+    )
+end
+
+@testset "XXZ1D — Yang-Yang Δ → 0 limit agrees with free-fermion -J/π" begin
+    # Approach γ = π/2 from both sides.
+    verify(
+        XXZ1D(; J=1.0, Δ=1e-6),
+        Energy(),
+        Infinite();
+        route=:limiting_case,
+        independent=-1 / π,
+        agree_within=1e-5,
+        at=["Δ=1e-6"],
+        refs=[
+            "XX free-fermion limit: e0 = -J/π at Δ = 0 (Lieb-Schultz-Mattis 1961); Yang-Yang continuous from Δ → 0⁺",
+        ],
+    )
+    verify(
+        XXZ1D(; J=1.0, Δ=-1e-6),
+        Energy(),
+        Infinite();
+        route=:limiting_case,
+        independent=-1 / π,
+        agree_within=1e-5,
+        at=["Δ=-1e-6"],
+        refs=[
+            "XX free-fermion limit: e0 = -J/π at Δ = 0; Yang-Yang continuous from Δ → 0⁻"
+        ],
+    )
+end
+
+# ── Anchor card (FM exact) ─────────────────────────────────────────────────
+@testset "XXZ Yang-Yang — exact-point anchor cards" begin
     # FM point Δ = -1: exact saturated state e0 = -J/4.
     verify(
         XXZ1D(; J=1.0, Δ=-1.0),

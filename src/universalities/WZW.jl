@@ -119,3 +119,7 @@ function _wzw_su2_normalize_spin(j::Real, k::Int)
         ),
     )
 end
+
+# ─── Infinite-bc forwarding for verify() integration ───────────────────────
+fetch(w::WZWSU2, q::CentralCharge, ::Infinite; kwargs...) = fetch(w, q; kwargs...)
+fetch(w::WZWSU2, q::ConformalWeights, ::Infinite; kwargs...) = fetch(w, q; kwargs...)

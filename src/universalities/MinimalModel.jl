@@ -153,3 +153,8 @@ function fetch(m::MinimalModel, ::PrimaryFields; kwargs...)
     end
     return out
 end
+
+# ─── Infinite-bc forwarding for verify() integration ───────────────────────
+fetch(m::MinimalModel, q::CentralCharge, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+fetch(m::MinimalModel, q::ConformalWeights, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+fetch(m::MinimalModel, q::PrimaryFields, ::Infinite; kwargs...) = fetch(m, q; kwargs...)

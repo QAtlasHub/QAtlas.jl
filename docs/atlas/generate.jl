@@ -60,7 +60,7 @@ modelof(h) = first(split(h, "/"))
 quantof(h) = (p=split(h, "/"); length(p) >= 2 ? p[2] : "?")
 bcof(h) = (p=split(h, "/"); length(p) >= 3 ? p[3] : "?")
 slugof(h) = replace(h, r"[^A-Za-z0-9]" => "_")
-_md_escape_dollar(s::AbstractString) = replace(s, "\$" => "\\\$")
+_md_escape_dollar(s::AbstractString) = replace(s, r"(?<!\\)\$" => "\\\$")
 
 # ── R1 taxonomy (single source of truth lives in AtlasInventory) ─────
 # generate.jl is now a thin TYPED consumer of AtlasInventory's
@@ -214,9 +214,9 @@ for h in claimed
         "`, reliability `",
         cl.reliability,
         "`",
-        isempty(cl.refs) ? "" : string(", refs: ", cl.refs),
+        isempty(cl.refs) ? "" : string(", refs: ", _md_escape_dollar(cl.refs)),
     )
-    isempty(cl.notes) || HP("- ", cl.notes)
+    isempty(cl.notes) || HP("- ", _md_escape_dollar(cl.notes))
     HP("")
     HP("## Corroboration")
     HP("")

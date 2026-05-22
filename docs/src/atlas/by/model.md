@@ -42,11 +42,16 @@ Every `src`-claimed hub grouped by model.
 
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only
 
-## `CurieWeissIsing` (3)
+## `CurieWeissIsing` (8)
 
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](../hubs/CurieWeissIsing_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`CurieWeissIsing/FreeEnergy/Infinite`](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) — coherent
+- 🔵 [`CurieWeissIsing/SpecificHeat/Infinite`](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) — coherent
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🔵 [`CurieWeissIsing/ThermalEntropy/Infinite`](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) — coherent
 
 ## `DMIHeisenberg1D` (1)
 

@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (153)
+## `Infinite` (158)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -24,7 +24,12 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](../hubs/CurieWeissIsing_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`CurieWeissIsing/FreeEnergy/Infinite`](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) — coherent
+- 🔵 [`CurieWeissIsing/SpecificHeat/Infinite`](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) — coherent
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🔵 [`CurieWeissIsing/ThermalEntropy/Infinite`](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) — coherent
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p

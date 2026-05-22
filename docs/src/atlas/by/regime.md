@@ -5,10 +5,11 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (69)
+## `(no card)` (70)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationX/OBC`](../hubs/Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
@@ -165,10 +166,14 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](../hubs/SchwingerModel_ChiralCondensate_Infinite.md) — corroborated-at-p
 - 🟢 [`SchwingerModel/MassGap/Infinite`](../hubs/SchwingerModel_MassGap_Infinite.md) — corroborated-at-p
 
-## `@mean_field` (2)
+## `@mean_field` (6)
 
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](../hubs/CurieWeissIsing_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🔵 [`CurieWeissIsing/FreeEnergy/Infinite`](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) — coherent
+- 🔵 [`CurieWeissIsing/SpecificHeat/Infinite`](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) — coherent
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🔵 [`CurieWeissIsing/ThermalEntropy/Infinite`](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) — coherent
 
 ## `@onsager` (6)
 

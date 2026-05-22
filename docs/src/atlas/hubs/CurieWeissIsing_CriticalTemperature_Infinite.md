@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, reliability `high`, refs: Landau-Lifshitz §149
-- Mean-field T_c = J for J > 0 (k_B = 1); 0 otherwise.
+- Mean-field T_c = J for J > 0 (k_B = 1); 0 otherwise. Zero-field reference value (no sharp transition at h ≠ 0).
 
 ## Corroboration
 

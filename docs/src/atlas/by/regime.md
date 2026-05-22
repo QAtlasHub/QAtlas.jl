@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (68)
+## `(no card)` (69)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -19,6 +19,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/Energy/PBC`](../hubs/IsingSquare_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/FreeEnergy/Infinite`](../hubs/IsingSquare_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
@@ -145,11 +146,15 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](../hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
 
-## `@ising1d` (3)
+## `@ising1d` (7)
 
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](../hubs/IsingChain1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/CriticalTemperature/Infinite`](../hubs/IsingChain1D_CriticalTemperature_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/FreeEnergy/Infinite`](../hubs/IsingChain1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpecificHeat/Infinite`](../hubs/IsingChain1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 
 ## `@isotropic` (1)
 

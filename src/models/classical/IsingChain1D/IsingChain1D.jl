@@ -172,3 +172,164 @@ function fetch(
     ratio > 1 || return Inf
     return 1 / log(ratio)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Thermodynamics at h = 0 — closed-form 1D Ising textbook expressions
+#
+# All five quantities below are valid at h = 0 only (textbook scope, Ising 1925).
+# The h ≠ 0 generalisation requires symbolic differentiation of `λ_+(β, J, h)`
+# and is deferred. A `DomainError` is raised on `h ≠ 0` for clarity.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@inline function _isingchain1d_require_zero_field(h, qname)
+    iszero(h) || throw(
+        DomainError(
+            h,
+            "IsingChain1D $(qname) currently requires h = 0; got h = $h. " *
+            "The h ≠ 0 closed forms require differentiating the general λ_+ formula " *
+            "and have not been implemented (closed forms exist; this is scope, not feasibility).",
+        ),
+    )
+end
+
+"""
+    fetch(::IsingChain1D, ::Energy{:per_site}, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Internal energy per site at zero field (Ising 1925):
+
+    u(β, h=0) = ⟨H⟩/N = -J tanh(β J).
+
+# References
+- E. Ising, *Z. Phys.* **31**, 253 (1925).
+"""
+function fetch(
+    m::IsingChain1D,
+    ::Energy{:per_site},
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 || throw(
+        DomainError(beta, "IsingChain1D Energy{:per_site} requires β > 0; got β = $beta."),
+    )
+    _isingchain1d_require_zero_field(h, "Energy{:per_site}")
+    return -J * tanh(beta * J)
+end
+
+"""
+    fetch(::IsingChain1D, ::SpecificHeat, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Specific heat per site at zero field (Ising 1925):
+
+    c_v(β, h=0) = (β J)² sech²(β J).
+
+# References
+- E. Ising, *Z. Phys.* **31**, 253 (1925).
+"""
+function fetch(
+    m::IsingChain1D,
+    ::SpecificHeat,
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 ||
+        throw(DomainError(beta, "IsingChain1D SpecificHeat requires β > 0; got β = $beta."))
+    _isingchain1d_require_zero_field(h, "SpecificHeat")
+    bJ = beta * J
+    return (bJ * sech(bJ))^2
+end
+
+"""
+    fetch(::IsingChain1D, ::ThermalEntropy, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Entropy per site at zero field (Ising 1925), via the Gibbs identity
+`s = β(u − f)` applied to the 1D Ising closed forms:
+
+    s(β, h=0) = log(2 cosh(β J)) − β J tanh(β J).
+
+Bounded between 0 (T → 0) and log 2 (T → ∞).
+
+# References
+- E. Ising, *Z. Phys.* **31**, 253 (1925).
+"""
+function fetch(
+    m::IsingChain1D,
+    ::ThermalEntropy,
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 || throw(
+        DomainError(beta, "IsingChain1D ThermalEntropy requires β > 0; got β = $beta.")
+    )
+    _isingchain1d_require_zero_field(h, "ThermalEntropy")
+    bJ = beta * J
+    return log(2 * cosh(bJ)) - bJ * tanh(bJ)
+end
+
+"""
+    fetch(::IsingChain1D, ::SusceptibilityZZ, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Zero-field longitudinal susceptibility per site (Brush 1967):
+
+    χ(β, h=0) = β e^{2 β J}.
+
+# References
+- E. Ising, *Z. Phys.* **31**, 253 (1925).
+- S. G. Brush, "History of the Lenz-Ising model", *Rev. Mod. Phys.* **39**,
+  883 (1967), Eq. (4.18).
+"""
+function fetch(
+    m::IsingChain1D,
+    ::SusceptibilityZZ,
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 || throw(
+        DomainError(beta, "IsingChain1D SusceptibilityZZ requires β > 0; got β = $beta."),
+    )
+    _isingchain1d_require_zero_field(h, "SusceptibilityZZ")
+    return beta * exp(2 * beta * J)
+end
+
+"""
+    fetch(::IsingChain1D, ::SpontaneousMagnetization, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Spontaneous magnetization per site of the 1D Ising chain — `0` for all
+`T > 0` and any `J ≠ 0` (Ising 1925: no spontaneous symmetry breaking
+in 1D at finite temperature).
+
+# References
+- E. Ising, *Z. Phys.* **31**, 253 (1925).
+"""
+function fetch(
+    m::IsingChain1D,
+    ::SpontaneousMagnetization,
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 || throw(
+        DomainError(
+            beta, "IsingChain1D SpontaneousMagnetization requires β > 0; got β = $beta."
+        ),
+    )
+    return 0.0
+end

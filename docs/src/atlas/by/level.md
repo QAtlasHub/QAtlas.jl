@@ -56,7 +56,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🔵 [`TFIM/XXStructureFactor/Infinite`](../hubs/TFIM_XXStructureFactor_Infinite.md) — coherent
 - 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
 
-## `corroborated-at-p` (138)
+## `corroborated-at-p` (142)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -92,6 +92,10 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](../hubs/IsingChain1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/CriticalTemperature/Infinite`](../hubs/IsingChain1D_CriticalTemperature_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/FreeEnergy/Infinite`](../hubs/IsingChain1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpecificHeat/Infinite`](../hubs/IsingChain1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingSquare/CriticalTemperature/Infinite`](../hubs/IsingSquare_CriticalTemperature_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingSquare/FreeEnergy/PBC`](../hubs/IsingSquare_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟢 [`IsingSquare/PartitionFunction/PBC`](../hubs/IsingSquare_PartitionFunction_PBC.md) — corroborated-at-p
@@ -197,7 +201,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (64)
+## `uncorroborated-but-feasible` (65)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -211,6 +215,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/Energy/PBC`](../hubs/IsingSquare_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/FreeEnergy/Infinite`](../hubs/IsingSquare_FreeEnergy_Infinite.md) — uncorroborated-but-feasible

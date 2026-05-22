@@ -172,3 +172,104 @@ end
         )
     end
 end
+
+# ── Additional verification cards (5 closed-form quantities, h=0) ─────────
+@testset "IsingChain1D — Energy{:per_site} closed form" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 1.0), (2.0, 0.7))
+        verify(
+            IsingChain1D(; J=J),
+            Energy{:per_site}(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=-J * tanh(β * J),
+            agree_within=1e-12,
+            refs=["Ising 1925: u(β,h=0) = -J tanh(βJ) per site"],
+        )
+    end
+end
+
+@testset "IsingChain1D — SpecificHeat closed form" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 1.0), (2.0, 0.7))
+        verify(
+            IsingChain1D(; J=J),
+            SpecificHeat(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=(β * J * sech(β * J))^2,
+            agree_within=1e-12,
+            refs=["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"],
+        )
+    end
+end
+
+@testset "IsingChain1D — ThermalEntropy closed form + bounds" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 1.0), (2.0, 0.7))
+        verify(
+            IsingChain1D(; J=J),
+            ThermalEntropy(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=log(2 * cosh(β * J)) - β * J * tanh(β * J),
+            agree_within=1e-12,
+            refs=["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"],
+        )
+    end
+    for β in (0.1, 1.0, 10.0)
+        s = QAtlas.fetch(IsingChain1D(; J=1.0), ThermalEntropy(), Infinite(); beta=β)
+        @test 0 ≤ s ≤ log(2) + 1e-12
+    end
+end
+
+@testset "IsingChain1D — SusceptibilityZZ closed form (Brush 1967)" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (0.5, 2.0), (2.0, 0.3))
+        verify(
+            IsingChain1D(; J=J),
+            SusceptibilityZZ(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=β * exp(2 * β * J),
+            agree_within=1e-12,
+            refs=["Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site"],
+        )
+    end
+end
+
+@testset "IsingChain1D — SpontaneousMagnetization = 0 (Ising 1925)" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 2.0), (1.0, 10.0), (-0.5, 1.0))
+        verify(
+            IsingChain1D(; J=J),
+            SpontaneousMagnetization(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=0.0,
+            agree_within=0,
+            refs=[
+                "Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically",
+            ],
+        )
+    end
+end
+
+@testset "IsingChain1D — h ≠ 0 DomainError on new quantities" begin
+    m = IsingChain1D(; J=1.0, h=0.3)
+    @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); beta=1.0)
+    @test_throws DomainError QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=1.0)
+    @test_throws DomainError QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=1.0)
+    @test_throws DomainError QAtlas.fetch(m, SusceptibilityZZ(), Infinite(); beta=1.0)
+    @test QAtlas.fetch(m, SpontaneousMagnetization(), Infinite(); beta=1.0) == 0.0
+end
+
+@testset "IsingChain1D — Gibbs identity s = β(u − f) cross-check at h=0" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (2.0, 0.7))
+        m = IsingChain1D(; J=J)
+        u = QAtlas.fetch(m, Energy{:per_site}(), Infinite(); beta=β)
+        f = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
+        s = QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=β)
+        @test s ≈ β * (u - f) atol = 1e-12
+    end
+end

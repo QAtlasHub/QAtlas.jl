@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 247 |
-| ED-feasible claimed (risk denominator) | 221 |
+| Hubs `src` claims (registry) | 252 |
+| ED-feasible claimed (risk denominator) | 226 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 138 |
+| 🟢 corroborated-at-p | 142 |
 | 🔵 coherent | 27 |
 | ⚪ cited-only (frontier — neutral) | 18 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 64 |
-| Inventory cards scanned (whole test/) | 482 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 65 |
+| Inventory cards scanned (whole test/) | 487 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **74.7%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.8%** · **in-repo-verified rate** (incl. 🔵 coherent): **74.8%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "64 actionable hub(s)"
+!!! warning "65 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
@@ -53,6 +53,7 @@
     - [`Heisenberg1D/SusceptibilityXX/OBC`](hubs/Heisenberg1D_SusceptibilityXX_OBC.md)
     - [`Heisenberg1D/SusceptibilityYY/OBC`](hubs/Heisenberg1D_SusceptibilityYY_OBC.md)
     - [`Heisenberg1D/SusceptibilityZZ/OBC`](hubs/Heisenberg1D_SusceptibilityZZ_OBC.md)
+    - [`IsingChain1D/Energy/Infinite`](hubs/IsingChain1D_Energy_Infinite.md)
     - [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
     - [`IsingSquare/Energy/PBC`](hubs/IsingSquare_Energy_PBC.md)
     - [`IsingSquare/FreeEnergy/Infinite`](hubs/IsingSquare_FreeEnergy_Infinite.md)
@@ -125,7 +126,7 @@
 | `Heisenberg1D` | 21 | 0 | 10 | 1 | 0 | 10 | feasible |
 | `HeisenbergXYZ` | 2 | 0 | 1 | 1 | 0 | 0 | feasible |
 | `Hubbard1D` | 4 | 0 | 2 | 2 | 0 | 0 | feasible |
-| `IsingChain1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
+| `IsingChain1D` | 8 | 0 | 7 | 0 | 0 | 1 | feasible |
 | `IsingSquare` | 12 | 0 | 4 | 2 | 0 | 6 | feasible |
 | `IsingTriangular` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `J1J2Heisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -169,7 +170,7 @@
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (247) — select to drill down
+## Hubs (252) — select to drill down
 
 ### `AKLT1D` (8)
 
@@ -267,11 +268,16 @@
 - 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 
-### `IsingChain1D` (3)
+### `IsingChain1D` (8)
 
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](hubs/IsingChain1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/CriticalTemperature/Infinite`](hubs/IsingChain1D_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingChain1D/Energy/Infinite`](hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingChain1D/FreeEnergy/Infinite`](hubs/IsingChain1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpecificHeat/Infinite`](hubs/IsingChain1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 
 ### `IsingSquare` (12)
 

@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (148)
+## `Infinite` (153)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -42,7 +42,12 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](../hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](../hubs/IsingChain1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/CriticalTemperature/Infinite`](../hubs/IsingChain1D_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingChain1D/FreeEnergy/Infinite`](../hubs/IsingChain1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpecificHeat/Infinite`](../hubs/IsingChain1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingSquare/CriticalTemperature/Infinite`](../hubs/IsingSquare_CriticalTemperature_Infinite.md) — corroborated-at-p
 - 🔵 [`IsingSquare/Energy/Infinite`](../hubs/IsingSquare_Energy_Infinite.md) — coherent

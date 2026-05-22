@@ -10,7 +10,9 @@ manifold and a non-zero zero-temperature entropy per site (Wannier
 1950). With ferromagnetic coupling the lattice supports a standard
 order-disorder transition with ``T_c = 4|J|/\ln 3`` (Houtappel 1950).
 
-$``H = +J \sum_{\langle i,j \rangle} \sigma_i \sigma_j, \qquad \sigma_i \in \{-1, +1\}``$
+```math
+H = +J \sum_{\langle i,j \rangle} \sigma_i \sigma_j, \qquad \sigma_i \in \{-1, +1\}
+```
 
 (Wannier 1950 sign convention; each site has six nearest neighbours.)
 

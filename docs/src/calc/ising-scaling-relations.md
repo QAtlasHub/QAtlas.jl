@@ -8,19 +8,23 @@ Given the **Widom scaling hypothesis** that the singular part of the
 free-energy density is a generalised homogeneous function of the
 reduced temperature and magnetic field,
 
-$$f_{\rm sing}(t, h) \;=\; |t|^{2 - \alpha}\,\Phi\!\left(\frac{h}{|t|^{\Delta_{h}}}\right),
-\tag{0}$$
+```math
+f_{\rm sing}(t, h) \;=\; |t|^{2 - \alpha}\,\Phi\!\left(\frac{h}{|t|^{\Delta_{h}}}\right),
+\tag{0}
+```
 
 four exact scaling relations follow:
 
-$$\boxed{\;
+```math
+\boxed{\;
 \begin{aligned}
 \alpha + 2\beta + \gamma &= 2 & &\text{(Rushbrooke, 1963)}\\
 \gamma &= \beta(\delta - 1) & &\text{(Widom, 1965)}\\
 \gamma &= \nu(2 - \eta) & &\text{(Fisher, 1969)}\\
 2 - \alpha &= d\,\nu & &\text{(Josephson, 1967; valid for }d \le 4\text{)}
 \end{aligned}
-\;}$$
+\;}
+```
 
 Four relations among six exponents ``\Rightarrow`` **two independent
 exponents**. For the 2D Ising universality class the two
@@ -30,8 +34,10 @@ dimensions (see
 [`ising-cft-primary-operators`](ising-cft-primary-operators.md)),
 and all six thermodynamic exponents follow:
 
-$$\alpha = 0\ (\log),\quad \beta = \tfrac{1}{8},\quad
-\gamma = \tfrac{7}{4},\quad \delta = 15,\quad \nu = 1,\quad \eta = \tfrac{1}{4}.$$
+```math
+\alpha = 0\ (\log),\quad \beta = \tfrac{1}{8},\quad
+\gamma = \tfrac{7}{4},\quad \delta = 15,\quad \nu = 1,\quad \eta = \tfrac{1}{4}.
+```
 
 All four scaling relations above are satisfied exactly by this
 tuple — the QAtlas test suite verifies this using `Rational{Int}`
@@ -67,9 +73,11 @@ algebraic relations among them.
 **Hypothesis** (Widom 1965). Near ``T_{c}``, the singular part of
 the free-energy density has the generalised homogeneous form
 
-$$f_{\rm sing}(t, h) \;=\; |t|^{2 - \alpha}\,
+```math
+f_{\rm sing}(t, h) \;=\; |t|^{2 - \alpha}\,
    \Phi\!\bigl(h\,|t|^{-\Delta_{h}}\bigr),
-\tag{1}$$
+\tag{1}
+```
 
 with ``\Phi(\cdot)`` a smooth scaling function and a single gap
 exponent ``\Delta_{h}`` fixed by the two relations we derive below.
@@ -80,8 +88,10 @@ rescaling ``\mathbf{r} \to b\mathbf{r}``, with exponents ``y_{t}, y_{h}``
 determined by the CFT scaling dimensions of the thermal (``\varepsilon``)
 and magnetic (``\sigma``) relevant operators:
 
-$$y_{t} = d - \Delta_{\varepsilon},\qquad y_{h} = d - \Delta_{\sigma}.
-\tag{2}$$
+```math
+y_{t} = d - \Delta_{\varepsilon},\qquad y_{h} = d - \Delta_{\sigma}.
+\tag{2}
+```
 
 (The scaling dimension of a relevant coupling is $y = d -
 \Delta_{\rm operator}$ — see
@@ -111,32 +121,42 @@ From the thermodynamic definitions:
 **Order parameter.** ``M = -(\partial f/\partial h)_{t}``. At ``h = 0``,
 differentiating (1) once,
 
-$$M(t, 0) \;=\; -\,|t|^{2 - \alpha - \Delta_{h}}\,\Phi'(0)\cdot
- \mathrm{sgn}(t),$$
+```math
+M(t, 0) \;=\; -\,|t|^{2 - \alpha - \Delta_{h}}\,\Phi'(0)\cdot
+ \mathrm{sgn}(t),
+```
 
 vanishing at ``t = 0`` and scaling as ``|t|^{2 - \alpha - \Delta_{h}}``
 for ``t < 0`` (below ``T_c``). Comparing to the definition $M \sim
 (-t)^{\beta}$:
 
-$$\boxed{\;\beta \;=\; 2 - \alpha - \Delta_{h}.\;}
-\tag{3}$$
+```math
+\boxed{\;\beta \;=\; 2 - \alpha - \Delta_{h}.\;}
+\tag{3}
+```
 
 **Susceptibility.** ``\chi = -(\partial^{2} f/\partial h^{2})_{t}`` at
 ``h = 0``:
 
-$``\chi(t, 0) \;=\; -\,|t|^{2 - \alpha - 2\Delta_{h}}\,\Phi''(0).``$
+```math
+\chi(t, 0) \;=\; -\,|t|^{2 - \alpha - 2\Delta_{h}}\,\Phi''(0).
+```
 
 So
 
-$$|t|^{-\gamma} \;\sim\; |t|^{2 - \alpha - 2\Delta_{h}}
+```math
+|t|^{-\gamma} \;\sim\; |t|^{2 - \alpha - 2\Delta_{h}}
 \quad\Longrightarrow\quad
 \boxed{\;\gamma \;=\; 2\Delta_{h} + \alpha - 2.\;}
-\tag{4}$$
+\tag{4}
+```
 
 **Specific heat.** ``C = -T(\partial^{2} f/\partial t^{2})_{h}`` at
 ``h = 0``:
 
-$``C(t, 0) \;\sim\; |t|^{-\alpha},``$
+```math
+C(t, 0) \;\sim\; |t|^{-\alpha},
+```
 
 matching the definition by construction — the exponent ``\alpha`` in
 (1) is precisely the specific-heat exponent (this is why the
@@ -147,18 +167,22 @@ matching the definition by construction — the exponent ``\alpha`` in
 ``x \to \infty``. Requiring ``f`` to be finite at ``t = 0`` fixes
 ``p = (2 - \alpha)/\Delta_{h}``, so
 
-$``f(0, h) \;\sim\; h^{(2 - \alpha)/\Delta_{h}}.``$
+```math
+f(0, h) \;\sim\; h^{(2 - \alpha)/\Delta_{h}}.
+```
 
 Then $M(0, h) = -(\partial f/\partial h)_{t = 0} \sim
 h^{(2 - \alpha)/\Delta_{h} - 1}``, comparing to ``M \sim h^{1/\delta}$:
 
-$$\frac{1}{\delta}
+```math
+\frac{1}{\delta}
  \;=\; \frac{2 - \alpha}{\Delta_{h}} - 1
  \;=\; \frac{2 - \alpha - \Delta_{h}}{\Delta_{h}}
  \;=\; \frac{\beta}{\Delta_{h}},
 \quad\Longrightarrow\quad
 \boxed{\;\Delta_{h} = \beta\,\delta.\;}
-\tag{5}$$
+\tag{5}
+```
 
 The gap exponent ``\Delta_{h}`` is thus determined by the product
 ``\beta\,\delta``, sometimes called the "gap" between the order-
@@ -168,26 +192,34 @@ parameter and critical-isotherm exponents.
 
 Add (3) and (4):
 
-$$\beta + \gamma
+```math
+\beta + \gamma
  = (2 - \alpha - \Delta_{h}) + (2\Delta_{h} + \alpha - 2)
- = \Delta_{h}.$$
+ = \Delta_{h}.
+```
 
 Using (5) ``\Delta_{h} = \beta\,\delta``:
 
-$$\beta + \gamma \;=\; \beta\,\delta,
+```math
+\beta + \gamma \;=\; \beta\,\delta,
 \quad\Longrightarrow\quad
-\gamma \;=\; \beta(\delta - 1).$$
+\gamma \;=\; \beta(\delta - 1).
+```
 
 That is the **Widom relation** (we'll return to it). Meanwhile,
 re-arranging (3) directly gives
 
-$``\Delta_{h} \;=\; 2 - \alpha - \beta.``$
+```math
+\Delta_{h} \;=\; 2 - \alpha - \beta.
+```
 
 Substitute into (4) $\gamma = 2\Delta_{h} + \alpha - 2 = 2(2 -
 \alpha - \beta) + \alpha - 2 = 2 - \alpha - 2\beta$, i.e.
 
-$$\boxed{\;\alpha + 2\beta + \gamma \;=\; 2.\;}
-\tag{RUSHBROOKE}$$
+```math
+\boxed{\;\alpha + 2\beta + \gamma \;=\; 2.\;}
+\tag{RUSHBROOKE}
+```
 
 **2D Ising check**: $0 + 2\cdot\tfrac{1}{8} + \tfrac{7}{4}
 = 0 + \tfrac{1}{4} + \tfrac{7}{4} = 2$. ✓
@@ -201,8 +233,10 @@ scaling hypothesis saturates the bound to an equality.
 From the derivation above, the relation $\beta + \gamma =
 \beta\,\delta`` is just a rewriting of ``\gamma = \beta(\delta - 1)$:
 
-$$\boxed{\;\gamma \;=\; \beta(\delta - 1).\;}
-\tag{WIDOM}$$
+```math
+\boxed{\;\gamma \;=\; \beta(\delta - 1).\;}
+\tag{WIDOM}
+```
 
 **2D Ising check**: $\tfrac{1}{8}\cdot(15 - 1) = \tfrac{14}{8} =
 \tfrac{7}{4}$. ✓
@@ -220,32 +254,44 @@ short-distance behaviour of ``\Phi``.
 
 The susceptibility is the integrated connected correlator
 
-$$\chi \;=\; \int d^{d}\mathbf{r}\,\bigl\langle s(\mathbf{r})\,
-                                            s(\mathbf{0})\bigr\rangle_{c}.$$
+```math
+\chi \;=\; \int d^{d}\mathbf{r}\,\bigl\langle s(\mathbf{r})\,
+                                            s(\mathbf{0})\bigr\rangle_{c}.
+```
 
 Near ``T_{c}`` at ``h = 0``, the correlator has the scaling form
 
-$$\bigl\langle s(\mathbf{r})\,s(\mathbf{0})\bigr\rangle_{c}
- \;=\; |\mathbf{r}|^{-(d - 2 + \eta)}\,\Psi(|\mathbf{r}|/\xi),$$
+```math
+\bigl\langle s(\mathbf{r})\,s(\mathbf{0})\bigr\rangle_{c}
+ \;=\; |\mathbf{r}|^{-(d - 2 + \eta)}\,\Psi(|\mathbf{r}|/\xi),
+```
 
 with ``\Psi`` a cutoff function that decays rapidly for $|\mathbf{r}|
 \gg \xi$. Substituting and switching to the dimensionless variable
 ``u = |\mathbf{r}|/\xi``,
 
-$$\chi \;=\; \int\,|\mathbf{r}|^{-(d - 2 + \eta)}\,\Psi(|\mathbf{r}|/\xi)
+```math
+\chi \;=\; \int\,|\mathbf{r}|^{-(d - 2 + \eta)}\,\Psi(|\mathbf{r}|/\xi)
              \,d^{d}\mathbf{r}
        \;=\; \xi^{2 - \eta}\int u^{-(d - 2 + \eta)}\,\Psi(u)\,
-       u^{d - 1}\,du$$
-$``= \xi^{2 - \eta}\int u^{1 - \eta}\,\Psi(u)\,du \;\sim\; \xi^{2 - \eta}.``$
+       u^{d - 1}\,du
+```
+```math
+= \xi^{2 - \eta}\int u^{1 - \eta}\,\Psi(u)\,du \;\sim\; \xi^{2 - \eta}.
+```
 
 Using ``\xi \sim |t|^{-\nu}``,
 
-$``\chi \sim |t|^{-\nu(2 - \eta)},``$
+```math
+\chi \sim |t|^{-\nu(2 - \eta)},
+```
 
 and comparing to ``\chi \sim |t|^{-\gamma}``:
 
-$$\boxed{\;\gamma \;=\; \nu(2 - \eta).\;}
-\tag{FISHER}$$
+```math
+\boxed{\;\gamma \;=\; \nu(2 - \eta).\;}
+\tag{FISHER}
+```
 
 **2D Ising check**: ``1\cdot(2 - 1/4) = 7/4``. ✓
 
@@ -254,10 +300,12 @@ $$\boxed{\;\gamma \;=\; \nu(2 - \eta).\;}
 The singular part of the free-energy density scales as the inverse
 of the correlation volume times a characteristic energy:
 
-$$f_{\rm sing}(t, 0)
+```math
+f_{\rm sing}(t, 0)
  \;\sim\; \frac{k_{B} T}{\xi^{d}(t)}
  \;\sim\; \xi^{-d}
- \;\sim\; |t|^{d\nu}.$$
+ \;\sim\; |t|^{d\nu}.
+```
 
 This is the "hyperscaling" assumption: each correlation volume
 contributes order ``k_{B}T`` of free energy, and there are
@@ -266,10 +314,12 @@ contributes order ``k_{B}T`` of free energy, and there are
 On the other hand, from (1) at ``h = 0`` the scaling form gives
 ``f_{\rm sing}(t, 0) \sim |t|^{2 - \alpha}``. Matching the two:
 
-$$|t|^{2 - \alpha} \;\sim\; |t|^{d\nu}
+```math
+|t|^{2 - \alpha} \;\sim\; |t|^{d\nu}
 \quad\Longrightarrow\quad
 \boxed{\;2 - \alpha \;=\; d\,\nu.\;}
-\tag{JOSEPHSON}$$
+\tag{JOSEPHSON}
+```
 
 **2D Ising check** (``d = 2``): ``2 - 0 = 2 \cdot 1 = 2``. ✓
 
@@ -290,15 +340,19 @@ From
 [`ising-cft-primary-operators`](ising-cft-primary-operators.md) Step
 5, the CFT scaling dimensions give:
 
-$$\eta = 2\Delta_{\sigma} + 2 - d,\qquad
+```math
+\eta = 2\Delta_{\sigma} + 2 - d,\qquad
 \nu = \frac{1}{d - \Delta_{\varepsilon}},\qquad
-\beta = \nu\,\Delta_{\sigma}.$$
+\beta = \nu\,\Delta_{\sigma}.
+```
 
 Using Widom and Rushbrooke, the remaining three exponents are
 
-$$\gamma = \beta(\delta - 1),\qquad
+```math
+\gamma = \beta(\delta - 1),\qquad
 \alpha = 2 - 2\beta - \gamma,\qquad
-\delta = \frac{d + 2 - \eta}{d - 2 + \eta}.$$
+\delta = \frac{d + 2 - \eta}{d - 2 + \eta}.
+```
 
 For 2D Ising ($d = 2, \Delta_{\sigma} = 1/8, \Delta_{\varepsilon}
 = 1$):
@@ -344,8 +398,10 @@ exponent tuples.
 **(i) Mean-field exponents (``d \ge d_{c} = 4``).** The Landau-theory
 values
 
-$$(\alpha, \beta, \gamma, \delta, \nu, \eta)_{\rm MF} \;=\;
- (0,\, \tfrac{1}{2},\, 1,\, 3,\, \tfrac{1}{2},\, 0)$$
+```math
+(\alpha, \beta, \gamma, \delta, \nu, \eta)_{\rm MF} \;=\;
+ (0,\, \tfrac{1}{2},\, 1,\, 3,\, \tfrac{1}{2},\, 0)
+```
 
 satisfy:
 - Rushbrooke: ``0 + 1 + 1 = 2`` ✓

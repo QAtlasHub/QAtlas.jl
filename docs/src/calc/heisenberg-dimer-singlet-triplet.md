@@ -5,7 +5,9 @@
 For two spin-``\tfrac{1}{2}`` particles coupled by the isotropic
 Heisenberg exchange
 
-$``H \;=\; J\,\mathbf{S}_{1}\cdot\mathbf{S}_{2},``$
+```math
+H \;=\; J\,\mathbf{S}_{1}\cdot\mathbf{S}_{2},
+```
 
 the Hilbert space ``\mathbb{C}^{2}\otimes\mathbb{C}^{2}`` (dimension
 ``4``) decomposes into a singlet (``S_{\rm tot} = 0``) and a triplet
@@ -151,8 +153,8 @@ S^{z}_{\rm tot}|{\downarrow\uparrow}\rangle
 So ``S^{z}_{\rm tot}|s\rangle = 0``. ✓
 
 **Verify ``\mathbf{S}^{2}_{\rm tot}|s\rangle = 0``.** Use
-``\mathbf{S}^{2}_{\rm tot} = (S^{z}_{\rm tot})^{2} + \tfrac{1}{2}
-(S^{+}_{\rm tot}S^{-}_{\rm tot} + S^{-}_{\rm tot}S^{+}_{\rm tot})``
+$\mathbf{S}^{2}_{\rm tot} = (S^{z}_{\rm tot})^{2} + \tfrac{1}{2}
+(S^{+}_{\rm tot}S^{-}_{\rm tot} + S^{-}_{\rm tot}S^{+}_{\rm tot})$
 with ``S^{\pm}_{\rm tot} = S^{\pm}_{1} + S^{\pm}_{2}``:
 
 ```math
@@ -167,12 +169,12 @@ S^{+}_{\rm tot}|{\downarrow\uparrow}\rangle
  = |{\uparrow\uparrow}\rangle + 0 = |{\uparrow\uparrow}\rangle,
 ```
 
-so ``S^{+}_{\rm tot}|s\rangle = \tfrac{1}{\sqrt{2}}
-(|{\uparrow\uparrow}\rangle - |{\uparrow\uparrow}\rangle) = 0``.
+so $S^{+}_{\rm tot}|s\rangle = \tfrac{1}{\sqrt{2}}
+(|{\uparrow\uparrow}\rangle - |{\uparrow\uparrow}\rangle) = 0$.
 Similarly ``S^{-}_{\rm tot}|s\rangle = 0``. Combined with
 ``(S^{z}_{\rm tot})^{2}|s\rangle = 0``, this gives
-``\mathbf{S}^{2}_{\rm tot}|s\rangle = 0``, confirming ``S_{\rm tot}
-(S_{\rm tot} + 1) = 0 \Rightarrow S_{\rm tot} = 0``. ✓
+``\mathbf{S}^{2}_{\rm tot}|s\rangle = 0``, confirming $S_{\rm tot}
+(S_{\rm tot} + 1) = 0 \Rightarrow S_{\rm tot} = 0$. ✓
 
 ### Step 3 — Triplet eigenvectors by ``S^{\pm}_{\rm tot}`` ladder
 
@@ -217,7 +219,9 @@ For ``|t_{+1}\rangle``, ``S^{z}|t_{+1}\rangle = +1 |t_{+1}\rangle`` and
 ``S^{+}|t_{+1}\rangle = 0`` (highest weight). Using
 ``\mathbf{S}^{2} = (S^{z})^{2} + S^{z} + S^{-}S^{+}``:
 
-$``\mathbf{S}^{2}|t_{+1}\rangle = (1 + 1 + 0)|t_{+1}\rangle = 2\,|t_{+1}\rangle,``$
+```math
+\mathbf{S}^{2}|t_{+1}\rangle = (1 + 1 + 0)|t_{+1}\rangle = 2\,|t_{+1}\rangle,
+```
 
 i.e. ``S_{\rm tot}(S_{\rm tot} + 1) = 2 \Rightarrow S_{\rm tot} = 1``.
 The other two triplet states follow by ladder-preservation of the
@@ -270,7 +274,9 @@ The ``(|{\uparrow\uparrow}\rangle, |{\downarrow\downarrow}\rangle)``
 states are already eigenvectors with eigenvalue ``1/4``. The
 middle ``2\times 2`` block
 
-$``M \;=\; \begin{pmatrix}-1/4 & 1/2 \\ 1/2 & -1/4\end{pmatrix}``$
+```math
+M \;=\; \begin{pmatrix}-1/4 & 1/2 \\ 1/2 & -1/4\end{pmatrix}
+```
 
 has eigenvalues ``-1/4 \pm 1/2 = \{1/4, -3/4\}`` with eigenvectors
 ``(1, 1)^{T}/\sqrt{2}`` and ``(1, -1)^{T}/\sqrt{2}``. Multiplying by
@@ -304,8 +310,8 @@ traceless). Check: ``-3 J/4 + 3 \cdot J/4 = 0``. ✓
 
 **(iv) Cross-reference with the spin-1/2 Heisenberg chain
 thermodynamic limit.** The infinite AF Heisenberg chain has
-ground-state energy per bond ``e_{0} = J(1/4 - \ln 2) \approx
--0.443\,J``, derived in
+ground-state energy per bond $e_{0} = J(1/4 - \ln 2) \approx
+-0.443\,J$, derived in
 [`bethe-ansatz-heisenberg-e0`](bethe-ansatz-heisenberg-e0.md). For
 ``N = 2`` the per-bond energy is ``E_{s}/1 = -3 J/4 = -0.75\,J`` (only
 one bond on a 2-site chain with open boundary condition; for PBC

@@ -54,8 +54,8 @@ manifold ``\mathcal{M}``, either:
 - **PBC**: a spatial circle of circumference ``L = N\,a``, so
   ``\mathcal{M} = \mathbb{R}_t \times S^{1}_{L}``. The Euclidean
   spacetime is an infinite cylinder of circumference ``L``.
-- **OBC**: a spatial segment ``[0, L]``, so ``\mathcal{M} =
-  \mathbb{R}_t \times [0, L]``. The Euclidean spacetime is an
+- **OBC**: a spatial segment ``[0, L]``, so $\mathcal{M} =
+  \mathbb{R}_t \times [0, L]$. The Euclidean spacetime is an
   infinite strip of width ``L``.
 
 Let ``A = [0, \ell\,a]`` be a contiguous block of ``\ell`` sites (in the
@@ -63,10 +63,12 @@ lattice picture) or length ``\ell_{\rm cont} = \ell\,a`` (in the
 continuum); the complement ``B`` is the rest of the chain. The
 reduced density matrix of ``A`` at zero temperature is
 
-$``\rho_{A} \;=\; \mathrm{Tr}_{B}\,|0\rangle\langle 0|,``$
+```math
+\rho_{A} \;=\; \mathrm{Tr}_{B}\,|0\rangle\langle 0|,
+```
 
-and the von Neumann entropy is ``S_{A} = -\mathrm{Tr}\,\rho_{A}\ln
-\rho_{A}``.
+and the von Neumann entropy is $S_{A} = -\mathrm{Tr}\,\rho_{A}\ln
+\rho_{A}$.
 
 ### Goal
 
@@ -105,8 +107,8 @@ continue in ``n``, and (iii) apply (1) to extract ``S_{A}``.
 ### Step 2 — Twist-operator construction for ``\mathrm{Tr}\,\rho_{A}^{n}``
 
 The path-integral representation of ``\rho_{A}`` is a piecewise
-computation: it is the Euclidean path integral on the ``\mathcal{M}
-\times \mathbb{R}_{\tau}`` spacetime with:
+computation: it is the Euclidean path integral on the $\mathcal{M}
+\times \mathbb{R}_{\tau}$ spacetime with:
 
 1. a cut along ``A`` at imaginary time ``\tau = 0^{-}`` (open below),
 2. a cut along ``A`` at ``\tau = 0^{+}`` (open above),
@@ -132,8 +134,8 @@ CFT on a single sheet (``\mathcal{M}``, not the ``n``-sheeted cover):
 \tag{2}
 ```
 
-with ``u = 0, v = \ell`` the endpoints of ``A`` and ``\mathcal{T}_{n},
-\overline{\mathcal{T}}_{n}`` a twist / anti-twist pair. The twist
+with ``u = 0, v = \ell`` the endpoints of ``A`` and $\mathcal{T}_{n},
+\overline{\mathcal{T}}_{n}$ a twist / anti-twist pair. The twist
 operator has conformal scaling dimension (Calabrese–Cardy 2004
 eq. (1.4))
 
@@ -159,8 +161,8 @@ cylinder of circumference ``L = N a``. The conformal map
 ``w = x + i\tau``) to the plane (coordinates ``z``), opening up the
 periodic spatial direction into the radial direction on ``\mathbb{C}``.
 
-Under this map, a primary operator ``\phi`` of dimension ``(\Delta,
-\overline{\Delta})`` transforms with the Jacobian
+Under this map, a primary operator ``\phi`` of dimension $(\Delta,
+\overline{\Delta})$ transforms with the Jacobian
 
 ```math
 \phi_{\rm plane}(z) = \left(\frac{dw}{dz}\right)^{\Delta}
@@ -244,7 +246,6 @@ respect to ``n`` at ``n = 1``:
    - 4\cdot\frac{c}{24}\Bigl(1 + \frac{1}{n^{2}}\Bigr)\Big|_{n = 1}\cdot
      \ln\!\bigl[\dots\bigr]
 ```
-
 ```math
 = \partial_{n}\ln C_{n}\big|_{n = 1}
    - \frac{c}{3}\,\ln\!\bigl[(2 L/\pi)\sin(\pi\ell/L)\bigr].
@@ -261,8 +262,8 @@ S_{\rm PBC} = \frac{c}{3}\,\ln\!\bigl[(2 L/\pi)\sin(\pi\ell/L)\bigr]
 with ``s_{1} = -\partial_{n}\ln C_{n}|_{n = 1}`` a non-universal
 constant.
 
-**Converting to lattice units.** With ``L = N a`` and ``\ell_{\rm cont}
-= \ell a``, the argument inside the log is
+**Converting to lattice units.** With ``L = N a`` and $\ell_{\rm cont}
+= \ell a$, the argument inside the log is
 
 ```math
 (2 L / \pi)\sin(\pi\ell_{\rm cont}/L)
@@ -292,8 +293,8 @@ real axis.
 
 Under this map, the strip's spatial point ``x`` at ``\tau = 0`` maps to
 ``z = \sin(\pi x/L) \in \mathbb{R}``. In particular, the block
-``A = [0, \ell]`` in the strip maps to the segment ``[0,
-\sin(\pi\ell/L)]`` on the positive real axis.
+``A = [0, \ell]`` in the strip maps to the segment $[0,
+\sin(\pi\ell/L)]$ on the positive real axis.
 
 **Step 4b: method of images.** On the upper half-plane with a
 **free / Dirichlet boundary** on the real axis (the standard BCFT
@@ -309,8 +310,8 @@ image: the 1-point function in the BCFT is
 ```
 
 where ``A_{n}`` is a boundary-condition-dependent constant (the
-boundary-operator coefficient) and the denominator ``(2\mathrm{Im}\,
-z)^{2\Delta_{n}} = |z - \bar z|^{2\Delta_{n}}`` is exactly the
+boundary-operator coefficient) and the denominator $(2\mathrm{Im}\,
+z)^{2\Delta_{n}} = |z - \bar z|^{2\Delta_{n}}$ is exactly the
 image-pair distance.
 
 **Step 4c: OBC twist correlator.** Crucially, in the OBC setup
@@ -368,7 +369,6 @@ Differentiating in ``n`` at ``n = 1``:
  = \partial_{n}\ln A_{n}\big|_{n = 1}
   - 2\cdot\frac{c}{24}\Bigl(1 + \frac{1}{n^{2}}\Bigr)\Big|_{n = 1}\cdot\ln[\dots]
 ```
-
 ```math
 = \partial_{n}\ln A_{n}\big|_{n = 1}
   - \frac{c}{6}\,\ln\!\bigl[(2 L/\pi)\sin(\pi\ell/L)\bigr].
@@ -417,9 +417,13 @@ in the OBC case is the image-doubling of the effective distance.
 **(i) ``\ell \to N/2`` (balanced bipartition).** At the midpoint,
 ``\sin(\pi/2) = 1`` and the formulas simplify to
 
-$``S_{\rm PBC}(N/2, N) = \frac{c}{3}\ln(N/(\pi a)) + s_{1},``$
+```math
+S_{\rm PBC}(N/2, N) = \frac{c}{3}\ln(N/(\pi a)) + s_{1},
+```
 
-$``S_{\rm OBC}(N/2, N) = \frac{c}{6}\ln(2 N/(\pi a)) + s_{1}^{\,\prime}.``$
+```math
+S_{\rm OBC}(N/2, N) = \frac{c}{6}\ln(2 N/(\pi a)) + s_{1}^{\,\prime}.
+```
 
 Both scale as ``\ln N`` with coefficients differing by a factor of
 two.

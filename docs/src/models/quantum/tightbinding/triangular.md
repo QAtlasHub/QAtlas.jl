@@ -8,7 +8,9 @@ nearest neighbours, the lattice has a single sublattice per unit cell,
 and the resulting single band exhibits a characteristic asymmetric
 dispersion that is the hallmark of geometric frustration.
 
-$``H = -t \sum_{\langle i,j \rangle} \bigl(c^\dagger_i c_j + c^\dagger_j c_i\bigr)``$
+```math
+H = -t \sum_{\langle i,j \rangle} \bigl(c^\dagger_i c_j + c^\dagger_j c_i\bigr)
+```
 
 **Lattice properties**: 1 sublattice per unit cell, 6 nearest
 neighbours, **not bipartite** (frustrated), no flat band.
@@ -29,7 +31,9 @@ singularity within the band.
 Since the triangular lattice has one sublattice, the Bloch
 "Hamiltonian" is a scalar at each ``\mathbf{k}``-point:
 
-$``E_{mn} = -2t\left[\cos\theta_1 + \cos\theta_2 + \cos(\theta_2 - \theta_1)\right]``$
+```math
+E_{mn} = -2t\left[\cos\theta_1 + \cos\theta_2 + \cos(\theta_2 - \theta_1)\right]
+```
 
 where ``\theta_1 = 2\pi m/L_x`` and ``\theta_2 = 2\pi n/L_y``, with
 ``\mathbf{a}_1 = (1, 0)``, ``\mathbf{a}_2 = (1/2, \sqrt{3}/2)`` the

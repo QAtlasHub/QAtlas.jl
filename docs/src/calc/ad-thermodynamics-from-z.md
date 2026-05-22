@@ -59,7 +59,9 @@ error (see `test/verification/test_ising_ad_thermodynamics.jl`).
 Given a Hamiltonian ``H(\{s\})`` over a state space ``\{s\}``, the
 canonical partition function at inverse temperature ``\beta`` is
 
-$``Z(\beta) \;=\; \sum_{\{s\}} e^{-\beta H(\{s\})}.``$
+```math
+Z(\beta) \;=\; \sum_{\{s\}} e^{-\beta H(\{s\})}.
+```
 
 The probability of a state is ``p_{s}(\beta) = e^{-\beta H_{s}}/Z``.
 Thermal averages are ``\langle A\rangle = \sum_{s} A(s)\,p_{s}``. The
@@ -77,8 +79,8 @@ Z_{\rm Ising}(\beta, J; L_{x}, L_{y})
 
 via the symmetric transfer matrix ``T`` derived in
 [`transfer-matrix-symmetric-split`](transfer-matrix-symmetric-split.md).
-The goal is to obtain ``F, \langle E\rangle, C_{v}, S,
-\langle\sigma\sigma\rangle`` as (higher-order) derivatives of
+The goal is to obtain $F, \langle E\rangle, C_{v}, S,
+\langle\sigma\sigma\rangle$ as (higher-order) derivatives of
 ``\ln Z`` using ForwardDiff.
 
 ### Goal
@@ -120,8 +122,8 @@ Divide by ``Z``:
 Equivalently ``\langle E\rangle = -\partial\ln Z/\partial\beta``
 (identifying ``E = H`` at thermal equilibrium).
 
-### Step 2 — Variance identity ``\partial^{2}\ln Z/\partial\beta^{2}
-             = \langle E^{2}\rangle - \langle E\rangle^{2}``
+### Step 2 — Variance identity $\partial^{2}\ln Z/\partial\beta^{2}
+             = \langle E^{2}\rangle - \langle E\rangle^{2}$
 
 Differentiate (1) once more:
 
@@ -144,8 +146,8 @@ Apply the quotient rule:
         \,\frac{\partial Z}{\partial\beta}.
 ```
 
-The numerator of the first term is ``\sum_{s}(-H_{s}^{2})\,
-e^{-\beta H_{s}} = -Z\,\langle H^{2}\rangle``. The second term is
+The numerator of the first term is $\sum_{s}(-H_{s}^{2})\,
+e^{-\beta H_{s}} = -Z\,\langle H^{2}\rangle$. The second term is
 $-\langle E\rangle \cdot \langle E\rangle\cdot(-Z)/Z = \langle
 E\rangle^{2}`` (using ``\partial Z/\partial\beta = -Z\langle E\rangle$).
 
@@ -240,8 +242,8 @@ so
 \tag{4}
 ```
 
-In the Ising case, setting ``g = J`` with ``\mathcal{O}_{J} = -\sum
-s_{u}s_{v}`` gives
+In the Ising case, setting ``g = J`` with $\mathcal{O}_{J} = -\sum
+s_{u}s_{v}$ gives
 ``\langle\sum s_{u}s_{v}\rangle = \beta^{-1}\partial_{J}\ln Z``, i.e.
 the nearest-neighbour correlator $\langle s_{u}s_{v}\rangle =
 \beta^{-1}\partial_{J}\ln Z / N_{\rm bonds}``. Setting ``g = h$ with
@@ -343,7 +345,9 @@ cross-checks the AD-computed thermodynamic quantities against a
 For the ``2\times 2``, ``2\times 3``, and ``3\times 3`` square lattices
 with various ``\beta \in [0.1, 2.0]``, AD and brute force agree to
 
-$``|A_{\rm AD} - A_{\rm brute}|\,/\,|A_{\rm brute}| \;\le\; 10^{-14}``$
+```math
+|A_{\rm AD} - A_{\rm brute}|\,/\,|A_{\rm brute}| \;\le\; 10^{-14}
+```
 
 — machine precision. This confirms that:
 

@@ -13,12 +13,16 @@ disordered phase.
 
 Each of the six vertex configurations is weighted in pairs:
 
-$``\omega_1 = \omega_2 = a, \qquad \omega_3 = \omega_4 = b, \qquad \omega_5 = \omega_6 = c.``$
+```math
+\omega_1 = \omega_2 = a, \qquad \omega_3 = \omega_4 = b, \qquad \omega_5 = \omega_6 = c.
+```
 
 All thermodynamic information at fixed temperature is encoded in the
 single dimensionless invariant
 
-$``\Delta = \frac{a^2 + b^2 - c^2}{2 a b}``$
+```math
+\Delta = \frac{a^2 + b^2 - c^2}{2 a b}
+```
 
 which divides parameter space into three exactly solvable phases:
 
@@ -41,7 +45,9 @@ entropy.
 At the symmetric point ``a = b = c = 1`` the zero-temperature
 configurational entropy per vertex is the closed form
 
-$``\frac{S}{N} = \frac{3}{2} \log\frac{4}{3} \approx 0.4315231086776713\ldots``$
+```math
+\frac{S}{N} = \frac{3}{2} \log\frac{4}{3} \approx 0.4315231086776713\ldots
+```
 
 ### Physical Context
 
@@ -71,7 +77,9 @@ The implementation returns the closed form `(3/2) * log(4/3)` directly.
 For ``\Delta > 1`` the ground state is the unique frozen configuration
 in which all arrows are parallel along the dominant axis, and
 
-$``f_{\mathrm{FE}}(a, b, c) = -\log \max(a, b).``$
+```math
+f_{\mathrm{FE}}(a, b, c) = -\log \max(a, b).
+```
 
 ### Physical Context
 

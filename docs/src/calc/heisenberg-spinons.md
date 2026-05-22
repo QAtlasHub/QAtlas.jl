@@ -9,21 +9,27 @@ that are exposed as Phase-1 helpers and `fetch` methods on
 
 For
 
-$``H = J\sum_{i}\mathbf{S}_i\cdot\mathbf{S}_{i+1},\qquad J>0,``$
+```math
+H = J\sum_{i}\mathbf{S}_i\cdot\mathbf{S}_{i+1},\qquad J>0,
+```
 
 the elementary excitations are massless spinons (half-odd-integer spin)
 which always come in pairs in any physical observable. The single-spinon
 dispersion (Faddeev–Takhtajan 1981) is
 
-$``\boxed{\;\varepsilon(k) \;=\; \frac{\pi J}{2}\,|\sin k|,\qquad k\in[0,\pi].\;}``$
+```math
+\boxed{\;\varepsilon(k) \;=\; \frac{\pi J}{2}\,|\sin k|,\qquad k\in[0,\pi].\;}
+```
 
 The two-spinon continuum, parameterised by the total momentum ``q``, is
 bounded by the des Cloizeaux–Pearson (1962) edges
 
-$$\boxed{\;
+```math
+\boxed{\;
   \varepsilon_L(q) \;=\; \frac{\pi J}{2}\,|\sin q|,\qquad
   \varepsilon_U(q) \;=\; \pi J\,\bigl|\sin(q/2)\bigr|.
-\;}$$
+\;}
+```
 
 The lower edge coincides with the single-spinon dispersion and the
 continuum is gapless at ``q=0`` and ``q=\pi`` (Umklapp).
@@ -31,12 +37,14 @@ continuum is gapless at ``q=0`` and ``q=\pi`` (Umklapp).
 The longitudinal dynamic structure factor inside the continuum is
 approximated by the Müller ansatz (Müller–Thomas–Beck–Bonner 1981):
 
-$$\boxed{\;
+```math
+\boxed{\;
   S^{zz}_{\rm Müller}(q,\omega)
   \;=\; \frac{\Theta\!\bigl[\omega-\varepsilon_L(q)\bigr]\,
               \Theta\!\bigl[\varepsilon_U(q)-\omega\bigr]}
              {2\,\sqrt{\omega^2 - \varepsilon_L(q)^2}},
-\;}$$
+\;}
+```
 
 with ``S^{zz}=0`` outside ``[\varepsilon_L,\varepsilon_U]``.
 
@@ -66,7 +74,9 @@ Eliminating ``\lambda`` via ``\cosh(\pi\lambda) = 1/\sin p`` — itself a
 direct consequence of the second relation — yields the closed-form
 dispersion stated above:
 
-$``\varepsilon(p) \;=\; \frac{\pi J}{2}\,\sin p,\qquad p\in[0,\pi].``$
+```math
+\varepsilon(p) \;=\; \frac{\pi J}{2}\,\sin p,\qquad p\in[0,\pi].
+```
 
 The absolute value ``|\sin p|`` in the boxed formula extends the result by
 the periodicity of the Brillouin zone.
@@ -91,14 +101,18 @@ Two solutions emerge.
 * ``k_1 = k_2 = q/2`` — both spinons share the momentum, giving the
   **upper edge**
 
-  $$\varepsilon_U(q) \;=\; 2\,\varepsilon(q/2)
-                       \;=\; \pi J\,\bigl|\sin(q/2)\bigr|.$$
+  ```math
+\varepsilon_U(q) \;=\; 2\,\varepsilon(q/2)
+                       \;=\; \pi J\,\bigl|\sin(q/2)\bigr|.
+```
 
 * ``k_1 = 0,\ k_2 = q`` (one spinon at the gapless point) —
   giving the **lower edge**
 
-  $$\varepsilon_L(q) \;=\; \varepsilon(0) + \varepsilon(q)
-                       \;=\; \frac{\pi J}{2}\,|\sin q|.$$
+  ```math
+\varepsilon_L(q) \;=\; \varepsilon(0) + \varepsilon(q)
+                       \;=\; \frac{\pi J}{2}\,|\sin q|.
+```
 
 Hence ``\varepsilon_L(q) \equiv \varepsilon(q)``, and the continuum
 collapses (``\varepsilon_U = \varepsilon_L = 0``) at the gapless points

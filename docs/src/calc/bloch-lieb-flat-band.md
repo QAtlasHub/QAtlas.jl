@@ -52,10 +52,10 @@ horizontal edge and one at the midpoint of each vertical edge.
 Denote these
 
 - ``A`` (corner / "copper"): position ``\mathbf{r}_{A} = (0, 0)``,
-- ``B`` (horizontal-edge midpoint / "oxygen ``x``"): ``\mathbf{r}_{B}
-  = \mathbf{a}_{1}/2 = (a/2, 0)``,
-- ``C`` (vertical-edge midpoint / "oxygen ``y``"): ``\mathbf{r}_{C}
-  = \mathbf{a}_{2}/2 = (0, a/2)``.
+- ``B`` (horizontal-edge midpoint / "oxygen ``x``"): $\mathbf{r}_{B}
+  = \mathbf{a}_{1}/2 = (a/2, 0)$,
+- ``C`` (vertical-edge midpoint / "oxygen ``y``"): $\mathbf{r}_{C}
+  = \mathbf{a}_{2}/2 = (0, a/2)$.
 
 (The naming anticipates the CuO``_{2}`` plane of cuprates, where ``A``
 carries the Cu orbital and ``B, C`` carry the O``_{x}, \text{O}_{y}``
@@ -135,10 +135,10 @@ c_{\alpha, \mathbf{k}}
 Each NN bond between ``\alpha`` at ``\mathbf{r}_{\alpha} + \mathbf{R}``
 and ``\beta`` at ``\mathbf{r}_{\beta} + \mathbf{R}'`` contributes
 ``-t\,e^{-i\mathbf{k}\cdot\mathbf{d}}`` in the Bloch Hamiltonian
-``(\alpha, \beta)`` block, with ``\mathbf{d} \equiv (\mathbf{r}_{\beta}
-+ \mathbf{R}') - (\mathbf{r}_{\alpha} + \mathbf{R})`` the bond
-vector. A Hermitian-conjugate pair sums to ``-2t\cos(\mathbf{k}\cdot
-\mathbf{d})``.
+``(\alpha, \beta)`` block, with $\mathbf{d} \equiv (\mathbf{r}_{\beta}
++ \mathbf{R}') - (\mathbf{r}_{\alpha} + \mathbf{R})$ the bond
+vector. A Hermitian-conjugate pair sums to $-2t\cos(\mathbf{k}\cdot
+\mathbf{d})$.
 
 For the two ``A``–``B`` bonds of (1): same-cell $\mathbf{d} =
 +\mathbf{a}_{1}/2``, cross-cell ``\mathbf{d} = -\mathbf{a}_{1}/2$.
@@ -196,7 +196,6 @@ row of ``M - \mu\mathbb{I}`` with ``s_{1} = \cos(\theta_{1}/2)``,
    - s_{1}\,\det\!\begin{pmatrix}s_{1} & 0 \\ s_{2} & -\mu\end{pmatrix}
    + s_{2}\,\det\!\begin{pmatrix}s_{1} & -\mu \\ s_{2} & 0\end{pmatrix}
 ```
-
 ```math
 = -\mu^{3} + \mu\,s_{1}^{2} + \mu\,s_{2}^{2}
  = -\mu\,\bigl[\,\mu^{2} - (s_{1}^{2} + s_{2}^{2})\,\bigr].
@@ -239,9 +238,15 @@ The flat band sits at ``E = 0`` throughout the BZ, independent of
 Solve ``\widetilde{H}(\mathbf{k})\,\mathbf{v} = 0``. In components
 ``\mathbf{v} = (v_{A}, v_{B}, v_{C})^{T}``, (2) gives
 
-$``\text{row }A: \quad -2t\bigl[s_{1} v_{B} + s_{2} v_{C}\bigr] = 0,``$
-$``\text{row }B: \quad -2t\,s_{1} v_{A} = 0,``$
-$``\text{row }C: \quad -2t\,s_{2} v_{A} = 0.``$
+```math
+\text{row }A: \quad -2t\bigl[s_{1} v_{B} + s_{2} v_{C}\bigr] = 0,
+```
+```math
+\text{row }B: \quad -2t\,s_{1} v_{A} = 0,
+```
+```math
+\text{row }C: \quad -2t\,s_{2} v_{A} = 0.
+```
 
 For generic ``\mathbf{k}`` with ``s_{1}, s_{2} \ne 0``, rows ``B`` and ``C``
 force ``v_{A} = 0``. Row ``A`` then requires $s_{1} v_{B} + s_{2} v_{C}
@@ -276,8 +281,8 @@ From rows ``B`` and ``C``,
 -2t\,s_{2}\,v_{A} = \pm E\,v_{C},
 ```
 
-giving ``v_{B} = -2t s_{1} v_{A}/(\pm E)``, ``v_{C} = -2t s_{2}
-v_{A}/(\pm E)``. Normalising,
+giving ``v_{B} = -2t s_{1} v_{A}/(\pm E)``, $v_{C} = -2t s_{2}
+v_{A}/(\pm E)$. Normalising,
 
 ```math
 |\psi_{\pm}(\mathbf{k})\rangle \;=\;
@@ -306,8 +311,8 @@ M\,\mathbf{v} = 0
 Q\,\mathbf{v}_{2} = 0\quad\text{and}\quad Q^{T}\,\mathbf{v}_{1} = 0.
 ```
 
-By rank-nullity, ``\dim\ker Q = N_{2} - \mathrm{rank}(Q) \ge
-N_{2} - \min(N_{1}, N_{2}) = \max(0, N_{2} - N_{1})``, so there are
+By rank-nullity, $\dim\ker Q = N_{2} - \mathrm{rank}(Q) \ge
+N_{2} - \min(N_{1}, N_{2}) = \max(0, N_{2} - N_{1})$, so there are
 at least ``\max(0, N_{2} - N_{1})`` zero-energy eigenvectors
 supported on sublattice 2. Similarly at least
 ``\max(0, N_{1} - N_{2})`` such vectors on sublattice 1. In total, at
@@ -351,7 +356,9 @@ Expand (5) near ``M``. With our normalisation $\mathbf{a}_{j} = 2
 
 Therefore
 
-$``s_{1}^{2} + s_{2}^{2} \;\approx\; q_{1}^{2} + q_{2}^{2} \;=\; |\mathbf{q}|^{2},``$
+```math
+s_{1}^{2} + s_{2}^{2} \;\approx\; q_{1}^{2} + q_{2}^{2} \;=\; |\mathbf{q}|^{2},
+```
 
 and
 
@@ -388,8 +395,8 @@ flat-band ferromagnetism (Lieb 1989).
 spectrum symmetric about ``E = 0``: for every dispersive eigenvalue
 ``+E(\mathbf{k})`` there is ``-E(\mathbf{k})``. The sublattice operator
 ``\Sigma = \mathrm{diag}(+1, -1, -1)`` (positive on ``A``,
-negative on ``B\cup C``) satisfies ``\Sigma \widetilde{H}(\mathbf{k})
-\Sigma = -\widetilde{H}(\mathbf{k})``, the algebraic expression of
+negative on ``B\cup C``) satisfies $\Sigma \widetilde{H}(\mathbf{k})
+\Sigma = -\widetilde{H}(\mathbf{k})$, the algebraic expression of
 bipartiteness.
 
 **(iv) Honeycomb vs Lieb comparison.** The honeycomb lattice (see

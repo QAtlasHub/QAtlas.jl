@@ -145,12 +145,12 @@ in the same cell, and to ``C`` at $\mathbf{r}_{C} + \mathbf{a}_{1} -
 \mathbf{a}_{2}`` (check: ``|\mathbf{r}_{C} + \mathbf{a}_{1} -
 \mathbf{a}_{2} - \mathbf{r}_{B}| = |(1/4, \sqrt{3}/4) + (1/2,
 -\sqrt{3}/2) - (1/2, 0)| = |(1/4, -\sqrt{3}/4)| = 1/2$, NN ✓).
-Fourier gives the factor ``1 + e^{i\mathbf{k}\cdot(\mathbf{a}_{1} -
-\mathbf{a}_{2})}``.
+Fourier gives the factor $1 + e^{i\mathbf{k}\cdot(\mathbf{a}_{1} -
+\mathbf{a}_{2})}$.
 
 Collecting contributions (and using
-``-t\,(1 + e^{i\phi})\,A^{\dagger}_{\mathbf{k}}B_{\mathbf{k}} +
-\text{h.c.}`` for each bond type),
+$-t\,(1 + e^{i\phi})\,A^{\dagger}_{\mathbf{k}}B_{\mathbf{k}} +
+\text{h.c.}$ for each bond type),
 
 ```math
 H = \sum_{\mathbf{k}}\,\Psi^{\dagger}_{\mathbf{k}}\,
@@ -183,10 +183,10 @@ c_{\alpha, \mathbf{k}} \;=\; \frac{1}{\sqrt{N_{c}}}
 ```
 
 which replaces the cell-index phase ``e^{-i\mathbf{k}\cdot\mathbf{R}}``
-of Step 1 by a full-position phase ``e^{-i\mathbf{k}\cdot(\mathbf{R} +
-\mathbf{r}_{\alpha})}`` including the sublattice offset. Under this
-convention every bond ``\alpha_{\mathbf{R}} \leftrightarrow
-\beta_{\mathbf{R}'}`` contributes, in the Bloch Hamiltonian,
+of Step 1 by a full-position phase $e^{-i\mathbf{k}\cdot(\mathbf{R} +
+\mathbf{r}_{\alpha})}$ including the sublattice offset. Under this
+convention every bond $\alpha_{\mathbf{R}} \leftrightarrow
+\beta_{\mathbf{R}'}$ contributes, in the Bloch Hamiltonian,
 
 ```math
 -t\,e^{-i\mathbf{k}\cdot(\mathbf{r}_{\beta} + \mathbf{R}'
@@ -194,13 +194,13 @@ convention every bond ``\alpha_{\mathbf{R}} \leftrightarrow
  \;=\; -t\,e^{-i\mathbf{k}\cdot\mathbf{d}},
 ```
 
-with ``\mathbf{d} = (\mathbf{r}_{\beta} + \mathbf{R}') -
-(\mathbf{r}_{\alpha} + \mathbf{R})`` the **bond vector** from
+with $\mathbf{d} = (\mathbf{r}_{\beta} + \mathbf{R}') -
+(\mathbf{r}_{\alpha} + \mathbf{R})$ the **bond vector** from
 ``\alpha`` to ``\beta``. Summing a Hermitian-conjugate pair gives
 ``-2t\cos(\mathbf{k}\cdot\mathbf{d})``.
 
-For the two ``A``–``B`` bonds of (1): the same-cell bond has ``\mathbf{d}
-= \mathbf{r}_{B} - \mathbf{r}_{A} = +\mathbf{a}_{1}/2``; the cross-cell
+For the two ``A``–``B`` bonds of (1): the same-cell bond has $\mathbf{d}
+= \mathbf{r}_{B} - \mathbf{r}_{A} = +\mathbf{a}_{1}/2$; the cross-cell
 bond has $\mathbf{d} = \mathbf{r}_{B} - \mathbf{r}_{A} -
 \mathbf{a}_{1} = -\mathbf{a}_{1}/2``. The ``(A, B)$ matrix element is
 the sum over these two:
@@ -221,8 +221,8 @@ the other bond types:
 \widetilde{H}_{BC} = -2t\cos\bigl[(\theta_{2} - \theta_{1})/2\bigr].
 ```
 
-The in-cell ``B``–``C`` bond vector is ``\mathbf{r}_{C} - \mathbf{r}_{B}
-= \mathbf{a}_{2}/2 - \mathbf{a}_{1}/2``; the cross-cell one is the
+The in-cell ``B``–``C`` bond vector is $\mathbf{r}_{C} - \mathbf{r}_{B}
+= \mathbf{a}_{2}/2 - \mathbf{a}_{1}/2$; the cross-cell one is the
 negative of that. Both give ``\cos((\theta_{2} - \theta_{1})/2)``
 after summation. Assembling, the **real-symmetric Bloch Hamiltonian** is
 
@@ -274,12 +274,13 @@ by cofactor expansion along the first row:
 
 Evaluating the ``2\times 2`` determinants,
 
-$``\det\!\begin{pmatrix}-\mu & c_{3} \\ c_{3} & -\mu\end{pmatrix} = \mu^{2} - c_{3}^{2},``$
+```math
+\det\!\begin{pmatrix}-\mu & c_{3} \\ c_{3} & -\mu\end{pmatrix} = \mu^{2} - c_{3}^{2},
+```
 ```math
 \det\!\begin{pmatrix}c_{1} & c_{3} \\ c_{2} & -\mu\end{pmatrix}
  = -\mu c_{1} - c_{2} c_{3},
 ```
-
 ```math
 \det\!\begin{pmatrix}c_{1} & -\mu \\ c_{2} & c_{3}\end{pmatrix}
  = c_{1} c_{3} + \mu c_{2}.
@@ -292,12 +293,13 @@ Substituting,
  = -\mu(\mu^{2} - c_{3}^{2}) - c_{1}(-\mu c_{1} - c_{2} c_{3})
     + c_{2}(c_{1} c_{3} + \mu c_{2})
 ```
-
 ```math
 = -\mu^{3} + \mu\,c_{3}^{2} + \mu\,c_{1}^{2} + c_{1} c_{2} c_{3}
     + c_{1} c_{2} c_{3} + \mu\,c_{2}^{2}
 ```
-$``= -\mu^{3} + \mu\,S + 2\,P,``$
+```math
+= -\mu^{3} + \mu\,S + 2\,P,
+```
 
 with
 
@@ -341,8 +343,8 @@ where ``c_{1} = \cos\alpha``, ``c_{2} = \cos(\alpha + \beta)``, $c_{3} =
 \quad\checkmark
 ```
 
-**Proof of (5).** Use the sum-angle formula ``\cos(\alpha + \beta) =
-\cos\alpha\cos\beta - \sin\alpha\sin\beta`` and square:
+**Proof of (5).** Use the sum-angle formula $\cos(\alpha + \beta) =
+\cos\alpha\cos\beta - \sin\alpha\sin\beta$ and square:
 
 ```math
 c_{2}^{2}
@@ -358,7 +360,6 @@ Substitute ``\sin^{2}x = 1 - \cos^{2}x``:
    - 2 c_{1} c_{3}\sin\alpha\sin\beta
    + (1 - c_{1}^{2})(1 - c_{3}^{2})
 ```
-
 ```math
 = 1 - c_{1}^{2} - c_{3}^{2} + 2\,c_{1}^{2}c_{3}^{2}
    - 2 c_{1} c_{3}\sin\alpha\sin\beta.
@@ -381,8 +382,8 @@ Factor the last two terms on the right:
  = 1 + 2 P,
 ```
 
-using ``c_{1}c_{3} - \sin\alpha\sin\beta = \cos\alpha\cos\beta -
-\sin\alpha\sin\beta = \cos(\alpha + \beta) = c_{2}``.
+using $c_{1}c_{3} - \sin\alpha\sin\beta = \cos\alpha\cos\beta -
+\sin\alpha\sin\beta = \cos(\alpha + \beta) = c_{2}$.
 
 Hence ``c_{1}^{2} + c_{2}^{2} + c_{3}^{2} - 2 P = 1``, i.e.
 ``S - 2P = 1``, which is exactly (5). ``\square``
@@ -414,8 +415,8 @@ which follows by expanding the right-hand side and using
  = \mu^{3} - S\mu - 2P,
 ```
 
-using ``1 - S = -2P``. The remaining quadratic ``\mu^{2} - \mu + (1 -
-S) = 0`` has roots
+using ``1 - S = -2P``. The remaining quadratic $\mu^{2} - \mu + (1 -
+S) = 0$ has roots
 
 ```math
 \mu_{\pm}
@@ -442,8 +443,8 @@ below the flat band everywhere, with minimum at ``\Gamma`` equal to
 ### Step 6 — ``\Gamma``-point and zone-boundary checks
 
 At ``\Gamma`` (``\mathbf{k} = (0, 0)``): ``\theta_{1} = \theta_{2} = 0``,
-so ``c_{1} = c_{2} = c_{3} = 1``, ``S = 3``, ``P = 1``, ``\sqrt{4S - 3} =
-\sqrt{9} = 3``. Plugging into (6),
+so ``c_{1} = c_{2} = c_{3} = 1``, ``S = 3``, ``P = 1``, $\sqrt{4S - 3} =
+\sqrt{9} = 3$. Plugging into (6),
 
 ```math
 E_{+}(\Gamma) = -t + 3 t = +2t,
@@ -469,16 +470,16 @@ S(\mathbf{k}) \approx 3 - \tfrac{1}{4}\bigl(\theta_{1}^{2} + \theta_{2}^{2}
                + (\theta_{2} - \theta_{1})^{2}) + O(\theta^{4}).
 ```
 
-Hence ``E_{+}(\Gamma + \mathbf{q}) \approx 2t - (t/6)(\theta_{1}^{2}
-+ \theta_{2}^{2} + (\theta_{2} - \theta_{1})^{2})``: the upper band
+Hence $E_{+}(\Gamma + \mathbf{q}) \approx 2t - (t/6)(\theta_{1}^{2}
++ \theta_{2}^{2} + (\theta_{2} - \theta_{1})^{2})$: the upper band
 descends **quadratically** from the degenerate touching point. This
 is the **quadratic band-touching** (QBT) point, qualitatively
 different from the linear Dirac cone at the honeycomb ``K``-point.
 
 At the zone boundary ``\mathbf{k} = \mathbf{b}_{1}/2`` (M-point),
 ``\theta_{1} = \pi``, ``\theta_{2} = 0``: ``c_{1} = 0``, ``c_{2} = 1``,
-``c_{3} = \cos(-\pi/2) = 0``, so ``S = 1``, ``P = 0``, ``\sqrt{4S - 3} =
-1``, giving
+``c_{3} = \cos(-\pi/2) = 0``, so ``S = 1``, ``P = 0``, $\sqrt{4S - 3} =
+1$, giving
 
 ```math
 E_{\pm}(M) = -t \pm t = \{0,\, -2t\},
@@ -501,7 +502,9 @@ boundary of a hexagonal void in cyclic order as $s_{1}, s_{2},
 surrounding the hexagon; consecutive ``s_{i}`` belong to different
 triangles. Assign amplitudes
 
-$``\psi(s_{i}) \;=\; (-1)^{i},\qquad i = 1, 2, \dots, 6,``$
+```math
+\psi(s_{i}) \;=\; (-1)^{i},\qquad i = 1, 2, \dots, 6,
+```
 
 and ``\psi = 0`` at every other site.
 
@@ -523,8 +526,8 @@ Hmm, that gives ``(H\psi)(s_{1}) = -2t``, but we need $+2t\,\psi(s_{1})
 
 At a site off the hexagonal ring, e.g. one of the "external"
 triangle vertices connected to two hexagon sites with amplitudes
-``+1`` and ``-1`` (which cancel), we get ``(H\psi)(s) = -t\,(1 + (-1) +
-\text{zeros}) = 0 = +2t\cdot 0 = +2t\cdot\psi(s)``. ✓
+``+1`` and ``-1`` (which cancel), we get $(H\psi)(s) = -t\,(1 + (-1) +
+\text{zeros}) = 0 = +2t\cdot 0 = +2t\cdot\psi(s)$. ✓
 
 So the hexagon-localised state with alternating-sign amplitudes is
 indeed an eigenstate at energy ``+2t`` — the flat-band energy.
@@ -538,8 +541,8 @@ naive count gives ``L_{1}L_{2}`` compact localised states — matching
 the momentum-space degeneracy (one flat-band mode per ``\mathbf{k}``).
 In fact one state is the overall sum of all hexagon states, which
 is *not* independent (it is the uniform ``k = 0`` flat-band mode),
-so one must subtract one and the correct count is ``L_{1}L_{2} -
-1 + 1 = L_{1}L_{2}`` states — still matching (see Mielke 1991 §3 and
+so one must subtract one and the correct count is $L_{1}L_{2} -
+1 + 1 = L_{1}L_{2}$ states — still matching (see Mielke 1991 §3 and
 Bergman–Wu–Balents 2008 eq. (13) for the careful topological
 argument).
 

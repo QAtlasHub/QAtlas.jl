@@ -504,24 +504,24 @@ println(
 # markers; if markers are absent, the section is appended at end of file.
 
 const MODEL_DOC_MAP = Dict{String,String}(
-    "TFIM"              => "docs/src/models/quantum/tfim.md",
-    "Heisenberg1D"      => "docs/src/models/quantum/heisenberg.md",
-    "S1Heisenberg1D"    => "docs/src/models/quantum/heisenberg.md",
-    "HeisenbergXYZ"     => "docs/src/models/quantum/heisenberg.md",
-    "DMIHeisenberg1D"   => "docs/src/models/quantum/heisenberg.md",
-    "J1J2Heisenberg1D"  => "docs/src/models/quantum/heisenberg.md",
-    "MajumdarGhosh"     => "docs/src/models/quantum/majumdar_ghosh.md",
-    "Hubbard1D"         => "docs/src/models/quantum/hubbard1d.md",
+    "TFIM" => "docs/src/models/quantum/tfim.md",
+    "Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "S1Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "HeisenbergXYZ" => "docs/src/models/quantum/heisenberg.md",
+    "DMIHeisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "J1J2Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "MajumdarGhosh" => "docs/src/models/quantum/majumdar_ghosh.md",
+    "Hubbard1D" => "docs/src/models/quantum/hubbard1d.md",
     "ExtendedHubbard1D" => "docs/src/models/quantum/hubbard1d.md",
-    "KitaevHoneycomb"   => "docs/src/models/quantum/kitaev-honeycomb.md",
-    "KitaevHeisenberg"  => "docs/src/models/quantum/kitaev-honeycomb.md",
-    "Kitaev1D"          => "docs/src/models/quantum/kitaev1d.md",
-    "ToricCode"         => "docs/src/models/quantum/toric-code.md",
-    "XXZ1D"             => "docs/src/models/quantum/xxz.md",
-    "S1XXZ1D"           => "docs/src/models/quantum/xxz.md",
-    "IsingSquare"       => "docs/src/models/classical/ising-square.md",
-    "IsingTriangular"   => "docs/src/models/classical/ising-triangular.md",
-    "SixVertex"         => "docs/src/models/classical/six-vertex.md",
+    "KitaevHoneycomb" => "docs/src/models/quantum/kitaev-honeycomb.md",
+    "KitaevHeisenberg" => "docs/src/models/quantum/kitaev-honeycomb.md",
+    "Kitaev1D" => "docs/src/models/quantum/kitaev1d.md",
+    "ToricCode" => "docs/src/models/quantum/toric-code.md",
+    "XXZ1D" => "docs/src/models/quantum/xxz.md",
+    "S1XXZ1D" => "docs/src/models/quantum/xxz.md",
+    "IsingSquare" => "docs/src/models/classical/ising-square.md",
+    "IsingTriangular" => "docs/src/models/classical/ising-triangular.md",
+    "SixVertex" => "docs/src/models/classical/six-vertex.md",
 )
 
 const _PAGE_TO_MODELS = let
@@ -552,7 +552,17 @@ function render_hub_section(page_rel, model_names)
     subj = n == 1 ? "this model registers" : "these $(n) models register"
     nh = length(relevant)
     hub_word = nh == 1 ? "hub" : "hubs"
-    P("In the [Verified Atlas](", atlas_rel, "), ", subj, " ", nh, " ", hub_word, " (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.")
+    P(
+        "In the [Verified Atlas](",
+        atlas_rel,
+        "), ",
+        subj,
+        " ",
+        nh,
+        " ",
+        hub_word,
+        " (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.",
+    )
     P()
     if nh == 0
         P("_No hubs registered yet._")
@@ -564,7 +574,21 @@ function render_hub_section(page_rel, model_names)
             for h in relevant
                 hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
                 rp = relpath(hub_page, page_dir)
-                P("| [`", quantof(h), "`](", rp, ") | `", bcof(h), "` | ", badgeof(h), " ", levname(h), " | ", length(cardsof(h)), " |")
+                P(
+                    "| [`",
+                    quantof(h),
+                    "`](",
+                    rp,
+                    ") | `",
+                    bcof(h),
+                    "` | ",
+                    badgeof(h),
+                    " ",
+                    levname(h),
+                    " | ",
+                    length(cardsof(h)),
+                    " |",
+                )
             end
         else
             P("| Hub | Assurance | Cards |")
@@ -572,7 +596,19 @@ function render_hub_section(page_rel, model_names)
             for h in relevant
                 hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
                 rp = relpath(hub_page, page_dir)
-                P("| [`", h, "`](", rp, ") | ", badgeof(h), " ", levname(h), " | ", length(cardsof(h)), " |")
+                P(
+                    "| [`",
+                    h,
+                    "`](",
+                    rp,
+                    ") | ",
+                    badgeof(h),
+                    " ",
+                    levname(h),
+                    " | ",
+                    length(cardsof(h)),
+                    " |",
+                )
             end
         end
         P()
@@ -585,7 +621,7 @@ function inject_hub_section!(page_rel, model_names)
     p = joinpath(ROOT, page_rel)
     if !isfile(p)
         @warn "ATLAS hub-inject skip: page not found" page = page_rel
-        return
+        return nothing
     end
     content = read(p, String)
     section = render_hub_section(page_rel, model_names)

@@ -1,10 +1,10 @@
 # Contributing to QAtlas.jl
 
-Thank you for your interest in contributing to QAtlas! This guide will help you understand how the project is organized and what we look for in contributions.
+Thank you for your interest in contributing to QAtlas! This guide describes how the project is organized and what we look for in contributions.
 
 ## What is QAtlas?
 
-QAtlas is a **dictionary of rigorous results in quantum and statistical physics**. It stores analytically known exact values in `src/` and verifies them against independent numerical calculations in `test/`. The core value proposition is that every stored result is cross-validated from at least two independent theoretical or computational sources.
+QAtlas is a **dictionary of rigorous results in quantum and statistical physics**. It stores analytically-known exact values in `src/` and cross-validates them against independent numerical / closed-form sources in `test/`. The core value proposition is that every stored result is checked against at least one *theoretically independent* derivation.
 
 ## Design Principles
 
@@ -14,154 +14,286 @@ The source code in `src/` does not depend on Lattice2D, QuasiCrystal, or any lat
 
 ### Accumulate results first, refactor later
 
-Adding a new rigorous result is always more valuable than perfecting the code structure. If a new result doesn't fit cleanly into the existing directory layout, **add it anyway and verify it** — the structure can be refactored later without losing the verified result.
+Adding a new rigorous result is always more valuable than perfecting the code structure. If a new result doesn't fit cleanly into the existing layout, **add it anyway and verify it** — the structure can be refactored later without losing the verified result.
 
 ### Physical correctness is paramount
 
-A value in `src/` is only considered rigorous once it has been **independently verified** in `test/`. Internal consistency checks (e.g., scaling relations) are necessary but not sufficient. We require **cross-verification from independent theoretical sources** whenever possible.
+A value in `src/` is only considered rigorous once it has been **independently verified** in `test/` via a `verify(...)` card (see [Verification cards](#verification-cards) below). Internal consistency checks (e.g. scaling relations) are necessary but not sufficient.
 
 ### Every numerical value traces to a derivation
 
-For each new rigorous result, the accompanying `docs/src/calc/` derivation must be **complete and step-by-step** (see [md/docs-conventions.md](md/docs-conventions.md) for the depth standard). Forbidden phrases such as "it can be shown" / "we omit details" / "standard calculation gives" must not appear.
+For each new rigorous result, the accompanying `docs/src/calc/` derivation must be complete and step-by-step (see [md/docs-conventions.md](md/docs-conventions.md)). Forbidden phrases such as "it can be shown" / "we omit details" / "standard calculation gives" must not appear.
 
 ## Repository Structure
 
 ```text
 src/
-├── core/                              # Type hierarchy, aliases, BC / Quantity structs
+├── QAtlas.jl                          # Top-level module, includes everything
+├── core/                              # Type hierarchy, registry, atlas plumbing
 │   ├── type.jl                        #   AbstractQAtlasModel, OBC(N), PBC(N), Infinite, Quantity{S}
-│   ├── alias.jl                       #   Symbol -> canonical-name dispatch table
-│   └── quantities.jl                  #   MagnetizationX, SusceptibilityZZ, ZZCorrelation{M}, ...
+│   ├── quantities.jl                  #   Energy, FreeEnergy, MagnetizationX, SusceptibilityZZ, ...
+│   ├── registry.jl                    #   @register macro + Implementation row schema
+│   └── conversions.jl                 #   Generic <-> per-site Energy granularity dispatch
 ├── deprecate/                         # Pre-v0.13 Symbol-dispatch shims (removable at v1.0)
-├── universalities/                    # Universality{C}(...) parametric type
+├── universalities/                    # Universality{C}(d) parametric type
 │   ├── Universality.jl                #   base type + exponent table
-│   ├── Ising2D.jl                     #   2D Ising (exact + 3D numerical bootstrap)
-│   ├── KPZ.jl, Percolation.jl, ...
-│   └── E8.jl                          #   E8 mass ratios
-├── universalities/ONModel.jl          #   XY / Heisenberg / O(N) nonlinear σ
-└── models/                            # Layout: `<class>/<Model>/<Model>.jl`.
-    │                                  # Per-model directory so each Model has
-    │                                  # its own dir even if currently single
-    │                                  # file (room to grow into thermal /
-    │                                  # dynamics / local siblings as needed).
+│   ├── Ising2D.jl                     #   2D/3D Ising universality
+│   ├── ONModel.jl                     #   XY / Heisenberg / O(N) σ
+│   └── ...
+└── models/
+    │                                  # Layout: <class>/<Model>/<Model>.jl
+    │                                  #         <class>/<Model>/<Model>_registry.jl
     ├── classical/
-    │   └── IsingSquare/
-    │       └── IsingSquare.jl         #   IsingSquare(; J, Lx, Ly)
+    │   ├── IsingSquare/
+    │   │   ├── IsingSquare.jl         #   IsingSquare(; J, Lx, Ly) + fetch dispatches
+    │   │   └── IsingSquare_registry.jl#   @register declarations
+    │   └── IsingTriangular/
+    │       ├── IsingTriangular.jl
+    │       └── IsingTriangular_registry.jl
     └── quantum/
-        ├── TFIM/
-        │   ├── TFIM.jl                #   TFIM(; J, h) + Energy + MassGap + CentralCharge
-        │   ├── TFIM_thermal.jl        #   FreeEnergy, ThermalEntropy, SpecificHeat, M_x, χ_xx
-        │   ├── TFIM_dynamics.jl       #   Majorana covariance, {XX,YY,ZZ}Correlation{M}, structure factors
-        │   └── TFIM_local.jl          #   MagnetizationXLocal, MagnetizationZLocal, EnergyLocal
-        ├── Heisenberg/
-        │   └── Heisenberg.jl          #   Heisenberg1D() + ExactSpectrum + GroundStateEnergyDensity
+        ├── TFIM/                       #   Multi-file model: TFIM_thermal.jl, TFIM_dynamics.jl, ...
         ├── XXZ/
-        │   └── XXZ.jl                 #   XXZ1D(; J, Δ) + Luttinger K, u, central charge, Energy
-        └── tightbinding/              # family dir (multiple tight-binding lattices)
-            └── regular/               # Bloch-diagonalisable periodic lattices
-                ├── Honeycomb.jl       #   Honeycomb(; t, Lx, Ly)
-                ├── Kagome.jl
-                ├── Lieb.jl
-                └── Triangular.jl
-            # Future: tightbinding/{quasicrystalline,fractal,disordered}/
-            # for Fibonacci, Penrose, Sierpinski, Anderson, ...
+        ├── Hubbard1D/
+        └── TightBinding1D/
 
 test/
-├── util/                              # Reusable verification helpers (dense + sparse)
-│   ├── classical_partition.jl         #   Brute-force partition function
-│   ├── tight_binding.jl               #   Real-space TB Hamiltonian
-│   ├── spinhalf_ed.jl                 #   Dense spin-1/2 many-body ED
-│   ├── sparse_ed.jl                   #   Sparse ED + KrylovKit Lanczos ground state
-│   └── bloch.jl                       #   Generic Bloch Hamiltonian builder
-├── standalone/                        # Lattice-independent tests
-└── verification/                      # Cross-validation against Lattice2D
+├── runtests.jl                         # Entry: respects QATLAS_TEST_PROFILE = fast|full|nightly
+├── util/                               # Reusable test helpers
+│   ├── verify.jl                       #   verify(...) card framework — READ THIS FIRST
+│   ├── bloch.jl                        #   Generic Bloch Hamiltonian builder
+│   ├── classical_partition.jl          #   Brute-force partition function
+│   ├── tight_binding.jl                #   Real-space TB Hamiltonian
+│   ├── spinhalf_ed.jl                  #   Dense spin-1/2 many-body ED
+│   ├── sparse_ed.jl                    #   Sparse ED + KrylovKit Lanczos
+│   └── extrapolate.jl                  #   1/N → ∞ extrapolation helpers
+├── util_verify/                        # Self-tests of the verify framework
+├── harness/atlas/                      # Atlas inventory drift guard, evidence card schema tests
+│   └── test_inventory_drift.jl         #   Regen + diff guard for INVENTORY.jsonl
+├── models/                             # Per-model verify-card test files
+│   ├── classical/
+│   └── quantum/
+├── INVENTORY.jsonl                     # Frozen inventory of registered hubs (regenerated, drift-guarded)
+└── verification/                       # Cross-model checks
 
-docs/src/                              # Documenter + GitHub Pages
-├── calc/                              # Step-by-step derivations (Zettelkasten)
-├── models/, universalities/, methods/ # API + results + narrative (links back to calc/)
-└── verification/                      # Cross-check narrative
+docs/
+├── atlas/
+│   └── generate.jl                     # Regenerates docs/src/atlas/* from REGISTRY + INVENTORY
+└── src/                                # Documenter source
+    ├── calc/                           # Step-by-step derivations (Zettelkasten)
+    ├── conventions.md                  # Sign / S / occupation conventions — REQUIRED READ
+    └── atlas/                          # Auto-generated hub pages (do NOT hand-edit)
 
-md/                                    # Dev memos (Japanese OK, not published)
-├── api.md, roadmap.md
-├── docs-conventions.md                # Docs depth standard — READ THIS BEFORE WRITING calc/
-└── models/, universalities/           # Per-topic implementation notes
+md/                                     # Dev memos (Japanese OK, not published)
+└── docs-conventions.md                 # Derivation depth standard
 ```
 
-## The v0.13 API
+## The model API
 
-Every model is a **concrete struct** that carries its physical parameters as typed fields. Quantities are likewise concrete structs (not `Symbol`s). Boundary conditions carry their own size.
+Every model is a **concrete struct** with typed physical parameters; quantities and boundary conditions are likewise concrete structs (not `Symbol`s):
 
 ```julia
-# Canonical 3-dispatch form
 fetch(TFIM(; J=1.0, h=1.0), Energy(), OBC(24); beta=5.0)
 fetch(XXZ1D(; J=1.0, Δ=0.5), LuttingerParameter(), Infinite())
 fetch(IsingSquare(; J=1.0, Lx=4, Ly=4), PartitionFunction(); β=0.44)
 ```
 
-Legacy Symbol calls `fetch(:TFIM, :energy, OBC(); N=24, J=1.0, h=1.0, beta=5.0)` still work through the thin shim layer in `src/deprecate/` but emit a deprecation log.
-
-See [md/api.md](md/api.md) for the full v0.13 design rationale (type hierarchy, quantity naming, deprecation path).
+Legacy Symbol calls still work through `src/deprecate/` but emit a deprecation log.
 
 ## How to Contribute
 
 ### Adding a new rigorous result
 
-1. **Define a concrete model struct** (if the model does not yet exist). Physical parameters go in typed fields; boundary conditions and lattice size use the `OBC(N)` / `PBC(N)` / `Infinite` types — never a loose kwarg.
+The minimum viable contribution is **four things** for a single `(model, quantity, bc)` triple:
 
-   ```julia
-   struct MyModel <: QAtlas.AbstractQAtlasModel
-       J::Float64
-       h::Float64
-   end
-   MyModel(; J::Real=1.0, h::Real=0.0) = MyModel(Float64(J), Float64(h))
+1. **A `fetch(...)` dispatch** in `src/models/<class>/<Model>/<Model>.jl` (or a sibling file under the same directory).
+2. **A `@register(...)` declaration** in `src/models/<class>/<Model>/<Model>_registry.jl`.
+3. **A `CONVENTION` header** at the top of the source file (enforced by `test/lint/`; see `docs/src/conventions.md`).
+4. **At least one `verify(...)` card** in `test/models/<class>/<Model>/...` that checks the value against an independent source.
 
-   function QAtlas.fetch(m::MyModel, ::Energy, bc::OBC; kwargs...)
-       N = QAtlas._bc_size(bc, kwargs)
-       ...
-   end
-   ```
+#### 1. The `fetch` dispatch
 
-2. **Cite the source precisely** in the docstring — not just "Author (Year)" but the specific equation, table, or theorem number. The `md/docs-conventions.md` policy applies equally to inline docstrings: no "it can be shown".
+```julia
+"""
+    fetch(m::MyModel, ::Energy{:per_site}, ::Infinite;
+          beta::Real, J=m.J, kwargs...) -> Float64
 
-   ```julia
-   # Good: traceable to a single line in the literature
-   """
-       fetch(model::IsingSquare, ::SpontaneousMagnetization) -> Float64
+Per-site internal energy at inverse temperature `β > 0`, ... (cite the
+specific equation/theorem from the reference).
 
-   Yang (1952) Phys. Rev. 85, 808 — from the spontaneous magnetization
-   formula M(T) = (1 − sinh⁻⁴(2βJ))^{1/8}.
-   """
-   ```
+# References
+- Author, *Journal* **Vol**, page (Year), Eq. (X.Y).
+"""
+function fetch(
+    m::MyModel,
+    ::Energy{:per_site},
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    kwargs...,
+)
+    beta > 0 || throw(DomainError(beta, "MyModel Energy requires β > 0; got β = $beta."))
+    return -J * tanh(beta * J)        # Author Year, Eq. (X.Y)
+end
+```
 
-3. **Write a derivation note under `docs/src/calc/`** covering the exact computation the new result is based on. Follow the Main result / Setup / Calculation / References / Used by skeleton of [md/docs-conventions.md](md/docs-conventions.md). Non-trivial algebra must be shown line by line; integrals must be evaluated (contour, poles, residues), not cited as "standard calculation gives".
+Conventions:
 
-4. **Link the derivation** in the corresponding `docs/src/models/…` or `docs/src/universalities/…` page via `See full derivation: [...](../../calc/…md)`.
+- Boundary condition is the third positional argument (`::OBC`, `::PBC`, `::Infinite`), **never** a kwarg.
+- Physical parameters come from the model struct with kwarg overrides (`J::Real=m.J`).
+- Validate inputs at the function boundary and throw `DomainError` with a precise message.
+- Cite the source **in the docstring** to a specific equation/theorem — not just "Author (Year)".
 
-5. **Write tests that independently verify the result.** The project uses a three-tier structure:
+#### 2. The registry declaration
 
-   | Tier               | Location             | Purpose                                                       |
-   | ------------------ | -------------------- | ------------------------------------------------------------- |
-   | Standalone         | `test/standalone/`   | Lattice-independent checks: special values, scaling relations |
-   | Verification       | `test/verification/` | Cross-check against Lattice2D-based calculations              |
-   | Cross-verification | `test/verification/` | Connect universality exponents to model-specific results      |
+`src/models/<class>/<Model>/<Model>_registry.jl`:
 
-6. **Include at least one cross-verification** that links your result to an existing QAtlas result derived from a **different theoretical source**. This is what makes QAtlas rigorous.
+```julia
+@register(
+    MyModel,
+    Energy{:per_site},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/<class>/<Model>/test_<model>.jl",
+    references=["Author Year"],
+    notes="u(β,h=0) = -J tanh(βJ) per site; closed form, no integrator.",
+)
+```
+
+| Field         | Allowed values                                                                                       |
+| ------------- | ---------------------------------------------------------------------------------------------------- |
+| `method`      | `:analytic`, `:bdg`, `:dense_ed`, `:sparse_ed`, `:transfer_matrix`, `:bethe_ansatz`, `:tba`, `:pfaffian`, `:not_implemented` |
+| `reliability` | `:high` (closed form + literature-tested), `:medium` (ED only / cross-check), `:low` (heuristic), `:not_implemented` |
+| `tested_in`   | Relative path to the test file that verifies this triple, or `nothing`                               |
+| `references`  | `["Author Year", ...]` — keep short, point to the docstring for full details                         |
+| `notes`       | One-line caller-facing caveat                                                                        |
+
+The registry is consumed by `docs/atlas/generate.jl` to auto-generate `docs/src/atlas/hubs/<Model>_<Quantity>_<BC>.md` and the inventory drift guard.
+
+#### 3. The CONVENTION header
+
+Every model source file must declare its sign / spin / occupation convention near the top:
+
+```julia
+# CONVENTION
+#   Hamiltonian: -J Σ σ^z σ^z - h Σ σ^x   (FM convention, h ≥ 0)
+#   Observable:  Spin-1/2 (S = σ/2)
+#   Reference:   docs/src/conventions.md §Spin convention
+```
+
+The CI lint in `test/lint/` will reject merges that omit this. See [docs/src/conventions.md](docs/src/conventions.md) for the project-wide convention policy and which Hamiltonian sign / observable normalization applies to which model family.
+
+### Verification cards
+
+**Every new `(model, quantity, bc)` triple requires at least one `verify(...)` card.** A card black-box-checks `fetch(...)` against an `independent` value obtained by a route theoretically distinct from the implementation.
+
+The signature (frozen — see `test/util/verify.jl`):
+
+```julia
+verify(
+    model,
+    quantity,
+    bc;
+    route::Symbol,                      # one of the allowed routes below
+    independent,                        # scalar OR convergence vector
+    agree_within::Real,                 # absolute tolerance
+    refs::AbstractVector{<:AbstractString},
+    fetch_kw::NamedTuple = (;),         # passed into the black-box fetch
+    reliability::Symbol = :high,
+    at = nothing,                       # for convergence vectors: the x-axis values
+    expected_fail::Bool = false,        # @test_broken (bug-surfacer)
+    subject_extract = nothing,          # project a NamedTuple/Vector fetch result to one Float64
+) -> subject
+```
+
+Allowed routes (see `_VERIFY_ROUTES` in `test/util/verify.jl`):
+
+| Route                          | When to use                                                                       |
+| ------------------------------ | --------------------------------------------------------------------------------- |
+| `:ed_finite_size`              | Exact diagonalisation at small `N`, optionally extrapolated to `N → ∞`            |
+| `:second_closed_form`          | A different closed-form derivation of the same quantity                           |
+| `:limiting_case`               | Known value at a special point (`T = 0`, `μ = 0`, `Δ = 0`, β → 0/∞ limit, ...)    |
+| `:sum_rule`                    | Independent analytic identity (e.g. f-sum rule)                                   |
+| `:delegation_invariant`        | Model X at parameter p is exactly model Y (e.g. `XXZ1D(Δ=0)` ≡ free fermion)      |
+| `:literature_value`            | Published numeric cross-check (DMRG / MC table)                                   |
+| `:lieb_square_ice`             | Lieb 1967 ice-point closed form (SixVertex)                                       |
+| `:lieb_ferroelectric`          | Lieb 1967 frozen-FE closed form (SixVertex)                                       |
+| `:single_root_specialisation`  | Specialised single-root closed form (e.g. SU(2)_k Verlinde S₀₀)                   |
+| `:multi_root_product`          | Multi-positive-root product form (e.g. SU(N≥3)_k Verlinde S₀₀)                    |
+
+Worked example — `IsingChain1D` finite-T entropy `s(β,h=0) = log(2 cosh βJ) − βJ tanh βJ`:
+
+```julia
+@testset "IsingChain1D — ThermalEntropy closed form" begin
+    for (J, β) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 1.0), (2.0, 0.7))
+        verify(
+            IsingChain1D(; J=J),
+            ThermalEntropy(),
+            Infinite();
+            route=:second_closed_form,
+            fetch_kw=(; beta=β),
+            independent=log(2 * cosh(β * J)) - β * J * tanh(β * J),
+            agree_within=1e-12,
+            refs=["Ising 1925: s(β,h=0) = log(2 cosh βJ) − βJ tanh(βJ) per site"],
+        )
+    end
+end
+```
+
+Critical properties:
+
+- The `subject` is **fetched inside** `verify` — you cannot pre-compute it on the caller side and pass it in. This prevents tautological cards.
+- The `independent` value must be derivable **without** running the same code path as `fetch`. Re-deriving the same integral with the same `quadgk` call is *not* independent.
+- Cite the source of the `independent` value in `refs` precisely (paper + equation / page).
+- Tolerance `agree_within` is **absolute**. For relative tolerance against a value `x`, pass `agree_within = abs(x) * rtol`.
+
+Limit-only cards (when there is no second closed form) use `route=:limiting_case` and cite the limit:
+
+```julia
+# β → 0⁺ limit of free-fermion free energy: ω → -log 2 / β per site
+verify(
+    TightBinding1D(),
+    FreeEnergy(),
+    Infinite();
+    route=:limiting_case,
+    fetch_kw=(; beta=1e-3),
+    independent=-log(2) / 1e-3,
+    agree_within=abs(log(2) / 1e-3) * 2e-3,
+    refs=["Mahan §1.3: free-fermion β → 0⁺ limit ω → -T log 2"],
+)
+```
+
+Tests that probe **exception shape** (e.g. `DomainError` on `β ≤ 0`) and tests that probe **identities between several fetched values** (e.g. Gibbs `s = β(u − f)`) do not fit the per-quantity card schema and stay as plain `@test_throws` / `@test`. Use them sparingly and as a complement to — not a replacement for — verify cards.
+
+### Atlas regeneration
+
+After adding or changing any `@register`, regenerate the atlas:
+
+```bash
+julia --project=docs docs/atlas/generate.jl
+```
+
+This rewrites `docs/src/atlas/index.md`, per-hub pages under `docs/src/atlas/hubs/`, and the facet pages under `docs/src/atlas/by/`. The `test/INVENTORY.jsonl` drift guard then enforces that the regenerated inventory matches the committed one:
+
+```bash
+julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+```
+
+A PR that adds registrations without regenerating the atlas will fail this drift guard.
 
 ### Adding a universality class
-
-Use the `Universality{C}` parametric type with dimension `d` as a keyword:
 
 ```julia
 fetch(Universality(:MyClass), CriticalExponents(); d=2)
 ```
 
 - Use `Rational{Int}` for exact values (e.g. `β = 1//8`).
-- For numerical estimates, include `_err` fields for uncertainty (e.g. `β = 0.32642, β_err = 0.00001`).
-- Verify scaling relations in tests: `α + 2β + γ = 2` (Rushbrooke), `γ = β(δ−1)` (Widom), etc.
+- For numerical estimates, include `_err` fields (e.g. `β = 0.32642, β_err = 1e-5`).
+- Verify scaling relations: `α + 2β + γ = 2` (Rushbrooke), `γ = β(δ−1)` (Widom).
 
 ### Adding a tight-binding lattice
 
-The generic Bloch builder in `test/util/bloch.jl` works for **any** Lattice2D topology. For lattices already supported by Lattice2D, a test file is usually all that is needed:
+The generic Bloch builder in `test/util/bloch.jl` works for any Lattice2D topology:
 
 ```julia
 λ_bloch = bloch_tb_spectrum(MyTopology, Lx, Ly, t)
@@ -170,56 +302,63 @@ H = build_tight_binding(lat, t)
 @test λ_bloch ≈ λ_real atol=1e-10
 ```
 
-If you want a hardcoded Bloch formula in `src/`, place it in `models/quantum/tightbinding/` as a concrete struct:
-
-```julia
-struct MyLattice <: QAtlas.AbstractQAtlasModel
-    t::Float64
-    Lx::Int
-    Ly::Int
-end
-```
-
-**Topology-name collisions with Lattice2D.** The identifiers `Honeycomb`, `Kagome`, `Lieb`, `Triangular` exist in both QAtlas and Lattice2D. To avoid `UndefVarError` in code that `using`s both packages, QAtlas **does not export** any of these names. Always qualify them as `QAtlas.Honeycomb()`, `QAtlas.Kagome()`, etc. The backward-compat alias `Graphene = Honeycomb` **is** exported because the name does not collide.
+**Topology-name collisions with Lattice2D.** `Honeycomb`, `Kagome`, `Lieb`, `Triangular` exist in both packages and are **not exported** by QAtlas. Qualify as `QAtlas.Honeycomb()` etc. The alias `Graphene = Honeycomb` *is* exported (no collision).
 
 ## Documentation
 
 Writing a new `docs/src/calc/` note? First read [md/docs-conventions.md](md/docs-conventions.md). The depth standard is enforced by:
 
-- grep check: `docs/src/calc/<new-note>.md` must have zero matches for `it can be shown`, `we omit`, `standard calculation`, `as in [Author] [Journal]`, `one can verify`, `it is easy to see`, `it follows immediately`.
-- Structure check: `## Main result`, `## Setup`, `## Calculation`, `## References`, `## Used by` sections, in that order.
-- Documenter build: `julia --project=docs -e 'include("docs/make.jl")'` must complete with no `Error:` lines.
+- grep check: zero matches for `it can be shown`, `we omit`, `standard calculation`, `one can verify`, `it is easy to see`, `it follows immediately`.
+- Structure: `## Main result`, `## Setup`, `## Calculation`, `## References`, `## Used by` — in that order.
+- Documenter build: `julia --project=docs -e 'include("docs/make.jl")'` completes with zero `Error:` lines.
 
-The exemplars for depth are [docs/src/calc/jw-tfim-bdg.md](docs/src/calc/jw-tfim-bdg.md) and [docs/src/calc/bethe-ansatz-heisenberg-e0.md](docs/src/calc/bethe-ansatz-heisenberg-e0.md).
+Exemplars: [docs/src/calc/jw-tfim-bdg.md](docs/src/calc/jw-tfim-bdg.md), [docs/src/calc/bethe-ansatz-heisenberg-e0.md](docs/src/calc/bethe-ansatz-heisenberg-e0.md).
 
-Public docs (`docs/src/`) are **English only**. Dev memos under `md/` may be in Japanese.
+Public docs (`docs/src/`) are **English only**. Dev memos under `md/` may be Japanese.
 
-## Things to Watch Out For
+`docs/src/atlas/*` is auto-generated — **do not hand-edit**. To change the rendering, edit `docs/atlas/generate.jl` and regenerate.
 
-- **`QAtlas.fetch` vs `Base.fetch`**: always qualify as `QAtlas.fetch(...)` in test code to avoid the name collision with Julia's built-in `Base.fetch`.
-- **Bond counting in small PBC systems**: Lattice2D's `bonds(lat)` double-counts bonds when `Lx = 2` or `Ly = 2` with periodic boundaries. Both the transfer-matrix and brute-force paths use the same convention, so they agree — but be aware of this when writing new models.
-- **OBC vs PBC for gap analysis**: in the ordered phase of the TFIM (h ≪ J), the lowest ED "gap" is actually the Z₂ tunneling splitting (exponentially small in N), not the physical excitation gap. This is correct physics but can be surprising in tests.
-- **ForwardDiff compatibility**: if you want a `fetch` function to support automatic differentiation, relax type constraints from `Float64` to `Real` and avoid LAPACK-only operations like `eigvals(Symmetric(T))` — use `tr(T^n)` instead, which works with dual numbers.
-- **Entanglement tests and RAM**: the ED-based entanglement-entropy tests (`test_entanglement_central_charge.jl`) scale as $O(2^N)$ memory at $N \ge 14$. The default PR-CI profile runs $N \le 14$ via sparse + KrylovKit Lanczos. `QATLAS_TEST_FULL=1` enables $N = 16$ (~24 GB peak) and is run automatically every night by [`NightlyFullTests.yml`](.github/workflows/NightlyFullTests.yml) (also invokable via `workflow_dispatch` from the Actions tab).
+## CI gates
 
-## Before Submitting a PR
+A PR must pass:
 
-1. Run the full test suite with full threading:
+1. **Format check** — `JuliaFormatter.format(path)` is idempotent on every changed `.jl` file.
+2. **Convention lint** — every modified model file has its `CONVENTION` header (`test/lint/`).
+3. **Test suite** — `Pkg.test()`, possibly under different `QATLAS_TEST_PROFILE` profiles.
+4. **Inventory drift guard** — `test/harness/atlas/test_inventory_drift.jl` passes (regenerate the atlas if it doesn't).
+5. **Aqua** (`test/test_aqua.jl`) — no stale deps, no piracy, no ambiguities.
+6. **Documenter build** — `julia --project=docs docs/make.jl` succeeds (run on every PR, not just on `main`).
+
+## Things to watch out for
+
+- **`QAtlas.fetch` vs `Base.fetch`**: always qualify as `QAtlas.fetch(...)` in test code.
+- **Bond counting in small PBC systems**: Lattice2D's `bonds(lat)` double-counts when `Lx = 2` or `Ly = 2` with periodic boundaries. Both the transfer-matrix and brute-force paths use the same convention, so they agree — but be aware.
+- **OBC vs PBC for gap analysis**: in the ordered phase of the TFIM (`h ≪ J`), the lowest ED "gap" is the Z₂ tunneling splitting (exponentially small in N), not the physical excitation gap.
+- **ForwardDiff compatibility**: relax `Float64` → `Real` and avoid LAPACK-only operations (`eigvals(Symmetric(T))`) — use `tr(T^n)` with dual numbers.
+- **Entanglement tests and RAM**: ED entanglement scales as `O(2^N)` memory at `N ≥ 14`. PR-CI runs `N ≤ 14`; `QATLAS_TEST_FULL=1` enables `N = 16` (~24 GB peak), run nightly by [`NightlyFullTests.yml`](.github/workflows/NightlyFullTests.yml).
+- **`fetch_kw` in `verify`**: pass parameters as a `NamedTuple` (`fetch_kw=(; beta=β)`), not as positional. A common bug is passing them in the outer `verify(...; beta=β)` call where they're silently swallowed.
+
+## Before submitting a PR
+
+1. Run the full test suite locally:
 
    ```bash
-   julia -e 'using Pkg; Pkg.activate("."); Pkg.test(; julia_args=`-t auto --heap-size-hint=96G`)'
+   julia --project=. -e 'using Pkg; Pkg.test(; julia_args=`-t auto --heap-size-hint=96G`)'
    ```
 
-   On CI (GitHub Actions) this is automatic via `julia-args: "--threads=auto"` in `.github/workflows/CI.yml`.
+2. If you added registrations, regenerate the atlas and confirm the drift guard:
 
-2. If your PR adds new features, update the version in `Project.toml` (patch bump per PR; minor for larger additions) — see [md/roadmap.md](md/roadmap.md) for the current version-bump policy.
+   ```bash
+   julia --project=docs docs/atlas/generate.jl
+   julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+   ```
 
-3. If you added a new `docs/src/calc/` derivation, build the docs locally and confirm:
+3. Bump the version in `Project.toml` (patch bump per PR; minor for larger additions).
+
+4. If you added a `docs/src/calc/` derivation, build the docs:
 
    ```bash
    julia --project=docs -e 'include("docs/make.jl")'
    ```
 
-   completes with exit 0 and no `Error:` lines in stderr.
-
-4. If you find a discrepancy between QAtlas values and the literature, please open an issue with the full reference (journal, volume, page, equation number) so we can investigate.
+5. If you find a discrepancy between QAtlas values and the literature, open an issue with the full reference (journal, volume, page, equation number).

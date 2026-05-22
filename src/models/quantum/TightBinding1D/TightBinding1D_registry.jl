@@ -36,3 +36,35 @@
     references=["Ashcroft-Mermin 1976"],
     notes="v_F = 2t sin(k_F) = 2t√(1 - μ²/(4t²)); returns 0 in gapped phase |μ| ≥ 2t (no Fermi surface; convention).",
 )
+@register(
+    TightBinding1D,
+    FreeEnergy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan 2000", "Coleman 2015"],
+    notes="ω(β;t,μ) = -(πβ)⁻¹ ∫₀^π log(1+e^{-βε}) dk, ε(k)=-2t cos k - μ; QuadGK rtol=1e-10.",
+)
+
+@register(
+    TightBinding1D,
+    ThermalEntropy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan 2000"],
+    notes="s(β;t,μ) = β(u-ω); high-T limit log 2 per site, Sommerfeld linear in T at low T.",
+)
+
+@register(
+    TightBinding1D,
+    SpecificHeat,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan 2000"],
+    notes="c_μ(β;t,μ) = (β²/π) ∫₀^π ε² n_F(1-n_F) dk; QuadGK rtol=1e-10.",
+)

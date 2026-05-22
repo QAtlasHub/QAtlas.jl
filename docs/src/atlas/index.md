@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 257 |
-| ED-feasible claimed (risk denominator) | 231 |
+| Hubs `src` claims (registry) | 263 |
+| ED-feasible claimed (risk denominator) | 237 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 143 |
 | 🔵 coherent | 30 |
 | ⚪ cited-only (frontier — neutral) | 18 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 66 |
-| Inventory cards scanned (whole test/) | 500 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 72 |
+| Inventory cards scanned (whole test/) | 508 |
 | Registry files parsed | 58 / 58 |
 | Models | 58 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **61.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **74.9%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **73.0%**
 
 ## Browse by facet
 
@@ -40,7 +40,7 @@
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "66 actionable hub(s)"
+!!! warning "72 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
@@ -93,6 +93,12 @@
     - [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
     - [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md)
     - [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md)
+    - [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md)
+    - [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md)
+    - [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md)
+    - [`TightBindingV1D/FreeEnergy/Infinite`](hubs/TightBindingV1D_FreeEnergy_Infinite.md)
+    - [`TightBindingV1D/SpecificHeat/Infinite`](hubs/TightBindingV1D_SpecificHeat_Infinite.md)
+    - [`TightBindingV1D/ThermalEntropy/Infinite`](hubs/TightBindingV1D_ThermalEntropy_Infinite.md)
     - [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
     - [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
     - [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md)
@@ -158,8 +164,8 @@
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TFIM` | 53 | 0 | 28 | 9 | 0 | 16 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TightBinding1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
-| `TightBindingV1D` | 3 | 0 | 3 | 0 | 0 | 0 | feasible |
+| `TightBinding1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
+| `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ToricCode` | 5 | 0 | 4 | 0 | 1 | 0 | infeasible |
 | `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
@@ -171,7 +177,7 @@
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (257) — select to drill down
+## Hubs (263) — select to drill down
 
 ### `AKLT1D` (8)
 
@@ -517,17 +523,23 @@
 
 - 🟢 [`TTbar/CentralCharge/Infinite`](hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 
-### `TightBinding1D` (3)
+### `TightBinding1D` (6)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 
-### `TightBindingV1D` (3)
+### `TightBindingV1D` (6)
 
 - 🟢 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBindingV1D/FreeEnergy/Infinite`](hubs/TightBindingV1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TightBindingV1D/MassGap/Infinite`](hubs/TightBindingV1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](hubs/TightBindingV1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](hubs/TightBindingV1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 
 ### `TodaLattice` (1)
 

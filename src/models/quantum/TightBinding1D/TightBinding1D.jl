@@ -181,3 +181,179 @@ function fetch(
     end
     return 2 * float(t) * sqrt(1 - (float(μ))^2 / (4 * float(t)^2))
 end
+# ═══════════════════════════════════════════════════════════════════════════════
+# Finite-temperature thermodynamics — free-fermion BZ integrals
+#
+# Per-site grand-canonical quantities at fixed (β, μ).  Since the model
+# Hamiltonian already absorbs μ into the single-particle dispersion
+# ε(k) = -2t cos(k) - μ, the per-site "free energy" implemented below is
+# the grand potential per site
+#
+#     ω(β; t, μ) = -(1/(2πβ)) ∫_{-π}^{π} log(1 + e^{-β ε(k)}) dk
+#                = -(1/(πβ))  ∫_{0}^{π}  log(1 + e^{-β ε(k)}) dk
+#
+# (the k ↔ -k symmetry of cos folds the BZ in half).  The associated
+# internal energy density u and entropy density s satisfy
+#
+#     u = (1/π) ∫_0^π ε(k) n_F(βε(k)) dk,
+#     s = β (u - ω),
+#     c_μ = (β²/π) ∫_0^π ε(k)² n_F(βε(k)) (1 - n_F(βε(k))) dk
+#         = (∂u/∂T)_μ.
+#
+# All three integrals are textbook (e.g. Mahan §1.3, Coleman §2.4) and
+# evaluated by `QuadGK.quadgk` with `rtol = 1e-10`.  Naming convention
+# matches the existing `Energy{:per_site}` at T = 0: that quantity is
+# the β → ∞ limit of `u` here, not of `ω`.  `Energy{:per_site}` at
+# finite T is *not* registered here to avoid colliding with the T = 0
+# closed form already on the file.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@inline _tb1d_dispersion(k::Real, t::Real, μ::Real) = -2 * t * cos(k) - μ
+
+# Numerically stable log(1 + exp(y)).
+@inline function _tb1d_log1pexp(y::Real)
+    return y > 0 ? y + log1p(exp(-y)) : log1p(exp(y))
+end
+
+# Numerically stable Fermi-Dirac occupation n_F(βε) = 1/(1 + e^{βε}).
+@inline function _tb1d_nF(βε::Real)
+    return βε > 0 ? exp(-βε) / (1 + exp(-βε)) : 1 / (1 + exp(βε))
+end
+
+function _tb1d_thermo_infinite(quantity::Symbol, t::Real, μ::Real, β::Real)
+    if quantity === :free_energy
+        integrand = k -> _tb1d_log1pexp(-β * _tb1d_dispersion(k, t, μ))
+        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
+        return -val / (π * β)
+    elseif quantity === :entropy
+        integrand = k -> begin
+            εk = _tb1d_dispersion(k, t, μ)
+            y = β * εk
+            _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
+        end
+        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
+        return val / π
+    elseif quantity === :specific_heat
+        integrand = k -> begin
+            εk = _tb1d_dispersion(k, t, μ)
+            n = _tb1d_nF(β * εk)
+            εk^2 * n * (1 - n)
+        end
+        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
+        return β^2 * val / π
+    else
+        error("Unknown TightBinding1D thermal quantity: $quantity")
+    end
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FreeEnergy at Infinite — grand-potential density
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::TightBinding1D, ::FreeEnergy, ::Infinite;
+          beta::Real, t=m.t, μ=m.μ, kwargs...) -> Float64
+
+Per-site grand-potential density of the 1D non-interacting tight-binding
+chain at inverse temperature `β > 0`:
+
+    ω(β; t, μ) = -(1/(πβ)) ∫_0^π log(1 + e^{-β ε(k)}) dk,
+    ε(k) = -2t cos k - μ.
+
+Evaluated by `QuadGK.quadgk` with `rtol = 1e-10`.  The T = 0
+`Energy`{`:per_site`} closed form is the β → ∞ limit of the
+*internal* energy `u(β)`, not of `ω(β)`; the two coincide only when
+`μ` is outside the band (`|μ| > 2t`) and `u_kin → 0`.
+
+# References
+- G. D. Mahan, *Many-Particle Physics* (3rd ed., 2000), §1.3.
+- P. Coleman, *Introduction to Many-Body Physics* (2015), §2.4.
+"""
+function fetch(
+    m::TightBinding1D,
+    ::FreeEnergy,
+    ::Infinite;
+    beta::Real,
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 || throw(DomainError(t, "TightBinding1D FreeEnergy requires t > 0; got t = $t."))
+    beta > 0 ||
+        throw(DomainError(beta, "TightBinding1D FreeEnergy requires β > 0; got β = $beta."))
+    return _tb1d_thermo_infinite(:free_energy, t, μ, beta)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ThermalEntropy at Infinite — per-site Gibbs entropy
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::TightBinding1D, ::ThermalEntropy, ::Infinite;
+          beta::Real, t=m.t, μ=m.μ, kwargs...) -> Float64
+
+Per-site Gibbs entropy
+
+    s(β; t, μ) = (1/π) ∫_0^π { log(1 + e^{-βε}) + βε · n_F(βε) } dk,
+    ε(k) = -2t cos k - μ,   n_F(x) = 1/(1 + e^x).
+
+Equivalent to the thermodynamic identity `s = β (u − ω)`.  In the
+high-T limit (`β → 0⁺`) each mode is half-occupied and `s → log 2`
+per site; in the metallic ground-state limit (`β → ∞`, `|μ| < 2t`)
+the Sommerfeld expansion gives `s ~ (π/3) v_F⁻¹ T` per site.
+
+# References
+- G. D. Mahan, *Many-Particle Physics* (3rd ed., 2000), §1.3.
+"""
+function fetch(
+    m::TightBinding1D,
+    ::ThermalEntropy,
+    ::Infinite;
+    beta::Real,
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 ||
+        throw(DomainError(t, "TightBinding1D ThermalEntropy requires t > 0; got t = $t."))
+    beta > 0 || throw(
+        DomainError(beta, "TightBinding1D ThermalEntropy requires β > 0; got β = $beta."),
+    )
+    return _tb1d_thermo_infinite(:entropy, t, μ, beta)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SpecificHeat at Infinite — per-site c_μ = (∂u/∂T)_μ
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::TightBinding1D, ::SpecificHeat, ::Infinite;
+          beta::Real, t=m.t, μ=m.μ, kwargs...) -> Float64
+
+Per-site specific heat at fixed chemical potential
+
+    c_μ(β; t, μ) = (β²/π) ∫_0^π ε(k)² n_F(βε) (1 − n_F(βε)) dk,
+    ε(k) = -2t cos k - μ.
+
+Both T → 0 (metal: linear in T, Sommerfeld; insulator: Arrhenius)
+and T → ∞ (~ β² · ⟨ε²⟩ / 4 → 0) limits are returned correctly.
+
+# References
+- G. D. Mahan, *Many-Particle Physics* (3rd ed., 2000), §1.3.
+"""
+function fetch(
+    m::TightBinding1D,
+    ::SpecificHeat,
+    ::Infinite;
+    beta::Real,
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 ||
+        throw(DomainError(t, "TightBinding1D SpecificHeat requires t > 0; got t = $t."))
+    beta > 0 || throw(
+        DomainError(beta, "TightBinding1D SpecificHeat requires β > 0; got β = $beta.")
+    )
+    return _tb1d_thermo_infinite(:specific_heat, t, μ, beta)
+end

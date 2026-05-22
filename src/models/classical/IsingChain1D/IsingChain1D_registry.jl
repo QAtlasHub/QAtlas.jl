@@ -35,3 +35,58 @@
     references=["Ising 1925"],
     notes="ξ(β,h) = 1/log(λ_+/λ_-); at h=0 reduces to 1/log(coth βJ).",
 )
+
+@register(
+    IsingChain1D,
+    Energy{:per_site},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
+    references=["Ising 1925"],
+    notes="u(b,h=0) = -J tanh(bJ); h=0 only (textbook scope).",
+)
+
+@register(
+    IsingChain1D,
+    SpecificHeat,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
+    references=["Ising 1925"],
+    notes="c_v(b,h=0) = (bJ)^2 sech^2(bJ); h=0 only.",
+)
+
+@register(
+    IsingChain1D,
+    ThermalEntropy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
+    references=["Ising 1925"],
+    notes="s(b,h=0) = log(2 cosh bJ) - bJ tanh(bJ); h=0 only.",
+)
+
+@register(
+    IsingChain1D,
+    SusceptibilityZZ,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
+    references=["Ising 1925", "Brush 1967 RMP 39 883"],
+    notes="chi(b,h=0) = b exp(2bJ) per site; h=0 only.",
+)
+
+@register(
+    IsingChain1D,
+    SpontaneousMagnetization,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
+    references=["Ising 1925"],
+    notes="m_spont = 0 for all T > 0 (no LRO in 1D Ising); independent of h.",
+)

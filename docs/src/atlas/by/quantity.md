@@ -72,7 +72,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 
-## `Energy` (29)
+## `Energy` (30)
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p
@@ -80,6 +80,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`HeisenbergXYZ/Energy/Infinite`](../hubs/HeisenbergXYZ_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`IsingSquare/Energy/Infinite`](../hubs/IsingSquare_Energy_Infinite.md) — coherent
 - 🟠 [`IsingSquare/Energy/PBC`](../hubs/IsingSquare_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
@@ -281,9 +282,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](../hubs/SpinIce_ResidualEntropy_Infinite.md) — corroborated-at-p
 
-## `SpecificHeat` (11)
+## `SpecificHeat` (12)
 
 - 🟢 [`Heisenberg1D/SpecificHeat/OBC`](../hubs/Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpecificHeat/Infinite`](../hubs/IsingChain1D_SpecificHeat_Infinite.md) — corroborated-at-p
 - 🟠 [`IsingSquare/SpecificHeat/Infinite`](../hubs/IsingSquare_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/SpecificHeat/PBC`](../hubs/IsingSquare_SpecificHeat_PBC.md) — uncorroborated-but-feasible
 - 🔵 [`KitaevHoneycomb/SpecificHeat/Infinite`](../hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) — coherent
@@ -300,9 +302,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](../hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 - ⚪ [`MajumdarGhosh/SpinGap/Infinite`](../hubs/MajumdarGhosh_SpinGap_Infinite.md) — cited-only
 
-## `SpontaneousMagnetization` (3)
+## `SpontaneousMagnetization` (4)
 
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingSquare/SpontaneousMagnetization/Infinite`](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 
@@ -330,17 +333,19 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`TFIM/SusceptibilityYY/OBC`](../hubs/TFIM_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SusceptibilityYY/OBC`](../hubs/XXZ1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 
-## `SusceptibilityZZ` (5)
+## `SusceptibilityZZ` (6)
 
 - 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
 - 🟠 [`S1Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/Infinite`](../hubs/TFIM_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/OBC`](../hubs/TFIM_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 
-## `ThermalEntropy` (11)
+## `ThermalEntropy` (12)
 
 - 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 - 🔵 [`IsingSquare/ThermalEntropy/Infinite`](../hubs/IsingSquare_ThermalEntropy_Infinite.md) — coherent
 - 🟠 [`IsingSquare/ThermalEntropy/PBC`](../hubs/IsingSquare_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/Infinite`](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — coherent

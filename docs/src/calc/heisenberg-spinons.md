@@ -1,6 +1,6 @@
 # Heisenberg Spinons: Dispersion, des Cloizeaux–Pearson Continuum, Müller Ansatz
 
-This page collects the closed-form excitation kinematics of the spin-$\tfrac{1}{2}$
+This page collects the closed-form excitation kinematics of the spin-``\tfrac{1}{2}``
 isotropic antiferromagnetic Heisenberg chain in the thermodynamic limit
 that are exposed as Phase-1 helpers and `fetch` methods on
 [`Heisenberg1D`](@ref).
@@ -9,15 +9,15 @@ that are exposed as Phase-1 helpers and `fetch` methods on
 
 For
 
-$$H = J\sum_{i}\mathbf{S}_i\cdot\mathbf{S}_{i+1},\qquad J>0,$$
+$``H = J\sum_{i}\mathbf{S}_i\cdot\mathbf{S}_{i+1},\qquad J>0,``$
 
 the elementary excitations are massless spinons (half-odd-integer spin)
 which always come in pairs in any physical observable. The single-spinon
 dispersion (Faddeev–Takhtajan 1981) is
 
-$$\boxed{\;\varepsilon(k) \;=\; \frac{\pi J}{2}\,|\sin k|,\qquad k\in[0,\pi].\;}$$
+$``\boxed{\;\varepsilon(k) \;=\; \frac{\pi J}{2}\,|\sin k|,\qquad k\in[0,\pi].\;}``$
 
-The two-spinon continuum, parameterised by the total momentum $q$, is
+The two-spinon continuum, parameterised by the total momentum ``q``, is
 bounded by the des Cloizeaux–Pearson (1962) edges
 
 $$\boxed{\;
@@ -26,7 +26,7 @@ $$\boxed{\;
 \;}$$
 
 The lower edge coincides with the single-spinon dispersion and the
-continuum is gapless at $q=0$ and $q=\pi$ (Umklapp).
+continuum is gapless at ``q=0`` and ``q=\pi`` (Umklapp).
 
 The longitudinal dynamic structure factor inside the continuum is
 approximated by the Müller ansatz (Müller–Thomas–Beck–Bonner 1981):
@@ -38,7 +38,7 @@ $$\boxed{\;
              {2\,\sqrt{\omega^2 - \varepsilon_L(q)^2}},
 \;}$$
 
-with $S^{zz}=0$ outside $[\varepsilon_L,\varepsilon_U]$.
+with ``S^{zz}=0`` outside ``[\varepsilon_L,\varepsilon_U]``.
 
 ---
 
@@ -46,102 +46,102 @@ with $S^{zz}=0$ outside $[\varepsilon_L,\varepsilon_U]$.
 
 ### Spinon dispersion (Faddeev–Takhtajan 1981)
 
-The Bethe-ansatz solution of the spin-$\tfrac{1}{2}$ XXX antiferromagnet
+The Bethe-ansatz solution of the spin-``\tfrac{1}{2}`` XXX antiferromagnet
 admits a thermodynamic state — the antiferromagnetic Dirac sea — built
-from a continuous distribution of real rapidities $\lambda\in\mathbb{R}$
-with density $\rho_0(\lambda)=1/(2\cosh(\pi\lambda))$. Holes in this
-distribution carry spin $\tfrac{1}{2}$ — these are the spinons.
+from a continuous distribution of real rapidities ``\lambda\in\mathbb{R}``
+with density ``\rho_0(\lambda)=1/(2\cosh(\pi\lambda))``. Holes in this
+distribution carry spin ``\tfrac{1}{2}`` — these are the spinons.
 
 The dispersion of a single spinon is obtained by adding one hole of
-rapidity $\lambda$ on top of the sea. The resulting energy and momentum,
+rapidity ``\lambda`` on top of the sea. The resulting energy and momentum,
 relative to the ground state, are
 
-$$
+```math
 \varepsilon(\lambda) \;=\; \frac{\pi J}{2}\,
                           \frac{1}{\cosh(\pi\lambda)},\qquad
 p(\lambda) \;=\; \frac{\pi}{2} \;-\; \arctan\bigl(\sinh(\pi\lambda)\bigr).
-$$
+```
 
-Eliminating $\lambda$ via $\cosh(\pi\lambda) = 1/\sin p$ — itself a
+Eliminating ``\lambda`` via ``\cosh(\pi\lambda) = 1/\sin p`` — itself a
 direct consequence of the second relation — yields the closed-form
 dispersion stated above:
 
-$$\varepsilon(p) \;=\; \frac{\pi J}{2}\,\sin p,\qquad p\in[0,\pi].$$
+$``\varepsilon(p) \;=\; \frac{\pi J}{2}\,\sin p,\qquad p\in[0,\pi].``$
 
-The absolute value $|\sin p|$ in the boxed formula extends the result by
+The absolute value ``|\sin p|`` in the boxed formula extends the result by
 the periodicity of the Brillouin zone.
 
 ### Two-spinon continuum and des Cloizeaux–Pearson edges (1962)
 
-A pair of spinons with momenta $k_1, k_2 \in [0,\pi]$ carries total
-momentum $q = k_1 + k_2$ (mod $2\pi$) and total energy
-$E = \varepsilon(k_1) + \varepsilon(k_2)$. At fixed $q$ the
+A pair of spinons with momenta ``k_1, k_2 \in [0,\pi]`` carries total
+momentum ``q = k_1 + k_2`` (mod ``2\pi``) and total energy
+``E = \varepsilon(k_1) + \varepsilon(k_2)``. At fixed ``q`` the
 spinon-pair energy ranges over an interval whose endpoints are
-extracted by Lagrange-multiplying $\varepsilon(k_1)+\varepsilon(k_2)$
-with the constraint $k_1 + k_2 = q$:
+extracted by Lagrange-multiplying ``\varepsilon(k_1)+\varepsilon(k_2)``
+with the constraint ``k_1 + k_2 = q``:
 
-$$
+```math
 \partial_{k_1}\varepsilon(k_1) \;=\; \partial_{k_2}\varepsilon(k_2)
   \quad\Longleftrightarrow\quad
   \cos k_1 \;=\; \cos k_2.
-$$
+```
 
 Two solutions emerge.
 
-* $k_1 = k_2 = q/2$ — both spinons share the momentum, giving the
+* ``k_1 = k_2 = q/2`` — both spinons share the momentum, giving the
   **upper edge**
 
   $$\varepsilon_U(q) \;=\; 2\,\varepsilon(q/2)
                        \;=\; \pi J\,\bigl|\sin(q/2)\bigr|.$$
 
-* $k_1 = 0,\ k_2 = q$ (one spinon at the gapless point) —
+* ``k_1 = 0,\ k_2 = q`` (one spinon at the gapless point) —
   giving the **lower edge**
 
   $$\varepsilon_L(q) \;=\; \varepsilon(0) + \varepsilon(q)
                        \;=\; \frac{\pi J}{2}\,|\sin q|.$$
 
-Hence $\varepsilon_L(q) \equiv \varepsilon(q)$, and the continuum
-collapses ($\varepsilon_U = \varepsilon_L = 0$) at the gapless points
-$q = 0, \pi$.
+Hence ``\varepsilon_L(q) \equiv \varepsilon(q)``, and the continuum
+collapses (``\varepsilon_U = \varepsilon_L = 0``) at the gapless points
+``q = 0, \pi``.
 
-Numerically, at $q = \pi$ one has $\varepsilon_L = 0$ and
-$\varepsilon_U = \pi J$, which is the value carried by
+Numerically, at ``q = \pi`` one has ``\varepsilon_L = 0`` and
+``\varepsilon_U = \pi J``, which is the value carried by
 [`heisenberg_two_spinon_upper_edge`](@ref) at the AFM ordering wave
 vector.
 
-### Müller ansatz for $S^{zz}(q,\omega)$ (1981)
+### Müller ansatz for ``S^{zz}(q,\omega)`` (1981)
 
 Müller, Thomas, Beck, and Bonner proposed an explicit closed form for
 the longitudinal dynamic structure factor that
 
 * has the correct support on the two-spinon continuum,
 * reproduces the integrable square-root singularity at the lower edge
-  $\omega \to \varepsilon_L^+$ (which dominates the spectral weight),
+  ``\omega \to \varepsilon_L^+`` (which dominates the spectral weight),
 * is normalised to give the correct equal-time longitudinal structure
   factor in leading order.
 
 The ansatz is
 
-$$
+```math
 S^{zz}_{\rm Müller}(q,\omega) \;=\;
   \frac{\Theta(\omega-\varepsilon_L)\,\Theta(\varepsilon_U-\omega)}
        {2\,\sqrt{\omega^2 - \varepsilon_L^2}},
-$$
+```
 
-returning $0$ outside the closed continuum
-$[\varepsilon_L(q),\varepsilon_U(q)]$. The ansatz is **approximate**:
+returning ``0`` outside the closed continuum
+``[\varepsilon_L(q),\varepsilon_U(q)]``. The ansatz is **approximate**:
 it captures the lower-edge behaviour and the support exactly but
 misestimates the spectral weight near the upper edge, where four-spinon
 contributions become important.
 
-The ansatz value diverges as $\omega \to \varepsilon_L^+$ but remains
+The ansatz value diverges as ``\omega \to \varepsilon_L^+`` but remains
 integrable: $\int_{\varepsilon_L}^{\varepsilon_U}
 S^{zz}\,d\omega < \infty$. QAtlas returns the raw analytical value
-without a regulator; downstream callers integrating in $\omega$ should
+without a regulator; downstream callers integrating in ``\omega`` should
 either use a quadrature aware of the square-root singularity (e.g.
-Gauss–Chebyshev, or the change of variables $\omega^2 = \varepsilon_L^2 + s$)
-or regulate via $\sqrt{\omega^2 - \varepsilon_L^2 + \eta^2}$ at their
-own choice of $\eta$.
+Gauss–Chebyshev, or the change of variables ``\omega^2 = \varepsilon_L^2 + s``)
+or regulate via ``\sqrt{\omega^2 - \varepsilon_L^2 + \eta^2}`` at their
+own choice of ``\eta``.
 
 ---
 
@@ -156,13 +156,13 @@ fetch(::Heisenberg1D, ::ZZStructureFactor, ::Infinite;
       q::Real, ω::Real, method::Symbol = :muller, J::Real = 1.0)::Float64
 ```
 
-Special values, all at $J = 1$:
+Special values, all at ``J = 1``:
 
-| quantity                              | $q = 0$ | $q = \pi/2$ | $q = \pi$ |
+| quantity                              | ``q = 0`` | ``q = \pi/2`` | ``q = \pi`` |
 | ------------------------------------- | ------- | ----------- | --------- |
-| `heisenberg_spinon_dispersion`        | $0$     | $\pi/2$     | $0$       |
-| `heisenberg_two_spinon_lower_edge`    | $0$     | $\pi/2$     | $0$       |
-| `heisenberg_two_spinon_upper_edge`    | $0$     | $\pi/\sqrt{2}$ | $\pi$  |
+| `heisenberg_spinon_dispersion`        | ``0``     | ``\pi/2``     | ``0``       |
+| `heisenberg_two_spinon_lower_edge`    | ``0``     | ``\pi/2``     | ``0``       |
+| `heisenberg_two_spinon_upper_edge`    | ``0``     | ``\pi/\sqrt{2}`` | ``\pi``  |
 
 For the Quantity-based dispatch the routing is:
 

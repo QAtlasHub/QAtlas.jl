@@ -48,9 +48,9 @@ validated at small system sizes.
 
 ### Operators and conventions
 
-Spin-1/2 operators $\mathbf{S}_{i} = \tfrac{1}{2}
+Spin-1/2 operators \(\mathbf{S}_{i} = \tfrac{1}{2}
 \boldsymbol{\sigma}_{i}`` act on the ``i``-th factor of ``\mathcal{H} =
-\mathbb{C}^{2}\otimes\mathbb{C}^{2}$. The computational basis is
+\mathbb{C}^{2}\otimes\mathbb{C}^{2}\). The computational basis is
 
 ```math
 \bigl\{\,|{\uparrow\uparrow}\rangle,\,
@@ -134,8 +134,8 @@ matching the Hilbert-space dimension ``1 + 3 = 4``. The **gap** is
 
 ### Step 2 — Singlet eigenvector by explicit ``\mathbf{S}^{2}_{\rm tot}`` verification
 
-Claim: $|s\rangle = \tfrac{1}{\sqrt{2}}(|{\uparrow\downarrow}\rangle
-- |{\downarrow\uparrow}\rangle)`` has ``S_{\rm tot} = 0$ and
+Claim: \(|s\rangle = \tfrac{1}{\sqrt{2}}(|{\uparrow\downarrow}\rangle
+- |{\downarrow\uparrow}\rangle)`` has ``S_{\rm tot} = 0\) and
 ``S^{z}_{\rm tot} = 0``.
 
 **Verify ``S^{z}_{\rm tot}|s\rangle = 0``.** Acting on each term:
@@ -153,8 +153,8 @@ S^{z}_{\rm tot}|{\downarrow\uparrow}\rangle
 So ``S^{z}_{\rm tot}|s\rangle = 0``. ✓
 
 **Verify ``\mathbf{S}^{2}_{\rm tot}|s\rangle = 0``.** Use
-$\mathbf{S}^{2}_{\rm tot} = (S^{z}_{\rm tot})^{2} + \tfrac{1}{2}
-(S^{+}_{\rm tot}S^{-}_{\rm tot} + S^{-}_{\rm tot}S^{+}_{\rm tot})$
+\(\mathbf{S}^{2}_{\rm tot} = (S^{z}_{\rm tot})^{2} + \tfrac{1}{2}
+(S^{+}_{\rm tot}S^{-}_{\rm tot} + S^{-}_{\rm tot}S^{+}_{\rm tot})\)
 with ``S^{\pm}_{\rm tot} = S^{\pm}_{1} + S^{\pm}_{2}``:
 
 ```math
@@ -169,18 +169,18 @@ S^{+}_{\rm tot}|{\downarrow\uparrow}\rangle
  = |{\uparrow\uparrow}\rangle + 0 = |{\uparrow\uparrow}\rangle,
 ```
 
-so $S^{+}_{\rm tot}|s\rangle = \tfrac{1}{\sqrt{2}}
-(|{\uparrow\uparrow}\rangle - |{\uparrow\uparrow}\rangle) = 0$.
+so \(S^{+}_{\rm tot}|s\rangle = \tfrac{1}{\sqrt{2}}
+(|{\uparrow\uparrow}\rangle - |{\uparrow\uparrow}\rangle) = 0\).
 Similarly ``S^{-}_{\rm tot}|s\rangle = 0``. Combined with
 ``(S^{z}_{\rm tot})^{2}|s\rangle = 0``, this gives
-``\mathbf{S}^{2}_{\rm tot}|s\rangle = 0``, confirming $S_{\rm tot}
-(S_{\rm tot} + 1) = 0 \Rightarrow S_{\rm tot} = 0$. ✓
+``\mathbf{S}^{2}_{\rm tot}|s\rangle = 0``, confirming \(S_{\rm tot}
+(S_{\rm tot} + 1) = 0 \Rightarrow S_{\rm tot} = 0\). ✓
 
 ### Step 3 — Triplet eigenvectors by ``S^{\pm}_{\rm tot}`` ladder
 
 The ``|t_{+1}\rangle = |{\uparrow\uparrow}\rangle`` state has
-$S^{z}_{\rm tot}|{\uparrow\uparrow}\rangle = +1 \cdot
-|{\uparrow\uparrow}\rangle`` (maximal ``S^z$), so it is the
+\(S^{z}_{\rm tot}|{\uparrow\uparrow}\rangle = +1 \cdot
+|{\uparrow\uparrow}\rangle`` (maximal ``S^z\)), so it is the
 "highest-weight" vector of the triplet. Apply ``S^{-}_{\rm tot}``:
 
 ```math
@@ -191,9 +191,9 @@ S^{-}_{\rm tot}|{\uparrow\uparrow}\rangle
                                         + |{\downarrow\uparrow}\rangle\bigr),
 ```
 
-using the standard ladder normalisation $S^{-}|S, m\rangle =
+using the standard ladder normalisation \(S^{-}|S, m\rangle =
 \sqrt{S(S + 1) - m(m - 1)}\,|S, m - 1\rangle`` which for ``S = 1,
-m = 1`` gives the factor ``\sqrt{2}$. Hence
+m = 1`` gives the factor ``\sqrt{2}\). Hence
 
 ```math
 |t_{0}\rangle \;=\; \tfrac{1}{\sqrt{2}}\bigl(|{\uparrow\downarrow}\rangle
@@ -229,10 +229,10 @@ The other two triplet states follow by ladder-preservation of the
 
 ### Step 4 — Direct ``4\times 4`` diagonalisation cross-check
 
-Write ``H = J\,\mathbf{S}_{1}\cdot\mathbf{S}_{2}`` as an explicit $4
+Write ``H = J\,\mathbf{S}_{1}\cdot\mathbf{S}_{2}`` as an explicit \(4
 \times 4`` matrix in the computational basis ``\{|{\uparrow\uparrow}
 \rangle, |{\uparrow\downarrow}\rangle, |{\downarrow\uparrow}
-\rangle, |{\downarrow\downarrow}\rangle\}$. Expand
+\rangle, |{\downarrow\downarrow}\rangle\}\). Expand
 
 ```math
 \mathbf{S}_{1}\cdot\mathbf{S}_{2}
@@ -295,8 +295,8 @@ identification.
 ### Step 5 — Limiting-case checks
 
 **(i) AF ground state ``J > 0``.** The singlet at ``E_{s} = -3J/4`` is
-the unique ground state. The first-excited triplet at $E_{t} =
-J/4`` is three-fold degenerate, with gap ``\Delta = J$.
+the unique ground state. The first-excited triplet at \(E_{t} =
+J/4`` is three-fold degenerate, with gap ``\Delta = J\).
 
 **(ii) FM ground state ``J < 0``.** The triplet is now the
 three-fold-degenerate ground manifold at ``E_{t} = J/4 < 0``, and
@@ -304,14 +304,14 @@ the singlet at ``E_{s} = -3J/4 > 0`` is an excited state. The sign
 convention is reversed but the spectrum is the same four
 eigenvalues up to reordering.
 
-**(iii) Trace.** $\mathrm{Tr}\,H = J\,\mathrm{Tr}\,(\mathbf{S}_{1}
-\cdot\mathbf{S}_{2}) = 0`` identically (since ``\mathbf{S}_{i}$ are
+**(iii) Trace.** \(\mathrm{Tr}\,H = J\,\mathrm{Tr}\,(\mathbf{S}_{1}
+\cdot\mathbf{S}_{2}) = 0`` identically (since ``\mathbf{S}_{i}\) are
 traceless). Check: ``-3 J/4 + 3 \cdot J/4 = 0``. ✓
 
 **(iv) Cross-reference with the spin-1/2 Heisenberg chain
 thermodynamic limit.** The infinite AF Heisenberg chain has
-ground-state energy per bond $e_{0} = J(1/4 - \ln 2) \approx
--0.443\,J$, derived in
+ground-state energy per bond \(e_{0} = J(1/4 - \ln 2) \approx
+-0.443\,J\), derived in
 [`bethe-ansatz-heisenberg-e0`](bethe-ansatz-heisenberg-e0.md). For
 ``N = 2`` the per-bond energy is ``E_{s}/1 = -3 J/4 = -0.75\,J`` (only
 one bond on a 2-site chain with open boundary condition; for PBC
@@ -354,8 +354,8 @@ identical eigenvalues to machine precision.
   ``N = 2`` `ExactSpectrum` returns exactly the Main-result set.
 - [`bethe-ansatz-heisenberg-e0`](bethe-ansatz-heisenberg-e0.md) —
   the ``N = 2`` dimer result is the smallest-``N`` limiting-case check
-  for the thermodynamic-limit Bethe-ansatz energy $e_{0} =
-  J(1/4 - \ln 2)``; the dimer overshoots ``e_{0}$ from below at finite
+  for the thermodynamic-limit Bethe-ansatz energy \(e_{0} =
+  J(1/4 - \ln 2)``; the dimer overshoots ``e_{0}\) from below at finite
   ``N`` and converges from finite-size corrections.
 - [XXZ model page](../models/quantum/xxz.md) — dimer limit at the
   isotropic point ``\Delta = 1``.

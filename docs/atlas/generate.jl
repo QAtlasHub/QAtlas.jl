@@ -60,6 +60,7 @@ modelof(h) = first(split(h, "/"))
 quantof(h) = (p=split(h, "/"); length(p) >= 2 ? p[2] : "?")
 bcof(h) = (p=split(h, "/"); length(p) >= 3 ? p[3] : "?")
 slugof(h) = replace(h, r"[^A-Za-z0-9]" => "_")
+_md_escape_dollar(s::AbstractString) = replace(s, "\$" => "\\\$")
 
 # ── R1 taxonomy (single source of truth lives in AtlasInventory) ─────
 # generate.jl is now a thin TYPED consumer of AtlasInventory's
@@ -241,7 +242,7 @@ for h in claimed
                 "` | ",
                 b,
                 " | ",
-                c.refs,
+                _md_escape_dollar(c.refs),
                 " | `",
                 c.file,
                 "` |",
@@ -593,17 +594,21 @@ function render_hub_section(page_rel, model_names)
                 )
             end
         else
-            P("| Hub | Assurance | Cards |")
-            P("|---|---|---|")
+            P("| Model | Quantity | BC | Assurance | Cards |")
+            P("|---|---|---|---|---|")
             for h in relevant
                 hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
                 rp = _posix(relpath(hub_page, page_dir))
                 P(
-                    "| [`",
-                    h,
+                    "| `",
+                    modelof(h),
+                    "` | [`",
+                    quantof(h),
                     "`](",
                     rp,
-                    ") | ",
+                    ") | `",
+                    bcof(h),
+                    "` | ",
                     badgeof(h),
                     " ",
                     levname(h),

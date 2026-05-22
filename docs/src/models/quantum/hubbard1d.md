@@ -108,12 +108,12 @@ QAtlas.fetch(Hubbard1D(; t=1, U=6, μ=2),
 
 In the [Verified Atlas](../../atlas/index.md), these 2 models register 5 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
-| Hub | Assurance | Cards |
-|---|---|---|
-| [`ExtendedHubbard1D/ChargeGap/Infinite`](../../atlas/hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) | 🔵 coherent | 1 |
-| [`Hubbard1D/ChargeGap/Infinite`](../../atlas/hubs/Hubbard1D_ChargeGap_Infinite.md) | 🔵 coherent | 2 |
-| [`Hubbard1D/GroundStateEnergyDensity/Infinite`](../../atlas/hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) | 🔵 coherent | 2 |
-| [`Hubbard1D/LuttingerParameter/Infinite`](../../atlas/hubs/Hubbard1D_LuttingerParameter_Infinite.md) | 🟢 corroborated-at-p | 1 |
-| [`Hubbard1D/SpinGap/Infinite`](../../atlas/hubs/Hubbard1D_SpinGap_Infinite.md) | 🟢 corroborated-at-p | 1 |
+| Model | Quantity | BC | Assurance | Cards |
+|---|---|---|---|---|
+| `ExtendedHubbard1D` | [`ChargeGap`](../../atlas/hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
+| `Hubbard1D` | [`ChargeGap`](../../atlas/hubs/Hubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
+| `Hubbard1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
+| `Hubbard1D` | [`LuttingerParameter`](../../atlas/hubs/Hubbard1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `Hubbard1D` | [`SpinGap`](../../atlas/hubs/Hubbard1D_SpinGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 
 <!-- ATLAS:HUBS:END -->

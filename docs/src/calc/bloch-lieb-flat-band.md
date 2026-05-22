@@ -52,15 +52,15 @@ horizontal edge and one at the midpoint of each vertical edge.
 Denote these
 
 - ``A`` (corner / "copper"): position ``\mathbf{r}_{A} = (0, 0)``,
-- ``B`` (horizontal-edge midpoint / "oxygen ``x``"): $\mathbf{r}_{B}
-  = \mathbf{a}_{1}/2 = (a/2, 0)$,
-- ``C`` (vertical-edge midpoint / "oxygen ``y``"): $\mathbf{r}_{C}
-  = \mathbf{a}_{2}/2 = (0, a/2)$.
+- ``B`` (horizontal-edge midpoint / "oxygen ``x``"): \(\mathbf{r}_{B}
+  = \mathbf{a}_{1}/2 = (a/2, 0)\),
+- ``C`` (vertical-edge midpoint / "oxygen ``y``"): \(\mathbf{r}_{C}
+  = \mathbf{a}_{2}/2 = (0, a/2)\).
 
 (The naming anticipates the CuO``_{2}`` plane of cuprates, where ``A``
 carries the Cu orbital and ``B, C`` carry the O``_{x}, \text{O}_{y}``
-orbitals.) Set ``a = 2`` so that the NN bond length $|\mathbf{r}_{B}
-- \mathbf{r}_{A}| = 1``; then ``\mathbf{a}_{1} = (2, 0)$,
+orbitals.) Set ``a = 2`` so that the NN bond length \(|\mathbf{r}_{B}
+- \mathbf{r}_{A}| = 1``; then ``\mathbf{a}_{1} = (2, 0)\),
 ``\mathbf{a}_{2} = (0, 2)``.
 
 Each ``A``-site at ``\mathbf{R}`` has four NN: two ``B``-sites along
@@ -135,13 +135,13 @@ c_{\alpha, \mathbf{k}}
 Each NN bond between ``\alpha`` at ``\mathbf{r}_{\alpha} + \mathbf{R}``
 and ``\beta`` at ``\mathbf{r}_{\beta} + \mathbf{R}'`` contributes
 ``-t\,e^{-i\mathbf{k}\cdot\mathbf{d}}`` in the Bloch Hamiltonian
-``(\alpha, \beta)`` block, with $\mathbf{d} \equiv (\mathbf{r}_{\beta}
-+ \mathbf{R}') - (\mathbf{r}_{\alpha} + \mathbf{R})$ the bond
-vector. A Hermitian-conjugate pair sums to $-2t\cos(\mathbf{k}\cdot
-\mathbf{d})$.
+``(\alpha, \beta)`` block, with \(\mathbf{d} \equiv (\mathbf{r}_{\beta}
++ \mathbf{R}') - (\mathbf{r}_{\alpha} + \mathbf{R})\) the bond
+vector. A Hermitian-conjugate pair sums to \(-2t\cos(\mathbf{k}\cdot
+\mathbf{d})\).
 
-For the two ``A``–``B`` bonds of (1): same-cell $\mathbf{d} =
-+\mathbf{a}_{1}/2``, cross-cell ``\mathbf{d} = -\mathbf{a}_{1}/2$.
+For the two ``A``–``B`` bonds of (1): same-cell \(\mathbf{d} =
++\mathbf{a}_{1}/2``, cross-cell ``\mathbf{d} = -\mathbf{a}_{1}/2\).
 Summing,
 
 ```math
@@ -196,6 +196,7 @@ row of ``M - \mu\mathbb{I}`` with ``s_{1} = \cos(\theta_{1}/2)``,
    - s_{1}\,\det\!\begin{pmatrix}s_{1} & 0 \\ s_{2} & -\mu\end{pmatrix}
    + s_{2}\,\det\!\begin{pmatrix}s_{1} & -\mu \\ s_{2} & 0\end{pmatrix}
 ```
+
 ```math
 = -\mu^{3} + \mu\,s_{1}^{2} + \mu\,s_{2}^{2}
  = -\mu\,\bigl[\,\mu^{2} - (s_{1}^{2} + s_{2}^{2})\,\bigr].
@@ -241,16 +242,18 @@ Solve ``\widetilde{H}(\mathbf{k})\,\mathbf{v} = 0``. In components
 ```math
 \text{row }A: \quad -2t\bigl[s_{1} v_{B} + s_{2} v_{C}\bigr] = 0,
 ```
+
 ```math
 \text{row }B: \quad -2t\,s_{1} v_{A} = 0,
 ```
+
 ```math
 \text{row }C: \quad -2t\,s_{2} v_{A} = 0.
 ```
 
 For generic ``\mathbf{k}`` with ``s_{1}, s_{2} \ne 0``, rows ``B`` and ``C``
-force ``v_{A} = 0``. Row ``A`` then requires $s_{1} v_{B} + s_{2} v_{C}
-= 0``, a single linear constraint on ``(v_{B}, v_{C})$. A convenient
+force ``v_{A} = 0``. Row ``A`` then requires \(s_{1} v_{B} + s_{2} v_{C}
+= 0``, a single linear constraint on ``(v_{B}, v_{C})\). A convenient
 normalisation picks
 
 ```math
@@ -263,16 +266,16 @@ normalisation picks
 ```
 
 so that ``\langle\psi_{\rm flat}|\psi_{\rm flat}\rangle = 1`` for all
-``\mathbf{k}`` except the single ``M``-point $\theta_{1} = \theta_{2} =
-\pi`` where both ``s_{j} = 0$ (see Step 6). The flat-band
+``\mathbf{k}`` except the single ``M``-point \(\theta_{1} = \theta_{2} =
+\pi`` where both ``s_{j} = 0\) (see Step 6). The flat-band
 wavefunction **has zero weight on the ``A`` sublattice for every
 ``\mathbf{k}``** — this is the algebraic expression of the bipartite
 imbalance argument (Step 5).
 
 ### Step 4 — Dispersive bands and the ``E_{\pm}`` eigenvectors
 
-The ``E_{\pm}`` eigenvectors satisfy $\widetilde{H}\,\mathbf{v}_{\pm}
-= \pm E \mathbf{v}_{\pm}`` with ``E = 2t\sqrt{s_{1}^{2} + s_{2}^{2}}$.
+The ``E_{\pm}`` eigenvectors satisfy \(\widetilde{H}\,\mathbf{v}_{\pm}
+= \pm E \mathbf{v}_{\pm}`` with ``E = 2t\sqrt{s_{1}^{2} + s_{2}^{2}}\).
 From rows ``B`` and ``C``,
 
 ```math
@@ -281,8 +284,8 @@ From rows ``B`` and ``C``,
 -2t\,s_{2}\,v_{A} = \pm E\,v_{C},
 ```
 
-giving ``v_{B} = -2t s_{1} v_{A}/(\pm E)``, $v_{C} = -2t s_{2}
-v_{A}/(\pm E)$. Normalising,
+giving ``v_{B} = -2t s_{1} v_{A}/(\pm E)``, \(v_{C} = -2t s_{2}
+v_{A}/(\pm E)\). Normalising,
 
 ```math
 |\psi_{\pm}(\mathbf{k})\rangle \;=\;
@@ -302,8 +305,8 @@ The flat band of (5) is no accident. It follows from a general
 theorem on bipartite lattices: if a tight-binding Hamiltonian has
 the block structure ``M = \begin{pmatrix}0 & Q\\ Q^{T} & 0\end{pmatrix}``
 with ``Q \in \mathbb{R}^{N_{1}\times N_{2}}`` (``N_{1}`` sites in one
-sublattice, ``N_{2}`` in the other), then the **at-least-$|N_{1} -
-N_{2}|``-degeneracy** at ``E = 0$ follows from
+sublattice, ``N_{2}`` in the other), then the **at-least-\(|N_{1} -
+N_{2}|``-degeneracy** at ``E = 0\) follows from
 
 ```math
 M\,\mathbf{v} = 0
@@ -311,8 +314,8 @@ M\,\mathbf{v} = 0
 Q\,\mathbf{v}_{2} = 0\quad\text{and}\quad Q^{T}\,\mathbf{v}_{1} = 0.
 ```
 
-By rank-nullity, $\dim\ker Q = N_{2} - \mathrm{rank}(Q) \ge
-N_{2} - \min(N_{1}, N_{2}) = \max(0, N_{2} - N_{1})$, so there are
+By rank-nullity, \(\dim\ker Q = N_{2} - \mathrm{rank}(Q) \ge
+N_{2} - \min(N_{1}, N_{2}) = \max(0, N_{2} - N_{1})\), so there are
 at least ``\max(0, N_{2} - N_{1})`` zero-energy eigenvectors
 supported on sublattice 2. Similarly at least
 ``\max(0, N_{1} - N_{2})`` such vectors on sublattice 1. In total, at
@@ -339,15 +342,15 @@ Tasaki 1998).
 ### Step 6 — Band-touching at the ``M``-point
 
 The flat band and the dispersive bands (5) coincide at ``E = 0``
-wherever ``s_{1}^{2} + s_{2}^{2} = 0``, i.e. $\cos(\theta_{1}/2) =
-\cos(\theta_{2}/2) = 0``, i.e. ``\theta_{1} = \theta_{2} = \pi$. This
+wherever ``s_{1}^{2} + s_{2}^{2} = 0``, i.e. \(\cos(\theta_{1}/2) =
+\cos(\theta_{2}/2) = 0``, i.e. ``\theta_{1} = \theta_{2} = \pi\). This
 is the BZ corner (the M-point) at ``\mathbf{k} = (\pi/a, \pi/a)``.
 
-Expand (5) near ``M``. With our normalisation $\mathbf{a}_{j} = 2
+Expand (5) near ``M``. With our normalisation \(\mathbf{a}_{j} = 2
 \hat{e}_{j}``, we have ``\theta_{j} = \mathbf{k}\cdot\mathbf{a}_{j} =
-2 k_{j}``; the ``M``-point in the ``\mathbf{k}$-variable is
-``\mathbf{M} = (\pi/2, \pi/2)``. Set $\mathbf{q} = \mathbf{k} -
-\mathbf{M}``, so ``\theta_{j} = \pi + 2 q_{j}$ and
+2 k_{j}``; the ``M``-point in the ``\mathbf{k}\)-variable is
+``\mathbf{M} = (\pi/2, \pi/2)``. Set \(\mathbf{q} = \mathbf{k} -
+\mathbf{M}``, so ``\theta_{j} = \pi + 2 q_{j}\) and
 
 ```math
 \cos(\theta_{j}/2) \;=\; \cos(\pi/2 + q_{j})
@@ -386,17 +389,17 @@ fully-filled per spin (in the spinful case, with additional flat
 spin degeneracy). This macroscopic degeneracy is the input for
 flat-band ferromagnetism (Lieb 1989).
 
-**(ii) ``\Gamma``-point.** At ``\mathbf{k} = (0, 0)``: $s_{1} = s_{2}
+**(ii) ``\Gamma``-point.** At ``\mathbf{k} = (0, 0)``: \(s_{1} = s_{2}
 = 1``, ``s_{1}^{2} + s_{2}^{2} = 2``, so ``E_{\pm}(\Gamma) = \pm 2t
 \sqrt{2}``. Three-band spectrum at ``\Gamma``: ``\{-2t\sqrt{2},\, 0,\,
-+2t\sqrt{2}\}``, all distinct (bandwidth ``= 4t\sqrt{2}$).
++2t\sqrt{2}\}``, all distinct (bandwidth ``= 4t\sqrt{2}\)).
 
 **(iii) Bipartite chiral symmetry.** The block form (3) makes the
 spectrum symmetric about ``E = 0``: for every dispersive eigenvalue
 ``+E(\mathbf{k})`` there is ``-E(\mathbf{k})``. The sublattice operator
 ``\Sigma = \mathrm{diag}(+1, -1, -1)`` (positive on ``A``,
-negative on ``B\cup C``) satisfies $\Sigma \widetilde{H}(\mathbf{k})
-\Sigma = -\widetilde{H}(\mathbf{k})$, the algebraic expression of
+negative on ``B\cup C``) satisfies \(\Sigma \widetilde{H}(\mathbf{k})
+\Sigma = -\widetilde{H}(\mathbf{k})\), the algebraic expression of
 bipartiteness.
 
 **(iv) Honeycomb vs Lieb comparison.** The honeycomb lattice (see

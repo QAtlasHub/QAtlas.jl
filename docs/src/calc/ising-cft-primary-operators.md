@@ -65,8 +65,8 @@ the Virasoro algebra (holomorphic + antiholomorphic),
  \;=\; (m - n)\,L_{m + n} \;+\; \frac{c}{12}\,m(m^{2} - 1)\,\delta_{m + n, 0},
 ```
 
-with the same relation for ``\bar L_{n}`` and $[L_{m}, \bar L_{n}]
-= 0``. The central charge ``c$ parametrises the anomaly in the
+with the same relation for ``\bar L_{n}`` and \([L_{m}, \bar L_{n}]
+= 0``. The central charge ``c\) parametrises the anomaly in the
 trace of the stress tensor under conformal rescalings; for the 2D
 Ising model ``c = 1/2`` as we confirm in Step 4.
 
@@ -79,8 +79,8 @@ L_{n}|\phi\rangle = 0,\qquad \bar L_{n}|\phi\rangle = 0\qquad
  (n > 0),
 ```
 
-and ``L_{0}|\phi\rangle = h\,|\phi\rangle``, $\bar L_{0}|\phi\rangle =
-\bar h\,|\phi\rangle``. The eigenvalues ``(h, \bar h)$ are the
+and ``L_{0}|\phi\rangle = h\,|\phi\rangle``, \(\bar L_{0}|\phi\rangle =
+\bar h\,|\phi\rangle``. The eigenvalues ``(h, \bar h)\) are the
 **conformal weights**; the scaling dimension is ``\Delta = h + \bar h``
 and the spin is ``s = h - \bar h``. All scaling operators in a CFT
 are either primaries or *descendants* (acted on by ``L_{-n}`` with
@@ -142,8 +142,8 @@ The Kac table has the **reflection symmetry**
 h_{r, s} \;=\; h_{p - r,\, p' - s},
 ```
 
-which follows from (2) by substituting ``r \to p - r``, $s \to p'
-- s$:
+which follows from (2) by substituting ``r \to p - r``, \(s \to p'
+- s\):
 
 ```math
 (p'(p - r) - p(p' - s))^{2}
@@ -168,12 +168,12 @@ c_{3, 4} \;=\; 1 - \frac{6(4 - 3)^{2}}{3\cdot 4}
 
 The central charge ``c = 1/2`` is the smallest positive value in the
 minimal-model series (the ``c_{2, 3}`` model is trivial with only
-the identity operator; the next nontrivial case is $\mathcal{M}(3,
-4)$). It is also the central charge of a single free Majorana
+the identity operator; the next nontrivial case is \(\mathcal{M}(3,
+4)\)). It is also the central charge of a single free Majorana
 fermion — not a coincidence, as we discuss at the end.
 
-The Kac rectangle for ``\mathcal{M}(3, 4)`` has $(p - 1)(p' - 1) =
-2 \cdot 3 = 6`` entries labelled by ``(r, s)`` with ``r \in \{1, 2\}$
+The Kac rectangle for ``\mathcal{M}(3, 4)`` has \((p - 1)(p' - 1) =
+2 \cdot 3 = 6`` entries labelled by ``(r, s)`` with ``r \in \{1, 2\}\)
 and ``s \in \{1, 2, 3\}``.
 
 ### Step 3 — Kac table for ``\mathcal{M}(3, 4)``
@@ -252,8 +252,8 @@ Toeplitz-determinant analysis of
 
 **Energy ``\varepsilon``, ``\Delta = 1``**: the continuum limit of
 the bond-energy operator
-$\varepsilon_{i} \propto \sigma^{z}_{i}\sigma^{z}_{i+1} -
-\langle\sigma^{z}\sigma^{z}\rangle_{c}$ (the connected bond-bond
+\(\varepsilon_{i} \propto \sigma^{z}_{i}\sigma^{z}_{i+1} -
+\langle\sigma^{z}\sigma^{z}\rangle_{c}\) (the connected bond-bond
 correlator). Its conformal dimension ``1`` reflects the thermal
 operator — perturbing by ``\varepsilon`` tunes ``T`` away from ``T_{c}``,
 with ``T - T_{c} \propto \int d^{2}x\,\varepsilon(x)``. The relation
@@ -284,8 +284,8 @@ and ``\Delta_{\varepsilon} = 1`` via standard CFT / scaling
 relations (Cardy 1996 Ch. 3).
 
 **Fisher exponent ``\eta``** (anomalous dimension of the order
-parameter). Definition: $\langle\sigma\sigma\rangle \sim
-|\mathbf{r}|^{-(d - 2 + \eta)}$. Compare with (6):
+parameter). Definition: \(\langle\sigma\sigma\rangle \sim
+|\mathbf{r}|^{-(d - 2 + \eta)}\). Compare with (6):
 ``2\Delta_{\sigma} = d - 2 + \eta``, hence
 
 ```math
@@ -293,8 +293,8 @@ parameter). Definition: $\langle\sigma\sigma\rangle \sim
  \;=\; 2\cdot\tfrac{1}{8} - 2 + 2 \;=\; \tfrac{1}{4}.
 ```
 
-**Correlation-length exponent ``\nu``.** Definition: $\xi \sim
-|T - T_{c}|^{-\nu}$. Scaling dimension of the thermal coupling
+**Correlation-length exponent ``\nu``.** Definition: \(\xi \sim
+|T - T_{c}|^{-\nu}\). Scaling dimension of the thermal coupling
 ``\delta K = \beta(T - T_{c})/J`` is ``d - \Delta_{\varepsilon}``
 (since ``\int d^{2}x\,\varepsilon`` must be dimensionless). Hence
 
@@ -303,8 +303,8 @@ parameter). Definition: $\langle\sigma\sigma\rangle \sim
  \;=\; \frac{1}{2 - 1} \;=\; 1.
 ```
 
-**Order-parameter exponent ``\beta``.** Definition: $M \sim
-|T_{c} - T|^{\beta}``. Scaling of ``M`` as ``\xi^{-\Delta_{\sigma}}$
+**Order-parameter exponent ``\beta``.** Definition: \(M \sim
+|T_{c} - T|^{\beta}``. Scaling of ``M`` as ``\xi^{-\Delta_{\sigma}}\)
 gives ``M \sim \xi^{-\Delta_{\sigma}} \sim |T_{c} - T|^{\nu\Delta_{\sigma}}``,
 hence
 
@@ -318,20 +318,20 @@ Cross-check with
 of the Toeplitz determinant: both derivations agree to first
 principles.
 
-**Susceptibility exponent ``\gamma``.** From Widom scaling $\gamma =
-\nu(2 - \eta) = 1 \cdot (2 - 1/4) = 7/4$. Or directly:
+**Susceptibility exponent ``\gamma``.** From Widom scaling \(\gamma =
+\nu(2 - \eta) = 1 \cdot (2 - 1/4) = 7/4\). Or directly:
 the susceptibility scales as ``\int d^{2}x\,\langle\sigma\sigma\rangle``
 which diverges as ``\xi^{d - 2\Delta_{\sigma}}``, giving
-$\chi \sim |T - T_{c}|^{-\nu(d - 2\Delta_{\sigma})} = |T -
-T_{c}|^{-7/4}$.
+\(\chi \sim |T - T_{c}|^{-\nu(d - 2\Delta_{\sigma})} = |T -
+T_{c}|^{-7/4}\).
 
-**Specific-heat exponent ``\alpha``.** Josephson scaling $\alpha = 2
-- \nu d = 2 - 2 = 0``, i.e. ``\alpha = 0$ with a logarithmic
+**Specific-heat exponent ``\alpha``.** Josephson scaling \(\alpha = 2
+- \nu d = 2 - 2 = 0``, i.e. ``\alpha = 0\) with a logarithmic
 divergence (Onsager 1944). This matches the exact 2D Ising specific
 heat ``C \sim |\ln|T - T_{c}||``.
 
-**Critical isotherm ``\delta``.** Widom relation $\delta = (d + 2
-- \eta)/(d - 2 + \eta) = (4 - 1/4)/(0 + 1/4) = (15/4)/(1/4) = 15$.
+**Critical isotherm ``\delta``.** Widom relation \(\delta = (d + 2
+- \eta)/(d - 2 + \eta) = (4 - 1/4)/(0 + 1/4) = (15/4)/(1/4) = 15\).
 
 Summary of the five independent 2D Ising exponents — all derived
 from the Kac table (2) + scaling relations:
@@ -403,8 +403,8 @@ from the PBC entanglement entropy in
 independently from the Toeplitz determinant in
 [`yang-magnetization-toeplitz`](yang-magnetization-toeplitz.md).
 Both derivations yield ``\beta = 1/8`` — the microscopic confirmation
-of the CFT prediction $\beta = \nu\,\Delta_{\sigma} = 1 \cdot
-\tfrac{1}{8}$.
+of the CFT prediction \(\beta = \nu\,\Delta_{\sigma} = 1 \cdot
+\tfrac{1}{8}\).
 
 **(v) Logarithmic specific heat.** Onsager 1944 exactly solved the
 2D Ising free energy and found ``C \sim -\ln|T - T_{c}|`` near
@@ -442,8 +442,8 @@ logarithmic (not power-law) divergence; the ``\alpha = 0`` value is
 ## Used by
 
 - [Ising universality class](../universalities/ising.md) — the
-  stored exponents $\beta = 1/8, \gamma = 7/4, \nu = 1, \eta = 1/4,
-  \alpha = 0, \delta = 15$ are read off from the scaling dimensions
+  stored exponents \(\beta = 1/8, \gamma = 7/4, \nu = 1, \eta = 1/4,
+  \alpha = 0, \delta = 15\) are read off from the scaling dimensions
   derived here.
 - [`yang-magnetization-toeplitz`](yang-magnetization-toeplitz.md) —
   independent microscopic derivation of ``\beta = 1/8`` via the

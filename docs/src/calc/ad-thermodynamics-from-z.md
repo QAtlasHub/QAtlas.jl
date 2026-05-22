@@ -31,8 +31,8 @@ S(\beta) \;&=\; -\,\frac{\partial F}{\partial T}
 (Setting ``k_{B} = 1`` throughout for notational brevity.)
 
 All seven formulas are elementary consequences of the
-Boltzmann-weight identity $\partial_{\beta} e^{-\beta E_{s}} =
--E_{s}\,e^{-\beta E_{s}}`` plus the chain rule. When ``Z$ is
+Boltzmann-weight identity \(\partial_{\beta} e^{-\beta E_{s}} =
+-E_{s}\,e^{-\beta E_{s}}`` plus the chain rule. When ``Z\) is
 implemented numerically — e.g. as ``Z = \mathrm{Tr}(T^{L_{x}})`` for
 a transfer matrix or as ``Z = \sum_{\{s\}}e^{-\beta H(\{s\})}`` for a
 brute-force enumeration — all of these observables become
@@ -79,8 +79,8 @@ Z_{\rm Ising}(\beta, J; L_{x}, L_{y})
 
 via the symmetric transfer matrix ``T`` derived in
 [`transfer-matrix-symmetric-split`](transfer-matrix-symmetric-split.md).
-The goal is to obtain $F, \langle E\rangle, C_{v}, S,
-\langle\sigma\sigma\rangle$ as (higher-order) derivatives of
+The goal is to obtain \(F, \langle E\rangle, C_{v}, S,
+\langle\sigma\sigma\rangle\) as (higher-order) derivatives of
 ``\ln Z`` using ForwardDiff.
 
 ### Goal
@@ -122,8 +122,8 @@ Divide by ``Z``:
 Equivalently ``\langle E\rangle = -\partial\ln Z/\partial\beta``
 (identifying ``E = H`` at thermal equilibrium).
 
-### Step 2 — Variance identity $\partial^{2}\ln Z/\partial\beta^{2}
-             = \langle E^{2}\rangle - \langle E\rangle^{2}$
+### Step 2 — Variance identity \(\partial^{2}\ln Z/\partial\beta^{2}
+             = \langle E^{2}\rangle - \langle E\rangle^{2}\)
 
 Differentiate (1) once more:
 
@@ -146,10 +146,10 @@ Apply the quotient rule:
         \,\frac{\partial Z}{\partial\beta}.
 ```
 
-The numerator of the first term is $\sum_{s}(-H_{s}^{2})\,
-e^{-\beta H_{s}} = -Z\,\langle H^{2}\rangle$. The second term is
-$-\langle E\rangle \cdot \langle E\rangle\cdot(-Z)/Z = \langle
-E\rangle^{2}`` (using ``\partial Z/\partial\beta = -Z\langle E\rangle$).
+The numerator of the first term is \(\sum_{s}(-H_{s}^{2})\,
+e^{-\beta H_{s}} = -Z\,\langle H^{2}\rangle\). The second term is
+\(-\langle E\rangle \cdot \langle E\rangle\cdot(-Z)/Z = \langle
+E\rangle^{2}`` (using ``\partial Z/\partial\beta = -Z\langle E\rangle\)).
 
 Putting it together,
 
@@ -207,9 +207,9 @@ The Helmholtz free energy is ``F = -\beta^{-1}\ln Z``, so
 ```
 
 consistent with (1). The entropy is ``S = -\partial F/\partial T``.
-Using ``F = -T\ln Z`` and the chain rule $\partial/\partial T =
+Using ``F = -T\ln Z`` and the chain rule \(\partial/\partial T =
 -\beta^{2}\,\partial/\partial\beta\,\cdot(1/k_{B})`` (with ``k_{B} =
-1$ henceforth),
+1\) henceforth),
 
 ```math
 S \;=\; -\frac{\partial F}{\partial T}
@@ -242,11 +242,11 @@ so
 \tag{4}
 ```
 
-In the Ising case, setting ``g = J`` with $\mathcal{O}_{J} = -\sum
-s_{u}s_{v}$ gives
+In the Ising case, setting ``g = J`` with \(\mathcal{O}_{J} = -\sum
+s_{u}s_{v}\) gives
 ``\langle\sum s_{u}s_{v}\rangle = \beta^{-1}\partial_{J}\ln Z``, i.e.
-the nearest-neighbour correlator $\langle s_{u}s_{v}\rangle =
-\beta^{-1}\partial_{J}\ln Z / N_{\rm bonds}``. Setting ``g = h$ with
+the nearest-neighbour correlator \(\langle s_{u}s_{v}\rangle =
+\beta^{-1}\partial_{J}\ln Z / N_{\rm bonds}``. Setting ``g = h\) with
 ``\mathcal{O}_{h} = -\sum s_{i}`` gives the magnetisation
 ``\langle M\rangle = \beta^{-1}\partial_{h}\ln Z``.
 
@@ -262,8 +262,8 @@ f(a + b\varepsilon) \;=\; f(a) + b\,f'(a)\,\varepsilon + O(\varepsilon^{2})
  \;=\; f(a) + b\,f'(a)\,\varepsilon,
 ```
 
-using ``\varepsilon^{2} = 0``. Starting with $\beta = \beta_{0} +
-1\cdot\varepsilon`` and computing ``\ln Z(\beta)$ via the full
+using ``\varepsilon^{2} = 0``. Starting with \(\beta = \beta_{0} +
+1\cdot\varepsilon`` and computing ``\ln Z(\beta)\) via the full
 numerical pipeline, the dual part of the result equals
 ``\partial\ln Z/\partial\beta|_{\beta_{0}}`` exactly — no
 finite-difference approximation, no round-off in the derivative.
@@ -303,8 +303,8 @@ Z \;=\; \mathrm{Tr}(T^{L_{x}})
  \;=\; \sum_{i = 1}^{2^{L_{y}}}\lambda_{i}^{L_{x}},
 ```
 
-where ``\lambda_{i}`` are the eigenvalues of the $2^{L_{y}}\times
-2^{L_{y}}`` symmetric transfer matrix ``T$. The second form is more
+where ``\lambda_{i}`` are the eigenvalues of the \(2^{L_{y}}\times
+2^{L_{y}}`` symmetric transfer matrix ``T\). The second form is more
 efficient at large ``L_{x}`` (the spectrum is computed once and the
 power is a scalar operation), but the eigenvalue decomposition
 uses LAPACK (`DSYEV`), which **does not accept dual-number
@@ -362,15 +362,15 @@ with various ``\beta \in [0.1, 2.0]``, AD and brute force agree to
 ### Step 9 — Limiting-case checks
 
 **(i) ``\beta \to 0`` (infinite temperature).** ``Z \to 2^{N}`` and
-``\ln Z \to N\ln 2``, so $\langle E\rangle = -\partial_{\beta}\ln Z
-\to 0`` and ``C_{v} \to 0``. Entropy ``S \to N\ln 2$ (maximal entropy).
+``\ln Z \to N\ln 2``, so \(\langle E\rangle = -\partial_{\beta}\ln Z
+\to 0`` and ``C_{v} \to 0``. Entropy ``S \to N\ln 2\) (maximal entropy).
 The AD derivatives at ``\beta = 0`` reproduce these trivial values
 exactly.
 
 **(ii) ``\beta \to \infty`` (zero temperature).** Only the ground
 state contributes, ``Z \sim e^{-\beta E_{\rm gs}}`` with degeneracy
-``g``; so ``\ln Z \to -\beta E_{\rm gs} + \ln g``. Then $\langle
-E\rangle \to E_{\rm gs}``, ``C_{v} \to 0``, ``S \to \ln g$ (third law).
+``g``; so ``\ln Z \to -\beta E_{\rm gs} + \ln g``. Then \(\langle
+E\rangle \to E_{\rm gs}``, ``C_{v} \to 0``, ``S \to \ln g\) (third law).
 The IsingSquare AD path handles this correctly, bounded only by
 the condition-number limitation noted in Step 7.
 

@@ -168,35 +168,35 @@ ansatz](../../calc/xxz-luttinger-parameters.md).
 
 In the [Verified Atlas](../../atlas/index.md), these 2 models register 28 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
-| Hub | Assurance | Cards |
-|---|---|---|
-| [`S1XXZ1D/Energy/Infinite`](../../atlas/hubs/S1XXZ1D_Energy_Infinite.md) | 🔵 coherent | 3 |
-| [`S1XXZ1D/MassGap/Infinite`](../../atlas/hubs/S1XXZ1D_MassGap_Infinite.md) | 🔵 coherent | 2 |
-| [`XXZ1D/CentralCharge/Infinite`](../../atlas/hubs/XXZ1D_CentralCharge_Infinite.md) | 🟢 corroborated-at-p | 1 |
-| [`XXZ1D/Energy/Infinite`](../../atlas/hubs/XXZ1D_Energy_Infinite.md) | 🟢 corroborated-at-p | 11 |
-| [`XXZ1D/Energy/OBC`](../../atlas/hubs/XXZ1D_Energy_OBC.md) | 🟢 corroborated-at-p | 4 |
-| [`XXZ1D/EnergyLocal/OBC`](../../atlas/hubs/XXZ1D_EnergyLocal_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/FreeEnergy/Infinite`](../../atlas/hubs/XXZ1D_FreeEnergy_Infinite.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/FreeEnergy/OBC`](../../atlas/hubs/XXZ1D_FreeEnergy_OBC.md) | 🟢 corroborated-at-p | 2 |
-| [`XXZ1D/LoschmidtEcho/Infinite`](../../atlas/hubs/XXZ1D_LoschmidtEcho_Infinite.md) | 🟢 corroborated-at-p | 2 |
-| [`XXZ1D/LuttingerParameter/Infinite`](../../atlas/hubs/XXZ1D_LuttingerParameter_Infinite.md) | 🟢 corroborated-at-p | 4 |
-| [`XXZ1D/LuttingerVelocity/Infinite`](../../atlas/hubs/XXZ1D_LuttingerVelocity_Infinite.md) | 🟢 corroborated-at-p | 2 |
-| [`XXZ1D/MagnetizationX/OBC`](../../atlas/hubs/XXZ1D_MagnetizationX_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/MagnetizationXLocal/OBC`](../../atlas/hubs/XXZ1D_MagnetizationXLocal_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/MagnetizationY/OBC`](../../atlas/hubs/XXZ1D_MagnetizationY_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/MagnetizationYLocal/OBC`](../../atlas/hubs/XXZ1D_MagnetizationYLocal_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/MagnetizationZ/OBC`](../../atlas/hubs/XXZ1D_MagnetizationZ_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/MagnetizationZLocal/OBC`](../../atlas/hubs/XXZ1D_MagnetizationZLocal_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/MassGap/Infinite`](../../atlas/hubs/XXZ1D_MassGap_Infinite.md) | 🟢 corroborated-at-p | 1 |
-| [`XXZ1D/MassGap/OBC`](../../atlas/hubs/XXZ1D_MassGap_OBC.md) | 🟢 corroborated-at-p | 1 |
-| [`XXZ1D/RenyiEntropy/OBC`](../../atlas/hubs/XXZ1D_RenyiEntropy_OBC.md) | 🟢 corroborated-at-p | 1 |
-| [`XXZ1D/SpecificHeat/Infinite`](../../atlas/hubs/XXZ1D_SpecificHeat_Infinite.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/SpecificHeat/OBC`](../../atlas/hubs/XXZ1D_SpecificHeat_OBC.md) | 🟢 corroborated-at-p | 3 |
-| [`XXZ1D/SusceptibilityXX/OBC`](../../atlas/hubs/XXZ1D_SusceptibilityXX_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/SusceptibilityYY/OBC`](../../atlas/hubs/XXZ1D_SusceptibilityYY_OBC.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/SusceptibilityZZ/OBC`](../../atlas/hubs/XXZ1D_SusceptibilityZZ_OBC.md) | 🟢 corroborated-at-p | 3 |
-| [`XXZ1D/ThermalEntropy/Infinite`](../../atlas/hubs/XXZ1D_ThermalEntropy_Infinite.md) | 🟠 uncorroborated-but-feasible | 0 |
-| [`XXZ1D/ThermalEntropy/OBC`](../../atlas/hubs/XXZ1D_ThermalEntropy_OBC.md) | 🟢 corroborated-at-p | 3 |
-| [`XXZ1D/VonNeumannEntropy/OBC`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_OBC.md) | 🟢 corroborated-at-p | 1 |
+| Model | Quantity | BC | Assurance | Cards |
+|---|---|---|---|---|
+| `S1XXZ1D` | [`Energy`](../../atlas/hubs/S1XXZ1D_Energy_Infinite.md) | `Infinite` | 🔵 coherent | 3 |
+| `S1XXZ1D` | [`MassGap`](../../atlas/hubs/S1XXZ1D_MassGap_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
+| `XXZ1D` | [`CentralCharge`](../../atlas/hubs/XXZ1D_CentralCharge_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `XXZ1D` | [`Energy`](../../atlas/hubs/XXZ1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 11 |
+| `XXZ1D` | [`Energy`](../../atlas/hubs/XXZ1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 4 |
+| `XXZ1D` | [`EnergyLocal`](../../atlas/hubs/XXZ1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`FreeEnergy`](../../atlas/hubs/XXZ1D_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`FreeEnergy`](../../atlas/hubs/XXZ1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 2 |
+| `XXZ1D` | [`LoschmidtEcho`](../../atlas/hubs/XXZ1D_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| `XXZ1D` | [`LuttingerParameter`](../../atlas/hubs/XXZ1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 4 |
+| `XXZ1D` | [`LuttingerVelocity`](../../atlas/hubs/XXZ1D_LuttingerVelocity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| `XXZ1D` | [`MagnetizationX`](../../atlas/hubs/XXZ1D_MagnetizationX_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`MagnetizationXLocal`](../../atlas/hubs/XXZ1D_MagnetizationXLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`MagnetizationY`](../../atlas/hubs/XXZ1D_MagnetizationY_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`MagnetizationYLocal`](../../atlas/hubs/XXZ1D_MagnetizationYLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`MagnetizationZ`](../../atlas/hubs/XXZ1D_MagnetizationZ_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`MagnetizationZLocal`](../../atlas/hubs/XXZ1D_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`MassGap`](../../atlas/hubs/XXZ1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `XXZ1D` | [`MassGap`](../../atlas/hubs/XXZ1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `XXZ1D` | [`RenyiEntropy`](../../atlas/hubs/XXZ1D_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `XXZ1D` | [`SpecificHeat`](../../atlas/hubs/XXZ1D_SpecificHeat_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`SpecificHeat`](../../atlas/hubs/XXZ1D_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
+| `XXZ1D` | [`SusceptibilityXX`](../../atlas/hubs/XXZ1D_SusceptibilityXX_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`SusceptibilityYY`](../../atlas/hubs/XXZ1D_SusceptibilityYY_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`SusceptibilityZZ`](../../atlas/hubs/XXZ1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
+| `XXZ1D` | [`ThermalEntropy`](../../atlas/hubs/XXZ1D_ThermalEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`ThermalEntropy`](../../atlas/hubs/XXZ1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
+| `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 
 <!-- ATLAS:HUBS:END -->

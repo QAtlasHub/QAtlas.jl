@@ -15,7 +15,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [$(name) at κ=$(κ)]" | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [\$(name) at κ=\$(κ)]" | `test/models/classical/test_sle_kappa.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ) | `test/models/classical/test_sle_kappa.jl` |
 
 ## Test calls

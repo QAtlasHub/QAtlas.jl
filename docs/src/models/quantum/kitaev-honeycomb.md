@@ -98,18 +98,18 @@ flux gap Δ_v ≈ 0.07 |K| (isotropic) — 凍結する温度スケール。
 
 In the [Verified Atlas](../../atlas/index.md), these 2 models register 11 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
-| Hub | Assurance | Cards |
-|---|---|---|
-| [`KitaevHeisenberg/MassGap/Infinite`](../../atlas/hubs/KitaevHeisenberg_MassGap_Infinite.md) | 🟢 corroborated-at-p | 1 |
-| [`KitaevHoneycomb/Energy/Infinite`](../../atlas/hubs/KitaevHoneycomb_Energy_Infinite.md) | ⚪ cited-only | 1 |
-| [`KitaevHoneycomb/Energy/OBC`](../../atlas/hubs/KitaevHoneycomb_Energy_OBC.md) | ⚪ cited-only | 0 |
-| [`KitaevHoneycomb/Energy/PBC`](../../atlas/hubs/KitaevHoneycomb_Energy_PBC.md) | ⚪ cited-only | 0 |
-| [`KitaevHoneycomb/FreeEnergy/Infinite`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) | ⚪ cited-only | 0 |
-| [`KitaevHoneycomb/FreeEnergy/OBC`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | ⚪ cited-only | 0 |
-| [`KitaevHoneycomb/MassGap/Infinite`](../../atlas/hubs/KitaevHoneycomb_MassGap_Infinite.md) | 🟢 corroborated-at-p | 1 |
-| [`KitaevHoneycomb/SpecificHeat/Infinite`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) | 🔵 coherent | 2 |
-| [`KitaevHoneycomb/SpecificHeat/OBC`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | 🔵 coherent | 2 |
-| [`KitaevHoneycomb/ThermalEntropy/Infinite`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) | 🔵 coherent | 1 |
-| [`KitaevHoneycomb/ThermalEntropy/OBC`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | 🔵 coherent | 1 |
+| Model | Quantity | BC | Assurance | Cards |
+|---|---|---|---|---|
+| `KitaevHeisenberg` | [`MassGap`](../../atlas/hubs/KitaevHeisenberg_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `KitaevHoneycomb` | [`Energy`](../../atlas/hubs/KitaevHoneycomb_Energy_Infinite.md) | `Infinite` | ⚪ cited-only | 1 |
+| `KitaevHoneycomb` | [`Energy`](../../atlas/hubs/KitaevHoneycomb_Energy_OBC.md) | `OBC` | ⚪ cited-only | 0 |
+| `KitaevHoneycomb` | [`Energy`](../../atlas/hubs/KitaevHoneycomb_Energy_PBC.md) | `PBC` | ⚪ cited-only | 0 |
+| `KitaevHoneycomb` | [`FreeEnergy`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
+| `KitaevHoneycomb` | [`FreeEnergy`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | `OBC` | ⚪ cited-only | 0 |
+| `KitaevHoneycomb` | [`MassGap`](../../atlas/hubs/KitaevHoneycomb_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `KitaevHoneycomb` | [`SpecificHeat`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
+| `KitaevHoneycomb` | [`SpecificHeat`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | `OBC` | 🔵 coherent | 2 |
+| `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
+| `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | `OBC` | 🔵 coherent | 1 |
 
 <!-- ATLAS:HUBS:END -->

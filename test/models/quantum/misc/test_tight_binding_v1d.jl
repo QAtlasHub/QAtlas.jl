@@ -146,3 +146,91 @@ end
         refs=["Mahan 2000; Ashcroft-Mermin 1976: e₀ = -(2t/π) sin(k_F) - (μ/π) k_F"],
     )
 end
+
+@testset "TightBindingV1D — finite-T thermodynamics" begin
+    # V = 0 free-fermion finite-T at Infinite.  Cards mirror those for
+    # TightBinding1D (same integrand); V ≠ 0 / β ≤ 0 traps stay as
+    # @test_throws since they probe exception shape rather than values.
+
+    for (t, β) in [(1.0, 1e-3), (2.5, 5e-4)]
+        verify(
+            QAtlas.TightBindingV1D(; t=t, V=0.0, μ=0.0),
+            QAtlas.FreeEnergy(),
+            QAtlas.Infinite();
+            route=:limiting_case,
+            fetch_kw=(; beta=β),
+            independent=-log(2) / β,
+            agree_within=abs(log(2) / β) * 2e-3,
+            refs=[
+                "Mahan, Many-Particle Physics §1.3: V=0 free-fermion β → 0⁺ limit ω → -T log 2",
+            ],
+        )
+    end
+
+    for (t, μ, β) in [(1.0, 0.0, 1e-3), (1.0, 0.5, 1e-3)]
+        verify(
+            QAtlas.TightBindingV1D(; t=t, V=0.0, μ=μ),
+            QAtlas.ThermalEntropy(),
+            QAtlas.Infinite();
+            route=:limiting_case,
+            fetch_kw=(; beta=β),
+            independent=log(2),
+            agree_within=log(2) * 4e-3,
+            refs=[
+                "Mahan, Many-Particle Physics §1.3: V=0 free-fermion β → 0⁺ entropy → log 2 per mode",
+            ],
+        )
+    end
+
+    let β = 1e-2, t = 1.0
+        bound = (β * 2 * t)^2
+        verify(
+            QAtlas.TightBindingV1D(; t=t, V=0.0, μ=0.0),
+            QAtlas.SpecificHeat(),
+            QAtlas.Infinite();
+            route=:limiting_case,
+            fetch_kw=(; beta=β),
+            independent=0.0,
+            agree_within=bound + 1e-12,
+            refs=["Mahan, Many-Particle Physics §1.3: V=0 c_μ ~ β² · ⟨ε²⟩/4 → 0 at β → 0⁺"],
+        )
+    end
+
+    verify(
+        QAtlas.TightBindingV1D(),
+        QAtlas.FreeEnergy(),
+        QAtlas.Infinite();
+        route=:limiting_case,
+        fetch_kw=(; beta=200.0),
+        independent=-2 / π,
+        agree_within=5e-3,
+        refs=[
+            "Ashcroft-Mermin (1976) Ch 9: half-filling 1D free-fermion E/N = -2/π = lim_{β→∞} ω(β) (V=0)",
+        ],
+    )
+
+    @testset "V ≠ 0 raises DomainError on finite-T quantities" begin
+        m = QAtlas.TightBindingV1D(; t=1.0, V=1.0, μ=0.0)
+        @test_throws DomainError QAtlas.fetch(
+            m, QAtlas.FreeEnergy(), QAtlas.Infinite(); beta=1.0
+        )
+        @test_throws DomainError QAtlas.fetch(
+            m, QAtlas.ThermalEntropy(), QAtlas.Infinite(); beta=1.0
+        )
+        @test_throws DomainError QAtlas.fetch(
+            m, QAtlas.SpecificHeat(), QAtlas.Infinite(); beta=1.0
+        )
+    end
+
+    @testset "DomainError on β ≤ 0" begin
+        @test_throws DomainError QAtlas.fetch(
+            QAtlas.TightBindingV1D(), QAtlas.FreeEnergy(), QAtlas.Infinite(); beta=0.0
+        )
+        @test_throws DomainError QAtlas.fetch(
+            QAtlas.TightBindingV1D(), QAtlas.ThermalEntropy(), QAtlas.Infinite(); beta=-1.0
+        )
+        @test_throws DomainError QAtlas.fetch(
+            QAtlas.TightBindingV1D(), QAtlas.SpecificHeat(), QAtlas.Infinite(); beta=0.0
+        )
+    end
+end

@@ -14,7 +14,7 @@
 # Phase 1 (this file) implements the Lieb–Wu (1968) closed-form
 # integrals at half filling only:
 #
-#   E₀/N = -4 t² ∫_0^∞ dω  J₀(ω) J₁(ω) / [ ω (1 + exp(ω U / 2t)) ]
+#   E₀/N = -4 t ∫_0^∞ dω  J₀(ω) J₁(ω) / [ ω (1 + exp(ω U / 2t)) ]
 #
 #   Δ_c  = (16 t² / U) ∫_1^∞ dω  √(ω² - 1) / sinh(2π t ω / U)
 #
@@ -132,7 +132,7 @@ end
 
 Lieb–Wu (1968) ground-state energy per site at half filling:
 
-    E₀/N = -4 t² ∫_0^∞ dω  J₀(ω) J₁(ω) / [ ω (1 + exp(ω U / 2t)) ].
+    E₀/N = -4 t ∫_0^∞ dω  J₀(ω) J₁(ω) / [ ω (1 + exp(ω U / 2t)) ].
 """
 function _hubbard1d_e0(t::Float64, U::Float64)::Float64
     integral, _ = quadgk(

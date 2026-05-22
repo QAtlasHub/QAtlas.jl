@@ -36,7 +36,7 @@ jobs:
       - name: Build docs (build-only, deploydocs is a no-op without token)
         run: julia --project=docs/ docs/make.jl
       - name: Upload built site (trial deploy artifact)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: tfim-atlas-docs
           path: docs/build

@@ -28,4 +28,10 @@ All `(Quantity, BC)` hubs `src` claims for **`S1XXZ1D`**.  Cells link to the per
 | [`Energy`](../quantities/Energy.md) | 🔵 [hub](../hubs/S1XXZ1D_Energy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🔵 [hub](../hubs/S1XXZ1D_MassGap_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`xxz-luttinger-parameters.md`](../../calc/xxz-luttinger-parameters.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

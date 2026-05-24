@@ -48,4 +48,12 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | — |
 | [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`bethe-ansatz-heisenberg-e0.md`](../../calc/bethe-ansatz-heisenberg-e0.md)
+- [`heisenberg-dimer-singlet-triplet.md`](../../calc/heisenberg-dimer-singlet-triplet.md)
+- [`heisenberg-spinons.md`](../../calc/heisenberg-spinons.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

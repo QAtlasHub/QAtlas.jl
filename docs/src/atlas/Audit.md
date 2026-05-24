@@ -33,13 +33,6 @@ The CI lint enforces `# CONVENTION` headers on new model files, but older files 
 - [`ZnClock`](models/ZnClock.md)
 - [`ZnParafermion`](models/ZnParafermion.md)
 
-**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (4) — model may live elsewhere or be defined inline:
-
-- [`AKLT1D`](models/AKLT1D.md)
-- [`Heisenberg1D`](models/Heisenberg1D.md)
-- [`S1Heisenberg1D`](models/S1Heisenberg1D.md)
-- [`XXZ1D`](models/XXZ1D.md)
-
 ## 2. Quantities without auto-extracted `Definition`
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.

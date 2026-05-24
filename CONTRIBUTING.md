@@ -285,6 +285,8 @@ This rewrites every auto-generated atlas surface, all derived from the fixed sub
 | `docs/src/atlas/by/{model,quantity,bc,level,mechanism,regime}.md` | 1D facet aggregators | INVENTORY |
 | `docs/src/atlas/Bibliography.md` | all citations, deduplicated, with hub backlinks sorted by hub-count | registry refs |
 | `docs/src/atlas/CalcIndex.md` | inverse view: every `docs/src/calc/*.md` ↔ matched models | calc filenames |
+| `docs/src/atlas/Audit.md` | doc-health gap surface: missing CONVENTION headers, missing quantity Definitions, orphan calc notes, models with 0 hubs, INVENTORY card hubs without registry claim (split universality-class vs real) | substrate-derived |
+| `docs/src/atlas/Methods.md` | solution-mechanism facet — every registered route grouped by method, with model × quantity counts | registry mechanism |
 
 The `test/INVENTORY.jsonl` drift guard then enforces that the regenerated inventory matches the committed one:
 

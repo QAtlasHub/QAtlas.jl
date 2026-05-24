@@ -37,4 +37,4 @@ verify(RandomBondIsing2D(), CentralCharge(), Infinite(); route = :literature_val
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `RandomBondIsing2D`](../models/RandomBondIsing2D.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

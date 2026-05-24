@@ -32,4 +32,4 @@ verify(TightBindingV1D(), FermiVelocity(), Infinite(); route = :second_closed_fo
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TightBindingV1D`](../models/TightBindingV1D.md) · [Quantity: `FermiVelocity`](../quantities/FermiVelocity.md) · [Atlas index](../index.md)

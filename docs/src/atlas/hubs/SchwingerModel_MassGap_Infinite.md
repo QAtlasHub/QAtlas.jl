@@ -32,4 +32,4 @@ verify(SchwingerModel(; e = e, m = 0.0), MassGap(), Infinite(); route = :second_
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `SchwingerModel`](../models/SchwingerModel.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

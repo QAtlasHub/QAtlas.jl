@@ -37,4 +37,4 @@ verify(TFIM(; J = J, h = h), Energy(:per_site), PBC(N); route = :sum_rule, fetch
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

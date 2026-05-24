@@ -37,4 +37,4 @@ verify(IsingChain1D(; J = J), CriticalTemperature(), Infinite(); route = :second
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `IsingChain1D`](../models/IsingChain1D.md) · [Quantity: `CriticalTemperature`](../quantities/CriticalTemperature.md) · [Atlas index](../index.md)

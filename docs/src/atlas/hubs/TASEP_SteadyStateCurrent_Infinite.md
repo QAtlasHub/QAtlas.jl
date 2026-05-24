@@ -42,4 +42,4 @@ verify(TASEP(), SteadyStateCurrent(), Infinite(); route = :second_closed_form, i
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TASEP`](../models/TASEP.md) · [Quantity: `SteadyStateCurrent`](../quantities/SteadyStateCurrent.md) · [Atlas index](../index.md)

@@ -37,4 +37,4 @@ verify(S1AnisotropicD1D(; J = J, D = 0.0), MassGap(), Infinite(); route = :deleg
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

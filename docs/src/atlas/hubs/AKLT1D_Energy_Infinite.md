@@ -42,4 +42,4 @@ verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, indepen
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `AKLT1D`](../models/AKLT1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

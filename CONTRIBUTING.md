@@ -273,7 +273,16 @@ After adding or changing any `@register`, regenerate the atlas:
 julia --project=docs docs/atlas/generate.jl
 ```
 
-This rewrites `docs/src/atlas/index.md`, per-hub pages under `docs/src/atlas/hubs/`, and the facet pages under `docs/src/atlas/by/`. The `test/INVENTORY.jsonl` drift guard then enforces that the regenerated inventory matches the committed one:
+This rewrites `docs/src/atlas/index.md`, per-hub pages under `docs/src/atlas/hubs/`, the facet pages under `docs/src/atlas/by/`, **the per-model index pages under `docs/src/atlas/models/<Model>.md`** (showing each model's hubs as a `Quantity × BC` matrix), **the per-quantity index pages under `docs/src/atlas/quantities/<Quantity>.md`** (the inverse `Model × BC` matrix), and **`docs/src/atlas/ModelList.md`** (the top-level searchable catalog with one row per model and columns derived from existing `@register` fields: methods used, assurance distribution, ED-feasibility, regimes).
+
+Adding a new `@register` entry therefore automatically:
+
+1. creates a new per-hub card under `hubs/`,
+2. adds the `(Quantity, BC)` cell to that model's `Quantity × BC` matrix in `models/<Model>.md` (empty cells are gap visualisation — where physics could be added next),
+3. adds the `(Model, BC)` cell to that quantity's `Model × BC` matrix in `quantities/<Quantity>.md`,
+4. bumps the `#K` count and assurance distribution in `ModelList.md`.
+
+Two CI guards enforce that the auto-generated structure stays consistent with the substrate: `test/harness/atlas/test_inventory_drift.jl` (registry/INVENTORY drift) and `test/harness/atlas/test_doc_structure.jl` (per-model / per-quantity / ModelList structural completeness + per-hub back-link presence):
 
 ```bash
 julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
@@ -346,11 +355,12 @@ A PR must pass:
    julia --project=. -e 'using Pkg; Pkg.test(; julia_args=`-t auto --heap-size-hint=96G`)'
    ```
 
-2. If you added registrations, regenerate the atlas and confirm the drift guard:
+2. If you added registrations, regenerate the atlas and confirm both guards:
 
    ```bash
    julia --project=docs docs/atlas/generate.jl
    julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+   julia --startup-file=no test/harness/atlas/test_doc_structure.jl
    ```
 
 3. Bump the version in `Project.toml` (patch bump per PR; minor for larger additions).

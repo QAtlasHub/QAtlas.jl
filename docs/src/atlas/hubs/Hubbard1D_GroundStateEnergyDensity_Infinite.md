@@ -37,4 +37,4 @@ verify(Hubbard1D(; t = t, U = U, μ = U / 2), GroundStateEnergyDensity(), Infini
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Hubbard1D`](../models/Hubbard1D.md) · [Quantity: `GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) · [Atlas index](../index.md)

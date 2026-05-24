@@ -32,4 +32,4 @@ verify(ChernSimons3D(; N = 2, k = k), CentralCharge(), Infinite(); route = :seco
 - cards: 1 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `ChernSimons3D`](../models/ChernSimons3D.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

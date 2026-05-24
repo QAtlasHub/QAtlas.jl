@@ -32,4 +32,4 @@ verify(LiouvilleCFT(; b = 1.0), ConformalWeights(), Infinite(); route = :second_
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `LiouvilleCFT`](../models/LiouvilleCFT.md) · [Quantity: `ConformalWeights`](../quantities/ConformalWeights.md) · [Atlas index](../index.md)

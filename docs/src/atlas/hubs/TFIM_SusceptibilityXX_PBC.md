@@ -31,4 +31,4 @@ verify(TFIM(; J = J, h = h), SusceptibilityXX(), PBC(N); route = :ed_finite_size
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `SusceptibilityXX`](../quantities/SusceptibilityXX.md) · [Atlas index](../index.md)

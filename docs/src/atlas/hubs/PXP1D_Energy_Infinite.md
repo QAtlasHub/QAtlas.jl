@@ -37,4 +37,4 @@ verify(PXP1D(), Energy(:per_site), Infinite(); route = :literature_value, indepe
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `PXP1D`](../models/PXP1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

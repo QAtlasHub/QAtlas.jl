@@ -47,4 +47,4 @@ verify(TFIM(; J = J, h = 0.0), VonNeumannEntropy(), OBC(N); route = :second_clos
 - cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) · [Atlas index](../index.md)

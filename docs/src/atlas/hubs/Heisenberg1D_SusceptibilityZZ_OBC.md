@@ -20,4 +20,4 @@ _No corroboration card._ Flagged by the R1 risk-linter (`src` claims this hub, E
 - cards: 0 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) · [Atlas index](../index.md)

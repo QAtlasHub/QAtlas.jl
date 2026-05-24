@@ -32,4 +32,4 @@ verify(IsingChain1D(; J = J), SpecificHeat(), Infinite(); route = :second_closed
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `IsingChain1D`](../models/IsingChain1D.md) · [Quantity: `SpecificHeat`](../quantities/SpecificHeat.md) · [Atlas index](../index.md)

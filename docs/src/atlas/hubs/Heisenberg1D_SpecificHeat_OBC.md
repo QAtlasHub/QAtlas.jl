@@ -41,4 +41,4 @@ verify(Heisenberg1D(), SpecificHeat(), OBC(N); route = :ed_finite_size, independ
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `SpecificHeat`](../quantities/SpecificHeat.md) · [Atlas index](../index.md)

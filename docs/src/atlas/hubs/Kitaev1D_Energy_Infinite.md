@@ -32,4 +32,4 @@ verify(Kitaev1D(; μ = 0.0, t = t, Δ = t), Energy(:per_site), Infinite(); route
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Kitaev1D`](../models/Kitaev1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

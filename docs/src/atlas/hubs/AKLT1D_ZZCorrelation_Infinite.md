@@ -37,4 +37,4 @@ verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_cl
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `AKLT1D`](../models/AKLT1D.md) · [Quantity: `ZZCorrelation`](../quantities/ZZCorrelation.md) · [Atlas index](../index.md)

@@ -42,4 +42,4 @@ verify(Kitaev1D(; μ = 3.0, t = 1.0, Δ = 1.0), CorrelationLength(), Infinite();
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Kitaev1D`](../models/Kitaev1D.md) · [Quantity: `CorrelationLength`](../quantities/CorrelationLength.md) · [Atlas index](../index.md)

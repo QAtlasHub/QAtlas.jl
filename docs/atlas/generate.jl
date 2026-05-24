@@ -60,6 +60,7 @@ modelof(h) = first(split(h, "/"))
 quantof(h) = (p=split(h, "/"); length(p) >= 2 ? p[2] : "?")
 bcof(h) = (p=split(h, "/"); length(p) >= 3 ? p[3] : "?")
 slugof(h) = replace(h, r"[^A-Za-z0-9]" => "_")
+_quant_slugof(q::AbstractString) = replace(q, r"[^A-Za-z0-9]" => "_")
 _md_escape_dollar(s::AbstractString) = replace(s, r"(?<!\\)\$" => "\\\$")
 
 # ── R1 taxonomy (single source of truth lives in AtlasInventory) ─────
@@ -276,7 +277,19 @@ for h in claimed
     )
     HP("- RES not wired — measured residuals / confidence are not shown yet.")
     HP("")
-    HP("[← back to the Atlas index](../index.md)")
+    HP(
+        "[← Model: `",
+        modelof(h),
+        "`](../models/",
+        modelof(h),
+        ".md) · ",
+        "[Quantity: `",
+        quantof(h),
+        "`](../quantities/",
+        _quant_slugof(quantof(h)),
+        ".md) · ",
+        "[Atlas index](../index.md)",
+    )
     write(joinpath(hubsdir, slugof(h) * ".md"), String(take!(hio)))
 end
 
@@ -406,6 +419,17 @@ P(
     "[by BC](by/bc.md) · [by level](by/level.md) · ",
     "[by mechanism](by/mechanism.md) · [by regime](by/regime.md). ",
     "Full-text search is the top bar (Documenter built-in).",
+)
+
+P("")
+P("## Model & Quantity matrices (Zettelkasten layer)")
+P("")
+P(
+    "Each model has a per-model index showing its hubs as a ",
+    "`Quantity × BC` matrix; each quantity has the inverse view ",
+    "(`Model × BC`).  Empty cells = gap visualisation (physics not ",
+    "yet implemented).  Use the **[Model list](ModelList.md)** for a ",
+    "searchable top-catalog.",
 )
 P("")
 P("## 🟠 R1 risk-linter — actionable only")
@@ -667,3 +691,276 @@ end
 for page in sort(collect(keys(_PAGE_TO_MODELS)))
     inject_hub_section!(page, _PAGE_TO_MODELS[page])
 end
+
+# ── TIER-1 VIEW GENERATORS (ModelList + per-model + per-quantity) ──────────
+# Per the Discussion #379 framework: stateless view-generators over the
+# fixed substrate (registry + INVENTORY + assurance taxonomy).  No src
+# change, no @register annotation added — every derived column comes from
+# what's already in the substrate.
+const _ALL_BCS_CANON = ["OBC", "PBC", "Infinite"]
+
+function _bc_order(bcs_present)
+    canon = filter(b -> b in bcs_present, _ALL_BCS_CANON)
+    extra = sort(filter(b -> !(b in _ALL_BCS_CANON), collect(bcs_present)))
+    return vcat(canon, extra)
+end
+
+# ── per-model index page (Quantity × BC matrix) ──────────────────────
+modelsdir = joinpath(ROOT, "docs", "src", "atlas", "models")
+mkpath(modelsdir)
+
+function render_model_index(model_name::AbstractString)
+    hs = sort(filter(h -> modelof(h) == model_name, claimed))
+    qts = sort(unique(quantof(h) for h in hs))
+    bcs = _bc_order(unique(bcof(h) for h in hs))
+    cell = Dict{Tuple{String,String},String}()
+    for h in hs
+        cell[(quantof(h), bcof(h))] = h
+    end
+
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# `", model_name, "` — model index")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "All `(Quantity, BC)` hubs `src` claims for **`",
+        model_name,
+        "`**.  Cells link to the per-hub card; `—` = not yet implemented ",
+        "at that BC.  The shape of the matrix is the *gap visualisation*: ",
+        "empty cells are where physics could be added next.",
+    )
+    P("")
+    levcounts = Dict{AtlasInventory.AssuranceLevel,Int}()
+    for h in hs
+        levcounts[levelcode(h)] = get(levcounts, levelcode(h), 0) + 1
+    end
+    P("## Coverage")
+    P("")
+    P("| Level | Count |")
+    P("|---|---|")
+    P(
+        "| 🟣 universality-corroborated | ",
+        get(levcounts, AtlasInventory.UNIVERSALITY_CORROBORATED, 0),
+        " |",
+    )
+    P("| 🟢 corroborated-at-p | ", get(levcounts, AtlasInventory.CORROBORATED_AT_P, 0), " |")
+    P("| 🔵 coherent | ", get(levcounts, AtlasInventory.COHERENT, 0), " |")
+    P("| ⚪ cited-only | ", get(levcounts, AtlasInventory.CITED_ONLY, 0), " |")
+    P(
+        "| 🟠 uncorroborated-but-feasible | ",
+        get(levcounts, AtlasInventory.UNCORROBORATED_BUT_FEASIBLE, 0),
+        " |",
+    )
+    P("| **total claimed hubs** | **", length(hs), "** |")
+    P("")
+    if model_name in AtlasInventory.ED_INFEASIBLE_MODELS
+        P("!!! note \"ED-infeasible model\"")
+        P(
+            "    This model is in `ED_INFEASIBLE_MODELS` (true 2D / frontier).  Its `cited-only` hubs are the published ceiling, **not** an actionable gap.",
+        )
+        P("")
+    end
+    methods_seen = sort(
+        unique(string(first(clby[h]).method) for h in hs if haskey(clby, h))
+    )
+    refs_seen = String[]
+    for h in hs
+        haskey(clby, h) || continue
+        r = first(clby[h]).refs
+        isempty(r) || push!(refs_seen, r)
+    end
+    refs_unique = sort(unique(refs_seen))
+    P(
+        "**Methods** (from `@register`, derived): ",
+        isempty(methods_seen) ? "—" : join(("`" * m * "`" for m in methods_seen), ", "),
+    )
+    P("")
+    if !isempty(refs_unique)
+        P("**References** (aggregated):")
+        for r in refs_unique
+            P("- ", _md_escape_dollar(r))
+        end
+        P("")
+    end
+
+    P("## Quantity × BC matrix")
+    P("")
+    if isempty(qts)
+        P("_No hubs registered._")
+    else
+        P("| Quantity | ", join(("`" * b * "`" for b in bcs), " | "), " |")
+        P("|---|", repeat("---|", length(bcs)))
+        for q in qts
+            cells = String[]
+            push!(cells, string("[`", q, "`](../quantities/", _quant_slugof(q), ".md)"))
+            for bc in bcs
+                h = get(cell, (q, bc), "")
+                if isempty(h)
+                    push!(cells, "—")
+                else
+                    push!(cells, string(badgeof(h), " [hub](../hubs/", slugof(h), ".md)"))
+                end
+            end
+            P("| ", join(cells, " | "), " |")
+        end
+    end
+    P("")
+    P("[← Atlas index](../index.md) · [Model list →](../ModelList.md)")
+    return String(take!(io))
+end
+
+for m in models
+    write(joinpath(modelsdir, m * ".md"), render_model_index(m))
+end
+
+# ── per-quantity index page (Model × BC matrix) ──────────────────────
+quantsdir = joinpath(ROOT, "docs", "src", "atlas", "quantities")
+mkpath(quantsdir)
+
+function render_quantity_index(quant_name::AbstractString)
+    hs = sort(filter(h -> quantof(h) == quant_name, claimed))
+    mdls = sort(unique(modelof(h) for h in hs))
+    bcs = _bc_order(unique(bcof(h) for h in hs))
+    cell = Dict{Tuple{String,String},String}()
+    for h in hs
+        cell[(modelof(h), bcof(h))] = h
+    end
+
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# `", quant_name, "` — quantity index")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "All `(Model, BC)` hubs `src` claims for the **`",
+        quant_name,
+        "`** observable.  Empty cells = this model doesn't yet have a `",
+        quant_name,
+        "` registered at that BC — i.e. where this quantity could be added ",
+        "to other models.",
+    )
+    P("")
+    P("## Coverage")
+    P("")
+    P("- **Models with this quantity registered**: ", length(mdls))
+    P("- **Total hubs (Model, BC pairs)**: ", length(hs))
+    P("")
+    P("## Model × BC matrix")
+    P("")
+    if isempty(mdls)
+        P("_No hubs registered._")
+    else
+        P("| Model | ", join(("`" * b * "`" for b in bcs), " | "), " |")
+        P("|---|", repeat("---|", length(bcs)))
+        for mname in mdls
+            cells = String[]
+            push!(cells, string("[`", mname, "`](../models/", mname, ".md)"))
+            for bc in bcs
+                h = get(cell, (mname, bc), "")
+                if isempty(h)
+                    push!(cells, "—")
+                else
+                    push!(cells, string(badgeof(h), " [hub](../hubs/", slugof(h), ".md)"))
+                end
+            end
+            P("| ", join(cells, " | "), " |")
+        end
+    end
+    P("")
+    P("[← Atlas index](../index.md) · [Model list →](../ModelList.md)")
+    return String(take!(io))
+end
+
+quants_all = sort(unique(quantof(h) for h in claimed))
+for q in quants_all
+    write(joinpath(quantsdir, _quant_slugof(q) * ".md"), render_quantity_index(q))
+end
+
+# ── ModelList.md — top searchable catalog ────────────────────────────
+function render_model_list()
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# Model list — searchable catalog")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "Top-level catalog of all **",
+        length(models),
+        " models** with claimed hubs.  One row per model; the columns are ",
+        "*derived* from the existing substrate (registry + INVENTORY + ",
+        "ED-feasibility set + R1 assurance taxonomy) — no extra ",
+        "annotation per model.  Use the browser's full-text search ",
+        "(Ctrl+F) or Documenter's search bar to filter.  Click a model ",
+        "name to drill into its `Quantity × BC` matrix.",
+    )
+    P("")
+    P("| Model | #K | Methods | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED | Regimes (top 3) |")
+    P("|---|---|---|---|---|---|---|---|---|---|")
+    for m in models
+        hs = sort(filter(h -> modelof(h) == m, claimed))
+        methods_seen = sort(
+            unique(string(first(clby[h]).method) for h in hs if haskey(clby, h))
+        )
+        regs = Set{String}()
+        for h in hs
+            for c in cardsof(h)
+                push!(regs, c.regime)
+            end
+        end
+        regs_sorted = sort(collect(regs))
+        regs_disp = first(regs_sorted, min(3, length(regs_sorted)))
+        P(
+            "| [`",
+            m,
+            "`](models/",
+            m,
+            ".md) | ",
+            length(hs),
+            " | ",
+            isempty(methods_seen) ? "—" : join(("`" * x * "`" for x in methods_seen), ", "),
+            " | ",
+            count(h -> levelcode(h) == AtlasInventory.UNIVERSALITY_CORROBORATED, hs),
+            " | ",
+            count(h -> levelcode(h) == AtlasInventory.CORROBORATED_AT_P, hs),
+            " | ",
+            count(h -> levelcode(h) == AtlasInventory.COHERENT, hs),
+            " | ",
+            count(h -> levelcode(h) == AtlasInventory.CITED_ONLY, hs),
+            " | ",
+            count(h -> levelcode(h) == AtlasInventory.UNCORROBORATED_BUT_FEASIBLE, hs),
+            " | ",
+            (m in AtlasInventory.ED_INFEASIBLE_MODELS ? "infeasible" : "feasible"),
+            " | ",
+            isempty(regs_disp) ? "—" : join(("`" * x * "`" for x in regs_disp), ", "),
+            " |",
+        )
+    end
+    P("")
+    P("## Quantity index")
+    P("")
+    P(
+        "Each quantity has its own `Model × BC` matrix page (gap visualisation across models):",
+    )
+    P("")
+    for q in quants_all
+        nmodels = length(unique(modelof(h) for h in claimed if quantof(h) == q))
+        P("- [`", q, "`](quantities/", _quant_slugof(q), ".md) — ", nmodels, " models")
+    end
+    P("")
+    P("[← back to the Atlas index](index.md)")
+    return String(take!(io))
+end
+
+write(joinpath(ROOT, "docs", "src", "atlas", "ModelList.md"), render_model_list())
+
+println(
+    "  + Tier-1 view-generators: ",
+    length(models),
+    " model pages + ",
+    length(quants_all),
+    " quantity pages + ModelList.md",
+)

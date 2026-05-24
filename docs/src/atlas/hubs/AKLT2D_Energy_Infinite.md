@@ -37,4 +37,4 @@ verify(AKLT2D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_fo
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `AKLT2D`](../models/AKLT2D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

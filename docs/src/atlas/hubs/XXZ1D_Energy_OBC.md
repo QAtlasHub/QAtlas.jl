@@ -47,4 +47,4 @@ verify(XXZ1D(; J = J, Δ = dz), Energy(:per_site), OBC(N); route = :ed_finite_si
 - cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

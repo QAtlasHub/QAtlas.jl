@@ -36,6 +36,10 @@
 
 [**Faceted search →**](by/index.md) · [by model](by/model.md) · [by quantity](by/quantity.md) · [by BC](by/bc.md) · [by level](by/level.md) · [by mechanism](by/mechanism.md) · [by regime](by/regime.md). Full-text search is the top bar (Documenter built-in).
 
+## Model & Quantity matrices (Zettelkasten layer)
+
+Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; each quantity has the inverse view (`Model × BC`).  Empty cells = gap visualisation (physics not yet implemented).  Use the **[Model list](ModelList.md)** for a searchable top-catalog.
+
 ## 🟠 R1 risk-linter — actionable only
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.

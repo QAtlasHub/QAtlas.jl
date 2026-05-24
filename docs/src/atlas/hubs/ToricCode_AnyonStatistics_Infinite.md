@@ -21,4 +21,4 @@ _No corroboration card._ Model is ED-infeasible — frontier (cited-only), not a
 - cards: 0 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `ToricCode`](../models/ToricCode.md) · [Quantity: `AnyonStatistics`](../quantities/AnyonStatistics.md) · [Atlas index](../index.md)

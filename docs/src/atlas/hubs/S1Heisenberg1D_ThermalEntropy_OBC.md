@@ -41,4 +41,4 @@ verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :ed_finite_siz
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `S1Heisenberg1D`](../models/S1Heisenberg1D.md) · [Quantity: `ThermalEntropy`](../quantities/ThermalEntropy.md) · [Atlas index](../index.md)

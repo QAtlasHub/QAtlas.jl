@@ -37,4 +37,4 @@ verify(MixedFieldIsing1D(; J = J, h_x = J, h_z = 0.0), MassGap(), Infinite(); ro
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `MixedFieldIsing1D`](../models/MixedFieldIsing1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

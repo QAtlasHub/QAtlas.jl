@@ -37,4 +37,4 @@ verify(S1Heisenberg1D(; J = 1.0), MassGap(), Infinite(); route = :literature_val
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `S1Heisenberg1D`](../models/S1Heisenberg1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

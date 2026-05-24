@@ -32,4 +32,4 @@ verify(CurieWeissIsing(; J = J), CriticalTemperature(), Infinite(); route = :sec
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `CurieWeissIsing`](../models/CurieWeissIsing.md) · [Quantity: `CriticalTemperature`](../quantities/CriticalTemperature.md) · [Atlas index](../index.md)

@@ -32,4 +32,4 @@ verify(HeisenbergXYZ(; Jx = 1.0, Jy = 1.0, Jz = 1.0), LuttingerParameter(), Infi
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `HeisenbergXYZ`](../models/HeisenbergXYZ.md) · [Quantity: `LuttingerParameter`](../quantities/LuttingerParameter.md) · [Atlas index](../index.md)

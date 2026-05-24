@@ -23,6 +23,14 @@ Phase 1 exposes only `CentralCharge = 0`. Logarithmic-operator structure,
 indecomposable representations, and specific β-coupling parametrisations
 are deferred to Phase 2.
 """
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 struct LogarithmicCFT <: AbstractQAtlasModel end
 
 """

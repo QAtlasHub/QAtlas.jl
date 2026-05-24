@@ -86,6 +86,14 @@ The Cardy state is selected via the `state` keyword to `fetch`:
 - I. Affleck, A. W. W. Ludwig, *Phys. Rev. Lett.* **67**, 161 (1991).
 - D. Friedan, A. Konechny, *Phys. Rev. Lett.* **93**, 030402 (2004).
 """
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 struct BCFT <: AbstractQAtlasModel end
 
 # ═══════════════════════════════════════════════════════════════════════════════

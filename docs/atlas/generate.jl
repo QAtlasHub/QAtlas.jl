@@ -803,6 +803,22 @@ function _calc_files_for_model(model_name::AbstractString)
     return out
 end
 
+# Hub-level (model + quantity) calc match: stricter than the per-model
+# matcher.  Returns only those calc/*.md whose filename mentions BOTH
+# the model alias AND the quantity name (lower-cased substring).
+function _calc_files_for_hub(model_name::AbstractString, quant_name::AbstractString)
+    aliases = _model_calc_aliases(model_name)
+    qlo = lowercase(quant_name)
+    strict = String[]
+    for f in _CALC_FILES
+        flo = lowercase(f)
+        any(a -> length(a) >= 3 && occursin(a, flo), aliases) || continue
+        length(qlo) >= 3 && occursin(qlo, flo) || continue
+        push!(strict, f)
+    end
+    return strict
+end
+
 function _split_refs(s::AbstractString)
     isempty(s) && return String[]
     return [strip(r) for r in split(s, "|") if !isempty(strip(r))]

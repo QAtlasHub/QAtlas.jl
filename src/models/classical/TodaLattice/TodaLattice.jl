@@ -57,6 +57,14 @@ in QAtlas core.
 - H. Flaschka, *Phys. Rev. B* **9**, 1924 (1974).
 - M. C. Gutzwiller, *Annals Phys.* **133**, 304 (1981).
 """
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 struct TodaLattice <: AbstractQAtlasModel
     a::Float64
     b::Float64

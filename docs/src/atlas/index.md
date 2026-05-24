@@ -43,7 +43,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 
 | Section | Count |
 |---|---|
-| 1. Models without CONVENTION header | 21 |
+| 1. Models without CONVENTION header | 0 |
 | 2. Quantities without extracted Definition | 0 |
 | 3. Orphan calc notes (matched to no model) | 13 |
 | 4. Models registered but with 0 hubs | 0 |

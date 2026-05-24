@@ -15,6 +15,14 @@
 #   Harvard University Press (1973).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 using LinearAlgebra: tr
 
 # ═══════════════════════════════════════════════════════════════════════════════

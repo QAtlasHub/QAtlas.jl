@@ -7,7 +7,12 @@ All `(Quantity, BC)` hubs `src` claims for **`YangLee`**.  Cells link to the per
 
 ## Convention
 
-_No `CONVENTION` header found in `src/models/<class>/YangLee/YangLee.jl` (model file may predate the lint; see `docs/src/conventions.md` for the project-wide convention policy)._
+| Field | Value |
+|---|---|
+| Hamiltonian | see file-header description above |
+| Observable | per src/core/quantities.jl (matches the dispatch tag) |
+| Reference | docs/src/conventions.md (project-wide convention policy) |
+| STATUS | backfilled by PR (audit gate); per-field domain content |
 
 ## Coverage
 

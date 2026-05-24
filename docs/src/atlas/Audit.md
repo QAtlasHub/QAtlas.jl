@@ -9,30 +9,7 @@ Substrate-derived audit of actionable gaps.  Each section is a concrete to-do li
 
 The CI lint enforces `# CONVENTION` headers on new model files, but older files predate the lint.  These models show an absence note on their per-model page; backfilling adds a one-block comment.
 
-**Has source file but missing/unparseable `CONVENTION` block** (21):
-
-- [`BCFT`](models/BCFT.md)
-- [`ConformalBootstrap`](models/ConformalBootstrap.md)
-- [`IsingChain1D`](models/IsingChain1D.md)
-- [`IsingSquare`](models/IsingSquare.md)
-- [`IsingTriangular`](models/IsingTriangular.md)
-- [`LiouvilleCFT`](models/LiouvilleCFT.md)
-- [`LogarithmicCFT`](models/LogarithmicCFT.md)
-- [`RFIM`](models/RFIM.md)
-- [`RandomBondIsing2D`](models/RandomBondIsing2D.md)
-- [`SLEkappa`](models/SLEkappa.md)
-- [`SherringtonKirkpatrick`](models/SherringtonKirkpatrick.md)
-- [`SixVertex`](models/SixVertex.md)
-- [`SpinIce`](models/SpinIce.md)
-- [`TASEP`](models/TASEP.md)
-- [`TTbar`](models/TTbar.md)
-- [`TodaLattice`](models/TodaLattice.md)
-- [`TricriticalIsing`](models/TricriticalIsing.md)
-- [`TricriticalPotts3`](models/TricriticalPotts3.md)
-- [`YangLee`](models/YangLee.md)
-- [`ZnClock`](models/ZnClock.md)
-- [`ZnParafermion`](models/ZnParafermion.md)
-
+!!! tip "All models have a CONVENTION header."
 ## 2. Quantities without auto-extracted `Definition`
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.

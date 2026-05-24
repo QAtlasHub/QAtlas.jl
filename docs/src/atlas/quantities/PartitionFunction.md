@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`PartitionFunction`** observable. 
 
 ## Definition
 
-Classical 2D Ising model on a square lattice with periodic boundary conditions (PBC) in both directions.
+Canonical partition function `Z = Σ_σ exp(-β H(σ))`.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

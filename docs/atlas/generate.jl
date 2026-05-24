@@ -180,7 +180,7 @@ const _QUANTITY_DEFS = let
             endswith(f, ".jl") || continue
             txt = read(joinpath(root, f), String)
             for m in eachmatch(
-                r"\"\"\"(.+?)\"\"\"\s*\n\s*struct\s+([A-Z][A-Za-z0-9_]*)(?:\{[^}]*\})?\s*<:\s*AbstractQuantity"s,
+                r"\"\"\"((?:(?!\"\"\").)+)\"\"\"\s*\n\s*struct\s+([A-Z][A-Za-z0-9_]*)(?:\{[^}]*\})?\s*<:\s*AbstractQuantity"s,
                 txt,
             )
                 docblock = strip(m.captures[1])

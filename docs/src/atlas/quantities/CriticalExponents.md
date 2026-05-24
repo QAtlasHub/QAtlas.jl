@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`CriticalExponents`** observable. 
 
 ## Definition
 
-Parametric dispatch tag for universality classes. `C` is a `Symbol` identifying the class (`:Ising`, `:XY`, `:Heisenberg`, `:Potts3`, `:Potts4`, `:Percolation`, `:KPZ`, etc.).
+Standard set of equilibrium critical exponents {α, β, γ, δ, ν, η} of a universality class. Returns a `NamedTuple`.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

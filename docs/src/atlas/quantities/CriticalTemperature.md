@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`CriticalTemperature`** observable
 
 ## Definition
 
-Return the 2^Ly × 2^Ly symmetric transfer matrix for a row of `Ly` Ising spins with PBC along the row direction.
+Exact critical temperature of a classical model.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

@@ -47,7 +47,7 @@ struct Heisenberg1D <: AbstractQAtlasModel end
 
 Dispatch tag for the full sorted eigenvalue spectrum of a finite model.
 """
-struct ExactSpectrum end
+struct ExactSpectrum <: AbstractQuantity end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # fetch: exact spectrum for small N
@@ -118,7 +118,7 @@ end
 Dispatch tag for the ground-state energy per site in the thermodynamic
 limit (N → ∞).
 """
-struct GroundStateEnergyDensity end
+struct GroundStateEnergyDensity <: AbstractQuantity end
 
 """
     fetch(::Heisenberg1D, ::GroundStateEnergyDensity; J=1.0) -> Float64

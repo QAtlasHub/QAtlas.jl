@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`ChargeGap`** observable.  Empty c
 
 ## Definition
 
-Convenience alias for the rate-function flavour `λ(t) = -log L(t)/N`.  See [`LoschmidtEcho`](@ref). """ const LoschmidtRateFunction = LoschmidtEcho{:rate}
+Charge (Mott) gap of an electron system,
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

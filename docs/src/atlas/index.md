@@ -39,7 +39,15 @@
 
 ## Doc-health audit
 
-Actionable gap surface: see **[Audit](Audit.md)** for models without CONVENTION headers, quantities without extracted definitions, orphan calc notes, and registry/INVENTORY mismatches.
+Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
+
+| Section | Count |
+|---|---|
+| 1. Models without CONVENTION header | 21 |
+| 2. Quantities without extracted Definition | 2 |
+| 3. Orphan calc notes (matched to no model) | 13 |
+| 4. Models registered but with 0 hubs | 0 |
+| 5. INVENTORY card hubs with no `@register` claim | 73 |
 
 ## Reference & derivation indices
 

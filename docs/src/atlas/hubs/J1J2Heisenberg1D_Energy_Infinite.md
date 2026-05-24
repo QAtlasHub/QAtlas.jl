@@ -47,4 +47,4 @@ verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); ro
 - cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `J1J2Heisenberg1D`](../models/J1J2Heisenberg1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

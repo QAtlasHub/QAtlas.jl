@@ -32,4 +32,4 @@ verify(GrossNeveu(; N = 1, g = 1.0), MassGap(), Infinite(); route = :second_clos
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `GrossNeveu`](../models/GrossNeveu.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

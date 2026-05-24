@@ -37,4 +37,4 @@ verify(PpIp2DSC(), CentralCharge(), Infinite(); route = :second_closed_form, ind
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `PpIp2DSC`](../models/PpIp2DSC.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

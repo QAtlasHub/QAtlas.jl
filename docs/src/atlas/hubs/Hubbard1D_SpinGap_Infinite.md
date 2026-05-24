@@ -32,4 +32,4 @@ verify(Hubbard1D(; t = t, U = U, μ = U / 2), SpinGap(), Infinite(); route = :se
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Hubbard1D`](../models/Hubbard1D.md) · [Quantity: `SpinGap`](../quantities/SpinGap.md) · [Atlas index](../index.md)

@@ -32,4 +32,4 @@ verify(RFIM(; Δ = 0.5), CriticalTemperature(), Infinite(); route = :second_clos
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `RFIM`](../models/RFIM.md) · [Quantity: `CriticalTemperature`](../quantities/CriticalTemperature.md) · [Atlas index](../index.md)

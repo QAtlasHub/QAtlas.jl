@@ -37,4 +37,4 @@ verify(MajumdarGhosh(; J = J), GroundStateEnergyDensity(), PBC(N); route = :seco
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `MajumdarGhosh`](../models/MajumdarGhosh.md) · [Quantity: `GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) · [Atlas index](../index.md)

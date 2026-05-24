@@ -32,4 +32,4 @@ verify(XXZ1D(), MassGap(), OBC(N); route = :second_closed_form, independent = 0.
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

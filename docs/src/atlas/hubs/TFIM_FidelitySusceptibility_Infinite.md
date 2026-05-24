@@ -37,4 +37,4 @@ verify(TFIM(; J = J, h = h), FidelitySusceptibility(), Infinite(); route = :seco
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `FidelitySusceptibility`](../quantities/FidelitySusceptibility.md) · [Atlas index](../index.md)

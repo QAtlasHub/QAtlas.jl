@@ -37,4 +37,4 @@ verify(CurieWeissIsing(; J = J, h = h), ThermalEntropy(), Infinite(); route = :l
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `CurieWeissIsing`](../models/CurieWeissIsing.md) · [Quantity: `ThermalEntropy`](../quantities/ThermalEntropy.md) · [Atlas index](../index.md)

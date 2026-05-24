@@ -31,4 +31,4 @@ verify(Heisenberg1D(), RenyiEntropy(α), OBC(N); route = :second_closed_form, in
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `RenyiEntropy`](../quantities/RenyiEntropy.md) · [Atlas index](../index.md)

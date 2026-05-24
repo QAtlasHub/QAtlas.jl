@@ -32,4 +32,4 @@ verify(TricriticalPotts3(), ConformalWeights(), Infinite(); route = :second_clos
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TricriticalPotts3`](../models/TricriticalPotts3.md) · [Quantity: `ConformalWeights`](../quantities/ConformalWeights.md) · [Atlas index](../index.md)

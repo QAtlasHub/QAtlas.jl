@@ -37,4 +37,4 @@ verify(AKLT1D(), StringOrderParameter(), Infinite(); route = :second_closed_form
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `AKLT1D`](../models/AKLT1D.md) · [Quantity: `StringOrderParameter`](../quantities/StringOrderParameter.md) · [Atlas index](../index.md)

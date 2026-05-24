@@ -37,4 +37,4 @@ verify(KagomeHeisenbergAFM(), MassGap(), Infinite(); route = :literature_value, 
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

@@ -32,4 +32,4 @@ verify(SherringtonKirkpatrick(; J = 1.0), Energy(:per_site), Infinite(); route =
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `SherringtonKirkpatrick`](../models/SherringtonKirkpatrick.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

@@ -37,4 +37,4 @@ verify(LogarithmicCFT(), CentralCharge(), Infinite(); route = :second_closed_for
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `LogarithmicCFT`](../models/LogarithmicCFT.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

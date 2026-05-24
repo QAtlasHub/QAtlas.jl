@@ -42,4 +42,4 @@ verify(TFIM(; J = J, h = h), RenyiEntropy(2), OBC(N); route = :ed_finite_size, f
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `RenyiEntropy`](../quantities/RenyiEntropy.md) · [Atlas index](../index.md)

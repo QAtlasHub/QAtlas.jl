@@ -32,4 +32,4 @@ verify(CurieWeissIsing(; J = J, h = 0.0), SusceptibilityZZ(), Infinite(); route 
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `CurieWeissIsing`](../models/CurieWeissIsing.md) · [Quantity: `SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) · [Atlas index](../index.md)

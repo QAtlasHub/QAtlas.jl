@@ -41,4 +41,4 @@ verify(TFIM(; J = J, h = J), FreeEnergy(), Infinite(); route = :second_closed_fo
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `FreeEnergy`](../quantities/FreeEnergy.md) · [Atlas index](../index.md)

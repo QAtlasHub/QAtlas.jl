@@ -36,4 +36,4 @@ verify(TFIM(; J = J, h = h), SpecificHeat(), OBC(N); route = :limiting_case, ind
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `TFIM`](../models/TFIM.md) · [Quantity: `SpecificHeat`](../quantities/SpecificHeat.md) · [Atlas index](../index.md)

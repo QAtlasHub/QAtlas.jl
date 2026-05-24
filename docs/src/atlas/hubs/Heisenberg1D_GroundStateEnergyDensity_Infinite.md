@@ -47,4 +47,4 @@ verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :ed_finit
 - cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) · [Atlas index](../index.md)

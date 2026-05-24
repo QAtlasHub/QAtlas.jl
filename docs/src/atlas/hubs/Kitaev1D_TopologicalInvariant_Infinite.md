@@ -37,4 +37,4 @@ verify(Kitaev1D(; μ = μ, t = t, Δ = Δ), TopologicalInvariant(), Infinite(); 
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
-[← back to the Atlas index](../index.md)
+[← Model: `Kitaev1D`](../models/Kitaev1D.md) · [Quantity: `TopologicalInvariant`](../quantities/TopologicalInvariant.md) · [Atlas index](../index.md)

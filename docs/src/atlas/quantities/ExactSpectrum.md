@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ExactSpectrum`** observable.  Empty cells = this model doesn't yet have a `ExactSpectrum` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Dispatch tag for the full sorted eigenvalue spectrum of a finite model.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`FreeEnergy`** observable.  Empty 
 
 ## Definition
 
-Trait declaring which granularity the given `model` returns natively for [`Energy`](@ref) at boundary condition `bc`.  Used by the `Energy()` (`:natural`) router and by the generic conversion fallbacks.
+Helmholtz free energy per site, `f = -β⁻¹ log Z / N`.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

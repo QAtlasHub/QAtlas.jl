@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`GroundStateEnergyDensity`** observable.  Empty cells = this model doesn't yet have a `GroundStateEnergyDensity` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Dispatch tag for the ground-state energy per site in the thermodynamic limit (N → ∞).
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 5

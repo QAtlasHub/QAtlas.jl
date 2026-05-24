@@ -985,13 +985,52 @@ P(
 
 P("")
 P("")
+_audit_counts = let
+    no_conv = 0
+    no_conv_no_file = 0
+    for m in models
+        cpath = _convention_path(m)
+        if isempty(cpath)
+            no_conv_no_file += 1
+        elseif isempty(_parse_convention(m))
+            no_conv += 1
+        end
+    end
+    no_def = 0
+    for q in quants_all
+        base = _quantity_base_name(q)
+        if !(haskey(_QUANTITY_DEFS, base) && !isempty(_QUANTITY_DEFS[base]))
+            no_def += 1
+        end
+    end
+    orphan_calc = 0
+    for f in _CALC_FILES
+        matched = false
+        for m in models
+            if f in _calc_files_for_model(m)
+                matched = true
+                break
+            end
+        end
+        matched || (orphan_calc += 1)
+    end
+    zero_hubs = count(m -> isempty(filter(h -> modelof(h) == m, claimed)), models)
+    claim_set = Set(claimed)
+    orphan_cards = length(unique(filter(h -> !(h in claim_set), [c.hub for c in cards])))
+    (; conv=no_conv + no_conv_no_file, def=no_def, orphan_calc, zero_hubs, orphan_cards)
+end
+
 P("## Doc-health audit")
 P("")
-P(
-    "Actionable gap surface: see **[Audit](Audit.md)** for models ",
-    "without CONVENTION headers, quantities without extracted ",
-    "definitions, orphan calc notes, and registry/INVENTORY mismatches.",
-)
+P("Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.")
+P("")
+P("| Section | Count |")
+P("|---|---|")
+P("| 1. Models without CONVENTION header | ", _audit_counts.conv, " |")
+P("| 2. Quantities without extracted Definition | ", _audit_counts.def, " |")
+P("| 3. Orphan calc notes (matched to no model) | ", _audit_counts.orphan_calc, " |")
+P("| 4. Models registered but with 0 hubs | ", _audit_counts.zero_hubs, " |")
+P("| 5. INVENTORY card hubs with no `@register` claim | ", _audit_counts.orphan_cards, " |")
 P("")
 P("## Reference & derivation indices")
 P("")

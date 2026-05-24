@@ -273,7 +273,20 @@ After adding or changing any `@register`, regenerate the atlas:
 julia --project=docs docs/atlas/generate.jl
 ```
 
-This rewrites `docs/src/atlas/index.md`, per-hub pages under `docs/src/atlas/hubs/`, the facet pages under `docs/src/atlas/by/`, **the per-model index pages under `docs/src/atlas/models/<Model>.md`** (showing each model's hubs as a `Quantity × BC` matrix), **the per-quantity index pages under `docs/src/atlas/quantities/<Quantity>.md`** (the inverse `Model × BC` matrix), and **`docs/src/atlas/ModelList.md`** (the top-level searchable catalog with one row per model and columns derived from existing `@register` fields: methods used, assurance distribution, ED-feasibility, regimes).
+This rewrites every auto-generated atlas surface, all derived from the fixed substrate (registry + INVENTORY + R1 assurance + ED_INFEASIBLE_MODELS + calc/*.md filenames):
+
+| Auto-generated page | Content | Derived from |
+|---|---|---|
+| `docs/src/atlas/index.md` | top atlas + risk-linter + per-model breakdown table | registry + INVENTORY |
+| `docs/src/atlas/ModelList.md` | top searchable catalog, one row per model, columns: Universality, #K, methods, assurance distribution, ED-feasibility, regimes | substrate-derived |
+| `docs/src/atlas/models/<Model>.md` × 58 | per-model `Quantity × BC` matrix, **Convention** block (from `# CONVENTION` header), **Derivation notes** (matched calc/*.md), aggregated methods + refs | registry + INVENTORY + src file comment + calc filenames |
+| `docs/src/atlas/quantities/<Quantity>.md` × 51 | inverse `Model × BC` matrix, methods aggregation, universality coverage, top references | registry + INVENTORY |
+| `docs/src/atlas/hubs/<Model>_<Quantity>_<BC>.md` × 263 | per-hub card with `src` claim, corroboration cards table, reconstructed `verify(...)` call, **Derivation note** link, three-way back-links (Model, Quantity, Atlas) | registry + INVENTORY |
+| `docs/src/atlas/by/{model,quantity,bc,level,mechanism,regime}.md` | 1D facet aggregators | INVENTORY |
+| `docs/src/atlas/Bibliography.md` | all citations, deduplicated, with hub backlinks sorted by hub-count | registry refs |
+| `docs/src/atlas/CalcIndex.md` | inverse view: every `docs/src/calc/*.md` ↔ matched models | calc filenames |
+
+The `test/INVENTORY.jsonl` drift guard then enforces that the regenerated inventory matches the committed one:
 
 Adding a new `@register` entry therefore automatically:
 

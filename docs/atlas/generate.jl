@@ -215,6 +215,18 @@ function _quantity_base_name(q::AbstractString)
     return replace(q, r"\{.*\}" => "")
 end
 
+# Hub-string normalization for orphan-card matching.
+function _normalize_hub(h::AbstractString)
+    parts = split(h, "/")
+    length(parts) == 3 || return String(h)
+    m, q, b = parts[1], parts[2], parts[3]
+    m = replace(m, r"^QAtlas\." => "")
+    q = replace(q, r"^QAtlas\." => "")
+    b = replace(b, r"^QAtlas\." => "")
+    q = replace(q, r"\{[^}]*\}" => "")
+    return string(m, "/", q, "/", b)
+end
+
 # ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
 
 # CONVENTION block extraction: parse the standard header comment
@@ -1015,8 +1027,10 @@ _audit_counts = let
         matched || (orphan_calc += 1)
     end
     zero_hubs = count(m -> isempty(filter(h -> modelof(h) == m, claimed)), models)
-    claim_set = Set(claimed)
-    orphan_cards = length(unique(filter(h -> !(h in claim_set), [c.hub for c in cards])))
+    norm_claims = Set(_normalize_hub(h) for h in claimed)
+    orphan_cards = length(
+        unique(filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards]))
+    )
     (; conv=no_conv + no_conv_no_file, def=no_def, orphan_calc, zero_hubs, orphan_cards)
 end
 
@@ -1555,8 +1569,10 @@ function render_audit()
         "primary `src` claim isn't there.",
     )
     P("")
-    claim_set = Set(claimed)
-    orphan_cards = sort(unique(filter(h -> !(h in claim_set), [c.hub for c in cards])))
+    norm_claims = Set(_normalize_hub(h) for h in claimed)
+    orphan_cards = sort(
+        unique(filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards]))
+    )
     if isempty(orphan_cards)
         P("!!! tip \"All INVENTORY card hubs have a matching `@register` claim.\"")
     else

@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`EnergyLocal`** observable.  Empty cells = this model doesn't yet have a `EnergyLocal` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Bond-resolved energy density vector, length `N_bulk − 1` for a bond Hamiltonian `Σ_b h_b`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

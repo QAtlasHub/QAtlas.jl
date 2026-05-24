@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`SpecificHeat`** observable.  Empty cells = this model doesn't yet have a `SpecificHeat` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Specific heat per site, `c_v(β) = β² (⟨H²⟩ − ⟨H⟩²) / N`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 10

@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`CorrelationLength`** observable.  Empty cells = this model doesn't yet have a `CorrelationLength` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Two-point correlation length `ξ` controlling the exponential decay of connected equal-time correlators in a gapped phase,
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

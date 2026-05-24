@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`CentralCharge`** observable.  Empty cells = this model doesn't yet have a `CentralCharge` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Central charge `c` of the emergent CFT.  For 1D critical systems extracted from the Calabrese–Cardy entanglement formula; universality pages return literature values.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 15

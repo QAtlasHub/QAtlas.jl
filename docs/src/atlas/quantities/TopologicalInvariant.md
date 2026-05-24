@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`TopologicalInvariant`** observable.  Empty cells = this model doesn't yet have a `TopologicalInvariant` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Topological `Z_2` invariant of a 1D BdG superconductor (Kitaev 2001). Defined as the Pfaffian sign at the time-reversal-invariant momenta `k = 0` and `k = π`,
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

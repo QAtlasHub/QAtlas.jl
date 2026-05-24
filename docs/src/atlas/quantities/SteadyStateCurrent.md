@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`SteadyStateCurrent`** observable.  Empty cells = this model doesn't yet have a `SteadyStateCurrent` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Steady-state mass / particle current `j` in a 1D non-equilibrium lattice gas (e.g. ASEP / TASEP, Derrida-Lebowitz 1998).  For TASEP at hopping rate `p` and density `ρ`,
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

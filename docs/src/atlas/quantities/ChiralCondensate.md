@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ChiralCondensate`** observable.  Empty cells = this model doesn't yet have a `ChiralCondensate` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Vacuum expectation value `⟨ψ̄ψ⟩` of a fermion bilinear, signalling spontaneous (anomalous) chiral-symmetry breaking.  The massless Schwinger model is the canonical 1+1-D example: even though the classical Lagrangian is chirally symmetric, the anomaly forces a non-zero condensate
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MagnetizationYLocal`** observable.  Empty cells = this model doesn't yet have a `MagnetizationYLocal` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Site-resolved `⟨σʸ_i⟩` vector of length `N_bulk`.  Identically zero for any real Hermitian Hamiltonian (parity / time-reversal); a model that returns it explicitly does so as an exact baseline against random-sample estimators that fluctuate around zero.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

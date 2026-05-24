@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`Energy`** observable.  Empty cells = this model doesn't yet have a `Energy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Ground-state / thermal energy expectation.  The type parameter `G` makes the granularity (total vs per-site) a dispatch axis instead of a hidden docstring contract.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 24

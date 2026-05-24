@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`FractalDimension`** observable.  Empty cells = this model doesn't yet have a `FractalDimension` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Hausdorff dimension `d_H` of the random geometric set associated with a model — e.g. the SLE_κ curve's `d_H(κ) = min(2, 1 + κ/8)` (Beffara 2008).  Real-valued, dimensionless, capped at the ambient space dimension.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

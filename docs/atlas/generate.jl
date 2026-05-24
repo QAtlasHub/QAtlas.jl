@@ -170,6 +170,51 @@ const LEGEND = string(
 )
 
 # HOISTED: TIER-1 EXT HELPERS
+
+# Quantity definition extraction: scan src/**/*.jl for docstrings preceding
+# `struct <Name>[{params}] <: AbstractQuantity`, build a Dict{base_name => first paragraph}.
+const _QUANTITY_DEFS = let
+    defs = Dict{String,String}()
+    for (root, _, fs) in walkdir(joinpath(ROOT, "src"))
+        for f in fs
+            endswith(f, ".jl") || continue
+            txt = read(joinpath(root, f), String)
+            for m in eachmatch(
+                r"\"\"\"(.+?)\"\"\"\s*\n\s*struct\s+([A-Z][A-Za-z0-9_]*)(?:\{[^}]*\})?\s*<:\s*AbstractQuantity"s,
+                txt,
+            )
+                docblock = strip(m.captures[1])
+                name = m.captures[2]
+                haskey(defs, name) && continue
+                lines = split(docblock, "\n")
+                body_start = 1
+                for (i, ln) in enumerate(lines)
+                    if i > 1 && isempty(strip(ln))
+                        body_start = i + 1
+                        break
+                    end
+                end
+                if body_start > length(lines)
+                    defs[name] = ""
+                    continue
+                end
+                para = String[]
+                for ln in lines[body_start:end]
+                    isempty(strip(ln)) && !isempty(para) && break
+                    isempty(strip(ln)) && continue
+                    push!(para, strip(ln))
+                end
+                defs[name] = join(para, " ")
+            end
+        end
+    end
+    defs
+end
+
+function _quantity_base_name(q::AbstractString)
+    return replace(q, r"\{.*\}" => "")
+end
+
 # ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
 
 # CONVENTION block extraction: parse the standard header comment
@@ -474,6 +519,27 @@ function render_quantity_index(quant_name::AbstractString)
         "to other models.",
     )
     P("")
+    base_name = _quantity_base_name(quant_name)
+    qdef = get(_QUANTITY_DEFS, base_name, "")
+    if !isempty(qdef)
+        P("## Definition")
+        P("")
+        P(_md_escape_dollar(qdef))
+        P("")
+        if base_name != quant_name
+            P(
+                "_(extracted from `src/core/quantities.jl` docstring for the base `",
+                base_name,
+                "`; this page covers the `",
+                quant_name,
+                "` variant.)_",
+            )
+            P("")
+        else
+            P("_(extracted from `src/core/quantities.jl` docstring.)_")
+            P("")
+        end
+    end
     P("## Coverage")
     P("")
     P("- **Models with this quantity registered**: ", length(mdls))

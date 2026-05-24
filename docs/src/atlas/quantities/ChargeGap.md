@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ChargeGap`** observable.  Empty cells = this model doesn't yet have a `ChargeGap` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Convenience alias for the rate-function flavour `λ(t) = -log L(t)/N`.  See [`LoschmidtEcho`](@ref). """ const LoschmidtRateFunction = LoschmidtEcho{:rate}
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

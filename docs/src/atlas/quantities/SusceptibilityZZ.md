@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`SusceptibilityZZ`** observable.  Empty cells = this model doesn't yet have a `SusceptibilityZZ` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Uniform longitudinal susceptibility, `χ_zz(β) = β · (⟨M_z²⟩ − ⟨M_z⟩²) / N`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 6

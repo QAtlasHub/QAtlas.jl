@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ConformalWeights`** observable.  Empty cells = this model doesn't yet have a `ConformalWeights` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro [`MinimalModel`](@ref) this is the Kac-table entry `h_{r,s}`; for [`WZWSU2`](@ref) it is the SU(2)-spin label `h_j = j(j+1)/(k+2)`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 6

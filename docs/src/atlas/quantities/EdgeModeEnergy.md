@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`EdgeModeEnergy`** observable.  Empty cells = this model doesn't yet have a `EdgeModeEnergy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Energy of the lowest-lying boundary mode on an open chain.  In a topological 1D superconductor (Kitaev 2001) the OBC chain hosts two Majorana zero modes at the chain ends; their hybridization energy decays exponentially with chain length,
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

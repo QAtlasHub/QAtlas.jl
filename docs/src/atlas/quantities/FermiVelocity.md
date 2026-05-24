@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`FermiVelocity`** observable.  Empty cells = this model doesn't yet have a `FermiVelocity` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Fermi velocity `v_F = ∂ε/∂k |_{k_F}`.  Meaningful for non-interacting / mean-field fermionic band structures (tight-binding lattices, Bogoliubov-de Gennes diagonalisations).  In QAtlas this is the type returned by models like [`Honeycomb`](@ref) (at the Dirac cones), the other tight-binding lattices, and the TFIM Majorana mode at the critical field.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

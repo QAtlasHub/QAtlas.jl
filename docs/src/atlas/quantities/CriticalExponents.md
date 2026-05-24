@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`CriticalExponents`** observable.  Empty cells = this model doesn't yet have a `CriticalExponents` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Parametric dispatch tag for universality classes. `C` is a `Symbol` identifying the class (`:Ising`, `:XY`, `:Heisenberg`, `:Potts3`, `:Potts4`, `:Percolation`, `:KPZ`, etc.).
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

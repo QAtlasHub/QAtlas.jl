@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`LoschmidtEcho`** observable.  Empty cells = this model doesn't yet have a `LoschmidtEcho` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Loschmidt-echo family for sudden-quench dynamics.  After preparing `|ψ_0⟩` as the ground state of an "initial" model `H_0` and quenching to the "final" model `H_f` (passed as the first positional argument to `fetch`), the Loschmidt amplitude is
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

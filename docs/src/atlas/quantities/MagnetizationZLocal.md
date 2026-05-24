@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MagnetizationZLocal`** observable.  Empty cells = this model doesn't yet have a `MagnetizationZLocal` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Site-resolved `⟨σᶻ_i⟩` vector of length `N_bulk`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

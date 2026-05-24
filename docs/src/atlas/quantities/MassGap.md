@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cells = this model doesn't yet have a `MassGap` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Energy gap between the ground state and the first excited state.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 24

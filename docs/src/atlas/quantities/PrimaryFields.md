@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`PrimaryFields`** observable.  Empty cells = this model doesn't yet have a `PrimaryFields` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Full list of primary fields of a 2D rational CFT.  For [`MinimalModel`](@ref) the result is a `Vector{NamedTuple{(:r, :s, :h)}}` of length `(p - 1)(p_prime - 1) / 2`, with one entry per Kac-symmetry orbit.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

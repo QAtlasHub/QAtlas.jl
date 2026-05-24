@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MagnetizationXLocal`** observable.  Empty cells = this model doesn't yet have a `MagnetizationXLocal` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Site-resolved `⟨σˣ_i⟩` quantity.  The mode parameter `M::Symbol` is a phantom type that splits the dispatch into:
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

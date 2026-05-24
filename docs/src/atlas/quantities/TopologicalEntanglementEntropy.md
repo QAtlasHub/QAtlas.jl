@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`TopologicalEntanglementEntropy`** observable.  Empty cells = this model doesn't yet have a `TopologicalEntanglementEntropy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Constant subleading correction `γ` in the area-law bipartite entanglement entropy of a 2D topologically ordered ground state on a simply-connected disk region:
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 3

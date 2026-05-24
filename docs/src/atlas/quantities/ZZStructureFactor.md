@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ZZStructureFactor`** observable.  Empty cells = this model doesn't yet have a `ZZStructureFactor` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Fourier-space structure factor `S_zz(q, ω) = ∫ dt e^{iωt} (1/N) Σ_{ij} e^{iq·(i-j)} ⟨σᶻ_i(t)σᶻ_j(0)⟩` (or its static limit, depending on the model's fetch signature).
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 3

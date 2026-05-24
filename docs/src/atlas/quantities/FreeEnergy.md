@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`FreeEnergy`** observable.  Empty cells = this model doesn't yet have a `FreeEnergy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Trait declaring which granularity the given `model` returns natively for [`Energy`](@ref) at boundary condition `bc`.  Used by the `Energy()` (`:natural`) router and by the generic conversion fallbacks.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 11

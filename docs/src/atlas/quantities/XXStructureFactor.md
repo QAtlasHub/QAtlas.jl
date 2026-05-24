@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`XXStructureFactor`** observable.  Empty cells = this model doesn't yet have a `XXStructureFactor` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Fourier-space equivalent of [`XXCorrelation`](@ref).
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

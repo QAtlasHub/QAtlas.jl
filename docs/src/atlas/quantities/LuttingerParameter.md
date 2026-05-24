@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`LuttingerParameter`** observable.  Empty cells = this model doesn't yet have a `LuttingerParameter` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Luttinger liquid parameter `K`.  Meaningful for critical 1D models with U(1) symmetry (e.g. XXZ in the critical regime `|Δ| < 1`).
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

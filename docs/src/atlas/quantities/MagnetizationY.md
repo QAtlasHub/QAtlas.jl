@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MagnetizationY`** observable.  Empty cells = this model doesn't yet have a `MagnetizationY` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Bulk-averaged `⟨σʸ⟩`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

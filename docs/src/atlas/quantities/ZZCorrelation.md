@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ZZCorrelation`** observable.  Empty cells = this model doesn't yet have a `ZZCorrelation` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Real-space 2-point correlator `⟨σᶻ_i σᶻ_j⟩`.  The mode `M::Symbol` is a phantom type parameter so dispatch can specialise on it.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 3

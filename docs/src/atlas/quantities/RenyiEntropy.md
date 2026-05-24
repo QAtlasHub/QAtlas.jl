@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`RenyiEntropy`** observable.  Empty cells = this model doesn't yet have a `RenyiEntropy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Rényi entropy of order `α`, `S_α = (1 − α)⁻¹ log Tr ρ_A^α`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`CriticalTemperature`** observable.  Empty cells = this model doesn't yet have a `CriticalTemperature` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Return the 2^Ly × 2^Ly symmetric transfer matrix for a row of `Ly` Ising spins with PBC along the row direction.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 6

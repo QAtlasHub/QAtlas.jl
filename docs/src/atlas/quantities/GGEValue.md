@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`GGEValue`** observable.  Empty cells = this model doesn't yet have a `GGEValue` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Wrapper quantity carrying an underlying observable `inner::Q` whose *generalised Gibbs ensemble* (GGE) stationary value is to be computed — i.e. the `t → ∞` long-time average that an integrable (free-fermion) quench reaches.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

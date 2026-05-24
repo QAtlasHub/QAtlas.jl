@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`YYCorrelation`** observable.  Empty cells = this model doesn't yet have a `YYCorrelation` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Real-space 2-point `⟨σʸ_i σʸ_j⟩` correlator.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

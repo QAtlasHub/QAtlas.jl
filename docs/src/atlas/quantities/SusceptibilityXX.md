@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`SusceptibilityXX`** observable.  Empty cells = this model doesn't yet have a `SusceptibilityXX` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Static transverse susceptibility, `χ_xx(β) = β · (⟨M_x²⟩ − ⟨M_x⟩²) / N`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

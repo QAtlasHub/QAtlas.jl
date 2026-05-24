@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`LuttingerVelocity`** observable.  Empty cells = this model doesn't yet have a `LuttingerVelocity` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Luttinger-liquid / bosonisation velocity `u` (a.k.a. `v_{LL}`) of the low-energy linear-dispersion mode in a 1D critical interacting system. Used by models like [`XXZ1D`](@ref) in the Luttinger regime `|Δ| < 1`, the Heisenberg chain at the SU(2) point, and any other bosonised 1D critical theory.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ThermalEntropy`** observable.  Empty cells = this model doesn't yet have a `ThermalEntropy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Thermal / thermodynamic entropy per site, `s(β) = −∂f/∂T` where `f` is the free energy per site.  Real-valued, non-negative, monotone in `T`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 10

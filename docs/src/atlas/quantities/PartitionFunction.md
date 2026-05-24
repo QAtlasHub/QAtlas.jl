@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`PartitionFunction`** observable.  Empty cells = this model doesn't yet have a `PartitionFunction` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Classical 2D Ising model on a square lattice with periodic boundary conditions (PBC) in both directions.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

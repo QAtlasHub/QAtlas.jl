@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`SpinGap`** observable.  Empty cells = this model doesn't yet have a `SpinGap` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Spin gap of an electron system,
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

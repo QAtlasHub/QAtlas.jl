@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`FidelitySusceptibility`** observable.  Empty cells = this model doesn't yet have a `FidelitySusceptibility` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Fidelity susceptibility `χ_F(λ) = −∂²⟨ψ(λ)|ψ(λ + δλ)⟩/∂δλ²`.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

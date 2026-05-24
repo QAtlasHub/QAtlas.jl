@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MagnetizationX`** observable.  Empty cells = this model doesn't yet have a `MagnetizationX` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Bulk-averaged `⟨σˣ⟩` in Pauli convention (= 2 ⟨Sˣ⟩ in spin-1/2 units). For a spin-1/2 chain `H = -J ΣSᶻSᶻ - h ΣSˣ` this is the transverse magnetization; the axis-explicit name avoids the "transverse" / "longitudinal" ambiguity that depends on the model's Hamiltonian choice.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

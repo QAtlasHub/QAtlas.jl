@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`AnyonStatistics`** observable.  Empty cells = this model doesn't yet have a `AnyonStatistics` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Topological data of the anyon content of a 2D topologically ordered phase.  The dispatched `fetch` method takes a `type::Symbol` kwarg selecting an anyon (or a mutual-braiding row) and returns a `NamedTuple` whose shape depends on the requested row — typically `(label, statistics, self_phase, quantum_dim, fusion)` for individual anyons, and `(label, mutual_phase, anyons)` for two-anyon braids.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

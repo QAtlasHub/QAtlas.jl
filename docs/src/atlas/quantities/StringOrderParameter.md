@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`StringOrderParameter`** observable.  Empty cells = this model doesn't yet have a `StringOrderParameter` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Kennedy-Tasaki non-local (string) order parameter
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 1

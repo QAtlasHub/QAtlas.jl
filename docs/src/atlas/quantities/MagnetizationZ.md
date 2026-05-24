@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MagnetizationZ`** observable.  Empty cells = this model doesn't yet have a `MagnetizationZ` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Bulk-averaged `⟨σᶻ⟩`.  For Z₂-symmetric phases on an infinite system this is the order parameter at low temperature; finite-system fetch methods may return the absolute value / the ordered-phase limit as documented.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 4

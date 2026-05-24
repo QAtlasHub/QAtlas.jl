@@ -5,6 +5,12 @@
 
 All `(Model, BC)` hubs `src` claims for the **`GroundStateDegeneracy`** observable.  Empty cells = this model doesn't yet have a `GroundStateDegeneracy` registered at that BC — i.e. where this quantity could be added to other models.
 
+## Definition
+
+Dimension of the ground-state subspace as an `Int`.  In topologically ordered phases this is a robust, lattice-independent invariant determined by the ambient surface (e.g. `4^g` on a closed orientable genus-`g` surface for the toric code) and is set by the kwarg `genus` on the `fetch` call.  Trivially `1` for any gapped, symmetry-unbroken phase.
+
+_(extracted from `src/core/quantities.jl` docstring.)_
+
 ## Coverage
 
 - **Models with this quantity registered**: 2

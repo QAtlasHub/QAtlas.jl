@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`XXStructureFactor`** observable. 
 
 ## Definition
 
-Fourier-space equivalent of [`XXCorrelation`](@ref).
+Fourier-space equivalent of ``XXCorrelation``.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

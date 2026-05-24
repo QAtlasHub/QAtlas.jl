@@ -28,9 +28,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | Model | `OBC` | `Infinite` |
 |---|---|---|
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |
-| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟠 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
+| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | 🟢 [hub](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) |
-| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
+| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
 | [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) | — |
 

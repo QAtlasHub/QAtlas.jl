@@ -187,7 +187,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `MagnetizationX` (6)
 
-- 🟠 [`Heisenberg1D/MagnetizationX/OBC`](../hubs/Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`Heisenberg1D/MagnetizationX/OBC`](../hubs/Heisenberg1D_MagnetizationX_OBC.md) — coherent
 - 🟠 [`S1Heisenberg1D/MagnetizationX/OBC`](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/MagnetizationX/Infinite`](../hubs/TFIM_MagnetizationX_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationX/OBC`](../hubs/TFIM_MagnetizationX_OBC.md) — corroborated-at-p
@@ -204,7 +204,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `MagnetizationY` (4)
 
-- 🟠 [`Heisenberg1D/MagnetizationY/OBC`](../hubs/Heisenberg1D_MagnetizationY_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`Heisenberg1D/MagnetizationY/OBC`](../hubs/Heisenberg1D_MagnetizationY_OBC.md) — coherent
 - 🟠 [`S1Heisenberg1D/MagnetizationY/OBC`](../hubs/S1Heisenberg1D_MagnetizationY_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/MagnetizationY/OBC`](../hubs/TFIM_MagnetizationY_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/MagnetizationY/OBC`](../hubs/XXZ1D_MagnetizationY_OBC.md) — uncorroborated-but-feasible
@@ -216,7 +216,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `MagnetizationZ` (4)
 
-- 🟠 [`Heisenberg1D/MagnetizationZ/OBC`](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`Heisenberg1D/MagnetizationZ/OBC`](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) — coherent
 - 🟠 [`S1Heisenberg1D/MagnetizationZ/OBC`](../hubs/S1Heisenberg1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](../hubs/TFIM_MagnetizationZ_Infinite.md) — corroborated-at-p
 - 🟠 [`XXZ1D/MagnetizationZ/OBC`](../hubs/XXZ1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
@@ -326,8 +326,8 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `SusceptibilityXX` (6)
 
-- 🟠 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/SusceptibilityXX/OBC`](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/SusceptibilityXX/OBC`](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](../hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p
@@ -335,17 +335,17 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `SusceptibilityYY` (4)
 
-- 🟠 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/SusceptibilityYY/OBC`](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/SusceptibilityYY/OBC`](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityYY/OBC`](../hubs/TFIM_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SusceptibilityYY/OBC`](../hubs/XXZ1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
 
 ## `SusceptibilityZZ` (7)
 
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
-- 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
-- 🟠 [`S1Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityZZ/Infinite`](../hubs/TFIM_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/OBC`](../hubs/TFIM_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
@@ -389,7 +389,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `XXCorrelation` (3)
 
-- 🟠 [`S1Heisenberg1D/XXCorrelation/OBC`](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/XXCorrelation/OBC`](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/Infinite`](../hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/OBC`](../hubs/TFIM_XXCorrelation_OBC.md) — corroborated-at-p
 
@@ -400,7 +400,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 ## `YYCorrelation` (2)
 
-- 🟠 [`S1Heisenberg1D/YYCorrelation/OBC`](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/YYCorrelation/OBC`](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/YYCorrelation/OBC`](../hubs/TFIM_YYCorrelation_OBC.md) — corroborated-at-p
 
 ## `YYStructureFactor` (2)
@@ -411,7 +411,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 ## `ZZCorrelation` (3)
 
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
-- 🟠 [`S1Heisenberg1D/ZZCorrelation/OBC`](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/ZZCorrelation/OBC`](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 
 ## `ZZStructureFactor` (4)

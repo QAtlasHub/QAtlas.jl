@@ -17,10 +17,10 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 7 |
+| 🟢 corroborated-at-p | 13 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 1 |
-| 🟠 uncorroborated-but-feasible | 13 |
+| 🟠 uncorroborated-but-feasible | 7 |
 | **total claimed hubs** | **21** |
 
 **Methods** (from `@register`, derived): `dense_ed`, `literature_value`
@@ -43,14 +43,14 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 | [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MassGap_OBC.md) | ⚪ [hub](../hubs/S1Heisenberg1D_MassGap_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) | — |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SpecificHeat_OBC.md) | — |
-| [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟠 [hub](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) | — |
-| [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟠 [hub](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) | — |
-| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟠 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
+| [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) | — |
+| [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) | — |
+| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | — |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) | — |
-| [`XXCorrelation`](../quantities/XXCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) | — |
-| [`YYCorrelation`](../quantities/YYCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | — |
-| [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | — |
+| [`XXCorrelation`](../quantities/XXCorrelation.md) | 🟢 [hub](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) | — |
+| [`YYCorrelation`](../quantities/YYCorrelation.md) | 🟢 [hub](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | — |
+| [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | — |
 
 ## Derivation notes
 

@@ -16,20 +16,42 @@ using QAtlas, Test
     for J in (0.5, 1.0, 2.0)
         for N in (4, 6, 8)
             for β in (1.0, 10.0)
-                for q in (MagnetizationX(), MagnetizationY(), MagnetizationZ())
-                    verify(
-                        Heisenberg1D(),
-                        q,
-                        OBC(N);
-                        route=:limiting_case,
-                        independent=0.0,
-                        agree_within=1e-10,
-                        refs=[
-                            "SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β",
-                        ],
-                        fetch_kw=(; J=J, beta=β),
-                    )
-                end
+                verify(
+                    Heisenberg1D(),
+                    MagnetizationX(),
+                    OBC(N);
+                    route=:limiting_case,
+                    independent=0.0,
+                    agree_within=1e-10,
+                    refs=[
+                        "SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β",
+                    ],
+                    fetch_kw=(; J=J, beta=β),
+                )
+                verify(
+                    Heisenberg1D(),
+                    MagnetizationY(),
+                    OBC(N);
+                    route=:limiting_case,
+                    independent=0.0,
+                    agree_within=1e-10,
+                    refs=[
+                        "SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β",
+                    ],
+                    fetch_kw=(; J=J, beta=β),
+                )
+                verify(
+                    Heisenberg1D(),
+                    MagnetizationZ(),
+                    OBC(N);
+                    route=:limiting_case,
+                    independent=0.0,
+                    agree_within=1e-10,
+                    refs=[
+                        "SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β",
+                    ],
+                    fetch_kw=(; J=J, beta=β),
+                )
             end
         end
     end

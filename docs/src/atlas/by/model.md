@@ -77,19 +77,19 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
-- 🟠 [`Heisenberg1D/MagnetizationX/OBC`](../hubs/Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`Heisenberg1D/MagnetizationX/OBC`](../hubs/Heisenberg1D_MagnetizationX_OBC.md) — coherent
 - 🟠 [`Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/MagnetizationY/OBC`](../hubs/Heisenberg1D_MagnetizationY_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`Heisenberg1D/MagnetizationY/OBC`](../hubs/Heisenberg1D_MagnetizationY_OBC.md) — coherent
 - 🟠 [`Heisenberg1D/MagnetizationYLocal/OBC`](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/MagnetizationZ/OBC`](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
+- 🔵 [`Heisenberg1D/MagnetizationZ/OBC`](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) — coherent
 - 🟠 [`Heisenberg1D/MagnetizationZLocal/OBC`](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/MassGap/Infinite`](../hubs/Heisenberg1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/MassGap/OBC`](../hubs/Heisenberg1D_MassGap_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/RenyiEntropy/OBC`](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/SpecificHeat/OBC`](../hubs/Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
-- 🟠 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
+- 🟢 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — corroborated-at-p
+- 🟢 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
@@ -239,14 +239,14 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`S1Heisenberg1D/MassGap/OBC`](../hubs/S1Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`S1Heisenberg1D/RenyiEntropy/OBC`](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/SpecificHeat/OBC`](../hubs/S1Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
-- 🟠 [`S1Heisenberg1D/SusceptibilityXX/OBC`](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/SusceptibilityYY/OBC`](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/SusceptibilityXX/OBC`](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/SusceptibilityYY/OBC`](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/ThermalEntropy/OBC`](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
-- 🟠 [`S1Heisenberg1D/XXCorrelation/OBC`](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/YYCorrelation/OBC`](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) — uncorroborated-but-feasible
-- 🟠 [`S1Heisenberg1D/ZZCorrelation/OBC`](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`S1Heisenberg1D/XXCorrelation/OBC`](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/YYCorrelation/OBC`](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) — corroborated-at-p
+- 🟢 [`S1Heisenberg1D/ZZCorrelation/OBC`](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) — corroborated-at-p
 
 ## `S1XXZ1D` (2)
 

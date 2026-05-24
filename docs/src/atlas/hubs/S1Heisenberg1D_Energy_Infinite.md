@@ -28,7 +28,7 @@ verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :litera
 ```
 
 ```julia
-verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(3, N, heis1_bond(1.0))))[1] / N for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.3, refs = ["Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow)"])
+verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(3, N, heis1_bond(1.0))))[1] / N for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8))], agree_within = 0.3, refs = ["Finite-N spin-1 OBC ED is a coarse approximant of the DMRG e (gapped, slow)"])
 ```
 
 ```julia

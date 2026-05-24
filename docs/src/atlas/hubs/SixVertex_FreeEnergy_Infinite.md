@@ -38,7 +38,7 @@ verify(SixVertex(; a = 2.0, b = 4.0, c = 1.0), FreeEnergy(), Infinite(); route =
 ```
 
 ```julia
-verify(SixVertex(; a = a_kdp, b = 1.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_ferroelectric, independent = -(log(a_kdp)), agree_within = 1.0e-14, refs = ["Lieb 1967c: KDP boundary Δ=1 approached from FE side; f = -log max(a,b)"])
+verify(SixVertex(; a = nextfloat(2.0), b = 1.0, c = 1.0), FreeEnergy(), Infinite(); route = :lieb_ferroelectric, independent = -(log(nextfloat(2.0))), agree_within = 1.0e-14, refs = ["Lieb 1967c: KDP boundary Δ=1 approached from FE side; f = -log max(a,b)"])
 ```
 
 ```julia

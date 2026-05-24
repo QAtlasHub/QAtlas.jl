@@ -18,8 +18,8 @@ All `(Quantity, BC)` hubs `src` claims for **`KitaevHoneycomb`**.  Cells link to
 |---|---|
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 1 |
-| 🔵 coherent | 4 |
-| ⚪ cited-only | 5 |
+| 🔵 coherent | 5 |
+| ⚪ cited-only | 4 |
 | 🟠 uncorroborated-but-feasible | 0 |
 | **total claimed hubs** | **10** |
 
@@ -37,7 +37,7 @@ All `(Quantity, BC)` hubs `src` claims for **`KitaevHoneycomb`**.  Cells link to
 | Quantity | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
 | [`Energy`](../quantities/Energy.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_OBC.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_PBC.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_Infinite.md) |
-| [`FreeEnergy`](../quantities/FreeEnergy.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | — | — | 🟢 [hub](../hubs/KitaevHoneycomb_MassGap_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🔵 [hub](../hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) |

@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970) | `test/models/quantum/misc/test_long_range_ising1d.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970) | `test/models/quantum/misc/test_long_range_ising1d.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970) | `test/models/quantum/misc/test_long_range_ising1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(LongRangeIsing1D(; J = J, h = h), MassGap(), Infinite(); route = :delegation_invariant, independent = 2 * abs(h - J), agree_within = 1.0e-9, refs = ["α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970)"])
+verify(LongRangeIsing1D(; 1.0 = 1.0, 2.0 = 2.0), MassGap(), Infinite(); route = :delegation_invariant, independent = 2 * abs(2.0 - 1.0), agree_within = 1.0e-9, refs = ["α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970)"])
+```
+
+```julia
+verify(LongRangeIsing1D(; 2.0 = 2.0, 0.5 = 0.5), MassGap(), Infinite(); route = :delegation_invariant, independent = 2 * abs(0.5 - 2.0), agree_within = 1.0e-9, refs = ["α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970)"])
+```
+
+```julia
+verify(LongRangeIsing1D(; 1.5 = 1.5, 0.7 = 0.7), MassGap(), Infinite(); route = :delegation_invariant, independent = 2 * abs(0.7 - 1.5), agree_within = 1.0e-9, refs = ["α=∞ NN limit delegates to TFIM: Δ = 2|h - J| (Pfeuty 1970)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -24,7 +24,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = ed_eps, at = ["N=$(N)" for N = Ns], agree_within = 1.0e-9, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
+verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = Float64[], at = ["N=$(N)" for N = (4, 6)], agree_within = 1.0e-9, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
 ```
 
 ```julia
@@ -32,7 +32,7 @@ verify(AKLT1D(), Energy(:per_site), Infinite(); route = :retype_formula, indepen
 ```
 
 ```julia
-verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [((aklt_manifold(N))[1])[1] / (N - 1) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-9, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
+verify(AKLT1D(), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [((aklt_manifold(N))[1])[1] / (N - 1) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8))], agree_within = 1.0e-9, refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
 ```
 
 

@@ -15,20 +15,105 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_mag_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Heisenberg1D(), MagnetizationY(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; J = J, beta = β))
+verify(Heisenberg1D(), MagnetizationY(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 0.5 = 0.5, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 0.5 = 0.5, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 0.5 = 0.5, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 0.5 = 0.5, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 0.5 = 0.5, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 0.5 = 0.5, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 1.0 = 1.0, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 1.0 = 1.0, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 1.0 = 1.0, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 1.0 = 1.0, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 1.0 = 1.0, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 1.0 = 1.0, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 2.0 = 2.0, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 2.0 = 2.0, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 2.0 = 2.0, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 2.0 = 2.0, beta = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 2.0 = 2.0, beta = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MagnetizationY(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-10, refs = ["SU(2) symmetry of the Heisenberg Hamiltonian: <S^α>_β = 0 for α ∈ {x,y,z} in the unbroken thermal ensemble, exact for any J, N, β"], fetch_kw = (; 2.0 = 2.0, beta = 10.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 18 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

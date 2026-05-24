@@ -23,15 +23,15 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), ZZCorrelation(; mode = :dynamic), OBC(N); route = :limiting_case, fetch_kw = (; i = i, j = j, t = 0.0), independent = zz0, agree_within = 1.0e-8, refs = ["t=0 limit: ⟨σz_i(0) σz_j⟩ = static GS correlator (dense ED)"])
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), ZZCorrelation(; mode = :dynamic), OBC(6); route = :limiting_case, fetch_kw = (; 2 = 2, 4 = 4, t = 0.0), independent = real(((eigen(_build_tfim_dense(6, 1.0, 1.0))).vectors[:, 1])' * (_op_site(_SZ, 2, 6) * (_op_site(_SZ, 4, 6) * (eigen(_build_tfim_dense(6, 1.0, 1.0))).vectors[:, 1]))), agree_within = 1.0e-8, refs = ["t=0 limit: ⟨σz_i(0) σz_j⟩ = static GS correlator (dense ED)"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), ZZCorrelation(; mode = :static), OBC(N); route = :ed_finite_size, fetch_kw = (; i = i, j = j, beta = Inf), independent = zz_ed, agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense GS"])
+verify(TFIM(; 1.0 = 1.0, 0.7 = 0.7), ZZCorrelation(; mode = :static), OBC(6); route = :ed_finite_size, fetch_kw = (; 2 = 2, 4 = 4, beta = Inf), independent = real(((LinearAlgebra.eigen(_build_tfim_dense(6, 1.0, 0.7))).vectors[:, 1])' * (_op_site(_SZ, 2, 6) * (_op_site(_SZ, 4, 6) * (LinearAlgebra.eigen(_build_tfim_dense(6, 1.0, 0.7))).vectors[:, 1]))), agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense GS"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), ZZCorrelation(; mode = :static), OBC(N); route = :ed_finite_size, fetch_kw = (; i = i, j = j, beta = Inf), independent = zz_ed, agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state"])
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), ZZCorrelation(; mode = :static), OBC(6); route = :ed_finite_size, fetch_kw = (; 2 = 2, 5 = 5, beta = Inf), independent = real(((LinearAlgebra.eigen(_build_tfim_dense(6, 1.0, 1.0))).vectors[:, 1])' * (_op_site(_SZ, 2, 6) * (_op_site(_SZ, 5, 6) * (LinearAlgebra.eigen(_build_tfim_dense(6, 1.0, 1.0))).vectors[:, 1]))), agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σz_i σz_j⟩ via _build_tfim_dense ground state"])
 ```
 
 

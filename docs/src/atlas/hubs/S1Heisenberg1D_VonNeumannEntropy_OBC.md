@@ -16,20 +16,150 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_entropy_l1_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(N); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; J = J, ℓ = 1, beta = β))
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(S1Heisenberg1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(3), agree_within = 1.0e-10, refs = ["S1Heisenberg1D SU(2) symmetry: ρ₁ = I/3 ⇒ S_vN(ℓ=1) = log 3 for all J, N, β"], fetch_kw = (; 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 27 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

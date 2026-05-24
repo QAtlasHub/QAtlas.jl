@@ -18,9 +18,9 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 |---|---|
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 13 |
-| 🔵 coherent | 0 |
+| 🔵 coherent | 3 |
 | ⚪ cited-only | 1 |
-| 🟠 uncorroborated-but-feasible | 7 |
+| 🟠 uncorroborated-but-feasible | 4 |
 | **total claimed hubs** | **21** |
 
 **Methods** (from `@register`, derived): `dense_ed`, `literature_value`
@@ -35,10 +35,10 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_OBC.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) | — |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | — |
-| [`MagnetizationX`](../quantities/MagnetizationX.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) | — |
+| [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) | — |
 | [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) | — |
-| [`MagnetizationY`](../quantities/MagnetizationY.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationY_OBC.md) | — |
-| [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationZ_OBC.md) | — |
+| [`MagnetizationY`](../quantities/MagnetizationY.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationY_OBC.md) | — |
+| [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationZ_OBC.md) | — |
 | [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md) | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MassGap_OBC.md) | ⚪ [hub](../hubs/S1Heisenberg1D_MassGap_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) | — |

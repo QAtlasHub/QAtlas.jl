@@ -165,7 +165,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 3 hubs (quan
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`CriticalExponents`](../../atlas/hubs/IsingTriangular_CriticalExponents_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`CriticalTemperature`](../../atlas/hubs/IsingTriangular_CriticalTemperature_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
+| [`CriticalTemperature`](../../atlas/hubs/IsingTriangular_CriticalTemperature_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`ResidualEntropy`](../../atlas/hubs/IsingTriangular_ResidualEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 
 <!-- ATLAS:HUBS:END -->

@@ -16,20 +16,60 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.) | `test/models/quantum/TFIM/test_TFIM_fidelity_susc_J0_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), FidelitySusceptibility(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FidelitySusceptibility(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FidelitySusceptibility(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FidelitySusceptibility(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FidelitySusceptibility(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FidelitySusceptibility(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FidelitySusceptibility(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FidelitySusceptibility(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FidelitySusceptibility(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FidelitySusceptibility(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["χ_F via ∂_h (transverse field derivative): at J=0 the GS is the trivial paramagnet |+⟩^N independent of h, so ⟨ψ(h)|ψ(h+dh)⟩ = 1 ⇒ χ_F(∂_h) = 0 exactly. (∂_J derivative would be non-zero — convention here is ∂_h.)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

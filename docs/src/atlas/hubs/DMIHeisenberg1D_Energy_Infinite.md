@@ -18,6 +18,9 @@
 | `@sweep` | `delegation_invariant` | 🟡 asserted | DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Hulthén 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2) | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2) | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2) | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2) | `test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl` |
 
 ## Test calls
 
@@ -28,18 +31,30 @@ verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route
 ```
 
 ```julia
-verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(2, N, heis_bond(1.0))))[1] / N for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.1, refs = ["Hulthén 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"])
+verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(2, N, heis_bond(1.0))))[1] / N for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.1, refs = ["Hulthén 1938: e0 = J(1/4 - log 2), spin-1/2 Heisenberg OBC ED"])
 ```
 
 ```julia
-verify(DMIHeisenberg1D(; J = J, D = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = J * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"])
+verify(DMIHeisenberg1D(; 0.5 = 0.5, D = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = 0.5 * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"])
+```
+
+```julia
+verify(DMIHeisenberg1D(; 1.0 = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = 1.0 * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"])
+```
+
+```julia
+verify(DMIHeisenberg1D(; 2.0 = 2.0, D = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = 2.0 * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"])
+```
+
+```julia
+verify(DMIHeisenberg1D(; 3.7 = 3.7, D = 0.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = 3.7 * (1 / 4 - log(2)), agree_within = 1.0e-14, refs = ["Hulthén 1938: at D=0 DMIHeisenberg1D reduces to pure Heisenberg, e₀ = J(1/4 − ln 2)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

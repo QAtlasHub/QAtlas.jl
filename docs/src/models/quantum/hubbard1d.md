@@ -110,10 +110,10 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 5 hubs (q
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
-| `ExtendedHubbard1D` | [`ChargeGap`](../../atlas/hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
-| `Hubbard1D` | [`ChargeGap`](../../atlas/hubs/Hubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
-| `Hubbard1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
-| `Hubbard1D` | [`LuttingerParameter`](../../atlas/hubs/Hubbard1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
-| `Hubbard1D` | [`SpinGap`](../../atlas/hubs/Hubbard1D_SpinGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `ExtendedHubbard1D` | [`ChargeGap`](../../atlas/hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 3 |
+| `Hubbard1D` | [`ChargeGap`](../../atlas/hubs/Hubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 6 |
+| `Hubbard1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🔵 coherent | 5 |
+| `Hubbard1D` | [`LuttingerParameter`](../../atlas/hubs/Hubbard1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
+| `Hubbard1D` | [`SpinGap`](../../atlas/hubs/Hubbard1D_SpinGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 
 <!-- ATLAS:HUBS:END -->

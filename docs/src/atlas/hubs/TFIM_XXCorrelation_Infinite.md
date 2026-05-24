@@ -16,6 +16,25 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet) | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | ⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state | `test/models/quantum/TFIM/test_TFIM_xxcorrelation_inf_batch.jl` |
 
 ## Test calls
@@ -23,18 +42,94 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = HIGH_T_BETA, i = i, j = j))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 41 = 41))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = β, i = 40, j = 40))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 50 = 50))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 60 = 60))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 41 = 41))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 50 = 50))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 60 = 60))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 41 = 41))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 50 = 50))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.001, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^x_i σ^x_j⟩ = 0 for i ≠ j (uncorrelated paramagnet)"], fetch_kw = (; beta = 0.001, 40 = 40, 60 = 60))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 0.001, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 10.0, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 1.0e6, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 0.001, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 10.0, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 1.0e6, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 0.001, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 10.0, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 1.0e6, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 0.001, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 10.0, i = 40, j = 40))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXCorrelation(mode = :static), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-10, refs = ["⟨σ^x_i σ^x_i⟩ = ⟨I⟩ = 1 exactly (σ_x² = I), independent of state"], fetch_kw = (; beta = 1.0e6, i = 40, j = 40))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 21 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

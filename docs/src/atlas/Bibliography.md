@@ -13,7 +13,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - ⚪ [`KitaevHoneycomb/Energy/Infinite`](hubs/KitaevHoneycomb_Energy_Infinite.md)
 - ⚪ [`KitaevHoneycomb/Energy/OBC`](hubs/KitaevHoneycomb_Energy_OBC.md)
 - ⚪ [`KitaevHoneycomb/Energy/PBC`](hubs/KitaevHoneycomb_Energy_PBC.md)
-- ⚪ [`KitaevHoneycomb/FreeEnergy/Infinite`](hubs/KitaevHoneycomb_FreeEnergy_Infinite.md)
+- 🔵 [`KitaevHoneycomb/FreeEnergy/Infinite`](hubs/KitaevHoneycomb_FreeEnergy_Infinite.md)
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](hubs/KitaevHoneycomb_FreeEnergy_OBC.md)
 - 🟢 [`KitaevHoneycomb/MassGap/Infinite`](hubs/KitaevHoneycomb_MassGap_Infinite.md)
 - 🔵 [`KitaevHoneycomb/SpecificHeat/Infinite`](hubs/KitaevHoneycomb_SpecificHeat_Infinite.md)
@@ -52,16 +52,16 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](hubs/CurieWeissIsing_CriticalTemperature_Infinite.md)
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
-- 🔵 [`CurieWeissIsing/FreeEnergy/Infinite`](hubs/CurieWeissIsing_FreeEnergy_Infinite.md)
-- 🔵 [`CurieWeissIsing/SpecificHeat/Infinite`](hubs/CurieWeissIsing_SpecificHeat_Infinite.md)
+- 🟢 [`CurieWeissIsing/FreeEnergy/Infinite`](hubs/CurieWeissIsing_FreeEnergy_Infinite.md)
+- 🟢 [`CurieWeissIsing/SpecificHeat/Infinite`](hubs/CurieWeissIsing_SpecificHeat_Infinite.md)
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md)
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md)
-- 🔵 [`CurieWeissIsing/ThermalEntropy/Infinite`](hubs/CurieWeissIsing_ThermalEntropy_Infinite.md)
+- 🟢 [`CurieWeissIsing/ThermalEntropy/Infinite`](hubs/CurieWeissIsing_ThermalEntropy_Infinite.md)
 
 ## Lieb 1994 — 7 hubs
 
 - ⚪ [`KitaevHoneycomb/Energy/Infinite`](hubs/KitaevHoneycomb_Energy_Infinite.md)
-- ⚪ [`KitaevHoneycomb/FreeEnergy/Infinite`](hubs/KitaevHoneycomb_FreeEnergy_Infinite.md)
+- 🔵 [`KitaevHoneycomb/FreeEnergy/Infinite`](hubs/KitaevHoneycomb_FreeEnergy_Infinite.md)
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](hubs/KitaevHoneycomb_FreeEnergy_OBC.md)
 - 🔵 [`KitaevHoneycomb/SpecificHeat/Infinite`](hubs/KitaevHoneycomb_SpecificHeat_Infinite.md)
 - 🔵 [`KitaevHoneycomb/SpecificHeat/OBC`](hubs/KitaevHoneycomb_SpecificHeat_OBC.md)
@@ -117,7 +117,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## Lieb-Schultz-Mattis 1961 — 6 hubs
 
 - 🟢 [`LongRangeXY1D/MassGap/Infinite`](hubs/LongRangeXY1D_MassGap_Infinite.md)
-- 🔵 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
+- 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
 - 🟢 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md)
 - 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md)
 - 🟢 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
@@ -189,9 +189,9 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Mahan §1.3 — 3 hubs
 
-- 🟠 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
+- 🔵 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](hubs/XXZ1D_SpecificHeat_Infinite.md)
-- 🟠 [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md)
+- 🔵 [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md)
 
 ## Majumdar-Ghosh 1969 — 3 hubs
 
@@ -228,7 +228,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Barouch-McCoy-Dresden 1970 — 2 hubs
 
-- 🟠 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
+- 🔵 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
 
 ## Baxter 1972 — 2 hubs
@@ -248,12 +248,12 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Calabrese-Essler-Fagotti 2012 — 2 hubs
 
-- 🟠 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
+- 🔵 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
 
 ## Calabrese-Essler-Fagotti J. Stat. Mech. (2012) — 1 hub
 
-- 🟠 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
+- 🔵 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
 
 ## Cardy 1985 — 2 hubs
 
@@ -272,8 +272,8 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Coleman §2.4 — 2 hubs
 
-- 🟠 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
-- 🟠 [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md)
+- 🔵 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
+- 🔵 [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md)
 
 ## Damski PRB 87 165101 (2013) — 2 hubs
 
@@ -342,11 +342,11 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Rigol et al. PRL 98 (2007) — 1 hub
 
-- 🟠 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
+- 🔵 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
 
 ## Sachdev 2011 — 2 hubs
 
-- 🔵 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
+- 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
 - 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md)
 
 ## Schulz 1986 — 2 hubs
@@ -723,7 +723,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Takahashi 1999 §4 — 1 hub
 
-- 🟠 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
+- 🔵 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md)
 
 ## Talagrand 2006 — 1 hub
 

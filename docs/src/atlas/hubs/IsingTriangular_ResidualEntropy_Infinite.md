@@ -27,7 +27,7 @@ verify(IsingTriangular(; J = 1.0), ResidualEntropy(), Infinite(); route = :liter
 ```
 
 ```julia
-verify(IsingTriangular(; J = J), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = (2 / π) * S_w, agree_within = 1.0e-6, refs = ["Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066"])
+verify(IsingTriangular(; 1.0 = 1.0), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = (2 / π) * S_w, agree_within = 1.0e-6, refs = ["Wannier 1950: S = (2/π) ∫_0^{π/3} log(2cosθ) dθ ≈ 0.323066"])
 ```
 
 

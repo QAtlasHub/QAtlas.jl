@@ -14,6 +14,19 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared) | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
 | `@sweep` | `delegation_invariant` | 🟡 asserted | Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared) | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
 
 ## Test calls
@@ -21,14 +34,66 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = 1.0, h = h), YYStructureFactor(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(TFIM(; J = 1.0, h = h), YYStructureFactor(), OBC(N_proxy); beta = β, q = q), agree_within = 0.0, at = ["N_proxy=$(N_proxy)"], refs = ["Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared)"], fetch_kw = (; beta = β, q = q, N_proxy = N_proxy))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), YYStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; YYStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; J = 1.0, h = h), YYStructureFactor(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(TFIM(; J = 1.0, h = h), YYStructureFactor(), OBC(40); beta = β, q = q), agree_within = 0.0, at = ["N_proxy=$(40)"], refs = ["Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared)"], fetch_kw = (; beta = β, q = q, 40 = 40))
+```
+
+```julia
+verify(TFIM(; J = 1.0, h = h), YYStructureFactor(), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(TFIM(; J = 1.0, h = h), YYStructureFactor(), OBC(80); beta = β, q = q), agree_within = 0.0, at = ["N_proxy=$(80)"], refs = ["Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared)"], fetch_kw = (; beta = β, q = q, 80 = 80))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 14 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

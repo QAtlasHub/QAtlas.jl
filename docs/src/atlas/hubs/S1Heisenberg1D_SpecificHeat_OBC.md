@@ -15,6 +15,40 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 | `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): C = β²·Var(E) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
@@ -22,18 +56,154 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = HIGH_T_BETA))
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(3); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
 ```
 
 ```julia
-verify(S1Heisenberg1D(; J = J), SpecificHeat(), OBC(N); route = :ed_finite_size, independent = ed_C, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; beta = beta))
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(5); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(3); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(5); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(3); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(5); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["S1Heisenberg1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), SpecificHeat(), OBC(5); route = :ed_finite_size, independent = ed_C, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 36 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

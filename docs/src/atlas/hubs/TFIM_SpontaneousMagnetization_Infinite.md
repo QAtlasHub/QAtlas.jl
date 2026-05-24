@@ -16,6 +16,11 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical) | `test/models/quantum/TFIM/test_TFIM_pfeuty_batch.jl` |
 
 ## Test calls
@@ -23,18 +28,38 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = (1 - (h / J) ^ 2) ^ (1 / 8), agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase)"])
+verify(TFIM(; 1.0 = 1.0, 0.0 = 0.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = (1 - (0.0 / 1.0) ^ 2) ^ (1 / 8), agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase)"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical)"])
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = (1 - (0.5 / 1.0) ^ 2) ^ (1 / 8), agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase)"])
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = (1 - (1.0 / 2.0) ^ 2) ^ (1 / 8), agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.95 = 0.95), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = (1 - (0.95 / 1.0) ^ 2) ^ (1 / 8), agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = (1 - (h/J)^2)^{1/8} for h < J (ordered phase)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical)"])
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Pfeuty 1970: m_z = 0 for h ≥ J (disordered / critical)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 7 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

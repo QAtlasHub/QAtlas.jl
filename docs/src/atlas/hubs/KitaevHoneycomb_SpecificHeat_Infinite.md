@@ -17,24 +17,44 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase) | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum) | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase) | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum) | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase) | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum) | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase)"], fetch_kw = (; beta = LOW_T_BETA))
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase)"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum)"], fetch_kw = (; beta = HIGH_T_BETA))
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum)"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum)"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: c → 0 (gap in A-phase / power-law in B-phase)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb T → ∞: c → 0 as β² high-T tail (bounded matter spectrum)"], fetch_kw = (; beta = 0.001))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-infeasible (frontier)
+- cards: 6 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -18,6 +18,8 @@
 | `@su2` | `delegation_invariant` | 🟡 asserted | Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2) | `test/identities/test_identities_Heisenberg1D.jl` |
 | `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e0 = 1/4 − log 2 | `test/identities/test_identities_Heisenberg1D.jl` |
 | `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact | `test/models/quantum/Heisenberg/test_Heisenberg1D_hulthen_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact | `test/models/quantum/Heisenberg/test_Heisenberg1D_hulthen_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact | `test/models/quantum/Heisenberg/test_Heisenberg1D_hulthen_batch.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence | `test/models/quantum/XXZ/test_bethe_ansatz.jl` |
 
 ## Test calls
@@ -33,18 +35,26 @@ verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_c
 ```
 
 ```julia
-verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = J * (1 / 4 - log(2)), agree_within = 1.0e-14, fetch_kw = (; J = J), refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = 0.5 * (1 / 4 - log(2)), agree_within = 1.0e-14, fetch_kw = (; 0.5 = 0.5), refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
 ```
 
 ```julia
-verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence"])
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = 2.0 * (1 / 4 - log(2)), agree_within = 1.0e-14, fetch_kw = (; 2.0 = 2.0), refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
+```
+
+```julia
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :second_closed_form, independent = 3.0 * (1 / 4 - log(2)), agree_within = 1.0e-14, fetch_kw = (; 3.0 = 3.0), refs = ["Hulthén 1938: e₀ = J(1/4 − log 2) Bethe-ansatz exact"])
+```
+
+```julia
+verify(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(2, N, kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz))))[1] / (N - 1) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14)))" for verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14)) = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2), verified by OBC ED convergence"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 4 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

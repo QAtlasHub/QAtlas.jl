@@ -14,31 +14,166 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | ED black-box: C = β²·Var(E) from full spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → 0: c = 0 exactly | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail | `test/models/quantum/XXZ/test_xxz1d_obc_thermal_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(XXZ1D(; J = J, Δ = Δ), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = LOW_T_BETA))
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
 ```
 
 ```julia
-verify(XXZ1D(; J = J, Δ = Δ), SpecificHeat(), OBC(N); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = HIGH_T_BETA))
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(XXZ1D(; J = J, Δ = dz), SpecificHeat(), OBC(N); route = :ed_finite_size, independent = ed_C, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; beta = beta))
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SpecificHeat(), OBC(3); route = :ed_finite_size, independent = ed_C, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SpecificHeat(), OBC(4); route = :ed_finite_size, independent = ed_C, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: C = β²·Var(E) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(4); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(6); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC T → 0: c = 0 exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(8); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["XXZ1D OBC T → ∞: c → 0 as ~β² high-T tail"], fetch_kw = (; beta = 0.001))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 30 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

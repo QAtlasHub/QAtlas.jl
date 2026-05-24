@@ -16,20 +16,75 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@mean_field` | `second_closed_form` | 🟢 structural | Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Single spin in field h: χ = β sech²(βh) | `test/models/classical/test_curie_weiss_ising.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(CurieWeissIsing(; J = J, h = 0.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = β / (1 - β * J), agree_within = 1.0e-12, refs = ["Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c"])
+verify(CurieWeissIsing(; 1.0 = 1.0, h = 0.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.5), independent = 0.5 / (1 - 0.5 * 1.0), agree_within = 1.0e-12, refs = ["Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c"])
+```
+
+```julia
+verify(CurieWeissIsing(; 1.0 = 1.0, h = 0.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.9), independent = 0.9 / (1 - 0.9 * 1.0), agree_within = 1.0e-12, refs = ["Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c"])
+```
+
+```julia
+verify(CurieWeissIsing(; 2.0 = 2.0, h = 0.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.3), independent = 0.3 / (1 - 0.3 * 2.0), agree_within = 1.0e-12, refs = ["Curie-Weiss law (Landau-Lifshitz §149): χ = β/(1-βJ) above T_c"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 0.1 = 0.1), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.3), independent = 0.3 * sech(0.3 * 0.1) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 0.1 = 0.1), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = 1.0 * sech(1.0 * 0.1) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 0.1 = 0.1), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 3.0), independent = 3.0 * sech(3.0 * 0.1) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 0.5 = 0.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.3), independent = 0.3 * sech(0.3 * 0.5) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 0.5 = 0.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = 1.0 * sech(1.0 * 0.5) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 0.5 = 0.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 3.0), independent = 3.0 * sech(3.0 * 0.5) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 1.5 = 1.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.3), independent = 0.3 * sech(0.3 * 1.5) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 1.5 = 1.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = 1.0 * sech(1.0 * 1.5) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
+```
+
+```julia
+verify(CurieWeissIsing(; J = 0.0, 1.5 = 1.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 3.0), independent = 3.0 * sech(3.0 * 1.5) ^ 2, agree_within = 1.0e-12, refs = ["Single spin in field h: χ = β sech²(βh)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 12 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

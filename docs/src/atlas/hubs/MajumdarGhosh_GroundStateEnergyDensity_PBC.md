@@ -17,24 +17,79 @@
 |---|---|---|---|---|
 | `@dimer` | `ed_finite_size` | 🟢 structural | "Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent" | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_pbc.jl` |
 | `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `second_closed_form` | 🟢 structural | Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), PBC(8); route = :ed_finite_size, independent = [mg_pbc_e0(N, 1.0) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 1.0e-12, refs = ["Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent"])
+verify(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), PBC(8); route = :ed_finite_size, independent = [mg_pbc_e0(N, 1.0) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12))], agree_within = 1.0e-12, refs = ["Exact MG dimer GS of the J1-J2 ring at J2=J/2 " * "(even N), e0 = -3J/8 size-independent"])
 ```
 
 ```julia
-verify(MajumdarGhosh(; J = J), GroundStateEnergyDensity(), PBC(N); route = :second_closed_form, independent = (-3J) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+verify(MajumdarGhosh(; 0.5 = 0.5), GroundStateEnergyDensity(), PBC(6); route = :second_closed_form, independent = (-3 * 0.5) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 1.0 = 1.0), GroundStateEnergyDensity(), PBC(6); route = :second_closed_form, independent = (-3 * 1.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 2.0 = 2.0), GroundStateEnergyDensity(), PBC(6); route = :second_closed_form, independent = (-3 * 2.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 0.5 = 0.5), GroundStateEnergyDensity(), PBC(8); route = :second_closed_form, independent = (-3 * 0.5) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 1.0 = 1.0), GroundStateEnergyDensity(), PBC(8); route = :second_closed_form, independent = (-3 * 1.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 2.0 = 2.0), GroundStateEnergyDensity(), PBC(8); route = :second_closed_form, independent = (-3 * 2.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 0.5 = 0.5), GroundStateEnergyDensity(), PBC(10); route = :second_closed_form, independent = (-3 * 0.5) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 1.0 = 1.0), GroundStateEnergyDensity(), PBC(10); route = :second_closed_form, independent = (-3 * 1.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 2.0 = 2.0), GroundStateEnergyDensity(), PBC(10); route = :second_closed_form, independent = (-3 * 2.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 0.5 = 0.5), GroundStateEnergyDensity(), PBC(12); route = :second_closed_form, independent = (-3 * 0.5) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 1.0 = 1.0), GroundStateEnergyDensity(), PBC(12); route = :second_closed_form, independent = (-3 * 1.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 2.0 = 2.0), GroundStateEnergyDensity(), PBC(12); route = :second_closed_form, independent = (-3 * 2.0) / 8, agree_within = 1.0e-14, refs = ["Majumdar-Ghosh 1969: dimer GS exact for any even N, e0 = -3J/8 (BC- and size-independent)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 13 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -16,20 +16,60 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), MassGap(), Infinite(); route = :second_closed_form, independent = Δ_expected, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.5 = 1.5), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.9 = 0.9), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 3.0 = 3.0), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * (3.0 - 2.0), agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 2.0 = 2.0), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * (2.0 - 1.0), agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 3.0 = 3.0, 1.0 = 1.0, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 2.0, agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 4.0 = 4.0, 0.5 = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 2 * (4.0 - 1.0), agree_within = 1.0e-12, refs = ["Kitaev 2006 Annals 321: Δ = 2·max(|K_max| − |K_others_sum|, 0); gapped iff one |K_γ| > sum of others"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 9 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

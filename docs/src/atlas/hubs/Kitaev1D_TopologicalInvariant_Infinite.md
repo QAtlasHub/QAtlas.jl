@@ -16,6 +16,13 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | "Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)" | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)" | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)" | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)" | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)" | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases | `test/models/quantum/misc/test_kitaev1d.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ## Test calls
@@ -23,18 +30,46 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Kitaev1D(; μ = μ, t = t, Δ = Δ), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = ν_closed, agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
+verify(Kitaev1D(; 0.0 = 0.0, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = sign(0.0 ^ 2 - 4 * 1.0 ^ 2), agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
 ```
 
 ```julia
-verify(Kitaev1D(; μ = μ, t = t, Δ = Δ), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = ν_expected, agree_within = 0, refs = ["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"])
+verify(Kitaev1D(; 1.5 = 1.5, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = sign(1.5 ^ 2 - 4 * 1.0 ^ 2), agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
+```
+
+```julia
+verify(Kitaev1D(; -1.5 = -1.5, 1.0 = 1.0, 0.5 = 0.5), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = sign((-1.5) ^ 2 - 4 * 1.0 ^ 2), agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
+```
+
+```julia
+verify(Kitaev1D(; 3.0 = 3.0, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = sign(3.0 ^ 2 - 4 * 1.0 ^ 2), agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
+```
+
+```julia
+verify(Kitaev1D(; -2.5 = -2.5, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = sign((-2.5) ^ 2 - 4 * 1.0 ^ 2), agree_within = 1.0e-12, refs = ["Kitaev 2001; Asboth-Oroszlany-Palyi 2016: ν = sgn(μ²-4t²) " * "(-1 topological, +1 trivial)"])
+```
+
+```julia
+verify(Kitaev1D(; 0.0 = 0.0, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = -1, agree_within = 0, refs = ["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"])
+```
+
+```julia
+verify(Kitaev1D(; 0.5 = 0.5, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = -1, agree_within = 0, refs = ["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"])
+```
+
+```julia
+verify(Kitaev1D(; 3.0 = 3.0, 1.0 = 1.0, 1.0 = 1.0), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = 1, agree_within = 0, refs = ["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"])
+```
+
+```julia
+verify(Kitaev1D(; -3.0 = -3.0, 1.0 = 1.0, 0.5 = 0.5), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = 1, agree_within = 0, refs = ["Kitaev 2001 Pfaffian Z2: ν = sgn(μ² − 4t²) on the gapped phases"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

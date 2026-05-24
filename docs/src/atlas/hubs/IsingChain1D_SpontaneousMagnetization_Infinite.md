@@ -16,20 +16,35 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingChain1D(; J = J), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = 0.0, agree_within = 0, refs = ["Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically"])
+verify(IsingChain1D(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.5), independent = 0.0, agree_within = 0, refs = ["Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = 0.0, agree_within = 0, refs = ["Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 10.0), independent = 0.0, agree_within = 0, refs = ["Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically"])
+```
+
+```julia
+verify(IsingChain1D(; -0.5 = -0.5), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = 0.0, agree_within = 0, refs = ["Ising 1925: no spontaneous magnetization at any T > 0 in 1D, m_spont = 0 identically"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

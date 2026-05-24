@@ -17,6 +17,9 @@
 |---|---|---|---|---|
 | `@triangular` | `limiting_case` | 🟡 asserted | Wannier 1950: AFM triangular is fully frustrated, Tc = 0 | `test/models/classical/test_ising_triangular.jl` |
 | `@triangular` | `second_closed_form` | 🟢 structural | Houtappel 1950: FM triangular Tc = 4|J| / log 3 | `test/models/classical/test_ising_triangular.jl` |
+| `@triangular` | `second_closed_form` | 🟢 structural | Houtappel 1950: FM triangular Tc = 4|J| / log 3 | `test/models/classical/test_ising_triangular.jl` |
+| `@triangular` | `second_closed_form` | 🟢 structural | Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0 | `test/models/classical/test_ising_triangular.jl` |
+| `@triangular` | `second_closed_form` | 🟢 structural | Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0 | `test/models/classical/test_ising_triangular.jl` |
 | `@triangular` | `second_closed_form` | 🟢 structural | Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0 | `test/models/classical/test_ising_triangular.jl` |
 
 ## Test calls
@@ -28,18 +31,30 @@ verify(IsingTriangular(; J = 1.0), CriticalTemperature(), Infinite(); route = :l
 ```
 
 ```julia
-verify(IsingTriangular(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (4 * abs(J)) / log(3), agree_within = 1.0e-9, refs = ["Houtappel 1950: FM triangular Tc = 4|J| / log 3"])
+verify(IsingTriangular(; -1.0 = -1.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (4 * abs(-1.0)) / log(3), agree_within = 1.0e-9, refs = ["Houtappel 1950: FM triangular Tc = 4|J| / log 3"])
 ```
 
 ```julia
-verify(IsingTriangular(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"])
+verify(IsingTriangular(; -2.0 = -2.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (4 * abs(-2.0)) / log(3), agree_within = 1.0e-9, refs = ["Houtappel 1950: FM triangular Tc = 4|J| / log 3"])
+```
+
+```julia
+verify(IsingTriangular(; 0.5 = 0.5), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"])
+```
+
+```julia
+verify(IsingTriangular(; 1.0 = 1.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"])
+```
+
+```julia
+verify(IsingTriangular(; 2.0 = 2.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Wannier 1950: fully-frustrated AF triangular Ising has no LRO ⇒ T_c = 0"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

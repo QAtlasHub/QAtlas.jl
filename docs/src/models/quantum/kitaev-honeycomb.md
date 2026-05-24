@@ -100,16 +100,16 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 11 hubs (
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
-| `KitaevHeisenberg` | [`MassGap`](../../atlas/hubs/KitaevHeisenberg_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `KitaevHeisenberg` | [`MassGap`](../../atlas/hubs/KitaevHeisenberg_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | `KitaevHoneycomb` | [`Energy`](../../atlas/hubs/KitaevHoneycomb_Energy_Infinite.md) | `Infinite` | ⚪ cited-only | 1 |
 | `KitaevHoneycomb` | [`Energy`](../../atlas/hubs/KitaevHoneycomb_Energy_OBC.md) | `OBC` | ⚪ cited-only | 0 |
 | `KitaevHoneycomb` | [`Energy`](../../atlas/hubs/KitaevHoneycomb_Energy_PBC.md) | `PBC` | ⚪ cited-only | 0 |
-| `KitaevHoneycomb` | [`FreeEnergy`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
+| `KitaevHoneycomb` | [`FreeEnergy`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) | `Infinite` | 🔵 coherent | 3 |
 | `KitaevHoneycomb` | [`FreeEnergy`](../../atlas/hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | `OBC` | ⚪ cited-only | 0 |
-| `KitaevHoneycomb` | [`MassGap`](../../atlas/hubs/KitaevHoneycomb_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
-| `KitaevHoneycomb` | [`SpecificHeat`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
-| `KitaevHoneycomb` | [`SpecificHeat`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | `OBC` | 🔵 coherent | 2 |
-| `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
-| `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | `OBC` | 🔵 coherent | 1 |
+| `KitaevHoneycomb` | [`MassGap`](../../atlas/hubs/KitaevHoneycomb_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 9 |
+| `KitaevHoneycomb` | [`SpecificHeat`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) | `Infinite` | 🔵 coherent | 6 |
+| `KitaevHoneycomb` | [`SpecificHeat`](../../atlas/hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | `OBC` | 🔵 coherent | 12 |
+| `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) | `Infinite` | 🔵 coherent | 4 |
+| `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | `OBC` | 🔵 coherent | 7 |
 
 <!-- ATLAS:HUBS:END -->

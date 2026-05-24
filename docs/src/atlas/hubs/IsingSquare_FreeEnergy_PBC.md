@@ -16,20 +16,25 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs) | `test/models/classical/test_IsingSquare_thermal.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs) | `test/models/classical/test_IsingSquare_thermal.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingSquare(; Lx = L, Ly = L, J = 1.0), FreeEnergy(), PBC(0); route = :ed_finite_size, fetch_kw = (; beta = β, Lx = L, Ly = L, J = 1.0), independent = (-(1 / β) * log(Z)) / (L * L), agree_within = 1.0e-6, refs = ["Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs)"])
+verify(IsingSquare(; Lx = 3, Ly = 3, J = 1.0), FreeEnergy(), PBC(0); route = :ed_finite_size, fetch_kw = (; beta = 0.3, Lx = 3, Ly = 3, J = 1.0), independent = (-(1 / 0.3) * log(sum(exp.(-β .* (Float64[] .- minimum(Float64[])))))) / (3 * 3), agree_within = 1.0e-6, refs = ["Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs)"])
+```
+
+```julia
+verify(IsingSquare(; Lx = 3, Ly = 3, J = 1.0), FreeEnergy(), PBC(0); route = :ed_finite_size, fetch_kw = (; beta = 0.5, Lx = 3, Ly = 3, J = 1.0), independent = (-(1 / 0.5) * log(sum(exp.(-β .* (Float64[] .- minimum(Float64[])))))) / (3 * 3), agree_within = 1.0e-6, refs = ["Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

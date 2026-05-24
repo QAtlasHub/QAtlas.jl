@@ -67,41 +67,9 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-**34 real orphan card hub(s)**:
+**2 real orphan card hub(s)**:
 
-- `S1Heisenberg1D/q/OBC`
-- `TFIM/Energy/bc`
 - `TFIM/LoschmidtRateFunction/Infinite`
-- `TFIM/q/Infinite`
-- `TFIM/q/OBC`
-- `TFIM/qty/OBC`
-- `TFIM/qty/PBC`
 - `XXZ1D/GroundStateEnergyDensity/Infinite`
-- `XXZ1D/q/OBC`
-- `XXZ1D/qty/OBC`
-- `_XX/Energy/Infinite`
-- `_XX/FreeEnergy/Infinite`
-- `_XX/ThermalEntropy/Infinite`
-- `m/Energy/Infinite`
-- `m/FreeEnergy/Infinite`
-- `m/GGEValue/Infinite`
-- `m/LoschmidtRateFunction/Infinite`
-- `m/MagnetizationXLocal/Infinite`
-- `m/ResidualEntropy/Infinite`
-- `m/SpecificHeat/Infinite`
-- `m/SusceptibilityZZ/Infinite`
-- `m/ThermalEntropy/Infinite`
-- `m/ThermalEntropy/OBC`
-- `mf/MagnetizationXLocal/Infinite`
-- `mf/VonNeumannEntropy/OBC`
-- `model/Energy/PBC`
-- `model/SpecificHeat/Infinite`
-- `model/SpecificHeat/OBC`
-- `model/SpecificHeat/PBC`
-- `model/ThermalEntropy/Infinite`
-- `model/ThermalEntropy/OBC`
-- `model/ThermalEntropy/PBC`
-- `model/ZZStructureFactor/Infinite`
-- `model/quantity/bc`
 
 [← back to the Atlas index](index.md)

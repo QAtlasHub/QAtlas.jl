@@ -29,16 +29,16 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
-| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🔵 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
+| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | — | — |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_FreeEnergy_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_FreeEnergy_PBC.md) | 🟠 [hub](../hubs/IsingSquare_FreeEnergy_Infinite.md) |
-| [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
+| [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | — | — |
 | [`SixVertex`](../models/SixVertex.md) | — | — | 🟠 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_FreeEnergy_Infinite.md) |
-| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_FreeEnergy_OBC.md) | — | 🟠 [hub](../hubs/XXZ1D_FreeEnergy_Infinite.md) |
+| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/XXZ1D_FreeEnergy_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

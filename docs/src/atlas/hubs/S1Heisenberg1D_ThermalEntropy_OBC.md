@@ -16,6 +16,48 @@
 |---|---|---|---|---|
 | `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
 | `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞ | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `limiting_case` | 🟡 asserted | S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermal_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 | `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
@@ -23,22 +65,190 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :limiting_case, independent = if iseven(N) 0.0 else log(3) / N end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = LOW_T_BETA))
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(3); route = :limiting_case, independent = if iseven(3) 0.0 else log(3) / 3 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = HIGH_T_BETA))
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(3); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
 ```
 
 ```julia
-verify(S1Heisenberg1D(; J = J), ThermalEntropy(), OBC(N); route = :ed_finite_size, independent = ed_S, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; beta = beta))
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(4); route = :limiting_case, independent = if iseven(4) 0.0 else log(3) / 4 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(4); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(5); route = :limiting_case, independent = if iseven(5) 0.0 else log(3) / 5 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(5); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(3); route = :limiting_case, independent = if iseven(3) 0.0 else log(3) / 3 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(3); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(4); route = :limiting_case, independent = if iseven(4) 0.0 else log(3) / 4 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(4); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(5); route = :limiting_case, independent = if iseven(5) 0.0 else log(3) / 5 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(5); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(3); route = :limiting_case, independent = if iseven(3) 0.0 else log(3) / 3 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(3); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(4); route = :limiting_case, independent = if iseven(4) 0.0 else log(3) / 4 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(4); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(5); route = :limiting_case, independent = if iseven(5) 0.0 else log(3) / 5 end, agree_within = 1.0e-9, refs = ["S1H OBC at T → 0: edge-multiplet residue s_per_site = iseven(N) ? 0 : log(3)/N for finite N (triplet GS for odd N, singlet for even N); Haldane-gap unique GS recovered only in N → ∞"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(5); route = :limiting_case, independent = log(3), agree_within = 1.0e-5, refs = ["S1Heisenberg1D OBC T → ∞: spin-1 paramagnet ⇒ s = log 3 per spin"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(3); route = :ed_finite_size, independent = ed_S, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), ThermalEntropy(), OBC(5); route = :ed_finite_size, independent = ed_S, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): S = β·(E - F) from full spectrum"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 45 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

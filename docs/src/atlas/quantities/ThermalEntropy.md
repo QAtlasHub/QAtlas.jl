@@ -29,15 +29,15 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
-| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🔵 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
+| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | — | — |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) |
-| [`IsingSquare`](../models/IsingSquare.md) | — | 🟠 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |
+| [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | — | — |
-| [`TFIM`](../models/TFIM.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
+| [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) |
-| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | — | 🟠 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
+| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

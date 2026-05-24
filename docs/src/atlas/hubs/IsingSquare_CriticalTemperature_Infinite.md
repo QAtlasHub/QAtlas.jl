@@ -16,7 +16,9 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) | `test/identities/test_identities_IsingSquare.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) | `test/identities/test_identities_IsingSquare.jl` |
 | `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1+√2) ≈ 2.269185 (β=1/8 universality anchor) | `test/models/classical/test_IsingSquare_critical.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2) | `test/models/classical/test_ising_onsager_yang.jl` |
 | `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2) | `test/models/classical/test_ising_onsager_yang.jl` |
 | `@onsager` | `second_closed_form` | 🟢 structural | Onsager 1944: Tc = 2J / log(1 + √2) ≈ 2.269185 | `test/verification/universality/test_universality_cross_check.jl` |
 
@@ -25,7 +27,11 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingSquare(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (2J) / log(1 + sqrt(2)), agree_within = 1.0e-10, refs = ["Onsager 1944: Tc = 2J / log(1+√2)"])
+verify(IsingSquare(; 1.0 = 1.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (2 * 1.0) / log(1 + sqrt(2)), agree_within = 1.0e-10, refs = ["Onsager 1944: Tc = 2J / log(1+√2)"])
+```
+
+```julia
+verify(IsingSquare(; 2.0 = 2.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (2 * 2.0) / log(1 + sqrt(2)), agree_within = 1.0e-10, refs = ["Onsager 1944: Tc = 2J / log(1+√2)"])
 ```
 
 ```julia
@@ -33,7 +39,11 @@ verify(IsingSquare(; J = 1.0), CriticalTemperature(), Infinite(); route = :secon
 ```
 
 ```julia
-verify(IsingSquare(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (2J) / log(1 + sqrt(2)), agree_within = 1.0e-10, refs = ["Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2)"])
+verify(IsingSquare(; 1.0 = 1.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (2 * 1.0) / log(1 + sqrt(2)), agree_within = 1.0e-10, refs = ["Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2)"])
+```
+
+```julia
+verify(IsingSquare(; 2.0 = 2.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = (2 * 2.0) / log(1 + sqrt(2)), agree_within = 1.0e-10, refs = ["Onsager 1944: sinh(2 βc J) = 1 => Tc = 2J / log(1+√2)"])
 ```
 
 ```julia
@@ -44,7 +54,7 @@ verify(IsingSquare(; J = 1.0), CriticalTemperature(), Infinite(); route = :secon
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 4 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

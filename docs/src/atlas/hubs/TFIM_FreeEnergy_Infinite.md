@@ -17,28 +17,58 @@
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀ | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀"], fetch_kw = (; beta = BETA))
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = 0.0, h = J), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀"], fetch_kw = (; beta = BETA))
+verify(TFIM(; 0.5 = 0.0, h = 0.5), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = J), FreeEnergy(), Infinite(); route = :second_closed_form, independent = (-4J) / π, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀"], fetch_kw = (; beta = BETA))
+verify(TFIM(; 0.5 = 0.5, h = 0.5), FreeEnergy(), Infinite(); route = :second_closed_form, independent = (-4 * 0.5) / π, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 0.0, h = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = (-4 * 1.0) / π, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=0 dispersion flat Λ=2J ⇒ ε₀ = -J; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 0.0, h = 2.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at J=0 dispersion flat Λ=2h ⇒ ε₀ = -h; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 2.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = (-4 * 2.0) / π, agree_within = 1.0e-5, refs = ["Pfeuty 1970: at h=J critical point ε₀ = -4J/π; β→∞ free energy → ε₀"], fetch_kw = (; beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

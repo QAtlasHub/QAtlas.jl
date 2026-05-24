@@ -12,26 +12,26 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`BCFT`](models/BCFT.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ChernSimons3D`](models/ChernSimons3D.md) | `WZW` | 2 | `analytic`, `sugawara` | 0 | 1 | 0 | 1 | 0 | infeasible | `@sweep` |
 | [`Cluster1D`](models/Cluster1D.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@cluster` |
-| [`Compass1D`](models/Compass1D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@anisotropic` |
+| [`Compass1D`](models/Compass1D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@anisotropic`, `@isotropic` |
 | [`ConformalBootstrap`](models/ConformalBootstrap.md) | — | 1 | `bootstrap_reference` | 0 | 0 | 0 | 1 | 0 | feasible | `@sweep` |
-| [`CurieWeissIsing`](models/CurieWeissIsing.md) | `MeanField` | 8 | `analytic`, `delegation` | 0 | 3 | 3 | 0 | 2 | feasible | `@mean_field` |
+| [`CurieWeissIsing`](models/CurieWeissIsing.md) | `MeanField` | 8 | `analytic`, `delegation` | 0 | 6 | 0 | 0 | 2 | feasible | `@mean_field` |
 | [`DMIHeisenberg1D`](models/DMIHeisenberg1D.md) | — | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ExtendedHubbard1D`](models/ExtendedHubbard1D.md) | — | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`Heisenberg1D`](models/Heisenberg1D.md) | — | 21 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 4 | feasible | `@su2` |
-| [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 2 | `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 0 | feasible | `@isotropic`, `@sweep`, `@xx` |
+| [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 2 | `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 0 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 4 | `analytic`, `bethe_ansatz` | 0 | 2 | 2 | 0 | 0 | feasible | `@sweep` |
 | [`IsingChain1D`](models/IsingChain1D.md) | — | 8 | `analytic` | 0 | 7 | 0 | 0 | 1 | feasible | `@ising1d` |
-| [`IsingSquare`](models/IsingSquare.md) | `Ising` | 12 | `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix` | 0 | 4 | 2 | 0 | 6 | feasible | `@onsager` |
+| [`IsingSquare`](models/IsingSquare.md) | `Ising` | 12 | `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix` | 0 | 7 | 2 | 0 | 3 | feasible | `@onsager` |
 | [`IsingTriangular`](models/IsingTriangular.md) | `Ising` | 3 | `analytic`, `delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@triangular` |
 | [`J1J2Heisenberg1D`](models/J1J2Heisenberg1D.md) | — | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`Kagome`](models/Kagome.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`KagomeHeisenbergAFM`](models/KagomeHeisenbergAFM.md) | — | 3 | `analytic`, `dmrg_reference` | 0 | 0 | 0 | 3 | 0 | infeasible | `@sweep` |
 | [`Kitaev1D`](models/Kitaev1D.md) | — | 6 | `analytic`, `bdg`, `pfaffian` | 0 | 6 | 0 | 0 | 0 | feasible | `@critical`, `@sweep`, `@topological` |
 | [`KitaevHeisenberg`](models/KitaevHeisenberg.md) | — | 1 | `kitaev_delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`KitaevHoneycomb`](models/KitaevHoneycomb.md) | — | 10 | `analytic`, `matter_free_fermion` | 0 | 1 | 4 | 5 | 0 | infeasible | `@sweep` |
+| [`KitaevHoneycomb`](models/KitaevHoneycomb.md) | — | 10 | `analytic`, `matter_free_fermion` | 0 | 1 | 5 | 4 | 0 | infeasible | `@sweep` |
 | [`Lieb`](models/Lieb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`LiouvilleCFT`](models/LiouvilleCFT.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`LogarithmicCFT`](models/LogarithmicCFT.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
@@ -44,7 +44,7 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`RFIM`](models/RFIM.md) | — | 1 | `analytic_imry_ma` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`RandomBondIsing2D`](models/RandomBondIsing2D.md) | `Ising` | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`S1AnisotropicD1D`](models/S1AnisotropicD1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
-| [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 21 | `dense_ed`, `literature_value` | 0 | 13 | 0 | 1 | 7 | feasible | `@haldane` |
+| [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 21 | `dense_ed`, `literature_value` | 0 | 13 | 3 | 1 | 4 | feasible | `@haldane` |
 | [`S1XXZ1D`](models/S1XXZ1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
 | [`SLEkappa`](models/SLEkappa.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`SYK`](models/SYK.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
@@ -54,7 +54,7 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`SixVertex`](models/SixVertex.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`TFIM`](models/TFIM.md) | `Ising` | 53 | `analytic`, `bdg`, `cft`, `delegation`, `pfaffian` | 0 | 28 | 9 | 0 | 16 | feasible | `@critical`, `@disordered`, `@ordered` |
+| [`TFIM`](models/TFIM.md) | `Ising` | 53 | `analytic`, `bdg`, `cft`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 9 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TightBinding1D`](models/TightBinding1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@sweep` |
@@ -64,7 +64,7 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 3 | `analytic` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
-| [`XXZ1D`](models/XXZ1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk` | 0 | 14 | 0 | 0 | 12 | feasible | `@fm`, `@free_fermion`, `@gapless` |
+| [`XXZ1D`](models/XXZ1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk` | 0 | 16 | 5 | 0 | 5 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@polarized`, `@sweep`, `@xx` |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |

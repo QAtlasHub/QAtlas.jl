@@ -19,10 +19,10 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingSquare`**.  Cells link to the
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 4 |
+| 🟢 corroborated-at-p | 7 |
 | 🔵 coherent | 2 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 6 |
+| 🟠 uncorroborated-but-feasible | 3 |
 | **total claimed hubs** | **12** |
 
 **Methods** (from `@register`, derived): `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix`
@@ -37,11 +37,11 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingSquare`**.  Cells link to the
 |---|---|---|
 | [`CriticalExponents`](../quantities/CriticalExponents.md) | — | 🟠 [hub](../hubs/IsingSquare_CriticalExponents_Infinite.md) |
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | — | 🟢 [hub](../hubs/IsingSquare_CriticalTemperature_Infinite.md) |
-| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/IsingSquare_Energy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_Energy_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/IsingSquare_Energy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_Energy_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/IsingSquare_FreeEnergy_PBC.md) | 🟠 [hub](../hubs/IsingSquare_FreeEnergy_Infinite.md) |
 | [`PartitionFunction`](../quantities/PartitionFunction.md) | 🟢 [hub](../hubs/IsingSquare_PartitionFunction_PBC.md) | — |
-| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_PBC.md) | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/IsingSquare_SpecificHeat_PBC.md) | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | — | 🟢 [hub](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) |
-| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

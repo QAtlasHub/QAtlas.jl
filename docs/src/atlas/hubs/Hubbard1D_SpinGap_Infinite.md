@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry) | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry) | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry) | `test/models/quantum/misc/test_hubbard1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Hubbard1D(; t = t, U = U, μ = U / 2), SpinGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"])
+verify(Hubbard1D(; 1.0 = 1.0, 0.5 = 0.5, μ = 0.5 / 2), SpinGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"])
+```
+
+```julia
+verify(Hubbard1D(; 1.0 = 1.0, 4.0 = 4.0, μ = 4.0 / 2), SpinGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"])
+```
+
+```julia
+verify(Hubbard1D(; 2.0 = 2.0, 8.0 = 8.0, μ = 8.0 / 2), SpinGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Lieb-Wu 1968 (Bethe ansatz): Δ_s = 0 for all U > 0 (gapless spinons by SU(2) symmetry)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

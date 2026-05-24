@@ -15,25 +15,165 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_PBC_ED_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), FreeEnergy(), PBC(N); route = :second_closed_form, independent = -J, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = BETA))
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), PBC(8); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), FreeEnergy(), PBC(N); route = :second_closed_form, independent = -h, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = BETA))
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), PBC(12); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), PBC(16); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), PBC(8); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), PBC(12); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), PBC(16); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), PBC(8); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), PBC(12); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), PBC(16); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["TFIM h=0 PBC: pure Ising ring, one bond per site ⇒ ε₀ = -J exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FreeEnergy(), PBC(12); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FreeEnergy(), PBC(16); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FreeEnergy(), PBC(8); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FreeEnergy(), PBC(12); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FreeEnergy(), PBC(16); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), PBC(12); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), PBC(16); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-5, refs = ["TFIM J=0 PBC: no Ising coupling ⇒ f/N = -h exactly"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 30 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

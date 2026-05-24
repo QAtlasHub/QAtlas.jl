@@ -16,6 +16,10 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological) | `test/models/quantum/misc/test_toric_code.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological) | `test/models/quantum/misc/test_toric_code.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological) | `test/models/quantum/misc/test_toric_code.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological) | `test/models/quantum/misc/test_toric_code.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003 §4.1: GSD is purely topological — independent of J_e, J_m | `test/models/quantum/misc/test_toric_code.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2003 §4.1: GSD is purely topological — independent of J_e, J_m | `test/models/quantum/misc/test_toric_code.jl` |
 
 ## Test calls
@@ -23,18 +27,34 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(ToricCode(; J_e = 1.0, J_m = 1.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4 ^ genus, agree_within = 0, refs = ["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"], fetch_kw = (; genus = genus))
+verify(ToricCode(; J_e = 1.0, J_m = 1.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4 ^ 0, agree_within = 0, refs = ["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"], fetch_kw = (; 0 = 0))
 ```
 
 ```julia
-verify(ToricCode(; J_e = J_e, J_m = J_m), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4, agree_within = 0, refs = ["Kitaev 2003 §4.1: GSD is purely topological — independent of J_e, J_m"], fetch_kw = (; genus = 1))
+verify(ToricCode(; J_e = 1.0, J_m = 1.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4 ^ 1, agree_within = 0, refs = ["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"], fetch_kw = (; 1 = 1))
+```
+
+```julia
+verify(ToricCode(; J_e = 1.0, J_m = 1.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4 ^ 2, agree_within = 0, refs = ["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"], fetch_kw = (; 2 = 2))
+```
+
+```julia
+verify(ToricCode(; J_e = 1.0, J_m = 1.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4 ^ 3, agree_within = 0, refs = ["Kitaev 2003 §4.1 (Ann. Phys. 303): ToricCode GSD = 4^g on a genus-g closed orientable surface (purely topological)"], fetch_kw = (; 3 = 3))
+```
+
+```julia
+verify(ToricCode(; 0.5 = 0.5, 2.0 = 2.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4, agree_within = 0, refs = ["Kitaev 2003 §4.1: GSD is purely topological — independent of J_e, J_m"], fetch_kw = (; genus = 1))
+```
+
+```julia
+verify(ToricCode(; 3.0 = 3.0, 1.0 = 1.0), GroundStateDegeneracy(), PBC(0); route = :second_closed_form, independent = 4, agree_within = 0, refs = ["Kitaev 2003 §4.1: GSD is purely topological — independent of J_e, J_m"], fetch_kw = (; genus = 1))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-infeasible (frontier)
+- cards: 6 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

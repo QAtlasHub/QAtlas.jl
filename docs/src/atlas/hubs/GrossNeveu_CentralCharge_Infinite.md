@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | UV free-fermion fixed point: c = N at g = 0 | `test/models/quantum/misc/test_gross_neveu.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | UV free-fermion fixed point: c = N at g = 0 | `test/models/quantum/misc/test_gross_neveu.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | UV free-fermion fixed point: c = N at g = 0 | `test/models/quantum/misc/test_gross_neveu.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(GrossNeveu(; N = N, g = 0.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = N, agree_within = 1.0e-10, refs = ["UV free-fermion fixed point: c = N at g = 0"])
+verify(GrossNeveu(; 1 = 1, g = 0.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 1, agree_within = 1.0e-10, refs = ["UV free-fermion fixed point: c = N at g = 0"])
+```
+
+```julia
+verify(GrossNeveu(; 2 = 2, g = 0.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2, agree_within = 1.0e-10, refs = ["UV free-fermion fixed point: c = N at g = 0"])
+```
+
+```julia
+verify(GrossNeveu(; 5 = 5, g = 0.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 5, agree_within = 1.0e-10, refs = ["UV free-fermion fixed point: c = N at g = 0"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

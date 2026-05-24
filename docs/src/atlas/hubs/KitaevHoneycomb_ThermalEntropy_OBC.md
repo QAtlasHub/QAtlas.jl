@@ -15,6 +15,12 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@sweep` | `sum_rule` | 🟡 asserted | Gibbs identity s = β(ε − f) on the Kitaev honeycomb | `test/identities/test_identities_KitaevHoneycomb.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 
 ## Test calls
@@ -22,14 +28,38 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; Lx = Lx, Ly = Ly, beta = LOW_T_BETA))
+verify(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), ThermalEntropy(), OBC(0); route = :sum_rule, fetch_kw = (; 2 = 2, 2 = 2, beta = 1.0), independent = 1.0 * (QAtlas.fetch(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), Energy(:per_site), OBC(0); 2 = 2, 2 = 2, beta = 1.0) - QAtlas.fetch(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), FreeEnergy(), OBC(0); 2 = 2, 2 = 2, beta = 1.0)), agree_within = 1.0e-7, refs = ["Gibbs identity s = β(ε − f) on the Kitaev honeycomb"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; 3 = 3, 3 = 3, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; 4 = 4, 4 = 4, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; 3 = 3, 3 = 3, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; 4 = 4, 4 = 4, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; 3 = 3, 3 = 3, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), ThermalEntropy(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; 4 = 4, 4 = 4, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 7 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -15,6 +15,32 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_xx_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
 
 ## Test calls
@@ -22,14 +48,118 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = 1.0, h = h), XXStructureFactor(), OBC(N); route = :ed_finite_size, independent = _ed_structure_factor(_SX, N, 1.0, h, β, q), agree_within = 1.0e-10, at = ["h=$(h)", "β=$(β)", "q=$(round(q; digits = 4))"], refs = ["ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q"], fetch_kw = (; beta = β, q = q))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = 0.0, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π / 2, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXStructureFactor(), OBC(8); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), XXStructureFactor(), OBC(12); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N)"], fetch_kw = (; XXStructureFactor() = π, beta = 0.001))
+```
+
+```julia
+verify(TFIM(; J = 1.0, (0.5, 1.0, 1.5) = (0.5, 1.0, 1.5)), XXStructureFactor(), OBC(4); route = :ed_finite_size, independent = _ed_structure_factor(_SX, 4, 1.0, (0.5, 1.0, 1.5), (0.5, 1.5), 0.0), agree_within = 1.0e-10, at = ["h=$((0.5, 1.0, 1.5))", "β=$((0.5, 1.5))", "q=$(round(0.0; digits = 4))"], refs = ["ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q"], fetch_kw = (; beta = (0.5, 1.5), 0.0 = 0.0))
+```
+
+```julia
+verify(TFIM(; J = 1.0, (0.5, 1.0, 1.5) = (0.5, 1.0, 1.5)), XXStructureFactor(), OBC(4); route = :ed_finite_size, independent = _ed_structure_factor(_SX, 4, 1.0, (0.5, 1.0, 1.5), (0.5, 1.5), π / 2), agree_within = 1.0e-10, at = ["h=$((0.5, 1.0, 1.5))", "β=$((0.5, 1.5))", "q=$(round(π / 2; digits = 4))"], refs = ["ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q"], fetch_kw = (; beta = (0.5, 1.5), π / 2 = π / 2))
+```
+
+```julia
+verify(TFIM(; J = 1.0, (0.5, 1.0, 1.5) = (0.5, 1.0, 1.5)), XXStructureFactor(), OBC(4); route = :ed_finite_size, independent = _ed_structure_factor(_SX, 4, 1.0, (0.5, 1.0, 1.5), (0.5, 1.5), π), agree_within = 1.0e-10, at = ["h=$((0.5, 1.0, 1.5))", "β=$((0.5, 1.5))", "q=$(round(π; digits = 4))"], refs = ["ED black-box: _build_tfim_dense + dense thermal trace ⟨σˣᵢσˣⱼ⟩ Fourier-summed at q"], fetch_kw = (; beta = (0.5, 1.5), π = π))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 27 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -15,25 +15,240 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form) | `test/models/quantum/TFIM/test_TFIM_free_energy_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), FreeEnergy(), OBC(N); route = :second_closed_form, independent = -h, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = BETA))
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FreeEnergy(), OBC(8); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), FreeEnergy(), OBC(N); route = :second_closed_form, independent = (-((N - 1)) * J) / N, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = BETA))
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FreeEnergy(), OBC(12); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), FreeEnergy(), OBC(16); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FreeEnergy(), OBC(8); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FreeEnergy(), OBC(12); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), FreeEnergy(), OBC(16); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), OBC(8); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), OBC(12); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), OBC(16); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-12, refs = ["TFIM J=0 OBC: no Ising coupling ⇒ f/N = -h exactly for any N"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), OBC(8); route = :second_closed_form, independent = (-((8 - 1)) * 0.5) / 8, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), OBC(12); route = :second_closed_form, independent = (-((12 - 1)) * 0.5) / 12, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), FreeEnergy(), OBC(16); route = :second_closed_form, independent = (-((16 - 1)) * 0.5) / 16, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), OBC(8); route = :second_closed_form, independent = (-((8 - 1)) * 1.0) / 8, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), OBC(12); route = :second_closed_form, independent = (-((12 - 1)) * 1.0) / 12, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), FreeEnergy(), OBC(16); route = :second_closed_form, independent = (-((16 - 1)) * 1.0) / 16, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), OBC(8); route = :second_closed_form, independent = (-((8 - 1)) * 2.0) / 8, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), OBC(12); route = :second_closed_form, independent = (-((12 - 1)) * 2.0) / 12, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), FreeEnergy(), OBC(16); route = :second_closed_form, independent = (-((16 - 1)) * 2.0) / 16, agree_within = 1.0e-5, refs = ["TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 45 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -16,6 +16,11 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site | `test/models/classical/test_ising_chain_1d.jl` |
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
@@ -23,18 +28,38 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingChain1D(; J = J), FreeEnergy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = -(1 / β) * log(2 * cosh(β * J)), agree_within = 1.0e-10, refs = ["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"])
+verify(IsingChain1D(; 1.0 = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.5), independent = -(1 / 0.5) * log(2 * cosh(0.5 * 1.0)), agree_within = 1.0e-10, refs = ["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"])
 ```
 
 ```julia
-verify(IsingChain1D(; J = J), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -(1 / β) * log(2 * cosh(β * J)), agree_within = 1.0e-12, refs = ["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"], fetch_kw = (; beta = β))
+verify(IsingChain1D(; 1.0 = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = -(1 / 2.0) * log(2 * cosh(2.0 * 1.0)), agree_within = 1.0e-10, refs = ["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"])
+```
+
+```julia
+verify(IsingChain1D(; 1.7 = 1.7), FreeEnergy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = -(1 / 1.0) * log(2 * cosh(1.0 * 1.7)), agree_within = 1.0e-10, refs = ["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -(1 / 0.5) * log(2 * cosh(0.5 * 1.0)), agree_within = 1.0e-12, refs = ["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"], fetch_kw = (; beta = 0.5))
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -(1 / 1.0) * log(2 * cosh(1.0 * 1.0)), agree_within = 1.0e-12, refs = ["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"], fetch_kw = (; beta = 1.0))
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -(1 / 2.0) * log(2 * cosh(2.0 * 1.0)), agree_within = 1.0e-12, refs = ["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"], fetch_kw = (; beta = 2.0))
+```
+
+```julia
+verify(IsingChain1D(; 0.5 = 0.5), FreeEnergy(), Infinite(); route = :second_closed_form, independent = -(1 / 1.0) * log(2 * cosh(1.0 * 0.5)), agree_within = 1.0e-12, refs = ["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"], fetch_kw = (; beta = 1.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 7 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

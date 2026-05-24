@@ -16,20 +16,40 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingChain1D(; J = J), SpecificHeat(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = (β * J * sech(β * J)) ^ 2, agree_within = 1.0e-12, refs = ["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"])
+verify(IsingChain1D(; 1.0 = 1.0), SpecificHeat(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.5), independent = (0.5 * 1.0 * sech(0.5 * 1.0)) ^ 2, agree_within = 1.0e-12, refs = ["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), SpecificHeat(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = (1.0 * 1.0 * sech(1.0 * 1.0)) ^ 2, agree_within = 1.0e-12, refs = ["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), SpecificHeat(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = (2.0 * 1.0 * sech(2.0 * 1.0)) ^ 2, agree_within = 1.0e-12, refs = ["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 0.5 = 0.5), SpecificHeat(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = (1.0 * 0.5 * sech(1.0 * 0.5)) ^ 2, agree_within = 1.0e-12, refs = ["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 2.0 = 2.0), SpecificHeat(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.7), independent = (0.7 * 2.0 * sech(0.7 * 2.0)) ^ 2, agree_within = 1.0e-12, refs = ["Ising 1925: c_v(β,h=0) = (βJ)² sech²(βJ) per site"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

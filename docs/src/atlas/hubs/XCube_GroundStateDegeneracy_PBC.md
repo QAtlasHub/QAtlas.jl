@@ -16,20 +16,25 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3 | `test/models/quantum/misc/test_x_cube.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3 | `test/models/quantum/misc/test_x_cube.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(XCube(), GroundStateDegeneracy(), PBC(); route = :second_closed_form, fetch_kw = (; Lx = Lx, Ly = Ly, Lz = Lz), independent = 2.0 ^ (2 * (Lx + Ly + Lz) - 3), agree_within = 0.5, refs = ["X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3"])
+verify(XCube(), GroundStateDegeneracy(), PBC(); route = :second_closed_form, fetch_kw = (; 2 = 2, 2 = 2, 2 = 2), independent = 2.0 ^ (2 * (2 + 2 + 2) - 3), agree_within = 0.5, refs = ["X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3"])
+```
+
+```julia
+verify(XCube(), GroundStateDegeneracy(), PBC(); route = :second_closed_form, fetch_kw = (; 3 = 3, 3 = 3, 3 = 3), independent = 2.0 ^ (2 * (3 + 3 + 3) - 3), agree_within = 0.5, refs = ["X-cube fracton order: log2 GSD = 2(Lx+Ly+Lz) - 3"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

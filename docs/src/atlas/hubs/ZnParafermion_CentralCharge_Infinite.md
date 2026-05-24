@@ -16,20 +16,35 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2) | `test/universalities/test_zn_parafermion.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2) | `test/universalities/test_zn_parafermion.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2) | `test/universalities/test_zn_parafermion.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2) | `test/universalities/test_zn_parafermion.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(ZnParafermion(; n = n), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2 * (n - 1) // (n + 2), agree_within = 1.0e-12, refs = ["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"])
+verify(ZnParafermion(; 2 = 2), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2 * (2 - 1) // (2 + 2), agree_within = 1.0e-12, refs = ["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"])
+```
+
+```julia
+verify(ZnParafermion(; 3 = 3), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2 * (3 - 1) // (3 + 2), agree_within = 1.0e-12, refs = ["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"])
+```
+
+```julia
+verify(ZnParafermion(; 4 = 4), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2 * (4 - 1) // (4 + 2), agree_within = 1.0e-12, refs = ["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"])
+```
+
+```julia
+verify(ZnParafermion(; 5 = 5), CentralCharge(), Infinite(); route = :second_closed_form, independent = 2 * (5 - 1) // (5 + 2), agree_within = 1.0e-12, refs = ["Fateev-Zamolodchikov: Z_n parafermion c = 2(n-1)/(n+2)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -17,6 +17,9 @@
 |---|---|---|---|---|
 | `@topological` | `second_closed_form` | 🟢 structural | Kitaev sweet spot μ=0, t=Δ=1: exact Majorana boundary, splitting ~ 0 | `test/models/quantum/misc/test_kitaev1d.jl` |
 | `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ## Test calls
 
@@ -27,14 +30,26 @@ verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(40); route
 ```
 
 ```julia
-verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(16); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(32); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

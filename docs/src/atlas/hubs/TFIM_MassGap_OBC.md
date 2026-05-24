@@ -22,7 +22,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), MassGap(), OBC(N); route = :ed_finite_size, independent = sp[2] - sp[1], agree_within = 1.0e-9, refs = ["Direct OBC dense ED first excitation via _build_tfim_dense"])
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), MassGap(), OBC(8); route = :ed_finite_size, independent = (dense_spectrum(_build_tfim_dense(8, 1.0, 2.0)))[2] - (dense_spectrum(_build_tfim_dense(8, 1.0, 2.0)))[1], agree_within = 1.0e-9, refs = ["Direct OBC dense ED first excitation via _build_tfim_dense"])
 ```
 
 

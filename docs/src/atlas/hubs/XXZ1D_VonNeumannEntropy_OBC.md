@@ -16,20 +16,255 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(XXZ1D(), VonNeumannEntropy(), OBC(N); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; J = J, Δ = Δ, ℓ = 1, beta = β))
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x symmetry (Z₂ from e^{iπΣS^x}): ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for all J, Δ, N, β"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 48 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

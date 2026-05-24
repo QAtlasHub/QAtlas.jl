@@ -16,20 +16,495 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index | `test/models/quantum/XXZ/test_xxz1d_obc_entropy_l1_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(XXZ1D(), RenyiEntropy(α), OBC(N); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; J = J, Δ = Δ, ℓ = 1, beta = β))
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(3); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(5); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["XXZ1D U(1) × Z₂^x (Z₂ from e^{iπΣS^x}): maximally mixed ρ₁ ⇒ S_α(ℓ=1) = log 2 for all Rényi index"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5, ℓ = 1, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 96 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

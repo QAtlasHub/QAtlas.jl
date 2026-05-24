@@ -15,6 +15,10 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1 | `test/models/quantum/TFIM/test_TFIM_magnetization_x_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1 | `test/models/quantum/TFIM/test_TFIM_magnetization_x_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1 | `test/models/quantum/TFIM/test_TFIM_magnetization_x_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value) | `test/models/quantum/TFIM/test_TFIM_magnetization_x_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value) | `test/models/quantum/TFIM/test_TFIM_magnetization_x_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value) | `test/models/quantum/TFIM/test_TFIM_magnetization_x_batch.jl` |
 
 ## Test calls
@@ -22,18 +26,34 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1"], fetch_kw = (; beta = BETA))
+verify(TFIM(; J = 0.0, 0.5 = 0.5), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1"], fetch_kw = (; beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value)"], fetch_kw = (; beta = BETA))
+verify(TFIM(; J = 0.0, 1.0 = 1.0), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["TFIM at J=0 is the pure transverse field; GS is the +x polarised product state ⇒ <σ^x> = 1"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value)"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), MagnetizationX(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["TFIM at h=0 (pure Ising): Hamiltonian has no x-component ⇒ <σ^x> = 0 (symmetry-unbroken thermal value)"], fetch_kw = (; beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

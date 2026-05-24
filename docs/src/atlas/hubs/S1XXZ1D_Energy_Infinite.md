@@ -18,6 +18,7 @@
 | `@haldane` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) delegates to S1Heisenberg1D: code paths must agree | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 | `@haldane` | `delegation_invariant` | 🟡 asserted | Linear J scaling: e(3J) = 3 e(J) for spin-1 Heisenberg point | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 | `@haldane` | `delegation_invariant` | 🟡 asserted | White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (Δ=1 delegation; J-linear scaling) | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (Δ=1 delegation; J-linear scaling) | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 
 ## Test calls
 
@@ -32,14 +33,18 @@ verify(S1XXZ1D(; J = 3.0, Δ = 1.0), Energy(:per_site), Infinite(); route = :del
 ```
 
 ```julia
-verify(S1XXZ1D(; J = J, Δ = 1.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = -1.40148403897J, agree_within = 1.0e-6, refs = ["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (Δ=1 delegation; J-linear scaling)"])
+verify(S1XXZ1D(; 1.0 = 1.0, Δ = 1.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = -1.40148403897 * 1.0, agree_within = 1.0e-6, refs = ["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (Δ=1 delegation; J-linear scaling)"])
+```
+
+```julia
+verify(S1XXZ1D(; 2.0 = 2.0, Δ = 1.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = -1.40148403897 * 2.0, agree_within = 1.0e-6, refs = ["White 1993 PRL 69 2863: S=1 Heisenberg DMRG e₀ ≈ -1.4014840 · J (Δ=1 delegation; J-linear scaling)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 3 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

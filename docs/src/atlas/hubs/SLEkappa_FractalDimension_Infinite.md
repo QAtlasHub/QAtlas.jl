@@ -16,20 +16,40 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8 | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8 | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8 | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8 | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8 | `test/models/classical/test_sle_kappa.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(SLEkappa(; κ = κ), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + κ / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
+verify(SLEkappa(; 2.0 = 2.0), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + 2.0 / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
+```
+
+```julia
+verify(SLEkappa(; 8 / 3 = 8 / 3), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + (8 / 3) / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
+```
+
+```julia
+verify(SLEkappa(; 3.0 = 3.0), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + 3.0 / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
+```
+
+```julia
+verify(SLEkappa(; 4.0 = 4.0), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + 4.0 / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
+```
+
+```julia
+verify(SLEkappa(; 6.0 = 6.0), FractalDimension(), Infinite(); route = :second_closed_form, independent = 1 + 6.0 / 8, agree_within = 1.0e-9, refs = ["Beffara 2008: SLE_κ curve fractal dimension D = 1 + κ/8"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

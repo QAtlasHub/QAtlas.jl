@@ -17,6 +17,8 @@
 |---|---|---|---|---|
 | `@ising1d` | `limiting_case` | 🟡 asserted | Ising 1925: no finite-T order in 1D, Tc = 0 | `test/models/classical/test_ising_chain_1d.jl` |
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0 | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
 
@@ -27,14 +29,22 @@ verify(IsingChain1D(; J = 1.0), CriticalTemperature(), Infinite(); route = :limi
 ```
 
 ```julia
-verify(IsingChain1D(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0"])
+verify(IsingChain1D(; 0.5 = 0.5), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0"])
+```
+
+```julia
+verify(IsingChain1D(; 2.0 = 2.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 0, refs = ["Ising 1925: 1D Ising chain has no spontaneous magnetisation at any T > 0 ⇒ T_c = 0"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -18,8 +18,8 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 3 |
-| 🔵 coherent | 3 |
+| 🟢 corroborated-at-p | 6 |
+| 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 2 |
 | **total claimed hubs** | **8** |
@@ -37,10 +37,10 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | [`CriticalExponents`](../quantities/CriticalExponents.md) | 🟠 [hub](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) |
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/CurieWeissIsing_CriticalTemperature_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/CurieWeissIsing_Energy_Infinite.md) |
-| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🔵 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
-| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🔵 [hub](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟢 [hub](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |
-| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🔵 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

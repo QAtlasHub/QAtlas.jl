@@ -37,7 +37,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | — |
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | — | 🟢 [hub](../hubs/HeisenbergXYZ_Energy_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟠 [hub](../hubs/IsingChain1D_Energy_Infinite.md) |
-| [`IsingSquare`](../models/IsingSquare.md) | — | 🟠 [hub](../hubs/IsingSquare_Energy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_Energy_Infinite.md) |
+| [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_Energy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_Energy_Infinite.md) |
 | [`J1J2Heisenberg1D`](../models/J1J2Heisenberg1D.md) | — | — | 🟢 [hub](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) |
 | [`KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) | — | — | ⚪ [hub](../hubs/KagomeHeisenbergAFM_Energy_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | — | — | 🟢 [hub](../hubs/Kitaev1D_Energy_Infinite.md) |
@@ -48,7 +48,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1XXZ1D`](../models/S1XXZ1D.md) | — | — | 🔵 [hub](../hubs/S1XXZ1D_Energy_Infinite.md) |
 | [`ShastrySutherland`](../models/ShastrySutherland.md) | — | — | 🟠 [hub](../hubs/ShastrySutherland_Energy_Infinite.md) |
 | [`SherringtonKirkpatrick`](../models/SherringtonKirkpatrick.md) | — | — | ⚪ [hub](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) |
-| [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🔵 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
+| [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟢 [hub](../hubs/TightBindingV1D_Energy_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/XXZ1D_Energy_Infinite.md) |

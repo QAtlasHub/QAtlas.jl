@@ -133,10 +133,10 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 6 hubs (quan
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`CorrelationLength`](../../atlas/hubs/Kitaev1D_CorrelationLength_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
-| [`EdgeModeEnergy`](../../atlas/hubs/Kitaev1D_EdgeModeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 2 |
-| [`Energy`](../../atlas/hubs/Kitaev1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| [`EdgeModeEnergy`](../../atlas/hubs/Kitaev1D_EdgeModeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 5 |
+| [`Energy`](../../atlas/hubs/Kitaev1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | [`MassGap`](../../atlas/hubs/Kitaev1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | [`MassGap`](../../atlas/hubs/Kitaev1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
-| [`TopologicalInvariant`](../../atlas/hubs/Kitaev1D_TopologicalInvariant_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| [`TopologicalInvariant`](../../atlas/hubs/Kitaev1D_TopologicalInvariant_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 9 |
 
 <!-- ATLAS:HUBS:END -->

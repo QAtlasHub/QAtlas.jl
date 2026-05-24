@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@massless` | `second_closed_form` | 🟢 structural | Massless Schwinger model: m_gamma = e / sqrt(pi) (exact) | `test/models/quantum/misc/test_schwinger_model.jl` |
+| `@massless` | `second_closed_form` | 🟢 structural | Massless Schwinger model: m_gamma = e / sqrt(pi) (exact) | `test/models/quantum/misc/test_schwinger_model.jl` |
+| `@massless` | `second_closed_form` | 🟢 structural | Massless Schwinger model: m_gamma = e / sqrt(pi) (exact) | `test/models/quantum/misc/test_schwinger_model.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(SchwingerModel(; e = e, m = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = e / sqrt(pi), agree_within = 1.0e-9, refs = ["Massless Schwinger model: m_gamma = e / sqrt(pi) (exact)"])
+verify(SchwingerModel(; 1.0 = 1.0, m = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0 / sqrt(pi), agree_within = 1.0e-9, refs = ["Massless Schwinger model: m_gamma = e / sqrt(pi) (exact)"])
+```
+
+```julia
+verify(SchwingerModel(; 2.0 = 2.0, m = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 2.0 / sqrt(pi), agree_within = 1.0e-9, refs = ["Massless Schwinger model: m_gamma = e / sqrt(pi) (exact)"])
+```
+
+```julia
+verify(SchwingerModel(; 3.0 = 3.0, m = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 3.0 / sqrt(pi), agree_within = 1.0e-9, refs = ["Massless Schwinger model: m_gamma = e / sqrt(pi) (exact)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

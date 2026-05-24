@@ -16,6 +16,9 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: ξ = 1 / log(coth βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: ξ = 1 / log(coth βJ) at h = 0 | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing | `test/models/classical/test_ising_chain_1d.jl` |
 | `@ising1d` | `second_closed_form` | 🟢 structural | Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
@@ -23,18 +26,30 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingChain1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = 1 / log(coth(β * J)), agree_within = 1.0e-9, refs = ["Ising 1925: ξ = 1 / log(coth βJ) at h = 0"])
+verify(IsingChain1D(; 1.0 = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = 1 / log(coth(1.0 * 1.0)), agree_within = 1.0e-9, refs = ["Ising 1925: ξ = 1 / log(coth βJ) at h = 0"])
 ```
 
 ```julia
-verify(IsingChain1D(; J = J), CorrelationLength(), Infinite(); route = :second_closed_form, independent = -1 / log(tanh(β * J)), agree_within = 1.0e-12, refs = ["Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing"], fetch_kw = (; beta = β))
+verify(IsingChain1D(; 1.0 = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = 1 / log(coth(2.0 * 1.0)), agree_within = 1.0e-9, refs = ["Ising 1925: ξ = 1 / log(coth βJ) at h = 0"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = -1 / log(tanh(0.5 * 1.0)), agree_within = 1.0e-12, refs = ["Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing"], fetch_kw = (; beta = 0.5))
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = -1 / log(tanh(1.0 * 1.0)), agree_within = 1.0e-12, refs = ["Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing"], fetch_kw = (; beta = 1.0))
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = -1 / log(tanh(2.0 * 1.0)), agree_within = 1.0e-12, refs = ["Kramers-Wannier 1941: ξ(β) = -1/log(tanh(βJ)) per lattice spacing"], fetch_kw = (; beta = 2.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

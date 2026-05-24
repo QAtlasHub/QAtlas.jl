@@ -23,11 +23,11 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, fetch_kw = (; q = q, ω = ω, J = J, method = :muller), independent = S_indep, agree_within = 1.0e-12, refs = ["Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion"])
+verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, fetch_kw = (; π / 2 = π / 2, 2.0 = 2.0, 1.0 = 1.0, method = :muller), independent = 1 / (2 * sqrt(2.0 ^ 2 - (((π * 1.0) / 2) * abs(sin(π / 2))) ^ 2)), agree_within = 1.0e-12, refs = ["Müller-Thomas-Beck-Bonner 1981; des Cloizeaux-Pearson 1962 dispersion"])
 ```
 
 ```julia
-verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, fetch_kw = (; q = q, ω = εU + 0.5, J = J, method = :muller), independent = 0.0, agree_within = 1.0e-14, refs = ["Two-spinon continuum has compact support: S=0 for ω > ε_U(q)"])
+verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, fetch_kw = (; π / 2 = π / 2, ω = π * 1.0 * abs(sin((π / 2) / 2)) + 0.5, 1.0 = 1.0, method = :muller), independent = 0.0, agree_within = 1.0e-14, refs = ["Two-spinon continuum has compact support: S=0 for ω > ε_U(q)"])
 ```
 
 

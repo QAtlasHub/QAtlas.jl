@@ -16,20 +16,60 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_massgap_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Heisenberg1D(), MassGap(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; J = J))
+verify(Heisenberg1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Heisenberg1D OBC odd N: S_total=1/2 doublet GS (two degenerate m_z = ±1/2 levels) ⇒ Δ = 0 exactly"], fetch_kw = (; 2.0 = 2.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -47,7 +47,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 | 2. Quantities without extracted Definition | 0 |
 | 3. Orphan calc notes (matched to no model) | 13 |
 | 4. Models registered but with 0 hubs | 0 |
-| 5. INVENTORY card hubs with no `@register` claim | 63 |
+| 5. INVENTORY card hubs with no `@register` claim | 44 |
 
 ## Reference & derivation indices
 

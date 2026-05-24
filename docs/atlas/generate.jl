@@ -230,6 +230,24 @@ function _normalize_hub(h::AbstractString)
     return string(m, "/", q, "/", b)
 end
 
+# Universality-class orphan classification.
+const _UNIV_CLASS_MODELS = Set([
+    "Universality",
+    "E8",
+    "MeanField",
+    "MinimalModel",
+    "ONModel",
+    "Potts",
+    "KPZ",
+    "Percolation",
+])
+
+function _is_univ_class_orphan(h::AbstractString)
+    parts = split(h, "/")
+    isempty(parts) && return false
+    return first(parts) in _UNIV_CLASS_MODELS
+end
+
 # ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
 
 # CONVENTION block extraction: parse the standard header comment
@@ -1031,9 +1049,10 @@ _audit_counts = let
     end
     zero_hubs = count(m -> isempty(filter(h -> modelof(h) == m, claimed)), models)
     norm_claims = Set(_normalize_hub(h) for h in claimed)
-    orphan_cards = length(
-        unique(filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards]))
+    all_oc = unique(
+        filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards])
     )
+    orphan_cards = count(h -> !_is_univ_class_orphan(h), all_oc)
     (; conv=no_conv + no_conv_no_file, def=no_def, orphan_calc, zero_hubs, orphan_cards)
 end
 
@@ -1568,21 +1587,39 @@ function render_audit()
     P("")
     P(
         "Verify cards exist for `(M, Q, BC)` triples that no `@register` ",
-        "claims.  These hubs are visible only through the cards, not the ",
-        "registry view; the absence of an `@register` claim means the ",
-        "primary `src` claim isn't there.",
+        "claims.  Split into two subcategories: universality-class cards ",
+        "are intentionally card-only (no model-side @register applies); ",
+        "the rest are real registry gaps for follow-up.",
     )
     P("")
     norm_claims = Set(_normalize_hub(h) for h in claimed)
-    orphan_cards = sort(
+    all_orphans = sort(
         unique(filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards]))
     )
-    if isempty(orphan_cards)
-        P("!!! tip \"All INVENTORY card hubs have a matching `@register` claim.\"")
+    univ_orphans = filter(_is_univ_class_orphan, all_orphans)
+    real_orphans = filter(h -> !_is_univ_class_orphan(h), all_orphans)
+    P("### 5a. Universality-class card-only (by design — not a gap)")
+    P("")
+    if isempty(univ_orphans)
+        P("_None._")
     else
-        P("**", length(orphan_cards), " orphan card hub(s)**:")
+        P("**", length(univ_orphans), " universality-class hub(s)**:")
         P("")
-        for h in orphan_cards
+        for h in univ_orphans
+            P("- `", h, "`")
+        end
+    end
+    P("")
+    P("### 5b. Real orphan card hubs (need @register or removal)")
+    P("")
+    if isempty(real_orphans)
+        P(
+            "!!! tip \"All non-universality INVENTORY card hubs have a matching `@register` claim.\"",
+        )
+    else
+        P("**", length(real_orphans), " real orphan card hub(s)**:")
+        P("")
+        for h in real_orphans
             P("- `", h, "`")
         end
         P("")

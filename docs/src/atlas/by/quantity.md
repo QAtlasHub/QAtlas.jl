@@ -368,6 +368,20 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
 
+## `TightBindingChecksum` (4)
+
+- 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingChecksum/Infinite`](../hubs/Lieb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+
+## `TightBindingMaxEnergy` (4)
+
+- 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](../hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+
 ## `TopologicalEntanglementEntropy` (3)
 
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p

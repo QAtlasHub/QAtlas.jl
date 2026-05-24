@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (64)
+## `(no card)` (72)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -14,6 +14,8 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationYLocal/OBC`](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationZLocal/OBC`](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/Energy/PBC`](../hubs/IsingSquare_Energy_PBC.md) — uncorroborated-but-feasible
@@ -22,10 +24,14 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`IsingSquare/SpecificHeat/PBC`](../hubs/IsingSquare_SpecificHeat_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/ThermalEntropy/PBC`](../hubs/IsingSquare_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](../hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - ⚪ [`KitaevHoneycomb/Energy/OBC`](../hubs/KitaevHoneycomb_Energy_OBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/Energy/PBC`](../hubs/KitaevHoneycomb_Energy_PBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/FreeEnergy/Infinite`](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) — cited-only
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) — cited-only
+- 🟠 [`Lieb/TightBindingChecksum/Infinite`](../hubs/Lieb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](../hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/EnergyLocal/OBC`](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationX/OBC`](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
@@ -57,6 +63,8 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
+- 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](../hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible

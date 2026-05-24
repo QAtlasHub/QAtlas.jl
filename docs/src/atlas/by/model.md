@@ -99,6 +99,11 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`HeisenbergXYZ/Energy/Infinite`](../hubs/HeisenbergXYZ_Energy_Infinite.md) — corroborated-at-p
 - 🔵 [`HeisenbergXYZ/LuttingerParameter/Infinite`](../hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) — coherent
 
+## `Honeycomb` (2)
+
+- 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+
 ## `Hubbard1D` (4)
 
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](../hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
@@ -142,6 +147,11 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 
+## `Kagome` (2)
+
+- 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+
 ## `KagomeHeisenbergAFM` (3)
 
 - ⚪ [`KagomeHeisenbergAFM/Energy/Infinite`](../hubs/KagomeHeisenbergAFM_Energy_Infinite.md) — cited-only
@@ -173,6 +183,11 @@ Every `src`-claimed hub grouped by model.
 - 🔵 [`KitaevHoneycomb/SpecificHeat/OBC`](../hubs/KitaevHoneycomb_SpecificHeat_OBC.md) — coherent
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/Infinite`](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — coherent
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/OBC`](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — coherent
+
+## `Lieb` (2)
+
+- 🟠 [`Lieb/TightBindingChecksum/Infinite`](../hubs/Lieb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](../hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
 ## `LiouvilleCFT` (2)
 
@@ -378,6 +393,11 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`ToricCode/GroundStateEnergyDensity/Infinite`](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/MassGap/Infinite`](../hubs/ToricCode_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/TopologicalEntanglementEntropy/Infinite`](../hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
+
+## `Triangular` (2)
+
+- 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
 ## `TricriticalIsing` (3)
 

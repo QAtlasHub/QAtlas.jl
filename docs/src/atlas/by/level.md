@@ -217,7 +217,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (60)
+## `uncorroborated-but-feasible` (68)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -226,6 +226,8 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationYLocal/OBC`](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationZLocal/OBC`](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/Energy/PBC`](../hubs/IsingSquare_Energy_PBC.md) — uncorroborated-but-feasible
@@ -234,6 +236,10 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`IsingSquare/SpecificHeat/PBC`](../hubs/IsingSquare_SpecificHeat_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/ThermalEntropy/PBC`](../hubs/IsingSquare_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](../hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingChecksum/Infinite`](../hubs/Lieb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](../hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/EnergyLocal/OBC`](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationX/OBC`](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
@@ -265,6 +271,8 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`TightBindingV1D/FreeEnergy/Infinite`](../hubs/TightBindingV1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](../hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible

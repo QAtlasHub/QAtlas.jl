@@ -40,4 +40,10 @@ All `(Quantity, BC)` hubs `src` claims for **`Hubbard1D`**.  Cells link to the p
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | 🟢 [hub](../hubs/Hubbard1D_LuttingerParameter_Infinite.md) |
 | [`SpinGap`](../quantities/SpinGap.md) | 🟢 [hub](../hubs/Hubbard1D_SpinGap_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

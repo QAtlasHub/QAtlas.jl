@@ -43,4 +43,10 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

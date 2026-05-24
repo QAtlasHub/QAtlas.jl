@@ -59,8 +59,12 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 
 Matched by filename substring (no annotation; substrate-derived):
 
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
 - [`bethe-ansatz-heisenberg-e0.md`](../../calc/bethe-ansatz-heisenberg-e0.md)
+- [`calabrese-cardy-obc-vs-pbc.md`](../../calc/calabrese-cardy-obc-vs-pbc.md)
 - [`heisenberg-dimer-singlet-triplet.md`](../../calc/heisenberg-dimer-singlet-triplet.md)
 - [`heisenberg-spinons.md`](../../calc/heisenberg-spinons.md)
+- [`xx-quench.md`](../../calc/xx-quench.md)
+- [`yang-magnetization-toeplitz.md`](../../calc/yang-magnetization-toeplitz.md)
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

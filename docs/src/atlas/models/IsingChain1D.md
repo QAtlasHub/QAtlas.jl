@@ -44,4 +44,15 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingChain1D`**.  Cells link to th
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+- [`ising-cft-magnetic-perturbation.md`](../../calc/ising-cft-magnetic-perturbation.md)
+- [`ising-cft-primary-operators.md`](../../calc/ising-cft-primary-operators.md)
+- [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
+- [`kramers-wannier-duality.md`](../../calc/kramers-wannier-duality.md)
+- [`transfer-matrix-symmetric-split.md`](../../calc/transfer-matrix-symmetric-split.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

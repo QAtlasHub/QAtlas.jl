@@ -225,12 +225,34 @@ end
 # from src/models/<class>/<Model>/<Model>.jl.  The block is enforced by
 # the CI lint (`test/lint/`) on new model files; older files (e.g.
 # IsingSquare) may not have it — return an empty list in that case.
+const _STRUCT_PATH_CACHE = Dict{String,String}()
+const _STRUCT_CACHE_BUILT = Ref(false)
+
+function _build_struct_path_cache()
+    _STRUCT_CACHE_BUILT[] && return nothing
+    for (root, _, fs) in walkdir(joinpath(ROOT, "src", "models"))
+        for f in fs
+            endswith(f, ".jl") || continue
+            endswith(f, "_registry.jl") && continue
+            p = joinpath(root, f)
+            txt = read(p, String)
+            for m in eachmatch(r"^struct\s+([A-Z][A-Za-z0-9_]*)(?:\{[^}]*\})?\s*<:"m, txt)
+                name = m.captures[1]
+                haskey(_STRUCT_PATH_CACHE, name) || (_STRUCT_PATH_CACHE[name] = p)
+            end
+        end
+    end
+    _STRUCT_CACHE_BUILT[] = true
+    return nothing
+end
+
 function _convention_path(model_name::AbstractString)
     for class in ("classical", "quantum")
         p = joinpath(ROOT, "src", "models", class, model_name, model_name * ".jl")
         isfile(p) && return p
     end
-    return ""
+    _build_struct_path_cache()
+    return get(_STRUCT_PATH_CACHE, model_name, "")
 end
 
 function _parse_convention(model_name::AbstractString)

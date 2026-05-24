@@ -7,7 +7,10 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 
 ## Convention
 
-_No `CONVENTION` header found in `src/models/<class>/Heisenberg1D/Heisenberg1D.jl` (model file may predate the lint; see `docs/src/conventions.md` for the project-wide convention policy)._
+| Field | Value |
+|---|---|
+| Hamiltonian | Spin S (this file) |
+| Observable | Spin S         (QAtlas-wide spin convention; see docs/src/conventions.md) |
 
 ## Coverage
 

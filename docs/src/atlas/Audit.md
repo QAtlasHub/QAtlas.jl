@@ -44,7 +44,7 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5a. Universality-class card-only (by design — not a gap)
 
-**19 universality-class hub(s)**:
+**21 universality-class hub(s)**:
 
 - `E8/E8Spectrum/Infinite`
 - `MeanField/CriticalExponents/Infinite`
@@ -65,19 +65,21 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 - `Universality/VonNeumannEntropy/OBC`
 - `Universality/VonNeumannEntropy/PBC`
 - `Universality/WignerSurmise/Infinite`
+- `WZWSU2/CentralCharge/Infinite`
+- `WZWSU2/ConformalWeights/Infinite`
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-**44 real orphan card hub(s)**:
+**42 real orphan card hub(s)**:
 
-- `QAtlas.Honeycomb/TightBindingChecksum/Infinite`
-- `QAtlas.Honeycomb/TightBindingMaxEnergy/Infinite`
-- `QAtlas.Kagome/TightBindingChecksum/Infinite`
-- `QAtlas.Kagome/TightBindingMaxEnergy/Infinite`
-- `QAtlas.Lieb/TightBindingChecksum/Infinite`
-- `QAtlas.Lieb/TightBindingMaxEnergy/Infinite`
-- `QAtlas.Triangular/TightBindingChecksum/Infinite`
-- `QAtlas.Triangular/TightBindingMaxEnergy/Infinite`
+- `Honeycomb/TightBindingChecksum/Infinite`
+- `Honeycomb/TightBindingMaxEnergy/Infinite`
+- `Kagome/TightBindingChecksum/Infinite`
+- `Kagome/TightBindingMaxEnergy/Infinite`
+- `Lieb/TightBindingChecksum/Infinite`
+- `Lieb/TightBindingMaxEnergy/Infinite`
+- `Triangular/TightBindingChecksum/Infinite`
+- `Triangular/TightBindingMaxEnergy/Infinite`
 - `S1Heisenberg1D/q/OBC`
 - `TFIM/Energy/bc`
 - `TFIM/LoschmidtRateFunction/Infinite`
@@ -85,15 +87,13 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 - `TFIM/q/OBC`
 - `TFIM/qty/OBC`
 - `TFIM/qty/PBC`
-- `WZWSU2/CentralCharge/Infinite`
-- `WZWSU2/ConformalWeights/Infinite`
 - `XXZ1D/GroundStateEnergyDensity/Infinite`
 - `XXZ1D/q/OBC`
 - `XXZ1D/qty/OBC`
 - `_XX/Energy/Infinite`
 - `_XX/FreeEnergy/Infinite`
 - `_XX/ThermalEntropy/Infinite`
-- `m/Energy{:per_site}/Infinite`
+- `m/Energy/Infinite`
 - `m/FreeEnergy/Infinite`
 - `m/GGEValue/Infinite`
 - `m/LoschmidtRateFunction/Infinite`

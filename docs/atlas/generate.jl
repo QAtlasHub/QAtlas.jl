@@ -239,13 +239,24 @@ const _UNIV_CLASS_MODELS = Set([
     "ONModel",
     "Potts",
     "KPZ",
+    "KPZ1D",
     "Percolation",
+    "WZWSU2",
 ])
 
 function _is_univ_class_orphan(h::AbstractString)
     parts = split(h, "/")
     isempty(parts) && return false
     return first(parts) in _UNIV_CLASS_MODELS
+end
+
+# Single source of truth for orphan card hubs.  Computed once at load
+# time so both the atlas/index.md count summary and the Audit.md
+# section 5 list use the same data; eliminates duplication and prevents
+# future divergence.
+const _ORPHAN_HUBS = let
+    norm = Set(_normalize_hub(h) for h in claimed)
+    sort(unique(filter(h -> !(_normalize_hub(h) in norm), [c.hub for c in cards])))
 end
 
 # ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
@@ -1048,11 +1059,7 @@ _audit_counts = let
         matched || (orphan_calc += 1)
     end
     zero_hubs = count(m -> isempty(filter(h -> modelof(h) == m, claimed)), models)
-    norm_claims = Set(_normalize_hub(h) for h in claimed)
-    all_oc = unique(
-        filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards])
-    )
-    orphan_cards = count(h -> !_is_univ_class_orphan(h), all_oc)
+    orphan_cards = count(h -> !_is_univ_class_orphan(h), _ORPHAN_HUBS)
     (; conv=no_conv + no_conv_no_file, def=no_def, orphan_calc, zero_hubs, orphan_cards)
 end
 
@@ -1592,12 +1599,8 @@ function render_audit()
         "the rest are real registry gaps for follow-up.",
     )
     P("")
-    norm_claims = Set(_normalize_hub(h) for h in claimed)
-    all_orphans = sort(
-        unique(filter(h -> !(_normalize_hub(h) in norm_claims), [c.hub for c in cards]))
-    )
-    univ_orphans = filter(_is_univ_class_orphan, all_orphans)
-    real_orphans = filter(h -> !_is_univ_class_orphan(h), all_orphans)
+    univ_orphans = filter(_is_univ_class_orphan, _ORPHAN_HUBS)
+    real_orphans = filter(h -> !_is_univ_class_orphan(h), _ORPHAN_HUBS)
     P("### 5a. Universality-class card-only (by design — not a gap)")
     P("")
     if isempty(univ_orphans)
@@ -1606,7 +1609,7 @@ function render_audit()
         P("**", length(univ_orphans), " universality-class hub(s)**:")
         P("")
         for h in univ_orphans
-            P("- `", h, "`")
+            P("- `", _normalize_hub(h), "`")
         end
     end
     P("")
@@ -1620,7 +1623,7 @@ function render_audit()
         P("**", length(real_orphans), " real orphan card hub(s)**:")
         P("")
         for h in real_orphans
-            P("- `", h, "`")
+            P("- `", _normalize_hub(h), "`")
         end
         P("")
     end

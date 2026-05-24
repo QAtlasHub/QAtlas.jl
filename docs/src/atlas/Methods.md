@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 100 hubs
+## `analytic` - 101 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -73,6 +73,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TFIM/FidelitySusceptibility/Infinite`](hubs/TFIM_FidelitySusceptibility_Infinite.md)
 - 🔵 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md)
+- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](hubs/TFIM_LoschmidtRateFunction_Infinite.md)
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
 - 🟢 [`TFIM/MagnetizationY/OBC`](hubs/TFIM_MagnetizationY_OBC.md)
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](hubs/TFIM_MagnetizationZ_Infinite.md)
@@ -266,12 +267,13 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🔵 [`IsingSquare/ThermalEntropy/Infinite`](hubs/IsingSquare_ThermalEntropy_Infinite.md)
 - 🟢 [`IsingSquare/ThermalEntropy/PBC`](hubs/IsingSquare_ThermalEntropy_PBC.md)
 
-## `bethe_ansatz` - 4 hubs
+## `bethe_ansatz` - 5 hubs
 
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md)
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
 - 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md)
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
+- 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md)
 
 ## `dmrg_reference` - 4 hubs
 

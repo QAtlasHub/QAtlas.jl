@@ -166,7 +166,7 @@ ansatz](../../calc/xxz-luttinger-parameters.md).
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 2 models register 28 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 2 models register 29 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
@@ -178,6 +178,7 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 28 hubs (
 | `XXZ1D` | [`EnergyLocal`](../../atlas/hubs/XXZ1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`FreeEnergy`](../../atlas/hubs/XXZ1D_FreeEnergy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | `XXZ1D` | [`FreeEnergy`](../../atlas/hubs/XXZ1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 21 |
+| `XXZ1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | `XXZ1D` | [`LoschmidtEcho`](../../atlas/hubs/XXZ1D_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 | `XXZ1D` | [`LuttingerParameter`](../../atlas/hubs/XXZ1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 9 |
 | `XXZ1D` | [`LuttingerVelocity`](../../atlas/hubs/XXZ1D_LuttingerVelocity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |

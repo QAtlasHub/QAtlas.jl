@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`PartitionFunction`** observable. 
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`, `transfer_matrix`
+- **Universality classes** (where applicable): `Ising`, `WZW`
+
+**Top references** (by hub count):
+- Onsager 1944 — 1 hub
+- Verlinde 1988 — 1 hub
+- Witten 1989 — 1 hub
 
 ## Model × BC matrix
 

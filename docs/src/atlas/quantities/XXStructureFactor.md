@@ -9,6 +9,8 @@ All `(Model, BC)` hubs `src` claims for the **`XXStructureFactor`** observable. 
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `pfaffian`
+- **Universality classes** (where applicable): `Ising`
 
 ## Model × BC matrix
 

@@ -9,6 +9,12 @@ All `(Model, BC)` hubs `src` claims for the **`LuttingerVelocity`** observable. 
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 1
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Giamarchi 2004 — 1 hub
+- des Cloizeaux Pearson 1962 — 1 hub
 
 ## Model × BC matrix
 

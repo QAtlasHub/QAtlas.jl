@@ -9,6 +9,8 @@ All `(Model, BC)` hubs `src` claims for the **`ExactSpectrum`** observable.  Emp
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 1
+- **Methods** (derived from `@register`): `dense_ed`
+- **Universality classes** (where applicable): —
 
 ## Model × BC matrix
 

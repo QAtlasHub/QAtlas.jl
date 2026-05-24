@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`SpecificHeat`** observable.  Empt
 
 - **Models with this quantity registered**: 10
 - **Total hubs (Model, BC pairs)**: 15
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `dense_ed`, `free_fermion_quadgk`, `matter_free_fermion`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Kitaev 2006 — 2 hubs
+- Lieb 1994 — 2 hubs
+- Mahan 2000 — 2 hubs
+- Ising 1925 — 1 hub
+- Landau-Lifshitz §149 — 1 hub
 
 ## Model × BC matrix
 

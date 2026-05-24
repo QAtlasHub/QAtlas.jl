@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`SpinGap`** observable.  Empty cel
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`, `dmrg_reference`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Eggert 1996 — 1 hub
+- Lieb-Wu PRL 20, 1445 (1968) — 1 hub
+- White-Affleck 1996 — 1 hub
 
 ## Model × BC matrix
 

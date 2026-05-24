@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`TopologicalInvariant`** observabl
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`, `pfaffian`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Asboth-Oroszlany-Palyi 2016 — 1 hub
+- Kitaev 2001 — 1 hub
+- Read-Green 2000 — 1 hub
 
 ## Model × BC matrix
 

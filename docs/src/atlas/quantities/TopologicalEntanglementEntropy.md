@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`TopologicalEntanglementEntropy`**
 
 - **Models with this quantity registered**: 3
 - **Total hubs (Model, BC pairs)**: 3
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Kitaev-Preskill 2006 — 3 hubs
+- Levin-Wen 2006 — 2 hubs
+- Freedman-Kitaev-Larsen-Wang 2003 — 1 hub
+- Iqbal-Becca-Sorella-Poilblanc 2013 — 1 hub
+- Jiang-Wang-Balents 2012 — 1 hub
 
 ## Model × BC matrix
 

@@ -9,6 +9,14 @@ All `(Model, BC)` hubs `src` claims for the **`SpontaneousMagnetization`** obser
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Ising 1925 — 1 hub
+- Landau-Lifshitz §149 — 1 hub
+- Pfeuty 1970 — 1 hub
+- Yang 1952 — 1 hub
 
 ## Model × BC matrix
 

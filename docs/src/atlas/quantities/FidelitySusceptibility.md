@@ -9,6 +9,12 @@ All `(Model, BC)` hubs `src` claims for the **`FidelitySusceptibility`** observa
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`, `bdg`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Damski PRB 87 165101 (2013) — 2 hubs
+- Gu IJMPB 24 4371 (2010) — 2 hubs
 
 ## Model × BC matrix
 

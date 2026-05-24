@@ -9,6 +9,8 @@ All `(Model, BC)` hubs `src` claims for the **`YYCorrelation`** observable.  Emp
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `dense_ed`, `pfaffian`
+- **Universality classes** (where applicable): `Ising`
 
 ## Model × BC matrix
 

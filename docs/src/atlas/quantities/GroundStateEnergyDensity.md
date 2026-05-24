@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`GroundStateEnergyDensity`** obser
 
 - **Models with this quantity registered**: 5
 - **Total hubs (Model, BC pairs)**: 6
+- **Methods** (derived from `@register`): `analytic`, `bethe_ansatz`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Majumdar-Ghosh 1969 — 2 hubs
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
+- Bethe 1931 — 1 hub
+- Essler et al. (2005) — 1 hub
+- Hulthén 1938 — 1 hub
 
 ## Model × BC matrix
 

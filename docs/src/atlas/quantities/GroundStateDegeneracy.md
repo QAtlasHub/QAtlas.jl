@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`GroundStateDegeneracy`** observab
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Kitaev 2003 — 1 hub
+- Slagle-Kim 2017 — 1 hub
+- Vijay-Haah-Fu 2016 — 1 hub
 
 ## Model × BC matrix
 

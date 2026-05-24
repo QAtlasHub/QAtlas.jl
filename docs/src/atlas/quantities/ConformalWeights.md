@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`ConformalWeights`** observable.  
 
 - **Models with this quantity registered**: 6
 - **Total hubs (Model, BC pairs)**: 6
+- **Methods** (derived from `@register`): `analytic`, `bootstrap_reference`, `minimal_model_delegation`
+- **Universality classes** (where applicable): `MinimalModel`
+
+**Top references** (by hub count):
+- Belavin-Polyakov-Zamolodchikov 1984 — 2 hubs
+- Andrews-Baxter-Forrester 1984 — 1 hub
+- Cardy 1985 — 1 hub
+- Kitaev 2015 — 1 hub
+- Kos-Poland-Simmons-Duffin 2014 — 1 hub
 
 ## Model × BC matrix
 

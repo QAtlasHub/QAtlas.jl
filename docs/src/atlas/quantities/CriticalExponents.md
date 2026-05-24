@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`CriticalExponents`** observable. 
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `delegation`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Onsager 1944 — 3 hubs
+- Houtappel 1950 — 1 hub
+- Landau 1937 — 1 hub
+- Pfeuty 1970 — 1 hub
+- Stanley 1971 — 1 hub
 
 ## Model × BC matrix
 

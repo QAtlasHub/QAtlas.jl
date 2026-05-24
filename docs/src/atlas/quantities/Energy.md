@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`Energy`** observable.  Empty cell
 
 - **Models with this quantity registered**: 24
 - **Total hubs (Model, BC pairs)**: 31
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Kitaev 2006 — 3 hubs
+- Pfeuty 1970 — 3 hubs
+- White-Huse 1993 — 3 hubs
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 2 hubs
+- Ashcroft-Mermin 1976 — 2 hubs
 
 ## Model × BC matrix
 

@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`SteadyStateCurrent`** observable.
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 1
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Derrida-Evans-Hakim-Pasquier 1993 — 1 hub
+- Derrida-Lebowitz 1998 — 1 hub
+- Kardar-Parisi-Zhang PRL 56, 889 (1986) — 1 hub
 
 ## Model × BC matrix
 

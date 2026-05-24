@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`SusceptibilityZZ`** observable.  
 
 - **Models with this quantity registered**: 6
 - **Total hubs (Model, BC pairs)**: 7
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Brush 1967 RMP 39 883 — 1 hub
+- Ising 1925 — 1 hub
+- Landau-Lifshitz §149 — 1 hub
 
 ## Model × BC matrix
 

@@ -40,29 +40,16 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 !!! tip "Every registered model has at least one hub."
 ## 5. INVENTORY cards with no matching registry claim
 
-Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  These hubs are visible only through the cards, not the registry view; the absence of an `@register` claim means the primary `src` claim isn't there.
+Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split into two subcategories: universality-class cards are intentionally card-only (no model-side @register applies); the rest are real registry gaps for follow-up.
 
-**63 orphan card hub(s)**:
+### 5a. Universality-class card-only (by design — not a gap)
+
+**19 universality-class hub(s)**:
 
 - `E8/E8Spectrum/Infinite`
 - `MeanField/CriticalExponents/Infinite`
 - `MinimalModel/CentralCharge/Infinite`
 - `MinimalModel/ConformalWeights/Infinite`
-- `QAtlas.Honeycomb/TightBindingChecksum/Infinite`
-- `QAtlas.Honeycomb/TightBindingMaxEnergy/Infinite`
-- `QAtlas.Kagome/TightBindingChecksum/Infinite`
-- `QAtlas.Kagome/TightBindingMaxEnergy/Infinite`
-- `QAtlas.Lieb/TightBindingChecksum/Infinite`
-- `QAtlas.Lieb/TightBindingMaxEnergy/Infinite`
-- `QAtlas.Triangular/TightBindingChecksum/Infinite`
-- `QAtlas.Triangular/TightBindingMaxEnergy/Infinite`
-- `S1Heisenberg1D/q/OBC`
-- `TFIM/Energy/bc`
-- `TFIM/LoschmidtRateFunction/Infinite`
-- `TFIM/q/Infinite`
-- `TFIM/q/OBC`
-- `TFIM/qty/OBC`
-- `TFIM/qty/PBC`
 - `Universality/CasimirEnergyCorrection/OBC`
 - `Universality/CasimirEnergyCorrection/PBC`
 - `Universality/CentralCharge/Infinite`
@@ -78,6 +65,26 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  These h
 - `Universality/VonNeumannEntropy/OBC`
 - `Universality/VonNeumannEntropy/PBC`
 - `Universality/WignerSurmise/Infinite`
+
+### 5b. Real orphan card hubs (need @register or removal)
+
+**44 real orphan card hub(s)**:
+
+- `QAtlas.Honeycomb/TightBindingChecksum/Infinite`
+- `QAtlas.Honeycomb/TightBindingMaxEnergy/Infinite`
+- `QAtlas.Kagome/TightBindingChecksum/Infinite`
+- `QAtlas.Kagome/TightBindingMaxEnergy/Infinite`
+- `QAtlas.Lieb/TightBindingChecksum/Infinite`
+- `QAtlas.Lieb/TightBindingMaxEnergy/Infinite`
+- `QAtlas.Triangular/TightBindingChecksum/Infinite`
+- `QAtlas.Triangular/TightBindingMaxEnergy/Infinite`
+- `S1Heisenberg1D/q/OBC`
+- `TFIM/Energy/bc`
+- `TFIM/LoschmidtRateFunction/Infinite`
+- `TFIM/q/Infinite`
+- `TFIM/q/OBC`
+- `TFIM/qty/OBC`
+- `TFIM/qty/PBC`
 - `WZWSU2/CentralCharge/Infinite`
 - `WZWSU2/ConformalWeights/Infinite`
 - `XXZ1D/GroundStateEnergyDensity/Infinite`

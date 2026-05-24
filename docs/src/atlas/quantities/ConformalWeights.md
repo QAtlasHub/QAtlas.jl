@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`ConformalWeights`** observable.  
 
 ## Definition
 
-Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro [`MinimalModel`](@ref) this is the Kac-table entry `h_{r,s}`; for [`WZWSU2`](@ref) it is the SU(2)-spin label `h_j = j(j+1)/(k+2)`.
+Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro ``MinimalModel`` this is the Kac-table entry `h_{r,s}`; for ``WZWSU2`` it is the SU(2)-spin label `h_j = j(j+1)/(k+2)`.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

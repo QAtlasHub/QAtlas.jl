@@ -61,7 +61,10 @@ quantof(h) = (p=split(h, "/"); length(p) >= 2 ? p[2] : "?")
 bcof(h) = (p=split(h, "/"); length(p) >= 3 ? p[3] : "?")
 slugof(h) = replace(h, r"[^A-Za-z0-9]" => "_")
 _quant_slugof(q::AbstractString) = replace(q, r"[^A-Za-z0-9]" => "_")
-_md_escape_dollar(s::AbstractString) = replace(s, r"(?<!\\)\$" => "\\\$")
+function _md_escape_dollar(s::AbstractString)
+    s = replace(s, r"\[([^\]]+)\]\(@ref[^\)]*\)" => s"`\1`")
+    return replace(s, r"(?<!\\)\$" => "\\\$")
+end
 
 # ── R1 taxonomy (single source of truth lives in AtlasInventory) ─────
 # generate.jl is now a thin TYPED consumer of AtlasInventory's

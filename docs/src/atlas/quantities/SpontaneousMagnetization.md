@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`SpontaneousMagnetization`** obser
 
 ## Definition
 
-Spontaneous magnetization of a classical model as a function of temperature.  Retained under this name for backward compatibility with the classical-Ising literature; new code may prefer the axis-explicit [`MagnetizationZ`](@ref) together with a `T < T_c` context.
+Spontaneous magnetization of a classical model as a function of temperature.  Retained under this name for backward compatibility with the classical-Ising literature; new code may prefer the axis-explicit ``MagnetizationZ`` together with a `T < T_c` context.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

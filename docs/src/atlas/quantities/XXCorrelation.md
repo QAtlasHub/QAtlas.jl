@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`XXCorrelation`** observable.  Emp
 
 ## Definition
 
-Real-space 2-point `⟨σˣ_i σˣ_j⟩` correlator.  See [`ZZCorrelation`](@ref) for the `mode` semantics.
+Real-space 2-point `⟨σˣ_i σˣ_j⟩` correlator.  See ``ZZCorrelation`` for the `mode` semantics.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

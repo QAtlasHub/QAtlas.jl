@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`YYStructureFactor`** observable. 
 
 ## Definition
 
-Fourier-space equivalent of [`YYCorrelation`](@ref).
+Fourier-space equivalent of ``YYCorrelation``.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

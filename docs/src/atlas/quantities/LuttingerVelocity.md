@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`LuttingerVelocity`** observable. 
 
 ## Definition
 
-Luttinger-liquid / bosonisation velocity `u` (a.k.a. `v_{LL}`) of the low-energy linear-dispersion mode in a 1D critical interacting system. Used by models like [`XXZ1D`](@ref) in the Luttinger regime `|Δ| < 1`, the Heisenberg chain at the SU(2) point, and any other bosonised 1D critical theory.
+Luttinger-liquid / bosonisation velocity `u` (a.k.a. `v_{LL}`) of the low-energy linear-dispersion mode in a 1D critical interacting system. Used by models like ``XXZ1D`` in the Luttinger regime `|Δ| < 1`, the Heisenberg chain at the SU(2) point, and any other bosonised 1D critical theory.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

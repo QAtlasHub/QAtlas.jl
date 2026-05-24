@@ -5,6 +5,14 @@
 
 All `(Quantity, BC)` hubs `src` claims for **`TightBinding1D`**.  Cells link to the per-hub card; `—` = not yet implemented at that BC.  The shape of the matrix is the *gap visualisation*: empty cells are where physics could be added next.
 
+## Convention
+
+| Field | Value |
+|---|---|
+| Hamiltonian | Fermion bilinears c†c |
+| Observable | Fermion (number n = c†c, bilinear ⟨c†_i c_j⟩); derived spin observables follow spin S = σ/2 |
+| Reference | docs/src/conventions.md §Fermion convention |
+
 ## Coverage
 
 | Level | Count |

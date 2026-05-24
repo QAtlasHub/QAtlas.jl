@@ -5,6 +5,14 @@
 
 All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to the per-hub card; `—` = not yet implemented at that BC.  The shape of the matrix is the *gap visualisation*: empty cells are where physics could be added next.
 
+## Convention
+
+| Field | Value |
+|---|---|
+| Hamiltonian | -(J/N)*Σ σσ - h*Σ σ  (FM convention, h ≥ 0 → m* ≥ 0) |
+| Observable | Spin-1/2 (σ ∈ {±1}) |
+| Reference | docs/src/conventions.md §Spin convention |
+
 ## Coverage
 
 | Level | Count |

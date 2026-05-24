@@ -704,6 +704,47 @@ end
 # ── TIER-1 VIEW GENERATORS (ModelList + per-model + per-quantity) ──────────
 
 # ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
+
+# CONVENTION block extraction: parse the standard header comment
+#   # CONVENTION
+#   #   Hamiltonian: ...
+#   #   Observable: ...
+#   #   Reference: ...
+# from src/models/<class>/<Model>/<Model>.jl.  The block is enforced by
+# the CI lint (`test/lint/`) on new model files; older files (e.g.
+# IsingSquare) may not have it — return an empty list in that case.
+function _convention_path(model_name::AbstractString)
+    for class in ("classical", "quantum")
+        p = joinpath(ROOT, "src", "models", class, model_name, model_name * ".jl")
+        isfile(p) && return p
+    end
+    return ""
+end
+
+function _parse_convention(model_name::AbstractString)
+    path = _convention_path(model_name)
+    isempty(path) && return Pair{String,String}[]
+    lines = readlines(path)
+    out = Pair{String,String}[]
+    in_block = false
+    for ln in lines
+        s = rstrip(ln)
+        if !in_block
+            if startswith(s, "# CONVENTION")
+                in_block = true
+            end
+            continue
+        end
+        if isempty(s) || !startswith(s, "#")
+            break
+        end
+        m = match(r"^#\s{2,}([^:]+?):\s*(.*)$", s)
+        m === nothing && break
+        push!(out, strip(m.captures[1]) => strip(m.captures[2]))
+    end
+    return out
+end
+
 # Universality detection: scan the model's CriticalExponents claim notes/refs
 # for known QAtlas universality-class tokens (src/universalities/*.jl).  Used
 # by ModelList; substrate-derived (zero @register annotation added).
@@ -810,6 +851,27 @@ function render_model_index(model_name::AbstractString)
     for h in hs
         levcounts[levelcode(h)] = get(levcounts, levelcode(h), 0) + 1
     end
+    conv = _parse_convention(model_name)
+    P("## Convention")
+    P("")
+    if isempty(conv)
+        P(
+            "_No `CONVENTION` header found in `src/models/<class>/",
+            model_name,
+            "/",
+            model_name,
+            ".jl` (model file may predate the lint; see ",
+            "`docs/src/conventions.md` for the project-wide ",
+            "convention policy)._",
+        )
+    else
+        P("| Field | Value |")
+        P("|---|---|")
+        for (k, v) in conv
+            P("| ", k, " | ", _md_escape_dollar(v), " |")
+        end
+    end
+    P("")
     P("## Coverage")
     P("")
     P("| Level | Count |")

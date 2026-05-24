@@ -5,6 +5,14 @@
 
 All `(Quantity, BC)` hubs `src` claims for **`PXP1D`**.  Cells link to the per-hub card; `—` = not yet implemented at that BC.  The shape of the matrix is the *gap visualisation*: empty cells are where physics could be added next.
 
+## Convention
+
+| Field | Value |
+|---|---|
+| Hamiltonian | Pauli σ with Rydberg blockade projectors P_i = (1 - σ^z_i)/2 |
+| Observable | Spin S = σ/2 for MagnetizationX/Y/Z-family; occupation n ∈ [0,1] for density-family |
+| Reference | docs/src/conventions.md §Hard-core boson / Rydberg |
+
 ## Coverage
 
 | Level | Count |

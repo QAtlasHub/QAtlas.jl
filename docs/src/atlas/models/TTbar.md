@@ -5,6 +5,10 @@
 
 All `(Quantity, BC)` hubs `src` claims for **`TTbar`**.  Cells link to the per-hub card; `—` = not yet implemented at that BC.  The shape of the matrix is the *gap visualisation*: empty cells are where physics could be added next.
 
+## Convention
+
+_No `CONVENTION` header found in `src/models/<class>/TTbar/TTbar.jl` (model file may predate the lint; see `docs/src/conventions.md` for the project-wide convention policy)._
+
 ## Coverage
 
 | Level | Count |

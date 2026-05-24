@@ -5,6 +5,14 @@
 
 All `(Quantity, BC)` hubs `src` claims for **`XCube`**.  Cells link to the per-hub card; `—` = not yet implemented at that BC.  The shape of the matrix is the *gap visualisation*: empty cells are where physics could be added next.
 
+## Convention
+
+| Field | Value |
+|---|---|
+| Hamiltonian | Stabilizer / operator product |
+| Observable | Operator-product expectations (Wilson loops, GSD, TEE, S-matrix entries); convention-free |
+| Reference | docs/src/conventions.md §Topological / operator-product |
+
 ## Coverage
 
 | Level | Count |

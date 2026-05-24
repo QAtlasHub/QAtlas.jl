@@ -5,6 +5,13 @@
 
 All `(Quantity, BC)` hubs `src` claims for **`KitaevHeisenberg`**.  Cells link to the per-hub card; `—` = not yet implemented at that BC.  The shape of the matrix is the *gap visualisation*: empty cells are where physics could be added next.
 
+## Convention
+
+| Field | Value |
+|---|---|
+| Hamiltonian | Pauli σ (this file) |
+| Observable | Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md) |
+
 ## Coverage
 
 | Level | Count |

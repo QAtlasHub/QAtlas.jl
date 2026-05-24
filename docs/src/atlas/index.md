@@ -37,6 +37,10 @@
 [**Faceted search →**](by/index.md) · [by model](by/model.md) · [by quantity](by/quantity.md) · [by BC](by/bc.md) · [by level](by/level.md) · [by mechanism](by/mechanism.md) · [by regime](by/regime.md). Full-text search is the top bar (Documenter built-in).
 
 
+## Doc-health audit
+
+Actionable gap surface: see **[Audit](Audit.md)** for models without CONVENTION headers, quantities without extracted definitions, orphan calc notes, and registry/INVENTORY mismatches.
+
 ## Reference & derivation indices
 
 Two more substrate-derived indices: **[Bibliography](Bibliography.md)** — every citation with hub backlinks; **[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).

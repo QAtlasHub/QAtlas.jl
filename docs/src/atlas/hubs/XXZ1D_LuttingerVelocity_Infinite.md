@@ -37,4 +37,5 @@ verify(XXZ1D(; J = 1.0, Δ = 1.0), LuttingerVelocity(), Infinite(); route = :lim
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `LuttingerVelocity`](../quantities/LuttingerVelocity.md) · [Atlas index](../index.md)

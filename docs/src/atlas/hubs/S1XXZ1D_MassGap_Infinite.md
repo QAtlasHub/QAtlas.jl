@@ -37,4 +37,5 @@ verify(S1XXZ1D(; J = J, Δ = 1.0), MassGap(), Infinite(); route = :delegation_in
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `S1XXZ1D`](../models/S1XXZ1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

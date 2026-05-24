@@ -32,4 +32,5 @@ verify(KitaevHeisenberg(; K = K, J = 0.0, Γ = 0.0), MassGap(), Infinite(); rout
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `KitaevHeisenberg`](../models/KitaevHeisenberg.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

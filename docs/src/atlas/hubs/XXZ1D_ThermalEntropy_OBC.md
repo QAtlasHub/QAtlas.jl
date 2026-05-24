@@ -41,4 +41,5 @@ verify(XXZ1D(; J = J, Δ = dz), ThermalEntropy(), OBC(N); route = :ed_finite_siz
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `ThermalEntropy`](../quantities/ThermalEntropy.md) · [Atlas index](../index.md)

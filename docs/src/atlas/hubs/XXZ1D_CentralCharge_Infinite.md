@@ -32,4 +32,5 @@ verify(XXZ1D(; J = 1.0, Δ = 0.0), CentralCharge(), Infinite(); route = :second_
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

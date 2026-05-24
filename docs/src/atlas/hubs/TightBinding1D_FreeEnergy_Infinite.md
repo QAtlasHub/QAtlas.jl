@@ -21,4 +21,5 @@ _No corroboration card._ Flagged by the R1 risk-linter (`src` claims this hub, E
 - cards: 0 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TightBinding1D`](../models/TightBinding1D.md) · [Quantity: `FreeEnergy`](../quantities/FreeEnergy.md) · [Atlas index](../index.md)

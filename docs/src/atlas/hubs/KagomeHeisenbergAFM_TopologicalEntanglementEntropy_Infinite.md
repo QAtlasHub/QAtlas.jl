@@ -37,4 +37,5 @@ verify(KagomeHeisenbergAFM(), TopologicalEntanglementEntropy(), Infinite(); rout
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) · [Quantity: `TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) · [Atlas index](../index.md)

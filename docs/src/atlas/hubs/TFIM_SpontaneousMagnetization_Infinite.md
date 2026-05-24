@@ -37,4 +37,5 @@ verify(TFIM(; J = J, h = h), SpontaneousMagnetization(), Infinite(); route = :se
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) · [Atlas index](../index.md)

@@ -32,4 +32,5 @@ verify(XCube(), GroundStateDegeneracy(), PBC(); route = :second_closed_form, fet
 - cards: 1 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XCube`](../models/XCube.md) · [Quantity: `GroundStateDegeneracy`](../quantities/GroundStateDegeneracy.md) · [Atlas index](../index.md)

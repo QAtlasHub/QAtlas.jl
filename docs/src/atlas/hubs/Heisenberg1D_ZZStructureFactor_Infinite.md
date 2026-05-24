@@ -37,4 +37,5 @@ verify(Heisenberg1D(), ZZStructureFactor(), Infinite(); route = :second_closed_f
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `ZZStructureFactor`](../quantities/ZZStructureFactor.md) · [Atlas index](../index.md)

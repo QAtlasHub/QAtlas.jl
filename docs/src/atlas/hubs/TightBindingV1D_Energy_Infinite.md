@@ -32,4 +32,5 @@ verify(TightBindingV1D(), Energy(), Infinite(); route = :second_closed_form, ind
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TightBindingV1D`](../models/TightBindingV1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

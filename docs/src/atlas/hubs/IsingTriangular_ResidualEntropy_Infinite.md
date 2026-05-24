@@ -37,4 +37,5 @@ verify(IsingTriangular(; J = J), ResidualEntropy(), Infinite(); route = :second_
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `IsingTriangular`](../models/IsingTriangular.md) · [Quantity: `ResidualEntropy`](../quantities/ResidualEntropy.md) · [Atlas index](../index.md)

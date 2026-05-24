@@ -47,4 +47,5 @@ verify(ChernSimons3D(; N = 2, k = 3), PartitionFunction(), Infinite(); route = :
 - cards: 4 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `ChernSimons3D`](../models/ChernSimons3D.md) · [Quantity: `PartitionFunction`](../quantities/PartitionFunction.md) · [Atlas index](../index.md)

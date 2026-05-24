@@ -32,4 +32,5 @@ verify(TricriticalIsing(), CentralCharge(), Infinite(); route = :second_closed_f
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TricriticalIsing`](../models/TricriticalIsing.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

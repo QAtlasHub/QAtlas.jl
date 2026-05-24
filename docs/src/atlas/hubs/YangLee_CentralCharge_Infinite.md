@@ -37,4 +37,5 @@ verify(YangLee(), CentralCharge(), Infinite(); route = :second_closed_form, inde
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `YangLee`](../models/YangLee.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

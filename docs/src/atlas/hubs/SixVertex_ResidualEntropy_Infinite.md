@@ -37,4 +37,5 @@ verify(SixVertex(; a = 1.0, b = 1.0, c = 1.0), ResidualEntropy(), Infinite(); ro
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `SixVertex`](../models/SixVertex.md) · [Quantity: `ResidualEntropy`](../quantities/ResidualEntropy.md) · [Atlas index](../index.md)

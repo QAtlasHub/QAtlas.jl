@@ -31,4 +31,5 @@ verify(TFIM(; J = J, h = h), ThermalEntropy(), PBC(; N = N); route = :limiting_c
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `ThermalEntropy`](../quantities/ThermalEntropy.md) · [Atlas index](../index.md)

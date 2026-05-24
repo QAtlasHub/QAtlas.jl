@@ -32,4 +32,5 @@ verify(Heisenberg1D(), MassGap(), OBC(N); route = :second_closed_form, independe
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

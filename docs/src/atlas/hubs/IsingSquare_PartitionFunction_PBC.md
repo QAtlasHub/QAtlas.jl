@@ -47,4 +47,5 @@ verify(IsingSquare(; Lx = L, Ly = L, J = 1.0), PartitionFunction(), PBC(0); rout
 - cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `IsingSquare`](../models/IsingSquare.md) · [Quantity: `PartitionFunction`](../quantities/PartitionFunction.md) · [Atlas index](../index.md)

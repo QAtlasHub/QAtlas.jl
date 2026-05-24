@@ -32,4 +32,5 @@ verify(XXZ1D(), RenyiEntropy(α), OBC(N); route = :second_closed_form, independe
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `RenyiEntropy`](../quantities/RenyiEntropy.md) · [Atlas index](../index.md)

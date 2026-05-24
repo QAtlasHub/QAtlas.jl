@@ -37,4 +37,5 @@ verify(Hubbard1D(; t = t, U = U, μ = U / 2), ChargeGap(), Infinite(); route = :
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Hubbard1D`](../models/Hubbard1D.md) · [Quantity: `ChargeGap`](../quantities/ChargeGap.md) · [Atlas index](../index.md)

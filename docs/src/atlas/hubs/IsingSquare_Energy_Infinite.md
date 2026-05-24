@@ -32,4 +32,5 @@ verify(IsingSquare(; J = 1.0), Energy(:per_site), Infinite(); route = :limiting_
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `IsingSquare`](../models/IsingSquare.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

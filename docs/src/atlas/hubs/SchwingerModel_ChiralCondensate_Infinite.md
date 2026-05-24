@@ -32,4 +32,5 @@ verify(SchwingerModel(; e = e, m = 0.0), ChiralCondensate(), Infinite(); route =
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `SchwingerModel`](../models/SchwingerModel.md) · [Quantity: `ChiralCondensate`](../quantities/ChiralCondensate.md) · [Atlas index](../index.md)

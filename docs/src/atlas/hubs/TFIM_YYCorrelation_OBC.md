@@ -32,4 +32,5 @@ verify(TFIM(; J = J, h = h), YYCorrelation(; mode = :static), OBC(N); route = :e
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `YYCorrelation`](../quantities/YYCorrelation.md) · [Atlas index](../index.md)

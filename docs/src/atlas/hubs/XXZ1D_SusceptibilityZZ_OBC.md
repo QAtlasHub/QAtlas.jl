@@ -41,4 +41,5 @@ verify(XXZ1D(), SusceptibilityZZ(), OBC(N); route = :second_closed_form, indepen
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) · [Atlas index](../index.md)

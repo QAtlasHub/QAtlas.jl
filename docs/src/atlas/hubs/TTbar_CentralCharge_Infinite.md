@@ -42,4 +42,5 @@ verify(TTbar(), CentralCharge(), Infinite(); route = :second_closed_form, indepe
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TTbar`](../models/TTbar.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

@@ -32,4 +32,5 @@ verify(SLEkappa(; κ = κ), FractalDimension(), Infinite(); route = :second_clos
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `SLEkappa`](../models/SLEkappa.md) · [Quantity: `FractalDimension`](../quantities/FractalDimension.md) · [Atlas index](../index.md)

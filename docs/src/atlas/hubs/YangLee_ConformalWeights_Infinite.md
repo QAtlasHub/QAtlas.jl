@@ -32,4 +32,5 @@ verify(YangLee(), ConformalWeights(), Infinite(); route = :literature_value, fet
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `YangLee`](../models/YangLee.md) · [Quantity: `ConformalWeights`](../quantities/ConformalWeights.md) · [Atlas index](../index.md)

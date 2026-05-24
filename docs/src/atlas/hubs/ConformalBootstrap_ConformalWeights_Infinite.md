@@ -42,4 +42,5 @@ verify(ConformalBootstrap(), ConformalWeights(), Infinite(); route = :literature
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `ConformalBootstrap`](../models/ConformalBootstrap.md) · [Quantity: `ConformalWeights`](../quantities/ConformalWeights.md) · [Atlas index](../index.md)

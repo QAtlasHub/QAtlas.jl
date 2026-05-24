@@ -32,4 +32,5 @@ verify(CurieWeissIsing(; J = J, h = 0.0), SpecificHeat(), Infinite(); route = :l
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `CurieWeissIsing`](../models/CurieWeissIsing.md) · [Quantity: `SpecificHeat`](../quantities/SpecificHeat.md) · [Atlas index](../index.md)

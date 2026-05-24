@@ -23,11 +23,11 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), FidelitySusceptibility(), Infinite(); route = :second_closed_form, independent = 1 / (16 * (J ^ 2 - h ^ 2)), agree_within = 1.0e-9, refs = ["BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2)"])
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FidelitySusceptibility(), Infinite(); route = :second_closed_form, independent = 1 / (16 * (1.0 ^ 2 - 0.5 ^ 2)), agree_within = 1.0e-9, refs = ["BdG closed form: χ_F/L = 1/(16(J²−h²)) ordered phase (= 1/12 at J=1,h=1/2)"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), FidelitySusceptibility(), Infinite(); route = :second_closed_form, independent = J ^ 2 / (16 * h ^ 2 * (h ^ 2 - J ^ 2)), agree_within = 1.0e-9, refs = ["BdG closed form: χ_F/L = J²/(16h²(h²−J²)) disordered phase"])
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FidelitySusceptibility(), Infinite(); route = :second_closed_form, independent = 1.0 ^ 2 / (16 * 2.0 ^ 2 * (2.0 ^ 2 - 1.0 ^ 2)), agree_within = 1.0e-9, refs = ["BdG closed form: χ_F/L = J²/(16h²(h²−J²)) disordered phase"])
 ```
 
 

@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `delegation_invariant` | 🟡 asserted | ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality | structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision) | `test/models/quantum/misc/test_extended_hubbard1d.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality | structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision) | `test/models/quantum/misc/test_extended_hubbard1d.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality | structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision) | `test/models/quantum/misc/test_extended_hubbard1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(ExtendedHubbard1D(; t = t, U = U, V = 0.0), ChargeGap(), Infinite(); route = :delegation_invariant, independent = refs_by_pt[(t, U)], agree_within = 1.0e-12, refs = ["ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality", "structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision)"])
+verify(ExtendedHubbard1D(; 1.0 = 1.0, 1.0 = 1.0, V = 0.0), ChargeGap(), Infinite(); route = :delegation_invariant, independent = (Dict((1.0, 1.0) => 0.005026732898582302, (1.0, 4.0) => 1.2867270220129354, (0.5, 4.0) => 2.339758553732098))[(1.0, 1.0)], agree_within = 1.0e-12, refs = ["ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality", "structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision)"])
+```
+
+```julia
+verify(ExtendedHubbard1D(; 1.0 = 1.0, 4.0 = 4.0, V = 0.0), ChargeGap(), Infinite(); route = :delegation_invariant, independent = (Dict((1.0, 1.0) => 0.005026732898582302, (1.0, 4.0) => 1.2867270220129354, (0.5, 4.0) => 2.339758553732098))[(1.0, 4.0)], agree_within = 1.0e-12, refs = ["ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality", "structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision)"])
+```
+
+```julia
+verify(ExtendedHubbard1D(; 0.5 = 0.5, 4.0 = 4.0, V = 0.0), ChargeGap(), Infinite(); route = :delegation_invariant, independent = (Dict((1.0, 1.0) => 0.005026732898582302, (1.0, 4.0) => 1.2867270220129354, (0.5, 4.0) => 2.339758553732098))[(0.5, 4.0)], agree_within = 1.0e-12, refs = ["ExtendedHubbard1D at V=0 ≡ Lieb-Wu Hubbard1D at half-filling ⇒ ChargeGap delegation equality", "structural delegation test (1e-12 = float identity vs precomputed Lieb-Wu reference, not physical precision)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -242,16 +242,16 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 12 hubs (qua
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`CriticalExponents`](../../atlas/hubs/IsingSquare_CriticalExponents_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`CriticalTemperature`](../../atlas/hubs/IsingSquare_CriticalTemperature_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 4 |
+| [`CriticalTemperature`](../../atlas/hubs/IsingSquare_CriticalTemperature_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`Energy`](../../atlas/hubs/IsingSquare_Energy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
-| [`Energy`](../../atlas/hubs/IsingSquare_Energy_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`Energy`](../../atlas/hubs/IsingSquare_Energy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 4 |
 | [`FreeEnergy`](../../atlas/hubs/IsingSquare_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`FreeEnergy`](../../atlas/hubs/IsingSquare_FreeEnergy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 1 |
-| [`PartitionFunction`](../../atlas/hubs/IsingSquare_PartitionFunction_PBC.md) | `PBC` | 🟢 corroborated-at-p | 4 |
+| [`FreeEnergy`](../../atlas/hubs/IsingSquare_FreeEnergy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 2 |
+| [`PartitionFunction`](../../atlas/hubs/IsingSquare_PartitionFunction_PBC.md) | `PBC` | 🟢 corroborated-at-p | 24 |
 | [`SpecificHeat`](../../atlas/hubs/IsingSquare_SpecificHeat_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`SpecificHeat`](../../atlas/hubs/IsingSquare_SpecificHeat_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
-| [`SpontaneousMagnetization`](../../atlas/hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| [`SpecificHeat`](../../atlas/hubs/IsingSquare_SpecificHeat_PBC.md) | `PBC` | 🟢 corroborated-at-p | 4 |
+| [`SpontaneousMagnetization`](../../atlas/hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 4 |
 | [`ThermalEntropy`](../../atlas/hubs/IsingSquare_ThermalEntropy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
-| [`ThermalEntropy`](../../atlas/hubs/IsingSquare_ThermalEntropy_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`ThermalEntropy`](../../atlas/hubs/IsingSquare_ThermalEntropy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 4 |
 
 <!-- ATLAS:HUBS:END -->

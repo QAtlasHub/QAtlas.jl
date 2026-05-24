@@ -16,6 +16,8 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Toda chain acoustic branch is gapless: MassGap = 0 | `test/models/classical/test_toda_lattice.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Toda chain acoustic branch is gapless: MassGap = 0 | `test/models/classical/test_toda_lattice.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Toda chain acoustic branch is gapless: MassGap = 0 | `test/models/classical/test_toda_lattice.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Flaschka 1974 / Henon 1974: integrable Toda lattice with acoustic phonons ⇒ MassGap = 0 | `test/models/classical/test_toda_lattice.jl` |
 
 ## Test calls
@@ -23,7 +25,15 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TodaLattice(; a = a, b = b), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Toda chain acoustic branch is gapless: MassGap = 0"])
+verify(TodaLattice(; 1.0 = 1.0, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Toda chain acoustic branch is gapless: MassGap = 0"])
+```
+
+```julia
+verify(TodaLattice(; 2.0 = 2.0, 0.5 = 0.5), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Toda chain acoustic branch is gapless: MassGap = 0"])
+```
+
+```julia
+verify(TodaLattice(; 0.7 = 0.7, 1.3 = 1.3), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-12, refs = ["Toda chain acoustic branch is gapless: MassGap = 0"])
 ```
 
 ```julia
@@ -34,7 +44,7 @@ verify(TodaLattice(), MassGap(), Infinite(); route = :second_closed_form, indepe
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

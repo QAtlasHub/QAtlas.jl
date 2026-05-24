@@ -22,7 +22,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), YYCorrelation(; mode = :static), OBC(N); route = :ed_finite_size, fetch_kw = (; i = i, j = j, beta = Inf), independent = yy_ed, agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σy_i σy_j⟩ via _build_tfim_dense ground state"])
+verify(TFIM(; 1.0 = 1.0, 1.3 = 1.3), YYCorrelation(; mode = :static), OBC(6); route = :ed_finite_size, fetch_kw = (; 2 = 2, 4 = 4, beta = Inf), independent = real(((LinearAlgebra.eigen(_build_tfim_dense(6, 1.0, 1.3))).vectors[:, 1])' * (_op_site(ComplexF64[0 -im; im 0], 2, 6) * (_op_site(ComplexF64[0 -im; im 0], 4, 6) * (LinearAlgebra.eigen(_build_tfim_dense(6, 1.0, 1.3))).vectors[:, 1]))), agree_within = 1.0e-8, refs = ["Direct OBC dense-ED ⟨σy_i σy_j⟩ via _build_tfim_dense ground state"])
 ```
 
 

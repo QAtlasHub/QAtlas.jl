@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@mean_field` | `second_closed_form` | 🟢 structural | Mean-field: linearised self-consistency gives βc J = 1 => Tc = J | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Mean-field: linearised self-consistency gives βc J = 1 => Tc = J | `test/models/classical/test_curie_weiss_ising.jl` |
+| `@mean_field` | `second_closed_form` | 🟢 structural | Mean-field: linearised self-consistency gives βc J = 1 => Tc = J | `test/models/classical/test_curie_weiss_ising.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(CurieWeissIsing(; J = J), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = J, agree_within = 1.0e-12, refs = ["Mean-field: linearised self-consistency gives βc J = 1 => Tc = J"])
+verify(CurieWeissIsing(; 0.5 = 0.5), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 0.5, agree_within = 1.0e-12, refs = ["Mean-field: linearised self-consistency gives βc J = 1 => Tc = J"])
+```
+
+```julia
+verify(CurieWeissIsing(; 1.0 = 1.0), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["Mean-field: linearised self-consistency gives βc J = 1 => Tc = J"])
+```
+
+```julia
+verify(CurieWeissIsing(; 2.5 = 2.5), CriticalTemperature(), Infinite(); route = :second_closed_form, independent = 2.5, agree_within = 1.0e-12, refs = ["Mean-field: linearised self-consistency gives βc J = 1 => Tc = J"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

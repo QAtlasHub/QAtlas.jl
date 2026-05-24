@@ -15,20 +15,60 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
+| `@su2` | `second_closed_form` | 🟢 structural | Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0 | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_susc_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Heisenberg1D(), SusceptibilityZZ(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; J = J, beta = LOW_T_BETA))
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), SusceptibilityZZ(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-8, refs = ["Heisenberg1D OBC even N: unique S_total=0 singlet GS ⇒ χ_αα = β·Var(S^α_total) = 0"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

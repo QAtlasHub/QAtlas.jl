@@ -16,20 +16,75 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized) | `test/models/quantum/TFIM/test_TFIM_loschmidt_t0_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h_f), LoschmidtEcho(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; J = J, h = h_i), t = 0.0))
+verify(TFIM(; 1.0 = 1.0, h = 1.0), LoschmidtEcho(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 0.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 1.0), LoschmidtEcho(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 0.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 2.0), LoschmidtEcho(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 0.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 2.0), LoschmidtEcho(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 0.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 1.0), LoschmidtEcho(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 1.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 1.0), LoschmidtEcho(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 1.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 2.0), LoschmidtEcho(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 1.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 2.0), LoschmidtEcho(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 1.0 = 1.0, h = 1.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 3.0), LoschmidtEcho(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 2.0 = 2.0, h = 0.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 3.0), LoschmidtEcho(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 2.0 = 2.0, h = 0.5), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 1.0), LoschmidtEcho(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 0.5 = 0.5, h = 2.0), t = 0.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 1.0), LoschmidtEcho(), OBC(12); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Loschmidt rate function r(t=0) = 0 in any BC, for any quench (initial state normalized)"], fetch_kw = (; initial = TFIM(; 0.5 = 0.5, h = 2.0), t = 0.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 12 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

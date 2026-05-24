@@ -16,6 +16,12 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear) | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
+| `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
 | `@dimer` | `literature_value` | 🟢 structural | Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4 | `test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl` |
 
 ## Test calls
@@ -23,18 +29,42 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(MajumdarGhosh(; J = J), MassGap(), Infinite(); route = :literature_value, independent = 0.234J, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"])
+verify(MajumdarGhosh(; 0.5 = 0.5), MassGap(), Infinite(); route = :literature_value, independent = 0.234 * 0.5, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"])
 ```
 
 ```julia
-verify(MajumdarGhosh(; J = J), MassGap(), Infinite(); route = :literature_value, independent = J / 4, agree_within = 1.0e-14, refs = ["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"], fetch_kw = (; method = :trimer_bound))
+verify(MajumdarGhosh(; 1.0 = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 0.234 * 1.0, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 2.0 = 2.0), MassGap(), Infinite(); route = :literature_value, independent = 0.234 * 2.0, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 3.7 = 3.7), MassGap(), Infinite(); route = :literature_value, independent = 0.234 * 3.7, agree_within = 1.0e-14, refs = ["White-Affleck 1996 DMRG; Eggert 1996: Δ ≈ 0.234 J (J-linear)"])
+```
+
+```julia
+verify(MajumdarGhosh(; 0.5 = 0.5), MassGap(), Infinite(); route = :literature_value, independent = 0.5 / 4, agree_within = 1.0e-14, refs = ["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"], fetch_kw = (; method = :trimer_bound))
+```
+
+```julia
+verify(MajumdarGhosh(; 1.0 = 1.0), MassGap(), Infinite(); route = :literature_value, independent = 1.0 / 4, agree_within = 1.0e-14, refs = ["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"], fetch_kw = (; method = :trimer_bound))
+```
+
+```julia
+verify(MajumdarGhosh(; 2.0 = 2.0), MassGap(), Infinite(); route = :literature_value, independent = 2.0 / 4, agree_within = 1.0e-14, refs = ["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"], fetch_kw = (; method = :trimer_bound))
+```
+
+```julia
+verify(MajumdarGhosh(; 3.7 = 3.7), MassGap(), Infinite(); route = :literature_value, independent = 3.7 / 4, agree_within = 1.0e-14, refs = ["Shastry-Sutherland 1981: trimer-sector bound Δ ≥ J/4"], fetch_kw = (; method = :trimer_bound))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **cited-only** ⚪
-- cards: 2 · model ED-feasible
+- cards: 8 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

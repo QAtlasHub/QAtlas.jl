@@ -437,28 +437,127 @@ function _handle_verify!(out, ex, file, testset)
     return nothing
 end
 
-function _scan_expr!(out, ex, file, testset)
+# Substitute every free Symbol in `ex` according to `env` (Symbol => Expr/value).
+# Powers _expand_loop AND the per-scope assignment tracking in _scan_expr!.
+function _subst_syms(ex, env::Dict{Symbol})
+    if ex isa Symbol
+        haskey(env, ex) && return env[ex]
+        return ex
+    elseif ex isa Expr
+        return Expr(ex.head, Any[_subst_syms(a, env) for a in ex.args]...)
+    else
+        return ex
+    end
+end
+
+# Recognise `for I in (lit, lit, ...)` or `for (a,b,c) in ((lit,lit,lit), ...)`
+# and return the unrolled body Exprs. Returns nothing for unsupported shapes.
+function _expand_loop(ex::Expr, env::Dict{Symbol,Any})
+    ex.head === :for || return nothing
+    length(ex.args) >= 2 || return nothing
+    binding = ex.args[1]
+    body = ex.args[2]
+    binding isa Expr && binding.head === :(=) && length(binding.args) == 2 || return nothing
+    var, iter = binding.args
+    # Allow the iter expression itself to be substituted from outer env first
+    # (so `for q in qs` with `qs = (Q1(), Q2())` works).
+    iter_subst = _subst_syms(iter, env)
+    iter_subst isa Expr && iter_subst.head in (:tuple, :vect) || return nothing
+
+    if var isa Symbol
+        return [_subst_syms(body, merge(env, Dict{Symbol,Any}(var => e))) for e in iter_subst.args]
+    end
+    if var isa Expr && var.head === :tuple
+        vars = var.args
+        all(v -> v isa Symbol, vars) || return nothing
+        all(e -> e isa Expr && e.head in (:tuple, :vect) && length(e.args) == length(vars), iter_subst.args) || return nothing
+        return [_subst_syms(body, merge(env, Dict{Symbol,Any}(vars[i] => e.args[i] for i in eachindex(vars)))) for e in iter_subst.args]
+    end
+    return nothing
+end
+
+# env is a per-scope name -> Expr table accumulating assignments seen so far.
+# It flows down into children but mutations within a scope (@testset / let / for body)
+# do not escape that scope: callers responsible for copying env at scope boundaries.
+function _scan_expr!(out, ex, file, testset, env::Dict{Symbol,Any}=Dict{Symbol,Any}())
     ex isa Expr || return nothing
     if ex.head === :macrocall && ex.args[1] === Symbol("@testset")
         nm = testset
+        body = nothing
         for a in ex.args
-            a isa String && (nm = a)
+            if a isa String
+                nm = a
+            elseif a isa Expr
+                body = a
+            end
         end
-        for a in ex.args
-            _scan_expr!(out, a, file, nm)
+        if body !== nothing
+            _scan_expr!(out, body, file, nm, copy(env))
         end
         return nothing
     end
     if ex.head === :call && _headsym(ex) === :verify
         try
-            _handle_verify!(out, ex, file, testset)
+            subst_ex = isempty(env) ? ex : _subst_syms(ex, env)
+            _handle_verify!(out, subst_ex, file, testset)
         catch err
             push!(PARSE_FAILS, (file, string(testset, " :: ", typeof(err))))
         end
         return nothing
     end
+    # Skip function definitions: `function f(args) body end` and the short form
+    # `f(args) = body`. Without these guards, _scan_expr would treat the header
+    # (which is a :call Expr) as a verify(...) call when f === :verify (see the
+    # docstringed signature in test/util/verify.jl).
+    if ex.head === :function
+        length(ex.args) >= 2 && _scan_expr!(out, ex.args[2], file, testset, env)
+        return nothing
+    end
+    if ex.head === :(=) && length(ex.args) == 2 && ex.args[1] isa Expr && ex.args[1].head === :call
+        _scan_expr!(out, ex.args[2], file, testset, env)
+        return nothing
+    end
+    # Track `var = rhs` assignments at block scope so subsequent verify() args
+    # using `var` can be resolved back to the literal model/quantity expression.
+    if ex.head === :(=) && length(ex.args) == 2 && ex.args[1] isa Symbol
+        var = ex.args[1]
+        rhs = ex.args[2]
+        env[var] = _subst_syms(rhs, env)
+        # Still recurse into rhs so any nested verify() etc. gets scanned.
+        _scan_expr!(out, rhs, file, testset, env)
+        return nothing
+    end
+    if ex.head === :for
+        expanded = _expand_loop(ex, env)
+        if expanded !== nothing
+            for e in expanded
+                _scan_expr!(out, e, file, testset, copy(env))
+            end
+            return nothing
+        end
+    end
+    # let x = v, y = w ; body end -> walk bindings first to populate scoped env,
+    # then walk body once. AST: Expr(:let, bindings, body) where bindings is
+    # either a single :(=) (one binding) or :block of :(=) (multi-binding).
+    if ex.head === :let
+        local_env = copy(env)
+        bindings = ex.args[1]
+        body = ex.args[end]
+        bind_list = if bindings isa Expr && bindings.head === :block
+            bindings.args
+        else
+            (bindings,)
+        end
+        for b in bind_list
+            if b isa Expr && b.head === :(=) && length(b.args) == 2 && b.args[1] isa Symbol
+                local_env[b.args[1]] = _subst_syms(b.args[2], local_env)
+            end
+        end
+        _scan_expr!(out, body, file, testset, local_env)
+        return nothing
+    end
     for a in ex.args
-        _scan_expr!(out, a, file, testset)
+        _scan_expr!(out, a, file, testset, env)
     end
 end
 

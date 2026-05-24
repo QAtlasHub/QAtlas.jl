@@ -17,24 +17,34 @@
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Arovas-Auerbach-Haldane 1988 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q) | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q) | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q) | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.15, fetch_kw = (; q = q), refs = ["Arovas-Auerbach-Haldane 1988"])
+verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :ed_finite_size, independent = Float64[], at = ["N=$(verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8)))" for verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8)) = verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8))], agree_within = 0.15, fetch_kw = (; pi = pi), refs = ["Arovas-Auerbach-Haldane 1988"])
 ```
 
 ```julia
-verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, independent = closed, agree_within = 1.0e-14, refs = ["Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q)"], fetch_kw = (; q = q))
+verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, independent = if 0.0 == 0.0 0.0 else (2 * (1 - cos(0.0))) / (5 + 3 * cos(0.0)) end, agree_within = 1.0e-14, refs = ["Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q)"], fetch_kw = (; 0.0 = 0.0))
+```
+
+```julia
+verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, independent = if π / 2 == 0.0 0.0 else (2 * (1 - cos(π / 2))) / (5 + 3 * cos(π / 2)) end, agree_within = 1.0e-14, refs = ["Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q)"], fetch_kw = (; π / 2 = π / 2))
+```
+
+```julia
+verify(AKLT1D(), ZZStructureFactor(), Infinite(); route = :second_closed_form, independent = if π == 0.0 0.0 else (2 * (1 - cos(π))) / (5 + 3 * cos(π)) end, agree_within = 1.0e-14, refs = ["Arovas-Auerbach-Haldane 1988: S_zz(q) = 2(1-cos q)/(5+3cos q)"], fetch_kw = (; π = π))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

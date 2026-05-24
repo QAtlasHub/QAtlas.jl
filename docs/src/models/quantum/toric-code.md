@@ -109,7 +109,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 5 hubs (quan
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`AnyonStatistics`](../../atlas/hubs/ToricCode_AnyonStatistics_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
-| [`GroundStateDegeneracy`](../../atlas/hubs/ToricCode_GroundStateDegeneracy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 2 |
+| [`GroundStateDegeneracy`](../../atlas/hubs/ToricCode_GroundStateDegeneracy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 6 |
 | [`GroundStateEnergyDensity`](../../atlas/hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | [`MassGap`](../../atlas/hubs/ToricCode_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | [`TopologicalEntanglementEntropy`](../../atlas/hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |

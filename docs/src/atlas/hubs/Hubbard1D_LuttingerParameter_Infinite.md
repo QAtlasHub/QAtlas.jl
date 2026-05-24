@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains) | `test/models/quantum/misc/test_hubbard1d_luttinger_U0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains) | `test/models/quantum/misc/test_hubbard1d_luttinger_U0_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains) | `test/models/quantum/misc/test_hubbard1d_luttinger_U0_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Hubbard1D(; t = t, U = 0.0, μ = 0.0), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-14, refs = ["At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains)"])
+verify(Hubbard1D(; 0.5 = 0.5, U = 0.0, μ = 0.0), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-14, refs = ["At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains)"])
+```
+
+```julia
+verify(Hubbard1D(; 1.0 = 1.0, U = 0.0, μ = 0.0), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-14, refs = ["At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains)"])
+```
+
+```julia
+verify(Hubbard1D(; 2.0 = 2.0, U = 0.0, μ = 0.0), LuttingerParameter(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-14, refs = ["At U=0 the Hubbard model is a free spinful fermion at half-filling (μ = U/2 = 0) ⇒ both Luttinger parameters K_ρ = K_σ = 1 (free-boson value, spin-charge separated free chains)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

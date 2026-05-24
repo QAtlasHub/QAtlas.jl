@@ -15,6 +15,9 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@sweep` | `sum_rule` | 🟡 asserted | Gibbs identity s = β(ε − f) across three independent code paths | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 
 ## Test calls
@@ -22,14 +25,26 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; beta = LOW_T_BETA))
+verify(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), ThermalEntropy(), Infinite(); route = :sum_rule, fetch_kw = (; beta = 1.0), independent = 1.0 * (QAtlas.fetch(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), Energy(:per_site), Infinite(); beta = 1.0) - QAtlas.fetch(KitaevHoneycomb(; Kx = 1.0, Ky = 1.0, Kz = 1.0), FreeEnergy(), Infinite(); beta = 1.0)), agree_within = 1.0e-6, refs = ["Gibbs identity s = β(ε − f) across three independent code paths"])
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb T → 0: unique matter-sector GS ⇒ s = 0"], fetch_kw = (; beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 4 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

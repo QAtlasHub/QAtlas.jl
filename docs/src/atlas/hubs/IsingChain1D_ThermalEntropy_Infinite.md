@@ -16,20 +16,40 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingChain1D(; J = J), ThermalEntropy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = log(2 * cosh(β * J)) - β * J * tanh(β * J), agree_within = 1.0e-12, refs = ["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"])
+verify(IsingChain1D(; 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.5), independent = log(2 * cosh(0.5 * 1.0)) - 0.5 * 1.0 * tanh(0.5 * 1.0), agree_within = 1.0e-12, refs = ["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = log(2 * cosh(1.0 * 1.0)) - 1.0 * 1.0 * tanh(1.0 * 1.0), agree_within = 1.0e-12, refs = ["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = log(2 * cosh(2.0 * 1.0)) - 2.0 * 1.0 * tanh(2.0 * 1.0), agree_within = 1.0e-12, refs = ["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 0.5 = 0.5), ThermalEntropy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = log(2 * cosh(1.0 * 0.5)) - 1.0 * 0.5 * tanh(1.0 * 0.5), agree_within = 1.0e-12, refs = ["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 2.0 = 2.0), ThermalEntropy(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.7), independent = log(2 * cosh(0.7 * 2.0)) - 0.7 * 2.0 * tanh(0.7 * 2.0), agree_within = 1.0e-12, refs = ["Ising 1925: s(β,h=0) = log(2 cosh βJ) - βJ tanh(βJ) per site"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

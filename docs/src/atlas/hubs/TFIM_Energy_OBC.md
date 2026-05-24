@@ -16,13 +16,62 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@disordered` | `sum_rule` | 🟡 asserted | Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0 | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
+| `@ordered` | `sum_rule` | 🟡 asserted | Tr(σz σz)=Tr(σx)=0 => per-site ⟨H⟩_{β=0}=0 across all BC | `test/identities/test_cross_bc_scaling.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | J=0 decoupled spins: ε = -h tanh(βh) per site | `test/identities/test_TFIM_limits_cross_model.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | J=0 decoupled spins: ε = -h tanh(βh) per site | `test/identities/test_TFIM_limits_cross_model.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | J=0 decoupled spins: ε = -h tanh(βh) per site | `test/identities/test_TFIM_limits_cross_model.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense | `test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | GS energy = min eigenvalue of _build_tfim_dense (black-box ED) | `test/models/quantum/TFIM/test_TFIM_local.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum | `test/models/quantum/TFIM/test_TFIM_thermal.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | "ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)" | `test/models/quantum/TFIM/test_TFIM_thermo_OBC_ED_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ) | `test/verification/tfim_ising/test_tfim_gap_closure.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12) | `test/verification/universality/test_universality_cross_check.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12) | `test/verification/universality/test_universality_cross_check.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12) | `test/verification/universality/test_universality_cross_check.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12) | `test/verification/universality/test_universality_cross_check.jl` |
 
 ## Test calls
@@ -34,42 +83,238 @@ verify(TFIM(; J = 1.0, h = 1.3), Energy(), OBC(6); route = :sum_rule, fetch_kw =
 ```
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), Energy(:per_site), OBC(6); route = :second_closed_form, fetch_kw = (; beta = β), independent = -h * tanh(β * h), agree_within = 1.0e-8, refs = ["J=0 decoupled spins: ε = -h tanh(βh) per site"])
+verify(TFIM(; J = 1.0, h = 0.5), Energy(:per_site), OBC(8); route = :sum_rule, fetch_kw = (; beta = 0.0), independent = 0.0, agree_within = 1.0e-9, refs = ["Tr(σz σz)=Tr(σx)=0 => per-site ⟨H⟩_{β=0}=0 across all BC"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = Inf), independent = (dense_spectrum(_build_tfim_dense(N, J, h)))[1], agree_within = 1.0e-9, refs = ["GS energy = min eigenvalue of _build_tfim_dense"])
+verify(TFIM(; J = 0.0, 1.0 = 1.0), Energy(:per_site), OBC(6); route = :second_closed_form, fetch_kw = (; beta = 0.7), independent = -1.0 * tanh(0.7 * 1.0), agree_within = 1.0e-8, refs = ["J=0 decoupled spins: ε = -h tanh(βh) per site"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = Inf), independent = (dense_spectrum(_build_tfim_dense(N, J, h)))[1], agree_within = 1.0e-9, refs = ["GS energy = min eigenvalue of _build_tfim_dense (black-box ED)"])
+verify(TFIM(; J = 0.0, 0.5 = 0.5), Energy(:per_site), OBC(6); route = :second_closed_form, fetch_kw = (; beta = 1.5), independent = -0.5 * tanh(1.5 * 0.5), agree_within = 1.0e-8, refs = ["J=0 decoupled spins: ε = -h tanh(βh) per site"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-8, refs = ["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"])
+verify(TFIM(; J = 0.0, 2.0 = 2.0), Energy(:per_site), OBC(6); route = :second_closed_form, fetch_kw = (; beta = 0.3), independent = -2.0 * tanh(0.3 * 2.0), agree_within = 1.0e-8, refs = ["J=0 decoupled spins: ε = -h tanh(βh) per site"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = E0_ed, agree_within = max(1.0e-12, 1.0e-10 * abs(E0_ed)), at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+verify(TFIM(; 1.0 = 1.0, 1.3 = 1.3), Energy(), OBC(6); route = :ed_finite_size, fetch_kw = (; beta = Inf), independent = (dense_spectrum(_build_tfim_dense(6, 1.0, 1.3)))[1], agree_within = 1.0e-9, refs = ["GS energy = min eigenvalue of _build_tfim_dense"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), Energy(), OBC(N); route = :limiting_case, independent = -J * (N - 1), agree_within = 1.0e-12, at = ["J=$(J)", "h=0.0", "N=$(N)"], refs = ["Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED)"])
+verify(TFIM(; 1.0 = 1.0, 1.5 = 1.5), Energy(), OBC(6); route = :ed_finite_size, fetch_kw = (; beta = Inf), independent = (dense_spectrum(_build_tfim_dense(6, 1.0, 1.5)))[1], agree_within = 1.0e-9, refs = ["GS energy = min eigenvalue of _build_tfim_dense (black-box ED)"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h_large), Energy(), OBC(N); route = :limiting_case, independent = E0_pt, agree_within = max(1.0e-12, 1.0e-9 * abs(E0_pt)), at = ["J=$(J)", "h=$(h_large)", "N=$(N)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0), independent = E_ind, agree_within = 1.0e-8, refs = ["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(J)", "h=$(h)", "N=$(N)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
+verify(TFIM(; 1.0 = 1.0, 1.5 = 1.5), Energy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 0.7 = 0.7), independent = E_ind, agree_within = 1.0e-8, refs = ["Direct OBC dense ED via _build_tfim_dense + thermo_from_spectrum"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(6); route = :ed_finite_size, independent = ed_E, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(:per_site), OBC(8); route = :ed_finite_size, independent = ed_E, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: -J σ_z⊗σ_z bonds + -h σ_x onsite, full spectrum, thermo_from_spectrum (E)"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.0 = 0.0), Energy(), OBC(4); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 0.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 0.0)))))[1])), at = ["J=$(1.0)", "h=$(0.0)", "N=$(4)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(), OBC(4); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 0.5)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 0.5)))))[1])), at = ["J=$(1.0)", "h=$(0.5)", "N=$(4)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(), OBC(4); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 1.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 1.0)))))[1])), at = ["J=$(1.0)", "h=$(1.0)", "N=$(4)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(), OBC(4); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 2.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 1.0, 2.0)))))[1])), at = ["J=$(1.0)", "h=$(2.0)", "N=$(4)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.5 = 1.5), Energy(), OBC(4); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 0.5, 1.5)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 4, 1; boundary = OpenAxis()), 0.5, 1.5)))))[1])), at = ["J=$(0.5)", "h=$(1.5)", "N=$(4)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.0 = 0.0), Energy(), OBC(6); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 0.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 0.0)))))[1])), at = ["J=$(1.0)", "h=$(0.0)", "N=$(6)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(), OBC(6); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 0.5)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 0.5)))))[1])), at = ["J=$(1.0)", "h=$(0.5)", "N=$(6)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(), OBC(6); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 1.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 1.0)))))[1])), at = ["J=$(1.0)", "h=$(1.0)", "N=$(6)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(), OBC(6); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 2.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 1.0, 2.0)))))[1])), at = ["J=$(1.0)", "h=$(2.0)", "N=$(6)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.5 = 1.5), Energy(), OBC(6); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 0.5, 1.5)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 6, 1; boundary = OpenAxis()), 0.5, 1.5)))))[1])), at = ["J=$(0.5)", "h=$(1.5)", "N=$(6)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.0 = 0.0), Energy(), OBC(8); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 0.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 0.0)))))[1])), at = ["J=$(1.0)", "h=$(0.0)", "N=$(8)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), Energy(), OBC(8); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 0.5)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 0.5)))))[1])), at = ["J=$(1.0)", "h=$(0.5)", "N=$(8)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(), OBC(8); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 1.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 1.0)))))[1])), at = ["J=$(1.0)", "h=$(1.0)", "N=$(8)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(), OBC(8); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 2.0)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 1.0, 2.0)))))[1])), at = ["J=$(1.0)", "h=$(2.0)", "N=$(8)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.5 = 1.5), Energy(), OBC(8); route = :ed_finite_size, independent = (sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 0.5, 1.5)))))[1], agree_within = max(1.0e-12, 1.0e-10 * abs((sort(eigvals(Symmetric(build_tfim(build_lattice(Square, 8, 1; boundary = OpenAxis()), 0.5, 1.5)))))[1])), at = ["J=$(0.5)", "h=$(1.5)", "N=$(8)"], refs = ["Independent dense-ED of build_tfim Lattice2D OBC chain (eigvals of Symmetric H = -J Σ σᶻσᶻ − h Σ σˣ) — cross-checks BdG analytical Energy OBC"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), Energy(), OBC(6); route = :limiting_case, independent = -1.0 * (6 - 1), agree_within = 1.0e-12, at = ["J=$(1.0)", "h=0.0", "N=$(6)"], refs = ["Classical Ising limit h=0: E_0^OBC = -J(N-1) exact (independent of dense ED)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 100.0), Energy(), OBC(6); route = :limiting_case, independent = -100.0 * 6 - (1.0 ^ 2 * (6 - 1)) / (4 * 100.0), agree_within = max(1.0e-12, 1.0e-9 * abs(-100.0 * 6 - (1.0 ^ 2 * (6 - 1)) / (4 * 100.0))), at = ["J=$(1.0)", "h=$(100.0)", "N=$(6)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 1000.0), Energy(), OBC(6); route = :limiting_case, independent = -1000.0 * 6 - (1.0 ^ 2 * (6 - 1)) / (4 * 1000.0), agree_within = max(1.0e-12, 1.0e-9 * abs(-1000.0 * 6 - (1.0 ^ 2 * (6 - 1)) / (4 * 1000.0))), at = ["J=$(1.0)", "h=$(1000.0)", "N=$(6)"], refs = ["Strong-field PT² limit h ≫ J: E_0^OBC ≈ -hN - J²(N-1)/(4h) (Rayleigh-Schrödinger, |+⟩^N unperturbed g.s., bond perturbation V = -J Σ σᶻσᶻ)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(), OBC(14); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(1.0)", "h=$(1.0)", "N=$(14)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), Energy(), OBC(16); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(1.0)", "h=$(1.0)", "N=$(16)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(), OBC(14); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(1.0)", "h=$(2.0)", "N=$(14)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), Energy(), OBC(16); route = :ed_finite_size, independent = vals[1], agree_within = max(1.0e-10, 1.0e-8 * abs(vals[1])), at = ["J=$(1.0)", "h=$(2.0)", "N=$(16)"], refs = ["Independent sparse-ED via build_tfim_sparse (KrylovKit Lanczos, krylovdim=30, tol=1e-11) on the real-space 2^N basis — pushes the BdG cross-check past dense-ED reach (N ≤ 12)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 9 · model ED-feasible
+- cards: 58 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -15,9 +15,47 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@ordered` | `limiting_case` | 🟡 asserted | t=0: quench EE equals the initial ground-state entanglement | `test/models/quantum/TFIM/test_tfim_quench_entanglement.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J) | `test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J) | `test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct Schmidt-SVD of the _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_entanglement.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Direct Schmidt-SVD of the _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_entanglement.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Direct Schmidt-SVD of the _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_entanglement.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0 | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
 
 ## Test calls
@@ -25,26 +63,178 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), VonNeumannEntropy(), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S_ind, agree_within = 1.0e-8, refs = ["Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J)"])
+verify(TFIM(; J = 1.0, h = 0.5), VonNeumannEntropy(:quench), OBC(8); route = :limiting_case, fetch_kw = (; initial = TFIM(; J = 1.0, h = 2.0), 4 = 4, t = 0.0), independent = QAtlas.fetch(TFIM(; J = 1.0, h = 2.0), VonNeumannEntropy(), OBC(8); 4 = 4, beta = Inf), agree_within = 1.0e-8, refs = ["t=0: quench EE equals the initial ground-state entanglement"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), VonNeumannEntropy(), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S_ind, agree_within = 1.0e-8, refs = ["Direct Schmidt-SVD of the _build_tfim_dense ground state"])
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), VonNeumannEntropy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(sum((s->begin p = s ^ 2 if p > 1.0e-15 p * log(p) else 0.0 end end), LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 1.0))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))))), agree_within = 1.0e-8, refs = ["Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J)"])
 ```
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), VonNeumannEntropy(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), VonNeumannEntropy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(sum((s->begin p = s ^ 2 if p > 1.0e-15 p * log(p) else 0.0 end end), LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 0.5))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))))), agree_within = 1.0e-8, refs = ["Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J)"])
 ```
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), VonNeumannEntropy(), OBC(N); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = β))
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), VonNeumannEntropy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(sum((s->begin p = s ^ 2 if p > 1.0e-15 p * log(p) else 0.0 end end), LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 1.0))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))))), agree_within = 1.0e-8, refs = ["Direct Schmidt-SVD of the _build_tfim_dense ground state"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), VonNeumannEntropy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(sum((s->begin p = s ^ 2 if p > 1.0e-15 p * log(p) else 0.0 end end), LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 0.5))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))))), agree_within = 1.0e-8, refs = ["Direct Schmidt-SVD of the _build_tfim_dense ground state"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), VonNeumannEntropy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(sum((s->begin p = s ^ 2 if p > 1.0e-15 p * log(p) else 0.0 end end), LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 2.0))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))))), agree_within = 1.0e-8, refs = ["Direct Schmidt-SVD of the _build_tfim_dense ground state"])
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: GS is pure product state |+⟩^N ⇒ ρ₁ pure ⇒ S_vN(ℓ=1) = 0"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: (a) T→0 cat-state of |↑..↑⟩,|↓..↓⟩ or (b) finite-T Z₂-symmetric ensemble ⇒ ρ₁ = I/2 ⇒ S_vN(ℓ=1) = log 2 for any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 4 · model ED-feasible
+- cards: 42 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

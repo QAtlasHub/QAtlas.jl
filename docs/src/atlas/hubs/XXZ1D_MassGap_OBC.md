@@ -16,20 +16,90 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0 | `test/models/quantum/XXZ/test_xxz1d_obc_massgap_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(XXZ1D(), MassGap(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; J = J, Δ = Δ))
+verify(XXZ1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 2.0 = 2.0, -0.5 = -0.5))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(3); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, -2.0 = -2.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(5); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, -2.0 = -2.0))
+```
+
+```julia
+verify(XXZ1D(), MassGap(), OBC(7); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["XXZ1D OBC odd N: m_z = ±1/2 doublet GS by U(1) S^z conservation + xy-Z2 symmetry ⇒ Δ = 0"], fetch_kw = (; 1.0 = 1.0, -2.0 = -2.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 15 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

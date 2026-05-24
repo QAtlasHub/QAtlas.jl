@@ -14,8 +14,36 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | "ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)" | `test/models/quantum/XXZ/test_xxz1d_obc_susc_ed_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0 | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N | `test/models/quantum/XXZ/test_xxz1d_obc_susc_batch.jl` |
 
 ## Test calls
@@ -23,22 +51,134 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(XXZ1D(; J = J, Δ = Delta), SusceptibilityZZ(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = chi_ind, agree_within = 1.0e-9, refs = ["chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian"])
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0), independent = (1.0 * (real(LinearAlgebra.tr(((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).vectors * LinearAlgebra.Diagonal(ComplexF64.(exp.(-1.0 .* ((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values .- minimum((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values))) ./ sum(exp.(-1.0 .* ((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values .- minimum((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values)))))) * ((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).vectors)') * (sum((site_op(2Sz, 2, 4, 1:N - 1) for 1:N - 1 = 1:4)) * sum((site_op(2Sz, 2, 4, 1:N - 1) for 1:N - 1 = 1:4))))) - real(LinearAlgebra.tr(((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).vectors * LinearAlgebra.Diagonal(ComplexF64.(exp.(-1.0 .* ((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values .- minimum((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values))) ./ sum(exp.(-1.0 .* ((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values .- minimum((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).values)))))) * ((LinearAlgebra.eigen(chain_hamiltonian(2, 4, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + 0.5 * kron(Sz, Sz))))).vectors)') * sum((site_op(2Sz, 2, 4, 1:N - 1) for 1:N - 1 = 1:4)))) ^ 2)) / 4, agree_within = 1.0e-9, refs = ["chi_zz = beta * Var(Mz) / N via density matrix from generic_ed chain_hamiltonian"])
 ```
 
 ```julia
-verify(XXZ1D(), SusceptibilityZZ(), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; J = J, Δ = Δ, beta = BETA))
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, independent = ed_xxz_chi(4, 1.0, 0.5, 1.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(XXZ1D(), SusceptibilityZZ(), OBC(N); route = :second_closed_form, independent = BETA / N, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; J = J, Δ = Δ, beta = BETA))
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, independent = ed_xxz_chi(4, 1.0, 0.5, 10.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 10.0 = 10.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SusceptibilityZZ(), OBC(5); route = :ed_finite_size, independent = ed_xxz_chi(5, 1.0, 0.5, 1.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), SusceptibilityZZ(), OBC(5); route = :ed_finite_size, independent = ed_xxz_chi(5, 1.0, 0.5, 10.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 10.0 = 10.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, independent = ed_xxz_chi(4, 1.0, 2.0, 1.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, independent = ed_xxz_chi(4, 1.0, 2.0, 10.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 10.0 = 10.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SusceptibilityZZ(), OBC(5); route = :ed_finite_size, independent = ed_xxz_chi(5, 1.0, 2.0, 1.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), SusceptibilityZZ(), OBC(5); route = :ed_finite_size, independent = ed_xxz_chi(5, 1.0, 2.0, 10.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 10.0 = 10.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, independent = ed_xxz_chi(4, 1.0, 1.0, 1.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SusceptibilityZZ(), OBC(4); route = :ed_finite_size, independent = ed_xxz_chi(4, 1.0, 1.0, 10.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 10.0 = 10.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SusceptibilityZZ(), OBC(5); route = :ed_finite_size, independent = ed_xxz_chi(5, 1.0, 1.0, 1.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 1.0 = 1.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), SusceptibilityZZ(), OBC(5); route = :ed_finite_size, independent = ed_xxz_chi(5, 1.0, 1.0, 10.0, 2 * (spin_ops(1 // 2))[3]), at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box: build H_XXZ from scratch with spin_ops(1/2), diagonalise, compute β·Var(M_α)/N (α=z)"], fetch_kw = (; 10.0 = 10.0))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(3); route = :second_closed_form, independent = 1.0e6 / 3, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(5); route = :second_closed_form, independent = 1.0e6 / 5, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(7); route = :second_closed_form, independent = 1.0e6 / 7, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(3); route = :second_closed_form, independent = 1.0e6 / 3, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(5); route = :second_closed_form, independent = 1.0e6 / 5, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(7); route = :second_closed_form, independent = 1.0e6 / 7, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["XXZ1D OBC even N: singlet GS m_z=0 ⇒ Var(S^z_total)=0 ⇒ χ_zz=0"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(3); route = :second_closed_form, independent = 1.0e6 / 3, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(5); route = :second_closed_form, independent = 1.0e6 / 5, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(XXZ1D(), SusceptibilityZZ(), OBC(7); route = :second_closed_form, independent = 1.0e6 / 7, agree_within = 1.0e-6, refs = ["XXZ1D OBC odd N: m_z=±1/2 doublet GS ⇒ χ_zz = β·Var(σ^z_total)/N = β/N"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0, beta = 1.0e6))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 31 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

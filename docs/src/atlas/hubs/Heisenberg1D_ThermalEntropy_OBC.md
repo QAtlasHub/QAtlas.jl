@@ -16,6 +16,48 @@
 |---|---|---|---|---|
 | `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
 | `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: S = β·(E - F) from full spectrum | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
@@ -23,22 +65,190 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Heisenberg1D(), ThermalEntropy(), OBC(N); route = :limiting_case, independent = if iseven(N) 0.0 else log(2.0) / N end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; J = J, beta = LOW_T_BETA))
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :limiting_case, independent = if iseven(4) 0.0 else log(2.0) / 4 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6))
 ```
 
 ```julia
-verify(Heisenberg1D(), ThermalEntropy(), OBC(N); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; J = J, beta = HIGH_T_BETA))
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 0.5 = 0.5, beta = 0.001))
 ```
 
 ```julia
-verify(Heisenberg1D(), ThermalEntropy(), OBC(N); route = :ed_finite_size, independent = ed_S, at = ["N=$(N)", "β=$(beta)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; J = J, beta = beta))
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :limiting_case, independent = if iseven(6) 0.0 else log(2.0) / 6 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 0.5 = 0.5, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :limiting_case, independent = if iseven(8) 0.0 else log(2.0) / 8 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 0.5 = 0.5, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :limiting_case, independent = if iseven(4) 0.0 else log(2.0) / 4 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 1.0 = 1.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :limiting_case, independent = if iseven(6) 0.0 else log(2.0) / 6 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 1.0 = 1.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :limiting_case, independent = if iseven(8) 0.0 else log(2.0) / 8 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 1.0 = 1.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :limiting_case, independent = if iseven(4) 0.0 else log(2.0) / 4 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 2.0 = 2.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :limiting_case, independent = if iseven(6) 0.0 else log(2.0) / 6 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 2.0 = 2.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :limiting_case, independent = if iseven(8) 0.0 else log(2.0) / 8 end, agree_within = 1.0e-9, refs = ["Heisenberg1D OBC T → 0: singlet GS for even N ⇒ s = 0; doublet GS for odd N ⇒ s = log(2)/N"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ s = log 2 per spin"], fetch_kw = (; 2.0 = 2.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 0.5 = 0.5, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 1.0 = 1.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(4); route = :ed_finite_size, independent = ed_S, at = ["N=$(4)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(6); route = :ed_finite_size, independent = ed_S, at = ["N=$(6)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), ThermalEntropy(), OBC(8); route = :ed_finite_size, independent = ed_S, at = ["N=$(8)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: S = β·(E - F) from full spectrum"], fetch_kw = (; 2.0 = 2.0, 10.0 = 10.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 45 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

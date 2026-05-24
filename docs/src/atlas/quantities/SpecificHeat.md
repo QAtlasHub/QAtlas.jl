@@ -29,13 +29,13 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
-| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🔵 [hub](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) |
+| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | — | — |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_SpecificHeat_Infinite.md) |
-| [`IsingSquare`](../models/IsingSquare.md) | — | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_PBC.md) | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_Infinite.md) |
+| [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_SpecificHeat_PBC.md) | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | 🔵 [hub](../hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SpecificHeat_OBC.md) | — | — |
-| [`TFIM`](../models/TFIM.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_OBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_PBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_Infinite.md) |
+| [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_OBC.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_PBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_SpecificHeat_OBC.md) | — | 🟠 [hub](../hubs/XXZ1D_SpecificHeat_Infinite.md) |

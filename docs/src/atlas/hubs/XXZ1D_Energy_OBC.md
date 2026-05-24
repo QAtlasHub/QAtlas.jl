@@ -15,36 +15,91 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@gapless` | `ed_finite_size` | 🟢 structural | OBC thermal energy from generic_ed thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
 | `@gapless` | `sum_rule` | 🟡 asserted | Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless) | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | OBC thermal energy from generic_ed thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_observables.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/XXZ/test_XXZ1D_thermal.jl` |
-| `@sweep` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapless` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@gapped` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum | `test/models/quantum/XXZ/test_xxz1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), Energy(), OBC(4); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0), independent = E_ind, agree_within = 1.0e-9, refs = ["OBC thermal energy from generic_ed thermo_from_spectrum"])
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.7), Energy(), OBC(4); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
+```
+
+```julia
 verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), OBC(5); route = :sum_rule, fetch_kw = (; beta = 0.0), independent = 0.0, agree_within = 1.0e-12, refs = ["Tr(H_XXZ) = 0 for OBC (all Si.Si+1 bond terms traceless)"])
 ```
 
 ```julia
-verify(XXZ1D(; J = J, Δ = Delta), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["OBC thermal energy from generic_ed thermo_from_spectrum"])
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
 ```
 
 ```julia
-verify(XXZ1D(; J = J, Δ = Delta), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(XXZ1D(; J = J, Δ = dz), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; beta = beta))
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(XXZ1D(; 1.0 = 1.0, Δ = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: chain_hamiltonian(2,N, J·(SxSx+SySy+Δ·SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 4 · model ED-feasible
+- cards: 15 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

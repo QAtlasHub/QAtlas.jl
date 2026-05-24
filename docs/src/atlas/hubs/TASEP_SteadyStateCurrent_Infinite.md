@@ -17,6 +17,9 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Empty/full lattice carries no current: j(0)=j(1)=0 | `test/models/classical/test_tasep.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TASEP mean-field steady state current j = p ρ (1-ρ) | `test/models/classical/test_tasep.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TASEP mean-field steady state current j = p ρ (1-ρ) | `test/models/classical/test_tasep.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TASEP mean-field steady state current j = p ρ (1-ρ) | `test/models/classical/test_tasep.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TASEP mean-field steady state current j = p ρ (1-ρ) | `test/models/classical/test_tasep.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Derrida 1998: TASEP steady-state J = ρ(1-ρ), max at ρ=1/2 ⇒ J = 1/4 | `test/models/classical/test_tasep.jl` |
 
 ## Test calls
@@ -28,7 +31,19 @@ verify(TASEP(; p = 1.0, ρ = 0.0), SteadyStateCurrent(), Infinite(); route = :li
 ```
 
 ```julia
-verify(TASEP(; p = p, ρ = ρ), SteadyStateCurrent(), Infinite(); route = :second_closed_form, independent = p * ρ * (1 - ρ), agree_within = 1.0e-12, refs = ["TASEP mean-field steady state current j = p ρ (1-ρ)"])
+verify(TASEP(; 1.0 = 1.0, 0.5 = 0.5), SteadyStateCurrent(), Infinite(); route = :second_closed_form, independent = 1.0 * 0.5 * (1 - 0.5), agree_within = 1.0e-12, refs = ["TASEP mean-field steady state current j = p ρ (1-ρ)"])
+```
+
+```julia
+verify(TASEP(; 1.0 = 1.0, 0.3 = 0.3), SteadyStateCurrent(), Infinite(); route = :second_closed_form, independent = 1.0 * 0.3 * (1 - 0.3), agree_within = 1.0e-12, refs = ["TASEP mean-field steady state current j = p ρ (1-ρ)"])
+```
+
+```julia
+verify(TASEP(; 0.7 = 0.7, 0.5 = 0.5), SteadyStateCurrent(), Infinite(); route = :second_closed_form, independent = 0.7 * 0.5 * (1 - 0.5), agree_within = 1.0e-12, refs = ["TASEP mean-field steady state current j = p ρ (1-ρ)"])
+```
+
+```julia
+verify(TASEP(; 1.0 = 1.0, 0.9 = 0.9), SteadyStateCurrent(), Infinite(); route = :second_closed_form, independent = 1.0 * 0.9 * (1 - 0.9), agree_within = 1.0e-12, refs = ["TASEP mean-field steady state current j = p ρ (1-ρ)"])
 ```
 
 ```julia
@@ -39,7 +54,7 @@ verify(TASEP(), SteadyStateCurrent(), Infinite(); route = :second_closed_form, i
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

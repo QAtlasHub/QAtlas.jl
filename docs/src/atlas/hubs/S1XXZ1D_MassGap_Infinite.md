@@ -17,6 +17,7 @@
 |---|---|---|---|---|
 | `@haldane` | `delegation_invariant` | 🟡 asserted | S1XXZ1D(Delta=1) Haldane gap delegates to S1Heisenberg1D | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 | `@haldane` | `delegation_invariant` | 🟡 asserted | White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (Δ=1 delegation; J-linear scaling) | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
+| `@haldane` | `delegation_invariant` | 🟡 asserted | White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (Δ=1 delegation; J-linear scaling) | `test/models/quantum/Heisenberg/test_s1_xxz1d.jl` |
 
 ## Test calls
 
@@ -27,14 +28,18 @@ verify(S1XXZ1D(; J = 1.0, Δ = 1.0), MassGap(), Infinite(); route = :delegation_
 ```
 
 ```julia
-verify(S1XXZ1D(; J = J, Δ = 1.0), MassGap(), Infinite(); route = :delegation_invariant, independent = 0.41048J, agree_within = 0.001, refs = ["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (Δ=1 delegation; J-linear scaling)"])
+verify(S1XXZ1D(; 1.0 = 1.0, Δ = 1.0), MassGap(), Infinite(); route = :delegation_invariant, independent = 0.41048 * 1.0, agree_within = 0.001, refs = ["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (Δ=1 delegation; J-linear scaling)"])
+```
+
+```julia
+verify(S1XXZ1D(; 2.0 = 2.0, Δ = 1.0), MassGap(), Infinite(); route = :delegation_invariant, independent = 0.41048 * 2.0, agree_within = 0.001, refs = ["White 1993 / Wang-Qin-Hu 2012: S=1 Heisenberg Haldane gap ≈ 0.41048 · J (Δ=1 delegation; J-linear scaling)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

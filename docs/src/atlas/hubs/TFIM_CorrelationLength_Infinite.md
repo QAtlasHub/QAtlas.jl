@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448 | `test/models/quantum/TFIM/test_TFIM_correlation_length_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448 | `test/models/quantum/TFIM/test_TFIM_correlation_length_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448 | `test/models/quantum/TFIM/test_TFIM_correlation_length_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), CorrelationLength(), Infinite(); route = :second_closed_form, independent = ξ_closed, agree_within = 1.0e-12, refs = ["TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448"])
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / (2 * abs(2.0 - 1.0)), agree_within = 1.0e-12, refs = ["TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 3.0 = 3.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / (2 * abs(3.0 - 1.0)), agree_within = 1.0e-12, refs = ["TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 4.0 = 4.0), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / (2 * abs(4.0 - 1.0)), agree_within = 1.0e-12, refs = ["TFIM CorrelationLength = 1/(2|h-J|) (inverse mass gap; src TFIM_zaxis.jl); convention discrepancy with Pfeuty 1970 1/log(max/min) tracked in issue #448"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -18,28 +18,158 @@
 | `@haldane` | `ed_finite_size` | 🟢 structural | Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
 | `@haldane` | `second_closed_form` | 🟢 structural | Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J} | `test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl` |
 | `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@haldane` | `ed_finite_size` | 🟢 structural | ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(; J = J), Energy(), OBC(N); route = :ed_finite_size, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(), OBC(4); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0), independent = E_ind, agree_within = 1.0e-9, refs = ["Direct spin-1 OBC ED via generic_ed chain_hamiltonian + thermo_from_spectrum"])
 ```
 
 ```julia
-verify(S1Heisenberg1D(; J = J), Energy(), OBC(2); route = :second_closed_form, fetch_kw = (; beta = beta), independent = E_ind, agree_within = 1.0e-9, refs = ["Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J}"])
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(), OBC(2); route = :second_closed_form, fetch_kw = (; 1.0 = 1.0), independent = E_ind, agree_within = 1.0e-9, refs = ["Exact spin-1 dimer spectrum: S_tot in {0,1,2} -> {-2J,-J,+J}"])
 ```
 
 ```julia
-verify(S1Heisenberg1D(; J = J), Energy(:per_site), OBC(N); route = :ed_finite_size, independent = ed_E, at = ["N=$(N)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; beta = beta))
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 0.5 = 0.5), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 1.0 = 1.0), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(3); route = :ed_finite_size, independent = ed_E, at = ["N=$(3)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(4); route = :ed_finite_size, independent = ed_E, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 0.5 = 0.5))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 2.0 = 2.0))
+```
+
+```julia
+verify(S1Heisenberg1D(; 2.0 = 2.0), Energy(:per_site), OBC(5); route = :ed_finite_size, independent = ed_E, at = ["N=$(5)"], agree_within = 1.0e-9, refs = ["ED black-box (spin-1): chain_hamiltonian(3,N, J·(SxSx+SySy+SzSz)), thermo_from_spectrum"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 29 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

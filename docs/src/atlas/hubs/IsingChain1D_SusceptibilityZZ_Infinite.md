@@ -16,20 +16,35 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@ising1d` | `second_closed_form` | 🟢 structural | Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
+| `@ising1d` | `second_closed_form` | 🟢 structural | Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site | `test/models/classical/test_ising_chain_1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingChain1D(; J = J), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = β * exp(2 * β * J), agree_within = 1.0e-12, refs = ["Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site"])
+verify(IsingChain1D(; 1.0 = 1.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.5), independent = 0.5 * exp(2 * 0.5 * 1.0), agree_within = 1.0e-12, refs = ["Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 1.0 = 1.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 1.0), independent = 1.0 * exp(2 * 1.0 * 1.0), agree_within = 1.0e-12, refs = ["Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 0.5 = 0.5), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = 2.0 * exp(2 * 2.0 * 0.5), agree_within = 1.0e-12, refs = ["Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site"])
+```
+
+```julia
+verify(IsingChain1D(; 2.0 = 2.0), SusceptibilityZZ(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 0.3), independent = 0.3 * exp(2 * 0.3 * 2.0), agree_within = 1.0e-12, refs = ["Brush 1967 RMP 39, 883, Eq. (4.18): χ(β,h=0) = β exp(2βJ) per site"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

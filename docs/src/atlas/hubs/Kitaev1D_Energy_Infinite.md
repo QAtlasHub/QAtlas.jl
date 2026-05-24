@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Kitaev1D(; μ = 0.0, t = t, Δ = t), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -t, agree_within = 1.0e-9, refs = ["Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"])
+verify(Kitaev1D(; μ = 0.0, 0.5 = 0.5, Δ = 0.5), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-9, refs = ["Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, 1.0 = 1.0, Δ = 1.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-9, refs = ["Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, 2.0 = 2.0, Δ = 2.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-9, refs = ["Kitaev 2001 sweet spot μ=0, t=Δ: dispersion is flat E(k)=2t, so ε₀ = −t"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

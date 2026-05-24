@@ -15,7 +15,14 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [\$(name) at κ=\$(κ)]" | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [Ising at κ=\$(3.0)]" | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [SAW at κ=\$(8 / 3)]" | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [GFF at κ=\$(4.0)]" | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | "SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [percolation at κ=\$(6.0)]" | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ) | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ) | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ) | `test/models/classical/test_sle_kappa.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ) | `test/models/classical/test_sle_kappa.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ) | `test/models/classical/test_sle_kappa.jl` |
 
 ## Test calls
@@ -23,18 +30,46 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(SLEkappa(; κ = κ), CentralCharge(), Infinite(); route = :second_closed_form, independent = c_ind, agree_within = 1.0e-9, refs = ["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [$(name) at κ=$(κ)]"])
+verify(SLEkappa(; 3.0 = 3.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = ((3 * 3.0 - 8) * (6 - 3.0)) / (2 * 3.0), agree_within = 1.0e-9, refs = ["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [Ising at κ=$(3.0)]"])
 ```
 
 ```julia
-verify(SLEkappa(; κ = κ), CentralCharge(), Infinite(); route = :second_closed_form, independent = Float64(c_expected), agree_within = 1.0e-12, refs = ["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"])
+verify(SLEkappa(; 8 / 3 = 8 / 3), CentralCharge(), Infinite(); route = :second_closed_form, independent = ((3 * (8 / 3) - 8) * (6 - 8 / 3)) / (2 * (8 / 3)), agree_within = 1.0e-9, refs = ["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [SAW at κ=$(8 / 3)]"])
+```
+
+```julia
+verify(SLEkappa(; 4.0 = 4.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = ((3 * 4.0 - 8) * (6 - 4.0)) / (2 * 4.0), agree_within = 1.0e-9, refs = ["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [GFF at κ=$(4.0)]"])
+```
+
+```julia
+verify(SLEkappa(; 6.0 = 6.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = ((3 * 6.0 - 8) * (6 - 6.0)) / (2 * 6.0), agree_within = 1.0e-9, refs = ["SLE: c(κ) = (3κ-8)(6-κ)/(2κ) [percolation at κ=$(6.0)]"])
+```
+
+```julia
+verify(SLEkappa(; 8 // 3 = 8 // 3), CentralCharge(), Infinite(); route = :second_closed_form, independent = Float64(0.0), agree_within = 1.0e-12, refs = ["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"])
+```
+
+```julia
+verify(SLEkappa(; 3.0 = 3.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = Float64(1 // 2), agree_within = 1.0e-12, refs = ["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"])
+```
+
+```julia
+verify(SLEkappa(; 4.0 = 4.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = Float64(1.0), agree_within = 1.0e-12, refs = ["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"])
+```
+
+```julia
+verify(SLEkappa(; 6.0 = 6.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = Float64(0.0), agree_within = 1.0e-12, refs = ["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"])
+```
+
+```julia
+verify(SLEkappa(; 8.0 = 8.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = Float64(-2.0), agree_within = 1.0e-12, refs = ["Bauer-Bernard 2002 / Cardy 2003: SLE(κ) ↔ CFT c = (3κ-8)(6-κ)/(2κ)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

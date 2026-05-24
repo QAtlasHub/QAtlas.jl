@@ -17,24 +17,44 @@
 |---|---|---|---|---|
 | `@sweep` | `ed_finite_size` | 🟢 structural | Affleck-Kennedy-Lieb-Tasaki 1988 | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent | `test/models/quantum/misc/test_aklt_verify_main.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.03, fetch_kw = (; r = r), refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :ed_finite_size, independent = Float64[], at = ["N=$(verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8)))" for verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8)) = verify_profile_Ns(; fast = (6, 8), full = (6, 8), nightly = (6, 8))], agree_within = 0.03, fetch_kw = (; 2 = 2), refs = ["Affleck-Kennedy-Lieb-Tasaki 1988"])
 ```
 
 ```julia
-verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = closed, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; r = r))
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = if 0 == 0 2 / 3 else (-1) ^ 0 * (4 / 3) * 3.0 ^ -0 end, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; 0 = 0))
+```
+
+```julia
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = if 1 == 0 2 / 3 else (-1) ^ 1 * (4 / 3) * 3.0 ^ -1 end, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; 1 = 1))
+```
+
+```julia
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = if 2 == 0 2 / 3 else (-1) ^ 2 * (4 / 3) * 3.0 ^ -2 end, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; 2 = 2))
+```
+
+```julia
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = if 3 == 0 2 / 3 else (-1) ^ 3 * (4 / 3) * 3.0 ^ -3 end, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; 3 = 3))
+```
+
+```julia
+verify(AKLT1D(), ZZCorrelation(; mode = :static), Infinite(); route = :second_closed_form, independent = if 4 == 0 2 / 3 else (-1) ^ 4 * (4 / 3) * 3.0 ^ -4 end, agree_within = 1.0e-14, refs = ["AKLT 1988: ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|}, J-independent"], fetch_kw = (; 4 = 4))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

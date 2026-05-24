@@ -16,24 +16,49 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system) | `test/models/quantum/TFIM/test_TFIM_specific_heat_batch.jl` |
+| `@sweep` | `sum_rule` | 🟡 asserted | c_v = -β² ∂ε/∂β — independent AutoDiff through QAtlas.fetch(Energy, Infinite) at the same (J,h,β) | `test/verification/universality/test_thermo_identity_quantum.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly"], fetch_kw = (; beta = LOW_T_BETA))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly"], fetch_kw = (; beta = 100.0))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system)"], fetch_kw = (; beta = HIGH_T_BETA))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system)"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly"], fetch_kw = (; beta = 100.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system)"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM gapped phase (h ≠ J): c(T → 0) ∝ exp(-Δ/T) → 0 exactly"], fetch_kw = (; beta = 100.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), SpecificHeat(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["TFIM at T → ∞: c → 0 as ~β² (high-T tail of bounded-spectrum quantum system)"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(TFIM(; J = J, h = h), SpecificHeat(), Infinite(); route = :sum_rule, fetch_kw = (; beta = (0.5, 1.0, 2.0)), independent = -((0.5, 1.0, 2.0) ^ 2) * ForwardDiff.derivative((b->begin QAtlas.fetch(TFIM(; J = J, h = h), Energy(), Infinite(); beta = b) end), (0.5, 1.0, 2.0)), agree_within = 1.0e-8, at = ["J=$(J)", "h=$(h)", "β=$((0.5, 1.0, 2.0))"], refs = ["c_v = -β² ∂ε/∂β — independent AutoDiff through QAtlas.fetch(Energy, Infinite) at the same (J,h,β)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-feasible
+- cards: 7 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

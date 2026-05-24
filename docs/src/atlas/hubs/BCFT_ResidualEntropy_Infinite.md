@@ -15,11 +15,26 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
+| `@sweep` | `delegation_invariant` | 🟡 asserted | Affleck-Ludwig g-theorem: equivalent boundary states share log g | `test/universalities/test_bcft.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | Affleck-Ludwig g-theorem: equivalent boundary states share log g | `test/universalities/test_bcft.jl` |
+| `@sweep` | `delegation_invariant` | 🟡 asserted | Affleck-Ludwig g-theorem: equivalent boundary states share log g | `test/universalities/test_bcft.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | "Cardy 1989; Affleck-Ludwig 1991: Ising fixed-boundary " * "g = 1/√2 ⇒ log g = -log(2)/2" | `test/universalities/test_bcft.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
+
+```julia
+verify(BCFT(), ResidualEntropy(), Infinite(); route = :delegation_invariant, fetch_kw = (; state = :fixed_plus), independent = QAtlas.fetch(BCFT(), ResidualEntropy(), Infinite(); state = :fixed), agree_within = 1.0e-10, refs = ["Affleck-Ludwig g-theorem: equivalent boundary states share log g"])
+```
+
+```julia
+verify(BCFT(), ResidualEntropy(), Infinite(); route = :delegation_invariant, fetch_kw = (; state = :fixed_minus), independent = QAtlas.fetch(BCFT(), ResidualEntropy(), Infinite(); state = :fixed), agree_within = 1.0e-10, refs = ["Affleck-Ludwig g-theorem: equivalent boundary states share log g"])
+```
+
+```julia
+verify(BCFT(), ResidualEntropy(), Infinite(); route = :delegation_invariant, fetch_kw = (; state = :identity), independent = QAtlas.fetch(BCFT(), ResidualEntropy(), Infinite(); state = :fixed), agree_within = 1.0e-10, refs = ["Affleck-Ludwig g-theorem: equivalent boundary states share log g"])
+```
 
 ```julia
 verify(BCFT(), ResidualEntropy(), Infinite(); route = :second_closed_form, independent = -(log(2)) / 2, agree_within = 1.0e-12, refs = ["Cardy 1989; Affleck-Ludwig 1991: Ising fixed-boundary " * "g = 1/√2 ⇒ log g = -log(2)/2"], fetch_kw = (; state = :fixed))
@@ -29,7 +44,7 @@ verify(BCFT(), ResidualEntropy(), Infinite(); route = :second_closed_form, indep
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

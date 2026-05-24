@@ -17,24 +17,74 @@
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: c → 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: c → 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: c → 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: c → 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: c → 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → 0: c → 0 | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail | `test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; Lx = Lx, Ly = Ly, beta = LOW_T_BETA))
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; 3 = 3, 3 = 3, beta = 1.0e6))
 ```
 
 ```julia
-verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; Lx = Lx, Ly = Ly, beta = HIGH_T_BETA))
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; 3 = 3, 3 = 3, beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; 4 = 4, 4 = 4, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 1.0 = 1.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; 4 = 4, 4 = 4, beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; 3 = 3, 3 = 3, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; 3 = 3, 3 = 3, beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; 4 = 4, 4 = 4, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 1.0 = 1.0, 1.0 = 1.0, 2.0 = 2.0), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; 4 = 4, 4 = 4, beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; 3 = 3, 3 = 3, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; 3 = 3, 3 = 3, beta = 0.001))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["KitaevHoneycomb OBC T → 0: c → 0"], fetch_kw = (; 4 = 4, 4 = 4, beta = 1.0e6))
+```
+
+```julia
+verify(KitaevHoneycomb(; 0.5 = 0.5, 0.5 = 0.5, 0.5 = 0.5), SpecificHeat(), OBC(0); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["KitaevHoneycomb OBC T → ∞: c → 0 as β² high-T tail"], fetch_kw = (; 4 = 4, 4 = 4, beta = 0.001))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-infeasible (frontier)
+- cards: 12 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -26,6 +26,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `Infinite` |
 |---|---|
-| [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
+| [`TFIM`](../models/TFIM.md) | 🔵 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

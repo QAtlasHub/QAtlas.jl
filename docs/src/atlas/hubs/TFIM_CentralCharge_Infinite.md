@@ -18,6 +18,8 @@
 | `@critical` | `literature_value` | 🟢 structural | 2D Ising CFT (Belavin-Polyakov-Zamolodchikov 1984): c = 1/2 | `test/models/quantum/TFIM/test_TFIM_central_charge.jl` |
 | `@critical` | `literature_value` | 🟢 structural | Onsager 1944 / Pfeuty 1970: Ising universality, c = 1/2, nu = 1, beta = 1/8 | `test/models/quantum/TFIM/test_tfim_critical_exponents.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | Gapped phase (h != J): no conformal sector, c = 0 | `test/models/quantum/TFIM/test_TFIM_central_charge.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Gapped phase (h != J): no conformal sector, c = 0 | `test/models/quantum/TFIM/test_TFIM_central_charge.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Gapped phase (h != J): no conformal sector, c = 0 | `test/models/quantum/TFIM/test_TFIM_central_charge.jl` |
 
 ## Test calls
 
@@ -32,14 +34,22 @@ verify(TFIM(; J = 1.0, h = 1.0), CentralCharge(), Infinite(); route = :literatur
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), CentralCharge(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Gapped phase (h != J): no conformal sector, c = 0"])
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), CentralCharge(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Gapped phase (h != J): no conformal sector, c = 0"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Gapped phase (h != J): no conformal sector, c = 0"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 10.0 = 10.0), CentralCharge(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Gapped phase (h != J): no conformal sector, c = 0"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

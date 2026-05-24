@@ -15,25 +15,70 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0 | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: s → log 2 per site (paramagnet) | `test/models/quantum/TFIM/test_TFIM_thermal_entropy_batch.jl` |
+| `@sweep` | `sum_rule` | 🟡 asserted | Gibbs identity s = β(ε − f) across three independent Infinite-bc fetches (Energy / FreeEnergy / ThermalEntropy) | `test/verification/universality/test_thermo_identity_quantum.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = J, h = h), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = LOW_T_BETA))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), ThermalEntropy(), Infinite(); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["TFIM at T → ∞: s → log 2 per site (paramagnet)"], fetch_kw = (; beta = HIGH_T_BETA))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 1.0e-9, refs = ["TFIM is gapped for h ≠ J ⇒ unique GS ⇒ thermal entropy density vanishes as T → 0"], fetch_kw = (; beta = 1000.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), ThermalEntropy(), Infinite(); route = :limiting_case, independent = log(2), agree_within = 1.0e-5, refs = ["TFIM at T → ∞: s → log 2 per site (paramagnet)"], fetch_kw = (; beta = 0.001))
+```
+
+```julia
+verify(TFIM(; J = J, h = h), ThermalEntropy(), Infinite(); route = :sum_rule, fetch_kw = (; beta = (0.5, 1.0, 2.0, 4.0)), independent = (0.5, 1.0, 2.0, 4.0) * (QAtlas.fetch(TFIM(; J = J, h = h), Energy(), Infinite(); beta = (0.5, 1.0, 2.0, 4.0)) - QAtlas.fetch(TFIM(; J = J, h = h), FreeEnergy(), Infinite(); beta = (0.5, 1.0, 2.0, 4.0))), agree_within = 1.0e-9, at = ["J=$(J)", "h=$(h)", "β=$((0.5, 1.0, 2.0, 4.0))"], refs = ["Gibbs identity s = β(ε − f) across three independent Infinite-bc fetches (Energy / FreeEnergy / ThermalEntropy)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-feasible
+- cards: 11 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -23,11 +23,11 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(2 + phi), agree_within = 1.0e-9, refs = ["Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio"])
+verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(2 + (1 + sqrt(5)) / 2), agree_within = 1.0e-9, refs = ["Fibonacci TQFT: gamma = (1/2) log(2 + phi), phi = golden ratio"])
 ```
 
 ```julia
-verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(1 + phi ^ 2), agree_within = 1.0e-12, refs = ["Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio)"])
+verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = :second_closed_form, independent = 0.5 * log(1 + ((1 + sqrt(5)) / 2) ^ 2), agree_within = 1.0e-12, refs = ["Kitaev-Preskill 2006 / Levin-Wen 2006: TEE = log D = (1/2) log(1+φ²) for Fibonacci anyons (φ = golden ratio)"])
 ```
 
 

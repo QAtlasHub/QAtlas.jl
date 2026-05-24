@@ -17,24 +17,34 @@
 |---|---|---|---|---|
 | `@onsager` | `limiting_case` | 🟡 asserted | Yang 1952: m = 0 for T >= Tc | `test/models/classical/test_ising_onsager_yang.jl` |
 | `@onsager` | `second_closed_form` | 🟢 structural | Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8 | `test/models/classical/test_ising_onsager_yang.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8 | `test/models/classical/test_ising_onsager_yang.jl` |
+| `@onsager` | `second_closed_form` | 🟢 structural | Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8 | `test/models/classical/test_ising_onsager_yang.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingSquare(; J = J), SpontaneousMagnetization(), Infinite(); route = :limiting_case, fetch_kw = (; β = 0.9βc), independent = 0.0, agree_within = 1.0e-10, refs = ["Yang 1952: m = 0 for T >= Tc"])
+verify(IsingSquare(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :limiting_case, fetch_kw = (; β = 0.9 * (log(1 + sqrt(2)) / (2 * 1.0))), independent = 0.0, agree_within = 1.0e-10, refs = ["Yang 1952: m = 0 for T >= Tc"])
 ```
 
 ```julia
-verify(IsingSquare(; J = J), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; β = β), independent = m_ind, agree_within = 1.0e-9, refs = ["Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8"])
+verify(IsingSquare(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; 1.1 * (log(1 + sqrt(2)) / (2 * 1.0)) = 1.1 * (log(1 + sqrt(2)) / (2 * 1.0))), independent = (1 - sinh(2 * (1.1 * (log(1 + sqrt(2)) / (2 * 1.0))) * 1.0) ^ -4) ^ (1 / 8), agree_within = 1.0e-9, refs = ["Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8"])
+```
+
+```julia
+verify(IsingSquare(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; 1.5 * (log(1 + sqrt(2)) / (2 * 1.0)) = 1.5 * (log(1 + sqrt(2)) / (2 * 1.0))), independent = (1 - sinh(2 * (1.5 * (log(1 + sqrt(2)) / (2 * 1.0))) * 1.0) ^ -4) ^ (1 / 8), agree_within = 1.0e-9, refs = ["Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8"])
+```
+
+```julia
+verify(IsingSquare(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; 2.0 * (log(1 + sqrt(2)) / (2 * 1.0)) = 2.0 * (log(1 + sqrt(2)) / (2 * 1.0))), independent = (1 - sinh(2 * (2.0 * (log(1 + sqrt(2)) / (2 * 1.0))) * 1.0) ^ -4) ^ (1 / 8), agree_within = 1.0e-9, refs = ["Yang 1952: m = (1 - sinh^{-4}(2βJ))^{1/8}, exponent 1/8"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

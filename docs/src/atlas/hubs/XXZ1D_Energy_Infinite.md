@@ -18,6 +18,7 @@
 | `@fm` | `limiting_case` | 🟡 asserted | FM saturation: all-aligned state is exact GS, e0 = -J/4 | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@fm` | `second_closed_form` | 🟢 structural | XXZ FM point Δ=-1: aligned state exact, e0 = -J/4 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
 | `@free_fermion` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
+| `@free_fermion` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 I: e0 = -J/pi for XX (Delta=0) free fermion | `test/models/quantum/XXZ/test_xxz_xx_infinite.jl` |
 | `@gapless` | `ed_finite_size` | 🟢 structural | Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3) | `test/models/quantum/XXZ/test_XXZ1D.jl` |
 | `@gapless` | `ed_finite_size` | 🟢 structural | Independent OBC dense-ED ground-state energies at N=8,10,12 then 1/N-extrapolated (edge-defect leading correction); cross-checks the Yang-Yang single-integral closed form at Δ = 1/2 | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
 | `@gapless` | `limiting_case` | 🟡 asserted | Heisenberg AF Δ→1⁻ limit: e0 → 1/4 − log 2 (des Cloizeaux-Pearson 1962) | `test/verification/heisenberg_xxz/test_xxz_yang_yang.jl` |
@@ -40,15 +41,19 @@ verify(XXZ1D(; J = 1.0, Δ = -1.0), Energy(), Infinite(); route = :second_closed
 ```
 
 ```julia
-verify(XXZ1D(; J = 1.0, Δ = 0.0), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 0.0, N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion)"])
+verify(XXZ1D(; J = 1.0, Δ = 0.0), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 0.0, N) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.05, refs = ["Yang-Yang 1966 I: e0 = -J/pi for Delta=0 (free fermion)"])
 ```
 
 ```julia
-verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 0.5, N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3)"])
+verify(XXZ1D(; J = 1.0, Δ = 0.0), Energy(), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(2, N, kron(Sx, Sx) + kron(Sy, Sy))))[1] / (N - 1) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.05, refs = ["Yang-Yang 1966 I: e0 = -J/pi for XX (Delta=0) free fermion"])
 ```
 
 ```julia
-verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size, independent = intercept, agree_within = 0.005, at = ["Ns=$(Ns)"], refs = ["Independent OBC dense-ED ground-state energies at N=8,10,12 then 1/N-extrapolated (edge-defect leading correction); cross-checks the Yang-Yang single-integral closed form at Δ = 1/2"])
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 0.5, N) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.05, refs = ["Yang-Yang 1966 II: e0 = -3J/8 at Delta=1/2 (gamma=pi/3)"])
+```
+
+```julia
+verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :ed_finite_size, independent = intercept, agree_within = 0.005, at = ["Ns=$([8, 10, 12])"], refs = ["Independent OBC dense-ED ground-state energies at N=8,10,12 then 1/N-extrapolated (edge-defect leading correction); cross-checks the Yang-Yang single-integral closed form at Δ = 1/2"])
 ```
 
 ```julia
@@ -72,14 +77,14 @@ verify(XXZ1D(; J = 1.0, Δ = 0.5), Energy(), Infinite(); route = :second_closed_
 ```
 
 ```julia
-verify(XXZ1D(; J = 1.0, Δ = 1.0), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 1.0, N) for N = Ns], at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1"])
+verify(XXZ1D(; J = 1.0, Δ = 1.0), Energy(), Infinite(); route = :ed_finite_size, independent = [xxz_e0_ed(1.0, 1.0, N) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(N)" for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.05, refs = ["Hulthen 1938: e0 = J(1/4 - log 2) at Delta=1"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 11 · model ED-feasible
+- cards: 12 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -16,7 +16,78 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β | `test/models/quantum/TFIM/test_TFIM_entropy_l1_batch.jl` |
+| `@sweep` | `ed_finite_size` | 🟢 structural | Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p² | `test/models/quantum/TFIM/test_TFIM_renyi.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p² | `test/models/quantum/TFIM/test_TFIM_renyi.jl` |
 
 ## Test calls
@@ -24,22 +95,306 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; J = 0.0, h = h), RenyiEntropy(α), OBC(N); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+verify(TFIM(; J = 0.0, 0.5 = 0.5), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = 0.0), RenyiEntropy(α), OBC(N); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = β))
+verify(TFIM(; J = 0.0, 0.5 = 0.5), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
 ```
 
 ```julia
-verify(TFIM(; J = J, h = h), RenyiEntropy(2), OBC(N); route = :ed_finite_size, fetch_kw = (; ℓ = ℓ, beta = Inf), independent = S2_ind, agree_within = 1.0e-8, refs = ["Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p²"])
+verify(TFIM(; J = 0.0, 0.5 = 0.5), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 0.5 = 0.5), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 1.0 = 1.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; J = 0.0, 2.0 = 2.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["TFIM J=0 T→0: pure GS ⇒ S_α(ℓ=1) = 0 for any Rényi index"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 0.5 = 0.5, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(4); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(6); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 0.5))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 10.0))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(2), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 2.0 = 2.0, h = 0.0), RenyiEntropy(3), OBC(8); route = :second_closed_form, independent = log(2), agree_within = 1.0e-10, refs = ["TFIM h=0: ρ₁ = I/2 ⇒ S_α(ℓ=1) = log 2 for any Rényi index, any β"], fetch_kw = (; ℓ = 1, beta = 1.0e6))
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), RenyiEntropy(2), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(log(sum((LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 1.0))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))) .^ 2) .^ 2))), agree_within = 1.0e-8, refs = ["Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p²"])
+```
+
+```julia
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), RenyiEntropy(2), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(log(sum((LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 0.5))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))) .^ 2) .^ 2))), agree_within = 1.0e-8, refs = ["Renyi-2 from Schmidt spectrum of _build_tfim_dense GS: S2 = -log Σ p²"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 3 · model ED-feasible
+- cards: 74 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -17,10 +17,10 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 28 |
-| 🔵 coherent | 9 |
+| 🟢 corroborated-at-p | 36 |
+| 🔵 coherent | 8 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 16 |
+| 🟠 uncorroborated-but-feasible | 9 |
 | **total claimed hubs** | **53** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `delegation`, `pfaffian`
@@ -47,32 +47,32 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`CentralCharge`](../quantities/CentralCharge.md) | — | — | 🟢 [hub](../hubs/TFIM_CentralCharge_Infinite.md) |
 | [`CorrelationLength`](../quantities/CorrelationLength.md) | — | — | 🟢 [hub](../hubs/TFIM_CorrelationLength_Infinite.md) |
 | [`CriticalExponents`](../quantities/CriticalExponents.md) | — | — | 🟠 [hub](../hubs/TFIM_CriticalExponents_Infinite.md) |
-| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🔵 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/TFIM_EnergyLocal_OBC.md) | — | — |
 | [`FidelitySusceptibility`](../quantities/FidelitySusceptibility.md) | 🟢 [hub](../hubs/TFIM_FidelitySusceptibility_OBC.md) | — | 🟢 [hub](../hubs/TFIM_FidelitySusceptibility_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
-| [`GGEValue`](../quantities/GGEValue.md) | — | — | 🟠 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
+| [`GGEValue`](../quantities/GGEValue.md) | — | — | 🔵 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
 | [`LoschmidtEcho`](../quantities/LoschmidtEcho.md) | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_OBC.md) | — | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_OBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_PBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_Infinite.md) |
-| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/TFIM_MagnetizationXLocal_OBC.md) | — | 🟠 [hub](../hubs/TFIM_MagnetizationXLocal_Infinite.md) |
+| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/TFIM_MagnetizationXLocal_OBC.md) | — | 🔵 [hub](../hubs/TFIM_MagnetizationXLocal_Infinite.md) |
 | [`MagnetizationY`](../quantities/MagnetizationY.md) | 🟢 [hub](../hubs/TFIM_MagnetizationY_OBC.md) | — | — |
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | — | — | 🟢 [hub](../hubs/TFIM_MagnetizationZ_Infinite.md) |
 | [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/TFIM_MagnetizationZLocal_OBC.md) | — | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TFIM_MassGap_OBC.md) | 🟠 [hub](../hubs/TFIM_MassGap_PBC.md) | 🟢 [hub](../hubs/TFIM_MassGap_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/TFIM_RenyiEntropy_OBC.md) | — | 🟠 [hub](../hubs/TFIM_RenyiEntropy_Infinite.md) |
-| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_OBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_PBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_OBC.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_PBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | — | — | 🟢 [hub](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) |
-| [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityXX_OBC.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityXX_PBC.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityXX_Infinite.md) |
-| [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityYY_OBC.md) | — | — |
-| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
-| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
+| [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityXX_OBC.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityXX_PBC.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityXX_Infinite.md) |
+| [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityYY_OBC.md) | — | — |
+| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/TFIM_VonNeumannEntropy_OBC.md) | — | 🟠 [hub](../hubs/TFIM_VonNeumannEntropy_Infinite.md) |
 | [`XXCorrelation`](../quantities/XXCorrelation.md) | 🟢 [hub](../hubs/TFIM_XXCorrelation_OBC.md) | — | 🟢 [hub](../hubs/TFIM_XXCorrelation_Infinite.md) |
 | [`XXStructureFactor`](../quantities/XXStructureFactor.md) | 🟢 [hub](../hubs/TFIM_XXStructureFactor_OBC.md) | — | 🔵 [hub](../hubs/TFIM_XXStructureFactor_Infinite.md) |
 | [`YYCorrelation`](../quantities/YYCorrelation.md) | 🟢 [hub](../hubs/TFIM_YYCorrelation_OBC.md) | — | — |
 | [`YYStructureFactor`](../quantities/YYStructureFactor.md) | 🟢 [hub](../hubs/TFIM_YYStructureFactor_OBC.md) | — | 🔵 [hub](../hubs/TFIM_YYStructureFactor_Infinite.md) |
 | [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟢 [hub](../hubs/TFIM_ZZCorrelation_OBC.md) | — | — |
-| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | 🟠 [hub](../hubs/TFIM_ZZStructureFactor_OBC.md) | — | 🟠 [hub](../hubs/TFIM_ZZStructureFactor_Infinite.md) |
+| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | 🔵 [hub](../hubs/TFIM_ZZStructureFactor_OBC.md) | — | 🔵 [hub](../hubs/TFIM_ZZStructureFactor_Infinite.md) |
 
 ## Derivation notes
 

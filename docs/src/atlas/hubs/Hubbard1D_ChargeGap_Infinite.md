@@ -16,6 +16,10 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞ | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞ | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞ | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U) | `test/models/quantum/misc/test_hubbard1d.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U) | `test/models/quantum/misc/test_hubbard1d.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U) | `test/models/quantum/misc/test_hubbard1d.jl` |
 
 ## Test calls
@@ -23,18 +27,34 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Hubbard1D(; t = t, U = U, μ = U / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = asymptote, agree_within = 0.02, refs = ["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"])
+verify(Hubbard1D(; 1.0 = 1.0, 16.0 = 16.0, μ = 16.0 / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = (16.0 - 4 * 1.0) + (8 * 1.0 ^ 2 * log(2)) / 16.0, agree_within = 0.02, refs = ["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"])
 ```
 
 ```julia
-verify(Hubbard1D(; t = t, U = U, μ = U / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"])
+verify(Hubbard1D(; 1.0 = 1.0, 24.0 = 24.0, μ = 24.0 / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = (24.0 - 4 * 1.0) + (8 * 1.0 ^ 2 * log(2)) / 24.0, agree_within = 0.02, refs = ["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"])
+```
+
+```julia
+verify(Hubbard1D(; 0.5 = 0.5, 12.0 = 12.0, μ = 12.0 / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = (12.0 - 4 * 0.5) + (8 * 0.5 ^ 2 * log(2)) / 12.0, agree_within = 0.02, refs = ["Lieb-Wu 1968 / Essler et al. 2005 Eq. 6.A.66: Δ_c → U - 4t + 8t²ln(2)/U as U → ∞"])
+```
+
+```julia
+verify(Hubbard1D(; 0.5 = 0.5, 0.3 * 0.5 = 0.3 * 0.5, μ = (0.3 * 0.5) / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"])
+```
+
+```julia
+verify(Hubbard1D(; 1.0 = 1.0, 0.3 * 1.0 = 0.3 * 1.0, μ = (0.3 * 1.0) / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"])
+```
+
+```julia
+verify(Hubbard1D(; 2.0 = 2.0, 0.3 * 2.0 = 0.3 * 2.0, μ = (0.3 * 2.0) / 2), ChargeGap(), Infinite(); route = :limiting_case, independent = 0.0, agree_within = 0.0001, refs = ["Lieb-Wu 1968: Δ_c → 0 as U → 0 with exponential form Δ_c ∝ exp(-2π t / U)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 2 · model ED-feasible
+- cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

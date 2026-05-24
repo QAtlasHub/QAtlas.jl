@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | NN XX chain: gapless for |h| <= 2J (free fermion) | `test/models/quantum/misc/test_long_range_xy1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | NN XX chain: gapless for |h| <= 2J (free fermion) | `test/models/quantum/misc/test_long_range_xy1d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | NN XX chain: gapless for |h| <= 2J (free fermion) | `test/models/quantum/misc/test_long_range_xy1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(LongRangeXY1D(; h = h), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["NN XX chain: gapless for |h| <= 2J (free fermion)"])
+verify(LongRangeXY1D(; 0.0 = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["NN XX chain: gapless for |h| <= 2J (free fermion)"])
+```
+
+```julia
+verify(LongRangeXY1D(; 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["NN XX chain: gapless for |h| <= 2J (free fermion)"])
+```
+
+```julia
+verify(LongRangeXY1D(; 2.0 = 2.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["NN XX chain: gapless for |h| <= 2J (free fermion)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

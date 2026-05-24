@@ -22,7 +22,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(CurieWeissIsing(; J = J), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = β), independent = m, agree_within = 1.0e-8, refs = ["Curie-Weiss self-consistency m = tanh(βJm), independent fixed point"])
+verify(CurieWeissIsing(; 1.0 = 1.0), SpontaneousMagnetization(), Infinite(); route = :second_closed_form, fetch_kw = (; beta = 2.0), independent = tanh(2.0 * 1.0 * 0.9), agree_within = 1.0e-8, refs = ["Curie-Weiss self-consistency m = tanh(βJm), independent fixed point"])
 ```
 
 

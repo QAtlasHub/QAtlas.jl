@@ -15,20 +15,195 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
+| `@haldane` | `second_closed_form` | 🟢 structural | S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime) | `test/models/quantum/Heisenberg/test_s1heisenberg1d_obc_corr_eqsite_batch.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(N); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; J = J, beta = β, i = 1, j = 1))
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 0.5 = 0.5, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 1.0 = 1.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(3); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(4); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(5); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 0.5, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 10.0, i = 1, j = 1))
+```
+
+```julia
+verify(S1Heisenberg1D(), YYCorrelation(mode = :static), OBC(6); route = :second_closed_form, independent = 2 / 3, agree_within = 1.0e-8, refs = ["S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)"], fetch_kw = (; 2.0 = 2.0, beta = 1.0e6, i = 1, j = 1))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 36 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

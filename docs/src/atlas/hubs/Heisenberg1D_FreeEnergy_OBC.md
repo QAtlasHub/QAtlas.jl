@@ -15,6 +15,40 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `limiting_case` | 🟡 asserted | Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J² | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermal_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
+| `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
 | `@su2` | `ed_finite_size` | 🟢 structural | ED black-box: full-spectrum log-sum-exp free energy F/N | `test/models/quantum/Heisenberg/test_heisenberg1d_obc_thermo_ED_batch.jl` |
 
 ## Test calls
@@ -22,18 +56,154 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Heisenberg1D(), FreeEnergy(), OBC(N); route = :limiting_case, independent = -(log(2)) / HIGH_T_BETA, agree_within = 0.005 * J ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; J = J, beta = HIGH_T_BETA))
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 0.5 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 0.5 = 0.5, beta = 0.001))
 ```
 
 ```julia
-verify(Heisenberg1D(), FreeEnergy(), OBC(N); route = :ed_finite_size, independent = ed_F, at = ["N=$(N)", "β=$(beta)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; J = J, beta = beta))
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 0.5 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 0.5 = 0.5, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 0.5 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 0.5 = 0.5, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 1.0 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 1.0 = 1.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 1.0 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 1.0 = 1.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 1.0 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 1.0 = 1.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 2.0 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 2.0 = 2.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 2.0 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 2.0 = 2.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :limiting_case, independent = -(log(2)) / 0.001, agree_within = 0.005 * 2.0 ^ 2, refs = ["Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²"], fetch_kw = (; 2.0 = 2.0, beta = 0.001))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 0.5 = 0.5, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 1.0 = 1.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 10.0 = 10.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(0.5)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 0.5 = 0.5))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(2.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 2.0 = 2.0))
+```
+
+```julia
+verify(Heisenberg1D(), FreeEnergy(), OBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)", "β=$(10.0)"], agree_within = 1.0e-9, refs = ["ED black-box: full-spectrum log-sum-exp free energy F/N"], fetch_kw = (; 2.0 = 2.0, 10.0 = 10.0))
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 36 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

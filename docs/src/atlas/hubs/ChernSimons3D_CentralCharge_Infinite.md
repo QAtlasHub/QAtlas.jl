@@ -16,20 +16,35 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984) | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984) | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984) | `test/models/quantum/misc/test_chern_simons_3d.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984) | `test/models/quantum/misc/test_chern_simons_3d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(ChernSimons3D(; N = 2, k = k), CentralCharge(), Infinite(); route = :second_closed_form, independent = (3k) // (k + 2), agree_within = 1.0e-10, refs = ["SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984)"])
+verify(ChernSimons3D(; N = 2, 1 = 1), CentralCharge(), Infinite(); route = :second_closed_form, independent = (3 * 1) // (1 + 2), agree_within = 1.0e-10, refs = ["SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984)"])
+```
+
+```julia
+verify(ChernSimons3D(; N = 2, 2 = 2), CentralCharge(), Infinite(); route = :second_closed_form, independent = (3 * 2) // (2 + 2), agree_within = 1.0e-10, refs = ["SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984)"])
+```
+
+```julia
+verify(ChernSimons3D(; N = 2, 3 = 3), CentralCharge(), Infinite(); route = :second_closed_form, independent = (3 * 3) // (3 + 2), agree_within = 1.0e-10, refs = ["SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984)"])
+```
+
+```julia
+verify(ChernSimons3D(; N = 2, 6 = 6), CentralCharge(), Infinite(); route = :second_closed_form, independent = (3 * 6) // (6 + 2), agree_within = 1.0e-10, refs = ["SU(2)_k WZW: c = 3k/(k+2) (Knizhnik-Zamolodchikov 1984)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-infeasible (frontier)
+- cards: 4 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -16,6 +16,11 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@cluster` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state) | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J | `test/models/quantum/misc/test_cluster1d.jl` |
+| `@cluster` | `second_closed_form` | 🟢 structural | Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J | `test/models/quantum/misc/test_cluster1d.jl` |
 | `@cluster` | `second_closed_form` | 🟢 structural | Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J | `test/models/quantum/misc/test_cluster1d.jl` |
 
 ## Test calls
@@ -23,18 +28,38 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Cluster1D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-12, refs = ["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"])
+verify(Cluster1D(; 0.5 = 0.5), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-12, refs = ["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"])
 ```
 
 ```julia
-verify(Cluster1D(; J = J), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -J, agree_within = 1.0e-12, refs = ["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"])
+verify(Cluster1D(; 1.0 = 1.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-12, refs = ["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"])
+```
+
+```julia
+verify(Cluster1D(; 3.0 = 3.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -3.0, agree_within = 1.0e-12, refs = ["Cluster-state Hamiltonian: e0 = -J (exact stabiliser ground state)"])
+```
+
+```julia
+verify(Cluster1D(; 0.5 = 0.5), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -0.5, agree_within = 1.0e-12, refs = ["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"])
+```
+
+```julia
+verify(Cluster1D(; 1.0 = 1.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -1.0, agree_within = 1.0e-12, refs = ["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"])
+```
+
+```julia
+verify(Cluster1D(; 2.0 = 2.0), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -2.0, agree_within = 1.0e-12, refs = ["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"])
+```
+
+```julia
+verify(Cluster1D(; 3.7 = 3.7), Energy(:per_site), Infinite(); route = :second_closed_form, independent = -3.7, agree_within = 1.0e-12, refs = ["Briegel-Raussendorf 2001: cluster state is +1 eigenstate of every K_i ⇒ E₀/N = -J"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 2 · model ED-feasible
+- cards: 7 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

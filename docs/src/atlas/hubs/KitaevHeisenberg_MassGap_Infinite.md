@@ -16,20 +16,30 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0) | `test/models/quantum/KitaevHoneycomb/test_kitaev_heisenberg.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0) | `test/models/quantum/KitaevHoneycomb/test_kitaev_heisenberg.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0) | `test/models/quantum/KitaevHoneycomb/test_kitaev_heisenberg.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(KitaevHeisenberg(; K = K, J = 0.0, Γ = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0)"])
+verify(KitaevHeisenberg(; 0.5 = 0.5, J = 0.0, Γ = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0)"])
+```
+
+```julia
+verify(KitaevHeisenberg(; 1.0 = 1.0, J = 0.0, Γ = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0)"])
+```
+
+```julia
+verify(KitaevHeisenberg(; 2.0 = 2.0, J = 0.0, Γ = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2006: isotropic pure-Kitaev point is gapless (Δ = 0)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -16,20 +16,35 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@massless` | `second_closed_form` | 🟢 structural | Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172) | `test/models/quantum/misc/test_schwinger_model.jl` |
+| `@massless` | `second_closed_form` | 🟢 structural | Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172) | `test/models/quantum/misc/test_schwinger_model.jl` |
+| `@massless` | `second_closed_form` | 🟢 structural | Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172) | `test/models/quantum/misc/test_schwinger_model.jl` |
+| `@massless` | `second_closed_form` | 🟢 structural | Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172) | `test/models/quantum/misc/test_schwinger_model.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(SchwingerModel(; e = e, m = 0.0), ChiralCondensate(), Infinite(); route = :second_closed_form, independent = (-(exp(γ_E)) * e) / (2 * π ^ (3 / 2)), agree_within = 1.0e-12, refs = ["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"])
+verify(SchwingerModel(; 0.5 = 0.5, m = 0.0), ChiralCondensate(), Infinite(); route = :second_closed_form, independent = (-(exp(MathConstants.eulergamma)) * 0.5) / (2 * π ^ (3 / 2)), agree_within = 1.0e-12, refs = ["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"])
+```
+
+```julia
+verify(SchwingerModel(; 1.0 = 1.0, m = 0.0), ChiralCondensate(), Infinite(); route = :second_closed_form, independent = (-(exp(MathConstants.eulergamma)) * 1.0) / (2 * π ^ (3 / 2)), agree_within = 1.0e-12, refs = ["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"])
+```
+
+```julia
+verify(SchwingerModel(; 2.0 = 2.0, m = 0.0), ChiralCondensate(), Infinite(); route = :second_closed_form, independent = (-(exp(MathConstants.eulergamma)) * 2.0) / (2 * π ^ (3 / 2)), agree_within = 1.0e-12, refs = ["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"])
+```
+
+```julia
+verify(SchwingerModel(; 3.7 = 3.7, m = 0.0), ChiralCondensate(), Infinite(); route = :second_closed_form, independent = (-(exp(MathConstants.eulergamma)) * 3.7) / (2 * π ^ (3 / 2)), agree_within = 1.0e-12, refs = ["Coleman-Jackiw-Susskind 1975 (Ann. Phys. 93, 267) eq. 6.13: ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); Lowenstein-Swieca 1971 (Ann. Phys. 68, 172)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 4 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

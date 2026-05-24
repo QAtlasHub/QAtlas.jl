@@ -16,8 +16,28 @@
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs) | `test/models/classical/test_ising_square_pfaffian.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs) | `test/models/classical/test_ising_square_pfaffian.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs) | `test/models/classical/test_ising_square_pfaffian.jl` |
 | `@onsager` | `limiting_case` | 🟡 asserted | β = 0: all 2^N configs weight 1 => Z = 2^N | `test/models/classical/test_ising_square_pfaffian.jl` |
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z | `test/verification/tfim_ising/test_ising_2x2_classical.jl` |
+| `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force exact_partition cross-check of the transfer-matrix Z | `test/verification/tfim_ising/test_ising_ad_thermodynamics.jl` |
 | `@onsager` | `ed_finite_size` | 🟢 structural | Brute-force exact_partition cross-check of the transfer-matrix Z | `test/verification/tfim_ising/test_ising_ad_thermodynamics.jl` |
 
 ## Test calls
@@ -25,7 +45,15 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(IsingSquare(; Lx = L, Ly = L, J = J), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = L, Ly = L, J = J), independent = exact_partition(L, L, J, β), agree_within = 1.0e-6, refs = ["Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs)"])
+verify(IsingSquare(; Lx = 3, Ly = 3, 1.0 = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.3 = 0.3, Lx = 3, Ly = 3, 1.0 = 1.0), independent = exact_partition(3, 3, 1.0, 0.3), agree_within = 1.0e-6, refs = ["Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs)"])
+```
+
+```julia
+verify(IsingSquare(; Lx = 3, Ly = 3, 1.0 = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.5 = 0.5, Lx = 3, Ly = 3, 1.0 = 1.0), independent = exact_partition(3, 3, 1.0, 0.5), agree_within = 1.0e-6, refs = ["Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs)"])
+```
+
+```julia
+verify(IsingSquare(; Lx = 4, Ly = 4, 1.0 = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.2 = 0.2, Lx = 4, Ly = 4, 1.0 = 1.0), independent = exact_partition(4, 4, 1.0, 0.2), agree_within = 1.0e-6, refs = ["Brute-force Σ_σ exp(-βE) over 2^(L²) configs (square_pbc_bond_pairs)"])
 ```
 
 ```julia
@@ -33,18 +61,90 @@ verify(IsingSquare(; Lx = 3, Ly = 3, J = 1.0), PartitionFunction(), PBC(0); rout
 ```
 
 ```julia
-verify(IsingSquare(; Lx = Lx, Ly = Ly, J = J_ISING), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = Lx, Ly = Ly, J = J_ISING), independent = Z_bf, agree_within = 1.0e-10 * max(1.0, abs(Z_bf)), at = ["Lx=$(Lx)", "Ly=$(Ly)", "β=$(β)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+verify(IsingSquare(; 2 = 2, 2 = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.0 = 0.0, 2 = 2, 2 = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 0.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 2, 1.0, 0.0))), at = ["Lx=$(2)", "Ly=$(2)", "β=$(0.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
 ```
 
 ```julia
-verify(IsingSquare(; Lx = L, Ly = L, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; β = β, Lx = L, Ly = L, J = 1.0), independent = exact_partition(L, L, 1.0, β), agree_within = 1.0e-6, refs = ["Brute-force exact_partition cross-check of the transfer-matrix Z"])
+verify(IsingSquare(; 2 = 2, 2 = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.1 = 0.1, 2 = 2, 2 = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 0.1), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 2, 1.0, 0.1))), at = ["Lx=$(2)", "Ly=$(2)", "β=$(0.1)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 2 = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.2 = 0.2, 2 = 2, 2 = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 0.2), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 2, 1.0, 0.2))), at = ["Lx=$(2)", "Ly=$(2)", "β=$(0.2)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 2 = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.44 = 0.44, 2 = 2, 2 = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 0.44), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 2, 1.0, 0.44))), at = ["Lx=$(2)", "Ly=$(2)", "β=$(0.44)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 2 = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0, 2 = 2, 2 = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 1.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 2, 1.0, 1.0))), at = ["Lx=$(2)", "Ly=$(2)", "β=$(1.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 2 = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 2.0 = 2.0, 2 = 2, 2 = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 2.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 2, 1.0, 2.0))), at = ["Lx=$(2)", "Ly=$(2)", "β=$(2.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.0 = 0.0, 2 = 2, 3 = 3, J = 1.0), independent = exact_partition(2, 3, 1.0, 0.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 3, 1.0, 0.0))), at = ["Lx=$(2)", "Ly=$(3)", "β=$(0.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.1 = 0.1, 2 = 2, 3 = 3, J = 1.0), independent = exact_partition(2, 3, 1.0, 0.1), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 3, 1.0, 0.1))), at = ["Lx=$(2)", "Ly=$(3)", "β=$(0.1)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.2 = 0.2, 2 = 2, 3 = 3, J = 1.0), independent = exact_partition(2, 3, 1.0, 0.2), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 3, 1.0, 0.2))), at = ["Lx=$(2)", "Ly=$(3)", "β=$(0.2)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.44 = 0.44, 2 = 2, 3 = 3, J = 1.0), independent = exact_partition(2, 3, 1.0, 0.44), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 3, 1.0, 0.44))), at = ["Lx=$(2)", "Ly=$(3)", "β=$(0.44)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0, 2 = 2, 3 = 3, J = 1.0), independent = exact_partition(2, 3, 1.0, 1.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 3, 1.0, 1.0))), at = ["Lx=$(2)", "Ly=$(3)", "β=$(1.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 2 = 2, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 2.0 = 2.0, 2 = 2, 3 = 3, J = 1.0), independent = exact_partition(2, 3, 1.0, 2.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(2, 3, 1.0, 2.0))), at = ["Lx=$(2)", "Ly=$(3)", "β=$(2.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 3 = 3, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.0 = 0.0, 3 = 3, 3 = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 0.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(3, 3, 1.0, 0.0))), at = ["Lx=$(3)", "Ly=$(3)", "β=$(0.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 3 = 3, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.1 = 0.1, 3 = 3, 3 = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 0.1), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(3, 3, 1.0, 0.1))), at = ["Lx=$(3)", "Ly=$(3)", "β=$(0.1)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 3 = 3, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.2 = 0.2, 3 = 3, 3 = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 0.2), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(3, 3, 1.0, 0.2))), at = ["Lx=$(3)", "Ly=$(3)", "β=$(0.2)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 3 = 3, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.44 = 0.44, 3 = 3, 3 = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 0.44), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(3, 3, 1.0, 0.44))), at = ["Lx=$(3)", "Ly=$(3)", "β=$(0.44)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 3 = 3, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 1.0 = 1.0, 3 = 3, 3 = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 1.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(3, 3, 1.0, 1.0))), at = ["Lx=$(3)", "Ly=$(3)", "β=$(1.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; 3 = 3, 3 = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 2.0 = 2.0, 3 = 3, 3 = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 2.0), agree_within = 1.0e-10 * max(1.0, abs(exact_partition(3, 3, 1.0, 2.0))), at = ["Lx=$(3)", "Ly=$(3)", "β=$(2.0)"], refs = ["Brute-force Σ_σ exp(-βE) over all 2^N configurations (independent enumeration) vs transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; Lx = 2, Ly = 2, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.4 = 0.4, Lx = 2, Ly = 2, J = 1.0), independent = exact_partition(2, 2, 1.0, 0.4), agree_within = 1.0e-6, refs = ["Brute-force exact_partition cross-check of the transfer-matrix Z"])
+```
+
+```julia
+verify(IsingSquare(; Lx = 3, Ly = 3, J = 1.0), PartitionFunction(), PBC(0); route = :ed_finite_size, fetch_kw = (; 0.3 = 0.3, Lx = 3, Ly = 3, J = 1.0), independent = exact_partition(3, 3, 1.0, 0.3), agree_within = 1.0e-6, refs = ["Brute-force exact_partition cross-check of the transfer-matrix Z"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 4 · model ED-feasible
+- cards: 24 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

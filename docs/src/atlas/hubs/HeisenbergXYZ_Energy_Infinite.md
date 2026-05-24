@@ -15,7 +15,7 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `ed_finite_size` | 🟢 structural | Hulthen 1938 via delegation to XXZ1D at Delta=1 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
+| `@isotropic` | `ed_finite_size` | 🟢 structural | Hulthen 1938 via delegation to XXZ1D at Delta=1 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 | `@xx` | `limiting_case` | 🟡 asserted | Jordan-Wigner free fermion: XX limit Jz=0 gives e0 = -J/pi | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 | `@xxz` | `limiting_case` | 🟡 asserted | FM saturation: Jz=-J gives e0 = -J/4 | `test/models/quantum/XXZ/test_heisenberg_xyz.jl` |
 
@@ -24,7 +24,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(HeisenbergXYZ(; Jx = J, Jy = J, Jz = J), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = ind, at = ["N=$(N)" for N = Ns], agree_within = 0.05, refs = ["Hulthen 1938 via delegation to XXZ1D at Delta=1"])
+verify(HeisenbergXYZ(; Jx = 1.0, Jy = 1.0, Jz = 1.0), Energy(:per_site), Infinite(); route = :ed_finite_size, independent = [(dense_spectrum(chain_hamiltonian(2, N, 1.0 * (kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz)))))[1] / (N - 1) for N = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], at = ["N=$(verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14)))" for verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14)) = verify_profile_Ns(; fast = (6, 8), full = (6, 8, 10, 12), nightly = (6, 8, 10, 12, 14))], agree_within = 0.05, refs = ["Hulthen 1938 via delegation to XXZ1D at Delta=1"])
 ```
 
 ```julia

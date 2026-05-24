@@ -36,6 +36,11 @@
 
 [**Faceted search →**](by/index.md) · [by model](by/model.md) · [by quantity](by/quantity.md) · [by BC](by/bc.md) · [by level](by/level.md) · [by mechanism](by/mechanism.md) · [by regime](by/regime.md). Full-text search is the top bar (Documenter built-in).
 
+
+## Reference & derivation indices
+
+Two more substrate-derived indices: **[Bibliography](Bibliography.md)** — every citation with hub backlinks; **[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).
+
 ## Model & Quantity matrices (Zettelkasten layer)
 
 Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; each quantity has the inverse view (`Model × BC`).  Empty cells = gap visualisation (physics not yet implemented).  Use the **[Model list](ModelList.md)** for a searchable top-catalog.

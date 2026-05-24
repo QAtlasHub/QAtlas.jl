@@ -45,4 +45,12 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 | [`YYCorrelation`](../quantities/YYCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | — |
 | [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | — |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`bethe-ansatz-heisenberg-e0.md`](../../calc/bethe-ansatz-heisenberg-e0.md)
+- [`heisenberg-dimer-singlet-triplet.md`](../../calc/heisenberg-dimer-singlet-triplet.md)
+- [`heisenberg-spinons.md`](../../calc/heisenberg-spinons.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

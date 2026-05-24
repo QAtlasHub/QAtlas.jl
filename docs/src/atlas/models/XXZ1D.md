@@ -54,4 +54,10 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) | — |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`xxz-luttinger-parameters.md`](../../calc/xxz-luttinger-parameters.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

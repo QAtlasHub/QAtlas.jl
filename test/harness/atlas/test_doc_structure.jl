@@ -98,4 +98,15 @@ using .AtlasInventory, .AtlasRegistry
         end
         @test isempty(sample_misses)
     end
+
+    @testset "Tier-1 ext: Bibliography + CalcIndex" begin
+        bib = joinpath(_ROOT, "docs", "src", "atlas", "Bibliography.md")
+        calc_idx = joinpath(_ROOT, "docs", "src", "atlas", "CalcIndex.md")
+        @test isfile(bib)
+        @test isfile(calc_idx)
+        bib_body = read(bib, String)
+        @test occursin(r"\[`[^`]+/[^`]+/[^`]+`\]\(hubs/", bib_body)
+        calc_body = read(calc_idx, String)
+        @test occursin(".md", calc_body)
+    end
 end

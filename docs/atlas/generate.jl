@@ -422,6 +422,15 @@ P(
 )
 
 P("")
+P("")
+P("## Reference & derivation indices")
+P("")
+P(
+    "Two more substrate-derived indices: ",
+    "**[Bibliography](Bibliography.md)** — every citation with hub backlinks; ",
+    "**[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).",
+)
+P("")
 P("## Model & Quantity matrices (Zettelkasten layer)")
 P("")
 P(
@@ -693,6 +702,71 @@ for page in sort(collect(keys(_PAGE_TO_MODELS)))
 end
 
 # ── TIER-1 VIEW GENERATORS (ModelList + per-model + per-quantity) ──────────
+
+# ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
+# Universality detection: scan the model's CriticalExponents claim notes/refs
+# for known QAtlas universality-class tokens (src/universalities/*.jl).  Used
+# by ModelList; substrate-derived (zero @register annotation added).
+const _UNIV_TOKENS = [
+    "MeanField",
+    "Ising",
+    "Potts",
+    "XY",
+    "Heisenberg",
+    "KPZ",
+    "Percolation",
+    "E8",
+    "CardyEntanglement",
+    "MinimalModel",
+    "WZW",
+    "Poisson",
+    "RMT",
+]
+
+function _universality_of(model_name::AbstractString)
+    for c in claims
+        c.model == model_name || continue
+        c.quantity in ("CriticalExponents", "CentralCharge") || continue
+        haystack = string(c.notes, " | ", c.refs)
+        for tok in _UNIV_TOKENS
+            occursin(tok, haystack) && return tok
+        end
+    end
+    return ""
+end
+
+# Calc cross-reference: substring match of model name (case-insensitive,
+# canonicalized: strip trailing dimensionality digits / 'D') in calc filename.
+const _CALC_DIR = joinpath(ROOT, "docs", "src", "calc")
+const _CALC_FILES =
+    isdir(_CALC_DIR) ? sort(filter(f -> endswith(f, ".md"), readdir(_CALC_DIR))) : String[]
+
+function _model_calc_aliases(model_name::AbstractString)
+    s = lowercase(model_name)
+    aliases = String[s]
+    m = match(r"^(.+?)(1d|2d|3d)$", s)
+    m === nothing || push!(aliases, m.captures[1])
+    m2 = match(r"^s\d+(.+?)(1d|2d|3d)?$", s)
+    m2 === nothing || push!(aliases, m2.captures[1])
+    return unique(aliases)
+end
+
+function _calc_files_for_model(model_name::AbstractString)
+    aliases = _model_calc_aliases(model_name)
+    out = String[]
+    for f in _CALC_FILES
+        flo = lowercase(f)
+        any(a -> length(a) >= 3 && occursin(a, flo), aliases) || continue
+        push!(out, f)
+    end
+    return out
+end
+
+function _split_refs(s::AbstractString)
+    isempty(s) && return String[]
+    return [strip(r) for r in split(s, "|") if !isempty(strip(r))]
+end
+
 # Per the Discussion #379 framework: stateless view-generators over the
 # fixed substrate (registry + INVENTORY + assurance taxonomy).  No src
 # change, no @register annotation added — every derived column comes from
@@ -807,6 +881,18 @@ function render_model_index(model_name::AbstractString)
         end
     end
     P("")
+    # Derivation notes from docs/src/calc/ (substring match on model name).
+    cf = _calc_files_for_model(model_name)
+    if !isempty(cf)
+        P("## Derivation notes")
+        P("")
+        P("Matched by filename substring (no annotation; substrate-derived):")
+        P("")
+        for f in cf
+            P("- [`", f, "`](../../calc/", f, ")")
+        end
+        P("")
+    end
     P("[← Atlas index](../index.md) · [Model list →](../ModelList.md)")
     return String(take!(io))
 end
@@ -898,8 +984,8 @@ function render_model_list()
         "name to drill into its `Quantity × BC` matrix.",
     )
     P("")
-    P("| Model | #K | Methods | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED | Regimes (top 3) |")
-    P("|---|---|---|---|---|---|---|---|---|---|")
+    P("| Model | Universality | #K | Methods | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED | Regimes (top 3) |")
+    P("|---|---|---|---|---|---|---|---|---|---|---|")
     for m in models
         hs = sort(filter(h -> modelof(h) == m, claimed))
         methods_seen = sort(
@@ -919,6 +1005,8 @@ function render_model_list()
             "`](models/",
             m,
             ".md) | ",
+            (u=_universality_of(m); isempty(u) ? "—" : "`" * u * "`"),
+            " | ",
             length(hs),
             " | ",
             isempty(methods_seen) ? "—" : join(("`" * x * "`" for x in methods_seen), ", "),
@@ -963,4 +1051,106 @@ println(
     " model pages + ",
     length(quants_all),
     " quantity pages + ModelList.md",
+)
+
+# ── TIER-1 EXT EMITTERS (Bibliography + CalcIndex) ──────────────────────────
+function render_bibliography()
+    citemap = Dict{String,Vector{String}}()
+    for c in claims
+        for r in _split_refs(c.refs)
+            push!(get!(citemap, r, String[]), c.hub)
+        end
+    end
+
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# Bibliography — citations across the atlas")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "Every distinct citation string appearing in any `@register(..., ",
+        "references=[...], ...)` across the atlas (",
+        length(citemap),
+        " unique citations).  For each one we list which hubs cite it — a ",
+        "*load-bearing-ness* view: high-count entries are central, ",
+        "low-count entries are local.",
+    )
+    P("")
+    P(
+        "Citations are kept as-is from `@register` (no normalization, no ",
+        "DOI lookup).  Free-form strings are an honest substrate; a ",
+        "structured citation database is deferred to a follow-up.",
+    )
+    P("")
+    keys_sorted = sort(collect(keys(citemap)); by=k -> (-length(citemap[k]), k))
+    for k in keys_sorted
+        hs = sort(unique(citemap[k]))
+        P(
+            "## ",
+            _md_escape_dollar(k),
+            " — ",
+            length(hs),
+            " hub",
+            (length(hs) == 1 ? "" : "s"),
+        )
+        P("")
+        for h in hs
+            P("- ", badgeof(h), " [`", h, "`](hubs/", slugof(h), ".md)")
+        end
+        P("")
+    end
+    P("[← back to the Atlas index](index.md)")
+    return String(take!(io))
+end
+
+write(joinpath(ROOT, "docs", "src", "atlas", "Bibliography.md"), render_bibliography())
+
+function render_calc_index()
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# Derivation-note index (`docs/src/calc/`)")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "All ",
+        length(_CALC_FILES),
+        " step-by-step derivation notes under `docs/src/calc/`, with the ",
+        "model(s) each matches by filename substring.  Substrate-derived ",
+        "(no annotation in calc files or `@register`).",
+    )
+    P("")
+    P("| Derivation note | Models matched |")
+    P("|---|---|")
+    for f in _CALC_FILES
+        matched = String[]
+        for m in models
+            cf = _calc_files_for_model(m)
+            f in cf || continue
+            push!(matched, m)
+        end
+        P(
+            "| [`",
+            f,
+            "`](../calc/",
+            f,
+            ") | ",
+            if isempty(matched)
+                "—"
+            else
+                join(("[`" * m * "`](models/" * m * ".md)" for m in matched), ", ")
+            end,
+            " |",
+        )
+    end
+    P("")
+    P("[← back to the Atlas index](index.md)")
+    return String(take!(io))
+end
+
+write(joinpath(ROOT, "docs", "src", "atlas", "CalcIndex.md"), render_calc_index())
+
+println(
+    "  + Tier-1 ext: Bibliography.md + CalcIndex.md (", length(_CALC_FILES), " calc notes)"
 )

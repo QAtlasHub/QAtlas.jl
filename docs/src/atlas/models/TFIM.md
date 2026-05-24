@@ -67,4 +67,14 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟢 [hub](../hubs/TFIM_ZZCorrelation_OBC.md) | — | — |
 | [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | 🟠 [hub](../hubs/TFIM_ZZStructureFactor_OBC.md) | — | 🟠 [hub](../hubs/TFIM_ZZStructureFactor_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`jw-tfim-bdg.md`](../../calc/jw-tfim-bdg.md)
+- [`tfim-entanglement-peschel.md`](../../calc/tfim-entanglement-peschel.md)
+- [`tfim-gge.md`](../../calc/tfim-gge.md)
+- [`tfim-loschmidt.md`](../../calc/tfim-loschmidt.md)
+- [`tfim-sigma-x-quench.md`](../../calc/tfim-sigma-x-quench.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

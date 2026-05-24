@@ -69,12 +69,10 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 
 Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  These hubs are visible only through the cards, not the registry view; the absence of an `@register` claim means the primary `src` claim isn't there.
 
-**73 orphan card hub(s)**:
+**64 orphan card hub(s)**:
 
-- `CurieWeissIsing/Energy{:per_site}/Infinite`
 - `E8/E8Spectrum/Infinite`
 - `Heisenberg1D/q/OBC`
-- `IsingChain1D/Energy{:per_site}/Infinite`
 - `MeanField/CriticalExponents/Infinite`
 - `MinimalModel/CentralCharge/Infinite`
 - `MinimalModel/ConformalWeights/Infinite`
@@ -84,13 +82,6 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  These h
 - `QAtlas.Kagome/TightBindingMaxEnergy/Infinite`
 - `QAtlas.Lieb/TightBindingChecksum/Infinite`
 - `QAtlas.Lieb/TightBindingMaxEnergy/Infinite`
-- `QAtlas.ShastrySutherland/Energy/Infinite`
-- `QAtlas.TightBinding1D/QAtlas.FreeEnergy/QAtlas.Infinite`
-- `QAtlas.TightBinding1D/QAtlas.SpecificHeat/QAtlas.Infinite`
-- `QAtlas.TightBinding1D/QAtlas.ThermalEntropy/QAtlas.Infinite`
-- `QAtlas.TightBindingV1D/QAtlas.FreeEnergy/QAtlas.Infinite`
-- `QAtlas.TightBindingV1D/QAtlas.SpecificHeat/QAtlas.Infinite`
-- `QAtlas.TightBindingV1D/QAtlas.ThermalEntropy/QAtlas.Infinite`
 - `QAtlas.Triangular/TightBindingChecksum/Infinite`
 - `QAtlas.Triangular/TightBindingMaxEnergy/Infinite`
 - `S1Heisenberg1D/q/OBC`

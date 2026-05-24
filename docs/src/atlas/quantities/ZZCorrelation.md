@@ -9,6 +9,11 @@ All `(Model, BC)` hubs `src` claims for the **`ZZCorrelation`** observable.  Emp
 
 - **Models with this quantity registered**: 3
 - **Total hubs (Model, BC pairs)**: 3
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
 
 ## Model × BC matrix
 

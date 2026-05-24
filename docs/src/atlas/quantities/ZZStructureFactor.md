@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`ZZStructureFactor`** observable. 
 
 - **Models with this quantity registered**: 3
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `muller_ansatz`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Arovas-Auerbach-Haldane 1988 — 1 hub
+- Müller-Thomas-Beck-Bonner 1981 — 1 hub
+- des Cloizeaux–Pearson 1962 — 1 hub
 
 ## Model × BC matrix
 

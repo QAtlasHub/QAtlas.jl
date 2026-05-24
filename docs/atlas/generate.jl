@@ -933,6 +933,39 @@ function render_quantity_index(quant_name::AbstractString)
     P("")
     P("- **Models with this quantity registered**: ", length(mdls))
     P("- **Total hubs (Model, BC pairs)**: ", length(hs))
+    q_methods = sort(unique(string(first(clby[h]).method) for h in hs if haskey(clby, h)))
+    P(
+        "- **Methods** (derived from `@register`): ",
+        isempty(q_methods) ? "—" : join(("`" * x * "`" for x in q_methods), ", "),
+    )
+    q_univs = sort(unique(filter(!isempty, [_universality_of(m) for m in mdls])))
+    P(
+        "- **Universality classes** (where applicable): ",
+        isempty(q_univs) ? "—" : join(("`" * u * "`" for u in q_univs), ", "),
+    )
+    q_citemap = Dict{String,Int}()
+    for h in hs
+        haskey(clby, h) || continue
+        for r in _split_refs(first(clby[h]).refs)
+            q_citemap[r] = get(q_citemap, r, 0) + 1
+        end
+    end
+    if !isempty(q_citemap)
+        top_refs = sort(collect(keys(q_citemap)); by=k -> (-q_citemap[k], k))
+        top_refs_disp = first(top_refs, min(5, length(top_refs)))
+        P("")
+        P("**Top references** (by hub count):")
+        for r in top_refs_disp
+            P(
+                "- ",
+                _md_escape_dollar(r),
+                " — ",
+                q_citemap[r],
+                " hub",
+                (q_citemap[r] == 1 ? "" : "s"),
+            )
+        end
+    end
     P("")
     P("## Model × BC matrix")
     P("")

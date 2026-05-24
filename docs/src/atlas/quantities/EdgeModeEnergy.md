@@ -9,6 +9,12 @@ All `(Model, BC)` hubs `src` claims for the **`EdgeModeEnergy`** observable.  Em
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 1
+- **Methods** (derived from `@register`): `bdg`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Alicea 2012 — 1 hub
+- Kitaev 2001 — 1 hub
 
 ## Model × BC matrix
 

@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`ResidualEntropy`** observable.  E
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Affleck-Ludwig 1991 — 1 hub
+- Cardy 1989 — 1 hub
+- Friedan-Konechny 2004 — 1 hub
+- Lieb 1967a — 1 hub
+- Pauling 1935 — 1 hub
 
 ## Model × BC matrix
 

@@ -9,6 +9,11 @@ All `(Model, BC)` hubs `src` claims for the **`FermiVelocity`** observable.  Emp
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Ashcroft-Mermin 1976 — 2 hubs
 
 ## Model × BC matrix
 

@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cel
 
 - **Models with this quantity registered**: 24
 - **Total hubs (Model, BC pairs)**: 30
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Pfeuty 1970 — 6 hubs
+- White-Huse 1993 — 3 hubs
+- Ashcroft-Mermin 1976 — 2 hubs
+- Kitaev 2001 — 2 hubs
+- Kitaev 2006 — 2 hubs
 
 ## Model × BC matrix
 

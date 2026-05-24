@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`LuttingerParameter`** observable.
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `analytic`, `delegation`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Luther-Peschel 1975 — 2 hubs
+- Affleck 1989 — 1 hub
+- Baxter 1972 — 1 hub
+- Giamarchi 2004 — 1 hub
+- Haldane 1980 — 1 hub
 
 ## Model × BC matrix
 

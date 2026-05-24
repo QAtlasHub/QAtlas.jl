@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`CriticalTemperature`** observable
 
 - **Models with this quantity registered**: 6
 - **Total hubs (Model, BC pairs)**: 6
+- **Methods** (derived from `@register`): `analytic`, `analytic_imry_ma`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Bricmont-Kupiainen 1987 — 1 hub
+- Houtappel 1950 — 1 hub
+- Imbrie 1985 — 1 hub
+- Imry-Ma 1975 — 1 hub
+- Ising 1925 — 1 hub
 
 ## Model × BC matrix
 

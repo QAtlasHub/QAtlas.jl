@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`FreeEnergy`** observable.  Empty 
 
 - **Models with this quantity registered**: 11
 - **Total hubs (Model, BC pairs)**: 16
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`, `free_fermion_quadgk`, `matter_free_fermion`, `onsager`, `transfer_matrix`
+- **Universality classes** (where applicable): `Ising`, `MeanField`
+
+**Top references** (by hub count):
+- Coleman 2015 — 2 hubs
+- Kitaev 2006 — 2 hubs
+- Lieb 1994 — 2 hubs
+- Mahan 2000 — 2 hubs
+- Baxter 1982 — 1 hub
 
 ## Model × BC matrix
 

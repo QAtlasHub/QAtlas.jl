@@ -9,6 +9,11 @@ All `(Model, BC)` hubs `src` claims for the **`MagnetizationZ`** observable.  Em
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `analytic`, `dense_ed`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Pfeuty 1970 — 1 hub
 
 ## Model × BC matrix
 

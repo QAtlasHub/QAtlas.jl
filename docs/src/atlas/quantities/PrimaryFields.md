@@ -9,6 +9,11 @@ All `(Model, BC)` hubs `src` claims for the **`PrimaryFields`** observable.  Emp
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): `MinimalModel`
+
+**Top references** (by hub count):
+- Belavin-Polyakov-Zamolodchikov 1984 — 2 hubs
 
 ## Model × BC matrix
 

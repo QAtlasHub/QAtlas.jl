@@ -9,6 +9,12 @@ All `(Model, BC)` hubs `src` claims for the **`MagnetizationXLocal`** observable
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 5
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Barouch-McCoy-Dresden 1970 — 1 hub
+- Calabrese-Essler-Fagotti 2012 — 1 hub
 
 ## Model × BC matrix
 

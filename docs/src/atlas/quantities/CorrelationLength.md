@@ -9,6 +9,13 @@ All `(Model, BC)` hubs `src` claims for the **`CorrelationLength`** observable. 
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 4
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
+- Ising 1925 — 1 hub
+- Kitaev 2001 — 1 hub
 
 ## Model × BC matrix
 

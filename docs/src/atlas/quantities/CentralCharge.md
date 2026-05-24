@@ -9,6 +9,15 @@ All `(Model, BC)` hubs `src` claims for the **`CentralCharge`** observable.  Emp
 
 - **Models with this quantity registered**: 15
 - **Total hubs (Model, BC pairs)**: 15
+- **Methods** (derived from `@register`): `analytic`, `analytic_uv`, `delegation`, `minimal_model_delegation`, `sugawara`
+- **Universality classes** (where applicable): `Ising`, `MinimalModel`, `WZW`
+
+**Top references** (by hub count):
+- Belavin-Polyakov-Zamolodchikov 1984 — 2 hubs
+- Andrews-Baxter-Forrester 1984 — 1 hub
+- Bauer-Bernard 2006 — 1 hub
+- Cardy 1985 — 1 hub
+- Cardy 2001 — 1 hub
 
 ## Model × BC matrix
 

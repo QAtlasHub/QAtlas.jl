@@ -9,6 +9,12 @@ All `(Model, BC)` hubs `src` claims for the **`GGEValue`** observable.  Empty ce
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 1
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): `Ising`
+
+**Top references** (by hub count):
+- Calabrese-Essler-Fagotti J. Stat. Mech. (2012) — 1 hub
+- Rigol et al. PRL 98 (2007) — 1 hub
 
 ## Model × BC matrix
 

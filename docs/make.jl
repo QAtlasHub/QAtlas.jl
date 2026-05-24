@@ -84,8 +84,12 @@ makedocs(;
         ],
         "Verification" => [
             "verification/index.md",
-            "Verified Atlas" =>
-                ["atlas/index.md", "Model list" => "atlas/ModelList.md"],
+            "Verified Atlas" => [
+                "atlas/index.md",
+                "Model list" => "atlas/ModelList.md",
+                "Bibliography" => "atlas/Bibliography.md",
+                "Derivation-note index" => "atlas/CalcIndex.md",
+            ],
             "Cross-Checks" => "verification/cross-checks.md",
             "Entanglement" => "verification/entanglement.md",
             "Disordered" => "verification/disordered.md",

@@ -9,6 +9,8 @@ All `(Model, BC)` hubs `src` claims for the **`SusceptibilityXX`** observable.  
 
 - **Models with this quantity registered**: 4
 - **Total hubs (Model, BC pairs)**: 6
+- **Methods** (derived from `@register`): `bdg`, `dense_ed`
+- **Universality classes** (where applicable): `Ising`
 
 ## Model × BC matrix
 

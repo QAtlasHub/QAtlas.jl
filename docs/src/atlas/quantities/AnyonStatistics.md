@@ -9,6 +9,12 @@ All `(Model, BC)` hubs `src` claims for the **`AnyonStatistics`** observable.  E
 
 - **Models with this quantity registered**: 1
 - **Total hubs (Model, BC pairs)**: 1
+- **Methods** (derived from `@register`): `analytic`
+- **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- Kitaev 2003 — 1 hub
+- Nayak-Simon-Stern-Freedman-Das Sarma 2008 — 1 hub
 
 ## Model × BC matrix
 

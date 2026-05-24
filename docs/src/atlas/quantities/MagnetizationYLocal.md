@@ -9,6 +9,8 @@ All `(Model, BC)` hubs `src` claims for the **`MagnetizationYLocal`** observable
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `dense_ed`
+- **Universality classes** (where applicable): —
 
 ## Model × BC matrix
 

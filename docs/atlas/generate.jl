@@ -1049,8 +1049,9 @@ P("")
 P("## Reference & derivation indices")
 P("")
 P(
-    "Two more substrate-derived indices: ",
+    "Three more substrate-derived indices: ",
     "**[Bibliography](Bibliography.md)** — every citation with hub backlinks; ",
+    "**[Methods](Methods.md)** — every `@register` `method=:X` value with hub backlinks; ",
     "**[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).",
 )
 P("")
@@ -1590,3 +1591,51 @@ end
 
 write(joinpath(ROOT, "docs", "src", "atlas", "Audit.md"), render_audit())
 println("  + Tier-1 ext: Audit.md")
+
+# ── TIER-1 EXT METHODS (Methods.md) ──────────────────────────────────────
+function render_methods()
+    methodmap = Dict{String,Vector{String}}()
+    for c in claims
+        m = string(c.method)
+        isempty(m) && continue
+        push!(get!(methodmap, m, String[]), c.hub)
+    end
+
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# Methods — solution mechanisms across the atlas")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "Every distinct `method=:X` value used in any `@register(...)` ",
+        "across the atlas (",
+        length(methodmap),
+        " unique methods).  For each one we list which hubs use it - a ",
+        "*solution-technique* view: high-count entries are central ",
+        "machinery (analytic, dense_ed, ...), low-count entries are ",
+        "model-specific (e.g. `bethe_ansatz` for the integrable models).",
+    )
+    P("")
+    P(
+        "Symmetric with **[Bibliography](Bibliography.md)** ",
+        "(which groups by citation): both decompose hubs along orthogonal ",
+        "axes of the `@register` metadata.",
+    )
+    P("")
+    keys_sorted = sort(collect(keys(methodmap)); by=k -> (-length(methodmap[k]), k))
+    for k in keys_sorted
+        hs = sort(unique(methodmap[k]))
+        P("## `", k, "` - ", length(hs), " hub", (length(hs) == 1 ? "" : "s"))
+        P("")
+        for h in hs
+            P("- ", badgeof(h), " [`", h, "`](hubs/", slugof(h), ".md)")
+        end
+        P("")
+    end
+    P("[← back to the Atlas index](index.md)")
+    return String(take!(io))
+end
+
+write(joinpath(ROOT, "docs", "src", "atlas", "Methods.md"), render_methods())
+println("  + Tier-1 ext: Methods.md")

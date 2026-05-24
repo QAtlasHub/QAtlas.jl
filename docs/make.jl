@@ -88,6 +88,7 @@ makedocs(;
                 "atlas/index.md",
                 "Model list" => "atlas/ModelList.md",
                 "Bibliography" => "atlas/Bibliography.md",
+                "Methods" => "atlas/Methods.md",
                 "Derivation-note index" => "atlas/CalcIndex.md",
                 "Audit" => "atlas/Audit.md",
             ],

@@ -22,8 +22,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` |
 |---|---|
-| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟠 [hub](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) |
-| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) |
+| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) |
+| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) |
 | [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityYY_OBC.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟠 [hub](../hubs/XXZ1D_SusceptibilityYY_OBC.md) |
 

@@ -13,20 +13,42 @@ using QAtlas, Test
     LOW_T_BETA = 1e6
     for J in (0.5, 1.0, 2.0)
         for N in (4, 6)  # even N + S=1 ⇒ unique singlet GS (Haldane phase)
-            for q in (SusceptibilityXX(), SusceptibilityYY(), SusceptibilityZZ())
-                verify(
-                    S1Heisenberg1D(),
-                    q,
-                    OBC(N);
-                    route=:second_closed_form,
-                    independent=0.0,
-                    agree_within=1e-8,
-                    refs=[
-                        "S1Heisenberg1D OBC even N: unique gapped Haldane S_total=0 GS ⇒ χ_αα = β·Var(S^α_total) = 0",
-                    ],
-                    fetch_kw=(; J=J, beta=LOW_T_BETA),
-                )
-            end
+            verify(
+                S1Heisenberg1D(),
+                SusceptibilityXX(),
+                OBC(N);
+                route=:second_closed_form,
+                independent=0.0,
+                agree_within=1e-8,
+                refs=[
+                    "S1Heisenberg1D OBC even N: unique gapped Haldane S_total=0 GS ⇒ χ_αα = β·Var(S^α_total) = 0",
+                ],
+                fetch_kw=(; J=J, beta=LOW_T_BETA),
+            )
+            verify(
+                S1Heisenberg1D(),
+                SusceptibilityYY(),
+                OBC(N);
+                route=:second_closed_form,
+                independent=0.0,
+                agree_within=1e-8,
+                refs=[
+                    "S1Heisenberg1D OBC even N: unique gapped Haldane S_total=0 GS ⇒ χ_αα = β·Var(S^α_total) = 0",
+                ],
+                fetch_kw=(; J=J, beta=LOW_T_BETA),
+            )
+            verify(
+                S1Heisenberg1D(),
+                SusceptibilityZZ(),
+                OBC(N);
+                route=:second_closed_form,
+                independent=0.0,
+                agree_within=1e-8,
+                refs=[
+                    "S1Heisenberg1D OBC even N: unique gapped Haldane S_total=0 GS ⇒ χ_αα = β·Var(S^α_total) = 0",
+                ],
+                fetch_kw=(; J=J, beta=LOW_T_BETA),
+            )
         end
     end
 end

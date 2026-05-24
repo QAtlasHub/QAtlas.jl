@@ -147,19 +147,19 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 46 hubs (
 | `Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/Heisenberg1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 2 |
 | `Heisenberg1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 4 |
 | `Heisenberg1D` | [`LuttingerParameter`](../../atlas/hubs/Heisenberg1D_LuttingerParameter_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
-| `Heisenberg1D` | [`MagnetizationX`](../../atlas/hubs/Heisenberg1D_MagnetizationX_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `Heisenberg1D` | [`MagnetizationX`](../../atlas/hubs/Heisenberg1D_MagnetizationX_OBC.md) | `OBC` | 🔵 coherent | 1 |
 | `Heisenberg1D` | [`MagnetizationXLocal`](../../atlas/hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `Heisenberg1D` | [`MagnetizationY`](../../atlas/hubs/Heisenberg1D_MagnetizationY_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `Heisenberg1D` | [`MagnetizationY`](../../atlas/hubs/Heisenberg1D_MagnetizationY_OBC.md) | `OBC` | 🔵 coherent | 1 |
 | `Heisenberg1D` | [`MagnetizationYLocal`](../../atlas/hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `Heisenberg1D` | [`MagnetizationZ`](../../atlas/hubs/Heisenberg1D_MagnetizationZ_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `Heisenberg1D` | [`MagnetizationZ`](../../atlas/hubs/Heisenberg1D_MagnetizationZ_OBC.md) | `OBC` | 🔵 coherent | 1 |
 | `Heisenberg1D` | [`MagnetizationZLocal`](../../atlas/hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`MassGap`](../../atlas/hubs/Heisenberg1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`MassGap`](../../atlas/hubs/Heisenberg1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`RenyiEntropy`](../../atlas/hubs/Heisenberg1D_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`SpecificHeat`](../../atlas/hubs/Heisenberg1D_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
-| `Heisenberg1D` | [`SusceptibilityXX`](../../atlas/hubs/Heisenberg1D_SusceptibilityXX_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `Heisenberg1D` | [`SusceptibilityYY`](../../atlas/hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `Heisenberg1D` | [`SusceptibilityZZ`](../../atlas/hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `Heisenberg1D` | [`SusceptibilityXX`](../../atlas/hubs/Heisenberg1D_SusceptibilityXX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `Heisenberg1D` | [`SusceptibilityYY`](../../atlas/hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `Heisenberg1D` | [`SusceptibilityZZ`](../../atlas/hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`ThermalEntropy`](../../atlas/hubs/Heisenberg1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
 | `Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`ZZStructureFactor`](../../atlas/hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
@@ -179,13 +179,13 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 46 hubs (
 | `S1Heisenberg1D` | [`MassGap`](../../atlas/hubs/S1Heisenberg1D_MassGap_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`RenyiEntropy`](../../atlas/hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | `S1Heisenberg1D` | [`SpecificHeat`](../../atlas/hubs/S1Heisenberg1D_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 2 |
-| `S1Heisenberg1D` | [`SusceptibilityXX`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `S1Heisenberg1D` | [`SusceptibilityYY`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `S1Heisenberg1D` | [`SusceptibilityZZ`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `S1Heisenberg1D` | [`SusceptibilityXX`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `S1Heisenberg1D` | [`SusceptibilityYY`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `S1Heisenberg1D` | [`SusceptibilityZZ`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | `S1Heisenberg1D` | [`ThermalEntropy`](../../atlas/hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
 | `S1Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
-| `S1Heisenberg1D` | [`XXCorrelation`](../../atlas/hubs/S1Heisenberg1D_XXCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `S1Heisenberg1D` | [`YYCorrelation`](../../atlas/hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
-| `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `S1Heisenberg1D` | [`XXCorrelation`](../../atlas/hubs/S1Heisenberg1D_XXCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `S1Heisenberg1D` | [`YYCorrelation`](../../atlas/hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 
 <!-- ATLAS:HUBS:END -->

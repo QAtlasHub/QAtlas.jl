@@ -19,7 +19,7 @@ Top-level catalog of all **58 models** with claimed hubs.  One row per model; th
 | [`ExtendedHubbard1D`](models/ExtendedHubbard1D.md) | — | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 21 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 10 | 1 | 0 | 10 | feasible | `@su2` |
+| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 21 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 4 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 2 | `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 0 | feasible | `@isotropic`, `@sweep`, `@xx` |
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 4 | `analytic`, `bethe_ansatz` | 0 | 2 | 2 | 0 | 0 | feasible | `@sweep` |
 | [`IsingChain1D`](models/IsingChain1D.md) | — | 8 | `analytic` | 0 | 7 | 0 | 0 | 1 | feasible | `@ising1d` |
@@ -41,7 +41,7 @@ Top-level catalog of all **58 models** with claimed hubs.  One row per model; th
 | [`RFIM`](models/RFIM.md) | — | 1 | `analytic_imry_ma` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`RandomBondIsing2D`](models/RandomBondIsing2D.md) | `Ising` | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`S1AnisotropicD1D`](models/S1AnisotropicD1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
-| [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 21 | `dense_ed`, `literature_value` | 0 | 7 | 0 | 1 | 13 | feasible | `@haldane` |
+| [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 21 | `dense_ed`, `literature_value` | 0 | 13 | 0 | 1 | 7 | feasible | `@haldane` |
 | [`S1XXZ1D`](models/S1XXZ1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
 | [`SLEkappa`](models/SLEkappa.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`SYK`](models/SYK.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |

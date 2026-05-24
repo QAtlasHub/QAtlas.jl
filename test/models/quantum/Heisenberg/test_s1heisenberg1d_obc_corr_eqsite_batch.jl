@@ -18,24 +18,42 @@ using QAtlas, Test
     for J in (0.5, 1.0, 2.0)
         for N in (3, 4, 5, 6)
             for β in (0.5, 10.0, 1e6)
-                for q in (
+                verify(
+                    S1Heisenberg1D(),
                     XXCorrelation(mode=:static),
-                    YYCorrelation(mode=:static),
-                    ZZCorrelation(mode=:static),
+                    OBC(N);
+                    route=:second_closed_form,
+                    independent=2/3,
+                    agree_within=1e-8,
+                    refs=[
+                        "S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)",
+                    ],
+                    fetch_kw=(; J=J, beta=β, i=1, j=1),
                 )
-                    verify(
-                        S1Heisenberg1D(),
-                        q,
-                        OBC(N);
-                        route=:second_closed_form,
-                        independent=2/3,
-                        agree_within=1e-8,
-                        refs=[
-                            "S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)",
-                        ],
-                        fetch_kw=(; J=J, beta=β, i=1, j=1),
-                    )
-                end
+                verify(
+                    S1Heisenberg1D(),
+                    YYCorrelation(mode=:static),
+                    OBC(N);
+                    route=:second_closed_form,
+                    independent=2/3,
+                    agree_within=1e-8,
+                    refs=[
+                        "S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)",
+                    ],
+                    fetch_kw=(; J=J, beta=β, i=1, j=1),
+                )
+                verify(
+                    S1Heisenberg1D(),
+                    ZZCorrelation(mode=:static),
+                    OBC(N);
+                    route=:second_closed_form,
+                    independent=2/3,
+                    agree_within=1e-8,
+                    refs=[
+                        "S1Heisenberg1D SU(2)-covariance + spin-1 Schur: ⟨S^α_i S^α_i⟩ = ⟨(S^α)²⟩ = (1/3)·S(S+1) = 2/3 at any i, axis α, J, N, β (no ρ_i = I/3 assumption — fails at finite-N OBC edge sites in Haldane regime)",
+                    ],
+                    fetch_kw=(; J=J, beta=β, i=1, j=1),
+                )
             end
         end
     end

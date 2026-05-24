@@ -22,7 +22,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
-| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationX_OBC.md) | — | — |
+| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationX_OBC.md) | — | — |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) | — | — |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_OBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_PBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationX_OBC.md) | — | — |

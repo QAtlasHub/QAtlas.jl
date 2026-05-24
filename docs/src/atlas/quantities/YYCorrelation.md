@@ -22,7 +22,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` |
 |---|---|
-| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) |
+| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_YYCorrelation_OBC.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -42,10 +42,9 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 
 Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  These hubs are visible only through the cards, not the registry view; the absence of an `@register` claim means the primary `src` claim isn't there.
 
-**64 orphan card hub(s)**:
+**63 orphan card hub(s)**:
 
 - `E8/E8Spectrum/Infinite`
-- `Heisenberg1D/q/OBC`
 - `MeanField/CriticalExponents/Infinite`
 - `MinimalModel/CentralCharge/Infinite`
 - `MinimalModel/ConformalWeights/Infinite`

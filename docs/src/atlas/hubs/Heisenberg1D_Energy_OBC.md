@@ -57,4 +57,5 @@ verify(Heisenberg1D(), Energy(), OBC(N); route = :delegation_invariant, fetch_kw
 - cards: 6 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

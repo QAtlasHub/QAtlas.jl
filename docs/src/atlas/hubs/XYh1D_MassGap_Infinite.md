@@ -42,4 +42,5 @@ verify(XYh1D(; h = 0.5), MassGap(), Infinite(); route = :second_closed_form, ind
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XYh1D`](../models/XYh1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

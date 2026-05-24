@@ -37,4 +37,5 @@ verify(ZnClock(; n = 3), CentralCharge(), Infinite(); route = :second_closed_for
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `ZnClock`](../models/ZnClock.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

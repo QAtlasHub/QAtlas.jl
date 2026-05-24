@@ -32,4 +32,5 @@ verify(TFIM(; J = 0.0, h = h), FidelitySusceptibility(), OBC(N); route = :second
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `FidelitySusceptibility`](../quantities/FidelitySusceptibility.md) · [Atlas index](../index.md)

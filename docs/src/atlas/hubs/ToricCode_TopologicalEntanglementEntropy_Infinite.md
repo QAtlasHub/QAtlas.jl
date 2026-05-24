@@ -32,4 +32,5 @@ verify(ToricCode(; J_e = 1.0, J_m = 1.0), TopologicalEntanglementEntropy(), Infi
 - cards: 1 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `ToricCode`](../models/ToricCode.md) · [Quantity: `TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) · [Atlas index](../index.md)

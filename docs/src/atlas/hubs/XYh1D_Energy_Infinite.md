@@ -37,4 +37,5 @@ verify(XYh1D(; h = 0.0), Energy(:per_site), Infinite(); route = :second_closed_f
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XYh1D`](../models/XYh1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

@@ -52,4 +52,5 @@ verify(SixVertex(; a = 1.0, b = 1.0, c = 1.0), FreeEnergy(), Infinite(); route =
 - cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `SixVertex`](../models/SixVertex.md) · [Quantity: `FreeEnergy`](../quantities/FreeEnergy.md) · [Atlas index](../index.md)

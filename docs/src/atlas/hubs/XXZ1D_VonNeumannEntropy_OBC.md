@@ -32,4 +32,5 @@ verify(XXZ1D(), VonNeumannEntropy(), OBC(N); route = :second_closed_form, indepe
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) · [Atlas index](../index.md)

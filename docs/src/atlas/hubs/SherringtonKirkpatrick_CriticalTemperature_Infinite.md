@@ -37,4 +37,5 @@ verify(SherringtonKirkpatrick(; J = J), CriticalTemperature(), Infinite(); route
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `SherringtonKirkpatrick`](../models/SherringtonKirkpatrick.md) · [Quantity: `CriticalTemperature`](../quantities/CriticalTemperature.md) · [Atlas index](../index.md)

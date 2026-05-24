@@ -37,4 +37,5 @@ verify(AKLT1D(), CorrelationLength(), Infinite(); route = :second_closed_form, i
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `AKLT1D`](../models/AKLT1D.md) · [Quantity: `CorrelationLength`](../quantities/CorrelationLength.md) · [Atlas index](../index.md)

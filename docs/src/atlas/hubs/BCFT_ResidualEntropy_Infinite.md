@@ -32,4 +32,5 @@ verify(BCFT(), ResidualEntropy(), Infinite(); route = :second_closed_form, indep
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `BCFT`](../models/BCFT.md) · [Quantity: `ResidualEntropy`](../quantities/ResidualEntropy.md) · [Atlas index](../index.md)

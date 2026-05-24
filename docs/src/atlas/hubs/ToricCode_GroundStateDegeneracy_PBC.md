@@ -37,4 +37,5 @@ verify(ToricCode(; J_e = J_e, J_m = J_m), GroundStateDegeneracy(), PBC(0); route
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `ToricCode`](../models/ToricCode.md) · [Quantity: `GroundStateDegeneracy`](../quantities/GroundStateDegeneracy.md) · [Atlas index](../index.md)

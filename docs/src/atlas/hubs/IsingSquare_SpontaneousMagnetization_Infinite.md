@@ -37,4 +37,5 @@ verify(IsingSquare(; J = J), SpontaneousMagnetization(), Infinite(); route = :se
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `IsingSquare`](../models/IsingSquare.md) · [Quantity: `SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) · [Atlas index](../index.md)

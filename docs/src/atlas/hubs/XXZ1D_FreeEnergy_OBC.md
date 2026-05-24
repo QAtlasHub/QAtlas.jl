@@ -36,4 +36,5 @@ verify(XXZ1D(; J = J, Δ = dz), FreeEnergy(), OBC(N); route = :ed_finite_size, i
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `FreeEnergy`](../quantities/FreeEnergy.md) · [Atlas index](../index.md)

@@ -32,4 +32,5 @@ verify(TFIM(; J = J, h = h_f), LoschmidtEcho(), Infinite(); route = :second_clos
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `LoschmidtEcho`](../quantities/LoschmidtEcho.md) · [Atlas index](../index.md)

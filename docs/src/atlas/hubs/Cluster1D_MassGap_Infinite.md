@@ -37,4 +37,5 @@ verify(Cluster1D(; J = J), MassGap(), Infinite(); route = :second_closed_form, i
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Cluster1D`](../models/Cluster1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

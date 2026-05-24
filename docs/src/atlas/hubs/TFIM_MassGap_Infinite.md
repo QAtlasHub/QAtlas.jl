@@ -82,4 +82,5 @@ verify(TFIM(; J = J, h = h), MassGap(), Infinite(); route = :second_closed_form,
 - cards: 11 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

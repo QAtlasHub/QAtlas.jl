@@ -37,4 +37,5 @@ verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), EdgeModeEnergy(), OBC(N); route 
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Kitaev1D`](../models/Kitaev1D.md) · [Quantity: `EdgeModeEnergy`](../quantities/EdgeModeEnergy.md) · [Atlas index](../index.md)

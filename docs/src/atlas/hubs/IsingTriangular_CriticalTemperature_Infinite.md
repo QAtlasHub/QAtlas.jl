@@ -42,4 +42,5 @@ verify(IsingTriangular(; J = J), CriticalTemperature(), Infinite(); route = :sec
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `IsingTriangular`](../models/IsingTriangular.md) · [Quantity: `CriticalTemperature`](../quantities/CriticalTemperature.md) · [Atlas index](../index.md)

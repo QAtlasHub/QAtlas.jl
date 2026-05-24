@@ -32,4 +32,5 @@ verify(Hubbard1D(; t = t, U = 0.0, μ = 0.0), LuttingerParameter(), Infinite(); 
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Hubbard1D`](../models/Hubbard1D.md) · [Quantity: `LuttingerParameter`](../quantities/LuttingerParameter.md) · [Atlas index](../index.md)

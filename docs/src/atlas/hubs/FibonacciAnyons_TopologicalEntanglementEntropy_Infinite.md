@@ -37,4 +37,5 @@ verify(FibonacciAnyons(), TopologicalEntanglementEntropy(), Infinite(); route = 
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `FibonacciAnyons`](../models/FibonacciAnyons.md) · [Quantity: `TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) · [Atlas index](../index.md)

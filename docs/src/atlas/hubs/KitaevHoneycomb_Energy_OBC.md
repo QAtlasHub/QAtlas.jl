@@ -21,4 +21,5 @@ _No corroboration card._ Model is ED-infeasible — frontier (cited-only), not a
 - cards: 0 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `KitaevHoneycomb`](../models/KitaevHoneycomb.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

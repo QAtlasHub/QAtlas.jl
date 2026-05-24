@@ -32,4 +32,5 @@ verify(CurieWeissIsing(; J = J), SpontaneousMagnetization(), Infinite(); route =
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `CurieWeissIsing`](../models/CurieWeissIsing.md) · [Quantity: `SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) · [Atlas index](../index.md)

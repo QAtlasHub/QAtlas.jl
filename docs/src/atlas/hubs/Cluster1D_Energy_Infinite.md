@@ -37,4 +37,5 @@ verify(Cluster1D(; J = J), Energy(:per_site), Infinite(); route = :second_closed
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Cluster1D`](../models/Cluster1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

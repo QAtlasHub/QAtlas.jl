@@ -41,4 +41,5 @@ verify(XXZ1D(; J = J, Δ = dz), SpecificHeat(), OBC(N); route = :ed_finite_size,
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `XXZ1D`](../models/XXZ1D.md) · [Quantity: `SpecificHeat`](../quantities/SpecificHeat.md) · [Atlas index](../index.md)

@@ -42,4 +42,5 @@ verify(S1Heisenberg1D(; J = 1.0), Energy(:per_site), Infinite(); route = :litera
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `S1Heisenberg1D`](../models/S1Heisenberg1D.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

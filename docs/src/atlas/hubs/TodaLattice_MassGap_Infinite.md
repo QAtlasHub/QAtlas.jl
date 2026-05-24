@@ -37,4 +37,5 @@ verify(TodaLattice(), MassGap(), Infinite(); route = :second_closed_form, indepe
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TodaLattice`](../models/TodaLattice.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

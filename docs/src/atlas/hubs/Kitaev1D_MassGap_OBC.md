@@ -32,4 +32,5 @@ verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(40); route = :sec
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Kitaev1D`](../models/Kitaev1D.md) · [Quantity: `MassGap`](../quantities/MassGap.md) · [Atlas index](../index.md)

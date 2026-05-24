@@ -32,4 +32,5 @@ verify(PpIp2DSC(), TopologicalInvariant(), Infinite(); route = :second_closed_fo
 - cards: 1 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `PpIp2DSC`](../models/PpIp2DSC.md) · [Quantity: `TopologicalInvariant`](../quantities/TopologicalInvariant.md) · [Atlas index](../index.md)

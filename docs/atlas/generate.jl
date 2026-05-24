@@ -169,540 +169,7 @@ const LEGEND = string(
     "published / DMRG value.",
 )
 
-# ── per-hub pages ────────────────────────────────────────────────────
-hubsdir = joinpath(ROOT, "docs", "src", "atlas", "hubs")
-mkpath(hubsdir)
-for h in claimed
-    cl = first(clby[h])
-    cs = cardsof(h)
-    lev, bdg, adm = levelof(h)
-    hio = IOBuffer()
-    HP(s...) = println(hio, string(s...))
-    HP("# ", bdg, " `", h, "`")
-    HP("")
-    HP(BANNER)
-    HP("")
-    HP("!!! ", adm, " \"Assurance level: ", lev, "\"")
-    if lev == "uncorroborated-but-feasible"
-        HP(
-            "    `src` claims this hub and dense ED is feasible, but no ",
-            "corroboration card exists. **Actionable**: add a ",
-            "`route = :ed_finite_size` or `:second_closed_form` card.",
-        )
-    elseif lev == "cited-only"
-        HP(
-            "    Backed only by a literature citation",
-            if ed_infeasible(h)
-                " (model is ED-infeasible — this is the ceiling)."
-            else
-                " — no in-repo independent re-derivation yet."
-            end,
-        )
-    elseif lev == "coherent"
-        HP(
-            "    An independent card exists and the value satisfies an ",
-            "internal invariant; no external value re-derives it yet.",
-        )
-    else
-        HP("    Independently corroborated. See the cards below.")
-    end
-    HP("")
-    HP("## `src` claim")
-    HP("")
-    HP(
-        "- method `",
-        cl.method,
-        "`, reliability `",
-        cl.reliability,
-        "`",
-        isempty(cl.refs) ? "" : string(", refs: ", _md_escape_dollar(cl.refs)),
-    )
-    isempty(cl.notes) || HP("- ", _md_escape_dollar(cl.notes))
-    HP("")
-    HP("## Corroboration")
-    HP("")
-    if isempty(cs)
-        HP(
-            "_No corroboration card._ ",
-            if ed_infeasible(h)
-                "Model is ED-infeasible — frontier (cited-only), not a gap."
-            else
-                "Flagged by the R1 risk-linter (`src` claims this hub, ED is feasible, no independent card)."
-            end,
-        )
-    else
-        HP("| regime | mechanism | independence | refs | file |")
-        HP("|---|---|---|---|---|")
-        for c in cs
-            b = c.independence == "structural" ? "🟢 structural" : "🟡 asserted"
-            HP(
-                "| `",
-                c.regime,
-                "` | `",
-                c.mechanism,
-                "` | ",
-                b,
-                " | ",
-                _md_escape_dollar(c.refs),
-                " | `",
-                c.file,
-                "` |",
-            )
-        end
-    end
-    if !isempty(cs)
-        HP("")
-        HP("## Test calls")
-        HP("")
-        HP(
-            "_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_",
-        )
-        HP("")
-        for c in cs
-            HP("```julia")
-            HP(c.srctext)
-            HP("```")
-            HP("")
-        end
-    end
-    HP("")
-    HP("## Assurance (provisional)")
-    HP("")
-    HP("- level: **", lev, "** ", bdg)
-    HP(
-        "- cards: ",
-        length(cs),
-        " · model ED-",
-        ed_infeasible(h) ? "infeasible (frontier)" : "feasible",
-    )
-    HP("- RES not wired — measured residuals / confidence are not shown yet.")
-    HP("")
-    HP(
-        "[← Model: `",
-        modelof(h),
-        "`](../models/",
-        modelof(h),
-        ".md) · ",
-        "[Quantity: `",
-        quantof(h),
-        "`](../quantities/",
-        _quant_slugof(quantof(h)),
-        ".md) · ",
-        "[Atlas index](../index.md)",
-    )
-    write(joinpath(hubsdir, slugof(h) * ".md"), String(take!(hio)))
-end
-
-# ── faceted index pages (R5) ─────────────────────────────────────────
-bydir = joinpath(ROOT, "docs", "src", "atlas", "by")
-mkpath(bydir)
-function write_facet(fname, title, groups, blurb)
-    fio = IOBuffer()
-    FP(s...) = println(fio, string(s...))
-    FP("# ", title)
-    FP("")
-    FP(BANNER)
-    FP("")
-    FP(blurb)
-    FP("")
-    for k in sort(collect(keys(groups)))
-        hs = sort(groups[k])
-        FP("## `", k, "` (", length(hs), ")")
-        FP("")
-        for h in hs
-            FP("- ", facet_link(h))
-        end
-        FP("")
-    end
-    FP("[← back to the Atlas index](../index.md)")
-    write(joinpath(bydir, fname), String(take!(fio)))
-end
-write_facet(
-    "model.md", "Atlas — by model", G_model, "Every `src`-claimed hub grouped by model."
-)
-write_facet(
-    "quantity.md",
-    "Atlas — by quantity",
-    G_quant,
-    "Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC schema).",
-)
-write_facet(
-    "bc.md",
-    "Atlas — by boundary condition",
-    G_bc,
-    "Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).",
-)
-write_facet(
-    "level.md",
-    "Atlas — by assurance level",
-    G_level,
-    "Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only actionable bucket.",
-)
-write_facet(
-    "mechanism.md",
-    "Atlas — by corroboration mechanism",
-    G_mech,
-    "Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.",
-)
-write_facet(
-    "regime.md",
-    "Atlas — by regime",
-    G_regime,
-    "Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).",
-)
-byidx = IOBuffer()
-BI(s...) = println(byidx, string(s...))
-BI("# Atlas — faceted search")
-BI("")
-BI(BANNER)
-BI("")
-BI(
-    "Full-text search is the bar at the top of every page (Documenter ",
-    "built-in — indexes every hub and facet page). Faceted indices over ",
-    "the locked **Model / Quantity / BC @ regime** schema:",
-)
-BI("")
-BI("- [By model](model.md) — ", length(G_model), " models")
-BI("- [By quantity](quantity.md) — ", length(G_quant), " observables")
-BI("- [By boundary condition](bc.md) — ", length(G_bc), " BCs")
-BI("- [By assurance level](level.md) — R1 taxonomy")
-BI("- [By corroboration mechanism](mechanism.md) — verify `route`")
-BI("- [By regime](regime.md) — resolved physical regimes")
-BI("")
-BI("[← back to the Atlas index](../index.md)")
-write(joinpath(bydir, "index.md"), String(take!(byidx)))
-
-# ── atlas index ──────────────────────────────────────────────────────
-io = IOBuffer()
-P(s...) = println(io, string(s...))
-P("# QAtlas — Verified Exact-Solution Atlas")
-P("")
-P(BANNER)
-P("")
-P(LEGEND)
-P("")
-P("## Coverage (all models)")
-P("")
-P("| | count |")
-P("|---|---|")
-P("| Hubs `src` claims (registry) | ", length(claimed), " |")
-P("| ED-feasible claimed (risk denominator) | ", nfeas, " |")
-P("| ED-infeasible claimed (frontier, excluded) | ", length(claimed) - nfeas, " |")
-P("| 🟣 universality-corroborated | ", length(L_UNIV), " |")
-P("| 🟢 corroborated-at-p | ", length(L_EDP), " |")
-P("| 🔵 coherent | ", length(L_COH), " |")
-P("| ⚪ cited-only (frontier — neutral) | ", length(L_CITED), " |")
-P("| 🟠 uncorroborated-but-feasible (**actionable risk**) | ", length(L_RISK), " |")
-P("| Inventory cards scanned (whole test/) | ", length(cards), " |")
-P(
-    "| Registry files parsed | ",
-    length(regfiles) - length(regfail),
-    " / ",
-    length(regfiles),
-    " |",
-)
-P("| Models | ", length(models), " |")
-P("")
-P(
-    "**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **",
-    rate_struct,
-    "%** · **in-repo-verified rate** (incl. 🔵 coherent): **",
-    rate_inrepo,
-    "%**",
-)
-P("")
-P("## Browse by facet")
-P("")
-P(
-    "[**Faceted search →**](by/index.md) · ",
-    "[by model](by/model.md) · [by quantity](by/quantity.md) · ",
-    "[by BC](by/bc.md) · [by level](by/level.md) · ",
-    "[by mechanism](by/mechanism.md) · [by regime](by/regime.md). ",
-    "Full-text search is the top bar (Documenter built-in).",
-)
-
-P("")
-P("")
-P("## Reference & derivation indices")
-P("")
-P(
-    "Two more substrate-derived indices: ",
-    "**[Bibliography](Bibliography.md)** — every citation with hub backlinks; ",
-    "**[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).",
-)
-P("")
-P("## Model & Quantity matrices (Zettelkasten layer)")
-P("")
-P(
-    "Each model has a per-model index showing its hubs as a ",
-    "`Quantity × BC` matrix; each quantity has the inverse view ",
-    "(`Model × BC`).  Empty cells = gap visualisation (physics not ",
-    "yet implemented).  Use the **[Model list](ModelList.md)** for a ",
-    "searchable top-catalog.",
-)
-P("")
-P("## 🟠 R1 risk-linter — actionable only")
-P("")
-P(
-    "`src` claims the hub, the model is ED-**feasible**, yet zero ",
-    "corroboration cards exist. `cited-only` (frontier) and ED-infeasible ",
-    "hubs are **not** listed here — they are the honest ceiling, not a gap.",
-)
-P("")
-if isempty(L_RISK)
-    P("!!! tip \"No actionable risk\"")
-    P("    Every ED-feasible claimed hub has at least one corroboration card.")
-else
-    P("!!! warning \"", length(L_RISK), " actionable hub(s)\"")
-    for h in sort(L_RISK)
-        P("    - [`", h, "`](hubs/", slugof(h), ".md)")
-    end
-end
-P("")
-P("## Per-model breakdown")
-P("")
-P("| model | claimed | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED |")
-P("|---|---|---|---|---|---|---|---|")
-for m in models
-    hs = filter(h -> modelof(h) == m, claimed)
-    P(
-        "| `",
-        m,
-        "` | ",
-        length(hs),
-        " | ",
-        count(h -> levelcode(h) == AtlasInventory.UNIVERSALITY_CORROBORATED, hs),
-        " | ",
-        count(h -> levelcode(h) == AtlasInventory.CORROBORATED_AT_P, hs),
-        " | ",
-        count(h -> levelcode(h) == AtlasInventory.COHERENT, hs),
-        " | ",
-        count(h -> levelcode(h) == AtlasInventory.CITED_ONLY, hs),
-        " | ",
-        count(h -> levelcode(h) == AtlasInventory.UNCORROBORATED_BUT_FEASIBLE, hs),
-        " | ",
-        (m in AtlasInventory.ED_INFEASIBLE_MODELS ? "infeasible" : "feasible"),
-        " |",
-    )
-end
-P("")
-P("## Hubs (", length(claimed), ") — select to drill down")
-P("")
-for m in models
-    hs = sort(filter(h -> modelof(h) == m, claimed))
-    P("### `", m, "` (", length(hs), ")")
-    P("")
-    for h in hs
-        P("- ", badgeof(h), " [`", h, "`](hubs/", slugof(h), ".md) — ", levname(h))
-    end
-    P("")
-end
-
-out = joinpath(ROOT, "docs", "src", "atlas", "index.md")
-mkpath(dirname(out))
-write(out, String(take!(io)))
-println(
-    "wrote ",
-    out,
-    " + ",
-    length(claimed),
-    " per-hub pages + 7 facet pages  models=",
-    length(models),
-    " hubs=",
-    length(claimed),
-    " cards=",
-    length(cards),
-    " regfail=",
-    length(regfail),
-    "  R1[univ=",
-    length(L_UNIV),
-    " edp=",
-    length(L_EDP),
-    " coh=",
-    length(L_COH),
-    " cited=",
-    length(L_CITED),
-    " risk=",
-    length(L_RISK),
-    "] feas=",
-    nfeas,
-    " rate_struct=",
-    rate_struct,
-    " rate_inrepo=",
-    rate_inrepo,
-)
-
-# ─── Auto-inject "Verified hubs" section into hand-written model pages ──────
-# Closes the model-page <-> atlas-hub coherence gap. For each mapped docs
-# page, writes a fresh `## Verified hubs` table between START / END
-# markers; if markers are absent, the section is appended at end of file.
-
-const MODEL_DOC_MAP = Dict{String,String}(
-    "TFIM" => "docs/src/models/quantum/tfim.md",
-    "Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
-    "S1Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
-    "HeisenbergXYZ" => "docs/src/models/quantum/heisenberg.md",
-    "DMIHeisenberg1D" => "docs/src/models/quantum/heisenberg.md",
-    "J1J2Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
-    "MajumdarGhosh" => "docs/src/models/quantum/majumdar_ghosh.md",
-    "Hubbard1D" => "docs/src/models/quantum/hubbard1d.md",
-    "ExtendedHubbard1D" => "docs/src/models/quantum/hubbard1d.md",
-    "KitaevHoneycomb" => "docs/src/models/quantum/kitaev-honeycomb.md",
-    "KitaevHeisenberg" => "docs/src/models/quantum/kitaev-honeycomb.md",
-    "Kitaev1D" => "docs/src/models/quantum/kitaev1d.md",
-    "ToricCode" => "docs/src/models/quantum/toric-code.md",
-    "XXZ1D" => "docs/src/models/quantum/xxz.md",
-    "S1XXZ1D" => "docs/src/models/quantum/xxz.md",
-    "IsingSquare" => "docs/src/models/classical/ising-square.md",
-    "IsingTriangular" => "docs/src/models/classical/ising-triangular.md",
-    "SixVertex" => "docs/src/models/classical/six-vertex.md",
-)
-
-const _PAGE_TO_MODELS = let
-    d = Dict{String,Vector{String}}()
-    for (m, page) in MODEL_DOC_MAP
-        push!(get!(d, page, String[]), m)
-    end
-    for (_, ms) in d
-        sort!(ms)
-    end
-    d
-end
-
-_posix(p::AbstractString) = replace(p, '\\' => '/')
-
-const _ATLAS_HUBS_BEGIN = "<!-- ATLAS:HUBS:START -- auto-generated by docs/atlas/generate.jl. Do not edit by hand; edits between these markers are overwritten on next regen. -->"
-const _ATLAS_HUBS_END = "<!-- ATLAS:HUBS:END -->"
-
-function render_hub_section(page_rel, model_names)
-    page_dir = dirname(joinpath(ROOT, page_rel))
-    io = IOBuffer()
-    P = (xs...) -> println(io, xs...)
-    relevant = sort(filter(h -> modelof(h) in model_names, claimed))
-    atlas_rel = _posix(relpath(joinpath(ROOT, "docs/src/atlas/index.md"), page_dir))
-    P(_ATLAS_HUBS_BEGIN)
-    P()
-    P("## Verified hubs")
-    P()
-    n = length(model_names)
-    subj = n == 1 ? "this model registers" : "these $(n) models register"
-    nh = length(relevant)
-    hub_word = nh == 1 ? "hub" : "hubs"
-    P(
-        "In the [Verified Atlas](",
-        atlas_rel,
-        "), ",
-        subj,
-        " ",
-        nh,
-        " ",
-        hub_word,
-        " (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.",
-    )
-    P()
-    if nh == 0
-        P("_No hubs registered yet._")
-        P()
-    else
-        if n == 1
-            P("| Quantity | BC | Assurance | Cards |")
-            P("|---|---|---|---|")
-            for h in relevant
-                hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
-                rp = _posix(relpath(hub_page, page_dir))
-                P(
-                    "| [`",
-                    quantof(h),
-                    "`](",
-                    rp,
-                    ") | `",
-                    bcof(h),
-                    "` | ",
-                    badgeof(h),
-                    " ",
-                    levname(h),
-                    " | ",
-                    length(cardsof(h)),
-                    " |",
-                )
-            end
-        else
-            P("| Model | Quantity | BC | Assurance | Cards |")
-            P("|---|---|---|---|---|")
-            for h in relevant
-                hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
-                rp = _posix(relpath(hub_page, page_dir))
-                P(
-                    "| `",
-                    modelof(h),
-                    "` | [`",
-                    quantof(h),
-                    "`](",
-                    rp,
-                    ") | `",
-                    bcof(h),
-                    "` | ",
-                    badgeof(h),
-                    " ",
-                    levname(h),
-                    " | ",
-                    length(cardsof(h)),
-                    " |",
-                )
-            end
-        end
-        P()
-    end
-    P(_ATLAS_HUBS_END)
-    return String(take!(io))
-end
-
-function inject_hub_section!(page_rel, model_names)
-    p = joinpath(ROOT, page_rel)
-    if !isfile(p)
-        @warn "ATLAS hub-inject skip: page not found" page = page_rel
-        return nothing
-    end
-    content = read(p, String)
-    section = render_hub_section(page_rel, model_names)
-    b = findfirst(_ATLAS_HUBS_BEGIN, content)
-    e = findfirst(_ATLAS_HUBS_END, content)
-    # Explicit marker-pair validation: refuse to write when only one of
-    # START/END is present or when they are misordered. Without this an
-    # orphaned START at the top of the page would be paired with the
-    # appended-section END at the bottom on the NEXT regen, silently
-    # nuking everything between them.
-    if (b === nothing) != (e === nothing)
-        @warn "ATLAS hub-inject skip: page has only one of START/END marker; refusing to mutate to avoid data loss" page =
-            page_rel
-        return nothing
-    end
-    if b !== nothing && e !== nothing && first(e) <= last(b)
-        @warn "ATLAS hub-inject skip: START/END markers in wrong order; refusing to mutate" page =
-            page_rel
-        return nothing
-    end
-    if b !== nothing && e !== nothing
-        new = content[1:(first(b) - 1)] * section * content[(last(e) + 1):end]
-    else
-        new = rstrip(content, '\n') * "\n\n---\n\n" * section * "\n"
-    end
-    # Normalize trailing newlines so re-runs are byte-stable (without this
-    # the append path leaves a trailing "\n\n" that grows by 1 newline on
-    # each subsequent replacement-path regen).
-    new = rstrip(new, '\n') * "\n"
-    if new != content
-        write(p, new)
-        println("  injected hubs into ", page_rel)
-    end
-end
-
-for page in sort(collect(keys(_PAGE_TO_MODELS)))
-    inject_hub_section!(page, _PAGE_TO_MODELS[page])
-end
-
-# ── TIER-1 VIEW GENERATORS (ModelList + per-model + per-quantity) ──────────
-
+# HOISTED: TIER-1 EXT HELPERS
 # ── TIER-1 EXT HELPERS (universality + calc + refs) ─────────────────────────
 
 # CONVENTION block extraction: parse the standard header comment
@@ -1163,6 +630,552 @@ println(
     length(quants_all),
     " quantity pages + ModelList.md",
 )
+
+# ── per-hub pages ────────────────────────────────────────────────────
+hubsdir = joinpath(ROOT, "docs", "src", "atlas", "hubs")
+mkpath(hubsdir)
+for h in claimed
+    cl = first(clby[h])
+    cs = cardsof(h)
+    lev, bdg, adm = levelof(h)
+    hio = IOBuffer()
+    HP(s...) = println(hio, string(s...))
+    HP("# ", bdg, " `", h, "`")
+    HP("")
+    HP(BANNER)
+    HP("")
+    HP("!!! ", adm, " \"Assurance level: ", lev, "\"")
+    if lev == "uncorroborated-but-feasible"
+        HP(
+            "    `src` claims this hub and dense ED is feasible, but no ",
+            "corroboration card exists. **Actionable**: add a ",
+            "`route = :ed_finite_size` or `:second_closed_form` card.",
+        )
+    elseif lev == "cited-only"
+        HP(
+            "    Backed only by a literature citation",
+            if ed_infeasible(h)
+                " (model is ED-infeasible — this is the ceiling)."
+            else
+                " — no in-repo independent re-derivation yet."
+            end,
+        )
+    elseif lev == "coherent"
+        HP(
+            "    An independent card exists and the value satisfies an ",
+            "internal invariant; no external value re-derives it yet.",
+        )
+    else
+        HP("    Independently corroborated. See the cards below.")
+    end
+    HP("")
+    HP("## `src` claim")
+    HP("")
+    HP(
+        "- method `",
+        cl.method,
+        "`, reliability `",
+        cl.reliability,
+        "`",
+        isempty(cl.refs) ? "" : string(", refs: ", _md_escape_dollar(cl.refs)),
+    )
+    isempty(cl.notes) || HP("- ", _md_escape_dollar(cl.notes))
+    HP("")
+    HP("## Corroboration")
+    HP("")
+    if isempty(cs)
+        HP(
+            "_No corroboration card._ ",
+            if ed_infeasible(h)
+                "Model is ED-infeasible — frontier (cited-only), not a gap."
+            else
+                "Flagged by the R1 risk-linter (`src` claims this hub, ED is feasible, no independent card)."
+            end,
+        )
+    else
+        HP("| regime | mechanism | independence | refs | file |")
+        HP("|---|---|---|---|---|")
+        for c in cs
+            b = c.independence == "structural" ? "🟢 structural" : "🟡 asserted"
+            HP(
+                "| `",
+                c.regime,
+                "` | `",
+                c.mechanism,
+                "` | ",
+                b,
+                " | ",
+                _md_escape_dollar(c.refs),
+                " | `",
+                c.file,
+                "` |",
+            )
+        end
+    end
+    if !isempty(cs)
+        HP("")
+        HP("## Test calls")
+        HP("")
+        HP(
+            "_The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_",
+        )
+        HP("")
+        for c in cs
+            HP("```julia")
+            HP(c.srctext)
+            HP("```")
+            HP("")
+        end
+    end
+    HP("")
+    HP("## Assurance (provisional)")
+    HP("")
+    HP("- level: **", lev, "** ", bdg)
+    HP(
+        "- cards: ",
+        length(cs),
+        " · model ED-",
+        ed_infeasible(h) ? "infeasible (frontier)" : "feasible",
+    )
+    HP("- RES not wired — measured residuals / confidence are not shown yet.")
+    HP("")
+    cf_hub = _calc_files_for_hub(modelof(h), quantof(h))
+    if !isempty(cf_hub)
+        HP("")
+        HP("## Derivation note")
+        HP("")
+        HP("Matched by filename substring (model + quantity); substrate-derived:")
+        HP("")
+        for f in cf_hub
+            HP("- [`", f, "`](../../calc/", f, ")")
+        end
+    end
+    HP("")
+    HP(
+        "[← Model: `",
+        modelof(h),
+        "`](../models/",
+        modelof(h),
+        ".md) · ",
+        "[Quantity: `",
+        quantof(h),
+        "`](../quantities/",
+        _quant_slugof(quantof(h)),
+        ".md) · ",
+        "[Atlas index](../index.md)",
+    )
+    write(joinpath(hubsdir, slugof(h) * ".md"), String(take!(hio)))
+end
+
+# ── faceted index pages (R5) ─────────────────────────────────────────
+bydir = joinpath(ROOT, "docs", "src", "atlas", "by")
+mkpath(bydir)
+function write_facet(fname, title, groups, blurb)
+    fio = IOBuffer()
+    FP(s...) = println(fio, string(s...))
+    FP("# ", title)
+    FP("")
+    FP(BANNER)
+    FP("")
+    FP(blurb)
+    FP("")
+    for k in sort(collect(keys(groups)))
+        hs = sort(groups[k])
+        FP("## `", k, "` (", length(hs), ")")
+        FP("")
+        for h in hs
+            FP("- ", facet_link(h))
+        end
+        FP("")
+    end
+    FP("[← back to the Atlas index](../index.md)")
+    write(joinpath(bydir, fname), String(take!(fio)))
+end
+write_facet(
+    "model.md", "Atlas — by model", G_model, "Every `src`-claimed hub grouped by model."
+)
+write_facet(
+    "quantity.md",
+    "Atlas — by quantity",
+    G_quant,
+    "Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC schema).",
+)
+write_facet(
+    "bc.md",
+    "Atlas — by boundary condition",
+    G_bc,
+    "Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).",
+)
+write_facet(
+    "level.md",
+    "Atlas — by assurance level",
+    G_level,
+    "Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only actionable bucket.",
+)
+write_facet(
+    "mechanism.md",
+    "Atlas — by corroboration mechanism",
+    G_mech,
+    "Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.",
+)
+write_facet(
+    "regime.md",
+    "Atlas — by regime",
+    G_regime,
+    "Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).",
+)
+byidx = IOBuffer()
+BI(s...) = println(byidx, string(s...))
+BI("# Atlas — faceted search")
+BI("")
+BI(BANNER)
+BI("")
+BI(
+    "Full-text search is the bar at the top of every page (Documenter ",
+    "built-in — indexes every hub and facet page). Faceted indices over ",
+    "the locked **Model / Quantity / BC @ regime** schema:",
+)
+BI("")
+BI("- [By model](model.md) — ", length(G_model), " models")
+BI("- [By quantity](quantity.md) — ", length(G_quant), " observables")
+BI("- [By boundary condition](bc.md) — ", length(G_bc), " BCs")
+BI("- [By assurance level](level.md) — R1 taxonomy")
+BI("- [By corroboration mechanism](mechanism.md) — verify `route`")
+BI("- [By regime](regime.md) — resolved physical regimes")
+BI("")
+BI("[← back to the Atlas index](../index.md)")
+write(joinpath(bydir, "index.md"), String(take!(byidx)))
+
+# ── atlas index ──────────────────────────────────────────────────────
+io = IOBuffer()
+P(s...) = println(io, string(s...))
+P("# QAtlas — Verified Exact-Solution Atlas")
+P("")
+P(BANNER)
+P("")
+P(LEGEND)
+P("")
+P("## Coverage (all models)")
+P("")
+P("| | count |")
+P("|---|---|")
+P("| Hubs `src` claims (registry) | ", length(claimed), " |")
+P("| ED-feasible claimed (risk denominator) | ", nfeas, " |")
+P("| ED-infeasible claimed (frontier, excluded) | ", length(claimed) - nfeas, " |")
+P("| 🟣 universality-corroborated | ", length(L_UNIV), " |")
+P("| 🟢 corroborated-at-p | ", length(L_EDP), " |")
+P("| 🔵 coherent | ", length(L_COH), " |")
+P("| ⚪ cited-only (frontier — neutral) | ", length(L_CITED), " |")
+P("| 🟠 uncorroborated-but-feasible (**actionable risk**) | ", length(L_RISK), " |")
+P("| Inventory cards scanned (whole test/) | ", length(cards), " |")
+P(
+    "| Registry files parsed | ",
+    length(regfiles) - length(regfail),
+    " / ",
+    length(regfiles),
+    " |",
+)
+P("| Models | ", length(models), " |")
+P("")
+P(
+    "**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **",
+    rate_struct,
+    "%** · **in-repo-verified rate** (incl. 🔵 coherent): **",
+    rate_inrepo,
+    "%**",
+)
+P("")
+P("## Browse by facet")
+P("")
+P(
+    "[**Faceted search →**](by/index.md) · ",
+    "[by model](by/model.md) · [by quantity](by/quantity.md) · ",
+    "[by BC](by/bc.md) · [by level](by/level.md) · ",
+    "[by mechanism](by/mechanism.md) · [by regime](by/regime.md). ",
+    "Full-text search is the top bar (Documenter built-in).",
+)
+
+P("")
+P("")
+P("## Reference & derivation indices")
+P("")
+P(
+    "Two more substrate-derived indices: ",
+    "**[Bibliography](Bibliography.md)** — every citation with hub backlinks; ",
+    "**[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).",
+)
+P("")
+P("## Model & Quantity matrices (Zettelkasten layer)")
+P("")
+P(
+    "Each model has a per-model index showing its hubs as a ",
+    "`Quantity × BC` matrix; each quantity has the inverse view ",
+    "(`Model × BC`).  Empty cells = gap visualisation (physics not ",
+    "yet implemented).  Use the **[Model list](ModelList.md)** for a ",
+    "searchable top-catalog.",
+)
+P("")
+P("## 🟠 R1 risk-linter — actionable only")
+P("")
+P(
+    "`src` claims the hub, the model is ED-**feasible**, yet zero ",
+    "corroboration cards exist. `cited-only` (frontier) and ED-infeasible ",
+    "hubs are **not** listed here — they are the honest ceiling, not a gap.",
+)
+P("")
+if isempty(L_RISK)
+    P("!!! tip \"No actionable risk\"")
+    P("    Every ED-feasible claimed hub has at least one corroboration card.")
+else
+    P("!!! warning \"", length(L_RISK), " actionable hub(s)\"")
+    for h in sort(L_RISK)
+        P("    - [`", h, "`](hubs/", slugof(h), ".md)")
+    end
+end
+P("")
+P("## Per-model breakdown")
+P("")
+P("| model | claimed | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED |")
+P("|---|---|---|---|---|---|---|---|")
+for m in models
+    hs = filter(h -> modelof(h) == m, claimed)
+    P(
+        "| `",
+        m,
+        "` | ",
+        length(hs),
+        " | ",
+        count(h -> levelcode(h) == AtlasInventory.UNIVERSALITY_CORROBORATED, hs),
+        " | ",
+        count(h -> levelcode(h) == AtlasInventory.CORROBORATED_AT_P, hs),
+        " | ",
+        count(h -> levelcode(h) == AtlasInventory.COHERENT, hs),
+        " | ",
+        count(h -> levelcode(h) == AtlasInventory.CITED_ONLY, hs),
+        " | ",
+        count(h -> levelcode(h) == AtlasInventory.UNCORROBORATED_BUT_FEASIBLE, hs),
+        " | ",
+        (m in AtlasInventory.ED_INFEASIBLE_MODELS ? "infeasible" : "feasible"),
+        " |",
+    )
+end
+P("")
+P("## Hubs (", length(claimed), ") — select to drill down")
+P("")
+for m in models
+    hs = sort(filter(h -> modelof(h) == m, claimed))
+    P("### `", m, "` (", length(hs), ")")
+    P("")
+    for h in hs
+        P("- ", badgeof(h), " [`", h, "`](hubs/", slugof(h), ".md) — ", levname(h))
+    end
+    P("")
+end
+
+out = joinpath(ROOT, "docs", "src", "atlas", "index.md")
+mkpath(dirname(out))
+write(out, String(take!(io)))
+println(
+    "wrote ",
+    out,
+    " + ",
+    length(claimed),
+    " per-hub pages + 7 facet pages  models=",
+    length(models),
+    " hubs=",
+    length(claimed),
+    " cards=",
+    length(cards),
+    " regfail=",
+    length(regfail),
+    "  R1[univ=",
+    length(L_UNIV),
+    " edp=",
+    length(L_EDP),
+    " coh=",
+    length(L_COH),
+    " cited=",
+    length(L_CITED),
+    " risk=",
+    length(L_RISK),
+    "] feas=",
+    nfeas,
+    " rate_struct=",
+    rate_struct,
+    " rate_inrepo=",
+    rate_inrepo,
+)
+
+# ─── Auto-inject "Verified hubs" section into hand-written model pages ──────
+# Closes the model-page <-> atlas-hub coherence gap. For each mapped docs
+# page, writes a fresh `## Verified hubs` table between START / END
+# markers; if markers are absent, the section is appended at end of file.
+
+const MODEL_DOC_MAP = Dict{String,String}(
+    "TFIM" => "docs/src/models/quantum/tfim.md",
+    "Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "S1Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "HeisenbergXYZ" => "docs/src/models/quantum/heisenberg.md",
+    "DMIHeisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "J1J2Heisenberg1D" => "docs/src/models/quantum/heisenberg.md",
+    "MajumdarGhosh" => "docs/src/models/quantum/majumdar_ghosh.md",
+    "Hubbard1D" => "docs/src/models/quantum/hubbard1d.md",
+    "ExtendedHubbard1D" => "docs/src/models/quantum/hubbard1d.md",
+    "KitaevHoneycomb" => "docs/src/models/quantum/kitaev-honeycomb.md",
+    "KitaevHeisenberg" => "docs/src/models/quantum/kitaev-honeycomb.md",
+    "Kitaev1D" => "docs/src/models/quantum/kitaev1d.md",
+    "ToricCode" => "docs/src/models/quantum/toric-code.md",
+    "XXZ1D" => "docs/src/models/quantum/xxz.md",
+    "S1XXZ1D" => "docs/src/models/quantum/xxz.md",
+    "IsingSquare" => "docs/src/models/classical/ising-square.md",
+    "IsingTriangular" => "docs/src/models/classical/ising-triangular.md",
+    "SixVertex" => "docs/src/models/classical/six-vertex.md",
+)
+
+const _PAGE_TO_MODELS = let
+    d = Dict{String,Vector{String}}()
+    for (m, page) in MODEL_DOC_MAP
+        push!(get!(d, page, String[]), m)
+    end
+    for (_, ms) in d
+        sort!(ms)
+    end
+    d
+end
+
+_posix(p::AbstractString) = replace(p, '\\' => '/')
+
+const _ATLAS_HUBS_BEGIN = "<!-- ATLAS:HUBS:START -- auto-generated by docs/atlas/generate.jl. Do not edit by hand; edits between these markers are overwritten on next regen. -->"
+const _ATLAS_HUBS_END = "<!-- ATLAS:HUBS:END -->"
+
+function render_hub_section(page_rel, model_names)
+    page_dir = dirname(joinpath(ROOT, page_rel))
+    io = IOBuffer()
+    P = (xs...) -> println(io, xs...)
+    relevant = sort(filter(h -> modelof(h) in model_names, claimed))
+    atlas_rel = _posix(relpath(joinpath(ROOT, "docs/src/atlas/index.md"), page_dir))
+    P(_ATLAS_HUBS_BEGIN)
+    P()
+    P("## Verified hubs")
+    P()
+    n = length(model_names)
+    subj = n == 1 ? "this model registers" : "these $(n) models register"
+    nh = length(relevant)
+    hub_word = nh == 1 ? "hub" : "hubs"
+    P(
+        "In the [Verified Atlas](",
+        atlas_rel,
+        "), ",
+        subj,
+        " ",
+        nh,
+        " ",
+        hub_word,
+        " (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.",
+    )
+    P()
+    if nh == 0
+        P("_No hubs registered yet._")
+        P()
+    else
+        if n == 1
+            P("| Quantity | BC | Assurance | Cards |")
+            P("|---|---|---|---|")
+            for h in relevant
+                hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
+                rp = _posix(relpath(hub_page, page_dir))
+                P(
+                    "| [`",
+                    quantof(h),
+                    "`](",
+                    rp,
+                    ") | `",
+                    bcof(h),
+                    "` | ",
+                    badgeof(h),
+                    " ",
+                    levname(h),
+                    " | ",
+                    length(cardsof(h)),
+                    " |",
+                )
+            end
+        else
+            P("| Model | Quantity | BC | Assurance | Cards |")
+            P("|---|---|---|---|---|")
+            for h in relevant
+                hub_page = joinpath(ROOT, "docs/src/atlas/hubs/$(slugof(h)).md")
+                rp = _posix(relpath(hub_page, page_dir))
+                P(
+                    "| `",
+                    modelof(h),
+                    "` | [`",
+                    quantof(h),
+                    "`](",
+                    rp,
+                    ") | `",
+                    bcof(h),
+                    "` | ",
+                    badgeof(h),
+                    " ",
+                    levname(h),
+                    " | ",
+                    length(cardsof(h)),
+                    " |",
+                )
+            end
+        end
+        P()
+    end
+    P(_ATLAS_HUBS_END)
+    return String(take!(io))
+end
+
+function inject_hub_section!(page_rel, model_names)
+    p = joinpath(ROOT, page_rel)
+    if !isfile(p)
+        @warn "ATLAS hub-inject skip: page not found" page = page_rel
+        return nothing
+    end
+    content = read(p, String)
+    section = render_hub_section(page_rel, model_names)
+    b = findfirst(_ATLAS_HUBS_BEGIN, content)
+    e = findfirst(_ATLAS_HUBS_END, content)
+    # Explicit marker-pair validation: refuse to write when only one of
+    # START/END is present or when they are misordered. Without this an
+    # orphaned START at the top of the page would be paired with the
+    # appended-section END at the bottom on the NEXT regen, silently
+    # nuking everything between them.
+    if (b === nothing) != (e === nothing)
+        @warn "ATLAS hub-inject skip: page has only one of START/END marker; refusing to mutate to avoid data loss" page =
+            page_rel
+        return nothing
+    end
+    if b !== nothing && e !== nothing && first(e) <= last(b)
+        @warn "ATLAS hub-inject skip: START/END markers in wrong order; refusing to mutate" page =
+            page_rel
+        return nothing
+    end
+    if b !== nothing && e !== nothing
+        new = content[1:(first(b) - 1)] * section * content[(last(e) + 1):end]
+    else
+        new = rstrip(content, '\n') * "\n\n---\n\n" * section * "\n"
+    end
+    # Normalize trailing newlines so re-runs are byte-stable (without this
+    # the append path leaves a trailing "\n\n" that grows by 1 newline on
+    # each subsequent replacement-path regen).
+    new = rstrip(new, '\n') * "\n"
+    if new != content
+        write(p, new)
+        println("  injected hubs into ", page_rel)
+    end
+end
+
+for page in sort(collect(keys(_PAGE_TO_MODELS)))
+    inject_hub_section!(page, _PAGE_TO_MODELS[page])
+end
+
+# ── TIER-1 VIEW GENERATORS (ModelList + per-model + per-quantity) ──────────
 
 # ── TIER-1 EXT EMITTERS (Bibliography + CalcIndex) ──────────────────────────
 function render_bibliography()

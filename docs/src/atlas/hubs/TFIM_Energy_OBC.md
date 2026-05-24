@@ -72,4 +72,5 @@ verify(TFIM(; J = J, h = h), Energy(), OBC(N); route = :ed_finite_size, independ
 - cards: 9 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `TFIM`](../models/TFIM.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

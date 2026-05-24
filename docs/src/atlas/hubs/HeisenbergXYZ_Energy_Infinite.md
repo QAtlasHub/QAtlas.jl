@@ -42,4 +42,5 @@ verify(HeisenbergXYZ(; Jx = 1.0, Jy = 1.0, Jz = -1.0), Energy(:per_site), Infini
 - cards: 3 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `HeisenbergXYZ`](../models/HeisenbergXYZ.md) · [Quantity: `Energy`](../quantities/Energy.md) · [Atlas index](../index.md)

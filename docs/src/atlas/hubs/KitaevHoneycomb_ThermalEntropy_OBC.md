@@ -32,4 +32,5 @@ verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), ThermalEntropy(), OBC(0); r
 - cards: 1 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `KitaevHoneycomb`](../models/KitaevHoneycomb.md) · [Quantity: `ThermalEntropy`](../quantities/ThermalEntropy.md) · [Atlas index](../index.md)

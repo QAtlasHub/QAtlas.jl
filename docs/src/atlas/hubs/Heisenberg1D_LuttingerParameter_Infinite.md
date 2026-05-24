@@ -37,4 +37,5 @@ verify(Heisenberg1D(), LuttingerParameter(), Infinite(); route = :limiting_case,
 - cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `Heisenberg1D`](../models/Heisenberg1D.md) · [Quantity: `LuttingerParameter`](../quantities/LuttingerParameter.md) · [Atlas index](../index.md)

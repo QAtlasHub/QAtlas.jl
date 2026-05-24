@@ -37,4 +37,5 @@ verify(KitaevHoneycomb(; Kx = Kx, Ky = Ky, Kz = Kz), SpecificHeat(), Infinite();
 - cards: 2 · model ED-infeasible (frontier)
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `KitaevHoneycomb`](../models/KitaevHoneycomb.md) · [Quantity: `SpecificHeat`](../quantities/SpecificHeat.md) · [Atlas index](../index.md)

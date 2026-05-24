@@ -32,4 +32,5 @@ verify(GrossNeveu(; N = N, g = 0.0), CentralCharge(), Infinite(); route = :secon
 - cards: 1 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
+
 [← Model: `GrossNeveu`](../models/GrossNeveu.md) · [Quantity: `CentralCharge`](../quantities/CentralCharge.md) · [Atlas index](../index.md)

@@ -9,9 +9,9 @@ All 22 step-by-step derivation notes under `docs/src/calc/`, with the model(s) e
 |---|---|
 | [`ad-thermodynamics-from-z.md`](../calc/ad-thermodynamics-from-z.md) | — |
 | [`bethe-ansatz-heisenberg-e0.md`](../calc/bethe-ansatz-heisenberg-e0.md) | [`Heisenberg1D`](models/Heisenberg1D.md), [`S1Heisenberg1D`](models/S1Heisenberg1D.md) |
-| [`bloch-honeycomb-dispersion.md`](../calc/bloch-honeycomb-dispersion.md) | — |
-| [`bloch-kagome-flat-band.md`](../calc/bloch-kagome-flat-band.md) | — |
-| [`bloch-lieb-flat-band.md`](../calc/bloch-lieb-flat-band.md) | — |
+| [`bloch-honeycomb-dispersion.md`](../calc/bloch-honeycomb-dispersion.md) | [`Honeycomb`](models/Honeycomb.md) |
+| [`bloch-kagome-flat-band.md`](../calc/bloch-kagome-flat-band.md) | [`Kagome`](models/Kagome.md) |
+| [`bloch-lieb-flat-band.md`](../calc/bloch-lieb-flat-band.md) | [`Lieb`](models/Lieb.md) |
 | [`calabrese-cardy-obc-vs-pbc.md`](../calc/calabrese-cardy-obc-vs-pbc.md) | — |
 | [`e8-mass-spectrum-derivation.md`](../calc/e8-mass-spectrum-derivation.md) | — |
 | [`heisenberg-dimer-singlet-triplet.md`](../calc/heisenberg-dimer-singlet-triplet.md) | [`Heisenberg1D`](models/Heisenberg1D.md), [`S1Heisenberg1D`](models/S1Heisenberg1D.md) |

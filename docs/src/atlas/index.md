@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 263 |
-| ED-feasible claimed (risk denominator) | 237 |
+| Hubs `src` claims (registry) | 271 |
+| ED-feasible claimed (risk denominator) | 245 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 152 |
 | 🔵 coherent | 33 |
 | ⚪ cited-only (frontier — neutral) | 18 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 60 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 68 |
 | Inventory cards scanned (whole test/) | 516 |
-| Registry files parsed | 58 / 58 |
-| Models | 58 |
+| Registry files parsed | 62 / 62 |
+| Models | 62 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **64.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **78.1%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **75.5%**
 
 ## Browse by facet
 
@@ -45,9 +45,9 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 |---|---|
 | 1. Models without CONVENTION header | 0 |
 | 2. Quantities without extracted Definition | 0 |
-| 3. Orphan calc notes (matched to no model) | 13 |
+| 3. Orphan calc notes (matched to no model) | 10 |
 | 4. Models registered but with 0 hubs | 0 |
-| 5. INVENTORY card hubs with no `@register` claim | 42 |
+| 5. INVENTORY card hubs with no `@register` claim | 34 |
 
 ## Reference & derivation indices
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "60 actionable hub(s)"
+!!! warning "68 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
@@ -69,6 +69,8 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`Heisenberg1D/MagnetizationXLocal/OBC`](hubs/Heisenberg1D_MagnetizationXLocal_OBC.md)
     - [`Heisenberg1D/MagnetizationYLocal/OBC`](hubs/Heisenberg1D_MagnetizationYLocal_OBC.md)
     - [`Heisenberg1D/MagnetizationZLocal/OBC`](hubs/Heisenberg1D_MagnetizationZLocal_OBC.md)
+    - [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md)
+    - [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md)
     - [`IsingChain1D/Energy/Infinite`](hubs/IsingChain1D_Energy_Infinite.md)
     - [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
     - [`IsingSquare/Energy/PBC`](hubs/IsingSquare_Energy_PBC.md)
@@ -77,6 +79,10 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`IsingSquare/SpecificHeat/PBC`](hubs/IsingSquare_SpecificHeat_PBC.md)
     - [`IsingSquare/ThermalEntropy/PBC`](hubs/IsingSquare_ThermalEntropy_PBC.md)
     - [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
+    - [`Kagome/TightBindingChecksum/Infinite`](hubs/Kagome_TightBindingChecksum_Infinite.md)
+    - [`Kagome/TightBindingMaxEnergy/Infinite`](hubs/Kagome_TightBindingMaxEnergy_Infinite.md)
+    - [`Lieb/TightBindingChecksum/Infinite`](hubs/Lieb_TightBindingChecksum_Infinite.md)
+    - [`Lieb/TightBindingMaxEnergy/Infinite`](hubs/Lieb_TightBindingMaxEnergy_Infinite.md)
     - [`S1Heisenberg1D/EnergyLocal/OBC`](hubs/S1Heisenberg1D_EnergyLocal_OBC.md)
     - [`S1Heisenberg1D/MagnetizationX/OBC`](hubs/S1Heisenberg1D_MagnetizationX_OBC.md)
     - [`S1Heisenberg1D/MagnetizationXLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md)
@@ -108,6 +114,8 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`TightBindingV1D/FreeEnergy/Infinite`](hubs/TightBindingV1D_FreeEnergy_Infinite.md)
     - [`TightBindingV1D/SpecificHeat/Infinite`](hubs/TightBindingV1D_SpecificHeat_Infinite.md)
     - [`TightBindingV1D/ThermalEntropy/Infinite`](hubs/TightBindingV1D_ThermalEntropy_Infinite.md)
+    - [`Triangular/TightBindingChecksum/Infinite`](hubs/Triangular_TightBindingChecksum_Infinite.md)
+    - [`Triangular/TightBindingMaxEnergy/Infinite`](hubs/Triangular_TightBindingMaxEnergy_Infinite.md)
     - [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
     - [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
     - [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md)
@@ -141,15 +149,18 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Heisenberg1D` | 21 | 0 | 13 | 4 | 0 | 4 | feasible |
 | `HeisenbergXYZ` | 2 | 0 | 1 | 1 | 0 | 0 | feasible |
+| `Honeycomb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `Hubbard1D` | 4 | 0 | 2 | 2 | 0 | 0 | feasible |
 | `IsingChain1D` | 8 | 0 | 7 | 0 | 0 | 1 | feasible |
 | `IsingSquare` | 12 | 0 | 4 | 2 | 0 | 6 | feasible |
 | `IsingTriangular` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `J1J2Heisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
+| `Kagome` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `KagomeHeisenbergAFM` | 3 | 0 | 0 | 0 | 3 | 0 | infeasible |
 | `Kitaev1D` | 6 | 0 | 6 | 0 | 0 | 0 | feasible |
 | `KitaevHeisenberg` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `KitaevHoneycomb` | 10 | 0 | 1 | 4 | 5 | 0 | infeasible |
+| `Lieb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `LiouvilleCFT` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `LogarithmicCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `LongRangeIsing1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
@@ -177,6 +188,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ToricCode` | 5 | 0 | 4 | 0 | 1 | 0 | infeasible |
+| `Triangular` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
@@ -186,7 +198,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (263) — select to drill down
+## Hubs (271) — select to drill down
 
 ### `AKLT1D` (8)
 
@@ -282,6 +294,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`HeisenbergXYZ/Energy/Infinite`](hubs/HeisenbergXYZ_Energy_Infinite.md) — corroborated-at-p
 - 🔵 [`HeisenbergXYZ/LuttingerParameter/Infinite`](hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) — coherent
 
+### `Honeycomb` (2)
+
+- 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+
 ### `Hubbard1D` (4)
 
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
@@ -325,6 +342,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 
+### `Kagome` (2)
+
+- 🟠 [`Kagome/TightBindingChecksum/Infinite`](hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+
 ### `KagomeHeisenbergAFM` (3)
 
 - ⚪ [`KagomeHeisenbergAFM/Energy/Infinite`](hubs/KagomeHeisenbergAFM_Energy_Infinite.md) — cited-only
@@ -356,6 +378,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🔵 [`KitaevHoneycomb/SpecificHeat/OBC`](hubs/KitaevHoneycomb_SpecificHeat_OBC.md) — coherent
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/Infinite`](hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — coherent
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/OBC`](hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — coherent
+
+### `Lieb` (2)
+
+- 🟠 [`Lieb/TightBindingChecksum/Infinite`](hubs/Lieb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
 ### `LiouvilleCFT` (2)
 
@@ -561,6 +588,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`ToricCode/GroundStateEnergyDensity/Infinite`](hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/MassGap/Infinite`](hubs/ToricCode_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`ToricCode/TopologicalEntanglementEntropy/Infinite`](hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
+
+### `Triangular` (2)
+
+- 🟠 [`Triangular/TightBindingChecksum/Infinite`](hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
 ### `TricriticalIsing` (3)
 

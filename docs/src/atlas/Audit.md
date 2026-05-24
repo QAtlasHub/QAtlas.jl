@@ -19,12 +19,9 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 
 `docs/src/calc/*.md` whose filename doesn't substring-match any registered model.  Likely true derivation notes that describe a method (e.g. `calabrese-cardy-obc-vs-pbc.md`, `ad-thermodynamics-from-z.md`) rather than a model, but worth scanning to confirm.
 
-**13 orphan calc note(s)**:
+**10 orphan calc note(s)**:
 
 - [`ad-thermodynamics-from-z.md`](../calc/ad-thermodynamics-from-z.md)
-- [`bloch-honeycomb-dispersion.md`](../calc/bloch-honeycomb-dispersion.md)
-- [`bloch-kagome-flat-band.md`](../calc/bloch-kagome-flat-band.md)
-- [`bloch-lieb-flat-band.md`](../calc/bloch-lieb-flat-band.md)
 - [`calabrese-cardy-obc-vs-pbc.md`](../calc/calabrese-cardy-obc-vs-pbc.md)
 - [`e8-mass-spectrum-derivation.md`](../calc/e8-mass-spectrum-derivation.md)
 - [`ising-cft-magnetic-perturbation.md`](../calc/ising-cft-magnetic-perturbation.md)
@@ -70,16 +67,8 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-**42 real orphan card hub(s)**:
+**34 real orphan card hub(s)**:
 
-- `Honeycomb/TightBindingChecksum/Infinite`
-- `Honeycomb/TightBindingMaxEnergy/Infinite`
-- `Kagome/TightBindingChecksum/Infinite`
-- `Kagome/TightBindingMaxEnergy/Infinite`
-- `Lieb/TightBindingChecksum/Infinite`
-- `Lieb/TightBindingMaxEnergy/Infinite`
-- `Triangular/TightBindingChecksum/Infinite`
-- `Triangular/TightBindingMaxEnergy/Infinite`
 - `S1Heisenberg1D/q/OBC`
 - `TFIM/Energy/bc`
 - `TFIM/LoschmidtRateFunction/Infinite`

@@ -51,7 +51,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 
 ## Reference & derivation indices
 
-Two more substrate-derived indices: **[Bibliography](Bibliography.md)** — every citation with hub backlinks; **[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).
+Three more substrate-derived indices: **[Bibliography](Bibliography.md)** — every citation with hub backlinks; **[Methods](Methods.md)** — every `@register` `method=:X` value with hub backlinks; **[Derivation-note index](CalcIndex.md)** — each `docs/src/calc/*.md` mapped to its model(s).
 
 ## Model & Quantity matrices (Zettelkasten layer)
 

@@ -45,7 +45,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 |---|---|
 | 1. Models without CONVENTION header | 0 |
 | 2. Quantities without extracted Definition | 0 |
-| 3. Orphan calc notes (matched to no model) | 10 |
+| 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
 | 5. INVENTORY card hubs with no `@register` claim | 2 |
 

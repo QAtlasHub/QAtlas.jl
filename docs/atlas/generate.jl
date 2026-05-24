@@ -370,12 +370,53 @@ function _model_calc_aliases(model_name::AbstractString)
     return unique(aliases)
 end
 
+# Cross-cutting calc notes whose filename does not substring-match a single
+# model name (general CFT, duality, transfer-matrix, scaling concepts).
+# Each entry binds the note to the list of models on whose page it should
+# appear, and removes it from the orphan-calc bookkeeping.  Hub-level (model
+# + quantity) matching is unchanged (still substring), so cross-listing here
+# does not auto-inject the note into every hub card.
+const _CALC_BIND_OVERRIDES = Dict{String,Vector{String}}(
+    "ad-thermodynamics-from-z.md" => [
+        "IsingChain1D", "IsingSquare", "IsingTriangular", "CurieWeissIsing",
+        "TFIM", "XXZ1D", "Heisenberg1D", "Hubbard1D",
+    ],
+    "calabrese-cardy-obc-vs-pbc.md" => [
+        "TFIM", "XXZ1D", "Heisenberg1D", "Universality", "MinimalModel",
+    ],
+    "e8-mass-spectrum-derivation.md" => ["TFIM", "E8", "Universality"],
+    "ising-cft-magnetic-perturbation.md" => [
+        "TFIM", "IsingSquare", "IsingChain1D", "IsingTriangular",
+        "MinimalModel", "Universality",
+    ],
+    "ising-cft-primary-operators.md" => [
+        "TFIM", "IsingSquare", "IsingChain1D", "IsingTriangular",
+        "MinimalModel", "Universality",
+    ],
+    "ising-scaling-relations.md" => [
+        "TFIM", "IsingSquare", "IsingChain1D", "IsingTriangular",
+        "MinimalModel", "Universality",
+    ],
+    "kramers-wannier-duality.md" => ["TFIM", "IsingChain1D", "IsingSquare"],
+    "transfer-matrix-symmetric-split.md" => [
+        "IsingChain1D", "TFIM", "IsingSquare",
+    ],
+    "xx-quench.md" => ["XXZ1D", "TFIM", "Heisenberg1D"],
+    "yang-magnetization-toeplitz.md" => [
+        "XXZ1D", "Heisenberg1D", "TFIM",
+    ],
+)
+
 function _calc_files_for_model(model_name::AbstractString)
     aliases = _model_calc_aliases(model_name)
     out = String[]
     for f in _CALC_FILES
         flo = lowercase(f)
-        any(a -> length(a) >= 3 && occursin(a, flo), aliases) || continue
+        matched = any(a -> length(a) >= 3 && occursin(a, flo), aliases)
+        if !matched
+            matched = model_name in get(_CALC_BIND_OVERRIDES, f, String[])
+        end
+        matched || continue
         push!(out, f)
     end
     return out

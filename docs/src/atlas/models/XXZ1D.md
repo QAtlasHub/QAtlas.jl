@@ -65,6 +65,10 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 
 Matched by filename substring (no annotation; substrate-derived):
 
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+- [`calabrese-cardy-obc-vs-pbc.md`](../../calc/calabrese-cardy-obc-vs-pbc.md)
+- [`xx-quench.md`](../../calc/xx-quench.md)
 - [`xxz-luttinger-parameters.md`](../../calc/xxz-luttinger-parameters.md)
+- [`yang-magnetization-toeplitz.md`](../../calc/yang-magnetization-toeplitz.md)
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

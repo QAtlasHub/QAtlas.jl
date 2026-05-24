@@ -40,4 +40,13 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/IsingTriangular_CriticalTemperature_Infinite.md) |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) |
 
+## Derivation notes
+
+Matched by filename substring (no annotation; substrate-derived):
+
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+- [`ising-cft-magnetic-perturbation.md`](../../calc/ising-cft-magnetic-perturbation.md)
+- [`ising-cft-primary-operators.md`](../../calc/ising-cft-primary-operators.md)
+- [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
+
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

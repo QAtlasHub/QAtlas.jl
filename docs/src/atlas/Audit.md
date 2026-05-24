@@ -19,19 +19,7 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 
 `docs/src/calc/*.md` whose filename doesn't substring-match any registered model.  Likely true derivation notes that describe a method (e.g. `calabrese-cardy-obc-vs-pbc.md`, `ad-thermodynamics-from-z.md`) rather than a model, but worth scanning to confirm.
 
-**10 orphan calc note(s)**:
-
-- [`ad-thermodynamics-from-z.md`](../calc/ad-thermodynamics-from-z.md)
-- [`calabrese-cardy-obc-vs-pbc.md`](../calc/calabrese-cardy-obc-vs-pbc.md)
-- [`e8-mass-spectrum-derivation.md`](../calc/e8-mass-spectrum-derivation.md)
-- [`ising-cft-magnetic-perturbation.md`](../calc/ising-cft-magnetic-perturbation.md)
-- [`ising-cft-primary-operators.md`](../calc/ising-cft-primary-operators.md)
-- [`ising-scaling-relations.md`](../calc/ising-scaling-relations.md)
-- [`kramers-wannier-duality.md`](../calc/kramers-wannier-duality.md)
-- [`transfer-matrix-symmetric-split.md`](../calc/transfer-matrix-symmetric-split.md)
-- [`xx-quench.md`](../calc/xx-quench.md)
-- [`yang-magnetization-toeplitz.md`](../calc/yang-magnetization-toeplitz.md)
-
+!!! tip "All calc notes match at least one model."
 ## 4. Models registered but with 0 hubs
 
 !!! tip "Every registered model has at least one hub."

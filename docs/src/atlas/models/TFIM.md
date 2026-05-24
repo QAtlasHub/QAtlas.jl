@@ -78,10 +78,20 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 
 Matched by filename substring (no annotation; substrate-derived):
 
+- [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+- [`calabrese-cardy-obc-vs-pbc.md`](../../calc/calabrese-cardy-obc-vs-pbc.md)
+- [`e8-mass-spectrum-derivation.md`](../../calc/e8-mass-spectrum-derivation.md)
+- [`ising-cft-magnetic-perturbation.md`](../../calc/ising-cft-magnetic-perturbation.md)
+- [`ising-cft-primary-operators.md`](../../calc/ising-cft-primary-operators.md)
+- [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
 - [`jw-tfim-bdg.md`](../../calc/jw-tfim-bdg.md)
+- [`kramers-wannier-duality.md`](../../calc/kramers-wannier-duality.md)
 - [`tfim-entanglement-peschel.md`](../../calc/tfim-entanglement-peschel.md)
 - [`tfim-gge.md`](../../calc/tfim-gge.md)
 - [`tfim-loschmidt.md`](../../calc/tfim-loschmidt.md)
 - [`tfim-sigma-x-quench.md`](../../calc/tfim-sigma-x-quench.md)
+- [`transfer-matrix-symmetric-split.md`](../../calc/transfer-matrix-symmetric-split.md)
+- [`xx-quench.md`](../../calc/xx-quench.md)
+- [`yang-magnetization-toeplitz.md`](../../calc/yang-magnetization-toeplitz.md)
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

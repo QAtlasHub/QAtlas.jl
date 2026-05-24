@@ -963,6 +963,14 @@ P(
 
 P("")
 P("")
+P("## Doc-health audit")
+P("")
+P(
+    "Actionable gap surface: see **[Audit](Audit.md)** for models ",
+    "without CONVENTION headers, quantities without extracted ",
+    "definitions, orphan calc notes, and registry/INVENTORY mismatches.",
+)
+P("")
 P("## Reference & derivation indices")
 P("")
 P(
@@ -1344,3 +1352,164 @@ write(joinpath(ROOT, "docs", "src", "atlas", "CalcIndex.md"), render_calc_index(
 println(
     "  + Tier-1 ext: Bibliography.md + CalcIndex.md (", length(_CALC_FILES), " calc notes)"
 )
+
+# ── TIER-1 EXT AUDIT (Audit.md) ─────────────────────────────────────────────
+function render_audit()
+    io = IOBuffer()
+    P(s...) = println(io, string(s...))
+    P("# Audit — doc-health gap surface")
+    P("")
+    P(BANNER)
+    P("")
+    P(
+        "Substrate-derived audit of actionable gaps.  Each section is a ",
+        "concrete to-do list: an item here is either a hand-fixable ",
+        "doc/code issue or a tracked physics task.  This page is the one ",
+        "place to look for \"what's not great yet\".",
+    )
+    P("")
+
+    P("## 1. Models without `CONVENTION` header")
+    P("")
+    P(
+        "The CI lint enforces `# CONVENTION` headers on new model files, but ",
+        "older files predate the lint.  These models show an absence note on ",
+        "their per-model page; backfilling adds a one-block comment.",
+    )
+    P("")
+    no_conv = String[]
+    for m in models
+        isempty(_convention_path(m)) && continue
+        isempty(_parse_convention(m)) || continue
+        push!(no_conv, m)
+    end
+    no_conv_no_file = String[m for m in models if isempty(_convention_path(m))]
+    if isempty(no_conv) && isempty(no_conv_no_file)
+        P("!!! tip \"All models have a CONVENTION header.\"")
+    else
+        if !isempty(no_conv)
+            P(
+                "**Has source file but missing/unparseable `CONVENTION` block** (",
+                length(no_conv),
+                "):",
+            )
+            P("")
+            for m in no_conv
+                P("- [`", m, "`](models/", m, ".md)")
+            end
+            P("")
+        end
+        if !isempty(no_conv_no_file)
+            P(
+                "**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (",
+                length(no_conv_no_file),
+                ") — model may live elsewhere or be defined inline:",
+            )
+            P("")
+            for m in no_conv_no_file
+                P("- [`", m, "`](models/", m, ".md)")
+            end
+            P("")
+        end
+    end
+
+    P("## 2. Quantities without auto-extracted `Definition`")
+    P("")
+    P(
+        "Quantities whose `struct X[{params}] <: AbstractQuantity` docstring ",
+        "wasn't matched by the regex extractor (likely defined as bare ",
+        "`struct X end` without `<: AbstractQuantity`, or with alternate ",
+        "formatting).  Adding the supertype + docstring makes them appear ",
+        "on the per-quantity page automatically.",
+    )
+    P("")
+    no_def = String[]
+    for q in quants_all
+        base = _quantity_base_name(q)
+        haskey(_QUANTITY_DEFS, base) && !isempty(_QUANTITY_DEFS[base]) && continue
+        push!(no_def, q)
+    end
+    if isempty(no_def)
+        P("!!! tip \"All quantities have an extracted Definition.\"")
+    else
+        P("**", length(no_def), " quantities**:")
+        P("")
+        for q in no_def
+            P("- [`", q, "`](quantities/", _quant_slugof(q), ".md)")
+        end
+        P("")
+    end
+
+    P("## 3. Orphan calc notes (matched to no model)")
+    P("")
+    P(
+        "`docs/src/calc/*.md` whose filename doesn't substring-match any ",
+        "registered model.  Likely true derivation notes that describe a ",
+        "method (e.g. `calabrese-cardy-obc-vs-pbc.md`, ",
+        "`ad-thermodynamics-from-z.md`) rather than a model, but worth ",
+        "scanning to confirm.",
+    )
+    P("")
+    orphan_calc = String[]
+    for f in _CALC_FILES
+        matched = false
+        for m in models
+            if f in _calc_files_for_model(m)
+                matched = true
+                break
+            end
+        end
+        matched || push!(orphan_calc, f)
+    end
+    if isempty(orphan_calc)
+        P("!!! tip \"All calc notes match at least one model.\"")
+    else
+        P("**", length(orphan_calc), " orphan calc note(s)**:")
+        P("")
+        for f in orphan_calc
+            P("- [`", f, "`](../calc/", f, ")")
+        end
+        P("")
+    end
+
+    P("## 4. Models registered but with 0 hubs")
+    P("")
+    zero_hubs = String[m for m in models if isempty(filter(h -> modelof(h) == m, claimed))]
+    if isempty(zero_hubs)
+        P("!!! tip \"Every registered model has at least one hub.\"")
+    else
+        P("**", length(zero_hubs), " models**:")
+        for m in zero_hubs
+            P("- `", m, "`")
+        end
+        P("")
+    end
+
+    P("## 5. INVENTORY cards with no matching registry claim")
+    P("")
+    P(
+        "Verify cards exist for `(M, Q, BC)` triples that no `@register` ",
+        "claims.  These hubs are visible only through the cards, not the ",
+        "registry view; the absence of an `@register` claim means the ",
+        "primary `src` claim isn't there.",
+    )
+    P("")
+    claim_set = Set(claimed)
+    orphan_cards = sort(unique(filter(h -> !(h in claim_set), [c.hub for c in cards])))
+    if isempty(orphan_cards)
+        P("!!! tip \"All INVENTORY card hubs have a matching `@register` claim.\"")
+    else
+        P("**", length(orphan_cards), " orphan card hub(s)**:")
+        P("")
+        for h in orphan_cards
+            P("- `", h, "`")
+        end
+        P("")
+    end
+
+    P("[← back to the Atlas index](index.md)")
+    return String(take!(io))
+end
+
+write(joinpath(ROOT, "docs", "src", "atlas", "Audit.md"), render_audit())
+println("  + Tier-1 ext: Audit.md")

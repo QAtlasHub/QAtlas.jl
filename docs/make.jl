@@ -89,6 +89,7 @@ makedocs(;
                 "Model list" => "atlas/ModelList.md",
                 "Bibliography" => "atlas/Bibliography.md",
                 "Derivation-note index" => "atlas/CalcIndex.md",
+                "Audit" => "atlas/Audit.md",
             ],
             "Cross-Checks" => "verification/cross-checks.md",
             "Entanglement" => "verification/entanglement.md",

@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 271 |
-| ED-feasible claimed (risk denominator) | 245 |
+| Hubs `src` claims (registry) | 273 |
+| ED-feasible claimed (risk denominator) | 247 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 168 |
-| 🔵 coherent | 38 |
+| 🟢 corroborated-at-p | 169 |
+| 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 48 |
 | Inventory cards scanned (whole test/) | 2745 |
 | Registry files parsed | 62 / 62 |
 | Models | 62 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **68.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **84.1%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **68.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **84.2%**
 
 ## Browse by facet
 
@@ -44,10 +44,10 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 | Section | Count |
 |---|---|
 | 1. Models without CONVENTION header | 0 |
-| 2. Quantities without extracted Definition | 0 |
+| 2. Quantities without extracted Definition | 1 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
-| 5. INVENTORY card hubs with no `@register` claim | 2 |
+| 5. INVENTORY card hubs with no `@register` claim | 0 |
 
 ## Reference & derivation indices
 
@@ -162,7 +162,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 53 | 0 | 36 | 8 | 0 | 9 | feasible |
+| `TFIM` | 54 | 0 | 36 | 9 | 0 | 9 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
@@ -172,13 +172,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `XXZ1D` | 26 | 0 | 16 | 5 | 0 | 5 | feasible |
+| `XXZ1D` | 27 | 0 | 17 | 5 | 0 | 5 | feasible |
 | `XYh1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `YangLee` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (271) — select to drill down
+## Hubs (273) — select to drill down
 
 ### `AKLT1D` (8)
 
@@ -479,7 +479,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-### `TFIM` (53)
+### `TFIM` (54)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -496,6 +496,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🔵 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md) — coherent
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md) — corroborated-at-p
+- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent
 - 🟢 [`TFIM/MagnetizationX/Infinite`](hubs/TFIM_MagnetizationX_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationX/OBC`](hubs/TFIM_MagnetizationX_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationX/PBC`](hubs/TFIM_MagnetizationX_PBC.md) — corroborated-at-p
@@ -590,7 +591,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 
-### `XXZ1D` (26)
+### `XXZ1D` (27)
 
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -598,6 +599,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🔵 [`XXZ1D/FreeEnergy/Infinite`](hubs/XXZ1D_FreeEnergy_Infinite.md) — coherent
 - 🟢 [`XXZ1D/FreeEnergy/OBC`](hubs/XXZ1D_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](hubs/XXZ1D_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p

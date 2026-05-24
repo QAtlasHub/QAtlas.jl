@@ -543,7 +543,7 @@ docstrings for the exported observable types and TFIM helpers
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 53 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
@@ -562,6 +562,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 53 hubs (qua
 | [`GGEValue`](../../atlas/hubs/TFIM_GGEValue_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_OBC.md) | `OBC` | 🟢 corroborated-at-p | 12 |
+| [`LoschmidtRateFunction`](../../atlas/hubs/TFIM_LoschmidtRateFunction_Infinite.md) | `Infinite` | 🔵 coherent | 4 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 18 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_PBC.md) | `PBC` | 🟢 corroborated-at-p | 18 |

@@ -645,3 +645,15 @@
     references=["Onsager 1944", "Pfeuty 1970"],
     notes="2D-Ising Onsager exponents (β=1/8, γ=7/4, ν=1) via TFIM↔2D-Ising mapping.",
 )
+
+# ── Loschmidt rate function (quench dynamics, infinite chain) ─────────
+@register(
+    TFIM,
+    LoschmidtRateFunction,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_tfim_loschmidt.jl",
+    references=["Heyl Polkovnikov Kehrein PRL 110 135704 (2013)"],
+    notes="λ(t) = -lim_{L→∞} (1/L) log |⟨ψ₀|e^{-iH_f t}|ψ₀⟩|² for TFIM h-quench; closed-form via Bogoliubov mode amplitudes.",
+)

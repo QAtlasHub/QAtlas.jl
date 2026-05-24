@@ -18,10 +18,10 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 |---|---|
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 36 |
-| 🔵 coherent | 8 |
+| 🔵 coherent | 9 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 9 |
-| **total claimed hubs** | **53** |
+| **total claimed hubs** | **54** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `delegation`, `pfaffian`
 
@@ -31,6 +31,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 - Calabrese-Cardy 2004 | Calabrese-Cardy 2009
 - Calabrese-Cardy 2009
 - Gu IJMPB 24 4371 (2010) | Damski PRB 87 165101 (2013)
+- Heyl Polkovnikov Kehrein PRL 110 135704 (2013)
 - Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013) | Heyl Rep. Prog. Phys. 81, 054001 (2018)
 - Lieb-Schultz-Mattis 1961
 - Lieb-Schultz-Mattis 1961 | Sachdev 2011
@@ -53,6 +54,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
 | [`GGEValue`](../quantities/GGEValue.md) | — | — | 🔵 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
 | [`LoschmidtEcho`](../quantities/LoschmidtEcho.md) | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_OBC.md) | — | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_Infinite.md) |
+| [`LoschmidtRateFunction`](../quantities/LoschmidtRateFunction.md) | — | — | 🔵 [hub](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_OBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_PBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_Infinite.md) |
 | [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/TFIM_MagnetizationXLocal_OBC.md) | — | 🔵 [hub](../hubs/TFIM_MagnetizationXLocal_Infinite.md) |
 | [`MagnetizationY`](../quantities/MagnetizationY.md) | 🟢 [hub](../hubs/TFIM_MagnetizationY_OBC.md) | — | — |

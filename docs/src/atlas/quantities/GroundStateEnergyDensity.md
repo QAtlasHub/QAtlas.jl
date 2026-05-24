@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 5
-- **Total hubs (Model, BC pairs)**: 6
+- **Models with this quantity registered**: 6
+- **Total hubs (Model, BC pairs)**: 7
 - **Methods** (derived from `@register`): `analytic`, `bethe_ansatz`
 - **Universality classes** (where applicable): —
 
@@ -22,8 +22,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - Majumdar-Ghosh 1969 — 2 hubs
 - Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
 - Bethe 1931 — 1 hub
+- Cloizeaux Pearson PR 128 2131 (1962) — 1 hub
 - Essler et al. (2005) — 1 hub
-- Hulthén 1938 — 1 hub
 
 ## Model × BC matrix
 
@@ -34,5 +34,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`Hubbard1D`](../models/Hubbard1D.md) | — | 🔵 [hub](../hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) |
 | [`MajumdarGhosh`](../models/MajumdarGhosh.md) | 🟢 [hub](../hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) | 🟢 [hub](../hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) |
 | [`ToricCode`](../models/ToricCode.md) | — | 🟢 [hub](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) |
+| [`XXZ1D`](../models/XXZ1D.md) | — | 🟢 [hub](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

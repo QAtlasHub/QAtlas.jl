@@ -17,11 +17,11 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 16 |
+| 🟢 corroborated-at-p | 17 |
 | 🔵 coherent | 5 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 5 |
-| **total claimed hubs** | **26** |
+| **total claimed hubs** | **27** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk`
 
@@ -34,6 +34,7 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 - Mahan §1.3 | Coleman §2.4
 - Mahan §1.3 | Coleman §2.4 | Takahashi 1999 §4
 - Yang Yang 1966 | Takahashi 1999
+- Yang-Yang J. Math. Phys. 10 1115 (1969) | Cloizeaux Pearson PR 128 2131 (1962)
 
 ## Quantity × BC matrix
 
@@ -43,6 +44,7 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/XXZ1D_Energy_OBC.md) | 🟢 [hub](../hubs/XXZ1D_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/XXZ1D_EnergyLocal_OBC.md) | — |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/XXZ1D_FreeEnergy_OBC.md) | 🔵 [hub](../hubs/XXZ1D_FreeEnergy_Infinite.md) |
+| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) |
 | [`LoschmidtEcho`](../quantities/LoschmidtEcho.md) | — | 🟢 [hub](../hubs/XXZ1D_LoschmidtEcho_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | — | 🟢 [hub](../hubs/XXZ1D_LuttingerParameter_Infinite.md) |
 | [`LuttingerVelocity`](../quantities/LuttingerVelocity.md) | — | 🟢 [hub](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) |

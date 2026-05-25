@@ -5,7 +5,7 @@ dictionary of rigorous results in quantum and statistical physics.
 Every stored value is traced to a specific publication and
 cross-validated against independent calculations.
 
-## What Makes QAtlas Different
+## Key Features
 
 Unlike typical numerical libraries, QAtlas focuses on **authoritative
 reference values** — exact analytical results, high-precision
@@ -89,3 +89,16 @@ Computational techniques used by QAtlas, with physical justification.
 ```@autodocs
 Modules = [QAtlas]
 ```
+
+## Reporting Errors
+
+Every page has a **Report an issue** button fixed at the top-right of the
+screen. Clicking it opens a pre-filled GitHub issue with the current page
+URL — no copy-paste needed.
+
+Individual sections also show a small **report** link when you hover over
+an H2 or H3 heading. Use it to flag a specific derivation or formula that
+looks wrong.
+
+All reports go to [sotashimozono/QAtlas.jl Issues](https://github.com/sotashimozono/QAtlas.jl/issues).
+Corrections and pull requests are equally welcome.

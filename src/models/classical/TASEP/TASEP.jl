@@ -25,6 +25,14 @@
 #   - B. Derrida, J. L. Lebowitz, Phys. Rev. Lett. 80, 209 (1998).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     TASEP(; p::Real = 1.0, ρ::Real = 0.5) <: AbstractQAtlasModel
 
@@ -47,14 +55,6 @@ Quantities registered (Phase 1):
   *J. Phys. A* **26**, 1493 (1993).
 - B. Derrida, J. L. Lebowitz, *Phys. Rev. Lett.* **80**, 209 (1998).
 """
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 struct TASEP <: AbstractQAtlasModel
     p::Float64        # hopping rate
     ρ::Float64        # particle density

@@ -1,18 +1,18 @@
 // QAtlas.jl documentation enhancements
 //
-// Two additions on every rendered page:
+// Three additions on every rendered page:
 //
-//   1. A banner at the top stating that the documentation is an
-//      AI-assisted draft and that error reports / PRs are welcome,
-//      with a direct link to open a new issue prefilled with the
+//   1. A floating "Report an issue" button fixed at the top-right of
+//      the viewport, always visible, linking to a prefilled GitHub issue.
+//
+//   2. A banner at the top of the article stating that the documentation
+//      is an AI-assisted draft.
+//
+//   3. A small "report" link appended to every h2 / h3 heading that
+//      opens a GitHub issue prefilled with the section title and
 //      page URL.
 //
-//   2. A small "report" link appended to every h2 / h3 heading that
-//      opens a GitHub issue prefilled with the section title and
-//      page URL, so readers who spot something wrong in a single
-//      section can report it with one click.
-//
-// Both hooks target the GitHub repository `sotashimozono/QAtlas.jl`.
+// All hooks target the GitHub repository `sotashimozono/QAtlas.jl`.
 
 (function () {
     const REPO = "sotashimozono/QAtlas.jl";
@@ -33,7 +33,21 @@
 
         const pageUrl = window.location.href;
 
-        // ── 1. Top-of-page banner ────────────────────────────────────────
+        // ── 1. Fixed top-right "Report an issue" button ─────────────────
+        const fab = document.createElement("a");
+        fab.href = issueUrl(
+            "[docs] error report",
+            "Page: " + pageUrl + "\n\nIssue:\n"
+        );
+        fab.target = "_blank";
+        fab.rel = "noopener";
+        fab.className = "report-fab";
+        fab.title = "Report an issue with this page";
+        fab.setAttribute("aria-label", "Report an issue with this page");
+        fab.textContent = "Report an issue";
+        document.body.appendChild(fab);
+
+        // ── 2. Top-of-page banner ────────────────────────────────────────
         const banner = document.createElement("div");
         banner.className = "ai-draft-banner";
         banner.innerHTML =
@@ -50,14 +64,10 @@
             'Feedback and corrections are very welcome.';
         article.insertBefore(banner, article.firstChild);
 
-        // ── 2. Per-section report links ──────────────────────────────────
+        // ── 3. Per-section report links ──────────────────────────────────
         article.querySelectorAll("h2, h3").forEach(function (h) {
-            // Skip the banner itself and Documenter-generated headings
-            // that shouldn't have a report link.
             if (h.closest(".ai-draft-banner")) return;
 
-            // Heading text may contain math, anchors, etc.  Use the
-            // textContent as the issue title, but keep it short.
             const sectionTitle = h.textContent.trim().replace(/\s+/g, " ");
             if (!sectionTitle) return;
 

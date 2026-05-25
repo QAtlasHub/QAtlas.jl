@@ -41,6 +41,14 @@
 #     SciPost Phys. 11 (2021) 072.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     ConformalBootstrap() <: AbstractQAtlasModel
 
@@ -76,16 +84,7 @@ Available kwargs for `ConformalWeights`:
 - M. Reehorst, S. Rychkov, D. Simmons-Duffin, B. Sirois, N. Su,
   B. van Rees, *SciPost Phys.* **11** (2021) 072.
 """
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 struct ConformalBootstrap <: AbstractQAtlasModel end
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # ConformalWeights — Δ_σ, Δ_ε bootstrap reference values
 # (KPSD 2014 methodology; precise (10) values from KPSD-Vichi 2016

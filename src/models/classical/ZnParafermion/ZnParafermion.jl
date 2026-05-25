@@ -31,6 +31,14 @@
 #     Sov. Phys. JETP 62, 215 (1985).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     ZnParafermion(; n::Integer=3) <: AbstractQAtlasModel
 
@@ -57,14 +65,6 @@ QAtlas.fetch(ZnParafermion(; n=5), CentralCharge(), Infinite())  # 8//7
 
 - V. A. Fateev, A. B. Zamolodchikov, *Sov. Phys. JETP* **62**, 215 (1985).
 """
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 struct ZnParafermion <: AbstractQAtlasModel
     n::Int
     function ZnParafermion(n::Integer)

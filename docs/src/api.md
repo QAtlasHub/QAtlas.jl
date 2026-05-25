@@ -138,5 +138,4 @@ page.
 
 ```@autodocs
 Modules = [QAtlas]
-Private = false
 ```

@@ -13,6 +13,7 @@ Downloads.download("https://github.com/sotashimozono.png", favicon_path)
 Downloads.download("https://github.com/sotashimozono.png", logo_path)
 
 makedocs(;
+    checkdocs=:exports,
     doctest=true,
     sitename="QAtlas.jl",
     repo=Remotes.GitHub("sotashimozono", "QAtlas.jl"),
@@ -20,12 +21,8 @@ makedocs(;
         canonical="https://codes.sota-shimozono.com/QAtlas.jl/stable/",
         prettyurls=get(ENV, "CI", "false") == "true",
         edit_link="main",
-        # `index.md` includes a full `@autodocs` of every QAtlas binding; the
-        # generated HTML grew past the default 200 KiB threshold once the
-        # observable surface expanded in v0.17/0.18 (Tier 1 + Tier 2 brought
-        # ~80 new fetch methods).  Bump the size threshold instead of
-        # splitting the autodocs page (the user explicitly preserved the
-        # `Modules = [QAtlas]` API layout).
+        # `api.md` contains the full `@autodocs` index. The threshold is bumped
+        # because the API page grows large once the observable surface expands.
         size_threshold=1_000_000,
         size_threshold_warn=600_000,
         mathengine=MathJax3(
@@ -132,6 +129,7 @@ makedocs(;
             "Ising CFT + σ → E8" => "calc/ising-cft-magnetic-perturbation.md",
             "E8 Mass Derivation" => "calc/e8-mass-spectrum-derivation.md",
         ],
+        "API Reference" => "api.md",
     ],
 )
 

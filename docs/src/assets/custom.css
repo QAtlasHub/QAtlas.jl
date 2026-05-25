@@ -71,3 +71,44 @@ html.theme--documenter-dark .report-section-link:focus {
     border-color: #ffb300;
     background: #3a2e14;
 }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Fixed top-right "Report an issue" button                                */
+/* ──────────────────────────────────────────────────────────────────────── */
+.report-fab {
+    position: fixed;
+    top: 0.75em;
+    right: 1em;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3em 0.75em;
+    font-size: 0.78em;
+    font-weight: 600;
+    line-height: 1.4;
+    border-radius: 4px;
+    border: 1px solid #ffb300;
+    background: #fff8e1;
+    color: #b26500;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: background 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.report-fab:hover,
+.report-fab:focus {
+    background: #ffb300;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+    text-decoration: none;
+}
+html.theme--documenter-dark .report-fab {
+    background: #3a2e14;
+    border-color: #ffb300;
+    color: #ffd86b;
+}
+html.theme--documenter-dark .report-fab:hover,
+html.theme--documenter-dark .report-fab:focus {
+    background: #ffb300;
+    color: #1a1a1a;
+}

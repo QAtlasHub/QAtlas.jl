@@ -465,13 +465,24 @@ function _expand_loop(ex::Expr, env::Dict{Symbol,Any})
     iter_subst isa Expr && iter_subst.head in (:tuple, :vect) || return nothing
 
     if var isa Symbol
-        return [_subst_syms(body, merge(env, Dict{Symbol,Any}(var => e))) for e in iter_subst.args]
+        return [
+            _subst_syms(body, merge(env, Dict{Symbol,Any}(var => e))) for
+            e in iter_subst.args
+        ]
     end
     if var isa Expr && var.head === :tuple
         vars = var.args
         all(v -> v isa Symbol, vars) || return nothing
-        all(e -> e isa Expr && e.head in (:tuple, :vect) && length(e.args) == length(vars), iter_subst.args) || return nothing
-        return [_subst_syms(body, merge(env, Dict{Symbol,Any}(vars[i] => e.args[i] for i in eachindex(vars)))) for e in iter_subst.args]
+        all(
+            e -> e isa Expr && e.head in (:tuple, :vect) && length(e.args) == length(vars),
+            iter_subst.args,
+        ) || return nothing
+        return [
+            _subst_syms(
+                body,
+                merge(env, Dict{Symbol,Any}(vars[i] => e.args[i] for i in eachindex(vars))),
+            ) for e in iter_subst.args
+        ]
     end
     return nothing
 end
@@ -513,7 +524,10 @@ function _scan_expr!(out, ex, file, testset, env::Dict{Symbol,Any}=Dict{Symbol,A
         length(ex.args) >= 2 && _scan_expr!(out, ex.args[2], file, testset, env)
         return nothing
     end
-    if ex.head === :(=) && length(ex.args) == 2 && ex.args[1] isa Expr && ex.args[1].head === :call
+    if ex.head === :(=) &&
+        length(ex.args) == 2 &&
+        ex.args[1] isa Expr &&
+        ex.args[1].head === :call
         _scan_expr!(out, ex.args[2], file, testset, env)
         return nothing
     end

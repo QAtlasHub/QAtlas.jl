@@ -1,89 +1,133 @@
-# API Reference
+# API Primer
 
-Complete Julia docstring index for QAtlas.jl, organized by category.
-For narrative documentation see the [Models](models/index.md),
-[Universality Classes](universalities/index.md), and [Methods](methods/index.md) pages.
-
----
-
-## Core API
-
-```@docs
-QAtlas.fetch
-```
-
-### Boundary Conditions
-
-```@docs
-BoundaryCondition
-OBC
-PBC
-Infinite
-```
-
-### Types
-
-```@docs
-AbstractModel
-AbstractQuantity
-```
+This page covers the **universal interface** of QAtlas.jl — the parts that
+apply regardless of which model or quantity you are working with.
+For model-specific documentation (Hamiltonian, parameters, stored quantities,
+verification cards) see the individual model pages under
+[Models](models/index.md).
 
 ---
 
-## Quantities
+## `fetch` — the primary entry point
 
-```@autodocs
-Modules = [QAtlas]
-Filter = t -> t isa Type && t <: QAtlas.AbstractQuantity
+```julia
+QAtlas.fetch(model, quantity, bc; kwargs...) -> Number | NamedTuple
 ```
 
----
+| Argument | Type | Description |
+|----------|------|-------------|
+| `model` | `<: AbstractModel` | The physical model (e.g. `TFIM(J=1.0, h=0.5)`) |
+| `quantity` | `<: AbstractQuantity` | What to compute (e.g. `Energy(:per_site)`) |
+| `bc` | `<: BoundaryCondition` | System size / topology |
+| `kwargs` | varies | Model-specific parameters (e.g. `β`, `N`) |
 
-## Models — Classical
+The return type depends on the quantity:
+- Scalar quantities (`Energy`, `MassGap`, …) → `Float64` or `Rational`
+- Multi-component quantities (`CriticalExponents`, `AnyonStatistics`, …) → `NamedTuple`
 
-```@autodocs
-Modules = [QAtlas]
-Filter = t -> begin
-    !(t isa Type) && return false
-    t <: QAtlas.AbstractModel || return false
-    m = parentmodule(t)
-    occursin("classical", string(m)) || occursin("Classical", string(m))
-end
+```julia
+using QAtlas
+
+# Scalar
+E = QAtlas.fetch(TFIM(J=1.0, h=0.5), Energy(:per_site), OBC(16))
+
+# NamedTuple
+e = QAtlas.fetch(Universality(:Ising), CriticalExponents(); d=2)
+e.β    # 1//8
+e.ν    # 1//1
 ```
 
 ---
 
-## Models — Quantum
+## Boundary Conditions
 
-```@autodocs
-Modules = [QAtlas]
-Filter = t -> begin
-    !(t isa Type) && return false
-    t <: QAtlas.AbstractModel || return false
-    m = parentmodule(t)
-    occursin("quantum", string(m)) || occursin("Quantum", string(m))
-end
+```julia
+OBC(N)        # open chain / slab of N sites
+PBC(N)        # periodic ring of N sites
+Infinite()    # thermodynamic limit (k-space / Bethe ansatz)
+```
+
+All three share the supertype `BoundaryCondition`.  Not all models support
+all boundary conditions — see the Quantity × BC matrix on each model page.
+
+---
+
+## Quantity types
+
+Quantities are parameterised types whose type parameter encodes the
+*variant* of the quantity:
+
+```julia
+Energy(:total)       # total ground-state energy E₀
+Energy(:per_site)    # E₀ / N
+
+FreeEnergy()         # F = -T ln Z (or -β⁻¹ ln Z)
+ThermalEntropy()     # S = -∂F/∂T
+SpecificHeat()       # C = -T ∂²F/∂T²
+
+MassGap()            # many-body gap Δ = E₁ - E₀
+CorrelationLength()  # ξ from exponential decay
+CentralCharge()      # CFT central charge c
+
+VonNeumannEntropy()  # S_vN = -tr(ρ ln ρ)
+RenyiEntropy(α)      # S_α = (1-α)⁻¹ ln tr(ρ^α)
+
+CriticalExponents()  # returns NamedTuple (β, ν, γ, η, δ, α, c)
+```
+
+All quantity types are subtypes of `AbstractQuantity`.
+
+---
+
+## Model constructors
+
+Every model is a Julia struct with keyword-argument fields for its
+physical parameters.  Default values are always provided.
+
+```julia
+# Quantum spin models
+TFIM(; J=1.0, h=1.0)
+Heisenberg1D(; J=1.0)
+XXZ1D(; J=1.0, Δ=1.0)
+Hubbard1D(; t=1.0, U=4.0)
+
+# Classical lattice models
+IsingSquare(; J=1.0)
+IsingTriangular(; J=1.0)
+
+# Universality classes
+Universality(:Ising)        # equivalent to Universality{:Ising}()
+MeanField()
+MinimalModel(3, 4)          # M(p, p') minimal model
+WZWSU2(k)                   # SU(2)_k WZW model
 ```
 
 ---
 
-## Universality Classes
+## Checking what is implemented
 
-```@docs
-Universality
-CriticalExponents
-GrowthExponents
-MeanField
-MinimalModel
-WZWSU2
+```julia
+QAtlas.implementation_status(TFIM())
+# returns a Markdown table of all registered (quantity, bc) pairs
+
+QAtlas.implementation_status_markdown(TFIM())
+# same, as a String
 ```
 
 ---
 
-## Full Index
+## Operator conventions
 
-All exported symbols not covered above.
+QAtlas standardises on the **spin operator** convention (`S^α` with
+eigenvalues in `{-S, …, +S}`) for all spin-observable return values.
+For fermionic and topological models, see the [Conventions](conventions.md)
+page.
 
-```@autodocs
-Modules = [QAtlas]
-```
+---
+
+## See also
+
+- [Models](models/index.md) — per-model Hamiltonian, parameters, quantity matrix
+- [Universality Classes](universalities/index.md) — `Universality{C}` API
+- [Conventions](conventions.md) — operator normalisation rules
+- [Verification](verification/index.md) — how correctness is ensured

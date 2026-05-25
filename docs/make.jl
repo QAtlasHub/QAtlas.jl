@@ -42,6 +42,7 @@ makedocs(;
         "Conventions" => "conventions.md",
         "Models" => [
             "models/index.md",
+            "Reference" => "models/reference.md",
             "Classical" => [
                 "models/classical/index.md",
                 "Ising Square" => "models/classical/ising-square.md",

@@ -1,126 +1,119 @@
-# Verification Philosophy
-
-## Overview
+# Verification
 
 QAtlas is a reference library: every stored value must be
-**demonstrably correct**. Unlike typical numerical libraries where
-testing checks that code runs without error, QAtlas's tests
-constitute **independent physical verifications** that the stored
-analytical results are consistent with each other and with
-first-principles calculations.
-
-The verification strategy has three tiers, each with a distinct
-purpose and level of independence.
+**demonstrably correct**. The test suite is organised into five layers,
+each with a distinct purpose and level of independence.
 
 ---
 
-## Tier 1: Standalone Tests
+## Layer 1 — Unit tests (`test/core/`)
 
-**Location**: `test/standalone/`
+Verifies that the core machinery — registry, alias routing, type
+hierarchy, energy granularity, Pfaffian implementation — behaves
+correctly independently of any physical model.
 
-**Principle**: Verify properties of QAtlas source values using
-*only* QAtlas itself -- no Lattice2D, no ED, no external
-computation. These tests check internal consistency and mathematical
-identities.
+| File | What is checked |
+|------|-----------------|
+| `test_registry.jl` | `@register` / lookup roundtrip; `implementation_status` |
+| `test_alias.jl` | `OBC → PBC` and `PBC → Infinite` alias chains |
+| `test_type.jl` | `Quantity` dispatch, `BoundaryCondition` hierarchy |
+| `test_energy_granularity.jl` | `Energy{:total}` ↔ `Energy{:per_site}` conversion |
+| `test_pfaffian.jl` | Pfaffian correctness for small matrices |
+| `test_verify_harness.jl` | `verify()` card execution mechanics |
 
-**Examples**:
+---
 
-| Test file | What is checked |
-|-----------|-----------------|
-| `test_bethe_ansatz.jl` | $e_0 = J(1/4 - \ln 2)$ numerical value, $J$ scaling, consistency with finite-$N$ spectra |
-| `test_ising_onsager_yang.jl` | $T_c = 2J/\ln(1+\sqrt{2})$, $\sinh(2\beta_c J) = 1$, $M(T_c) = 0$, $M(\beta \to \infty) = 1$ |
-| `test_ising_square_pfaffian.jl` | $Z(\beta=0) = 2^N$, $L_x \leftrightarrow L_y$ symmetry |
-| `test_universality_exponents.jl` | Scaling relations: $\alpha + 2\beta + \gamma = 2$, $\gamma = \nu(2 - \eta)$, hyperscaling |
+## Layer 2 — Identity and symmetry tests (`test/identities/`)
 
-**What this tier cannot do**: It cannot detect systematic errors
+Checks model-specific mathematical identities using **only QAtlas
+itself** — no external computation. Catches formula errors that
+survive unit testing because the physics constraint is violated.
+
+| File | What is checked |
+|------|-----------------|
+| `test_identities_TFIM.jl` | Scaling relations at criticality; $E_0$ BC consistency |
+| `test_identities_TFIM_pbc.jl` | PBC parity-sector consistency |
+| `test_identities_Heisenberg1D.jl` | SU(2) symmetry; $e_0$ bounds; dimer exact values |
+| `test_identities_XXZ1D.jl` | Anisotropy limits $\Delta \in \{-1,0,1\}$; Luttinger $K, u$ |
+| `test_identities_IsingSquare.jl` | Yang formula limits; $T_c$ self-consistency |
+| `test_identities_KitaevHoneycomb.jl` | Flux-free sector ground state; gauge structure |
+| `test_identities_S1Heisenberg1D.jl` | Haldane gap; AKLT point |
+| `test_cross_bc_scaling.jl` | OBC → PBC → Infinite consistency across system size |
+| `test_TFIM_limits_cross_model.jl` | $J=0$ / $h=0$ limits agree with IsingChain1D and free fermions |
+| `test_TFIM_dynamic_symmetries.jl` | Time-reversal and parity in dynamic correlators |
+| `test_property_invariants.jl` | Monotonicity, positivity, and bound constraints |
+
+**What this layer cannot do**: It cannot detect systematic errors
 where the source formula itself is wrong, because there is no
 independent computation to compare against.
 
 ---
 
-## Tier 2: Verification Tests
+## Layer 3 — Physics cross-verification (`test/verification/`)
 
-**Location**: `test/verification/`
+Cross-checks `src/` analytical formulas against **independent ED** via
+`Lattice2D`-built real-space Hamiltonians, or against independent
+integration (Yang-Yang). The two paths must agree to numerical precision.
 
-**Principle**: Cross-check QAtlas source values against an
-**independent computation** from a different code path. Typically
-this means comparing hardcoded analytical formulas
-(`src/models/`) against numerical diagonalization of real-space
-Hamiltonians built from `Lattice2D`.
+| Sub-directory | Coverage |
+|---------------|----------|
+| `tfim_ising/` | BdG gap closure; FDT sanity and numerics; AD thermodynamics vs transfer-matrix |
+| `heisenberg_xxz/` | Luttinger parameters (Bethe vs ED); Yang-Yang integral |
+| `universality/` | Universality ↔ model cross-checks (8 connections); thermodynamic identities |
 
-The two paths must agree to numerical precision:
-
-- **Path A** (src): Analytical formula, Bloch dispersion, or
-  Bethe ansatz result -- implemented once, tested many times.
-- **Path B** (test): Real-space Hamiltonian construction via
-  `Lattice2D.bonds()` + exact diagonalization -- completely
-  generic, no model-specific knowledge.
-
-**Examples**:
-
-| Test file | Path A (src) | Path B (test) |
-|-----------|-------------|---------------|
-| `test_heisenberg_dimer.jl` | Hardcoded $\{-3J/4, J/4, J/4, J/4\}$ | `build_spinhalf_heisenberg` + `eigvals` |
-| `test_graphene_tight_binding.jl` | Closed-form Bloch $E_\pm = \pm t\sqrt{\ldots}$ | `build_tight_binding` + `eigvals` |
-| `test_bloch_generic.jl` | Hardcoded Bloch formulas | Generic `bloch_tb_spectrum` builder |
-| `test_tfim_gap_closure.jl` | BdG quasiparticle spectrum | Full $2^N$ ED via `build_tfim` |
-
-**What this tier cannot do**: Both paths could share a systematic
-error in the underlying physics (e.g., a wrong sign convention).
-Tier 3 addresses this.
+See [Cross-Verification Table](cross-checks.md) for all 8 universality ↔ model
+connections.
 
 ---
 
-## Tier 3: Cross-Verification (Universality ↔ Models)
+## Layer 4 — Atlas harness (`test/harness/atlas/`)
 
-**Location**: `test/verification/test_universality_cross_check.jl`
+The `verify()` card system tracks every analytical claim made in
+`src/*_registry.jl`. The harness checks:
 
-**Principle**: Connect results from two **independently sourced
-theoretical lines** -- typically a universality-class prediction
-(sourced from CFT / Coulomb gas) and a model-specific exact result
-(sourced from Onsager / Yang / Bethe). If both agree, the QAtlas
-data is validated from two independent origins in the physics
-literature.
+- **Inventory drift** (`test_inventory_drift.jl`) — `test/INVENTORY.jsonl`
+  stays in sync with the AST of all `verify()` calls; any new or
+  deleted card is caught immediately.
+- **Registry coverage** (`test_atlas_logic.jl`) — every `@register`
+  entry has at least one `verify()` card.
+- **Documentation structure** (`test_doc_structure.jl`) — atlas hub
+  pages exist for every registered quantity.
 
-This is the tier that makes QAtlas's data **physically verified**,
-not just computationally consistent.
+See [Identity Harness](identity-harness.md) for the full `verify()` protocol.
 
-See [Cross-Verification: Universality ↔ Models](cross-checks.md)
-for the complete table of all cross-checks.
+---
+
+## Layer 5 — Convention lint (`test/lint/`)
+
+Enforces the operator-convention header required in every top-level
+model file (see [Conventions](../conventions.md)).
+
+| File | Rule enforced |
+|------|---------------|
+| `test_convention_declarations.jl` | Every `src/models/quantum/<Model>/<Model>.jl` must contain a `# CONVENTION` block |
 
 ---
 
 ## Design Principles
 
-1. **Every `src/` value must have at least one Tier 2 test**.
-   No analytical formula enters the source code without being
-   verified against an independent numerical calculation.
-
-2. **Cross-verification closes the loop**. Tier 3 tests connect
-   different theoretical frameworks (e.g., Bethe ansatz vs ED,
-   Yang's formula vs CFT exponents), ensuring that QAtlas's data
-   is not just internally consistent but physically correct.
-
-3. **Multiple computation paths are a feature, not redundancy**.
-   For tight-binding models, three independent paths exist:
-   hardcoded Bloch formula, generic Bloch builder, and real-space
-   ED. For the TFIM, two paths exist: BdG quasiparticle spectrum
-   and full $2^N$ ED. Agreement across all paths provides strong
-   evidence of correctness.
-
-4. **Test sizes are kept small enough for exact comparison**.
-   All verification tests use system sizes where ED is feasible
-   ($N \leq 16$ for spin models, $L_x, L_y \leq 6$ for
-   tight-binding), enabling comparison to machine precision
-   rather than statistical tolerance.
+1. **Every `src/` value has at least one Layer 3 card.** No analytical
+   formula enters the source code without being verified against an
+   independent numerical calculation.
+2. **Layer 4 closes the loop.** No new `@register` entry can escape
+   without a `verify()` card; no card can silently disappear.
+3. **Multiple computation paths are a feature, not redundancy.** For the
+   TFIM, BdG, full $2^N$ ED, and AD thermodynamics all exist as
+   independent paths; agreement across all three provides strong evidence
+   of correctness.
+4. **Test sizes are kept small enough for exact comparison.** All
+   verification tests use $N \leq 16$ for spin models, enabling
+   comparison to machine precision.
 
 ---
 
 ## Further Reading
 
-- [Cross-Verification Table](cross-checks.md) -- all 8 universality
-  ↔ model cross-checks
-- [Entanglement Verification](entanglement.md) -- central charge
-  extraction from $S(l)$
-- [Disordered Systems](disordered.md) -- IRFP and random singlet
-  verification
+- [Cross-Verification Table](cross-checks.md) — all 8 universality ↔ model cross-checks
+- [Entanglement Verification](entanglement.md) — central charge from $S(l)$
+- [Disordered Systems](disordered.md) — IRFP and random singlet
+- [Identity Harness](identity-harness.md) — the `verify()` card protocol

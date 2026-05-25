@@ -10,6 +10,7 @@ on:
 permissions:
   contents: write
   statuses: write
+  pull-requests: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,3 +27,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: julia --project=docs/ docs/make.jl
+      - name: Find existing preview comment
+        if: github.event_name == 'pull_request'
+        id: find-comment
+        uses: peter-evans/find-comment@v3
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: 'Docs preview'
+      - name: Post preview URL to PR
+        if: github.event_name == 'pull_request' && success()
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            📚 **Docs preview**: https://codes.sota-shimozono.com/QAtlas.jl/previews/PR${{ github.event.pull_request.number }}/
+
+            *(updates on each push to this PR)*
+          edit-mode: replace

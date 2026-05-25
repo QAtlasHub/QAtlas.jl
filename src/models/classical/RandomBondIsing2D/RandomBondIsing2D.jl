@@ -63,6 +63,7 @@ Nishimori-line and multicritical Nishimori-point universality
 - H. Nishimori, *Prog. Theor. Phys.* **66**, 1169 (1981).
 - A. Honecker, M. Picco, P. Pujol, *Phys. Rev. Lett.* **87**, 047201 (2001).
 """
+struct RandomBondIsing2D <: AbstractQAtlasModel
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -70,8 +71,6 @@ Nishimori-line and multicritical Nishimori-point universality
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct RandomBondIsing2D <: AbstractQAtlasModel
     J::Float64
     p::Float64
     function RandomBondIsing2D(J::Real, p::Real)

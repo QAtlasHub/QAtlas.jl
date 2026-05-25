@@ -54,6 +54,7 @@ tracked as a follow-up phase (#257 phase 2) and not exposed here.
 - L. Pauling, *J. Am. Chem. Soc.* **57**, 2680 (1935).
 - S. T. Bramwell, M. J. P. Gingras, *Science* **294**, 1495 (2001).
 """
+struct SpinIce <: AbstractQAtlasModel end
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -61,8 +62,6 @@ tracked as a follow-up phase (#257 phase 2) and not exposed here.
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct SpinIce <: AbstractQAtlasModel end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Pauling residual entropy

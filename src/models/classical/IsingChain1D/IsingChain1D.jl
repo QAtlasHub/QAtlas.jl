@@ -61,6 +61,7 @@ Quantities registered:
 
 - E. Ising, *Z. Phys.* **31**, 253 (1925).
 """
+struct IsingChain1D <: AbstractQAtlasModel
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -68,8 +69,6 @@ Quantities registered:
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct IsingChain1D <: AbstractQAtlasModel
     J::Float64
     h::Float64
 end

@@ -47,6 +47,7 @@ Quantities registered (Phase 1):
   *J. Phys. A* **26**, 1493 (1993).
 - B. Derrida, J. L. Lebowitz, *Phys. Rev. Lett.* **80**, 209 (1998).
 """
+struct TASEP <: AbstractQAtlasModel
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -54,8 +55,6 @@ Quantities registered (Phase 1):
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct TASEP <: AbstractQAtlasModel
     p::Float64        # hopping rate
     ρ::Float64        # particle density
     function TASEP(p::Real, ρ::Real)

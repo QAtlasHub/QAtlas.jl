@@ -54,6 +54,7 @@ selection requires a coupling parameter; these branches throw a
 - S. Elitzur, R. B. Pearson, J. Shigemitsu,
   *Phys. Rev. D* **19**, 3698 (1979).
 """
+struct ZnClock <: AbstractQAtlasModel
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -61,8 +62,6 @@ selection requires a coupling parameter; these branches throw a
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct ZnClock <: AbstractQAtlasModel
     n::Int
     function ZnClock(n::Integer)
         n ≥ 2 || throw(DomainError(n, "ZnClock requires n ≥ 2; got n = $n."))

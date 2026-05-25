@@ -54,6 +54,7 @@ Quantities registered:
 - V. Beffara, *Annals Probab.* **36**, 1421 (2008).
 - M. Bauer, D. Bernard, *Phys. Rep.* **432**, 115 (2006).
 """
+struct SLEkappa <: AbstractQAtlasModel
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -61,8 +62,6 @@ Quantities registered:
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct SLEkappa <: AbstractQAtlasModel
     κ::Float64
 end
 SLEkappa(; κ::Real=6.0) = SLEkappa(Float64(κ))

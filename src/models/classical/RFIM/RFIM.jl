@@ -56,6 +56,7 @@ Quantities registered (Phase 1):
 - Y. Imry, S. Ma, *Phys. Rev. Lett.* **35**, 1399 (1975).
 - J. Imbrie, *Comm. Math. Phys.* **98**, 145 (1985).
 """
+struct RFIM <: AbstractQAtlasModel
 # CONVENTION
 #   Hamiltonian: see file-header description above
 #   Observable:  per src/core/quantities.jl (matches the dispatch tag)
@@ -63,8 +64,6 @@ Quantities registered (Phase 1):
 #   STATUS:      backfilled by PR (audit gate); per-field domain content
 #                left to a follow-up - see issue tracker for the model-specific
 #                Hamiltonian sign / observable normalisation.
-
-struct RFIM <: AbstractQAtlasModel
     J::Float64
     Δ::Float64
 end

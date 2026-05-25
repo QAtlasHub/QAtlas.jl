@@ -35,6 +35,14 @@
 #     J. Stat. Phys. 35, 193 (1984).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     TricriticalIsing() <: AbstractQAtlasModel
 
@@ -58,14 +66,6 @@ Quantities registered (Phase 1):
 - D. Friedan, Z. Qiu, S. Shenker, *Phys. Rev. Lett.* **52**, 1575 (1984).
 """
 struct TricriticalIsing <: AbstractQAtlasModel end
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # Central charge via MinimalModel(5, 4) delegation
 # ═══════════════════════════════════════════════════════════════════════════════

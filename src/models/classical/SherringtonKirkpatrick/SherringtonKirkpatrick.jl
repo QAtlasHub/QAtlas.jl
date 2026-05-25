@@ -42,6 +42,14 @@
 #   - M. Talagrand, Annals Math. 163, 221 (2006).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     SherringtonKirkpatrick(; J::Real = 1.0) <: AbstractQAtlasModel
 
@@ -74,13 +82,6 @@ distribution `P(q)` remain tracked for later phases.
 - M. Talagrand, *Annals Math.* **163**, 221 (2006).
 """
 struct SherringtonKirkpatrick <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     J::Float64
 end
 SherringtonKirkpatrick(; J::Real=1.0) = SherringtonKirkpatrick(Float64(J))

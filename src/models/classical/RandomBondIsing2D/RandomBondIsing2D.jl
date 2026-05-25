@@ -37,6 +37,14 @@
 #   - L. Onsager, Phys. Rev. 65, 117 (1944).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     RandomBondIsing2D(; J::Real = 1.0, p::Real = 1.0) <: AbstractQAtlasModel
 
@@ -64,13 +72,6 @@ Nishimori-line and multicritical Nishimori-point universality
 - A. Honecker, M. Picco, P. Pujol, *Phys. Rev. Lett.* **87**, 047201 (2001).
 """
 struct RandomBondIsing2D <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     J::Float64
     p::Float64
     function RandomBondIsing2D(J::Real, p::Real)

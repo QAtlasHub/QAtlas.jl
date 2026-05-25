@@ -45,6 +45,14 @@
 # Model struct
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     SixVertex(; a::Real = 1.0, b::Real = 1.0, c::Real = 1.0) <: AbstractQAtlasModel
 
@@ -82,13 +90,6 @@ requested.
 See also: [`IsingSquare`](@ref) for the closest classical analog.
 """
 struct SixVertex <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     a::Float64
     b::Float64
     c::Float64

@@ -35,6 +35,14 @@
 # Reference: E. Ising, Z. Phys. 31, 253 (1925).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     IsingChain1D(; J::Real = 1.0, h::Real = 0.0) <: AbstractQAtlasModel
 
@@ -62,13 +70,6 @@ Quantities registered:
 - E. Ising, *Z. Phys.* **31**, 253 (1925).
 """
 struct IsingChain1D <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     J::Float64
     h::Float64
 end

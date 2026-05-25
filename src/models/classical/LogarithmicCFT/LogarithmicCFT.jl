@@ -5,6 +5,14 @@
 # representation structure and logarithmic operator content are deferred to
 # Phase 2 (see issue #235).
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     LogarithmicCFT <: AbstractQAtlasModel
 
@@ -24,14 +32,6 @@ indecomposable representations, and specific β-coupling parametrisations
 are deferred to Phase 2.
 """
 struct LogarithmicCFT <: AbstractQAtlasModel end
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 """
     fetch(::LogarithmicCFT, ::CentralCharge, ::Infinite; kwargs...) -> Rational{Int}
 

@@ -31,6 +31,14 @@
 #     Nucl. Phys. B 477, 577 (1996).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     LiouvilleCFT(; b::Real = 1.0) <: AbstractQAtlasModel
 
@@ -54,13 +62,6 @@ Quantities registered:
   *Nucl. Phys. B* **477**, 577 (1996).
 """
 struct LiouvilleCFT <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     b::Float64
 end
 LiouvilleCFT(; b::Real=1.0) = LiouvilleCFT(Float64(b))

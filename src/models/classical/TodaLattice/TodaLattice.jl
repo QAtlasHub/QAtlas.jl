@@ -32,6 +32,14 @@
 #   - M. C. Gutzwiller, Annals Phys. 133, 304 (1981) — quantum Toda.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     TodaLattice(; a::Real = 1.0, b::Real = 1.0) <: AbstractQAtlasModel
 
@@ -58,13 +66,6 @@ in QAtlas core.
 - M. C. Gutzwiller, *Annals Phys.* **133**, 304 (1981).
 """
 struct TodaLattice <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     a::Float64
     b::Float64
 end

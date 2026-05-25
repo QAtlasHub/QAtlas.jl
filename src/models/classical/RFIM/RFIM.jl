@@ -36,6 +36,14 @@
 #   - G. Tarjus, M. Tissier, Phys. Rev. Lett. 93, 267008 (2004).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     RFIM(; J::Real = 1.0, Δ::Real = 1.0) <: AbstractQAtlasModel
 
@@ -57,13 +65,6 @@ Quantities registered (Phase 1):
 - J. Imbrie, *Comm. Math. Phys.* **98**, 145 (1985).
 """
 struct RFIM <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     J::Float64
     Δ::Float64
 end

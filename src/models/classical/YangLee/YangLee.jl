@@ -32,6 +32,14 @@
 #   - M. E. Fisher, Phys. Rev. Lett. 40, 1610 (1978).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     YangLee() <: AbstractQAtlasModel
 
@@ -57,14 +65,6 @@ exponent and is what makes the theory non-unitary (c = -22/5 < 0).
 - J. L. Cardy, *Phys. Rev. Lett.* **54**, 1354 (1985).
 """
 struct YangLee <: AbstractQAtlasModel end
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # Central charge via MinimalModel(5, 2) delegation
 # ═══════════════════════════════════════════════════════════════════════════════

@@ -31,6 +31,14 @@
 #   - C. Castelnovo, R. Moessner, S. L. Sondhi, Nature 451, 42 (2008).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     SpinIce() <: AbstractQAtlasModel
 
@@ -55,14 +63,6 @@ tracked as a follow-up phase (#257 phase 2) and not exposed here.
 - S. T. Bramwell, M. J. P. Gingras, *Science* **294**, 1495 (2001).
 """
 struct SpinIce <: AbstractQAtlasModel end
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # Pauling residual entropy
 # ═══════════════════════════════════════════════════════════════════════════════

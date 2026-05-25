@@ -26,6 +26,14 @@
 #   - D. A. Huse, Phys. Rev. B 30, 3908 (1984).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     TricriticalPotts3() <: AbstractQAtlasModel
 
@@ -49,14 +57,6 @@ Quantities registered:
 - D. A. Huse, *Phys. Rev. B* **30**, 3908 (1984).
 """
 struct TricriticalPotts3 <: AbstractQAtlasModel end
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # Central charge via MinimalModel(6, 7) delegation
 # ═══════════════════════════════════════════════════════════════════════════════

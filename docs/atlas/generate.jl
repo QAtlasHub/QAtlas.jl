@@ -378,33 +378,46 @@ end
 # does not auto-inject the note into every hub card.
 const _CALC_BIND_OVERRIDES = Dict{String,Vector{String}}(
     "ad-thermodynamics-from-z.md" => [
-        "IsingChain1D", "IsingSquare", "IsingTriangular", "CurieWeissIsing",
-        "TFIM", "XXZ1D", "Heisenberg1D", "Hubbard1D",
+        "IsingChain1D",
+        "IsingSquare",
+        "IsingTriangular",
+        "CurieWeissIsing",
+        "TFIM",
+        "XXZ1D",
+        "Heisenberg1D",
+        "Hubbard1D",
     ],
-    "calabrese-cardy-obc-vs-pbc.md" => [
-        "TFIM", "XXZ1D", "Heisenberg1D", "Universality", "MinimalModel",
-    ],
+    "calabrese-cardy-obc-vs-pbc.md" =>
+        ["TFIM", "XXZ1D", "Heisenberg1D", "Universality", "MinimalModel"],
     "e8-mass-spectrum-derivation.md" => ["TFIM", "E8", "Universality"],
     "ising-cft-magnetic-perturbation.md" => [
-        "TFIM", "IsingSquare", "IsingChain1D", "IsingTriangular",
-        "MinimalModel", "Universality",
+        "TFIM",
+        "IsingSquare",
+        "IsingChain1D",
+        "IsingTriangular",
+        "MinimalModel",
+        "Universality",
     ],
     "ising-cft-primary-operators.md" => [
-        "TFIM", "IsingSquare", "IsingChain1D", "IsingTriangular",
-        "MinimalModel", "Universality",
+        "TFIM",
+        "IsingSquare",
+        "IsingChain1D",
+        "IsingTriangular",
+        "MinimalModel",
+        "Universality",
     ],
     "ising-scaling-relations.md" => [
-        "TFIM", "IsingSquare", "IsingChain1D", "IsingTriangular",
-        "MinimalModel", "Universality",
+        "TFIM",
+        "IsingSquare",
+        "IsingChain1D",
+        "IsingTriangular",
+        "MinimalModel",
+        "Universality",
     ],
     "kramers-wannier-duality.md" => ["TFIM", "IsingChain1D", "IsingSquare"],
-    "transfer-matrix-symmetric-split.md" => [
-        "IsingChain1D", "TFIM", "IsingSquare",
-    ],
+    "transfer-matrix-symmetric-split.md" => ["IsingChain1D", "TFIM", "IsingSquare"],
     "xx-quench.md" => ["XXZ1D", "TFIM", "Heisenberg1D"],
-    "yang-magnetization-toeplitz.md" => [
-        "XXZ1D", "Heisenberg1D", "TFIM",
-    ],
+    "yang-magnetization-toeplitz.md" => ["XXZ1D", "Heisenberg1D", "TFIM"],
 )
 
 function _calc_files_for_model(model_name::AbstractString)
@@ -1728,8 +1741,13 @@ println("  + Tier-1 ext: Methods.md")
 const _MODEL_CLASS = let
     d = Dict{String,String}()
     for rf in regfiles
-        cls = occursin("/classical/", rf) ? "classical" :
-              occursin("/quantum/", rf)   ? "quantum"   : "other"
+        cls = if occursin("/classical/", rf)
+            "classical"
+        elseif occursin("/quantum/", rf)
+            "quantum"
+        else
+            "other"
+        end
         for c in AtlasRegistry.scan_registry(rf)
             get!(d, c.model, cls)
         end
@@ -1743,30 +1761,46 @@ function render_models_index()
     P(s...) = println(io, string(s...))
 
     classical_ms = sort(filter(m -> get(_MODEL_CLASS, m, "") == "classical", models))
-    quantum_ms   = sort(filter(m -> get(_MODEL_CLASS, m, "") == "quantum",   models))
-    other_ms     = sort(filter(
-        m -> !in(get(_MODEL_CLASS, m, ""), ("classical", "quantum")), models
-    ))
+    quantum_ms = sort(filter(m -> get(_MODEL_CLASS, m, "") == "quantum", models))
+    other_ms = sort(
+        filter(m -> !in(get(_MODEL_CLASS, m, ""), ("classical", "quantum")), models)
+    )
 
     function model_row(m)
-        hs   = sort(filter(h -> modelof(h) == m, claimed))
-        nq   = length(unique(quantof(h) for h in hs))
-        nu   = count(h -> levelcode(h) == AtlasInventory.UNIVERSALITY_CORROBORATED, hs)
+        hs = sort(filter(h -> modelof(h) == m, claimed))
+        nq = length(unique(quantof(h) for h in hs))
+        nu = count(h -> levelcode(h) == AtlasInventory.UNIVERSALITY_CORROBORATED, hs)
         nedp = count(h -> levelcode(h) == AtlasInventory.CORROBORATED_AT_P, hs)
-        nc   = count(h -> levelcode(h) == AtlasInventory.COHERENT, hs)
-        nci  = count(h -> levelcode(h) == AtlasInventory.CITED_ONLY, hs)
-        nr   = count(h -> levelcode(h) == AtlasInventory.UNCORROBORATED_BUT_FEASIBLE, hs)
+        nc = count(h -> levelcode(h) == AtlasInventory.COHERENT, hs)
+        nci = count(h -> levelcode(h) == AtlasInventory.CITED_ONLY, hs)
+        nr = count(h -> levelcode(h) == AtlasInventory.UNCORROBORATED_BUT_FEASIBLE, hs)
         univ = _universality_of(m)
-        us   = isempty(univ) ? "—" : string("`", univ, "`")
+        us = isempty(univ) ? "—" : string("`", univ, "`")
         P(
-            "| [`", m, "`](../atlas/models/", m, ".md) | ",
-            nq, " | 🟣 ", nu, " 🟢 ", nedp, " 🔵 ", nc, " ⚪ ", nci, " 🟠 ", nr,
-            " | ", us, " |",
+            "| [`",
+            m,
+            "`](../atlas/models/",
+            m,
+            ".md) | ",
+            nq,
+            " | 🟣 ",
+            nu,
+            " 🟢 ",
+            nedp,
+            " 🔵 ",
+            nc,
+            " ⚪ ",
+            nci,
+            " 🟠 ",
+            nr,
+            " | ",
+            us,
+            " |",
         )
     end
 
     function section(label, ms)
-        isempty(ms) && return
+        isempty(ms) && return nothing
         P("## ", label, " (", length(ms), ")")
         P("")
         P("| Model | Quantities | Assurance | Universality |")
@@ -1780,7 +1814,9 @@ function render_models_index()
     P("<!-- ATLAS:INDEX:START — generated by docs/atlas/generate.jl — do not edit -->")
     P("")
     P(
-        "All **", length(models), " models** with registered `@register` entries, ",
+        "All **",
+        length(models),
+        " models** with registered `@register` entries, ",
         "derived from `src/*_registry.jl`.  ",
         "Run `julia docs/atlas/generate.jl` to refresh.",
     )
@@ -1802,27 +1838,24 @@ function render_models_index()
     return String(take!(io))
 end
 
-write(
-    joinpath(ROOT, "docs", "src", "models", "index.md"),
-    render_models_index(),
-)
+write(joinpath(ROOT, "docs", "src", "models", "index.md"), render_models_index())
 println("  + docs/src/models/index.md  (", length(models), " models)")
 
 # ── docs/src/universalities/index.md ─────────────────────────────────────────
 const _UNIV_META = [
-    ("Ising",             "ising.md",              "Z₂ symmetry, d=2,3,≥4"),
-    ("Percolation",       "percolation.md",        "Geometric transition, d=2,3,≥6"),
-    ("Potts",             "potts.md",              "S₃/S₄ symmetry, d=2 exact"),
-    ("KPZ",               "kpz.md",               "Non-equilibrium growth, 1+1D"),
-    ("XY",                "on-models.md",          "O(2) symmetry, d=2,3,≥4"),
-    ("Heisenberg",        "on-models.md",          "O(3) symmetry, d=3,≥4"),
-    ("MeanField",         "mean-field.md",         "Baseline, d ≥ d_c"),
-    ("E8",                "e8.md",                 "Exact mass ratios, integrable"),
+    ("Ising", "ising.md", "Z₂ symmetry, d=2,3,≥4"),
+    ("Percolation", "percolation.md", "Geometric transition, d=2,3,≥6"),
+    ("Potts", "potts.md", "S₃/S₄ symmetry, d=2 exact"),
+    ("KPZ", "kpz.md", "Non-equilibrium growth, 1+1D"),
+    ("XY", "on-models.md", "O(2) symmetry, d=2,3,≥4"),
+    ("Heisenberg", "on-models.md", "O(3) symmetry, d=3,≥4"),
+    ("MeanField", "mean-field.md", "Baseline, d ≥ d_c"),
+    ("E8", "e8.md", "Exact mass ratios, integrable"),
     ("CardyEntanglement", "cardy_entanglement.md", "Entanglement scaling at CFT QCPs"),
-    ("MinimalModel",      "cft_minimal_models.md", "M(p,p') rational CFT, c < 1"),
-    ("WZW",               "cft_minimal_models.md", "SU(2)_k WZW, Sugawara c"),
-    ("RMT",               "rmt.md",               "Wigner-Dyson level statistics, β=1,2,4"),
-    ("Poisson",           "rmt.md",               "Integrable/MBL baseline"),
+    ("MinimalModel", "cft_minimal_models.md", "M(p,p') rational CFT, c < 1"),
+    ("WZW", "cft_minimal_models.md", "SU(2)_k WZW, Sugawara c"),
+    ("RMT", "rmt.md", "Wigner-Dyson level statistics, β=1,2,4"),
+    ("Poisson", "rmt.md", "Integrable/MBL baseline"),
 ]
 
 function render_universalities_index()

@@ -33,6 +33,14 @@
 #   - L. McGough, M. Mezei, H. Verlinde, JHEP 04, 010 (2018).
 # ─────────────────────────────────────────────────────────────────────────────
 
+# CONVENTION
+#   Hamiltonian: see file-header description above
+#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
+#   Reference:   docs/src/conventions.md (project-wide convention policy)
+#   STATUS:      backfilled by PR (audit gate); per-field domain content
+#                left to a follow-up - see issue tracker for the model-specific
+#                Hamiltonian sign / observable normalisation.
+
 """
     TTbar(; c::Real = 1.0, λ::Real = 0.0) <: AbstractQAtlasModel
 
@@ -62,13 +70,6 @@ Quantities registered (Phase 1):
 - L. McGough, M. Mezei, H. Verlinde, *JHEP* **04**, 010 (2018).
 """
 struct TTbar <: AbstractQAtlasModel
-# CONVENTION
-#   Hamiltonian: see file-header description above
-#   Observable:  per src/core/quantities.jl (matches the dispatch tag)
-#   Reference:   docs/src/conventions.md (project-wide convention policy)
-#   STATUS:      backfilled by PR (audit gate); per-field domain content
-#                left to a follow-up - see issue tracker for the model-specific
-#                Hamiltonian sign / observable normalisation.
     c::Float64       # UV CFT central charge (preserved under TT̄)
     λ::Float64       # TT̄ coupling, dimension (length)²
     function TTbar(c::Real, λ::Real)

@@ -135,4 +135,4 @@ makedocs(;
     ],
 )
 
-deploydocs(; repo="github.com/sotashimozono/QAtlas.jl.git", devbranch="main")
+deploydocs(; repo="github.com/sotashimozono/QAtlas.jl.git", devbranch="main", push_preview=true)

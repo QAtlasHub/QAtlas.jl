@@ -13,6 +13,7 @@ Downloads.download("https://github.com/sotashimozono.png", favicon_path)
 Downloads.download("https://github.com/sotashimozono.png", logo_path)
 
 makedocs(;
+    checkdocs=:exports,
     doctest=true,
     sitename="QAtlas.jl",
     repo=Remotes.GitHub("sotashimozono", "QAtlas.jl"),

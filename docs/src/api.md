@@ -131,3 +131,12 @@ page.
 - [Universality Classes](universalities/index.md) — `Universality{C}` API
 - [Conventions](conventions.md) — operator normalisation rules
 - [Verification](verification/index.md) — how correctness is ensured
+
+---
+
+## Full API Index
+
+```@autodocs
+Modules = [QAtlas]
+Private = false
+```

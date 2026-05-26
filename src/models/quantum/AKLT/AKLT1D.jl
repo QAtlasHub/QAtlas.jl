@@ -57,7 +57,7 @@
 #     the specific heat of spin-s Heisenberg models with arbitrary
 #     exchange patterns", Phys. Rev. B 89, 014415 (2014) — HTSE
 #     methodology baseline (bilinear Heisenberg only; biquadratic
-#     extension to AKLT is not in the literature, see issue tracker).
+#     extension to AKLT is not in the literature; see QAtlas issue #506).
 #     doi:10.1103/PhysRevB.89.014415
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -352,14 +352,14 @@ end
 #
 # Finite β > 0 (β ≠ ∞) throws DomainError everywhere.  Future work to
 # extend this with a biquadratic-aware HTSE truncation (or a Padé-
-# accelerated form) is tracked in the QAtlas issue tracker.
+# accelerated form) is tracked in QAtlas issue #506.
 
 # ── OBC: β = ∞ limits ─────────────────────────────────────────────────────────
 
 const _AKLT_NO_FINITE_BETA_MSG = "AKLT1D finite-β thermodynamics has no known " *
     "analytic / TM / integral-equation reduction (the model is not Bethe-ansatz " *
     "integrable).  Only β = Inf is supported here.  See AKLT1D module docstring " *
-    "and the QAtlas issue tracker for the planned HTSE extension."
+    "and QAtlas issue #506 for the planned HTSE extension."
 
 """
     fetch(model::AKLT1D, ::FreeEnergy, bc::OBC; beta::Real) -> Float64

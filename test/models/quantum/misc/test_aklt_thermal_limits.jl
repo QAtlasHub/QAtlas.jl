@@ -40,8 +40,10 @@ using LinearAlgebra: Hermitian, eigvals
 end
 
 @testset "AKLT1D β=∞ — OBC ThermalEntropy = log(4)/N (edge degeneracy)" begin
-    for N in (2, 3, 4, 5, 6, 8)
-        s = QAtlas.fetch(AKLT1D(), ThermalEntropy(), OBC(N); beta=Inf)
+    # log(4)/N is J-independent; sweep J anyway to guard against a latent
+    # bug where the impl accidentally pulled in J.
+    for J in (0.5, 1.0, 2.5), N in (2, 3, 4, 5, 6, 8)
+        s = QAtlas.fetch(AKLT1D(; J=J), ThermalEntropy(), OBC(N); beta=Inf)
         @test s ≈ log(4) / N atol = 1e-14
     end
 
@@ -93,20 +95,41 @@ end
 end
 
 @testset "AKLT1D — finite β throws DomainError (no analytic reduction)" begin
+    # The β guard is `isinf(beta) && beta > 0 || throw(DomainError(...))`.
+    # Sweep finite positive, finite negative, zero, and the two non-positive
+    # infinities / NaN so a future refactor that simplifies the predicate
+    # (e.g., to `beta == Inf`) regresses visibly.
     m = AKLT1D()
     for bc in (OBC(4), PBC(4), Infinite())
         for q in (FreeEnergy(), ThermalEntropy(), SpecificHeat())
-            for beta in (1.0, 0.5, 2.0, 10.0, 0.0)
+            for beta in (1.0, 0.5, 2.0, 10.0, 0.0, -1.0, -Inf, NaN)
                 @test_throws DomainError QAtlas.fetch(m, q, bc; beta=beta)
             end
         end
     end
-    # SusceptibilityZZ: only PBC and Infinite return 0 at β=Inf; finite β throws.
+    # SusceptibilityZZ: only PBC and Infinite return 0 at β=Inf; everything
+    # else throws (including OBC at β=Inf — covered by a separate testset).
     for bc in (PBC(4), Infinite())
-        for beta in (1.0, 0.5, 2.0, 0.0)
+        for beta in (1.0, 0.5, 2.0, 0.0, -1.0, -Inf, NaN)
             @test_throws DomainError QAtlas.fetch(m, SusceptibilityZZ(), bc; beta=beta)
         end
     end
+end
+
+@testset "AKLT1D — N < 2 chain throws ArgumentError" begin
+    # Each OBC/PBC fetch is guarded by `bc.N ≥ 2 || throw(ArgumentError(...))`
+    # so an N=1 chain produces a different error class than the finite-β
+    # path. Verifying this keeps a future guard-removal from sliding a
+    # subtle `N=1` silent-divide-by-zero into the registered formula.
+    m = AKLT1D()
+    for bc in (OBC(1), PBC(1))
+        for q in (FreeEnergy(), ThermalEntropy(), SpecificHeat())
+            @test_throws ArgumentError QAtlas.fetch(m, q, bc; beta=Inf)
+        end
+    end
+    # SusceptibilityZZ × PBC also guarded; OBC × χ throws DomainError
+    # unconditionally so the N=1 ArgumentError is unreachable there.
+    @test_throws ArgumentError QAtlas.fetch(m, SusceptibilityZZ(), PBC(1); beta=Inf)
 end
 
 @testset "AKLT1D — OBC SusceptibilityZZ always throws (Curie divergence)" begin
@@ -114,7 +137,7 @@ end
     # singlet at 0 + three triplet states at 1, 0, 1, averaged), so
     # χ_OBC(β → ∞) ≈ β / (2N) diverges.  fetch refuses to return ∞.
     m = AKLT1D()
-    for beta in (Inf, 100.0, 10.0, 1.0, 0.5, 0.0), N in (2, 3, 4)
+    for beta in (Inf, 100.0, 10.0, 1.0, 0.5, 0.0, -1.0, -Inf, NaN), N in (2, 3, 4)
         @test_throws DomainError QAtlas.fetch(m, SusceptibilityZZ(), OBC(N); beta=beta)
     end
 end
@@ -169,4 +192,88 @@ end
             refs=["AKLT 1988: 4-fold edge-mode GS degeneracy, s(∞) = log 4 / N"],
         )
     end
+
+    # ── Verify the remaining registered β=∞ rows that return 0.0 ─────────
+    # (SpecificHeat × {OBC, PBC, Infinite}, ThermalEntropy × {PBC, Infinite},
+    # SusceptibilityZZ × {PBC, Infinite}).  These round-trip the registry
+    # dispatch / reliability tag / refs even though the value itself is
+    # trivial (Var(H) = 0 on the GS manifold; Haldane gap → χ → 0).
+    for N in (3, 4)
+        verify(
+            AKLT1D(),
+            SpecificHeat(),
+            OBC(N);
+            route=:second_closed_form,
+            fetch_kw=(; beta=Inf),
+            independent=0.0,
+            agree_within=1e-14,
+            refs=["AKLT 1988: Var(H) = 0 on the 4-fold OBC GS manifold"],
+        )
+        verify(
+            AKLT1D(),
+            SpecificHeat(),
+            PBC(N);
+            route=:second_closed_form,
+            fetch_kw=(; beta=Inf),
+            independent=0.0,
+            agree_within=1e-14,
+            refs=["AKLT 1988: pure VBS GS, Var(H) = 0"],
+        )
+        verify(
+            AKLT1D(),
+            ThermalEntropy(),
+            PBC(N);
+            route=:second_closed_form,
+            fetch_kw=(; beta=Inf),
+            independent=0.0,
+            agree_within=1e-14,
+            refs=["AKLT 1988: PBC VBS unique, s(∞) = 0"],
+        )
+        verify(
+            AKLT1D(),
+            SusceptibilityZZ(),
+            PBC(N);
+            route=:second_closed_form,
+            fetch_kw=(; beta=Inf),
+            independent=0.0,
+            agree_within=1e-14,
+            refs=[
+                "AKLT 1988: PBC unique GS, ⟨S^z⟩ = 0",
+                "García-Saez-Murg-Verstraete 2013: Haldane gap suppression",
+            ],
+        )
+    end
+    verify(
+        AKLT1D(),
+        SpecificHeat(),
+        Infinite();
+        route=:second_closed_form,
+        fetch_kw=(; beta=Inf),
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["AKLT 1988: bulk pure GS, Var(H) = 0"],
+    )
+    verify(
+        AKLT1D(),
+        ThermalEntropy(),
+        Infinite();
+        route=:second_closed_form,
+        fetch_kw=(; beta=Inf),
+        independent=0.0,
+        agree_within=1e-14,
+        refs=["AKLT 1988: bulk unique GS, s(∞) = 0"],
+    )
+    verify(
+        AKLT1D(),
+        SusceptibilityZZ(),
+        Infinite();
+        route=:second_closed_form,
+        fetch_kw=(; beta=Inf),
+        independent=0.0,
+        agree_within=1e-14,
+        refs=[
+            "AKLT 1988: bulk unique GS",
+            "García-Saez-Murg-Verstraete 2013: Haldane gap → χ(∞) = 0",
+        ],
+    )
 end

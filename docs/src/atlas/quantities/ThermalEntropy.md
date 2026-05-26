@@ -13,22 +13,23 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 10
-- **Total hubs (Model, BC pairs)**: 15
+- **Models with this quantity registered**: 11
+- **Total hubs (Model, BC pairs)**: 18
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `dense_ed`, `free_fermion_quadgk`, `matter_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 3 hubs
 - Kitaev 2006 — 2 hubs
 - Lieb 1994 — 2 hubs
 - Mahan 2000 — 2 hubs
 - Coleman §2.4 — 1 hub
-- Ising 1925 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
+| [`AKLT1D`](../models/AKLT1D.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_Infinite.md) |
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | — | — |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) |

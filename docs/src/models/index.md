@@ -48,7 +48,7 @@ In this page, all model list defined in QAtlas.jl is shown. **62 models** have `
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
-| [`AKLT1D`](../atlas/models/AKLT1D.md) | 8 | 🟣 0 🟢 6 🔵 0 ⚪ 1 🟠 1 | — |
+| [`AKLT1D`](../atlas/models/AKLT1D.md) | 12 | 🟣 0 🟢 17 🔵 0 ⚪ 1 🟠 1 | — |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ChernSimons3D`](../atlas/models/ChernSimons3D.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `WZW` |
 | [`Cluster1D`](../atlas/models/Cluster1D.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |

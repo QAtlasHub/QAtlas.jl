@@ -26,16 +26,39 @@
 # Numerical-exact (no closed form):
 #   * Haldane gap (Infinite):  Δ ≈ 0.350 J  (García-Saez–Murg–Verstraete 2013, DMRG)
 #
-# References:
+# References (DOIs given for direct lookup via doiget / DOI resolver):
 #   I. Affleck, T. Kennedy, E. H. Lieb, H. Tasaki,
 #     "Valence bond ground states in isotropic quantum antiferromagnets",
-#     Commun. Math. Phys. 115, 477 (1988).
+#     Commun. Math. Phys. 115, 477 (1988).  doi:10.1007/BF01218021
 #   T. Kennedy and H. Tasaki,
 #     "Hidden Z₂ × Z₂ symmetry breaking in Haldane-gap antiferromagnets",
 #     Phys. Rev. B 45, 304 (1992) — string order parameter.
+#     doi:10.1103/PhysRevB.45.304
+#   D. P. Arovas, A. Auerbach, F. D. M. Haldane,
+#     "Extended Heisenberg models of antiferromagnetism: Analogies to the
+#     fractional quantum Hall effect", Phys. Rev. Lett. 60, 531 (1988) —
+#     static structure factor of the AKLT chain.
+#     doi:10.1103/PhysRevLett.60.531
 #   A. García-Saez, V. Murg, and F. Verstraete,
 #     "Spectral gap of the Affleck-Kennedy-Lieb-Tasaki Hamiltonian",
 #     Phys. Rev. B 88, 245118 (2013); arXiv:1308.3631 — DMRG gap.
+#     doi:10.1103/PhysRevB.88.245118
+#
+# Finite-temperature context (no analytic reduction known at the AKLT
+# point; the model is not Bethe-ansatz integrable, unlike the nearby
+# Takhtajan-Babujian θ = π/4 and Lai-Sutherland θ = -π/4 BLBQ points):
+#   S. Lou, T. Xiang, Z. Su,
+#     "Thermodynamics of the Bilinear-Biquadratic Spin-One Heisenberg
+#     Chain", Phys. Rev. Lett. 85, 2380 (2000) — TMRG numerical reference
+#     for BLBQ thermodynamic curves (includes the AKLT point).
+#     doi:10.1103/PhysRevLett.85.2380
+#   A. Lohmann, H.-J. Schmidt, J. Richter,
+#     "Tenth-order high-temperature expansion for the susceptibility and
+#     the specific heat of spin-s Heisenberg models with arbitrary
+#     exchange patterns", Phys. Rev. B 89, 014415 (2014) — HTSE
+#     methodology baseline (bilinear Heisenberg only; biquadratic
+#     extension to AKLT is not in the literature; see QAtlas issue #506).
+#     doi:10.1103/PhysRevB.89.014415
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION
@@ -176,8 +199,8 @@ Haldane gap of the AKLT chain in the thermodynamic limit,
     Δ ≈ 0.350 J
 
 (numerical-exact DMRG value; A. García-Saez, V. Murg, and F. Verstraete,
-Phys. Rev. B **88**, 245118 (2013), arXiv:1308.3631).  No closed form is known; `reliability=:medium`
-in the registry.
+Phys. Rev. B **88**, 245118 (2013), arXiv:1308.3631, doi:10.1103/PhysRevB.88.245118).
+No closed form is known; `reliability=:medium` in the registry.
 """
 function fetch(model::AKLT1D, ::MassGap, ::Infinite; kwargs...)
     return 0.350 * model.J
@@ -250,8 +273,10 @@ end
 # References:
 #   I. Affleck, T. Kennedy, E. H. Lieb, H. Tasaki, Commun. Math. Phys.
 #     115, 477 (1988) — exact VBS two-point function.
+#     doi:10.1007/BF01218021
 #   D. P. Arovas, A. Auerbach, F. D. M. Haldane, Phys. Rev. Lett. 60,
 #     531 (1988) — static structure factor of the AKLT chain.
+#     doi:10.1103/PhysRevLett.60.531
 
 """
     fetch(model::AKLT1D, ::ZZCorrelation{:static}, ::Infinite; r::Integer) -> Float64
@@ -289,4 +314,266 @@ This is the lattice-Fourier sum of the closed-form
 function fetch(::AKLT1D, ::ZZStructureFactor, ::Infinite; q::Real, kwargs...)
     c = cos(q)
     return 2.0 * (1.0 - c) / (5.0 + 3.0 * c)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Finite-temperature thermodynamics — β = ∞ (T = 0) limits only
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# The AKLT model is NOT Bethe-ansatz integrable (the integrable BLBQ
+# points are Takhtajan-Babujian θ = π/4 and Lai-Sutherland θ = -π/4;
+# AKLT sits at θ = arctan(1/3) ≈ 18.4° between them).  As a result, no
+# closed-form analytic, transfer-matrix, or integral-equation reduction
+# is known for the AKLT chain finite-T thermodynamic functions (free
+# energy, entropy, specific heat, susceptibility) at arbitrary β.
+#
+# The published HTSE machinery (Lohmann-Schmidt-Richter 2014,
+# doi:10.1103/PhysRevB.89.014415) handles only bilinear Heisenberg
+# `J s_i · s_j`; the biquadratic `(s_i · s_j)²` term required by AKLT is
+# not supported.  Lou-Xiang-Su 2000 (doi:10.1103/PhysRevLett.85.2380)
+# give TMRG **numerical** thermodynamic curves for the BLBQ chain
+# including the AKLT point, but no analytic form.
+#
+# Per the "src/ holds only analytic / TM / integral-equation reductions"
+# policy, the only finite-T values shipped here are the **β → ∞ ground-
+# state limits**, all of which are closed-form from the AKLT bond-
+# projector decomposition (AKLT 1988):
+#
+#   H = 2J Σ_bonds P₂(i,j) − (2J/3) · N_bonds
+#
+# The VBS state annihilates every P₂(i,j) projector, so the GS energy is
+# exactly  −(2J/3) · N_bonds  for any (OBC, PBC, Infinite) BC.
+#
+#   OBC (N ≥ 2, N_bonds = N − 1):
+#     • f(∞) = −(2J/3) · (N − 1) / N        [exact]
+#     • s(∞) = log 4 / N                    [4-fold edge-mode degeneracy:
+#                                            two free spin-½ at the open
+#                                            ends give a singlet ⊕ triplet
+#                                            ground manifold; AKLT 1988]
+#     • c(∞) = 0                            [Var(H) = 0 on any GS manifold]
+#     • χ(∞) = ∞                            [Curie tail from edge spins;
+#                                            ⟨(S^z_tot)²⟩_GS = 1/2 over
+#                                            the 4-state manifold, so
+#                                            χ ≈ β/(2N) → ∞.  Throws
+#                                            DomainError; the divergence
+#                                            coefficient 1/(2N) is exact
+#                                            but not registered as a
+#                                            separate observable here.]
+#
+#   PBC (N ≥ 2, N_bonds = N):  VBS is the unique frustration-free GS.
+#     • f(∞) = −2J/3                        [exact, N-independent]
+#     • s(∞) = 0, c(∞) = 0, χ(∞) = 0        [Haldane gap suppression]
+#
+#   Infinite:  same bulk as PBC at N → ∞.
+#     • f(∞) = −2J/3, s(∞) = 0, c(∞) = 0, χ(∞) = 0
+#
+# Finite β > 0 (β ≠ ∞) throws DomainError everywhere.  Future work to
+# extend this with a biquadratic-aware HTSE truncation (or a Padé-
+# accelerated form) is tracked in QAtlas issue #506.
+
+# ── OBC: β = ∞ limits ─────────────────────────────────────────────────────────
+
+const _AKLT_NO_FINITE_BETA_MSG =
+    "AKLT1D finite-β thermodynamics has no known " *
+    "analytic / TM / integral-equation reduction (the model is not Bethe-ansatz " *
+    "integrable).  Only β = Inf is supported here.  See AKLT1D module docstring " *
+    "and QAtlas issue #506 for the planned HTSE extension."
+
+"""
+    fetch(model::AKLT1D, ::FreeEnergy, bc::OBC; beta::Real) -> Float64
+
+Per-site Helmholtz free energy at `β = ∞` for the AKLT OBC chain on `N`
+sites:
+
+    f_OBC(∞) = −(2J/3) · (N − 1) / N
+
+Exact closed form from the bond-projector decomposition (AKLT 1988,
+doi:10.1007/BF01218021): the VBS ground state annihilates every bond
+projector, so `E_GS_OBC = −(2J/3)(N − 1)` for any of the 4 degenerate
+ground states.  Only `beta = Inf` is supported; finite-β throws
+`DomainError`.
+"""
+function fetch(model::AKLT1D, ::FreeEnergy, bc::OBC; beta::Real, kwargs...)
+    bc.N ≥ 2 || throw(ArgumentError("AKLT1D OBC FreeEnergy needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return -(2.0 / 3.0) * model.J * (bc.N - 1) / bc.N
+end
+
+"""
+    fetch(model::AKLT1D, ::ThermalEntropy, bc::OBC; beta::Real) -> Float64
+
+Per-site Gibbs entropy at `β = ∞` for the AKLT OBC chain:
+
+    s_OBC(∞) = log(4) / N
+
+The OBC ground state is 4-fold degenerate (singlet ⊕ triplet of the two
+free spin-½ edge modes; AKLT 1988, doi:10.1007/BF01218021), so the
+β → ∞ Gibbs entropy of the equal-weight ground-manifold mixed state is
+`log 4` total, hence `log 4 / N` per site.
+"""
+function fetch(::AKLT1D, ::ThermalEntropy, bc::OBC; beta::Real, kwargs...)
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D OBC ThermalEntropy needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return log(4.0) / bc.N
+end
+
+"""
+    fetch(model::AKLT1D, ::SpecificHeat, bc::OBC; beta::Real) -> Float64
+
+Per-site heat capacity at `β = ∞` for the AKLT OBC chain:
+
+    c_OBC(∞) = 0
+
+The 4-fold degenerate ground manifold has zero energy variance (all four
+states share the same energy `−(2J/3)(N − 1)`), so the variance form
+`c = β² Var(H) / N` evaluates to 0 identically at `β = ∞`.
+"""
+function fetch(::AKLT1D, ::SpecificHeat, bc::OBC; beta::Real, kwargs...)
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D OBC SpecificHeat needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
+end
+
+"""
+    fetch(model::AKLT1D, ::SusceptibilityZZ, bc::OBC; beta::Real)
+
+Always throws `DomainError`.  The AKLT OBC longitudinal susceptibility
+diverges as `β → ∞` (Curie tail from the two free spin-½ edge modes):
+averaging `(S^z_tot)²` over the 4-fold ground manifold gives `1/2`, so
+
+    χ_OBC(β → ∞) ≈ β / (2N) → ∞.
+
+The divergence coefficient `1/(2N)` is exact (AKLT 1988,
+doi:10.1007/BF01218021) but is not registered as a separate observable
+here.  Finite β has no analytic reduction.  Use the PBC or Infinite
+fetches for finite gap-suppressed values, or HeisenbergS1.jl's
+ED-based path for finite-N numerical references.
+"""
+function fetch(::AKLT1D, ::SusceptibilityZZ, ::OBC; beta::Real, kwargs...)
+    throw(
+        DomainError(
+            beta,
+            "AKLT1D OBC SusceptibilityZZ diverges at β = Inf (edge-mode Curie tail; " *
+            "coefficient 1/(2N) is exact but not a registered observable).  " *
+            "Finite β has no analytic reduction.  See AKLT1D module docstring.",
+        ),
+    )
+end
+
+# ── PBC: β = ∞ limits ─────────────────────────────────────────────────────────
+
+"""
+    fetch(model::AKLT1D, ::FreeEnergy, bc::PBC; beta::Real) -> Float64
+
+Per-site Helmholtz free energy at `β = ∞` for the AKLT PBC chain:
+
+    f_PBC(∞) = −2J / 3
+
+Exact, `N`-independent for any `N ≥ 2`.  PBC has `N` bonds and the VBS
+state is the unique frustration-free ground state annihilating every
+bond projector (AKLT 1988, doi:10.1007/BF01218021); the GS energy is
+`E_GS = −(2J/3) · N`.
+"""
+function fetch(model::AKLT1D, ::FreeEnergy, bc::PBC; beta::Real, kwargs...)
+    bc.N ≥ 2 || throw(ArgumentError("AKLT1D PBC FreeEnergy needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return -(2.0 / 3.0) * model.J
+end
+
+"""
+    fetch(model::AKLT1D, ::ThermalEntropy, bc::PBC; beta::Real) -> Float64
+
+Per-site Gibbs entropy at `β = ∞` for the AKLT PBC chain: `0`.  The PBC
+VBS ground state is unique and gapped (Haldane gap, García-Saez–Murg–
+Verstraete 2013, doi:10.1103/PhysRevB.88.245118), so the β → ∞ Gibbs
+state is the pure GS with zero entropy.
+"""
+function fetch(::AKLT1D, ::ThermalEntropy, bc::PBC; beta::Real, kwargs...)
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D PBC ThermalEntropy needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
+end
+
+"""
+    fetch(model::AKLT1D, ::SpecificHeat, bc::PBC; beta::Real) -> Float64
+
+Per-site heat capacity at `β = ∞` for the AKLT PBC chain: `0`.  Pure GS
+implies zero energy variance.
+"""
+function fetch(::AKLT1D, ::SpecificHeat, bc::PBC; beta::Real, kwargs...)
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D PBC SpecificHeat needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
+end
+
+"""
+    fetch(model::AKLT1D, ::SusceptibilityZZ, bc::PBC; beta::Real) -> Float64
+
+Per-site uniform longitudinal susceptibility at `β = ∞` for the AKLT
+PBC chain: `0`.  The unique VBS ground state has `⟨S^z_i⟩ = 0` and the
+Haldane-gapped excitation spectrum gives exponential suppression
+`χ ~ exp(−β Δ)` (Δ ≈ 0.350 J, García-Saez–Murg–Verstraete 2013,
+doi:10.1103/PhysRevB.88.245118), so the strict β → ∞ limit is `0`.
+"""
+function fetch(::AKLT1D, ::SusceptibilityZZ, bc::PBC; beta::Real, kwargs...)
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D PBC SusceptibilityZZ needs N ≥ 2 (got N = $(bc.N))"))
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
+end
+
+# ── Infinite: β = ∞ limits ────────────────────────────────────────────────────
+
+"""
+    fetch(model::AKLT1D, ::FreeEnergy, ::Infinite; beta::Real) -> Float64
+
+Per-site Helmholtz free energy at `β = ∞` for the infinite AKLT chain:
+
+    f(∞) = −2J / 3
+
+Same closed form as `GroundStateEnergyDensity` at `Infinite()`; exposed
+through `FreeEnergy` for callers that route generic thermodynamic
+observables.
+"""
+function fetch(model::AKLT1D, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return -(2.0 / 3.0) * model.J
+end
+
+"""
+    fetch(model::AKLT1D, ::ThermalEntropy, ::Infinite; beta::Real) -> Float64
+
+Per-site Gibbs entropy at `β = ∞` for the infinite AKLT chain: `0`.
+Bulk Haldane phase has a unique GS modulo finite edge-mode corrections
+(which vanish per-site as `N → ∞`).
+"""
+function fetch(::AKLT1D, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...)
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
+end
+
+"""
+    fetch(model::AKLT1D, ::SpecificHeat, ::Infinite; beta::Real) -> Float64
+
+Per-site heat capacity at `β = ∞` for the infinite AKLT chain: `0`.
+"""
+function fetch(::AKLT1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
+end
+
+"""
+    fetch(model::AKLT1D, ::SusceptibilityZZ, ::Infinite; beta::Real) -> Float64
+
+Per-site uniform longitudinal susceptibility at `β = ∞` for the infinite
+AKLT chain: `0`.  Haldane-gapped bulk → exponential suppression
+`χ ~ exp(−β Δ)`, strict limit is `0`.
+"""
+function fetch(::AKLT1D, ::SusceptibilityZZ, ::Infinite; beta::Real, kwargs...)
+    isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
+    return 0.0
 end

@@ -240,11 +240,22 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 
-## `second_closed_form` (133)
+## `second_closed_form` (144)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/Infinite`](../hubs/AKLT1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/PBC`](../hubs/AKLT1D_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](../hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/Infinite`](../hubs/AKLT1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/OBC`](../hubs/AKLT1D_SpecificHeat_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/PBC`](../hubs/AKLT1D_SpecificHeat_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/StringOrderParameter/Infinite`](../hubs/AKLT1D_StringOrderParameter_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SusceptibilityZZ/Infinite`](../hubs/AKLT1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SusceptibilityZZ/PBC`](../hubs/AKLT1D_SusceptibilityZZ_PBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/Infinite`](../hubs/AKLT1D_ThermalEntropy_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/OBC`](../hubs/AKLT1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/PBC`](../hubs/AKLT1D_ThermalEntropy_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p

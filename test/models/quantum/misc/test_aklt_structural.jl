@@ -13,6 +13,11 @@ using QAtlas, Test, LinearAlgebra
     @testset "Constructor variants" begin
         @test AKLT1D().J == 1.0
         @test AKLT1D(; J=2.5).J == 2.5
+        # J > 0 is required: every registered analytic observable assumes
+        # the antiferromagnetic sign of the AKLT bond-projector form.
+        @test_throws ArgumentError AKLT1D(; J=0.0)
+        @test_throws ArgumentError AKLT1D(; J=-1.0)
+        @test_throws ArgumentError AKLT1D(; J=(-eps()))
     end
 
     @testset "OBC ExactSpectrum shape (sorted, real, length 3^N)" begin

@@ -356,7 +356,8 @@ end
 
 # ── OBC: β = ∞ limits ─────────────────────────────────────────────────────────
 
-const _AKLT_NO_FINITE_BETA_MSG = "AKLT1D finite-β thermodynamics has no known " *
+const _AKLT_NO_FINITE_BETA_MSG =
+    "AKLT1D finite-β thermodynamics has no known " *
     "analytic / TM / integral-equation reduction (the model is not Bethe-ansatz " *
     "integrable).  Only β = Inf is supported here.  See AKLT1D module docstring " *
     "and QAtlas issue #506 for the planned HTSE extension."
@@ -394,7 +395,8 @@ free spin-½ edge modes; AKLT 1988, doi:10.1007/BF01218021), so the
 `log 4` total, hence `log 4 / N` per site.
 """
 function fetch(::AKLT1D, ::ThermalEntropy, bc::OBC; beta::Real, kwargs...)
-    bc.N ≥ 2 || throw(ArgumentError("AKLT1D OBC ThermalEntropy needs N ≥ 2 (got N = $(bc.N))"))
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D OBC ThermalEntropy needs N ≥ 2 (got N = $(bc.N))"))
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return log(4.0) / bc.N
 end
@@ -411,7 +413,8 @@ states share the same energy `−(2J/3)(N − 1)`), so the variance form
 `c = β² Var(H) / N` evaluates to 0 identically at `β = ∞`.
 """
 function fetch(::AKLT1D, ::SpecificHeat, bc::OBC; beta::Real, kwargs...)
-    bc.N ≥ 2 || throw(ArgumentError("AKLT1D OBC SpecificHeat needs N ≥ 2 (got N = $(bc.N))"))
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D OBC SpecificHeat needs N ≥ 2 (got N = $(bc.N))"))
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return 0.0
 end
@@ -432,10 +435,14 @@ fetches for finite gap-suppressed values, or HeisenbergS1.jl's
 ED-based path for finite-N numerical references.
 """
 function fetch(::AKLT1D, ::SusceptibilityZZ, ::OBC; beta::Real, kwargs...)
-    throw(DomainError(beta,
-        "AKLT1D OBC SusceptibilityZZ diverges at β = Inf (edge-mode Curie tail; " *
-        "coefficient 1/(2N) is exact but not a registered observable).  " *
-        "Finite β has no analytic reduction.  See AKLT1D module docstring."))
+    throw(
+        DomainError(
+            beta,
+            "AKLT1D OBC SusceptibilityZZ diverges at β = Inf (edge-mode Curie tail; " *
+            "coefficient 1/(2N) is exact but not a registered observable).  " *
+            "Finite β has no analytic reduction.  See AKLT1D module docstring.",
+        ),
+    )
 end
 
 # ── PBC: β = ∞ limits ─────────────────────────────────────────────────────────
@@ -467,7 +474,8 @@ Verstraete 2013, doi:10.1103/PhysRevB.88.245118), so the β → ∞ Gibbs
 state is the pure GS with zero entropy.
 """
 function fetch(::AKLT1D, ::ThermalEntropy, bc::PBC; beta::Real, kwargs...)
-    bc.N ≥ 2 || throw(ArgumentError("AKLT1D PBC ThermalEntropy needs N ≥ 2 (got N = $(bc.N))"))
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D PBC ThermalEntropy needs N ≥ 2 (got N = $(bc.N))"))
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return 0.0
 end
@@ -479,7 +487,8 @@ Per-site heat capacity at `β = ∞` for the AKLT PBC chain: `0`.  Pure GS
 implies zero energy variance.
 """
 function fetch(::AKLT1D, ::SpecificHeat, bc::PBC; beta::Real, kwargs...)
-    bc.N ≥ 2 || throw(ArgumentError("AKLT1D PBC SpecificHeat needs N ≥ 2 (got N = $(bc.N))"))
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D PBC SpecificHeat needs N ≥ 2 (got N = $(bc.N))"))
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return 0.0
 end
@@ -494,7 +503,8 @@ Haldane-gapped excitation spectrum gives exponential suppression
 doi:10.1103/PhysRevB.88.245118), so the strict β → ∞ limit is `0`.
 """
 function fetch(::AKLT1D, ::SusceptibilityZZ, bc::PBC; beta::Real, kwargs...)
-    bc.N ≥ 2 || throw(ArgumentError("AKLT1D PBC SusceptibilityZZ needs N ≥ 2 (got N = $(bc.N))"))
+    bc.N ≥ 2 ||
+        throw(ArgumentError("AKLT1D PBC SusceptibilityZZ needs N ≥ 2 (got N = $(bc.N))"))
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return 0.0
 end

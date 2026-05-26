@@ -7,12 +7,23 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 101 hubs
+## `analytic` - 112 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
+- 🟢 [`AKLT1D/FreeEnergy/Infinite`](hubs/AKLT1D_FreeEnergy_Infinite.md)
+- 🟢 [`AKLT1D/FreeEnergy/OBC`](hubs/AKLT1D_FreeEnergy_OBC.md)
+- 🟢 [`AKLT1D/FreeEnergy/PBC`](hubs/AKLT1D_FreeEnergy_PBC.md)
 - 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
+- 🟢 [`AKLT1D/SpecificHeat/Infinite`](hubs/AKLT1D_SpecificHeat_Infinite.md)
+- 🟢 [`AKLT1D/SpecificHeat/OBC`](hubs/AKLT1D_SpecificHeat_OBC.md)
+- 🟢 [`AKLT1D/SpecificHeat/PBC`](hubs/AKLT1D_SpecificHeat_PBC.md)
 - 🟢 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md)
+- 🟢 [`AKLT1D/SusceptibilityZZ/Infinite`](hubs/AKLT1D_SusceptibilityZZ_Infinite.md)
+- 🟢 [`AKLT1D/SusceptibilityZZ/PBC`](hubs/AKLT1D_SusceptibilityZZ_PBC.md)
+- 🟢 [`AKLT1D/ThermalEntropy/Infinite`](hubs/AKLT1D_ThermalEntropy_Infinite.md)
+- 🟢 [`AKLT1D/ThermalEntropy/OBC`](hubs/AKLT1D_ThermalEntropy_OBC.md)
+- 🟢 [`AKLT1D/ThermalEntropy/PBC`](hubs/AKLT1D_ThermalEntropy_PBC.md)
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md)
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md)
 - 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)

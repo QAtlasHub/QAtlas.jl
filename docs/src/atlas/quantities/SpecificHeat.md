@@ -13,22 +13,23 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 10
-- **Total hubs (Model, BC pairs)**: 15
+- **Models with this quantity registered**: 11
+- **Total hubs (Model, BC pairs)**: 18
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `dense_ed`, `free_fermion_quadgk`, `matter_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 3 hubs
 - Kitaev 2006 — 2 hubs
 - Lieb 1994 — 2 hubs
 - Mahan 2000 — 2 hubs
 - Ising 1925 — 1 hub
-- Landau-Lifshitz §149 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
+| [`AKLT1D`](../models/AKLT1D.md) | 🟢 [hub](../hubs/AKLT1D_SpecificHeat_OBC.md) | 🟢 [hub](../hubs/AKLT1D_SpecificHeat_PBC.md) | 🟢 [hub](../hubs/AKLT1D_SpecificHeat_Infinite.md) |
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | — | — |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_SpecificHeat_Infinite.md) |

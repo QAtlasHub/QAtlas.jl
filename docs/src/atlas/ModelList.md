@@ -7,7 +7,7 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 
 | Model | Universality | #K | Methods | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED | Regimes (top 3) |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [`AKLT1D`](models/AKLT1D.md) | — | 8 | `analytic`, `dense_ed`, `literature_value` | 0 | 6 | 0 | 1 | 1 | feasible | `@sweep` |
+| [`AKLT1D`](models/AKLT1D.md) | — | 19 | `analytic`, `dense_ed`, `literature_value` | 0 | 17 | 0 | 1 | 1 | feasible | `@sweep` |
 | [`AKLT2D`](models/AKLT2D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`BCFT`](models/BCFT.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ChernSimons3D`](models/ChernSimons3D.md) | `WZW` | 2 | `analytic`, `sugawara` | 0 | 1 | 0 | 1 | 0 | infeasible | `@sweep` |
@@ -89,7 +89,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
 - [`FidelitySusceptibility`](quantities/FidelitySusceptibility.md) — 1 models
 - [`FractalDimension`](quantities/FractalDimension.md) — 1 models
-- [`FreeEnergy`](quantities/FreeEnergy.md) — 11 models
+- [`FreeEnergy`](quantities/FreeEnergy.md) — 12 models
 - [`GGEValue`](quantities/GGEValue.md) — 1 models
 - [`GroundStateDegeneracy`](quantities/GroundStateDegeneracy.md) — 2 models
 - [`GroundStateEnergyDensity`](quantities/GroundStateEnergyDensity.md) — 6 models
@@ -108,15 +108,15 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models
 - [`RenyiEntropy`](quantities/RenyiEntropy.md) — 4 models
 - [`ResidualEntropy`](quantities/ResidualEntropy.md) — 4 models
-- [`SpecificHeat`](quantities/SpecificHeat.md) — 10 models
+- [`SpecificHeat`](quantities/SpecificHeat.md) — 11 models
 - [`SpinGap`](quantities/SpinGap.md) — 2 models
 - [`SpontaneousMagnetization`](quantities/SpontaneousMagnetization.md) — 4 models
 - [`SteadyStateCurrent`](quantities/SteadyStateCurrent.md) — 1 models
 - [`StringOrderParameter`](quantities/StringOrderParameter.md) — 1 models
 - [`SusceptibilityXX`](quantities/SusceptibilityXX.md) — 4 models
 - [`SusceptibilityYY`](quantities/SusceptibilityYY.md) — 4 models
-- [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md) — 6 models
-- [`ThermalEntropy`](quantities/ThermalEntropy.md) — 10 models
+- [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md) — 7 models
+- [`ThermalEntropy`](quantities/ThermalEntropy.md) — 11 models
 - [`TightBindingChecksum`](quantities/TightBindingChecksum.md) — 4 models
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models
 - [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md) — 3 models

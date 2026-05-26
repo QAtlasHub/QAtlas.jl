@@ -58,11 +58,26 @@ Valence Bond Solid (VBS).  The infinite-system observables exposed
 through `fetch` are closed-form (energy density, correlation length,
 string order parameter); the Haldane gap is the García-Saez–Murg–Verstraete (2013)
 DMRG numerical-exact value.
+
+The constructor requires `J > 0`: the AKLT bond-projector decomposition
+`H = 2J Σ P₂ − (2J/3) N_bonds` and every analytic value registered in
+`AKLT1D_registry.jl` (GS energy density, correlation length, string
+order parameter, mass gap, β=∞ thermodynamic limits) assumes the
+antiferromagnetic sign.  Passing `J ≤ 0` would silently return
+sign-flipped or physically meaningless values, so the constructor
+throws `ArgumentError` at construction time instead.
 """
 struct AKLT1D <: AbstractQAtlasModel
     J::Float64
 end
-AKLT1D(; J::Real=1.0) = AKLT1D(Float64(J))
+function AKLT1D(; J::Real=1.0)
+    J > 0 || throw(ArgumentError(
+        "AKLT1D requires J > 0 (antiferromagnetic); got J = $J.  " *
+        "Every registered analytic observable assumes J > 0 — see the " *
+        "AKLT1D module docstring."
+    ))
+    return AKLT1D(Float64(J))
+end
 
 # Reuse the spin-1 primitives + bond cap defined alongside `S1Heisenberg1D`
 # so the AKLT chain inherits the same `_MAX_ED_SITES_S1 = 8` budget for

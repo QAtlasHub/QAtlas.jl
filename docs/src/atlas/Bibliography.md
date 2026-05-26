@@ -7,6 +7,26 @@ Every distinct citation string appearing in any `@register(..., references=[...]
 
 Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Free-form strings are an honest substrate; a structured citation database is deferred to a follow-up.
 
+## Affleck-Kennedy-Lieb-Tasaki 1988 — 17 hubs
+
+- 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
+- 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
+- 🟢 [`AKLT1D/FreeEnergy/Infinite`](hubs/AKLT1D_FreeEnergy_Infinite.md)
+- 🟢 [`AKLT1D/FreeEnergy/OBC`](hubs/AKLT1D_FreeEnergy_OBC.md)
+- 🟢 [`AKLT1D/FreeEnergy/PBC`](hubs/AKLT1D_FreeEnergy_PBC.md)
+- 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
+- 🟢 [`AKLT1D/SpecificHeat/Infinite`](hubs/AKLT1D_SpecificHeat_Infinite.md)
+- 🟢 [`AKLT1D/SpecificHeat/OBC`](hubs/AKLT1D_SpecificHeat_OBC.md)
+- 🟢 [`AKLT1D/SpecificHeat/PBC`](hubs/AKLT1D_SpecificHeat_PBC.md)
+- 🟢 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md)
+- 🟢 [`AKLT1D/SusceptibilityZZ/Infinite`](hubs/AKLT1D_SusceptibilityZZ_Infinite.md)
+- 🟢 [`AKLT1D/SusceptibilityZZ/PBC`](hubs/AKLT1D_SusceptibilityZZ_PBC.md)
+- 🟢 [`AKLT1D/ThermalEntropy/Infinite`](hubs/AKLT1D_ThermalEntropy_Infinite.md)
+- 🟢 [`AKLT1D/ThermalEntropy/OBC`](hubs/AKLT1D_ThermalEntropy_OBC.md)
+- 🟢 [`AKLT1D/ThermalEntropy/PBC`](hubs/AKLT1D_ThermalEntropy_PBC.md)
+- 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md)
+- 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)
+
 ## Kitaev 2006 — 12 hubs
 
 - 🟢 [`KitaevHeisenberg/MassGap/Infinite`](hubs/KitaevHeisenberg_MassGap_Infinite.md)
@@ -77,15 +97,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`TightBindingV1D/FreeEnergy/Infinite`](hubs/TightBindingV1D_FreeEnergy_Infinite.md)
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](hubs/TightBindingV1D_SpecificHeat_Infinite.md)
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](hubs/TightBindingV1D_ThermalEntropy_Infinite.md)
-
-## Affleck-Kennedy-Lieb-Tasaki 1988 — 6 hubs
-
-- 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
-- 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
-- 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md)
-- 🟢 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md)
-- 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md)
-- 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)
 
 ## Ashcroft-Mermin 1976 — 6 hubs
 
@@ -175,6 +186,12 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
 - 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md)
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
+
+## García-Saez-Murg-Verstraete 2013 — 3 hubs
+
+- ⚪ [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md)
+- 🟢 [`AKLT1D/SusceptibilityZZ/Infinite`](hubs/AKLT1D_SusceptibilityZZ_Infinite.md)
+- 🟢 [`AKLT1D/SusceptibilityZZ/PBC`](hubs/AKLT1D_SusceptibilityZZ_PBC.md)
 
 ## Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013) — 2 hubs
 
@@ -532,10 +549,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## Friedan-Qiu-Shenker 1984 — 1 hub
 
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](hubs/TricriticalIsing_CentralCharge_Infinite.md)
-
-## García-Saez-Murg-Verstraete 2013 — 1 hub
-
-- ⚪ [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md)
 
 ## Gong-Foss-Feig 2014 — 1 hub
 

@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 273 |
-| ED-feasible claimed (risk denominator) | 247 |
+| Hubs `src` claims (registry) | 284 |
+| ED-feasible claimed (risk denominator) | 258 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 169 |
+| 🟢 corroborated-at-p | 180 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 48 |
-| Inventory cards scanned (whole test/) | 2745 |
+| Inventory cards scanned (whole test/) | 2768 |
 | Registry files parsed | 62 / 62 |
 | Models | 62 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **68.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **84.2%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **69.8%** · **in-repo-verified rate** (incl. 🔵 coherent): **84.9%**
 
 ## Browse by facet
 
@@ -115,7 +115,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 | model | claimed | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED |
 |---|---|---|---|---|---|---|---|
-| `AKLT1D` | 8 | 0 | 6 | 0 | 1 | 1 | feasible |
+| `AKLT1D` | 19 | 0 | 17 | 0 | 1 | 1 | feasible |
 | `AKLT2D` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `BCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ChernSimons3D` | 2 | 0 | 1 | 0 | 1 | 0 | infeasible |
@@ -178,16 +178,27 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (273) — select to drill down
+## Hubs (284) — select to drill down
 
-### `AKLT1D` (8)
+### `AKLT1D` (19)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`AKLT1D/FreeEnergy/Infinite`](hubs/AKLT1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/OBC`](hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/PBC`](hubs/AKLT1D_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/GroundStateEnergyDensity/Infinite`](hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - ⚪ [`AKLT1D/MassGap/Infinite`](hubs/AKLT1D_MassGap_Infinite.md) — cited-only
+- 🟢 [`AKLT1D/SpecificHeat/Infinite`](hubs/AKLT1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/OBC`](hubs/AKLT1D_SpecificHeat_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/PBC`](hubs/AKLT1D_SpecificHeat_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/StringOrderParameter/Infinite`](hubs/AKLT1D_StringOrderParameter_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SusceptibilityZZ/Infinite`](hubs/AKLT1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SusceptibilityZZ/PBC`](hubs/AKLT1D_SusceptibilityZZ_PBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/Infinite`](hubs/AKLT1D_ThermalEntropy_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/OBC`](hubs/AKLT1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/PBC`](hubs/AKLT1D_ThermalEntropy_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 

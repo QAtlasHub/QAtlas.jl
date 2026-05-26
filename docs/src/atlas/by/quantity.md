@@ -131,8 +131,11 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 
-## `FreeEnergy` (16)
+## `FreeEnergy` (19)
 
+- 🟢 [`AKLT1D/FreeEnergy/Infinite`](../hubs/AKLT1D_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/FreeEnergy/PBC`](../hubs/AKLT1D_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/FreeEnergy/Infinite`](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/FreeEnergy/Infinite`](../hubs/IsingChain1D_FreeEnergy_Infinite.md) — corroborated-at-p
@@ -291,8 +294,11 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](../hubs/SpinIce_ResidualEntropy_Infinite.md) — corroborated-at-p
 
-## `SpecificHeat` (15)
+## `SpecificHeat` (18)
 
+- 🟢 [`AKLT1D/SpecificHeat/Infinite`](../hubs/AKLT1D_SpecificHeat_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/OBC`](../hubs/AKLT1D_SpecificHeat_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SpecificHeat/PBC`](../hubs/AKLT1D_SpecificHeat_PBC.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/SpecificHeat/Infinite`](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/SpecificHeat/OBC`](../hubs/Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/SpecificHeat/Infinite`](../hubs/IsingChain1D_SpecificHeat_Infinite.md) — corroborated-at-p
@@ -345,8 +351,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`TFIM/SusceptibilityYY/OBC`](../hubs/TFIM_SusceptibilityYY_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/SusceptibilityYY/OBC`](../hubs/XXZ1D_SusceptibilityYY_OBC.md) — corroborated-at-p
 
-## `SusceptibilityZZ` (7)
+## `SusceptibilityZZ` (9)
 
+- 🟢 [`AKLT1D/SusceptibilityZZ/Infinite`](../hubs/AKLT1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/SusceptibilityZZ/PBC`](../hubs/AKLT1D_SusceptibilityZZ_PBC.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
@@ -355,8 +363,11 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`TFIM/SusceptibilityZZ/OBC`](../hubs/TFIM_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 
-## `ThermalEntropy` (15)
+## `ThermalEntropy` (18)
 
+- 🟢 [`AKLT1D/ThermalEntropy/Infinite`](../hubs/AKLT1D_ThermalEntropy_Infinite.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/OBC`](../hubs/AKLT1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`AKLT1D/ThermalEntropy/PBC`](../hubs/AKLT1D_ThermalEntropy_PBC.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/ThermalEntropy/Infinite`](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p

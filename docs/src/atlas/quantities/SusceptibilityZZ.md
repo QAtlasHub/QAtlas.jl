@@ -13,25 +13,28 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 6
-- **Total hubs (Model, BC pairs)**: 7
+- **Models with this quantity registered**: 7
+- **Total hubs (Model, BC pairs)**: 9
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Affleck-Kennedy-Lieb-Tasaki 1988 — 2 hubs
+- García-Saez-Murg-Verstraete 2013 — 2 hubs
 - Brush 1967 RMP 39 883 — 1 hub
 - Ising 1925 — 1 hub
 - Landau-Lifshitz §149 — 1 hub
 
 ## Model × BC matrix
 
-| Model | `OBC` | `Infinite` |
-|---|---|---|
-| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |
-| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
-| [`IsingChain1D`](../models/IsingChain1D.md) | — | 🟢 [hub](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) |
-| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
-| [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
-| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) | — |
+| Model | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`AKLT1D`](../models/AKLT1D.md) | — | 🟢 [hub](../hubs/AKLT1D_SusceptibilityZZ_PBC.md) | 🟢 [hub](../hubs/AKLT1D_SusceptibilityZZ_Infinite.md) |
+| [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |
+| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — | — |
+| [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) |
+| [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — | — |
+| [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
+| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) | — | — |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

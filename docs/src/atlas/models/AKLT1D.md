@@ -17,31 +17,36 @@ All `(Quantity, BC)` hubs `src` claims for **`AKLT1D`**.  Cells link to the per-
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 6 |
+| 🟢 corroborated-at-p | 17 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 1 |
 | 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **8** |
+| **total claimed hubs** | **19** |
 
 **Methods** (from `@register`, derived): `analytic`, `dense_ed`, `literature_value`
 
 **References** (aggregated):
 - Affleck-Kennedy-Lieb-Tasaki 1988
+- Affleck-Kennedy-Lieb-Tasaki 1988 | García-Saez-Murg-Verstraete 2013
 - Affleck-Kennedy-Lieb-Tasaki 1988 | Kennedy-Tasaki 1992
 - Arovas-Auerbach-Haldane 1988
 - García-Saez-Murg-Verstraete 2013
 
 ## Quantity × BC matrix
 
-| Quantity | `OBC` | `Infinite` |
-|---|---|---|
-| [`CorrelationLength`](../quantities/CorrelationLength.md) | — | 🟢 [hub](../hubs/AKLT1D_CorrelationLength_Infinite.md) |
-| [`Energy`](../quantities/Energy.md) | — | 🟢 [hub](../hubs/AKLT1D_Energy_Infinite.md) |
-| [`ExactSpectrum`](../quantities/ExactSpectrum.md) | 🟠 [hub](../hubs/AKLT1D_ExactSpectrum_OBC.md) | — |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) |
-| [`MassGap`](../quantities/MassGap.md) | — | ⚪ [hub](../hubs/AKLT1D_MassGap_Infinite.md) |
-| [`StringOrderParameter`](../quantities/StringOrderParameter.md) | — | 🟢 [hub](../hubs/AKLT1D_StringOrderParameter_Infinite.md) |
-| [`ZZCorrelation`](../quantities/ZZCorrelation.md) | — | 🟢 [hub](../hubs/AKLT1D_ZZCorrelation_Infinite.md) |
-| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟢 [hub](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) |
+| Quantity | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`CorrelationLength`](../quantities/CorrelationLength.md) | — | — | 🟢 [hub](../hubs/AKLT1D_CorrelationLength_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | — | — | 🟢 [hub](../hubs/AKLT1D_Energy_Infinite.md) |
+| [`ExactSpectrum`](../quantities/ExactSpectrum.md) | 🟠 [hub](../hubs/AKLT1D_ExactSpectrum_OBC.md) | — | — |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_Infinite.md) |
+| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | — | 🟢 [hub](../hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) |
+| [`MassGap`](../quantities/MassGap.md) | — | — | ⚪ [hub](../hubs/AKLT1D_MassGap_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/AKLT1D_SpecificHeat_OBC.md) | 🟢 [hub](../hubs/AKLT1D_SpecificHeat_PBC.md) | 🟢 [hub](../hubs/AKLT1D_SpecificHeat_Infinite.md) |
+| [`StringOrderParameter`](../quantities/StringOrderParameter.md) | — | — | 🟢 [hub](../hubs/AKLT1D_StringOrderParameter_Infinite.md) |
+| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | — | 🟢 [hub](../hubs/AKLT1D_SusceptibilityZZ_PBC.md) | 🟢 [hub](../hubs/AKLT1D_SusceptibilityZZ_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_Infinite.md) |
+| [`ZZCorrelation`](../quantities/ZZCorrelation.md) | — | — | 🟢 [hub](../hubs/AKLT1D_ZZCorrelation_Infinite.md) |
+| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | — | 🟢 [hub](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

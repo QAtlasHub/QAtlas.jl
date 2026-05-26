@@ -71,11 +71,13 @@ struct AKLT1D <: AbstractQAtlasModel
     J::Float64
 end
 function AKLT1D(; J::Real=1.0)
-    J > 0 || throw(ArgumentError(
-        "AKLT1D requires J > 0 (antiferromagnetic); got J = $J.  " *
-        "Every registered analytic observable assumes J > 0 — see the " *
-        "AKLT1D module docstring."
-    ))
+    J > 0 || throw(
+        ArgumentError(
+            "AKLT1D requires J > 0 (antiferromagnetic); got J = $J.  " *
+            "Every registered analytic observable assumes J > 0 — see the " *
+            "AKLT1D module docstring.",
+        ),
+    )
     return AKLT1D(Float64(J))
 end
 

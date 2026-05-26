@@ -17,7 +17,7 @@ using QAtlas, Test, LinearAlgebra
         # the antiferromagnetic sign of the AKLT bond-projector form.
         @test_throws ArgumentError AKLT1D(; J=0.0)
         @test_throws ArgumentError AKLT1D(; J=-1.0)
-        @test_throws ArgumentError AKLT1D(; J=-eps())
+        @test_throws ArgumentError AKLT1D(; J=(-eps()))
     end
 
     @testset "OBC ExactSpectrum shape (sorted, real, length 3^N)" begin

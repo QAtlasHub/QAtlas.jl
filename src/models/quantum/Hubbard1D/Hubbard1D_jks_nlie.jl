@@ -165,4 +165,121 @@ function jks_driving_cbar(x::Real; U::Real, mu::Real, h::Real=0.0)
     )
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage B — kernels + discrete convolution scaffold
+#
+# What this file adds (appended to Hubbard1D_jks_nlie.jl Stage A):
+#
+#   (1) Concrete `jks_kernel_K_n_concrete(s, n, gamma) -> ComplexF64`
+#       evaluator. The Stage-A stub `jks_kernel_K_n` is kept for
+#       backward compatibility but is now redirected to the concrete
+#       version.
+#   (2) `JKSContourGrid(N, gamma; x_max)` struct holding the discretized
+#       contour points x_j.
+#   (3) `build_kernel_matrix(grid, n) -> Matrix{ComplexF64}` Toeplitz-
+#       style discrete convolution operator.
+#   (4) `apply_kernel(K_mat, f) -> Vector{ComplexF64}` discrete convolution.
+#
+# Stage C will use these to write the Picard NLIE residual and solver,
+# and to switch the Hubbard1D fetch dispatch to the JKS path.
+#
+# Reference: JKS 1998 eq (38) for the kernels, eq (50) for the
+# discrete-convolution convention.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Kernel — concrete implementation
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    jks_kernel_K_n_concrete(s, n, gamma) -> ComplexF64
+
+JKS kernel `K_n(s) = gamma / (pi * s * (s + 2 n i gamma))` from eq (38).
+
+Vanishes at infinity (`K_n(s) ~ gamma/(pi s^2)` for `|s| -> infty`) and
+has simple poles at `s = 0` and `s = -2 n i gamma`.
+
+For `s == 0` returns `Inf + 0im` since the pole at the origin is the
+singular feature that the contour deformation in eq (47) exploits;
+numerical callers should evaluate at `s + i*eps` (small) instead.
+"""
+function jks_kernel_K_n_concrete(s::Number, n::Integer, gamma::Real)
+    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
+    0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
+    if s == zero(s)
+        return ComplexF64(Inf, 0.0)
+    end
+    return ComplexF64(gamma / (pi * s * (s + 2 * n * im * gamma)))
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Contour grid + kernel-matrix cache
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    JKSContourGrid(N, gamma; x_max=10.0)
+
+Discretization of the real-axis contour used by the JKS NLIE. Holds:
+
+- `N::Int` — number of contour points
+- `gamma::Float64` — kernel shift parameter, gamma in (0, pi)
+- `x_max::Float64` — half-width of the discretized window [-x_max, x_max]
+- `x::Vector{Float64}` — N evenly-spaced contour points
+- `dx::Float64` — grid spacing (uniform)
+
+The grid is symmetric about 0 to expose the K_n / K_n_bar conjugation
+symmetry numerically.
+"""
+struct JKSContourGrid
+    N::Int
+    gamma::Float64
+    x_max::Float64
+    x::Vector{Float64}
+    dx::Float64
+    function JKSContourGrid(N::Int, gamma::Real; x_max::Real=10.0)
+        N > 1 || throw(DomainError(N, "JKSContourGrid requires N > 1"))
+        0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
+        x_max > 0 || throw(DomainError(x_max, "x_max must be > 0"))
+        x = collect(range(-x_max, x_max; length=N))
+        dx = x[2] - x[1]
+        return new(N, Float64(gamma), Float64(x_max), x, dx)
+    end
+end
+
+"""
+    build_kernel_matrix(grid, n; eps=1e-10) -> Matrix{ComplexF64}
+
+Build the discrete convolution matrix
+`K[j, k] = jks_kernel_K_n_concrete(x_j - x_k + i*eps, n, gamma) * dx`
+so that `(K * f)[j] ≈ integral K_n(x_j - y) f(y) dy` for any vector
+`f` sampled on the contour grid. The `eps` (default `1e-10`) shifts
+off the singular `x = 0` diagonal — needed because the kernel has a
+pole at the origin.
+"""
+function build_kernel_matrix(grid::JKSContourGrid, n::Integer; eps::Real=1e-10)
+    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
+    eps > 0 || throw(DomainError(eps, "eps regularization must be > 0"))
+    N = grid.N
+    K = zeros(ComplexF64, N, N)
+    for j in 1:N, k in 1:N
+        K[j, k] =
+            jks_kernel_K_n_concrete(grid.x[j] - grid.x[k] + im * eps, n, grid.gamma) *
+            grid.dx
+    end
+    return K
+end
+
+"""
+    apply_kernel(K, f) -> Vector{ComplexF64}
+
+Discrete convolution `(K * f)[j] = sum_k K[j, k] * f[k]`. Returns a
+`ComplexF64` vector. Thin wrapper for readability; matrix-vector
+multiply is the same operation.
+"""
+function apply_kernel(K::AbstractMatrix, f::AbstractVector)
+    size(K, 2) == length(f) ||
+        throw(DimensionMismatch("K is $(size(K)) but f has length $(length(f))"))
+    return K * f
+end
+
 end  # module Hubbard1DJKSNLIE

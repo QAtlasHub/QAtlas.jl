@@ -1,4 +1,4 @@
-﻿# ─────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
 # Standalone test: XYh1D — general anisotropic XY model exact solutions
 # (Lieb-Schultz-Mattis 1961; Pfeuty 1970).
 # ─────────────────────────────────────────────────────────────────────────────
@@ -20,17 +20,19 @@ end
     @test QAtlas.fetch(XYh1D(; h=3.0), MassGap(), Infinite()) == 2.0
     @test QAtlas.fetch(XYh1D(; h=-3.0), MassGap(), Infinite()) == 2.0
     @test QAtlas.fetch(XYh1D(; h=5.0), MassGap(), Infinite()) == 6.0
-    
+
     # Anisotropic Jx ≠ Jy (MassGap should be finite for h < Jx+Jy if Jx ≠ Jy)
     # e.g., Jx=1.0, Jy=0.5, h=0.0: MassGap = 2 * |Jx - Jy| = 2.0 * 0.5 = 1.0
     @test QAtlas.fetch(XYh1D(; Jx=1.0, Jy=0.5, h=0.0), MassGap(), Infinite()) ≈ 1.0
-    
+
     # OBC MassGap matches the smallest positive eigenvalue of the BdG spectrum
     let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.5)
         gap_inf = QAtlas.fetch(m, MassGap(), Infinite())
         gap_obc = QAtlas.fetch(m, MassGap(), OBC(200))
         @test isapprox(gap_obc, gap_inf; atol=1e-3)
     end
+end
+
 @testset "XYh1D — rejects Jx, Jy ≤ 0" begin
     @test_throws DomainError XYh1D(; Jx=0.0)
     @test_throws DomainError XYh1D(; Jx=-1.0)

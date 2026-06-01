@@ -178,7 +178,7 @@ end
         FreeEnergy(),
         Infinite();
         route=:lieb_square_ice,
-        independent=-(3/2) * log(4/3),
+        independent=(-(3/2) * log(4/3)),
         agree_within=1e-14,
         refs=["Lieb 1967a Phys. Rev. 162: square-ice f = -(3/2) log(4/3)"],
     )

@@ -79,7 +79,7 @@ end
         ResidualEntropy(),
         Infinite();
         route=:second_closed_form,
-        independent=-log(2) / 2,
+        independent=(-log(2) / 2),
         agree_within=1e-12,
         refs=[
             "Cardy 1989; Affleck-Ludwig 1991: Ising fixed-boundary " *

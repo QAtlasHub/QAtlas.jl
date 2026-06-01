@@ -147,7 +147,7 @@ end
             OBC(6);
             route=:second_closed_form,
             fetch_kw=(; beta=β),
-            independent=-h * tanh(β * h),
+            independent=(-h * tanh(β * h)),
             agree_within=1e-8,
             refs=["J=0 decoupled spins: ε = -h tanh(βh) per site"],
         )

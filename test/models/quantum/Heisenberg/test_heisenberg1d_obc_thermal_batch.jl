@@ -82,7 +82,7 @@ using QAtlas, Test
                 FreeEnergy(),
                 OBC(N);
                 route=:limiting_case,
-                independent=-log(2) / HIGH_T_BETA,
+                independent=(-log(2) / HIGH_T_BETA),
                 agree_within=5e-3 * J^2,
                 refs=[
                     "Heisenberg1D OBC T → ∞: free paramagnet ⇒ f/N = -T log 2 = -log(2)/β; tol ~β·J²",

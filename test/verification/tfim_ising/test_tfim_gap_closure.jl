@@ -98,7 +98,7 @@ end
             Energy(),
             OBC(N);
             route=:limiting_case,
-            independent=-J * (N - 1),
+            independent=(-J * (N - 1)),
             agree_within=1e-12,
             at=["J=$(J)", "h=0.0", "N=$(N)"],
             refs=[

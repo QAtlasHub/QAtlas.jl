@@ -91,3 +91,19 @@ end
         @test all(isfinite, mz)
     end
 end
+
+@testset "XYh1D — site-local observables (X, Y, EnergyLocal)" begin
+    let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 12
+        mx = QAtlas.fetch(m, MagnetizationXLocal{:equilibrium}(), OBC(N); beta=β)
+        my = QAtlas.fetch(m, MagnetizationYLocal(), OBC(N); beta=β)
+        @test length(mx) == N && all(iszero, mx)
+        @test length(my) == N && all(iszero, my)
+
+        e = QAtlas.fetch(m, EnergyLocal(), OBC(N); beta=β)
+        @test length(e) == N
+        @test all(isfinite, e)
+        # Sum of local energies should equal total Energy{:total}
+        E_total = QAtlas.fetch(m, Energy{:total}(), OBC(N); beta=β)
+        @test isapprox(sum(e), E_total; atol=1e-6)
+    end
+end

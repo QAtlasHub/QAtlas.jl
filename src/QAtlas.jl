@@ -245,6 +245,7 @@ include("models/quantum/XXZ/XXZ_klumper_nlie.jl")  # Klümper QTM NLIE for criti
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 include("models/quantum/Hubbard1D/Hubbard1D.jl")
+include("models/quantum/Hubbard1D/Hubbard1D_jks_nlie.jl")  # JKS NLIE Stage A scaffold (#523)
 include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY for Hubbard1D
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
 include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh

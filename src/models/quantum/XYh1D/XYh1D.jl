@@ -704,3 +704,48 @@ for (QTy, qsym) in _XYH1D_PBC_THERMAL_METHODS
         end
     end
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Site-local observables at PBC (Phase 2, #292)
+# (Translational invariance → uniform vector = bulk per-site scalar)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::XYh1D, ::MagnetizationZLocal, bc::PBC; beta) -> Vector{Float64}
+
+Site-resolved ⟨σᶻ_i⟩ on the PBC chain. Translational invariance gives a
+uniform vector of length N filled with the bulk MagnetizationZ value.
+"""
+function fetch(model::XYh1D, ::MagnetizationZLocal, bc::PBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_pbc_local_mz(N, model.Jx, model.Jy, model.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::PBC; beta) -> Vector{Float64}
+
+Vanishes by Z₂ symmetry σˣ → −σˣ; returns zeros of length N.
+"""
+function fetch(::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::PBC; beta::Real, kwargs...)
+    return zeros(Float64, _bc_size(bc, kwargs))
+end
+
+"""
+    fetch(model::XYh1D, ::MagnetizationYLocal, bc::PBC; beta) -> Vector{Float64}
+
+Vanishes by Z₂ symmetry σʸ → −σʸ; returns zeros of length N.
+"""
+function fetch(::XYh1D, ::MagnetizationYLocal, bc::PBC; beta::Real, kwargs...)
+    return zeros(Float64, _bc_size(bc, kwargs))
+end
+
+"""
+    fetch(model::XYh1D, ::EnergyLocal, bc::PBC; beta) -> Vector{Float64}
+
+Site-resolved energy density on the PBC chain. Translational invariance
+gives a uniform vector ε_i = E_total / N.
+"""
+function fetch(model::XYh1D, ::EnergyLocal, bc::PBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_pbc_local_energy(N, model.Jx, model.Jy, model.h, beta)
+end

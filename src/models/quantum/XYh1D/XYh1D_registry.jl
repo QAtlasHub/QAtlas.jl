@@ -71,3 +71,37 @@ for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat)
         notes="Per-site thermal quantity from OBC BdG spectrum sum.",
     )
 end
+
+# ── Magnetization & Susceptibility (Phase 2, #292) ─────────────────────
+for QTy in (MagnetizationZ, SusceptibilityZZ)
+    register!(
+        XYh1D,
+        QTy,
+        Infinite;
+        method=:quadgk,
+        reliability=:high,
+        tested_in="test/models/quantum/misc/test_xyh1d.jl",
+        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+        notes="Per-site value via QuadGK over dispersion.",
+    )
+    register!(
+        XYh1D,
+        QTy,
+        OBC;
+        method=:bdg,
+        reliability=:high,
+        tested_in="test/models/quantum/misc/test_xyh1d.jl",
+        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+        notes="Per-site value from OBC BdG spectrum / Majorana covariance.",
+    )
+end
+register!(
+    XYh1D,
+    MagnetizationZLocal,
+    OBC;
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    notes="Site-resolved ⟨σᶻ_i⟩ from Majorana thermal covariance on OBC chain.",
+)

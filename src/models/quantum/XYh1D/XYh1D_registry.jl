@@ -105,3 +105,35 @@ register!(
     references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
     notes="Site-resolved ⟨σᶻ_i⟩ from Majorana thermal covariance on OBC chain.",
 )
+
+# ── Site-local observables (Phase 2, #292) ─────────────────────────────
+register!(
+    XYh1D,
+    MagnetizationXLocal{:equilibrium},
+    OBC;
+    method=:symmetry,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Vanishes by Z₂ symmetry at zero longitudinal field; returns zeros.",
+)
+register!(
+    XYh1D,
+    MagnetizationYLocal,
+    OBC;
+    method=:symmetry,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Vanishes by Z₂ symmetry; returns zeros.",
+)
+register!(
+    XYh1D,
+    EnergyLocal,
+    OBC;
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Site-resolved bond-symmetric energy density from Majorana covariance.",
+)

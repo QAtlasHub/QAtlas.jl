@@ -412,3 +412,51 @@ function fetch(m::XYh1D, ::MagnetizationZLocal, bc::OBC; beta::Real, kwargs...)
     Σ = _xyh1d_majorana_thermal_covariance(hmat, beta)
     return Float64[Σ[2i - 1, 2i] for i in 1:N]
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Site-local observables (Phase 2, #292)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta) -> Vector{Float64}
+
+Site-resolved ⟨σˣ_i⟩ at equilibrium. By the residual Z₂ symmetry σˣ → −σˣ of
+the XYh1D Hamiltonian at zero longitudinal field, the equilibrium expectation
+vanishes identically: returns the zero vector of length N.
+"""
+function fetch(::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return zeros(Float64, N)
+end
+
+"""
+    fetch(model::XYh1D, ::MagnetizationYLocal, bc::OBC; beta) -> Vector{Float64}
+
+Site-resolved ⟨σʸ_i⟩. Vanishes by Z₂ symmetry σʸ → −σʸ; returns zeros.
+"""
+function fetch(::XYh1D, ::MagnetizationYLocal, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return zeros(Float64, N)
+end
+
+"""
+    fetch(model::XYh1D, ::EnergyLocal, bc::OBC; beta) -> Vector{Float64}
+
+Site-resolved energy density ε_i = ⟨H_i⟩ on the OBC chain, where H_i is the
+symmetric bond split. Computed from the Majorana thermal covariance.
+"""
+function fetch(model::XYh1D, ::EnergyLocal, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    hmat = _xyh1d_majorana_ham(N, model.Jx, model.Jy, model.h)
+    Σ = _xyh1d_majorana_thermal_covariance(hmat, beta)
+    bonds = Float64[
+        -model.Jx * Σ[2i, 2i + 1] + model.Jy * Σ[2i - 1, 2i + 2] for i in 1:(N - 1)
+    ]
+    ε = Vector{Float64}(undef, N)
+    @inbounds for i in 1:N
+        left = i > 1 ? bonds[i - 1] : 0.0
+        right = i < N ? bonds[i] : 0.0
+        ε[i] = 0.5 * (left + right) - model.h * Σ[2i - 1, 2i]
+    end
+    return ε
+end

@@ -189,3 +189,45 @@ for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat, MagnetizationZ, Susceptibi
         notes="Per-site PBC quantity via two-sector free-fermion partition (AP + P).",
     )
 end
+
+# ── Site-local observables at PBC (Phase 2, #292) ──────────────────────
+register!(
+    XYh1D,
+    MagnetizationZLocal,
+    PBC;
+    method=:translational_invariance,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Uniform site-resolved ⟨σᶻ_i⟩ from bulk MagnetizationZ.",
+)
+register!(
+    XYh1D,
+    MagnetizationXLocal{:equilibrium},
+    PBC;
+    method=:symmetry,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Vanishes by Z₂ symmetry; returns zeros.",
+)
+register!(
+    XYh1D,
+    MagnetizationYLocal,
+    PBC;
+    method=:symmetry,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Vanishes by Z₂ symmetry; returns zeros.",
+)
+register!(
+    XYh1D,
+    EnergyLocal,
+    PBC;
+    method=:translational_invariance,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+    references=["Lieb-Schultz-Mattis 1961"],
+    notes="Uniform site-resolved ε_i = E_total / N.",
+)

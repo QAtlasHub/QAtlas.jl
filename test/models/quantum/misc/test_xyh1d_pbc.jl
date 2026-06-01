@@ -110,3 +110,33 @@ end
         @test χ > -1e-6
     end
 end
+
+@testset "XYh1D PBC — Site-local observables uniformity" begin
+    let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 100
+        mz_local = QAtlas.fetch(m, MagnetizationZLocal(), PBC(N=N); beta=β)
+        @test length(mz_local) == N
+        @test all(isfinite, mz_local)
+        # Translational invariance: all sites equal to first
+        @test all(isapprox.(mz_local, mz_local[1]; atol=1e-12))
+        # Matches bulk MagnetizationZ
+        mz_bulk = QAtlas.fetch(m, MagnetizationZ(), PBC(N=N); beta=β)
+        @test isapprox(mz_local[1], mz_bulk; atol=1e-12)
+    end
+
+    let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 50
+        mx = QAtlas.fetch(m, MagnetizationXLocal{:equilibrium}(), PBC(N=N); beta=β)
+        my = QAtlas.fetch(m, MagnetizationYLocal(), PBC(N=N); beta=β)
+        @test length(mx) == N && all(iszero, mx)
+        @test length(my) == N && all(iszero, my)
+    end
+
+    let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 100
+        ε = QAtlas.fetch(m, EnergyLocal(), PBC(N=N); beta=β)
+        @test length(ε) == N
+        @test all(isfinite, ε)
+        @test all(isapprox.(ε, ε[1]; atol=1e-12))
+        # Sum reproduces Energy{:total}
+        E_total = QAtlas.fetch(m, Energy{:total}(), PBC(N=N); beta=β)
+        @test isapprox(sum(ε), E_total; atol=1e-6)
+    end
+end

@@ -169,7 +169,7 @@ end
             QAtlas.Infinite();
             route=:limiting_case,
             fetch_kw=(; beta=β),
-            independent=-log(2) / β,
+            independent=(-log(2) / β),
             agree_within=abs(log(2) / β) * 2e-3,
             refs=[
                 "Mahan, Many-Particle Physics §1.3: free-fermion β → 0⁺ limit ω → -T log 2 per site",

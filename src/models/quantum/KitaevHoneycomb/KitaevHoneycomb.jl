@@ -92,9 +92,8 @@ end
     )
 end
 
-@inline _kitaev_fk_abs(m::KitaevHoneycomb, θ₁::Real, θ₂::Real) = sqrt(
-    max(_kitaev_fk_abs²(m, θ₁, θ₂), 0.0)
-)
+@inline _kitaev_fk_abs(m::KitaevHoneycomb, θ₁::Real, θ₂::Real) =
+    sqrt(max(_kitaev_fk_abs²(m, θ₁, θ₂), 0.0))
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Energy granularity convention: Kitaev is a 2D model — per-site is the

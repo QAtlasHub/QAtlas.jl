@@ -86,7 +86,7 @@ end
             Infinite();
             route=:sum_rule,
             fetch_kw=(; beta=β),
-            independent=-β^2 * dε_dβ,
+            independent=(-β^2 * dε_dβ),
             agree_within=1e-8,
             at=["J=$(J)", "h=$(h)", "β=$(β)"],
             refs=[
@@ -109,7 +109,7 @@ end
             OBC(N);
             route=:sum_rule,
             fetch_kw=(; beta=β),
-            independent=-β^2 * dE_dβ / N,
+            independent=(-β^2 * dE_dβ / N),
             agree_within=1e-9,
             at=["J=$(J)", "h=$(h)", "N=$(N)", "β=$(β)"],
             refs=[

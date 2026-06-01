@@ -155,7 +155,7 @@ end
             OBC(4);
             route=:second_closed_form,
             fetch_kw=(; beta=Inf),
-            independent=-(2.0 / 3.0) * J * 3 / 4,    # N=4: -(2J/3)·3/4
+            independent=(-(2.0 / 3.0) * J * 3 / 4),    # N=4: -(2J/3)·3/4
             agree_within=1e-14,
             refs=["AKLT 1988: bond-projector E_GS_OBC = -(2J/3)(N-1)"],
         )
@@ -165,7 +165,7 @@ end
             PBC(4);
             route=:second_closed_form,
             fetch_kw=(; beta=Inf),
-            independent=-(2.0 / 3.0) * J,
+            independent=(-(2.0 / 3.0) * J),
             agree_within=1e-14,
             refs=["AKLT 1988: PBC VBS unique, f = -2J/3"],
         )
@@ -175,7 +175,7 @@ end
             Infinite();
             route=:second_closed_form,
             fetch_kw=(; beta=Inf),
-            independent=-(2.0 / 3.0) * J,
+            independent=(-(2.0 / 3.0) * J),
             agree_within=1e-14,
             refs=["AKLT 1988: bulk f(∞) = -2J/3"],
         )

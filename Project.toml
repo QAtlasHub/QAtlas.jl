@@ -1,6 +1,6 @@
 name = "QAtlas"
 uuid = "2bd488d2-d3e6-46ee-afb3-5515643db0c7"
-version = "0.22.14"
+version = "0.22.16"
 authors = ["sota shimozono <shimozono-sota631@g.ecc.u-tokyo.ac.jp>"]
 
 [deps]
@@ -12,8 +12,8 @@ SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Aqua = "0.8"
 ForwardDiff = "0.10, 1"
 KrylovKit = "0.8, 0.9, 0.10"
-LatticeCore = "0.8, 0.10"
 Lattice2D = "0.2.8, 0.3"
+LatticeCore = "0.8, 0.10"
 LinearAlgebra = "1.10"
 QuadGK = "2.11.2"
 Random = "1.10"

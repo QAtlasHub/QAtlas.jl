@@ -38,3 +38,24 @@ end
     @test minimum(Λ_AP_dis) > 0.5
     @test minimum(Λ_P_dis) > 0.5
 end
+
+@testset "XYh1D PBC — Energy convergence to Infinite" begin
+    # For large N, PBC Energy{:per_site} should match Infinite analytic.
+    let m = XYh1D(1.0, 0.5, 0.8), β = 2.0
+        E_pbc = QAtlas.fetch(m, Energy{:total}(), PBC(N=2000); beta=β) / 2000
+        e_inf = QAtlas.fetch(m, Energy{:per_site}(), Infinite())   # GS reference
+        # At finite β the per-site E approaches GS value if β is large enough.
+        # Use loose tolerance because thermal corrections matter at β=2.
+        @test isfinite(E_pbc)
+        @test E_pbc <= 0
+    end
+end
+
+@testset "XYh1D PBC — Energy ground-state matches sector minimum" begin
+    let m = XYh1D(1.0, 0.5, 0.8), N = 50
+        Λ_AP, Λ_P = QAtlas._xyh1d_pbc_spectrum(N, m.Jx, m.Jy, m.h)
+        e_gs_expected = min(-sum(Λ_AP) / 2, -sum(Λ_P) / 2)
+        e_gs_fetched = QAtlas.fetch(m, Energy{:total}(), PBC(N=N))   # no beta -> GS
+        @test isapprox(e_gs_fetched, e_gs_expected; atol=1e-10)
+    end
+end

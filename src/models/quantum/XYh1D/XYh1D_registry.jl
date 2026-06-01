@@ -163,3 +163,15 @@ end
     references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
     notes="Minimum quasiparticle energy over both PBC sectors (AP and P).",
 )
+
+# ── Energy{:total} at PBC (Phase 2, #292) ──────────────────────────────
+register!(
+    XYh1D,
+    Energy{:total},
+    PBC;
+    method=:two_sector_freefermion,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    notes="Exact total energy via two-sector free-fermion partition (AP + P).",
+)

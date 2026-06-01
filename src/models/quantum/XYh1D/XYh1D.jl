@@ -637,3 +637,47 @@ function fetch(model::XYh1D, ::MassGap, bc::PBC; kwargs...)
     Λ_AP, Λ_P = _xyh1d_pbc_spectrum(N, model.Jx, model.Jy, model.h)
     return min(minimum(Λ_AP), minimum(Λ_P))
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Energy — PBC (Phase 2, #292)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+native_energy_granularity(::XYh1D, ::PBC) = :total
+
+"""
+    fetch(model::XYh1D, ::Energy{:total}, bc::PBC; beta, kwargs...) -> Float64
+
+Ground-state (β → ∞) or thermal total energy for PBC XYh1D, via the exact
+two-sector free-fermion partition function (Lieb-Schultz-Mattis 1961).
+"""
+function fetch(
+    model::XYh1D,
+    ::Energy{:total},
+    bc::PBC;
+    beta::Union{Real,Nothing}=nothing,
+    betas::Union{AbstractVector{<:Real},Nothing}=nothing,
+    kwargs...,
+)
+    N = _bc_size(bc, kwargs)
+    Λ_AP, Λ_P = _xyh1d_pbc_spectrum(N, model.Jx, model.Jy, model.h)
+    function _pbc_energy(β::Real)
+        lZ_AP = _xyh1d_pbc_sector_logZ(Λ_AP, β)
+        lZ_P = _xyh1d_pbc_sector_logZ(Λ_P, β)
+        lZ = max(lZ_AP, lZ_P) + log1p(exp(-abs(lZ_AP - lZ_P)))
+        w_AP = exp(lZ_AP - lZ)
+        w_P = exp(lZ_P - lZ)
+        e_AP = -sum(λ -> (λ / 2) * tanh(β * λ / 2), Λ_AP)
+        e_P = -sum(λ -> (λ / 2) * tanh(β * λ / 2), Λ_P)
+        return w_AP * e_AP + w_P * e_P
+    end
+    if betas !== nothing
+        return [_pbc_energy(β) for β in betas]
+    elseif beta !== nothing
+        return _pbc_energy(beta)
+    else
+        # Ground state: β → ∞, lowest sector dominates
+        e_AP_gs = -sum(Λ_AP) / 2
+        e_P_gs = -sum(Λ_P) / 2
+        return min(e_AP_gs, e_P_gs)
+    end
+end

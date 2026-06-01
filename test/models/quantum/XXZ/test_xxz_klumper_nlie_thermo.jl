@@ -81,4 +81,25 @@ using QAtlas: _XXZ_NLIE_GRID_CACHE
         m = XXZ1D(; J=1.0, Δ=-0.5)
         @test_skip isfinite(QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=1.0))
     end
+
+    @testset "ThermalEntropy + SpecificHeat at Δ = 0.5 via NLIE finite-diff (#521 path)" begin
+        m = XXZ1D(; J=1.0, Δ=0.5)
+        β = 1.0
+        s = QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=β)
+        c = QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=β)
+        # Sanity: both positive, both bounded by high-T saturations.
+        @test isfinite(s) && s > 0
+        @test isfinite(c) && c > 0
+        @test s ≤ log(2) + 1e-6      # ln 2 = high-T entropy bound per site
+        @test c ≤ 0.5                 # well below the Schottky-anomaly upper bound for a spin-½ site
+    end
+
+    @testset "High-T s → ln 2, c → 0 at Δ = 0.5" begin
+        m = XXZ1D(; J=1.0, Δ=0.5)
+        β = 0.001
+        s = QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=β)
+        c = QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=β)
+        @test isapprox(s, log(2); rtol=1e-3)
+        @test abs(c) < 1e-3
+    end
 end

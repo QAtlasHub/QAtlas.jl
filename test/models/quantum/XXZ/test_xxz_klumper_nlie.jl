@@ -50,8 +50,8 @@ using QAtlas: XXZ1D, FreeEnergy, ThermalEntropy, SpecificHeat, Energy, Infinite
         )
     end
 
-    @testset "ThermalEntropy / SpecificHeat at Δ = 0.5 still NaN (NLIE not yet wired)" begin
-        m = XXZ1D(; J=1.0, Δ=0.5)
+    @testset "|Δ| ≥ 0.99 endpoint guard also blocks ThermalEntropy and SpecificHeat" begin
+        m = XXZ1D(; J=1.0, Δ=0.999)
         s = (@test_logs (:warn,) match_mode=:any QAtlas.fetch(
             m, ThermalEntropy(), Infinite(); beta=1.0
         ))

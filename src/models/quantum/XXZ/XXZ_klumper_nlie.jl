@@ -11,9 +11,13 @@
 #
 #   H = J Σᵢ [ Sˣᵢ Sˣᵢ₊₁ + Sʸᵢ Sʸᵢ₊₁ + Δ Sᶻᵢ Sᶻᵢ₊₁ ]
 #
-# via γ = arccos(Δ), β̃ = β J sin(γ)/2 (pinned by the XX (Δ=0) limit
-# against the exact free-fermion result; see _xx_limit_check in the
-# test file).  In Klümper's energy units the free-energy density per
+# via γ = arccos(Δ), β̃ = β J sin(γ)/2.  The factor sin(γ)/2 is the
+# rescaling that maps Klümpers natural energy unit (eq. 5.1, J_X = 1/sin γ
+# after the canonical sign-flip and axis-cycling unitaries) onto QAtlass
+# H_Q = J Σ S·S coupling; the prefactor sin γ is recovered explicitly in
+# the XX limit (γ = π/2, eq. 5.7), where the spectral parameter identifi-
+# cation reduces to β̃ = β J / 2 and is cross-checked against the
+# free-fermion closed form by the XX-limit testset.  In Klümper's energy units the free-energy density per
 # site is
 #
 #       β̃ ( f_K − ε_K ) = − (1/(2γ)) ∫_{-∞}^{∞} ln[ A(x) Ā(x) ] / cosh(πx/γ) dx.   (5.5)
@@ -111,13 +115,30 @@ function build_grid(
     0 < γ < π || throw(DomainError(γ, "γ must lie in (0, π) for the critical regime"))
     ε_shift >= _KSHIFT_EPS_MIN || throw(
         ArgumentError(
-            "ε_shift = \$ε_shift below safe floor \$_KSHIFT_EPS_MIN; " *
+            "ε_shift = $(ε_shift) below safe floor $(_KSHIFT_EPS_MIN); " *
             "the shifted kernel integral overflows for smaller ε. " *
-            "Choose ε_shift in [\$_KSHIFT_EPS_MIN, γ) or use the default 0.5.",
+            "Choose ε_shift in [$(_KSHIFT_EPS_MIN), γ) or use the default 0.5.",
         ),
     )
     ε_shift < γ ||
-        throw(ArgumentError("ε_shift = \$ε_shift must be strictly less than γ = \$γ."))
+        throw(ArgumentError("ε_shift = $(ε_shift) must be strictly less than γ = $(γ)."))
+    # γ-aware overflow guard. `_kshift_kmax(ε)` returns max(60, 30/ε); the
+    # cosh(k·(γ-ε)) integrand evaluated at k = kmax overflows Float64 above
+    # cosh(709). If kmax·(γ-ε) > 709, quadgk silently returns NaN and poisons
+    # the entire Toeplitz kernel. Refuse such inputs with an explicit error.
+    decay_c = γ - ε_shift
+    kmax_guess = _kshift_kmax(ε_shift)
+    if kmax_guess * decay_c > 700.0
+        eps_floor_for_γ = γ - 700.0 / kmax_guess
+        throw(
+            ArgumentError(
+                "ε_shift = $(ε_shift) combined with γ = $(γ) (Δ = $(cos(γ))) drives " *
+                "cosh(kmax·(γ-ε)) over the Float64 ceiling; the shifted kernel " *
+                "integral would silently return NaN. Increase ε_shift above " *
+                "$(eps_floor_for_γ) or reduce γ.",
+            ),
+        )
+    end
     L = L_factor * γ / π
     dx = 2L / N
     x = [(i - (N + 1) / 2) * dx for i in 1:N]
@@ -238,6 +259,12 @@ end  # module XXZKlumperNLIE
 # Cache + dispatch glue (outside the module so it can call into QAtlas)
 # ════════════════════════════════════════════════════════════════════════════
 
+# Module-level grid cache. Practical bound: one entry per distinct
+# (γ, N, L_factor, ε_shift) tuple. In production usage all calls go through
+# `_xxz_nlie_grid`, which fixes (N, L_factor, ε_shift) = (128, 15.0, 0.5),
+# so the cache size grows by one per distinct Δ (= arccos γ, rounded to 10
+# digits). Memory per entry ≈ 4·N + 2·(2N-1)·8 bytes ≈ 4 KiB; a 100-Δ
+# coverage sweep stays under 0.5 MiB.
 const _XXZ_NLIE_GRID_CACHE = Dict{
     Tuple{Float64,Int,Float64,Float64},XXZKlumperNLIE.NLIEGrid
 }()
@@ -272,7 +299,15 @@ on iteration failure.
 function _xxz_klumper_free_energy_excess(model::XXZ1D, beta::Real)
     Δ, J = model.Δ, model.J
     beta > 0 ||
-        throw(DomainError(beta, "XXZ1D Klümper NLIE requires β > 0; got β = \$beta."))
+        throw(DomainError(beta, "XXZ1D Klümper NLIE requires β > 0; got β = $(beta)."))
+    J > 0 || throw(
+        DomainError(
+            J,
+            "XXZ1D Klümper NLIE requires J > 0; got J = $(J). " *
+            "J = 0 makes the Klümper energy unit J·sin(γ)/2 vanish (β̃ = 0), " *
+            "causing a 0/0 in the free-energy integral.",
+        ),
+    )
     if !(-0.99 < Δ < 0.99)
         @warn "XXZ1D Klümper NLIE skips |Δ| ≥ 0.99 (mapping degenerates as sin γ → 0); " *
             "Heisenberg/FM endpoint deferred to issue #521." Δ
@@ -280,14 +315,20 @@ function _xxz_klumper_free_energy_excess(model::XXZ1D, beta::Real)
     end
     pars = XXZKlumperNLIE.qatlas_to_klumper(Float64(Δ), Float64(J), Float64(beta))
     grid = _xxz_nlie_grid(pars.γ)
+    # Solver parameters are hard-coded here for the production dispatch path.
+    # Callers needing tighter convergence (tol=1e-12) or different mixing α
+    # should call XXZKlumperNLIE.solve_klumper_nlie(grid, β̃; α=..., ...) directly.
     sol = XXZKlumperNLIE.solve_klumper_nlie(grid, pars.β̃; α=0.4, maxiter=400, tol=1e-9)
     if !sol.converged
         @warn "XXZ1D Klümper NLIE did not converge for FreeEnergy@Infinite" Δ beta residual=sol.residual iterations=sol.iterations
         return NaN
     end
     # Surface near-marginal solutions even when the boolean flag is true.
+    # `@info` rather than `@warn`: the result is mildly noisier than the
+    # tol=1e-9 target, not wrong, so we avoid diluting the genuine
+    # non-convergence warning above by reserving `@warn` for that.
     if sol.residual > 1e-7
-        @warn "XXZ1D Klümper NLIE converged but residual is high; the result may be biased." Δ beta residual=sol.residual
+        @info "XXZ1D Klümper NLIE converged but residual is above 1e-7; the result may be slightly biased." Δ beta residual=sol.residual
     end
     return pars.escale * XXZKlumperNLIE.free_energy_excess_klumper(sol)
 end

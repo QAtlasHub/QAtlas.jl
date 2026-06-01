@@ -59,3 +59,54 @@ end
         @test isapprox(e_gs_fetched, e_gs_expected; atol=1e-10)
     end
 end
+
+@testset "XYh1D PBC — FreeEnergy is finite and monotone in β" begin
+    # PBC and Infinite use different conventions for f (PBC: total per-site
+    # vs Infinite: excess from GS); detailed cross-BC comparison is left
+    # to the F = E − TS consistency test below. Here just sanity-check that
+    # the PBC value is finite and decreases monotonically as β increases.
+    let m = XYh1D(1.0, 0.5, 0.8)
+        fs = [
+            QAtlas.fetch(m, FreeEnergy(), PBC(N=500); beta=β) for β in (0.5, 1.0, 2.0, 4.0)
+        ]
+        @test all(isfinite, fs)
+        @test all(diff(fs) .>= -1e-10)  # f is monotone non-decreasing in β
+    end
+end
+
+@testset "XYh1D PBC — Thermodynamic consistency F = E - TS" begin
+    let m = XYh1D(1.0, 0.5, 0.8), β = 1.5, N = 200
+        F = QAtlas.fetch(m, FreeEnergy(), PBC(N=N); beta=β)
+        S = QAtlas.fetch(m, ThermalEntropy(), PBC(N=N); beta=β)
+        E = QAtlas.fetch(m, Energy{:total}(), PBC(N=N); beta=β) / N
+        @test isapprox(F, E - S / β; atol=1e-6)
+    end
+end
+
+@testset "XYh1D PBC — SpecificHeat non-negativity" begin
+    let m = XYh1D(1.0, 0.5, 0.8)
+        for β in (0.1, 0.5, 1.0, 2.0, 5.0)
+            Cv = QAtlas.fetch(m, SpecificHeat(), PBC(N=300); beta=β)
+            @test Cv >= -1e-10
+        end
+        Cv_low = QAtlas.fetch(m, SpecificHeat(), PBC(N=300); beta=100.0)
+        @test Cv_low < 1.0   # T → 0 limit: Cv → 0
+    end
+end
+
+@testset "XYh1D PBC — MagnetizationZ field-sign anti-symmetry" begin
+    let m_pos = XYh1D(; Jx=1.0, Jy=0.5, h=0.7), β = 1.0
+        m_neg = XYh1D(; Jx=1.0, Jy=0.5, h=-0.7)
+        mz_pos = QAtlas.fetch(m_pos, MagnetizationZ(), PBC(N=500); beta=β)
+        mz_neg = QAtlas.fetch(m_neg, MagnetizationZ(), PBC(N=500); beta=β)
+        @test isapprox(mz_pos, -mz_neg; atol=1e-10)
+    end
+end
+
+@testset "XYh1D PBC — SusceptibilityZZ positivity" begin
+    let m = XYh1D(1.0, 0.5, 0.8), β = 1.0
+        χ = QAtlas.fetch(m, SusceptibilityZZ(), PBC(N=500); beta=β)
+        @test isfinite(χ)
+        @test χ > -1e-6
+    end
+end

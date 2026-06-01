@@ -681,3 +681,26 @@ function fetch(
         return min(e_AP_gs, e_P_gs)
     end
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Thermodynamic potentials and magnetization — PBC (Phase 2, #292)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+const _XYH1D_PBC_THERMAL_METHODS = (
+    (FreeEnergy, :free_energy),
+    (ThermalEntropy, :entropy),
+    (SpecificHeat, :specific_heat),
+    (MagnetizationZ, :transverse_magnetization),
+    (SusceptibilityZZ, :transverse_susceptibility),
+)
+
+for (QTy, qsym) in _XYH1D_PBC_THERMAL_METHODS
+    @eval begin
+        function fetch(model::XYh1D, ::$QTy, bc::PBC; beta::Real, kwargs...)
+            N = _bc_size(bc, kwargs)
+            return _xyh1d_thermo_pbc(
+                $(QuoteNode(qsym)), N, model.Jx, model.Jy, model.h, beta
+            )
+        end
+    end
+end

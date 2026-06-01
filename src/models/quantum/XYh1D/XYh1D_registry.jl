@@ -175,3 +175,17 @@ register!(
     references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
     notes="Exact total energy via two-sector free-fermion partition (AP + P).",
 )
+
+# ── Thermodynamic potentials at PBC (Phase 2, #292) ────────────────────
+for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat, MagnetizationZ, SusceptibilityZZ)
+    register!(
+        XYh1D,
+        QTy,
+        PBC;
+        method=:analytic,
+        reliability=:high,
+        tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+        references=["Lieb-Schultz-Mattis 1961"],
+        notes="Per-site PBC quantity via two-sector free-fermion partition (AP + P).",
+    )
+end

@@ -586,4 +586,52 @@ function free_energy_jks(
     return real(f)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.3 partial — complex analytic continuation of phi
+#
+# JKS Sec 5 uses the elementary function phi evaluated on contours shifted
+# off the real axis by +- i alpha (alpha is the b/b_bar contour shift, free
+# with 0 < alpha < eta = U/4). The Stage C.2 jks_log_phi only covered the
+# real axis at |s| > 1; this file adds the complex analytic continuation
+#
+#     ln phi(s) = -2 beta s sqrt(1 - 1/s^2)
+#
+# with the principal branch of sqrt (positive real part for large |s|).
+#
+# This is the input for the driving terms psi_b, psi_c, psi_c_bar (eq 58-59)
+# which Stage C.4 will assemble.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    jks_log_phi_complex(s::Number, beta::Real) -> ComplexF64
+
+Complex analytic continuation of the JKS elementary function phi (eq 48):
+
+    ln phi(s) = -2 beta s sqrt(1 - 1/s^2)
+
+For real `s` with |s| > 1 this reduces to the real-axis form
+`ln phi(s) = -2 beta |s| sqrt(1 - 1/s^2)`. For real `s` with |s| <= 1
+the value is pure imaginary — this is the branch-cut discontinuity
+used by the contour integrals in eq (49).
+
+For complex `s = x + i y` with `y != 0`, returns the value on the
+principal sheet.
+
+Throws `DomainError` for `beta <= 0`.
+"""
+function jks_log_phi_complex(s::Number, beta::Real)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    return -2 * beta * sqrt(s^2 - 1 + 0im)
+end
+
+"""
+    jks_phi_complex(s::Number, beta::Real) -> ComplexF64
+
+Exponential form: `phi(s) = exp(ln phi(s))` with complex `s`. The result
+is finite for any `s` (the cut is a discontinuity, not a singularity).
+"""
+function jks_phi_complex(s::Number, beta::Real)
+    return exp(jks_log_phi_complex(s, beta))
+end
+
 end  # module Hubbard1DJKSNLIE

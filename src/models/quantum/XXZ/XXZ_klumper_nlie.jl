@@ -59,9 +59,14 @@ end
 
 # Shifted kernel k(x - i(γ - ε)), complex-valued. Decay at large |k| is
 # controlled by ε > 0 (must satisfy 0 < ε < γ).
-function _kshift(x::Real, γ::Real, ε::Real;
-                 kmax::Real=max(60.0, 30.0 / ε),
-                 rtol::Real=1e-10)
+# Adaptive kmax for the slow e^{-εk} tail of the iε-regularised kernel.
+_kshift_kmax(ε::Real) = max(60.0, 30.0 / ε)
+
+# Minimum safe ε_shift: keeps cosh(k·(γ-ε)) within Float64 range during
+# numerical integration. Below this floor _kshift overflows quadgk.
+const _KSHIFT_EPS_MIN = 0.1
+
+function _kshift(x::Real, γ::Real, ε::Real; kmax::Real=_kshift_kmax(ε), rtol::Real=1e-10)
     decay = γ - ε
     decay > 0 || throw(ArgumentError("ε must satisfy 0 < ε < γ; got ε=$ε, γ=$γ"))
     re, _ = quadgk(k -> _khat(k, γ) * cos(k * x) * cosh(k * decay), 0.0, kmax; rtol=rtol)
@@ -86,12 +91,19 @@ struct NLIEGrid
     k_shift_vec::Vector{ComplexF64}          # length 2N-1, k_shift(d·dx)
 end
 
-function build_grid(γ::Real;
-                    N::Int=512,
-                    L_factor::Real=20.0,
-                    ε_shift::Real=0.5,
-                    rtol::Real=1e-10)
+function build_grid(
+    γ::Real; N::Int=512, L_factor::Real=20.0, ε_shift::Real=0.5, rtol::Real=1e-10
+)
     0 < γ < π || throw(DomainError(γ, "γ must lie in (0, π) for the critical regime"))
+    ε_shift >= _KSHIFT_EPS_MIN || throw(
+        ArgumentError(
+            "ε_shift = \$ε_shift below safe floor \$_KSHIFT_EPS_MIN; " *
+            "the shifted kernel integral overflows for smaller ε. " *
+            "Choose ε_shift in [\$_KSHIFT_EPS_MIN, γ) or use the default 0.5.",
+        ),
+    )
+    ε_shift < γ ||
+        throw(ArgumentError("ε_shift = \$ε_shift must be strictly less than γ = \$γ."))
     L = L_factor * γ / π
     dx = 2L / N
     x = [(i - (N + 1) / 2) * dx for i in 1:N]
@@ -100,18 +112,29 @@ function build_grid(γ::Real;
     Nk = 2N - 1
     k_vec = Vector{Float64}(undef, Nk)
     k_shift_vec = Vector{ComplexF64}(undef, Nk)
-    for (i, d) in enumerate(-(N - 1):(N - 1))
+    for (i, d) in enumerate((-(N - 1)):(N - 1))
         xd = d * dx
         k_vec[i] = _kreal(xd, γ; rtol=rtol)
         k_shift_vec[i] = _kshift(xd, γ, ε_shift; rtol=rtol)
     end
-    return NLIEGrid(Float64(γ), N, dx, L, Float64(ε_shift),
-                    x, sech_factor, driving_template, k_vec, k_shift_vec)
+    return NLIEGrid(
+        Float64(γ),
+        N,
+        dx,
+        L,
+        Float64(ε_shift),
+        x,
+        sech_factor,
+        driving_template,
+        k_vec,
+        k_shift_vec,
+    )
 end
 
 # Toeplitz matrix-vector product g[i] = Σⱼ k_vec[N + i - j] · f[j] · dx.
-function _conv!(g::AbstractVector, k_vec::AbstractVector,
-                f::AbstractVector, N::Int, dx::Real)
+function _conv!(
+    g::AbstractVector, k_vec::AbstractVector, f::AbstractVector, N::Int, dx::Real
+)
     @inbounds for i in 1:N
         s = zero(eltype(g))
         for j in 1:N
@@ -135,11 +158,14 @@ struct NLIESolution
     residual::Float64
 end
 
-function solve_klumper_nlie(grid::NLIEGrid, β̃::Real;
-                            α::Real=0.5,
-                            maxiter::Int=500,
-                            tol::Real=1e-10,
-                            verbose::Bool=false)
+function solve_klumper_nlie(
+    grid::NLIEGrid,
+    β̃::Real;
+    α::Real=0.5,
+    maxiter::Int=500,
+    tol::Real=1e-10,
+    verbose::Bool=false,
+)
     N = grid.N
     driving = β̃ .* grid.driving_template
     a = ComplexF64.(exp.(driving))
@@ -189,7 +215,7 @@ function qatlas_to_klumper(Δ::Real, J::Real, β::Real)
     sinγ = sin(γ)
     β̃ = β * J * sinγ / 2
     escale = J * sinγ / 2
-    return γ, β̃, escale
+    return (; γ, β̃, escale)
 end
 
 end  # module XXZKlumperNLIE
@@ -198,14 +224,27 @@ end  # module XXZKlumperNLIE
 # Cache + dispatch glue (outside the module so it can call into QAtlas)
 # ════════════════════════════════════════════════════════════════════════════
 
-const _XXZ_NLIE_GRID_CACHE = Dict{Tuple{Float64,Int,Float64,Float64},XXZKlumperNLIE.NLIEGrid}()
+const _XXZ_NLIE_GRID_CACHE = Dict{
+    Tuple{Float64,Int,Float64,Float64},XXZKlumperNLIE.NLIEGrid
+}()
+const _XXZ_NLIE_GRID_CACHE_LOCK = ReentrantLock()
 
-function _xxz_nlie_grid(γ::Float64; N::Int=128, L_factor::Float64=15.0, ε_shift::Float64=0.5)
+# `_xxz_nlie_grid` returns a cached `NLIEGrid` keyed on
+# `(round(γ; digits=10), N, L_factor, ε_shift)`. N defaults to 128 —
+# the production sweet spot empirically: at γ ≈ π/3 the kernel decays
+# as e^{-π|x|/γ}, so L_factor·γ/π = 15·1/3 ≈ 5 with dx ≈ 0.04 resolves
+# the kernel to ~1e-7. Coarser than the standalone `build_grid` default
+# (N=512), but the dispatch-level caller cares about wall time over the
+# spectral tail beyond 5γ/π, which is already e^{-15}-suppressed.
+function _xxz_nlie_grid(
+    γ::Float64; N::Int=128, L_factor::Float64=15.0, ε_shift::Float64=0.5
+)
     key = (round(γ; digits=10), N, L_factor, ε_shift)
-    haskey(_XXZ_NLIE_GRID_CACHE, key) && return _XXZ_NLIE_GRID_CACHE[key]
-    g = XXZKlumperNLIE.build_grid(γ; N=N, L_factor=L_factor, ε_shift=ε_shift)
-    _XXZ_NLIE_GRID_CACHE[key] = g
-    return g
+    lock(_XXZ_NLIE_GRID_CACHE_LOCK) do
+        get!(_XXZ_NLIE_GRID_CACHE, key) do
+            XXZKlumperNLIE.build_grid(γ; N=N, L_factor=L_factor, ε_shift=ε_shift)
+        end
+    end
 end
 
 """
@@ -218,17 +257,23 @@ on iteration failure.
 """
 function _xxz_klumper_free_energy_excess(model::XXZ1D, beta::Real)
     Δ, J = model.Δ, model.J
+    beta > 0 ||
+        throw(DomainError(beta, "XXZ1D Klümper NLIE requires β > 0; got β = \$beta."))
     if !(-0.99 < Δ < 0.99)
         @warn "XXZ1D Klümper NLIE skips |Δ| ≥ 0.99 (mapping degenerates as sin γ → 0); " *
             "Heisenberg/FM endpoint deferred to issue #521." Δ
         return NaN
     end
-    γ, β̃, escale = XXZKlumperNLIE.qatlas_to_klumper(Float64(Δ), Float64(J), Float64(beta))
-    grid = _xxz_nlie_grid(γ)
-    sol = XXZKlumperNLIE.solve_klumper_nlie(grid, β̃; α=0.4, maxiter=400, tol=1e-9)
+    pars = XXZKlumperNLIE.qatlas_to_klumper(Float64(Δ), Float64(J), Float64(beta))
+    grid = _xxz_nlie_grid(pars.γ)
+    sol = XXZKlumperNLIE.solve_klumper_nlie(grid, pars.β̃; α=0.4, maxiter=400, tol=1e-9)
     if !sol.converged
-        @warn "XXZ1D Klümper NLIE did not converge" Δ beta residual=sol.residual iterations=sol.iterations
+        @warn "XXZ1D Klümper NLIE did not converge for FreeEnergy@Infinite" Δ beta residual=sol.residual iterations=sol.iterations
         return NaN
     end
-    return escale * XXZKlumperNLIE.free_energy_excess_klumper(sol)
+    # Surface near-marginal solutions even when the boolean flag is true.
+    if sol.residual > 1e-7
+        @warn "XXZ1D Klümper NLIE converged but residual is high; the result may be biased." Δ beta residual=sol.residual
+    end
+    return pars.escale * XXZKlumperNLIE.free_energy_excess_klumper(sol)
 end

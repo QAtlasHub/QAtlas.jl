@@ -241,7 +241,7 @@ include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_xx_infinite.jl")
 include("models/quantum/XXZ/XXZ_xx_quench.jl")
-include("models/quantum/XXZ/XXZ_klumper_nlie.jl")  # XX (Δ=0) Loschmidt rate at Infinite (issue #148)
+include("models/quantum/XXZ/XXZ_klumper_nlie.jl")  # Klümper QTM NLIE for critical Δ ∈ (-1,1) (issue #521)
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 include("models/quantum/Hubbard1D/Hubbard1D.jl")

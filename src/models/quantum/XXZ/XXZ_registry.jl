@@ -232,11 +232,11 @@ end
     XXZ1D,
     FreeEnergy,
     Infinite,
-    method=:free_fermion_quadgk,
-    reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan §1.3", "Coleman §2.4", "Takahashi 1999 §4"],
-    notes="XX (Δ = 0) free-fermion f(β) by QuadGK; warns + NaN at general Δ (issue #108).",
+    method=:klumper_nlie,
+    reliability=:medium,
+    tested_in="test/models/quantum/XXZ/test_xxz_klumper_nlie.jl",
+    references=["Mahan §1.3", "Coleman §2.4", "Takahashi 1999 §4", "Klümper 1993"],
+    notes="Δ = 0: XX free-fermion f(β) by QuadGK (exact); -1 < Δ < 1, |Δ| < 0.99: Klümper QTM NLIE (issue #521); |Δ| ≥ 0.99 or gapped: NaN + warn.",
 )
 @register(
     XXZ1D,

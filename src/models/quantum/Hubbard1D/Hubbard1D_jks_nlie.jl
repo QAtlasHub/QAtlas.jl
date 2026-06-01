@@ -282,4 +282,143 @@ function apply_kernel(K::AbstractMatrix, f::AbstractVector)
     return K * f
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.1 — auxiliary-function container
+#
+# Holds the 4 complex-valued auxiliary functions (b, b_bar, c, c_bar) of
+# JKS eq (27) on the discretised contour. Provides safe initialisation
+# from the atomic-limit fugacities (Stage A) — a reasonable Picard
+# starting point for any (beta, U, mu, h), but NOT claimed to be an
+# NLIE solution outside the atomic limit.
+#
+# Stage C.2 will add the NLIE residual evaluator (forward operator),
+# the Trotter-limit driving function `log lambda_0(x)`, and the Picard
+# iteration solver. Stage C.3 will wire the production fetch dispatch.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Auxiliary-function container
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    JKSAuxFunctions(N)
+
+Container for the four JKS auxiliary functions evaluated on an N-point
+discretised contour:
+
+- `b::Vector{ComplexF64}`     — b(x_j + i gamma)     (eq 27, 51)
+- `b_bar::Vector{ComplexF64}` — bar b(x_j - i gamma)
+- `c::Vector{ComplexF64}`     — c(x_j + i 0+)
+- `c_bar::Vector{ComplexF64}` — bar c(x_j - i 0+)
+
+Each vector has length `N`. The constructor `JKSAuxFunctions(N)` returns
+zero-initialised arrays — see `init_atomic_limit!` for a physically
+meaningful starting point.
+"""
+struct JKSAuxFunctions
+    b::Vector{ComplexF64}
+    b_bar::Vector{ComplexF64}
+    c::Vector{ComplexF64}
+    c_bar::Vector{ComplexF64}
+    function JKSAuxFunctions(N::Int)
+        N > 0 || throw(DomainError(N, "N must be > 0"))
+        return new(
+            zeros(ComplexF64, N),
+            zeros(ComplexF64, N),
+            zeros(ComplexF64, N),
+            zeros(ComplexF64, N),
+        )
+    end
+end
+
+"""
+    Base.length(aux::JKSAuxFunctions) -> Int
+
+Number of contour points (equal across all four arrays).
+"""
+Base.length(aux::JKSAuxFunctions) = length(aux.b)
+
+"""
+    Base.copy(aux::JKSAuxFunctions) -> JKSAuxFunctions
+
+Deep-copy of all four auxiliary-function arrays. Used by the Stage C.2
+Picard iteration to keep prior-iterate values for mixing.
+"""
+function Base.copy(aux::JKSAuxFunctions)
+    new_aux = JKSAuxFunctions(length(aux))
+    copyto!(new_aux.b, aux.b)
+    copyto!(new_aux.b_bar, aux.b_bar)
+    copyto!(new_aux.c, aux.c)
+    copyto!(new_aux.c_bar, aux.c_bar)
+    return new_aux
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Atomic-limit initialization
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# At t = 0 the Hubbard sites decouple. The four Boltzmann weights
+#
+#   z_empty  = 1
+#   z_up     = exp(beta * (mu + h/2))
+#   z_down   = exp(beta * (mu - h/2))
+#   z_double = exp(beta * (2 mu - U))
+#
+# give a per-site partition function Z_site. In this limit the auxiliary
+# functions become x-independent constants determined by the JKS Sec 7.3
+# high-T analysis. Without the full eq (138) at hand, we use the spin-
+# channel and charge-channel ratios as physically motivated initial
+# guesses:
+#
+#   b_const    = (z_up + z_down) / (z_empty + z_double)
+#   c_const    = z_up / Z_site
+#   cbar_const = z_down / Z_site
+#
+# These are NOT claimed to be exact NLIE solutions for t > 0; they are
+# the starting point Stage C.2's Picard iteration relaxes to the true
+# fixed-point auxiliary functions.
+
+"""
+    init_atomic_limit!(aux, beta, U, mu; h=0.0) -> JKSAuxFunctions
+
+Fill `aux` with x-independent constants derived from the atomic-limit
+Boltzmann weights at the requested `(beta, U, mu, h)`. Returns `aux`
+for chaining.
+
+Used as the Picard iteration starting point in Stage C.2. The constants
+are physically motivated but NOT verified against JKS eq (138); Stage
+C.2 may revise them once the paper's high-T analysis is fully ported.
+"""
+function init_atomic_limit!(
+    aux::JKSAuxFunctions, beta::Real, U::Real, mu::Real; h::Real=0.0
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    z_empty = 1.0
+    z_up = exp(beta * (mu + h/2))
+    z_down = exp(beta * (mu - h/2))
+    z_double = exp(beta * (2 * mu - U))
+    Z_site = z_empty + z_up + z_down + z_double
+
+    b_const = ComplexF64((z_up + z_down) / (z_empty + z_double))
+    c_const = ComplexF64(z_up / Z_site)
+    cbar_const = ComplexF64(z_down / Z_site)
+
+    fill!(aux.b, b_const)
+    fill!(aux.b_bar, b_const)
+    fill!(aux.c, c_const)
+    fill!(aux.c_bar, cbar_const)
+    return aux
+end
+
+"""
+    init_atomic_limit(grid, beta, U, mu; h=0.0) -> JKSAuxFunctions
+
+Convenience: allocate a fresh `JKSAuxFunctions(grid.N)` and initialise
+it via `init_atomic_limit!`.
+"""
+function init_atomic_limit(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; h::Real=0.0)
+    aux = JKSAuxFunctions(grid.N)
+    return init_atomic_limit!(aux, beta, U, mu; h=h)
+end
+
 end  # module Hubbard1DJKSNLIE

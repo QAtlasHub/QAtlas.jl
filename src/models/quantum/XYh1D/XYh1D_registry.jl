@@ -47,3 +47,27 @@
     references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
     notes="Total ground-state and finite-T energy via BdG spectrum sum.",
 )
+
+# ── Scalar Thermodynamic Potentials ───────────────────────────────────
+for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat)
+    register!(
+        XYh1D,
+        QTy,
+        Infinite;
+        method=:quadgk,
+        reliability=:high,
+        tested_in="test/models/quantum/misc/test_xyh1d.jl",
+        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+        notes="Per-site thermal quantity via QuadGK over dispersion.",
+    )
+    register!(
+        XYh1D,
+        QTy,
+        OBC;
+        method=:bdg,
+        reliability=:high,
+        tested_in="test/models/quantum/misc/test_xyh1d.jl",
+        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+        notes="Per-site thermal quantity from OBC BdG spectrum sum.",
+    )
+end

@@ -125,6 +125,108 @@ native_energy_granularity(::XYh1D, ::Infinite) = :per_site
 
 Single-particle Bogoliubov gap of the LSM/Pfeuty XY chain in a transverse field.
 """
+@inline function _xyh1d_logcosh2(x::Real)
+    a = abs(x)
+    return a + log1p(exp(-2.0 * a))
+end
+
+function _xyh1d_thermo_infinite(quantity::Symbol, Jx::Real, Jy::Real, h::Real, β::Real)
+    integrand = if quantity === :free_energy
+        k -> begin
+            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
+            _xyh1d_logcosh2(β * Λk / 2.0)
+        end
+    elseif quantity === :entropy
+        k -> begin
+            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
+            x = β * Λk / 2.0
+            _xyh1d_logcosh2(x) - x * tanh(x)
+        end
+    elseif quantity === :specific_heat
+        k -> begin
+            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
+            x = β * Λk / 2.0
+            x^2 * sech(x)^2
+        end
+    elseif quantity === :transverse_magnetization
+        k -> begin
+            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
+            A = h - (Jx + Jy) * cos(k)
+            (2.0 * A / Λk) * tanh(β * Λk / 2.0)
+        end
+    elseif quantity === :transverse_susceptibility
+        k -> begin
+            A = h - (Jx + Jy) * cos(k)
+            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
+            # (2/Λ - 8A²/Λ³) tanh(βΛ/2) + (4β A²/Λ²) sech²(βΛ/2)
+            (2.0 / Λk - 8.0 * A^2 / Λk^3) * tanh(β * Λk / 2.0) +
+            (4.0 * β * A^2 / Λk^2) * sech(β * Λk / 2.0)^2
+        end
+    else
+        error("Unknown thermal quantity: $quantity")
+    end
+
+    val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
+
+    if quantity === :free_energy
+        return -val / (π * β)
+    elseif quantity === :transverse_magnetization || quantity === :transverse_susceptibility
+        return (1.0 / π) * val
+    else  # entropy, specific_heat
+        return val / π
+    end
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OBC Finite-size Thermodynamics via BdG
+# ═══════════════════════════════════════════════════════════════════════════════
+
+function _xyh1d_zz_uniform_susceptibility(N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    hmat = _xyh1d_majorana_ham(N, Jx, Jy, h)
+    Σ = _xyh1d_majorana_thermal_covariance(hmat, β)
+    mx = [Σ[2i - 1, 2i] for i in 1:N]
+    s = sum(1.0 - mx[i]^2 for i in 1:N)
+    for i in 1:N, j in (i + 1):N
+        cij = -Σ[2i - 1, 2j - 1] * Σ[2i, 2j] + Σ[2i - 1, 2j] * Σ[2i, 2j - 1]
+        s += 2.0 * cij
+    end
+    return β * s / N
+end
+
+function _xyh1d_thermo_obc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    if quantity === :free_energy
+        Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
+        return -sum(λ -> _xyh1d_logcosh2(β * λ / 2.0), Λ) / (N * β)
+    elseif quantity === :entropy
+        Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
+        return sum(Λ) do λ
+            x = β * λ / 2.0
+            _xyh1d_logcosh2(x) - x * tanh(x)
+        end / N
+    elseif quantity === :specific_heat
+        Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
+        return sum(λ -> begin
+            x = β * λ / 2.0
+            x^2 * sech(x)^2
+        end, Λ) / N
+    elseif quantity === :transverse_magnetization
+        hmat = _xyh1d_majorana_ham(N, Jx, Jy, h)
+        Σ = _xyh1d_majorana_thermal_covariance(hmat, β)
+        return sum(Σ[2i - 1, 2i] for i in 1:N) / N
+    elseif quantity === :transverse_susceptibility
+        return _xyh1d_zz_uniform_susceptibility(N, Jx, Jy, h, β)
+    else
+        error("Unknown thermal quantity: $quantity")
+    end
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# site-local equilibrium observables
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::XYh1D, ::MagnetizationZLocal, bc::OBC; beta, kwargs...)
+"""
 function fetch(
     m::XYh1D, ::MassGap, ::Infinite; Jx::Real=m.Jx, Jy::Real=m.Jy, h::Real=m.h, kwargs...
 )
@@ -217,3 +319,52 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 # Infinite-chain Thermodynamics via integration over dispersion
 # ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::XYh1D, ::FreeEnergy, ::Infinite; beta) -> Float64
+
+Per-site free-energy density of the infinite XYh1D chain at inverse
+temperature β, via Gauss-Kronrod integration over the Bogoliubov
+dispersion (Lieb-Schultz-Mattis 1961).
+"""
+function fetch(m::XYh1D, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
+    return _xyh1d_thermo_infinite(:free_energy, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::ThermalEntropy, ::Infinite; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...)
+    return _xyh1d_thermo_infinite(:entropy, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::SpecificHeat, ::Infinite; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
+    return _xyh1d_thermo_infinite(:specific_heat, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::FreeEnergy, bc::OBC; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::FreeEnergy, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_thermo_obc(:free_energy, N, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::ThermalEntropy, bc::OBC; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::ThermalEntropy, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_thermo_obc(:entropy, N, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::SpecificHeat, bc::OBC; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::SpecificHeat, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_thermo_obc(:specific_heat, N, m.Jx, m.Jy, m.h, beta)
+end

@@ -51,3 +51,20 @@ end
         @test isapprox(e, -4J / π; atol=1e-12)
     end
 end
+
+@testset "XYh1D — Finite Temperature potentials" begin
+    # Check that OBC free energy approaches the infinite thermodynamic limit
+    let m = XYh1D(; Jx=1.2, Jy=0.8, h=0.6), β = 2.0
+        f_inf = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
+        f_obc = QAtlas.fetch(m, FreeEnergy(), OBC(200); beta=β)
+        @test isapprox(f_obc, f_inf; atol=1e-2)
+
+        s_inf = QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=β)
+        s_obc = QAtlas.fetch(m, ThermalEntropy(), OBC(200); beta=β)
+        @test isapprox(s_obc, s_inf; atol=1e-2)
+
+        c_inf = QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=β)
+        c_obc = QAtlas.fetch(m, SpecificHeat(), OBC(200); beta=β)
+        @test isapprox(c_obc, c_inf; atol=1e-2)
+    end
+end

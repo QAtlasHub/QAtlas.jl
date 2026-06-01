@@ -421,4 +421,169 @@ function init_atomic_limit(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; 
     return init_atomic_limit!(aux, beta, U, mu; h=h)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.2 — elementary function phi + free-energy evaluator
+#
+# After the Read-tool extraction of JKS Sec 4-5 image pages, the precise
+# forms are now in hand:
+#
+#   (1) Elementary function phi (eq 48):
+#         ln phi(s) = -2 beta |s| sqrt(1 - 1/s^2)
+#       for real s with |s| > 1; analytically continued elsewhere.
+#       Used inside the driving terms psi_c, psi_cbar.
+#
+#   (2) Free energy formula (eq 49, simplest form):
+#         ln Lambda = -2 pi i (U/4)
+#                   + integral_L [ln z(s)]'      ln(1 + c + cbar) ds
+#                   + integral_L [ln z(s - 2i eta)]' ln C(s) ds
+#       with z(s) = i s (1 + sqrt(1 - 1/s^2)) (eq 23) and eta = U/4.
+#       The derivative simplifies to
+#         [ln z(s)]' = 1 / sqrt(s^2 - 1).
+#       Contour L is just above and below the branch cut on [-1, 1];
+#       the closed-contour integral picks up the discontinuity.
+#
+#   (3) Per-site free energy (with N -> infty Trotter limit):
+#         f(T, U, mu, h) = -T ln Lambda
+#
+# Stage C.3 will add the NLIE residual evaluator + Picard solver +
+# production fetch dispatch. The infrastructure shipped here is the
+# input that solver will need at every iteration.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Elementary function phi (eq 48)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    jks_log_phi(s::Real, beta::Real) -> Float64
+
+JKS elementary function on the real axis (eq 48):
+
+    ln phi(s) = -2 beta |s| sqrt(1 - 1/s^2),    valid for |s| > 1.
+
+For |s| <= 1 the argument of the square root is negative and the
+function takes an imaginary value (branch cut). Stage C.2 returns
+`-Inf` there as a sentinel — the contour integrals only touch the
+branch cut along [-1, 1] and use the discontinuity rather than the
+value, so the cut is never evaluated naively.
+"""
+function jks_log_phi(s::Real, beta::Real)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    if abs(s) <= 1.0
+        return -Inf
+    end
+    return -2 * beta * abs(s) * sqrt(1 - 1/s^2)
+end
+
+"""
+    jks_phi(s::Real, beta::Real) -> Float64
+
+Exponential form: `phi(s) = exp(ln phi(s))`. Returns `0.0` for
+`|s| <= 1` (the cut). For numerical use prefer `jks_log_phi` to avoid
+underflow at large `beta`.
+"""
+function jks_phi(s::Real, beta::Real)
+    return exp(jks_log_phi(s, beta))
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# log z(s) derivative (eq 23 simplified)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    jks_log_z_deriv(s::Number) -> ComplexF64
+
+Derivative `[ln z(s)]' = 1 / sqrt(s^2 - 1)`, where `z(s) = i s (1 + sqrt(1 - 1/s^2))`
+(eq 23). On the real axis `|s| > 1` this is real; for `|s| < 1` it is
+imaginary (branch cut along [-1, 1]).
+
+This is the kernel of the closed-contour integration in the JKS free
+energy formula eq (49).
+"""
+function jks_log_z_deriv(s::Number)
+    return 1 / sqrt(s^2 - 1 + 0im)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Free energy evaluator (eq 49)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    free_energy_jks(aux, grid, beta, U; mu=U/2) -> Float64
+
+Per-site free energy of the 1D Hubbard model from JKS eq (49), given
+the auxiliary functions `aux` on the discretized contour `grid`.
+
+This evaluator is correct **once aux is the converged NLIE solution**;
+on un-converged aux (such as Stage C.1's atomic-limit initial guess)
+it returns the free energy "as if aux were the answer" — a useful
+baseline for atomic-limit consistency checks, but not the physical f
+for t > 0.
+
+# Arguments
+
+- `aux`: JKSAuxFunctions container holding (b, b_bar, c, c_bar) sampled
+  on `grid.x`.
+- `grid`: JKSContourGrid. **Note**: in Stage C.2 we interpret
+  `grid.gamma` as the Hubbard parameter `eta = U / 4` (the kernel-pole
+  shift), not as a free contour parameter. The independent contour
+  shift parameter `alpha` is not used here (it only enters the NLIE
+  solver of Stage C.3).
+- `beta`, `U`, `mu`: physics parameters. Default `mu = U/2` is the
+  half-filling case.
+
+# Returns
+
+The per-site free-energy density `f = -T ln Lambda / (2 pi i)`,
+evaluated by the discrete Simpson-style quadrature of eq (49) over
+the branch cut `[-1, 1]`.
+
+# References
+
+- JKS 1998 eq (23), (38), (49) — z(s), kernel, free energy
+"""
+function free_energy_jks(
+    aux::JKSAuxFunctions, grid::JKSContourGrid, beta::Real, U::Real; mu::Real=U/2
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    length(aux) == grid.N ||
+        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
+
+    eta = U / 4
+
+    # Restrict to grid points inside the branch cut [-1, 1]:
+    # the contour integral only contributes on the cut.
+    cut_mask = [-1.0 <= x <= 1.0 for x in grid.x]
+
+    # First integral:  -2i int_{-1}^{1} ln(1 + c + cbar) / sqrt(1 - s^2) ds
+    integrand_1 = ComplexF64[
+        cut_mask[j] ? log(1 + aux.c[j] + aux.c_bar[j]) / sqrt(1 - grid.x[j]^2) : 0.0 + 0im
+        for j in 1:grid.N
+    ]
+    int_1 = -2im * sum(integrand_1) * grid.dx
+
+    # Second integral:  oint [ln z(s - 2 i eta)]' ln C(s) ds.
+    # The pole at s - 2i eta = ±1 is off the real axis for eta > 0; this
+    # second integral is regular on [-1, 1] and we evaluate it as a
+    # straight Riemann sum.
+    integrand_2 = ComplexF64[
+        if cut_mask[j]
+            jks_log_z_deriv(grid.x[j] - 2im * eta) * log(1 + aux.c[j])
+        else
+            0.0 + 0im
+        end for j in 1:grid.N
+    ]
+    int_2 = sum(integrand_2) * grid.dx
+
+    # ln Lambda from eq (49):
+    ln_Lambda = -2pi * im * (U/4) + int_1 + int_2
+
+    # Per-site f = -T ln Lambda / (2 pi i)  — the factor 2 pi i in
+    # the LHS of eq (49) means ln Lambda on the RHS is unnormalised;
+    # divide by 2 pi i to get the physical eigenvalue.
+    f = -(1/beta) * ln_Lambda / (2pi * im)
+
+    return real(f)
+end
+
 end  # module Hubbard1DJKSNLIE

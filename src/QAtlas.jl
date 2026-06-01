@@ -245,7 +245,8 @@ include("models/quantum/XXZ/XXZ_klumper_nlie.jl")  # Klümper QTM NLIE for criti
 include("models/quantum/XXZ/XXZ_registry.jl")  # populates REGISTRY for XXZ1D
 include("models/quantum/Heisenberg/Heisenberg_registry.jl")  # populates REGISTRY for Heisenberg1D
 include("models/quantum/Hubbard1D/Hubbard1D.jl")
-include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY for Hubbard1D
+include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")
+include("models/quantum/Hubbard1D/Hubbard1D_thermal_stopgap.jl")  # finite-T Phase-2A delegation (#523 stopgap)
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
 include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
 include("models/quantum/ShastrySutherland/ShastrySutherland.jl")

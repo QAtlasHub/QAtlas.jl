@@ -250,6 +250,7 @@ include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY 
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
 include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")
 include("models/quantum/HaldaneShastry/HaldaneShastry.jl")
+include("models/quantum/HaldaneShastry/HaldaneShastry_thermal_cft.jl")  # c=1 CFT low-T (#524 stopgap)
 include("models/quantum/HaldaneShastry/HaldaneShastry_registry.jl")  # populates REGISTRY for HaldaneShastry
 include("models/quantum/ShastrySutherland/ShastrySutherland.jl")
 include("models/quantum/ShastrySutherland/ShastrySutherland_registry.jl")  # populates REGISTRY for ShastrySutherland (#259)

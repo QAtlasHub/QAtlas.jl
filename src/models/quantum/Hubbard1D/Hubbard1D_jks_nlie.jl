@@ -634,4 +634,160 @@ function jks_phi_complex(s::Number, beta::Real)
     return exp(jks_log_phi_complex(s, beta))
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.4 — driving terms + NLIE residual + Picard solver
+#
+# Closes the bulk implementation of the JKS Hubbard finite-T NLIE except
+# for the production dispatch switch and Fig 5-10 agreement tests
+# (deferred to Stage C.5).
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Driving terms (eq 58-59)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    jks_driving_b(grid, beta, U, alpha; H=0.0) -> Vector{ComplexF64}
+
+JKS driving function `psi_b(x_j) = -beta U - beta H + log phi(x+i alpha) - log phi(x-i alpha)` (eq 59).
+"""
+function jks_driving_b(grid::JKSContourGrid, beta::Real, U::Real, alpha::Real; H::Real=0.0)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
+    return [
+        -beta * U - beta * H + jks_log_phi_complex(x + im * alpha, beta) -
+        jks_log_phi_complex(x - im * alpha, beta) for x in grid.x
+    ]
+end
+
+"""
+    jks_driving_c(grid, beta, U, mu; H=0.0) -> Vector{ComplexF64}
+
+JKS driving function `psi_c(x_j) = -beta U/2 - beta(mu + H/2) + log phi(x)` (eq 58).
+"""
+function jks_driving_c(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    return [
+        -beta * U / 2 - beta * (mu + H/2) + jks_log_phi_complex(x + 0im, beta) for
+        x in grid.x
+    ]
+end
+
+"""
+    jks_driving_cbar(grid, beta, U, mu; H=0.0) -> Vector{ComplexF64}
+
+Particle-hole conjugate of `jks_driving_c`. Satisfies `psi_c + psi_cbar = -beta U`.
+"""
+function jks_driving_cbar(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    return [
+        -beta * U / 2 + beta * (mu + H/2) - jks_log_phi_complex(x + 0im, beta) for
+        x in grid.x
+    ]
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NLIE residual evaluator (b-channel of eq 53)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    jks_nlie_residual(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
+
+Compute the b-channel NLIE residual `log b - RHS` for the given `aux`.
+The L-infinity norm of the residual measures convergence; at the
+converged NLIE solution it is zero up to discretization error.
+
+This is the b-equation residual only — Stage C.5 will extend to the
+full (b, c, c_bar) triple.
+"""
+function jks_nlie_residual(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
+    length(aux) == grid.N ||
+        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
+
+    K1 = build_kernel_matrix(grid, 1)
+    K2 = build_kernel_matrix(grid, 2)
+
+    psi_b = jks_driving_b(grid, beta, U, alpha; H=H)
+
+    log_B = log.(1 .+ aux.b)
+    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_C = log.(1 .+ aux.c)
+    log_Cbar = log.(1 .+ aux.c_bar)
+    delta_log_CCbar = log_C .- log_Cbar
+
+    rhs =
+        psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
+        apply_kernel(K1, delta_log_CCbar)
+
+    log_b = log.(aux.b)
+    return log_b .- rhs
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Picard solver (b-channel only, alpha-mixing)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    JKSSolution
+
+Container for `solve_jks_nlie_b_only` result.
+"""
+struct JKSSolution
+    aux::JKSAuxFunctions
+    iterations::Int
+    residual::Float64
+    converged::Bool
+end
+
+"""
+    solve_jks_nlie_b_only(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
+                          maxiter=200, alpha_mix=0.3) -> JKSSolution
+
+Picard iteration on the b-channel of the JKS NLIE only (Stage C.4
+scope). c and c_bar are held at the atomic-limit constants. Init from
+`init_atomic_limit`; update rule
+
+    log b_new = log b_old - alpha_mix * residual
+
+until L-infinity norm of residual is below `tol`.
+"""
+function solve_jks_nlie_b_only(
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=200,
+    alpha_mix::Real=0.3,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    0 < alpha_mix <= 1 || throw(DomainError(alpha_mix, "alpha_mix must be in (0, 1]"))
+    aux = init_atomic_limit(grid, beta, U, mu; h=H)
+
+    last_residual = Inf
+    for iter in 1:maxiter
+        res = jks_nlie_residual(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+        log_b_new = log.(aux.b) .- alpha_mix .* res
+        aux.b .= exp.(log_b_new)
+        aux.b_bar .= aux.b
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
 end  # module Hubbard1DJKSNLIE

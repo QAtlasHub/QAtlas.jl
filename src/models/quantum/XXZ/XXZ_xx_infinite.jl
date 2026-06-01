@@ -237,6 +237,11 @@ function fetch(model::XXZ1D, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
     if _xx_is_free_fermion(model)
         return _xx_thermo_infinite(:free_energy, model.J, beta)
     end
+    if -1 < model.Δ < 1
+        e0 = fetch(model, Energy{:per_site}(), Infinite())
+        excess = _xxz_klumper_free_energy_excess(model, beta)
+        return e0 + excess
+    end
     return _xx_warn_general_delta(:free_energy, model.Δ)
 end
 

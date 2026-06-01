@@ -113,15 +113,19 @@ end
     end
 end
 
-@testset "XXZ1D Δ ≠ 0 / Infinite — warn+NaN placeholder is preserved" begin
-    # Issue #108 owns the general-Δ TBA; for now we still return NaN+warn.
-    for Δ in (0.5, -0.5, 0.99)
+@testset "XXZ1D Δ ≠ 0 / Infinite — warn+NaN placeholder for unrouted quantities" begin
+    # As of issue #521 (PR #522) FreeEnergy at general -1 < Δ < 1 is wired
+    # through the Klümper NLIE and no longer returns NaN. ThermalEntropy and
+    # SpecificHeat remain NaN-with-warn pending follow-up; the |Δ| ≥ 0.99
+    # endpoint of FreeEnergy also still emits NaN+warn.
+    for Δ in (0.5, -0.5)
         m = XXZ1D(; J=1.0, Δ=Δ)
-        @test isnan(QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=1.0))
         @test isnan(QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=1.0))
         @test isnan(QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=1.0))
-        @test isnan(QAtlas.fetch(m, Energy(), Infinite(); beta=1.0))
     end
+    # FreeEnergy still NaN at the |Δ| ≥ 0.99 endpoints.
+    @test isnan(QAtlas.fetch(XXZ1D(; Δ=0.999), FreeEnergy(), Infinite(); beta=1.0))
+    @test isnan(QAtlas.fetch(XXZ1D(; Δ=-0.999), FreeEnergy(), Infinite(); beta=1.0))
 end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────

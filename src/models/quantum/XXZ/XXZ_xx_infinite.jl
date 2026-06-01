@@ -234,8 +234,18 @@ References: Mahan, *Many-Particle Physics*, §1.3; Coleman, *Introduction
 to Many-Body Physics*, §2.4; Takahashi (1999), §4.
 """
 function fetch(model::XXZ1D, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
+    isempty(kwargs) || @warn(
+        "fetch(XXZ1D, FreeEnergy, Infinite) received unrecognized kwargs; they are ignored. " *
+            "Magnetic field h ≠ 0 is not yet wired through the Klümper NLIE (issue #521).",
+        kwargs=collect(keys(kwargs))
+    )
     if _xx_is_free_fermion(model)
         return _xx_thermo_infinite(:free_energy, model.J, beta)
+    end
+    if -1 < model.Δ < 1
+        e0 = fetch(model, Energy{:per_site}(), Infinite())
+        excess = _xxz_klumper_free_energy_excess(model, beta)
+        return e0 + excess
     end
     return _xx_warn_general_delta(:free_energy, model.Δ)
 end
@@ -254,6 +264,10 @@ equivalent to `s(β) = β (e(β) - f(β))`.  In the high-T limit
 (with a warning) for general Δ pending issue #108.
 """
 function fetch(model::XXZ1D, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...)
+    isempty(kwargs) || @warn(
+        "fetch(XXZ1D, ThermalEntropy, Infinite) received unrecognized kwargs; they are ignored.",
+        kwargs=collect(keys(kwargs))
+    )
     if _xx_is_free_fermion(model)
         return _xx_thermo_infinite(:entropy, model.J, beta)
     end
@@ -271,6 +285,10 @@ Returns `NaN` (with a warning) for general Δ pending the thermal
 Bethe ansatz of issue #108.
 """
 function fetch(model::XXZ1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
+    isempty(kwargs) || @warn(
+        "fetch(XXZ1D, SpecificHeat, Infinite) received unrecognized kwargs; they are ignored.",
+        kwargs=collect(keys(kwargs))
+    )
     if _xx_is_free_fermion(model)
         return _xx_thermo_infinite(:specific_heat, model.J, beta)
     end

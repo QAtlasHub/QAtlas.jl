@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 112 hubs
+## `analytic` - 111 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -118,8 +118,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](hubs/XXZ1D_LuttingerParameter_Infinite.md)
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](hubs/XXZ1D_LuttingerVelocity_Infinite.md)
 - 🟢 [`XXZ1D/MassGap/Infinite`](hubs/XXZ1D_MassGap_Infinite.md)
-- 🟢 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
-- 🟢 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](hubs/ZnParafermion_CentralCharge_Infinite.md)
 
 ## `dense_ed` - 54 hubs
@@ -179,7 +178,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](hubs/XXZ1D_ThermalEntropy_OBC.md)
 - 🟢 [`XXZ1D/VonNeumannEntropy/OBC`](hubs/XXZ1D_VonNeumannEntropy_OBC.md)
 
-## `bdg` - 36 hubs
+## `bdg` - 37 hubs
 
 - 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
 - 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
@@ -217,6 +216,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TFIM/ZZCorrelation/OBC`](hubs/TFIM_ZZCorrelation_OBC.md)
 - 🔵 [`TFIM/ZZStructureFactor/Infinite`](hubs/TFIM_ZZStructureFactor_Infinite.md)
 - 🔵 [`TFIM/ZZStructureFactor/OBC`](hubs/TFIM_ZZStructureFactor_OBC.md)
+- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 
 ## `delegation` - 13 hubs
 

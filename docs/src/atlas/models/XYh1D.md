@@ -17,22 +17,21 @@ All `(Quantity, BC)` hubs `src` claims for **`XYh1D`**.  Cells link to the per-h
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 2 |
+| 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 0 |
+| 🟠 uncorroborated-but-feasible | 2 |
 | **total claimed hubs** | **2** |
 
-**Methods** (from `@register`, derived): `analytic`
+**Methods** (from `@register`, derived): `analytic`, `bdg`
 
 **References** (aggregated):
 - Lieb-Schultz-Mattis 1961 | Pfeuty 1970
 
 ## Quantity × BC matrix
 
-| Quantity | `Infinite` |
-|---|---|
-| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/XYh1D_Energy_Infinite.md) |
-| [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
+| Quantity | `OBC` | `Infinite` |
+|---|---|---|
+| [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/XYh1D_MassGap_OBC.md) | 🟠 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

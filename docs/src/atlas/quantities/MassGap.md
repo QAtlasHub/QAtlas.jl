@@ -14,16 +14,16 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 ## Coverage
 
 - **Models with this quantity registered**: 24
-- **Total hubs (Model, BC pairs)**: 30
+- **Total hubs (Model, BC pairs)**: 31
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Pfeuty 1970 — 6 hubs
+- Pfeuty 1970 — 7 hubs
+- Lieb-Schultz-Mattis 1961 — 3 hubs
 - White-Huse 1993 — 3 hubs
 - Ashcroft-Mermin 1976 — 2 hubs
 - Kitaev 2001 — 2 hubs
-- Kitaev 2006 — 2 hubs
 
 ## Model × BC matrix
 
@@ -52,6 +52,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`TodaLattice`](../models/TodaLattice.md) | — | — | 🟢 [hub](../hubs/TodaLattice_MassGap_Infinite.md) |
 | [`ToricCode`](../models/ToricCode.md) | — | — | 🟢 [hub](../hubs/ToricCode_MassGap_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/XXZ1D_MassGap_Infinite.md) |
-| [`XYh1D`](../models/XYh1D.md) | — | — | 🟢 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
+| [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_MassGap_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

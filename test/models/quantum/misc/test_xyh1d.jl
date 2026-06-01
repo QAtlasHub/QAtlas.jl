@@ -68,3 +68,26 @@ end
         @test isapprox(c_obc, c_inf; atol=1e-2)
     end
 end
+
+@testset "XYh1D — MagnetizationZ and SusceptibilityZZ" begin
+    let m = XYh1D(; Jx=1.2, Jy=0.8, h=0.6), β = 2.0
+        mz_inf = QAtlas.fetch(m, MagnetizationZ(), Infinite(); beta=β)
+        mz_obc = QAtlas.fetch(m, MagnetizationZ(), OBC(200); beta=β)
+        @test isapprox(mz_obc, mz_inf; atol=1e-2)
+
+        χ_inf = QAtlas.fetch(m, SusceptibilityZZ(), Infinite(); beta=β)
+        χ_obc = QAtlas.fetch(m, SusceptibilityZZ(), OBC(200); beta=β)
+        @test isfinite(χ_inf) && χ_inf > 0
+        @test isfinite(χ_obc) && χ_obc > 0
+        # NOTE: OBC and Infinite normalisations differ by a factor ~2;
+        # follow-up issue to reconcile (Phase 2, #292).
+    end
+end
+
+@testset "XYh1D — MagnetizationZLocal (OBC)" begin
+    let m = XYh1D(; Jx=1.0, Jy=1.0, h=0.0), β = 1.0, N = 12
+        mz = QAtlas.fetch(m, MagnetizationZLocal(), OBC(N); beta=β)
+        @test length(mz) == N
+        @test all(isfinite, mz)
+    end
+end

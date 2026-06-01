@@ -368,3 +368,47 @@ function fetch(m::XYh1D, ::SpecificHeat, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     return _xyh1d_thermo_obc(:specific_heat, N, m.Jx, m.Jy, m.h, beta)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Magnetization & Susceptibility dispatchers (Phase 2, #292)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::XYh1D, ::MagnetizationZ, ::Infinite; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::MagnetizationZ, ::Infinite; beta::Real, kwargs...)
+    return _xyh1d_thermo_infinite(:transverse_magnetization, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::MagnetizationZ, bc::OBC; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::MagnetizationZ, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_thermo_obc(:transverse_magnetization, N, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::SusceptibilityZZ, ::Infinite; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::SusceptibilityZZ, ::Infinite; beta::Real, kwargs...)
+    return _xyh1d_thermo_infinite(:transverse_susceptibility, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::SusceptibilityZZ, bc::OBC; beta) -> Float64
+"""
+function fetch(m::XYh1D, ::SusceptibilityZZ, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    return _xyh1d_thermo_obc(:transverse_susceptibility, N, m.Jx, m.Jy, m.h, beta)
+end
+
+"""
+    fetch(model::XYh1D, ::MagnetizationZLocal, bc::OBC; beta) -> Vector{Float64}
+"""
+function fetch(m::XYh1D, ::MagnetizationZLocal, bc::OBC; beta::Real, kwargs...)
+    N = _bc_size(bc, kwargs)
+    hmat = _xyh1d_majorana_ham(N, m.Jx, m.Jy, m.h)
+    Σ = _xyh1d_majorana_thermal_covariance(hmat, beta)
+    return Float64[Σ[2i - 1, 2i] for i in 1:N]
+end

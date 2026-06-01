@@ -72,68 +72,94 @@ for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat)
     )
 end
 
-# ── Magnetization & Susceptibility (Phase 2, #292) ─────────────────────
-for QTy in (MagnetizationZ, SusceptibilityZZ)
-    register!(
-        XYh1D,
-        QTy,
-        Infinite;
-        method=:quadgk,
-        reliability=:high,
-        tested_in="test/models/quantum/misc/test_xyh1d.jl",
-        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
-        notes="Per-site value via QuadGK over dispersion.",
-    )
-    register!(
-        XYh1D,
-        QTy,
-        OBC;
-        method=:bdg,
-        reliability=:high,
-        tested_in="test/models/quantum/misc/test_xyh1d.jl",
-        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
-        notes="Per-site value from OBC BdG spectrum / Majorana covariance.",
-    )
-end
-register!(
+# ── Transverse Magnetization & Susceptibility ─────────────────────────
+@register(
     XYh1D,
-    MagnetizationZLocal,
-    OBC;
+    MagnetizationZ,
+    Infinite,
+    method=:quadgk,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    notes="transverse magnetization per site (along the field direction z) via QuadGK.",
+)
+@register(
+    XYh1D,
+    MagnetizationZ,
+    OBC,
     method=:bdg,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
     references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
-    notes="Site-resolved ⟨σᶻ_i⟩ from Majorana thermal covariance on OBC chain.",
+    notes="transverse magnetization per site from the thermal Majorana covariance matrix.",
 )
-
-# ── Site-local observables (Phase 2, #292) ─────────────────────────────
-register!(
+@register(
     XYh1D,
-    MagnetizationXLocal{:equilibrium},
-    OBC;
-    method=:symmetry,
+    SusceptibilityZZ,
+    Infinite,
+    method=:quadgk,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
-    notes="Vanishes by Z₂ symmetry at zero longitudinal field; returns zeros.",
+    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    notes="transverse susceptibility per site via QuadGK.",
 )
-register!(
+@register(
     XYh1D,
-    MagnetizationYLocal,
-    OBC;
-    method=:symmetry,
-    reliability=:high,
-    tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
-    notes="Vanishes by Z₂ symmetry; returns zeros.",
-)
-register!(
-    XYh1D,
-    EnergyLocal,
-    OBC;
+    SusceptibilityZZ,
+    OBC,
     method=:bdg,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
-    notes="Site-resolved bond-symmetric energy density from Majorana covariance.",
+    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    notes="transverse susceptibility per site from exact Wick contraction over covariance.",
+)
+
+# ── Site-local Equilibrium Observables ────────────────────────────────
+@register(
+    XYh1D,
+    MagnetizationZLocal,
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    notes="Site-local expectation value vector of σᶻ.",
+)
+@register(
+    XYh1D,
+    MagnetizationXLocal{:equilibrium},
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    notes="Identically zero by Z₂ symmetry.",
+)
+@register(
+    XYh1D,
+    MagnetizationYLocal,
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    notes="Identically zero by Z₂ symmetry.",
+)
+@register(
+    XYh1D,
+    EnergyLocal,
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d.jl",
+    notes="Symmetric split of bond energies ε_i such that sum(ε) == ⟨H⟩.",
+)
+
+# ── PBC ──────────────────────────────────────────────────────────────
+@register(
+    XYh1D,
+    MassGap,
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
+    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    notes="Minimum quasiparticle energy over both PBC sectors (AP and P).",
 )

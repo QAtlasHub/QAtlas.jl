@@ -1,0 +1,73 @@
+.docs-logo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* AI-draft banner (injected at the top of every page by                   */
+/* assets/report-issue.js)                                                  */
+/* ──────────────────────────────────────────────────────────────────────── */
+.ai-draft-banner {
+    background: #fff8e1;
+    border-left: 4px solid #ffb300;
+    padding: 0.75em 1em;
+    margin: 0 0 1.5em 0;
+    border-radius: 4px;
+    font-size: 0.92em;
+    line-height: 1.5;
+}
+.ai-draft-banner strong {
+    color: #b26500;
+}
+.ai-draft-banner a {
+    font-weight: 600;
+}
+
+/* Dark-theme palette for the banner */
+html.theme--documenter-dark .ai-draft-banner {
+    background: #3a2e14;
+    border-left-color: #ffb300;
+    color: #f5d58a;
+}
+html.theme--documenter-dark .ai-draft-banner strong {
+    color: #ffd86b;
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Per-section "report" link appended next to h2 / h3 headings             */
+/* ──────────────────────────────────────────────────────────────────────── */
+.report-section-link {
+    font-size: 0.55em;
+    font-weight: 400;
+    margin-left: 0.6em;
+    padding: 0.1em 0.45em;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #888;
+    text-decoration: none;
+    vertical-align: middle;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+h2:hover > .report-section-link,
+h3:hover > .report-section-link,
+.report-section-link:hover,
+.report-section-link:focus {
+    opacity: 1;
+    color: #b26500;
+    border-color: #ffb300;
+    background: #fff8e1;
+}
+html.theme--documenter-dark .report-section-link {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #aaa;
+}
+html.theme--documenter-dark .report-section-link:hover,
+html.theme--documenter-dark .report-section-link:focus {
+    color: #ffd86b;
+    border-color: #ffb300;
+    background: #3a2e14;
+}

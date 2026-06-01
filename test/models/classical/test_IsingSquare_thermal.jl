@@ -152,7 +152,7 @@ end
             PBC(0);
             route=:ed_finite_size,
             fetch_kw=(; beta=β, Lx=L, Ly=L, J=1.0),
-            independent=-(1 / β) * log(Z) / (L * L),
+            independent=(-(1 / β) * log(Z) / (L * L)),
             agree_within=1e-6,
             refs=["Brute-force Z: f/N = -(1/β) log Z / N (square_pbc_bond_pairs)"],
         )

@@ -153,7 +153,7 @@ end
             Infinite();
             route=:limiting_case,
             fetch_kw=(; beta=β),
-            independent=-log(2) / β,
+            independent=(-log(2) / β),
             agree_within=1e-12,
             refs=["Landau-Lifshitz §149: paramagnet (m*=0) ⇒ f = -log(2)/β per site"],
         )
@@ -242,7 +242,7 @@ end
                 Infinite();
                 route=:second_closed_form,
                 fetch_kw=(; beta=β),
-                independent=-log(2 * cosh(β * h)) / β,
+                independent=(-log(2 * cosh(β * h)) / β),
                 agree_within=1e-12,
                 refs=["Single spin in field h: f = -β⁻¹ log(2 cosh βh)"],
             )
@@ -252,7 +252,7 @@ end
                 Infinite();
                 route=:second_closed_form,
                 fetch_kw=(; beta=β),
-                independent=-h * tanh(β * h),
+                independent=(-h * tanh(β * h)),
                 agree_within=1e-12,
                 refs=["Single spin in field h: u = -h tanh(βh)"],
             )
@@ -303,7 +303,7 @@ end
             Infinite();
             route=:limiting_case,
             fetch_kw=(; beta=100.0),
-            independent=-J / 2 - h,
+            independent=(-J / 2 - h),
             agree_within=1e-10,
             refs=[
                 "T → 0 saturation: m → 1 (h > 0 + J > 0 selects full alignment) ⇒ u = -J/2 - h",
@@ -339,7 +339,7 @@ end
             Infinite();
             route=:limiting_case,
             fetch_kw=(; beta=β),
-            independent=-h * tanh(β * h),
+            independent=(-h * tanh(β * h)),
             agree_within=1e-3 * abs(h * tanh(β * h)) + 1e-12,
             refs=[
                 "βJ → 0 limit: m* → tanh(βh) (J-independent leading order) ⇒ u → -h tanh(βh)",

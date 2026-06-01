@@ -72,7 +72,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 
-## `Energy` (31)
+## `Energy` (30)
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p
@@ -104,7 +104,6 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`TightBindingV1D/Energy/Infinite`](../hubs/TightBindingV1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/OBC`](../hubs/XXZ1D_Energy_OBC.md) — corroborated-at-p
-- 🟢 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — corroborated-at-p
 
 ## `EnergyLocal` (4)
 
@@ -236,7 +235,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/MagnetizationZLocal/OBC`](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 
-## `MassGap` (30)
+## `MassGap` (31)
 
 - ⚪ [`AKLT1D/MassGap/Infinite`](../hubs/AKLT1D_MassGap_Infinite.md) — cited-only
 - 🟢 [`Cluster1D/MassGap/Infinite`](../hubs/Cluster1D_MassGap_Infinite.md) — corroborated-at-p
@@ -267,7 +266,8 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`ToricCode/MassGap/Infinite`](../hubs/ToricCode_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/MassGap/Infinite`](../hubs/XXZ1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/MassGap/OBC`](../hubs/XXZ1D_MassGap_OBC.md) — corroborated-at-p
-- 🟢 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
 
 ## `PartitionFunction` (2)
 

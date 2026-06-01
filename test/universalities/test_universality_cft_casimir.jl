@@ -18,7 +18,7 @@ using QAtlas, Test
         CasimirEnergyCorrection(),
         PBC();
         route=:second_closed_form,
-        independent=-π / 96,
+        independent=(-π / 96),
         agree_within=1e-12,
         refs=[
             "Cardy 1986: E_0^PBC universal 1/L correction = -π c v / (6 L); Ising c=1/2, v=2.0, L=16 ⇒ -π/96",
@@ -32,7 +32,7 @@ using QAtlas, Test
         CasimirEnergyCorrection(),
         OBC();
         route=:second_closed_form,
-        independent=-π / 384,
+        independent=(-π / 384),
         agree_within=1e-12,
         refs=[
             "Cardy 1986 / Blöte-Cardy-Nightingale 1986: E_0^OBC = -π c v / (24 L); Ising c=1/2, v=2.0, L=16 ⇒ -π/384",
@@ -70,7 +70,7 @@ using QAtlas, Test
                 CasimirEnergyCorrection(),
                 PBC();
                 route=:second_closed_form,
-                independent=-π * (1 // 2) * v / 6 / L,    # = -π c v / (6 L) at c=1/2
+                independent=(-π * (1 // 2) * v / 6 / L),    # = -π c v / (6 L) at c=1/2
                 agree_within=1e-12,
                 at=["L=$(L)"],
                 refs=[
@@ -94,7 +94,7 @@ using QAtlas, Test
             CasimirEnergyCorrection(),
             PBC();
             route=:second_closed_form,
-            independent=-π * (4 // 5) / 60,
+            independent=(-π * (4 // 5) / 60),
             agree_within=1e-12,
             refs=[
                 "Cardy 1986 + Dotsenko 1984: 2D 3-state Potts c=4/5 ⇒ E_0^PBC/L = -π·c·v/(6L) = -π·(4/5)/60 at v=1, L=10",
@@ -107,7 +107,7 @@ using QAtlas, Test
             CasimirEnergyCorrection(),
             PBC();
             route=:second_closed_form,
-            independent=-π / 60,
+            independent=(-π / 60),
             agree_within=1e-12,
             refs=[
                 "Cardy 1986 + DFMS §12.3: 2D 4-state Potts (marginal compact boson) c=1 ⇒ E_0^PBC/L = -π/60 at v=1, L=10",
@@ -120,7 +120,7 @@ using QAtlas, Test
             CasimirEnergyCorrection(),
             PBC();
             route=:second_closed_form,
-            independent=-π / 60,
+            independent=(-π / 60),
             agree_within=1e-12,
             refs=[
                 "Cardy 1986 + Kosterlitz 1974: 2D XY (BKT free compact boson) c=1 ⇒ E_0^PBC/L = -π/60 at v=1, L=10",
@@ -133,7 +133,7 @@ using QAtlas, Test
             CasimirEnergyCorrection(),
             PBC();
             route=:second_closed_form,
-            independent=-π / 60,
+            independent=(-π / 60),
             agree_within=1e-12,
             refs=[
                 "Cardy 1986 + Affleck-Haldane 1987: spin-1/2 Heisenberg chain (SU(2)_1 WZW) c=1 ⇒ E_0^PBC/L = -π/60 at v=1, L=10",

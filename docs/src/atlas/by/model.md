@@ -459,8 +459,8 @@ Every `src`-claimed hub grouped by model.
 
 ## `XYh1D` (2)
 
-- 🟢 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — corroborated-at-p
-- 🟢 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
 
 ## `YangLee` (2)
 

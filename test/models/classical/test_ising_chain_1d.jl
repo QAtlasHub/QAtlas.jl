@@ -109,7 +109,7 @@ end
             Infinite();
             route=:second_closed_form,
             fetch_kw=(; beta=β),
-            independent=-(1 / β) * log(2 * cosh(β * J)),
+            independent=(-(1 / β) * log(2 * cosh(β * J))),
             agree_within=1e-10,
             refs=["Ising 1925: f = -(1/β) log(2 cosh βJ) at h = 0"],
         )
@@ -152,7 +152,7 @@ end
             FreeEnergy(),
             Infinite();
             route=:second_closed_form,
-            independent=-(1/β) * log(2 * cosh(β*J)),
+            independent=(-(1/β) * log(2 * cosh(β*J))),
             agree_within=1e-12,
             refs=["Ising 1925: f(β) = -(1/β) log(2 cosh(βJ)) per site"],
             fetch_kw=(; beta=β),
@@ -182,7 +182,7 @@ end
             Infinite();
             route=:second_closed_form,
             fetch_kw=(; beta=β),
-            independent=-J * tanh(β * J),
+            independent=(-J * tanh(β * J)),
             agree_within=1e-12,
             refs=["Ising 1925: u(β,h=0) = -J tanh(βJ) per site"],
         )

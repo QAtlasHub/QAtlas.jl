@@ -64,7 +64,7 @@ using QAtlas, Test
                 FreeEnergy(),
                 OBC(N);
                 route=:limiting_case,
-                independent=-log(2) / HIGH_T_BETA,
+                independent=(-log(2) / HIGH_T_BETA),
                 agree_within=1e-2,
                 refs=["XXZ1D OBC T → ∞: free paramagnet f/N = -T log 2 = -log(2)/β"],
                 fetch_kw=(; beta=HIGH_T_BETA),

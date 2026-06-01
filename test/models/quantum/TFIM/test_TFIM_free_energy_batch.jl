@@ -81,7 +81,7 @@ using QAtlas, Test
                 FreeEnergy(),
                 OBC(N);
                 route=:second_closed_form,
-                independent=-(N - 1) * J / N,
+                independent=(-(N - 1) * J / N),
                 agree_within=1e-5,
                 refs=[
                     "TFIM h=0 OBC: N-1 bonds on N sites ⇒ ε₀ = -(N-1)J/N (boundary-correction closed form)",

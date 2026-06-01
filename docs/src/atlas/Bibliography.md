@@ -54,8 +54,8 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md)
 - 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md)
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md)
-- 🟢 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
-- 🟢 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 
 ## Ising 1925 — 8 hubs
 
@@ -131,8 +131,8 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
 - 🟢 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md)
 - 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md)
-- 🟢 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
-- 🟢 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 
 ## Onsager 1944 — 6 hubs
 

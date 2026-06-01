@@ -1,0 +1,39 @@
+name: Verify references
+
+# Checks that every DOI / arXiv reference in docs/references.bib resolves
+# to real metadata (Crossref / arXiv), without downloading PDFs. Backed by
+# the doiget-verify composite action.
+#
+# Currently NON-strict: only malformed ids (`illegal`) fail the job.
+# `unresolved` / `unverifiable` are warnings, because arXiv metadata can
+# return transient HTTP 429 under load (sotashimozono/doiget#264). Flip
+# `strict: "true"` once that is fixed to also fail on dead references.
+
+on:
+  pull_request:
+    paths:
+      - "docs/references.bib"
+      - ".github/workflows/VerifyReferences.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/references.bib"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify references resolve
+    # GitHub-hosted: the action builds the Rust binary and needs outbound
+    # access to Crossref / arXiv, so this lane is intentionally not on the
+    # self-hosted Julia runner.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: sotashimozono/doiget/.github/actions/verify@next
+        with:
+          path: docs/references.bib
+          strict: "false"
+          contact-email: souta.shimozono@gmail.com

@@ -34,6 +34,20 @@
 # Fourier coefficient ŝ(k) e^{(γ-ε)|k|} on k > 0 decays as e^{-εk}.
 # ─────────────────────────────────────────────────────────────────────────────
 
+"""
+    XXZKlumperNLIE
+
+Internal numerical solver for the Klümper Quantum-Transfer-Matrix
+non-linear integral equation (NLIE) of the critical XXZ chain
+($-1 < \Delta < 1$) in the thermodynamic limit.  Used by
+`fetch(::XXZ1D, ::FreeEnergy, ::Infinite; beta=...)` to provide an
+analytic reference free-energy density at general \Delta beyond the
+XX (\Delta = 0) free-fermion point.
+
+This is an implementation detail of the XXZ dispatch surface, not a
+public API.  See the module-level header comment for the full equation
+references (Klümper 1993, eq. 5.4-5.7).
+"""
 module XXZKlumperNLIE
 
 using LinearAlgebra

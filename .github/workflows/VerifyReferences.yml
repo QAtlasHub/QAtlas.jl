@@ -23,6 +23,12 @@ on:
 permissions:
   contents: read
 
+# Single source of truth for the bibliography path. The Julia
+# key-consistency test (test/core/test_references_bib.jl) reads the same
+# env var, so the two reference checks never disagree on which file.
+env:
+  QATLAS_REFERENCES_BIB: docs/references.bib
+
 jobs:
   verify:
     name: verify references resolve
@@ -32,8 +38,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Persist the resolver cache (docs/CACHE.md) across runs so an
+      # unchanged bibliography resolves with zero network calls — see
+      # sotashimozono/doiget#265. Keyed on the .bib so a new ref re-fetches
+      # only the delta.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/doiget
+          key: doiget-resolver-${{ hashFiles(env.QATLAS_REFERENCES_BIB) }}
+          restore-keys: doiget-resolver-
       - uses: sotashimozono/doiget/.github/actions/verify@next
         with:
-          path: docs/references.bib
+          path: ${{ env.QATLAS_REFERENCES_BIB }}
           strict: "false"
           contact-email: souta.shimozono@gmail.com

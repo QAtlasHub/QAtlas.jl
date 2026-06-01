@@ -223,6 +223,7 @@ include("models/quantum/TFIM/TFIM_loschmidt.jl")
 include("models/quantum/TFIM/TFIM_gge.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
 include("models/quantum/Heisenberg/Heisenberg.jl")
+include("models/quantum/Heisenberg/Heisenberg1D_thermal_cft.jl")  # c=1 CFT low-T (#521 Path B)
 include("models/quantum/Heisenberg/Heisenberg_spinon.jl")
 include("models/quantum/Heisenberg/HeisenbergS1.jl")
 include("models/quantum/Heisenberg/HeisenbergS1_observables.jl")

@@ -13,17 +13,17 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 23
-- **Total hubs (Model, BC pairs)**: 30
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
+- **Models with this quantity registered**: 24
+- **Total hubs (Model, BC pairs)**: 32
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `quadgk`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Pfeuty 1970 — 4 hubs
 - Kitaev 2006 — 3 hubs
+- Lieb-Schultz-Mattis 1961 — 3 hubs
 - White-Huse 1993 — 3 hubs
 - Affleck-Kennedy-Lieb-Tasaki 1988 — 2 hubs
-- Ashcroft-Mermin 1976 — 2 hubs
-- Bethe-Hulthén 1938 — 2 hubs
 
 ## Model × BC matrix
 
@@ -52,5 +52,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟢 [hub](../hubs/TightBindingV1D_Energy_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/XXZ1D_Energy_Infinite.md) |
+| [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_Energy_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

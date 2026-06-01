@@ -155,3 +155,65 @@ end
 """
     fetch(model::XYh1D, ::Energy{:per_site}, ::Infinite; beta, betas) -> Float64 or Vector{Float64}
 """
+function fetch(
+    m::XYh1D,
+    ::Energy{:per_site},
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    h::Real=m.h,
+    beta::Union{Real,Nothing}=nothing,
+    betas::Union{AbstractVector{<:Real},Nothing}=nothing,
+    kwargs...,
+)
+    _energy_at_beta =
+        β -> begin
+            result, _ = quadgk(
+                k -> begin
+                    Λk = _xyh1d_dispersion(k, Jx, Jy, h)
+                    (Λk / 2.0) * tanh(β * Λk / 2.0)
+                end, 0.0, π; rtol=1e-10
+            )
+            -(1.0 / π) * result
+        end
+
+    if betas !== nothing
+        return [_energy_at_beta(β) for β in betas]
+    elseif beta !== nothing
+        return _energy_at_beta(beta)
+    else
+        # Ground state: β → ∞
+        return _energy_at_beta(1e6)
+    end
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Energy: OBC finite-N
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::XYh1D, ::Energy{:total}, bc::OBC; beta, betas) -> Float64 or Vector{Float64}
+"""
+function fetch(
+    m::XYh1D,
+    ::Energy{:total},
+    bc::OBC;
+    beta::Union{Real,Nothing}=nothing,
+    betas::Union{AbstractVector{<:Real},Nothing}=nothing,
+    kwargs...,
+)
+    N = _bc_size(bc, kwargs)
+    Λ = _xyh1d_bdg_spectrum(N, m.Jx, m.Jy, m.h)
+    if betas !== nothing
+        return [-sum(λ -> (λ / 2.0) * tanh(β * λ / 2.0), Λ) for β in betas]
+    elseif beta !== nothing
+        return -sum(λ -> (λ / 2.0) * tanh(beta * λ / 2.0), Λ)
+    else
+        # Ground state
+        return -sum(Λ) / 2.0
+    end
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Infinite-chain Thermodynamics via integration over dispersion
+# ═══════════════════════════════════════════════════════════════════════════════

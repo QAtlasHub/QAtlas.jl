@@ -39,3 +39,15 @@ end
     @test_throws DomainError XYh1D(; Jy=0.0)
     @test_throws DomainError XYh1D(; Jy=-1.0)
 end
+
+@testset "XYh1D — Energy{:per_site} (Infinite and OBC)" begin
+    # h = 0, J = 1: E/N = -4/π  (Lieb-Schultz-Mattis 1961)
+    e0 = QAtlas.fetch(XYh1D(), Energy{:per_site}(), Infinite())
+    @test isapprox(e0, -4 / π; atol=1e-12)
+
+    # J linearity at h = 0
+    for J in (0.5, 1.0, 2.0, 3.5)
+        e = QAtlas.fetch(XYh1D(; Jx=J, Jy=J, h=0.0), Energy{:per_site}(), Infinite())
+        @test isapprox(e, -4J / π; atol=1e-12)
+    end
+end

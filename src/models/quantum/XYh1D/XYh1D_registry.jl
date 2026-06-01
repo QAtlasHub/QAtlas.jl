@@ -1,4 +1,4 @@
-﻿# models/quantum/XYh1D/XYh1D_registry.jl
+# models/quantum/XYh1D/XYh1D_registry.jl
 #
 # Declarative implementation map for the anisotropic XY chain in a
 # transverse field (Lieb-Schultz-Mattis 1961).  Schema documented in
@@ -47,4 +47,3 @@
     references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
     notes="Total ground-state and finite-T energy via BdG spectrum sum.",
 )
-

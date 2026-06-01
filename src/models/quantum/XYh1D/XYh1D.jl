@@ -1,4 +1,4 @@
-﻿# XYh1D — anisotropic XY chain in a transverse field (Lieb-Schultz-Mattis 1961).
+# XYh1D — anisotropic XY chain in a transverse field (Lieb-Schultz-Mattis 1961).
 #
 # Hamiltonian (LSM 1961 convention, ferromagnetic sign for the XY exchanges):
 #
@@ -217,4 +217,3 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 # Infinite-chain Thermodynamics via integration over dispersion
 # ═══════════════════════════════════════════════════════════════════════════════
-

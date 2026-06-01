@@ -27,6 +27,23 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](hubs/AKLT1D_ZZCorrelation_Infinite.md)
 - 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)
 
+## Pfeuty 1970 — 14 hubs
+
+- 🔵 [`LongRangeIsing1D/MassGap/Infinite`](hubs/LongRangeIsing1D_MassGap_Infinite.md)
+- 🟢 [`LongRangeXY1D/MassGap/Infinite`](hubs/LongRangeXY1D_MassGap_Infinite.md)
+- 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](hubs/MixedFieldIsing1D_MassGap_Infinite.md)
+- 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
+- 🟢 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md)
+- 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md)
+- 🟢 [`TFIM/MagnetizationZ/Infinite`](hubs/TFIM_MagnetizationZ_Infinite.md)
+- 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md)
+- 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md)
+- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md)
+- 🟠 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
+- 🟠 [`XYh1D/Energy/OBC`](hubs/XYh1D_Energy_OBC.md)
+- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
+
 ## Kitaev 2006 — 12 hubs
 
 - 🟢 [`KitaevHeisenberg/MassGap/Infinite`](hubs/KitaevHeisenberg_MassGap_Infinite.md)
@@ -42,21 +59,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/OBC`](hubs/KitaevHoneycomb_ThermalEntropy_OBC.md)
 - 🟢 [`PpIp2DSC/CentralCharge/Infinite`](hubs/PpIp2DSC_CentralCharge_Infinite.md)
 
-## Pfeuty 1970 — 12 hubs
-
-- 🔵 [`LongRangeIsing1D/MassGap/Infinite`](hubs/LongRangeIsing1D_MassGap_Infinite.md)
-- 🟢 [`LongRangeXY1D/MassGap/Infinite`](hubs/LongRangeXY1D_MassGap_Infinite.md)
-- 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](hubs/MixedFieldIsing1D_MassGap_Infinite.md)
-- 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
-- 🟢 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md)
-- 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md)
-- 🟢 [`TFIM/MagnetizationZ/Infinite`](hubs/TFIM_MagnetizationZ_Infinite.md)
-- 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md)
-- 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md)
-- 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md)
-- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
-- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
-
 ## Ising 1925 — 8 hubs
 
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](hubs/IsingChain1D_CorrelationLength_Infinite.md)
@@ -67,6 +69,17 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md)
 - 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](hubs/IsingChain1D_SusceptibilityZZ_Infinite.md)
 - 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](hubs/IsingChain1D_ThermalEntropy_Infinite.md)
+
+## Lieb-Schultz-Mattis 1961 — 8 hubs
+
+- 🟢 [`LongRangeXY1D/MassGap/Infinite`](hubs/LongRangeXY1D_MassGap_Infinite.md)
+- 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
+- 🟢 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md)
+- 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md)
+- 🟠 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
+- 🟠 [`XYh1D/Energy/OBC`](hubs/XYh1D_Energy_OBC.md)
+- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
+- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 
 ## Landau-Lifshitz §149 — 7 hubs
 
@@ -124,15 +137,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
 - 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
-
-## Lieb-Schultz-Mattis 1961 — 6 hubs
-
-- 🟢 [`LongRangeXY1D/MassGap/Infinite`](hubs/LongRangeXY1D_MassGap_Infinite.md)
-- 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
-- 🟢 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md)
-- 🟢 [`TFIM/XXCorrelation/OBC`](hubs/TFIM_XXCorrelation_OBC.md)
-- 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
-- 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 
 ## Onsager 1944 — 6 hubs
 

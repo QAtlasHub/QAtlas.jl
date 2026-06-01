@@ -65,7 +65,7 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`XXZ1D`](models/XXZ1D.md) | — | 27 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk` | 0 | 17 | 5 | 0 | 5 | feasible | `@fm`, `@free_fermion`, `@gapless` |
-| [`XYh1D`](models/XYh1D.md) | — | 2 | `analytic`, `bdg` | 0 | 0 | 0 | 0 | 2 | feasible | — |
+| [`XYh1D`](models/XYh1D.md) | — | 4 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 4 | feasible | — |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ZnParafermion`](models/ZnParafermion.md) | `Ising` | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
@@ -83,7 +83,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`CriticalExponents`](quantities/CriticalExponents.md) — 4 models
 - [`CriticalTemperature`](quantities/CriticalTemperature.md) — 6 models
 - [`EdgeModeEnergy`](quantities/EdgeModeEnergy.md) — 1 models
-- [`Energy`](quantities/Energy.md) — 23 models
+- [`Energy`](quantities/Energy.md) — 24 models
 - [`EnergyLocal`](quantities/EnergyLocal.md) — 4 models
 - [`ExactSpectrum`](quantities/ExactSpectrum.md) — 1 models
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models

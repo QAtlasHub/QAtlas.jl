@@ -1394,7 +1394,7 @@ function jks_nlie_residual_c(
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
     K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
     K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
-    K2_small = build_kernel_matrix_shifted(grid, 2, max(alpha / 50, 1e-3))
+    K2_small = build_kernel_matrix_shifted(grid, 2, max(grid.dx, alpha / 50, 1e-3))
 
     psi_c = jks_driving_c(grid, beta, U, mu; H=H)
 
@@ -1435,7 +1435,7 @@ function jks_nlie_residual_cbar(
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
     K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
     K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
-    K2_small = build_kernel_matrix_shifted(grid, 2, max(alpha / 50, 1e-3))
+    K2_small = build_kernel_matrix_shifted(grid, 2, max(grid.dx, alpha / 50, 1e-3))
 
     psi_cbar = jks_driving_cbar(grid, beta, U, mu; H=H)
 

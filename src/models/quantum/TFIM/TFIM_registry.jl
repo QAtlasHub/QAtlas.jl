@@ -545,10 +545,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
-    references=[
-        "Heyl2013",
-        "Heyl2018",
-    ],
+    references=["Heyl2013", "Heyl2018"],
     notes="L(t) = ∏_n |cos²θ_n + sin²θ_n e^{-2iΛ_n t}|² via OBC BdG diagonalisation of H_0, H_f.",
 )
 @register(
@@ -568,10 +565,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
-    references=[
-        "Heyl2013",
-        "Heyl2018",
-    ],
+    references=["Heyl2013", "Heyl2018"],
     notes="λ(t) = -(1/2π) ∫₀^π log|cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k(h_f) t}|² dk via QuadGK.",
 )
 # ── GGE stationary values for h-quench (TFIM_gge.jl) ─────────────────
@@ -582,9 +576,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_gge.jl",
-    references=[
-        "Rigol2007", "CalabreseEsslerFagotti2012"
-    ],
+    references=["Rigol2007", "CalabreseEsslerFagotti2012"],
     notes="Per-site ε_GGE via QuadGK over the post-quench dispersion with Bogoliubov-mismatch occupations n_k = sin²(θ_k(h₀)−θ_k(h_f)).",
 )
 @register(
@@ -594,9 +586,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_gge.jl",
-    references=[
-        "Rigol2007", "CalabreseEsslerFagotti2012"
-    ],
+    references=["Rigol2007", "CalabreseEsslerFagotti2012"],
     notes="⟨σˣ⟩_GGE via QuadGK over (h_f − J cos k)/Λ_k(h_f) · (1 − 2 n_k).",
 )
 

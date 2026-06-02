@@ -1378,11 +1378,18 @@ function jks_nlie_residual_c(
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_C = log.(1 .+ aux.c)
     log_Cbar = log.(1 .+ aux.c_bar)
+
+    # Delta log C := log(C+ / C-). Above/below the cut C+ and C- are complex
+    # conjugates on a real-axis-symmetric problem, so the discontinuity is
+    # 2i * Im(log C+). Stage C.14 paper-precision fix.
+    delta_log_C = 2im .* imag.(log_C)
+    delta_log_Cbar = 2im .* imag.(log_Cbar)
 
     rhs =
         -psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
-        apply_kernel(K2, log_Cbar)
+        apply_kernel(K2, delta_log_Cbar) - 0.5 .* delta_log_C
 
     log_c = log.(aux.c)
     return log_c .- rhs
@@ -1415,10 +1422,15 @@ function jks_nlie_residual_cbar(
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
     log_C = log.(1 .+ aux.c)
+    log_Cbar = log.(1 .+ aux.c_bar)
+
+    # Stage C.14 paper-precision fix: Delta log C terms.
+    delta_log_C = 2im .* imag.(log_C)
+    delta_log_Cbar = 2im .* imag.(log_Cbar)
 
     rhs =
         -psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
-        apply_kernel(K2, log_C)
+        apply_kernel(K2, delta_log_C) - 0.5 .* delta_log_Cbar
 
     log_cbar = log.(aux.c_bar)
     return log_cbar .- rhs

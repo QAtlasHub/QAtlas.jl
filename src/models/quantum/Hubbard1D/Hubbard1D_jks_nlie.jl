@@ -1378,11 +1378,16 @@ function jks_nlie_residual_c(
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_C = log.(1 .+ aux.c)
     log_Cbar = log.(1 .+ aux.c_bar)
+
+    # Stage C.15 Option A: add -(1/2) Delta log C term.
+    # Delta log C := 2i Im(log C) (cut discontinuity, vanishes when c is real).
+    delta_log_C = 2im .* imag.(log_C)
 
     rhs =
         -psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
-        apply_kernel(K2, log_Cbar)
+        apply_kernel(K2, log_Cbar) - 0.5 .* delta_log_C
 
     log_c = log.(aux.c)
     return log_c .- rhs
@@ -1415,10 +1420,14 @@ function jks_nlie_residual_cbar(
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
     log_C = log.(1 .+ aux.c)
+    log_Cbar = log.(1 .+ aux.c_bar)
+
+    # Stage C.15 Option A: add -(1/2) Delta log Cbar term.
+    delta_log_Cbar = 2im .* imag.(log_Cbar)
 
     rhs =
         -psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
-        apply_kernel(K2, log_C)
+        apply_kernel(K2, log_C) - 0.5 .* delta_log_Cbar
 
     log_cbar = log.(aux.c_bar)
     return log_cbar .- rhs

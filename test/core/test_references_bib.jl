@@ -54,15 +54,14 @@ starting with a letter — i.e. no spaces/punctuation.
 """
 is_bibkey(s::AbstractString) = occursin(r"^[A-Za-z][A-Za-z0-9_]*$", s)
 
-# References intentionally left as free strings. No-DOI works (textbooks,
-# pre-DOI Soviet journals, talks) are now proper @book / @article / @misc
-# bibkey entries in references.bib (identified by ISBN / journal+ISSN /
-# URL instead of a DOI), so only genuinely-unidentified author strings
-# remain here. Keep this list tight — prefer adding a bibkey.
-const KNOWN_UNMIGRATED = Set{String}([
-    "Chen-Roncaglia 2008",           # ambiguous author string, no unique match (Phase-2 quantity)
-    "Tzeng-Yang-Hsu 2017",           # ambiguous author string, no unique match (Phase-2 quantity)
-])
+# Allowlist of references intentionally left as free strings. The bibkey
+# migration is now COMPLETE — every `@register` reference resolves to a
+# references.bib entry (DOI-bearing where one exists; otherwise @book /
+# @article+ISSN / @misc+URL), so this list is empty. A new free-string
+# reference therefore fails the completeness test below: add a bibkey to
+# references.bib, or (only if genuinely unciteable) list it here with a
+# justification.
+const KNOWN_UNMIGRATED = Set{String}()
 
 @testset "references.bib key consistency" begin
     path = references_bib_path()

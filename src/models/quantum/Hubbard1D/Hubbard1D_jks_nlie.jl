@@ -1347,10 +1347,11 @@ function hubbard1d_jks_free_energy(
     beta::Real;
     alpha::Real=U/6,
     H::Real=0.0,
-    grid_N::Int=64,
-    x_max::Real=8.0,
+    grid_N::Int=128,
+    x_max::Real=32.0,
     tol::Real=1e-6,
     maxiter::Int=40,
+    N_cheb::Int=64,
     solver::Symbol=:full_newton,
     # Backward compat kwargs (only used when solver = :b_only_continuation)
     beta_start::Real=0.01,
@@ -1398,7 +1399,7 @@ function hubbard1d_jks_free_energy(
         return NaN
     end
 
-    return free_energy_jks(sol.aux, grid, beta, U; mu=mu)
+    return free_energy_jks(sol.aux, grid, beta, U; mu=mu, N_cheb=N_cheb)
 end
 
 # ─────────────────────────────────────────────────────────────────────────────

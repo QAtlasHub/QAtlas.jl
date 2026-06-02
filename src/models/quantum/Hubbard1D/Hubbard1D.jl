@@ -316,8 +316,8 @@ function fetch(
     ::Infinite;
     beta::Real,
     H::Real=0.0,
-    grid_N::Int=64,
-    x_max::Real=8.0,
+    grid_N::Int=128,
+    x_max::Real=32.0,
     alpha::Real=m.U / 6,
     tol::Real=1e-6,
     maxiter::Int=40,

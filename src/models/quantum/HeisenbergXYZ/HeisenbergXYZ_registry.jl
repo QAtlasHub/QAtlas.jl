@@ -11,8 +11,8 @@
     method=:xxz_delegation,
     reliability=:high,
     tested_in="test/standalone/test_heisenberg_xyz.jl",
-    references=["YangYang1966", "Baxter1972"],
-    notes="Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; general (Jx≠Jy) raises DomainError (Baxter elliptic deferred to Phase 2).",
+    references=["YangYang1966", "LiebSchultzMattis1961", "Baxter1972"],
+    notes="Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; XY anisotropic line (Jz=0) via Lieb-Schultz-Mattis 1961 closed form; generic XYZ (Jx≠Jy, Jz≠0) deferred to Baxter elliptic Phase 3.",
 )
 
 @register(

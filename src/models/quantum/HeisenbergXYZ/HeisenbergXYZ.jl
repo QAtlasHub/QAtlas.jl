@@ -106,24 +106,31 @@ function fetch(
     Jz::Real=m.Jz,
     kwargs...,
 )
-    Jx == Jy || throw(
-        DomainError(
-            (Jx, Jy),
-            "HeisenbergXYZ Energy(:per_site) currently supports only the axis-aligned reduction Jx = Jy (delegated to XXZ1D); general XYZ via Baxter elliptic Bethe ansatz is tracked as Phase 2.  Got (Jx, Jy) = ($Jx, $Jy).",
-        ),
-    )
-    # Restrict to Jx > 0 so that Delta = Jz/Jx has unambiguous sign and the
-    # delegation lands in the XXZ1D-tested domain.  Jx < 0 (FM exchange) would
-    # flip Delta's sign into XXZ1D regions whose Yang-Yang analytic
-    # continuation is not exercised by the current XXZ1D test suite.
-    Jx > 0 || throw(
-        DomainError(
-            Jx,
-            "HeisenbergXYZ Energy(:per_site): Jx > 0 required (Jx == 0 is Ising-like; Jx < 0 is the FM-exchange XXZ regime whose XXZ1D delegation is not yet tested).  Got Jx = $Jx.",
-        ),
-    )
-    Δ = Jz / Jx
-    return QAtlas.fetch(QAtlas.XXZ1D(; J=Jx, Δ=Δ), Energy{:per_site}(), Infinite())
+    if Jx == Jy
+        Jx > 0 || throw(
+            DomainError(
+                Jx,
+                "HeisenbergXYZ Energy(:per_site): Jx > 0 required in the axial Jx = Jy " *
+                "branch (Jx == 0 is Ising-like; Jx < 0 is the FM-exchange XXZ regime " *
+                "whose XXZ1D delegation is not yet tested). Got Jx = $Jx.",
+            ),
+        )
+        Δ = Jz / Jx
+        return QAtlas.fetch(QAtlas.XXZ1D(; J=Jx, Δ=Δ), Energy{:per_site}(), Infinite())
+    elseif Jz == 0
+        # XY anisotropic line (Jx != Jy, Jz = 0). Lieb-Schultz-Mattis closed form.
+        return _heisenberg_xyz_gs_energy_xy_line(Jx, Jy)
+    else
+        throw(
+            DomainError(
+                (Jx, Jy, Jz),
+                "HeisenbergXYZ Energy(:per_site): generic XYZ (Jx != Jy, Jz != 0) " *
+                "requires the Baxter (1972) elliptic Bethe-ansatz machinery, deferred " *
+                "to Phase 3. Supported now: Jx = Jy (XXZ delegation) and Jz = 0 (XY line). " *
+                "Got (Jx, Jy, Jz) = ($Jx, $Jy, $Jz).",
+            ),
+        )
+    end
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

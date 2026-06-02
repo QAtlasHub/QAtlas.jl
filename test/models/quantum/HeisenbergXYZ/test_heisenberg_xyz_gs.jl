@@ -65,4 +65,19 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
         m_fm = HeisenbergXYZ(; Jx=-1.0, Jy=-1.0, Jz=0.5)
         @test_throws DomainError fetch(m_fm, GroundStateEnergyDensity(), Infinite())
     end
+
+    @testset "Energy{:per_site} matches GroundStateEnergyDensity across regimes" begin
+        using QAtlas: Energy
+        for m in (
+            HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.0),  # Heisenberg
+            HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=0.5),  # XXZ
+            HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=0.0),  # XX
+            HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.0),  # anisotropic XY
+            HeisenbergXYZ(; Jx=3.0, Jy=0.5, Jz=0.0),  # extreme anisotropic XY
+        )
+            f_gsed = fetch(m, GroundStateEnergyDensity(), Infinite())
+            f_ener = fetch(m, Energy{:per_site}(), Infinite())
+            @test f_gsed == f_ener
+        end
+    end
 end

@@ -1446,4 +1446,154 @@ function jks_nlie_residual_full(
     return vcat(res_b, res_c, res_cbar)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.12 — full 3N x 3N Newton solver
+#
+# Stage C.7 b-only Newton converged in 2 iter at high T but stalled at
+# mid-T because c, c_bar were held at atomic-limit constants. Stage C.11
+# added the c and c_bar residuals. This file assembles them into a
+# 3N x 3N Jacobian and damped Newton solver.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    jks_jacobian_full_finite_diff(aux, grid, beta, U, mu, alpha; H=0.0, eps=1e-6)
+        -> Matrix{ComplexF64}
+
+Numerical Jacobian of the full 3N residual (`[res_b; res_c; res_cbar]`)
+with respect to `[log b; log c; log c_bar]`, via forward finite
+differences. Returns a `3N x 3N` complex matrix.
+"""
+function jks_jacobian_full_finite_diff(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+    eps::Real=1e-6,
+)
+    N = grid.N
+    M = 3 * N
+    res0 = jks_nlie_residual_full(aux, grid, beta, U, mu, alpha; H=H)
+    J = zeros(ComplexF64, M, M)
+
+    log_b0 = log.(aux.b)
+    for k in 1:N
+        aux_pert = copy(aux)
+        log_pert = copy(log_b0)
+        log_pert[k] += eps
+        aux_pert.b .= exp.(log_pert)
+        aux_pert.b_bar .= aux_pert.b
+        res_pert = jks_nlie_residual_full(aux_pert, grid, beta, U, mu, alpha; H=H)
+        J[:, k] = (res_pert .- res0) ./ eps
+    end
+
+    log_c0 = log.(aux.c)
+    for k in 1:N
+        aux_pert = copy(aux)
+        log_pert = copy(log_c0)
+        log_pert[k] += eps
+        aux_pert.c .= exp.(log_pert)
+        res_pert = jks_nlie_residual_full(aux_pert, grid, beta, U, mu, alpha; H=H)
+        J[:, N + k] = (res_pert .- res0) ./ eps
+    end
+
+    log_cbar0 = log.(aux.c_bar)
+    for k in 1:N
+        aux_pert = copy(aux)
+        log_pert = copy(log_cbar0)
+        log_pert[k] += eps
+        aux_pert.c_bar .= exp.(log_pert)
+        res_pert = jks_nlie_residual_full(aux_pert, grid, beta, U, mu, alpha; H=H)
+        J[:, 2 * N + k] = (res_pert .- res0) ./ eps
+    end
+
+    return J
+end
+
+"""
+    solve_jks_nlie_full_newton(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
+                                maxiter=50, jac_eps=1e-6,
+                                damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01))
+        -> JKSSolution
+
+Damped 3N x 3N Newton solver on the full (b, c, c_bar) residual system.
+"""
+function solve_jks_nlie_full_newton(
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=50,
+    jac_eps::Real=1e-6,
+    damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    aux = init_atomic_limit(grid, beta, U, mu; h=H)
+    N = grid.N
+    last_residual = Inf
+
+    for iter in 1:maxiter
+        res = jks_nlie_residual_full(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+
+        if !isfinite(last_residual)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+
+        J = jks_jacobian_full_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
+
+        delta = try
+            J \ (-res)
+        catch
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if !all(isfinite, delta)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+
+        delta_b = delta[1:N]
+        delta_c = delta[(N + 1):(2 * N)]
+        delta_cbar = delta[(2 * N + 1):(3 * N)]
+
+        log_b_old = log.(aux.b)
+        log_c_old = log.(aux.c)
+        log_cbar_old = log.(aux.c_bar)
+
+        accepted = false
+        for damp in damps
+            aux_try = copy(aux)
+            aux_try.b .= exp.(log_b_old .+ damp .* delta_b)
+            aux_try.b_bar .= aux_try.b
+            aux_try.c .= exp.(log_c_old .+ damp .* delta_c)
+            aux_try.c_bar .= exp.(log_cbar_old .+ damp .* delta_cbar)
+            res_try = try
+                jks_nlie_residual_full(aux_try, grid, beta, U, mu, alpha; H=H)
+            catch
+                continue
+            end
+            res_try_norm = maximum(abs.(res_try))
+            if isfinite(res_try_norm) && res_try_norm < last_residual
+                aux.b .= aux_try.b
+                aux.b_bar .= aux_try.b_bar
+                aux.c .= aux_try.c
+                aux.c_bar .= aux_try.c_bar
+                accepted = true
+                break
+            end
+        end
+        if !accepted
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
 end  # module Hubbard1DJKSNLIE

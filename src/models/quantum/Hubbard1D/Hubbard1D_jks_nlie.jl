@@ -1408,7 +1408,7 @@ function hubbard1d_jks_free_energy(
     tol::Real=1e-6,
     maxiter::Int=40,
     N_cheb::Int=64,
-    solver::Symbol=:full_newton,
+    solver::Symbol=:full_newton_continuation,
     # Backward compat kwargs (only used when solver = :b_only_continuation)
     beta_start::Real=0.01,
     inner_maxiter::Int=30,
@@ -1426,15 +1426,24 @@ function hubbard1d_jks_free_energy(
     end
 
     grid = if nonuniform
-        build_nonuniform_grid(; x_inner=x_inner, x_outer=x_max, N_inner=N_inner, N_outer=N_outer, gamma=eta)
+        build_nonuniform_grid(;
+            x_inner=x_inner, x_outer=x_max, N_inner=N_inner, N_outer=N_outer, gamma=eta
+        )
     else
         JKSContourGrid(grid_N, eta; x_max=x_max)
     end
 
     sol = if solver == :full_newton
-        # Stage C.24+ paper-precise 3-channel Newton (default).
+        # Stage C.24+ paper-precise 3-channel Newton (high T only).
         solve_jks_nlie_full_newton(
             grid, beta, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+        )
+    elseif solver == :full_newton_continuation
+        # Stage G.1: β-continuation for wide-β robustness (default).
+        bs = min(beta_start, beta)
+        solve_jks_nlie_full_newton_continuation(
+            grid, beta, U, mu; alpha=alpha, H=H, beta_start=bs,
+            tol=tol, maxiter=maxiter, outer_maxsteps=outer_maxsteps,
         )
     elseif solver == :b_only_continuation
         # Stage C.4-C.10 b-only path with beta-continuation (legacy).
@@ -1710,6 +1719,166 @@ function solve_jks_nlie_full_newton(
         end
     end
     return JKSSolution(aux, maxiter, last_residual, false)
+end
+
+"""
+    solve_jks_nlie_full_newton_from(aux_init, grid, beta, U, mu; ...) -> JKSSolution
+
+Warm-start variant of solve_jks_nlie_full_newton: starts Newton from the
+caller-supplied `aux_init` instead of the atomic-limit init. Used by
+solve_jks_nlie_full_newton_continuation to chain solutions from low β
+to high β with each Newton getting a good initial guess.
+"""
+function solve_jks_nlie_full_newton_from(
+    aux_init::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=50,
+    jac_eps::Real=1e-6,
+    damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    aux = copy(aux_init)
+    N = grid.N
+    last_residual = Inf
+
+    for iter in 1:maxiter
+        res = jks_nlie_residual_full(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+
+        if !isfinite(last_residual)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+
+        J = jks_jacobian_full_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
+
+        delta = try
+            J \ (-res)
+        catch
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if !all(isfinite, delta)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+
+        delta_b = delta[1:N]
+        delta_c = delta[(N + 1):(2 * N)]
+        delta_cbar = delta[(2 * N + 1):(3 * N)]
+
+        log_b_old = log.(aux.b)
+        log_c_old = log.(aux.c)
+        log_cbar_old = log.(aux.c_bar)
+
+        accepted = false
+        for damp in damps
+            aux_try = copy(aux)
+            aux_try.b .= exp.(log_b_old .+ damp .* delta_b)
+            aux_try.b_bar .= aux_try.b
+            aux_try.c .= exp.(log_c_old .+ damp .* delta_c)
+            aux_try.c_bar .= exp.(log_cbar_old .+ damp .* delta_cbar)
+            res_try = try
+                jks_nlie_residual_full(aux_try, grid, beta, U, mu, alpha; H=H)
+            catch
+                continue
+            end
+            res_try_norm = maximum(abs.(res_try))
+            if isfinite(res_try_norm) && res_try_norm < last_residual
+                aux.b .= aux_try.b
+                aux.b_bar .= aux_try.b_bar
+                aux.c .= aux_try.c
+                aux.c_bar .= aux_try.c_bar
+                accepted = true
+                break
+            end
+        end
+        if !accepted
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
+"""
+    solve_jks_nlie_full_newton_continuation(grid, beta_target, U, mu; beta_start=1e-3, step_init=0.3, ...) -> JKSSolution
+
+β-continuation wrapper for the full 3-channel Newton solver. Starts from
+atomic init at `beta_start` (small β), then steps β = β * (1 + step)
+until reaching `beta_target`, warm-starting each Newton solve from the
+previous converged aux. The step size adapts on failure (halving) and
+success (slow growth).
+
+Enables wide-β robustness for the Hubbard JKS NLIE: solves at moderate-
+to-low T (β > 0.1) where direct atomic init fails to converge.
+"""
+function solve_jks_nlie_full_newton_continuation(
+    grid::JKSContourGrid,
+    beta_target::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    beta_start::Real=1e-3,
+    step_init::Real=0.3,
+    step_max::Real=1.0,
+    grow_factor::Real=1.5,
+    shrink_factor::Real=0.5,
+    tol::Real=1e-6,
+    maxiter::Int=40,
+    outer_maxsteps::Int=200,
+)
+    beta_target > 0 || throw(DomainError(beta_target, "beta_target must be > 0"))
+
+    bs = min(beta_start, beta_target)
+    aux = init_atomic_limit(grid, bs, U, mu; h=H)
+    sol_init = solve_jks_nlie_full_newton_from(
+        aux, grid, bs, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+    )
+    if !sol_init.converged
+        return JKSSolution(sol_init.aux, sol_init.iterations, sol_init.residual, false)
+    end
+    aux = sol_init.aux
+
+    if bs >= beta_target - 1e-12
+        return sol_init
+    end
+
+    beta_current = bs
+    step = step_init
+    total_iter = sol_init.iterations
+    last_residual = sol_init.residual
+
+    for outer_iter in 1:outer_maxsteps
+        if beta_current >= beta_target - 1e-12
+            return JKSSolution(aux, total_iter, last_residual, true)
+        end
+
+        beta_try = min(beta_current * (1 + step), beta_target)
+        sol = solve_jks_nlie_full_newton_from(
+            aux, grid, beta_try, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+        )
+        total_iter += sol.iterations
+
+        if sol.converged
+            beta_current = beta_try
+            aux = sol.aux
+            last_residual = sol.residual
+            step = min(step * grow_factor, step_max)
+        else
+            step *= shrink_factor
+            if step < 1e-4
+                return JKSSolution(aux, total_iter, last_residual, false)
+            end
+        end
+    end
+    return JKSSolution(aux, total_iter, last_residual, beta_current >= beta_target - 1e-12)
 end
 
 end  # module Hubbard1DJKSNLIE

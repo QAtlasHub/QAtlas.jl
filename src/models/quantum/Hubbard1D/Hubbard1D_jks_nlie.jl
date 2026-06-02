@@ -790,4 +790,119 @@ function solve_jks_nlie_b_only(
     return JKSSolution(aux, maxiter, last_residual, false)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.5 — physical kernel regularization + improved solver
+#
+# Stage C.4 build_kernel_matrix used eps = 1e-10 as the diagonal pole
+# regularizer, giving K[j,j] ~ 4e8 which dominated the residual. The
+# physically correct regularization is the contour shift alpha (with
+# 0 < alpha < eta), giving K(0 + i alpha) of order O(1).
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    build_kernel_matrix_shifted(grid, n, alpha_shift) -> Matrix{ComplexF64}
+
+Kernel matrix with diagonal regularized by the physical contour shift
+`alpha_shift` (typically 0 < alpha_shift < eta = U/4) rather than the
+tiny `eps = 1e-10` used by `build_kernel_matrix`.
+
+K[j, k] = jks_kernel_K_n_concrete(x_j - x_k + i * alpha_shift, n, gamma) * dx
+
+The j = k diagonal evaluates at K(i * alpha_shift), which is O(1) for
+alpha_shift ~ eta.
+"""
+function build_kernel_matrix_shifted(grid::JKSContourGrid, n::Integer, alpha_shift::Real)
+    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
+    alpha_shift > 0 || throw(DomainError(alpha_shift, "alpha_shift must be > 0"))
+    N = grid.N
+    K = zeros(ComplexF64, N, N)
+    for j in 1:N, k in 1:N
+        K[j, k] =
+            jks_kernel_K_n_concrete(
+                grid.x[j] - grid.x[k] + im * alpha_shift, n, grid.gamma
+            ) * grid.dx
+    end
+    return K
+end
+
+"""
+    jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
+
+Same as `jks_nlie_residual` but uses the physically-regularized kernels
+via `build_kernel_matrix_shifted` with the same `alpha` for both the
+contour shift and the kernel regularizer.
+"""
+function jks_nlie_residual_shifted(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
+    length(aux) == grid.N ||
+        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
+
+    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
+    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+
+    psi_b = jks_driving_b(grid, beta, U, alpha; H=H)
+
+    log_B = log.(1 .+ aux.b)
+    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_C = log.(1 .+ aux.c)
+    log_Cbar = log.(1 .+ aux.c_bar)
+    delta_log_CCbar = log_C .- log_Cbar
+
+    rhs =
+        psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
+        apply_kernel(K1, delta_log_CCbar)
+
+    log_b = log.(aux.b)
+    return log_b .- rhs
+end
+
+"""
+    solve_jks_nlie_shifted(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
+                          maxiter=200, alpha_mix=0.05) -> JKSSolution
+
+Picard solver using the physically-shifted kernels. Default `alpha_mix`
+is 0.05 (smaller than Stage C.4's 0.3) because even with correct kernel
+regularization the Jacobian can drive Picard unstable for large mixing.
+"""
+function solve_jks_nlie_shifted(
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=200,
+    alpha_mix::Real=0.05,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    0 < alpha_mix <= 1 || throw(DomainError(alpha_mix, "alpha_mix must be in (0, 1]"))
+    aux = init_atomic_limit(grid, beta, U, mu; h=H)
+
+    last_residual = Inf
+    for iter in 1:maxiter
+        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+        if !isfinite(last_residual)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+        log_b_new = log.(aux.b) .- alpha_mix .* res
+        aux.b .= exp.(log_b_new)
+        aux.b_bar .= aux.b
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
 end  # module Hubbard1DJKSNLIE

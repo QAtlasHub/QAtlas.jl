@@ -1,23 +1,81 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
+
 version-resolver:
   major:
-    labels: ['major']
+    labels:
+      - 'major'
+      - 'breaking'
   minor:
     labels:
       - 'minor'
-      - 'breaking'
+      - 'feature'
+      - 'enhancement'
   patch:
-    labels: ['patch']
+    labels:
+      - 'patch'
+      - 'bug'
+      - 'fix'
+      - 'documentation'
+      - 'docs'
+      - 'chore'
+      - 'refactor'
+      - 'performance'
+      - 'ci'
+      - 'test'
   default: patch
+
+# Conventional Commits prefix から自動 label 付与。
+# PR title が `feat: ...` なら 'feature' label が付き、release-drafter
+# が categories に分類できる。`!:` または body の `BREAKING CHANGE:` は
+# 'breaking' を付ける。
+autolabeler:
+  - label: 'breaking'
+    title:
+      - '/^[a-z]+(\(.+\))?!:/i'
+    body:
+      - '/BREAKING CHANGE:/i'
+  - label: 'feature'
+    title:
+      - '/^feat(\(.+\))?:/i'
+  - label: 'bug'
+    title:
+      - '/^fix(\(.+\))?:/i'
+  - label: 'documentation'
+    title:
+      - '/^docs(\(.+\))?:/i'
+    files:
+      - 'docs/**'
+      - '**/*.md'
+  - label: 'performance'
+    title:
+      - '/^perf(\(.+\))?:/i'
+  - label: 'refactor'
+    title:
+      - '/^refactor(\(.+\))?:/i'
+  - label: 'chore'
+    title:
+      - '/^chore(\(.+\))?:/i'
+  - label: 'ci'
+    title:
+      - '/^ci(\(.+\))?:/i'
+    files:
+      - '.github/**'
+  - label: 'test'
+    title:
+      - '/^test(\(.+\))?:/i'
+    files:
+      - 'test/**'
+      - '**/test_*.jl'
+
 categories:
   - title: '⚠️ Breaking Changes'
     labels:
       - 'breaking'
   - title: '🚀 Features'
     labels:
-      - 'enhancement'
       - 'feature'
+      - 'enhancement'
   - title: '🐛 Bug Fixes'
     labels:
       - 'bug'
@@ -29,21 +87,51 @@ categories:
     labels:
       - 'documentation'
       - 'docs'
-  - title: '🧰 Maintenance & Refactoring'
+  - title: '🧹 Refactoring'
+    labels:
+      - 'refactor'
+  - title: '🧪 Tests'
+    labels:
+      - 'test'
+  - title: '🧰 CI & Maintenance'
     labels:
       - 'chore'
-      - 'refactor'
       - 'ci'
 
 exclude-labels:
   - 'skip-changelog'
   - 'wontfix'
+  - 'duplicate'
+  - 'invalid'
 
-change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
+# PR title から Conventional Commits prefix を除去して release notes に
+# 載せる際に綺麗に見せる。`feat: add foo` → `add foo`。
+replacers:
+  - search: '/^feat(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^fix(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^docs(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^chore(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^refactor(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^perf(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^ci(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^test(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^build(\(.+\))?[!:]\s*/i'
+    replace: ''
+  - search: '/^style(\(.+\))?[!:]\s*/i'
+    replace: ''
+
+change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
+change-title-escapes: '\<*_&'
 
 template: |
-  ## Changelog
-
   ## What's Changed
 
   $CHANGES

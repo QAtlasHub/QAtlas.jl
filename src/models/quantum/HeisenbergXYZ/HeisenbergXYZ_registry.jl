@@ -38,3 +38,16 @@
           "closed form; axial XXZ case (Jx=Jy) delegated to XXZ1D Energy(:per_site). " *
           "Generic XYZ (Jx!=Jy, Jz!=0) deferred to Baxter elliptic Phase 3.",
 )
+
+@register(
+    HeisenbergXYZ,
+    MassGap,
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/HeisenbergXYZ/test_heisenberg_xyz_gs.jl",
+    references=["LiebSchultzMattis1961", "YangYang1966", "Baxter1972"],
+    notes="Critical axial XXZ (Jx=Jy, |Jz/Jx|<=1): gapless (0.0). XY anisotropic " *
+          "line (Jz=0): single-particle gap (1/4)|Jx-Jy| from LSM dispersion. " *
+          "Massive AFM and generic XYZ deferred to Phase 3.",
+)

@@ -239,3 +239,73 @@ function fetch(
         )
     end
 end
+
+# ==============================================================================
+# Mass gap (Phase 2: critical axial + XY line free-fermion)
+# ==============================================================================
+
+"""
+    fetch(m::HeisenbergXYZ, ::MassGap, ::Infinite;
+          Jx=m.Jx, Jy=m.Jy, Jz=m.Jz) -> Float64
+
+Single-particle mass gap (smallest excitation energy above the ground
+state) of the spin-1/2 XYZ chain at the thermodynamic limit.
+
+| Regime                              | Method                                         |
+|-------------------------------------|------------------------------------------------|
+| `Jx = Jy`, `abs(Jz/Jx) <= 1`        | gapless critical XXZ: returns `0.0`            |
+| `Jz = 0` (XY line, `Jx != Jy`)      | LSM dispersion minimum: `(1/4)*abs(Jx - Jy)`   |
+| massive axial AFM (`Jz/Jx > 1`)     | `DomainError` (Yang-Yang gap deferred)         |
+| generic XYZ (`Jx != Jy`, `Jz != 0`) | `DomainError` (Baxter elliptic Phase 3)        |
+
+# References
+
+- E. Lieb, T. Schultz, D. Mattis, *Ann. Phys.* **16**, 407 (1961).
+- C. N. Yang, C. P. Yang, *Phys. Rev.* **150**, 327 (1966).
+- A. Luther, I. Peschel, *Phys. Rev. B* **12**, 3908 (1975).
+- R. J. Baxter, *Ann. Phys.* **70**, 193 (1972).
+"""
+function fetch(
+    m::HeisenbergXYZ,
+    ::MassGap,
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    Jz::Real=m.Jz,
+    kwargs...,
+)
+    if Jx == Jy
+        Jx > 0 || throw(
+            DomainError(
+                Jx,
+                "HeisenbergXYZ MassGap axial branch requires Jx > 0; got Jx = $Jx.",
+            ),
+        )
+        if abs(Jz / Jx) <= 1
+            return 0.0  # critical XXZ -1 <= Delta <= 1: gapless spinon spectrum
+        else
+            throw(
+                DomainError(
+                    Jz / Jx,
+                    "HeisenbergXYZ MassGap at Jx = Jy: massive AFM regime " *
+                    "Delta = Jz/Jx > 1 not yet implemented (Yang-Yang gap " *
+                    "formula deferred); got Delta = $(Jz/Jx).",
+                ),
+            )
+        end
+    elseif Jz == 0
+        # XY anisotropic line: single-fermion gap min_k epsilon(k) with
+        #   epsilon(k) = (1/4) * sqrt((Jx+Jy)^2 cos^2(k) + (Jx-Jy)^2 sin^2(k))
+        # Minimum at k = +- pi/2 gives (1/4)*|Jx - Jy|.
+        return abs(Jx - Jy) / 4
+    else
+        throw(
+            DomainError(
+                (Jx, Jy, Jz),
+                "HeisenbergXYZ MassGap: generic XYZ (Jx != Jy, Jz != 0) requires " *
+                "the Baxter (1972) / Johnson-Krinsky-McCoy (1973) elliptic mass " *
+                "spectrum, deferred to Phase 3. Got (Jx, Jy, Jz) = ($Jx, $Jy, $Jz).",
+            ),
+        )
+    end
+end

@@ -979,4 +979,122 @@ function solve_jks_nlie_adaptive(
     return JKSSolution(aux, maxiter, last_residual, false)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.7 — damped Newton solver
+#
+# Picard variants (Stage C.4, C.5, C.6) are first-order. Newton gives
+# quadratic convergence near the solution at the price of a Jacobian
+# solve per iteration. We use forward finite differences for the
+# Jacobian and damped line search to handle overshoot.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    jks_jacobian_b_finite_diff(aux, grid, beta, U, mu, alpha; H=0.0, eps=1e-6)
+        -> Matrix{ComplexF64}
+
+Numerical Jacobian `J[i, k] = d residual_i / d log b_k` via forward
+finite difference at step `eps`. Requires `N + 1` residual evaluations
+on an `N`-point grid.
+"""
+function jks_jacobian_b_finite_diff(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+    eps::Real=1e-6,
+)
+    N = grid.N
+    res0 = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
+    J = zeros(ComplexF64, N, N)
+    log_b0 = log.(aux.b)
+    for k in 1:N
+        aux_pert = copy(aux)
+        log_b_pert = copy(log_b0)
+        log_b_pert[k] += eps
+        aux_pert.b .= exp.(log_b_pert)
+        aux_pert.b_bar .= aux_pert.b
+        res_pert = jks_nlie_residual_shifted(aux_pert, grid, beta, U, mu, alpha; H=H)
+        J[:, k] = (res_pert .- res0) ./ eps
+    end
+    return J
+end
+
+"""
+    solve_jks_nlie_newton(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
+                          maxiter=50, jac_eps=1e-6,
+                          damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01)) -> JKSSolution
+
+Damped Newton solver. At each iteration: compute residual r and Jacobian
+J, solve `J · δ = -r`, then try damping factors from largest to smallest
+and accept the first that decreases the residual.
+"""
+function solve_jks_nlie_newton(
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=50,
+    jac_eps::Real=1e-6,
+    damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    aux = init_atomic_limit(grid, beta, U, mu; h=H)
+    last_residual = Inf
+
+    for iter in 1:maxiter
+        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+
+        if !isfinite(last_residual)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+
+        J = jks_jacobian_b_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
+
+        delta = try
+            J \ (-res)
+        catch
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+
+        if !all(isfinite, delta)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+
+        log_b_old = log.(aux.b)
+        accepted = false
+        for damp in damps
+            log_b_new = log_b_old .+ damp .* delta
+            aux_try = copy(aux)
+            aux_try.b .= exp.(log_b_new)
+            aux_try.b_bar .= aux_try.b
+            res_try = try
+                jks_nlie_residual_shifted(aux_try, grid, beta, U, mu, alpha; H=H)
+            catch
+                continue
+            end
+            res_try_norm = maximum(abs.(res_try))
+            if isfinite(res_try_norm) && res_try_norm < last_residual
+                aux.b .= aux_try.b
+                aux.b_bar .= aux_try.b_bar
+                accepted = true
+                break
+            end
+        end
+        if !accepted
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
 end  # module Hubbard1DJKSNLIE

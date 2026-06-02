@@ -110,7 +110,7 @@ end
     strays = sort(collect(stray))
     if !isempty(strays)
         @info "references not resolvable to references.bib (add a bibkey, or " *
-              "allowlist in KNOWN_UNMIGRATED if genuinely unciteable)" strays
+            "allowlist in KNOWN_UNMIGRATED if genuinely unciteable)" strays
     end
     @test strays == String[]
 

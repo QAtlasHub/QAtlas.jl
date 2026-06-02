@@ -28,10 +28,6 @@ All `(Quantity, BC)` hubs `src` claims for **`KitaevHoneycomb`**.  Cells link to
 
 **Methods** (from `@register`, derived): `analytic`, `matter_free_fermion`
 
-**References** (aggregated):
-- Kitaev 2006
-- Kitaev 2006 | Lieb 1994
-
 ## Quantity × BC matrix
 
 | Quantity | `OBC` | `PBC` | `Infinite` |
@@ -41,5 +37,16 @@ All `(Quantity, BC)` hubs `src` claims for **`KitaevHoneycomb`**.  Cells link to
 | [`MassGap`](../quantities/MassGap.md) | — | — | 🟢 [hub](../hubs/KitaevHoneycomb_MassGap_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🔵 [hub](../hubs/KitaevHoneycomb_SpecificHeat_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Kitaev2006
+Lieb1994
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

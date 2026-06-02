@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Wannier 1950 | Houtappel 1950
+- method `analytic`, reliability `high`, refs: Wannier1950 | Houtappel1950
 - AFM (J>0): T_c = 0 (frustrated, no order). FM (J<0): T_c = 4|J|/ln 3.
 
 ## Corroboration

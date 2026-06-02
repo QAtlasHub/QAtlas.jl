@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Witten 1989 | Verlinde 1988
+- method `analytic`, reliability `high`, refs: Witten1989 | Verlinde1988
 - Z(S³; SU(N)_k) = S_{0,0} of modular S-matrix; product over positive roots in (k+N).
 
 ## Corroboration

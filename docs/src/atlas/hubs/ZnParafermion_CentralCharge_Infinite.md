@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Fateev-Zamolodchikov 1985
+- method `analytic`, reliability `high`, refs: FateevZamolodchikov1985
 - c = 2(n-1)/(n+2); SU(2)_n / U(1) coset CFT; n=2 = Ising, n=3 = Potts.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bethe_ansatz`, reliability `high`, refs: Lieb-Wu PRL 20, 1445 (1968) | Essler et al. (2005)
+- method `bethe_ansatz`, reliability `high`, refs: LiebWu1968 | Essler2005
 - Lieb-Wu integral Δ_c = (16t²/U) ∫₁^∞ √(ω²-1)/sinh(2πtω/U) dω at half filling.
 
 ## Corroboration

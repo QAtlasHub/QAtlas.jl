@@ -27,10 +27,6 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalIsing`**.  Cells link t
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Belavin-Polyakov-Zamolodchikov 1984
-- Belavin-Polyakov-Zamolodchikov 1984 | Friedan-Qiu-Shenker 1984
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -38,5 +34,16 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalIsing`**.  Cells link t
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/TricriticalIsing_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | 🟢 [hub](../hubs/TricriticalIsing_ConformalWeights_Infinite.md) |
 | [`PrimaryFields`](../quantities/PrimaryFields.md) | 🟠 [hub](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BelavinPolyakovZamolodchikov1984
+FriedanQiuShenker1984
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

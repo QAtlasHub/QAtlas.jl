@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bethe_ansatz`, reliability `high`, refs: Yang-Yang J. Math. Phys. 10 1115 (1969) | Cloizeaux Pearson PR 128 2131 (1962)
+- method `bethe_ansatz`, reliability `high`, refs: YangYang1969 | desCloizeauxPearson1962
 - e₀(Δ) at the isotropic AF point (Δ=1) reduces to Heisenberg1D Hulthén value J(1/4-ln 2); at the FM point (Δ=-1) the aligned state is exact, e₀ = -J/4.
 
 ## Corroboration

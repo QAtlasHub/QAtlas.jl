@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013) | Heyl Rep. Prog. Phys. 81, 054001 (2018)
+- method `bdg`, reliability `high`, refs: Heyl2013 | Heyl2018
 - L(t) = ∏_n |cos²θ_n + sin²θ_n e^{-2iΛ_n t}|² via OBC BdG diagonalisation of H_0, H_f.
 
 ## Corroboration

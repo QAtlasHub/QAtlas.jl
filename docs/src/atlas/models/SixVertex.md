@@ -27,15 +27,23 @@ All `(Quantity, BC)` hubs `src` claims for **`SixVertex`**.  Cells link to the p
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Lieb 1967a
-- Lieb 1967a | Lieb 1967c | Baxter 1982
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/SixVertex_ResidualEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Baxter1982
+Lieb1967a
+Lieb1967c
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

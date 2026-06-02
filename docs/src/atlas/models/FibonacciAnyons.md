@@ -29,13 +29,22 @@ All `(Quantity, BC)` hubs `src` claims for **`FibonacciAnyons`**.  Cells link to
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Freedman-Kitaev-Larsen-Wang 2003 | Read-Rezayi 1999 | Kitaev-Preskill 2006
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) | 🟢 [hub](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+FreedmanKitaevLarsenWang2003
+KitaevPreskill2006
+ReadRezayi1999
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Majumdar-Ghosh 1969
+- method `analytic`, reliability `high`, refs: MajumdarGhosh1969
 - E₀/N = -3J/8 from the exact dimer-product ground state.
 
 ## Corroboration

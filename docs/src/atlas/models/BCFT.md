@@ -27,13 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`BCFT`**.  Cells link to the per-hu
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Cardy 1989 | Affleck-Ludwig 1991 | Friedan-Konechny 2004
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/BCFT_ResidualEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AffleckLudwig1991
+Cardy1989
+FriedanKonechny2004
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

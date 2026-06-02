@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev-Preskill 2006 | Levin-Wen 2006
+- method `analytic`, reliability `high`, refs: KitaevPreskill2006 | LevinWen2006
 - γ = log 𝒟 = log 2 (Z₂ topological order, total quantum dim 𝒟 = 2).
 
 ## Corroboration

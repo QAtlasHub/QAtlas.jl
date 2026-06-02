@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ashcroft-Mermin 1976
+- method `analytic`, reliability `high`, refs: AshcroftMermin1976
 - V=0 free-fermion v_F = 2t sin(k_F); |μ|≥2t (no Fermi surface) DomainError.
 
 ## Corroboration

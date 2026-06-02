@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Giamarchi 2004
+- method `analytic`, reliability `high`, refs: Giamarchi2003
 - K = π / (2(π − arccos Δ)) for -1 < Δ ≤ 1.
 
 ## Corroboration

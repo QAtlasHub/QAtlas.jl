@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `MinimalModel`
 
 **Top references** (by hub count):
-- Belavin-Polyakov-Zamolodchikov 1984 — 2 hubs
-- Andrews-Baxter-Forrester 1984 — 1 hub
-- Cardy 1985 — 1 hub
-- Kitaev 2015 — 1 hub
-- Kos-Poland-Simmons-Duffin 2014 — 1 hub
+- BelavinPolyakovZamolodchikov1984 — 2 hubs
+- AndrewsBaxterForrester1984 — 1 hub
+- Cardy1984 — 1 hub
+- Kitaev2015 — 1 hub
+- Kos2016 — 1 hub
 
 ## Model × BC matrix
 

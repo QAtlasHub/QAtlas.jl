@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Pfeuty 1970 | McCoy-Wu 1978
+- method `delegation`, reliability `high`, refs: Pfeuty1970 | McCoyWu1978
 - h_z = 0 delegated to TFIM (closed-form Δ = 2|h_x − J|); h_z ≠ 0 non-integrable, deferred to Phase 2 (ED/DMRG).
 
 ## Corroboration

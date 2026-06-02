@@ -26,13 +26,22 @@ All `(Quantity, BC)` hubs `src` claims for **`ExtendedHubbard1D`**.  Cells link 
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- Lieb-Wu PRL 20, 1445 (1968) | Voit Rep. Prog. Phys. 58, 977 (1995) | Nakamura PRB 61, 16377 (2000)
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ChargeGap`](../quantities/ChargeGap.md) | 🔵 [hub](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+LiebWu1968
+Nakamura2000
+Voit1995
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -19,7 +19,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `MinimalModel`
 
 **Top references** (by hub count):
-- Belavin-Polyakov-Zamolodchikov 1984 — 2 hubs
+- BelavinPolyakovZamolodchikov1984 — 2 hubs
 
 ## Model × BC matrix
 

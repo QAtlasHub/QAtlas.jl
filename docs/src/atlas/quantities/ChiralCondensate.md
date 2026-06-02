@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Coleman-Jackiw-Susskind 1975 — 1 hub
-- Schwinger 1962 — 1 hub
+- ColemanJackiwSusskind1975 — 1 hub
+- Schwinger1962 — 1 hub
 
 ## Model × BC matrix
 

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `xxz_delegation`, reliability `high`, refs: Yang-Yang 1966 | Baxter 1972
+- method `xxz_delegation`, reliability `high`, refs: YangYang1966 | Baxter1972
 - Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; general (Jx≠Jy) raises DomainError (Baxter elliptic deferred to Phase 2).
 
 ## Corroboration

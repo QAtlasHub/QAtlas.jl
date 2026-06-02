@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Freedman-Kitaev-Larsen-Wang 2003 | Read-Rezayi 1999 | Kitaev-Preskill 2006
+- method `analytic`, reliability `high`, refs: FreedmanKitaevLarsenWang2003 | ReadRezayi1999 | KitaevPreskill2006
 - γ = (1/2) log(2 + φ) ≈ 0.6430; non-Abelian Fibonacci fusion, universal TQC.
 
 ## Corroboration

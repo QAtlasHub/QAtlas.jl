@@ -25,13 +25,22 @@ All `(Quantity, BC)` hubs `src` claims for **`Compass1D`**.  Cells link to the p
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Brzezicki-Dziarmaga-Oles PRB 75, 134415 (2007) | Kugel-Khomskii Sov. Phys. Usp. 25, 231 (1982) | Kitaev Annals of Physics 321, 2 (2006)
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Compass1D_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BrzezickiDziarmagaOles2007
+Kitaev2006
+KugelKhomskii1982
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

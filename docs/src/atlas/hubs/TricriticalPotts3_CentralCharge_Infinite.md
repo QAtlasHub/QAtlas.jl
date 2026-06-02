@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `minimal_model_delegation`, reliability `high`, refs: Andrews-Baxter-Forrester 1984 | Huse 1984
+- method `minimal_model_delegation`, reliability `high`, refs: AndrewsBaxterForrester1984 | Huse1984
 - Delegates to MinimalModel(6,7); c = 6/7 exact (Rational).
 
 ## Corroboration

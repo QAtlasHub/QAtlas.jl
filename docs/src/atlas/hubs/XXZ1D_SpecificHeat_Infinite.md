@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `free_fermion_quadgk`, reliability `high`, refs: Mahan §1.3
+- method `free_fermion_quadgk`, reliability `high`, refs: Mahan2000
 - XX (Δ = 0) free-fermion C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk.
 
 ## Corroboration

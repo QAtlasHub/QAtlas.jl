@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising 1925
+- method `analytic`, reliability `high`, refs: Ising1925
 - f(β,h) = -β^{-1} log λ_+; at h=0 reduces to -β^{-1} log(2 cosh βJ).
 
 ## Corroboration

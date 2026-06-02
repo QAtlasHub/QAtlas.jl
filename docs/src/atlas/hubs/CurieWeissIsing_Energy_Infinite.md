@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Landau-Lifshitz §149
+- method `analytic`, reliability `high`, refs: LandauLifshitz1980
 - u(β;J,h) = -Jm*²/2 - h m*; J≤0 reduces to single-spin -h tanh(βh); T→0 saturation -J/2 - |h|.
 
 ## Corroboration

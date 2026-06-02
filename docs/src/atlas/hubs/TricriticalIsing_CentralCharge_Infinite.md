@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Belavin-Polyakov-Zamolodchikov 1984 | Friedan-Qiu-Shenker 1984
+- method `analytic`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984 | FriedanQiuShenker1984
 - M(5,4) unitary minimal model, c=7/10; delegated to MinimalModel.
 
 ## Corroboration

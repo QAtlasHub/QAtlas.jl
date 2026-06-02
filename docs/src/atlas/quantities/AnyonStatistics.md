@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Kitaev 2003 — 1 hub
-- Nayak-Simon-Stern-Freedman-Das Sarma 2008 — 1 hub
+- Kitaev2003 — 1 hub
+- NayakSimonSternFreedmanDasSarma2008 — 1 hub
 
 ## Model × BC matrix
 

@@ -115,3 +115,6 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 5 hubs (quan
 | [`TopologicalEntanglementEntropy`](../../atlas/hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+

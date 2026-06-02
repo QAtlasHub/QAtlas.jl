@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Luther-Peschel 1975 — 2 hubs
-- Affleck 1989 — 1 hub
-- Baxter 1972 — 1 hub
-- Giamarchi 2004 — 1 hub
-- Haldane 1980 — 1 hub
+- LutherPeschel1975 — 2 hubs
+- Affleck1989 — 1 hub
+- Baxter1972 — 1 hub
+- Giamarchi2003 — 1 hub
+- Haldane1980 — 1 hub
 
 ## Model × BC matrix
 

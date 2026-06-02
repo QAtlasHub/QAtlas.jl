@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Shastry-Sutherland 1981 | White-Affleck 1996
+- method `analytic`, reliability `high`, refs: ShastrySutherland1981 | WhiteAffleck1996
 - method=:lower_bound → J/4 (Shastry-Sutherland); :numerical → 0.234 J (White-Affleck DMRG).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan 2000
+- method `analytic`, reliability `high`, refs: Mahan2000
 - s(β;t,μ) = β(u-ω); high-T limit log 2 per site, Sommerfeld linear in T at low T.
 
 ## Corroboration

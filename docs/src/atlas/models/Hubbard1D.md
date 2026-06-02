@@ -26,11 +26,6 @@ All `(Quantity, BC)` hubs `src` claims for **`Hubbard1D`**.  Cells link to the p
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`
 
-**References** (aggregated):
-- Lieb-Wu PRL 20, 1445 (1968)
-- Lieb-Wu PRL 20, 1445 (1968) | Essler et al. (2005)
-- Lieb-Wu PRL 20, 1445 (1968) | Voit Rep. Prog. Phys. 58, 977 (1995)
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -45,5 +40,17 @@ All `(Quantity, BC)` hubs `src` claims for **`Hubbard1D`**.  Cells link to the p
 Matched by filename substring (no annotation; substrate-derived):
 
 - [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Essler2005
+LiebWu1968
+Voit1995
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

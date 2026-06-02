@@ -27,15 +27,24 @@ All `(Quantity, BC)` hubs `src` claims for **`SLEkappa`**.  Cells link to the pe
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Beffara 2008
-- Schramm 2000 | Bauer-Bernard 2006 | Cardy 2005
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/SLEkappa_CentralCharge_Infinite.md) |
 | [`FractalDimension`](../quantities/FractalDimension.md) | 🟢 [hub](../hubs/SLEkappa_FractalDimension_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BauerBernard2006
+Beffara2008
+Cardy2005
+Schramm2000
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

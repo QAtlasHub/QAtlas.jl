@@ -117,3 +117,6 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 5 hubs (q
 | `Hubbard1D` | [`SpinGap`](../../atlas/hubs/Hubbard1D_SpinGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+

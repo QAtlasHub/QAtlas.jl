@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `free_fermion_quadgk`, reliability `high`, refs: Mahan §1.3 | Coleman §2.4 | Takahashi 1999 §4
-- XX (Δ = 0) free-fermion f(β) by QuadGK; warns + NaN at general Δ (issue #108).
+- method `klumper_nlie`, reliability `medium`, refs: Mahan2000 | Coleman2015 | Takahashi1999 | Klumper1993
+- Δ = 0: XX free-fermion f(β) by QuadGK (exact); -1 < Δ < 1, |Δ| < 0.99: Klümper QTM NLIE (issue #521); |Δ| ≥ 0.99 or gapped: NaN + warn.
 
 ## Corroboration
 

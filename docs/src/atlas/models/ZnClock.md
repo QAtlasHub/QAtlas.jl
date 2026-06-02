@@ -27,13 +27,21 @@ All `(Quantity, BC)` hubs `src` claims for **`ZnClock`**.  Cells link to the per
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- José-Kadanoff-Kirkpatrick-Nelson 1977 | Elitzur-Pearson-Shigemitsu 1979
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/ZnClock_CentralCharge_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+ElitzurPearsonShigemitsu1979
+JoseKadanoffKirkpatrickNelson1977
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

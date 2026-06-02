@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Lieb-Schultz-Mattis 1961 | Pfeuty 1970
+- method `bdg`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
 - Total ground-state and finite-T energy via BdG spectrum sum.
 
 ## Corroboration

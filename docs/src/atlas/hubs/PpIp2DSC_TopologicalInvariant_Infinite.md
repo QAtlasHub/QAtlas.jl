@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Read-Green 2000
+- method `analytic`, reliability `high`, refs: ReadGreen2000
 - First Chern number C=1 in weak-pairing topological phase.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Lieb-Wu PRL 20, 1445 (1968)
+- method `analytic`, reliability `high`, refs: LiebWu1968
 - Spinon branch is rigorously gapless at half filling — returns 0.0.
 
 ## Corroboration

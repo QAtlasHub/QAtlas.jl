@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `pfaffian`, reliability `high`, refs: Kitaev 2001 | Asboth-Oroszlany-Palyi 2016
+- method `pfaffian`, reliability `high`, refs: Kitaev2001 | AsbothOroszlanyPalyi2016
 - ν = sgn[Pf A(k=0)·Pf A(k=π)] = sgn(μ² - 4t²); ν=-1 topological, +1 trivial.
 
 ## Corroboration

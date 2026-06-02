@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Peschel 2003 | Calabrese-Cardy 2009
+- method `bdg`, reliability `high`, refs: Peschel2003 | CalabreseCardy2009
 - Free-fermion correlation-matrix Renyi α ≠ 1.
 
 ## Corroboration

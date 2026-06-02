@@ -19,7 +19,7 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`ExtendedHubbard1D`](models/ExtendedHubbard1D.md) | — | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 21 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 4 | feasible | `@su2` |
+| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 24 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 7 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 2 | `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 0 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 4 | `analytic`, `bethe_ansatz` | 0 | 2 | 2 | 0 | 0 | feasible | `@sweep` |
@@ -64,8 +64,8 @@ Top-level catalog of all **62 models** with claimed hubs.  One row per model; th
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 3 | `analytic` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
-| [`XXZ1D`](models/XXZ1D.md) | — | 27 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk` | 0 | 17 | 5 | 0 | 5 | feasible | `@fm`, `@free_fermion`, `@gapless` |
-| [`XYh1D`](models/XYh1D.md) | — | 4 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 4 | feasible | — |
+| [`XXZ1D`](models/XXZ1D.md) | — | 27 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk`, `klumper_nlie` | 0 | 17 | 5 | 0 | 5 | feasible | `@fm`, `@free_fermion`, `@gapless` |
+| [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ZnParafermion`](models/ZnParafermion.md) | `Ising` | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
@@ -84,7 +84,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`CriticalTemperature`](quantities/CriticalTemperature.md) — 6 models
 - [`EdgeModeEnergy`](quantities/EdgeModeEnergy.md) — 1 models
 - [`Energy`](quantities/Energy.md) — 24 models
-- [`EnergyLocal`](quantities/EnergyLocal.md) — 4 models
+- [`EnergyLocal`](quantities/EnergyLocal.md) — 5 models
 - [`ExactSpectrum`](quantities/ExactSpectrum.md) — 1 models
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
 - [`FidelitySusceptibility`](quantities/FidelitySusceptibility.md) — 1 models
@@ -98,11 +98,11 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`LuttingerParameter`](quantities/LuttingerParameter.md) — 4 models
 - [`LuttingerVelocity`](quantities/LuttingerVelocity.md) — 1 models
 - [`MagnetizationX`](quantities/MagnetizationX.md) — 4 models
-- [`MagnetizationXLocal`](quantities/MagnetizationXLocal.md) — 4 models
+- [`MagnetizationXLocal`](quantities/MagnetizationXLocal.md) — 5 models
 - [`MagnetizationY`](quantities/MagnetizationY.md) — 4 models
-- [`MagnetizationYLocal`](quantities/MagnetizationYLocal.md) — 2 models
-- [`MagnetizationZ`](quantities/MagnetizationZ.md) — 4 models
-- [`MagnetizationZLocal`](quantities/MagnetizationZLocal.md) — 4 models
+- [`MagnetizationYLocal`](quantities/MagnetizationYLocal.md) — 3 models
+- [`MagnetizationZ`](quantities/MagnetizationZ.md) — 5 models
+- [`MagnetizationZLocal`](quantities/MagnetizationZLocal.md) — 5 models
 - [`MassGap`](quantities/MassGap.md) — 24 models
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 2 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models
@@ -115,7 +115,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`StringOrderParameter`](quantities/StringOrderParameter.md) — 1 models
 - [`SusceptibilityXX`](quantities/SusceptibilityXX.md) — 4 models
 - [`SusceptibilityYY`](quantities/SusceptibilityYY.md) — 4 models
-- [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md) — 7 models
+- [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md) — 8 models
 - [`ThermalEntropy`](quantities/ThermalEntropy.md) — 11 models
 - [`TightBindingChecksum`](quantities/TightBindingChecksum.md) — 4 models
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models

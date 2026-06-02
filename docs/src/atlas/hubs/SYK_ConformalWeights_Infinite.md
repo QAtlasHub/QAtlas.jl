@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Sachdev-Ye 1993 | Kitaev 2015 | Maldacena-Stanford 2016
+- method `analytic`, reliability `high`, refs: SachdevYe1993 | Kitaev2015 | MaldacenaStanford2016
 - Large-N IR Majorana conformal dimension Δ_ψ = 1/q; composite-operator dimensions Phase 2.
 
 ## Corroboration

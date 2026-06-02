@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Lieb 1967a
+- method `analytic`, reliability `high`, refs: Lieb1967a
 - Square ice (a=b=c): S/N = (3/2) log(4/3) ≈ 0.4315231. FE phase (Δ > 1): 0. Generic disordered & AFE residual entropy deferred (issue #163 phase 2/3).
 
 ## Corroboration

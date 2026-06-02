@@ -19,7 +19,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Beffara 2008 — 1 hub
+- Beffara2008 — 1 hub
 
 ## Model × BC matrix
 

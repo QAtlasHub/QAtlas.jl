@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Affleck-Ludwig 1991 — 1 hub
-- Cardy 1989 — 1 hub
-- Friedan-Konechny 2004 — 1 hub
-- Lieb 1967a — 1 hub
-- Pauling 1935 — 1 hub
+- AffleckLudwig1991 — 1 hub
+- Cardy1989 — 1 hub
+- FriedanKonechny2004 — 1 hub
+- Lieb1967a — 1 hub
+- Pauling1935 — 1 hub
 
 ## Model × BC matrix
 

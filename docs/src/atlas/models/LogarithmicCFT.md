@@ -27,13 +27,23 @@ All `(Quantity, BC)` hubs `src` claims for **`LogarithmicCFT`**.  Cells link to 
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Saleur 1992 | Cardy 2001 | Pearce-Rasmussen-Zuber 2006 | Vasseur-Jacobsen-Saleur 2011
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/LogarithmicCFT_CentralCharge_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Cardy2001
+PearceRasmussenZuber2006
+Saleur1992
+VasseurJacobsenSaleur2011
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

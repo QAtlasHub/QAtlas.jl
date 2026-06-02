@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 4
-- **Total hubs (Model, BC pairs)**: 4
+- **Models with this quantity registered**: 5
+- **Total hubs (Model, BC pairs)**: 5
 - **Methods** (derived from `@register`): `bdg`, `dense_ed`
 - **Universality classes** (where applicable): `Ising`
 
@@ -26,5 +26,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md) |
 | [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_MagnetizationZLocal_OBC.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) |
+| [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZLocal_OBC.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

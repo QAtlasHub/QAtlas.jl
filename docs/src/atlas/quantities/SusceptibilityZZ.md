@@ -13,17 +13,17 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 7
-- **Total hubs (Model, BC pairs)**: 9
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
+- **Models with this quantity registered**: 8
+- **Total hubs (Model, BC pairs)**: 11
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`, `quadgk`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
-- Affleck-Kennedy-Lieb-Tasaki 1988 — 2 hubs
-- García-Saez-Murg-Verstraete 2013 — 2 hubs
-- Brush 1967 RMP 39 883 — 1 hub
-- Ising 1925 — 1 hub
-- Landau-Lifshitz §149 — 1 hub
+- AKLT1988 — 2 hubs
+- GarciaSaez2013 — 2 hubs
+- LiebSchultzMattis1961 — 2 hubs
+- Pfeuty1970 — 2 hubs
+- Brush1967 — 1 hub
 
 ## Model × BC matrix
 
@@ -36,5 +36,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — | — |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) | — | — |
+| [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -28,13 +28,21 @@ All `(Quantity, BC)` hubs `src` claims for **`AKLT2D`**.  Cells link to the per-
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Affleck-Kennedy-Lieb-Tasaki 1988 | Verstraete-Cirac 2004
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/AKLT2D_Energy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AKLT1988
+VerstraeteCirac2004
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

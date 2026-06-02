@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988 | Kennedy-Tasaki 1992
+- method `analytic`, reliability `high`, refs: AKLT1988 | KennedyTasaki1992
 - Closed form O_str = 4/9; detects hidden Z₂×Z₂ in the Haldane phase.
 
 ## Corroboration

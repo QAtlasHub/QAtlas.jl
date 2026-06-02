@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `variational_reference`, reliability `high`, refs: Parisi 1980 | Crisanti-Rizzo 2002 | Talagrand 2006
+- method `variational_reference`, reliability `high`, refs: Parisi1980 | CrisantiRizzo2002 | Talagrand2006
 - e_0/J ≈ -0.7631667 (Crisanti-Rizzo 2002 high-precision Parisi full-RSB).
 
 ## Corroboration

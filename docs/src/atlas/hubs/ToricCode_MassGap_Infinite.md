@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev 2003
+- method `analytic`, reliability `high`, refs: Kitaev2003
 - Δ = 2 · min(J_e, J_m) — single-anyon excitation gap.
 
 ## Corroboration

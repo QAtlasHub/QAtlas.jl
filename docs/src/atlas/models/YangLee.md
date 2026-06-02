@@ -27,15 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`YangLee`**.  Cells link to the per
 
 **Methods** (from `@register`, derived): `minimal_model_delegation`
 
-**References** (aggregated):
-- Cardy 1985
-- Cardy 1985 | Yang-Lee 1952
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/YangLee_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | ⚪ [hub](../hubs/YangLee_ConformalWeights_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Cardy1984
+YangLee1952
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

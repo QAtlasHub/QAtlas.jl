@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising 1925 | Brush 1967 RMP 39 883
+- method `analytic`, reliability `high`, refs: Ising1925 | Brush1967
 - chi(b,h=0) = b exp(2bJ) per site; h=0 only.
 
 ## Corroboration

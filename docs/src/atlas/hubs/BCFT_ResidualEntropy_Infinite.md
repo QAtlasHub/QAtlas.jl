@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Cardy 1989 | Affleck-Ludwig 1991 | Friedan-Konechny 2004
+- method `analytic`, reliability `high`, refs: Cardy1989 | AffleckLudwig1991 | FriedanKonechny2004
 - Ising Cardy boundary entropy log g: fixed=-log(2)/2, free=σ=0, identity=epsilon=-log(2)/2; g-theorem.
 
 ## Corroboration

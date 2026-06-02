@@ -19,10 +19,10 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
-- Ising 1925 — 1 hub
-- Landau-Lifshitz §149 — 1 hub
-- Pfeuty 1970 — 1 hub
-- Yang 1952 — 1 hub
+- Ising1925 — 1 hub
+- LandauLifshitz1980 — 1 hub
+- Pfeuty1970 — 1 hub
+- Yang1952 — 1 hub
 
 ## Model × BC matrix
 

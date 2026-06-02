@@ -19,7 +19,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
+- AKLT1988 — 1 hub
 
 ## Model × BC matrix
 

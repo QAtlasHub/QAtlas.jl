@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Majumdar-Ghosh 1969 — 2 hubs
-- Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
-- Bethe 1931 — 1 hub
-- Cloizeaux Pearson PR 128 2131 (1962) — 1 hub
-- Essler et al. (2005) — 1 hub
+- MajumdarGhosh1969 — 2 hubs
+- AKLT1988 — 1 hub
+- Bethe1931 — 1 hub
+- Essler2005 — 1 hub
+- Hulthen1938 — 1 hub
 
 ## Model × BC matrix
 

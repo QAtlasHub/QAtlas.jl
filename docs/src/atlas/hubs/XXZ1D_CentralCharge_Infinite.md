@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Giamarchi 2004
+- method `analytic`, reliability `high`, refs: Giamarchi2003
 - c = 1 in the critical regime -1 < Δ < 1.
 
 ## Corroboration

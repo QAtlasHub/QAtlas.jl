@@ -27,13 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`RFIM`**.  Cells link to the per-hu
 
 **Methods** (from `@register`, derived): `analytic_imry_ma`
 
-**References** (aggregated):
-- Imry-Ma 1975 | Imbrie 1985 | Bricmont-Kupiainen 1987
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/RFIM_CriticalTemperature_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BricmontKupiainen1987
+Imbrie1985
+ImryMa1975
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

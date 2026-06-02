@@ -19,10 +19,10 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Lieb-Wu PRL 20, 1445 (1968) — 2 hubs
-- Essler et al. (2005) — 1 hub
-- Nakamura PRB 61, 16377 (2000) — 1 hub
-- Voit Rep. Prog. Phys. 58, 977 (1995) — 1 hub
+- LiebWu1968 — 2 hubs
+- Essler2005 — 1 hub
+- Nakamura2000 — 1 hub
+- Voit1995 — 1 hub
 
 ## Model × BC matrix
 

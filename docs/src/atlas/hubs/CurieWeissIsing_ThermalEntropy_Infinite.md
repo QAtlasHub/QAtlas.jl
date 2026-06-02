@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Landau-Lifshitz §149
+- method `analytic`, reliability `high`, refs: LandauLifshitz1980
 - s(β;J,h) = log[2cosh(β(Jm*+h))] − β(Jm*+h)m* (Gibbs); bounded [0, log 2].
 
 ## Corroboration

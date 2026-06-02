@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Landau-Lifshitz §149
+- method `analytic`, reliability `high`, refs: LandauLifshitz1980
 - c_v(β;J,h) = β²(Jm*+h)²(1-m*²)/[1 - βJ(1-m*²)]; J>0,h=0: 0 above T_c, jump 3/2 at T_c⁻; J≤0: (βh sech(βh))².
 
 ## Corroboration

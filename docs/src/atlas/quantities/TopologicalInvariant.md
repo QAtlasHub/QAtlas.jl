@@ -19,9 +19,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Asboth-Oroszlany-Palyi 2016 — 1 hub
-- Kitaev 2001 — 1 hub
-- Read-Green 2000 — 1 hub
+- AsbothOroszlanyPalyi2016 — 1 hub
+- Kitaev2001 — 1 hub
+- ReadGreen2000 — 1 hub
 
 ## Model × BC matrix
 

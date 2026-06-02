@@ -25,13 +25,21 @@ All `(Quantity, BC)` hubs `src` claims for **`KitaevHeisenberg`**.  Cells link t
 
 **Methods** (from `@register`, derived): `kitaev_delegation`
 
-**References** (aggregated):
-- Kitaev 2006 | Rau-Lee-Kee 2014
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/KitaevHeisenberg_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Kitaev2006
+RauLeeKee2014
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

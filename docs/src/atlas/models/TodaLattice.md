@@ -27,13 +27,21 @@ All `(Quantity, BC)` hubs `src` claims for **`TodaLattice`**.  Cells link to the
 
 **Methods** (from `@register`, derived): `linear_phonon`
 
-**References** (aggregated):
-- Toda 1967 | Flaschka 1974
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TodaLattice_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Flaschka1974
+Toda1967
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

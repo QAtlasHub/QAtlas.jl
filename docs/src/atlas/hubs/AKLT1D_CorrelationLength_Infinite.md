@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988
+- method `analytic`, reliability `high`, refs: AKLT1988
 - Closed form ξ = 1/log 3 ≈ 0.910 from VBS transfer matrix.
 
 ## Corroboration

@@ -27,15 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`LiouvilleCFT`**.  Cells link to th
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Polyakov 1981
-- Polyakov 1981 | Zamolodchikov-Zamolodchikov 1996
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/LiouvilleCFT_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | 🟢 [hub](../hubs/LiouvilleCFT_ConformalWeights_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Polyakov1981
+ZamolodchikovZamolodchikov1996
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

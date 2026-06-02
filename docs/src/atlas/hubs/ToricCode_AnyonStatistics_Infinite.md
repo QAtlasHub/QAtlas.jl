@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev 2003 | Nayak-Simon-Stern-Freedman-Das Sarma 2008
+- method `analytic`, reliability `high`, refs: Kitaev2003 | NayakSimonSternFreedmanDasSarma2008
 - Topological data for {1, e, m, ε} and e/m mutual braiding (phase π).
 
 ## Corroboration

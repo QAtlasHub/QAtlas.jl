@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `literature_value`, reliability `medium`, refs: White-Huse 1993
+- method `literature_value`, reliability `medium`, refs: WhiteHuse1993
 - GS energy density e₀ ≈ -1.401484 J (DMRG; no closed form).
 
 ## Corroboration

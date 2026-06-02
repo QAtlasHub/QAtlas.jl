@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `s1_heisenberg_delegation`, reliability `medium`, refs: White-Huse 1993 | Schulz 1986 | Tzeng-Yang-Hsu 2017
+- method `s1_heisenberg_delegation`, reliability `medium`, refs: WhiteHuse1993 | Schulz1986 | TzengYang2008
 - Δ=1 delegate to S1Heisenberg1D Haldane gap; Δ≠1 (XY1/large-Δ Néel) Phase 2.
 
 ## Corroboration

@@ -19,7 +19,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Ashcroft-Mermin 1976 — 2 hubs
+- AshcroftMermin1976 — 2 hubs
 
 ## Model × BC matrix
 

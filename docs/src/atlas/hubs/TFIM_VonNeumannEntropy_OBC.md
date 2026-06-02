@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Peschel 2003
+- method `bdg`, reliability `high`, refs: Peschel2003
 - Free-fermion correlation-matrix method; pass subsystem length ℓ.
 
 ## Corroboration

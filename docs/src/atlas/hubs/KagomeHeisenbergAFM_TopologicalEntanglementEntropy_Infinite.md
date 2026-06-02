@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `medium`, refs: Kitaev-Preskill 2006 | Levin-Wen 2006 | Jiang-Wang-Balents 2012 | Yan-Huse-White 2011 | Iqbal-Becca-Sorella-Poilblanc 2013
+- method `analytic`, reliability `medium`, refs: KitaevPreskill2006 | LevinWen2006 | JiangWangBalents2012 | YanHuseWhite2011 | IqbalBeccaSorellaPoilblanc2013
 - γ = log 2 in the Z₂-spin-liquid scenario; competing U(1) Dirac scenario predicts γ = 0.
 
 ## Corroboration

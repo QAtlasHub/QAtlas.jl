@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Gu IJMPB 24 4371 (2010) | Damski PRB 87 165101 (2013)
+- method `bdg`, reliability `high`, refs: Gu2010 | Damski2013
 - χ_F = Σ_{p<q} 4 X_{pq}² / (Λ_p+Λ_q)² from Bogoliubov amplitudes.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan 2000
+- method `analytic`, reliability `high`, refs: Mahan2000
 - c_μ(β;t,μ) = (β²/π) ∫₀^π ε² n_F(1-n_F) dk; QuadGK rtol=1e-10.
 
 ## Corroboration

@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Calabrese-Essler-Fagotti J. Stat. Mech. (2012) — 1 hub
-- Rigol et al. PRL 98 (2007) — 1 hub
+- CalabreseEsslerFagotti2012 — 1 hub
+- Rigol2007 — 1 hub
 
 ## Model × BC matrix
 

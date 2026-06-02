@@ -19,9 +19,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Eggert 1996 — 1 hub
-- Lieb-Wu PRL 20, 1445 (1968) — 1 hub
-- White-Affleck 1996 — 1 hub
+- Eggert1996 — 1 hub
+- LiebWu1968 — 1 hub
+- WhiteAffleck1996 — 1 hub
 
 ## Model × BC matrix
 

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ashcroft-Mermin 1976
+- method `analytic`, reliability `high`, refs: AshcroftMermin1976
 - E/N = -(2t/π) sin(k_F) - (μ/π) k_F at partial filling; E/N = 0 (empty) / -μ (full).
 
 ## Corroboration

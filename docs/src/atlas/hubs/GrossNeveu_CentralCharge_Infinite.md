@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic_uv`, reliability `high`, refs: Gross-Neveu 1974
+- method `analytic_uv`, reliability `high`, refs: GrossNeveu1974
 - UV free-fermion c = N at g = 0 (N Dirac flavours); g ≠ 0 raises DomainError (Phase 2: RG flow / dynamical mass).
 
 ## Corroboration

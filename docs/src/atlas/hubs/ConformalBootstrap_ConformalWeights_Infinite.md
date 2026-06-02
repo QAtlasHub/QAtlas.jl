@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bootstrap_reference`, reliability `high`, refs: Kos-Poland-Simmons-Duffin 2014 | Kos-Poland-Simmons-Duffin-Vichi 2016 (Precision Islands, arXiv:1603.04436) | Simmons-Duffin 2017 | Reehorst et al 2021
+- method `bootstrap_reference`, reliability `high`, refs: KosPolandSimmonsDuffin2014 | Kos2016 | SimmonsDuffin2017 | Reehorst2021
 - 3D Ising critical exponents Δ_σ=0.5181489(10), Δ_ε=1.412625(10) — KPSD-Vichi 2016 Precision Islands; KPSD 2014 methodology, Simmons-Duffin 2017 cross-check. Higher operators Phase 2.
 
 ## Corroboration

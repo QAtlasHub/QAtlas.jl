@@ -25,14 +25,21 @@ All `(Quantity, BC)` hubs `src` claims for **`Cluster1D`**.  Cells link to the p
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Briegel-Raussendorf 2001
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/Cluster1D_Energy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Cluster1D_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BriegelRaussendorf2001
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

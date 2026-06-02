@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988
+- method `analytic`, reliability `high`, refs: AKLT1988
 - β=∞ only: s_OBC(∞) = log(4)/N from 4-fold edge-mode GS degeneracy (two free spin-½). Finite β throws DomainError.
 
 ## Corroboration

@@ -25,13 +25,21 @@ All `(Quantity, BC)` hubs `src` claims for **`MixedFieldIsing1D`**.  Cells link 
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- Pfeuty 1970 | McCoy-Wu 1978
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`MassGap`](../quantities/MassGap.md) | 🔵 [hub](../hubs/MixedFieldIsing1D_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+McCoyWu1978
+Pfeuty1970
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

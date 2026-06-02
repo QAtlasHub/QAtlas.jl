@@ -25,11 +25,6 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `pfaffian`
 
-**References** (aggregated):
-- Kitaev 2001
-- Kitaev 2001 | Alicea 2012
-- Kitaev 2001 | Asboth-Oroszlany-Palyi 2016
-
 ## Quantity × BC matrix
 
 | Quantity | `OBC` | `Infinite` |
@@ -39,5 +34,17 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | [`Energy`](../quantities/Energy.md) | — | 🟢 [hub](../hubs/Kitaev1D_Energy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_OBC.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_Infinite.md) |
 | [`TopologicalInvariant`](../quantities/TopologicalInvariant.md) | — | 🟢 [hub](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Alicea2012
+AsbothOroszlanyPalyi2016
+Kitaev2001
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

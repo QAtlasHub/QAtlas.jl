@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev 2006
+- method `analytic`, reliability `high`, refs: Kitaev2006
 - Δ = 2 · max(|K_γ_max| − sum_others, 0); 0 in B-phase, finite in A_γ.
 
 ## Corroboration

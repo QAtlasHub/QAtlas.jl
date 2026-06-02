@@ -20,19 +20,33 @@ All `(Quantity, BC)` hubs `src` claims for **`XYh1D`**.  Cells link to the per-h
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **4** |
+| 🟠 uncorroborated-but-feasible | 13 |
+| **total claimed hubs** | **13** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `quadgk`
 
-**References** (aggregated):
-- Lieb-Schultz-Mattis 1961 | Pfeuty 1970
-
 ## Quantity × BC matrix
 
-| Quantity | `OBC` | `Infinite` |
-|---|---|---|
-| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/XYh1D_Energy_OBC.md) | 🟠 [hub](../hubs/XYh1D_Energy_Infinite.md) |
-| [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/XYh1D_MassGap_OBC.md) | 🟠 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
+| Quantity | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/XYh1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_Energy_Infinite.md) |
+| [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/XYh1D_EnergyLocal_OBC.md) | — | — |
+| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationXLocal_OBC.md) | — | — |
+| [`MagnetizationYLocal`](../quantities/MagnetizationYLocal.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationYLocal_OBC.md) | — | — |
+| [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZ_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_MagnetizationZ_Infinite.md) |
+| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZLocal_OBC.md) | — | — |
+| [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/XYh1D_MassGap_OBC.md) | 🟠 [hub](../hubs/XYh1D_MassGap_PBC.md) | 🟠 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
+| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟠 [hub](../hubs/XYh1D_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+LiebSchultzMattis1961
+Pfeuty1970
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

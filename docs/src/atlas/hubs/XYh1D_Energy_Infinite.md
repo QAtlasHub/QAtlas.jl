@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `quadgk`, reliability `high`, refs: Lieb-Schultz-Mattis 1961 | Pfeuty 1970
+- method `quadgk`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
 - Ground-state and finite-T per-site energy via Gauss-Kronrod integration over dispersion.
 
 ## Corroboration

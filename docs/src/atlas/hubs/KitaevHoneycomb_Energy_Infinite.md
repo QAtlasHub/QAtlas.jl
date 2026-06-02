@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `matter_free_fermion`, reliability `high`, refs: Kitaev 2006 | Lieb 1994
+- method `matter_free_fermion`, reliability `high`, refs: Kitaev2006 | Lieb1994
 - GS by 2D Gauss-Kronrod; thermal value (β kwarg) uses matter-sector free fermion.
 
 ## Corroboration

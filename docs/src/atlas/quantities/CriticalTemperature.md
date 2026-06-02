@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
-- Bricmont-Kupiainen 1987 — 1 hub
-- Houtappel 1950 — 1 hub
-- Imbrie 1985 — 1 hub
-- Imry-Ma 1975 — 1 hub
-- Ising 1925 — 1 hub
+- BricmontKupiainen1987 — 1 hub
+- Houtappel1950 — 1 hub
+- Imbrie1985 — 1 hub
+- ImryMa1975 — 1 hub
+- Ising1925 — 1 hub
 
 ## Model × BC matrix
 

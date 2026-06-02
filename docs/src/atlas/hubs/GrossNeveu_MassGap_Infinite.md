@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Gross-Neveu 1974 | Andrei-Lowenstein 1979
+- method `analytic`, reliability `high`, refs: GrossNeveu1974 | AndreiLowenstein1979
 - Large-N dynamic mass m_F = Λ exp(-π/(N g²)); Λ required kwarg (renormalisation scheme).
 
 ## Corroboration

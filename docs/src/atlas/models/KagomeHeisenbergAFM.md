@@ -28,11 +28,6 @@ All `(Quantity, BC)` hubs `src` claims for **`KagomeHeisenbergAFM`**.  Cells lin
 
 **Methods** (from `@register`, derived): `analytic`, `dmrg_reference`
 
-**References** (aggregated):
-- Kitaev-Preskill 2006 | Levin-Wen 2006 | Jiang-Wang-Balents 2012 | Yan-Huse-White 2011 | Iqbal-Becca-Sorella-Poilblanc 2013
-- Yan-Huse-White 2011 | Depenbrock-McCulloch-Schollwöck 2012
-- Yan-Huse-White 2011 | Iqbal-Becca-Sorella-Poilblanc 2013
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -40,5 +35,20 @@ All `(Quantity, BC)` hubs `src` claims for **`KagomeHeisenbergAFM`**.  Cells lin
 | [`Energy`](../quantities/Energy.md) | ⚪ [hub](../hubs/KagomeHeisenbergAFM_Energy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | ⚪ [hub](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) |
 | [`TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) | ⚪ [hub](../hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+DepenbrockMcCullochSchollwock2012
+IqbalBeccaSorellaPoilblanc2013
+JiangWangBalents2012
+KitaevPreskill2006
+LevinWen2006
+YanHuseWhite2011
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bethe_ansatz`, reliability `high`, refs: Lieb-Wu PRL 20, 1445 (1968) | Essler et al. (2005)
+- method `bethe_ansatz`, reliability `high`, refs: LiebWu1968 | Essler2005
 - Lieb-Wu integral E₀/N = -4t² ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).
 
 ## Corroboration

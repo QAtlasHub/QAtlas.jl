@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
-- Onsager 1944 — 3 hubs
-- Houtappel 1950 — 1 hub
-- Landau 1937 — 1 hub
-- Pfeuty 1970 — 1 hub
-- Stanley 1971 — 1 hub
+- Onsager1944 — 3 hubs
+- Houtappel1950 — 1 hub
+- Landau1937 — 1 hub
+- Pfeuty1970 — 1 hub
+- Stanley1971 — 1 hub
 
 ## Model × BC matrix
 

@@ -25,13 +25,22 @@ All `(Quantity, BC)` hubs `src` claims for **`LongRangeIsing1D`**.  Cells link t
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- Pfeuty 1970 | Koffel-Lewenstein-Tagliacozzo 2012 | Gong-Foss-Feig 2014
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`MassGap`](../quantities/MassGap.md) | 🔵 [hub](../hubs/LongRangeIsing1D_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+GongFossFeig2014
+KoffelLewensteinTagliacozzo2012
+Pfeuty1970
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

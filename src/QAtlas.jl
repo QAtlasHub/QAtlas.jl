@@ -52,6 +52,7 @@ export TightBindingChecksum, TightBindingMaxEnergy  # scalar invariants for veri
 export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
 export Hubbard1D                                         # Lieb-Wu Bethe ansatz half-filling
 export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
+export HaldaneShastry, haldane_shastry_spinon_dispersion, haldane_shastry_sound_velocity         # spin-1/2 1/r^2 inverse-square Heisenberg chain
 export HeisenbergXYZ                                     # spin-½ XYZ chain (Baxter 1972, axis-aligned XXZ delegation)
 export ShastrySutherland                                 # SrCu₂(BO₃)₂ 2D dimer GS (Shastry-Sutherland 1981)
 export S1Heisenberg1D                                    # spin-1 (Haldane chain)
@@ -250,7 +251,10 @@ include("models/quantum/Hubbard1D/Hubbard1D.jl")
 include("models/quantum/Hubbard1D/Hubbard1D_jks_nlie.jl")  # JKS NLIE Stage A scaffold (#523)
 include("models/quantum/Hubbard1D/Hubbard1D_registry.jl")  # populates REGISTRY for Hubbard1D
 include("models/quantum/MajumdarGhosh/MajumdarGhosh.jl")
-include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")  # populates REGISTRY for MajumdarGhosh
+include("models/quantum/MajumdarGhosh/MajumdarGhosh_registry.jl")
+include("models/quantum/HaldaneShastry/HaldaneShastry.jl")
+include("models/quantum/HaldaneShastry/HaldaneShastry_thermal_cft.jl")  # c=1 CFT low-T (#524 stopgap)
+include("models/quantum/HaldaneShastry/HaldaneShastry_registry.jl")  # populates REGISTRY for HaldaneShastry
 include("models/quantum/ShastrySutherland/ShastrySutherland.jl")
 include("models/quantum/ShastrySutherland/ShastrySutherland_registry.jl")  # populates REGISTRY for ShastrySutherland (#259)
 include("models/quantum/HeisenbergXYZ/HeisenbergXYZ.jl")

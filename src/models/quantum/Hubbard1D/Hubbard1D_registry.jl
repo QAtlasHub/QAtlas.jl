@@ -12,7 +12,7 @@
     method=:bethe_ansatz,
     reliability=:high,
     tested_in="test/standalone/test_hubbard1d.jl",
-    references=["Lieb-Wu PRL 20, 1445 (1968)", "Essler et al. (2005)"],
+    references=["LiebWu1968", "Essler2005"],
     notes="Lieb-Wu integral E₀/N = -4t² ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).",
 )
 
@@ -23,7 +23,7 @@
     method=:bethe_ansatz,
     reliability=:high,
     tested_in="test/standalone/test_hubbard1d.jl",
-    references=["Lieb-Wu PRL 20, 1445 (1968)", "Essler et al. (2005)"],
+    references=["LiebWu1968", "Essler2005"],
     notes="Lieb-Wu integral Δ_c = (16t²/U) ∫₁^∞ √(ω²-1)/sinh(2πtω/U) dω at half filling.",
 )
 
@@ -34,7 +34,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_hubbard1d.jl",
-    references=["Lieb-Wu PRL 20, 1445 (1968)"],
+    references=["LiebWu1968"],
     notes="Spinon branch is rigorously gapless at half filling — returns 0.0.",
 )
 
@@ -45,6 +45,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_hubbard1d.jl",
-    references=["Lieb-Wu PRL 20, 1445 (1968)", "Voit Rep. Prog. Phys. 58, 977 (1995)"],
+    references=["LiebWu1968", "Voit1995"],
     notes="K=1 at U=0 free-fermion limit; finite-U Lieb-Wu Bethe ansatz K_ρ, K_σ deferred Phase 2.",
 )

@@ -9,7 +9,7 @@
     method=:analytic_uv,
     reliability=:high,
     tested_in="test/standalone/test_gross_neveu.jl",
-    references=["Gross-Neveu 1974"],
+    references=["GrossNeveu1974"],
     notes="UV free-fermion c = N at g = 0 (N Dirac flavours); g ≠ 0 raises DomainError (Phase 2: RG flow / dynamical mass).",
 )
 
@@ -20,6 +20,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_gross_neveu.jl",
-    references=["Gross-Neveu 1974", "Andrei-Lowenstein 1979"],
+    references=["GrossNeveu1974", "AndreiLowenstein1979"],
     notes="Large-N dynamic mass m_F = Λ exp(-π/(N g²)); Λ required kwarg (renormalisation scheme).",
 )

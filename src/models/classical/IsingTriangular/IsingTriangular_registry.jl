@@ -11,7 +11,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_ising_triangular.jl",
-    references=["Wannier 1950", "Houtappel 1950"],
+    references=["Wannier1950", "Houtappel1950"],
     notes="AFM (J>0): T_c = 0 (frustrated, no order). FM (J<0): T_c = 4|J|/ln 3.",
 )
 
@@ -22,7 +22,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_ising_triangular.jl",
-    references=["Wannier 1950"],
+    references=["Wannier1950"],
     notes="AFM (J>0): S/N = (2/π) ∫₀^{π/3} log(2 cos θ) dθ ≈ 0.3230659669 (QuadGK). FM (J<0): 0.",
 )
 
@@ -33,6 +33,6 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/classical/test_ising_triangular.jl",
-    references=["Onsager 1944", "Houtappel 1950"],
+    references=["Onsager1944", "Houtappel1950"],
     notes="2D Ising universality (Onsager exponents) shared with IsingSquare; delegated to Universality(:Ising) d=2.",
 )

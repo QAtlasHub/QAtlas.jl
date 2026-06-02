@@ -14,7 +14,7 @@
     method=:bethe_ansatz,
     reliability=:high,
     tested_in="test/standalone/test_bethe_ansatz.jl",
-    references=["Hulthén 1938", "Bethe 1931"],
+    references=["Hulthen1938", "Bethe1931"],
     notes="e₀ = J(1/4 - ln 2) at the isotropic AF point.",
 )
 
@@ -204,7 +204,7 @@ end
     method=:muller_ansatz,
     reliability=:medium,
     tested_in="test/standalone/test_heisenberg_spinon.jl",
-    references=["des Cloizeaux–Pearson 1962", "Müller-Thomas-Beck-Bonner 1981"],
+    references=["desCloizeauxPearson1962", "MullerThomasBeckBonner1981"],
     notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",
 )
 
@@ -216,7 +216,7 @@ end
     method=:delegation,
     reliability=:high,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_luttinger.jl",
-    references=["Luther-Peschel 1975", "Affleck 1989", "Haldane 1980"],
+    references=["LutherPeschel1975", "Affleck1989", "Haldane1980"],
     notes="K = 1/2 (SU(2)-symmetric Heisenberg AFM); delegate to XXZ1D(Δ=1).",
 )
 
@@ -231,11 +231,7 @@ end
     method=:cft_low_T,
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
-    references=[
-        "Affleck PRL 56, 746 (1986)",
-        "Blöte-Cardy-Nightingale PRL 56, 742 (1986)",
-        "Eggert-Affleck-Takahashi PRL 73, 332 (1994)",
-    ],
+    references=["Affleck1986", "BloteCardyNightingale1986", "EggertAffleckTakahashi1994"],
     notes="f = e₀ - π T² / (6 v_s), v_s = π J / 2. Valid β > 5/J; NaN+warn otherwise.",
 )
 
@@ -246,7 +242,7 @@ end
     method=:cft_low_T,
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
-    references=["Affleck PRL 56, 746 (1986)"],
+    references=["Affleck1986"],
     notes="s = π T / (3 v_s) = 2T / (3J). Valid β > 5/J.",
 )
 
@@ -257,6 +253,6 @@ end
     method=:cft_low_T,
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
-    references=["Affleck PRL 56, 746 (1986)"],
+    references=["Affleck1986"],
     notes="c_v = π T / (3 v_s) = 2T / (3J). Equals s(T) at LO CFT. Valid β > 5/J.",
 )

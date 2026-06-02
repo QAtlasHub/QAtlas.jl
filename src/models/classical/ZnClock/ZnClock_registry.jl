@@ -10,6 +10,6 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/universalities/test_zn_clock.jl",
-    references=["José-Kadanoff-Kirkpatrick-Nelson 1977", "Elitzur-Pearson-Shigemitsu 1979"],
+    references=["JoseKadanoffKirkpatrickNelson1977", "ElitzurPearsonShigemitsu1979"],
     notes="n=2 (Ising c=1/2) and n=3 (Potts c=4/5) delegate to MinimalModel; n≥4 (Ashkin-Teller/BKT line) Phase 2.",
 )

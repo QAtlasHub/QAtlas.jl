@@ -11,6 +11,6 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_long_range_ising1d.jl",
-    references=["Pfeuty 1970", "Koffel-Lewenstein-Tagliacozzo 2012", "Gong-Foss-Feig 2014"],
+    references=["Pfeuty1970", "KoffelLewensteinTagliacozzo2012", "GongFossFeig2014"],
     notes="α=Inf delegated to TFIM (Δ = 2|h-J|); finite α requires DMRG, deferred to Phase 2.",
 )

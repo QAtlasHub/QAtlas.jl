@@ -43,7 +43,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
-    references=["Mahan 2000", "Coleman 2015"],
+    references=["Mahan2000", "Coleman2015"],
     notes="ω(β;t,μ) = -(πβ)⁻¹ ∫₀^π log(1+e^{-βε}) dk, ε(k)=-2t cos k - μ; QuadGK rtol=1e-10.",
 )
 
@@ -54,7 +54,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
-    references=["Mahan 2000"],
+    references=["Mahan2000"],
     notes="s(β;t,μ) = β(u-ω); high-T limit log 2 per site, Sommerfeld linear in T at low T.",
 )
 
@@ -65,6 +65,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
-    references=["Mahan 2000"],
+    references=["Mahan2000"],
     notes="c_μ(β;t,μ) = (β²/π) ∫₀^π ε² n_F(1-n_F) dk; QuadGK rtol=1e-10.",
 )

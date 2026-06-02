@@ -12,10 +12,10 @@
     reliability=:medium,
     tested_in="test/models/quantum/misc/test_pxp1d.jl",
     references=[
-        "Turner-Michailidis-Abanin-Serbyn-Papić 2018",
-        "Lin-Motrunich 2019",
-        "Iadecola-Schecter-Xu 2019",
-        "Surace 2020",
+        "TurnerMichailidisAbaninSerbynPapic2018",
+        "LinMotrunich2019",
+        "IadecolaSchecterXu2019",
+        "Surace2020",
     ],
     notes="e_0/Ω ≈ -0.6516(2) DMRG/ED reference (PXP-scar literature); Surace 2020 gauge-theory mapping consistent but does not tabulate e_0.",
 )

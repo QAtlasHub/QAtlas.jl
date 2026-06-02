@@ -10,7 +10,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_cluster1d.jl",
-    references=["Briegel-Raussendorf 2001"],
+    references=["BriegelRaussendorf2001"],
     notes="E_0/N = -J; ground state is the cluster state (stabiliser model).",
 )
 
@@ -21,6 +21,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_cluster1d.jl",
-    references=["Briegel-Raussendorf 2001"],
+    references=["BriegelRaussendorf2001"],
     notes="Δ = 2J; single-stabiliser-flip excitation.",
 )

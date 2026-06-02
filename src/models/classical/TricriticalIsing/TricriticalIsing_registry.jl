@@ -10,7 +10,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/universalities/test_tricritical_ising.jl",
-    references=["Belavin-Polyakov-Zamolodchikov 1984", "Friedan-Qiu-Shenker 1984"],
+    references=["BelavinPolyakovZamolodchikov1984", "FriedanQiuShenker1984"],
     notes="M(5,4) unitary minimal model, c=7/10; delegated to MinimalModel.",
 )
 
@@ -21,7 +21,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/universalities/test_tricritical_ising.jl",
-    references=["Belavin-Polyakov-Zamolodchikov 1984"],
+    references=["BelavinPolyakovZamolodchikov1984"],
     notes="Kac formula h_{r,s} via MinimalModel(5,4); σ at 3/80, ε at 1/10.",
 )
 
@@ -32,6 +32,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/universalities/test_tricritical_ising.jl",
-    references=["Belavin-Polyakov-Zamolodchikov 1984"],
+    references=["BelavinPolyakovZamolodchikov1984"],
     notes="6 primaries modulo Kac symmetry.",
 )

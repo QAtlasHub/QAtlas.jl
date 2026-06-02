@@ -10,6 +10,6 @@
     method=:linear_phonon,
     reliability=:high,
     tested_in="test/standalone/test_toda_lattice.jl",
-    references=["Toda 1967", "Flaschka 1974"],
+    references=["Toda1967", "Flaschka1974"],
     notes="Linearised acoustic phonon ω(k) = 2√(ab)|sin(k/2)| ⇒ MassGap = 0.  Soliton / quantum-Toda spectrum tracked as Phase 2.",
 )

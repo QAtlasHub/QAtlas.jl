@@ -12,7 +12,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="Exact closed-form dispersion minimization for arbitrary Jx, Jy, h.",
 )
 @register(
@@ -22,7 +22,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="Lowest BdG quasiparticle energy from 2N×2N diagonalization.",
 )
 
@@ -34,7 +34,7 @@
     method=:quadgk,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="Ground-state and finite-T per-site energy via Gauss-Kronrod integration over dispersion.",
 )
 @register(
@@ -44,7 +44,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="Total ground-state and finite-T energy via BdG spectrum sum.",
 )
 
@@ -57,7 +57,7 @@ for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat)
         method=:quadgk,
         reliability=:high,
         tested_in="test/models/quantum/misc/test_xyh1d.jl",
-        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+        references=["LiebSchultzMattis1961", "Pfeuty1970"],
         notes="Per-site thermal quantity via QuadGK over dispersion.",
     )
     register!(
@@ -67,7 +67,7 @@ for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat)
         method=:bdg,
         reliability=:high,
         tested_in="test/models/quantum/misc/test_xyh1d.jl",
-        references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+        references=["LiebSchultzMattis1961", "Pfeuty1970"],
         notes="Per-site thermal quantity from OBC BdG spectrum sum.",
     )
 end
@@ -80,7 +80,7 @@ end
     method=:quadgk,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="transverse magnetization per site (along the field direction z) via QuadGK.",
 )
 @register(
@@ -90,7 +90,7 @@ end
     method=:bdg,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="transverse magnetization per site from the thermal Majorana covariance matrix.",
 )
 @register(
@@ -100,7 +100,7 @@ end
     method=:quadgk,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="transverse susceptibility per site via QuadGK.",
 )
 @register(
@@ -110,7 +110,7 @@ end
     method=:bdg,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="transverse susceptibility per site from exact Wick contraction over covariance.",
 )
 
@@ -160,7 +160,7 @@ end
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="Minimum quasiparticle energy over both PBC sectors (AP and P).",
 )
 
@@ -172,7 +172,7 @@ register!(
     method=:two_sector_freefermion,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Pfeuty 1970"],
+    references=["LiebSchultzMattis1961", "Pfeuty1970"],
     notes="Exact total energy via two-sector free-fermion partition (AP + P).",
 )
 
@@ -185,7 +185,7 @@ for QTy in (FreeEnergy, ThermalEntropy, SpecificHeat, MagnetizationZ, Susceptibi
         method=:analytic,
         reliability=:high,
         tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-        references=["Lieb-Schultz-Mattis 1961"],
+        references=["LiebSchultzMattis1961"],
         notes="Per-site PBC quantity via two-sector free-fermion partition (AP + P).",
     )
 end
@@ -198,7 +198,7 @@ register!(
     method=:translational_invariance,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
+    references=["LiebSchultzMattis1961"],
     notes="Uniform site-resolved ⟨σᶻ_i⟩ from bulk MagnetizationZ.",
 )
 register!(
@@ -208,7 +208,7 @@ register!(
     method=:symmetry,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
+    references=["LiebSchultzMattis1961"],
     notes="Vanishes by Z₂ symmetry; returns zeros.",
 )
 register!(
@@ -218,7 +218,7 @@ register!(
     method=:symmetry,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
+    references=["LiebSchultzMattis1961"],
     notes="Vanishes by Z₂ symmetry; returns zeros.",
 )
 register!(
@@ -228,6 +228,6 @@ register!(
     method=:translational_invariance,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d_pbc.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
+    references=["LiebSchultzMattis1961"],
     notes="Uniform site-resolved ε_i = E_total / N.",
 )

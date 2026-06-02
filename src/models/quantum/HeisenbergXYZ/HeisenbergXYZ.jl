@@ -315,3 +315,74 @@ function fetch(
         )
     end
 end
+
+# ==============================================================================
+# Correlation length (Phase 2: critical axial + XY line free-fermion)
+# ==============================================================================
+
+"""
+    fetch(m::HeisenbergXYZ, ::CorrelationLength, ::Infinite;
+          Jx=m.Jx, Jy=m.Jy, Jz=m.Jz) -> Float64
+
+Asymptotic correlation length of the spin-1/2 XYZ chain at the
+thermodynamic limit.
+
+| Regime                              | Method                                                              |
+|-------------------------------------|---------------------------------------------------------------------|
+| `Jx = Jy`, `abs(Jz/Jx) <= 1`        | gapless critical XXZ: returns `Inf`                                 |
+| `Jz = 0` (XY line, `Jx != Jy`)      | `xi = 1/asinh(abs(Jx-Jy) / (2*sqrt(Jx*Jy)))` (dispersion zero)      |
+| massive axial AFM (`Jz/Jx > 1`)     | `DomainError`                                                       |
+| generic XYZ                         | `DomainError` (Baxter elliptic Phase 3)                             |
+
+# References
+
+- E. Lieb, T. Schultz, D. Mattis, *Ann. Phys.* **16**, 407 (1961).
+- B. M. McCoy, T. T. Wu, *Phys. Rev.* **174**, 546 (1968).
+"""
+function fetch(
+    m::HeisenbergXYZ,
+    ::CorrelationLength,
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    Jz::Real=m.Jz,
+    kwargs...,
+)
+    if Jx == Jy
+        Jx > 0 || throw(
+            DomainError(
+                Jx,
+                "HeisenbergXYZ CorrelationLength axial branch requires Jx > 0; got Jx = $Jx.",
+            ),
+        )
+        if abs(Jz / Jx) <= 1
+            return Inf
+        else
+            throw(
+                DomainError(
+                    Jz / Jx,
+                    "HeisenbergXYZ CorrelationLength at Jx = Jy: massive AFM " *
+                    "Delta = Jz/Jx > 1 not yet implemented; got Delta = $(Jz/Jx).",
+                ),
+            )
+        end
+    elseif Jz == 0
+        prod = Jx * Jy
+        prod > 0 || throw(
+            DomainError(
+                (Jx, Jy),
+                "HeisenbergXYZ CorrelationLength on XY line requires Jx Jy > 0; " *
+                "got Jx*Jy = $prod.",
+            ),
+        )
+        return 1 / asinh(abs(Jx - Jy) / (2 * sqrt(prod)))
+    else
+        throw(
+            DomainError(
+                (Jx, Jy, Jz),
+                "HeisenbergXYZ CorrelationLength: generic XYZ requires Baxter " *
+                "(1972) elliptic correlation, deferred to Phase 3. Got (Jx, Jy, Jz) = ($Jx, $Jy, $Jz).",
+            ),
+        )
+    end
+end

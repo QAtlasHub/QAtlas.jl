@@ -668,7 +668,7 @@ JKS driving function `psi_c(x_j) = -beta U/2 - beta(mu + H/2) + log phi(x)` (eq 
 function jks_driving_c(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     return [
-        -beta * U / 2 - beta * (mu + H/2) + jks_log_phi_complex(x + 0im, beta) for
+        -beta * U / 2 + beta * (mu + H/2) + jks_log_phi_complex(x + 0im, beta) for
         x in grid.x
     ]
 end
@@ -681,7 +681,7 @@ Particle-hole conjugate of `jks_driving_c`. Satisfies `psi_c + psi_cbar = -beta 
 function jks_driving_cbar(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     return [
-        -beta * U / 2 + beta * (mu + H/2) - jks_log_phi_complex(x + 0im, beta) for
+        -beta * U / 2 - beta * (mu + H/2) - jks_log_phi_complex(x + 0im, beta) for
         x in grid.x
     ]
 end

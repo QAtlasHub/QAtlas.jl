@@ -399,9 +399,11 @@ function init_atomic_limit!(
     z_double = exp(beta * (2 * mu - U))
     Z_site = z_empty + z_up + z_down + z_double
 
+    # Stage C.22c: paper-precise PH-symmetric init.
+    # At beta=0 limit, c = cbar = exp(-betaU/2) by PH symmetry of eq (47).
     b_const = ComplexF64((z_up + z_down) / (z_empty + z_double))
-    c_const = ComplexF64(z_up / Z_site)
-    cbar_const = ComplexF64(z_down / Z_site)
+    c_const = ComplexF64(exp(-beta * U / 2))
+    cbar_const = ComplexF64(exp(-beta * U / 2))
 
     fill!(aux.b, b_const)
     fill!(aux.b_bar, b_const)
@@ -557,8 +559,11 @@ function free_energy_jks(
 
     # First integral:  -2i int_{-1}^{1} ln(1 + c + cbar) / sqrt(1 - s^2) ds
     integrand_1 = ComplexF64[
-        cut_mask[j] ? log(1 + aux.c[j] + aux.c_bar[j]) / sqrt(1 - grid.x[j]^2) : 0.0 + 0im
-        for j in 1:grid.N
+        if cut_mask[j]
+            log((1 + aux.c[j] + aux.c_bar[j]) / aux.c[j]) / sqrt(1 - grid.x[j]^2)
+        else
+            0.0 + 0im
+        end for j in 1:grid.N
     ]
     int_1 = -2im * sum(integrand_1) * grid.dx
 
@@ -668,7 +673,7 @@ JKS driving function `psi_c(x_j) = -beta U/2 - beta(mu + H/2) + log phi(x)` (eq 
 function jks_driving_c(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     return [
-        -beta * U / 2 - beta * (mu + H/2) + jks_log_phi_complex(x + 0im, beta) for
+        -beta * U / 2 + beta * (mu + H/2) + jks_log_phi_complex(x + 0im, beta) for
         x in grid.x
     ]
 end
@@ -681,7 +686,7 @@ Particle-hole conjugate of `jks_driving_c`. Satisfies `psi_c + psi_cbar = -beta 
 function jks_driving_cbar(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     return [
-        -beta * U / 2 + beta * (mu + H/2) - jks_log_phi_complex(x + 0im, beta) for
+        -beta * U / 2 - beta * (mu + H/2) - jks_log_phi_complex(x + 0im, beta) for
         x in grid.x
     ]
 end
@@ -721,13 +726,12 @@ function jks_nlie_residual(
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_c = log.(aux.c)
     log_C = log.(1 .+ aux.c)
-    log_Cbar = log.(1 .+ aux.c_bar)
-    delta_log_CCbar = log_C .- log_Cbar
+    log_c_minus_C = log_c .- log_C
 
-    rhs =
-        psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
-        apply_kernel(K1, delta_log_CCbar)
+    # Paper eq (47) b residual: log b = -betaH + K_2 ⊛ log B + K_1 ⊛ (log c - log C)
+    rhs = (-beta * H) .+ apply_kernel(K2, log_B) + apply_kernel(K1, log_c_minus_C)
 
     log_b = log.(aux.b)
     return log_b .- rhs
@@ -825,6 +829,23 @@ function build_kernel_matrix_shifted(grid::JKSContourGrid, n::Integer, alpha_shi
     return K
 end
 
+# Stage C.18: K_bar kernel with -i*alpha shift (conjugate of K_n).
+function build_kernel_matrix_shifted_bar(
+    grid::JKSContourGrid, n::Integer, alpha_shift::Real
+)
+    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
+    alpha_shift > 0 || throw(DomainError(alpha_shift, "alpha_shift must be > 0"))
+    N = grid.N
+    K = zeros(ComplexF64, N, N)
+    for j in 1:N, k in 1:N
+        K[j, k] =
+            jks_kernel_K_n_concrete(
+                grid.x[j] - grid.x[k] - im * alpha_shift, n, grid.gamma
+            ) * grid.dx
+    end
+    return K
+end
+
 """
     jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
 
@@ -848,18 +869,19 @@ function jks_nlie_residual_shifted(
 
     K1 = build_kernel_matrix_shifted(grid, 1, alpha)
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+    K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
+    K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
 
     psi_b = jks_driving_b(grid, beta, U, alpha; H=H)
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_c = log.(aux.c)
     log_C = log.(1 .+ aux.c)
-    log_Cbar = log.(1 .+ aux.c_bar)
-    delta_log_CCbar = log_C .- log_Cbar
+    log_c_minus_C = log_c .- log_C
 
-    rhs =
-        psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
-        apply_kernel(K1, delta_log_CCbar)
+    # Paper eq (47) b residual: log b = -betaH + K_2 ⊛ log B + K_1 ⊛ (log c - log C)
+    rhs = (-beta * H) .+ apply_kernel(K2, log_B) + apply_kernel(K1, log_c_minus_C)
 
     log_b = log.(aux.b)
     return log_b .- rhs
@@ -1373,16 +1395,21 @@ function jks_nlie_residual_c(
 
     K1 = build_kernel_matrix_shifted(grid, 1, alpha)
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+    K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
+    K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
+    K2_small = build_kernel_matrix_shifted(grid, 2, max(grid.dx, alpha / 50, 1e-3))
 
     psi_c = jks_driving_c(grid, beta, U, mu; H=H)
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_C = log.(1 .+ aux.c)
     log_Cbar = log.(1 .+ aux.c_bar)
 
-    rhs =
-        psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
-        apply_kernel(K2, log_Cbar)
+    # Stage C.22c: paper eq (47) direct form.
+    # log c = psi_c - K_1 ⊛ log B - K_1 ◦ log C
+    # (K_1⊓⊔ means convolution on the wide +/-iα contour: our K1 with +α shift)
+    rhs = psi_c - apply_kernel(K1, log_B) - apply_kernel(K1, log_C)
 
     log_c = log.(aux.c)
     return log_c .- rhs
@@ -1409,16 +1436,20 @@ function jks_nlie_residual_cbar(
 
     K1 = build_kernel_matrix_shifted(grid, 1, alpha)
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+    K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
+    K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
+    K2_small = build_kernel_matrix_shifted(grid, 2, max(grid.dx, alpha / 50, 1e-3))
 
     psi_cbar = jks_driving_cbar(grid, beta, U, mu; H=H)
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
     log_C = log.(1 .+ aux.c)
+    log_Cbar = log.(1 .+ aux.c_bar)
 
-    rhs =
-        psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
-        apply_kernel(K2, log_C)
+    # Stage C.22c: paper eq (47) cbar form.
+    # log cbar = psi_cbar + K_1 ⊛ log B + K_1 ◦ log C
+    rhs = psi_cbar + apply_kernel(K1, log_B) + apply_kernel(K1, log_C)
 
     log_cbar = log.(aux.c_bar)
     return log_cbar .- rhs

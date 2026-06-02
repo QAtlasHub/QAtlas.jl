@@ -137,5 +137,5 @@ page.
 ## Full API Index
 
 ```@autodocs
-Modules = [QAtlas, QAtlas.XXZKlumperNLIE]
+Modules = [QAtlas, QAtlas.XXZKlumperNLIE, QAtlas.Hubbard1DJKSNLIE]
 ```

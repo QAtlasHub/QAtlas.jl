@@ -86,9 +86,8 @@ tolerance choice already used by the T = 0 `Energy` integration in
 of the prefactor `1/((2π)²)` is left to the caller).
 """
 function _kitaev_bz_integral(integrand, model::KitaevHoneycomb; rtol::Float64=1e-8)
-    inner(θ₁) = first(
-        quadgk(θ₂ -> integrand(model, θ₁, θ₂), 0.0, 2π; rtol=rtol * 10, atol=1e-14)
-    )
+    inner(θ₁) =
+        first(quadgk(θ₂ -> integrand(model, θ₁, θ₂), 0.0, 2π; rtol=rtol * 10, atol=1e-14))
     I, _ = quadgk(inner, 0.0, 2π; rtol=rtol, atol=1e-14)
     return I
 end
@@ -282,7 +281,9 @@ function fetch(
     if beta === nothing
         # T = 0 GS path: ε_gs = -(1/(8π²)) ∫ |f| d²θ.
         inner(θ₁) = first(
-            quadgk(θ₂ -> _kitaev_fk_abs(model, θ₁, θ₂), 0.0, 2π; rtol=rtol * 10, atol=1e-14)
+            quadgk(
+                θ₂ -> _kitaev_fk_abs(model, θ₁, θ₂), 0.0, 2π; rtol=rtol * 10, atol=1e-14
+            ),
         )
         I, _ = quadgk(inner, 0.0, 2π; rtol=rtol, atol=1e-14)
         return -I / (8π^2)

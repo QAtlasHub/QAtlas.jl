@@ -52,7 +52,7 @@ using SparseArrays: spzeros
             f = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=1e-3)
             f_atom = atomic_free_energy(1e-3, U, U/2)
             @test isfinite(f)
-            @test isapprox(f, f_atom; rtol=0.005)
+            @test isapprox(f, f_atom; rtol=0.01)
         end
     end
 

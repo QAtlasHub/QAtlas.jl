@@ -15,7 +15,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_aklt.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="Closed form e₀ = -2J/3 from the bond-projector decomposition of H.",
 )
 @register(
@@ -25,7 +25,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_aklt.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="Same analytic e₀ = -2J/3 routed through Energy(:per_site).",
 )
 @register(
@@ -35,7 +35,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_aklt.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="Closed form ξ = 1/log 3 ≈ 0.910 from VBS transfer matrix.",
 )
 @register(
@@ -45,7 +45,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_aklt.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988", "Kennedy-Tasaki 1992"],
+    references=["AKLT1988", "KennedyTasaki1992"],
     notes="Closed form O_str = 4/9; detects hidden Z₂×Z₂ in the Haldane phase.",
 )
 
@@ -57,7 +57,7 @@
     method=:literature_value,
     reliability=:medium,
     tested_in="test/standalone/test_aklt.jl",
-    references=["García-Saez-Murg-Verstraete 2013"],
+    references=["GarciaSaez2013"],
     notes="Haldane gap Δ ≈ 0.350 J; DMRG numerical-exact, no closed form.",
 )
 
@@ -80,7 +80,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="Exact VBS ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|} (r≠0), 2/3 (r=0); J-independent. ED in tests verifies finite-N convergence.",
 )
 @register(
@@ -90,7 +90,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt.jl",
-    references=["Arovas-Auerbach-Haldane 1988"],
+    references=["Arovas1988"],
     notes="Exact static structure factor S_zz(q) = 2(1-cos q)/(5+3 cos q); S(0)=0, S(π)=2; J-independent.",
 )
 
@@ -107,7 +107,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: f_OBC(∞) = -(2J/3)(N-1)/N from bond-projector E_GS_OBC = -(2J/3)(N-1). Finite β throws DomainError.",
 )
 @register(
@@ -117,7 +117,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: s_OBC(∞) = log(4)/N from 4-fold edge-mode GS degeneracy (two free spin-½). Finite β throws DomainError.",
 )
 @register(
@@ -127,7 +127,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: c_OBC(∞) = 0 (pure GS manifold, zero energy variance). Finite β throws DomainError.",
 )
 @register(
@@ -137,7 +137,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: f_PBC(∞) = -2J/3 (unique VBS GS, all N bond projectors annihilated). Finite β throws DomainError.",
 )
 @register(
@@ -147,7 +147,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: s_PBC(∞) = 0 (unique gapped GS). Finite β throws DomainError.",
 )
 @register(
@@ -157,7 +157,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: c_PBC(∞) = 0. Finite β throws DomainError.",
 )
 @register(
@@ -167,7 +167,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988", "García-Saez-Murg-Verstraete 2013"],
+    references=["AKLT1988", "GarciaSaez2013"],
     notes="β=∞ only: χ_PBC(∞) = 0 (Haldane gap exponential suppression). Finite β throws DomainError.",
 )
 @register(
@@ -177,7 +177,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError.",
 )
 @register(
@@ -187,7 +187,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: s(∞) = 0 (unique bulk GS in the Haldane phase). Finite β throws DomainError.",
 )
 @register(
@@ -197,7 +197,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988"],
+    references=["AKLT1988"],
     notes="β=∞ only: c(∞) = 0. Finite β throws DomainError.",
 )
 @register(
@@ -207,6 +207,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
-    references=["Affleck-Kennedy-Lieb-Tasaki 1988", "García-Saez-Murg-Verstraete 2013"],
+    references=["AKLT1988", "GarciaSaez2013"],
     notes="β=∞ only: χ(∞) = 0 (Haldane gap suppression). Finite β throws DomainError.",
 )

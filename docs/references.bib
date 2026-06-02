@@ -1,0 +1,182 @@
+% QAtlas.jl bibliography — single source of truth for references cited in
+% docstrings and the `@register` registry. Each entry carries a DOI
+% (Crossref) or an arXiv eprint so the references can be machine-verified
+% by `doiget verify` in CI (see .github/workflows/VerifyReferences.yml).
+%
+% Citation-key convention: FirstAuthorYYYY, with a physics acronym pinned
+% where the paper is universally known by it (e.g. AKLT1988). Keys are
+% immutable once published here — docstrings reference them.
+%
+% NOTE: titles with inline math are reduced to plain $...$ TeX; the full
+% MathML from Crossref is intentionally dropped. A future `doiget cite`
+% command will regenerate this file from Crossref JSON automatically.
+
+@article{AKLT1988,
+  title   = {Valence bond ground states in isotropic quantum antiferromagnets},
+  author  = {Affleck, Ian and Kennedy, Tom and Lieb, Elliott H. and Tasaki, Hal},
+  journal = {Communications in Mathematical Physics},
+  volume  = {115},
+  number  = {3},
+  pages   = {477--528},
+  year    = {1988},
+  doi     = {10.1007/BF01218021},
+}
+
+@article{Klumper1993,
+  title   = {Thermodynamics of the anisotropic spin-1/2 Heisenberg chain and related quantum chains},
+  author  = {Kl{\"u}mper, Andreas},
+  journal = {Zeitschrift f{\"u}r Physik B Condensed Matter},
+  volume  = {91},
+  number  = {4},
+  pages   = {507--519},
+  year    = {1993},
+  doi     = {10.1007/BF01316831},
+}
+
+@article{KennedyTasaki1992,
+  title   = {Hidden $Z_2 \times Z_2$ symmetry breaking in Haldane-gap antiferromagnets},
+  author  = {Kennedy, Tom and Tasaki, Hal},
+  journal = {Physical Review B},
+  volume  = {45},
+  number  = {1},
+  pages   = {304--307},
+  year    = {1992},
+  doi     = {10.1103/PhysRevB.45.304},
+}
+
+@article{GarciaSaez2013,
+  title         = {Spectral gaps of Affleck-Kennedy-Lieb-Tasaki Hamiltonians using tensor network methods},
+  author        = {Garcia-Saez, Artur and Murg, Valentin and Wei, Tzu-Chieh},
+  journal       = {Physical Review B},
+  volume        = {88},
+  number        = {24},
+  pages         = {245118},
+  year          = {2013},
+  doi           = {10.1103/PhysRevB.88.245118},
+  eprint        = {1308.3631},
+  archivePrefix = {arXiv},
+}
+
+@article{Lohmann2014,
+  title   = {Tenth-order high-temperature expansion for the susceptibility and the specific heat of spin-$s$ Heisenberg models with arbitrary exchange patterns},
+  author  = {Lohmann, Andre and Schmidt, Heinz-J{\"u}rgen and Richter, Johannes},
+  journal = {Physical Review B},
+  volume  = {89},
+  number  = {1},
+  pages   = {014415},
+  year    = {2014},
+  doi     = {10.1103/PhysRevB.89.014415},
+}
+
+@article{Arovas1988,
+  title   = {Extended Heisenberg models of antiferromagnetism: Analogies to the fractional quantum Hall effect},
+  author  = {Arovas, Daniel P. and Auerbach, Assa},
+  journal = {Physical Review Letters},
+  volume  = {60},
+  number  = {6},
+  pages   = {531--534},
+  year    = {1988},
+  doi     = {10.1103/PhysRevLett.60.531},
+}
+
+@article{Lou2000,
+  title   = {Thermodynamics of the Bilinear-Biquadratic Spin-One Heisenberg Chain},
+  author  = {Lou, Jizhong and Xiang, Tao and Su, Zhaobin},
+  journal = {Physical Review Letters},
+  volume  = {85},
+  number  = {11},
+  pages   = {2380--2383},
+  year    = {2000},
+  doi     = {10.1103/PhysRevLett.85.2380},
+}
+
+@misc{CalabreseCardy2009,
+  title         = {Entanglement entropy and conformal field theory},
+  author        = {Calabrese, Pasquale and Cardy, John},
+  year          = {2009},
+  eprint        = {0905.4013},
+  archivePrefix = {arXiv},
+}
+
+@misc{Kos2016,
+  title         = {Precision Islands in the Ising and $O(N)$ Models},
+  author        = {Kos, Filip and Poland, David and Simmons-Duffin, David and Vichi, Alessandro},
+  year          = {2016},
+  eprint        = {1603.04436},
+  archivePrefix = {arXiv},
+}
+
+@misc{Cotler2016,
+  title         = {Black Holes and Random Matrices},
+  author        = {Cotler, Jordan S. and Gur-Ari, Guy and Hanada, Masanori and Polchinski, Joseph and Saad, Phil and Shenker, Stephen H. and Stanford, Douglas and Streicher, Alexandre and Tezuka, Masaki},
+  year          = {2016},
+  eprint        = {1611.04650},
+  archivePrefix = {arXiv},
+}
+
+@article{YangYang1966,
+  title   = {One-Dimensional Chain of Anisotropic Spin-Spin Interactions. II. Properties of the Ground-State Energy Per Lattice Site for an Infinite System},
+  author  = {Yang, C. N. and Yang, C. P.},
+  journal = {Physical Review},
+  volume  = {150},
+  number  = {1},
+  pages   = {327--339},
+  year    = {1966},
+  doi     = {10.1103/PhysRev.150.327},
+}
+
+@article{desCloizeauxPearson1962,
+  title   = {Spin-Wave Spectrum of the Antiferromagnetic Linear Chain},
+  author  = {des Cloizeaux, Jacques and Pearson, J. J.},
+  journal = {Physical Review},
+  volume  = {128},
+  number  = {5},
+  pages   = {2131--2135},
+  year    = {1962},
+  doi     = {10.1103/PhysRev.128.2131},
+}
+
+@book{Takahashi1999,
+  title     = {Thermodynamics of One-Dimensional Solvable Models},
+  author    = {Takahashi, Minoru},
+  publisher = {Cambridge University Press},
+  year      = {1999},
+  doi       = {10.1017/CBO9780511524332},
+}
+
+@book{Giamarchi2003,
+  title     = {Quantum Physics in One Dimension},
+  author    = {Giamarchi, Thierry},
+  publisher = {Oxford University Press},
+  year      = {2003},
+  doi       = {10.1093/acprof:oso/9780198525004.001.0001},
+}
+
+@book{Coleman2015,
+  title     = {Introduction to Many-Body Physics},
+  author    = {Coleman, Piers},
+  publisher = {Cambridge University Press},
+  year      = {2015},
+  doi       = {10.1017/CBO9781139020916},
+}
+
+@book{Mahan2000,
+  title     = {Many-Particle Physics},
+  author    = {Mahan, Gerald D.},
+  publisher = {Springer US},
+  year      = {2000},
+  doi       = {10.1007/978-1-4757-5714-9},
+}
+
+% Pre-DOI classic (Arkiv för Matematik, Astronomi och Fysik 26A(11), 1938);
+% no Crossref DOI exists, so `doiget verify` reports it as `unverifiable`
+% (a warning, not a failure) rather than `valid`.
+@article{Hulthen1938,
+  title   = {{\"U}ber das Austauschproblem eines Kristalles},
+  author  = {Hulth{\'e}n, Lamek},
+  journal = {Arkiv f{\"o}r Matematik, Astronomi och Fysik},
+  volume  = {26A},
+  number  = {11},
+  pages   = {1--106},
+  year    = {1938},
+}

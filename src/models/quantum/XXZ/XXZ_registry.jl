@@ -16,7 +16,7 @@
     method=:dense_ed,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_thermal.jl",
-    references=["Yang Yang 1966", "Takahashi 1999"],
+    references=["YangYang1966", "Takahashi1999"],
     notes="Total ⟨H⟩(β) by dense ED of the 2^N × 2^N XXZ Hamiltonian.",
 )
 @register(
@@ -26,7 +26,7 @@
     method=:bethe_ansatz,
     reliability=:high,
     tested_in="test/models/test_XXZ1D.jl",
-    references=["Hulthén 1938", "Yang Yang 1966"],
+    references=["Hulthen1938", "YangYang1966"],
     notes="Closed form at Δ ∈ {-1, 0, 1}; Yang-Yang single integral via QuadGK for general -1 < Δ < 1; |Δ| > 1 (gapped) deferred.",
 )
 
@@ -38,7 +38,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_XXZ1D.jl",
-    references=["Giamarchi 2004"],
+    references=["Giamarchi2003"],
     notes="c = 1 in the critical regime -1 < Δ < 1.",
 )
 @register(
@@ -48,7 +48,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_XXZ1D.jl",
-    references=["Giamarchi 2004"],
+    references=["Giamarchi2003"],
     notes="K = π / (2(π − arccos Δ)) for -1 < Δ ≤ 1.",
 )
 @register(
@@ -58,7 +58,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_XXZ1D.jl",
-    references=["Giamarchi 2004", "des Cloizeaux Pearson 1962"],
+    references=["Giamarchi2003", "desCloizeauxPearson1962"],
     notes="u = (πJ/2) sin γ / γ, γ = arccos Δ; -1 < Δ ≤ 1.",
 )
 @register(
@@ -77,7 +77,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
-    references=["Giamarchi 2004"],
+    references=["Giamarchi2003"],
     notes="0 in the critical regime -1 < Δ ≤ 1; gapped regime returns NaN with a warning.",
 )
 
@@ -235,7 +235,7 @@ end
     method=:klumper_nlie,
     reliability=:medium,
     tested_in="test/models/quantum/XXZ/test_xxz_klumper_nlie.jl",
-    references=["Mahan §1.3", "Coleman §2.4", "Takahashi 1999 §4", "Klümper 1993"],
+    references=["Mahan2000", "Coleman2015", "Takahashi1999", "Klumper1993"],
     notes="Δ = 0: XX free-fermion f(β) by QuadGK (exact); -1 < Δ < 1, |Δ| < 0.99: Klümper QTM NLIE (issue #521); |Δ| ≥ 0.99 or gapped: NaN + warn.",
 )
 @register(
@@ -245,7 +245,7 @@ end
     method=:free_fermion_quadgk,
     reliability=:high,
     tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan §1.3", "Coleman §2.4"],
+    references=["Mahan2000", "Coleman2015"],
     notes="XX (Δ = 0) free-fermion s(β) = β(e − f); warns + NaN at general Δ.",
 )
 @register(
@@ -255,7 +255,7 @@ end
     method=:free_fermion_quadgk,
     reliability=:high,
     tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan §1.3"],
+    references=["Mahan2000"],
     notes="XX (Δ = 0) free-fermion C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk.",
 )
 # ── Quench observables (Δ = 0 / XX free fermion only; issue #148 phase 1) ──

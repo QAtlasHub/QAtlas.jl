@@ -48,3 +48,20 @@
     references=["LiebWu1968", "Voit1995"],
     notes="K=1 at U=0 free-fermion limit; finite-U Lieb-Wu Bethe ansatz K_ρ, K_σ deferred Phase 2.",
 )
+
+@register(
+    Hubbard1D,
+    FreeEnergy,
+    Infinite,
+    method=:jks_qtm_nlie,
+    reliability=:medium,
+    tested_in="test/models/quantum/Hubbard1D/test_hubbard1d_jks_paper_precise.jl",
+    references=["JuttnerKlumperSuzuki1998"],
+    notes=(
+        "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄). FE evaluator uses " *
+        "Chebyshev-Gauss quadrature on the cut [-1, 1] (handles 1/sqrt(1-x^2) " *
+        "singularity exactly) + paper page-14 direct-form log Λ. " *
+        "U-independent and exact at high T to within 1%% (β <= 1e-3 across " *
+        "U ∈ {2, 4, 8}). Mid-T (β ~ 0.1) shows physical kinetic corrections."
+    ),
+)

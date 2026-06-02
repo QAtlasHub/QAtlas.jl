@@ -219,3 +219,44 @@ end
     references=["Luther-Peschel 1975", "Affleck 1989", "Haldane 1980"],
     notes="K = 1/2 (SU(2)-symmetric Heisenberg AFM); delegate to XXZ1D(Δ=1).",
 )
+
+# ── Finite-T at Infinite() via c=1 CFT low-T expansion (#521 Path B) ──
+# Stopgap: valid for β > 5/J only. The Klümper Δ → 1 limit (Path A) will
+# replace these once implemented.
+
+@register(
+    Heisenberg1D,
+    FreeEnergy,
+    Infinite,
+    method=:cft_low_T,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
+    references=[
+        "Affleck PRL 56, 746 (1986)",
+        "Blöte-Cardy-Nightingale PRL 56, 742 (1986)",
+        "Eggert-Affleck-Takahashi PRL 73, 332 (1994)",
+    ],
+    notes="f = e₀ - π T² / (6 v_s), v_s = π J / 2. Valid β > 5/J; NaN+warn otherwise.",
+)
+
+@register(
+    Heisenberg1D,
+    ThermalEntropy,
+    Infinite,
+    method=:cft_low_T,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
+    references=["Affleck PRL 56, 746 (1986)"],
+    notes="s = π T / (3 v_s) = 2T / (3J). Valid β > 5/J.",
+)
+
+@register(
+    Heisenberg1D,
+    SpecificHeat,
+    Infinite,
+    method=:cft_low_T,
+    reliability=:medium,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
+    references=["Affleck PRL 56, 746 (1986)"],
+    notes="c_v = π T / (3 v_s) = 2T / (3J). Equals s(T) at LO CFT. Valid β > 5/J.",
+)

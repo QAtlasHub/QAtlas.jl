@@ -277,8 +277,7 @@ function fetch(
     if Jx == Jy
         Jx > 0 || throw(
             DomainError(
-                Jx,
-                "HeisenbergXYZ MassGap axial branch requires Jx > 0; got Jx = $Jx.",
+                Jx, "HeisenbergXYZ MassGap axial branch requires Jx > 0; got Jx = $Jx."
             ),
         )
         if abs(Jz / Jx) <= 1

@@ -726,7 +726,7 @@ function jks_nlie_residual(
     delta_log_CCbar = log_C .- log_Cbar
 
     rhs =
-        psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
+        -psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
         apply_kernel(K1, delta_log_CCbar)
 
     log_b = log.(aux.b)
@@ -858,7 +858,7 @@ function jks_nlie_residual_shifted(
     delta_log_CCbar = log_C .- log_Cbar
 
     rhs =
-        psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
+        -psi_b - apply_kernel(K2, log_B) + apply_kernel(K2, log_Bbar) -
         apply_kernel(K1, delta_log_CCbar)
 
     log_b = log.(aux.b)
@@ -1381,7 +1381,7 @@ function jks_nlie_residual_c(
     log_Cbar = log.(1 .+ aux.c_bar)
 
     rhs =
-        psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
+        -psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
         apply_kernel(K2, log_Cbar)
 
     log_c = log.(aux.c)
@@ -1417,7 +1417,7 @@ function jks_nlie_residual_cbar(
     log_C = log.(1 .+ aux.c)
 
     rhs =
-        psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
+        -psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
         apply_kernel(K2, log_C)
 
     log_cbar = log.(aux.c_bar)

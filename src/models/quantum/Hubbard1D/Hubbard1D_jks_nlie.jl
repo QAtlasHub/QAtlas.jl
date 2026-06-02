@@ -1394,6 +1394,7 @@ function jks_nlie_residual_c(
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
     K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
     K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
+    K2_small = build_kernel_matrix_shifted(grid, 2, max(alpha / 50, 1e-3))
 
     psi_c = jks_driving_c(grid, beta, U, mu; H=H)
 
@@ -1405,7 +1406,7 @@ function jks_nlie_residual_c(
     # Stage C.16 Option B: add -(1/2) log C term (Delta dropped as typesetting).
     rhs =
         -psi_c + apply_kernel(K1, log_B) - apply_kernel(K1bar, log_Bbar) +
-        apply_kernel(K2, log_Cbar) - 0.5 .* log_C
+        apply_kernel(K2_small, log_Cbar) - 0.5 .* log_C
 
     log_c = log.(aux.c)
     return log_c .- rhs
@@ -1434,6 +1435,7 @@ function jks_nlie_residual_cbar(
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
     K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
     K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
+    K2_small = build_kernel_matrix_shifted(grid, 2, max(alpha / 50, 1e-3))
 
     psi_cbar = jks_driving_cbar(grid, beta, U, mu; H=H)
 
@@ -1445,7 +1447,7 @@ function jks_nlie_residual_cbar(
     # Stage C.16 Option B: add -(1/2) log Cbar term.
     rhs =
         -psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1bar, log_Bbar) +
-        apply_kernel(K2, log_C) - 0.5 .* log_Cbar
+        apply_kernel(K2_small, log_C) - 0.5 .* log_Cbar
 
     log_cbar = log.(aux.c_bar)
     return log_cbar .- rhs

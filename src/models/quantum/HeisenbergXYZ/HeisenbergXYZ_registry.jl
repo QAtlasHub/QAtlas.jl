@@ -51,3 +51,16 @@
           "line (Jz=0): single-particle gap (1/4)|Jx-Jy| from LSM dispersion. " *
           "Massive AFM and generic XYZ deferred to Phase 3.",
 )
+
+@register(
+    HeisenbergXYZ,
+    CorrelationLength,
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/HeisenbergXYZ/test_heisenberg_xyz_gs.jl",
+    references=["LiebSchultzMattis1961", "McCoyWu1978"],
+    notes="Critical axial XXZ (Jx=Jy, |Jz/Jx|<=1): Inf (gapless). XY line (Jz=0): " *
+          "xi = 1/asinh(|Jx-Jy|/(2 sqrt(Jx Jy))) from dispersion zero on imaginary " *
+          "momentum axis. Massive AFM and generic XYZ deferred to Phase 3.",
+)

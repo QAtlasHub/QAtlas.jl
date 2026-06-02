@@ -85,4 +85,24 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
         m_generic = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.5)
         @test_throws DomainError fetch(m_generic, QAtlas.MassGap(), Infinite())
     end
+
+    @testset "CorrelationLength@Infinite -- critical + XY line" begin
+        for (Jx, Jy, Jz) in ((1.0, 1.0, 1.0), (1.0, 1.0, 0.5), (1.0, 1.0, 0.0))
+            m = HeisenbergXYZ(; Jx=Jx, Jy=Jy, Jz=Jz)
+            @test fetch(m, QAtlas.CorrelationLength(), Infinite()) == Inf
+        end
+        for (Jx, Jy) in ((2.0, 1.0), (3.0, 0.5), (1.0, 2.0))
+            m = HeisenbergXYZ(; Jx=Jx, Jy=Jy, Jz=0.0)
+            xi_ref = 1 / asinh(abs(Jx - Jy) / (2 * sqrt(Jx * Jy)))
+            @test fetch(m, QAtlas.CorrelationLength(), Infinite()) ≈ xi_ref atol=1e-12
+        end
+        m_strong = HeisenbergXYZ(; Jx=10.0, Jy=1.0, Jz=0.0)
+        m_weak = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.0)
+        @test fetch(m_strong, QAtlas.CorrelationLength(), Infinite()) <
+            fetch(m_weak, QAtlas.CorrelationLength(), Infinite())
+        m_massive = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.5)
+        @test_throws DomainError fetch(m_massive, QAtlas.CorrelationLength(), Infinite())
+        m_generic = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.5)
+        @test_throws DomainError fetch(m_generic, QAtlas.CorrelationLength(), Infinite())
+    end
 end

@@ -559,8 +559,11 @@ function free_energy_jks(
 
     # First integral:  -2i int_{-1}^{1} ln(1 + c + cbar) / sqrt(1 - s^2) ds
     integrand_1 = ComplexF64[
-        cut_mask[j] ? log(1 + aux.c[j] + aux.c_bar[j]) / sqrt(1 - grid.x[j]^2) : 0.0 + 0im
-        for j in 1:grid.N
+        if cut_mask[j]
+            log((1 + aux.c[j] + aux.c_bar[j]) / aux.c[j]) / sqrt(1 - grid.x[j]^2)
+        else
+            0.0 + 0im
+        end for j in 1:grid.N
     ]
     int_1 = -2im * sum(integrand_1) * grid.dx
 

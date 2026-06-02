@@ -270,3 +270,68 @@ function fetch(
     end
     return 1.0       # free-fermion limit
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Free energy at finite T via JKS NLIE (Stage D.2 wire-up of #523)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::Hubbard1D, ::FreeEnergy, ::Infinite; beta, kwargs...) -> Float64
+
+Per-site Helmholtz free energy of the 1D Hubbard chain at finite
+temperature 1/beta, computed by the JKS 1998 quantum-transfer-matrix
+non-linear integral equations (issue #523).
+
+The solver uses the paper-precise eq (47) NLIE in 3 channels (b, c, c̄)
+on a discretised contour, then evaluates the QTM eigenvalue via paper
+eq (49) third form. At β → 0 the result reproduces the atomic limit
+`atomic_free_energy(β, U, μ)` to within a few percent (Stage C.10
+test guards this).
+
+# Keyword arguments
+
+- `beta::Real`: inverse temperature (β > 0 required).
+- `H::Real = 0`: external magnetic field (couples to magnetisation).
+- `grid_N::Int = 64`, `x_max::Real = 8.0`: discretisation knobs.
+- `alpha::Real = m.U / 6`: contour shift in the b channel
+  (0 < α < η = U/4).
+- `tol::Real = 1e-6`, `maxiter::Int = 40`: Newton convergence knobs.
+
+# Notes
+
+Half-filling (μ = U/2) is the well-tested regime. Other fillings
+work as long as the NLIE converges (the Newton solver does not warn
+on non-convergence; the result is `NaN` in that case).
+
+# References
+
+- JKS 1998 = Jüttner, Klümper, Suzuki, *Nucl. Phys. B* **522**, 471 (1998),
+  arXiv:cond-mat/9711310.
+- Paper eqs (23), (47), (48), (49), (54), (55) all implemented per PDF
+  (Stage C.22c paper-precise rewrite + Stage C.24 FE evaluator fix).
+"""
+function fetch(
+    m::Hubbard1D,
+    ::FreeEnergy,
+    ::Infinite;
+    beta::Real,
+    H::Real=0.0,
+    grid_N::Int=64,
+    x_max::Real=8.0,
+    alpha::Real=m.U / 6,
+    tol::Real=1e-6,
+    maxiter::Int=40,
+    kwargs...,
+)
+    beta > 0 ||
+        throw(DomainError(beta, "Hubbard1D FreeEnergy@Infinite requires β > 0; got β = $(beta)."))
+    isempty(kwargs) || @warn(
+        "fetch(Hubbard1D, FreeEnergy, Infinite) received unrecognized kwargs; ignored.",
+        kwargs=collect(keys(kwargs))
+    )
+    return Hubbard1DJKSNLIE.hubbard1d_jks_free_energy(
+        m.t, m.U, m.μ, beta;
+        H=H, grid_N=grid_N, x_max=x_max, alpha=alpha, tol=tol, maxiter=maxiter,
+        solver=:full_newton,
+    )
+end

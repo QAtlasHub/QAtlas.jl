@@ -23,16 +23,14 @@ using QAtlas.Hubbard1DJKSNLIE:
     end
 
     @testset "High-T agreement with atomic limit to within 10%" begin
-        # The Stage C.4-C.9 b-only solver, when combined with the paper-precise
-        # c, cbar init (Stage C.22c) and FE eval /c factor (Stage C.23), gives
-        # a ratio ~1.56 at high T (the old c=z_up/Z_site=1/4 init + missing /c
-        # in FE happened to cancel out to give ~1.03; with paper-precise inputs
-        # the b-only path no longer matches atomic to 10%). The exact agreement
-        # requires the full 3-channel Newton + FE prefactor fix (Stage C.24+).
+        # Restored after Stage C.24 paper-precise fix: the production wrapper
+        # now uses solve_jks_nlie_full_newton (3-channel) with corrected
+        # jks_log_z_deriv and FE int_1 prefactor. At default grid (N=64,
+        # x_max=8) the high-T ratio is within a few percent of atomic.
         for beta in (1e-4, 1e-3, 1e-2)
-            f_jks = hubbard1d_jks_free_energy(1.0, 4.0, 2.0, beta; tol=1e-3)
+            f_jks = hubbard1d_jks_free_energy(1.0, 4.0, 2.0, beta; tol=1e-6)
             f_atom = atomic_free_energy(beta, 4.0, 2.0)
-            @test_broken isapprox(f_jks, f_atom; rtol=0.1)
+            @test isapprox(f_jks, f_atom; rtol=0.1)
         end
     end
 

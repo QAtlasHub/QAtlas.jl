@@ -1324,9 +1324,12 @@ function hubbard1d_jks_free_energy(
     beta::Real;
     alpha::Real=U/6,
     H::Real=0.0,
-    grid_N::Int=16,
-    x_max::Real=2.0,
-    tol::Real=1e-3,
+    grid_N::Int=64,
+    x_max::Real=8.0,
+    tol::Real=1e-6,
+    maxiter::Int=40,
+    solver::Symbol=:full_newton,
+    # Backward compat kwargs (only used when solver = :b_only_continuation)
     beta_start::Real=0.01,
     inner_maxiter::Int=30,
     outer_maxsteps::Int=200,
@@ -1344,19 +1347,29 @@ function hubbard1d_jks_free_energy(
 
     grid = JKSContourGrid(grid_N, eta; x_max=x_max)
 
-    bs = min(beta_start, beta)
-    sol = solve_jks_nlie_continuation(
-        grid,
-        beta,
-        U,
-        mu;
-        alpha=alpha,
-        H=H,
-        beta_start=bs,
-        tol=tol,
-        inner_maxiter=inner_maxiter,
-        outer_maxsteps=outer_maxsteps,
-    )
+    sol = if solver == :full_newton
+        # Stage C.24+ paper-precise 3-channel Newton (default).
+        solve_jks_nlie_full_newton(
+            grid, beta, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+        )
+    elseif solver == :b_only_continuation
+        # Stage C.4-C.10 b-only path with beta-continuation (legacy).
+        bs = min(beta_start, beta)
+        solve_jks_nlie_continuation(
+            grid,
+            beta,
+            U,
+            mu;
+            alpha=alpha,
+            H=H,
+            beta_start=bs,
+            tol=tol,
+            inner_maxiter=inner_maxiter,
+            outer_maxsteps=outer_maxsteps,
+        )
+    else
+        throw(ArgumentError("solver must be :full_newton or :b_only_continuation, got $solver"))
+    end
 
     if !sol.converged
         return NaN

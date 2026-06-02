@@ -38,9 +38,15 @@ jobs:
       - name: Create or update release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Pass body via env so bash never parses it. Inline
+          # ${{ steps.body.outputs.content }} would interpolate the body
+          # straight into the script source, where backticks inside the body
+          # (e.g. `Version bumped from \`0.22.19\` -> \`0.23.0\`` from
+          # release-drafter or AutoCompatBump output) trigger command
+          # substitution and exit 127.
+          BODY: ${{ steps.body.outputs.content }}
         run: |
           TAG="${{ github.ref_name }}"
-          BODY="${{ steps.body.outputs.content }}"
 
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release edit "$TAG" --title "$TAG" --notes "$BODY" --draft=false

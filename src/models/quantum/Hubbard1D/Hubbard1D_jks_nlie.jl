@@ -1097,4 +1097,164 @@ function solve_jks_nlie_newton(
     return JKSSolution(aux, maxiter, last_residual, false)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.8 — beta-continuation Newton solver
+#
+# Stage C.7 showed Newton converges in 2 iter at beta = 0.01 but stalls
+# at beta = 1.0 because the atomic-limit init becomes a bad guess.
+# Continuation: solve at high T, then walk beta up using each converged
+# aux as the next initial guess.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    solve_jks_nlie_newton_from(aux_init, grid, beta, U, mu; alpha, H, tol,
+                                maxiter, jac_eps, damps) -> JKSSolution
+
+Like `solve_jks_nlie_newton` but takes an explicit initial guess
+`aux_init` instead of allocating from `init_atomic_limit`. Used as the
+inner loop of the beta-continuation solver.
+"""
+function solve_jks_nlie_newton_from(
+    aux_init::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=50,
+    jac_eps::Real=1e-6,
+    damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    aux = copy(aux_init)
+    last_residual = Inf
+
+    for iter in 1:maxiter
+        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+        if !isfinite(last_residual)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+
+        J = jks_jacobian_b_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
+        delta = try
+            J \ (-res)
+        catch
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if !all(isfinite, delta)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+
+        log_b_old = log.(aux.b)
+        accepted = false
+        for damp in damps
+            log_b_new = log_b_old .+ damp .* delta
+            aux_try = copy(aux)
+            aux_try.b .= exp.(log_b_new)
+            aux_try.b_bar .= aux_try.b
+            res_try = try
+                jks_nlie_residual_shifted(aux_try, grid, beta, U, mu, alpha; H=H)
+            catch
+                continue
+            end
+            res_try_norm = maximum(abs.(res_try))
+            if isfinite(res_try_norm) && res_try_norm < last_residual
+                aux.b .= aux_try.b
+                aux.b_bar .= aux_try.b_bar
+                accepted = true
+                break
+            end
+        end
+        if !accepted
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
+"""
+    solve_jks_nlie_continuation(grid, beta_target, U, mu; alpha=U/6, H=0,
+                                 beta_start=0.01, step_init=0.5,
+                                 step_min=1e-3, step_max=1.0,
+                                 grow_factor=1.2, shrink_factor=0.5,
+                                 tol=1e-6, inner_maxiter=30,
+                                 outer_maxsteps=200) -> JKSSolution
+
+Beta-continuation Newton solver. Solve at `beta_start` from atomic-limit
+init, then walk `beta` up multiplicatively (`beta_new = beta * (1 + step)`)
+to `beta_target`. On inner-Newton convergence: grow `step`. On failure:
+shrink `step`. Give up if `step < step_min`.
+"""
+function solve_jks_nlie_continuation(
+    grid::JKSContourGrid,
+    beta_target::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    beta_start::Real=0.01,
+    step_init::Real=0.5,
+    step_min::Real=1e-3,
+    step_max::Real=1.0,
+    grow_factor::Real=1.2,
+    shrink_factor::Real=0.5,
+    tol::Real=1e-6,
+    inner_maxiter::Int=30,
+    outer_maxsteps::Int=200,
+)
+    beta_target > 0 || throw(DomainError(beta_target, "beta_target must be > 0"))
+    beta_start > 0 || throw(DomainError(beta_start, "beta_start must be > 0"))
+    beta_start <= beta_target || throw(ArgumentError("beta_start must be <= beta_target"))
+    0 < shrink_factor < 1 ||
+        throw(DomainError(shrink_factor, "shrink_factor must be in (0, 1)"))
+    grow_factor > 1 || throw(DomainError(grow_factor, "grow_factor must be > 1"))
+
+    aux = init_atomic_limit(grid, beta_start, U, mu; h=H)
+    sol_init = solve_jks_nlie_newton_from(
+        aux, grid, beta_start, U, mu; alpha=alpha, H=H, tol=tol, maxiter=inner_maxiter
+    )
+    if !sol_init.converged
+        return JKSSolution(sol_init.aux, sol_init.iterations, sol_init.residual, false)
+    end
+    aux = sol_init.aux
+
+    beta_current = beta_start
+    step = step_init
+    total_iter = sol_init.iterations
+
+    for outer_iter in 1:outer_maxsteps
+        if beta_current >= beta_target - 1e-12
+            return JKSSolution(aux, total_iter, sol_init.residual, true)
+        end
+
+        beta_try = min(beta_current * (1 + step), beta_target)
+        sol = solve_jks_nlie_newton_from(
+            aux, grid, beta_try, U, mu; alpha=alpha, H=H, tol=tol, maxiter=inner_maxiter
+        )
+        total_iter += sol.iterations
+
+        if sol.converged
+            beta_current = beta_try
+            aux = sol.aux
+            step = min(step * grow_factor, step_max)
+        else
+            step *= shrink_factor
+            if step < step_min
+                return JKSSolution(aux, total_iter, sol.residual, false)
+            end
+        end
+    end
+
+    final_res = maximum(
+        abs.(jks_nlie_residual_shifted(aux, grid, beta_current, U, mu, alpha; H=H))
+    )
+    return JKSSolution(aux, total_iter, final_res, beta_current >= beta_target - 1e-12)
+end
+
 end  # module Hubbard1DJKSNLIE

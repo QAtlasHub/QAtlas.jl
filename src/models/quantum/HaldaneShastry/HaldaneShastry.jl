@@ -1,3 +1,7 @@
+# CONVENTION
+#   Hamiltonian: H = J · Σ_{i<j} S_i · S_j / d(i,j)²  with spin S = σ/2
+#   Observable:  Spin S = σ/2 (QAtlas-wide spin convention; see docs/src/conventions.md)
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Haldane-Shastry chain — spin-1/2 inverse-square Heisenberg chain
 #

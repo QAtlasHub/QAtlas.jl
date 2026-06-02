@@ -271,6 +271,9 @@ function fetch(model::XXZ1D, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...
     if _xx_is_free_fermion(model)
         return _xx_thermo_infinite(:entropy, model.J, beta)
     end
+    if -1 < model.Δ < 1
+        return _xxz_klumper_entropy(model, beta)
+    end
     return _xx_warn_general_delta(:entropy, model.Δ)
 end
 
@@ -281,8 +284,8 @@ Per-site heat capacity of the infinite XXZ chain.  At Δ = 0,
 
     C(β) = (1/π) ∫₀^π (β ε / 2)² sech²(β ε / 2) dk,   ε(k) = -J cos k.
 
-Returns `NaN` (with a warning) for general Δ pending the thermal
-Bethe ansatz of issue #108.
+For `-1 < Δ < 1` (Δ ≠ 0) routes through the Klümper NLIE (issue #521).
+See `_xxz_klumper_specific_heat` for the finite-difference details.
 """
 function fetch(model::XXZ1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
     isempty(kwargs) || @warn(
@@ -291,6 +294,9 @@ function fetch(model::XXZ1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
     )
     if _xx_is_free_fermion(model)
         return _xx_thermo_infinite(:specific_heat, model.J, beta)
+    end
+    if -1 < model.Δ < 1
+        return _xxz_klumper_specific_heat(model, beta)
     end
     return _xx_warn_general_delta(:specific_heat, model.Δ)
 end

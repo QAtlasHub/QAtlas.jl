@@ -242,21 +242,21 @@ end
     XXZ1D,
     ThermalEntropy,
     Infinite,
-    method=:free_fermion_quadgk,
+    method=:free_fermion_quadgk_or_klumper_nlie,
     reliability=:high,
     tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan2000", "Coleman2015"],
-    notes="XX (Δ = 0) free-fermion s(β) = β(e − f); warns + NaN at general Δ.",
+    references=["Mahan2000", "Coleman2015", "Klumper1993"],
+    notes="XX free-fermion s(β); -1<Δ<1 (Δ≠0) routes through Klümper NLIE finite-diff (issue #521); NaN+warn at |Δ|≥0.99.",
 )
 @register(
     XXZ1D,
     SpecificHeat,
     Infinite,
-    method=:free_fermion_quadgk,
+    method=:free_fermion_quadgk_or_klumper_nlie,
     reliability=:high,
     tested_in="test/standalone/test_xxz_xx_infinite.jl",
-    references=["Mahan2000"],
-    notes="XX (Δ = 0) free-fermion C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk.",
+    references=["Mahan2000", "Klumper1993"],
+    notes="XX free-fermion closed form; -1<Δ<1 (Δ≠0) via Klümper NLIE finite-diff (issue #521); NaN+warn at |Δ|≥0.99.",
 )
 # ── Quench observables (Δ = 0 / XX free fermion only; issue #148 phase 1) ──
 @register(

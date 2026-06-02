@@ -332,3 +332,79 @@ function _xxz_klumper_free_energy_excess(model::XXZ1D, beta::Real)
     end
     return pars.escale * XXZKlumperNLIE.free_energy_excess_klumper(sol)
 end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Thermal entropy & specific heat via central finite difference of f(β)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Thermodynamic identities (all at zero magnetic field):
+#
+#   u(β) = ∂(β f) / ∂β = f(β) + β f'(β)
+#   s(β) = β² f'(β)                            (entropy density)
+#   c(β) = -β · ∂s/∂β = -2 β² f'(β) - β³ f''(β) (heat capacity)
+#
+# We compute f at 3 β values via the cached NLIE grid (one full grid build
+# at the first call; subsequent calls at the same γ reuse the cache, so
+# each extra β costs ~one Picard iteration, ~1–2 s in production).
+#
+# The relative step δrel = δ/β has a sweet spot near 1e-4: too small and
+# round-off in f dominates the second difference; too large and the
+# discretization error in f''(β) is no longer leading. We expose it as
+# a kwarg so callers needing higher precision can tighten.
+
+"""
+    _xxz_klumper_thermal_derivatives(model, beta; δrel=1e-4) -> (Float64, Float64)
+
+Return `(s, c)` from a 3-point central finite difference of
+`_xxz_klumper_free_energy_excess`. NaN+warn for `|Δ| ≥ 0.99`, identical
+to the FreeEnergy gate. Both `s` and `c` propagate NaN if any of the
+three f evaluations fail to converge.
+"""
+function _xxz_klumper_thermal_derivatives(model::XXZ1D, beta::Real; δrel::Real=1e-4)
+    Δ, J = model.Δ, model.J
+    beta > 0 || throw(
+        DomainError(
+            beta, "XXZ1D Klümper thermal derivatives require β > 0; got β = $(beta)."
+        ),
+    )
+    J > 0 || throw(
+        DomainError(J, "XXZ1D Klümper thermal derivatives require J > 0; got J = $(J).")
+    )
+    δrel > 0 || throw(DomainError(δrel, "δrel must be > 0; got δrel = $(δrel)."))
+    if !(-0.99 < Δ < 0.99)
+        @warn "XXZ1D Klümper NLIE skips |Δ| ≥ 0.99 for thermal derivatives" Δ
+        return (NaN, NaN)
+    end
+    δ = beta * δrel
+    f_minus = _xxz_klumper_free_energy_excess(model, beta - δ)
+    f_zero = _xxz_klumper_free_energy_excess(model, beta)
+    f_plus = _xxz_klumper_free_energy_excess(model, beta + δ)
+    if isnan(f_minus) || isnan(f_zero) || isnan(f_plus)
+        return (NaN, NaN)
+    end
+    fp = (f_plus - f_minus) / (2δ)
+    fpp = (f_plus - 2 * f_zero + f_minus) / δ^2
+    s = beta^2 * fp
+    c = -2 * beta^2 * fp - beta^3 * fpp
+    return (s, c)
+end
+
+"""
+    _xxz_klumper_entropy(model, beta; δrel=1e-4) -> Float64
+
+Per-site Gibbs entropy density `s(β) = β² · ∂f/∂β` via central finite
+difference of the Klümper NLIE FreeEnergy. NaN+warn at |Δ| ≥ 0.99.
+"""
+function _xxz_klumper_entropy(model::XXZ1D, beta::Real; δrel::Real=1e-4)
+    return _xxz_klumper_thermal_derivatives(model, beta; δrel=δrel)[1]
+end
+
+"""
+    _xxz_klumper_specific_heat(model, beta; δrel=1e-4) -> Float64
+
+Per-site heat capacity `c(β) = -2 β² f'(β) - β³ f''(β)` via central
+finite difference of the Klümper NLIE FreeEnergy. NaN+warn at |Δ| ≥ 0.99.
+"""
+function _xxz_klumper_specific_heat(model::XXZ1D, beta::Real; δrel::Real=1e-4)
+    return _xxz_klumper_thermal_derivatives(model, beta; δrel=δrel)[2]
+end

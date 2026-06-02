@@ -79,7 +79,9 @@ using QAtlas.Hubbard1DJKSNLIE:
         z_empty = 1.0
         z_double = exp(beta * (2 * mu - U))
         Z_site = z_empty + z_up + z_down + z_double
-        @test isapprox(real(aux.c[1]), z_up / Z_site; atol=1e-12)
+        # Stage C.22c paper-precise init: PH symmetry gives c = exp(-βU/2),
+        # not z_up/Z_site. The (z_up+z_down)/(z_empty+z_double) is still correct for b.
+        @test isapprox(real(aux.c[1]), exp(-beta * U / 2); atol=1e-12)
         @test isapprox(real(aux.b[1]), (z_up + z_down) / (z_empty + z_double); atol=1e-12)
         # And the (independent) atomic_free_energy from Stage A.
         f_atomic = atomic_free_energy(beta, U, mu)

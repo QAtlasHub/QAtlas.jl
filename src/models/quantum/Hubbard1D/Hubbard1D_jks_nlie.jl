@@ -399,11 +399,13 @@ function init_atomic_limit!(
     z_double = exp(beta * (2 * mu - U))
     Z_site = z_empty + z_up + z_down + z_double
 
-    # Stage C.22c: paper-precise PH-symmetric init.
-    # At beta=0 limit, c = cbar = exp(-betaU/2) by PH symmetry of eq (47).
+    # Paper-precise atomic-limit aux init.
+    # Constraints at beta -> 0: c*cbar = exp(-betaU) and c/cbar = exp(betah),
+    # so c = exp(-betaU/2 + betah/2) and cbar = exp(-betaU/2 - betah/2).
+    # The b ratio (z_up+z_down)/(z_empty+z_double) is the paper-consistent leading value.
     b_const = ComplexF64((z_up + z_down) / (z_empty + z_double))
-    c_const = ComplexF64(exp(-beta * U / 2))
-    cbar_const = ComplexF64(exp(-beta * U / 2))
+    c_const = ComplexF64(exp(-beta * U / 2 + beta * h / 2))
+    cbar_const = ComplexF64(exp(-beta * U / 2 - beta * h / 2))
 
     fill!(aux.b, b_const)
     fill!(aux.b_bar, b_const)
@@ -869,8 +871,6 @@ function jks_nlie_residual_shifted(
 
     K1 = build_kernel_matrix_shifted(grid, 1, alpha)
     K2 = build_kernel_matrix_shifted(grid, 2, alpha)
-    K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
-    K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
 
     psi_b = jks_driving_b(grid, beta, U, alpha; H=H)
 
@@ -1393,22 +1393,14 @@ function jks_nlie_residual_c(
     length(aux) == grid.N ||
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
+    # Paper eq (47): log c = psi_c - K_1 ⊓⊔ log B - K_1 ◦ log C
     K1 = build_kernel_matrix_shifted(grid, 1, alpha)
-    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
-    K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
-    K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
-    K2_small = build_kernel_matrix_shifted(grid, 2, max(grid.dx, alpha / 50, 1e-3))
 
     psi_c = jks_driving_c(grid, beta, U, mu; H=H)
 
     log_B = log.(1 .+ aux.b)
-    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
     log_C = log.(1 .+ aux.c)
-    log_Cbar = log.(1 .+ aux.c_bar)
 
-    # Stage C.22c: paper eq (47) direct form.
-    # log c = psi_c - K_1 ⊛ log B - K_1 ◦ log C
-    # (K_1⊓⊔ means convolution on the wide +/-iα contour: our K1 with +α shift)
     rhs = psi_c - apply_kernel(K1, log_B) - apply_kernel(K1, log_C)
 
     log_c = log.(aux.c)
@@ -1434,21 +1426,14 @@ function jks_nlie_residual_cbar(
     length(aux) == grid.N ||
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
+    # Paper eq (47): log cbar = psi_cbar + K_1 ⊓⊔ log B + K_1 ◦ log C
     K1 = build_kernel_matrix_shifted(grid, 1, alpha)
-    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
-    K2bar = build_kernel_matrix_shifted_bar(grid, 2, alpha)
-    K1bar = build_kernel_matrix_shifted_bar(grid, 1, alpha)
-    K2_small = build_kernel_matrix_shifted(grid, 2, max(grid.dx, alpha / 50, 1e-3))
 
     psi_cbar = jks_driving_cbar(grid, beta, U, mu; H=H)
 
     log_B = log.(1 .+ aux.b)
-    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
     log_C = log.(1 .+ aux.c)
-    log_Cbar = log.(1 .+ aux.c_bar)
 
-    # Stage C.22c: paper eq (47) cbar form.
-    # log cbar = psi_cbar + K_1 ⊛ log B + K_1 ◦ log C
     rhs = psi_cbar + apply_kernel(K1, log_B) + apply_kernel(K1, log_C)
 
     log_cbar = log.(aux.c_bar)

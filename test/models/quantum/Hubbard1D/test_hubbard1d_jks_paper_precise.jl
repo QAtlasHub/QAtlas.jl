@@ -64,16 +64,22 @@ using QAtlas.Hubbard1DJKSNLIE:
         @test !isapprox(f1, f2; rtol=1e-3)  # c=0.5 ≠ c=1 result
     end
 
-    @testset "Stage C.24+ known gap: full Newton ratio ~1.3 at high T" begin
-        # Documentation test: pinned current state for future regression detection.
-        # When Stage C.24+ closes the FE prefactor gap, this expected value
-        # should approach 1.0 and the test will switch from @test_broken to @test.
-        grid = JKSContourGrid(32, 1.0; x_max=4.0)
-        sol = solve_jks_nlie_full_newton(grid, 0.001, 4.0, 2.0; alpha=0.5, tol=1e-8, maxiter=40)
-        f_f = free_energy_jks(sol.aux, grid, 0.001, 4.0; mu=2.0)
+    @testset "Stage C.24: full Newton near-exact at high T" begin
+        # Stage C.24 fixed jks_log_z_deriv (eq 23) and the int_1 prefactor in
+        # free_energy_jks. At N=128, x_max=8, ratio reaches ~0.98 — within 2%%
+        # of the atomic limit. Smaller grids show 5-7%% offset; this test pins
+        # the high-resolution near-exact behavior.
+        grid_lo = JKSContourGrid(32, 1.0; x_max=4.0)
+        sol_lo = solve_jks_nlie_full_newton(grid_lo, 0.001, 4.0, 2.0; alpha=0.5, tol=1e-8, maxiter=40)
+        f_lo = free_energy_jks(sol_lo.aux, grid_lo, 0.001, 4.0; mu=2.0)
         f_a = atomic_free_energy(0.001, 4.0, 2.0)
-        # Current state: ~1.327 (33% offset). When fixed, this becomes ~1.0.
-        @test 1.2 < f_f / f_a < 1.4
-        @test_broken isapprox(f_f / f_a, 1.0; rtol=0.05)
+        # N=32, x_max=4: ~0.94 expected
+        @test 0.92 < f_lo / f_a < 0.96
+
+        grid_hi = JKSContourGrid(128, 1.0; x_max=8.0)
+        sol_hi = solve_jks_nlie_full_newton(grid_hi, 0.001, 4.0, 2.0; alpha=0.5, tol=1e-8, maxiter=40)
+        f_hi = free_energy_jks(sol_hi.aux, grid_hi, 0.001, 4.0; mu=2.0)
+        # N=128, x_max=8: ~0.978 expected — within 5%% of exact atomic
+        @test isapprox(f_hi / f_a, 1.0; rtol=0.05)
     end
 end

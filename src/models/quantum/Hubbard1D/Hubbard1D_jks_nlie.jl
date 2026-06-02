@@ -505,7 +505,7 @@ This is the kernel of the closed-contour integration in the JKS free
 energy formula eq (49).
 """
 function jks_log_z_deriv(s::Number)
-    return 1 / sqrt(s^2 - 1 + 0im)
+    return 1 / (s * sqrt(1 - 1/s^2 + 0im))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -560,6 +560,9 @@ function free_energy_jks(
     cut_mask = [-1.0 <= x <= 1.0 for x in grid.x]
 
     # First integral:  -2i int_{-1}^{1} ln(1 + c + cbar) / sqrt(1 - s^2) ds
+    # Stage C.24: int_1 = ∫_L [ln z]' log((1+c+c̄)/c) ds.
+    # Closed contour evaluated at +i0+ side: [ln z+]' = -i/sqrt(1-x²) for the
+    # principal branch. Single-valued integrand → 2x the +i0+ contribution.
     integrand_1 = ComplexF64[
         if cut_mask[j]
             log((1 + aux.c[j] + aux.c_bar[j]) / aux.c[j]) / sqrt(1 - grid.x[j]^2)
@@ -567,7 +570,7 @@ function free_energy_jks(
             0.0 + 0im
         end for j in 1:grid.N
     ]
-    int_1 = -2im * sum(integrand_1) * grid.dx
+    int_1 = -1im * sum(integrand_1) * grid.dx
 
     # Second integral:  oint [ln z(s - 2 i eta)]' ln C(s) ds.
     # The pole at s - 2i eta = ±1 is off the real axis for eta > 0; this

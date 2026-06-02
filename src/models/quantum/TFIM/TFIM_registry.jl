@@ -18,7 +18,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_thermal.jl",
-    references=["Pfeuty 1970"],
+    references=["Pfeuty1970"],
     notes="Total ⟨H⟩(β) via the BdG spectrum; ground state when no β kwarg.",
 )
 @register(
@@ -28,7 +28,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_thermal.jl",
-    references=["Pfeuty 1970"],
+    references=["Pfeuty1970"],
     notes="Per-site ε(β) by QuadGK over the PBC dispersion Λ(k).",
 )
 
@@ -40,7 +40,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_TFIM_massgap.jl",
-    references=["Pfeuty 1970"],
+    references=["Pfeuty1970"],
     notes="Δ_∞(J,h) = 2|h - J| — closed-form Ising gap.",
 )
 @register(
@@ -50,7 +50,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_massgap.jl",
-    references=["Pfeuty 1970"],
+    references=["Pfeuty1970"],
     notes="Smallest positive BdG eigenvalue of the OBC chain.",
 )
 @register(
@@ -60,7 +60,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_TFIM_central_charge.jl",
-    references=["Belavin-Polyakov-Zamolodchikov 1984"],
+    references=["BelavinPolyakovZamolodchikov1984"],
     notes="c = 1/2 at the critical point (h = J), 0 otherwise.",
 )
 
@@ -170,7 +170,7 @@
     method=:majorana_evolution,
     reliability=:high,
     tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
-    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
+    references=["BarouchMcCoy1970", "CalabreseEsslerFagotti2012"],
     notes="Sudden h_0 -> h_f quench; Sigma(t) = R(t) Sigma_0 R(t)^T; sigma^x_i(t) = Sigma(t)[2i-1, 2i].",
 )
 @register(
@@ -180,7 +180,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
-    references=["Barouch-McCoy-Dresden 1970", "Calabrese-Essler-Fagotti 2012"],
+    references=["BarouchMcCoy1970", "CalabreseEsslerFagotti2012"],
     notes="Closed-form k-integral over the Bogoliubov angles theta_k(h_0,f); QuadGK rtol=1e-12.",
 )
 @register(
@@ -252,7 +252,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_entanglement.jl",
-    references=["Peschel 2003"],
+    references=["Peschel2003"],
     notes="Free-fermion correlation-matrix method; pass subsystem length ℓ.",
 )
 
@@ -264,7 +264,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_pbc_thermal.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Sachdev 2011"],
+    references=["LiebSchultzMattis1961", "Sachdev2011"],
     notes="Per-site ε(β) with parity-projected fermion sectors (NS + R).",
 )
 @register(
@@ -274,7 +274,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_pbc_thermal.jl",
-    references=["Lieb-Schultz-Mattis 1961"],
+    references=["LiebSchultzMattis1961"],
 )
 @register(
     TFIM,
@@ -326,7 +326,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_TFIM_zaxis.jl",
-    references=["Pfeuty 1970"],
+    references=["Pfeuty1970"],
     notes="m_z = (1 - (h/J)²)^(1/8) for h < J, else 0 (T = 0 spontaneous).",
 )
 @register(
@@ -336,7 +336,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_TFIM_zaxis.jl",
-    references=["Pfeuty 1970"],
+    references=["Pfeuty1970"],
     notes="Same value as MagnetizationZ; order-parameter alias.",
 )
 @register(
@@ -386,7 +386,7 @@
     method=:pfaffian,
     reliability=:high,
     tested_in="test/models/test_TFIM_xx_static.jl",
-    references=["Lieb-Schultz-Mattis 1961", "Sachdev 2011"],
+    references=["LiebSchultzMattis1961", "Sachdev2011"],
     notes="t=0 limit of dynamic XX correlator; real Pfaffian.",
 )
 @register(
@@ -423,7 +423,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/models/test_TFIM_renyi.jl",
-    references=["Peschel 2003", "Calabrese-Cardy 2009"],
+    references=["Peschel2003", "CalabreseCardy2009"],
     notes="Free-fermion correlation-matrix Renyi α ≠ 1.",
 )
 
@@ -435,7 +435,7 @@
     method=:cft,
     reliability=:high,
     tested_in="test/models/test_TFIM_cft_entanglement.jl",
-    references=["Calabrese-Cardy 2004", "Calabrese-Cardy 2009"],
+    references=["CalabreseCardy2004", "CalabreseCardy2009"],
     notes="Closed-form CC; T=0 critical/gapped + T>0 critical (gapped + T>0 errors).",
 )
 @register(
@@ -445,7 +445,7 @@
     method=:cft,
     reliability=:high,
     tested_in="test/models/test_TFIM_cft_entanglement.jl",
-    references=["Calabrese-Cardy 2009"],
+    references=["CalabreseCardy2009"],
     notes="CC Renyi: prefactor (c/6)(1 + 1/α). Same case coverage as VN.",
 )
 
@@ -546,8 +546,8 @@
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
     references=[
-        "Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)",
-        "Heyl Rep. Prog. Phys. 81, 054001 (2018)",
+        "Heyl2013",
+        "Heyl2018",
     ],
     notes="L(t) = ∏_n |cos²θ_n + sin²θ_n e^{-2iΛ_n t}|² via OBC BdG diagonalisation of H_0, H_f.",
 )
@@ -558,7 +558,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
-    references=["Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)"],
+    references=["Heyl2013"],
     notes="λ(t) = -log L(t) / N from the OBC BdG product.",
 )
 @register(
@@ -569,8 +569,8 @@
     reliability=:high,
     tested_in="test/standalone/test_tfim_loschmidt.jl",
     references=[
-        "Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013)",
-        "Heyl Rep. Prog. Phys. 81, 054001 (2018)",
+        "Heyl2013",
+        "Heyl2018",
     ],
     notes="λ(t) = -(1/2π) ∫₀^π log|cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k(h_f) t}|² dk via QuadGK.",
 )
@@ -583,7 +583,7 @@
     reliability=:high,
     tested_in="test/standalone/test_tfim_gge.jl",
     references=[
-        "Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"
+        "Rigol2007", "CalabreseEsslerFagotti2012"
     ],
     notes="Per-site ε_GGE via QuadGK over the post-quench dispersion with Bogoliubov-mismatch occupations n_k = sin²(θ_k(h₀)−θ_k(h_f)).",
 )
@@ -595,7 +595,7 @@
     reliability=:high,
     tested_in="test/standalone/test_tfim_gge.jl",
     references=[
-        "Rigol et al. PRL 98 (2007)", "Calabrese-Essler-Fagotti J. Stat. Mech. (2012)"
+        "Rigol2007", "CalabreseEsslerFagotti2012"
     ],
     notes="⟨σˣ⟩_GGE via QuadGK over (h_f − J cos k)/Λ_k(h_f) · (1 − 2 n_k).",
 )
@@ -608,7 +608,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_tfim_quench_entanglement.jl",
-    references=["Calabrese-Cardy 2005", "Peschel 2003"],
+    references=["CalabreseCardy2005", "Peschel2003"],
     notes="S(ℓ, t) after a global quench from initial::TFIM ground state; Peschel on time-evolved Σ(t) = R(t) Σ_0 R(t)ᵀ.",
 )
 
@@ -620,7 +620,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_tfim_fidelity_susceptibility.jl",
-    references=["Gu IJMPB 24 4371 (2010)", "Damski PRB 87 165101 (2013)"],
+    references=["Gu2010", "Damski2013"],
     notes="χ_F = Σ_{p<q} 4 X_{pq}² / (Λ_p+Λ_q)² from Bogoliubov amplitudes.",
 )
 @register(
@@ -630,7 +630,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_tfim_fidelity_susceptibility.jl",
-    references=["Gu IJMPB 24 4371 (2010)", "Damski PRB 87 165101 (2013)"],
+    references=["Gu2010", "Damski2013"],
     notes="χ_F/L = 1/(16(J²-h²)) (h<J), J²/(16h²(h²-J²)) (h>J); QuadGK, divergent at h=J.",
 )
 
@@ -642,7 +642,7 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/quantum/TFIM/test_tfim_critical_exponents.jl",
-    references=["Onsager 1944", "Pfeuty 1970"],
+    references=["Onsager1944", "Pfeuty1970"],
     notes="2D-Ising Onsager exponents (β=1/8, γ=7/4, ν=1) via TFIM↔2D-Ising mapping.",
 )
 
@@ -654,6 +654,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/TFIM/test_tfim_loschmidt.jl",
-    references=["Heyl Polkovnikov Kehrein PRL 110 135704 (2013)"],
+    references=["Heyl2013"],
     notes="λ(t) = -lim_{L→∞} (1/L) log |⟨ψ₀|e^{-iH_f t}|ψ₀⟩|² for TFIM h-quench; closed-form via Bogoliubov mode amplitudes.",
 )

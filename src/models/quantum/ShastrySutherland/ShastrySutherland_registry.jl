@@ -11,6 +11,6 @@
     method=:exact_dimer,
     reliability=:high,
     tested_in="test/standalone/test_shastry_sutherland.jl",
-    references=["Shastry-Sutherland 1981", "Koga-Kawakami 2000"],
+    references=["ShastrySutherland1981", "KogaKawakami2000"],
     notes="E0/N = -3 J'/8 on the exact dimer GS for J/J' ≤ α_c ≈ 0.675; DomainError outside.",
 )

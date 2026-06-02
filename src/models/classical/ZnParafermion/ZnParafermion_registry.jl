@@ -10,6 +10,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/universalities/test_zn_parafermion.jl",
-    references=["Fateev-Zamolodchikov 1985"],
+    references=["FateevZamolodchikov1985"],
     notes="c = 2(n-1)/(n+2); SU(2)_n / U(1) coset CFT; n=2 = Ising, n=3 = Potts.",
 )

@@ -10,7 +10,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding_v1d.jl",
-    references=["YangYang1966", "Ashcroft-Mermin 1976"],
+    references=["YangYang1966", "AshcroftMermin1976"],
     notes="V=0 free-fermion gap = max(0, |μ|-2t); V≠0 (JW XXZ) deferred to Phase 2.",
 )
 
@@ -21,7 +21,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding_v1d.jl",
-    references=["Ashcroft-Mermin 1976"],
+    references=["AshcroftMermin1976"],
     notes="V=0 free-fermion v_F = 2t sin(k_F); |μ|≥2t (no Fermi surface) DomainError.",
 )
 
@@ -32,7 +32,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding_v1d.jl",
-    references=["Mahan2000", "Ashcroft-Mermin 1976"],
+    references=["Mahan2000", "AshcroftMermin1976"],
     notes="V=0 free-fermion e₀ = -(2t/π)sin(k_F) - (μ/π)k_F, k_F = arccos(-μ/2t); band-edge piecewise.",
 )
 @register(

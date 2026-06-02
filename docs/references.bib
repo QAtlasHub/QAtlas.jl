@@ -1808,3 +1808,70 @@
   archivePrefix = {arXiv},
 }
 
+% ── No-DOI references made citable via book / journal metadata instead of
+%    a DOI (textbooks → @book; pre-DOI Soviet journals → @article + ISSN;
+%    talks → @misc + URL). `doiget verify` reports these `unverifiable`
+%    (a warning — no online DOI/arXiv id), same class as Hulthen1938. ──
+@book{AshcroftMermin1976,
+  title     = {Solid State Physics},
+  author    = {Ashcroft, Neil W. and Mermin, N. David},
+  publisher = {Holt, Rinehart and Winston},
+  year      = {1976},
+}
+
+@book{Stanley1971,
+  title     = {Introduction to Phase Transitions and Critical Phenomena},
+  author    = {Stanley, H. Eugene},
+  publisher = {Oxford University Press},
+  year      = {1971},
+}
+
+@book{Baxter1982,
+  title     = {Exactly Solved Models in Statistical Mechanics},
+  author    = {Baxter, Rodney J.},
+  publisher = {Academic Press},
+  year      = {1982},
+}
+
+@book{LandauLifshitz1980,
+  title     = {Statistical Physics, Part 1},
+  author    = {Landau, Lev D. and Lifshitz, Evgeny M.},
+  series    = {Course of Theoretical Physics},
+  volume    = {5},
+  edition   = {3},
+  publisher = {Pergamon Press},
+  year      = {1980},
+}
+
+% Original Zh. Eksp. Teor. Fiz. 7, 19 (1937); the DOI is the verifiable
+% English reprint in Collected Papers of L. D. Landau (Elsevier, 1965).
+@article{Landau1937,
+  title   = {On the theory of phase transitions},
+  author  = {Landau, Lev D.},
+  journal = {Zh. Eksp. Teor. Fiz.},
+  volume  = {7},
+  pages   = {19--32},
+  year    = {1937},
+  doi     = {10.1016/B978-0-08-010586-4.50034-1},
+}
+
+% Sov. Phys. JETP 62, 215 (1985) [Zh. Eksp. Teor. Fiz. 89, 380]; pre-DOI
+% Soviet journal, no DOI / arXiv — identified by journal + volume + ISSN.
+@article{FateevZamolodchikov1985,
+  title   = {Nonlocal (parafermion) currents in two-dimensional conformal quantum field theory and self-dual critical points in $Z_N$-symmetric statistical systems},
+  author  = {Fateev, V. A. and Zamolodchikov, A. B.},
+  journal = {Sov. Phys. JETP},
+  volume  = {62},
+  pages   = {215--225},
+  year    = {1985},
+  issn    = {0038-5646},
+}
+
+@misc{Kitaev2015,
+  title        = {A simple model of quantum holography},
+  author       = {Kitaev, Alexei},
+  year         = {2015},
+  howpublished = {KITP Program: Entanglement in Strongly-Correlated Quantum Matter (talks)},
+  note         = {http://online.kitp.ucsb.edu/online/entangled15/kitaev/},
+}
+

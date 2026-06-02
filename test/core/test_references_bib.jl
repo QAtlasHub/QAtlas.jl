@@ -54,20 +54,14 @@ starting with a letter — i.e. no spaces/punctuation.
 """
 is_bibkey(s::AbstractString) = occursin(r"^[A-Za-z][A-Za-z0-9_]*$", s)
 
-# References intentionally left as free strings: no reliable Crossref DOI /
-# arXiv id exists to make them machine-verifiable. Each is a textbook, a
-# pre-DOI Soviet-journal paper, or an author string too ambiguous to pin.
-# Keep this list tight — prefer adding a bibkey to references.bib.
+# References intentionally left as free strings. No-DOI works (textbooks,
+# pre-DOI Soviet journals, talks) are now proper @book / @article / @misc
+# bibkey entries in references.bib (identified by ISBN / journal+ISSN /
+# URL instead of a DOI), so only genuinely-unidentified author strings
+# remain here. Keep this list tight — prefer adding a bibkey.
 const KNOWN_UNMIGRATED = Set{String}([
-    "Ashcroft-Mermin 1976",          # textbook, Solid State Physics (no DOI)
-    "Baxter 1982",                   # textbook, Exactly Solved Models (no DOI)
-    "Chen-Roncaglia 2008",           # ambiguous author string, no unique match
-    "Fateev-Zamolodchikov 1985",     # Sov. Phys. JETP 62, 215 — pre-DOI
-    "Kitaev 2015",                   # SYK KITP talks (no DOI)
-    "Landau 1937",                   # ZhETF 7, 19 — pre-DOI original
-    "Landau-Lifshitz §149",          # textbook, Statistical Physics (no DOI)
-    "Stanley 1971",                  # textbook, Intro to Phase Transitions (no DOI)
-    "Tzeng-Yang-Hsu 2017",           # ambiguous author string, no unique match
+    "Chen-Roncaglia 2008",           # ambiguous author string, no unique match (Phase-2 quantity)
+    "Tzeng-Yang-Hsu 2017",           # ambiguous author string, no unique match (Phase-2 quantity)
 ])
 
 @testset "references.bib key consistency" begin

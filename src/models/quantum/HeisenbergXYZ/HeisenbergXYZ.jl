@@ -239,3 +239,77 @@ function fetch(
         )
     end
 end
+
+# ==============================================================================
+# Spontaneous magnetization (Phase 2: XY anisotropic line)
+# ==============================================================================
+
+"""
+    fetch(m::HeisenbergXYZ, ::SpontaneousMagnetization, ::Infinite;
+          Jx=m.Jx, Jy=m.Jy, Jz=m.Jz) -> Float64
+
+Spontaneous magnetization (sublattice order parameter) of the spin-1/2
+XYZ chain at the thermodynamic limit.
+
+| Regime                              | Method                                                            |
+|-------------------------------------|-------------------------------------------------------------------|
+| `Jx = Jy`, `abs(Jz/Jx) <= 1`        | gapless critical XXZ, no LRO in 1D: returns `0.0`                 |
+| `Jz = 0` (XY line, `Jx != Jy`)      | McCoy-Wu / Pfeuty 1/8: `M = (1 - (Jmin/Jmax)^2)^(1/8)`            |
+| massive axial AFM (`Jz/Jx > 1`)     | `DomainError` (Neel staggered M Baxter 1971 deferred)             |
+| generic XYZ                         | `DomainError` (Baxter 1973 PRL elliptic theta deferred)           |
+
+# References
+
+- B. M. McCoy, T. T. Wu, *Phys. Rev.* **174**, 546 (1968).
+- P. Pfeuty, *Ann. Phys.* **57**, 79 (1970).
+- R. J. Baxter, *Phys. Rev. Lett.* **31**, 1294 (1973) -- generic XYZ.
+"""
+function fetch(
+    m::HeisenbergXYZ,
+    ::SpontaneousMagnetization,
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    Jz::Real=m.Jz,
+    kwargs...,
+)
+    if Jx == Jy
+        Jx > 0 || throw(
+            DomainError(
+                Jx,
+                "HeisenbergXYZ SpontaneousMagnetization axial branch requires Jx > 0; got Jx = $Jx.",
+            ),
+        )
+        if abs(Jz / Jx) <= 1
+            return 0.0
+        else
+            throw(
+                DomainError(
+                    Jz / Jx,
+                    "HeisenbergXYZ SpontaneousMagnetization at Jx = Jy: massive AFM " *
+                    "(Neel staggered M) deferred to Phase 3; got Delta = $(Jz/Jx).",
+                ),
+            )
+        end
+    elseif Jz == 0
+        ax, ay = abs(Jx), abs(Jy)
+        (ax > 0 && ay > 0) || throw(
+            DomainError(
+                (Jx, Jy),
+                "HeisenbergXYZ SpontaneousMagnetization on XY line requires both " *
+                "|Jx| > 0 and |Jy| > 0; got (Jx, Jy) = ($Jx, $Jy).",
+            ),
+        )
+        jmin, jmax = minmax(ax, ay)
+        return (1 - (jmin / jmax)^2)^(1 / 8)
+    else
+        throw(
+            DomainError(
+                (Jx, Jy, Jz),
+                "HeisenbergXYZ SpontaneousMagnetization: generic XYZ requires Baxter " *
+                "(1973) elliptic theta-function staggered polarization, deferred " *
+                "to Phase 3. Got (Jx, Jy, Jz) = ($Jx, $Jy, $Jz).",
+            ),
+        )
+    end
+end

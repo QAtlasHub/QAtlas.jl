@@ -38,3 +38,17 @@
           "closed form; axial XXZ case (Jx=Jy) delegated to XXZ1D Energy(:per_site). " *
           "Generic XYZ (Jx!=Jy, Jz!=0) deferred to Baxter elliptic Phase 3.",
 )
+
+@register(
+    HeisenbergXYZ,
+    SpontaneousMagnetization,
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/HeisenbergXYZ/test_heisenberg_xyz_gs.jl",
+    references=["McCoyWu1978"],
+    notes="Critical axial XXZ (Jx=Jy, |Jz/Jx|<=1): 0 (no LRO in 1D). XY anisotropic " *
+          "line (Jz=0, Jx != Jy): McCoy-Wu / Pfeuty Onsager 1/8 exponent " *
+          "M = (1-(Jmin/Jmax)^2)^(1/8) along dominant axis. Massive AFM Neel order " *
+          "and generic XYZ Baxter (1973) elliptic deferred to Phase 3.",
+)

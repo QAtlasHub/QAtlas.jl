@@ -65,4 +65,28 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
         m_fm = HeisenbergXYZ(; Jx=-1.0, Jy=-1.0, Jz=0.5)
         @test_throws DomainError fetch(m_fm, GroundStateEnergyDensity(), Infinite())
     end
+
+    @testset "SpontaneousMagnetization@Infinite -- McCoy-Wu XY line + critical" begin
+        for (Jx, Jy, Jz) in
+            ((1.0, 1.0, 1.0), (1.0, 1.0, 0.5), (1.0, 1.0, -0.5), (1.0, 1.0, 0.0))
+            m = HeisenbergXYZ(; Jx=Jx, Jy=Jy, Jz=Jz)
+            @test fetch(m, QAtlas.SpontaneousMagnetization(), Infinite()) == 0.0
+        end
+        for (Jx, Jy) in ((2.0, 1.0), (3.0, 0.5), (10.0, 1.0), (1.0, 2.0))
+            m = HeisenbergXYZ(; Jx=Jx, Jy=Jy, Jz=0.0)
+            jmin, jmax = minmax(abs(Jx), abs(Jy))
+            M_ref = (1 - (jmin / jmax)^2)^(1 / 8)
+            @test fetch(m, QAtlas.SpontaneousMagnetization(), Infinite()) ≈ M_ref atol=1e-12
+        end
+        m_strong = HeisenbergXYZ(; Jx=100.0, Jy=1.0, Jz=0.0)
+        @test fetch(m_strong, QAtlas.SpontaneousMagnetization(), Infinite()) > 0.999
+        m_massive = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.5)
+        @test_throws DomainError fetch(
+            m_massive, QAtlas.SpontaneousMagnetization(), Infinite()
+        )
+        m_generic = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.5)
+        @test_throws DomainError fetch(
+            m_generic, QAtlas.SpontaneousMagnetization(), Infinite()
+        )
+    end
 end

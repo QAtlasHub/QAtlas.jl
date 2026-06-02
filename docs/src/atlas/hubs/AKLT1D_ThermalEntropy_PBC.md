@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988
+- method `analytic`, reliability `high`, refs: AKLT1988
 - β=∞ only: s_PBC(∞) = 0 (unique gapped GS). Finite β throws DomainError.
 
 ## Corroboration

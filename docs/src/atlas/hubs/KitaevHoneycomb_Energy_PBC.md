@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `matter_free_fermion`, reliability `high`, refs: Kitaev 2006
+- method `matter_free_fermion`, reliability `high`, refs: Kitaev2006
 - Four-sector minimum on Lx × Ly torus (T = 0 only).
 
 ## Corroboration

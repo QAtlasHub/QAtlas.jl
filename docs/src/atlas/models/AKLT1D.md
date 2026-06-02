@@ -25,13 +25,6 @@ All `(Quantity, BC)` hubs `src` claims for **`AKLT1D`**.  Cells link to the per-
 
 **Methods** (from `@register`, derived): `analytic`, `dense_ed`, `literature_value`
 
-**References** (aggregated):
-- Affleck-Kennedy-Lieb-Tasaki 1988
-- Affleck-Kennedy-Lieb-Tasaki 1988 | García-Saez-Murg-Verstraete 2013
-- Affleck-Kennedy-Lieb-Tasaki 1988 | Kennedy-Tasaki 1992
-- Arovas-Auerbach-Haldane 1988
-- García-Saez-Murg-Verstraete 2013
-
 ## Quantity × BC matrix
 
 | Quantity | `OBC` | `PBC` | `Infinite` |
@@ -48,5 +41,18 @@ All `(Quantity, BC)` hubs `src` claims for **`AKLT1D`**.  Cells link to the per-
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_Infinite.md) |
 | [`ZZCorrelation`](../quantities/ZZCorrelation.md) | — | — | 🟢 [hub](../hubs/AKLT1D_ZZCorrelation_Infinite.md) |
 | [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | — | 🟢 [hub](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AKLT1988
+Arovas1988
+GarciaSaez2013
+KennedyTasaki1992
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

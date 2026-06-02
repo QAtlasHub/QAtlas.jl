@@ -25,22 +25,6 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `delegation`, `pfaffian`
 
-**References** (aggregated):
-- Barouch-McCoy-Dresden 1970 | Calabrese-Essler-Fagotti 2012
-- Belavin-Polyakov-Zamolodchikov 1984
-- Calabrese-Cardy 2004 | Calabrese-Cardy 2009
-- Calabrese-Cardy 2009
-- Gu IJMPB 24 4371 (2010) | Damski PRB 87 165101 (2013)
-- Heyl Polkovnikov Kehrein PRL 110 135704 (2013)
-- Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013) | Heyl Rep. Prog. Phys. 81, 054001 (2018)
-- Lieb-Schultz-Mattis 1961
-- Lieb-Schultz-Mattis 1961 | Sachdev 2011
-- Onsager 1944 | Pfeuty 1970
-- Peschel 2003
-- Peschel 2003 | Calabrese-Cardy 2009
-- Pfeuty 1970
-- Rigol et al. PRL 98 (2007) | Calabrese-Essler-Fagotti J. Stat. Mech. (2012)
-
 ## Quantity × BC matrix
 
 | Quantity | `OBC` | `PBC` | `Infinite` |
@@ -95,5 +79,29 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`transfer-matrix-symmetric-split.md`](../../calc/transfer-matrix-symmetric-split.md)
 - [`xx-quench.md`](../../calc/xx-quench.md)
 - [`yang-magnetization-toeplitz.md`](../../calc/yang-magnetization-toeplitz.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BarouchMcCoy1970
+BelavinPolyakovZamolodchikov1984
+CalabreseCardy2004
+CalabreseCardy2009
+CalabreseEsslerFagotti2012
+Damski2013
+Gu2010
+Heyl2013
+Heyl2018
+LiebSchultzMattis1961
+Onsager1944
+Peschel2003
+Pfeuty1970
+Rigol2007
+Sachdev2011
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

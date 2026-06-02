@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Damski PRB 87 165101 (2013) — 2 hubs
-- Gu IJMPB 24 4371 (2010) — 2 hubs
+- Damski2013 — 2 hubs
+- Gu2010 — 2 hubs
 
 ## Model × BC matrix
 

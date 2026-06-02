@@ -27,10 +27,6 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingSquare`**.  Cells link to the
 
 **Methods** (from `@register`, derived): `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix`
 
-**References** (aggregated):
-- Onsager 1944
-- Yang 1952
-
 ## Quantity × BC matrix
 
 | Quantity | `PBC` | `Infinite` |
@@ -54,5 +50,16 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
 - [`kramers-wannier-duality.md`](../../calc/kramers-wannier-duality.md)
 - [`transfer-matrix-symmetric-split.md`](../../calc/transfer-matrix-symmetric-split.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Onsager1944
+Yang1952
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

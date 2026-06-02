@@ -27,13 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`TTbar`**.  Cells link to the per-h
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Zamolodchikov 2004 | Smirnov-Zamolodchikov 2017 | Cavaglià-Negro-Szécsényi-Tateo 2016
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/TTbar_CentralCharge_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+CavagliaNegroSzecsenyiTateo2016
+SmirnovZamolodchikov2017
+Zamolodchikov2004
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

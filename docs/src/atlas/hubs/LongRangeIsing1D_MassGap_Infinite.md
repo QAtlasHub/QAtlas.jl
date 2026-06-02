@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Pfeuty 1970 | Koffel-Lewenstein-Tagliacozzo 2012 | Gong-Foss-Feig 2014
+- method `delegation`, reliability `high`, refs: Pfeuty1970 | KoffelLewensteinTagliacozzo2012 | GongFossFeig2014
 - α=Inf delegated to TFIM (Δ = 2|h-J|); finite α requires DMRG, deferred to Phase 2.
 
 ## Corroboration

@@ -25,13 +25,22 @@ All `(Quantity, BC)` hubs `src` claims for **`LongRangeXY1D`**.  Cells link to t
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Lieb-Schultz-Mattis 1961 | Pfeuty 1970 | Maghrebi-Gong-Gorshkov 2017
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/LongRangeXY1D_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+LiebSchultzMattis1961
+MaghrebiGongGorshkov2017
+Pfeuty1970
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

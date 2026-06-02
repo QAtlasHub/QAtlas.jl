@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan 2000 | Ashcroft-Mermin 1976
+- method `analytic`, reliability `high`, refs: Mahan2000 | AshcroftMermin1976
 - V=0 free-fermion e₀ = -(2t/π)sin(k_F) - (μ/π)k_F, k_F = arccos(-μ/2t); band-edge piecewise.
 
 ## Corroboration

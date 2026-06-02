@@ -10,7 +10,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev 2001"],
+    references=["Kitaev2001"],
     notes="Per-site ε₀ by Gauss-Kronrod over the PBC dispersion E(k).",
 )
 
@@ -22,7 +22,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev 2001", "Alicea 2012"],
+    references=["Kitaev2001", "Alicea2012"],
     notes="Closed-form min over k of √((2t cos k + μ)² + 4Δ² sin² k).",
 )
 @register(
@@ -32,7 +32,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev 2001"],
+    references=["Kitaev2001"],
     notes="Smallest non-negative BdG eigenvalue (Majorana edge mode in topological phase).",
 )
 @register(
@@ -42,7 +42,7 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev 2001", "Alicea 2012"],
+    references=["Kitaev2001", "Alicea2012"],
     notes="Same value as MassGap@OBC; named for the Majorana boundary-mode interpretation.",
 )
 @register(
@@ -52,7 +52,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev 2001"],
+    references=["Kitaev2001"],
     notes="ξ = 1/Δ_gap; Inf on the critical line |μ| = 2|t|.",
 )
 @register(
@@ -62,6 +62,6 @@
     method=:pfaffian,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev 2001", "Asboth-Oroszlany-Palyi 2016"],
+    references=["Kitaev2001", "AsbothOroszlanyPalyi2016"],
     notes="ν = sgn[Pf A(k=0)·Pf A(k=π)] = sgn(μ² - 4t²); ν=-1 topological, +1 trivial.",
 )

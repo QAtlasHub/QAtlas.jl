@@ -19,11 +19,11 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`, `MinimalModel`, `WZW`
 
 **Top references** (by hub count):
-- Belavin-Polyakov-Zamolodchikov 1984 — 2 hubs
-- Andrews-Baxter-Forrester 1984 — 1 hub
-- Bauer-Bernard 2006 — 1 hub
-- Cardy 1985 — 1 hub
-- Cardy 2001 — 1 hub
+- BelavinPolyakovZamolodchikov1984 — 2 hubs
+- AndrewsBaxterForrester1984 — 1 hub
+- BauerBernard2006 — 1 hub
+- Cardy1984 — 1 hub
+- Cardy2001 — 1 hub
 
 ## Model × BC matrix
 

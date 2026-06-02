@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Onsager 1944 | Pfeuty 1970
+- method `delegation`, reliability `high`, refs: Onsager1944 | Pfeuty1970
 - 2D-Ising Onsager exponents (β=1/8, γ=7/4, ν=1) via TFIM↔2D-Ising mapping.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Giamarchi 2004 | des Cloizeaux Pearson 1962
+- method `analytic`, reliability `high`, refs: Giamarchi2003 | desCloizeauxPearson1962
 - u = (πJ/2) sin γ / γ, γ = arccos Δ; -1 < Δ ≤ 1.
 
 ## Corroboration

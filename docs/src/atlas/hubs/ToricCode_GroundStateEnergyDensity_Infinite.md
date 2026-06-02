@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev 2003
+- method `analytic`, reliability `high`, refs: Kitaev2003
 - ε₀ = −(J_e + J_m) per (vertex+plaquette) unit cell.
 
 ## Corroboration

@@ -248,15 +248,18 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (52)
+## `uncorroborated-but-feasible` (64)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationYLocal/OBC`](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationZLocal/OBC`](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
@@ -300,7 +303,16 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](../hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/OBC`](../hubs/XYh1D_Energy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/EnergyLocal/OBC`](../hubs/XYh1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationXLocal/OBC`](../hubs/XYh1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationYLocal/OBC`](../hubs/XYh1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationZ/Infinite`](../hubs/XYh1D_MagnetizationZ_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationZ/OBC`](../hubs/XYh1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationZLocal/OBC`](../hubs/XYh1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MassGap/PBC`](../hubs/XYh1D_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/SusceptibilityZZ/Infinite`](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/SusceptibilityZZ/OBC`](../hubs/XYh1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 
 [← back to the Atlas index](../index.md)

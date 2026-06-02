@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan 2000 | Coleman 2015
+- method `analytic`, reliability `high`, refs: Mahan2000 | Coleman2015
 - ω(β;t,μ) = -(πβ)⁻¹ ∫₀^π log(1+e^{-βε}) dk, ε(k)=-2t cos k - μ; QuadGK rtol=1e-10.
 
 ## Corroboration

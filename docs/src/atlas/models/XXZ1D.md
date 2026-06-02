@@ -23,18 +23,7 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | 🟠 uncorroborated-but-feasible | 5 |
 | **total claimed hubs** | **27** |
 
-**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk`
-
-**References** (aggregated):
-- Calabrese Essler Fagotti J. Stat. Mech. (2012) P07016 | Heyl Polkovnikov Kehrein Phys. Rev. Lett. 110, 135704 (2013) | Essler Fagotti J. Stat. Mech. (2016) 064002
-- Giamarchi 2004
-- Giamarchi 2004 | des Cloizeaux Pearson 1962
-- Hulthén 1938 | Yang Yang 1966
-- Mahan §1.3
-- Mahan §1.3 | Coleman §2.4
-- Mahan §1.3 | Coleman §2.4 | Takahashi 1999 §4
-- Yang Yang 1966 | Takahashi 1999
-- Yang-Yang J. Math. Phys. 10 1115 (1969) | Cloizeaux Pearson PR 128 2131 (1962)
+**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk`, `klumper_nlie`
 
 ## Quantity × BC matrix
 
@@ -72,5 +61,26 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`xx-quench.md`](../../calc/xx-quench.md)
 - [`xxz-luttinger-parameters.md`](../../calc/xxz-luttinger-parameters.md)
 - [`yang-magnetization-toeplitz.md`](../../calc/yang-magnetization-toeplitz.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+CalabreseEsslerFagotti2012
+Coleman2015
+EsslerFagotti2016
+Giamarchi2003
+Heyl2013
+Hulthen1938
+Klumper1993
+Mahan2000
+Takahashi1999
+YangYang1966
+YangYang1969
+desCloizeauxPearson1962
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

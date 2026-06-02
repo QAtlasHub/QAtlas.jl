@@ -25,13 +25,21 @@ All `(Quantity, BC)` hubs `src` claims for **`ShastrySutherland`**.  Cells link 
 
 **Methods** (from `@register`, derived): `exact_dimer`
 
-**References** (aggregated):
-- Shastry-Sutherland 1981 | Koga-Kawakami 2000
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/ShastrySutherland_Energy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+KogaKawakami2000
+ShastrySutherland1981
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

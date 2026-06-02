@@ -552,22 +552,20 @@ function render_model_index(model_name::AbstractString)
     refs_seen = String[]
     for h in hs
         haskey(clby, h) || continue
-        r = first(clby[h]).refs
-        isempty(r) || push!(refs_seen, r)
+        append!(refs_seen, _split_refs(first(clby[h]).refs))
     end
-    refs_unique = sort(unique(refs_seen))
+    # Bibkey-form references resolve to references.bib via DocumenterCitations.
+    # After the migration every cited reference is a bibkey; the filter guards
+    # against a stray free string ever breaking the @bibliography block (the
+    # full reference list is rendered at the bottom of the page).
+    refs_unique = sort(
+        unique(r for r in refs_seen if occursin(r"^[A-Za-z][A-Za-z0-9_]*$", r))
+    )
     P(
         "**Methods** (from `@register`, derived): ",
         isempty(methods_seen) ? "—" : join(("`" * m * "`" for m in methods_seen), ", "),
     )
     P("")
-    if !isempty(refs_unique)
-        P("**References** (aggregated):")
-        for r in refs_unique
-            P("- ", _md_escape_dollar(r))
-        end
-        P("")
-    end
 
     P("## Quantity × BC matrix")
     P("")
@@ -601,6 +599,26 @@ function render_model_index(model_name::AbstractString)
         for f in cf
             P("- [`", f, "`](../../calc/", f, ")")
         end
+        P("")
+    end
+    if !isempty(refs_unique)
+        P("## References")
+        P("")
+        P(
+            "Papers cited by this model's `@register` cards. The full ",
+            "numbered list is on the [Reference List](../../references.md).",
+        )
+        P("")
+        # DocumenterCitations: render just this model's cited keys, linking to
+        # the canonical entry on references.md (`@bibliography *`). `Pages = []`
+        # disables page-citation auto-include; the explicit keys are the list.
+        P("```@bibliography")
+        P("Pages = []")
+        P("Canonical = false")
+        for r in refs_unique
+            P(r)
+        end
+        P("```")
         P("")
     end
     P("[← Atlas index](../index.md) · [Model list →](../ModelList.md)")

@@ -29,13 +29,21 @@ All `(Quantity, BC)` hubs `src` claims for **`XCube`**.  Cells link to the per-h
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Vijay-Haah-Fu 2016 | Slagle-Kim 2017
-
 ## Quantity × BC matrix
 
 | Quantity | `PBC` |
 |---|---|
 | [`GroundStateDegeneracy`](../quantities/GroundStateDegeneracy.md) | 🟢 [hub](../hubs/XCube_GroundStateDegeneracy_PBC.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+SlagleKim2017
+VijayHaahFu2016
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -26,15 +26,22 @@ All `(Quantity, BC)` hubs `src` claims for **`SchwingerModel`**.  Cells link to 
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Schwinger 1962
-- Schwinger 1962 | Coleman-Jackiw-Susskind 1975
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ChiralCondensate`](../quantities/ChiralCondensate.md) | 🟢 [hub](../hubs/SchwingerModel_ChiralCondensate_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/SchwingerModel_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+ColemanJackiwSusskind1975
+Schwinger1962
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

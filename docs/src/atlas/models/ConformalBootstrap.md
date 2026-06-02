@@ -27,13 +27,23 @@ All `(Quantity, BC)` hubs `src` claims for **`ConformalBootstrap`**.  Cells link
 
 **Methods** (from `@register`, derived): `bootstrap_reference`
 
-**References** (aggregated):
-- Kos-Poland-Simmons-Duffin 2014 | Kos-Poland-Simmons-Duffin-Vichi 2016 (Precision Islands, arXiv:1603.04436) | Simmons-Duffin 2017 | Reehorst et al 2021
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | ⚪ [hub](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Kos2016
+KosPolandSimmonsDuffin2014
+Reehorst2021
+SimmonsDuffin2017
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dmrg_reference`, reliability `medium`, refs: White-Affleck 1996 | Eggert 1996
+- method `dmrg_reference`, reliability `medium`, refs: WhiteAffleck1996 | Eggert1996
 - Δ ≈ 0.234 J DMRG; Shastry-Sutherland 1981 bound Δ ≥ J/4 is trimer-sector only.
 
 ## Corroboration

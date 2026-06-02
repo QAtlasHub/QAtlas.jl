@@ -13,13 +13,14 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 4
-- **Total hubs (Model, BC pairs)**: 4
-- **Methods** (derived from `@register`): `analytic`, `dense_ed`
+- **Models with this quantity registered**: 5
+- **Total hubs (Model, BC pairs)**: 6
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`, `quadgk`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Pfeuty 1970 — 1 hub
+- Pfeuty1970 — 3 hubs
+- LiebSchultzMattis1961 — 2 hubs
 
 ## Model × BC matrix
 
@@ -29,5 +30,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationZ_OBC.md) | — |
 | [`TFIM`](../models/TFIM.md) | — | 🟢 [hub](../hubs/TFIM_MagnetizationZ_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🔵 [hub](../hubs/XXZ1D_MagnetizationZ_OBC.md) | — |
+| [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZ_OBC.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZ_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `minimal_model_delegation`, reliability `high`, refs: Cardy 1985
+- method `minimal_model_delegation`, reliability `high`, refs: Cardy1984
 - Kac formula h_{r,s} via MinimalModel(5,2); famous Yang-Lee primary h_{1,2} = -1/5.
 
 ## Corroboration

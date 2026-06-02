@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Landau-Lifshitz §149
+- method `analytic`, reliability `high`, refs: LandauLifshitz1980
 - χ(β;J,h) = β(1-m*²)/[1 - βJ(1-m*²)] (∂m/∂h); Curie-Weiss law β/(1-βJ) at h=0, T>T_c; J≤0: β sech²(βh).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Luther-Peschel 1975 | Affleck 1989 | Haldane 1980
+- method `delegation`, reliability `high`, refs: LutherPeschel1975 | Affleck1989 | Haldane1980
 - K = 1/2 (SU(2)-symmetric Heisenberg AFM); delegate to XXZ1D(Δ=1).
 
 ## Corroboration

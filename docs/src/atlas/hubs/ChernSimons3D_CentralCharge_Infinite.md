@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `sugawara`, reliability `high`, refs: Witten 1989 | Knizhnik-Zamolodchikov 1984
+- method `sugawara`, reliability `high`, refs: Witten1989 | KnizhnikZamolodchikov1984
 - Sugawara c = k(N²-1)/(k+N) for boundary ŝu(N)_k WZW; SU(2)_k specialises to 3k/(k+2).
 
 ## Corroboration

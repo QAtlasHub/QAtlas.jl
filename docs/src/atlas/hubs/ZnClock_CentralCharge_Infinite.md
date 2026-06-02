@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: José-Kadanoff-Kirkpatrick-Nelson 1977 | Elitzur-Pearson-Shigemitsu 1979
+- method `delegation`, reliability `high`, refs: JoseKadanoffKirkpatrickNelson1977 | ElitzurPearsonShigemitsu1979
 - n=2 (Ising c=1/2) and n=3 (Potts c=4/5) delegate to MinimalModel; n≥4 (Ashkin-Teller/BKT line) Phase 2.
 
 ## Corroboration

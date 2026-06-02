@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988
+- method `analytic`, reliability `high`, refs: AKLT1988
 - β=∞ only: s(∞) = 0 (unique bulk GS in the Haldane phase). Finite β throws DomainError.
 
 ## Corroboration

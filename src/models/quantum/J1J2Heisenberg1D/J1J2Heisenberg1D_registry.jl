@@ -15,6 +15,6 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl",
-    references=["Bethe-Hulthén 1938", "Majumdar-Ghosh 1969", "White-Affleck 1996"],
+    references=["Hulthen1938", "MajumdarGhosh1969", "WhiteAffleck1996"],
     notes="Closed form at j=0 (Heisenberg1D delegate) and j=1/2 (MajumdarGhosh delegate); generic j deferred.",
 )

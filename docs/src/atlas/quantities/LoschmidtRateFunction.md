@@ -13,7 +13,7 @@ All `(Model, BC)` hubs `src` claims for the **`LoschmidtRateFunction`** observab
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Heyl Polkovnikov Kehrein PRL 110 135704 (2013) — 1 hub
+- Heyl2013 — 1 hub
 
 ## Model × BC matrix
 

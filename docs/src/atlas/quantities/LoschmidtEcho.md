@@ -19,11 +19,10 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Heyl Rep. Prog. Phys. 81, 054001 (2018) — 2 hubs
-- Heyl-Polkovnikov-Kehrein PRL 110, 135704 (2013) — 2 hubs
-- Calabrese Essler Fagotti J. Stat. Mech. (2012) P07016 — 1 hub
-- Essler Fagotti J. Stat. Mech. (2016) 064002 — 1 hub
-- Heyl Polkovnikov Kehrein Phys. Rev. Lett. 110, 135704 (2013) — 1 hub
+- Heyl2013 — 3 hubs
+- Heyl2018 — 2 hubs
+- CalabreseEsslerFagotti2012 — 1 hub
+- EsslerFagotti2016 — 1 hub
 
 ## Model × BC matrix
 

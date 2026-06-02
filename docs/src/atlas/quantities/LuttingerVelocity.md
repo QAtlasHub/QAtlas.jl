@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Giamarchi 2004 — 1 hub
-- des Cloizeaux Pearson 1962 — 1 hub
+- Giamarchi2003 — 1 hub
+- desCloizeauxPearson1962 — 1 hub
 
 ## Model × BC matrix
 

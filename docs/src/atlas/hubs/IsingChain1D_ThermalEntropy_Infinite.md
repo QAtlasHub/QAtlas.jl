@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising 1925
+- method `analytic`, reliability `high`, refs: Ising1925
 - s(b,h=0) = log(2 cosh bJ) - bJ tanh(bJ); h=0 only.
 
 ## Corroboration

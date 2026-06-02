@@ -217,6 +217,76 @@ function implementation_status(queue::AbstractVector)
     return out
 end
 
+# Coerce an instance-or-type argument to its `Type` for registry matching.
+_as_type(x) = x isa Type ? x : typeof(x)
+
+"""
+    references_for(model, quantity, bc) -> Vector{String}
+    references_for(model, quantity)     -> Vector{String}
+    references_for(model)               -> Vector{String}
+
+Return the literature references — `references.bib` bibkeys — that the
+registered implementation(s) for the given arguments rest on. Use it as a
+companion to [`fetch`](@ref): pass the same `model` (and optionally
+`quantity` and boundary condition `bc`) you are calling to see *which
+papers that closed-form value derives from and is checked against*.
+
+These are exactly the keys rendered on the model's documentation page and
+in the global [Reference List](@ref); resolve a key to its full entry
+there (or in
+[`docs/references.bib`](https://github.com/sotashimozono/QAtlas.jl/blob/main/docs/references.bib)).
+
+Arguments may be instances or types, mirroring
+[`implementation_status`](@ref). With fewer arguments the references are
+aggregated over the unspecified axes (all boundary conditions for a
+`(model, quantity)` pair; every registered quantity for a bare `model`).
+The result is de-duplicated and sorted, and is empty when no matching
+registry row carries references (including when the triple is not
+registered at all).
+
+# Examples
+```julia
+julia> references_for(TFIM(), Energy{:per_site}(), Infinite())
+1-element Vector{String}:
+ "Pfeuty1970"
+
+julia> references_for(TFIM())            # every paper TFIM rests on
+…
+```
+"""
+function references_for(model, quantity, bc)
+    m_T, q_T, bc_T = _as_type(model), _as_type(quantity), _as_type(bc)
+    refs = String[]
+    for e in REGISTRY
+        if e.model === m_T && e.quantity === q_T && e.bc === bc_T
+            append!(refs, e.references)
+        end
+    end
+    return sort!(unique!(refs))
+end
+
+function references_for(model, quantity)
+    m_T, q_T = _as_type(model), _as_type(quantity)
+    refs = String[]
+    for e in REGISTRY
+        if e.model === m_T && e.quantity === q_T
+            append!(refs, e.references)
+        end
+    end
+    return sort!(unique!(refs))
+end
+
+function references_for(model)
+    m_T = _as_type(model)
+    refs = String[]
+    for e in REGISTRY
+        if e.model === m_T
+            append!(refs, e.references)
+        end
+    end
+    return sort!(unique!(refs))
+end
+
 # ──────────────────────────────────────────────────────────────────────
 # Markdown rendering
 # ──────────────────────────────────────────────────────────────────────

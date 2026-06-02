@@ -29,15 +29,23 @@ All `(Quantity, BC)` hubs `src` claims for **`ChernSimons3D`**.  Cells link to t
 
 **Methods** (from `@register`, derived): `analytic`, `sugawara`
 
-**References** (aggregated):
-- Witten 1989 | Knizhnik-Zamolodchikov 1984
-- Witten 1989 | Verlinde 1988
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/ChernSimons3D_CentralCharge_Infinite.md) |
 | [`PartitionFunction`](../quantities/PartitionFunction.md) | ⚪ [hub](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+KnizhnikZamolodchikov1984
+Verlinde1988
+Witten1989
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

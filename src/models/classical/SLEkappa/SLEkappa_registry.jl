@@ -10,7 +10,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_sle_kappa.jl",
-    references=["Schramm 2000", "Bauer-Bernard 2006", "Cardy 2005"],
+    references=["Schramm2000", "BauerBernard2006", "Cardy2005"],
     notes="SLE-CFT correspondence c(κ) = (3κ-8)(6-κ)/(2κ); symmetric under κ↔16/κ.",
 )
 
@@ -21,6 +21,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/classical/test_sle_kappa.jl",
-    references=["Beffara 2008"],
+    references=["Beffara2008"],
     notes="d_H(κ) = min(2, 1 + κ/8); cap at d_H = 2 for κ ≥ 8 (space-filling regime).",
 )

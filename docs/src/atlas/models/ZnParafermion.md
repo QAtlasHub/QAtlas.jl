@@ -27,13 +27,20 @@ All `(Quantity, BC)` hubs `src` claims for **`ZnParafermion`**.  Cells link to t
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Fateev-Zamolodchikov 1985
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/ZnParafermion_CentralCharge_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+FateevZamolodchikov1985
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

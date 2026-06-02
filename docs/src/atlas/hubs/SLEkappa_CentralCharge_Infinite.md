@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Schramm 2000 | Bauer-Bernard 2006 | Cardy 2005
+- method `analytic`, reliability `high`, refs: Schramm2000 | BauerBernard2006 | Cardy2005
 - SLE-CFT correspondence c(κ) = (3κ-8)(6-κ)/(2κ); symmetric under κ↔16/κ.
 
 ## Corroboration

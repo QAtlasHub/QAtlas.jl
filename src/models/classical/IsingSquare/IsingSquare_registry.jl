@@ -11,7 +11,7 @@
     method=:transfer_matrix,
     reliability=:high,
     tested_in="test/util/classical_partition.jl",
-    references=["Onsager 1944"],
+    references=["Onsager1944"],
     notes="Z = tr(T^Lx) on the symmetric transfer matrix; bond-counting differs at Lx,Ly=2.",
 )
 @register(
@@ -21,7 +21,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_ising2d_observables.jl",
-    references=["Onsager 1944"],
+    references=["Onsager1944"],
     notes="T_c = 2J/log(1+√2).",
 )
 @register(
@@ -31,7 +31,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_ising2d_observables.jl",
-    references=["Yang 1952"],
+    references=["Yang1952"],
     notes="M(T) = (1 - sinh⁻⁴(2βJ))^(1/8) for T < T_c.",
 )
 
@@ -79,7 +79,7 @@
     method=:onsager,
     reliability=:high,
     tested_in="test/models/test_IsingSquare_thermal.jl",
-    references=["Onsager 1944"],
+    references=["Onsager1944"],
     notes="-βf = log(2) + (1/2π)∫log[(A+√(A²-B²))/2]dφ; bond-counting matches PBC limit.",
 )
 @register(
@@ -118,6 +118,6 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/classical/test_IsingSquare_critical.jl",
-    references=["Onsager 1944"],
+    references=["Onsager1944"],
     notes="2D Ising Onsager exponents (β=1/8, γ=7/4, ν=1) delegated to Universality(:Ising) at d=2.",
 )

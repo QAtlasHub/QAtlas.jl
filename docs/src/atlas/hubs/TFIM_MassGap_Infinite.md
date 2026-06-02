@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Pfeuty 1970
+- method `analytic`, reliability `high`, refs: Pfeuty1970
 - Δ_∞(J,h) = 2|h - J| — closed-form Ising gap.
 
 ## Corroboration

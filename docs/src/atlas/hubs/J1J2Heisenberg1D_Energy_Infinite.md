@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Bethe-Hulthén 1938 | Majumdar-Ghosh 1969 | White-Affleck 1996
+- method `delegation`, reliability `high`, refs: Hulthen1938 | MajumdarGhosh1969 | WhiteAffleck1996
 - Closed form at j=0 (Heisenberg1D delegate) and j=1/2 (MajumdarGhosh delegate); generic j deferred.
 
 ## Corroboration

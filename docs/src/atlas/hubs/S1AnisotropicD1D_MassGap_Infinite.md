@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `s1_heisenberg_delegation`, reliability `medium`, refs: White-Huse 1993 | Chen-Roncaglia 2008 | Tzeng-Yang-Hsu 2017
+- method `s1_heisenberg_delegation`, reliability `medium`, refs: WhiteHuse1993 | ChenHidaSanctuary2003 | TzengYang2008
 - Phase 1: D = 0 delegate to S1Heisenberg1D (Δ ≈ 0.41048 J, DMRG numerical-exact). D ≠ 0 throws DomainError (Phase 2).
 
 ## Corroboration

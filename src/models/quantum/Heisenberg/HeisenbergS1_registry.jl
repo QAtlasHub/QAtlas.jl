@@ -186,7 +186,7 @@
     method=:literature_value,
     reliability=:medium,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
-    references=["White-Huse 1993"],
+    references=["WhiteHuse1993"],
     notes="Haldane gap Δ ≈ 0.41048 J (DMRG; no closed form).",
 )
 @register(
@@ -196,7 +196,7 @@
     method=:literature_value,
     reliability=:medium,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
-    references=["White-Huse 1993"],
+    references=["WhiteHuse1993"],
     notes="GS energy density e₀ ≈ -1.401484 J (DMRG; no closed form).",
 )
 

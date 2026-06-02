@@ -19,9 +19,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Derrida-Evans-Hakim-Pasquier 1993 — 1 hub
-- Derrida-Lebowitz 1998 — 1 hub
-- Kardar-Parisi-Zhang PRL 56, 889 (1986) — 1 hub
+- DerridaEvansHakimPasquier1993 — 1 hub
+- DerridaLebowitz1998 — 1 hub
+- KardarParisiZhang1986 — 1 hub
 
 ## Model × BC matrix
 

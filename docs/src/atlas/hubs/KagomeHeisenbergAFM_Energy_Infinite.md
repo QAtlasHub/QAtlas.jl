@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dmrg_reference`, reliability `medium`, refs: Yan-Huse-White 2011 | Depenbrock-McCulloch-Schollwöck 2012
+- method `dmrg_reference`, reliability `medium`, refs: YanHuseWhite2011 | DepenbrockMcCullochSchollwock2012
 - e_0/J ≈ -0.4386(5) cylindrical-DMRG reference.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Onsager 1944 | Houtappel 1950
+- method `delegation`, reliability `high`, refs: Onsager1944 | Houtappel1950
 - 2D Ising universality (Onsager exponents) shared with IsingSquare; delegated to Universality(:Ising) d=2.
 
 ## Corroboration

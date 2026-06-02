@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988
+- method `analytic`, reliability `high`, refs: AKLT1988
 - β=∞ only: f_OBC(∞) = -(2J/3)(N-1)/N from bond-projector E_GS_OBC = -(2J/3)(N-1). Finite β throws DomainError.
 
 ## Corroboration

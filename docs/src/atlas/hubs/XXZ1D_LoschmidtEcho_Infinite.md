@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `free_fermion_analytic`, reliability `high`, refs: Calabrese Essler Fagotti J. Stat. Mech. (2012) P07016 | Heyl Polkovnikov Kehrein Phys. Rev. Lett. 110, 135704 (2013) | Essler Fagotti J. Stat. Mech. (2016) 064002
+- method `free_fermion_analytic`, reliability `high`, refs: CalabreseEsslerFagotti2012 | Heyl2013 | EsslerFagotti2016
 - XX → XX quench Loschmidt rate λ(t) at Δ = 0 only; same-sign J ⇒ λ ≡ 0 (Fermi sea preserved), sign-flip ⇒ 0 (|GS(J₀)⟩ is a number eigenstate of H_f; Anderson orthogonality does not apply to the Loschmidt amplitude).  Δ ≠ 0 throws DomainError.
 
 ## Corroboration

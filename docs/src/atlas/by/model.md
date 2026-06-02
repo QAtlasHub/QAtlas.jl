@@ -81,10 +81,11 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/MassGap/Infinite`](../hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 
-## `Heisenberg1D` (21)
+## `Heisenberg1D` (24)
 
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
@@ -97,10 +98,12 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`Heisenberg1D/MassGap/Infinite`](../hubs/Heisenberg1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/MassGap/OBC`](../hubs/Heisenberg1D_MassGap_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/RenyiEntropy/OBC`](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
+- 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/SpecificHeat/OBC`](../hubs/Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/SusceptibilityYY/OBC`](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
+- 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
@@ -457,12 +460,21 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/VonNeumannEntropy/OBC`](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 
-## `XYh1D` (4)
+## `XYh1D` (13)
 
 - 🟠 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/OBC`](../hubs/XYh1D_Energy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/EnergyLocal/OBC`](../hubs/XYh1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationXLocal/OBC`](../hubs/XYh1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationYLocal/OBC`](../hubs/XYh1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationZ/Infinite`](../hubs/XYh1D_MagnetizationZ_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationZ/OBC`](../hubs/XYh1D_MagnetizationZ_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MagnetizationZLocal/OBC`](../hubs/XYh1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/MassGap/PBC`](../hubs/XYh1D_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/SusceptibilityZZ/Infinite`](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XYh1D/SusceptibilityZZ/OBC`](../hubs/XYh1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 
 ## `YangLee` (2)
 

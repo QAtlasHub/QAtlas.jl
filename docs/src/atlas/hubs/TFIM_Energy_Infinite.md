@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Pfeuty 1970
+- method `bdg`, reliability `high`, refs: Pfeuty1970
 - Per-site ε(β) by QuadGK over the PBC dispersion Λ(k).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Affleck-Kennedy-Lieb-Tasaki 1988
+- method `analytic`, reliability `high`, refs: AKLT1988
 - Same analytic e₀ = -2J/3 routed through Energy(:per_site).
 
 ## Corroboration

@@ -137,13 +137,14 @@ Full Bethe-ansatz derivation in
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 5 models register 46 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 5 models register 49 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
 | `DMIHeisenberg1D` | [`Energy`](../../atlas/hubs/DMIHeisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | `Heisenberg1D` | [`Energy`](../../atlas/hubs/Heisenberg1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 42 |
 | `Heisenberg1D` | [`EnergyLocal`](../../atlas/hubs/Heisenberg1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/Heisenberg1D_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/Heisenberg1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 | `Heisenberg1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | `Heisenberg1D` | [`LuttingerParameter`](../../atlas/hubs/Heisenberg1D_LuttingerParameter_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
@@ -156,10 +157,12 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 46 hubs (
 | `Heisenberg1D` | [`MassGap`](../../atlas/hubs/Heisenberg1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`MassGap`](../../atlas/hubs/Heisenberg1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 9 |
 | `Heisenberg1D` | [`RenyiEntropy`](../../atlas/hubs/Heisenberg1D_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 72 |
+| `Heisenberg1D` | [`SpecificHeat`](../../atlas/hubs/Heisenberg1D_SpecificHeat_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`SpecificHeat`](../../atlas/hubs/Heisenberg1D_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 45 |
 | `Heisenberg1D` | [`SusceptibilityXX`](../../atlas/hubs/Heisenberg1D_SusceptibilityXX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 9 |
 | `Heisenberg1D` | [`SusceptibilityYY`](../../atlas/hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | `OBC` | 🟢 corroborated-at-p | 9 |
 | `Heisenberg1D` | [`SusceptibilityZZ`](../../atlas/hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟢 corroborated-at-p | 9 |
+| `Heisenberg1D` | [`ThermalEntropy`](../../atlas/hubs/Heisenberg1D_ThermalEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`ThermalEntropy`](../../atlas/hubs/Heisenberg1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 45 |
 | `Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 | `Heisenberg1D` | [`ZZStructureFactor`](../../atlas/hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
@@ -189,3 +192,7 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 46 hubs (
 | `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
+

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `kitaev_delegation`, reliability `high`, refs: Kitaev 2006 | Rau-Lee-Kee 2014
+- method `kitaev_delegation`, reliability `high`, refs: Kitaev2006 | RauLeeKee2014
 - K-only limit (J=Γ=0) delegated to KitaevHoneycomb; non-zero J or Γ raises DomainError (Phase 2: DMRG/ED).
 
 ## Corroboration

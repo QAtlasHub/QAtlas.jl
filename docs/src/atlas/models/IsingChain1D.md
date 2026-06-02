@@ -27,10 +27,6 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingChain1D`**.  Cells link to th
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Ising 1925
-- Ising 1925 | Brush 1967 RMP 39 883
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -54,5 +50,16 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
 - [`kramers-wannier-duality.md`](../../calc/kramers-wannier-duality.md)
 - [`transfer-matrix-symmetric-split.md`](../../calc/transfer-matrix-symmetric-split.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Brush1967
+Ising1925
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

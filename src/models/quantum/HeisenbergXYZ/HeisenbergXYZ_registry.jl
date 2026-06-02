@@ -11,7 +11,7 @@
     method=:xxz_delegation,
     reliability=:high,
     tested_in="test/standalone/test_heisenberg_xyz.jl",
-    references=["Yang-Yang 1966", "Baxter 1972"],
+    references=["YangYang1966", "Baxter1972"],
     notes="Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; general (Jx≠Jy) raises DomainError (Baxter elliptic deferred to Phase 2).",
 )
 
@@ -22,6 +22,6 @@
     method=:delegation,
     reliability=:high,
     tested_in="test/models/quantum/XXZ/test_heisenberg_xyz.jl",
-    references=["Luther-Peschel 1975", "Baxter 1972"],
+    references=["LutherPeschel1975", "Baxter1972"],
     notes="K=1/2 at isotropic Jx=Jy=Jz; delegates to XXZ1D(Δ=1) (same target as Heisenberg1D path). Generic XYZ Phase 2 (Baxter elliptic).",
 )

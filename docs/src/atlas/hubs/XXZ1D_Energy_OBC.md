@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`, refs: Yang Yang 1966 | Takahashi 1999
+- method `dense_ed`, reliability `high`, refs: YangYang1966 | Takahashi1999
 - Total ⟨H⟩(β) by dense ED of the 2^N × 2^N XXZ Hamiltonian.
 
 ## Corroboration

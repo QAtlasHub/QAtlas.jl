@@ -25,9 +25,6 @@ All `(Quantity, BC)` hubs `src` claims for **`S1XXZ1D`**.  Cells link to the per
 
 **Methods** (from `@register`, derived): `s1_heisenberg_delegation`
 
-**References** (aggregated):
-- White-Huse 1993 | Schulz 1986 | Tzeng-Yang-Hsu 2017
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -40,5 +37,17 @@ All `(Quantity, BC)` hubs `src` claims for **`S1XXZ1D`**.  Cells link to the per
 Matched by filename substring (no annotation; substrate-derived):
 
 - [`xxz-luttinger-parameters.md`](../../calc/xxz-luttinger-parameters.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Schulz1986
+TzengYang2008
+WhiteHuse1993
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

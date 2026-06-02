@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `exact_dimer`, reliability `high`, refs: Shastry-Sutherland 1981 | Koga-Kawakami 2000
+- method `exact_dimer`, reliability `high`, refs: ShastrySutherland1981 | KogaKawakami2000
 - E0/N = -3 J'/8 on the exact dimer GS for J/J' ≤ α_c ≈ 0.675; DomainError outside.
 
 ## Corroboration

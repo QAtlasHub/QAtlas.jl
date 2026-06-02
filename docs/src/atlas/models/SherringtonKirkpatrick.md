@@ -27,15 +27,24 @@ All `(Quantity, BC)` hubs `src` claims for **`SherringtonKirkpatrick`**.  Cells 
 
 **Methods** (from `@register`, derived): `analytic`, `variational_reference`
 
-**References** (aggregated):
-- Parisi 1980 | Crisanti-Rizzo 2002 | Talagrand 2006
-- Sherrington-Kirkpatrick 1975
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | ⚪ [hub](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+CrisantiRizzo2002
+Parisi1980
+SherringtonKirkpatrick1975
+Talagrand2006
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

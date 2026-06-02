@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev 2001 | Alicea 2012
+- method `analytic`, reliability `high`, refs: Kitaev2001 | Alicea2012
 - Closed-form min over k of √((2t cos k + μ)² + 4Δ² sin² k).
 
 ## Corroboration

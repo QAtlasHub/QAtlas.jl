@@ -29,13 +29,22 @@ All `(Quantity, BC)` hubs `src` claims for **`SYK`**.  Cells link to the per-hub
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Sachdev-Ye 1993 | Kitaev 2015 | Maldacena-Stanford 2016
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | 🟢 [hub](../hubs/SYK_ConformalWeights_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Kitaev2015
+MaldacenaStanford2016
+SachdevYe1993
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

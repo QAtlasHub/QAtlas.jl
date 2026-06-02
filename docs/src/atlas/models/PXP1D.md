@@ -26,13 +26,23 @@ All `(Quantity, BC)` hubs `src` claims for **`PXP1D`**.  Cells link to the per-h
 
 **Methods** (from `@register`, derived): `dmrg_reference`
 
-**References** (aggregated):
-- Turner-Michailidis-Abanin-Serbyn-Papić 2018 | Lin-Motrunich 2019 | Iadecola-Schecter-Xu 2019 | Surace 2020
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | ⚪ [hub](../hubs/PXP1D_Energy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+IadecolaSchecterXu2019
+LinMotrunich2019
+Surace2020
+TurnerMichailidisAbaninSerbynPapic2018
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

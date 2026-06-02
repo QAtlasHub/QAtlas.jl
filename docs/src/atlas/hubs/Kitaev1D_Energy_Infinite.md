@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Kitaev 2001
+- method `bdg`, reliability `high`, refs: Kitaev2001
 - Per-site ε₀ by Gauss-Kronrod over the PBC dispersion E(k).
 
 ## Corroboration

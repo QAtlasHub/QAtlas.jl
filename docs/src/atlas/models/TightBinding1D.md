@@ -26,11 +26,6 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBinding1D`**.  Cells link to 
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Ashcroft-Mermin 1976
-- Mahan 2000
-- Mahan 2000 | Coleman 2015
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -41,5 +36,17 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBinding1D`**.  Cells link to 
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AshcroftMermin1976
+Coleman2015
+Mahan2000
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

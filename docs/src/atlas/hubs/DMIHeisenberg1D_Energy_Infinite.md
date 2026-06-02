@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Bethe-Hulthén 1938 | Dzyaloshinskii 1958 | Moriya 1960 | Affleck-Oshikawa 1999
+- method `delegation`, reliability `high`, refs: Hulthen1938 | Dzyaloshinsky1958 | Moriya1960 | AffleckOshikawa1999
 - D = 0 delegated to Heisenberg1D Bethe-Hulthén; D ≠ 0 spiral/twisted-XXZ deferred to Phase 2.
 
 ## Corroboration

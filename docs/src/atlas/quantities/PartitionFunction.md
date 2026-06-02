@@ -19,9 +19,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`, `WZW`
 
 **Top references** (by hub count):
-- Onsager 1944 — 1 hub
-- Verlinde 1988 — 1 hub
-- Witten 1989 — 1 hub
+- Onsager1944 — 1 hub
+- Verlinde1988 — 1 hub
+- Witten1989 — 1 hub
 
 ## Model × BC matrix
 

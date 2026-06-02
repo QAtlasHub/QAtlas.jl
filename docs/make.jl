@@ -1,8 +1,16 @@
 using QAtlas
 using Documenter
+using DocumenterCitations
 using Downloads
 
 DocMeta.setdocmeta!(QAtlas, :DocTestSetup, :(using QAtlas); recursive=true)
+
+# Bibliography plugin (DocumenterCitations): renders references.bib — the
+# same curated file `doiget verify` checks in CI — as a numbered reference
+# list ([1], [2], …). The global list lives on `references.md`
+# (`@bibliography *`); each auto-generated model page emits a non-canonical
+# `@bibliography` block listing just the bibkeys its `@register` cards cite.
+bib = CitationBibliography(joinpath(@__DIR__, "references.bib"); style=:numeric)
 
 assets_dir = joinpath(@__DIR__, "src", "assets")
 mkpath(assets_dir)
@@ -37,6 +45,7 @@ makedocs(;
         assets=["assets/favicon.ico", "assets/custom.css", "assets/report-issue.js"],
     ),
     modules=[QAtlas],
+    plugins=[bib],
     pages=[
         "Home" => "index.md",
         "Conventions" => "conventions.md",
@@ -130,6 +139,7 @@ makedocs(;
             "Ising CFT + σ → E8" => "calc/ising-cft-magnetic-perturbation.md",
             "E8 Mass Derivation" => "calc/e8-mass-spectrum-derivation.md",
         ],
+        "References" => "references.md",
         "API Reference" => "api.md",
     ],
 )

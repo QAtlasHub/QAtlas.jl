@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Belavin-Polyakov-Zamolodchikov 1984
+- method `analytic`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984
 - c = 1/2 at the critical point (h = J), 0 otherwise.
 
 ## Corroboration

@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- Affleck-Kennedy-Lieb-Tasaki 1988 — 1 hub
-- Kennedy-Tasaki 1992 — 1 hub
+- AKLT1988 — 1 hub
+- KennedyTasaki1992 — 1 hub
 
 ## Model × BC matrix
 

@@ -25,13 +25,23 @@ All `(Quantity, BC)` hubs `src` claims for **`DMIHeisenberg1D`**.  Cells link to
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- Bethe-Hulthén 1938 | Dzyaloshinskii 1958 | Moriya 1960 | Affleck-Oshikawa 1999
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/DMIHeisenberg1D_Energy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AffleckOshikawa1999
+Dzyaloshinsky1958
+Hulthen1938
+Moriya1960
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

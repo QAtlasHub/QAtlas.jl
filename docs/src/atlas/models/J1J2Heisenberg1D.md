@@ -25,13 +25,22 @@ All `(Quantity, BC)` hubs `src` claims for **`J1J2Heisenberg1D`**.  Cells link t
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- Bethe-Hulthén 1938 | Majumdar-Ghosh 1969 | White-Affleck 1996
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Hulthen1938
+MajumdarGhosh1969
+WhiteAffleck1996
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

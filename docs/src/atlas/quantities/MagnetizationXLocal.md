@@ -13,14 +13,14 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 4
-- **Total hubs (Model, BC pairs)**: 5
+- **Models with this quantity registered**: 5
+- **Total hubs (Model, BC pairs)**: 6
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Barouch-McCoy-Dresden 1970 — 1 hub
-- Calabrese-Essler-Fagotti 2012 — 1 hub
+- BarouchMcCoy1970 — 1 hub
+- CalabreseEsslerFagotti2012 — 1 hub
 
 ## Model × BC matrix
 
@@ -30,5 +30,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) | — |
 | [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_MagnetizationXLocal_OBC.md) | 🔵 [hub](../hubs/TFIM_MagnetizationXLocal_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationXLocal_OBC.md) | — |
+| [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationXLocal_OBC.md) | — |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

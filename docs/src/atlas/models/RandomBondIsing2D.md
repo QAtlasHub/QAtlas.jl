@@ -27,13 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`RandomBondIsing2D`**.  Cells link 
 
 **Methods** (from `@register`, derived): `delegation`
 
-**References** (aggregated):
-- Edwards-Anderson 1975 | Nishimori 1981 | Honecker-Picco-Pujol 2001
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🔵 [hub](../hubs/RandomBondIsing2D_CentralCharge_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+EdwardsAnderson1975
+HoneckerPiccoPujol2001
+Nishimori1981
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

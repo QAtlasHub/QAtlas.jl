@@ -25,15 +25,23 @@ All `(Quantity, BC)` hubs `src` claims for **`HeisenbergXYZ`**.  Cells link to t
 
 **Methods** (from `@register`, derived): `delegation`, `xxz_delegation`
 
-**References** (aggregated):
-- Luther-Peschel 1975 | Baxter 1972
-- Yang-Yang 1966 | Baxter 1972
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/HeisenbergXYZ_Energy_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | 🔵 [hub](../hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Baxter1972
+LutherPeschel1975
+YangYang1966
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

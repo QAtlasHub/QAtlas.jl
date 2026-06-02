@@ -27,11 +27,6 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
-**References** (aggregated):
-- Onsager 1944 | Houtappel 1950
-- Wannier 1950
-- Wannier 1950 | Houtappel 1950
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -48,5 +43,17 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`ising-cft-magnetic-perturbation.md`](../../calc/ising-cft-magnetic-perturbation.md)
 - [`ising-cft-primary-operators.md`](../../calc/ising-cft-primary-operators.md)
 - [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Houtappel1950
+Onsager1944
+Wannier1950
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -255,3 +255,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 12 hubs (qua
 | [`ThermalEntropy`](../../atlas/hubs/IsingSquare_ThermalEntropy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 4 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
+

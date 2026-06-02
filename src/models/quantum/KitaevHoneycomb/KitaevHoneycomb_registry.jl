@@ -10,7 +10,7 @@
     method=:matter_free_fermion,
     reliability=:high,
     tested_in="test/models/test_KitaevHoneycomb.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="GS by 2D Gauss-Kronrod; thermal value (β kwarg) uses matter-sector free fermion.",
 )
 @register(
@@ -20,7 +20,7 @@
     method=:matter_free_fermion,
     reliability=:high,
     tested_in="test/models/test_KitaevHoneycomb.jl",
-    references=["Kitaev 2006"],
+    references=["Kitaev2006"],
     notes="Bipartite hopping matrix SVD; thermal value (β kwarg) uses matter-sector free fermion.",
 )
 @register(
@@ -30,7 +30,7 @@
     method=:matter_free_fermion,
     reliability=:high,
     tested_in="test/models/test_KitaevHoneycomb.jl",
-    references=["Kitaev 2006"],
+    references=["Kitaev2006"],
     notes="Four-sector minimum on Lx × Ly torus (T = 0 only).",
 )
 
@@ -42,7 +42,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_KitaevHoneycomb.jl",
-    references=["Kitaev 2006"],
+    references=["Kitaev2006"],
     notes="Δ = 2 · max(|K_γ_max| − sum_others, 0); 0 in B-phase, finite in A_γ.",
 )
 
@@ -56,7 +56,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -66,7 +66,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -76,7 +76,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -86,7 +86,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -96,7 +96,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -106,6 +106,6 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev 2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )

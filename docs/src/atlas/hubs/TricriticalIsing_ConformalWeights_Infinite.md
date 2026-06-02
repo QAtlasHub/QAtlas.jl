@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Belavin-Polyakov-Zamolodchikov 1984
+- method `analytic`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984
 - Kac formula h_{r,s} via MinimalModel(5,4); σ at 3/80, ε at 1/10.
 
 ## Corroboration

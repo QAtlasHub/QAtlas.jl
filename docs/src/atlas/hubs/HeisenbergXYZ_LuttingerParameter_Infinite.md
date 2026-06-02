@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Luther-Peschel 1975 | Baxter 1972
+- method `delegation`, reliability `high`, refs: LutherPeschel1975 | Baxter1972
 - K=1/2 at isotropic Jx=Jy=Jz; delegates to XXZ1D(Δ=1) (same target as Heisenberg1D path). Generic XYZ Phase 2 (Baxter elliptic).
 
 ## Corroboration

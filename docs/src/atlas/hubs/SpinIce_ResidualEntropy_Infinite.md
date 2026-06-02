@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `medium`, refs: Pauling 1935
+- method `analytic`, reliability `medium`, refs: Pauling1935
 - Pauling 1935 mean-tetrahedron closed form S/N = (1/2) log(3/2); a few percent below Nagle 1966.
 
 ## Corroboration

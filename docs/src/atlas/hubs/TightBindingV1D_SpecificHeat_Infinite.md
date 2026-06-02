@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan 2000
+- method `analytic`, reliability `high`, refs: Mahan2000
 - V=0 c_μ(β;t,μ) = (β²/π) ∫₀^π ε² n_F(1-n_F) dk; V≠0 deferred to Phase 2.
 
 ## Corroboration

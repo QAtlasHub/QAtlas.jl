@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bethe_ansatz`, reliability `high`, refs: Hulthén 1938 | Bethe 1931
+- method `bethe_ansatz`, reliability `high`, refs: Hulthen1938 | Bethe1931
 - e₀ = J(1/4 - ln 2) at the isotropic AF point.
 
 ## Corroboration

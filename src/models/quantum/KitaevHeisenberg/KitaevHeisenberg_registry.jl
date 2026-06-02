@@ -10,6 +10,6 @@
     method=:kitaev_delegation,
     reliability=:high,
     tested_in="test/standalone/test_kitaev_heisenberg.jl",
-    references=["Kitaev 2006", "Rau-Lee-Kee 2014"],
+    references=["Kitaev2006", "RauLeeKee2014"],
     notes="K-only limit (J=Γ=0) delegated to KitaevHoneycomb; non-zero J or Γ raises DomainError (Phase 2: DMRG/ED).",
 )

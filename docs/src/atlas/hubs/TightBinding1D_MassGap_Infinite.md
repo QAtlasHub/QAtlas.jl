@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ashcroft-Mermin 1976
+- method `analytic`, reliability `high`, refs: AshcroftMermin1976
 - Δ = max(0, |μ| - 2t); gapless for |μ| ≤ 2t (metallic).
 
 ## Corroboration

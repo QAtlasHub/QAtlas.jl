@@ -20,15 +20,10 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | 🟢 corroborated-at-p | 13 |
 | 🔵 coherent | 4 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **21** |
+| 🟠 uncorroborated-but-feasible | 7 |
+| **total claimed hubs** | **24** |
 
-**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `muller_ansatz`
-
-**References** (aggregated):
-- Hulthén 1938 | Bethe 1931
-- Luther-Peschel 1975 | Affleck 1989 | Haldane 1980
-- des Cloizeaux–Pearson 1962 | Müller-Thomas-Beck-Bonner 1981
+**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz`
 
 ## Quantity × BC matrix
 
@@ -36,7 +31,7 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 |---|---|---|
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_EnergyLocal_OBC.md) | — |
-| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | — |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) |
 | [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | — | 🔵 [hub](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationX_OBC.md) | — |
@@ -47,11 +42,11 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) | — |
-| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | — |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) |
 | [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) | — |
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
-| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | — |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | — |
 | [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
 
@@ -66,5 +61,24 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`heisenberg-spinons.md`](../../calc/heisenberg-spinons.md)
 - [`xx-quench.md`](../../calc/xx-quench.md)
 - [`yang-magnetization-toeplitz.md`](../../calc/yang-magnetization-toeplitz.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Affleck1986
+Affleck1989
+Bethe1931
+BloteCardyNightingale1986
+EggertAffleckTakahashi1994
+Haldane1980
+Hulthen1938
+LutherPeschel1975
+MullerThomasBeckBonner1981
+desCloizeauxPearson1962
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

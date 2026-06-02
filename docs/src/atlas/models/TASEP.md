@@ -27,13 +27,22 @@ All `(Quantity, BC)` hubs `src` claims for **`TASEP`**.  Cells link to the per-h
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Kardar-Parisi-Zhang PRL 56, 889 (1986) | Derrida-Evans-Hakim-Pasquier 1993 | Derrida-Lebowitz 1998
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`SteadyStateCurrent`](../quantities/SteadyStateCurrent.md) | 🟢 [hub](../hubs/TASEP_SteadyStateCurrent_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+DerridaEvansHakimPasquier1993
+DerridaLebowitz1998
+KardarParisiZhang1986
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -19,8 +19,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Calabrese-Cardy 2009 — 2 hubs
-- Peschel 2003 — 1 hub
+- CalabreseCardy2009 — 2 hubs
+- Peschel2003 — 1 hub
 
 ## Model × BC matrix
 

@@ -27,11 +27,6 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalPotts3`**.  Cells link 
 
 **Methods** (from `@register`, derived): `analytic`, `minimal_model_delegation`
 
-**References** (aggregated):
-- Andrews-Baxter-Forrester 1984 | Huse 1984
-- Belavin-Polyakov-Zamolodchikov 1984
-- Belavin-Polyakov-Zamolodchikov 1984 | Andrews-Baxter-Forrester 1984
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -39,5 +34,17 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalPotts3`**.  Cells link 
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/TricriticalPotts3_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | 🟢 [hub](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) |
 | [`PrimaryFields`](../quantities/PrimaryFields.md) | 🟠 [hub](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AndrewsBaxterForrester1984
+BelavinPolyakovZamolodchikov1984
+Huse1984
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

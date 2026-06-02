@@ -29,11 +29,6 @@ All `(Quantity, BC)` hubs `src` claims for **`ToricCode`**.  Cells link to the p
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Kitaev 2003
-- Kitaev 2003 | Nayak-Simon-Stern-Freedman-Das Sarma 2008
-- Kitaev-Preskill 2006 | Levin-Wen 2006
-
 ## Quantity × BC matrix
 
 | Quantity | `PBC` | `Infinite` |
@@ -43,5 +38,18 @@ All `(Quantity, BC)` hubs `src` claims for **`ToricCode`**.  Cells link to the p
 | [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | — | 🟢 [hub](../hubs/ToricCode_MassGap_Infinite.md) |
 | [`TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) | — | 🟢 [hub](../hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Kitaev2003
+KitaevPreskill2006
+LevinWen2006
+NayakSimonSternFreedmanDasSarma2008
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

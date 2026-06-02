@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Giamarchi 2004
+- method `analytic`, reliability `high`, refs: Giamarchi2003
 - 0 in the critical regime -1 < Δ ≤ 1; gapped regime returns NaN with a warning.
 
 ## Corroboration

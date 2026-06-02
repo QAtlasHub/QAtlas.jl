@@ -24,7 +24,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_toric_code.jl",
-    references=["Kitaev 2003"],
+    references=["Kitaev2003"],
     notes="ε₀ = −(J_e + J_m) per (vertex+plaquette) unit cell.",
 )
 
@@ -35,7 +35,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_toric_code.jl",
-    references=["Kitaev 2003"],
+    references=["Kitaev2003"],
     notes="Δ = 2 · min(J_e, J_m) — single-anyon excitation gap.",
 )
 
@@ -46,7 +46,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_toric_code.jl",
-    references=["Kitaev 2003"],
+    references=["Kitaev2003"],
     notes="GSD = 4^genus on a closed orientable surface; OBC has unique GS (not registered).",
 )
 
@@ -57,7 +57,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_toric_code.jl",
-    references=["Kitaev-Preskill 2006", "Levin-Wen 2006"],
+    references=["KitaevPreskill2006", "LevinWen2006"],
     notes="γ = log 𝒟 = log 2 (Z₂ topological order, total quantum dim 𝒟 = 2).",
 )
 
@@ -68,6 +68,6 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_toric_code.jl",
-    references=["Kitaev 2003", "Nayak-Simon-Stern-Freedman-Das Sarma 2008"],
+    references=["Kitaev2003", "NayakSimonSternFreedmanDasSarma2008"],
     notes="Topological data for {1, e, m, ε} and e/m mutual braiding (phase π).",
 )

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `free_fermion_quadgk`, reliability `high`, refs: Mahan §1.3 | Coleman §2.4
+- method `free_fermion_quadgk`, reliability `high`, refs: Mahan2000 | Coleman2015
 - XX (Δ = 0) free-fermion s(β) = β(e − f); warns + NaN at general Δ.
 
 ## Corroboration

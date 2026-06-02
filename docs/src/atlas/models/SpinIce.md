@@ -27,13 +27,20 @@ All `(Quantity, BC)` hubs `src` claims for **`SpinIce`**.  Cells link to the per
 
 **Methods** (from `@register`, derived): `analytic`
 
-**References** (aggregated):
-- Pauling 1935
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/SpinIce_ResidualEntropy_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Pauling1935
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

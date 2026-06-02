@@ -26,15 +26,22 @@ All `(Quantity, BC)` hubs `src` claims for **`GrossNeveu`**.  Cells link to the 
 
 **Methods** (from `@register`, derived): `analytic`, `analytic_uv`
 
-**References** (aggregated):
-- Gross-Neveu 1974
-- Gross-Neveu 1974 | Andrei-Lowenstein 1979
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/GrossNeveu_CentralCharge_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/GrossNeveu_MassGap_Infinite.md) |
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+AndreiLowenstein1979
+GrossNeveu1974
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

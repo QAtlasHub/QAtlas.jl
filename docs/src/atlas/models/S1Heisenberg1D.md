@@ -25,9 +25,6 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 
 **Methods** (from `@register`, derived): `dense_ed`, `literature_value`
 
-**References** (aggregated):
-- White-Huse 1993
-
 ## Quantity × BC matrix
 
 | Quantity | `OBC` | `Infinite` |
@@ -59,5 +56,15 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`bethe-ansatz-heisenberg-e0.md`](../../calc/bethe-ansatz-heisenberg-e0.md)
 - [`heisenberg-dimer-singlet-triplet.md`](../../calc/heisenberg-dimer-singlet-triplet.md)
 - [`heisenberg-spinons.md`](../../calc/heisenberg-spinons.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+WhiteHuse1993
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

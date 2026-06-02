@@ -9,7 +9,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/standalone/test_sherrington_kirkpatrick.jl",
-    references=["Sherrington-Kirkpatrick 1975"],
+    references=["SherringtonKirkpatrick1975"],
     notes="T_c = J in 1/√N normalisation with J_ij ~ N(0, J²); 0 for J ≤ 0.",
 )
 
@@ -20,6 +20,6 @@
     method=:variational_reference,
     reliability=:high,
     tested_in="test/models/classical/test_sherrington_kirkpatrick.jl",
-    references=["Parisi 1980", "Crisanti-Rizzo 2002", "Talagrand 2006"],
+    references=["Parisi1980", "CrisantiRizzo2002", "Talagrand2006"],
     notes="e_0/J ≈ -0.7631667 (Crisanti-Rizzo 2002 high-precision Parisi full-RSB).",
 )

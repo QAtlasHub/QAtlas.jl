@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Edwards-Anderson 1975 | Nishimori 1981 | Honecker-Picco-Pujol 2001
+- method `delegation`, reliability `high`, refs: EdwardsAnderson1975 | Nishimori1981 | HoneckerPiccoPujol2001
 - p=1 pure FM delegates to MinimalModel(4,3) (Ising c=1/2); Nishimori-line and multicritical point Phase 2.
 
 ## Corroboration

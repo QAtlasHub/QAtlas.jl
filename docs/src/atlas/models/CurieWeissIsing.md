@@ -26,10 +26,6 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
-**References** (aggregated):
-- Landau 1937 | Stanley 1971
-- Landau-Lifshitz §149
-
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
@@ -48,5 +44,17 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 Matched by filename substring (no annotation; substrate-derived):
 
 - [`ad-thermodynamics-from-z.md`](../../calc/ad-thermodynamics-from-z.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+Landau1937
+LandauLifshitz1980
+Stanley1971
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

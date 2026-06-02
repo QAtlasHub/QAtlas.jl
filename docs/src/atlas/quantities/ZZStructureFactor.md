@@ -19,9 +19,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Arovas-Auerbach-Haldane 1988 — 1 hub
-- Müller-Thomas-Beck-Bonner 1981 — 1 hub
-- des Cloizeaux–Pearson 1962 — 1 hub
+- Arovas1988 — 1 hub
+- MullerThomasBeckBonner1981 — 1 hub
+- desCloizeauxPearson1962 — 1 hub
 
 ## Model × BC matrix
 

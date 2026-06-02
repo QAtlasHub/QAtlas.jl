@@ -399,9 +399,11 @@ function init_atomic_limit!(
     z_double = exp(beta * (2 * mu - U))
     Z_site = z_empty + z_up + z_down + z_double
 
+    # Stage C.22c: paper-precise PH-symmetric init.
+    # At beta=0 limit, c = cbar = exp(-betaU/2) by PH symmetry of eq (47).
     b_const = ComplexF64((z_up + z_down) / (z_empty + z_double))
-    c_const = ComplexF64(z_up / Z_site)
-    cbar_const = ComplexF64(z_down / Z_site)
+    c_const = ComplexF64(exp(-beta * U / 2))
+    cbar_const = ComplexF64(exp(-beta * U / 2))
 
     fill!(aux.b, b_const)
     fill!(aux.b_bar, b_const)
@@ -721,13 +723,12 @@ function jks_nlie_residual(
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_c = log.(aux.c)
     log_C = log.(1 .+ aux.c)
-    log_Cbar = log.(1 .+ aux.c_bar)
-    delta_log_CCbar = log_C .- log_Cbar
+    log_c_minus_C = log_c .- log_C
 
-    rhs =
-        -psi_b - apply_kernel(K2, log_B) + apply_kernel(K2bar, log_Bbar) -
-        apply_kernel(K1, delta_log_CCbar)
+    # Paper eq (47) b residual: log b = -betaH + K_2 ⊛ log B + K_1 ⊛ (log c - log C)
+    rhs = (-beta * H) .+ apply_kernel(K2, log_B) + apply_kernel(K1, log_c_minus_C)
 
     log_b = log.(aux.b)
     return log_b .- rhs
@@ -872,13 +873,12 @@ function jks_nlie_residual_shifted(
 
     log_B = log.(1 .+ aux.b)
     log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_c = log.(aux.c)
     log_C = log.(1 .+ aux.c)
-    log_Cbar = log.(1 .+ aux.c_bar)
-    delta_log_CCbar = log_C .- log_Cbar
+    log_c_minus_C = log_c .- log_C
 
-    rhs =
-        -psi_b - apply_kernel(K2, log_B) + apply_kernel(K2bar, log_Bbar) -
-        apply_kernel(K1, delta_log_CCbar)
+    # Paper eq (47) b residual: log b = -betaH + K_2 ⊛ log B + K_1 ⊛ (log c - log C)
+    rhs = (-beta * H) .+ apply_kernel(K2, log_B) + apply_kernel(K1, log_c_minus_C)
 
     log_b = log.(aux.b)
     return log_b .- rhs
@@ -1403,10 +1403,10 @@ function jks_nlie_residual_c(
     log_C = log.(1 .+ aux.c)
     log_Cbar = log.(1 .+ aux.c_bar)
 
-    # Stage C.16 Option B: add -(1/2) log C term (Delta dropped as typesetting).
-    rhs =
-        -psi_c + apply_kernel(K1, log_B) - apply_kernel(K1bar, log_Bbar) +
-        apply_kernel(K2_small, log_Cbar) - 0.5 .* log_C
+    # Stage C.22c: paper eq (47) direct form.
+    # log c = psi_c - K_1 ⊛ log B - K_1 ◦ log C
+    # (K_1⊓⊔ means convolution on the wide +/-iα contour: our K1 with +α shift)
+    rhs = psi_c - apply_kernel(K1, log_B) - apply_kernel(K1, log_C)
 
     log_c = log.(aux.c)
     return log_c .- rhs
@@ -1444,10 +1444,9 @@ function jks_nlie_residual_cbar(
     log_C = log.(1 .+ aux.c)
     log_Cbar = log.(1 .+ aux.c_bar)
 
-    # Stage C.16 Option B: add -(1/2) log Cbar term.
-    rhs =
-        -psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1bar, log_Bbar) +
-        apply_kernel(K2_small, log_C) - 0.5 .* log_Cbar
+    # Stage C.22c: paper eq (47) cbar form.
+    # log cbar = psi_cbar + K_1 ⊛ log B + K_1 ◦ log C
+    rhs = psi_cbar + apply_kernel(K1, log_B) + apply_kernel(K1, log_C)
 
     log_cbar = log.(aux.c_bar)
     return log_cbar .- rhs

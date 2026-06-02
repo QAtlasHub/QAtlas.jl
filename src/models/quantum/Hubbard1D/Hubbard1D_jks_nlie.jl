@@ -1257,4 +1257,87 @@ function solve_jks_nlie_continuation(
     return JKSSolution(aux, total_iter, final_res, beta_current >= beta_target - 1e-12)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.9 — high-level free energy wrapper
+#
+# Wraps grid construction + continuation solver + free-energy evaluator
+# into a single call. Production fetch dispatch wiring (modifying
+# Hubbard1D_thermal_stopgap) is deferred to Stage C.10.
+#
+# Limitation: JKS NLIE is derived with t = 1 normalization. Callers
+# wanting general t can rescale beta and U externally.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    hubbard1d_jks_free_energy(t, U, mu, beta; alpha=U/6, H=0.0,
+                              grid_N=16, x_max=2.0,
+                              tol=1e-3, beta_start=0.01,
+                              inner_maxiter=30, outer_maxsteps=200)
+        -> Float64
+
+Per-site Helmholtz free-energy density of the 1D Hubbard chain via the
+JKS QTM NLIE + beta-continuation Newton solver.
+
+Returns the free-energy density on convergence; returns `NaN` if the
+continuation cannot reach `beta` (the solver stalls).
+
+# Arguments
+
+- `t = 1`: enforced. The JKS NLIE assumes the t = 1 normalization;
+  callers wanting general t pass U/t and mu/t, multiply beta by t.
+- `U`, `mu`: Hubbard parameters; half-filling is mu = U/2.
+- `beta`: inverse temperature.
+- `alpha`: contour shift, free in (0, U/4).
+- `H`: magnetic field.
+- `grid_N`, `x_max`: discretization grid size + half-width.
+- `tol`, `beta_start`, `inner_maxiter`, `outer_maxsteps`: continuation knobs.
+"""
+function hubbard1d_jks_free_energy(
+    t::Real,
+    U::Real,
+    mu::Real,
+    beta::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    grid_N::Int=16,
+    x_max::Real=2.0,
+    tol::Real=1e-3,
+    beta_start::Real=0.01,
+    inner_maxiter::Int=30,
+    outer_maxsteps::Int=200,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    U >= 0 || throw(DomainError(U, "U must be >= 0"))
+    isapprox(t, 1.0) ||
+        throw(ArgumentError("JKS wrapper assumes t = 1; rescale externally for general t"))
+
+    eta = U / 4
+
+    if alpha >= eta
+        return NaN
+    end
+
+    grid = JKSContourGrid(grid_N, eta; x_max=x_max)
+
+    bs = min(beta_start, beta)
+    sol = solve_jks_nlie_continuation(
+        grid,
+        beta,
+        U,
+        mu;
+        alpha=alpha,
+        H=H,
+        beta_start=bs,
+        tol=tol,
+        inner_maxiter=inner_maxiter,
+        outer_maxsteps=outer_maxsteps,
+    )
+
+    if !sol.converged
+        return NaN
+    end
+
+    return -free_energy_jks(sol.aux, grid, beta, U; mu=mu)  # sign flip pending Stage C.10 FE evaluator review
+end
+
 end  # module Hubbard1DJKSNLIE

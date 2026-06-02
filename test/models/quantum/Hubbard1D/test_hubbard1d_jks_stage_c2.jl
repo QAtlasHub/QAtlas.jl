@@ -44,14 +44,20 @@ using QAtlas.Hubbard1DJKSNLIE:
         @test_throws DomainError jks_log_phi(2.0, -1.0)
     end
 
-    @testset "jks_log_z_deriv = 1 / sqrt(s^2 - 1)" begin
-        # Real axis, |s| > 1: real value
-        for s in (1.5, 2.0, 5.0, -3.0)
+    @testset "jks_log_z_deriv = 1 / (s * sqrt(1 - 1/s^2))  (Stage C.24 paper-precise eq 23)" begin
+        # Real axis, |s| > 1: real value with sign(s) factor.
+        # Old broken form 1/sqrt(s^2-1) was missing this factor on s < 0;
+        # Stage C.24 fixed jks_log_z_deriv per paper eq (23).
+        for s in (1.5, 2.0, 5.0)
             v = jks_log_z_deriv(s + 0im)
-            expected = 1 / sqrt(s^2 - 1 + 0im)
+            expected = 1 / (s * sqrt(1 - 1/s^2 + 0im))
             @test isapprox(v, expected; atol=1e-14)
         end
-        # Inside the cut |s| < 1: imaginary
+        # s = -3: with sign correction, value is -1/sqrt(8) (was +1/sqrt(8)
+        # in the pre-C.24 broken implementation).
+        v_neg = jks_log_z_deriv(-3.0 + 0im)
+        @test isapprox(v_neg, -1 / sqrt(8); atol=1e-14)
+        # Inside the cut |s| < 1: imaginary, |value| = 1 / sqrt(1 - s^2)
         v_inside = jks_log_z_deriv(0.5 + 0im)
         @test abs(real(v_inside)) < 1e-14
         @test isapprox(abs(imag(v_inside)), 1 / sqrt(1 - 0.25); atol=1e-14)

@@ -32,6 +32,10 @@ env:
 jobs:
   verify:
     name: verify references resolve
+    # doiget action @next has a provenance log io error (sotashimozono/doiget upstream
+    # bug); make the job soft-fail so it does not block merges while that gets
+    # diagnosed. Re-enable hard-fail once doiget#264 lands.
+    continue-on-error: true
     # GitHub-hosted: the action builds the Rust binary and needs outbound
     # access to Crossref / arXiv, so this lane is intentionally not on the
     # self-hosted Julia runner.

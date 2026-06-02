@@ -24,11 +24,9 @@ Path to the canonical references.bib. Overridable via the
 `QATLAS_REFERENCES_BIB` environment variable so CI (and `doiget verify`)
 can point at the same file from any working directory.
 """
-references_bib_path() = get(
-    ENV,
-    "QATLAS_REFERENCES_BIB",
-    joinpath(pkgdir(QAtlas), "docs", "references.bib"),
-)
+function references_bib_path()
+    get(ENV, "QATLAS_REFERENCES_BIB", joinpath(pkgdir(QAtlas), "docs", "references.bib"))
+end
 
 """
     bib_citation_keys(path) -> Set{String}

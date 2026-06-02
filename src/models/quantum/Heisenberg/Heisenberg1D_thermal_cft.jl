@@ -1,0 +1,171 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Heisenberg1D — Infinite() finite-T observables via c = 1 CFT low-T expansion
+#
+# Path B of issue #521 (stopgap before the full Klümper NLIE Δ → 1 limit).
+# This file fills the FreeEnergy / ThermalEntropy / SpecificHeat gap at
+# the SU(2)-symmetric point so external benchmarks have an analytic
+# Infinite() reference inside the CFT-valid window.
+#
+# Physics
+# =======
+#
+# The S = 1/2 antiferromagnetic Heisenberg chain
+#
+#     H = J · Σᵢ Sᵢ · Sᵢ₊₁
+#
+# is critical with central charge c = 1 and sound velocity
+#
+#     v_s = π J / 2          (Δ → 1 limit of v_s = π J sin γ / (2 γ))
+#
+# Leading-order CFT then gives per-site
+#
+#     f(T) ≈ e₀ − π T² / (6 v_s) = e₀ − T² / (3 J)
+#     s(T) ≈ π T / (3 v_s)        =  2 T / (3 J)
+#     c(T) ≈ π T / (3 v_s)        =  2 T / (3 J)
+#
+# with e₀ = J (1/4 − ln 2) the Hulthén ground-state energy density.
+#
+# Validity
+# ========
+#
+# Eggert-Affleck-Takahashi (1994) log corrections modify each leading
+# term by a factor ≈ 1 + 1 / (2 ln(T₀/T)) with T₀ ≈ 7.7 J. The plain
+# LO expression here is accurate to ≲ 5 % for T ≲ J/5 (β ≥ 5/J) and
+# rapidly degrades above. We refuse to return a value outside the
+# validity window:
+#
+#     β > 5/J  → CFT value
+#     β ≤ 5/J  → NaN + warning naming the Klümper-Δ→1 NLIE path
+#                (issue #521) as the proper extension
+#
+# References
+# ==========
+#
+#   - I. Affleck, Phys. Rev. Lett. 56, 746 (1986)
+#   - H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, Phys. Rev. Lett.
+#     56, 742 (1986)
+#   - S. Lukyanov, A. Zamolodchikov, Nucl. Phys. B 493, 571 (1997)
+#     — sound velocity at the isotropic point
+#   - S. Eggert, I. Affleck, M. Takahashi, Phys. Rev. Lett. 73, 332
+#     (1994) — multiplicative log corrections
+#   - A. Klümper, Z. Phys. B 91, 507 (1993) — Δ → 1 limit of XXZ NLIE
+# ─────────────────────────────────────────────────────────────────────────────
+
+const _HEIS_CFT_BETA_MIN = 5.0  # in units of 1/J; below this β the LO CFT degrades > 5 %
+
+"""
+    _heisenberg1d_cft_freeenergy(J::Real, beta::Real) -> Float64
+
+Leading-order c = 1 CFT free-energy density for the SU(2) Heisenberg chain:
+`f = e₀ − T² / (3J)`, with `e₀ = J(1/4 − ln 2)` and `v_s = π J / 2`.
+"""
+function _heisenberg1d_cft_freeenergy(J::Real, beta::Real)
+    e0 = J * (0.25 - log(2))
+    T = 1 / beta
+    v_s = π * J / 2
+    return e0 - π * T^2 / (6 * v_s)
+end
+
+"""
+    _heisenberg1d_cft_entropy(J::Real, beta::Real) -> Float64
+
+Leading-order c = 1 CFT entropy density: `s = 2T / (3J) = π T / (3 v_s)`.
+"""
+function _heisenberg1d_cft_entropy(J::Real, beta::Real)
+    T = 1 / beta
+    v_s = π * J / 2
+    return π * T / (3 * v_s)
+end
+
+"""
+    _heisenberg1d_cft_specific_heat(J::Real, beta::Real) -> Float64
+
+Leading-order c = 1 CFT specific-heat density: `c_v = 2T / (3J)`.
+Equals `s(T)` at LO CFT (`c_v = T ∂s/∂T = s` for linear-in-T entropy).
+"""
+function _heisenberg1d_cft_specific_heat(J::Real, beta::Real)
+    T = 1 / beta
+    v_s = π * J / 2
+    return π * T / (3 * v_s)
+end
+
+"""
+    _heisenberg1d_cft_validity_warn(quantity::Symbol, J::Real, beta::Real)
+
+Emit a `@warn` naming Klümper-Δ→1 (#521 Path A) as the proper extension
+and return NaN. Called when β is below the LO-CFT validity floor.
+"""
+function _heisenberg1d_cft_validity_warn(quantity::Symbol, J::Real, beta::Real)
+    @warn (
+        "Heisenberg1D " *
+        String(quantity) *
+        " at Infinite() uses a c=1 " *
+        "CFT low-T expansion that is only accurate for β > $(_HEIS_CFT_BETA_MIN)/J. " *
+        "At β = $(beta) (T = $(round(1/beta; digits=3))) the LO term has > 5% " *
+        "systematic error from EAT log corrections. The full Klümper NLIE " *
+        "Δ → 1 limit (issue #521 Path A) will replace this. Returning NaN."
+    )
+    return NaN
+end
+
+# ── Dispatches ──────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Heisenberg1D, ::FreeEnergy, ::Infinite; beta, J=1.0)
+
+Per-site free energy of the infinite spin-1/2 Heisenberg AF chain via
+leading-order c = 1 CFT. Returns `e₀ - π T² / (6 v_s)` for β > 5/J;
+otherwise NaN + warn. `β ≤ 0` raises `DomainError`.
+"""
+function fetch(::Heisenberg1D, ::FreeEnergy, ::Infinite; beta::Real, J::Real=1.0, kwargs...)
+    isempty(kwargs) || @warn(
+        "fetch(Heisenberg1D, FreeEnergy, Infinite) received unrecognized kwargs; they are ignored.",
+        kwargs=collect(keys(kwargs))
+    )
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    J > 0 || throw(DomainError(J, "J must be > 0"))
+    if beta * J ≤ _HEIS_CFT_BETA_MIN
+        return _heisenberg1d_cft_validity_warn(:FreeEnergy, J, beta)
+    end
+    return _heisenberg1d_cft_freeenergy(J, beta)
+end
+
+"""
+    fetch(::Heisenberg1D, ::ThermalEntropy, ::Infinite; beta, J=1.0)
+
+Per-site entropy via leading-order c = 1 CFT: `s = π T / (3 v_s) = 2T / (3J)`.
+"""
+function fetch(
+    ::Heisenberg1D, ::ThermalEntropy, ::Infinite; beta::Real, J::Real=1.0, kwargs...
+)
+    isempty(kwargs) || @warn(
+        "fetch(Heisenberg1D, ThermalEntropy, Infinite) received unrecognized kwargs; they are ignored.",
+        kwargs=collect(keys(kwargs))
+    )
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    J > 0 || throw(DomainError(J, "J must be > 0"))
+    if beta * J ≤ _HEIS_CFT_BETA_MIN
+        return _heisenberg1d_cft_validity_warn(:ThermalEntropy, J, beta)
+    end
+    return _heisenberg1d_cft_entropy(J, beta)
+end
+
+"""
+    fetch(::Heisenberg1D, ::SpecificHeat, ::Infinite; beta, J=1.0)
+
+Per-site heat capacity via leading-order c = 1 CFT: `c_v = π T / (3 v_s) = 2T / (3J)`.
+"""
+function fetch(
+    ::Heisenberg1D, ::SpecificHeat, ::Infinite; beta::Real, J::Real=1.0, kwargs...
+)
+    isempty(kwargs) || @warn(
+        "fetch(Heisenberg1D, SpecificHeat, Infinite) received unrecognized kwargs; they are ignored.",
+        kwargs=collect(keys(kwargs))
+    )
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    J > 0 || throw(DomainError(J, "J must be > 0"))
+    if beta * J ≤ _HEIS_CFT_BETA_MIN
+        return _heisenberg1d_cft_validity_warn(:SpecificHeat, J, beta)
+    end
+    return _heisenberg1d_cft_specific_heat(J, beta)
+end

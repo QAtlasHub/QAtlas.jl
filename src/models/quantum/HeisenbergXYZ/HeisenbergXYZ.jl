@@ -178,3 +178,64 @@ function fetch(
     # (Heisenberg1D itself delegates to XXZ1D(Δ=1) once PR #347 lands).
     return QAtlas.fetch(QAtlas.XXZ1D(; J=1.0, Δ=1.0), LuttingerParameter(), Infinite())
 end
+
+# ==============================================================================
+# Ground-state energy density (Phase 2: XY line + XXZ delegation)
+# ==============================================================================
+
+"""
+    fetch(m::HeisenbergXYZ, ::GroundStateEnergyDensity, ::Infinite;
+          Jx=m.Jx, Jy=m.Jy, Jz=m.Jz) -> Float64
+
+Ground-state energy density (per site) of the spin-1/2 XYZ chain at the
+thermodynamic limit. Supported parameter regimes:
+
+| Regime              | Method                                                  |
+|---------------------|---------------------------------------------------------|
+| `Jx = Jy`           | delegated to `XXZ1D(J=Jx, D=Jz/Jx)` `Energy(:per_site)` |
+| `Jz = 0` (XY line)  | closed-form Lieb-Schultz-Mattis (1961) free-fermion     |
+| generic XYZ         | `DomainError` (Baxter 1972 elliptic deferred to Phase 3)|
+
+# References
+
+- E. Lieb, T. Schultz, D. Mattis, *Ann. Phys.* **16**, 407 (1961).
+- C. N. Yang, C. P. Yang, *Phys. Rev.* **150**, 327 (1966).
+- R. J. Baxter, *Ann. Phys.* **70**, 193 (1972) -- generic XYZ via elliptic Bethe ansatz.
+"""
+function fetch(
+    m::HeisenbergXYZ,
+    ::GroundStateEnergyDensity,
+    ::Infinite;
+    Jx::Real=m.Jx,
+    Jy::Real=m.Jy,
+    Jz::Real=m.Jz,
+    kwargs...,
+)
+    if Jx == Jy
+        # Axial XXZ reduction. Reuse the Energy(:per_site) target since XXZ1D
+        # exposes it (its GS-energy semantics agree at Infinite).
+        Jx > 0 || throw(
+            DomainError(
+                Jx,
+                "HeisenbergXYZ GroundStateEnergyDensity at Jx = Jy: Jx > 0 required " *
+                "(Jx = 0 is Ising-like; Jx < 0 is the FM-exchange XXZ regime whose " *
+                "XXZ1D delegation is not yet tested). Got Jx = $Jx.",
+            ),
+        )
+        Δ = Jz / Jx
+        return QAtlas.fetch(QAtlas.XXZ1D(; J=Jx, Δ=Δ), Energy{:per_site}(), Infinite())
+    elseif Jz == 0
+        # XY anisotropic line. Lieb-Schultz-Mattis closed form.
+        return _heisenberg_xyz_gs_energy_xy_line(Jx, Jy)
+    else
+        throw(
+            DomainError(
+                (Jx, Jy, Jz),
+                "HeisenbergXYZ GroundStateEnergyDensity: generic XYZ (Jx != Jy, Jz != 0) " *
+                "requires the Baxter (1972) elliptic Bethe-ansatz machinery, deferred " *
+                "to Phase 3. Supported now: Jx = Jy (XXZ delegation) and Jz = 0 (XY line). " *
+                "Got (Jx, Jy, Jz) = ($Jx, $Jy, $Jz).",
+            ),
+        )
+    end
+end

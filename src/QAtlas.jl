@@ -257,6 +257,7 @@ include("models/quantum/HaldaneShastry/HaldaneShastry_thermal_cft.jl")  # c=1 CF
 include("models/quantum/HaldaneShastry/HaldaneShastry_registry.jl")  # populates REGISTRY for HaldaneShastry
 include("models/quantum/ShastrySutherland/ShastrySutherland.jl")
 include("models/quantum/ShastrySutherland/ShastrySutherland_registry.jl")  # populates REGISTRY for ShastrySutherland (#259)
+include("models/quantum/HeisenbergXYZ/HeisenbergXYZ_xy_line.jl")  # LSM XY-line GS energy
 include("models/quantum/HeisenbergXYZ/HeisenbergXYZ.jl")
 include("models/quantum/HeisenbergXYZ/HeisenbergXYZ_registry.jl")          # populates REGISTRY for HeisenbergXYZ (#253)
 include("models/quantum/KitaevHeisenberg/KitaevHeisenberg.jl")

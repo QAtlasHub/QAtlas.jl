@@ -144,5 +144,4 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
             m_generic, QAtlas.SpontaneousMagnetization(), Infinite()
         )
     end
-
 end

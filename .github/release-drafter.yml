@@ -68,15 +68,20 @@ autolabeler:
       - 'test/**'
       - '**/test_*.jl'
 
+# 章立て: 章は対応 label の PR が 1 件もない時、release-drafter のデフォルト
+# 動作で見出しごと自動的に省略される (empty section is illegal を満たす)。
 categories:
   - title: '⚠️ Breaking Changes'
     labels:
       - 'breaking'
-  - title: '🚀 Features'
+  - title: '🚀 Added'
     labels:
       - 'feature'
       - 'enhancement'
-  - title: '🐛 Bug Fixes'
+  - title: '🔄 Changed'
+    labels:
+      - 'refactor'
+  - title: '🐛 Fixed'
     labels:
       - 'bug'
       - 'fix'
@@ -87,16 +92,14 @@ categories:
     labels:
       - 'documentation'
       - 'docs'
-  - title: '🧹 Refactoring'
-    labels:
-      - 'refactor'
-  - title: '🧪 Tests'
+  - title: '✅ Verification & Reliability'
     labels:
       - 'test'
-  - title: '🧰 CI & Maintenance'
-    labels:
-      - 'chore'
       - 'ci'
+      - 'chore'
+  - title: '⚠️ Known Limitations'
+    labels:
+      - 'known-limitation'
 
 exclude-labels:
   - 'skip-changelog'
@@ -131,8 +134,14 @@ replacers:
 change-template: '- $TITLE by @$AUTHOR in #$NUMBER'
 change-title-escapes: '\<*_&'
 
+# 唯一の固定セクションは Summary。残りの章は label-driven で、entry が
+# 0 件の章は自動的に出力されない (empty section is illegal の方針)。
 template: |
-  ## What's Changed
+  ## Summary
+
+  <!-- このセクションだけ自動生成では埋まりません。
+       リリース前にここに 1 段落書いてください。
+       何を出荷したか、利用者に最も伝えたいことを 3 行程度で。 -->
 
   $CHANGES
 

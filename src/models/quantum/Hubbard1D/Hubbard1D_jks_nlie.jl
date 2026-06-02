@@ -905,4 +905,78 @@ function solve_jks_nlie_shifted(
     return JKSSolution(aux, maxiter, last_residual, false)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.6 — adaptive alpha-mix Picard solver
+#
+# Stage C.5 fixed the kernel scale; adaptive mixing extends convergence
+# from the high-T regime down into intermediate T / U.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    solve_jks_nlie_adaptive(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
+                            maxiter=2000, alpha_mix_init=0.02,
+                            alpha_mix_floor=1e-6, alpha_mix_cap=0.5,
+                            shrink=0.5, grow=1.1) -> JKSSolution
+
+Adaptive alpha-mix Picard solver. Updates the mixing parameter based on
+whether the residual is decreasing:
+
+  - shrink alpha_mix by `shrink` if residual grows by > 10%
+  - grow alpha_mix by `grow` if residual shrinks by > 10%
+  - floor at `alpha_mix_floor`
+  - cap at `alpha_mix_cap`
+"""
+function solve_jks_nlie_adaptive(
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real;
+    alpha::Real=U/6,
+    H::Real=0.0,
+    tol::Real=1e-6,
+    maxiter::Int=2000,
+    alpha_mix_init::Real=0.02,
+    alpha_mix_floor::Real=1e-6,
+    alpha_mix_cap::Real=0.5,
+    shrink::Real=0.5,
+    grow::Real=1.1,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    0 < alpha_mix_init <= 1 ||
+        throw(DomainError(alpha_mix_init, "alpha_mix_init must be in (0, 1]"))
+    0 < shrink < 1 || throw(DomainError(shrink, "shrink must be in (0, 1)"))
+    grow > 1 || throw(DomainError(grow, "grow must be > 1"))
+
+    aux = init_atomic_limit(grid, beta, U, mu; h=H)
+
+    alpha_mix = alpha_mix_init
+    prev_residual = Inf
+    last_residual = Inf
+
+    for iter in 1:maxiter
+        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
+        last_residual = maximum(abs.(res))
+
+        if !isfinite(last_residual)
+            return JKSSolution(aux, iter, last_residual, false)
+        end
+        if last_residual < tol
+            return JKSSolution(aux, iter, last_residual, true)
+        end
+
+        if last_residual > prev_residual * 1.1
+            alpha_mix = max(alpha_mix * shrink, alpha_mix_floor)
+        elseif last_residual < prev_residual * 0.9
+            alpha_mix = min(alpha_mix * grow, alpha_mix_cap)
+        end
+
+        log_b_new = log.(aux.b) .- alpha_mix .* res
+        aux.b .= exp.(log_b_new)
+        aux.b_bar .= aux.b
+
+        prev_residual = last_residual
+    end
+    return JKSSolution(aux, maxiter, last_residual, false)
+end
+
 end  # module Hubbard1DJKSNLIE

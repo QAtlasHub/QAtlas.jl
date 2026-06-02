@@ -235,15 +235,67 @@ struct JKSContourGrid
     gamma::Float64
     x_max::Float64
     x::Vector{Float64}
-    dx::Float64
+    dx::Float64                  # average step (for legacy callers)
+    weights::Vector{Float64}     # per-point trapezoidal weights
     function JKSContourGrid(N::Int, gamma::Real; x_max::Real=10.0)
+        # Uniform grid constructor.
         N > 1 || throw(DomainError(N, "JKSContourGrid requires N > 1"))
         0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
         x_max > 0 || throw(DomainError(x_max, "x_max must be > 0"))
         x = collect(range(-x_max, x_max; length=N))
         dx = x[2] - x[1]
-        return new(N, Float64(gamma), Float64(x_max), x, dx)
+        w = fill(dx, N)  # uniform Riemann; Toeplitz-preserving
+        return new(N, Float64(gamma), Float64(x_max), x, dx, w)
     end
+    function JKSContourGrid(x::AbstractVector{<:Real}, gamma::Real)
+        # Stage F.2: non-uniform grid constructor.
+        # Caller provides sorted x array; trapezoidal weights computed.
+        N = length(x)
+        N > 1 || throw(DomainError(N, "non-uniform grid requires N > 1"))
+        0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
+        issorted(x) || throw(ArgumentError("x must be sorted ascending"))
+        xf = collect(Float64, x)
+        w = zeros(Float64, N)
+        w[1] = (xf[2] - xf[1]) / 2
+        for k in 2:(N - 1)
+            w[k] = (xf[k + 1] - xf[k - 1]) / 2
+        end
+        w[N] = (xf[N] - xf[N - 1]) / 2
+        dx_avg = (xf[N] - xf[1]) / (N - 1)
+        x_max = max(abs(xf[1]), abs(xf[N]))
+        return new(N, Float64(gamma), Float64(x_max), xf, dx_avg, w)
+    end
+end
+
+"""
+    build_nonuniform_grid(; x_inner=2.0, x_outer=32.0, N_inner=80, N_outer=24, gamma)
+
+Construct a non-uniform symmetric grid concentrated in [-x_inner, x_inner]
+(uniform spacing dx_in = 2 x_inner / N_inner) and sparse in [x_inner,
+x_outer] (geometric stretching). Stage F.2 high-precision grid: typical
+N_total = N_inner + 2 N_outer ~ 128, with dx_inner ~ 0.025 vs uniform
+dx ~ 0.5 at the same total N. Dramatically reduces c, c_bar interpolation
+error in the cut [-1, 1] without expanding Newton dim.
+"""
+function build_nonuniform_grid(;
+    x_inner::Real=2.0, x_outer::Real=32.0, N_inner::Int=80, N_outer::Int=24, gamma::Real
+)
+    x_inner > 0 || throw(DomainError(x_inner, "x_inner must be > 0"))
+    x_outer > x_inner || throw(DomainError(x_outer, "x_outer must exceed x_inner"))
+    N_inner > 1 || throw(DomainError(N_inner, "N_inner must be > 1"))
+    N_outer >= 1 || throw(DomainError(N_outer, "N_outer must be >= 1"))
+    # Inner: uniform in [-x_inner, x_inner]
+    x_in = collect(range(-x_inner, x_inner; length=N_inner))
+    # Outer right: geometric stretching from x_inner to x_outer
+    if N_outer > 0
+        ratio = (x_outer / x_inner)^(1 / N_outer)
+        x_right = [x_inner * ratio^k for k in 1:N_outer]
+        x_left = -reverse(x_right)
+        x_all = vcat(x_left, x_in, x_right)
+    else
+        x_all = x_in
+    end
+    return JKSContourGrid(x_all, gamma)
 end
 
 """
@@ -264,7 +316,7 @@ function build_kernel_matrix(grid::JKSContourGrid, n::Integer; eps::Real=1e-10)
     for j in 1:N, k in 1:N
         K[j, k] =
             jks_kernel_K_n_concrete(grid.x[j] - grid.x[k] + im * eps, n, grid.gamma) *
-            grid.dx
+            grid.weights[k]
     end
     return K
 end
@@ -852,7 +904,7 @@ function build_kernel_matrix_shifted(grid::JKSContourGrid, n::Integer, alpha_shi
         K[j, k] =
             jks_kernel_K_n_concrete(
                 grid.x[j] - grid.x[k] + im * alpha_shift, n, grid.gamma
-            ) * grid.dx
+            ) * grid.weights[k]
     end
     return K
 end
@@ -869,7 +921,7 @@ function build_kernel_matrix_shifted_bar(
         K[j, k] =
             jks_kernel_K_n_concrete(
                 grid.x[j] - grid.x[k] - im * alpha_shift, n, grid.gamma
-            ) * grid.dx
+            ) * grid.weights[k]
     end
     return K
 end
@@ -1349,6 +1401,10 @@ function hubbard1d_jks_free_energy(
     H::Real=0.0,
     grid_N::Int=128,
     x_max::Real=32.0,
+    nonuniform::Bool=false,
+    x_inner::Real=2.0,
+    N_inner::Int=80,
+    N_outer::Int=24,
     tol::Real=1e-6,
     maxiter::Int=40,
     N_cheb::Int=64,
@@ -1369,7 +1425,11 @@ function hubbard1d_jks_free_energy(
         return NaN
     end
 
-    grid = JKSContourGrid(grid_N, eta; x_max=x_max)
+    grid = if nonuniform
+        build_nonuniform_grid(; x_inner=x_inner, x_outer=x_max, N_inner=N_inner, N_outer=N_outer, gamma=eta)
+    else
+        JKSContourGrid(grid_N, eta; x_max=x_max)
+    end
 
     sol = if solver == :full_newton
         # Stage C.24+ paper-precise 3-channel Newton (default).

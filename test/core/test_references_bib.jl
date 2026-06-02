@@ -61,13 +61,11 @@ is_bibkey(s::AbstractString) = occursin(r"^[A-Za-z][A-Za-z0-9_]*$", s)
 const KNOWN_UNMIGRATED = Set{String}([
     "Ashcroft-Mermin 1976",          # textbook, Solid State Physics (no DOI)
     "Baxter 1982",                   # textbook, Exactly Solved Models (no DOI)
-    "Cardy 2001",                    # ambiguous lecture notes, no journal DOI
     "Chen-Roncaglia 2008",           # ambiguous author string, no unique match
     "Fateev-Zamolodchikov 1985",     # Sov. Phys. JETP 62, 215 — pre-DOI
     "Kitaev 2015",                   # SYK KITP talks (no DOI)
     "Landau 1937",                   # ZhETF 7, 19 — pre-DOI original
     "Landau-Lifshitz §149",          # textbook, Statistical Physics (no DOI)
-    "Lieb 1994",                     # ambiguous, no journal/volume to pin
     "Stanley 1971",                  # textbook, Intro to Phase Transitions (no DOI)
     "Tzeng-Yang-Hsu 2017",           # ambiguous author string, no unique match
 ])

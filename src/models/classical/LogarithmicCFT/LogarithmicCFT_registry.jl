@@ -12,7 +12,7 @@
     reliability=:high,
     tested_in="test/models/classical/test_logarithmic_cft.jl",
     references=[
-        "Saleur1992", "Cardy 2001", "PearceRasmussenZuber2006", "VasseurJacobsenSaleur2011"
+        "Saleur1992", "Cardy2001", "PearceRasmussenZuber2006", "VasseurJacobsenSaleur2011"
     ],
     notes="c=0 logarithmic CFT (polymer/percolation universality); indecomposable rep structure Phase 2."
 )

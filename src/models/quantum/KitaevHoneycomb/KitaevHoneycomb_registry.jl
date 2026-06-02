@@ -10,7 +10,7 @@
     method=:matter_free_fermion,
     reliability=:high,
     tested_in="test/models/test_KitaevHoneycomb.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="GS by 2D Gauss-Kronrod; thermal value (β kwarg) uses matter-sector free fermion.",
 )
 @register(
@@ -56,7 +56,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -66,7 +66,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -76,7 +76,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -86,7 +86,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -96,7 +96,7 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
 @register(
@@ -106,6 +106,6 @@
     method=:matter_free_fermion,
     reliability=:medium,
     tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
-    references=["Kitaev2006", "Lieb 1994"],
+    references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )

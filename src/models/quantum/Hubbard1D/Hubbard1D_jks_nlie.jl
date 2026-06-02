@@ -1,26 +1,19 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Hubbard1DJKSNLIE — Juttner-Klumper-Suzuki QTM NLIE module (#523)
+# Hubbard1DJKSNLIE — Jüttner-Klümper-Suzuki QTM NLIE module (#523)
 #
-# Phase-2B foundation for the full thermodynamics of the 1D Hubbard model
-# at arbitrary (T, U, mu, h). Stage A (this file) ships:
+# Finite-T free-energy density of the 1D Hubbard chain via the quantum
+# transfer matrix nonlinear integral equations of
 #
-#   (i)  the atomic-limit closed-form free energy (t = 0), exact for any
-#        (T, U, mu, h)
-#   (ii) a typed Grid skeleton (`JKSGrid`) that Stage B will fill with
-#        full NLIE contour + auxiliary-function storage
-#   (iii) stub signatures for the kernels and driving functions Stage B
-#        will implement
+#   G. Jüttner, A. Klümper, J. Suzuki, "The Hubbard chain at finite
+#   temperatures: ab initio calculations of Tomonaga-Luttinger liquid
+#   properties", Nucl. Phys. B 522, 471 (1998), arXiv:cond-mat/9711310.
 #
-# No NLIE solver is wired up in Stage A. Production fetch dispatches for
-# `Hubbard1D` still go through the regime-based stopgap in
-# `Hubbard1D_thermal_stopgap.jl` (PR #530). Stage B will route them
-# through the full Picard NLIE solver and remove the NaN intermediate
-# regime.
+# Currently SUPPORTS H = 0 AND μ = U/2 (half-filling) ONLY. The 3-channel
+# Newton solver enforces b̄ = b via the H=0 half-filling symmetry;
+# extending to H ≠ 0 / off-half-filling requires solving the independent
+# b̄ equation (paper eq 47, conjugate channel) — followup work.
 #
-# Math reference: G. Juttner, A. Klumper, J. Suzuki, "The Hubbard chain
-# at finite temperatures: ab initio calculations of Tomonaga-Luttinger
-# liquid properties", Nucl. Phys. B 522, 471 (1998), arXiv:cond-mat/
-# 9711310. Numbering below cites that paper's equations.
+# Numbering below cites the 1998 paper's equation numbers.
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
@@ -41,6 +34,9 @@ arXiv:cond-mat/9711310 (JuttnerKlumperSuzuki1998).
 module Hubbard1DJKSNLIE
 
 export atomic_free_energy, atomic_free_energy_half_filling
+
+# SingularException needed for selective catch in Newton solvers.
+using LinearAlgebra: SingularException
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Atomic limit (t = 0) — closed form
@@ -105,44 +101,6 @@ end
 # calls during this phase loud rather than silent.
 
 """
-    JKSGrid(N, gamma)
-
-NLIE discretization grid for the JKS QTM NLIE (Stage B). At full
-implementation will hold the contour points, kernel cache, and
-auxiliary-function arrays for `b, b_bar, c, c_bar`. Stage A reserves
-the type for forward compatibility only.
-
-# Fields
-
-- `N::Int` — number of contour points (default 128 in Stage B)
-- `gamma::Float64` — contour-shift parameter `gamma in (0, pi)` (eq 51,
-  default `2*pi/3`)
-"""
-struct JKSGrid
-    N::Int
-    gamma::Float64
-    function JKSGrid(N::Int, gamma::Real)
-        N > 0 || throw(DomainError(N, "N must be > 0"))
-        0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
-        return new(N, Float64(gamma))
-    end
-end
-
-"""
-    jks_kernel_K_n(s, n, gamma) -> ComplexF64
-
-JKS kernel `K_n(s) = gamma / (pi * s * (s + 2 n i gamma))` from eq (38),
-used in the NLIE convolutions of Sec 5. Stage A: not yet implemented;
-calling it raises `ErrorException` so accidental Stage-A use is loud.
-
-Stage B will provide the full evaluator and a cached Toeplitz/full
-convolution operator.
-"""
-function jks_kernel_K_n(s::Number, n::Integer, gamma::Real)
-    error("Hubbard1DJKSNLIE.jks_kernel_K_n is not yet implemented (Stage B / #523).")
-end
-
-"""
     jks_driving_b(x; h=0.0) -> Float64
 
 JKS spin-channel driving term `d_b(x) = -h` from eq (54). Constant in
@@ -153,32 +111,6 @@ c_bar driving terms still need the Trotter-limit function
 `log lambda_0(x)` that Stage B will derive from Sec 4.
 """
 jks_driving_b(x::Real; h::Real=0.0) = -float(h)
-
-"""
-    jks_driving_c(x; U, mu, h=0.0) -> Float64
-
-JKS charge-channel driving term `d_c(x) = -U/2 + (mu + h/2) + log lambda_0(x)`
-from eq (54). Stage A returns the constant part only; the Trotter-limit
-`log lambda_0(x)` term is deferred to Stage B. Calling Stage A is loud:
-we error so a Stage-A caller does not silently get a wrong value.
-"""
-function jks_driving_c(x::Real; U::Real, mu::Real, h::Real=0.0)
-    error(
-        "Hubbard1DJKSNLIE.jks_driving_c needs Trotter-limit log lambda_0; deferred to Stage B (#523).",
-    )
-end
-
-"""
-    jks_driving_cbar(x; U, mu, h=0.0) -> Float64
-
-Conjugate of `jks_driving_c`: `d_c_bar(x) = -U/2 - (mu + h/2) - log lambda_0(x)`
-from eq (55). Stage A error; full implementation in Stage B.
-"""
-function jks_driving_cbar(x::Real; U::Real, mu::Real, h::Real=0.0)
-    error(
-        "Hubbard1DJKSNLIE.jks_driving_cbar needs Trotter-limit log lambda_0; deferred to Stage B (#523).",
-    )
-end
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Hubbard1DJKSNLIE Stage B — kernels + discrete convolution scaffold
@@ -239,8 +171,13 @@ Discretization of the real-axis contour used by the JKS NLIE. Holds:
 - `N::Int` — number of contour points
 - `gamma::Float64` — kernel shift parameter, gamma in (0, pi)
 - `x_max::Float64` — half-width of the discretized window [-x_max, x_max]
-- `x::Vector{Float64}` — N evenly-spaced contour points
-- `dx::Float64` — grid spacing (uniform)
+- `is_uniform::Bool` — `true` for evenly-spaced grids, `false` for grids built by
+  `build_nonuniform_grid`. On non-uniform grids `dx` is the global *average*
+  spacing only and should NOT be used as a local quadrature weight; use
+  `weights[k]` instead.
+- `x::Vector{Float64}` — N contour points (sorted ascending)
+- `dx::Float64` — uniform spacing when `is_uniform`; average step otherwise
+- `weights::Vector{Float64}` — authoritative quadrature weights
 
 The grid is symmetric about 0 to expose the K_n / K_n_bar conjugation
 symmetry numerically.
@@ -249,9 +186,10 @@ struct JKSContourGrid
     N::Int
     gamma::Float64
     x_max::Float64
+    is_uniform::Bool             # true for uniform grid; false for non-uniform
     x::Vector{Float64}
-    dx::Float64                  # average step (for legacy callers)
-    weights::Vector{Float64}     # per-point trapezoidal weights
+    dx::Float64                  # uniform spacing; on non-uniform grid set to average step (NOT local spacing)
+    weights::Vector{Float64}     # per-point quadrature weights (authoritative integration weight)
     function JKSContourGrid(N::Int, gamma::Real; x_max::Real=10.0)
         # Uniform grid constructor.
         N > 1 || throw(DomainError(N, "JKSContourGrid requires N > 1"))
@@ -260,7 +198,7 @@ struct JKSContourGrid
         x = collect(range(-x_max, x_max; length=N))
         dx = x[2] - x[1]
         w = fill(dx, N)  # uniform Riemann; Toeplitz-preserving
-        return new(N, Float64(gamma), Float64(x_max), x, dx, w)
+        return new(N, Float64(gamma), Float64(x_max), true, x, dx, w)
     end
     function JKSContourGrid(x::AbstractVector{<:Real}, gamma::Real)
         # Stage F.2: non-uniform grid constructor.
@@ -278,7 +216,7 @@ struct JKSContourGrid
         w[N] = (xf[N] - xf[N - 1]) / 2
         dx_avg = (xf[N] - xf[1]) / (N - 1)
         x_max = max(abs(xf[1]), abs(xf[N]))
-        return new(N, Float64(gamma), Float64(x_max), xf, dx_avg, w)
+        return new(N, Float64(gamma), Float64(x_max), false, xf, dx_avg, w)
     end
 end
 
@@ -311,29 +249,6 @@ function build_nonuniform_grid(;
         x_all = x_in
     end
     return JKSContourGrid(x_all, gamma)
-end
-
-"""
-    build_kernel_matrix(grid, n; eps=1e-10) -> Matrix{ComplexF64}
-
-Build the discrete convolution matrix
-`K[j, k] = jks_kernel_K_n_concrete(x_j - x_k + i*eps, n, gamma) * dx`
-so that `(K * f)[j] ≈ integral K_n(x_j - y) f(y) dy` for any vector
-`f` sampled on the contour grid. The `eps` (default `1e-10`) shifts
-off the singular `x = 0` diagonal — needed because the kernel has a
-pole at the origin.
-"""
-function build_kernel_matrix(grid::JKSContourGrid, n::Integer; eps::Real=1e-10)
-    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
-    eps > 0 || throw(DomainError(eps, "eps regularization must be > 0"))
-    N = grid.N
-    K = zeros(ComplexF64, N, N)
-    for j in 1:N, k in 1:N
-        K[j, k] =
-            jks_kernel_K_n_concrete(grid.x[j] - grid.x[k] + im * eps, n, grid.gamma) *
-            grid.weights[k]
-    end
-    return K
 end
 
 """
@@ -382,7 +297,7 @@ Each vector has length `N`. The constructor `JKSAuxFunctions(N)` returns
 zero-initialised arrays — see `init_atomic_limit!` for a physically
 meaningful starting point.
 """
-struct JKSAuxFunctions
+mutable struct JKSAuxFunctions
     b::Vector{ComplexF64}
     b_bar::Vector{ComplexF64}
     c::Vector{ComplexF64}
@@ -452,9 +367,10 @@ Fill `aux` with x-independent constants derived from the atomic-limit
 Boltzmann weights at the requested `(beta, U, mu, h)`. Returns `aux`
 for chaining.
 
-Used as the Picard iteration starting point in Stage C.2. The constants
-are physically motivated but NOT verified against JKS eq (138); Stage
-C.2 may revise them once the paper's high-T analysis is fully ported.
+Used as the Newton solver starting point. The constants are
+paper-precise atomic-limit fugacities: c = exp(-βU/2 + βh/2),
+c̄ = exp(-βU/2 - βh/2) (preserves c·c̄ = exp(-βU) and c/c̄ =
+exp(βh) at β → 0), and b = (z_up + z_down) / (z_empty + z_double).
 """
 function init_atomic_limit!(
     aux::JKSAuxFunctions, beta::Real, U::Real, mu::Real; h::Real=0.0
@@ -605,9 +521,10 @@ for t > 0.
 
 # Returns
 
-The per-site free-energy density `f = -T ln Lambda / (2 pi i)`,
-evaluated by the discrete Simpson-style quadrature of eq (49) over
-the branch cut `[-1, 1]`.
+The per-site free-energy density `f = -T ln Lambda`,
+evaluated by Chebyshev-Gauss first-kind quadrature on the branch
+cut `[-1, 1]` (handles the `1/sqrt(1-x^2)` singularity exactly) via
+the paper page-14 direct form (eq 57 / eq 49).
 
 # References
 
@@ -682,6 +599,15 @@ function free_energy_jks(
     log_Lambda = int_1 + int_2 - beta * U / 4
 
     f = -(1 / beta) * log_Lambda
+
+    # Imag should be O(machine eps) when aux is a true NLIE solution.
+    # An O(1) imag indicates aux is not converged or formula is wrong;
+    # surface this rather than silently returning the real part.
+    if abs(imag(f)) > 1e-3 * max(abs(real(f)), 1.0)
+        @warn "free_energy_jks: non-negligible imag part discarded" imag_part=imag(f) real_part=real(
+            f
+        ) beta=beta U=U
+    end
 
     return real(f)
 end
@@ -763,7 +689,7 @@ end
 """
     jks_driving_c(grid, beta, U, mu; H=0.0) -> Vector{ComplexF64}
 
-JKS driving function `psi_c(x_j) = -beta U/2 - beta(mu + H/2) + log phi(x)` (eq 58).
+JKS driving function `psi_c(x_j) = -beta U/2 + beta(mu + H/2) + log phi(x)` (eq 58).
 """
 function jks_driving_c(grid::JKSContourGrid, beta::Real, U::Real, mu::Real; H::Real=0.0)
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
@@ -790,48 +716,6 @@ end
 # NLIE residual evaluator (b-channel of eq 53)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-"""
-    jks_nlie_residual(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
-
-Compute the b-channel NLIE residual `log b - RHS` for the given `aux`.
-The L-infinity norm of the residual measures convergence; at the
-converged NLIE solution it is zero up to discretization error.
-
-This is the b-equation residual only — Stage C.5 will extend to the
-full (b, c, c_bar) triple.
-"""
-function jks_nlie_residual(
-    aux::JKSAuxFunctions,
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real,
-    alpha::Real;
-    H::Real=0.0,
-)
-    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
-    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
-    length(aux) == grid.N ||
-        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
-
-    K1 = build_kernel_matrix(grid, 1)
-    K2 = build_kernel_matrix(grid, 2)
-
-    psi_b = jks_driving_b(grid, beta, U, alpha; H=H)
-
-    log_B = log.(1 .+ aux.b)
-    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
-    log_c = log.(aux.c)
-    log_C = log.(1 .+ aux.c)
-    log_c_minus_C = log_c .- log_C
-
-    # Paper eq (47) b residual: log b = -betaH + K_2 ⊛ log B + K_1 ⊛ (log c - log C)
-    rhs = (-beta * H) .+ apply_kernel(K2, log_B) + apply_kernel(K1, log_c_minus_C)
-
-    log_b = log.(aux.b)
-    return log_b .- rhs
-end
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # Picard solver (b-channel only, alpha-mixing)
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -846,47 +730,6 @@ struct JKSSolution
     iterations::Int
     residual::Float64
     converged::Bool
-end
-
-"""
-    solve_jks_nlie_b_only(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
-                          maxiter=200, alpha_mix=0.3) -> JKSSolution
-
-Picard iteration on the b-channel of the JKS NLIE only (Stage C.4
-scope). c and c_bar are held at the atomic-limit constants. Init from
-`init_atomic_limit`; update rule
-
-    log b_new = log b_old - alpha_mix * residual
-
-until L-infinity norm of residual is below `tol`.
-"""
-function solve_jks_nlie_b_only(
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real;
-    alpha::Real=U/6,
-    H::Real=0.0,
-    tol::Real=1e-6,
-    maxiter::Int=200,
-    alpha_mix::Real=0.3,
-)
-    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
-    0 < alpha_mix <= 1 || throw(DomainError(alpha_mix, "alpha_mix must be in (0, 1]"))
-    aux = init_atomic_limit(grid, beta, U, mu; h=H)
-
-    last_residual = Inf
-    for iter in 1:maxiter
-        res = jks_nlie_residual(aux, grid, beta, U, mu, alpha; H=H)
-        last_residual = maximum(abs.(res))
-        if last_residual < tol
-            return JKSSolution(aux, iter, last_residual, true)
-        end
-        log_b_new = log.(aux.b) .- alpha_mix .* res
-        aux.b .= exp.(log_b_new)
-        aux.b_bar .= aux.b
-    end
-    return JKSSolution(aux, maxiter, last_residual, false)
 end
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -925,21 +768,6 @@ function build_kernel_matrix_shifted(grid::JKSContourGrid, n::Integer, alpha_shi
 end
 
 # Stage C.18: K_bar kernel with -i*alpha shift (conjugate of K_n).
-function build_kernel_matrix_shifted_bar(
-    grid::JKSContourGrid, n::Integer, alpha_shift::Real
-)
-    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
-    alpha_shift > 0 || throw(DomainError(alpha_shift, "alpha_shift must be > 0"))
-    N = grid.N
-    K = zeros(ComplexF64, N, N)
-    for j in 1:N, k in 1:N
-        K[j, k] =
-            jks_kernel_K_n_concrete(
-                grid.x[j] - grid.x[k] - im * alpha_shift, n, grid.gamma
-            ) * grid.weights[k]
-    end
-    return K
-end
 
 """
     jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
@@ -980,119 +808,12 @@ function jks_nlie_residual_shifted(
     return log_b .- rhs
 end
 
-"""
-    solve_jks_nlie_shifted(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
-                          maxiter=200, alpha_mix=0.05) -> JKSSolution
-
-Picard solver using the physically-shifted kernels. Default `alpha_mix`
-is 0.05 (smaller than Stage C.4's 0.3) because even with correct kernel
-regularization the Jacobian can drive Picard unstable for large mixing.
-"""
-function solve_jks_nlie_shifted(
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real;
-    alpha::Real=U/6,
-    H::Real=0.0,
-    tol::Real=1e-6,
-    maxiter::Int=200,
-    alpha_mix::Real=0.05,
-)
-    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
-    0 < alpha_mix <= 1 || throw(DomainError(alpha_mix, "alpha_mix must be in (0, 1]"))
-    aux = init_atomic_limit(grid, beta, U, mu; h=H)
-
-    last_residual = Inf
-    for iter in 1:maxiter
-        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
-        last_residual = maximum(abs.(res))
-        if !isfinite(last_residual)
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-        if last_residual < tol
-            return JKSSolution(aux, iter, last_residual, true)
-        end
-        log_b_new = log.(aux.b) .- alpha_mix .* res
-        aux.b .= exp.(log_b_new)
-        aux.b_bar .= aux.b
-    end
-    return JKSSolution(aux, maxiter, last_residual, false)
-end
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Hubbard1DJKSNLIE Stage C.6 — adaptive alpha-mix Picard solver
 #
 # Stage C.5 fixed the kernel scale; adaptive mixing extends convergence
 # from the high-T regime down into intermediate T / U.
 # ─────────────────────────────────────────────────────────────────────────────
-
-"""
-    solve_jks_nlie_adaptive(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
-                            maxiter=2000, alpha_mix_init=0.02,
-                            alpha_mix_floor=1e-6, alpha_mix_cap=0.5,
-                            shrink=0.5, grow=1.1) -> JKSSolution
-
-Adaptive alpha-mix Picard solver. Updates the mixing parameter based on
-whether the residual is decreasing:
-
-  - shrink alpha_mix by `shrink` if residual grows by > 10%
-  - grow alpha_mix by `grow` if residual shrinks by > 10%
-  - floor at `alpha_mix_floor`
-  - cap at `alpha_mix_cap`
-"""
-function solve_jks_nlie_adaptive(
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real;
-    alpha::Real=U/6,
-    H::Real=0.0,
-    tol::Real=1e-6,
-    maxiter::Int=2000,
-    alpha_mix_init::Real=0.02,
-    alpha_mix_floor::Real=1e-6,
-    alpha_mix_cap::Real=0.5,
-    shrink::Real=0.5,
-    grow::Real=1.1,
-)
-    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
-    0 < alpha_mix_init <= 1 ||
-        throw(DomainError(alpha_mix_init, "alpha_mix_init must be in (0, 1]"))
-    0 < shrink < 1 || throw(DomainError(shrink, "shrink must be in (0, 1)"))
-    grow > 1 || throw(DomainError(grow, "grow must be > 1"))
-
-    aux = init_atomic_limit(grid, beta, U, mu; h=H)
-
-    alpha_mix = alpha_mix_init
-    prev_residual = Inf
-    last_residual = Inf
-
-    for iter in 1:maxiter
-        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
-        last_residual = maximum(abs.(res))
-
-        if !isfinite(last_residual)
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-        if last_residual < tol
-            return JKSSolution(aux, iter, last_residual, true)
-        end
-
-        if last_residual > prev_residual * 1.1
-            alpha_mix = max(alpha_mix * shrink, alpha_mix_floor)
-        elseif last_residual < prev_residual * 0.9
-            alpha_mix = min(alpha_mix * grow, alpha_mix_cap)
-        end
-
-        log_b_new = log.(aux.b) .- alpha_mix .* res
-        aux.b .= exp.(log_b_new)
-        aux.b_bar .= aux.b
-
-        prev_residual = last_residual
-    end
-    return JKSSolution(aux, maxiter, last_residual, false)
-end
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Hubbard1DJKSNLIE Stage C.7 — damped Newton solver
@@ -1103,115 +824,6 @@ end
 # Jacobian and damped line search to handle overshoot.
 # ─────────────────────────────────────────────────────────────────────────────
 
-"""
-    jks_jacobian_b_finite_diff(aux, grid, beta, U, mu, alpha; H=0.0, eps=1e-6)
-        -> Matrix{ComplexF64}
-
-Numerical Jacobian `J[i, k] = d residual_i / d log b_k` via forward
-finite difference at step `eps`. Requires `N + 1` residual evaluations
-on an `N`-point grid.
-"""
-function jks_jacobian_b_finite_diff(
-    aux::JKSAuxFunctions,
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real,
-    alpha::Real;
-    H::Real=0.0,
-    eps::Real=1e-6,
-)
-    N = grid.N
-    res0 = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
-    J = zeros(ComplexF64, N, N)
-    log_b0 = log.(aux.b)
-    for k in 1:N
-        aux_pert = copy(aux)
-        log_b_pert = copy(log_b0)
-        log_b_pert[k] += eps
-        aux_pert.b .= exp.(log_b_pert)
-        aux_pert.b_bar .= aux_pert.b
-        res_pert = jks_nlie_residual_shifted(aux_pert, grid, beta, U, mu, alpha; H=H)
-        J[:, k] = (res_pert .- res0) ./ eps
-    end
-    return J
-end
-
-"""
-    solve_jks_nlie_newton(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
-                          maxiter=50, jac_eps=1e-6,
-                          damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01)) -> JKSSolution
-
-Damped Newton solver. At each iteration: compute residual r and Jacobian
-J, solve `J · δ = -r`, then try damping factors from largest to smallest
-and accept the first that decreases the residual.
-"""
-function solve_jks_nlie_newton(
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real;
-    alpha::Real=U/6,
-    H::Real=0.0,
-    tol::Real=1e-6,
-    maxiter::Int=50,
-    jac_eps::Real=1e-6,
-    damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
-)
-    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
-    aux = init_atomic_limit(grid, beta, U, mu; h=H)
-    last_residual = Inf
-
-    for iter in 1:maxiter
-        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
-        last_residual = maximum(abs.(res))
-
-        if !isfinite(last_residual)
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-        if last_residual < tol
-            return JKSSolution(aux, iter, last_residual, true)
-        end
-
-        J = jks_jacobian_b_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
-
-        delta = try
-            J \ (-res)
-        catch
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-
-        if !all(isfinite, delta)
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-
-        log_b_old = log.(aux.b)
-        accepted = false
-        for damp in damps
-            log_b_new = log_b_old .+ damp .* delta
-            aux_try = copy(aux)
-            aux_try.b .= exp.(log_b_new)
-            aux_try.b_bar .= aux_try.b
-            res_try = try
-                jks_nlie_residual_shifted(aux_try, grid, beta, U, mu, alpha; H=H)
-            catch
-                continue
-            end
-            res_try_norm = maximum(abs.(res_try))
-            if isfinite(res_try_norm) && res_try_norm < last_residual
-                aux.b .= aux_try.b
-                aux.b_bar .= aux_try.b_bar
-                accepted = true
-                break
-            end
-        end
-        if !accepted
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-    end
-    return JKSSolution(aux, maxiter, last_residual, false)
-end
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Hubbard1DJKSNLIE Stage C.8 — beta-continuation Newton solver
 #
@@ -1220,157 +832,6 @@ end
 # Continuation: solve at high T, then walk beta up using each converged
 # aux as the next initial guess.
 # ─────────────────────────────────────────────────────────────────────────────
-
-"""
-    solve_jks_nlie_newton_from(aux_init, grid, beta, U, mu; alpha, H, tol,
-                                maxiter, jac_eps, damps) -> JKSSolution
-
-Like `solve_jks_nlie_newton` but takes an explicit initial guess
-`aux_init` instead of allocating from `init_atomic_limit`. Used as the
-inner loop of the beta-continuation solver.
-"""
-function solve_jks_nlie_newton_from(
-    aux_init::JKSAuxFunctions,
-    grid::JKSContourGrid,
-    beta::Real,
-    U::Real,
-    mu::Real;
-    alpha::Real=U/6,
-    H::Real=0.0,
-    tol::Real=1e-6,
-    maxiter::Int=50,
-    jac_eps::Real=1e-6,
-    damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
-)
-    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
-    aux = copy(aux_init)
-    last_residual = Inf
-
-    for iter in 1:maxiter
-        res = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
-        last_residual = maximum(abs.(res))
-        if !isfinite(last_residual)
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-        if last_residual < tol
-            return JKSSolution(aux, iter, last_residual, true)
-        end
-
-        J = jks_jacobian_b_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
-        delta = try
-            J \ (-res)
-        catch
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-        if !all(isfinite, delta)
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-
-        log_b_old = log.(aux.b)
-        accepted = false
-        for damp in damps
-            log_b_new = log_b_old .+ damp .* delta
-            aux_try = copy(aux)
-            aux_try.b .= exp.(log_b_new)
-            aux_try.b_bar .= aux_try.b
-            res_try = try
-                jks_nlie_residual_shifted(aux_try, grid, beta, U, mu, alpha; H=H)
-            catch
-                continue
-            end
-            res_try_norm = maximum(abs.(res_try))
-            if isfinite(res_try_norm) && res_try_norm < last_residual
-                aux.b .= aux_try.b
-                aux.b_bar .= aux_try.b_bar
-                accepted = true
-                break
-            end
-        end
-        if !accepted
-            return JKSSolution(aux, iter, last_residual, false)
-        end
-    end
-    return JKSSolution(aux, maxiter, last_residual, false)
-end
-
-"""
-    solve_jks_nlie_continuation(grid, beta_target, U, mu; alpha=U/6, H=0,
-                                 beta_start=0.01, step_init=0.5,
-                                 step_min=1e-3, step_max=1.0,
-                                 grow_factor=1.2, shrink_factor=0.5,
-                                 tol=1e-6, inner_maxiter=30,
-                                 outer_maxsteps=200) -> JKSSolution
-
-Beta-continuation Newton solver. Solve at `beta_start` from atomic-limit
-init, then walk `beta` up multiplicatively (`beta_new = beta * (1 + step)`)
-to `beta_target`. On inner-Newton convergence: grow `step`. On failure:
-shrink `step`. Give up if `step < step_min`.
-"""
-function solve_jks_nlie_continuation(
-    grid::JKSContourGrid,
-    beta_target::Real,
-    U::Real,
-    mu::Real;
-    alpha::Real=U/6,
-    H::Real=0.0,
-    beta_start::Real=0.01,
-    step_init::Real=0.5,
-    step_min::Real=1e-3,
-    step_max::Real=1.0,
-    grow_factor::Real=1.2,
-    shrink_factor::Real=0.5,
-    tol::Real=1e-6,
-    inner_maxiter::Int=30,
-    outer_maxsteps::Int=200,
-)
-    beta_target > 0 || throw(DomainError(beta_target, "beta_target must be > 0"))
-    beta_start > 0 || throw(DomainError(beta_start, "beta_start must be > 0"))
-    beta_start <= beta_target || throw(ArgumentError("beta_start must be <= beta_target"))
-    0 < shrink_factor < 1 ||
-        throw(DomainError(shrink_factor, "shrink_factor must be in (0, 1)"))
-    grow_factor > 1 || throw(DomainError(grow_factor, "grow_factor must be > 1"))
-
-    aux = init_atomic_limit(grid, beta_start, U, mu; h=H)
-    sol_init = solve_jks_nlie_newton_from(
-        aux, grid, beta_start, U, mu; alpha=alpha, H=H, tol=tol, maxiter=inner_maxiter
-    )
-    if !sol_init.converged
-        return JKSSolution(sol_init.aux, sol_init.iterations, sol_init.residual, false)
-    end
-    aux = sol_init.aux
-
-    beta_current = beta_start
-    step = step_init
-    total_iter = sol_init.iterations
-
-    for outer_iter in 1:outer_maxsteps
-        if beta_current >= beta_target - 1e-12
-            return JKSSolution(aux, total_iter, sol_init.residual, true)
-        end
-
-        beta_try = min(beta_current * (1 + step), beta_target)
-        sol = solve_jks_nlie_newton_from(
-            aux, grid, beta_try, U, mu; alpha=alpha, H=H, tol=tol, maxiter=inner_maxiter
-        )
-        total_iter += sol.iterations
-
-        if sol.converged
-            beta_current = beta_try
-            aux = sol.aux
-            step = min(step * grow_factor, step_max)
-        else
-            step *= shrink_factor
-            if step < step_min
-                return JKSSolution(aux, total_iter, sol.residual, false)
-            end
-        end
-    end
-
-    final_res = maximum(
-        abs.(jks_nlie_residual_shifted(aux, grid, beta_current, U, mu, alpha; H=H))
-    )
-    return JKSSolution(aux, total_iter, final_res, beta_current >= beta_target - 1e-12)
-end
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Hubbard1DJKSNLIE Stage C.9 — high-level free energy wrapper
@@ -1424,21 +885,37 @@ function hubbard1d_jks_free_energy(
     maxiter::Int=40,
     N_cheb::Int=64,
     solver::Symbol=:full_newton_continuation,
-    # Backward compat kwargs (only used when solver = :b_only_continuation)
     beta_start::Real=0.01,
-    inner_maxiter::Int=30,
     outer_maxsteps::Int=200,
 )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     U >= 0 || throw(DomainError(U, "U must be >= 0"))
     isapprox(t, 1.0) ||
         throw(ArgumentError("JKS wrapper assumes t = 1; rescale externally for general t"))
+    # The 3-channel Newton solver enforces b̄ = b at every step, which is
+    # exact only at H=0 and μ = U/2 (half-filling). Breaking either symmetry
+    # requires the full independent b/b̄ NLIE (Stage H+); reject here rather
+    # than silently return a wrong answer.
+    isapprox(H, 0.0; atol=1e-10) || throw(
+        ArgumentError(
+            "JKS NLIE currently supports H = 0 only (b̄ = b symmetry); got H = $H"
+        ),
+    )
+    isapprox(mu, U / 2; atol=1e-10) || throw(
+        ArgumentError(
+            "JKS NLIE currently supports half-filling μ = U/2 only; got μ = $mu, U = $U"
+        ),
+    )
 
     eta = U / 4
 
-    if alpha >= eta
-        return NaN
-    end
+    alpha < eta || throw(
+        DomainError(
+            alpha,
+            "JKS NLIE requires 0 < alpha < eta = U/4 = $(eta); got alpha = $(alpha). " *
+            "Choose alpha < U/4 (default U/6 satisfies this).",
+        ),
+    )
 
     grid = if nonuniform
         build_nonuniform_grid(;
@@ -1468,23 +945,12 @@ function hubbard1d_jks_free_energy(
             maxiter=maxiter,
             outer_maxsteps=outer_maxsteps,
         )
-    elseif solver == :b_only_continuation
-        # Stage C.4-C.10 b-only path with beta-continuation (legacy).
-        bs = min(beta_start, beta)
-        solve_jks_nlie_continuation(
-            grid,
-            beta,
-            U,
-            mu;
-            alpha=alpha,
-            H=H,
-            beta_start=bs,
-            tol=tol,
-            inner_maxiter=inner_maxiter,
-            outer_maxsteps=outer_maxsteps,
-        )
     else
-        throw(ArgumentError("solver must be :full_newton or :b_only_continuation, got $solver"))
+        throw(
+            ArgumentError(
+                "solver must be :full_newton or :full_newton_continuation, got $solver"
+            ),
+        )
     end
 
     if !sol.converged
@@ -1700,7 +1166,11 @@ function solve_jks_nlie_full_newton(
 
         delta = try
             J \ (-res)
-        catch
+        catch e
+            # Only swallow numerical failures (singular Jacobian); programming
+            # errors (BoundsError, MethodError, etc.) must propagate.
+            e isa LinearAlgebra.SingularException || rethrow()
+            @warn "JKS Newton: singular Jacobian" iter=iter beta=beta
             return JKSSolution(aux, iter, last_residual, false)
         end
         if !all(isfinite, delta)
@@ -1724,7 +1194,10 @@ function solve_jks_nlie_full_newton(
             aux_try.c_bar .= exp.(log_cbar_old .+ damp .* delta_cbar)
             res_try = try
                 jks_nlie_residual_full(aux_try, grid, beta, U, mu, alpha; H=H)
-            catch
+            catch e
+                # Only continue past numerical NaN/Inf cascades; programming bugs
+                # (BoundsError, MethodError, etc.) must propagate.
+                e isa DomainError || rethrow()
                 continue
             end
             res_try_norm = maximum(abs.(res_try))
@@ -1785,7 +1258,11 @@ function solve_jks_nlie_full_newton_from(
 
         delta = try
             J \ (-res)
-        catch
+        catch e
+            # Only swallow numerical failures (singular Jacobian); programming
+            # errors (BoundsError, MethodError, etc.) must propagate.
+            e isa LinearAlgebra.SingularException || rethrow()
+            @warn "JKS Newton: singular Jacobian" iter=iter beta=beta
             return JKSSolution(aux, iter, last_residual, false)
         end
         if !all(isfinite, delta)
@@ -1809,7 +1286,10 @@ function solve_jks_nlie_full_newton_from(
             aux_try.c_bar .= exp.(log_cbar_old .+ damp .* delta_cbar)
             res_try = try
                 jks_nlie_residual_full(aux_try, grid, beta, U, mu, alpha; H=H)
-            catch
+            catch e
+                # Only continue past numerical NaN/Inf cascades; programming bugs
+                # (BoundsError, MethodError, etc.) must propagate.
+                e isa DomainError || rethrow()
                 continue
             end
             res_try_norm = maximum(abs.(res_try))

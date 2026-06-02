@@ -321,6 +321,11 @@ function fetch(
     alpha::Real=(m.U / 6),
     tol::Real=1e-6,
     maxiter::Int=40,
+    nonuniform::Bool=false,
+    x_inner::Real=2.0,
+    N_inner::Int=80,
+    N_outer::Int=24,
+    solver::Symbol=:full_newton_continuation,
     kwargs...,
 )
     beta > 0 || throw(
@@ -341,6 +346,10 @@ function fetch(
         alpha=alpha,
         tol=tol,
         maxiter=maxiter,
-        solver=:full_newton,
+        nonuniform=nonuniform,
+        x_inner=x_inner,
+        N_inner=N_inner,
+        N_outer=N_outer,
+        solver=solver,
     )
 end

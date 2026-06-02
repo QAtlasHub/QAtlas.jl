@@ -5,7 +5,7 @@
 # against direct reading of JKS 1998 PDF (cond-mat/9711310).
 
 using Test
-using QAtlas
+using QAtlas: fetch, FreeEnergy, Infinite, Hubbard1D
 using QAtlas.Hubbard1DJKSNLIE:
     JKSContourGrid,
     JKSAuxFunctions,
@@ -100,5 +100,47 @@ using QAtlas.Hubbard1DJKSNLIE:
         )
         f_hi = free_energy_jks(sol_hi.aux, grid_hi, 0.001, 4.0; mu=2.0)
         @test isapprox(f_hi / f_a, 1.0; rtol=0.01)
+    end
+
+    @testset "guard contract" begin
+        m = Hubbard1D(t=1.0, U=4.0, μ=2.0)
+        # beta <= 0 → DomainError
+        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.0)
+        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=-1.0)
+        # t != 1 → ArgumentError (JKS path-rescale not implemented)
+        m_t2 = Hubbard1D(t=2.0, U=4.0, μ=2.0)
+        @test_throws ArgumentError fetch(m_t2, FreeEnergy(), Infinite(); beta=0.1)
+        # H != 0 → ArgumentError (b̄=b symmetry only valid at H=0)
+        @test_throws ArgumentError fetch(m, FreeEnergy(), Infinite(); beta=0.1, H=0.5)
+        # off-half-filling → ArgumentError
+        m_qf = Hubbard1D(t=1.0, U=4.0, μ=1.0)
+        @test_throws ArgumentError fetch(m_qf, FreeEnergy(), Infinite(); beta=0.1)
+    end
+
+    @testset "alpha >= eta DomainError" begin
+        m = Hubbard1D(t=1.0, U=4.0, μ=2.0)
+        # alpha = U/4 (=eta) hits the constraint boundary
+        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.001, alpha=1.0)
+        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.001, alpha=2.0)
+    end
+
+    @testset "nonuniform grid path" begin
+        # Smoke test for build_nonuniform_grid path (Stage F.2)
+        m = Hubbard1D(t=1.0, U=4.0, μ=2.0)
+        f_uni = fetch(m, FreeEnergy(), Infinite(); beta=0.001, grid_N=128, x_max=32.0)
+        f_non = fetch(
+            m,
+            FreeEnergy(),
+            Infinite();
+            beta=0.001,
+            nonuniform=true,
+            x_inner=2.0,
+            N_inner=80,
+            N_outer=24,
+        )
+        @test isfinite(f_uni)
+        @test isfinite(f_non)
+        # Should agree to a few percent (different grids, same physics)
+        @test isapprox(f_uni, f_non; rtol=0.05)
     end
 end

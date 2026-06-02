@@ -24,12 +24,10 @@ using QAtlas.Hubbard1DJKSNLIE: hubbard1d_jks_free_energy, atomic_free_energy
         @test_throws DomainError hubbard1d_jks_free_energy(1.0, -1.0, 0.0, 0.1)
     end
 
-    @testset "alpha >= eta returns NaN (caller error)" begin
+    @testset "alpha >= eta throws DomainError (caller error)" begin
         # alpha must be < eta = U/4. With U = 4, eta = 1; alpha = 1 is invalid.
-        f = hubbard1d_jks_free_energy(1.0, 4.0, 2.0, 0.01; alpha=1.0)
-        @test isnan(f)
-        f2 = hubbard1d_jks_free_energy(1.0, 4.0, 2.0, 0.01; alpha=2.0)
-        @test isnan(f2)
+        @test_throws DomainError hubbard1d_jks_free_energy(1.0, 4.0, 2.0, 0.01; alpha=1.0)
+        @test_throws DomainError hubbard1d_jks_free_energy(1.0, 4.0, 2.0, 0.01; alpha=2.0)
     end
 
     @testset "High-T sanity: returns reasonable finite value" begin

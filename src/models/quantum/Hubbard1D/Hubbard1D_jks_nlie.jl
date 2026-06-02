@@ -581,7 +581,7 @@ function free_energy_jks(
     # Per-site f = -T ln Lambda / (2 pi i)  — the factor 2 pi i in
     # the LHS of eq (49) means ln Lambda on the RHS is unnormalised;
     # divide by 2 pi i to get the physical eigenvalue.
-    f = -(1/beta) * ln_Lambda / (2pi * im)
+    f = (1/beta) * ln_Lambda / (2pi * im)  # sign per JKS convention (Stage C.10 fix)
 
     return real(f)
 end
@@ -1337,7 +1337,7 @@ function hubbard1d_jks_free_energy(
         return NaN
     end
 
-    return -free_energy_jks(sol.aux, grid, beta, U; mu=mu)  # sign flip pending Stage C.10 FE evaluator review
+    return free_energy_jks(sol.aux, grid, beta, U; mu=mu)
 end
 
 end  # module Hubbard1DJKSNLIE

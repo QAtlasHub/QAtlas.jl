@@ -80,4 +80,24 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
             @test f_gsed == f_ener
         end
     end
+
+    @testset "MassGap@Infinite -- critical axial + XY line" begin
+        # Heisenberg, XXZ critical, XX point: all gapless
+        for (Jx, Jy, Jz) in
+            ((1.0, 1.0, 1.0), (1.0, 1.0, 0.5), (1.0, 1.0, -0.5), (1.0, 1.0, 0.0))
+            m = HeisenbergXYZ(; Jx=Jx, Jy=Jy, Jz=Jz)
+            @test fetch(m, QAtlas.MassGap(), Infinite()) == 0.0
+        end
+        # XY anisotropic line: gap = (1/4) |Jx - Jy|
+        for (Jx, Jy) in ((2.0, 1.0), (3.0, 0.5), (1.0, 2.0))
+            m = HeisenbergXYZ(; Jx=Jx, Jy=Jy, Jz=0.0)
+            @test fetch(m, QAtlas.MassGap(), Infinite()) ≈ abs(Jx - Jy) / 4 atol=1e-12
+        end
+        # Massive AFM (Jz/Jx > 1): not yet implemented, DomainError
+        m_massive = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.5)
+        @test_throws DomainError fetch(m_massive, QAtlas.MassGap(), Infinite())
+        # Generic XYZ: DomainError
+        m_generic = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.5)
+        @test_throws DomainError fetch(m_generic, QAtlas.MassGap(), Infinite())
+    end
 end

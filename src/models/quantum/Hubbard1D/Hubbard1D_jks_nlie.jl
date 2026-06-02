@@ -1383,7 +1383,8 @@ function jks_nlie_residual_c(
 
     # Stage C.16 Option B: add -(1/2) log C term (Delta dropped as typesetting).
     rhs =
-        -psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
+        -psi_c - apply_kernel(K1, log_B) +
+        apply_kernel(K1, log_Bbar) +
         apply_kernel(K2, log_Cbar) - 0.5 .* log_C
 
     log_c = log.(aux.c)
@@ -1421,7 +1422,8 @@ function jks_nlie_residual_cbar(
 
     # Stage C.16 Option B: add -(1/2) log Cbar term.
     rhs =
-        -psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
+        -psi_cbar - apply_kernel(K1, log_B) +
+        apply_kernel(K1, log_Bbar) +
         apply_kernel(K2, log_C) - 0.5 .* log_Cbar
 
     log_cbar = log.(aux.c_bar)

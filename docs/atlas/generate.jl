@@ -558,7 +558,9 @@ function render_model_index(model_name::AbstractString)
     # After the migration every cited reference is a bibkey; the filter guards
     # against a stray free string ever breaking the @bibliography block (the
     # full reference list is rendered at the bottom of the page).
-    refs_unique = sort(unique(r for r in refs_seen if occursin(r"^[A-Za-z][A-Za-z0-9_]*$", r)))
+    refs_unique = sort(
+        unique(r for r in refs_seen if occursin(r"^[A-Za-z][A-Za-z0-9_]*$", r))
+    )
     P(
         "**Methods** (from `@register`, derived): ",
         isempty(methods_seen) ? "—" : join(("`" * m * "`" for m in methods_seen), ", "),

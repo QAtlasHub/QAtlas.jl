@@ -308,3 +308,35 @@ end
         @test e.method !== :unknown
     end
 end
+
+@testset "references_for returns the registry bibkeys for a triple" begin
+    # TFIM per-site energy at infinite size rests on Pfeuty 1970 (BdG).
+    @test references_for(TFIM(), Energy{:per_site}(), Infinite()) == ["Pfeuty1970"]
+
+    # Types and instances are interchangeable, mirroring implementation_status.
+    @test references_for(TFIM, Energy{:per_site}, Infinite) ==
+        references_for(TFIM(), Energy{:per_site}(), Infinite())
+
+    # Unregistered / reference-free triples yield an empty vector, never throw.
+    @test references_for(TFIM(), MeanRatio(), OBC(8)) == String[]
+end
+
+@testset "references_for aggregates over unspecified axes" begin
+    # (model, quantity): union across boundary conditions, deduped + sorted.
+    pair = references_for(TFIM(), Energy{:per_site}())
+    @test "Pfeuty1970" in pair
+    @test issorted(pair) && allunique(pair)
+
+    # (model): every paper any TFIM row cites — a superset of any narrower query.
+    all_tfim = references_for(TFIM())
+    @test issorted(all_tfim) && allunique(all_tfim)
+    @test "Pfeuty1970" in all_tfim
+    @test issubset(Set(pair), Set(all_tfim))
+
+    # Cross-check against the source of truth: identical to folding the
+    # registry rows for TFIM by hand.
+    expected = sort!(
+        unique!(String[r for e in REGISTRY if e.model === TFIM for r in e.references])
+    )
+    @test all_tfim == expected
+end

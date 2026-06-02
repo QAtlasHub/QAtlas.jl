@@ -1,5 +1,6 @@
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DocumenterCitations = "daee34ce-89f3-4625-b898-19384cb65244"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 QAtlas = "2bd488d2-d3e6-46ee-afb3-5515643db0c7"
 

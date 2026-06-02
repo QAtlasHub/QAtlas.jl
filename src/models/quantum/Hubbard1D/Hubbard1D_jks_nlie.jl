@@ -1340,4 +1340,110 @@ function hubbard1d_jks_free_energy(
     return free_energy_jks(sol.aux, grid, beta, U; mu=mu)
 end
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Hubbard1DJKSNLIE Stage C.11 — c, c_bar channel residuals + 3-equation system
+#
+# Stage C.4-C.10 only iterated the b channel; c and c_bar were held at
+# atomic-limit constants. That left a ~3 % offset in the high-T
+# hubbard1d_jks_free_energy vs atomic_free_energy comparison (#544).
+#
+# Adds residuals for the c and c_bar equations from JKS eq (53) and a
+# concatenation `jks_nlie_residual_full` that Stage C.12 will drive to
+# zero via a 3N x 3N Newton solver.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    jks_nlie_residual_c(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
+
+c-channel NLIE residual `log c+ - RHS_c` per JKS eq (53).
+"""
+function jks_nlie_residual_c(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
+    length(aux) == grid.N ||
+        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
+
+    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
+    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+
+    psi_c = jks_driving_c(grid, beta, U, mu; H=H)
+
+    log_B = log.(1 .+ aux.b)
+    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_Cbar = log.(1 .+ aux.c_bar)
+
+    rhs =
+        psi_c + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
+        apply_kernel(K2, log_Cbar)
+
+    log_c = log.(aux.c)
+    return log_c .- rhs
+end
+
+"""
+    jks_nlie_residual_cbar(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
+
+c_bar-channel NLIE residual (particle-hole conjugate structure).
+"""
+function jks_nlie_residual_cbar(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
+    length(aux) == grid.N ||
+        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
+
+    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
+    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+
+    psi_cbar = jks_driving_cbar(grid, beta, U, mu; H=H)
+
+    log_B = log.(1 .+ aux.b)
+    log_Bbar = log.(1 .+ 1 ./ aux.b_bar)
+    log_C = log.(1 .+ aux.c)
+
+    rhs =
+        psi_cbar + apply_kernel(K1, log_B) - apply_kernel(K1, log_Bbar) +
+        apply_kernel(K2, log_C)
+
+    log_cbar = log.(aux.c_bar)
+    return log_cbar .- rhs
+end
+
+"""
+    jks_nlie_residual_full(aux, grid, beta, U, mu, alpha; H=0.0) -> Vector{ComplexF64}
+
+Concatenated NLIE residual covering all three channels (b, c, c_bar) as
+a single length-`3N` complex vector ordered `[res_b; res_c; res_cbar]`.
+Stage C.12's full-system Newton solver drives this to zero.
+"""
+function jks_nlie_residual_full(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+)
+    res_b = jks_nlie_residual_shifted(aux, grid, beta, U, mu, alpha; H=H)
+    res_c = jks_nlie_residual_c(aux, grid, beta, U, mu, alpha; H=H)
+    res_cbar = jks_nlie_residual_cbar(aux, grid, beta, U, mu, alpha; H=H)
+    return vcat(res_b, res_c, res_cbar)
+end
+
 end  # module Hubbard1DJKSNLIE

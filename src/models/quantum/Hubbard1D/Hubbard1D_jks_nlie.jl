@@ -547,51 +547,74 @@ the branch cut `[-1, 1]`.
 - JKS 1998 eq (23), (38), (49) — z(s), kernel, free energy
 """
 function free_energy_jks(
-    aux::JKSAuxFunctions, grid::JKSContourGrid, beta::Real, U::Real; mu::Real=U/2
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real;
+    mu::Real=U/2,
+    N_cheb::Int=64,
 )
+    # Stage E.1: Chebyshev-Gauss quadrature + paper page-14 direct form.
+    #
+    # log Lambda = -int_{-1}^1 K(x) log[(1+c+cb)^2/(c*cb)] dx
+    #             -int_{-1}^1 K_{-2g}(x) log[(1+c+)/(1+c-)] dx
+    #             -beta*U/4
+    #
+    # K(x) = -1/(2 pi sqrt(1-x^2))   (eq 57, paper)
+    #
+    # The 1/sqrt(1-x^2) singularity is handled exactly via Chebyshev-Gauss
+    # nodes x_j = cos((2j-1) pi/(2N)) and uniform weights pi/N:
+    #   int_{-1}^1 g(x)/sqrt(1-x^2) dx ~ (pi/N) sum g(x_j).
+    # Substituting K = -1/(2 pi sqrt(1-x^2)) absorbs the weight to 1/(2N).
+    #
+    # aux.c, aux.c_bar linearly interpolated to Chebyshev nodes from the
+    # uniform NLIE grid.
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     length(aux) == grid.N ||
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
     eta = U / 4
 
-    # Restrict to grid points inside the branch cut [-1, 1]:
-    # the contour integral only contributes on the cut.
-    cut_mask = [-1.0 <= x <= 1.0 for x in grid.x]
+    function _interp_complex(xs, ys, x)
+        idx = searchsortedfirst(xs, x)
+        idx == 1 && return ys[1]
+        idx > length(xs) && return ys[end]
+        x0, x1 = xs[idx - 1], xs[idx]
+        y0, y1 = ys[idx - 1], ys[idx]
+        t = (x - x0) / (x1 - x0)
+        return (1 - t) * y0 + t * y1
+    end
 
-    # First integral:  -2i int_{-1}^{1} ln(1 + c + cbar) / sqrt(1 - s^2) ds
-    # Stage C.24: int_1 = ∫_L [ln z]' log((1+c+c̄)/c) ds.
-    # Closed contour evaluated at +i0+ side: [ln z+]' = -i/sqrt(1-x²) for the
-    # principal branch. Single-valued integrand → 2x the +i0+ contribution.
-    integrand_1 = ComplexF64[
-        if cut_mask[j]
-            log((1 + aux.c[j] + aux.c_bar[j]) / aux.c[j]) / sqrt(1 - grid.x[j]^2)
-        else
-            0.0 + 0im
-        end for j in 1:grid.N
-    ]
-    int_1 = -1im * sum(integrand_1) * grid.dx
+    cheb_nodes = [cos((2j - 1) * pi / (2 * N_cheb)) for j in 1:N_cheb]
+    c_at_cheb = [_interp_complex(grid.x, aux.c, x) for x in cheb_nodes]
+    cbar_at_cheb = [_interp_complex(grid.x, aux.c_bar, x) for x in cheb_nodes]
 
-    # Second integral:  oint [ln z(s - 2 i eta)]' ln C(s) ds.
-    # The pole at s - 2i eta = ±1 is off the real axis for eta > 0; this
-    # second integral is regular on [-1, 1] and we evaluate it as a
-    # straight Riemann sum.
-    integrand_2 = ComplexF64[
-        if cut_mask[j]
-            jks_log_z_deriv(grid.x[j] - 2im * eta) * log(1 + aux.c[j])
-        else
-            0.0 + 0im
-        end for j in 1:grid.N
-    ]
-    int_2 = sum(integrand_2) * grid.dx
+    # First integral: -int K * log[(1+c+cb)^2/(c*cb)] dx
+    int_1 = zero(ComplexF64)
+    for j in 1:N_cheb
+        cv = c_at_cheb[j]
+        cbv = cbar_at_cheb[j]
+        g = log(1 + cv) + log(1 + cbv)
+        int_1 += g
+    end
+    int_1 *= 2 / (2 * N_cheb)  # closed-contour 2x discontinuity factor
 
-    # ln Lambda from eq (49):
-    ln_Lambda = -2pi * im * (U/4) + int_1 + int_2
+    # Second integral: -int K_{-2g}(x) * Delta_log_C dx
+    # K_{-2g}(x) is regular on real x in [-1,1]; use Chebyshev with sin(theta).
+    int_2 = zero(ComplexF64)
+    for j in 1:N_cheb
+        x = cheb_nodes[j]
+        cv = c_at_cheb[j]
+        sin_theta = sqrt(1 - x^2)
+        K_shifted = -1 / (2pi * sqrt(1 - (x - 2im * eta)^2 + 0im))
+        delta_log_C = 2im * imag(log(1 + cv))
+        int_2 += K_shifted * delta_log_C * sin_theta
+    end
+    int_2 *= -pi / N_cheb
 
-    # Per-site f = -T ln Lambda / (2 pi i)  — the factor 2 pi i in
-    # the LHS of eq (49) means ln Lambda on the RHS is unnormalised;
-    # divide by 2 pi i to get the physical eigenvalue.
-    f = (1/beta) * ln_Lambda / (2pi * im)  # sign per JKS convention (Stage C.10 fix)
+    log_Lambda = int_1 + int_2 - beta * U / 4
+
+    f = -(1 / beta) * log_Lambda
 
     return real(f)
 end

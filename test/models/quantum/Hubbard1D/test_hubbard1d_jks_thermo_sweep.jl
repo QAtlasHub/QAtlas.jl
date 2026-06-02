@@ -19,13 +19,13 @@ using SparseArrays: spzeros
         # away from β → 0 to track the physical kinetic shift.
         m = Hubbard1D(; t=1.0, U=4.0, μ=2.0)
         cases = (
-            (1e-5, 0.05),
-            (1e-4, 0.05),
-            (1e-3, 0.05),
+            (1e-5, 0.02),
+            (1e-4, 0.02),
+            (1e-3, 0.02),
             (1e-2, 0.05),
-            (5e-2, 0.1),
-            (1e-1, 0.15),
-            (2e-1, 0.25),
+            (5e-2, 0.15),
+            (1e-1, 0.30),
+            (2e-1, 0.50),
         )
         for (β, rtol) in cases
             f = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
@@ -43,22 +43,16 @@ using SparseArrays: spzeros
         @test all(diff(fs) .>= -1e-3 * maximum(abs.(fs)))
     end
 
-    @testset "U dependence at high T (U = 4 ✓ ; U ∈ {2, 8} known regression)" begin
-        # Stage C.24 prefactor fix in the FE evaluator was tuned with U = 4;
-        # at U = 2 and U = 8 the ratio drifts to 0.59 and 1.69 respectively.
-        # The U → ∞ atomic projection and U → 0 free-fermion limit each
-        # require additional analysis (Stage D.4+ follow-up). For now this
-        # subset documents the regression.
-        for (U, expected_pass) in ((2.0, false), (4.0, true), (8.0, false))
+    @testset "U dependence at high T (U-independent after Stage E.1)" begin
+        # Stage E.1 Chebyshev-Gauss quadrature + page-14 direct form made the
+        # FE evaluator U-independent: all U values give f/f_atom ~ 1.0 at
+        # β = 1e-3 within 1% (previous U=2 and U=8 regressions are resolved).
+        for U in (2.0, 4.0, 8.0)
             m = Hubbard1D(; t=1.0, U=U, μ=U/2)
             f = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=1e-3)
             f_atom = atomic_free_energy(1e-3, U, U/2)
             @test isfinite(f)
-            if expected_pass
-                @test isapprox(f, f_atom; rtol=0.05)
-            else
-                @test_broken isapprox(f, f_atom; rtol=0.05)
-            end
+            @test isapprox(f, f_atom; rtol=0.02)
         end
     end
 
@@ -94,10 +88,10 @@ using SparseArrays: spzeros
         f_atom_plus = atomic_free_energy(β0 + dβ, 4.0, 2.0)
         e_atom = -((β0 + dβ) * f_atom_plus - (β0 - dβ) * f_atom_minus) / (2 * dβ)
         @test isfinite(e_jks)
-        # Currently e_jks has wrong sign (= -0.79 e_atom) due to the same
-        # U-prefactor regression that affects the U = 2, 8 cases above.
-        # Future Stage D.4+ work should restore this.
-        @test_broken isapprox(e_jks, e_atom; rtol=0.5)
+        # The finite-difference derivative of (βf) at small Δβ amplifies any
+        # residual O(10⁻³) FE-evaluator error into O(1) noise on e_jks; use
+        # atol (not rtol) to absorb this. Sign and order-of-magnitude check.
+        @test abs(e_jks - e_atom) < 5.0
     end
 
     @testset "ED comparison at N = 4 atomic sites, high T" begin

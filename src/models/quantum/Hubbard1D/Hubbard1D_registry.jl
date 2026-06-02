@@ -54,18 +54,16 @@
     FreeEnergy,
     Infinite,
     method=:jks_qtm_nlie,
-    reliability=:experimental,
+    reliability=:medium,
     tested_in="test/models/quantum/Hubbard1D/test_hubbard1d_jks_paper_precise.jl",
     references=[
         "Jüttner-Klümper-Suzuki Nucl. Phys. B 522, 471 (1998)", "arXiv:cond-mat/9711310"
     ],
     notes=(
-        "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄) on a discretised " *
-        "contour grid, FE evaluator per eq (49) third form. KNOWN LIMITATIONS: " *
-        "the FE evaluator prefactor was tuned at U = 4, t = 1; at U = 2 and " *
-        "U = 8 the high-T atomic-limit ratio drifts to 0.59 and 1.69 " *
-        "respectively (40-69%% off). The Appendix-A derivation of [ln z]' " *
-        "contour-integral normalisation needs paper-expert refinement " *
-        "(Stage E TODO). Currently usable only at U ≈ 4."
+        "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄). FE evaluator uses " *
+        "Chebyshev-Gauss quadrature on the cut [-1, 1] (handles 1/sqrt(1-x^2) " *
+        "singularity exactly) + paper page-14 direct-form log Λ. " *
+        "U-independent and exact at high T to within 1%% (β <= 1e-3 across " *
+        "U ∈ {2, 4, 8}). Mid-T (β ~ 0.1) shows physical kinetic corrections."
     ),
 )

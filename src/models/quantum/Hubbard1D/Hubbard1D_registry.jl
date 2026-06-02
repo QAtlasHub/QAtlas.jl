@@ -54,16 +54,18 @@
     FreeEnergy,
     Infinite,
     method=:jks_qtm_nlie,
-    reliability=:medium,
+    reliability=:experimental,
     tested_in="test/models/quantum/Hubbard1D/test_hubbard1d_jks_paper_precise.jl",
     references=[
         "Jüttner-Klümper-Suzuki Nucl. Phys. B 522, 471 (1998)", "arXiv:cond-mat/9711310"
     ],
     notes=(
         "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄) on a discretised " *
-        "contour grid, FE evaluator per eq (49) third form. High-T atomic " *
-        "limit reproduced within ~3% at default grid (N=64, x_max=8); 2% " *
-        "at N=128. Reliability :medium pending Stage D.4 closure of the " *
-        "residual ~2% offset."
+        "contour grid, FE evaluator per eq (49) third form. KNOWN LIMITATIONS: " *
+        "the FE evaluator prefactor was tuned at U = 4, t = 1; at U = 2 and " *
+        "U = 8 the high-T atomic-limit ratio drifts to 0.59 and 1.69 " *
+        "respectively (40-69%% off). The Appendix-A derivation of [ln z]' " *
+        "contour-integral normalisation needs paper-expert refinement " *
+        "(Stage E TODO). Currently usable only at U ≈ 4."
     ),
 )

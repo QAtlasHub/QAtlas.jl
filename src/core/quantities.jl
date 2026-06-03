@@ -633,6 +633,25 @@ Affleck-Ludwig 1991. Tracking: #580.
 struct BoundaryEntropy <: AbstractQuantity end
 
 """
+    PageEntropy() <: AbstractQuantity
+
+Page average entropy of a subsystem for a Haar-random pure state in
+`H_A ⊗ H_B`. For `dim(H_A) = m`, `dim(H_B) = n` with `m ≤ n` (else
+swap by purity symmetry), Page 1993 found
+
+    <S_A> = sum_{k=n+1}^{m·n} 1/k - (m-1)/(2n).
+
+For `m = n` this gives `<S_A> ≈ log m - 1/2` (close to maximal but
+reduced by 1/2); for `m << n` it gives `<S_A> ≈ log m - m/(2n)`.
+This is the famous Page curve in dimension space underlying e.g. the
+information-paradox / Page-time analysis of evaporating black holes.
+
+Reference: D. N. Page, *Phys. Rev. Lett.* **71**, 1291 (1993),
+DOI 10.1103/PhysRevLett.71.1291. Tracking: #580.
+"""
+struct PageEntropy <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

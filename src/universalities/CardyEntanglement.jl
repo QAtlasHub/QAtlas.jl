@@ -734,3 +734,45 @@ function fetch(
         )
     end
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Page entropy for Haar-random pure states (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{:HaarRandom}, ::PageEntropy, ::Infinite;
+          d_A::Integer, d_B::Integer, kwargs...) -> Float64
+
+Page 1993 average entropy of a subsystem `A` for a Haar-random pure
+state in `H_A ⊗ H_B` with `dim(H_A) = d_A`, `dim(H_B) = d_B`:
+
+    <S_A> = sum_{k=n+1}^{m·n} 1/k - (m-1)/(2n)
+
+where `m = min(d_A, d_B)` and `n = max(d_A, d_B)` (the formula is
+invariant under A ↔ B exchange by purity of the global state).
+
+Asymptotic limits:
+- `m == n`:   `<S_A> ≈ log m - 1/2`  (nearly maximal entropy)
+- `m << n`:   `<S_A> ≈ log m - m/(2n)`  (almost maximal volume law)
+- `m >> n`:   `<S_A> ≈ log n - n/(2m)`  (same by A ↔ B symmetry)
+
+Reference: D. N. Page, *Phys. Rev. Lett.* **71**, 1291 (1993),
+DOI 10.1103/PhysRevLett.71.1291.
+"""
+function fetch(
+    ::Universality{:HaarRandom},
+    ::PageEntropy,
+    ::Infinite;
+    d_A::Integer,
+    d_B::Integer,
+    kwargs...,
+)
+    d_A >= 1 || throw(ArgumentError("PageEntropy: d_A must be >= 1; got d_A=$d_A."))
+    d_B >= 1 || throw(ArgumentError("PageEntropy: d_B must be >= 1; got d_B=$d_B."))
+    m, n = minmax(d_A, d_B)
+    s = 0.0
+    for k in (n + 1):(m * n)
+        s += 1.0 / k
+    end
+    return s - (m - 1) / (2.0 * n)
+end

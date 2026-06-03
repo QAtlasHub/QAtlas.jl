@@ -247,6 +247,43 @@ function fetch(model::TFIM, ::CentralCharge, ::Infinite; kwargs...)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Lieb-Robinson velocity bound (status=:bound) + high-T free-energy expansion
+# (status=:approx) — status-axis worked examples (v0.24)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite) -> Float64
+
+Lieb-Robinson velocity of the infinite-chain TFIM,
+
+    v_LR = 2 min(|J|, |h|),
+
+the slope of the causal cone bounding commutator spread.  For the
+free-fermion TFIM this tight bound is saturated by the maximum group
+velocity `max_k |dΛ/dk|` of the Bogoliubov dispersion
+`Λ(k) = 2√(J² + h² − 2 J h cos k)`.  Registered with `status=:bound`.
+
+(Lieb & Robinson 1972; Hastings & Koma 2006.)
+"""
+function fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite; kwargs...)
+    return 2 * min(abs(model.J), abs(model.h))
+end
+
+"""
+    fetch(model::TFIM, ::HighTemperatureFreeEnergy, ::Infinite; beta) -> Float64
+
+Leading high-temperature (small-β) expansion of the per-site free energy,
+
+    f(β)/N ≈ −ln 2 / β − (β/2)(J² + h²) + O(β³),
+
+valid for `β J ≪ 1`.  Registered with `status=:approx`; outside the
+high-temperature window use the exact [`FreeEnergy`](@ref) instead.
+"""
+function fetch(model::TFIM, ::HighTemperatureFreeEnergy, ::Infinite; beta::Real, kwargs...)
+    return -log(2) / beta - (beta / 2) * (model.J^2 + model.h^2)
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Critical exponents at the quantum critical point — delegate to 2D Ising universality
 # ═══════════════════════════════════════════════════════════════════════════════
 

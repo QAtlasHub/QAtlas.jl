@@ -111,6 +111,7 @@ export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
+export LiebRobinsonBound, HighTemperatureFreeEnergy  # status-axis examples (:bound / :approx)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper

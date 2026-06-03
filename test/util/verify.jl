@@ -376,13 +376,14 @@ end
 const _BOUND_ROUTES = (
     :ed_operator_bound,    # an ED-measured quantity stays within the fetched bound
     :variational_state,    # a trial state's expectation one-sidedly bounds the fetched value
+    :dispersion_velocity,  # max group velocity of the dispersion saturates a Lieb-Robinson cone
     :saturating_constant,  # a universal constant attained (equality) at the optimal state
 )
 
 # ED-/trial-state-backed bound checks are structurally independent of the
 # src formula; a saturating universal constant is an asserted optimum.
 function _bound_independence(route::Symbol)
-    if route in (:ed_operator_bound, :variational_state)
+    if route in (:ed_operator_bound, :variational_state, :dispersion_velocity)
         return ("structural", "ed:bound-witness")
     else
         return ("asserted", "asserted:" * string(route))

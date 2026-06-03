@@ -164,8 +164,13 @@ end
     for e in REGISTRY
         @test e.status in QAtlas.STATUS_VALUES
     end
-    # Every legacy row that does not pass `status=` must default to :exact.
-    @test all(e.status === :exact for e in REGISTRY if e.model === TFIM)
+    # Rows that omit `status=` default to :exact (e.g. the Energy rows);
+    # the v0.24 worked examples declare :bound / :approx explicitly.
+    @test all(
+        e.status === :exact for e in REGISTRY if e.model === TFIM && e.quantity <: Energy
+    )
+    @test any(e.status === :bound for e in REGISTRY if e.model === TFIM)
+    @test any(e.status === :approx for e in REGISTRY if e.model === TFIM)
 end
 
 @testset "register! rejects a status outside STATUS_VALUES" begin

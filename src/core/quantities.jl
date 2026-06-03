@@ -739,6 +739,29 @@ Use `theory` kwarg (`:classical`, `:quantum`, `:no_signalling`).
 struct MerminGHZBound <: AbstractQuantity end
 
 """
+    WignerSemicircleMoment <: AbstractQuantity
+
+Moments of the Wigner semicircle distribution
+
+    rho(x) = (1 / (2 pi)) sqrt(4 - x^2),   x in [-2, 2],
+
+the universal large-N eigenvalue density of Gaussian random matrix
+ensembles (GOE / GUE / GSE) under Wigner-Mehta normalisation.
+
+The even moments are Catalan numbers,
+
+    m_{2k} = C_k = (2k)! / (k! (k+1)!),
+
+and the odd moments vanish by symmetry. These are the universal large-N
+free-probability moments underlying RMT spectral statistics; they also
+count rooted plane trees / non-crossing pair partitions.
+
+Reference: E. P. Wigner, *Ann. Math.* **62**, 548 (1955); M. L. Mehta
+*Random Matrices* (1991).
+"""
+struct WignerSemicircleMoment <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

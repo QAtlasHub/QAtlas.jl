@@ -128,7 +128,8 @@ export FermiVelocity,
     MandelstamTammBound,
     MargolusLevitinBound,
     BekensteinBound,
-    MerminGHZBound
+    MerminGHZBound,
+    WignerSemicircleMoment
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode

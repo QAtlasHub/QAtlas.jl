@@ -780,6 +780,23 @@ Reference: P. W. Shor, J. Preskill *Phys. Rev. Lett.* **85**, 441 (2000).
 struct BB84KeyRate <: AbstractQuantity end
 
 """
+    OptimalCloningFidelity <: AbstractQuantity
+
+Buzek-Hillery 1996 optimal symmetric universal quantum cloner
+fidelity for the canonical `1 -> 2` cloner of a `d`-level system,
+
+    F_{1,2,d} = 1/2 + 1/(d + 1).
+
+For qubits (`d = 2`) this gives the famous `F = 5/6`. Universal upper
+bound — no symmetric `1 -> 2` cloner can exceed it; saturated by the
+Buzek-Hillery construction.
+
+Reference: V. Buzek, M. Hillery *Phys. Rev. A* **54**, 1844 (1996);
+N. Gisin, S. Massar *Phys. Rev. Lett.* **79**, 2153 (1997).
+"""
+struct OptimalCloningFidelity <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

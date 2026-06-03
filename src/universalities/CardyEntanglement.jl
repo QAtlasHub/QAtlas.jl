@@ -1162,3 +1162,27 @@ function fetch(
     h2 = -qber * log2(qber) - (1 - qber) * log2(1 - qber)
     return 1 - 2 * h2
 end
+
+# -----------------------------------------------------------------------------
+# Optimal symmetric 1 -> 2 universal cloning fidelity (Buzek-Hillery 1996)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::OptimalCloningFidelity, ::Infinite;
+          d::Integer=2, kwargs...) where {C} -> Float64
+
+Buzek-Hillery 1996 optimal symmetric universal `1 -> 2` cloner
+single-clone fidelity for a `d`-level system,
+
+    F_{1,2,d} = 1/2 + 1/(d + 1).
+
+For qubits (`d = 2`) this gives the canonical `F = 5/6`.
+
+Reference: V. Buzek, M. Hillery *Phys. Rev. A* **54**, 1844 (1996).
+"""
+function fetch(
+    ::Universality{C}, ::OptimalCloningFidelity, ::Infinite; d::Integer=2, kwargs...
+) where {C}
+    d >= 2 || throw(DomainError(d, "OptimalCloningFidelity requires d >= 2; got d = $d."))
+    return 0.5 + 1 / (d + 1)
+end

@@ -1095,3 +1095,36 @@ function fetch(
     E > 0 || throw(DomainError(E, "BekensteinBound requires E > 0; got E = $E."))
     return 2 * pi * R * E
 end
+
+# -----------------------------------------------------------------------------
+# Mermin 3-party inequality bound (Mermin 1990 PRL)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::MerminGHZBound, ::Infinite;
+          theory::Symbol, kwargs...) where {C} -> Float64
+
+Maximum value of `|<M_3>|` for the Mermin 3-party operator under the
+selected `theory`:
+
+- `:classical`     -> 2          (local hidden-variable bound)
+- `:quantum`       -> 4          (saturated by GHZ state |000> + |111>)
+- `:no_signalling` -> 4          (same as QM, QM saturates here)
+
+Reference: N. D. Mermin, *Phys. Rev. Lett.* **65**, 1838 (1990).
+"""
+function fetch(
+    ::Universality{C}, ::MerminGHZBound, ::Infinite; theory::Symbol, kwargs...
+) where {C}
+    if theory === :classical
+        return 2.0
+    elseif theory === :quantum || theory === :no_signalling
+        return 4.0
+    else
+        throw(
+            ArgumentError(
+                "MerminGHZBound: theory must be one of :classical, :quantum, :no_signalling; got $theory.",
+            ),
+        )
+    end
+end

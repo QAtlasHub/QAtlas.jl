@@ -715,6 +715,30 @@ black holes.
 struct BekensteinBound <: AbstractQuantity end
 
 """
+    MerminGHZBound <: AbstractQuantity
+
+Mermin 1990 3-party generalisation of the CHSH inequality. For the
+3-qubit Mermin operator
+
+    M_3 = X_1 Y_2 Y_3 + Y_1 X_2 Y_3 + Y_1 Y_2 X_3 - X_1 X_2 X_3,
+
+the universal bounds are:
+
+| Theory                              | Bound on |<M_3>| |
+|-------------------------------------|------------------|
+| Local realism / classical           | 2                |
+| Quantum mechanics (Tsirelson-like)  | 4                |
+| Non-signalling (Popescu-Rohrlich)   | 4                |
+
+The quantum bound 4 is saturated by the GHZ state |000> + |111> with
+appropriate Pauli settings; coincides with the no-signalling bound, so
+QM saturates the latter here (unlike CHSH where 2 sqrt(2) < 4).
+
+Use `theory` kwarg (`:classical`, `:quantum`, `:no_signalling`).
+"""
+struct MerminGHZBound <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

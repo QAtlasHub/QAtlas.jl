@@ -1072,3 +1072,26 @@ function fetch(
     )
     return pi / (2 * mean_E)
 end
+
+# -----------------------------------------------------------------------------
+# Bekenstein bound (Bekenstein 1981)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::BekensteinBound, ::Infinite;
+          R::Real, E::Real, kwargs...) where {C} -> Float64
+
+Universal Bekenstein upper bound on entropy of any system of linear
+size `R` and total energy `E`,
+
+    S_max = 2 pi R E       (hbar = c = 1).
+
+Reference: J. D. Bekenstein, *Phys. Rev. D* **23**, 287 (1981).
+"""
+function fetch(
+    ::Universality{C}, ::BekensteinBound, ::Infinite; R::Real, E::Real, kwargs...
+) where {C}
+    R > 0 || throw(DomainError(R, "BekensteinBound requires R > 0; got R = $R."))
+    E > 0 || throw(DomainError(E, "BekensteinBound requires E > 0; got E = $E."))
+    return 2 * pi * R * E
+end

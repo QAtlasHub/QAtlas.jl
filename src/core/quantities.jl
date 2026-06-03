@@ -701,6 +701,20 @@ The tightest known QM speed limit is the maximum of
 struct MargolusLevitinBound <: AbstractQuantity end
 
 """
+    BekensteinBound <: AbstractQuantity
+
+Bekenstein 1981 universal upper bound on the von Neumann entropy of
+any physical system of linear size `R` and total energy `E`,
+
+    S <= 2 pi R E / (hbar c).
+
+Holographic in spirit and historically motivated by black-hole
+thermodynamics, but applies to any QFT in flat space. Saturated by
+black holes.
+"""
+struct BekensteinBound <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

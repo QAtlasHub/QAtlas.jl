@@ -20,10 +20,10 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | 🟢 corroborated-at-p | 17 |
 | 🔵 coherent | 5 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 5 |
-| **total claimed hubs** | **27** |
+| 🟠 uncorroborated-but-feasible | 7 |
+| **total claimed hubs** | **29** |
 
-**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie`
+**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie`
 
 ## Quantity × BC matrix
 
@@ -44,13 +44,13 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/XXZ1D_MagnetizationZ_OBC.md) | — |
 | [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_OBC.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_Infinite.md) |
-| [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/XXZ1D_RenyiEntropy_OBC.md) | — |
+| [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/XXZ1D_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/XXZ1D_SpecificHeat_OBC.md) | 🟠 [hub](../hubs/XXZ1D_SpecificHeat_Infinite.md) |
 | [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityXX_OBC.md) | — |
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityYY_OBC.md) | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) | — |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | 🔵 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
-| [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) | — |
+| [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) |
 
 ## Derivation notes
 
@@ -69,6 +69,7 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 ```@bibliography
 Pages = []
 Canonical = false
+CalabreseCardy2004
 CalabreseEsslerFagotti2012
 Coleman2015
 EsslerFagotti2016

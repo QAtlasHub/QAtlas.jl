@@ -65,7 +65,7 @@ Top-level catalog of all **63 models** with claimed hubs.  One row per model; th
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 3 | `analytic` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
-| [`XXZ1D`](models/XXZ1D.md) | — | 27 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 17 | 5 | 0 | 5 | feasible | `@fm`, `@free_fermion`, `@gapless` |
+| [`XXZ1D`](models/XXZ1D.md) | — | 29 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 17 | 5 | 0 | 7 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |

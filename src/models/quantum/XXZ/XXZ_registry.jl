@@ -281,3 +281,26 @@ end
     references=["YangYang1969", "desCloizeauxPearson1962"],
     notes="e₀(Δ) at the isotropic AF point (Δ=1) reduces to Heisenberg1D Hulthén value J(1/4-ln 2); at the FM point (Δ=-1) the aligned state is exact, e₀ = -J/4.",
 )
+
+# ── CC entanglement at Infinite via Universality(:XY) / (:Heisenberg) (#580 Phase 2)
+@register(
+    XXZ1D,
+    VonNeumannEntropy{:equilibrium},
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/XXZ/test_xxz1d_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="Critical regime -1 < Δ < 1: delegate to Universality(:XY) (c=1). Δ=1: route via Universality(:Heisenberg). |Δ|>1 gapped: DomainError.",
+)
+
+@register(
+    XXZ1D,
+    RenyiEntropy,
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/XXZ/test_xxz1d_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="Same critical-regime guard as VN. Standard c -> c*(1+1/alpha)/2 substitution. Reduces to VN at alpha=1.",
+)

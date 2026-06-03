@@ -227,7 +227,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](hubs/XYh1D_SusceptibilityZZ_OBC.md)
 
-## `delegation` - 17 hubs
+## `delegation` - 19 hubs
 
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](hubs/DMIHeisenberg1D_Energy_Infinite.md)
@@ -245,6 +245,8 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](hubs/MixedFieldIsing1D_MassGap_Infinite.md)
 - 🔵 [`RandomBondIsing2D/CentralCharge/Infinite`](hubs/RandomBondIsing2D_CentralCharge_Infinite.md)
 - 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
+- 🟠 [`XXZ1D/RenyiEntropy/Infinite`](hubs/XXZ1D_RenyiEntropy_Infinite.md)
+- 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](hubs/XXZ1D_VonNeumannEntropy_Infinite.md)
 - 🟢 [`ZnClock/CentralCharge/Infinite`](hubs/ZnClock_CentralCharge_Infinite.md)
 
 ## `pfaffian` - 9 hubs

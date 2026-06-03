@@ -109,6 +109,16 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](hubs/IsingChain1D_SusceptibilityZZ_Infinite.md)
 - 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](hubs/IsingChain1D_ThermalEntropy_Infinite.md)
 
+## CalabreseCardy2004 — 7 hubs
+
+- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](hubs/HaldaneShastry_RenyiEntropy_Infinite.md)
+- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md)
+- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](hubs/Heisenberg1D_RenyiEntropy_Infinite.md)
+- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md)
+- 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
+- 🟠 [`XXZ1D/RenyiEntropy/Infinite`](hubs/XXZ1D_RenyiEntropy_Infinite.md)
+- 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](hubs/XXZ1D_VonNeumannEntropy_Infinite.md)
+
 ## LandauLifshitz1980 — 7 hubs
 
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](hubs/CurieWeissIsing_CriticalTemperature_Infinite.md)
@@ -182,14 +192,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - ⚪ [`S1Heisenberg1D/MassGap/Infinite`](hubs/S1Heisenberg1D_MassGap_Infinite.md)
 - 🔵 [`S1XXZ1D/Energy/Infinite`](hubs/S1XXZ1D_Energy_Infinite.md)
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](hubs/S1XXZ1D_MassGap_Infinite.md)
-
-## CalabreseCardy2004 — 5 hubs
-
-- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](hubs/HaldaneShastry_RenyiEntropy_Infinite.md)
-- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md)
-- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](hubs/Heisenberg1D_RenyiEntropy_Infinite.md)
-- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md)
-- 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
 
 ## CalabreseEsslerFagotti2012 — 4 hubs
 

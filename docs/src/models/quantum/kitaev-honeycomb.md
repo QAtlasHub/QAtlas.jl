@@ -113,7 +113,3 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 11 hubs (
 | `KitaevHoneycomb` | [`ThermalEntropy`](../../atlas/hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | `OBC` | 🔵 coherent | 7 |
 
 <!-- ATLAS:HUBS:END -->
-
-
-
-

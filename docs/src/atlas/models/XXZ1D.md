@@ -23,7 +23,7 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | 🟠 uncorroborated-but-feasible | 5 |
 | **total claimed hubs** | **27** |
 
-**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk`, `klumper_nlie`
+**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie`
 
 ## Quantity × BC matrix
 

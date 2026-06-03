@@ -13,14 +13,14 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 24
-- **Total hubs (Model, BC pairs)**: 32
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
+- **Models with this quantity registered**: 25
+- **Total hubs (Model, BC pairs)**: 33
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
 - Pfeuty1970 — 8 hubs
-- LiebSchultzMattis1961 — 4 hubs
+- LiebSchultzMattis1961 — 5 hubs
 - Kitaev2006 — 3 hubs
 - WhiteHuse1993 — 3 hubs
 - AshcroftMermin1976 — 2 hubs
@@ -34,6 +34,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`Compass1D`](../models/Compass1D.md) | — | — | 🟢 [hub](../hubs/Compass1D_MassGap_Infinite.md) |
 | [`GrossNeveu`](../models/GrossNeveu.md) | — | — | 🟢 [hub](../hubs/GrossNeveu_MassGap_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
+| [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | — | 🟠 [hub](../hubs/HeisenbergXYZ_MassGap_Infinite.md) |
 | [`KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) | — | — | ⚪ [hub](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Kitaev1D_MassGap_Infinite.md) |
 | [`KitaevHeisenberg`](../models/KitaevHeisenberg.md) | — | — | 🟢 [hub](../hubs/KitaevHeisenberg_MassGap_Infinite.md) |

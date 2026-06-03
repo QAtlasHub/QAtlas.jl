@@ -21,16 +21,17 @@ All `(Quantity, BC)` hubs `src` claims for **`Hubbard1D`**.  Cells link to the p
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 2 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 0 |
-| **total claimed hubs** | **4** |
+| 🟠 uncorroborated-but-feasible | 1 |
+| **total claimed hubs** | **5** |
 
-**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`
+**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `jks_qtm_nlie`
 
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`ChargeGap`](../quantities/ChargeGap.md) | 🔵 [hub](../hubs/Hubbard1D_ChargeGap_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/Hubbard1D_FreeEnergy_Infinite.md) |
 | [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | 🔵 [hub](../hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | 🟢 [hub](../hubs/Hubbard1D_LuttingerParameter_Infinite.md) |
 | [`SpinGap`](../quantities/SpinGap.md) | 🟢 [hub](../hubs/Hubbard1D_SpinGap_Infinite.md) |
@@ -49,6 +50,7 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 Pages = []
 Canonical = false
 Essler2005
+JuttnerKlumperSuzuki1998
 LiebWu1968
 Voit1995
 ```

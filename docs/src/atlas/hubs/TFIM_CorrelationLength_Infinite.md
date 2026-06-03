@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, reliability `high`
-- ξ = 1/(2|h-J|) (gapped phase); Inf at criticality.
+- Relativistic inverse-mass-gap convention: ξ = 1/Δ = 1/(2|h-J|) (gapped); Inf at criticality. Pfeuty 1/log(max/min) lattice form (alt convention) not exposed — agrees to leading order near criticality. See docstring Convention table.
 
 ## Corroboration
 

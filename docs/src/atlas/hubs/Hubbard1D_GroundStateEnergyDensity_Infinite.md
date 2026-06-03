@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `bethe_ansatz`, reliability `high`, refs: LiebWu1968 | Essler2005
-- Lieb-Wu integral E₀/N = -4t² ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).
+- Lieb-Wu integral E₀/N = -4t ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).
 
 ## Corroboration
 

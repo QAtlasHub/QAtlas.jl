@@ -122,51 +122,51 @@ verify(TFIM(; J = 0.0, 2.0 = 2.0), FreeEnergy(), PBC(16); route = :second_closed
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 0.5 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(4); route = :ed_finite_size, independent = ed_F, at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(6); route = :ed_finite_size, independent = ed_F, at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = 2.0 > 1.0, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), FreeEnergy(), PBC(8); route = :ed_finite_size, independent = ed_F, at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box (PBC ring): chain_hamiltonian_pbc + onsite -h σ_x, full spectrum, thermo_from_spectrum (F)"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 

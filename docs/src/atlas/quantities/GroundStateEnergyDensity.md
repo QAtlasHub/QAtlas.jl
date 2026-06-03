@@ -13,24 +13,26 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 6
-- **Total hubs (Model, BC pairs)**: 7
-- **Methods** (derived from `@register`): `analytic`, `bethe_ansatz`
+- **Models with this quantity registered**: 8
+- **Total hubs (Model, BC pairs)**: 9
+- **Methods** (derived from `@register`): `analytic`, `bethe_ansatz`, `closed_form`
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
 - MajumdarGhosh1969 — 2 hubs
 - AKLT1988 — 1 hub
+- Baxter1972 — 1 hub
 - Bethe1931 — 1 hub
 - Essler2005 — 1 hub
-- Hulthen1938 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `PBC` | `Infinite` |
 |---|---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | — | 🟢 [hub](../hubs/AKLT1D_GroundStateEnergyDensity_Infinite.md) |
+| [`HaldaneShastry`](../models/HaldaneShastry.md) | — | 🟠 [hub](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | — | 🟢 [hub](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) |
+| [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | 🟠 [hub](../hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md) |
 | [`Hubbard1D`](../models/Hubbard1D.md) | — | 🔵 [hub](../hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) |
 | [`MajumdarGhosh`](../models/MajumdarGhosh.md) | 🟢 [hub](../hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) | 🟢 [hub](../hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) |
 | [`ToricCode`](../models/ToricCode.md) | — | 🟢 [hub](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) |

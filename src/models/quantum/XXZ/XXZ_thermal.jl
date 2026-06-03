@@ -290,7 +290,9 @@ end
 # Susceptibilities (per-site, σ-convention variance)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Common helper: χ_αα(β) = β · (⟨M_α²⟩ - ⟨M_α⟩²) / N
+# Common helper (equal-time variance): χ_αα(β) = β · Var(M_α) / N.
+# Valid for the *conserved* z-axis (XXZ has [H, Σ σz] = 0 so Var = Kubo);
+# for χ_xx and χ_yy where M is not conserved, use the Kubo helper below.
 function _xxz1d_uniform_susceptibility(F::NamedTuple, N::Int, σα::AbstractMatrix, β::Real)
     Mα = _xxz1d_total_M(N, σα)
     M1 = _xxz1d_thermal_expectation_op(F, Mα)
@@ -298,29 +300,71 @@ function _xxz1d_uniform_susceptibility(F::NamedTuple, N::Int, σα::AbstractMatr
     return β * (M2 - M1^2) / N
 end
 
+# Kubo static susceptibility: χ_αα(β) = ∂⟨M_α⟩/∂h_α at h_α = 0, computed
+# via the sum-over-eigenpairs canonical-ensemble form.  Equivalent to the
+# equal-time variance when [H, M_α] = 0; differs when M_α is not
+# conserved (e.g. M_x, M_y in XXZ).
+#
+#   χ = (1/N) ( Σ_{m,n: E_m ≠ E_n}  (p_n - p_m)/(E_m - E_n) |M_{mn}|²
+#             + β Σ_{m,n: E_m = E_n}  p_m |M_{mn}|² )
+#     - (β/N) ⟨M⟩²
+#
+# The degenerate case includes the diagonal m = n term and any exact
+# accidental degeneracies; the limit (p_n - p_m)/(E_m - E_n) → -β p_n.
+function _xxz1d_kubo_susceptibility(F::NamedTuple, N::Int, σα::AbstractMatrix, β::Real)
+    Mα = _xxz1d_total_M(N, σα)
+    evals = F.evals
+    evecs = F.evecs
+    p = F.weights
+    Mab = evecs' * Mα * evecs
+    M_mean = zero(eltype(p))
+    @inbounds for m in eachindex(p)
+        M_mean += p[m] * real(Mab[m, m])
+    end
+    χ_total = zero(eltype(p))
+    @inbounds for m in eachindex(evals), n in eachindex(evals)
+        ΔE = evals[m] - evals[n]
+        mn = abs2(Mab[m, n])
+        if abs(ΔE) > 1e-10
+            χ_total += (p[n] - p[m]) / ΔE * mn
+        else
+            χ_total += β * p[m] * mn
+        end
+    end
+    return (χ_total - β * M_mean^2) / N
+end
+
 """
     fetch(model::XXZ1D, ::SusceptibilityXX, ::OBC; beta) -> Float64
 
-Static transverse susceptibility per site
-`χ_xx(β) = (β/N) · (⟨M_x²⟩ - ⟨M_x⟩²)`, with `M_x = Σᵢ σˣᵢ`.
+Static transverse Kubo susceptibility per site (response-derivative
+convention) `χ_xx(β) = ∂⟨M_x⟩/∂h_x` at `h_x = 0`, with
+`M_x = Σᵢ σˣᵢ`. Equivalent to `β·Var(M_x)/N` only when
+`[H, M_x] = 0`, which the XXZ Hamiltonian does not satisfy on the
+x-axis; see issue #576.
 """
 function fetch(model::XXZ1D, ::SusceptibilityXX, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     F = _xxz1d_thermal_kernel(model, N, beta)
-    return _xxz1d_uniform_susceptibility(F, N, _σx, beta)
+    # [H_XXZ, M_x] ≠ 0 (only Σ σz is conserved), so use the Kubo form;
+    # the equal-time variance is a different physical quantity.
+    return _xxz1d_kubo_susceptibility(F, N, _σx, beta)
 end
 
 """
     fetch(model::XXZ1D, ::SusceptibilityYY, ::OBC; beta) -> Float64
 
-Static y-axis susceptibility per site, `χ_yy(β) = (β/N) Var(M_y)`.
-By the SU(2) → U(1) reduction the XXZ model has `⟨M_y⟩ = 0`, so
-this is `β ⟨M_y²⟩ / N`.
+Static y-axis Kubo susceptibility per site (response-derivative
+convention) `χ_yy(β) = ∂⟨M_y⟩/∂h_y` at `h_y = 0`. Equivalent to
+`β·Var(M_y)/N` only when `[H, M_y] = 0`; the XXZ Hamiltonian does
+not satisfy this on the y-axis. See issue #576.
 """
 function fetch(model::XXZ1D, ::SusceptibilityYY, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     F = _xxz1d_thermal_kernel(model, N, beta)
-    return _xxz1d_uniform_susceptibility(F, N, _σy, beta)
+    # [H_XXZ, M_y] ≠ 0; use Kubo as in χ_xx (M_z conservation does not
+    # extend to M_y on the lattice).
+    return _xxz1d_kubo_susceptibility(F, N, _σy, beta)
 end
 
 """

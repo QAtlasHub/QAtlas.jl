@@ -523,6 +523,23 @@ identity.
 const SpinWaveVelocity = LuttingerVelocity
 
 """
+    LiebRobinsonVelocity() <: AbstractQuantity
+
+Lieb-Robinson velocity `v_LR` setting the linear light cone for
+information propagation in a local lattice quantum system: for any
+local operators `A_x`, `B_y` separated by `|x - y|`,
+
+    || [A_x(t), B_y(0)] || <= C * exp(-mu * (|x - y| - v_LR * t)).
+
+For free-fermion-mappable spin chains (TFIM, XY/XYh1D, the XX limit
+of XXZ) the bound is saturated and `v_LR` equals twice the maximum
+single-particle group velocity. Reference: Lieb-Robinson, *Commun.
+Math. Phys.* **28**, 251 (1972); Hastings-Koma, *Commun. Math. Phys.*
+**265**, 781 (2006). Tracking: issue #579 inequality framework.
+"""
+struct LiebRobinsonVelocity <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

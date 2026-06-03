@@ -111,7 +111,7 @@ export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  #
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
-export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
+export FermiVelocity, LuttingerVelocity, SpinWaveVelocity, LiebRobinsonVelocity
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)

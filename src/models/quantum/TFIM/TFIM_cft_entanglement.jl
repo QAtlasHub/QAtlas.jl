@@ -160,3 +160,46 @@ function fetch(model::TFIM, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=In
     end
     return _tfim_cc_entanglement(model.J, model.h, ℓ, beta; α=q.α)
 end
+
+# -----------------------------------------------------------------------------
+# Affleck-Ludwig boundary entropy at criticality (h = J)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::BoundaryEntropy, ::Infinite;
+          h = m.h, J = m.J, boundary_state::Symbol, kwargs...) -> Float64
+
+Affleck-Ludwig boundary entropy `log g` of the critical TFIM at the
+quantum critical point `h = J`. Delegates to `Universality(:Ising)`
+with the same `boundary_state`, which is dimensionless (independent
+of the sound velocity).
+
+Off-critical (`h != J`) is gapped and Affleck-Ludwig does not apply —
+this dispatch throws `DomainError`.
+
+Reference: Affleck-Ludwig *Phys. Rev. Lett.* **67**, 161 (1991).
+"""
+function fetch(
+    m::TFIM,
+    ::BoundaryEntropy,
+    ::Infinite;
+    h::Real=m.h,
+    J::Real=m.J,
+    boundary_state::Symbol,
+    kwargs...,
+)
+    isapprox(abs(h), abs(J); atol=1e-12) || throw(
+        DomainError(
+            (h, J),
+            "TFIM BoundaryEntropy: closed-form Affleck-Ludwig applies only at " *
+            "the critical point |h| = |J|; got (h, J) = ($h, $J).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        BoundaryEntropy(),
+        Infinite();
+        boundary_state=boundary_state,
+        kwargs...,
+    )
+end

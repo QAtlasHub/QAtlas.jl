@@ -867,3 +867,34 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     return π * c / (6 * beta_eff)
 end
+
+# -----------------------------------------------------------------------------
+# Thermal energy density (Affleck 1986; Bloete-Cardy-Nightingale 1986)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::ThermalEnergyDensity, ::Infinite;
+          beta::Real, kwargs...) where {C} -> Float64
+
+Leading thermal energy density above the ground state for a
+(1+1)D CFT with central charge ,
+
+    e(T) - e_0 = pi c / (6 beta^2).
+
+This is the universal complement of
+[](@ref): modular invariance interchanges the
+finite-size Casimir energy and the finite-temperature thermal energy
+with identical coefficient .
+
+Reference: I. Affleck *Phys. Rev. Lett.* **56**, 746 (1986);
+Bloete-Cardy-Nightingale *Phys. Rev. Lett.* **56**, 742 (1986).
+"""
+function fetch(
+    ::Universality{C}, ::ThermalEnergyDensity, ::Infinite; beta::Real, kwargs...
+) where {C}
+    beta > 0 || throw(
+        DomainError(beta, "ThermalEnergyDensity requires beta > 0; got beta = $beta.")
+    )
+    c = _cardy_central_charge(Universality(C))
+    return π * c / (6 * beta^2)
+end

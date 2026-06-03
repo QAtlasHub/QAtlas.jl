@@ -111,13 +111,39 @@ end
         @test QAtlas.fetch(m, MagnetizationY(), OBC(N); beta=β) ≈ my_ed atol = 1e-10
         @test QAtlas.fetch(m, MagnetizationZ(), OBC(N); beta=β) ≈ mz_ed atol = 1e-10
 
-        # Susceptibilities χ_αα = β · Var(M_α) / N
-        χxx_ed = β * (real(tr(ρ * (Mx * Mx))) - real(tr(ρ * Mx))^2) / N
-        χyy_ed = β * (real(tr(ρ * (My * My))) - real(tr(ρ * My))^2) / N
+        # χ_zz: M_z is conserved by XXZ, so β·Var(M_z)/N equals the
+        # Kubo static susceptibility — keep the variance form for that
+        # axis.
         χzz_ed = β * (real(tr(ρ * (Mz * Mz))) - real(tr(ρ * Mz))^2) / N
+        @test QAtlas.fetch(m, SusceptibilityZZ(), OBC(N); beta=β) ≈ χzz_ed atol = 1e-10
+
+        # χ_xx and χ_yy: M_x, M_y are not conserved (XXZ only conserves
+        # Σ S_z); QAtlas exposes the Kubo static susceptibility for
+        # these. Reference is the sum-over-eigenpairs Kubo form on the
+        # same H spectrum. See issue #576.
+        evals_ed, evecs_ed = eigen(Hermitian(Matrix(H)))
+        emin_ed = minimum(evals_ed)
+        w_ed = exp.(-β .* (evals_ed .- emin_ed))
+        p_ed = w_ed ./ sum(w_ed)
+        function kubo_chi(M_op)
+            Mab = evecs_ed' * M_op * evecs_ed
+            Mmean = sum(p_ed[i] * real(Mab[i, i]) for i in eachindex(p_ed))
+            χ = 0.0
+            for i in eachindex(evals_ed), j in eachindex(evals_ed)
+                ΔE = evals_ed[i] - evals_ed[j]
+                mn = abs2(Mab[i, j])
+                if abs(ΔE) > 1e-10
+                    χ += (p_ed[j] - p_ed[i]) / ΔE * mn
+                else
+                    χ += β * p_ed[i] * mn
+                end
+            end
+            return (χ - β * Mmean^2) / N
+        end
+        χxx_ed = kubo_chi(Mx)
+        χyy_ed = kubo_chi(My)
         @test QAtlas.fetch(m, SusceptibilityXX(), OBC(N); beta=β) ≈ χxx_ed atol = 1e-10
         @test QAtlas.fetch(m, SusceptibilityYY(), OBC(N); beta=β) ≈ χyy_ed atol = 1e-10
-        @test QAtlas.fetch(m, SusceptibilityZZ(), OBC(N); beta=β) ≈ χzz_ed atol = 1e-10
 
         # Two-point correlators (all axes, both modes)
         for (qty, σ) in

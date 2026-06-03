@@ -241,3 +241,45 @@ function fetch(
         kwargs...,
     )
 end
+
+# -----------------------------------------------------------------------------
+# Mutual information of two adjacent intervals at h = J (Calabrese-Cardy 2009)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real=Inf, kwargs...) -> Float64
+
+Calabrese-Cardy mutual information `I(A:B)` of two adjacent intervals
+at the critical TFIM point `|h| = |J|`, with the same lattice
+spacing convention `a = 1/2` used by the VonNeumannEntropy /
+RenyiEntropy wrappers. The cutoff cancels in
+`S(A) + S(B) - S(A union B)`, so the result is independent of `a`.
+"""
+function fetch(
+    m::TFIM,
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+)
+    isapprox(abs(m.h), abs(m.J); atol=1e-12) || throw(
+        DomainError(
+            (m.h, m.J),
+            "TFIM MutualInformation: closed-form CC applies only at the critical " *
+            "point |h| = |J|; got (h, J) = ($(m.h), $(m.J)).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        MutualInformation(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        beta=beta,
+        a=1//2,
+        kwargs...,
+    )
+end

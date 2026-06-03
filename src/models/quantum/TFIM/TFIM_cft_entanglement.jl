@@ -203,3 +203,41 @@ function fetch(
         kwargs...,
     )
 end
+
+# -----------------------------------------------------------------------------
+# Post-quench entanglement saturation density at h = J (Calabrese-Cardy 2005)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, h = m.h, J = m.J, kwargs...) -> Float64
+
+Long-time saturation `S_A(infty)/L = pi c / (6 beta_eff)` of the
+half-system entanglement entropy after a global quench at the
+critical TFIM point `|h| = |J|`. Delegates to `Universality(:Ising)`
+(c = 1/2).
+"""
+function fetch(
+    m::TFIM,
+    ::EntanglementSaturationDensity,
+    ::Infinite;
+    beta_eff::Real,
+    h::Real=m.h,
+    J::Real=m.J,
+    kwargs...,
+)
+    isapprox(abs(h), abs(J); atol=1e-12) || throw(
+        DomainError(
+            (h, J),
+            "TFIM EntanglementSaturationDensity: closed form applies only at the " *
+            "critical point |h| = |J|; got (h, J) = ($h, $J).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

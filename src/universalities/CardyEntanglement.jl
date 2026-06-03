@@ -1128,3 +1128,37 @@ function fetch(
         )
     end
 end
+
+# -----------------------------------------------------------------------------
+# Shor-Preskill 2000 BB84 secret-key rate
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::BB84KeyRate, ::Infinite;
+          qber::Real, kwargs...) where {C} -> Float64
+
+Shor-Preskill 2000 asymptotic secret-key rate per sifted bit of the
+BB84 QKD protocol at quantum bit error rate `qber = e` (in [0, 0.5]),
+
+    R(e) = 1 - 2 H_2(e),
+
+with `H_2(e) = -e log2(e) - (1-e) log2(1-e)` the binary Shannon entropy.
+The rate is clamped at 0 above the unconditional-security threshold
+`e* ≈ 0.110028` (where `R = 0`).
+
+Reference: P. W. Shor, J. Preskill *Phys. Rev. Lett.* **85**, 441 (2000).
+"""
+function fetch(
+    ::Universality{C}, ::BB84KeyRate, ::Infinite; qber::Real, kwargs...
+) where {C}
+    (0 <= qber <= 0.5) ||
+        throw(DomainError(qber, "BB84KeyRate requires qber in [0, 0.5]; got qber = $qber."))
+    if qber == 0
+        return 1.0
+    end
+    if qber == 0.5
+        return -1.0
+    end
+    h2 = -qber * log2(qber) - (1 - qber) * log2(1 - qber)
+    return 1 - 2 * h2
+end

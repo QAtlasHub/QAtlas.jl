@@ -762,6 +762,24 @@ Reference: E. P. Wigner, *Ann. Math.* **62**, 548 (1955); M. L. Mehta
 struct WignerSemicircleMoment <: AbstractQuantity end
 
 """
+    BB84KeyRate <: AbstractQuantity
+
+Shor-Preskill 2000 universal asymptotic secret-key rate (per sifted
+bit) of the BB84 quantum-key-distribution protocol against a
+collective-attack eavesdropper, parameterised by the quantum bit
+error rate (QBER) `e`:
+
+    R(e) = 1 - 2 H_2(e),    H_2(e) = -e log_2(e) - (1-e) log_2(1-e).
+
+The rate vanishes at the unconditional-security threshold
+`e* ≈ 0.110028`; above this QBER no positive secret key can be
+extracted in the asymptotic limit.
+
+Reference: P. W. Shor, J. Preskill *Phys. Rev. Lett.* **85**, 441 (2000).
+"""
+struct BB84KeyRate <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

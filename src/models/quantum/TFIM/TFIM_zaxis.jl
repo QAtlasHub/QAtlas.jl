@@ -97,14 +97,31 @@ end
 """
     fetch(model::TFIM, ::CorrelationLength, ::Infinite; kwargs...) -> Float64
 
-T = 0 longitudinal correlation length of the infinite TFIM,
+T = 0 correlation length of the infinite TFIM in the **relativistic
+continuum convention** (inverse mass gap),
 
     ξ = 1 / (2|h - J|)        (gapped phase)
     ξ = Inf                   (critical point h = J)
 
-This is set by the inverse mass gap `Δ = 2|h - J|` (see
-[`MassGap`](@ref) at `Infinite`); the asymptotic exponential decay
-of the connected longitudinal correlator is `e^{-r/ξ}`.
+set by the lattice mass gap `Δ = 2|h - J|` via the universal IR
+relation `ξ = 1/Δ` (with `v_F = 1` implicit; lattice units). Tracks
+[`MassGap`](@ref) at `Infinite`.
+
+# Convention note
+
+Three legitimate conventions exist for the TFIM correlation length on
+the lattice; QAtlas exposes the first by default for consistency with
+`MassGap`:
+
+| Convention                        | Formula                       | Origin                                 |
+|-----------------------------------|-------------------------------|----------------------------------------|
+| **Inverse mass gap** (this fetch) | `1 / (2|h - J|)`              | relativistic continuum / Sachdev IR    |
+| Pfeuty 1970 longitudinal          | `1 / log(max(J,h) / min(J,h))` | lattice JW-fermion <σᶻσᶻ> decay exact  |
+| Sachdev lattice relativistic      | `min(J,h) / |h - J|`           | E²(k) = Δ² + v²k² with v_F = 2·min     |
+
+The three agree to leading order near criticality (|h - J| << max). For
+exact lattice decay of the longitudinal correlator at any (J, h), use
+the Pfeuty form externally.
 
 In QAtlas convention ξ is dimensionless (in units of the lattice
 spacing).

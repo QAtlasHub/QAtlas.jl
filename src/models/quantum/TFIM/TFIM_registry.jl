@@ -346,7 +346,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/test_TFIM_zaxis.jl",
-    notes="ξ = 1/(2|h-J|) (gapped phase); Inf at criticality.",
+    notes="Relativistic inverse-mass-gap convention: ξ = 1/Δ = 1/(2|h-J|) (gapped); Inf at criticality. Pfeuty 1/log(max/min) lattice form (alt convention) not exposed — agrees to leading order near criticality. See docstring Convention table.",
 )
 @register(
     TFIM,

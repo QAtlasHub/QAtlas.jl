@@ -878,6 +878,8 @@ for h in claimed
     HP(
         "- method `",
         cl.method,
+        "`, status `",
+        isempty(cl.status) ? "exact" : cl.status,
         "`, reliability `",
         cl.reliability,
         "`",

@@ -15,6 +15,7 @@ struct Claim
     quantity::String
     bc::String
     method::String
+    status::String
     reliability::String
     refs::String
     notes::String
@@ -66,6 +67,7 @@ function _walk!(out, ex)
                     qty,
                     bc,
                     string(get(kw, :method, "")),
+                    string(get(kw, :status, "")),
                     string(get(kw, :reliability, "")),
                     _refs_text(get(kw, :references, nothing)),
                     string(get(kw, :notes, "")),

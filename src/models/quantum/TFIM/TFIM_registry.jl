@@ -648,7 +648,7 @@
     notes="λ(t) = -lim_{L→∞} (1/L) log |⟨ψ₀|e^{-iH_f t}|ψ₀⟩|² for TFIM h-quench; closed-form via Bogoliubov mode amplitudes.",
 )
 
-# ── Status-axis worked examples: Lieb-Robinson bound + high-T expansion ──
+# ── Status-axis worked example: Lieb-Robinson bound (:bound) ────────────
 @register(
     TFIM,
     LiebRobinsonBound,
@@ -659,15 +659,4 @@
     tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
     references=["LiebRobinson1972", "HastingsKoma2006"],
     notes="v_LR = 2 min(|J|,|h|), the causal-cone slope; saturated by the max group velocity of Λ(k).",
-)
-@register(
-    TFIM,
-    HighTemperatureFreeEnergy,
-    Infinite,
-    method=:analytic,
-    status=:approx,
-    reliability=:high,
-    tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
-    references=["Pfeuty1970"],
-    notes="f/N ≈ -ln2/β - (β/2)(J²+h²) + O(β³), valid for βJ ≪ 1.",
 )

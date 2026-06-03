@@ -957,12 +957,13 @@ sigma-model closed forms (Mehta 2004 §16) are deferred to Phase 2.
 """
 struct SpectralFormFactor <: AbstractQuantity end
 
-# ─── Registered-status worked examples (status axis, v0.24) ─────────────
-# Two quantities carried in with the new `status` registry axis: a
-# one-sided BOUND (Lieb-Robinson velocity cone) and a domain-limited
-# APPROXIMATION (high-temperature free-energy expansion). They exercise
-# the :bound / :approx status, verify_bound / verify_approx, and the
-# atlas status rendering end to end.
+# ─── Registered-status worked example (status axis, v0.24) ──────────────
+# A one-sided BOUND quantity (Lieb-Robinson velocity cone) carried in with
+# the new `status` registry axis — exercising the :bound status,
+# verify_bound, and the atlas status rendering.  (The :approx status and
+# verify_approx ship too; their worked example is deferred to the
+# definition-list redesign, which expresses approximations as non-canonical
+# definitions of an existing quantity rather than a new quantity.)
 
 """
     LiebRobinsonBound() <: AbstractQuantity
@@ -980,18 +981,3 @@ maximum group velocity `max_k |dΛ/dk|`. Registered with `status=:bound`.
 (Lieb & Robinson 1972; Hastings & Koma 2006.)
 """
 struct LiebRobinsonBound <: AbstractQuantity end
-
-"""
-    HighTemperatureFreeEnergy() <: AbstractQuantity
-
-Leading high-temperature (small-β) expansion of the per-site free energy,
-
-    f(β)/N ≈ −ln 2 / β − (β/2)(J² + h²) + O(β³),
-
-obtained from `ln Z / N = ln 2 + (β²/2) ⟨H²⟩_∞ / N + …` with the
-infinite-temperature second moment `⟨H²⟩_∞ / N = J² + h²` (the cross
-`ZZ·X` traces vanish). A domain-limited `:approx`: correct for `βJ ≪ 1`
-with leading error `O(β³)`; outside that window the exact
-[`FreeEnergy`](@ref) must be used. Registered with `status=:approx`.
-"""
-struct HighTemperatureFreeEnergy <: AbstractQuantity end

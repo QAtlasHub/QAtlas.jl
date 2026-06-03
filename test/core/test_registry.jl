@@ -170,7 +170,6 @@ end
         e.status === :exact for e in REGISTRY if e.model === TFIM && e.quantity <: Energy
     )
     @test any(e.status === :bound for e in REGISTRY if e.model === TFIM)
-    @test any(e.status === :approx for e in REGISTRY if e.model === TFIM)
 end
 
 @testset "register! rejects a status outside STATUS_VALUES" begin

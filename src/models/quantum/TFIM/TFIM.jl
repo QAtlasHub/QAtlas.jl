@@ -247,8 +247,7 @@ function fetch(model::TFIM, ::CentralCharge, ::Infinite; kwargs...)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Lieb-Robinson velocity bound (status=:bound) + high-T free-energy expansion
-# (status=:approx) — status-axis worked examples (v0.24)
+# Lieb-Robinson velocity bound (status=:bound) — status-axis worked example (v0.24)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
@@ -267,20 +266,6 @@ velocity `max_k |dΛ/dk|` of the Bogoliubov dispersion
 """
 function fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite; kwargs...)
     return 2 * min(abs(model.J), abs(model.h))
-end
-
-"""
-    fetch(model::TFIM, ::HighTemperatureFreeEnergy, ::Infinite; beta) -> Float64
-
-Leading high-temperature (small-β) expansion of the per-site free energy,
-
-    f(β)/N ≈ −ln 2 / β − (β/2)(J² + h²) + O(β³),
-
-valid for `β J ≪ 1`.  Registered with `status=:approx`; outside the
-high-temperature window use the exact [`FreeEnergy`](@ref) instead.
-"""
-function fetch(model::TFIM, ::HighTemperatureFreeEnergy, ::Infinite; beta::Real, kwargs...)
-    return -log(2) / beta - (beta / 2) * (model.J^2 + model.h^2)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

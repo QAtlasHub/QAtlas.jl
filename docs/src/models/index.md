@@ -69,7 +69,7 @@ In this page, all model list defined in QAtlas.jl is shown. **63 models** have `
 | [`SixVertex`](../atlas/models/SixVertex.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
 | [`SpinIce`](../atlas/models/SpinIce.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 32 | 🟣 0 🟢 36 🔵 9 ⚪ 0 🟠 11 | `Ising` |
+| [`TFIM`](../atlas/models/TFIM.md) | 31 | 🟣 0 🟢 36 🔵 9 ⚪ 0 🟠 10 | `Ising` |
 | [`TTbar`](../atlas/models/TTbar.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |

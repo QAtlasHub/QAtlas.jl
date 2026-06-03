@@ -283,3 +283,38 @@ function fetch(
         kwargs...,
     )
 end
+
+# -----------------------------------------------------------------------------
+# Logarithmic negativity of two adjacent intervals at h = J (CC-Tonni 2012)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+Calabrese-Cardy-Tonni 2012 logarithmic negativity of two adjacent
+intervals at the critical TFIM point `|h| = |J|`:
+
+    E = (c/4) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)],   c = 1/2.
+
+Delegates to `Universality(:Ising)`.
+"""
+function fetch(
+    m::TFIM, ::LogarithmicNegativity, ::Infinite; ℓ_A::Real, ℓ_B::Real, kwargs...
+)
+    isapprox(abs(m.h), abs(m.J); atol=1e-12) || throw(
+        DomainError(
+            (m.h, m.J),
+            "TFIM LogarithmicNegativity: closed-form CC-Tonni applies only at " *
+            "the critical point |h| = |J|; got (h, J) = ($(m.h), $(m.J)).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        LogarithmicNegativity(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        kwargs...,
+    )
+end

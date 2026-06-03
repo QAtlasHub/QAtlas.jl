@@ -275,27 +275,48 @@ function fetch(
 end
 
 """
-    fetch(::Universality{C}, ::VonNeumannEntropy, ::Infinite; ℓ::Real, kwargs...)
-        -> Float64
+    fetch(::Universality{C}, ::VonNeumannEntropy, ::Infinite;
+          ℓ::Real, beta::Real = Inf, kwargs...) -> Float64
 
 Calabrese–Cardy von Neumann entanglement entropy in the thermodynamic
-limit (`L → ∞`) of a 1+1D CFT, with PBC scaling — i.e. two
-entanglement cuts in an infinite chain:
+limit (`L → ∞`) of a 1+1D CFT, with PBC scaling — two entanglement
+cuts in an infinite chain.
 
-    S(ℓ) = (c/3) log ℓ                                   (Infinite)
+- `beta = Inf` (default): T = 0 ground state.
 
-The non-universal additive constant is dropped.  This is the standard
-"infinite-chain" reference used to extract the central charge from
-finite-size lattice data.
+      S(ℓ) = (c/3) log ℓ                                   (Infinite)
 
-Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) eq. (3.13).
+- `0 < beta < Inf`: finite-temperature thermal state of the CFT.
+
+      S(ℓ, β) = (c/3) log[(β/π) sinh(π ℓ / β)]             (Infinite, T > 0)
+
+Both forms drop the non-universal additive constant.  The β → ∞ limit
+of the finite-T form recovers the T = 0 expression because
+`(β/π) sinh(π ℓ / β) → ℓ`.  Fermi velocity is normalised to unity
+(lattice units); models computing thermal entanglement at a non-unit
+sound velocity should pass `beta` already scaled by their velocity.
+
+Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) §4, eq. (3.13),
+(3.16). Tracking: #580.
 """
 function fetch(
-    model::Universality{C}, ::VonNeumannEntropy, ::Infinite; ℓ::Real, kwargs...
+    model::Universality{C},
+    ::VonNeumannEntropy,
+    ::Infinite;
+    ℓ::Real,
+    beta::Real=Inf,
+    kwargs...,
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite: ℓ must be > 0; got ℓ=$ℓ."))
     c = _cardy_central_charge(model; kwargs...)
-    return (c / 3) * log(ℓ)
+    if isinf(beta)
+        return (c / 3) * log(ℓ)
+    else
+        beta > 0 || throw(
+            ArgumentError("Cardy Infinite finite-T: beta must be > 0; got beta=$beta.")
+        )
+        return (c / 3) * log((beta / π) * sinh(π * ℓ / beta))
+    end
 end
 
 # ─── Rényi entropy ──────────────────────────────────────────────────────────
@@ -380,12 +401,21 @@ Reduces to the von Neumann `(c/3) log ℓ` at `α = 1` after the
 substitution `c -> c · (1 + 1/α) / 2`.
 """
 function fetch(
-    model::Universality{C}, q::RenyiEntropy, ::Infinite; ℓ::Real, kwargs...
+    model::Universality{C}, q::RenyiEntropy, ::Infinite; ℓ::Real, beta::Real=Inf, kwargs...
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite Rényi: ℓ must be > 0; got ℓ=$ℓ."))
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
-    return (c_eff / 3) * log(ℓ)
+    if isinf(beta)
+        return (c_eff / 3) * log(ℓ)
+    else
+        beta > 0 || throw(
+            ArgumentError(
+                "Cardy Infinite Rényi finite-T: beta must be > 0; got beta=$beta."
+            ),
+        )
+        return (c_eff / 3) * log((beta / π) * sinh(π * ℓ / beta))
+    end
 end
 
 # ─── Infinite bc forwarding for verify() integration ───────────────────────

@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (198)
+## `Infinite` (200)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -53,8 +53,10 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
 - 🟢 [`Heisenberg1D/MassGap/Infinite`](../hubs/Heisenberg1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 - 🟠 [`HeisenbergXYZ/CorrelationLength/Infinite`](../hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`HeisenbergXYZ/Energy/Infinite`](../hubs/HeisenbergXYZ_Energy_Infinite.md) — corroborated-at-p

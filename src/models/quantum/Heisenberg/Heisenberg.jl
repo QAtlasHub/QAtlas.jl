@@ -287,6 +287,34 @@ for CorrTy in (:XXCorrelation, :YYCorrelation, :ZZCorrelation)
     end
 end
 
+# Entanglement at Infinite delegates to Universality(:Heisenberg) which
+# carries the c=1 Calabrese–Cardy closed forms (issue #580 Phase 1).
+# The Heisenberg chain is gapless for all J (always at the SU(2) critical
+# point), so no gapped crossover is needed.
+function fetch(
+    ::Heisenberg1D,
+    ::VonNeumannEntropy{:equilibrium},
+    ::Infinite;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
+)
+    return fetch(
+        Universality(:Heisenberg),
+        VonNeumannEntropy(),
+        Infinite();
+        ℓ=ℓ,
+        beta=beta,
+        kwargs...,
+    )
+end
+
+function fetch(
+    ::Heisenberg1D, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
+)
+    return fetch(Universality(:Heisenberg), q, Infinite(); ℓ=ℓ, beta=beta, kwargs...)
+end
+
 # Entanglement: VonNeumannEntropy and RenyiEntropy.
 function fetch(
     ::Heisenberg1D,

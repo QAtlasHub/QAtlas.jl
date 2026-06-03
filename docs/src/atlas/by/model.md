@@ -97,7 +97,7 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 
-## `Heisenberg1D` (24)
+## `Heisenberg1D` (26)
 
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
@@ -113,6 +113,7 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`Heisenberg1D/MagnetizationZLocal/OBC`](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/MassGap/Infinite`](../hubs/Heisenberg1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/MassGap/OBC`](../hubs/Heisenberg1D_MassGap_OBC.md) — corroborated-at-p
+- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/RenyiEntropy/OBC`](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/SpecificHeat/OBC`](../hubs/Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
@@ -121,6 +122,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 

@@ -35,7 +35,7 @@ In this page, all model list defined in QAtlas.jl is shown. **64 models** have `
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | 4 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 4 | — |
-| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 20 | 🟣 0 🟢 13 🔵 4 ⚪ 0 🟠 7 | — |
+| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 20 | 🟣 0 🟢 13 🔵 4 ⚪ 0 🟠 9 | — |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | 6 | 🟣 0 🟢 1 🔵 1 ⚪ 0 🟠 4 | — |
 | [`Honeycomb`](../atlas/models/Honeycomb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 5 | 🟣 0 🟢 2 🔵 2 ⚪ 0 🟠 1 | — |

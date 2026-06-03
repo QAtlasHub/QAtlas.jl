@@ -234,12 +234,14 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](hubs/XYh1D_SusceptibilityZZ_OBC.md)
 
-## `delegation` - 13 hubs
+## `delegation` - 15 hubs
 
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](hubs/DMIHeisenberg1D_Energy_Infinite.md)
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](hubs/Heisenberg1D_LuttingerParameter_Infinite.md)
+- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](hubs/Heisenberg1D_RenyiEntropy_Infinite.md)
+- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md)
 - 🔵 [`HeisenbergXYZ/LuttingerParameter/Infinite`](hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md)
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)

@@ -67,12 +67,14 @@ end
 
 @testset "TFIM disordered (h>J) PBC: monotonic convergence to Infinite" begin
     # At finite β the dominant `O(1/N)` error in *both* OBC and PBC
-    # comes from the trapezoidal-rule quadrature of the thermal
-    # integrand `log(2 cosh(βΛ_k/2))` on the discrete momentum grid;
-    # the boundary contribution that distinguishes the two BCs is
-    # subleading in this regime.  We only assert that the PBC error
-    # decreases monotonically with N (not that it beats OBC at every
-    # finite N — that comparison is finite-β-coefficient-dependent).
+    # In the gapped phase (|h - J| > 0) the leading finite-size
+    # correction to the PBC per-site energy is **exponential**
+    # `O(exp(-N / ξ))` with ξ = 1/(2|h - J|); the trapezoidal-rule
+    # quadrature error of the `Infinite()` integrand vanishes as
+    # `O(exp(-cN))` on a smooth periodic integrand too.  We assert
+    # monotonic decrease only — the convergence is faster than any
+    # power law and saturates at machine precision by N ~ 128, so a
+    # power-law slope fit on log(err) is dominated by log(0) garbage.
     J, h = 1.0, 1.5
     model = TFIM(; J=J, h=h)
     β = 2.0
@@ -83,9 +85,15 @@ end
         abs(QAtlas.fetch(model, Energy(:per_site), PBC(N); beta=β) - ε_inf) for N in Ns
     ]
     @test issorted(errs; rev=true)
-    _, p = _fit_loglog(Ns, errs)
-    # PBC at finite β should decay at least as fast as OBC (1/N).
-    @test 0.7 ≤ p ≤ 2.5
+    # Exponential convergence: each doubling of N should reduce err
+    # by orders of magnitude, capped at machine precision.  Below the
+    # cap we cannot fit a power law (log(0) blows the slope up); above
+    # we just assert each step shrinks by ≥ 10× as the lightest
+    # exponential check.
+    for i in 1:(length(errs) - 1)
+        errs[i + 1] ≤ 1e-12 && continue   # saturated at machine precision
+        @test errs[i + 1] ≤ errs[i] / 10
+    end
 end
 
 # ────────────────────────────────────────────────────────────────────

@@ -603,7 +603,3 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
-
-
-
-

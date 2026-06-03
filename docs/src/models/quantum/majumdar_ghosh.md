@@ -112,7 +112,3 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 4 hubs (quan
 | [`SpinGap`](../../atlas/hubs/MajumdarGhosh_SpinGap_Infinite.md) | `Infinite` | ⚪ cited-only | 4 |
 
 <!-- ATLAS:HUBS:END -->
-
-
-
-

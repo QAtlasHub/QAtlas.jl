@@ -571,6 +571,21 @@ P04010. Tracking: #580 quench-dynamics phase.
 struct EntanglementGrowthSlope <: AbstractQuantity end
 
 """
+    CardyEntropy() <: AbstractQuantity
+
+Asymptotic high-energy entropy (log of the density of states) of a
+1+1D CFT, given by the Cardy 1986 formula
+
+    S_Cardy(E) = 2 π sqrt(c E / 6),
+
+where `c` is the central charge of the CFT and `E` is the excitation
+energy (in units where the cylinder circumference is 1). This counts
+the number of CFT states at fixed energy `E` and underlies, e.g., the
+Cardy-Verlinde / black-hole-entropy correspondences. Tracking: #580.
+"""
+struct CardyEntropy <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

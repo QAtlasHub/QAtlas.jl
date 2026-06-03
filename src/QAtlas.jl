@@ -119,7 +119,8 @@ export FermiVelocity,
     EntanglementGrowthSlope,
     CardyEntropy,
     ConformalCasimirEnergy,
-    LogarithmicNegativity
+    LogarithmicNegativity,
+    BoundaryEntropy
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)

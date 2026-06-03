@@ -682,3 +682,55 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     return (c / 4) * log(ℓ_A * ℓ_B / (ℓ_A + ℓ_B))
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Affleck-Ludwig boundary entropy log g (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{:Ising}, ::BoundaryEntropy, ::Infinite;
+          boundary_state::Symbol, kwargs...) -> Float64
+
+Affleck-Ludwig universal boundary entropy `log g` for an Ising CFT
+(M(3,4), c = 1/2) Cardy boundary state. From the modular S-matrix of
+the Ising minimal model the universal `g_a = S_{0a} / sqrt(S_{00})`
+values are
+
+    g_1 (identity)  = 1/sqrt(2),   log g = -(1/2) log 2
+    g_σ (spin)      = 1,           log g = 0
+    g_ε (energy)    = 1/sqrt(2),   log g = -(1/2) log 2
+
+Physical interpretation: `|σ⟩` is the "free" (unconstrained) boundary
+and `|1⟩` and `|ε⟩` are the "fixed" boundaries (spin pinned up or
+down). The free boundary has higher `g`, so free flows to fixed under
+RG (g-theorem).
+
+`boundary_state` selects the Cardy state, one of:
+    `:identity` (≡ `:fixed_up`),
+    `:sigma`    (≡ `:free`),
+    `:epsilon`  (≡ `:fixed_down`).
+
+Reference: Affleck-Ludwig PRL **67**, 161 (1991);
+Cardy *Nucl. Phys. B* **324**, 581 (1989) for the Cardy state
+construction. Tracking: #580.
+"""
+function fetch(
+    ::Universality{:Ising}, ::BoundaryEntropy, ::Infinite; boundary_state::Symbol, kwargs...
+)
+    if boundary_state === :identity ||
+        boundary_state === :fixed_up ||
+        boundary_state === :epsilon ||
+        boundary_state === :fixed_down
+        return -log(2) / 2  # log(1/sqrt(2))
+    elseif boundary_state === :sigma || boundary_state === :free
+        return 0.0           # log(1)
+    else
+        throw(
+            ArgumentError(
+                "Universality(:Ising) BoundaryEntropy: boundary_state must be one " *
+                "of :identity / :fixed_up / :sigma / :free / :epsilon / :fixed_down; " *
+                "got \$(boundary_state).",
+            ),
+        )
+    end
+end

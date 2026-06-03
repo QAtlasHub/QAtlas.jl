@@ -48,3 +48,78 @@ using LinearAlgebra: kron
         refs=["x"],
     )
 end
+
+@testset "verify_bound harness — variational one-sided witness" begin
+    # Rayleigh–Ritz: the |→…→⟩ product-state energy density (-h exactly,
+    # since ⟨X⟩=1 and ⟨ZZ⟩=0 there) is an UPPER bound for the TFIM
+    # ground-state energy density. So the fetched GS (subject) sits at or
+    # below -h, i.e. the measured witness -h is ≥ subject. This is a real
+    # one-sided check, not an equality dressed up as a bound.
+    J, h = 1.0, 2.0
+    m = TFIM(; J=J, h=h)
+    trial_density = -h                       # ⟨H⟩/N for |→…→⟩, analytic
+    s = verify_bound(
+        m,
+        Energy(:per_site),
+        Infinite();
+        route=:variational_state,
+        measured=[trial_density],
+        relation=:geq,
+        refs=["Rayleigh–Ritz variational principle"],
+    )
+    @test s == QAtlas.fetch(m, Energy(:per_site), Infinite())   # subject came from fetch
+    @test trial_density >= s                              # the bound genuinely holds
+
+    # Both vocabularies are closed — a typo can't silently weaken the card.
+    @test_throws ErrorException verify_bound(
+        m,
+        Energy(:per_site),
+        Infinite();
+        route=:retype,
+        measured=[trial_density],
+        relation=:geq,
+        refs=["x"],
+    )
+    @test_throws ErrorException verify_bound(
+        m,
+        Energy(:per_site),
+        Infinite();
+        route=:variational_state,
+        measured=[trial_density],
+        relation=:above,
+        refs=["x"],
+    )
+end
+
+@testset "verify_approx harness — domain-limited high-T tail" begin
+    # TFIM specific heat decays as ~(βΔ)² at high T, so c → 0 as β → 0.
+    # In-domain (βJ ≪ 1) the fetched c agrees with the leading value 0 to
+    # the stated tolerance; the domain + error order ride along on the card.
+    m = TFIM(; J=1.0, h=1.0)
+    s = verify_approx(
+        m,
+        SpecificHeat(),
+        Infinite();
+        route=:high_temperature,
+        reference=0.0,
+        agree_within=1e-3,
+        valid_domain="betaJ << 1",
+        error_order="O((betaJ)^2)",
+        refs=["high-T tail: c ~ (beta*Delta)^2"],
+        fetch_kw=(; beta=1e-3),
+    )
+    @test isapprox(s, 0.0; atol=1e-3)        # in-domain: matches leading value
+
+    @test_throws ErrorException verify_approx(
+        m,
+        SpecificHeat(),
+        Infinite();
+        route=:bogus,
+        reference=0.0,
+        agree_within=1e-3,
+        valid_domain="x",
+        error_order="y",
+        refs=["z"],
+        fetch_kw=(; beta=1e-3),
+    )
+end

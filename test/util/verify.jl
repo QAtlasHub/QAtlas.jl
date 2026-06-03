@@ -287,3 +287,281 @@ function verify(
     end
     return subject
 end
+
+# ──────────────────────────────────────────────────────────────────────
+# Shared v2 card emitter for the bound / approx verification variants.
+# verify() above keeps its own inlined emit (its signature + emit are
+# frozen for the 195 migrated cards); these siblings funnel through one
+# helper so the JSONL schema stays consistent across all three. The
+# `extra_fields` argument is a pre-formatted run of `"key":value,` pairs
+# (with a trailing comma) spliced verbatim before the common tail.
+# ──────────────────────────────────────────────────────────────────────
+
+function _emit_card2(
+    model,
+    quantity,
+    bc;
+    route::Symbol,
+    status::AbstractString,
+    subject::Real,
+    reliability::Symbol,
+    refs::AbstractVector{<:AbstractString},
+    at,
+    independence::AbstractString,
+    discriminant::AbstractString,
+    extra_fields::AbstractString,
+)
+    get(ENV, "QATLAS_EMIT", "0") == "1" || return nothing
+    outdir = get(ENV, "QATLAS_CIOUT_DIR", joinpath(@__DIR__, "..", ".ci-out"))
+    mkpath(outdir)
+    tf = get(ENV, "QATLAS_TEST_FILES", "")
+    sid = isempty(tf) ? "all" : replace(string(hash(tf); base=16), '/' => '-')
+    atv = at === nothing ? String[] : [string(a) for a in at]
+    card = string(
+        "{",
+        "\"schema_version\":2,",
+        "\"hub\":",
+        _json_str(_verify_hub(model, quantity, bc)),
+        ",",
+        "\"route\":",
+        _json_str(route),
+        ",",
+        "\"mechanism\":",
+        _json_str(route),
+        ",",
+        "\"independence\":",
+        _json_str(independence),
+        ",",
+        "\"discriminant\":",
+        _json_str(discriminant),
+        ",",
+        "\"status\":",
+        _json_str(status),
+        ",",
+        extra_fields,
+        "\"subject\":",
+        _json_num(subject),
+        ",",
+        "\"at\":",
+        _json_arr(atv),
+        ",",
+        "\"reliability\":",
+        _json_str(reliability),
+        ",",
+        "\"refs\":",
+        _json_arr(refs),
+        ",",
+        "\"commit\":",
+        _json_str(_verify_commit()),
+        ",",
+        "\"env\":",
+        _json_str(_v2_env()),
+        ",",
+        "\"date\":",
+        _json_str(string(Dates.today())),
+        "}",
+    )
+    _ef = joinpath(outdir, "evidence-$(sid).jsonl")
+    open(_ef, "a") do io
+        println(io, card)
+    end
+    @info "verify variant: emitted v2 card" path = abspath(_ef) status = status route = route
+    return nothing
+end
+
+# ──────────────────────────────────────────────────────────────────────
+# verify_bound — one-sided inequality cards (registry status :bound).
+# ──────────────────────────────────────────────────────────────────────
+
+const _BOUND_ROUTES = (
+    :ed_operator_bound,    # an ED-measured quantity stays within the fetched bound
+    :variational_state,    # a trial state's expectation one-sidedly bounds the fetched value
+    :saturating_constant,  # a universal constant attained (equality) at the optimal state
+)
+
+# ED-/trial-state-backed bound checks are structurally independent of the
+# src formula; a saturating universal constant is an asserted optimum.
+function _bound_independence(route::Symbol)
+    if route in (:ed_operator_bound, :variational_state)
+        return ("structural", "ed:bound-witness")
+    else
+        return ("asserted", "asserted:" * string(route))
+    end
+end
+
+"""
+    verify_bound(model, quantity, bc;
+                 route, measured, relation,
+                 refs, slack=0.0, saturating=false,
+                 reliability=:high, fetch_kw=(;), at=nothing,
+                 subject_extract=nothing) -> subject
+
+One-sided counterpart of [`verify`](@ref) for `status=:bound` claims. The
+fetched value `subject = fetch(model, quantity, bc; fetch_kw...)` is the
+theoretical bound (RHS); `measured` is an INDEPENDENT witness (scalar or
+vector — e.g. an ED expectation, or a trial-state energy) that must stay
+on the correct side:
+
+  * `relation=:leq` asserts `maximum(measured) <= subject + slack`
+  * `relation=:geq` asserts `minimum(measured) >= subject - slack`
+
+(the extremum is the tightest point of the sample). `saturating=true`
+additionally asserts equality at that extremum — for universal constants
+attained at the optimum (Tsirelson, Page average). The `<=`/`>=` direction
+lives here on the card, never in the registry. Emits a v2 card with
+`status` one of `pass` / `violated` / `saturated`.
+"""
+function verify_bound(
+    model,
+    quantity,
+    bc;
+    route::Symbol,
+    measured,
+    relation::Symbol,
+    refs::AbstractVector{<:AbstractString},
+    slack::Real=0.0,
+    saturating::Bool=false,
+    reliability::Symbol=:high,
+    fetch_kw::NamedTuple=(;),
+    at=nothing,
+    subject_extract::Union{Nothing,Function}=nothing,
+)
+    route in _BOUND_ROUTES ||
+        error("verify_bound: route must be one of $(_BOUND_ROUTES); got $(repr(route))")
+    relation in (:leq, :geq) ||
+        error("verify_bound: relation must be :leq or :geq; got $(repr(relation))")
+
+    raw = QAtlas.fetch(model, quantity, bc; fetch_kw...)
+    subject = subject_extract === nothing ? raw : subject_extract(raw)
+    bound = float(subject)
+
+    meas = measured isa AbstractVector ? collect(float.(measured)) : [float(measured)]
+    worst = relation === :leq ? maximum(meas) : minimum(meas)
+
+    satisfied = relation === :leq ? (worst <= bound + slack) : (worst >= bound - slack)
+    @test satisfied
+    saturated = isapprox(worst, bound; atol=max(slack, 1e-12))
+    if saturating
+        @test saturated
+    end
+
+    indep, disc = _bound_independence(route)
+    status = !satisfied ? "violated" : (saturated ? "saturated" : "pass")
+    extra = string(
+        "\"relation\":",
+        _json_str(relation),
+        ",",
+        "\"measured\":",
+        _json_arr(meas),
+        ",",
+        "\"bound\":",
+        _json_num(bound),
+        ",",
+        "\"slack\":",
+        _json_num(slack),
+        ",",
+        "\"saturating\":",
+        (saturating ? "true" : "false"),
+        ",",
+    )
+    _emit_card2(
+        model,
+        quantity,
+        bc;
+        route=route,
+        status=status,
+        subject=bound,
+        reliability=reliability,
+        refs=refs,
+        at=at,
+        independence=indep,
+        discriminant=disc,
+        extra_fields=extra,
+    )
+    return subject
+end
+
+# ──────────────────────────────────────────────────────────────────────
+# verify_approx — domain-limited approximation cards (registry status :approx).
+# ──────────────────────────────────────────────────────────────────────
+
+const _APPROX_ROUTES = (
+    :high_temperature,   # high-T (small-β) expansion
+    :low_temperature,    # low-T (large-β) expansion
+    :large_n,            # large-N / mean-field expansion
+    :perturbative,       # perturbation series in a small parameter
+)
+
+"""
+    verify_approx(model, quantity, bc;
+                  route, reference, agree_within, valid_domain, error_order,
+                  refs, reliability=:medium, fetch_kw=(;), at=nothing,
+                  subject_extract=nothing) -> subject
+
+Approximation counterpart of [`verify`](@ref) for `status=:approx` claims.
+`subject = fetch(model, quantity, bc; fetch_kw...)` is an approximation
+(e.g. a high-T expansion) valid on a human-readable `valid_domain`
+(e.g. `"betaJ << 1"`) with a known leading `error_order`
+(e.g. `"O((betaJ)^2)"`). Asserts `subject ≈ reference` within
+`agree_within` INSIDE the domain — the caller picks `fetch_kw` to sit
+in-domain, and `reference` is the exact value there (ED or a tighter
+formula). The domain and error order are recorded structurally so the
+atlas can show *where* and *how well* the approximation holds.
+"""
+function verify_approx(
+    model,
+    quantity,
+    bc;
+    route::Symbol,
+    reference,
+    agree_within::Real,
+    valid_domain::AbstractString,
+    error_order::AbstractString,
+    refs::AbstractVector{<:AbstractString},
+    reliability::Symbol=:medium,
+    fetch_kw::NamedTuple=(;),
+    at=nothing,
+    subject_extract::Union{Nothing,Function}=nothing,
+)
+    route in _APPROX_ROUTES ||
+        error("verify_approx: route must be one of $(_APPROX_ROUTES); got $(repr(route))")
+
+    raw = QAtlas.fetch(model, quantity, bc; fetch_kw...)
+    subject = subject_extract === nothing ? raw : subject_extract(raw)
+    approx = float(subject)
+    ref = float(reference)
+
+    ok = isapprox(approx, ref; atol=agree_within)
+    @test ok
+
+    status = ok ? "pass" : "fail"
+    extra = string(
+        "\"valid_domain\":",
+        _json_str(valid_domain),
+        ",",
+        "\"error_order\":",
+        _json_str(error_order),
+        ",",
+        "\"reference\":",
+        _json_num(ref),
+        ",",
+        "\"agree_within\":",
+        _json_num(agree_within),
+        ",",
+    )
+    _emit_card2(
+        model,
+        quantity,
+        bc;
+        route=route,
+        status=status,
+        subject=approx,
+        reliability=reliability,
+        refs=refs,
+        at=at,
+        independence="asserted",
+        discriminant="approx:" * string(route),
+        extra_fields=extra,
+    )
+    return subject
+end

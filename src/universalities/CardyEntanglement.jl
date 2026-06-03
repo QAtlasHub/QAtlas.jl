@@ -637,3 +637,48 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     return -π * c / (6 * L)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Logarithmic negativity for two adjacent intervals at Infinite (#580)
+#
+# Calabrese-Cardy-Tonni 2012 (DOI 10.1103/PhysRevLett.109.130502) found
+# that the universal piece of E = log Tr |rho^{T_B}| for two adjacent
+# intervals of lengths ell_A, ell_B on an infinite 1+1D-CFT chain at
+# T = 0 is
+#
+#     E(ell_A, ell_B) = (c/4) log[ell_A * ell_B / (ell_A + ell_B)],
+#
+# i.e., the same geometric-mean log as the mutual-information universal
+# formula (PR #587) with the prefactor c/3 replaced by c/4.
+#
+# Reference: P. Calabrese, J. Cardy, E. Tonni, Phys. Rev. Lett. 109,
+# 130502 (2012). Tracking: #580.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+Logarithmic negativity of two adjacent intervals at T = 0 on an
+infinite 1+1D-CFT chain (Calabrese-Cardy-Tonni 2012):
+
+    E = (c/4) log[ℓ_A * ℓ_B / (ℓ_A + ℓ_B)]
+
+Returns the universal log piece; non-universal additive constants are
+dropped.
+"""
+function fetch(
+    model::Universality{C},
+    ::LogarithmicNegativity,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    kwargs...,
+) where {C}
+    ℓ_A > 0 ||
+        throw(ArgumentError("LogarithmicNegativity: ell_A must be > 0; got ell_A=$ℓ_A."))
+    ℓ_B > 0 ||
+        throw(ArgumentError("LogarithmicNegativity: ell_B must be > 0; got ell_B=$ℓ_B."))
+    c = _cardy_central_charge(model; kwargs...)
+    return (c / 4) * log(ℓ_A * ℓ_B / (ℓ_A + ℓ_B))
+end

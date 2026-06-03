@@ -13,21 +13,24 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 4
-- **Total hubs (Model, BC pairs)**: 4
-- **Methods** (derived from `@register`): `analytic`
+- **Models with this quantity registered**: 5
+- **Total hubs (Model, BC pairs)**: 5
+- **Methods** (derived from `@register`): `analytic`, `closed_form`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
 - AKLT1988 — 1 hub
 - Ising1925 — 1 hub
 - Kitaev2001 — 1 hub
+- LiebSchultzMattis1961 — 1 hub
+- McCoyWu1978 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `Infinite` |
 |---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | 🟢 [hub](../hubs/AKLT1D_CorrelationLength_Infinite.md) |
+| [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | 🟠 [hub](../hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | 🟢 [hub](../hubs/IsingChain1D_CorrelationLength_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_CorrelationLength_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_CorrelationLength_Infinite.md) |

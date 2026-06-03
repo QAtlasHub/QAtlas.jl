@@ -137,7 +137,7 @@ Full Bethe-ansatz derivation in
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 5 models register 49 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 5 models register 53 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
@@ -166,8 +166,12 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 49 hubs (
 | `Heisenberg1D` | [`ThermalEntropy`](../../atlas/hubs/Heisenberg1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 45 |
 | `Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 | `Heisenberg1D` | [`ZZStructureFactor`](../../atlas/hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| `HeisenbergXYZ` | [`CorrelationLength`](../../atlas/hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `HeisenbergXYZ` | [`Energy`](../../atlas/hubs/HeisenbergXYZ_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
+| `HeisenbergXYZ` | [`GroundStateEnergyDensity`](../../atlas/hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `HeisenbergXYZ` | [`LuttingerParameter`](../../atlas/hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
+| `HeisenbergXYZ` | [`MassGap`](../../atlas/hubs/HeisenbergXYZ_MassGap_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| `HeisenbergXYZ` | [`SpontaneousMagnetization`](../../atlas/hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `J1J2Heisenberg1D` | [`Energy`](../../atlas/hubs/J1J2Heisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | `S1Heisenberg1D` | [`Energy`](../../atlas/hubs/S1Heisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | `S1Heisenberg1D` | [`Energy`](../../atlas/hubs/S1Heisenberg1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 29 |
@@ -192,7 +196,3 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 49 hubs (
 | `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 
 <!-- ATLAS:HUBS:END -->
-
-
-
-

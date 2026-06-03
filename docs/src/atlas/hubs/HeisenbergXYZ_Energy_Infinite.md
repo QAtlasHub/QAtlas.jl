@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `xxz_delegation`, reliability `high`, refs: YangYang1966 | Baxter1972
-- Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; general (Jx≠Jy) raises DomainError (Baxter elliptic deferred to Phase 2).
+- method `xxz_delegation`, reliability `high`, refs: YangYang1966 | LiebSchultzMattis1961 | Baxter1972
+- Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; XY anisotropic line (Jz=0) via Lieb-Schultz-Mattis 1961 closed form; generic XYZ (Jx≠Jy, Jz≠0) deferred to Baxter elliptic Phase 3.
 
 ## Corroboration
 

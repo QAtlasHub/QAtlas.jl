@@ -13,17 +13,17 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 11
-- **Total hubs (Model, BC pairs)**: 19
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `cft_low_T`, `dense_ed`, `free_fermion_quadgk`, `matter_free_fermion`
+- **Models with this quantity registered**: 12
+- **Total hubs (Model, BC pairs)**: 20
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `cft_low_T`, `dense_ed`, `free_fermion_quadgk_or_klumper_nlie`, `matter_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
 - AKLT1988 — 3 hubs
 - Mahan2000 — 3 hubs
+- Affleck1986 — 2 hubs
 - Kitaev2006 — 2 hubs
 - Lieb1994 — 2 hubs
-- Affleck1986 — 1 hub
 
 ## Model × BC matrix
 
@@ -31,6 +31,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 |---|---|---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_ThermalEntropy_Infinite.md) |
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
+| [`HaldaneShastry`](../models/HaldaneShastry.md) | — | — | 🟠 [hub](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |

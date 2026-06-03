@@ -32,51 +32,51 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 0.5, 1.0), at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 0.5, 1.0), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 0.5, 5.0), at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 0.5, 5.0), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 0.5, 1.0), at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 0.5, 1.0), at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 0.5, 5.0), at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 0.5, 5.0), at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 0.5, 1.0), at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 0.5, 1.0), at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 0.5, 5.0), at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 0.5, 5.0), at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 2.0, 1.0), at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 2.0, 1.0), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 2.0, 5.0), at = ["N=$(4)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(4); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(4, 1.0, 2.0, 5.0), at = ["N=$(4)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 2.0, 1.0), at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 2.0, 1.0), at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 2.0, 5.0), at = ["N=$(6)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(6); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(6, 1.0, 2.0, 5.0), at = ["N=$(6)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 2.0, 1.0), at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 2.0, 1.0), at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 1.0 = 1.0))
 ```
 
 ```julia
-verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 2.0, 5.0), at = ["N=$(8)"], agree_within = 1.0e-9, expected_fail = true, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
+verify(TFIM(; 1.0 = 1.0, 2.0 = 2.0), SusceptibilityXX(), PBC(8); route = :ed_finite_size, independent = ed_tfim_pbc_chi_xx(8, 1.0, 2.0, 5.0), at = ["N=$(8)"], agree_within = 1.0e-9, refs = ["ED black-box: build PBC H_TFIM with chain_hamiltonian_pbc + onsite -h σ_x, diagonalise, compute β·Var(M_x)/N"], fetch_kw = (; 5.0 = 5.0))
 ```
 
 

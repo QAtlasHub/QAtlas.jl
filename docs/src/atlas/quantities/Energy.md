@@ -19,10 +19,10 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- LiebSchultzMattis1961 — 4 hubs
 - Pfeuty1970 — 4 hubs
 - Hulthen1938 — 3 hubs
 - Kitaev2006 — 3 hubs
-- LiebSchultzMattis1961 — 3 hubs
 - WhiteHuse1993 — 3 hubs
 
 ## Model × BC matrix

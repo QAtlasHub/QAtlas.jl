@@ -602,6 +602,21 @@ unitary CFTs with `c > 0`. Tracking: #580.
 struct ConformalCasimirEnergy <: AbstractQuantity end
 
 """
+    LogarithmicNegativity() <: AbstractQuantity
+
+Logarithmic negativity `E = log Tr |ρ^{T_B}|` measuring mixed-state
+entanglement between two subsystems. For two adjacent intervals on
+an infinite 1+1D-CFT chain at T = 0, the universal closed form
+(Calabrese-Cardy-Tonni 2012) is
+
+    E(ℓ_A, ℓ_B) = (c/4) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)],
+
+i.e., the same geometric-mean log of the mutual-information universal
+formula with the prefactor c/3 replaced by c/4. Tracking: #580.
+"""
+struct LogarithmicNegativity <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

@@ -552,6 +552,25 @@ cases. Tracking: #580 entanglement universality catalog.
 struct MutualInformation <: AbstractQuantity end
 
 """
+    EntanglementGrowthSlope() <: AbstractQuantity
+
+Linear-growth slope of the half-system entanglement entropy after a
+global quench from a thermal-like initial state. Calabrese-Cardy 2005
+predicts that, for `t < L / (2 v)`,
+
+    dS_A / dt = (π c v) / (3 β_eff),
+
+where `c` is the central charge of the critical post-quench
+Hamiltonian, `v` is the Lieb-Robinson velocity of correlation
+spreading, and `β_eff` is the effective inverse temperature of the
+generalised-Gibbs steady state set by the initial state. This struct
+is the type tag; concrete dispatches live at the universality layer
+and on model files. Reference: Calabrese-Cardy 2005, *J. Stat. Mech.*
+P04010. Tracking: #580 quench-dynamics phase.
+"""
+struct EntanglementGrowthSlope <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

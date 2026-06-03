@@ -308,3 +308,25 @@ function fetch(
         kwargs...,
     )
 end
+
+"""
+    fetch(::HaldaneShastry, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+CC-Tonni 2012 logarithmic negativity of two adjacent intervals,
+delegated to `Universality(:Heisenberg)` (c = 1):
+
+    E = (1/4) log[ℓ_A * ℓ_B / (ℓ_A + ℓ_B)].
+"""
+function fetch(
+    ::HaldaneShastry, ::LogarithmicNegativity, ::Infinite; ℓ_A::Real, ℓ_B::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        LogarithmicNegativity(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        kwargs...,
+    )
+end

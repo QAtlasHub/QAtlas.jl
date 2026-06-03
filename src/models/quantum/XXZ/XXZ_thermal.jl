@@ -713,3 +713,46 @@ function fetch(
         )
     end
 end
+
+"""
+    fetch(model::XXZ1D, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+CC-Tonni 2012 logarithmic negativity of two adjacent intervals in the
+critical Luttinger-liquid regime `-1 < Δ <= 1`. Delegates to
+`Universality(:XY)` for `-1 < Δ < 1` and `Universality(:Heisenberg)`
+at `Δ = 1`.
+"""
+function fetch(
+    model::XXZ1D, ::LogarithmicNegativity, ::Infinite; ℓ_A::Real, ℓ_B::Real, kwargs...
+)
+    Δ = model.Δ
+    if Δ == 1.0
+        return fetch(
+            Universality(:Heisenberg),
+            LogarithmicNegativity(),
+            Infinite();
+            ℓ_A=ℓ_A,
+            ℓ_B=ℓ_B,
+            kwargs...,
+        )
+    elseif -1.0 < Δ < 1.0
+        return fetch(
+            Universality(:XY),
+            LogarithmicNegativity(),
+            Infinite();
+            ℓ_A=ℓ_A,
+            ℓ_B=ℓ_B,
+            kwargs...,
+        )
+    else
+        throw(
+            DomainError(
+                Δ,
+                "XXZ1D LogarithmicNegativity at Infinite: only the critical " *
+                "Luttinger-liquid regime -1 < Δ <= 1 admits a c = 1 " *
+                "CC-Tonni closed form. Got Δ = $Δ.",
+            ),
+        )
+    end
+end

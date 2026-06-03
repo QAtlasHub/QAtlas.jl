@@ -202,3 +202,61 @@ function fetch(
 )
     return fetch(Universality(:Heisenberg), q, Infinite(); ℓ=ℓ, beta=beta, kwargs...)
 end
+
+# -----------------------------------------------------------------------------
+# Lieb-Robinson velocity + entanglement growth slope (#579, #580)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::HaldaneShastry, ::LiebRobinsonVelocity, ::Infinite;
+          J = m.J, kwargs...) -> Float64
+
+Spinon group velocity of the Haldane-Shastry chain. The free-spinon
+gas underlying the SU(2)_1 WZW description has linear low-energy
+dispersion with sound (spinon) velocity
+
+    v_s = pi J / 2.
+
+For the long-range 1/r^2 model the strict Lieb-Robinson bound is
+weaker (no exponential light cone), but the QUASIPARTICLE / spinon
+propagation velocity that governs entanglement spreading at low
+energies is v_s = pi J / 2.
+
+Reference: F. D. M. Haldane PRL 60, 635 (1988); B. S. Shastry PRL 60,
+639 (1988); Y. Kuramoto-N. Kato-A. Sutherland review on long-range
+integrable models.
+"""
+function fetch(
+    m::HaldaneShastry, ::LiebRobinsonVelocity, ::Infinite; J::Real=m.J, kwargs...
+)
+    return π * abs(J) / 2
+end
+
+"""
+    fetch(m::HaldaneShastry, ::EntanglementGrowthSlope, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Linear-growth slope of post-quench half-system entanglement entropy
+of the Haldane-Shastry chain. The chain is gapless with c = 1, so the
+Calabrese-Cardy 2005 formula applies directly:
+
+    dS_A / dt = pi c v_s / (3 beta_eff) = pi^2 J / (6 beta_eff),
+
+with c = 1 from Universality(:Heisenberg) and v_s = pi J / 2 from the
+LiebRobinsonVelocity dispatch above.
+
+Reference: Calabrese-Cardy J. Stat. Mech. P04010 (2005); HS spinon
+velocity v_s = pi J / 2 as above.
+"""
+function fetch(
+    m::HaldaneShastry, ::EntanglementGrowthSlope, ::Infinite; beta_eff::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        EntanglementGrowthSlope(),
+        Infinite();
+        v=fetch(m, LiebRobinsonVelocity(), Infinite()),
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

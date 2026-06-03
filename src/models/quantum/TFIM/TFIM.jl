@@ -278,19 +278,38 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
-    fetch(model::TFIM, ::LiebRobinsonVelocity, ::Infinite; J=m.J) -> Float64
+    fetch(model::TFIM, ::LiebRobinsonVelocity, ::Infinite;
+          J=m.J, h=m.h) -> Float64
 
 Lieb-Robinson velocity of the transverse-field Ising chain. Via the
 Jordan-Wigner mapping the TFIM is a free Bogoliubov-fermion system
-with dispersion `Λ(k) = 2 sqrt(J^2 + h^2 - 2 J h cos k)`. The
-maximum group velocity over `k` saturates the Lieb-Robinson bound,
+with dispersion `Λ(k) = 2 sqrt(J^2 + h^2 - 2 J h cos k)`. The tight
+Lieb-Robinson velocity is the maximum single-particle group velocity
+saturating the bound: differentiating `Λ(k)` and locating the
+interior stationary point at `cos k = min(|J|, |h|) / max(|J|, |h|)`
+gives
 
-    v_LR = max_k |dΛ/dk| = 2 |J|.
+    v_LR = max_k |dΛ/dk| = 2 min(|J|, |h|).
 
-This is independent of the transverse field `h`: it is the bandwidth
-of the JJ exchange divided by the spin spacing. Reference:
-Lieb-Robinson 1972; Calabrese-Cardy 2006 (quench dynamics).
+At criticality `h = J` this is `2J = 2h` (Calabrese-Cardy 2006).
+The Hastings-Koma upper bound `2 max(|J|, |h|)` is loose; the value
+returned here is the *tight* free-fermion saturated velocity that
+governs e.g. the linear-growth slope of post-quench entanglement
+(see PR #588 EntanglementGrowthSlope).
+
+At `h = 0` (classical Ising) or `J = 0` (decoupled site spins) the
+chain has no quantum dynamics and `v_LR = 0`.
+
+Reference: Lieb-Robinson 1972; Hastings-Koma 2006 (general bound);
+Calabrese-Cardy 2006 (free-fermion saturation in quench dynamics).
 """
-function fetch(model::TFIM, ::LiebRobinsonVelocity, ::Infinite; J::Real=model.J, kwargs...)
-    return 2 * abs(J)
+function fetch(
+    model::TFIM,
+    ::LiebRobinsonVelocity,
+    ::Infinite;
+    J::Real=model.J,
+    h::Real=model.h,
+    kwargs...,
+)
+    return 2 * min(abs(J), abs(h))
 end

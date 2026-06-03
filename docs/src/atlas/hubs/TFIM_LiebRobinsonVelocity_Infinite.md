@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `closed_form`, reliability `high`, refs: LiebRobinson1972 | HastingsKoma2006
-- v_LR = 2|J|, free-fermion (Jordan-Wigner) saturated bound, h-independent.
+- v_LR = 2 min(|J|, |h|) tight free-fermion saturated bound (max group velocity over BdG dispersion). At criticality h=J, v_LR=2J. Vanishes at h=0 (classical Ising) or J=0 (decoupled spins). The h-independent 2|J| Hastings-Koma upper bound is loose; use this tight value for entanglement-growth slope (PR #588) and other dynamical formulas.
 
 ## Corroboration
 

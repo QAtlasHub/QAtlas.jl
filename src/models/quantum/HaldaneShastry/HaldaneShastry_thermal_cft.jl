@@ -281,3 +281,30 @@ function fetch(
         kwargs...,
     )
 end
+
+"""
+    fetch(::HaldaneShastry, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real=Inf, kwargs...) -> Float64
+
+Calabrese-Cardy mutual information of two adjacent intervals,
+delegated to `Universality(:Heisenberg)` (c = 1).
+"""
+function fetch(
+    ::HaldaneShastry,
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+)
+    return fetch(
+        Universality(:Heisenberg),
+        MutualInformation(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        beta=beta,
+        kwargs...,
+    )
+end

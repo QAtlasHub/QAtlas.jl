@@ -660,3 +660,56 @@ function fetch(model::XXZ1D, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=I
         )
     end
 end
+
+"""
+    fetch(model::XXZ1D, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real=Inf, kwargs...) -> Float64
+
+Calabrese-Cardy mutual information of two adjacent intervals in the
+critical Luttinger-liquid regime `-1 < Δ <= 1` of the XXZ chain.
+Delegates to `Universality(:XY)` for `-1 < Δ < 1` and to
+`Universality(:Heisenberg)` at `Δ = 1`.
+
+Throws `DomainError` outside the critical regime.
+"""
+function fetch(
+    model::XXZ1D,
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+)
+    Δ = model.Δ
+    if Δ == 1.0
+        return fetch(
+            Universality(:Heisenberg),
+            MutualInformation(),
+            Infinite();
+            ℓ_A=ℓ_A,
+            ℓ_B=ℓ_B,
+            beta=beta,
+            kwargs...,
+        )
+    elseif -1.0 < Δ < 1.0
+        return fetch(
+            Universality(:XY),
+            MutualInformation(),
+            Infinite();
+            ℓ_A=ℓ_A,
+            ℓ_B=ℓ_B,
+            beta=beta,
+            kwargs...,
+        )
+    else
+        throw(
+            DomainError(
+                Δ,
+                "XXZ1D MutualInformation at Infinite: only the critical " *
+                "Luttinger-liquid regime -1 < Δ <= 1 admits a c = 1 " *
+                "Calabrese-Cardy closed form. Got Δ = $Δ.",
+            ),
+        )
+    end
+end

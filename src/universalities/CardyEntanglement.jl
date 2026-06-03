@@ -867,3 +867,48 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     return π * c / (6 * beta_eff)
 end
+
+# -----------------------------------------------------------------------------
+# CHSH bounds (#579 inequality framework Phase 1)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{:QuantumMechanics}, ::CHSHBound, ::Infinite;
+          convention::Symbol = :quantum, kwargs...) -> Float64
+
+Universal CHSH bounds for the Bell-inequality correlator S =
+E(a,b) + E(a,bp) + E(ap,b) - E(ap,bp):
+
+- :classical              -> 2          (CHSH 1969 local-realistic)
+- :quantum (default)      -> 2 sqrt(2)  (Tsirelson 1980 quantum max)
+- :no_signalling, :pr     -> 4          (Popescu-Rohrlich algebraic max)
+
+The quantum bound 2 sqrt(2) is saturated by the maximally entangled
+Bell state with appropriate measurement axes 0, pi/4, pi/2, 3 pi/4.
+
+References: Clauser-Horne-Shimony-Holt PRL 23, 880 (1969); B. S.
+Cirelson (Tsirelson), Lett. Math. Phys. 4, 93 (1980), DOI
+10.1007/BF00417500 (metadata fetched via doiget). Tracking: #579.
+"""
+function fetch(
+    ::Universality{:QuantumMechanics},
+    ::CHSHBound,
+    ::Infinite;
+    convention::Symbol=:quantum,
+    kwargs...,
+)
+    if convention === :quantum
+        return 2 * sqrt(2)
+    elseif convention === :classical
+        return 2.0
+    elseif convention === :no_signalling || convention === :pr
+        return 4.0
+    else
+        throw(
+            ArgumentError(
+                "CHSHBound: convention must be one of :quantum / :classical / " *
+                ":no_signalling / :pr; got :$(convention).",
+            ),
+        )
+    end
+end

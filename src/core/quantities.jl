@@ -589,6 +589,18 @@ linear regime). Reference: Calabrese-Cardy J. Stat. Mech. P04010
 struct EntanglementSaturationDensity <: AbstractQuantity end
 
 """
+    CHSHBound() <: AbstractQuantity
+
+Maximum value of the CHSH (Clauser-Horne-Shimony-Holt) Bell-inequality
+correlator over a state ensemble. Classical |S| <= 2 (CHSH 1969);
+quantum mechanics |S| <= 2 sqrt(2) (Tsirelson 1980); no-signalling /
+Popescu-Rohrlich |S| <= 4 (algebraic max). The quantum value is
+saturated by the Bell state with appropriate measurement-axis
+angles. Tracking: issue #579 inequality framework.
+"""
+struct CHSHBound <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

@@ -260,3 +260,24 @@ function fetch(
         kwargs...,
     )
 end
+
+"""
+    fetch(::HaldaneShastry, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time saturation `S_A(infty)/L = pi c / (6 beta_eff)` after a
+global quench. Haldane-Shastry is gapless with `c = 1`, so the
+formula gives `pi / (6 beta_eff)`. Delegates to
+`Universality(:Heisenberg)`.
+"""
+function fetch(
+    ::HaldaneShastry, ::EntanglementSaturationDensity, ::Infinite; beta_eff::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

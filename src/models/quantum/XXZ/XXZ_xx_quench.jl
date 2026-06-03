@@ -310,3 +310,33 @@ function fetch(
         kwargs...,
     )
 end
+
+"""
+    fetch(model::XXZ1D, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time saturation of post-quench half-system entanglement entropy
+at the XX point (`Delta = 0`). The XX chain is gapless with c = 1,
+so delegates to `Universality(:XY)` returning `pi / (6 beta_eff)`.
+
+Off-XX (`Delta != 0`) throws `DomainError` -- interacting regime
+deferred.
+"""
+function fetch(
+    model::XXZ1D, ::EntanglementSaturationDensity, ::Infinite; beta_eff::Real, kwargs...
+)
+    isapprox(model.Δ, 0.0; atol=1e-12) || throw(
+        DomainError(
+            model.Δ,
+            "XXZ1D EntanglementSaturationDensity: closed form only at the XX " *
+            "point (Delta = 0); got Delta = $(model.Δ).",
+        ),
+    )
+    return fetch(
+        Universality(:XY),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

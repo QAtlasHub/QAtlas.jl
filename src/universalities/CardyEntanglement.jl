@@ -997,3 +997,31 @@ function fetch(::Universality{C}, ::ChaosBound, ::Infinite; beta::Real, kwargs..
     beta > 0 || throw(DomainError(beta, "ChaosBound requires beta > 0; got beta = $beta."))
     return 2 * π / beta
 end
+
+# -----------------------------------------------------------------------------
+# Fast scrambling time (Sekino-Susskind 2008; MSS 2016)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::ScramblingTime, ::Infinite;
+          beta::Real, N::Real, kwargs...) where {C} -> Float64
+
+Saturating value of the Sekino-Susskind fast-scrambling time at
+inverse temperature  with  effective degrees of freedom,
+
+    t_star = (beta / (2 pi)) * log(N).
+
+This is the universal lower bound on the scrambling time; black
+holes saturate it.
+
+Reference: Sekino-Susskind *JHEP* **10**, 065 (2008); Maldacena-
+Shenker-Stanford *JHEP* **08**, 106 (2016).
+"""
+function fetch(
+    ::Universality{C}, ::ScramblingTime, ::Infinite; beta::Real, N::Real, kwargs...
+) where {C}
+    beta > 0 ||
+        throw(DomainError(beta, "ScramblingTime requires beta > 0; got beta = $beta."))
+    N > 1 || throw(DomainError(N, "ScramblingTime requires N > 1; got N = $N."))
+    return beta * log(N) / (2 * π)
+end

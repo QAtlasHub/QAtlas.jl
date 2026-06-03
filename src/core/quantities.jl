@@ -649,6 +649,26 @@ charge, dimension, and microscopic detail.
 struct ChaosBound <: AbstractQuantity end
 
 """
+    ScramblingTime <: AbstractQuantity
+
+Sekino-Susskind / Maldacena-Shenker-Stanford fast-scrambling time
+scale of a quantum thermal system with  effective degrees of
+freedom,
+
+    t_star = (beta / (2 pi)) * log(N).
+
+Universal lower bound on the time required to spread localised
+information into the global state. Saturated by black holes (fastest
+possible scramblers); for local QM systems t_star is parametrically
+longer ().
+
+Reference: Y. Sekino, L. Susskind, *JHEP* **10**, 065 (2008),
+arXiv:0808.2096; J. Maldacena, S. H. Shenker, D. Stanford, *JHEP*
+**08**, 106 (2016).
+"""
+struct ScramblingTime <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

@@ -9,8 +9,7 @@
 # (dispersion / exact free energy), never against the same closed form.
 
 using QAtlas, Test
-using QAtlas:
-    TFIM, LiebRobinsonBound, HighTemperatureFreeEnergy, FreeEnergy, Infinite
+using QAtlas: TFIM, LiebRobinsonBound, HighTemperatureFreeEnergy, FreeEnergy, Infinite
 
 @testset "TFIM LiebRobinsonBound — group velocity saturates v_LR (:bound)" begin
     # Dispersion Λ(k) = 2√(J² + h² − 2 J h cos k); group velocity is

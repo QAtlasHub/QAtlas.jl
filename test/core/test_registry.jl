@@ -177,9 +177,7 @@ end
     # Fail-fast at registration time, not silently at query time. The
     # rejection happens before the push!, so REGISTRY is left untouched.
     n_before = length(REGISTRY)
-    @test_throws ArgumentError QAtlas.register!(
-        TFIM, MassGap, Infinite; status=:nonsense
-    )
+    @test_throws ArgumentError QAtlas.register!(TFIM, MassGap, Infinite; status=:nonsense)
     @test length(REGISTRY) == n_before
 end
 

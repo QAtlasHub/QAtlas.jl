@@ -105,9 +105,7 @@ function register!(
     notes::AbstractString="",
 )
     status in STATUS_VALUES || throw(
-        ArgumentError(
-            "register!: status must be one of $(STATUS_VALUES); got :$(status)"
-        ),
+        ArgumentError("register!: status must be one of $(STATUS_VALUES); got :$(status)"),
     )
     push!(
         REGISTRY,
@@ -347,7 +345,10 @@ Render `entries` (any iterable of `NamedTuple` rows from
 to `io`.
 """
 function implementation_status_markdown(io::IO=stdout, entries=implementation_status())
-    println(io, "| Model | Quantity | BC | Method | Status | Reliability | Tested in | References |")
+    println(
+        io,
+        "| Model | Quantity | BC | Method | Status | Reliability | Tested in | References |",
+    )
     println(io, "|---|---|---|---|---|---|---|---|")
     for e in entries
         println(

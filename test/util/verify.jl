@@ -365,7 +365,8 @@ function _emit_card2(
     open(_ef, "a") do io
         println(io, card)
     end
-    @info "verify variant: emitted v2 card" path = abspath(_ef) status = status route = route
+    @info "verify variant: emitted v2 card" path = abspath(_ef) status = status route =
+        route
     return nothing
 end
 

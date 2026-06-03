@@ -305,17 +305,20 @@ function fetch(
     ::Infinite;
     ℓ::Real,
     beta::Real=Inf,
+    a::Real=1.0,
     kwargs...,
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite: ℓ must be > 0; got ℓ=$ℓ."))
+    a > 0 ||
+        throw(ArgumentError("Cardy Infinite: lattice spacing a must be > 0; got a=$a."))
     c = _cardy_central_charge(model; kwargs...)
     if isinf(beta)
-        return (c / 3) * log(ℓ)
+        return (c / 3) * log(ℓ / a)
     else
         beta > 0 || throw(
             ArgumentError("Cardy Infinite finite-T: beta must be > 0; got beta=$beta.")
         )
-        return (c / 3) * log((beta / π) * sinh(π * ℓ / beta))
+        return (c / 3) * log((beta / (π * a)) * sinh(π * ℓ / beta))
     end
 end
 
@@ -401,20 +404,29 @@ Reduces to the von Neumann `(c/3) log ℓ` at `α = 1` after the
 substitution `c -> c · (1 + 1/α) / 2`.
 """
 function fetch(
-    model::Universality{C}, q::RenyiEntropy, ::Infinite; ℓ::Real, beta::Real=Inf, kwargs...
+    model::Universality{C},
+    q::RenyiEntropy,
+    ::Infinite;
+    ℓ::Real,
+    beta::Real=Inf,
+    a::Real=1.0,
+    kwargs...,
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite Rényi: ℓ must be > 0; got ℓ=$ℓ."))
+    a > 0 || throw(
+        ArgumentError("Cardy Infinite Rényi: lattice spacing a must be > 0; got a=$a.")
+    )
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
     if isinf(beta)
-        return (c_eff / 3) * log(ℓ)
+        return (c_eff / 3) * log(ℓ / a)
     else
         beta > 0 || throw(
             ArgumentError(
                 "Cardy Infinite Rényi finite-T: beta must be > 0; got beta=$beta."
             ),
         )
-        return (c_eff / 3) * log((beta / π) * sinh(π * ℓ / beta))
+        return (c_eff / 3) * log((beta / (π * a)) * sinh(π * ℓ / beta))
     end
 end
 

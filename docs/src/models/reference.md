@@ -43,7 +43,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`ExtendedHubbard1D`](../atlas/models/ExtendedHubbard1D.md) | LiebWu1968, Voit1995, Nakamura2000 |
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | FreedmanKitaevLarsenWang2003, ReadRezayi1999, KitaevPreskill2006 |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | GrossNeveu1974, AndreiLowenstein1979 |
-| [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986 |
+| [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986, CalabreseCardy2004 |
 | [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | YangYang1966, LiebSchultzMattis1961, Baxter1972, LutherPeschel1975, McCoyWu1978 |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) |  |

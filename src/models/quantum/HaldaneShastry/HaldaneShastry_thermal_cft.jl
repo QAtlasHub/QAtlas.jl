@@ -144,3 +144,61 @@ function fetch(m::HaldaneShastry, ::SpecificHeat, ::Infinite; beta::Real, kwargs
     end
     return _haldane_shastry_cft_specific_heat(m.J, beta)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Calabrese-Cardy entanglement at Infinite via Universality(:Heisenberg)
+#
+# The Haldane-Shastry chain is gapless with linear dispersion (free
+# spinons of the SU(2)_1 WZW model) and shares the c = 1 free-boson
+# universality class with the SU(2)-symmetric Heisenberg chain. Its
+# single-interval von Neumann and Renyi entanglement entropies in the
+# thermodynamic limit are therefore given by the Calabrese-Cardy
+# closed forms with c = 1, identical to Heisenberg1D.
+#
+# Reference: Calabrese-Cardy J. Stat. Mech. P06002 (2004) §4.
+# Issue: #580 Phase 1, extending the universality-layer delegation
+# pattern introduced for Heisenberg1D.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::HaldaneShastry, ::VonNeumannEntropy{:equilibrium}, ::Infinite;
+          ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
+
+Single-interval von Neumann entanglement entropy of the
+Haldane-Shastry chain in the thermodynamic limit, delegated to the
+c = 1 Calabrese-Cardy form via `Universality(:Heisenberg)`.
+
+- `beta = Inf` (default): T = 0 ground state, `S = (1/3) log ℓ`.
+- `beta < Inf`: thermal state, `S = (1/3) log[(β/π) sinh(π ℓ / β)]`.
+"""
+function fetch(
+    ::HaldaneShastry,
+    ::VonNeumannEntropy{:equilibrium},
+    ::Infinite;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
+)
+    return fetch(
+        Universality(:Heisenberg),
+        VonNeumannEntropy(),
+        Infinite();
+        ℓ=ℓ,
+        beta=beta,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::HaldaneShastry, q::RenyiEntropy, ::Infinite;
+          ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
+
+Single-interval Renyi-α entanglement entropy delegated to
+`Universality(:Heisenberg)` with the standard
+`c -> c · (1 + 1/α) / 2` substitution.
+"""
+function fetch(
+    ::HaldaneShastry, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
+)
+    return fetch(Universality(:Heisenberg), q, Infinite(); ℓ=ℓ, beta=beta, kwargs...)
+end

@@ -19,7 +19,7 @@ Top-level catalog of all **63 models** with claimed hubs.  One row per model; th
 | [`ExtendedHubbard1D`](models/ExtendedHubbard1D.md) | — | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`HaldaneShastry`](models/HaldaneShastry.md) | — | 4 | `analytic`, `cft_low_T` | 0 | 0 | 0 | 0 | 4 | feasible | — |
+| [`HaldaneShastry`](models/HaldaneShastry.md) | — | 6 | `analytic`, `cft_low_T`, `delegation` | 0 | 0 | 0 | 0 | 6 | feasible | — |
 | [`Heisenberg1D`](models/Heisenberg1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 9 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 6 | `closed_form`, `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 4 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
@@ -107,7 +107,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`MassGap`](quantities/MassGap.md) — 25 models
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 2 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models
-- [`RenyiEntropy`](quantities/RenyiEntropy.md) — 4 models
+- [`RenyiEntropy`](quantities/RenyiEntropy.md) — 5 models
 - [`ResidualEntropy`](quantities/ResidualEntropy.md) — 4 models
 - [`SpecificHeat`](quantities/SpecificHeat.md) — 12 models
 - [`SpinGap`](quantities/SpinGap.md) — 2 models
@@ -122,7 +122,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models
 - [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md) — 3 models
 - [`TopologicalInvariant`](quantities/TopologicalInvariant.md) — 2 models
-- [`VonNeumannEntropy`](quantities/VonNeumannEntropy.md) — 4 models
+- [`VonNeumannEntropy`](quantities/VonNeumannEntropy.md) — 5 models
 - [`XXCorrelation`](quantities/XXCorrelation.md) — 2 models
 - [`XXStructureFactor`](quantities/XXStructureFactor.md) — 1 models
 - [`YYCorrelation`](quantities/YYCorrelation.md) — 2 models

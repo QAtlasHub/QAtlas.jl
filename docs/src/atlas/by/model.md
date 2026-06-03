@@ -81,12 +81,14 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/MassGap/Infinite`](../hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 
-## `HaldaneShastry` (4)
+## `HaldaneShastry` (6)
 
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 
 ## `Heisenberg1D` (26)
 

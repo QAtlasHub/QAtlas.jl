@@ -295,8 +295,9 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 
-## `RenyiEntropy` (6)
+## `RenyiEntropy` (7)
 
+- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/RenyiEntropy/OBC`](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/RenyiEntropy/OBC`](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
@@ -433,8 +434,9 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
-## `VonNeumannEntropy` (6)
+## `VonNeumannEntropy` (7)
 
+- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p

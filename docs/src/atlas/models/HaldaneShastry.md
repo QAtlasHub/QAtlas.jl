@@ -20,10 +20,10 @@ All `(Quantity, BC)` hubs `src` claims for **`HaldaneShastry`**.  Cells link to 
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **4** |
+| 🟠 uncorroborated-but-feasible | 6 |
+| **total claimed hubs** | **6** |
 
-**Methods** (from `@register`, derived): `analytic`, `cft_low_T`
+**Methods** (from `@register`, derived): `analytic`, `cft_low_T`, `delegation`
 
 ## Quantity × BC matrix
 
@@ -31,8 +31,10 @@ All `(Quantity, BC)` hubs `src` claims for **`HaldaneShastry`**.  Cells link to 
 |---|---|
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) |
 | [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | 🟠 [hub](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) |
+| [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) |
+| [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) |
 
 ## References
 
@@ -42,6 +44,7 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 Pages = []
 Canonical = false
 Affleck1986
+CalabreseCardy2004
 Haldane1988
 Shastry1988
 ```

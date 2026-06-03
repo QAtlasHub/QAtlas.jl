@@ -776,3 +776,58 @@ function fetch(
     end
     return s - (m - 1) / (2.0 * n)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Topological entanglement entropy via total quantum dimension (#580)
+#
+# Kitaev-Preskill 2006 (DOI 10.1103/PhysRevLett.96.110404) and Levin-Wen
+# 2006 (DOI 10.1103/PhysRevLett.96.110405) showed that the subleading
+# constant in the entanglement entropy of a topologically ordered
+# 2D ground state is the universal piece
+#
+#     gamma = log D,      D = sqrt(sum_a d_a^2),
+#
+# where {d_a} are the quantum dimensions of the anyon types and D is
+# the total quantum dimension. Examples:
+#
+#     ToricCode:      anyons {1, e, m, eps},  d_a = (1,1,1,1) -> D = 2  -> gamma = log 2
+#     Ising anyon:    anyons {1, sigma, psi},  d_a = (1, sqrt 2, 1) -> D = 2 -> gamma = log 2
+#     Fibonacci:      anyons {1, tau},  d_a = (1, phi),  phi = (1+sqrt 5)/2 -> D = sqrt(2+phi)
+#
+# Tracking: #580.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{:TopologicalOrder}, ::TopologicalEntanglementEntropy,
+          ::Infinite; quantum_dimensions::AbstractVector{<:Real}, kwargs...)
+        -> Float64
+
+Universal topological entanglement entropy of a 2D topologically
+ordered ground state in the Kitaev-Preskill / Levin-Wen convention,
+
+    gamma = log D,    D = sqrt(sum_a d_a^2),
+
+with `quantum_dimensions = [d_a]` the vector of anyon quantum
+dimensions. References: Kitaev-Preskill 2006 (PRL 96, 110404);
+Levin-Wen 2006 (PRL 96, 110405).
+"""
+function fetch(
+    ::Universality{:TopologicalOrder},
+    ::TopologicalEntanglementEntropy,
+    ::Infinite;
+    quantum_dimensions::AbstractVector{<:Real},
+    kwargs...,
+)
+    isempty(quantum_dimensions) && throw(
+        ArgumentError(
+            "TopologicalEntanglementEntropy: quantum_dimensions must be non-empty."
+        ),
+    )
+    all(d -> d > 0, quantum_dimensions) || throw(
+        ArgumentError(
+            "TopologicalEntanglementEntropy: all quantum dimensions d_a must be > 0."
+        ),
+    )
+    D_sq = sum(d -> d^2, quantum_dimensions)
+    return 0.5 * log(D_sq)
+end

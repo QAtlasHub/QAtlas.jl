@@ -335,3 +335,50 @@ function fetch(
 )
     return 2 * min(abs(J), abs(h))
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EntanglementGrowthSlope wrapper at h = J critical (#580 / #579 cross)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(model::TFIM, ::EntanglementGrowthSlope, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Linear-growth slope of post-quench half-system entanglement entropy
+for the TFIM at the Ising critical point `h = J`. Wires together two
+universality-layer pieces
+
+    c = 1/2          (Universality(:Ising) CentralCharge)
+    v_LR = 2 |J|     (TFIM LiebRobinsonVelocity at h = J critical)
+
+into the Calabrese-Cardy 2005 result
+
+    dS_A/dt = π c v_LR / (3 beta_eff) = π J / (3 beta_eff).
+
+For non-critical TFIM (`h ≠ J`, gapped) the CC linear-growth picture
+does not apply and `DomainError` is thrown.
+
+Reference: Calabrese-Cardy *J. Stat. Mech.* P04010 (2005);
+combines universality-layer dispatches from PR #588 and the TFIM
+LiebRobinsonVelocity from PR #586 / fix #592.
+"""
+function fetch(
+    model::TFIM, ::EntanglementGrowthSlope, ::Infinite; beta_eff::Real, kwargs...
+)
+    isapprox(model.h, model.J; atol=1e-10) || throw(
+        DomainError(
+            (model.J, model.h),
+            "TFIM EntanglementGrowthSlope at Infinite is defined only at the Ising " *
+            "critical point h = J (gapless c = 1/2 CFT); off-critical TFIM is gapped " *
+            "and CC linear-growth does not apply. Got (J, h) = (\$(model.J), \$(model.h)).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        EntanglementGrowthSlope(),
+        Infinite();
+        v=fetch(model, LiebRobinsonVelocity(), Infinite()),
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

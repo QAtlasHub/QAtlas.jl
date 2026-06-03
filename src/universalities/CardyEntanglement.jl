@@ -579,3 +579,30 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     return π * c * v / (3 * beta_eff)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cardy formula: asymptotic high-energy state-counting entropy (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::CardyEntropy, ::Infinite;
+          E::Real, kwargs...) -> Float64
+
+Asymptotic high-energy entropy of a 1+1D CFT (Cardy 1986):
+
+    S_Cardy(E) = 2 π sqrt(c E / 6),
+
+with `c` supplied by the universality class. This is the log of the
+microcanonical density of states at energy `E` on a cylinder of unit
+circumference. Valid asymptotically at large `E`; at low `E` the
+formula systematically underestimates the count.
+
+Reference: Cardy, *Nucl. Phys. B* **270**, 186 (1986).
+"""
+function fetch(
+    model::Universality{C}, ::CardyEntropy, ::Infinite; E::Real, kwargs...
+) where {C}
+    E >= 0 || throw(ArgumentError("CardyEntropy: E must be >= 0; got E=$E."))
+    c = _cardy_central_charge(model; kwargs...)
+    return 2 * π * sqrt(c * E / 6)
+end

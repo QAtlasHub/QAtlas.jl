@@ -601,6 +601,23 @@ angles. Tracking: issue #579 inequality framework.
 struct CHSHBound <: AbstractQuantity end
 
 """
+    ThermalEnergyDensity <: AbstractQuantity
+
+Leading low-temperature thermal energy density of a (1+1)D
+conformal field theory above its ground state,
+
+    e(T) - e_0 = pi c T^2 / 6 = pi c / (6 beta^2),
+
+where  is the central charge and  (Affleck 1986;
+Bloete-Cardy-Nightingale 1986). This is the universal counterpart of
+[](@ref): the same  prefactor that
+controls the Casimir term in finite size also fixes the leading
+thermal-excitation density in finite temperature, via modular
+invariance.
+"""
+struct ThermalEnergyDensity <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

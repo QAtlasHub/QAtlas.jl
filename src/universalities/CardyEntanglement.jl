@@ -831,3 +831,39 @@ function fetch(
     D_sq = sum(d -> d^2, quantum_dimensions)
     return 0.5 * log(D_sq)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Per-length saturation of post-quench entanglement (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time saturation of post-quench entanglement entropy per unit
+length (Calabrese-Cardy 2005):
+
+    S_A(infty) / L = pi c / (6 beta_eff),
+
+with `c` provided by the universality class. Partner to
+EntanglementGrowthSlope (PR #588): the linear-regime extrapolation
+slope * (L / (2 v)) equals this saturation value, expressing the
+crossover at the boundary of the light cone.
+
+Reference: Calabrese-Cardy J. Stat. Mech. P04010 (2005). Tracking #580.
+"""
+function fetch(
+    model::Universality{C},
+    ::EntanglementSaturationDensity,
+    ::Infinite;
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    beta_eff > 0 || throw(
+        ArgumentError(
+            "EntanglementSaturationDensity: beta_eff must be > 0; got beta_eff=$beta_eff.",
+        ),
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    return π * c / (6 * beta_eff)
+end

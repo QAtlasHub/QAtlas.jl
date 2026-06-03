@@ -571,6 +571,24 @@ P04010. Tracking: #580 quench-dynamics phase.
 struct EntanglementGrowthSlope <: AbstractQuantity end
 
 """
+    EntanglementSaturationDensity() <: AbstractQuantity
+
+Per-unit-length saturation value of post-quench entanglement entropy
+in the Calabrese-Cardy 2005 picture: in the long-time regime
+`t > L / (2 v)`, the half-system entropy saturates at
+
+    S_A(infty) / L = π c / (6 beta_eff),
+
+where `c` is the central charge of the post-quench critical
+Hamiltonian and `beta_eff` is the effective inverse temperature of the
+generalised-Gibbs steady state. Universal in (c, beta_eff). Partner to
+[`EntanglementGrowthSlope`](@ref) (which gives the dS/dt of the
+linear regime). Reference: Calabrese-Cardy J. Stat. Mech. P04010
+(2005). Tracking: #580.
+"""
+struct EntanglementSaturationDensity <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

@@ -485,3 +485,53 @@ end
 fetch(m::MeanField, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 fetch(m::Ising2D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 fetch(m::KPZ1D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Mutual information for two adjacent intervals at Infinite (#580 Phase 2+)
+#
+# For two adjacent intervals of lengths ℓ_A and ℓ_B on an infinite
+# 1+1D-CFT chain at T = 0, I(A:B) = S(A) + S(B) - S(A ∪ B) reduces to
+#
+#     I(A:B) = (c/3) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)]   (T = 0)
+#
+# At β finite each entropy takes the CC sinh form.
+#
+# Reference: Calabrese-Cardy J. Stat. Mech. P06002 (2004); J. Phys. A 42,
+# 504005 (2009). Tracking: #580.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real = Inf, kwargs...) -> Float64
+
+Mutual information of two adjacent intervals of lengths `ℓ_A` and
+`ℓ_B` on an infinite 1+1D-CFT chain.  Closed form follows from the
+single-interval Calabrese-Cardy result via
+`I = S(A) + S(B) − S(A∪B)`:
+
+    I(A:B) = (c/3) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)]      (T = 0)
+
+At finite β each single-interval entropy takes the sinh form.
+
+Refs Calabrese-Cardy 2004 / 2009; issue #580.
+"""
+function fetch(
+    model::Universality{C},
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+) where {C}
+    ℓ_A > 0 || throw(
+        ArgumentError("Cardy Infinite MutualInformation: ℓ_A must be > 0; got ℓ_A=$ℓ_A."),
+    )
+    ℓ_B > 0 || throw(
+        ArgumentError("Cardy Infinite MutualInformation: ℓ_B must be > 0; got ℓ_B=$ℓ_B."),
+    )
+    S_A = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_A, beta=beta, kwargs...)
+    S_B = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_B, beta=beta, kwargs...)
+    S_AB = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_A + ℓ_B, beta=beta, kwargs...)
+    return S_A + S_B - S_AB
+end

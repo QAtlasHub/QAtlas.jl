@@ -540,6 +540,18 @@ Math. Phys.* **28**, 251 (1972); Hastings-Koma, *Commun. Math. Phys.*
 struct LiebRobinsonVelocity <: AbstractQuantity end
 
 """
+    MutualInformation() <: AbstractQuantity
+
+Mutual information between two subsystems, `I(A:B) = S(A) + S(B) - S(A ∪ B)`.
+
+This struct is the type tag; concrete `fetch` dispatches live at the
+universality layer (see `src/universalities/CardyEntanglement.jl` for
+the Calabrese-Cardy closed forms) and on model files for non-universal
+cases. Tracking: #580 entanglement universality catalog.
+"""
+struct MutualInformation <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

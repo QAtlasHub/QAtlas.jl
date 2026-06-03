@@ -606,3 +606,34 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     return 2 * π * sqrt(c * E / 6)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Conformal Casimir energy on a cylinder (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::ConformalCasimirEnergy, ::Infinite;
+          L::Real, kwargs...) -> Float64
+
+Universal Casimir ground-state energy of a 1+1D CFT on a cylinder of
+circumference `L` (Cardy 1986 / Blote-Cardy-Nightingale 1986 /
+Affleck 1986):
+
+    E_0(L) = -π c / (6 L).
+
+The sign convention follows the original PRLs (`E_0 < 0` for unitary
+CFTs with `c > 0`). Identified empirically by subtracting `L * e_∞`
+from the lattice ground-state energy on a periodic chain of `L` sites
+and rescaling by `L`.
+
+Reference: Cardy *Nucl. Phys. B* **270**, 186 (1986); Blote-Cardy-
+Nightingale *Phys. Rev. Lett.* **56**, 742 (1986); Affleck *Phys. Rev.
+Lett.* **56**, 746 (1986).
+"""
+function fetch(
+    model::Universality{C}, ::ConformalCasimirEnergy, ::Infinite; L::Real, kwargs...
+) where {C}
+    L > 0 || throw(ArgumentError("ConformalCasimirEnergy: L must be > 0; got L=$L."))
+    c = _cardy_central_charge(model; kwargs...)
+    return -π * c / (6 * L)
+end

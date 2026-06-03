@@ -576,3 +576,87 @@ function fetch(model::XXZ1D, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Real=Inf,
     end
     return log(s) / (1 - α)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Calabrese-Cardy entanglement at Infinite via Universality(:XY)  (#580 Phase 2)
+#
+# In the critical / Luttinger-liquid regime `-1 < Δ < 1` the XXZ chain
+# sits in the c = 1 free compact boson universality class (same c=1
+# class as the XY model below T_BKT). At Δ = 1 the SU(2) Heisenberg
+# point is also in c = 1; we route that via Universality(:Heisenberg)
+# for symmetry. For |Δ| > 1 the chain is gapped (Ising-like AFM or FM
+# saturated phase) and no scale-invariant CC form applies — we throw
+# DomainError.
+#
+# Reference: Calabrese-Cardy J. Stat. Mech. P06002 (2004) §4.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::XXZ1D, ::VonNeumannEntropy{:equilibrium}, ::Infinite;
+          ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
+
+Single-interval von Neumann entanglement entropy of the XXZ chain in
+the thermodynamic limit, valid in the critical Luttinger-liquid
+regime `-1 < Δ < 1` (and at the Δ = 1 SU(2) Heisenberg point).
+Delegates to the c = 1 Calabrese-Cardy form via Universality(:XY)
+(or Universality(:Heisenberg) at Δ = 1 for symmetry).
+"""
+function fetch(
+    model::XXZ1D,
+    ::VonNeumannEntropy{:equilibrium},
+    ::Infinite;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
+)
+    Δ = model.Δ
+    if Δ == 1.0
+        return fetch(
+            Universality(:Heisenberg),
+            VonNeumannEntropy(),
+            Infinite();
+            ℓ=ℓ,
+            beta=beta,
+            kwargs...,
+        )
+    elseif -1.0 < Δ < 1.0
+        return fetch(
+            Universality(:XY), VonNeumannEntropy(), Infinite(); ℓ=ℓ, beta=beta, kwargs...
+        )
+    else
+        throw(
+            DomainError(
+                Δ,
+                "XXZ1D VonNeumannEntropy{:equilibrium} at Infinite: only the critical " *
+                "Luttinger-liquid regime -1 < Δ ≤ 1 admits a c = 1 Calabrese-Cardy " *
+                "closed form; for |Δ| > 1 the chain is gapped and no scale-invariant " *
+                "thermodynamic-limit closed form applies. Got Δ = \$Δ.",
+            ),
+        )
+    end
+end
+
+"""
+    fetch(::XXZ1D, q::RenyiEntropy, ::Infinite; ℓ, beta=Inf, kwargs...) -> Float64
+
+Single-interval Renyi-α entanglement entropy. Same critical-regime
+guard as the VN case; delegates to Universality(:XY) (or
+Universality(:Heisenberg) at Δ = 1).
+"""
+function fetch(model::XXZ1D, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...)
+    Δ = model.Δ
+    if Δ == 1.0
+        return fetch(Universality(:Heisenberg), q, Infinite(); ℓ=ℓ, beta=beta, kwargs...)
+    elseif -1.0 < Δ < 1.0
+        return fetch(Universality(:XY), q, Infinite(); ℓ=ℓ, beta=beta, kwargs...)
+    else
+        throw(
+            DomainError(
+                Δ,
+                "XXZ1D RenyiEntropy at Infinite: only the critical Luttinger-liquid " *
+                "regime -1 < Δ ≤ 1 admits a c = 1 Calabrese-Cardy closed form. " *
+                "Got Δ = \$Δ.",
+            ),
+        )
+    end
+end

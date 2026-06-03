@@ -669,6 +669,38 @@ arXiv:0808.2096; J. Maldacena, S. H. Shenker, D. Stanford, *JHEP*
 struct ScramblingTime <: AbstractQuantity end
 
 """
+    MandelstamTammBound <: AbstractQuantity
+
+Mandelstam-Tamm universal quantum speed limit: the minimum time
+required for a quantum state to evolve into a state orthogonal to
+itself,
+
+    t_QSL = pi hbar / (2 Delta E),
+
+where Delta E is the energy uncertainty (root variance of the
+Hamiltonian in the initial state). Universal across quantum
+mechanics; one of the canonical time-energy uncertainty bounds.
+
+Complemented by [`MargolusLevitinBound`](@ref), which uses the mean
+energy above the ground state in place of Delta E.
+"""
+struct MandelstamTammBound <: AbstractQuantity end
+
+"""
+    MargolusLevitinBound <: AbstractQuantity
+
+Margolus-Levitin universal quantum speed limit: the minimum time
+required for a quantum state to evolve into an orthogonal one,
+expressed in terms of the mean energy above the ground state,
+
+    t_ML = pi hbar / (2 (E - E_0)).
+
+The tightest known QM speed limit is the maximum of
+[`MandelstamTammBound`](@ref) and `MargolusLevitinBound`.
+"""
+struct MargolusLevitinBound <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

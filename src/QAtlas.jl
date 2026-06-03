@@ -124,7 +124,9 @@ export FermiVelocity,
     ThermalEnergyDensity,
     CFTThermalEntropyDensity,
     ChaosBound,
-    ScramblingTime
+    ScramblingTime,
+    MandelstamTammBound,
+    MargolusLevitinBound
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode

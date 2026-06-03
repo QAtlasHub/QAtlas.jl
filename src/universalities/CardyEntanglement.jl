@@ -1025,3 +1025,50 @@ function fetch(
     N > 1 || throw(DomainError(N, "ScramblingTime requires N > 1; got N = $N."))
     return beta * log(N) / (2 * π)
 end
+
+# -----------------------------------------------------------------------------
+# Quantum speed limits: Mandelstam-Tamm 1945; Margolus-Levitin 1998
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::MandelstamTammBound, ::Infinite;
+          delta_E::Real, kwargs...) where {C} -> Float64
+
+Mandelstam-Tamm minimal orthogonalization time
+
+    t_QSL = pi / (2 Delta E)        (hbar = 1).
+
+Reference: L. Mandelstam, I. Tamm, *J. Phys. (USSR)* **9**, 249 (1945);
+see also Anandan-Aharonov *Phys. Rev. Lett.* **65**, 1697 (1990).
+"""
+function fetch(
+    ::Universality{C}, ::MandelstamTammBound, ::Infinite; delta_E::Real, kwargs...
+) where {C}
+    delta_E > 0 || throw(
+        DomainError(
+            delta_E, "MandelstamTammBound requires delta_E > 0; got delta_E = $delta_E."
+        ),
+    )
+    return pi / (2 * delta_E)
+end
+
+"""
+    fetch(::Universality{C}, ::MargolusLevitinBound, ::Infinite;
+          mean_E::Real, kwargs...) where {C} -> Float64
+
+Margolus-Levitin minimal orthogonalization time
+
+    t_ML = pi / (2 (E - E_0))         (hbar = 1).
+
+Reference: N. Margolus, L. B. Levitin, *Physica D* **120**, 188 (1998).
+"""
+function fetch(
+    ::Universality{C}, ::MargolusLevitinBound, ::Infinite; mean_E::Real, kwargs...
+) where {C}
+    mean_E > 0 || throw(
+        DomainError(
+            mean_E, "MargolusLevitinBound requires mean_E > 0; got mean_E = $mean_E."
+        ),
+    )
+    return pi / (2 * mean_E)
+end

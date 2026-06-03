@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bloch_diagonalization`, reliability `high`
+- method `bloch_diagonalization`, status `exact`, reliability `high`
 - Σ λᵢ² = tr(H²); forwarded through TightBindingSpectrum so it agrees with the spectrum closed-form by construction; verify cards pin it against the chiral-symmetry identity 2 t² · z · Lx · Ly and against real-space ED.
 
 ## Corroboration

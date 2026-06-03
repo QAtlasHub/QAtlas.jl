@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `central_diff`, reliability `medium`
+- method `central_diff`, status `exact`, reliability `medium`
 - c_v = β² ∂²(log Z)/∂β² / N via 3-point stencil.
 
 ## Corroboration

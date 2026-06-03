@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `literature_value`, reliability `medium`, refs: WhiteHuse1993
+- method `literature_value`, status `exact`, reliability `medium`, refs: WhiteHuse1993
 - Haldane gap Δ ≈ 0.41048 J (DMRG; no closed form).
 
 ## Corroboration

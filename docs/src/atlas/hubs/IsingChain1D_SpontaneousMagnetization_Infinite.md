@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising1925
+- method `analytic`, status `exact`, reliability `high`, refs: Ising1925
 - m_spont = 0 for all T > 0 (no LRO in 1D Ising); independent of h.
 
 ## Corroboration

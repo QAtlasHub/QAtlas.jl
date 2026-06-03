@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984 | AndrewsBaxterForrester1984
+- method `analytic`, status `exact`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984 | AndrewsBaxterForrester1984
 - Delegated to MinimalModel(7, 6) Kac formula; r ∈ [1, 5], s ∈ [1, 6].
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `quadgk`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
+- method `quadgk`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
 - transverse magnetization per site (along the field direction z) via QuadGK.
 
 ## Corroboration

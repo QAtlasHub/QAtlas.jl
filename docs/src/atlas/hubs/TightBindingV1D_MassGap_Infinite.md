@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: YangYang1966 | AshcroftMermin1976
+- method `analytic`, status `exact`, reliability `high`, refs: YangYang1966 | AshcroftMermin1976
 - V=0 free-fermion gap = max(0, |μ|-2t); V≠0 (JW XXZ) deferred to Phase 2.
 
 ## Corroboration

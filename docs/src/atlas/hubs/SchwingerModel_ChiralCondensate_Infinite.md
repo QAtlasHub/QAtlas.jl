@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Schwinger1962 | ColemanJackiwSusskind1975
+- method `analytic`, status `exact`, reliability `high`, refs: Schwinger1962 | ColemanJackiwSusskind1975
 - Massless ⟨ψ̄ψ⟩ = -exp(γ_E)·e/(2π^{3/2}); anomaly-induced spontaneous symmetry breaking.
 
 ## Corroboration

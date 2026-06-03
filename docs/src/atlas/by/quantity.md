@@ -180,6 +180,14 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`ToricCode/GroundStateEnergyDensity/Infinite`](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 
+## `HighTemperatureFreeEnergy` (1)
+
+- 🟠 [`TFIM/HighTemperatureFreeEnergy/Infinite`](../hubs/TFIM_HighTemperatureFreeEnergy_Infinite.md) — uncorroborated-but-feasible
+
+## `LiebRobinsonBound` (1)
+
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
+
 ## `LoschmidtEcho` (3)
 
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](../hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p

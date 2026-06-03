@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `pfaffian`, reliability `medium`
+- method `pfaffian`, status `exact`, reliability `medium`
 - OBC large-N proxy (N_proxy kwarg).
 
 ## Corroboration

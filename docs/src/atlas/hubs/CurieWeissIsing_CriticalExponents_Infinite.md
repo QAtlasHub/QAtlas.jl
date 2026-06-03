@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: Landau1937 | Stanley1971
+- method `delegation`, status `exact`, reliability `high`, refs: Landau1937 | Stanley1971
 - Delegated to MeanField — α=0, β=1/2, γ=1, δ=3, ν=1/2, η=0 (mean-field universality).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Haldane1988 | Shastry1988
+- method `analytic`, status `exact`, reliability `high`, refs: Haldane1988 | Shastry1988
 - E_0/N = -π² J / 24, finite-N exact (Gutzwiller-projected free-fermion eigenstate of the chord-distance Hamiltonian).
 
 ## Corroboration

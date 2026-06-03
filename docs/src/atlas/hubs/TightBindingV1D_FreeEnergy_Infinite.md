@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan2000 | Coleman2015
+- method `analytic`, status `exact`, reliability `high`, refs: Mahan2000 | Coleman2015
 - V=0 free-fermion ω(β;t,μ) = -(πβ)⁻¹ ∫₀^π log(1+e^{-βε}) dk; V≠0 (JW XXZ, Yang-Yang 1966) deferred to Phase 2.
 
 ## Corroboration

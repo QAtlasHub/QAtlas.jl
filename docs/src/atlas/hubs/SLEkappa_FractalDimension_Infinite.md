@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Beffara2008
+- method `analytic`, status `exact`, reliability `high`, refs: Beffara2008
 - d_H(κ) = min(2, 1 + κ/8); cap at d_H = 2 for κ ≥ 8 (space-filling regime).
 
 ## Corroboration

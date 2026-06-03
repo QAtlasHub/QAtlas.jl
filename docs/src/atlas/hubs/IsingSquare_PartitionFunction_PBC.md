@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `transfer_matrix`, reliability `high`, refs: Onsager1944
+- method `transfer_matrix`, status `exact`, reliability `high`, refs: Onsager1944
 - Z = tr(T^Lx) on the symmetric transfer matrix; bond-counting differs at Lx,Ly=2.
 
 ## Corroboration

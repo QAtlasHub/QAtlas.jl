@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AKLT1988
+- method `analytic`, status `exact`, reliability `high`, refs: AKLT1988
 - Same analytic e₀ = -2J/3 routed through Energy(:per_site).
 
 ## Corroboration

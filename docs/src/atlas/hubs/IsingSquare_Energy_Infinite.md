@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `central_diff`, reliability `high`
+- method `central_diff`, status `exact`, reliability `high`
 - ε = -∂(log Z/N)/∂β via central diff on Onsager log Z.
 
 ## Corroboration

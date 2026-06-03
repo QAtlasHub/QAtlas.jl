@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: LiebSchultzMattis1961 | Sachdev2011
+- method `bdg`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | Sachdev2011
 - Per-site ε(β) with parity-projected fermion sectors (NS + R).
 
 ## Corroboration

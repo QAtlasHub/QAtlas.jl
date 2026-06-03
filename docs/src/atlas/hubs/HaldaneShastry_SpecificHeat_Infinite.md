@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `cft_low_T`, reliability `medium`, refs: Haldane1988 | Affleck1986
+- method `cft_low_T`, status `exact`, reliability `medium`, refs: Haldane1988 | Affleck1986
 - c_v = π T / (3 v_s) = 2T / (3J). Equals s at LO CFT. Valid β > 5/J.
 
 ## Corroboration

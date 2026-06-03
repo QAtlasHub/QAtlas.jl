@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `muller_ansatz`, reliability `medium`, refs: desCloizeauxPearson1962 | MullerThomasBeckBonner1981
+- method `muller_ansatz`, status `exact`, reliability `medium`, refs: desCloizeauxPearson1962 | MullerThomasBeckBonner1981
 - Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.
 
 ## Corroboration

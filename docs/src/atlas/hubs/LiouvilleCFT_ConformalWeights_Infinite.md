@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Polyakov1981 | ZamolodchikovZamolodchikov1996
+- method `analytic`, status `exact`, reliability `high`, refs: Polyakov1981 | ZamolodchikovZamolodchikov1996
 - Vertex operator Δ_α = α(Q − α); reflection α↔Q−α symmetry; degenerate at α=b, 1/b.
 
 ## Corroboration

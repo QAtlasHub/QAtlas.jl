@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `minimal_model_delegation`, reliability `high`, refs: Cardy1984 | YangLee1952
+- method `minimal_model_delegation`, status `exact`, reliability `high`, refs: Cardy1984 | YangLee1952
 - Non-unitary minimal model M(5,2); c = -22/5 exact (Rational), delegated to MinimalModel.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `pfaffian`, reliability `high`
+- method `pfaffian`, status `exact`, reliability `high`
 
 ## Corroboration
 

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Kitaev2001 | Alicea2012
+- method `bdg`, status `exact`, reliability `high`, refs: Kitaev2001 | Alicea2012
 - Same value as MassGap@OBC; named for the Majorana boundary-mode interpretation.
 
 ## Corroboration

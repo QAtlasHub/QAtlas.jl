@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bethe_ansatz`, reliability `high`, refs: Hulthen1938 | YangYang1966
+- method `bethe_ansatz`, status `exact`, reliability `high`, refs: Hulthen1938 | YangYang1966
 - Closed form at Δ ∈ {-1, 0, 1}; Yang-Yang single integral via QuadGK for general -1 < Δ < 1; |Δ| > 1 (gapped) deferred.
 
 ## Corroboration

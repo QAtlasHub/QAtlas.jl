@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - S_α = log Tr ρ_A^α / (1-α); same partial-trace path as VonNeumann.
 
 ## Corroboration

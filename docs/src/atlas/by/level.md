@@ -248,7 +248,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (73)
+## `uncorroborated-but-feasible` (75)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
@@ -288,6 +288,8 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/HighTemperatureFreeEnergy/Infinite`](../hubs/TFIM_HighTemperatureFreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](../hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible

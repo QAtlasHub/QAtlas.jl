@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dmrg_reference`, reliability `medium`, refs: YanHuseWhite2011 | IqbalBeccaSorellaPoilblanc2013
+- method `dmrg_reference`, status `exact`, reliability `medium`, refs: YanHuseWhite2011 | IqbalBeccaSorellaPoilblanc2013
 - Δ_s/J ≈ 0.13 (Z₂ scenario, YHW); competing VMC Dirac spin liquid suggests upper bound.
 
 ## Corroboration

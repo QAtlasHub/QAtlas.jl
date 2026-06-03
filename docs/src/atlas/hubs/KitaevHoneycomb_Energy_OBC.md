@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `matter_free_fermion`, reliability `high`, refs: Kitaev2006
+- method `matter_free_fermion`, status `exact`, reliability `high`, refs: Kitaev2006
 - Bipartite hopping matrix SVD; thermal value (β kwarg) uses matter-sector free fermion.
 
 ## Corroboration

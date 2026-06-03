@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: BrzezickiDziarmagaOles2007 | KugelKhomskii1982 | Kitaev2006
+- method `analytic`, status `exact`, reliability `high`, refs: BrzezickiDziarmagaOles2007 | KugelKhomskii1982 | Kitaev2006
 - Δ = 2|J_x − J_y| from JW-dual dimerised Kitaev chain; Δ=0 at J_x=J_y is a first-order QPT.
 
 ## Corroboration

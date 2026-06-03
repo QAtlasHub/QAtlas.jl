@@ -223,3 +223,4 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 2 hubs (quan
 | [`ResidualEntropy`](../../atlas/hubs/SixVertex_ResidualEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 
 <!-- ATLAS:HUBS:END -->
+

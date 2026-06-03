@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Wannier1950
+- method `analytic`, status `exact`, reliability `high`, refs: Wannier1950
 - AFM (J>0): S/N = (2/π) ∫₀^{π/3} log(2 cos θ) dθ ≈ 0.3230659669 (QuadGK). FM (J<0): 0.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `closed_form`, reliability `high`, refs: LiebSchultzMattis1961 | McCoyWu1978
+- method `closed_form`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | McCoyWu1978
 - "Critical axial XXZ (Jx=Jy, |Jz/Jx|<=1): Inf (gapless). XY line (Jz=0): " * "xi = 1/asinh(|Jx-Jy|/(2 sqrt(Jx Jy))) from dispersion zero on imaginary " * "momentum axis. Massive AFM and generic XYZ deferred to Phase 3."
 
 ## Corroboration

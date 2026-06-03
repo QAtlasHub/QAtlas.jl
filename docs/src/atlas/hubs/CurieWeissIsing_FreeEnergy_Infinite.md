@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: LandauLifshitz1980
+- method `analytic`, status `exact`, reliability `high`, refs: LandauLifshitz1980
 - f(β;J,h) = Jm*²/2 − β⁻¹ log[2cosh(β(Jm*+h))] at the SCE solution; J≤0 reduces to single-spin -β⁻¹ log[2cosh(βh)].
 
 ## Corroboration

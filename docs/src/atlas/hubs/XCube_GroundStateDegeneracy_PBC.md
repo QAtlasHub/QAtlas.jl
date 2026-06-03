@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: VijayHaahFu2016 | SlagleKim2017
+- method `analytic`, status `exact`, reliability `high`, refs: VijayHaahFu2016 | SlagleKim2017
 - Subextensive log_2 GSD = 2(Lx+Ly+Lz) - 3 on closed cubic torus.
 
 ## Corroboration

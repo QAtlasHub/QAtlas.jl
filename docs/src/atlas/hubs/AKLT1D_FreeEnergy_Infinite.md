@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AKLT1988
+- method `analytic`, status `exact`, reliability `high`, refs: AKLT1988
 - β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError.
 
 ## Corroboration

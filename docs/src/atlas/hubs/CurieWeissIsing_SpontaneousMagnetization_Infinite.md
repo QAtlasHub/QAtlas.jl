@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: LandauLifshitz1980
+- method `analytic`, status `exact`, reliability `high`, refs: LandauLifshitz1980
 - m*(β) = lim_{h→0⁺} m(β,J,h); positive root of m = tanh(βJm) by bisection; 0 in paramagnetic phase. Independent of model.h.
 
 ## Corroboration

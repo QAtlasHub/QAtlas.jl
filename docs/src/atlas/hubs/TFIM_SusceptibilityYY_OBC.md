@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `pfaffian`, reliability `high`
+- method `pfaffian`, status `exact`, reliability `high`
 - Per-site β·Var(M_y)/N via Wick contraction over O(N²) pairs.
 
 ## Corroboration

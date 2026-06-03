@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - Partial trace of dense thermal ρ; subsystem length ℓ ∈ [1, N-1].
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Mahan2000
+- method `analytic`, status `exact`, reliability `high`, refs: Mahan2000
 - V=0 s(β;t,μ) = β(u-ω); high-T limit log 2 per site; V≠0 deferred to Phase 2.
 
 ## Corroboration

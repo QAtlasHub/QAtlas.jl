@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev2001
+- method `analytic`, status `exact`, reliability `high`, refs: Kitaev2001
 - ξ = 1/Δ_gap; Inf on the critical line |μ| = 2|t|.
 
 ## Corroboration

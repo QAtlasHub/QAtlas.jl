@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Gu2010 | Damski2013
+- method `analytic`, status `exact`, reliability `high`, refs: Gu2010 | Damski2013
 - χ_F/L = 1/(16(J²-h²)) (h<J), J²/(16h²(h²-J²)) (h>J); QuadGK, divergent at h=J.
 
 ## Corroboration

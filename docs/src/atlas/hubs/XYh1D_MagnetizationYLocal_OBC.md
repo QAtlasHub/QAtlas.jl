@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`
+- method `bdg`, status `exact`, reliability `high`
 - Identically zero by Z₂ symmetry.
 
 ## Corroboration

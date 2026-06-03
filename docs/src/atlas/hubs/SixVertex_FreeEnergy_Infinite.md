@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Lieb1967a | Lieb1967c | Baxter1982
+- method `analytic`, status `exact`, reliability `high`, refs: Lieb1967a | Lieb1967c | Baxter1982
 - FE phase (Δ > 1): f = -log max(a, b) (Lieb 1967c). Square-ice point (a = b = c): f = -(3/2) log(4/3) (Lieb 1967a). Generic disordered (off-diagonal) deferred to issue #163 phase 2; AFE phase (Δ < -1, Lieb 1967b elliptic) deferred to phase 3.
 
 ## Corroboration

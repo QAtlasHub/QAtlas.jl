@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: MajumdarGhosh1969
+- method `analytic`, status `exact`, reliability `high`, refs: MajumdarGhosh1969
 - Size-independent: dimer-product state is an exact eigenstate for any even N.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `closed_form`, reliability `high`, refs: LiebSchultzMattis1961 | Baxter1972
+- method `closed_form`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | Baxter1972
 - "XY anisotropic line (Jz=0) via Lieb-Schultz-Mattis 1961 free-fermion " * "closed form; axial XXZ case (Jx=Jy) delegated to XXZ1D Energy(:per_site). " * "Generic XYZ (Jx!=Jy, Jz!=0) deferred to Baxter elliptic Phase 3."
 
 ## Corroboration

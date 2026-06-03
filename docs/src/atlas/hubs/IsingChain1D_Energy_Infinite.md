@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising1925
+- method `analytic`, status `exact`, reliability `high`, refs: Ising1925
 - u(b,h=0) = -J tanh(bJ); h=0 only (textbook scope).
 
 ## Corroboration

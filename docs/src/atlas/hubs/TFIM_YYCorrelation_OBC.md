@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `pfaffian`, reliability `high`
+- method `pfaffian`, status `exact`, reliability `high`
 - σʸ_i = -(-i)^{i-1} γ_1 … γ_{2i-2} γ_{2i}; same Pfaffian machinery as σᶻ.
 
 ## Corroboration

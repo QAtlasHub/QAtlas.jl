@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Heyl2013
+- method `analytic`, status `exact`, reliability `high`, refs: Heyl2013
 - λ(t) = -lim_{L→∞} (1/L) log |⟨ψ₀|e^{-iH_f t}|ψ₀⟩|² for TFIM h-quench; closed-form via Bogoliubov mode amplitudes.
 
 ## Corroboration

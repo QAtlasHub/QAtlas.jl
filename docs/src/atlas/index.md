@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 307 |
-| ED-feasible claimed (risk denominator) | 281 |
+| Hubs `src` claims (registry) | 309 |
+| ED-feasible claimed (risk denominator) | 283 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 178 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 73 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 75 |
 | Inventory cards scanned (whole test/) | 2763 |
 | Registry files parsed | 63 / 63 |
 | Models | 63 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **63.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **77.2%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **76.7%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "73 actionable hub(s)"
+!!! warning "75 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
@@ -100,6 +100,8 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
+    - [`TFIM/HighTemperatureFreeEnergy/Infinite`](hubs/TFIM_HighTemperatureFreeEnergy_Infinite.md)
+    - [`TFIM/LiebRobinsonBound/Infinite`](hubs/TFIM_LiebRobinsonBound_Infinite.md)
     - [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
     - [`TFIM/MagnetizationZLocal/OBC`](hubs/TFIM_MagnetizationZLocal_OBC.md)
     - [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md)
@@ -188,7 +190,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 54 | 0 | 36 | 9 | 0 | 9 | feasible |
+| `TFIM` | 56 | 0 | 36 | 9 | 0 | 11 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
@@ -204,7 +206,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (307) — select to drill down
+## Hubs (309) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -531,7 +533,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-### `TFIM` (54)
+### `TFIM` (56)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -546,6 +548,8 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`TFIM/FreeEnergy/OBC`](hubs/TFIM_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/FreeEnergy/PBC`](hubs/TFIM_FreeEnergy_PBC.md) — corroborated-at-p
 - 🔵 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md) — coherent
+- 🟠 [`TFIM/HighTemperatureFreeEnergy/Infinite`](hubs/TFIM_HighTemperatureFreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md) — corroborated-at-p
 - 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent

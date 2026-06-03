@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `jks_qtm_nlie`, reliability `medium`, refs: JuttnerKlumperSuzuki1998
+- method `jks_qtm_nlie`, status `exact`, reliability `medium`, refs: JuttnerKlumperSuzuki1998
 - "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄). FE evaluator uses " * "Chebyshev-Gauss quadrature on the cut [-1, 1] (handles 1/sqrt(1-x^2) " * "singularity exactly) + paper page-14 direct-form log Λ. " * "Currently SUPPORTS H=0 AND μ = U/2 (half-filling) ONLY: the b/b̄ " * "particle-hole symmetry is enforced in the solver via b̄ = b, which " * "is exact at H=0 half-filling and breaks for H ≠ 0 or off-half-filling. " * "U-independent and exact at high T to within 1%% (β <= 1e-3 across " * "U ∈ {2, 4, 8}). Mid-T (β ~ 0.1) deviation from ED is a formula-level " * "bug (Stage G.3+ followup)."
 
 ## Corroboration

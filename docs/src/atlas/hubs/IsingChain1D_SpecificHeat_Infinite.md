@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising1925
+- method `analytic`, status `exact`, reliability `high`, refs: Ising1925
 - c_v(b,h=0) = (bJ)^2 sech^2(bJ); h=0 only.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: LiebWu1968 | Voit1995 | Nakamura2000
+- method `delegation`, status `exact`, reliability `high`, refs: LiebWu1968 | Voit1995 | Nakamura2000
 - V=0 delegates to Hubbard1D at half filling (Lieb-Wu integral); V≠0 (CDW/SDW/BOW phase diagram) deferred to Phase 2.
 
 ## Corroboration

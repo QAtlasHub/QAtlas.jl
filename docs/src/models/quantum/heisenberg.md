@@ -196,3 +196,4 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 53 hubs (
 | `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 
 <!-- ATLAS:HUBS:END -->
+

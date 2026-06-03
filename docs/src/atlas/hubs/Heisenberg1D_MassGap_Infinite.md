@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`
+- method `analytic`, status `exact`, reliability `high`
 - Gapless (0.0) at the isotropic critical point.
 
 ## Corroboration

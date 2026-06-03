@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `onsager`, reliability `high`, refs: Onsager1944
+- method `onsager`, status `exact`, reliability `high`, refs: Onsager1944
 - -βf = log(2) + (1/2π)∫log[(A+√(A²-B²))/2]dφ; bond-counting matches PBC limit.
 
 ## Corroboration

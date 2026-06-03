@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`
+- method `bdg`, status `exact`, reliability `high`
 - Symmetric split of bond energies ε_i such that sum(ε) == ⟨H⟩.
 
 ## Corroboration

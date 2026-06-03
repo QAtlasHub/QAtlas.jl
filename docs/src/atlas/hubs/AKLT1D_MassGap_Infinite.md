@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `literature_value`, reliability `medium`, refs: GarciaSaez2013
+- method `literature_value`, status `exact`, reliability `medium`, refs: GarciaSaez2013
 - Haldane gap Δ ≈ 0.350 J; DMRG numerical-exact, no closed form.
 
 ## Corroboration

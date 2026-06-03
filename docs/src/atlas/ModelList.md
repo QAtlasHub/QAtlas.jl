@@ -20,7 +20,7 @@ Top-level catalog of all **63 models** with claimed hubs.  One row per model; th
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`HaldaneShastry`](models/HaldaneShastry.md) | — | 4 | `analytic`, `cft_low_T` | 0 | 0 | 0 | 0 | 4 | feasible | — |
-| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 24 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 7 | feasible | `@su2` |
+| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 9 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 6 | `closed_form`, `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 4 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 5 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 2 | 0 | 1 | feasible | `@sweep` |

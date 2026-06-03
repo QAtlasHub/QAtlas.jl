@@ -191,6 +191,59 @@ using QAtlas, Test
         )
     end
 
+    @testset "Infinite finite-T VN (CC sinh form, #580)" begin
+        # New beta kwarg: S(ℓ, β) = (c/3) log[(β/π) sinh(πℓ/β)] across all
+        # 1+1D-CFT universality classes registered. β → ∞ recovers T=0.
+        # Each class has a canonical dimension that yields a 1+1D CFT
+        # at the universality level; Heisenberg uses d=1 (1D chain).
+        d_for_class = Dict(:Ising=>2, :XY=>2, :Heisenberg=>1, :Potts3=>2, :Potts4=>2)
+        for class in (:Ising, :XY, :Heisenberg, :Potts3, :Potts4)
+            d = d_for_class[class]
+            c = float(QAtlas.fetch(Universality(class), CentralCharge(); d=d))
+            for ℓ in (5.0, 25.0), β in (1.0, 10.0, 100.0)
+                S = QAtlas.fetch(
+                    Universality(class), VonNeumannEntropy(), Infinite(); ℓ=ℓ, beta=β
+                )
+                expected = (c / 3) * log((β / π) * sinh(π * ℓ / β))
+                @test S ≈ expected atol = 1e-12
+            end
+            # β → ∞ recovery
+            S_T0 = QAtlas.fetch(
+                Universality(class), VonNeumannEntropy(), Infinite(); ℓ=10.0, beta=Inf
+            )
+            S_lowT = QAtlas.fetch(
+                Universality(class), VonNeumannEntropy(), Infinite(); ℓ=10.0, beta=1.0e6
+            )
+            @test S_lowT ≈ S_T0 rtol = 1e-3
+        end
+    end
+
+    @testset "Infinite finite-T Renyi (CC sinh form with c → c·(1+1/α)/2, #580)" begin
+        d_for_class = Dict(:Ising=>2, :Heisenberg=>1)
+        for class in (:Ising, :Heisenberg)
+            c = float(
+                QAtlas.fetch(Universality(class), CentralCharge(); d=d_for_class[class])
+            )
+            for α in (0.5, 2.0, 5.0), ℓ in (10.0, 30.0), β in (2.0, 20.0)
+                S = QAtlas.fetch(
+                    Universality(class), RenyiEntropy(α), Infinite(); ℓ=ℓ, beta=β
+                )
+                c_eff = c * (1 + 1 / α) / 2
+                expected = (c_eff / 3) * log((β / π) * sinh(π * ℓ / β))
+                @test S ≈ expected atol = 1e-12
+            end
+        end
+    end
+
+    @testset "Infinite finite-T argument validation" begin
+        @test_throws ArgumentError QAtlas.fetch(
+            Universality(:Ising), VonNeumannEntropy(), Infinite(); ℓ=10.0, beta=-1.0
+        )
+        @test_throws ArgumentError QAtlas.fetch(
+            Universality(:Ising), RenyiEntropy(2.0), Infinite(); ℓ=10.0, beta=0.0
+        )
+    end
+
     @testset "Argument validation" begin
         @test_throws ArgumentError QAtlas.fetch(
             Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=-1.0, L=8.0

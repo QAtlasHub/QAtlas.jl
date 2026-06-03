@@ -262,6 +262,12 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🔵 [`S1XXZ1D/Energy/Infinite`](hubs/S1XXZ1D_Energy_Infinite.md)
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](hubs/S1XXZ1D_MassGap_Infinite.md)
 
+## CalabreseCardy2004 — 3 hubs
+
+- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](hubs/Heisenberg1D_RenyiEntropy_Infinite.md)
+- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md)
+- 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
+
 ## CalabreseCardy2009 — 3 hubs
 
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
@@ -510,10 +516,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## BrzezickiDziarmagaOles2007 — 1 hub
 
 - 🟢 [`Compass1D/MassGap/Infinite`](hubs/Compass1D_MassGap_Infinite.md)
-
-## CalabreseCardy2004 — 1 hub
-
-- 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
 
 ## CalabreseCardy2005 — 1 hub
 

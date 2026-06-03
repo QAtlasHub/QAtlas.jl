@@ -633,6 +633,22 @@ Nightingale 1986), and the operational complement of
 struct CFTThermalEntropyDensity <: AbstractQuantity end
 
 """
+    ChaosBound <: AbstractQuantity
+
+Maldacena-Shenker-Stanford 2016 universal Lyapunov bound for the
+out-of-time-ordered correlator (OTOC) growth rate of any quantum
+thermal many-body system,
+
+    lambda_L <= 2 pi / beta = 2 pi T.
+
+Equivalent to the universal scrambling rate cap. Saturated by
+Sachdev-Ye-Kitaev / Einstein-gravity black holes; conjectured to
+characterise maximally chaotic systems. Independent of central
+charge, dimension, and microscopic detail.
+"""
+struct ChaosBound <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

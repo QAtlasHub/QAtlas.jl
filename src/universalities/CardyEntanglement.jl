@@ -971,3 +971,29 @@ function fetch(
     c = _cardy_central_charge(model)
     return π * c / (3 * beta)
 end
+
+# -----------------------------------------------------------------------------
+# MSS chaos bound (Maldacena-Shenker-Stanford 2016)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::ChaosBound, ::Infinite;
+          beta::Real, kwargs...) where {C} -> Float64
+
+MSS universal upper bound on the Lyapunov exponent of the OTOC at
+inverse temperature ,
+
+    lambda_L^max = 2 pi / beta = 2 pi T.
+
+Universality-class independent: any thermal quantum system that
+admits a microscopic description and a hermitian Hamiltonian
+satisfies this bound (the dispatch is provided on 
+only for API uniformity).
+
+Reference: J. Maldacena, S. H. Shenker, D. Stanford, *J. High Energy
+Phys.* **08**, 106 (2016), arXiv:1503.01409.
+"""
+function fetch(::Universality{C}, ::ChaosBound, ::Infinite; beta::Real, kwargs...) where {C}
+    beta > 0 || throw(DomainError(beta, "ChaosBound requires beta > 0; got beta = $beta."))
+    return 2 * π / beta
+end

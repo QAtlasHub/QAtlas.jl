@@ -116,6 +116,23 @@ function fetch(
     kwargs...,
 )
     ℓ ≥ 1 || throw(ArgumentError("VonNeumannEntropy Infinite: ℓ must be ≥ 1; got $ℓ."))
+    # At the Ising critical point h ≈ J the CC form lives at the
+    # universality layer (Universality(:Ising), c = 1/2). TFIM uses the
+    # lattice-spacing convention a = 1/2 inside log, which is selected
+    # via the `a` kwarg added to the universality dispatch (#580).
+    if isapprox(model.h, model.J; atol=1e-10)
+        return fetch(
+            Universality(:Ising),
+            VonNeumannEntropy(),
+            Infinite();
+            ℓ=ℓ,
+            beta=beta,
+            a=1//2,
+            kwargs...,
+        )
+    end
+    # Off-critical / gapped regime: not at a universality fixed point;
+    # use the TFIM-local crossover form which includes the mass scale.
     return _tfim_cc_entanglement(model.J, model.h, ℓ, beta; α=1.0)
 end
 
@@ -138,5 +155,8 @@ The non-universal `S_0` offset is dropped.
 """
 function fetch(model::TFIM, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...)
     ℓ ≥ 1 || throw(ArgumentError("RenyiEntropy Infinite: ℓ must be ≥ 1; got $ℓ."))
+    if isapprox(model.h, model.J; atol=1e-10)
+        return fetch(Universality(:Ising), q, Infinite(); ℓ=ℓ, beta=beta, a=1//2, kwargs...)
+    end
     return _tfim_cc_entanglement(model.J, model.h, ℓ, beta; α=q.α)
 end

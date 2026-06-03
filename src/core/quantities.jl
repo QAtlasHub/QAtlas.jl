@@ -586,6 +586,22 @@ Cardy-Verlinde / black-hole-entropy correspondences. Tracking: #580.
 struct CardyEntropy <: AbstractQuantity end
 
 """
+    ConformalCasimirEnergy() <: AbstractQuantity
+
+Universal Casimir (ground-state) energy of a 1+1D CFT on a cylinder
+of circumference `L` (PBC). Cardy 1986 / Blote-Cardy-Nightingale 1986
+/ Affleck 1986 showed it is determined entirely by the central charge:
+
+    E_0(L) = -π c / (6 L).
+
+This is the strict thermodynamic-limit subtraction `lim_{L->∞}
+(E_GS(L) - L * e_∞) * L` that extracts the universal finite-size
+correction.  Sign convention follows the original PRL: `E_0 < 0` for
+unitary CFTs with `c > 0`. Tracking: #580.
+"""
+struct ConformalCasimirEnergy <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

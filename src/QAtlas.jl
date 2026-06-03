@@ -124,7 +124,8 @@ export FermiVelocity,
     PageEntropy,
     EntanglementSaturationDensity,
     ThermalEnergyDensity,
-    CFTThermalEntropyDensity
+    CFTThermalEntropyDensity,
+    WignerSemicircleMoment
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)

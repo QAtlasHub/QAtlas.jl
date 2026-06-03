@@ -256,3 +256,36 @@ function fetch(
     end
     return 1.0  # GUE late-time plateau (Mehta 2004 §16; CHM 2016)
 end
+
+# -----------------------------------------------------------------------------
+# Wigner-semicircle moments (Wigner 1955, Mehta)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{:RMT}, ::WignerSemicircleMoment, ::Infinite;
+          n::Integer, kwargs...) -> Float64
+
+Universal moment `m_n = E[x^n]` of the Wigner semicircle distribution
+on `[-2, 2]`. Even moments are Catalan numbers
+
+    m_{2k} = C_k = binomial(2k, k) / (k + 1),
+
+odd moments vanish. The large-N eigenvalue density of all three Gaussian
+ensembles (GOE, GUE, GSE) converges to the same semicircle, so the
+moments are class-independent within RMT.
+"""
+function fetch(
+    ::Universality{:RMT}, ::WignerSemicircleMoment, ::Infinite; n::Integer, kwargs...
+)
+    n >= 0 ||
+        throw(DomainError(n, "WignerSemicircleMoment: n must be non-negative; got n = $n."))
+    if isodd(n)
+        return 0.0
+    end
+    k = div(n, 2)
+    return Float64(binomial(big(2 * k), big(k)) / (k + 1))
+end
+
+function fetch(m::Universality{:RMT}, q::WignerSemicircleMoment; n::Integer, kwargs...)
+    fetch(m, q, Infinite(); n=n, kwargs...)
+end

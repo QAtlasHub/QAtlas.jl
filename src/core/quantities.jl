@@ -617,6 +617,22 @@ formula with the prefactor c/3 replaced by c/4. Tracking: #580.
 struct LogarithmicNegativity <: AbstractQuantity end
 
 """
+    BoundaryEntropy() <: AbstractQuantity
+
+Affleck-Ludwig universal (non-integer) boundary entropy `log g`
+of a conformal boundary state in a 1+1D rational CFT, given by
+
+    g_a = S_{0a} / sqrt(S_{00})
+
+for the Cardy boundary state |a⟩ corresponding to primary `a`, where
+`S_{ab}` is the modular S-matrix. The quantity `log g` is non-negative
+under unitary RG and decreases monotonically (g-theorem). The
+universal "ground-state degeneracy" interpretation goes back to
+Affleck-Ludwig 1991. Tracking: #580.
+"""
+struct BoundaryEntropy <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete

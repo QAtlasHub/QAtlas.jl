@@ -606,6 +606,21 @@ invariance.
 struct ThermalEnergyDensity <: AbstractQuantity end
 
 """
+    CFTThermalEntropyDensity <: AbstractQuantity
+
+Leading low-temperature thermal entropy density (entropy per unit
+length) of a (1+1)D conformal field theory,
+
+    s(T) = pi c T / 3 = pi c / (3 beta),
+
+with  the central charge. This is the temperature derivative of
+the universal CFT free energy density  (Bloete-Cardy-
+Nightingale 1986), and the operational complement of
+[](@ref).
+"""
+struct CFTThermalEntropyDensity <: AbstractQuantity end
+
+"""
     CardyEntropy() <: AbstractQuantity
 
 Asymptotic high-energy entropy (log of the density of states) of a

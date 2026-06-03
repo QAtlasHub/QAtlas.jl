@@ -898,3 +898,31 @@ function fetch(
     c = _cardy_central_charge(Universality(C))
     return π * c / (6 * beta^2)
 end
+
+# -----------------------------------------------------------------------------
+# Thermal entropy density (Bloete-Cardy-Nightingale 1986)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::CFTThermalEntropyDensity, ::Infinite;
+          beta::Real, kwargs...) where {C} -> Float64
+
+Thermal entropy density of a (1+1)D CFT with central charge
+,
+
+    s(T) = pi c / (3 beta).
+
+Obtained from  of the universal free energy density.
+
+Reference: Bloete-Cardy-Nightingale *Phys. Rev. Lett.* **56**, 742
+(1986); I. Affleck *Phys. Rev. Lett.* **56**, 746 (1986).
+"""
+function fetch(
+    model::Universality{C}, ::CFTThermalEntropyDensity, ::Infinite; beta::Real, kwargs...
+) where {C}
+    beta > 0 || throw(
+        DomainError(beta, "CFTThermalEntropyDensity requires beta > 0; got beta = $beta."),
+    )
+    c = _cardy_central_charge(model)
+    return π * c / (3 * beta)
+end

@@ -6,6 +6,11 @@
 #   * `method`      — algorithm tag (`:bdg`, `:dense_ed`, `:analytic`,
 #                      `:transfer_matrix`, `:bethe_ansatz`, `:tba`, `:pfaffian`,
 #                      `:not_implemented`, …)
+#   * `status`      — claim kind, orthogonal to `reliability`: `:exact`
+#                      (analytic closed form), `:bound` (one-sided
+#                      inequality / saturating universal constant), or
+#                      `:approx` (domain-limited approximation, e.g. a
+#                      high-T expansion).  See [`STATUS_VALUES`](@ref).
 #   * `reliability` — `:high` (closed-form + literature-tested),
 #                      `:medium` (ED only / cross-check),
 #                      `:low` (heuristic, not validated),
@@ -38,11 +43,38 @@ struct Implementation
     quantity::Type
     bc::Type
     method::Symbol
+    status::Symbol
     reliability::Symbol
     tested_in::Union{String,Nothing}
     references::Vector{String}
     notes::String
 end
+
+"""
+    STATUS_VALUES
+
+The controlled vocabulary for the `status` axis of a registered
+implementation — *what kind of mathematical claim* the row makes. This
+is orthogonal to `reliability` (how confident the implementation is) and
+to the test-corroboration level tracked by the atlas harness:
+
+  * `:exact`  — analytic closed form; verified as an equality against the
+                 literature value (the historical default; every legacy
+                 row is `:exact`).
+  * `:bound`  — a one-sided inequality. Either a *saturating* universal
+                 constant (equality at the optimal state, e.g. a Tsirelson
+                 bound) or a *variational* bound (an independently measured
+                 quantity stays ≤/≥ the fetched value, with no saturation
+                 guaranteed). The ≤/≥ direction lives on the verification
+                 card, not here.
+  * `:approx` — a domain-limited approximation (e.g. a high-temperature
+                 expansion): correct on a stated region of validity with a
+                 known leading error order.
+
+`register!` rejects any `status` outside this tuple, so a typo fails at
+package load time rather than silently mislabelling a claim.
+"""
+const STATUS_VALUES = (:exact, :bound, :approx)
 
 """
     REGISTRY :: Vector{Implementation}
@@ -66,11 +98,17 @@ function register!(
     quantity_T::Type,
     bc_T::Type;
     method::Symbol=:unknown,
+    status::Symbol=:exact,
     reliability::Symbol=:unknown,
     tested_in::Union{String,Nothing}=nothing,
     references::AbstractVector{<:AbstractString}=String[],
     notes::AbstractString="",
 )
+    status in STATUS_VALUES || throw(
+        ArgumentError(
+            "register!: status must be one of $(STATUS_VALUES); got :$(status)"
+        ),
+    )
     push!(
         REGISTRY,
         Implementation(
@@ -78,6 +116,7 @@ function register!(
             quantity_T,
             bc_T,
             method,
+            status,
             reliability,
             tested_in,
             String[r for r in references],
@@ -156,6 +195,7 @@ function _to_nt(e::Implementation)
         quantity=e.quantity,
         bc=e.bc,
         method=e.method,
+        status=e.status,
         reliability=e.reliability,
         tested_in=e.tested_in,
         references=e.references,
@@ -307,8 +347,8 @@ Render `entries` (any iterable of `NamedTuple` rows from
 to `io`.
 """
 function implementation_status_markdown(io::IO=stdout, entries=implementation_status())
-    println(io, "| Model | Quantity | BC | Method | Reliability | Tested in | References |")
-    println(io, "|---|---|---|---|---|---|---|")
+    println(io, "| Model | Quantity | BC | Method | Status | Reliability | Tested in | References |")
+    println(io, "|---|---|---|---|---|---|---|---|")
     for e in entries
         println(
             io,
@@ -320,6 +360,9 @@ function implementation_status_markdown(io::IO=stdout, entries=implementation_st
             _short_type(e.bc),
             " | `",
             e.method,
+            "`",
+            " | `",
+            e.status,
             "`",
             " | `",
             e.reliability,

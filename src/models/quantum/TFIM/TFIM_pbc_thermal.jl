@@ -192,22 +192,35 @@ end
 #     = ½(Z_NS^+ + Z_NS^-) + ½(Z_R^+ + Z_R^-)
 # where Z_α^+ = ∏ 2 cosh(βΛ/2) and Z_α^- = ∏ 2 sinh(βΛ/2).
 #
-# Convention check (cross-validated against dense ED at N = 2, 3, 4): the
-# physical TFIM Hilbert space maps to (NS, even fermion parity) ∪
-# (R, even fermion parity), so all four sector contributions enter with
-# weight `+½` after the projector normalisation.  An earlier draft used
-# the LSM-style P=+1 ↔ NS-even / P=-1 ↔ R-odd convention with sign
-# (+,+,+,-); that convention is correct for the XY chain LSM analysed
-# but not for our TFIM JW string convention (which puts the wrap-around
-# bond's sign-flip in (-1)^(N-1) ∏ σˣ rather than ∏ σˣ).  See the test
-# `test_TFIM_pbc_thermal.jl` "ED comparison N=4" testset for the numerical
-# cross-validation.
+# The (R, sinh) sector enters with a phase-dependent sign equal to the
+# fermion parity of the R-sector BCS vacuum, which flips across the
+# ferro/para phase boundary at `|h| = |J|`:
+#
+#   |h| < |J|  (ordered  / ferromagnetic)  →  s_R_sinh = +1
+#   |h| > |J|  (disordered / paramagnetic) →  s_R_sinh = -1
+#   |h| = |J|  (critical point):  Λ(k=0) (or Λ(k=π) when N is even and
+#              hJ < 0) vanishes, so Z_R^- = ∏ 2 sinh(βΛ/2) → 0 and the
+#              sign convention is irrelevant — both choices give 0.
+#
+# Mathematically, `s_R_sinh · Z_R^-(h)` is the smooth analytic
+# continuation of the contribution: near the critical point, Z_R^- ∝
+# |Λ(0)| = 2||h|-|J||, so `s_R_sinh · Z_R^- ∝ (|J|-|h|)·2` is linear in
+# the deviation from criticality — without the sign flip the
+# contribution would carry a spurious |·| kink in its h-derivative.
+#
+# An earlier draft used a constant sign `(+,+,+,+)` cross-validated at
+# h = 0.5, J = 1 (ordered phase) only; that convention happens to agree
+# with the phase-dependent one in the ordered phase but is silently
+# wrong in the disordered phase `|h| > |J|` — see issue #444 for the
+# bug-surfacing TFIM/PBC χ_xx vs raw ED discrepancy and 0e8e6c9 for the
+# now-corrected convention.
 function _all_sector_states(N::Int, J::Real, h::Real, β::Real)
+    s_R_sinh = abs(h) < abs(J) ? +1 : -1
     return (
         _sector_state(N, J, h, β, :NS, :cosh, +1),
         _sector_state(N, J, h, β, :NS, :sinh, +1),
         _sector_state(N, J, h, β, :R, :cosh, +1),
-        _sector_state(N, J, h, β, :R, :sinh, +1),
+        _sector_state(N, J, h, β, :R, :sinh, s_R_sinh),
     )
 end
 

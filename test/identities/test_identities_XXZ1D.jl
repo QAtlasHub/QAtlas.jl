@@ -76,6 +76,27 @@ end
     end
 end
 
+@testset "XXZ1D Δ=1 OBC SU(2) symmetry: χ_xx = χ_yy = χ_zz" begin
+    # At Δ = 1 the XXZ chain is SU(2)-symmetric (Heisenberg point), so
+    # the three uniform susceptibilities χ_αα with α ∈ {x, y, z} must
+    # be equal. This locks in two things at once:
+    #   (1) the Kubo helper introduced in #576 / PR #577 respects SU(2)
+    #       (a Var-only χ_xx would *also* be equal here because [H,M_α]=0
+    #        for all α at Δ=1, but a buggy formula would break the
+    #        equality);
+    #   (2) the kernel does not accidentally introduce an axis-dependent
+    #       artifact.
+    using QAtlas: SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
+    m = XXZ1D(; J=1.0, Δ=1.0)
+    for β in (0.5, 1.0, 2.0, 5.0), N in (4, 6, 8)
+        χxx = QAtlas.fetch(m, SusceptibilityXX(), OBC(N); beta=β)
+        χyy = QAtlas.fetch(m, SusceptibilityYY(), OBC(N); beta=β)
+        χzz = QAtlas.fetch(m, SusceptibilityZZ(), OBC(N); beta=β)
+        @test χxx ≈ χyy atol = 1e-12
+        @test χyy ≈ χzz atol = 1e-12
+    end
+end
+
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
 @testset "XXZ1D identities — verification cards" begin
     # FM point Δ = -1: exact saturated ground state, e0 = -J/4.

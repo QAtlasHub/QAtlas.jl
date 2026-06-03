@@ -535,3 +535,47 @@ function fetch(
     S_AB = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_A + ℓ_B, beta=beta, kwargs...)
     return S_A + S_B - S_AB
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Quench-dynamics: linear-growth slope of half-system entanglement (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::EntanglementGrowthSlope, ::Infinite;
+          v::Real, beta_eff::Real, kwargs...) -> Float64
+
+Linear-growth slope `dS_A / dt` of the half-system entanglement entropy
+after a global quench from a thermal-like initial state into a critical
+post-quench Hamiltonian in the same universality class. Calabrese-Cardy
+2005 predicts
+
+    dS_A / dt = (π c v) / (3 beta_eff)            (t < L / (2 v))
+
+where
+
+- `c` is the central charge of the post-quench critical Hamiltonian
+  (provided by the universality dispatch),
+- `v` is the propagation velocity (Lieb-Robinson for free-fermion
+  models; a model-dependent sound velocity in general),
+- `beta_eff` is the effective inverse temperature of the generalised-
+  Gibbs steady state, set by the initial state energy density.
+
+Reference: Calabrese-Cardy J. Stat. Mech. P04010 (2005). Tracking #580.
+"""
+function fetch(
+    model::Universality{C},
+    ::EntanglementGrowthSlope,
+    ::Infinite;
+    v::Real,
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    v > 0 || throw(ArgumentError("EntanglementGrowthSlope: v must be > 0; got v=$v."))
+    beta_eff > 0 || throw(
+        ArgumentError(
+            "EntanglementGrowthSlope: beta_eff must be > 0; got beta_eff=$beta_eff."
+        ),
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    return π * c * v / (3 * beta_eff)
+end

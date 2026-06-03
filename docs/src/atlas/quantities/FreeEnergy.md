@@ -13,17 +13,17 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 12
-- **Total hubs (Model, BC pairs)**: 20
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `klumper_nlie`, `matter_free_fermion`, `onsager`, `transfer_matrix`
+- **Models with this quantity registered**: 14
+- **Total hubs (Model, BC pairs)**: 22
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `jks_qtm_nlie`, `klumper_nlie`, `matter_free_fermion`, `onsager`, `transfer_matrix`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
 - AKLT1988 — 3 hubs
 - Coleman2015 — 3 hubs
 - Mahan2000 — 3 hubs
+- Affleck1986 — 2 hubs
 - Kitaev2006 — 2 hubs
-- Lieb1994 — 2 hubs
 
 ## Model × BC matrix
 
@@ -31,7 +31,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 |---|---|---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_Infinite.md) |
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
+| [`HaldaneShastry`](../models/HaldaneShastry.md) | — | — | 🟠 [hub](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) |
+| [`Hubbard1D`](../models/Hubbard1D.md) | — | — | 🟠 [hub](../hubs/Hubbard1D_FreeEnergy_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_FreeEnergy_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_FreeEnergy_PBC.md) | 🟠 [hub](../hubs/IsingSquare_FreeEnergy_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |

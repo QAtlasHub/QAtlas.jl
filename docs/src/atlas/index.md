@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 298 |
-| ED-feasible claimed (risk denominator) | 272 |
+| Hubs `src` claims (registry) | 307 |
+| ED-feasible claimed (risk denominator) | 281 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 178 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 64 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 73 |
 | Inventory cards scanned (whole test/) | 2763 |
-| Registry files parsed | 62 / 62 |
-| Models | 62 |
+| Registry files parsed | 63 / 63 |
+| Models | 63 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **65.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **79.8%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **63.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **77.2%**
 
 ## Browse by facet
 
@@ -61,10 +61,14 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "64 actionable hub(s)"
+!!! warning "73 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
+    - [`HaldaneShastry/FreeEnergy/Infinite`](hubs/HaldaneShastry_FreeEnergy_Infinite.md)
+    - [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md)
+    - [`HaldaneShastry/SpecificHeat/Infinite`](hubs/HaldaneShastry_SpecificHeat_Infinite.md)
+    - [`HaldaneShastry/ThermalEntropy/Infinite`](hubs/HaldaneShastry_ThermalEntropy_Infinite.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
     - [`Heisenberg1D/FreeEnergy/Infinite`](hubs/Heisenberg1D_FreeEnergy_Infinite.md)
     - [`Heisenberg1D/MagnetizationXLocal/OBC`](hubs/Heisenberg1D_MagnetizationXLocal_OBC.md)
@@ -72,8 +76,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`Heisenberg1D/MagnetizationZLocal/OBC`](hubs/Heisenberg1D_MagnetizationZLocal_OBC.md)
     - [`Heisenberg1D/SpecificHeat/Infinite`](hubs/Heisenberg1D_SpecificHeat_Infinite.md)
     - [`Heisenberg1D/ThermalEntropy/Infinite`](hubs/Heisenberg1D_ThermalEntropy_Infinite.md)
+    - [`HeisenbergXYZ/CorrelationLength/Infinite`](hubs/HeisenbergXYZ_CorrelationLength_Infinite.md)
+    - [`HeisenbergXYZ/GroundStateEnergyDensity/Infinite`](hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md)
+    - [`HeisenbergXYZ/MassGap/Infinite`](hubs/HeisenbergXYZ_MassGap_Infinite.md)
+    - [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md)
     - [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md)
     - [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md)
+    - [`Hubbard1D/FreeEnergy/Infinite`](hubs/Hubbard1D_FreeEnergy_Infinite.md)
     - [`IsingChain1D/Energy/Infinite`](hubs/IsingChain1D_Energy_Infinite.md)
     - [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
     - [`IsingSquare/FreeEnergy/Infinite`](hubs/IsingSquare_FreeEnergy_Infinite.md)
@@ -143,10 +152,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ExtendedHubbard1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `FibonacciAnyons` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
+| `HaldaneShastry` | 4 | 0 | 0 | 0 | 0 | 4 | feasible |
 | `Heisenberg1D` | 24 | 0 | 13 | 4 | 0 | 7 | feasible |
-| `HeisenbergXYZ` | 2 | 0 | 1 | 1 | 0 | 0 | feasible |
+| `HeisenbergXYZ` | 6 | 0 | 1 | 1 | 0 | 4 | feasible |
 | `Honeycomb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
-| `Hubbard1D` | 4 | 0 | 2 | 2 | 0 | 0 | feasible |
+| `Hubbard1D` | 5 | 0 | 2 | 2 | 0 | 1 | feasible |
 | `IsingChain1D` | 8 | 0 | 7 | 0 | 0 | 1 | feasible |
 | `IsingSquare` | 12 | 0 | 7 | 2 | 0 | 3 | feasible |
 | `IsingTriangular` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
@@ -194,7 +204,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (298) — select to drill down
+## Hubs (307) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -272,6 +282,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 
+### `HaldaneShastry` (4)
+
+- 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](hubs/HaldaneShastry_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+
 ### `Heisenberg1D` (24)
 
 - 🟢 [`Heisenberg1D/Energy/OBC`](hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
@@ -299,19 +316,24 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 
-### `HeisenbergXYZ` (2)
+### `HeisenbergXYZ` (6)
 
+- 🟠 [`HeisenbergXYZ/CorrelationLength/Infinite`](hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`HeisenbergXYZ/Energy/Infinite`](hubs/HeisenbergXYZ_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`HeisenbergXYZ/GroundStateEnergyDensity/Infinite`](hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`HeisenbergXYZ/LuttingerParameter/Infinite`](hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) — coherent
+- 🟠 [`HeisenbergXYZ/MassGap/Infinite`](hubs/HeisenbergXYZ_MassGap_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 
 ### `Honeycomb` (2)
 
 - 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
-### `Hubbard1D` (4)
+### `Hubbard1D` (5)
 
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
+- 🟠 [`Hubbard1D/FreeEnergy/Infinite`](hubs/Hubbard1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — coherent
 - 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p

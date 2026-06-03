@@ -32,17 +32,29 @@ let Sx_op = spin_ops(1//2)[1], Sy_op = spin_ops(1//2)[2], Sz_op = spin_ops(1//2)
     function ed_xxz_chi(N::Int, J::Real, dz::Real, beta::Real, sigma_alpha::AbstractMatrix)
         bond = J * (kron(Sx_op, Sx_op) + kron(Sy_op, Sy_op) + dz * kron(Sz_op, Sz_op))
         H = chain_hamiltonian(2, N, bond)
+        # Kubo static susceptibility from full ED (sum-over-eigenpairs).
+        # Equivalent to β·Var(M)/N only when [H, M] = 0; XXZ conserves
+        # only Σ σz, so we need the full Kubo form for χ_xx and χ_yy.
+        # See issue #576 for the convention discussion.
         M = sum(site_op(sigma_alpha, 2, N, i) for i in 1:N)
         evals, evecs = eigen(Hermitian(Matrix(H)))
         emin = minimum(evals)
         w = exp.(-beta .* (evals .- emin))
         Z = sum(w)
-        Md = evecs' * M * evecs
-        diagM = real.(diag(Md))
-        diagM2 = real.(diag(Md * Md))
-        M1 = sum(diagM .* w) / Z
-        M2 = sum(diagM2 .* w) / Z
-        return beta * (M2 - M1^2) / N
+        p = w ./ Z
+        Mab = evecs' * M * evecs
+        Mmean = sum(p[m] * real(Mab[m, m]) for m in eachindex(p))
+        χ = 0.0
+        for m in eachindex(evals), n in eachindex(evals)
+            ΔE = evals[m] - evals[n]
+            mn = abs2(Mab[m, n])
+            if abs(ΔE) > 1e-10
+                χ += (p[n] - p[m]) / ΔE * mn
+            else
+                χ += beta * p[m] * mn
+            end
+        end
+        return (χ - beta * Mmean^2) / N
     end
 
     @testset "XXZ1D — Susceptibility{XX,YY,ZZ}/OBC vs ED (#381 batch)" begin

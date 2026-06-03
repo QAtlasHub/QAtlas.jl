@@ -20,10 +20,10 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | 🟢 corroborated-at-p | 36 |
 | 🔵 coherent | 9 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 9 |
-| **total claimed hubs** | **54** |
+| 🟠 uncorroborated-but-feasible | 10 |
+| **total claimed hubs** | **55** |
 
-**Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `delegation`, `pfaffian`
+**Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian`
 
 ## Quantity × BC matrix
 
@@ -37,6 +37,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`FidelitySusceptibility`](../quantities/FidelitySusceptibility.md) | 🟢 [hub](../hubs/TFIM_FidelitySusceptibility_OBC.md) | — | 🟢 [hub](../hubs/TFIM_FidelitySusceptibility_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
 | [`GGEValue`](../quantities/GGEValue.md) | — | — | 🔵 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
+| [`LiebRobinsonVelocity`](../quantities/LiebRobinsonVelocity.md) | — | — | 🟠 [hub](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) |
 | [`LoschmidtEcho`](../quantities/LoschmidtEcho.md) | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_OBC.md) | — | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_Infinite.md) |
 | [`LoschmidtRateFunction`](../quantities/LoschmidtRateFunction.md) | — | — | 🔵 [hub](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_OBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_PBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_Infinite.md) |
@@ -94,8 +95,10 @@ CalabreseCardy2009
 CalabreseEsslerFagotti2012
 Damski2013
 Gu2010
+HastingsKoma2006
 Heyl2013
 Heyl2018
+LiebRobinson1972
 LiebSchultzMattis1961
 Onsager1944
 Peschel2003

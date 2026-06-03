@@ -272,3 +272,25 @@ exponents are identical to Onsager's 1944 result.
 function fetch(::TFIM, ::CriticalExponents, ::Infinite; kwargs...)
     return QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Lieb-Robinson velocity (#579 inequality framework Phase 1)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(model::TFIM, ::LiebRobinsonVelocity, ::Infinite; J=m.J) -> Float64
+
+Lieb-Robinson velocity of the transverse-field Ising chain. Via the
+Jordan-Wigner mapping the TFIM is a free Bogoliubov-fermion system
+with dispersion `Λ(k) = 2 sqrt(J^2 + h^2 - 2 J h cos k)`. The
+maximum group velocity over `k` saturates the Lieb-Robinson bound,
+
+    v_LR = max_k |dΛ/dk| = 2 |J|.
+
+This is independent of the transverse field `h`: it is the bandwidth
+of the JJ exchange divided by the spin spacing. Reference:
+Lieb-Robinson 1972; Calabrese-Cardy 2006 (quench dynamics).
+"""
+function fetch(model::TFIM, ::LiebRobinsonVelocity, ::Infinite; J::Real=model.J, kwargs...)
+    return 2 * abs(J)
+end

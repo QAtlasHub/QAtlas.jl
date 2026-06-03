@@ -67,7 +67,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`SYK`](../atlas/models/SYK.md) | SachdevYe1993, Kitaev2015, MaldacenaStanford2016 |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | Schwinger1962, ColemanJackiwSusskind1975 |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | ShastrySutherland1981, KogaKawakami2000 |
-| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944 |
+| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006 |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | AshcroftMermin1976, Mahan2000, Coleman2015 |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | YangYang1966, AshcroftMermin1976, Mahan2000, Coleman2015 |
 | [`ToricCode`](../atlas/models/ToricCode.md) | Kitaev2003, KitaevPreskill2006, LevinWen2006, NayakSimonSternFreedmanDasSarma2008 |

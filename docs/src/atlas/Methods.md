@@ -310,12 +310,13 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
 - 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md)
 
-## `closed_form` - 4 hubs
+## `closed_form` - 5 hubs
 
 - 🟠 [`HeisenbergXYZ/CorrelationLength/Infinite`](hubs/HeisenbergXYZ_CorrelationLength_Infinite.md)
 - 🟠 [`HeisenbergXYZ/GroundStateEnergyDensity/Infinite`](hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md)
 - 🟠 [`HeisenbergXYZ/MassGap/Infinite`](hubs/HeisenbergXYZ_MassGap_Infinite.md)
 - 🟠 [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md)
+- 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](hubs/TFIM_LiebRobinsonVelocity_Infinite.md)
 
 ## `dmrg_reference` - 4 hubs
 

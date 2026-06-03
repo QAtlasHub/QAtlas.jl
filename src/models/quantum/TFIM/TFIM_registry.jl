@@ -647,3 +647,15 @@
     references=["Heyl2013"],
     notes="λ(t) = -lim_{L→∞} (1/L) log |⟨ψ₀|e^{-iH_f t}|ψ₀⟩|² for TFIM h-quench; closed-form via Bogoliubov mode amplitudes.",
 )
+
+# ── Lieb-Robinson velocity (#579 inequality framework Phase 1) ─────────
+@register(
+    TFIM,
+    LiebRobinsonVelocity,
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_lieb_robinson.jl",
+    references=["LiebRobinson1972", "HastingsKoma2006"],
+    notes="v_LR = 2|J|, free-fermion (Jordan-Wigner) saturated bound, h-independent.",
+)

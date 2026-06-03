@@ -334,7 +334,7 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-## `TFIM` (54)
+## `TFIM` (55)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](../hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](../hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -349,6 +349,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`TFIM/FreeEnergy/OBC`](../hubs/TFIM_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/FreeEnergy/PBC`](../hubs/TFIM_FreeEnergy_PBC.md) — corroborated-at-p
 - 🔵 [`TFIM/GGEValue/Infinite`](../hubs/TFIM_GGEValue_Infinite.md) — coherent
+- 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](../hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/LoschmidtEcho/OBC`](../hubs/TFIM_LoschmidtEcho_OBC.md) — corroborated-at-p
 - 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent

@@ -81,7 +81,7 @@ In this page, all model list defined in QAtlas.jl is shown. **63 models** have `
 | [`SYK`](../atlas/models/SYK.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 30 | 🟣 0 🟢 36 🔵 9 ⚪ 0 🟠 9 | `Ising` |
+| [`TFIM`](../atlas/models/TFIM.md) | 31 | 🟣 0 🟢 36 🔵 9 ⚪ 0 🟠 10 | `Ising` |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
 | [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 4 🔵 0 ⚪ 1 🟠 0 | — |

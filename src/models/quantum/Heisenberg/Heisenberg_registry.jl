@@ -256,3 +256,26 @@ end
     references=["Affleck1986"],
     notes="c_v = π T / (3 v_s) = 2T / (3J). Equals s(T) at LO CFT. Valid β > 5/J.",
 )
+
+# ── Calabrese-Cardy entanglement at Infinite() (#580 Phase 1) ─────────
+@register(
+    Heisenberg1D,
+    VonNeumannEntropy{:equilibrium},
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="S_VN(ℓ, β) = (1/3) log[(2β/π) sinh(πℓ/β)] (β finite); (1/3) log(2ℓ) at β=∞. c=1 universal, always critical at SU(2) point.",
+)
+
+@register(
+    Heisenberg1D,
+    RenyiEntropy,
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="S_α(ℓ, β) = (1/6)(1 + 1/α) log[(2β/π) sinh(πℓ/β)] at β finite; same prefactor times log(2ℓ) at β=∞.",
+)

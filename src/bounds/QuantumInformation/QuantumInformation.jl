@@ -46,3 +46,36 @@ function fetch(
         )
     end
 end
+
+"""
+    fetch(::Bound{:QuantumInformation}, ::MerminGHZBound, ::Infinite; source=:mermin)
+
+Upper bound on the Mermin 3-party operator `|⟨M₃⟩|`, by `source`:
+
+  * `:classical`        → 2   local-hidden-variable (local-realistic) bound
+  * `:mermin` (default) → 4   quantum maximum (Mermin 1990), saturated by the
+                              GHZ state `(|000⟩ + |111⟩)/√2`
+
+The quantum/classical gap is 2 (vs √2 for two-party CHSH): multipartite
+nonlocality grows with the number of parties.
+"""
+function fetch(
+    ::Bound{:QuantumInformation},
+    ::MerminGHZBound,
+    ::Infinite;
+    source::Symbol=:mermin,
+    kwargs...,
+)
+    if source === :mermin
+        return 4.0
+    elseif source === :classical
+        return 2.0
+    else
+        throw(
+            ArgumentError(
+                "MerminGHZBound: source must be :classical or :mermin (whose bound); " *
+                "got :$(source)",
+            ),
+        )
+    end
+end

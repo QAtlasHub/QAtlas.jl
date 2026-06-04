@@ -17,8 +17,8 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **1** |
+| 🟠 uncorroborated-but-feasible | 2 |
+| **total claimed hubs** | **2** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -27,6 +27,7 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | Quantity | `Infinite` |
 |---|---|
 | [`CHSHBound`](../quantities/CHSHBound.md) | 🟠 [hub](../hubs/Bound_CHSHBound_Infinite.md) |
+| [`MerminGHZBound`](../quantities/MerminGHZBound.md) | 🟠 [hub](../hubs/Bound_MerminGHZBound_Infinite.md) |
 
 ## References
 
@@ -36,6 +37,7 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 Pages = []
 Canonical = false
 CHSH1969
+Mermin1990
 PopescuRohrlich1994
 Tsirelson1980
 ```

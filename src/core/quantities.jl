@@ -993,3 +993,14 @@ theory.  A `status=:bound` quantity with the historical name (like
 (`:bell` → 2, `:tsirelson` → 2√2, `:popescu_rohrlich` → 4).
 """
 struct CHSHBound <: AbstractQuantity end
+
+"""
+    MerminGHZBound() <: AbstractQuantity
+
+The Mermin 3-party Bell-type bound — the maximum of the Mermin operator
+`|⟨M₃⟩|` admissible in a given theory.  A `status=:bound` quantity
+(Mermin 1990); fetched against a [`Bound`](@ref) domain with `source=`
+choosing the bound (`:classical` → 2 local-realistic, `:mermin` → 4
+quantum, saturated by the GHZ state).
+"""
+struct MerminGHZBound <: AbstractQuantity end

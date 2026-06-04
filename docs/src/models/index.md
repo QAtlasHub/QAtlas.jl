@@ -24,7 +24,7 @@ In this page, all model list defined in QAtlas.jl is shown. **64 models** have `
 | [`AKLT1D`](../atlas/models/AKLT1D.md) | 12 | 🟣 0 🟢 17 🔵 0 ⚪ 1 🟠 1 | — |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`BCFT`](../atlas/models/BCFT.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`Bound`](../atlas/models/Bound.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
+| [`Bound`](../atlas/models/Bound.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`ChernSimons3D`](../atlas/models/ChernSimons3D.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `WZW` |
 | [`Cluster1D`](../atlas/models/Cluster1D.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`Compass1D`](../atlas/models/Compass1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |

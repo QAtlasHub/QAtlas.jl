@@ -5,10 +5,11 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (78)
+## `(no card)` (79)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible

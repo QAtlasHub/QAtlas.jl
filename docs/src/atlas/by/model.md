@@ -35,9 +35,10 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](../hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
 
-## `Bound` (1)
+## `Bound` (2)
 
 - 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
 
 ## `ChernSimons3D` (2)
 

@@ -114,6 +114,7 @@ export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)
 export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …
 export CHSHBound          # CHSH / Bell correlator bound (:bound)
+export MerminGHZBound     # Mermin 3-party Bell bound (:bound)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper

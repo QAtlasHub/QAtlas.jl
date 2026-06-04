@@ -10,7 +10,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`AKLT1D`](../atlas/models/AKLT1D.md) | AKLT1988, KennedyTasaki1992, GarciaSaez2013, Arovas1988 |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | AKLT1988, VerstraeteCirac2004 |
 | [`BCFT`](../atlas/models/BCFT.md) | Cardy1989, AffleckLudwig1991, FriedanKonechny2004 |
-| [`Bound`](../atlas/models/Bound.md) | CHSH1969, Tsirelson1980, PopescuRohrlich1994 |
+| [`Bound`](../atlas/models/Bound.md) | CHSH1969, Tsirelson1980, PopescuRohrlich1994, Mermin1990 |
 | [`ChernSimons3D`](../atlas/models/ChernSimons3D.md) | Witten1989, KnizhnikZamolodchikov1984, Verlinde1988 |
 | [`Cluster1D`](../atlas/models/Cluster1D.md) | BriegelRaussendorf2001 |
 | [`Compass1D`](../atlas/models/Compass1D.md) | BrzezickiDziarmagaOles2007, KugelKhomskii1982, Kitaev2006 |

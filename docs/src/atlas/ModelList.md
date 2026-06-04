@@ -10,7 +10,7 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 | [`AKLT1D`](models/AKLT1D.md) | — | 19 | `analytic`, `dense_ed`, `literature_value` | 0 | 17 | 0 | 1 | 1 | feasible | `@sweep` |
 | [`AKLT2D`](models/AKLT2D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`BCFT`](models/BCFT.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`Bound`](models/Bound.md) | — | 1 | `analytic` | 0 | 0 | 0 | 0 | 1 | feasible | — |
+| [`Bound`](models/Bound.md) | — | 2 | `analytic` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`ChernSimons3D`](models/ChernSimons3D.md) | `WZW` | 2 | `analytic`, `sugawara` | 0 | 1 | 0 | 1 | 0 | infeasible | `@sweep` |
 | [`Cluster1D`](models/Cluster1D.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@cluster` |
 | [`Compass1D`](models/Compass1D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@anisotropic`, `@isotropic` |
@@ -108,6 +108,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`MagnetizationZ`](quantities/MagnetizationZ.md) — 5 models
 - [`MagnetizationZLocal`](quantities/MagnetizationZLocal.md) — 5 models
 - [`MassGap`](quantities/MassGap.md) — 25 models
+- [`MerminGHZBound`](quantities/MerminGHZBound.md) — 1 models
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 2 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models
 - [`RenyiEntropy`](quantities/RenyiEntropy.md) — 4 models

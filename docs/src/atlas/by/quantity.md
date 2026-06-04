@@ -293,6 +293,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/PBC`](../hubs/XYh1D_MassGap_PBC.md) — uncorroborated-but-feasible
 
+## `MerminGHZBound` (1)
+
+- 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
+
 ## `PartitionFunction` (2)
 
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only

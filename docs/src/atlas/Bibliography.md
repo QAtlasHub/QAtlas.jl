@@ -7,7 +7,7 @@ Every distinct citation string appearing in any `@register(..., references=[...]
 
 Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Free-form strings are an honest substrate; a structured citation database is deferred to a follow-up.
 
-## Pfeuty1970 — 19 hubs
+## Pfeuty1970 — 20 hubs
 
 - 🔵 [`LongRangeIsing1D/MassGap/Infinite`](hubs/LongRangeIsing1D_MassGap_Infinite.md)
 - 🟢 [`LongRangeXY1D/MassGap/Infinite`](hubs/LongRangeXY1D_MassGap_Infinite.md)
@@ -15,6 +15,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
 - 🟢 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md)
 - 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md)
+- 🟢 [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md)
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](hubs/TFIM_MagnetizationZ_Infinite.md)
 - 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md)
 - 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md)

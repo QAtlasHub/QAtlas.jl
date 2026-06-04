@@ -1079,7 +1079,11 @@ BI("- [By boundary condition](bc.md) — ", length(G_bc), " BCs")
 BI("- [By assurance level](level.md) — R1 taxonomy")
 BI("- [By corroboration mechanism](mechanism.md) — verify `route`")
 BI("- [By regime](regime.md) — resolved physical regimes")
-BI("- [By universality class](universality.md) — ", length(G_univ), " classes (model ↔ class)")
+BI(
+    "- [By universality class](universality.md) — ",
+    length(G_univ),
+    " classes (model ↔ class)",
+)
 BI("")
 BI("[← back to the Atlas index](../index.md)")
 write(joinpath(bydir, "index.md"), String(take!(byidx)))

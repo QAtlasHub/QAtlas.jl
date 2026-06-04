@@ -649,3 +649,22 @@
     references=["LiebRobinson1972", "HastingsKoma2006"],
     notes="v_LR = 2 min(|J|,|h|), the causal-cone slope; saturated by the max group velocity of Λ(k).",
 )
+
+# ── Status-axis worked example: high-temperature free energy (:approx) ──
+# A second definition of (TFIM, FreeEnergy, Infinite) keyed by scheme=:high_T;
+# the canonical row above stays the exact closed form. fetch(...; scheme=:high_T).
+@register(
+    TFIM,
+    FreeEnergy,
+    Infinite,
+    scheme=:high_T,
+    method=:analytic,
+    status=:approx,
+    valid_domain="βJ ≪ 1 and βh ≪ 1 (high temperature)",
+    error_order="O((βJ)³, (βh)³)",
+    canonical=false,
+    reliability=:high,
+    references=["Pfeuty1970"],
+    tested_in="test/models/quantum/TFIM/test_tfim_highT_freeenergy.jl",
+    notes="f/N = -ln2/β - (β/2)(J²+h²) + O(β³); the small-β limit of the exact FreeEnergy.",
+)

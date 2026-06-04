@@ -243,8 +243,17 @@ for (QTy, qsym) in _TFIM_THERMAL_METHODS
         inverse temperature `beta`.  Uses adaptive Gauss-Kronrod quadrature
         over the BdG dispersion `Λ(k) = 2√(J² + h² − 2Jh cos k)`.
         """
-        function fetch(model::TFIM, ::$QTy, ::Infinite; beta::Real, kwargs...)
-            return _tfim_thermo_infinite($(QuoteNode(qsym)), model.J, model.h, beta)
+        function fetch(
+            model::TFIM,
+            ::$QTy,
+            ::Infinite;
+            scheme::Symbol=:canonical,
+            beta::Real,
+            kwargs...,
+        )
+            scheme === :canonical &&
+                return _tfim_thermo_infinite($(QuoteNode(qsym)), model.J, model.h, beta)
+            return _tfim_thermo_infinite_scheme(model, $QTy(), Val(scheme); beta=beta)
         end
 
         """
@@ -259,4 +268,23 @@ for (QTy, qsym) in _TFIM_THERMAL_METHODS
             return _tfim_thermo_obc($(QuoteNode(qsym)), N, model.J, model.h, beta)
         end
     end
+end
+
+# ── Non-canonical (approximation) schemes of Infinite thermal quantities ──
+# The bare / `scheme=:canonical` fetch stays the exact closed form above; a
+# `scheme=:high_T` etc. routes here.  Decision C: the multi-definition selector
+# lives on the native method, so `fetch(m, q, Infinite())` reproduces the exact
+# row while `definitions(m, q, Infinite())` lists the registered approximations.
+function _tfim_thermo_infinite_scheme(m::TFIM, q, ::Val{S}; beta) where {S}
+    error(
+        "TFIM $(typeof(q)) Infinite: no scheme :$(S) " *
+        "(only :canonical + registered approximations)",
+    )
+end
+
+# High-temperature expansion of the free energy density:
+#   f/N = -ln2/β - (β/2)(J² + h²) + O(β³),  valid for βJ ≪ 1, βh ≪ 1.
+# This is the small-β limit of the exact free energy (the :canonical row).
+function _tfim_thermo_infinite_scheme(m::TFIM, ::FreeEnergy, ::Val{:high_T}; beta)
+    -log(2) / beta - (beta / 2) * (m.J^2 + m.h^2)
 end

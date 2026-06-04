@@ -17,8 +17,8 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 2 |
-| **total claimed hubs** | **2** |
+| 🟠 uncorroborated-but-feasible | 4 |
+| **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -26,7 +26,9 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 
 | Quantity | `Infinite` |
 |---|---|
+| [`BekensteinBound`](../quantities/BekensteinBound.md) | 🟠 [hub](../hubs/Bound_BekensteinBound_Infinite.md) |
 | [`CHSHBound`](../quantities/CHSHBound.md) | 🟠 [hub](../hubs/Bound_CHSHBound_Infinite.md) |
+| [`ChaosBound`](../quantities/ChaosBound.md) | 🟠 [hub](../hubs/Bound_ChaosBound_Infinite.md) |
 | [`MerminGHZBound`](../quantities/MerminGHZBound.md) | 🟠 [hub](../hubs/Bound_MerminGHZBound_Infinite.md) |
 
 ## References
@@ -36,7 +38,9 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 ```@bibliography
 Pages = []
 Canonical = false
+Bekenstein1981
 CHSH1969
+MaldacenaShenkerStanford2016
 Mermin1990
 ```
 

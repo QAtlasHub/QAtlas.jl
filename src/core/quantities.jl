@@ -1004,3 +1004,22 @@ choosing the bound (`:classical` → 2 local-realistic, `:mermin` → 4
 quantum, saturated by the GHZ state).
 """
 struct MerminGHZBound <: AbstractQuantity end
+
+"""
+    ChaosBound() <: AbstractQuantity
+
+The Maldacena–Shenker–Stanford bound on quantum chaos — an upper bound on the
+Lyapunov exponent `λ_L` of out-of-time-order correlators (`λ_L ≤ 2π/β`).  A
+`status=:bound` quantity; fetched against a [`Bound`](@ref) domain
+(`Bound(:Dynamics)`).
+"""
+struct ChaosBound <: AbstractQuantity end
+
+"""
+    BekensteinBound() <: AbstractQuantity
+
+The Bekenstein universal entropy bound — an upper bound on the entropy of a
+bounded system (`S ≤ 2π R E`).  A `status=:bound` quantity; fetched against a
+[`Bound`](@ref) domain (`Bound(:Holographic)`).
+"""
+struct BekensteinBound <: AbstractQuantity end

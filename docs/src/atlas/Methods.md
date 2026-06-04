@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 115 hubs
+## `analytic` - 117 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -28,7 +28,9 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md)
 - 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md)
+- 🟠 [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
 - 🟠 [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md)
+- 🟠 [`Bound/ChaosBound/Infinite`](hubs/Bound_ChaosBound_Infinite.md)
 - 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](hubs/ChernSimons3D_PartitionFunction_Infinite.md)
 - 🟢 [`Cluster1D/Energy/Infinite`](hubs/Cluster1D_Energy_Infinite.md)

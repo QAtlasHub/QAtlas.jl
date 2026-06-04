@@ -116,6 +116,8 @@ export LiebRobinsonBound  # status-axis example (:bound)
 export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …
 export CHSHBound          # CHSH / Bell correlator bound (:bound)
 export MerminGHZBound     # Mermin 3-party Bell bound (:bound)
+export ChaosBound         # MSS chaos / Lyapunov bound (:bound, Dynamics)
+export BekensteinBound    # Bekenstein entropy bound (:bound, Holographic)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper
@@ -151,6 +153,10 @@ include("universalities/CardyEntanglement.jl")
 include("bounds/Bounds.jl")
 include("bounds/QuantumInformation/QuantumInformation.jl")
 include("bounds/QuantumInformation/QuantumInformation_registry.jl")
+include("bounds/Dynamics/Dynamics.jl")
+include("bounds/Dynamics/Dynamics_registry.jl")
+include("bounds/Holographic/Holographic.jl")
+include("bounds/Holographic/Holographic_registry.jl")
 
 # --- Models ---
 # Layout: `<class>/<Model>/<Model>.jl` (with optional sibling axis files like

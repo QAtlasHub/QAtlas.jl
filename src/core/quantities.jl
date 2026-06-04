@@ -1023,3 +1023,13 @@ bounded system (`S ≤ 2π R E`).  A `status=:bound` quantity; fetched against a
 [`Bound`](@ref) domain (`Bound(:Holographic)`).
 """
 struct BekensteinBound <: AbstractQuantity end
+
+"""
+    QuantumSpeedLimit() <: AbstractQuantity
+
+The quantum speed limit — a *lower* bound on the time to evolve a state to an
+orthogonal one (Margolus–Levitin `τ ≥ π/(2E)`).  A `status=:bound`,
+`direction=:lower` quantity; fetched against a [`Bound`](@ref) domain
+(`Bound(:Dynamics)`).
+"""
+struct QuantumSpeedLimit <: AbstractQuantity end

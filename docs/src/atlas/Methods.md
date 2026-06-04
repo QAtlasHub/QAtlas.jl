@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 117 hubs
+## `analytic` - 118 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -32,6 +32,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md)
 - 🟠 [`Bound/ChaosBound/Infinite`](hubs/Bound_ChaosBound_Infinite.md)
 - 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
+- 🟠 [`Bound/QuantumSpeedLimit/Infinite`](hubs/Bound_QuantumSpeedLimit_Infinite.md)
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](hubs/ChernSimons3D_PartitionFunction_Infinite.md)
 - 🟢 [`Cluster1D/Energy/Infinite`](hubs/Cluster1D_Energy_Infinite.md)
 - 🟢 [`Cluster1D/MassGap/Infinite`](hubs/Cluster1D_MassGap_Infinite.md)

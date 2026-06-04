@@ -17,8 +17,8 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **4** |
+| 🟠 uncorroborated-but-feasible | 5 |
+| **total claimed hubs** | **5** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -30,6 +30,7 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | [`CHSHBound`](../quantities/CHSHBound.md) | 🟠 [hub](../hubs/Bound_CHSHBound_Infinite.md) |
 | [`ChaosBound`](../quantities/ChaosBound.md) | 🟠 [hub](../hubs/Bound_ChaosBound_Infinite.md) |
 | [`MerminGHZBound`](../quantities/MerminGHZBound.md) | 🟠 [hub](../hubs/Bound_MerminGHZBound_Infinite.md) |
+| [`QuantumSpeedLimit`](../quantities/QuantumSpeedLimit.md) | 🟠 [hub](../hubs/Bound_QuantumSpeedLimit_Infinite.md) |
 
 ## References
 
@@ -41,6 +42,7 @@ Canonical = false
 Bekenstein1981
 CHSH1969
 MaldacenaShenkerStanford2016
+MargolusLevitin1998
 Mermin1990
 ```
 

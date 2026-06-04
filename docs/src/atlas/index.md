@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 311 |
-| ED-feasible claimed (risk denominator) | 285 |
+| Hubs `src` claims (registry) | 312 |
+| ED-feasible claimed (risk denominator) | 286 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 178 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 78 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 79 |
 | Inventory cards scanned (whole test/) | 2763 |
 | Registry files parsed | 66 / 66 |
 | Models | 64 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.5%** · **in-repo-verified rate** (incl. 🔵 coherent): **75.8%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **75.5%**
 
 ## Browse by facet
 
@@ -61,12 +61,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "78 actionable hub(s)"
+!!! warning "79 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
     - [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md)
     - [`Bound/ChaosBound/Infinite`](hubs/Bound_ChaosBound_Infinite.md)
     - [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
+    - [`Bound/QuantumSpeedLimit/Infinite`](hubs/Bound_QuantumSpeedLimit_Infinite.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
     - [`HaldaneShastry/FreeEnergy/Infinite`](hubs/HaldaneShastry_FreeEnergy_Infinite.md)
@@ -148,7 +149,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `AKLT1D` | 19 | 0 | 17 | 0 | 1 | 1 | feasible |
 | `AKLT2D` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `BCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `Bound` | 4 | 0 | 0 | 0 | 0 | 4 | feasible |
+| `Bound` | 5 | 0 | 0 | 0 | 0 | 5 | feasible |
 | `ChernSimons3D` | 2 | 0 | 1 | 0 | 1 | 0 | infeasible |
 | `Cluster1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Compass1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -210,7 +211,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (311) — select to drill down
+## Hubs (312) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -242,12 +243,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
 
-### `Bound` (4)
+### `Bound` (5)
 
 - 🟠 [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/ChaosBound/Infinite`](hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/QuantumSpeedLimit/Infinite`](hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
 
 ### `ChernSimons3D` (2)
 

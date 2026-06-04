@@ -139,17 +139,17 @@ export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
 export MinimalModel, WZWSU2       # 2D rational-CFT dispatch tags
 export WignerSurmise, TracyWidom, MeanRatio  # RMT / Poisson level statistics (#151)
 export SpectralFormFactor  # RMT spectral form factor (#243)
-include("universalities/Universality.jl")
-include("universalities/E8.jl")
-include("universalities/MeanField.jl")
-include("universalities/Ising2D.jl")
-include("universalities/KPZ.jl")
-include("universalities/Percolation.jl")
-include("universalities/Potts.jl")
-include("universalities/ONModel.jl")
-include("universalities/MinimalModel.jl")
-include("universalities/WZW.jl")
-include("universalities/CardyEntanglement.jl")
+include("universalities/Universality.jl")            # namespace root: Universality{C} + shared types
+include("universalities/E8/E8.jl")
+include("universalities/MeanField/MeanField.jl")
+include("universalities/Ising2D/Ising2D.jl")
+include("universalities/KPZ/KPZ.jl")
+include("universalities/Percolation/Percolation.jl")
+include("universalities/Potts/Potts.jl")
+include("universalities/ONModel/ONModel.jl")
+include("universalities/MinimalModel/MinimalModel.jl")
+include("universalities/WZW/WZW.jl")
+include("universalities/CardyEntanglement.jl")       # shared CFT entanglement (cross-class)
 
 # --- Universal bounds (model-independent inequalities) ---
 # A bound is NOT a universality class: it is pinned by the quantity it bounds,
@@ -323,8 +323,8 @@ include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibil
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)
 include("models/quantum/ToricCode/ToricCode.jl")
 include("models/quantum/ToricCode/ToricCode_registry.jl")  # populates REGISTRY for ToricCode (#162)
-include("universalities/RMT.jl")                            # RMT universality class (#151)
-include("universalities/Poisson.jl")                        # Poisson universality class (#151)
+include("universalities/RMT/RMT.jl")                        # RMT universality class (#151)
+include("universalities/Poisson/Poisson.jl")                # Poisson universality class (#151)
 
 # --- Deprecation shims (legacy API) ---
 # Loaded last so they can route into any already-registered concrete

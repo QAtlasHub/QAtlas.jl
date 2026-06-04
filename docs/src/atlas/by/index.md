@@ -11,5 +11,6 @@ Full-text search is the bar at the top of every page (Documenter built-in — in
 - [By assurance level](level.md) — R1 taxonomy
 - [By corroboration mechanism](mechanism.md) — verify `route`
 - [By regime](regime.md) — resolved physical regimes
+- [By universality class](universality.md) — 5 classes (model ↔ class)
 
 [← back to the Atlas index](../index.md)

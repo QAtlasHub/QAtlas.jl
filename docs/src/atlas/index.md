@@ -27,14 +27,14 @@
 | ⚪ cited-only (frontier — neutral) | 17 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 80 |
 | Inventory cards scanned (whole test/) | 2763 |
-| Registry files parsed | 66 / 66 |
+| Registry files parsed | 67 / 67 |
 | Models | 64 |
 
 **Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **75.3%**
 
 ## Browse by facet
 
-[**Faceted search →**](by/index.md) · [by model](by/model.md) · [by quantity](by/quantity.md) · [by BC](by/bc.md) · [by level](by/level.md) · [by mechanism](by/mechanism.md) · [by regime](by/regime.md). Full-text search is the top bar (Documenter built-in).
+[**Faceted search →**](by/index.md) · [by model](by/model.md) · [by quantity](by/quantity.md) · [by BC](by/bc.md) · [by level](by/level.md) · [by mechanism](by/mechanism.md) · [by regime](by/regime.md) · [by universality](by/universality.md). Full-text search is the top bar (Documenter built-in).
 
 
 ## Doc-health audit

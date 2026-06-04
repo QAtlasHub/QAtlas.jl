@@ -1030,6 +1030,37 @@ write_facet(
     G_regime,
     "Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).",
 )
+
+# by/universality — model ↔ universality-class correspondence (@realizes backend).
+realz = AtlasRegistry.scan_realizes(joinpath(ROOT, "src", "realizes_registry.jl"))
+G_univ = Dict{String,Vector{Tuple{String,String}}}()
+for r in realz
+    push!(get!(G_univ, r.class, Tuple{String,String}[]), (r.model, r.regime))
+end
+uio = IOBuffer()
+UP(s...) = println(uio, string(s...))
+UP("# Atlas — by universality class")
+UP("")
+UP(BANNER)
+UP("")
+UP(
+    "Which concrete models realize each universality class (RG fixed point), and ",
+    "the regime where they do — the `@realizes` backend register, queryable with ",
+    "`realized_by(class)` / `realizations(model)`.",
+)
+UP("")
+for k in sort(collect(keys(G_univ)))
+    ms = sort(G_univ[k])
+    UP("## `", k, "` (", length(ms), ")")
+    UP("")
+    for (model, regime) in ms
+        UP("- **", model, "**", isempty(regime) ? "" : string(" — ", regime))
+    end
+    UP("")
+end
+UP("[← back to the Atlas index](../index.md)")
+write(joinpath(bydir, "universality.md"), String(take!(uio)))
+
 byidx = IOBuffer()
 BI(s...) = println(byidx, string(s...))
 BI("# Atlas — faceted search")
@@ -1048,6 +1079,7 @@ BI("- [By boundary condition](bc.md) — ", length(G_bc), " BCs")
 BI("- [By assurance level](level.md) — R1 taxonomy")
 BI("- [By corroboration mechanism](mechanism.md) — verify `route`")
 BI("- [By regime](regime.md) — resolved physical regimes")
+BI("- [By universality class](universality.md) — ", length(G_univ), " classes (model ↔ class)")
 BI("")
 BI("[← back to the Atlas index](../index.md)")
 write(joinpath(bydir, "index.md"), String(take!(byidx)))
@@ -1097,7 +1129,8 @@ P(
     "[**Faceted search →**](by/index.md) · ",
     "[by model](by/model.md) · [by quantity](by/quantity.md) · ",
     "[by BC](by/bc.md) · [by level](by/level.md) · ",
-    "[by mechanism](by/mechanism.md) · [by regime](by/regime.md). ",
+    "[by mechanism](by/mechanism.md) · [by regime](by/regime.md) · ",
+    "[by universality](by/universality.md). ",
     "Full-text search is the top bar (Documenter built-in).",
 )
 

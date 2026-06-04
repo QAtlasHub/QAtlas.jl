@@ -82,6 +82,7 @@ include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
 include("core/registry.jl")
+include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/pfaffian.jl")
 include("core/dense_ed.jl")
 
@@ -89,6 +90,7 @@ include("core/dense_ed.jl")
 export Implementation, implementation_status, implementation_status_markdown
 export references_for
 export definitions, validity, canonical_scheme  # multi-definition catalog / selector
+export Realization, realizes!, @realizes, realizations, realized_by  # model <-> class
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
@@ -333,5 +335,8 @@ include("deprecate/legacy_e8.jl")
 include("deprecate/legacy_honeycomb.jl")
 export Graphene                                         # backward-compat alias
 include("deprecate/legacy_xxz.jl")
+
+# Model <-> universality-class realizations (membership) — after all models.
+include("realizes_registry.jl")
 
 end # module QAtlas

@@ -54,14 +54,20 @@ end
     @test rows isa Vector
     @test !isempty(rows)
     sample = first(rows)
-    # NamedTuple with the documented field set (status sits between the
-    # algorithm tag `method` and the confidence tag `reliability`).
+    # NamedTuple with the documented field set. A hub may hold several rows
+    # (one per `scheme`); status/direction/valid_domain/error_order/canonical
+    # are surfaced so callers can recognise the claim kind and pick a definition.
     expected_keys = (
         :model,
         :quantity,
         :bc,
+        :scheme,
         :method,
         :status,
+        :direction,
+        :valid_domain,
+        :error_order,
+        :canonical,
         :reliability,
         :tested_in,
         :references,
@@ -71,8 +77,13 @@ end
     @test sample.model isa Type
     @test sample.quantity isa Type
     @test sample.bc isa Type
+    @test sample.scheme isa Symbol
     @test sample.method isa Symbol
     @test sample.status isa Symbol
+    @test sample.direction isa Union{Symbol,Nothing}
+    @test sample.valid_domain isa Union{String,Nothing}
+    @test sample.error_order isa Union{String,Nothing}
+    @test sample.canonical isa Bool
     @test sample.reliability isa Symbol
     @test sample.tested_in isa Union{String,Nothing}
     @test sample.references isa Vector{String}
@@ -184,6 +195,34 @@ end
     )
     @test_throws ArgumentError QAtlas.register!(
         TFIM, MassGap, Infinite; status=:exact, direction=:upper
+    )
+    @test length(REGISTRY) == n_before
+end
+
+@testset "every hub has exactly one canonical definition" begin
+    # A (model, quantity, bc) hub may hold several rows (one per scheme), but
+    # exactly one is `canonical` — the one a bare fetch(model, quantity, bc)
+    # returns.  This keeps `scheme=` selection unambiguous.
+    canon = Dict{Tuple,Int}()
+    hubs = Set{Tuple}()
+    for e in REGISTRY
+        k = (e.model, e.quantity, e.bc)
+        push!(hubs, k)
+        e.canonical && (canon[k] = get(canon, k, 0) + 1)
+    end
+    for h in hubs
+        @test get(canon, h, 0) == 1
+    end
+end
+
+@testset "register! :approx requires references + valid_domain" begin
+    n_before = length(REGISTRY)
+    @test_throws ArgumentError QAtlas.register!(TFIM, MassGap, Infinite; status=:approx)
+    @test_throws ArgumentError QAtlas.register!(
+        TFIM, MassGap, Infinite; status=:approx, references=["x"]
+    )
+    @test_throws ArgumentError QAtlas.register!(
+        TFIM, MassGap, Infinite; status=:exact, valid_domain="betaJ << 1"
     )
     @test length(REGISTRY) == n_before
 end

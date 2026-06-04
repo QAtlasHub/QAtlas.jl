@@ -38,8 +38,6 @@ Pages = []
 Canonical = false
 CHSH1969
 Mermin1990
-PopescuRohrlich1994
-Tsirelson1980
 ```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

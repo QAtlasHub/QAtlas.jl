@@ -20,8 +20,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 **Top references** (by hub count):
 - CHSH1969 — 1 hub
-- PopescuRohrlich1994 — 1 hub
-- Tsirelson1980 — 1 hub
 
 ## Model × BC matrix
 

@@ -88,6 +88,7 @@ include("core/dense_ed.jl")
 # --- Implementation registry public API ---
 export Implementation, implementation_status, implementation_status_markdown
 export references_for
+export definitions, validity, canonical_scheme  # multi-definition catalog / selector
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho

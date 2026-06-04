@@ -18,10 +18,10 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 |---|---|
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 36 |
-| 🔵 coherent | 9 |
+| 🔵 coherent | 8 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 10 |
-| **total claimed hubs** | **55** |
+| **total claimed hubs** | **54** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `delegation`, `pfaffian`
 
@@ -39,7 +39,6 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`GGEValue`](../quantities/GGEValue.md) | — | — | 🔵 [hub](../hubs/TFIM_GGEValue_Infinite.md) |
 | [`LiebRobinsonBound`](../quantities/LiebRobinsonBound.md) | — | — | 🟠 [hub](../hubs/TFIM_LiebRobinsonBound_Infinite.md) |
 | [`LoschmidtEcho`](../quantities/LoschmidtEcho.md) | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_OBC.md) | — | 🟢 [hub](../hubs/TFIM_LoschmidtEcho_Infinite.md) |
-| [`LoschmidtRateFunction`](../quantities/LoschmidtRateFunction.md) | — | — | 🔵 [hub](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_OBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_PBC.md) | 🟢 [hub](../hubs/TFIM_MagnetizationX_Infinite.md) |
 | [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/TFIM_MagnetizationXLocal_OBC.md) | — | 🔵 [hub](../hubs/TFIM_MagnetizationXLocal_Infinite.md) |
 | [`MagnetizationY`](../quantities/MagnetizationY.md) | 🟢 [hub](../hubs/TFIM_MagnetizationY_OBC.md) | — | — |

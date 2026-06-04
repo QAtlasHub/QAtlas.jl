@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, status `bound`, reliability `high`, refs: Mermin1990
-- Upper bound on the Mermin 3-party operator |<M3>|; source=:classical (2, local-realistic) / :mermin (4, GHZ-saturated quantum).
+- Local-realistic Mermin bound: |<M3>| ≤ 2.
 
 ## Corroboration
 

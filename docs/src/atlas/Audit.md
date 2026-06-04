@@ -17,10 +17,7 @@ The CI lint enforces `# CONVENTION` headers on new model files, but older files 
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.
 
-**1 quantities**:
-
-- [`LoschmidtRateFunction`](quantities/LoschmidtRateFunction.md)
-
+!!! tip "All quantities have an extracted Definition."
 ## 3. Orphan calc notes (matched to no model)
 
 `docs/src/calc/*.md` whose filename doesn't substring-match any registered model.  Likely true derivation notes that describe a method (e.g. `calabrese-cardy-obc-vs-pbc.md`, `ad-thermodynamics-from-z.md`) rather than a model, but worth scanning to confirm.
@@ -61,5 +58,8 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-!!! tip "All non-universality INVENTORY card hubs have a matching `@register` claim."
+**1 real orphan card hub(s)**:
+
+- `TFIM/LoschmidtRateFunction/Infinite`
+
 [← back to the Atlas index](index.md)

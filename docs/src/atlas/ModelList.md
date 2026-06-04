@@ -56,7 +56,7 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 | [`SixVertex`](models/SixVertex.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`TFIM`](models/TFIM.md) | `Ising` | 55 | `analytic`, `bdg`, `cft`, `delegation`, `pfaffian` | 0 | 36 | 9 | 0 | 10 | feasible | `@critical`, `@disordered`, `@ordered` |
+| [`TFIM`](models/TFIM.md) | `Ising` | 54 | `analytic`, `bdg`, `cft`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 10 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TightBinding1D`](models/TightBinding1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@sweep` |
@@ -98,7 +98,6 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`GroundStateEnergyDensity`](quantities/GroundStateEnergyDensity.md) — 8 models
 - [`LiebRobinsonBound`](quantities/LiebRobinsonBound.md) — 1 models
 - [`LoschmidtEcho`](quantities/LoschmidtEcho.md) — 2 models
-- [`LoschmidtRateFunction`](quantities/LoschmidtRateFunction.md) — 1 models
 - [`LuttingerParameter`](quantities/LuttingerParameter.md) — 4 models
 - [`LuttingerVelocity`](quantities/LuttingerVelocity.md) — 1 models
 - [`MagnetizationX`](quantities/MagnetizationX.md) — 4 models

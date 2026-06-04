@@ -190,13 +190,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
 - 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](hubs/XXZ1D_LoschmidtEcho_Infinite.md)
 
-## Heyl2013 — 4 hubs
-
-- 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md)
-- 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md)
-- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](hubs/TFIM_LoschmidtRateFunction_Infinite.md)
-- 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](hubs/XXZ1D_LoschmidtEcho_Infinite.md)
-
 ## LiebWu1968 — 5 hubs
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
@@ -240,6 +233,12 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md)
 - 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](hubs/HaldaneShastry_SpecificHeat_Infinite.md)
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](hubs/HaldaneShastry_ThermalEntropy_Infinite.md)
+
+## Heyl2013 — 3 hubs
+
+- 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md)
+- 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md)
+- 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](hubs/XXZ1D_LoschmidtEcho_Infinite.md)
 
 ## Hulthen1938 — 4 hubs
 
@@ -400,6 +399,10 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](hubs/Heisenberg1D_LuttingerParameter_Infinite.md)
 - 🔵 [`HeisenbergXYZ/LuttingerParameter/Infinite`](hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md)
+
+## Mermin1990 — 1 hub
+
+- 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
 
 ## Polyakov1981 — 2 hubs
 
@@ -706,10 +709,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## MaldacenaStanford2016 — 1 hub
 
 - 🟢 [`SYK/ConformalWeights/Infinite`](hubs/SYK_ConformalWeights_Infinite.md)
-
-## Mermin1990 — 1 hub
-
-- 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
 
 ## Moriya1960 — 1 hub
 

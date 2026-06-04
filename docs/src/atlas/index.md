@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 310 |
-| ED-feasible claimed (risk denominator) | 284 |
+| Hubs `src` claims (registry) | 309 |
+| ED-feasible claimed (risk denominator) | 283 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 178 |
-| 🔵 coherent | 39 |
+| 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 76 |
 | Inventory cards scanned (whole test/) | 2763 |
 | Registry files parsed | 64 / 64 |
 | Models | 64 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.7%** · **in-repo-verified rate** (incl. 🔵 coherent): **76.4%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **76.3%**
 
 ## Browse by facet
 
@@ -44,10 +44,10 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 | Section | Count |
 |---|---|
 | 1. Models without CONVENTION header | 1 |
-| 2. Quantities without extracted Definition | 1 |
+| 2. Quantities without extracted Definition | 0 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
-| 5. INVENTORY card hubs with no `@register` claim | 0 |
+| 5. INVENTORY card hubs with no `@register` claim | 1 |
 
 ## Reference & derivation indices
 
@@ -192,7 +192,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 55 | 0 | 36 | 9 | 0 | 10 | feasible |
+| `TFIM` | 54 | 0 | 36 | 8 | 0 | 10 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
@@ -208,7 +208,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (310) — select to drill down
+## Hubs (309) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -540,7 +540,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-### `TFIM` (55)
+### `TFIM` (54)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -558,7 +558,6 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`TFIM/LiebRobinsonBound/Infinite`](hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md) — corroborated-at-p
-- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent
 - 🟢 [`TFIM/MagnetizationX/Infinite`](hubs/TFIM_MagnetizationX_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationX/OBC`](hubs/TFIM_MagnetizationX_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationX/PBC`](hubs/TFIM_MagnetizationX_PBC.md) — corroborated-at-p

@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `analytic`, status `bound`, reliability `high`, refs: CHSH1969 | Tsirelson1980 | PopescuRohrlich1994
-- Upper bound on the CHSH correlator S; select whose bound with source=:bell/:tsirelson/:popescu_rohrlich (2 / 2√2 / 4). Quantum value 2√2 saturated by the optimal Bell state.
+- method `analytic`, status `bound`, reliability `high`, refs: CHSH1969
+- Local-hidden-variable (classical) CHSH bound: S ≤ 2.
 
 ## Corroboration
 

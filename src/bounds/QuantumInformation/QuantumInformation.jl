@@ -1,60 +1,60 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# bounds/QuantumInformation — quantum-information bounds (Bell / CHSH, …).
+# bounds/QuantumInformation — quantum-information bounds (Bell / CHSH, Mermin).
 #
 # Extracted from the former `Universality(:QuantumMechanics)` dumping ground:
-# the CHSH bounds are *bounds* (an upper bound on a Bell correlator), not a
-# universality class.
+# these are *bounds* (upper bounds on Bell-type correlators), not a universality
+# class.  Each is registered once per theory regime
+# (`scheme = :classical / :quantum / :no_signalling`); whose bound each regime
+# is lives in the per-scheme `references` — list them with
+# `definitions(Bound(:QuantumInformation), Q)`.
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
-    fetch(::Bound{:QuantumInformation}, ::CHSHBound, ::Infinite; source=:tsirelson)
+    fetch(::Bound{:QuantumInformation}, ::CHSHBound, ::Infinite; scheme=:quantum)
 
 Upper bound on the CHSH correlator
+`S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)`, by theory regime:
 
-    S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′),
-
-selected by `source` — *whose* bound (all are upper bounds):
-
-  * `:bell`               → 2     local-hidden-variable bound (CHSH 1969)
-  * `:tsirelson` (default)→ 2√2   quantum maximum (Tsirelson 1980), saturated
-                                  by the optimal Bell state
-  * `:popescu_rohrlich`   → 4     algebraic / no-signalling maximum
-                                  (Popescu–Rohrlich 1994)
+  * `:classical`         → 2     local-hidden-variable bound (CHSH 1969)
+  * `:quantum` (default) → 2√2   Tsirelson 1980 quantum maximum, saturated by
+                                 the optimal Bell state
+  * `:no_signalling`     → 4     Popescu–Rohrlich 1994 algebraic maximum
 
 The ladder 2 < 2√2 < 4 is classical → quantum → no-signalling; the
-quantum/classical ratio √2 is the Bell-violation factor.
+quantum/classical ratio √2 is the Bell-violation factor.  Whose bound each
+regime is lives in the per-scheme `references` (see [`definitions`](@ref)).
 """
 function fetch(
     ::Bound{:QuantumInformation},
     ::CHSHBound,
     ::Infinite;
-    source::Symbol=:tsirelson,
+    scheme::Symbol=:quantum,
     kwargs...,
 )
-    if source === :tsirelson
+    if scheme === :quantum
         return 2 * sqrt(2)
-    elseif source === :bell
+    elseif scheme === :classical
         return 2.0
-    elseif source === :popescu_rohrlich
+    elseif scheme === :no_signalling
         return 4.0
     else
         throw(
             ArgumentError(
-                "CHSHBound: source must be one of :bell / :tsirelson / " *
-                ":popescu_rohrlich (whose bound); got :$(source)",
+                "CHSHBound: scheme must be :classical / :quantum / :no_signalling; " *
+                "got :$(scheme)",
             ),
         )
     end
 end
 
 """
-    fetch(::Bound{:QuantumInformation}, ::MerminGHZBound, ::Infinite; source=:mermin)
+    fetch(::Bound{:QuantumInformation}, ::MerminGHZBound, ::Infinite; scheme=:quantum)
 
-Upper bound on the Mermin 3-party operator `|⟨M₃⟩|`, by `source`:
+Upper bound on the Mermin 3-party operator `|⟨M₃⟩|`, by theory regime:
 
-  * `:classical`        → 2   local-hidden-variable (local-realistic) bound
-  * `:mermin` (default) → 4   quantum maximum (Mermin 1990), saturated by the
-                              GHZ state `(|000⟩ + |111⟩)/√2`
+  * `:classical`         → 2   local-realistic bound (Mermin 1990)
+  * `:quantum` (default) → 4   quantum maximum (Mermin 1990), saturated by the
+                               GHZ state `(|000⟩ + |111⟩)/√2`
 
 The quantum/classical gap is 2 (vs √2 for two-party CHSH): multipartite
 nonlocality grows with the number of parties.
@@ -63,18 +63,17 @@ function fetch(
     ::Bound{:QuantumInformation},
     ::MerminGHZBound,
     ::Infinite;
-    source::Symbol=:mermin,
+    scheme::Symbol=:quantum,
     kwargs...,
 )
-    if source === :mermin
+    if scheme === :quantum
         return 4.0
-    elseif source === :classical
+    elseif scheme === :classical
         return 2.0
     else
         throw(
             ArgumentError(
-                "MerminGHZBound: source must be :classical or :mermin (whose bound); " *
-                "got :$(source)",
+                "MerminGHZBound: scheme must be :classical / :quantum; got :$(scheme)"
             ),
         )
     end

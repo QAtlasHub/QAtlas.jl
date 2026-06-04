@@ -42,9 +42,13 @@ struct Implementation
     model::Type
     quantity::Type
     bc::Type
+    scheme::Symbol                       # definition key within a hub (:canonical default)
     method::Symbol
     status::Symbol
-    direction::Union{Symbol,Nothing}
+    direction::Union{Symbol,Nothing}     # :bound only — :upper / :lower
+    valid_domain::Union{String,Nothing}  # :approx only — where it holds
+    error_order::Union{String,Nothing}   # :approx only — leading error
+    canonical::Bool                      # the bare-fetch default within a hub
     reliability::Symbol
     tested_in::Union{String,Nothing}
     references::Vector{String}
@@ -71,11 +75,19 @@ to the test-corroboration level tracked by the atlas harness:
   * `:approx` — a domain-limited approximation (e.g. a high-temperature
                  expansion): correct on a stated region of validity with a
                  known leading error order.
+  * `:universal` — universality-class behaviour (CFT scaling, critical
+                 exponents, RMT statistics): true for the class, not a finite
+                 model's exact value. Reached via the `Universality{C}`
+                 namespace.
+
+The four kinds are also signalled by the *namespace* of the call: a concrete
+`Model` (`:exact`/`:bound`/`:approx`), `Universality{C}` (`:universal`), or
+`Bound{D}` (`:bound`, model-independent).
 
 `register!` rejects any `status` outside this tuple, so a typo fails at
 package load time rather than silently mislabelling a claim.
 """
-const STATUS_VALUES = (:exact, :bound, :approx)
+const STATUS_VALUES = (:exact, :bound, :approx, :universal)
 
 """
     BOUND_DIRECTIONS
@@ -90,9 +102,9 @@ The controlled vocabulary for the `direction` of a `status=:bound` row —
 
 A bound is fully pinned by *what* it bounds (the registry `quantity`),
 *which way* (`direction`), and *whose* bound it is (`references`, plus a
-`source=` selector when several bounds share one quantity — e.g. the
-classical / quantum / no-signalling CHSH bounds). Non-bound rows carry
-`direction === nothing`; `register!` enforces both halves.
+`scheme=` selector when several bounds share one quantity — e.g. the
+`:classical` / `:quantum` / `:no_signalling` CHSH bounds). Non-bound rows
+carry `direction === nothing`; `register!` enforces both halves.
 """
 const BOUND_DIRECTIONS = (:upper, :lower)
 
@@ -107,22 +119,31 @@ const REGISTRY = Implementation[]
 
 """
     register!(model_T, quantity_T, bc_T;
-              method=:unknown, status=:exact, direction=nothing,
-              reliability=:unknown, tested_in=nothing,
+              scheme=:canonical, method=:unknown, status=:exact,
+              direction=nothing, valid_domain=nothing, error_order=nothing,
+              canonical=true, reliability=:unknown, tested_in=nothing,
               references=String[], notes="")
 
-Push a new [`Implementation`](@ref) row into [`REGISTRY`](@ref).
-Usually called via the [`@register`](@ref) macro for ergonomics.
-`status=:bound` requires a `direction` (`:upper`/`:lower`); any other
-status must leave `direction === nothing`. See [`BOUND_DIRECTIONS`](@ref).
+Push a new [`Implementation`](@ref) row into [`REGISTRY`](@ref). Usually
+called via the [`@register`](@ref) macro. A `(model, quantity, bc)` hub may
+hold several rows distinguished by `scheme` (the definition key); `canonical`
+marks the one a bare `fetch(model, quantity, bc)` returns. Invariants:
+`status=:bound` requires a `direction`; `status=:approx` requires
+`references` + a `valid_domain`; `status=:exact` forbids
+`valid_domain`/`error_order`. See [`STATUS_VALUES`](@ref),
+[`BOUND_DIRECTIONS`](@ref).
 """
 function register!(
     model_T::Type,
     quantity_T::Type,
     bc_T::Type;
+    scheme::Symbol=:canonical,
     method::Symbol=:unknown,
     status::Symbol=:exact,
     direction::Union{Symbol,Nothing}=nothing,
+    valid_domain::Union{String,Nothing}=nothing,
+    error_order::Union{String,Nothing}=nothing,
+    canonical::Bool=true,
     reliability::Symbol=:unknown,
     tested_in::Union{String,Nothing}=nothing,
     references::AbstractVector{<:AbstractString}=String[],
@@ -131,21 +152,40 @@ function register!(
     status in STATUS_VALUES || throw(
         ArgumentError("register!: status must be one of $(STATUS_VALUES); got :$(status)"),
     )
-    # A bound must pin which way it constrains; conversely a non-bound must
-    # not carry a direction (meaningless next to an equality/approximation).
+    # A bound must pin which way it constrains; a non-bound must not.
     if status === :bound
         direction in BOUND_DIRECTIONS || throw(
             ArgumentError(
-                "register!: status=:bound requires direction ∈ $(BOUND_DIRECTIONS) " *
-                "(an upper/lower bound must say which way it constrains); got " *
-                "$(repr(direction))",
+                "register!: status=:bound requires direction ∈ $(BOUND_DIRECTIONS); " *
+                "got $(repr(direction))",
             ),
         )
     else
         direction === nothing || throw(
             ArgumentError(
-                "register!: direction is only meaningful for status=:bound; got " *
-                "status=:$(status) with direction=$(repr(direction))",
+                "register!: direction is only for status=:bound; got status=:$(status) " *
+                "with direction=$(repr(direction))",
+            ),
+        )
+    end
+    # An approximation only exists paired with its paper + a region of validity.
+    if status === :approx
+        isempty(references) && throw(
+            ArgumentError(
+                "register!: status=:approx requires references (an approximation is " *
+                "meaningless without the scheme/paper it derives from)",
+            ),
+        )
+        valid_domain === nothing && throw(
+            ArgumentError(
+                "register!: status=:approx requires a valid_domain (where it holds)"
+            ),
+        )
+    elseif status === :exact
+        (valid_domain === nothing && error_order === nothing) || throw(
+            ArgumentError(
+                "register!: status=:exact is exact everywhere; valid_domain/error_order " *
+                "are only meaningful for :approx",
             ),
         )
     end
@@ -155,9 +195,13 @@ function register!(
             model_T,
             quantity_T,
             bc_T,
+            scheme,
             method,
             status,
             direction,
+            valid_domain,
+            error_order,
+            canonical,
             reliability,
             tested_in,
             String[r for r in references],
@@ -235,8 +279,13 @@ function _to_nt(e::Implementation)
         model=e.model,
         quantity=e.quantity,
         bc=e.bc,
+        scheme=e.scheme,
         method=e.method,
         status=e.status,
+        direction=e.direction,
+        valid_domain=e.valid_domain,
+        error_order=e.error_order,
+        canonical=e.canonical,
         reliability=e.reliability,
         tested_in=e.tested_in,
         references=e.references,
@@ -366,6 +415,107 @@ function references_for(model)
         end
     end
     return sort!(unique!(refs))
+end
+
+# ──────────────────────────────────────────────────────────────────────
+# Definition list: the multiple definitions a (model, quantity[, bc]) hub
+# may carry, one per `scheme`.  Lets a caller discover what exact / bound /
+# approx / universal definitions exist and select one with `fetch(...; scheme=)`.
+# ──────────────────────────────────────────────────────────────────────
+
+"""
+    definitions(model, quantity)     -> Vector{NamedTuple}
+    definitions(model, quantity, bc)
+
+Catalog of registered definitions for a `(model, quantity)` — every way
+QAtlas can compute it, one row per `scheme`.  Each row is
+`(bc, scheme, status, direction, valid_domain, error_order, canonical,
+references)` (the `bc` field is dropped in the 3-argument form).  Use it to
+see which exact / bound / approx definitions exist and where each holds, then
+select one with `fetch(model, quantity, bc; scheme=…)`.  The `canonical` row
+is what a bare `fetch(model, quantity, bc)` returns.
+"""
+function definitions(model, quantity)
+    m_T, q_T = _as_type(model), _as_type(quantity)
+    return [
+        (
+            bc=e.bc,
+            scheme=e.scheme,
+            status=e.status,
+            direction=e.direction,
+            valid_domain=e.valid_domain,
+            error_order=e.error_order,
+            canonical=e.canonical,
+            references=e.references,
+        ) for e in REGISTRY if e.model === m_T && e.quantity === q_T
+    ]
+end
+
+function definitions(model, quantity, bc)
+    m_T, q_T, bc_T = _as_type(model), _as_type(quantity), _as_type(bc)
+    return [
+        (
+            scheme=e.scheme,
+            status=e.status,
+            direction=e.direction,
+            valid_domain=e.valid_domain,
+            error_order=e.error_order,
+            canonical=e.canonical,
+            references=e.references,
+        ) for e in REGISTRY if e.model === m_T && e.quantity === q_T && e.bc === bc_T
+    ]
+end
+
+"""
+    canonical_scheme(model, quantity, bc) -> Symbol
+
+The `scheme` of the canonical definition for the hub — the one a bare
+`fetch(model, quantity, bc)` returns.  Errors if the hub has no canonical row.
+"""
+function canonical_scheme(model, quantity, bc)
+    m_T, q_T, bc_T = _as_type(model), _as_type(quantity), _as_type(bc)
+    for e in REGISTRY
+        e.model === m_T &&
+            e.quantity === q_T &&
+            e.bc === bc_T &&
+            e.canonical &&
+            return e.scheme
+    end
+    return error(
+        "canonical_scheme: no canonical definition for $(_short_type(m_T))/" *
+        "$(_short_type(q_T)) at $(_short_type(bc_T))",
+    )
+end
+
+"""
+    validity(model, quantity; scheme, bc=nothing) -> NamedTuple
+
+Region of validity of a registered definition selected by `scheme`:
+`(scheme, status, direction, valid_domain, error_order, references)`.  For an
+`:approx` this is *where* (`valid_domain`) and *how well* (`error_order`) it
+holds; for a `:bound`, the `direction`.  Pass the `scheme` from
+[`definitions`](@ref).
+"""
+function validity(model, quantity; scheme::Symbol, bc=nothing)
+    m_T, q_T = _as_type(model), _as_type(quantity)
+    bc_T = bc === nothing ? nothing : _as_type(bc)
+    for e in REGISTRY
+        e.model === m_T && e.quantity === q_T || continue
+        (bc_T === nothing || e.bc === bc_T) || continue
+        e.scheme === scheme || continue
+        return (
+            scheme=e.scheme,
+            status=e.status,
+            direction=e.direction,
+            valid_domain=e.valid_domain,
+            error_order=e.error_order,
+            references=e.references,
+        )
+    end
+    return error(
+        "validity: no registered definition for $(_short_type(m_T))/" *
+        "$(_short_type(q_T)) with scheme=$(repr(scheme))",
+    )
 end
 
 # ──────────────────────────────────────────────────────────────────────

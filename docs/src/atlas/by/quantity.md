@@ -9,6 +9,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
 
+## `CHSHBound` (1)
+
+- 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
+
 ## `CentralCharge` (15)
 
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p

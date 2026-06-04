@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 308 |
-| ED-feasible claimed (risk denominator) | 282 |
+| Hubs `src` claims (registry) | 309 |
+| ED-feasible claimed (risk denominator) | 283 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 178 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 74 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 75 |
 | Inventory cards scanned (whole test/) | 2763 |
-| Registry files parsed | 63 / 63 |
-| Models | 63 |
+| Registry files parsed | 64 / 64 |
+| Models | 64 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **63.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **77.0%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **62.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **76.7%**
 
 ## Browse by facet
 
@@ -43,7 +43,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 
 | Section | Count |
 |---|---|
-| 1. Models without CONVENTION header | 0 |
+| 1. Models without CONVENTION header | 1 |
 | 2. Quantities without extracted Definition | 1 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
@@ -61,8 +61,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "74 actionable hub(s)"
+!!! warning "75 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
+    - [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
     - [`HaldaneShastry/FreeEnergy/Infinite`](hubs/HaldaneShastry_FreeEnergy_Infinite.md)
@@ -144,6 +145,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `AKLT1D` | 19 | 0 | 17 | 0 | 1 | 1 | feasible |
 | `AKLT2D` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `BCFT` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
+| `Bound` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
 | `ChernSimons3D` | 2 | 0 | 1 | 0 | 1 | 0 | infeasible |
 | `Cluster1D` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `Compass1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
@@ -205,7 +207,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (308) — select to drill down
+## Hubs (309) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -236,6 +238,10 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 ### `BCFT` (1)
 
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
+
+### `Bound` (1)
+
+- 🟠 [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
 
 ### `ChernSimons3D` (2)
 

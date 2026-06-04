@@ -9,7 +9,10 @@ Substrate-derived audit of actionable gaps.  Each section is a concrete to-do li
 
 The CI lint enforces `# CONVENTION` headers on new model files, but older files predate the lint.  These models show an absence note on their per-model page; backfilling adds a one-block comment.
 
-!!! tip "All models have a CONVENTION header."
+**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (1) — model may live elsewhere or be defined inline:
+
+- [`Bound`](models/Bound.md)
+
 ## 2. Quantities without auto-extracted `Definition`
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.

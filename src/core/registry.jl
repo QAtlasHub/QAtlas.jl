@@ -44,6 +44,7 @@ struct Implementation
     bc::Type
     method::Symbol
     status::Symbol
+    direction::Union{Symbol,Nothing}
     reliability::Symbol
     tested_in::Union{String,Nothing}
     references::Vector{String}
@@ -77,6 +78,25 @@ package load time rather than silently mislabelling a claim.
 const STATUS_VALUES = (:exact, :bound, :approx)
 
 """
+    BOUND_DIRECTIONS
+
+The controlled vocabulary for the `direction` of a `status=:bound` row —
+*which side* of the bounded quantity the fetched value constrains:
+
+  * `:upper` — the fetched value is an upper bound; an independent witness
+               stays `≤` it (verified with `verify_bound(...; relation=:leq)`).
+  * `:lower` — the fetched value is a lower bound; a witness stays `≥` it
+               (`relation=:geq`).
+
+A bound is fully pinned by *what* it bounds (the registry `quantity`),
+*which way* (`direction`), and *whose* bound it is (`references`, plus a
+`source=` selector when several bounds share one quantity — e.g. the
+classical / quantum / no-signalling CHSH bounds). Non-bound rows carry
+`direction === nothing`; `register!` enforces both halves.
+"""
+const BOUND_DIRECTIONS = (:upper, :lower)
+
+"""
     REGISTRY :: Vector{Implementation}
 
 Module-level mutable vector populated at include-time by `@register`
@@ -87,11 +107,14 @@ const REGISTRY = Implementation[]
 
 """
     register!(model_T, quantity_T, bc_T;
-              method=:unknown, reliability=:unknown,
-              tested_in=nothing, references=String[], notes="")
+              method=:unknown, status=:exact, direction=nothing,
+              reliability=:unknown, tested_in=nothing,
+              references=String[], notes="")
 
 Push a new [`Implementation`](@ref) row into [`REGISTRY`](@ref).
 Usually called via the [`@register`](@ref) macro for ergonomics.
+`status=:bound` requires a `direction` (`:upper`/`:lower`); any other
+status must leave `direction === nothing`. See [`BOUND_DIRECTIONS`](@ref).
 """
 function register!(
     model_T::Type,
@@ -99,6 +122,7 @@ function register!(
     bc_T::Type;
     method::Symbol=:unknown,
     status::Symbol=:exact,
+    direction::Union{Symbol,Nothing}=nothing,
     reliability::Symbol=:unknown,
     tested_in::Union{String,Nothing}=nothing,
     references::AbstractVector{<:AbstractString}=String[],
@@ -107,6 +131,24 @@ function register!(
     status in STATUS_VALUES || throw(
         ArgumentError("register!: status must be one of $(STATUS_VALUES); got :$(status)"),
     )
+    # A bound must pin which way it constrains; conversely a non-bound must
+    # not carry a direction (meaningless next to an equality/approximation).
+    if status === :bound
+        direction in BOUND_DIRECTIONS || throw(
+            ArgumentError(
+                "register!: status=:bound requires direction ∈ $(BOUND_DIRECTIONS) " *
+                "(an upper/lower bound must say which way it constrains); got " *
+                "$(repr(direction))",
+            ),
+        )
+    else
+        direction === nothing || throw(
+            ArgumentError(
+                "register!: direction is only meaningful for status=:bound; got " *
+                "status=:$(status) with direction=$(repr(direction))",
+            ),
+        )
+    end
     push!(
         REGISTRY,
         Implementation(
@@ -115,6 +157,7 @@ function register!(
             bc_T,
             method,
             status,
+            direction,
             reliability,
             tested_in,
             String[r for r in references],

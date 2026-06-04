@@ -981,3 +981,15 @@ maximum group velocity `max_k |dΛ/dk|`. Registered with `status=:bound`.
 (Lieb & Robinson 1972; Hastings & Koma 2006.)
 """
 struct LiebRobinsonBound <: AbstractQuantity end
+
+"""
+    CHSHBound() <: AbstractQuantity
+
+The CHSH (Bell-inequality) correlator bound — the maximum of
+`S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical
+theory.  A `status=:bound` quantity with the historical name (like
+[`LiebRobinsonBound`](@ref)); fetched against a [`Bound`](@ref) domain
+(not a model), with a `source=` selector choosing *whose* bound
+(`:bell` → 2, `:tsirelson` → 2√2, `:popescu_rohrlich` → 4).
+"""
+struct CHSHBound <: AbstractQuantity end

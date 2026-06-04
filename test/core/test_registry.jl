@@ -177,6 +177,14 @@ end
     # rejection happens before the push!, so REGISTRY is left untouched.
     n_before = length(REGISTRY)
     @test_throws ArgumentError QAtlas.register!(TFIM, MassGap, Infinite; status=:nonsense)
+    # A :bound row must pin a direction; non-bounds must not carry one.
+    @test_throws ArgumentError QAtlas.register!(TFIM, MassGap, Infinite; status=:bound)
+    @test_throws ArgumentError QAtlas.register!(
+        TFIM, MassGap, Infinite; status=:bound, direction=:sideways
+    )
+    @test_throws ArgumentError QAtlas.register!(
+        TFIM, MassGap, Infinite; status=:exact, direction=:upper
+    )
     @test length(REGISTRY) == n_before
 end
 

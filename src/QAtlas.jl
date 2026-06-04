@@ -112,6 +112,8 @@ export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)
+export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …
+export CHSHBound          # CHSH / Bell correlator bound (:bound)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper
@@ -140,6 +142,13 @@ include("universalities/ONModel.jl")
 include("universalities/MinimalModel.jl")
 include("universalities/WZW.jl")
 include("universalities/CardyEntanglement.jl")
+
+# --- Universal bounds (model-independent inequalities) ---
+# A bound is NOT a universality class: it is pinned by the quantity it bounds,
+# its direction (:upper/:lower), and whose bound it is.  See bounds/Bounds.jl.
+include("bounds/Bounds.jl")
+include("bounds/QuantumInformation/QuantumInformation.jl")
+include("bounds/QuantumInformation/QuantumInformation_registry.jl")
 
 # --- Models ---
 # Layout: `<class>/<Model>/<Model>.jl` (with optional sibling axis files like

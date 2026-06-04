@@ -655,6 +655,7 @@
     Infinite,
     method=:analytic,
     status=:bound,
+    direction=:upper,
     reliability=:high,
     tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
     references=["LiebRobinson1972", "HastingsKoma2006"],

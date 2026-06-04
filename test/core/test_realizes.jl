@@ -11,9 +11,13 @@ using QAtlas: TFIM, XXZ1D, Heisenberg1D, realizations, realized_by
     end
 
     @testset "realized_by(class) lists member models" begin
-        @test TFIM in [r.model for r in realized_by(:Ising)]
+        ising = [r.model for r in realized_by(:Ising)]
+        @test TFIM in ising
+        @test IsingSquare in ising            # quantum and 2D-classical both flow to Ising
         @test XXZ1D in [r.model for r in realized_by(:XY)]
         @test Heisenberg1D in [r.model for r in realized_by(:Heisenberg)]
+        @test CurieWeissIsing in [r.model for r in realized_by(:MeanField)]
+        @test TASEP in [r.model for r in realized_by(:KPZ)]
         @test isempty(realized_by(:NoSuchClass))
     end
 

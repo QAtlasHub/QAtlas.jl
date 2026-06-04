@@ -301,6 +301,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
 
+## `OptimalCloningFidelity` (1)
+
+- 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
+
 ## `PartitionFunction` (2)
 
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only

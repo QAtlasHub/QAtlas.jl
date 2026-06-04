@@ -78,3 +78,20 @@ function fetch(
         )
     end
 end
+
+"""
+    fetch(::Bound{:QuantumInformation}, ::OptimalCloningFidelity, ::Infinite)
+
+Bužek–Hillery 1996 upper bound on the single-copy fidelity of a universal,
+symmetric `1 → 2` quantum cloner of a qubit,
+
+    F ≤ 5/6.
+
+The no-cloning theorem forbids `F = 1`; `5/6` is the best achievable, saturated
+by the optimal universal cloner.  A `status=:bound`, `direction=:upper` claim.
+"""
+function fetch(
+    ::Bound{:QuantumInformation}, ::OptimalCloningFidelity, ::Infinite; kwargs...
+)
+    return 5 / 6
+end

@@ -119,6 +119,7 @@ export MerminGHZBound     # Mermin 3-party Bell bound (:bound)
 export ChaosBound         # MSS chaos / Lyapunov bound (:bound, Dynamics)
 export BekensteinBound    # Bekenstein entropy bound (:bound, Holographic)
 export QuantumSpeedLimit  # Margolus-Levitin speed limit (:bound lower, Dynamics)
+export OptimalCloningFidelity  # Buzek-Hillery cloning bound (:bound upper, QuantumInformation)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper

@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (197)
+## `Infinite` (198)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -24,6 +24,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/ChaosBound/Infinite`](../hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/QuantumSpeedLimit/Infinite`](../hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only

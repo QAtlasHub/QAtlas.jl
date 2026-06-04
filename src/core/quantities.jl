@@ -1033,3 +1033,13 @@ orthogonal one (Margolus–Levitin `τ ≥ π/(2E)`).  A `status=:bound`,
 (`Bound(:Dynamics)`).
 """
 struct QuantumSpeedLimit <: AbstractQuantity end
+
+"""
+    OptimalCloningFidelity() <: AbstractQuantity
+
+The optimal universal quantum cloning fidelity — an upper bound on the
+single-copy fidelity of a `1 → 2` qubit cloner (Bužek–Hillery `F ≤ 5/6`).  A
+`status=:bound`, `direction=:upper` quantity; fetched against a [`Bound`](@ref)
+domain (`Bound(:QuantumInformation)`).
+"""
+struct OptimalCloningFidelity <: AbstractQuantity end

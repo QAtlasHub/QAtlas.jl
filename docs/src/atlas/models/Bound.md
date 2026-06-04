@@ -17,8 +17,8 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 5 |
-| **total claimed hubs** | **5** |
+| 🟠 uncorroborated-but-feasible | 6 |
+| **total claimed hubs** | **6** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -30,6 +30,7 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | [`CHSHBound`](../quantities/CHSHBound.md) | 🟠 [hub](../hubs/Bound_CHSHBound_Infinite.md) |
 | [`ChaosBound`](../quantities/ChaosBound.md) | 🟠 [hub](../hubs/Bound_ChaosBound_Infinite.md) |
 | [`MerminGHZBound`](../quantities/MerminGHZBound.md) | 🟠 [hub](../hubs/Bound_MerminGHZBound_Infinite.md) |
+| [`OptimalCloningFidelity`](../quantities/OptimalCloningFidelity.md) | 🟠 [hub](../hubs/Bound_OptimalCloningFidelity_Infinite.md) |
 | [`QuantumSpeedLimit`](../quantities/QuantumSpeedLimit.md) | 🟠 [hub](../hubs/Bound_QuantumSpeedLimit_Infinite.md) |
 
 ## References
@@ -40,6 +41,7 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 Pages = []
 Canonical = false
 Bekenstein1981
+BuzekHillery1996
 CHSH1969
 MaldacenaShenkerStanford2016
 MargolusLevitin1998

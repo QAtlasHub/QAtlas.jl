@@ -75,3 +75,17 @@
     tested_in="test/bounds/test_mermin_ghz_bound.jl",
     notes="Quantum Mermin bound: |<M3>| ≤ 4, saturated by the GHZ state.",
 )
+
+# Universal 1->2 qubit cloning fidelity — upper bound (Buzek-Hillery 1996).
+@register(
+    Bound{:QuantumInformation},
+    OptimalCloningFidelity,
+    Infinite,
+    method=:analytic,
+    status=:bound,
+    direction=:upper,
+    reliability=:high,
+    references=["BuzekHillery1996"],
+    tested_in="test/bounds/test_optimal_cloning_fidelity.jl",
+    notes="Buzek-Hillery 1996: universal 1->2 qubit cloning fidelity F ≤ 5/6, saturated by the optimal cloner.",
+)

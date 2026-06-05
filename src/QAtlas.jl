@@ -166,6 +166,7 @@ include("universalities/ONModel/ONModel.jl")
 include("universalities/MinimalModel/MinimalModel.jl")
 include("universalities/WZW/WZW.jl")
 include("universalities/CardyEntanglement.jl")       # shared CFT entanglement (cross-class)
+include("universalities/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
 
 # --- Universal bounds (model-independent inequalities) ---
 # A bound is NOT a universality class: it is pinned by the quantity it bounds,
@@ -354,5 +355,13 @@ include("deprecate/legacy_xxz.jl")
 
 # Model <-> universality-class realizations (membership) — after all models.
 include("realizes_registry.jl")
+
+# Knowledge-graph layer: bidirectional queries over the edge stores
+# (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.
+include("core/links.jl")
+include("core/coherence.jl")
+export predicts, predicted_by, bounds_on, cited_by, delegations, implementations_of
+export coherence_report,
+    coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
 
 end # module QAtlas

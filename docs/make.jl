@@ -93,6 +93,7 @@ makedocs(;
             "verification/index.md",
             "Verified Atlas" => [
                 "atlas/index.md",
+                "Knowledge graph" => "atlas/graph.md",
                 "Model list" => "atlas/ModelList.md",
                 "Bibliography" => "atlas/Bibliography.md",
                 "Methods" => "atlas/Methods.md",

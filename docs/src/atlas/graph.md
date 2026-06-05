@@ -12,7 +12,6 @@ Drag nodes; hover for type.
 
 ```@raw html
 <div id="qatlas-graph" style="width:100%;height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
-<script src="../../assets/vis-network.min.js"></script>
 <script>
 (function(){
   function draw(){
@@ -179,8 +178,20 @@ Drag nodes; hover for type.
     );
     network.once("stabilizationIterationsDone", function(){ network.fit(); });
   }
-  if (document.readyState === "complete") { draw(); }
-  else { window.addEventListener("load", draw); }
+  function start(){
+    if (typeof vis !== "undefined") { draw(); return; }
+    var root = location.pathname.split("atlas/graph")[0];
+    var s = document.createElement("script");
+    s.src = root + "assets/vis-network.min.js";
+    s.onload = draw;
+    s.onerror = function(){
+      var el = document.getElementById("qatlas-graph");
+      if (el) el.innerHTML = "<p style='padding:1em'>vis-network asset failed to load from " + s.src + "</p>";
+    };
+    document.head.appendChild(s);
+  }
+  if (document.readyState === "complete") { start(); }
+  else { window.addEventListener("load", start); }
 })();
 </script>
 ```

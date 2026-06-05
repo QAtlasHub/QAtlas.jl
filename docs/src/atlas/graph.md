@@ -12,14 +12,14 @@ Drag nodes; hover for type.
 
 ```@raw html
 <div id="qatlas-graph" style="width:100%;height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
-<script src="https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js"></script>
+<script src="../../assets/vis-network.min.js"></script>
 <script>
 (function(){
   function draw(){
     var el = document.getElementById("qatlas-graph");
     if (!el) return;
     if (typeof vis === "undefined") {
-      el.innerHTML = "<p style='padding:1em'>vis-network failed to load — check network access to unpkg.com.</p>";
+      el.innerHTML = "<p style='padding:1em'>vis-network failed to load — the bundled assets/vis-network.min.js did not load.</p>";
       return;
     }
     var nodes = new vis.DataSet([

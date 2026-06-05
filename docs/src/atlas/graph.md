@@ -11,12 +11,18 @@ Drag nodes; hover for type.
 3 bound domains, 25 quantities), 81 edges.*
 
 ```@raw html
-<div id="qatlas-graph" style="height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
+<div id="qatlas-graph" style="width:100%;height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
 <script src="https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js"></script>
 <script>
 (function(){
-  if (typeof vis === "undefined") return;
-  var nodes = new vis.DataSet([
+  function draw(){
+    var el = document.getElementById("qatlas-graph");
+    if (!el) return;
+    if (typeof vis === "undefined") {
+      el.innerHTML = "<p style='padding:1em'>vis-network failed to load — check network access to unpkg.com.</p>";
+      return;
+    }
+    var nodes = new vis.DataSet([
       {id:"Q:BekensteinBound",label:"BekensteinBound",group:"quantity",title:"quantity: BekensteinBound"},
       {id:"Q:LogarithmicNegativity",label:"LogarithmicNegativity",group:"quantity",title:"quantity: LogarithmicNegativity"},
       {id:"Q:VonNeumannEntropy{:equilibrium}",label:"VonNeumannEntropy{:equilibrium}",group:"quantity",title:"quantity: VonNeumannEntropy{:equilibrium}"},
@@ -159,18 +165,22 @@ Drag nodes; hover for type.
     quantity: {color:{background:"#5fae6f",border:"#2b7a3f"},shape:"box"},
     gap:      {color:{background:"#e8a33d",border:"#b87410"},shape:"diamond"}
   };
-  var network = new vis.Network(
-    document.getElementById("qatlas-graph"),
-    {nodes:nodes, edges:edges},
-    {
-      groups: groups,
-      nodes: {font:{size:12}},
-      edges: {smooth:{type:"continuous"}},
-      physics: {barnesHut:{gravitationalConstant:-8000,springLength:120,springConstant:0.04},
-                stabilization:{iterations:200}},
-      interaction: {hover:true, tooltipDelay:120}
-    }
-  );
+    var network = new vis.Network(
+      el,
+      {nodes:nodes, edges:edges},
+      {
+        groups: groups,
+        nodes: {font:{size:12}},
+        edges: {smooth:{type:"continuous"}},
+        physics: {barnesHut:{gravitationalConstant:-8000,springLength:120,springConstant:0.04},
+                  stabilization:{iterations:200}},
+        interaction: {hover:true, tooltipDelay:120}
+      }
+    );
+    network.once("stabilizationIterationsDone", function(){ network.fit(); });
+  }
+  if (document.readyState === "complete") { draw(); }
+  else { window.addEventListener("load", draw); }
 })();
 </script>
 ```

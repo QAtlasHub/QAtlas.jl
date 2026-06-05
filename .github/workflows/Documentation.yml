@@ -4,9 +4,10 @@ on:
     branches:
       - main
     tags: '*'
+  # Run on every PR (any base), not just main-targeting ones, so stacked PRs
+  # build the docs and get a Documenter push_preview deploy. deploydocs only
+  # publishes the live site on push to main; PRs get previews/PR<N>.
   pull_request:
-    branches:
-      - main
   workflow_dispatch:
 permissions:
   contents: write

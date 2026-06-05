@@ -217,5 +217,18 @@ function coherence_report(; bibkeys=String[])
     return findings
 end
 
+"""
+    coherence_errors(findings) -> Vector{CoherenceFinding}
+
+The `:error` findings (violated invariants — must be empty) among `findings`
+from [`coherence_report`](@ref).
+"""
 coherence_errors(findings) = filter(f -> f.severity === :error, findings)
+
+"""
+    coherence_gaps(findings) -> Vector{CoherenceFinding}
+
+The `:gap` findings (missing-but-expected edges — the network's self-reported
+holes) among `findings` from [`coherence_report`](@ref).
+"""
 coherence_gaps(findings) = filter(f -> f.severity === :gap, findings)

@@ -181,10 +181,16 @@ Drag nodes; hover for type.
   function start(){
     if (typeof vis !== "undefined") { draw(); return; }
     var root = location.pathname.split("atlas/graph")[0];
+    // The Documenter page loads requirejs, so vis-network's UMD would register
+    // as an AMD module instead of setting window.vis. Hide `define` during the
+    // load so the UMD falls through to the global-assignment branch, then restore.
+    var savedDefine = window.define;
+    window.define = undefined;
     var s = document.createElement("script");
     s.src = root + "assets/vis-network.min.js";
-    s.onload = draw;
+    s.onload = function(){ window.define = savedDefine; draw(); };
     s.onerror = function(){
+      window.define = savedDefine;
       var el = document.getElementById("qatlas-graph");
       if (el) el.innerHTML = "<p style='padding:1em'>vis-network asset failed to load from " + s.src + "</p>";
     };

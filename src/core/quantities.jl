@@ -1218,6 +1218,17 @@ Lyapunov exponent `λ_L` of out-of-time-order correlators (`λ_L ≤ 2π/β`).  
 struct ChaosBound <: AbstractQuantity end
 
 """
+    ScramblingTime() <: AbstractQuantity
+
+The fast-scrambling time `t_* = (β/2π) log N` (Sekino–Susskind 2008) — the
+conjectured *lower* bound on the time for a thermal system of `N` degrees of
+freedom to scramble local information into global entanglement; saturated by
+black holes (the fastest scramblers).  A `status=:bound`, `direction=:lower`
+quantity; fetched against a [`Bound`](@ref) domain (`Bound(:Dynamics)`).
+"""
+struct ScramblingTime <: AbstractQuantity end
+
+"""
     BekensteinBound() <: AbstractQuantity
 
 The Bekenstein universal entropy bound — an upper bound on the entropy of a
@@ -1245,3 +1256,14 @@ single-copy fidelity of a `1 → 2` qubit cloner (Bužek–Hillery `F ≤ 5/6`).
 domain (`Bound(:QuantumInformation)`).
 """
 struct OptimalCloningFidelity <: AbstractQuantity end
+
+"""
+    BB84KeyRate() <: AbstractQuantity
+
+The BB84 asymptotic secret-key rate `R(e) = 1 − 2 H₂(e)` (Shor–Preskill 2000),
+with `H₂` the binary entropy and `e` the qubit error rate (QBER).  A provably
+achievable rate — a *lower* bound on the extractable secret-key fraction;
+positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched
+against a [`Bound`](@ref) domain (`Bound(:QuantumInformation)`).
+"""
+struct BB84KeyRate <: AbstractQuantity end

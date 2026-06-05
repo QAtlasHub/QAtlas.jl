@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: CalabreseCardy2004
+- method `delegation`, status `exact`, reliability `high`, refs: CalabreseCardy2004
 - Delegates to Universality(:Heisenberg) with c -> c*(1+1/alpha)/2 substitution. Reduces to VN at alpha=1.
 
 ## Corroboration

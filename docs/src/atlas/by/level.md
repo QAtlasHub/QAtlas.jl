@@ -247,21 +247,25 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (82)
+## `uncorroborated-but-feasible` (89)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BekensteinBound/Infinite`](../hubs/Bound_BekensteinBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/ChaosBound/Infinite`](../hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/QuantumSpeedLimit/Infinite`](../hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/ScramblingTime/Infinite`](../hubs/Bound_ScramblingTime_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/MagnetizationXLocal/OBC`](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
@@ -296,6 +300,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](../hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
@@ -317,7 +322,9 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`XXZ1D/MagnetizationXLocal/OBC`](../hubs/XXZ1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/MagnetizationYLocal/OBC`](../hubs/XXZ1D_MagnetizationYLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/MagnetizationZLocal/OBC`](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`XXZ1D/RenyiEntropy/Infinite`](../hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](../hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/OBC`](../hubs/XYh1D_Energy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/EnergyLocal/OBC`](../hubs/XYh1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible

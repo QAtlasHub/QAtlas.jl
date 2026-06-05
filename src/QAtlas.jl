@@ -136,6 +136,8 @@ export ChaosBound         # MSS chaos / Lyapunov bound (:bound, Dynamics)
 export BekensteinBound    # Bekenstein entropy bound (:bound, Holographic)
 export QuantumSpeedLimit  # Margolus-Levitin speed limit (:bound lower, Dynamics)
 export OptimalCloningFidelity  # Buzek-Hillery cloning bound (:bound upper, QuantumInformation)
+export ScramblingTime     # Sekino-Susskind fast-scrambling time (:bound lower, Dynamics)
+export BB84KeyRate        # Shor-Preskill BB84 secret-key rate (:bound lower, QuantumInformation)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper

@@ -89,3 +89,17 @@
     tested_in="test/bounds/test_optimal_cloning_fidelity.jl",
     notes="Buzek-Hillery 1996: universal 1->2 qubit cloning fidelity F ≤ 5/6, saturated by the optimal cloner.",
 )
+
+# BB84 asymptotic secret-key rate R(e) = 1 - 2 H2(e) — achievable lower bound.
+@register(
+    Bound{:QuantumInformation},
+    BB84KeyRate,
+    Infinite,
+    method=:analytic,
+    status=:bound,
+    direction=:lower,
+    reliability=:high,
+    references=["ShorPreskill2000"],
+    tested_in="test/bounds/test_bb84_key_rate.jl",
+    notes="Shor-Preskill 2000 BB84 secret-key rate R = 1 - 2 H2(qber): achievable rate, lower bound on key fraction; positive for qber < ~11%.",
+)

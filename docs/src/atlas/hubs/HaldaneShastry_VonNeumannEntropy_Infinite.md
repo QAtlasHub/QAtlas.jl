@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `delegation`, reliability `high`, refs: CalabreseCardy2004
+- method `delegation`, status `exact`, reliability `high`, refs: CalabreseCardy2004
 - Delegates to Universality(:Heisenberg) c=1 Calabrese-Cardy form. HS is gapless free-spinon SU(2)_1 WZW, same c=1 class as Heisenberg1D.
 
 ## Corroboration

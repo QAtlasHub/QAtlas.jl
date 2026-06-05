@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (200)
+## `Infinite` (207)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -20,12 +20,14 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](../hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BekensteinBound/Infinite`](../hubs/Bound_BekensteinBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/ChaosBound/Infinite`](../hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/QuantumSpeedLimit/Infinite`](../hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/ScramblingTime/Infinite`](../hubs/Bound_ScramblingTime_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
 - 🟢 [`Cluster1D/Energy/Infinite`](../hubs/Cluster1D_Energy_Infinite.md) — corroborated-at-p
@@ -47,8 +49,10 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`GrossNeveu/MassGap/Infinite`](../hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
@@ -147,6 +151,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TFIM/FreeEnergy/Infinite`](../hubs/TFIM_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🔵 [`TFIM/GGEValue/Infinite`](../hubs/TFIM_GGEValue_Infinite.md) — coherent
 - 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](../hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MagnetizationX/Infinite`](../hubs/TFIM_MagnetizationX_Infinite.md) — corroborated-at-p
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](../hubs/TFIM_MagnetizationXLocal_Infinite.md) — coherent
@@ -197,8 +202,10 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/MassGap/Infinite`](../hubs/XXZ1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`XXZ1D/RenyiEntropy/Infinite`](../hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](../hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — coherent
+- 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MagnetizationZ/Infinite`](../hubs/XYh1D_MagnetizationZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/Infinite`](../hubs/XYh1D_MassGap_Infinite.md) — uncorroborated-but-feasible

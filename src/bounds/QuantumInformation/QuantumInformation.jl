@@ -95,3 +95,25 @@ function fetch(
 )
     return 5 / 6
 end
+
+"""
+    fetch(::Bound{:QuantumInformation}, ::BB84KeyRate, ::Infinite; qber)
+
+Shor–Preskill 2000 asymptotic secret-key rate of the BB84 protocol,
+
+    R(e) = 1 − 2 H₂(e),     H₂(e) = −e log₂ e − (1−e) log₂(1−e),
+
+with `e = qber` the qubit error rate.  A provably achievable rate — a *lower*
+bound on the extractable secret-key fraction.  `R = 1` at `e = 0`, decreasing to
+`R = 0` at the `e ≈ 11%` security threshold and negative beyond (no secure key).
+A `status=:bound`, `direction=:lower` claim.
+"""
+function fetch(
+    ::Bound{:QuantumInformation}, ::BB84KeyRate, ::Infinite; qber::Real, kwargs...
+)
+    0 <= qber <= 0.5 ||
+        throw(ArgumentError("BB84KeyRate: qber must satisfy 0 ≤ qber ≤ 0.5; got $(qber)"))
+    qber == 0 && return 1.0
+    h2 = -qber * log2(qber) - (1 - qber) * log2(1 - qber)
+    return 1 - 2 * h2
+end

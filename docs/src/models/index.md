@@ -24,7 +24,7 @@ In this page, all model list defined in QAtlas.jl is shown. **64 models** have `
 | [`AKLT1D`](../atlas/models/AKLT1D.md) | 12 | 🟣 0 🟢 17 🔵 0 ⚪ 1 🟠 1 | — |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`BCFT`](../atlas/models/BCFT.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`Bound`](../atlas/models/Bound.md) | 6 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 6 | — |
+| [`Bound`](../atlas/models/Bound.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 8 | — |
 | [`ChernSimons3D`](../atlas/models/ChernSimons3D.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `WZW` |
 | [`Cluster1D`](../atlas/models/Cluster1D.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`Compass1D`](../atlas/models/Compass1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
@@ -34,7 +34,7 @@ In this page, all model list defined in QAtlas.jl is shown. **64 models** have `
 | [`ExtendedHubbard1D`](../atlas/models/ExtendedHubbard1D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | — |
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
-| [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | 4 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 4 | — |
+| [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | 6 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 6 | — |
 | [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 20 | 🟣 0 🟢 13 🔵 4 ⚪ 0 🟠 9 | — |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | 6 | 🟣 0 🟢 1 🔵 1 ⚪ 0 🟠 4 | — |
 | [`Honeycomb`](../atlas/models/Honeycomb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
@@ -70,7 +70,7 @@ In this page, all model list defined in QAtlas.jl is shown. **64 models** have `
 | [`SixVertex`](../atlas/models/SixVertex.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
 | [`SpinIce`](../atlas/models/SpinIce.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 30 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 10 | `Ising` |
+| [`TFIM`](../atlas/models/TFIM.md) | 31 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 11 | `Ising` |
 | [`TTbar`](../atlas/models/TTbar.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
@@ -80,7 +80,7 @@ In this page, all model list defined in QAtlas.jl is shown. **64 models** have `
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | `MinimalModel` |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | `MinimalModel` |
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | 22 | 🟣 0 🟢 17 🔵 5 ⚪ 0 🟠 5 | — |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | 22 | 🟣 0 🟢 17 🔵 5 ⚪ 0 🟠 7 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
 | [`YangLee`](../atlas/models/YangLee.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `MinimalModel` |
 | [`ZnClock`](../atlas/models/ZnClock.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | `Ising` |

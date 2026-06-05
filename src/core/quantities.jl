@@ -598,7 +598,7 @@ conformal field theory above its ground state,
 
 where  is the central charge and  (Affleck 1986;
 Bloete-Cardy-Nightingale 1986). This is the universal counterpart of
-[](@ref): the same  prefactor that
+[`ConformalCasimirEnergy`](@ref): the same `c` prefactor that
 controls the Casimir term in finite size also fixes the leading
 thermal-excitation density in finite temperature, via modular
 invariance.
@@ -616,7 +616,7 @@ length) of a (1+1)D conformal field theory,
 with  the central charge. This is the temperature derivative of
 the universal CFT free energy density  (Bloete-Cardy-
 Nightingale 1986), and the operational complement of
-[](@ref).
+[`ThermalEnergyDensity`](@ref).
 """
 struct CFTThermalEntropyDensity <: AbstractQuantity end
 

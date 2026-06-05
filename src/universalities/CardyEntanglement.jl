@@ -882,7 +882,7 @@ Leading thermal energy density above the ground state for a
     e(T) - e_0 = pi c / (6 beta^2).
 
 This is the universal complement of
-[](@ref): modular invariance interchanges the
+[`ConformalCasimirEnergy`](@ref): modular invariance interchanges the
 finite-size Casimir energy and the finite-temperature thermal energy
 with identical coefficient .
 

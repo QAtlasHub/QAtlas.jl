@@ -1,12 +1,14 @@
 # docs/atlas/graph_export.jl — render the QAtlas knowledge graph as an
-# Obsidian-style force-directed graph view inside the Documenter site.
+# Obsidian-style force-directed graph view inside the Documenter site, using the
+# Quartz graph engine (d3-force + PixiJS) ported to a standalone, data-driven
+# bundle: docs/src/assets/qatlas-graph.js (built from
+# obsidian-remote-ssh/docs-site/qatlas-graph-entry.ts via esbuild).
 #
-# Unlike generate.jl (a pure-AST scanner), this loads QAtlas and walks the live
-# edge stores (REGISTRY + REALIZES via links.jl): the physical-validity network
-# — models realize classes, classes predict quantities, bounds constrain
-# quantities, models delegate quantities — plus the coherence self-diagnosis
-# (undeveloped classes / delegation-without-realizes) colored as gaps, so the
-# verification and the visualization come out of the same graph.
+# This loads QAtlas and walks the live edge stores (REGISTRY + REALIZES via
+# links.jl) — models realize classes, classes predict quantities, bounds
+# constrain quantities, models delegate quantities — plus the coherence
+# self-diagnosis (undeveloped classes / delegation-without-realizes) colored as
+# gaps.  Verification and visualization come out of the same graph.
 #
 # Run: julia --project=. docs/atlas/graph_export.jl  →  docs/src/atlas/graph.md
 
@@ -17,17 +19,21 @@ const REAL = QAtlas.REALIZES
 
 _short(T) = replace(string(T), "QAtlas." => "")
 _js(s) = replace(string(s), "\\" => "\\\\", "\"" => "\\\"")
+_clean(s) = occursin(r"^[A-Za-z0-9_]+$", s)
 
 # ── collect nodes + edges (only nodes that appear in an edge) ────────────────
-nodes = Dict{String,NamedTuple}()      # id => (label, group, title)
-edges = Vector{NamedTuple}()           # (from, to, label, gap)
+nodes = Dict{String,NamedTuple}()      # id => (text, group, url)
+edges = Vector{NamedTuple}()           # (from, to, gap)
 
-addnode!(id, label, group, title) = get!(nodes, id, (label=label, group=group, title=title))
+addnode!(id, text, group, url) = get!(nodes, id, (text=text, group=group, url=url))
 
 _is_uni(T) = T <: QAtlas.Universality
 _is_bnd(T) = T <: QAtlas.Bound
 _class(T) = T.parameters[1]
 _concrete(T) = !_is_uni(T) && !_is_bnd(T)
+
+_model_url(name) = _clean(name) ? "../models/$(name)/" : ""
+_quantity_url(name) = _clean(name) ? "../quantities/$(name)/" : ""
 
 realized_classes = sort(unique(r.class for r in REAL))
 undeveloped = Set(c for c in realized_classes if isempty(QAtlas.predicts(c)))
@@ -35,9 +41,11 @@ undeveloped = Set(c for c in realized_classes if isempty(QAtlas.predicts(c)))
 # realizes : model → class
 for r in REAL
     m = _short(r.model)
-    addnode!("M:" * m, m, "model", "model")
-    addnode!("C:" * string(r.class), string(r.class), "class", "universality class")
-    push!(edges, (from="M:" * m, to="C:" * string(r.class), label="realizes", gap=false))
+    addnode!("M:" * m, m, "model", _model_url(m))
+    addnode!(
+        "C:" * string(r.class), string(r.class), r.class in undeveloped ? "gap" : "class", ""
+    )
+    push!(edges, (from="M:" * m, to="C:" * string(r.class), gap=false))
 end
 
 # predicts : class → quantity
@@ -45,9 +53,9 @@ for e in REG
     _is_uni(e.model) || continue
     c = _class(e.model)
     q = _short(e.quantity)
-    addnode!("C:" * string(c), string(c), "class", "universality class")
-    addnode!("Q:" * q, q, "quantity", "quantity")
-    push!(edges, (from="C:" * string(c), to="Q:" * q, label="predicts", gap=false))
+    addnode!("C:" * string(c), string(c), c in undeveloped ? "gap" : "class", "")
+    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
+    push!(edges, (from="C:" * string(c), to="Q:" * q, gap=false))
 end
 
 # bounds : bound-domain → quantity
@@ -55,17 +63,9 @@ for e in REG
     _is_bnd(e.model) || continue
     d = _class(e.model)
     q = _short(e.quantity)
-    addnode!("B:" * string(d), string(d), "bound", "bound domain")
-    addnode!("Q:" * q, q, "quantity", "quantity")
-    push!(
-        edges,
-        (
-            from="B:" * string(d),
-            to="Q:" * q,
-            label="bounds(" * string(e.direction) * ")",
-            gap=false,
-        ),
-    )
+    addnode!("B:" * string(d), string(d), "bound", "")
+    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
+    push!(edges, (from="B:" * string(d), to="Q:" * q, gap=false))
 end
 
 # delegates : model → quantity  (gap-colored when the model realizes no class)
@@ -74,27 +74,17 @@ for e in REG
     m = _short(e.model)
     q = _short(e.quantity)
     isgap = !any(r -> r.model === e.model, REAL)
-    addnode!("M:" * m, m, "model", "model")
-    addnode!("Q:" * q, q, "quantity", "quantity")
-    push!(edges, (from="M:" * m, to="Q:" * q, label="delegates", gap=isgap))
+    addnode!("M:" * m, m, "model", _model_url(m))
+    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
+    push!(edges, (from="M:" * m, to="Q:" * q, gap=isgap))
 end
 
-# ── emit vis-network JSON ────────────────────────────────────────────────────
-function node_json(id, n)
-    grp = if startswith(id, "C:") && (id[3:end] in [string(c) for c in undeveloped])
-        "gap"
-    else
-        n.group
-    end
-    return "{id:\"$(_js(id))\",label:\"$(_js(n.label))\",group:\"$(grp)\",title:\"$(_js(n.title)): $(_js(n.label))\"}"
-end
-node_lines = join([node_json(id, n) for (id, n) in nodes], ",\n      ")
-
-function edge_json(e)
-    col = e.gap ? ",color:{color:\"#e8a33d\"},dashes:true" : ""
-    return "{from:\"$(_js(e.from))\",to:\"$(_js(e.to))\",label:\"$(_js(e.label))\",arrows:\"to\",font:{size:9,color:\"#888\"}$(col)}"
-end
-edge_lines = join([edge_json(e) for e in edges], ",\n      ")
+# ── emit QAtlasGraph JSON ─────────────────────────────────────────────────────
+node_json(id, n) =
+    "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"
+nodes_js = join([node_json(id, n) for (id, n) in nodes], ",\n      ")
+edge_json(e) = "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\",gap:$(e.gap)}"
+edges_js = join([edge_json(e) for e in edges], ",\n      ")
 
 n_models = count(id -> startswith(id, "M:"), keys(nodes))
 n_classes = count(id -> startswith(id, "C:"), keys(nodes))
@@ -106,72 +96,47 @@ page = """
 
 The QAtlas vault as a force-directed network — **models** realize **universality
 classes**, classes **predict** quantities, **bounds** constrain quantities, and
-models **delegate** quantities to their class.  Orange dashed = a coherence
-*gap* (an undeveloped class, or a delegation whose model realizes no class).
-Drag nodes; hover for type.
+models **delegate** quantities to their class.  Orange = a coherence *gap* (an
+undeveloped class, or a delegation whose model realizes no class).  Drag nodes,
+scroll to zoom, hover to highlight neighbours, click a model/quantity to open its
+page.
 
-*Generated by `docs/atlas/graph_export.jl` from the live registry —
-$(length(nodes)) nodes ($(n_models) models, $(n_classes) classes,
-$(n_bounds) bound domains, $(n_quant) quantities), $(length(edges)) edges.*
+*Rendered by the Quartz graph engine (d3-force + PixiJS), ported to a standalone
+bundle (`assets/qatlas-graph.js`).  Generated by `docs/atlas/graph_export.jl`
+from the live registry — $(length(nodes)) nodes ($(n_models) models,
+$(n_classes) classes, $(n_bounds) bound domains, $(n_quant) quantities),
+$(length(edges)) edges.*
 
 ```@raw html
 <div id="qatlas-graph" style="width:100%;height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
 <script>
 (function(){
-  function draw(){
+  var DATA = {
+    nodes: [
+      $(nodes_js)
+    ],
+    links: [
+      $(edges_js)
+    ]
+  };
+  var CFG = {
+    drag: true, zoom: true, repelForce: 0.7, centerForce: 0.3,
+    linkDistance: 38, fontSize: 0.6, opacityScale: 1.1, focusOnHover: true,
+    labelColor: getComputedStyle(document.documentElement).getPropertyValue("--body-color") || "#2b2b2b"
+  };
+  function go(){
     var el = document.getElementById("qatlas-graph");
     if (!el) return;
-    if (typeof vis === "undefined") {
-      el.innerHTML = "<p style='padding:1em'>vis-network failed to load — the bundled assets/vis-network.min.js did not load.</p>";
-      return;
-    }
-    var nodes = new vis.DataSet([
-      $(node_lines)
-  ]);
-  var edges = new vis.DataSet([
-      $(edge_lines)
-  ]);
-  var groups = {
-    model:    {color:{background:"#4f8cc9",border:"#2b5d8a"},shape:"dot"},
-    class:    {color:{background:"#9b6cc9",border:"#6b3f96"},shape:"diamond"},
-    bound:    {color:{background:"#c95f5f",border:"#8a2b2b"},shape:"triangle"},
-    quantity: {color:{background:"#5fae6f",border:"#2b7a3f"},shape:"box"},
-    gap:      {color:{background:"#e8a33d",border:"#b87410"},shape:"diamond"}
-  };
-    var network = new vis.Network(
-      el,
-      {nodes:nodes, edges:edges},
-      {
-        groups: groups,
-        nodes: {font:{size:12}},
-        edges: {smooth:{type:"continuous"}},
-        physics: {barnesHut:{gravitationalConstant:-8000,springLength:120,springConstant:0.04},
-                  stabilization:{iterations:200}},
-        interaction: {hover:true, tooltipDelay:120}
-      }
-    );
-    network.once("stabilizationIterationsDone", function(){ network.fit(); });
-  }
-  function start(){
-    if (typeof vis !== "undefined") { draw(); return; }
+    if (window.QAtlasGraph) { window.QAtlasGraph.render(el, DATA, CFG); return; }
     var root = location.pathname.split("atlas/graph")[0];
-    // The Documenter page loads requirejs, so vis-network's UMD would register
-    // as an AMD module instead of setting window.vis. Hide `define` during the
-    // load so the UMD falls through to the global-assignment branch, then restore.
-    var savedDefine = window.define;
-    window.define = undefined;
     var s = document.createElement("script");
-    s.src = root + "assets/vis-network.min.js";
-    s.onload = function(){ window.define = savedDefine; draw(); };
-    s.onerror = function(){
-      window.define = savedDefine;
-      var el = document.getElementById("qatlas-graph");
-      if (el) el.innerHTML = "<p style='padding:1em'>vis-network asset failed to load from " + s.src + "</p>";
-    };
+    s.src = root + "assets/qatlas-graph.js";
+    s.onload = function(){ if (window.QAtlasGraph) window.QAtlasGraph.render(el, DATA, CFG); };
+    s.onerror = function(){ el.innerHTML = "<p style='padding:1em'>graph bundle failed to load from " + s.src + "</p>"; };
     document.head.appendChild(s);
   }
-  if (document.readyState === "complete") { start(); }
-  else { window.addEventListener("load", start); }
+  if (document.readyState === "complete") { go(); }
+  else { window.addEventListener("load", go); }
 })();
 </script>
 ```

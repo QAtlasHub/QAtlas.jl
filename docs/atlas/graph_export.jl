@@ -45,7 +45,7 @@ for r in REAL
     addnode!(
         "C:" * string(r.class), string(r.class), r.class in undeveloped ? "gap" : "class", ""
     )
-    push!(edges, (from="M:" * m, to="C:" * string(r.class), gap=false))
+    push!(edges, (from="M:" * m, to="C:" * string(r.class), kind="realizes", gap=false))
 end
 
 # predicts : class → quantity
@@ -55,7 +55,7 @@ for e in REG
     q = _short(e.quantity)
     addnode!("C:" * string(c), string(c), c in undeveloped ? "gap" : "class", "")
     addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="C:" * string(c), to="Q:" * q, gap=false))
+    push!(edges, (from="C:" * string(c), to="Q:" * q, kind="predicts", gap=false))
 end
 
 # bounds : bound-domain → quantity
@@ -65,7 +65,7 @@ for e in REG
     q = _short(e.quantity)
     addnode!("B:" * string(d), string(d), "bound", "")
     addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="B:" * string(d), to="Q:" * q, gap=false))
+    push!(edges, (from="B:" * string(d), to="Q:" * q, kind="bounds", gap=false))
 end
 
 # delegates : model → quantity  (gap-colored when the model realizes no class)
@@ -76,14 +76,14 @@ for e in REG
     isgap = !any(r -> r.model === e.model, REAL)
     addnode!("M:" * m, m, "model", _model_url(m))
     addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="M:" * m, to="Q:" * q, gap=isgap))
+    push!(edges, (from="M:" * m, to="Q:" * q, kind="delegates", gap=isgap))
 end
 
 # ── emit QAtlasGraph JSON ─────────────────────────────────────────────────────
 node_json(id, n) =
     "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"
 nodes_js = join([node_json(id, n) for (id, n) in nodes], ",\n      ")
-edge_json(e) = "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\",gap:$(e.gap)}"
+edge_json(e) = "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\",kind:\"$(e.kind)\",gap:$(e.gap)}"
 edges_js = join([edge_json(e) for e in edges], ",\n      ")
 
 n_models = count(id -> startswith(id, "M:"), keys(nodes))
@@ -120,9 +120,9 @@ $(length(edges)) edges.*
     ]
   };
   var CFG = {
-    drag: true, zoom: true, repelForce: 0.7, centerForce: 0.3,
-    linkDistance: 38, fontSize: 0.6, opacityScale: 1.1, focusOnHover: true,
-    labelColor: getComputedStyle(document.documentElement).getPropertyValue("--body-color") || "#2b2b2b"
+    drag: true, zoom: true, repelForce: 0.45, centerForce: 0.22,
+    linkDistance: 70, linkStrength: 0.12, fontSize: 0.62, opacityScale: 1.1,
+    focusOnHover: true, labelColor: "#eaeaea", labelStroke: "#15171a"
   };
   function go(){
     var el = document.getElementById("qatlas-graph");

@@ -27,7 +27,7 @@ import { Text, Graphics, Application, Container, Circle } from "pixi.js"
 import { Group as TweenGroup, Tween as Tweened } from "@tweenjs/tween.js"
 
 type NodeIn = { id: string; text?: string; group?: string; url?: string }
-type LinkIn = { source: string; target: string; gap?: boolean; label?: string }
+type LinkIn = { source: string; target: string; gap?: boolean; kind?: string; label?: string }
 
 type NodeData = {
   id: string
@@ -40,6 +40,7 @@ type LinkData = {
   source: NodeData
   target: NodeData
   gap: boolean
+  kind: string
 } & SimulationLinkDatum<NodeData>
 
 type GraphicsInfo = { color: number; gfx: Graphics; alpha: number; active: boolean }
@@ -57,10 +58,13 @@ type Cfg = {
   opacityScale?: number
   focusOnHover?: boolean
   legend?: boolean
+  linkStrength?: number
   colors?: Record<string, string>
+  linkColors?: Record<string, string>
   linkColor?: string
   gapColor?: string
   labelColor?: string
+  labelStroke?: string
 }
 
 const DEFAULT_COLORS: Record<string, string> = {
@@ -70,6 +74,14 @@ const DEFAULT_COLORS: Record<string, string> = {
   quantity: "#5fae6f",
   gap: "#e8a33d",
   default: "#888888",
+}
+
+const DEFAULT_LINK_COLORS: Record<string, string> = {
+  realizes: "#6f9fd8",
+  predicts: "#b08fd8",
+  bounds: "#d88f8f",
+  delegates: "#9aa0a8",
+  default: "#b8b8b8",
 }
 
 function hexToNum(hex: string): number {
@@ -93,13 +105,19 @@ async function renderGraph(
     fontSize = 0.5,
     opacityScale = 1.0,
     focusOnHover = true,
+    linkStrength = 0.18,
     colors = {},
+    linkColors = {},
     linkColor = "#b8b8b8",
     gapColor = "#e8a33d",
-    labelColor = "#2b2b2b",
+    labelColor = "#eaeaea",
+    labelStroke = "#15171a",
   } = cfg
   const palette = { ...DEFAULT_COLORS, ...colors }
+  const linkPalette = { ...DEFAULT_LINK_COLORS, ...linkColors }
   const colorOf = (g: string) => hexToNum(palette[g] ?? palette.default)
+  const linkColorOf = (l: LinkData) =>
+    hexToNum(l.gap ? gapColor : (linkPalette[l.kind] ?? linkColor))
 
   while (graph.firstChild) graph.removeChild(graph.firstChild)
 
@@ -112,7 +130,12 @@ async function renderGraph(
   const byId = new Map(nodes.map((n) => [n.id, n]))
   const links: LinkData[] = dataIn.links
     .filter((l) => byId.has(l.source) && byId.has(l.target))
-    .map((l) => ({ source: byId.get(l.source)!, target: byId.get(l.target)!, gap: !!l.gap }))
+    .map((l) => ({
+      source: byId.get(l.source)!,
+      target: byId.get(l.target)!,
+      gap: !!l.gap,
+      kind: l.kind ?? "default",
+    }))
   const graphData = { nodes, links }
 
   const width = graph.offsetWidth || 800
@@ -121,7 +144,7 @@ async function renderGraph(
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
     .force("charge", forceManyBody().strength(-100 * repelForce))
     .force("center", forceCenter().strength(centerForce))
-    .force("link", forceLink(graphData.links).distance(linkDistance))
+    .force("link", forceLink(graphData.links).distance(linkDistance).strength(linkStrength))
     .force("collide", forceCollide<NodeData>((n) => nodeRadius(n)).iterations(3))
 
   function nodeRadius(d: NodeData) {
@@ -166,7 +189,7 @@ async function renderGraph(
     for (const l of linkRenderData) {
       let alpha = 1
       if (hoveredNodeId) alpha = l.active ? 1 : 0.2
-      l.color = l.gap ? hexToNum(gapColor) : hexToNum(linkColor)
+      l.color = linkColorOf(l.simulationData)
       tg.add(new Tweened<LinkRenderData>(l).to({ alpha }, 200))
     }
     tg.getAll().forEach((t) => t.start())
@@ -237,25 +260,40 @@ async function renderGraph(
   if (cfg.legend !== false) {
     graph.style.position = graph.style.position || "relative"
     const present = new Set(nodes.map((n) => n.group))
-    const legendItems: [string, string][] = [
+    const presentKinds = new Set(links.map((l) => l.kind))
+    const hasGapEdge = links.some((l) => l.gap)
+    const nodeItems: [string, string][] = [
       ["model", "Model"],
       ["class", "Universality class"],
       ["bound", "Bound domain"],
       ["quantity", "Quantity"],
-      ["gap", "Coherence gap"],
+      ["gap", "Coherence-gap class"],
     ]
+    const edgeItems: [string, string][] = [
+      ["realizes", "realizes (model→class)"],
+      ["predicts", "predicts (class→quantity)"],
+      ["bounds", "bounds (bound→quantity)"],
+      ["delegates", "delegates (model→quantity)"],
+    ]
+    const dot = (c: string) =>
+      `<span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${c};margin-right:7px;vertical-align:middle"></span>`
+    const line = (c: string) =>
+      `<span style="display:inline-block;width:17px;border-top:2px solid ${c};margin:0 7px 3px 0;vertical-align:middle"></span>`
+    const nodeHtml = nodeItems
+      .filter(([g]) => present.has(g))
+      .map(([g, label]) => `<div>${dot(palette[g])}${label}</div>`)
+      .join("")
+    const edgeHtml = edgeItems
+      .filter(([k]) => presentKinds.has(k))
+      .map(([k, label]) => `<div>${line(linkPalette[k])}${label}</div>`)
+      .join("")
+    const gapHtml = hasGapEdge ? `<div>${line(gapColor)}gap: delegates, no realizes</div>` : ""
+    const sep = edgeHtml || gapHtml ? `<div style="margin:5px 0 2px;opacity:0.5">edges</div>` : ""
     const legend = document.createElement("div")
     legend.style.cssText =
-      "position:absolute;top:10px;left:10px;padding:7px 10px;font-size:12px;line-height:1.7;" +
-      "background:rgba(127,127,127,0.14);border-radius:6px;pointer-events:none"
-    legend.innerHTML = legendItems
-      .filter(([g]) => present.has(g))
-      .map(
-        ([g, label]) =>
-          `<div><span style="display:inline-block;width:11px;height:11px;border-radius:50%;` +
-          `background:${palette[g]};margin-right:7px;vertical-align:middle"></span>${label}</div>`,
-      )
-      .join("")
+      "position:absolute;top:10px;left:10px;padding:8px 11px;font-size:12px;line-height:1.7;" +
+      "background:rgba(18,20,24,0.6);color:#e8e8e8;border-radius:6px;pointer-events:none"
+    legend.innerHTML = nodeHtml + sep + edgeHtml + gapHtml
     graph.appendChild(legend)
   }
 
@@ -273,7 +311,11 @@ async function renderGraph(
       text: n.text,
       alpha: 0,
       anchor: { x: 0.5, y: 1.2 },
-      style: { fontSize: fontSize * 16, fill: hexToNum(labelColor) },
+      style: {
+        fontSize: fontSize * 16,
+        fill: hexToNum(labelColor),
+        stroke: { color: hexToNum(labelStroke), width: 3 },
+      },
       resolution: window.devicePixelRatio * 2,
     })
     label.scale.set(1 / scale)
@@ -316,7 +358,7 @@ async function renderGraph(
       simulationData: l,
       gfx,
       gap: l.gap,
-      color: l.gap ? hexToNum(gapColor) : hexToNum(linkColor),
+      color: linkColorOf(l),
       alpha: 1,
       active: false,
     })

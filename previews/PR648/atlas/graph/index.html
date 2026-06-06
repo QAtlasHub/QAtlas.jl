@@ -1,190 +1,162 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Knowledge graph · QAtlas.jl</title><meta name="title" content="Knowledge graph · QAtlas.jl"/><meta property="og:title" content="Knowledge graph · QAtlas.jl"/><meta property="twitter:title" content="Knowledge graph · QAtlas.jl"/><meta name="description" content="Documentation for QAtlas.jl."/><meta property="og:description" content="Documentation for QAtlas.jl."/><meta property="twitter:description" content="Documentation for QAtlas.jl."/><meta property="og:url" content="https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/graph/"/><meta property="twitter:url" content="https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/graph/"/><link rel="canonical" href="https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/graph/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/><link href="../../assets/custom.css" rel="stylesheet" type="text/css"/><script src="../../assets/report-issue.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../../"><img src="../../assets/logo.png" alt="QAtlas.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href="../../">QAtlas.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><a class="tocitem" href="../../conventions/">Conventions</a></li><li><span class="tocitem">Models</span><ul><li><a class="tocitem" href="../../models/">Models</a></li><li><a class="tocitem" href="../../models/reference/">Reference</a></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Classical</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../models/classical/">Classical Models</a></li><li><a class="tocitem" href="../../models/classical/ising-square/">Ising Square</a></li><li><a class="tocitem" href="../../models/classical/ising-triangular/">Ising Triangular</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Quantum</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../models/quantum/">Quantum Models</a></li><li><a class="tocitem" href="../../models/quantum/tfim/">TFIM</a></li><li><a class="tocitem" href="../../models/quantum/heisenberg/">Heisenberg</a></li><li><a class="tocitem" href="../../models/quantum/majumdar_ghosh/">Majumdar-Ghosh</a></li><li><a class="tocitem" href="../../models/quantum/xxz/">XXZ</a></li><li><a class="tocitem" href="../../models/quantum/hubbard1d/">Hubbard1D</a></li><li><a class="tocitem" href="../../models/quantum/kitaev-honeycomb/">Kitaev Honeycomb</a></li><li><a class="tocitem" href="../../models/quantum/kitaev1d/">Kitaev1D</a></li><li><a class="tocitem" href="../../models/quantum/toric-code/">Toric Code</a></li><li><input class="collapse-toggle" id="menuitem-3-4-10" type="checkbox"/><label class="tocitem" for="menuitem-3-4-10"><span class="docs-label">Tight-Binding</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../models/quantum/tightbinding/">Tight-Binding Models</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/honeycomb/">Honeycomb</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/kagome/">Kagome</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/lieb/">Lieb</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/triangular/">Triangular</a></li></ul></li></ul></li></ul></li><li><span class="tocitem">Universality Classes</span><ul><li><a class="tocitem" href="../../universalities/">Universality Classes</a></li><li><a class="tocitem" href="../../universalities/ising/">Ising</a></li><li><a class="tocitem" href="../../universalities/percolation/">Percolation</a></li><li><a class="tocitem" href="../../universalities/potts/">Potts</a></li><li><a class="tocitem" href="../../universalities/kpz/">KPZ</a></li><li><a class="tocitem" href="../../universalities/rmt/">RMT / Poisson</a></li><li><a class="tocitem" href="../../universalities/on-models/">XY / Heisenberg</a></li><li><a class="tocitem" href="../../universalities/mean-field/">Mean-Field</a></li><li><a class="tocitem" href="../../universalities/e8/">E8</a></li><li><a class="tocitem" href="../../universalities/cardy_entanglement/">Cardy Entanglement</a></li><li><a class="tocitem" href="../../universalities/cft-casimir/">CFT Casimir Correction</a></li></ul></li><li><span class="tocitem">Verification</span><ul><li><a class="tocitem" href="../../verification/">Verification</a></li><li><input class="collapse-toggle" id="menuitem-5-2" type="checkbox" checked/><label class="tocitem" for="menuitem-5-2"><span class="docs-label">Verified Atlas</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../">QAtlas — Verified Exact-Solution Atlas</a></li><li class="is-active"><a class="tocitem" href>Knowledge graph</a></li><li><a class="tocitem" href="../ModelList/">Model list</a></li><li><a class="tocitem" href="../Bibliography/">Bibliography</a></li><li><a class="tocitem" href="../Methods/">Methods</a></li><li><a class="tocitem" href="../CalcIndex/">Derivation-note index</a></li><li><a class="tocitem" href="../Audit/">Audit</a></li></ul></li><li><a class="tocitem" href="../../verification/cross-checks/">Cross-Checks</a></li><li><a class="tocitem" href="../../verification/entanglement/">Entanglement</a></li><li><a class="tocitem" href="../../verification/disordered/">Disordered</a></li><li><a class="tocitem" href="../../verification/identity-harness/">Identity Harness</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../methods/">Computational Methods</a></li><li><input class="collapse-toggle" id="menuitem-6-2" type="checkbox"/><label class="tocitem" for="menuitem-6-2"><span class="docs-label">Physical</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../methods/transfer-matrix/">Transfer Matrix</a></li><li><a class="tocitem" href="../../methods/bloch-hamiltonian/">Bloch Hamiltonian</a></li><li><a class="tocitem" href="../../methods/jordan-wigner/">Jordan-Wigner</a></li><li><a class="tocitem" href="../../methods/calabrese-cardy/">Calabrese-Cardy</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-6-3" type="checkbox"/><label class="tocitem" for="menuitem-6-3"><span class="docs-label">Computational</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../methods/exact-diagonalization/">Exact Diagonalization</a></li><li><a class="tocitem" href="../../methods/automatic-differentiation/">Automatic Differentiation</a></li></ul></li></ul></li><li><span class="tocitem">Derivation Notes</span><ul><li><a class="tocitem" href="../../calc/jw-tfim-bdg/">JW → TFIM BdG</a></li><li><a class="tocitem" href="../../calc/kramers-wannier-duality/">Kramers-Wannier Duality</a></li><li><a class="tocitem" href="../../calc/transfer-matrix-symmetric-split/">Transfer Matrix Split</a></li><li><a class="tocitem" href="../../calc/yang-magnetization-toeplitz/">Yang Magnetization</a></li><li><a class="tocitem" href="../../calc/heisenberg-dimer-singlet-triplet/">Heisenberg Dimer</a></li><li><a class="tocitem" href="../../calc/bethe-ansatz-heisenberg-e0/">Bethe Ansatz e₀</a></li><li><a class="tocitem" href="../../calc/heisenberg-spinons/">Heisenberg Spinons</a></li><li><a class="tocitem" href="../../calc/xxz-luttinger-parameters/">XXZ Luttinger Parameters</a></li><li><a class="tocitem" href="../../calc/bloch-honeycomb-dispersion/">Honeycomb Bloch</a></li><li><a class="tocitem" href="../../calc/bloch-kagome-flat-band/">Kagome Flat Band</a></li><li><a class="tocitem" href="../../calc/bloch-lieb-flat-band/">Lieb Flat Band</a></li><li><a class="tocitem" href="../../calc/calabrese-cardy-obc-vs-pbc/">Calabrese-Cardy OBC/PBC</a></li><li><a class="tocitem" href="../../calc/tfim-entanglement-peschel/">TFIM Entanglement (Peschel)</a></li><li><a class="tocitem" href="../../calc/tfim-loschmidt/">TFIM Loschmidt + DQPT</a></li><li><a class="tocitem" href="../../calc/tfim-gge/">TFIM GGE Quench</a></li><li><a class="tocitem" href="../../calc/ad-thermodynamics-from-z/">AD from ln Z</a></li><li><a class="tocitem" href="../../calc/ising-scaling-relations/">Scaling Relations</a></li><li><a class="tocitem" href="../../calc/ising-cft-primary-operators/">Ising CFT Operators</a></li><li><a class="tocitem" href="../../calc/ising-cft-magnetic-perturbation/">Ising CFT + σ → E8</a></li><li><a class="tocitem" href="../../calc/e8-mass-spectrum-derivation/">E8 Mass Derivation</a></li></ul></li><li><a class="tocitem" href="../../references/">References</a></li><li><a class="tocitem" href="../../api/">API Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Verification</a></li><li><a class="is-disabled">Verified Atlas</a></li><li class="is-active"><a href>Knowledge graph</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Knowledge graph</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/sotashimozono/QAtlas.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/sotashimozono/QAtlas.jl/blob/main/docs/src/atlas/graph.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Knowledge-graph"><a class="docs-heading-anchor" href="#Knowledge-graph">Knowledge graph</a><a id="Knowledge-graph-1"></a><a class="docs-heading-anchor-permalink" href="#Knowledge-graph" title="Permalink"></a></h1><p>The QAtlas vault as a force-directed network — <strong>models</strong> realize <strong>universality classes</strong>, classes <strong>predict</strong> quantities, <strong>bounds</strong> constrain quantities, and models <strong>delegate</strong> quantities to their class.  Orange dashed = a coherence <em>gap</em> (an undeveloped class, or a delegation whose model realizes no class). Drag nodes; hover for type.</p><p><em>Generated by <code>docs/atlas/graph_export.jl</code> from the live registry — 51 nodes (16 models, 7 classes, 3 bound domains, 25 quantities), 81 edges.</em></p><div id="qatlas-graph" style="width:100%;height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Knowledge graph · QAtlas.jl</title><meta name="title" content="Knowledge graph · QAtlas.jl"/><meta property="og:title" content="Knowledge graph · QAtlas.jl"/><meta property="twitter:title" content="Knowledge graph · QAtlas.jl"/><meta name="description" content="Documentation for QAtlas.jl."/><meta property="og:description" content="Documentation for QAtlas.jl."/><meta property="twitter:description" content="Documentation for QAtlas.jl."/><meta property="og:url" content="https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/graph/"/><meta property="twitter:url" content="https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/graph/"/><link rel="canonical" href="https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/graph/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/favicon.ico" rel="icon" type="image/x-icon"/><link href="../../assets/custom.css" rel="stylesheet" type="text/css"/><script src="../../assets/report-issue.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../../"><img src="../../assets/logo.png" alt="QAtlas.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href="../../">QAtlas.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><a class="tocitem" href="../../conventions/">Conventions</a></li><li><span class="tocitem">Models</span><ul><li><a class="tocitem" href="../../models/">Models</a></li><li><a class="tocitem" href="../../models/reference/">Reference</a></li><li><input class="collapse-toggle" id="menuitem-3-3" type="checkbox"/><label class="tocitem" for="menuitem-3-3"><span class="docs-label">Classical</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../models/classical/">Classical Models</a></li><li><a class="tocitem" href="../../models/classical/ising-square/">Ising Square</a></li><li><a class="tocitem" href="../../models/classical/ising-triangular/">Ising Triangular</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-3-4" type="checkbox"/><label class="tocitem" for="menuitem-3-4"><span class="docs-label">Quantum</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../models/quantum/">Quantum Models</a></li><li><a class="tocitem" href="../../models/quantum/tfim/">TFIM</a></li><li><a class="tocitem" href="../../models/quantum/heisenberg/">Heisenberg</a></li><li><a class="tocitem" href="../../models/quantum/majumdar_ghosh/">Majumdar-Ghosh</a></li><li><a class="tocitem" href="../../models/quantum/xxz/">XXZ</a></li><li><a class="tocitem" href="../../models/quantum/hubbard1d/">Hubbard1D</a></li><li><a class="tocitem" href="../../models/quantum/kitaev-honeycomb/">Kitaev Honeycomb</a></li><li><a class="tocitem" href="../../models/quantum/kitaev1d/">Kitaev1D</a></li><li><a class="tocitem" href="../../models/quantum/toric-code/">Toric Code</a></li><li><input class="collapse-toggle" id="menuitem-3-4-10" type="checkbox"/><label class="tocitem" for="menuitem-3-4-10"><span class="docs-label">Tight-Binding</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../models/quantum/tightbinding/">Tight-Binding Models</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/honeycomb/">Honeycomb</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/kagome/">Kagome</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/lieb/">Lieb</a></li><li><a class="tocitem" href="../../models/quantum/tightbinding/triangular/">Triangular</a></li></ul></li></ul></li></ul></li><li><span class="tocitem">Universality Classes</span><ul><li><a class="tocitem" href="../../universalities/">Universality Classes</a></li><li><a class="tocitem" href="../../universalities/ising/">Ising</a></li><li><a class="tocitem" href="../../universalities/percolation/">Percolation</a></li><li><a class="tocitem" href="../../universalities/potts/">Potts</a></li><li><a class="tocitem" href="../../universalities/kpz/">KPZ</a></li><li><a class="tocitem" href="../../universalities/rmt/">RMT / Poisson</a></li><li><a class="tocitem" href="../../universalities/on-models/">XY / Heisenberg</a></li><li><a class="tocitem" href="../../universalities/mean-field/">Mean-Field</a></li><li><a class="tocitem" href="../../universalities/e8/">E8</a></li><li><a class="tocitem" href="../../universalities/cardy_entanglement/">Cardy Entanglement</a></li><li><a class="tocitem" href="../../universalities/cft-casimir/">CFT Casimir Correction</a></li></ul></li><li><span class="tocitem">Verification</span><ul><li><a class="tocitem" href="../../verification/">Verification</a></li><li><input class="collapse-toggle" id="menuitem-5-2" type="checkbox" checked/><label class="tocitem" for="menuitem-5-2"><span class="docs-label">Verified Atlas</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../">QAtlas — Verified Exact-Solution Atlas</a></li><li class="is-active"><a class="tocitem" href>Knowledge graph</a></li><li><a class="tocitem" href="../ModelList/">Model list</a></li><li><a class="tocitem" href="../Bibliography/">Bibliography</a></li><li><a class="tocitem" href="../Methods/">Methods</a></li><li><a class="tocitem" href="../CalcIndex/">Derivation-note index</a></li><li><a class="tocitem" href="../Audit/">Audit</a></li></ul></li><li><a class="tocitem" href="../../verification/cross-checks/">Cross-Checks</a></li><li><a class="tocitem" href="../../verification/entanglement/">Entanglement</a></li><li><a class="tocitem" href="../../verification/disordered/">Disordered</a></li><li><a class="tocitem" href="../../verification/identity-harness/">Identity Harness</a></li></ul></li><li><span class="tocitem">Methods</span><ul><li><a class="tocitem" href="../../methods/">Computational Methods</a></li><li><input class="collapse-toggle" id="menuitem-6-2" type="checkbox"/><label class="tocitem" for="menuitem-6-2"><span class="docs-label">Physical</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../methods/transfer-matrix/">Transfer Matrix</a></li><li><a class="tocitem" href="../../methods/bloch-hamiltonian/">Bloch Hamiltonian</a></li><li><a class="tocitem" href="../../methods/jordan-wigner/">Jordan-Wigner</a></li><li><a class="tocitem" href="../../methods/calabrese-cardy/">Calabrese-Cardy</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-6-3" type="checkbox"/><label class="tocitem" for="menuitem-6-3"><span class="docs-label">Computational</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../methods/exact-diagonalization/">Exact Diagonalization</a></li><li><a class="tocitem" href="../../methods/automatic-differentiation/">Automatic Differentiation</a></li></ul></li></ul></li><li><span class="tocitem">Derivation Notes</span><ul><li><a class="tocitem" href="../../calc/jw-tfim-bdg/">JW → TFIM BdG</a></li><li><a class="tocitem" href="../../calc/kramers-wannier-duality/">Kramers-Wannier Duality</a></li><li><a class="tocitem" href="../../calc/transfer-matrix-symmetric-split/">Transfer Matrix Split</a></li><li><a class="tocitem" href="../../calc/yang-magnetization-toeplitz/">Yang Magnetization</a></li><li><a class="tocitem" href="../../calc/heisenberg-dimer-singlet-triplet/">Heisenberg Dimer</a></li><li><a class="tocitem" href="../../calc/bethe-ansatz-heisenberg-e0/">Bethe Ansatz e₀</a></li><li><a class="tocitem" href="../../calc/heisenberg-spinons/">Heisenberg Spinons</a></li><li><a class="tocitem" href="../../calc/xxz-luttinger-parameters/">XXZ Luttinger Parameters</a></li><li><a class="tocitem" href="../../calc/bloch-honeycomb-dispersion/">Honeycomb Bloch</a></li><li><a class="tocitem" href="../../calc/bloch-kagome-flat-band/">Kagome Flat Band</a></li><li><a class="tocitem" href="../../calc/bloch-lieb-flat-band/">Lieb Flat Band</a></li><li><a class="tocitem" href="../../calc/calabrese-cardy-obc-vs-pbc/">Calabrese-Cardy OBC/PBC</a></li><li><a class="tocitem" href="../../calc/tfim-entanglement-peschel/">TFIM Entanglement (Peschel)</a></li><li><a class="tocitem" href="../../calc/tfim-loschmidt/">TFIM Loschmidt + DQPT</a></li><li><a class="tocitem" href="../../calc/tfim-gge/">TFIM GGE Quench</a></li><li><a class="tocitem" href="../../calc/ad-thermodynamics-from-z/">AD from ln Z</a></li><li><a class="tocitem" href="../../calc/ising-scaling-relations/">Scaling Relations</a></li><li><a class="tocitem" href="../../calc/ising-cft-primary-operators/">Ising CFT Operators</a></li><li><a class="tocitem" href="../../calc/ising-cft-magnetic-perturbation/">Ising CFT + σ → E8</a></li><li><a class="tocitem" href="../../calc/e8-mass-spectrum-derivation/">E8 Mass Derivation</a></li></ul></li><li><a class="tocitem" href="../../references/">References</a></li><li><a class="tocitem" href="../../api/">API Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Verification</a></li><li><a class="is-disabled">Verified Atlas</a></li><li class="is-active"><a href>Knowledge graph</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Knowledge graph</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/sotashimozono/QAtlas.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/sotashimozono/QAtlas.jl/blob/main/docs/src/atlas/graph.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Knowledge-graph"><a class="docs-heading-anchor" href="#Knowledge-graph">Knowledge graph</a><a id="Knowledge-graph-1"></a><a class="docs-heading-anchor-permalink" href="#Knowledge-graph" title="Permalink"></a></h1><p>The QAtlas vault as a force-directed network — <strong>models</strong> realize <strong>universality classes</strong>, classes <strong>predict</strong> quantities, <strong>bounds</strong> constrain quantities, and models <strong>delegate</strong> quantities to their class.  Orange = a coherence <em>gap</em> (an undeveloped class, or a delegation whose model realizes no class).  Drag nodes, scroll to zoom, hover to highlight neighbours, click a model/quantity to open its page.</p><p><em>Rendered by the Quartz graph engine (d3-force + PixiJS), ported to a standalone bundle (<code>assets/qatlas-graph.js</code>).  Generated by <code>docs/atlas/graph_export.jl</code> from the live registry — 51 nodes (16 models, 7 classes, 3 bound domains, 25 quantities), 81 edges.</em></p><div id="qatlas-graph" style="width:100%;height:720px;border:1px solid var(--light-color,#ddd);border-radius:6px;"></div>
 <script>
 (function(){
-  function draw(){
+  var DATA = {
+    nodes: [
+      {id:"Q:BekensteinBound",text:"BekensteinBound",group:"quantity",url:"../quantities/BekensteinBound/"},
+      {id:"Q:LogarithmicNegativity",text:"LogarithmicNegativity",group:"quantity",url:"../quantities/LogarithmicNegativity/"},
+      {id:"Q:VonNeumannEntropy{:equilibrium}",text:"VonNeumannEntropy{:equilibrium}",group:"quantity",url:""},
+      {id:"M:LongRangeIsing1D",text:"LongRangeIsing1D",group:"model",url:"../models/LongRangeIsing1D/"},
+      {id:"C:MeanField",text:"MeanField",group:"class",url:""},
+      {id:"Q:MassGap",text:"MassGap",group:"quantity",url:"../quantities/MassGap/"},
+      {id:"M:CurieWeissIsing",text:"CurieWeissIsing",group:"model",url:"../models/CurieWeissIsing/"},
+      {id:"Q:MerminGHZBound",text:"MerminGHZBound",group:"quantity",url:"../quantities/MerminGHZBound/"},
+      {id:"M:TFIM",text:"TFIM",group:"model",url:"../models/TFIM/"},
+      {id:"M:IsingTriangular",text:"IsingTriangular",group:"model",url:"../models/IsingTriangular/"},
+      {id:"B:QuantumInformation",text:"QuantumInformation",group:"bound",url:""},
+      {id:"Q:CFTThermalEntropyDensity",text:"CFTThermalEntropyDensity",group:"quantity",url:"../quantities/CFTThermalEntropyDensity/"},
+      {id:"Q:EntanglementGrowthSlope",text:"EntanglementGrowthSlope",group:"quantity",url:"../quantities/EntanglementGrowthSlope/"},
+      {id:"Q:RenyiEntropy",text:"RenyiEntropy",group:"quantity",url:"../quantities/RenyiEntropy/"},
+      {id:"Q:GrowthExponents",text:"GrowthExponents",group:"quantity",url:"../quantities/GrowthExponents/"},
+      {id:"Q:ThermalEnergyDensity",text:"ThermalEnergyDensity",group:"quantity",url:"../quantities/ThermalEnergyDensity/"},
+      {id:"M:ZnClock",text:"ZnClock",group:"model",url:"../models/ZnClock/"},
+      {id:"C:XY",text:"XY",group:"class",url:""},
+      {id:"Q:ChargeGap",text:"ChargeGap",group:"quantity",url:"../quantities/ChargeGap/"},
+      {id:"M:DMIHeisenberg1D",text:"DMIHeisenberg1D",group:"model",url:"../models/DMIHeisenberg1D/"},
+      {id:"Q:ConformalCasimirEnergy",text:"ConformalCasimirEnergy",group:"quantity",url:"../quantities/ConformalCasimirEnergy/"},
+      {id:"M:Heisenberg1D",text:"Heisenberg1D",group:"model",url:"../models/Heisenberg1D/"},
+      {id:"B:Holographic",text:"Holographic",group:"bound",url:""},
+      {id:"M:HeisenbergXYZ",text:"HeisenbergXYZ",group:"model",url:"../models/HeisenbergXYZ/"},
+      {id:"M:HaldaneShastry",text:"HaldaneShastry",group:"model",url:"../models/HaldaneShastry/"},
+      {id:"Q:QuantumSpeedLimit",text:"QuantumSpeedLimit",group:"quantity",url:"../quantities/QuantumSpeedLimit/"},
+      {id:"Q:EntanglementSaturationDensity",text:"EntanglementSaturationDensity",group:"quantity",url:"../quantities/EntanglementSaturationDensity/"},
+      {id:"M:XXZ1D",text:"XXZ1D",group:"model",url:"../models/XXZ1D/"},
+      {id:"Q:MutualInformation",text:"MutualInformation",group:"quantity",url:"../quantities/MutualInformation/"},
+      {id:"M:MixedFieldIsing1D",text:"MixedFieldIsing1D",group:"model",url:"../models/MixedFieldIsing1D/"},
+      {id:"C:KPZ",text:"KPZ",group:"class",url:""},
+      {id:"Q:LuttingerParameter",text:"LuttingerParameter",group:"quantity",url:"../quantities/LuttingerParameter/"},
+      {id:"Q:CHSHBound",text:"CHSHBound",group:"quantity",url:"../quantities/CHSHBound/"},
+      {id:"M:RandomBondIsing2D",text:"RandomBondIsing2D",group:"model",url:"../models/RandomBondIsing2D/"},
+      {id:"Q:CardyEntropy",text:"CardyEntropy",group:"quantity",url:"../quantities/CardyEntropy/"},
+      {id:"B:Dynamics",text:"Dynamics",group:"bound",url:""},
+      {id:"Q:CentralCharge",text:"CentralCharge",group:"quantity",url:"../quantities/CentralCharge/"},
+      {id:"C:Potts4",text:"Potts4",group:"class",url:""},
+      {id:"Q:Energy{:per_site}",text:"Energy{:per_site}",group:"quantity",url:""},
+      {id:"M:TASEP",text:"TASEP",group:"model",url:"../models/TASEP/"},
+      {id:"C:Ising",text:"Ising",group:"class",url:""},
+      {id:"C:Heisenberg",text:"Heisenberg",group:"class",url:""},
+      {id:"M:J1J2Heisenberg1D",text:"J1J2Heisenberg1D",group:"model",url:"../models/J1J2Heisenberg1D/"},
+      {id:"Q:ChaosBound",text:"ChaosBound",group:"quantity",url:"../quantities/ChaosBound/"},
+      {id:"M:IsingSquare",text:"IsingSquare",group:"model",url:"../models/IsingSquare/"},
+      {id:"Q:OptimalCloningFidelity",text:"OptimalCloningFidelity",group:"quantity",url:"../quantities/OptimalCloningFidelity/"},
+      {id:"Q:CriticalExponents",text:"CriticalExponents",group:"quantity",url:"../quantities/CriticalExponents/"},
+      {id:"C:Potts3",text:"Potts3",group:"class",url:""},
+      {id:"Q:BB84KeyRate",text:"BB84KeyRate",group:"quantity",url:"../quantities/BB84KeyRate/"},
+      {id:"M:ExtendedHubbard1D",text:"ExtendedHubbard1D",group:"model",url:"../models/ExtendedHubbard1D/"},
+      {id:"Q:ScramblingTime",text:"ScramblingTime",group:"quantity",url:"../quantities/ScramblingTime/"}
+    ],
+    links: [
+      {source:"M:TFIM",target:"C:Ising",gap:false},
+      {source:"M:XXZ1D",target:"C:XY",gap:false},
+      {source:"M:Heisenberg1D",target:"C:Heisenberg",gap:false},
+      {source:"M:IsingSquare",target:"C:Ising",gap:false},
+      {source:"M:CurieWeissIsing",target:"C:MeanField",gap:false},
+      {source:"M:TASEP",target:"C:KPZ",gap:false},
+      {source:"M:HaldaneShastry",target:"C:Heisenberg",gap:false},
+      {source:"M:IsingTriangular",target:"C:Ising",gap:false},
+      {source:"C:MeanField",target:"Q:CriticalExponents",gap:false},
+      {source:"C:KPZ",target:"Q:GrowthExponents",gap:false},
+      {source:"C:Ising",target:"Q:MutualInformation",gap:false},
+      {source:"C:Ising",target:"Q:EntanglementGrowthSlope",gap:false},
+      {source:"C:Ising",target:"Q:EntanglementSaturationDensity",gap:false},
+      {source:"C:Ising",target:"Q:ConformalCasimirEnergy",gap:false},
+      {source:"C:Ising",target:"Q:ThermalEnergyDensity",gap:false},
+      {source:"C:Ising",target:"Q:CFTThermalEntropyDensity",gap:false},
+      {source:"C:Ising",target:"Q:CardyEntropy",gap:false},
+      {source:"C:Ising",target:"Q:LogarithmicNegativity",gap:false},
+      {source:"C:XY",target:"Q:MutualInformation",gap:false},
+      {source:"C:XY",target:"Q:EntanglementGrowthSlope",gap:false},
+      {source:"C:XY",target:"Q:EntanglementSaturationDensity",gap:false},
+      {source:"C:XY",target:"Q:ConformalCasimirEnergy",gap:false},
+      {source:"C:XY",target:"Q:ThermalEnergyDensity",gap:false},
+      {source:"C:XY",target:"Q:CFTThermalEntropyDensity",gap:false},
+      {source:"C:XY",target:"Q:CardyEntropy",gap:false},
+      {source:"C:XY",target:"Q:LogarithmicNegativity",gap:false},
+      {source:"C:Heisenberg",target:"Q:MutualInformation",gap:false},
+      {source:"C:Heisenberg",target:"Q:EntanglementGrowthSlope",gap:false},
+      {source:"C:Heisenberg",target:"Q:EntanglementSaturationDensity",gap:false},
+      {source:"C:Heisenberg",target:"Q:ConformalCasimirEnergy",gap:false},
+      {source:"C:Heisenberg",target:"Q:ThermalEnergyDensity",gap:false},
+      {source:"C:Heisenberg",target:"Q:CFTThermalEntropyDensity",gap:false},
+      {source:"C:Heisenberg",target:"Q:CardyEntropy",gap:false},
+      {source:"C:Heisenberg",target:"Q:LogarithmicNegativity",gap:false},
+      {source:"C:Potts3",target:"Q:MutualInformation",gap:false},
+      {source:"C:Potts3",target:"Q:EntanglementGrowthSlope",gap:false},
+      {source:"C:Potts3",target:"Q:EntanglementSaturationDensity",gap:false},
+      {source:"C:Potts3",target:"Q:ConformalCasimirEnergy",gap:false},
+      {source:"C:Potts3",target:"Q:ThermalEnergyDensity",gap:false},
+      {source:"C:Potts3",target:"Q:CFTThermalEntropyDensity",gap:false},
+      {source:"C:Potts3",target:"Q:CardyEntropy",gap:false},
+      {source:"C:Potts3",target:"Q:LogarithmicNegativity",gap:false},
+      {source:"C:Potts4",target:"Q:MutualInformation",gap:false},
+      {source:"C:Potts4",target:"Q:EntanglementGrowthSlope",gap:false},
+      {source:"C:Potts4",target:"Q:EntanglementSaturationDensity",gap:false},
+      {source:"C:Potts4",target:"Q:ConformalCasimirEnergy",gap:false},
+      {source:"C:Potts4",target:"Q:ThermalEnergyDensity",gap:false},
+      {source:"C:Potts4",target:"Q:CFTThermalEntropyDensity",gap:false},
+      {source:"C:Potts4",target:"Q:CardyEntropy",gap:false},
+      {source:"C:Potts4",target:"Q:LogarithmicNegativity",gap:false},
+      {source:"B:QuantumInformation",target:"Q:CHSHBound",gap:false},
+      {source:"B:QuantumInformation",target:"Q:CHSHBound",gap:false},
+      {source:"B:QuantumInformation",target:"Q:CHSHBound",gap:false},
+      {source:"B:QuantumInformation",target:"Q:MerminGHZBound",gap:false},
+      {source:"B:QuantumInformation",target:"Q:MerminGHZBound",gap:false},
+      {source:"B:QuantumInformation",target:"Q:OptimalCloningFidelity",gap:false},
+      {source:"B:QuantumInformation",target:"Q:BB84KeyRate",gap:false},
+      {source:"B:Dynamics",target:"Q:ChaosBound",gap:false},
+      {source:"B:Dynamics",target:"Q:QuantumSpeedLimit",gap:false},
+      {source:"B:Dynamics",target:"Q:QuantumSpeedLimit",gap:false},
+      {source:"B:Dynamics",target:"Q:ScramblingTime",gap:false},
+      {source:"B:Holographic",target:"Q:BekensteinBound",gap:false},
+      {source:"M:IsingSquare",target:"Q:CriticalExponents",gap:false},
+      {source:"M:IsingTriangular",target:"Q:CriticalExponents",gap:false},
+      {source:"M:CurieWeissIsing",target:"Q:CriticalExponents",gap:false},
+      {source:"M:RandomBondIsing2D",target:"Q:CentralCharge",gap:true},
+      {source:"M:ZnClock",target:"Q:CentralCharge",gap:true},
+      {source:"M:TFIM",target:"Q:CriticalExponents",gap:false},
+      {source:"M:XXZ1D",target:"Q:VonNeumannEntropy{:equilibrium}",gap:false},
+      {source:"M:XXZ1D",target:"Q:RenyiEntropy",gap:false},
+      {source:"M:Heisenberg1D",target:"Q:LuttingerParameter",gap:false},
+      {source:"M:Heisenberg1D",target:"Q:VonNeumannEntropy{:equilibrium}",gap:false},
+      {source:"M:Heisenberg1D",target:"Q:RenyiEntropy",gap:false},
+      {source:"M:HaldaneShastry",target:"Q:VonNeumannEntropy{:equilibrium}",gap:false},
+      {source:"M:HaldaneShastry",target:"Q:RenyiEntropy",gap:false},
+      {source:"M:HeisenbergXYZ",target:"Q:LuttingerParameter",gap:true},
+      {source:"M:LongRangeIsing1D",target:"Q:MassGap",gap:true},
+      {source:"M:DMIHeisenberg1D",target:"Q:Energy{:per_site}",gap:true},
+      {source:"M:J1J2Heisenberg1D",target:"Q:Energy{:per_site}",gap:true},
+      {source:"M:MixedFieldIsing1D",target:"Q:MassGap",gap:true},
+      {source:"M:ExtendedHubbard1D",target:"Q:ChargeGap",gap:true}
+    ]
+  };
+  var CFG = {
+    drag: true, zoom: true, repelForce: 0.7, centerForce: 0.3,
+    linkDistance: 38, fontSize: 0.6, opacityScale: 1.1, focusOnHover: true,
+    labelColor: getComputedStyle(document.documentElement).getPropertyValue("--body-color") || "#2b2b2b"
+  };
+  function go(){
     var el = document.getElementById("qatlas-graph");
     if (!el) return;
-    if (typeof vis === "undefined") {
-      el.innerHTML = "<p style='padding:1em'>vis-network failed to load — the bundled assets/vis-network.min.js did not load.</p>";
-      return;
-    }
-    var nodes = new vis.DataSet([
-      {id:"Q:BekensteinBound",label:"BekensteinBound",group:"quantity",title:"quantity: BekensteinBound"},
-      {id:"Q:LogarithmicNegativity",label:"LogarithmicNegativity",group:"quantity",title:"quantity: LogarithmicNegativity"},
-      {id:"Q:VonNeumannEntropy{:equilibrium}",label:"VonNeumannEntropy{:equilibrium}",group:"quantity",title:"quantity: VonNeumannEntropy{:equilibrium}"},
-      {id:"M:LongRangeIsing1D",label:"LongRangeIsing1D",group:"model",title:"model: LongRangeIsing1D"},
-      {id:"C:MeanField",label:"MeanField",group:"class",title:"universality class: MeanField"},
-      {id:"Q:MassGap",label:"MassGap",group:"quantity",title:"quantity: MassGap"},
-      {id:"M:CurieWeissIsing",label:"CurieWeissIsing",group:"model",title:"model: CurieWeissIsing"},
-      {id:"Q:MerminGHZBound",label:"MerminGHZBound",group:"quantity",title:"quantity: MerminGHZBound"},
-      {id:"M:TFIM",label:"TFIM",group:"model",title:"model: TFIM"},
-      {id:"M:IsingTriangular",label:"IsingTriangular",group:"model",title:"model: IsingTriangular"},
-      {id:"B:QuantumInformation",label:"QuantumInformation",group:"bound",title:"bound domain: QuantumInformation"},
-      {id:"Q:CFTThermalEntropyDensity",label:"CFTThermalEntropyDensity",group:"quantity",title:"quantity: CFTThermalEntropyDensity"},
-      {id:"Q:EntanglementGrowthSlope",label:"EntanglementGrowthSlope",group:"quantity",title:"quantity: EntanglementGrowthSlope"},
-      {id:"Q:RenyiEntropy",label:"RenyiEntropy",group:"quantity",title:"quantity: RenyiEntropy"},
-      {id:"Q:GrowthExponents",label:"GrowthExponents",group:"quantity",title:"quantity: GrowthExponents"},
-      {id:"Q:ThermalEnergyDensity",label:"ThermalEnergyDensity",group:"quantity",title:"quantity: ThermalEnergyDensity"},
-      {id:"M:ZnClock",label:"ZnClock",group:"model",title:"model: ZnClock"},
-      {id:"C:XY",label:"XY",group:"class",title:"universality class: XY"},
-      {id:"Q:ChargeGap",label:"ChargeGap",group:"quantity",title:"quantity: ChargeGap"},
-      {id:"M:DMIHeisenberg1D",label:"DMIHeisenberg1D",group:"model",title:"model: DMIHeisenberg1D"},
-      {id:"Q:ConformalCasimirEnergy",label:"ConformalCasimirEnergy",group:"quantity",title:"quantity: ConformalCasimirEnergy"},
-      {id:"M:Heisenberg1D",label:"Heisenberg1D",group:"model",title:"model: Heisenberg1D"},
-      {id:"B:Holographic",label:"Holographic",group:"bound",title:"bound domain: Holographic"},
-      {id:"M:HeisenbergXYZ",label:"HeisenbergXYZ",group:"model",title:"model: HeisenbergXYZ"},
-      {id:"M:HaldaneShastry",label:"HaldaneShastry",group:"model",title:"model: HaldaneShastry"},
-      {id:"Q:QuantumSpeedLimit",label:"QuantumSpeedLimit",group:"quantity",title:"quantity: QuantumSpeedLimit"},
-      {id:"Q:EntanglementSaturationDensity",label:"EntanglementSaturationDensity",group:"quantity",title:"quantity: EntanglementSaturationDensity"},
-      {id:"M:XXZ1D",label:"XXZ1D",group:"model",title:"model: XXZ1D"},
-      {id:"Q:MutualInformation",label:"MutualInformation",group:"quantity",title:"quantity: MutualInformation"},
-      {id:"M:MixedFieldIsing1D",label:"MixedFieldIsing1D",group:"model",title:"model: MixedFieldIsing1D"},
-      {id:"C:KPZ",label:"KPZ",group:"class",title:"universality class: KPZ"},
-      {id:"Q:LuttingerParameter",label:"LuttingerParameter",group:"quantity",title:"quantity: LuttingerParameter"},
-      {id:"Q:CHSHBound",label:"CHSHBound",group:"quantity",title:"quantity: CHSHBound"},
-      {id:"M:RandomBondIsing2D",label:"RandomBondIsing2D",group:"model",title:"model: RandomBondIsing2D"},
-      {id:"Q:CardyEntropy",label:"CardyEntropy",group:"quantity",title:"quantity: CardyEntropy"},
-      {id:"B:Dynamics",label:"Dynamics",group:"bound",title:"bound domain: Dynamics"},
-      {id:"Q:CentralCharge",label:"CentralCharge",group:"quantity",title:"quantity: CentralCharge"},
-      {id:"C:Potts4",label:"Potts4",group:"class",title:"universality class: Potts4"},
-      {id:"Q:Energy{:per_site}",label:"Energy{:per_site}",group:"quantity",title:"quantity: Energy{:per_site}"},
-      {id:"M:TASEP",label:"TASEP",group:"model",title:"model: TASEP"},
-      {id:"C:Ising",label:"Ising",group:"class",title:"universality class: Ising"},
-      {id:"C:Heisenberg",label:"Heisenberg",group:"class",title:"universality class: Heisenberg"},
-      {id:"M:J1J2Heisenberg1D",label:"J1J2Heisenberg1D",group:"model",title:"model: J1J2Heisenberg1D"},
-      {id:"Q:ChaosBound",label:"ChaosBound",group:"quantity",title:"quantity: ChaosBound"},
-      {id:"M:IsingSquare",label:"IsingSquare",group:"model",title:"model: IsingSquare"},
-      {id:"Q:OptimalCloningFidelity",label:"OptimalCloningFidelity",group:"quantity",title:"quantity: OptimalCloningFidelity"},
-      {id:"Q:CriticalExponents",label:"CriticalExponents",group:"quantity",title:"quantity: CriticalExponents"},
-      {id:"C:Potts3",label:"Potts3",group:"class",title:"universality class: Potts3"},
-      {id:"Q:BB84KeyRate",label:"BB84KeyRate",group:"quantity",title:"quantity: BB84KeyRate"},
-      {id:"M:ExtendedHubbard1D",label:"ExtendedHubbard1D",group:"model",title:"model: ExtendedHubbard1D"},
-      {id:"Q:ScramblingTime",label:"ScramblingTime",group:"quantity",title:"quantity: ScramblingTime"}
-  ]);
-  var edges = new vis.DataSet([
-      {from:"M:TFIM",to:"C:Ising",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:XXZ1D",to:"C:XY",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:Heisenberg1D",to:"C:Heisenberg",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:IsingSquare",to:"C:Ising",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:CurieWeissIsing",to:"C:MeanField",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:TASEP",to:"C:KPZ",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:HaldaneShastry",to:"C:Heisenberg",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:IsingTriangular",to:"C:Ising",label:"realizes",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:MeanField",to:"Q:CriticalExponents",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:KPZ",to:"Q:GrowthExponents",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:MutualInformation",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:EntanglementGrowthSlope",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:EntanglementSaturationDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:ConformalCasimirEnergy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:ThermalEnergyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:CFTThermalEntropyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:CardyEntropy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Ising",to:"Q:LogarithmicNegativity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:MutualInformation",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:EntanglementGrowthSlope",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:EntanglementSaturationDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:ConformalCasimirEnergy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:ThermalEnergyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:CFTThermalEntropyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:CardyEntropy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:XY",to:"Q:LogarithmicNegativity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:MutualInformation",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:EntanglementGrowthSlope",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:EntanglementSaturationDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:ConformalCasimirEnergy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:ThermalEnergyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:CFTThermalEntropyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:CardyEntropy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Heisenberg",to:"Q:LogarithmicNegativity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:MutualInformation",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:EntanglementGrowthSlope",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:EntanglementSaturationDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:ConformalCasimirEnergy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:ThermalEnergyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:CFTThermalEntropyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:CardyEntropy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts3",to:"Q:LogarithmicNegativity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:MutualInformation",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:EntanglementGrowthSlope",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:EntanglementSaturationDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:ConformalCasimirEnergy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:ThermalEnergyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:CFTThermalEntropyDensity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:CardyEntropy",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"C:Potts4",to:"Q:LogarithmicNegativity",label:"predicts",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:CHSHBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:CHSHBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:CHSHBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:MerminGHZBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:MerminGHZBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:OptimalCloningFidelity",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:QuantumInformation",to:"Q:BB84KeyRate",label:"bounds(lower)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:Dynamics",to:"Q:ChaosBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:Dynamics",to:"Q:QuantumSpeedLimit",label:"bounds(lower)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:Dynamics",to:"Q:QuantumSpeedLimit",label:"bounds(lower)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:Dynamics",to:"Q:ScramblingTime",label:"bounds(lower)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"B:Holographic",to:"Q:BekensteinBound",label:"bounds(upper)",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:IsingSquare",to:"Q:CriticalExponents",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:IsingTriangular",to:"Q:CriticalExponents",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:CurieWeissIsing",to:"Q:CriticalExponents",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:RandomBondIsing2D",to:"Q:CentralCharge",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:ZnClock",to:"Q:CentralCharge",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:TFIM",to:"Q:CriticalExponents",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:XXZ1D",to:"Q:VonNeumannEntropy{:equilibrium}",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:XXZ1D",to:"Q:RenyiEntropy",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:Heisenberg1D",to:"Q:LuttingerParameter",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:Heisenberg1D",to:"Q:VonNeumannEntropy{:equilibrium}",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:Heisenberg1D",to:"Q:RenyiEntropy",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:HaldaneShastry",to:"Q:VonNeumannEntropy{:equilibrium}",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:HaldaneShastry",to:"Q:RenyiEntropy",label:"delegates",arrows:"to",font:{size:9,color:"#888"}},
-      {from:"M:HeisenbergXYZ",to:"Q:LuttingerParameter",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:LongRangeIsing1D",to:"Q:MassGap",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:DMIHeisenberg1D",to:"Q:Energy{:per_site}",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:J1J2Heisenberg1D",to:"Q:Energy{:per_site}",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:MixedFieldIsing1D",to:"Q:MassGap",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true},
-      {from:"M:ExtendedHubbard1D",to:"Q:ChargeGap",label:"delegates",arrows:"to",font:{size:9,color:"#888"},color:{color:"#e8a33d"},dashes:true}
-  ]);
-  var groups = {
-    model:    {color:{background:"#4f8cc9",border:"#2b5d8a"},shape:"dot"},
-    class:    {color:{background:"#9b6cc9",border:"#6b3f96"},shape:"diamond"},
-    bound:    {color:{background:"#c95f5f",border:"#8a2b2b"},shape:"triangle"},
-    quantity: {color:{background:"#5fae6f",border:"#2b7a3f"},shape:"box"},
-    gap:      {color:{background:"#e8a33d",border:"#b87410"},shape:"diamond"}
-  };
-    var network = new vis.Network(
-      el,
-      {nodes:nodes, edges:edges},
-      {
-        groups: groups,
-        nodes: {font:{size:12}},
-        edges: {smooth:{type:"continuous"}},
-        physics: {barnesHut:{gravitationalConstant:-8000,springLength:120,springConstant:0.04},
-                  stabilization:{iterations:200}},
-        interaction: {hover:true, tooltipDelay:120}
-      }
-    );
-    network.once("stabilizationIterationsDone", function(){ network.fit(); });
-  }
-  function start(){
-    if (typeof vis !== "undefined") { draw(); return; }
+    if (window.QAtlasGraph) { window.QAtlasGraph.render(el, DATA, CFG); return; }
     var root = location.pathname.split("atlas/graph")[0];
-    // The Documenter page loads requirejs, so vis-network's UMD would register
-    // as an AMD module instead of setting window.vis. Hide `define` during the
-    // load so the UMD falls through to the global-assignment branch, then restore.
-    var savedDefine = window.define;
-    window.define = undefined;
     var s = document.createElement("script");
-    s.src = root + "assets/vis-network.min.js";
-    s.onload = function(){ window.define = savedDefine; draw(); };
-    s.onerror = function(){
-      window.define = savedDefine;
-      var el = document.getElementById("qatlas-graph");
-      if (el) el.innerHTML = "<p style='padding:1em'>vis-network asset failed to load from " + s.src + "</p>";
-    };
+    s.src = root + "assets/qatlas-graph.js";
+    s.onload = function(){ if (window.QAtlasGraph) window.QAtlasGraph.render(el, DATA, CFG); };
+    s.onerror = function(){ el.innerHTML = "<p style='padding:1em'>graph bundle failed to load from " + s.src + "</p>"; };
     document.head.appendChild(s);
   }
-  if (document.readyState === "complete") { start(); }
-  else { window.addEventListener("load", start); }
+  if (document.readyState === "complete") { go(); }
+  else { window.addEventListener("load", go); }
 })();
-</script></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« QAtlas — Verified Exact-Solution Atlas</a><a class="docs-footer-nextpage" href="../ModelList/">Model list »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Friday 5 June 2026 08:07">Friday 5 June 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+</script></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« QAtlas — Verified Exact-Solution Atlas</a><a class="docs-footer-nextpage" href="../ModelList/">Model list »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Saturday 6 June 2026 01:46">Saturday 6 June 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

@@ -56,6 +56,7 @@ type Cfg = {
   fontSize?: number
   opacityScale?: number
   focusOnHover?: boolean
+  legend?: boolean
   colors?: Record<string, string>
   linkColor?: string
   gapColor?: string
@@ -181,10 +182,13 @@ async function renderGraph(
     const def = 1 / scale
     const act = def * 1.1
     for (const n of nodeRenderData) {
-      const isH = hoveredNodeId === n.simulationData.id
+      const id = n.simulationData.id
+      const isH = hoveredNodeId === id
+      const show = isH || hoveredNeighbours.has(id)
+      const alpha = show ? 1 : hoveredNodeId !== null ? 0 : n.label.alpha
       tg.add(
         new Tweened<Text>(n.label).to(
-          { alpha: isH ? 1 : n.label.alpha, scale: { x: isH ? act : def, y: isH ? act : def } },
+          { alpha, scale: { x: isH ? act : def, y: isH ? act : def } },
           100,
         ),
       )
@@ -229,6 +233,31 @@ async function renderGraph(
     eventMode: "static",
   })
   graph.appendChild(app.canvas)
+
+  if (cfg.legend !== false) {
+    graph.style.position = graph.style.position || "relative"
+    const present = new Set(nodes.map((n) => n.group))
+    const legendItems: [string, string][] = [
+      ["model", "Model"],
+      ["class", "Universality class"],
+      ["bound", "Bound domain"],
+      ["quantity", "Quantity"],
+      ["gap", "Coherence gap"],
+    ]
+    const legend = document.createElement("div")
+    legend.style.cssText =
+      "position:absolute;top:10px;left:10px;padding:7px 10px;font-size:12px;line-height:1.7;" +
+      "background:rgba(127,127,127,0.14);border-radius:6px;pointer-events:none"
+    legend.innerHTML = legendItems
+      .filter(([g]) => present.has(g))
+      .map(
+        ([g, label]) =>
+          `<div><span style="display:inline-block;width:11px;height:11px;border-radius:50%;` +
+          `background:${palette[g]};margin-right:7px;vertical-align:middle"></span>${label}</div>`,
+      )
+      .join("")
+    graph.appendChild(legend)
+  }
 
   const stage = app.stage
   stage.interactive = false
@@ -361,11 +390,29 @@ async function renderGraph(
     }
     for (const l of linkRenderData) {
       const d = l.simulationData
+      const sx = d.source.x! + width / 2,
+        sy = d.source.y! + height / 2
+      const tx = d.target.x! + width / 2,
+        ty = d.target.y! + height / 2
+      const dx = tx - sx,
+        dy = ty - sy
+      const len = Math.hypot(dx, dy) || 1
+      const ux = dx / len,
+        uy = dy / len
+      const tr = nodeRadius(d.target) + 1.5
+      const ex = tx - ux * tr,
+        ey = ty - uy * tr // line stops at the target node's edge
       l.gfx.clear()
-      l.gfx.moveTo(d.source.x! + width / 2, d.source.y! + height / 2)
+      l.gfx.moveTo(sx, sy).lineTo(ex, ey).stroke({ alpha: l.alpha, width: 1, color: l.color })
+      // arrowhead at the target end
+      const ah = 4.5,
+        a = Math.atan2(dy, dx)
       l.gfx
-        .lineTo(d.target.x! + width / 2, d.target.y! + height / 2)
-        .stroke({ alpha: l.alpha, width: 1, color: l.color })
+        .moveTo(ex, ey)
+        .lineTo(ex - ah * Math.cos(a - 0.45), ey - ah * Math.sin(a - 0.45))
+        .lineTo(ex - ah * Math.cos(a + 0.45), ey - ah * Math.sin(a + 0.45))
+        .lineTo(ex, ey)
+        .fill({ alpha: l.alpha, color: l.color })
     }
     tweens.forEach((t) => t.update(time))
     app.renderer.render(stage)

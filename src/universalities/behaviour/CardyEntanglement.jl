@@ -53,9 +53,9 @@ generic-CFT entanglement formula must use a 1+1D class.
 
 Reference: Belavin, Polyakov, Zamolodchikov, Nucl. Phys. B 241, 333 (1984).
 """
-function fetch(::Universality{:Ising}, ::CentralCharge; d::Int=2, kwargs...)
+function fetch(m::Universality{:Ising}, ::CentralCharge; d::Int=2, kwargs...)
     if d == 2
-        return 1 // 2
+        return _universality_central_charge(m)  # single source: universalities/Ising2D/
     end
     return error(
         "Universality{:Ising} CentralCharge: only d=2 is a 1+1D CFT (c = 1/2); " *
@@ -74,9 +74,9 @@ The 2D 3-state Potts model is the Virasoro minimal model `M(5,6)` with
 Reference: Dotsenko, Nucl. Phys. B 235, 54 (1984); di Francesco–
 Mathieu–Sénéchal §7.4.
 """
-function fetch(::Universality{:Potts3}, ::CentralCharge; d::Int=2, kwargs...)
+function fetch(m::Universality{:Potts3}, ::CentralCharge; d::Int=2, kwargs...)
     if d == 2
-        return 4 // 5
+        return _universality_central_charge(m)  # single source: universalities/Potts/
     end
     return error("Universality{:Potts3} CentralCharge: only d=2 supported; got d=$d.")
 end
@@ -91,9 +91,9 @@ The 2D 4-state Potts model is at the marginal compact-boson point
 Reference: di Francesco–Mathieu–Sénéchal, *Conformal Field Theory*
 (Springer 1997), §12.3.
 """
-function fetch(::Universality{:Potts4}, ::CentralCharge; d::Int=2, kwargs...)
+function fetch(m::Universality{:Potts4}, ::CentralCharge; d::Int=2, kwargs...)
     if d == 2
-        return 1 // 1
+        return _universality_central_charge(m)  # single source: universalities/Potts/
     end
     return error("Universality{:Potts4} CentralCharge: only d=2 supported; got d=$d.")
 end
@@ -111,9 +111,9 @@ Mathieu–Sénéchal §6.
 
 For `d ≥ 3` the class is not a 1+1D CFT and the call errors.
 """
-function fetch(::Universality{:XY}, ::CentralCharge; d::Int=2, kwargs...)
+function fetch(m::Universality{:XY}, ::CentralCharge; d::Int=2, kwargs...)
     if d == 2
-        return 1 // 1
+        return _universality_central_charge(m)  # single source: universalities/ONModel/
     end
     return error(
         "Universality{:XY} CentralCharge: only d=2 (BKT free boson) is a 1+1D CFT " *
@@ -136,9 +136,9 @@ generic-CFT entanglement formula must use a 1+1D class.
 Reference: Affleck–Haldane, Phys. Rev. B 36, 5291 (1987); di Francesco–
 Mathieu–Sénéchal §15.6 (SU(2)_1 WZW).
 """
-function fetch(::Universality{:Heisenberg}, ::CentralCharge; d::Int=1, kwargs...)
+function fetch(m::Universality{:Heisenberg}, ::CentralCharge; d::Int=1, kwargs...)
     if d == 1
-        return 1 // 1
+        return _universality_central_charge(m)  # single source: universalities/ONModel/
     end
     return error(
         "Universality{:Heisenberg} CentralCharge: only d=1 (spin-1/2 Heisenberg " *
@@ -160,7 +160,11 @@ Internal helper: fetch the central charge `c` of the universality class
 with a Calabrese–Cardy-specific message if the class has no
 `CentralCharge` defined.
 """
-function _cardy_central_charge(model::Universality{C}; kwargs...) where {C}
+function _cardy_central_charge(model::Universality{C}; c=nothing, kwargs...) where {C}
+    # Caller-supplied (e.g. model-dependent) central charge takes precedence: a
+    # model that realizes this class passes its own `c` into the universal EE
+    # formula, rather than the formula hard-wiring the class value.
+    c === nothing || return Float64(c)
     try
         return Float64(fetch(model, CentralCharge(); kwargs...))
     catch err

@@ -206,13 +206,48 @@ function check_realization_agreement(probes::AbstractDict; rtol=1e-8)
     return out
 end
 
+# ── C8 — realization loci are mutually exclusive ─────────────────────────────
+# A critical point belongs to exactly one universality class.  When a model has
+# several `@realizes` rows (e.g. XXZ on the :XY line and at the :Heisenberg
+# point), their `at` predicates must not overlap.  We verify this on each row's
+# representative `example`: it must satisfy its OWN predicate and no sibling's.
+function check_realization_loci()
+    out = CoherenceFinding[]
+    rows = [r for r in REALIZES if r.at !== nothing && r.example !== nothing]
+    for r in rows
+        r.at(r.example) || push!(
+            out,
+            CoherenceFinding(
+                :realization_loci,
+                :error,
+                "$(_kgshort(r.model))→:$(r.class) example does not satisfy its own `at` predicate",
+            ),
+        )
+        for s in rows
+            (s.model === r.model && s.class !== r.class) || continue
+            try
+                s.at(r.example) && push!(
+                    out,
+                    CoherenceFinding(
+                        :realization_loci,
+                        :error,
+                        "$(_kgshort(r.model)): the :$(r.class) example also matches the :$(s.class) `at` predicate — realization loci are not mutually exclusive",
+                    ),
+                )
+            catch
+            end
+        end
+    end
+    return out
+end
+
 # ── aggregate (structural suite) ─────────────────────────────────────────────
 """
     coherence_report(; bibkeys=String[]) -> Vector{CoherenceFinding}
 
-Run the structural graph-coherence suite (C1–C4 + the C6 coverage report).
-Pass `bibkeys` (the set of keys in references.bib) to include C1.  `:error`
-findings must be empty; `:gap` findings are the network's self-reported holes.
+Run the structural graph-coherence suite (C1–C4, C6 coverage, C8 realization
+loci). Pass `bibkeys` (the set of keys in references.bib) to include C1.
+`:error` findings must be empty; `:gap` findings are self-reported holes.
 """
 function coherence_report(; bibkeys=String[])
     findings = CoherenceFinding[]
@@ -221,6 +256,7 @@ function coherence_report(; bibkeys=String[])
     append!(findings, check_canonical_coherence())
     append!(findings, check_delegation_targets())
     append!(findings, coverage_report())
+    append!(findings, check_realization_loci())
     return findings
 end
 

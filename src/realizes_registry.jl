@@ -12,7 +12,7 @@
 # kwarg, not a struct field) carries only `regime` for now.
 
 @realizes TFIM :Ising regime = "quantum critical point h = J; (1+1)D Ising CFT, c = 1/2" at = (
-    m -> m.h == m.J
+    m -> isapprox(m.h, m.J; atol=1e-10)
 ) example = TFIM(; J=1.0, h=1.0)
 
 @realizes XXZ1D :XY regime = "critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1" at = (

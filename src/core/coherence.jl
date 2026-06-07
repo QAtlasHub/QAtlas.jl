@@ -211,6 +211,10 @@ end
 # several `@realizes` rows (e.g. XXZ on the :XY line and at the :Heisenberg
 # point), their `at` predicates must not overlap.  We verify this on each row's
 # representative `example`: it must satisfy its OWN predicate and no sibling's.
+#
+# Limitation: this samples the registered `example` points only — a predicate
+# overlap *away* from the examples is not caught here, and would instead surface
+# at runtime as the multiple-match error in [`realized_class`](@ref).
 function check_realization_loci()
     out = CoherenceFinding[]
     rows = [r for r in REALIZES if r.at !== nothing && r.example !== nothing]
@@ -225,6 +229,8 @@ function check_realization_loci()
         )
         for s in rows
             (s.model === r.model && s.class !== r.class) || continue
+            # same model type, so s.at is callable on r.example; a throw here is a
+            # malformed predicate (e.g. a bad field), which we surface, not swallow.
             try
                 s.at(r.example) && push!(
                     out,
@@ -234,7 +240,15 @@ function check_realization_loci()
                         "$(_kgshort(r.model)): the :$(r.class) example also matches the :$(s.class) `at` predicate — realization loci are not mutually exclusive",
                     ),
                 )
-            catch
+            catch err
+                push!(
+                    out,
+                    CoherenceFinding(
+                        :realization_loci,
+                        :error,
+                        "$(_kgshort(s.model)) :$(s.class) `at` predicate threw on the :$(r.class) example ($(typeof(err)))",
+                    ),
+                )
             end
         end
     end

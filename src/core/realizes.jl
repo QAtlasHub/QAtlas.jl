@@ -122,7 +122,7 @@ function realized_class(model::AbstractQAtlasModel)
     end
     isempty(hits) && return nothing
     length(hits) == 1 || error(
-        "realized_class($(model)): instance matches multiple classes $(hits) — the " *
+        "realized_class($(m_T)): instance matches multiple classes $(hits) — the " *
         "@realizes `at` predicates for $(m_T) are not mutually exclusive.",
     )
     return only(hits)

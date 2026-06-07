@@ -56,3 +56,28 @@ html.theme--documenter-dark .report-section-link:hover,
 html.theme--documenter-dark .report-section-link:focus {
     color: #ffd86b;
 }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Bibliography (DocumenterCitations :numeric)                              */
+/* Default rendering puts the [N] label and the entry on separate lines     */
+/* (a <dt>/<dd> pair) with the <dd><p> margins adding a blank line between   */
+/* every reference. Lay the dl out as a two-column grid so each entry reads  */
+/* "[N]  Author, Title…" on one row, and zero the inner <p> margins.        */
+/* ──────────────────────────────────────────────────────────────────────── */
+.citation dl {
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: 0.6em;
+    row-gap: 0.5em;
+    margin: 0;
+}
+.citation dt {
+    grid-column-start: 1;
+}
+.citation dd {
+    grid-column-start: 2;
+    margin: 0;
+}
+.citation dd p {
+    margin: 0;
+}

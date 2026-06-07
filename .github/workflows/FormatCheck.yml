@@ -1,7 +1,9 @@
 name: Format Check
+# Runs on every PR (no path filter): format-check is a *required* status check,
+# so it must always report — a path-filtered required check never reports on
+# PRs that don't touch the filtered paths and blocks the merge forever.
 on:
   pull_request:
-    paths: ['**/*.jl']
 
 jobs:
   format-check:

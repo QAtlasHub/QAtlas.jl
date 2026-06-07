@@ -82,9 +82,11 @@ type Cfg = {
 }
 
 const DEFAULT_COLORS: Record<string, string> = {
-  model: "#4f8cc9",
+  // Model is red/pink so its (many) nodes don't blend into the blue
+  // exact/universal edges; Bound domain takes the freed-up blue.
+  model: "#c95f5f",
   class: "#9b6cc9",
-  bound: "#c95f5f",
+  bound: "#4f8cc9",
   quantity: "#5fae6f",
   default: "#888888",
 }

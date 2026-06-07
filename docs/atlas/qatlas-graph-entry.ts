@@ -78,6 +78,7 @@ const DEFAULT_COLORS: Record<string, string> = {
 
 const DEFAULT_LINK_COLORS: Record<string, string> = {
   realizes: "#6f9fd8",
+  implements: "#7faa93",
   predicts: "#b08fd8",
   bounds: "#d88f8f",
   delegates: "#9aa0a8",
@@ -271,6 +272,7 @@ async function renderGraph(
     ]
     const edgeItems: [string, string][] = [
       ["realizes", "realizes (model→class)"],
+      ["implements", "implements (model→quantity)"],
       ["predicts", "predicts (class→quantity)"],
       ["bounds", "bounds (bound→quantity)"],
       ["delegates", "delegates (model→quantity)"],

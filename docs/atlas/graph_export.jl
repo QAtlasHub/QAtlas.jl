@@ -79,6 +79,21 @@ for e in REG
     push!(edges, (from="M:" * m, to="Q:" * q, kind="delegates", gap=isgap))
 end
 
+# implements : model → quantity  (every concrete-model registered quantity that
+# is not a delegation) — the bulk of the vault.
+for e in REG
+    (_concrete(e.model) && e.method !== :delegation) || continue
+    m = _short(e.model)
+    q = _short(e.quantity)
+    addnode!("M:" * m, m, "model", _model_url(m))
+    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
+    push!(edges, (from="M:" * m, to="Q:" * q, kind="implements", gap=false))
+end
+
+# dedup edges by (from, to, kind): a (model, quantity) appears at several
+# bc/scheme rows but is one edge in the graph.
+edges = unique(e -> (e.from, e.to, e.kind), edges)
+
 # ── emit QAtlasGraph JSON ─────────────────────────────────────────────────────
 node_json(id, n) =
     "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"

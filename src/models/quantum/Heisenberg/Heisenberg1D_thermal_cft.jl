@@ -169,3 +169,125 @@ function fetch(
     end
     return _heisenberg1d_cft_specific_heat(J, beta)
 end
+
+# -----------------------------------------------------------------------------
+# Adjacent-interval quantum-information triple at the gapless point
+# (Calabrese-Cardy 2009 MI / CC-Tonni 2012 LN / CC 2005 saturation)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Heisenberg1D, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real=Inf, kwargs...) -> Float64
+
+Calabrese-Cardy mutual information of two adjacent intervals,
+delegated to `Universality(:Heisenberg)` (c = 1). The chain is gapless
+SU(2)-invariant Luttinger liquid, so the Universality formula applies
+directly.
+"""
+function fetch(
+    ::Heisenberg1D,
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+)
+    return fetch(
+        Universality(:Heisenberg),
+        MutualInformation(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        beta=beta,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::Heisenberg1D, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+Calabrese-Cardy-Tonni 2012 logarithmic negativity of two adjacent
+intervals, delegated to `Universality(:Heisenberg)`:
+
+    E = (1/4) log[ℓ_A * ℓ_B / (ℓ_A + ℓ_B)].
+"""
+function fetch(
+    ::Heisenberg1D, ::LogarithmicNegativity, ::Infinite; ℓ_A::Real, ℓ_B::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        LogarithmicNegativity(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::Heisenberg1D, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time post-quench saturation of half-system entanglement entropy
+per unit length, delegated to `Universality(:Heisenberg)`:
+
+    S_A(infty) / L = pi / (6 beta_eff).
+"""
+function fetch(
+    ::Heisenberg1D, ::EntanglementSaturationDensity, ::Infinite; beta_eff::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end
+
+# -----------------------------------------------------------------------------
+# Lieb-Robinson velocity + entanglement growth slope (des Cloizeaux-Pearson)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::Heisenberg1D, ::LiebRobinsonVelocity, ::Infinite;
+          J = m.J, kwargs...) -> Float64
+
+Maximum group velocity of the des Cloizeaux-Pearson spinon
+dispersion of the spin-1/2 Heisenberg chain. With epsilon(k) =
+(pi/2) |J sin k| the spinon velocity is
+
+    v_s = pi J / 2,
+
+attained at k = 0 and k = pi. This is the standard CC quasi-particle
+velocity that enters the entanglement-spreading formulas.
+"""
+function fetch(m::Heisenberg1D, ::LiebRobinsonVelocity, ::Infinite; J::Real=1.0, kwargs...)
+    return π * abs(J) / 2
+end
+
+"""
+    fetch(m::Heisenberg1D, ::EntanglementGrowthSlope, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Calabrese-Cardy 2005 linear-growth slope of post-quench half-system
+entanglement entropy for the gapless Heisenberg chain (c = 1, v = pi J / 2):
+
+    dS_A / dt = pi c v / (3 beta_eff) = pi^2 J / (6 beta_eff).
+
+Delegates to `Universality(:Heisenberg)`.
+"""
+function fetch(
+    m::Heisenberg1D, ::EntanglementGrowthSlope, ::Infinite; beta_eff::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        EntanglementGrowthSlope(),
+        Infinite();
+        v=fetch(m, LiebRobinsonVelocity(), Infinite()),
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

@@ -144,3 +144,189 @@ function fetch(m::HaldaneShastry, ::SpecificHeat, ::Infinite; beta::Real, kwargs
     end
     return _haldane_shastry_cft_specific_heat(m.J, beta)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Calabrese-Cardy entanglement at Infinite via Universality(:Heisenberg)
+#
+# The Haldane-Shastry chain is gapless with linear dispersion (free
+# spinons of the SU(2)_1 WZW model) and shares the c = 1 free-boson
+# universality class with the SU(2)-symmetric Heisenberg chain. Its
+# single-interval von Neumann and Renyi entanglement entropies in the
+# thermodynamic limit are therefore given by the Calabrese-Cardy
+# closed forms with c = 1, identical to Heisenberg1D.
+#
+# Reference: Calabrese-Cardy J. Stat. Mech. P06002 (2004) §4.
+# Issue: #580 Phase 1, extending the universality-layer delegation
+# pattern introduced for Heisenberg1D.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::HaldaneShastry, ::VonNeumannEntropy{:equilibrium}, ::Infinite;
+          ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
+
+Single-interval von Neumann entanglement entropy of the
+Haldane-Shastry chain in the thermodynamic limit, delegated to the
+c = 1 Calabrese-Cardy form via `Universality(:Heisenberg)`.
+
+- `beta = Inf` (default): T = 0 ground state, `S = (1/3) log ℓ`.
+- `beta < Inf`: thermal state, `S = (1/3) log[(β/π) sinh(π ℓ / β)]`.
+"""
+function fetch(
+    ::HaldaneShastry,
+    ::VonNeumannEntropy{:equilibrium},
+    ::Infinite;
+    ℓ::Int,
+    beta::Real=Inf,
+    kwargs...,
+)
+    return fetch(
+        Universality(:Heisenberg),
+        VonNeumannEntropy(),
+        Infinite();
+        ℓ=ℓ,
+        beta=beta,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::HaldaneShastry, q::RenyiEntropy, ::Infinite;
+          ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
+
+Single-interval Renyi-α entanglement entropy delegated to
+`Universality(:Heisenberg)` with the standard
+`c -> c · (1 + 1/α) / 2` substitution.
+"""
+function fetch(
+    ::HaldaneShastry, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
+)
+    return fetch(Universality(:Heisenberg), q, Infinite(); ℓ=ℓ, beta=beta, kwargs...)
+end
+
+# -----------------------------------------------------------------------------
+# Lieb-Robinson velocity + entanglement growth slope (#579, #580)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::HaldaneShastry, ::LiebRobinsonVelocity, ::Infinite;
+          J = m.J, kwargs...) -> Float64
+
+Spinon group velocity of the Haldane-Shastry chain. The free-spinon
+gas underlying the SU(2)_1 WZW description has linear low-energy
+dispersion with sound (spinon) velocity
+
+    v_s = pi J / 2.
+
+For the long-range 1/r^2 model the strict Lieb-Robinson bound is
+weaker (no exponential light cone), but the QUASIPARTICLE / spinon
+propagation velocity that governs entanglement spreading at low
+energies is v_s = pi J / 2.
+
+Reference: F. D. M. Haldane PRL 60, 635 (1988); B. S. Shastry PRL 60,
+639 (1988); Y. Kuramoto-N. Kato-A. Sutherland review on long-range
+integrable models.
+"""
+function fetch(
+    m::HaldaneShastry, ::LiebRobinsonVelocity, ::Infinite; J::Real=m.J, kwargs...
+)
+    return π * abs(J) / 2
+end
+
+"""
+    fetch(m::HaldaneShastry, ::EntanglementGrowthSlope, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Linear-growth slope of post-quench half-system entanglement entropy
+of the Haldane-Shastry chain. The chain is gapless with c = 1, so the
+Calabrese-Cardy 2005 formula applies directly:
+
+    dS_A / dt = pi c v_s / (3 beta_eff) = pi^2 J / (6 beta_eff),
+
+with c = 1 from Universality(:Heisenberg) and v_s = pi J / 2 from the
+LiebRobinsonVelocity dispatch above.
+
+Reference: Calabrese-Cardy J. Stat. Mech. P04010 (2005); HS spinon
+velocity v_s = pi J / 2 as above.
+"""
+function fetch(
+    m::HaldaneShastry, ::EntanglementGrowthSlope, ::Infinite; beta_eff::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        EntanglementGrowthSlope(),
+        Infinite();
+        v=fetch(m, LiebRobinsonVelocity(), Infinite()),
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::HaldaneShastry, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time saturation `S_A(infty)/L = pi c / (6 beta_eff)` after a
+global quench. Haldane-Shastry is gapless with `c = 1`, so the
+formula gives `pi / (6 beta_eff)`. Delegates to
+`Universality(:Heisenberg)`.
+"""
+function fetch(
+    ::HaldaneShastry, ::EntanglementSaturationDensity, ::Infinite; beta_eff::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::HaldaneShastry, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real=Inf, kwargs...) -> Float64
+
+Calabrese-Cardy mutual information of two adjacent intervals,
+delegated to `Universality(:Heisenberg)` (c = 1).
+"""
+function fetch(
+    ::HaldaneShastry,
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+)
+    return fetch(
+        Universality(:Heisenberg),
+        MutualInformation(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        beta=beta,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(::HaldaneShastry, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+CC-Tonni 2012 logarithmic negativity of two adjacent intervals,
+delegated to `Universality(:Heisenberg)` (c = 1):
+
+    E = (1/4) log[ℓ_A * ℓ_B / (ℓ_A + ℓ_B)].
+"""
+function fetch(
+    ::HaldaneShastry, ::LogarithmicNegativity, ::Infinite; ℓ_A::Real, ℓ_B::Real, kwargs...
+)
+    return fetch(
+        Universality(:Heisenberg),
+        LogarithmicNegativity(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        kwargs...,
+    )
+end

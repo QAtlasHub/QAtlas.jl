@@ -244,3 +244,99 @@ function fetch(
     # See `(♣) / (♠)` in the file header for the full derivation.
     return 0.0
 end
+
+# -----------------------------------------------------------------------------
+# Lieb-Robinson velocity + entanglement growth slope at the XX point (Delta = 0)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(model::XXZ1D, ::LiebRobinsonVelocity, ::Infinite;
+          J = model.J, Delta = model.Δ, kwargs...) -> Float64
+
+Maximum group velocity of the free-fermion XX chain (`Delta = 0`).
+The single-particle dispersion is `epsilon(k) = -2 J cos k`, and its
+group-velocity maximum is
+
+    v_LR = 2 |J|,
+
+attained at `k = pi / 2`. For `Delta != 0` the LR bound is more
+involved (interacting regime) and is deferred — this dispatch throws
+`DomainError`.
+"""
+function fetch(
+    model::XXZ1D,
+    ::LiebRobinsonVelocity,
+    ::Infinite;
+    J::Real=model.J,
+    Delta::Real=model.Δ,
+    kwargs...,
+)
+    isapprox(Delta, 0.0; atol=1e-12) || throw(
+        DomainError(
+            Delta,
+            "XXZ1D LiebRobinsonVelocity: closed form only at the XX point (Delta = 0); got Delta = $Delta.",
+        ),
+    )
+    return 2 * abs(J)
+end
+
+"""
+    fetch(model::XXZ1D, ::EntanglementGrowthSlope, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Calabrese-Cardy 2005 linear-growth slope of half-system entanglement
+after a quench at the XX point of the XXZ chain. The chain is
+gapless with central charge `c = 1` and LR velocity `v = 2 |J|`, so
+
+    dS_A / dt = pi c v / (3 beta_eff) = 2 pi |J| / (3 beta_eff).
+
+Delegates to `Universality(:XY)` (c = 1).
+"""
+function fetch(
+    model::XXZ1D, ::EntanglementGrowthSlope, ::Infinite; beta_eff::Real, kwargs...
+)
+    isapprox(model.Δ, 0.0; atol=1e-12) || throw(
+        DomainError(
+            model.Δ,
+            "XXZ1D EntanglementGrowthSlope: closed form only at the XX point (Delta = 0); got Delta = $(model.Δ).",
+        ),
+    )
+    return fetch(
+        Universality(:XY),
+        EntanglementGrowthSlope(),
+        Infinite();
+        v=fetch(model, LiebRobinsonVelocity(), Infinite()),
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end
+
+"""
+    fetch(model::XXZ1D, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time saturation of post-quench half-system entanglement entropy
+at the XX point (`Delta = 0`). The XX chain is gapless with c = 1,
+so delegates to `Universality(:XY)` returning `pi / (6 beta_eff)`.
+
+Off-XX (`Delta != 0`) throws `DomainError` -- interacting regime
+deferred.
+"""
+function fetch(
+    model::XXZ1D, ::EntanglementSaturationDensity, ::Infinite; beta_eff::Real, kwargs...
+)
+    isapprox(model.Δ, 0.0; atol=1e-12) || throw(
+        DomainError(
+            model.Δ,
+            "XXZ1D EntanglementSaturationDensity: closed form only at the XX " *
+            "point (Delta = 0); got Delta = $(model.Δ).",
+        ),
+    )
+    return fetch(
+        Universality(:XY),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

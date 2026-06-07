@@ -10,7 +10,7 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 | [`AKLT1D`](models/AKLT1D.md) | — | 19 | `analytic`, `dense_ed`, `literature_value` | 0 | 17 | 0 | 1 | 1 | feasible | `@sweep` |
 | [`AKLT2D`](models/AKLT2D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`BCFT`](models/BCFT.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`Bound`](models/Bound.md) | — | 6 | `analytic` | 0 | 0 | 0 | 0 | 6 | feasible | — |
+| [`Bound`](models/Bound.md) | — | 8 | `analytic` | 0 | 0 | 0 | 0 | 8 | feasible | — |
 | [`ChernSimons3D`](models/ChernSimons3D.md) | `WZW` | 2 | `analytic`, `sugawara` | 0 | 1 | 0 | 1 | 0 | infeasible | `@sweep` |
 | [`Cluster1D`](models/Cluster1D.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@cluster` |
 | [`Compass1D`](models/Compass1D.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@anisotropic`, `@isotropic` |
@@ -20,8 +20,8 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 | [`ExtendedHubbard1D`](models/ExtendedHubbard1D.md) | — | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`HaldaneShastry`](models/HaldaneShastry.md) | — | 4 | `analytic`, `cft_low_T` | 0 | 0 | 0 | 0 | 4 | feasible | — |
-| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 24 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 7 | feasible | `@su2` |
+| [`HaldaneShastry`](models/HaldaneShastry.md) | — | 6 | `analytic`, `cft_low_T`, `delegation` | 0 | 0 | 0 | 0 | 6 | feasible | — |
+| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 9 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 6 | `closed_form`, `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 4 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 5 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 2 | 0 | 1 | feasible | `@sweep` |
@@ -56,7 +56,7 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 | [`SixVertex`](models/SixVertex.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`TFIM`](models/TFIM.md) | `Ising` | 54 | `analytic`, `bdg`, `cft`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 10 | feasible | `@critical`, `@disordered`, `@ordered` |
+| [`TFIM`](models/TFIM.md) | `Ising` | 55 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 11 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TightBinding1D`](models/TightBinding1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@sweep` |
@@ -66,7 +66,7 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 3 | `analytic` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
-| [`XXZ1D`](models/XXZ1D.md) | — | 27 | `analytic`, `bethe_ansatz`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 17 | 5 | 0 | 5 | feasible | `@fm`, `@free_fermion`, `@gapless` |
+| [`XXZ1D`](models/XXZ1D.md) | — | 29 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 17 | 5 | 0 | 7 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
@@ -77,6 +77,7 @@ Top-level catalog of all **64 models** with claimed hubs.  One row per model; th
 Each quantity has its own `Model × BC` matrix page (gap visualisation across models):
 
 - [`AnyonStatistics`](quantities/AnyonStatistics.md) — 1 models
+- [`BB84KeyRate`](quantities/BB84KeyRate.md) — 1 models
 - [`BekensteinBound`](quantities/BekensteinBound.md) — 1 models
 - [`CHSHBound`](quantities/CHSHBound.md) — 1 models
 - [`CentralCharge`](quantities/CentralCharge.md) — 15 models
@@ -99,6 +100,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`GroundStateDegeneracy`](quantities/GroundStateDegeneracy.md) — 2 models
 - [`GroundStateEnergyDensity`](quantities/GroundStateEnergyDensity.md) — 8 models
 - [`LiebRobinsonBound`](quantities/LiebRobinsonBound.md) — 1 models
+- [`LiebRobinsonVelocity`](quantities/LiebRobinsonVelocity.md) — 1 models
 - [`LoschmidtEcho`](quantities/LoschmidtEcho.md) — 2 models
 - [`LuttingerParameter`](quantities/LuttingerParameter.md) — 4 models
 - [`LuttingerVelocity`](quantities/LuttingerVelocity.md) — 1 models
@@ -114,8 +116,9 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 2 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models
 - [`QuantumSpeedLimit`](quantities/QuantumSpeedLimit.md) — 1 models
-- [`RenyiEntropy`](quantities/RenyiEntropy.md) — 4 models
+- [`RenyiEntropy`](quantities/RenyiEntropy.md) — 5 models
 - [`ResidualEntropy`](quantities/ResidualEntropy.md) — 4 models
+- [`ScramblingTime`](quantities/ScramblingTime.md) — 1 models
 - [`SpecificHeat`](quantities/SpecificHeat.md) — 12 models
 - [`SpinGap`](quantities/SpinGap.md) — 2 models
 - [`SpontaneousMagnetization`](quantities/SpontaneousMagnetization.md) — 5 models
@@ -129,7 +132,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models
 - [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md) — 3 models
 - [`TopologicalInvariant`](quantities/TopologicalInvariant.md) — 2 models
-- [`VonNeumannEntropy`](quantities/VonNeumannEntropy.md) — 4 models
+- [`VonNeumannEntropy`](quantities/VonNeumannEntropy.md) — 5 models
 - [`XXCorrelation`](quantities/XXCorrelation.md) — 2 models
 - [`XXStructureFactor`](quantities/XXStructureFactor.md) — 1 models
 - [`YYCorrelation`](quantities/YYCorrelation.md) — 2 models

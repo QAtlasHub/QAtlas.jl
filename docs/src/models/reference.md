@@ -10,7 +10,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`AKLT1D`](../atlas/models/AKLT1D.md) | AKLT1988, KennedyTasaki1992, GarciaSaez2013, Arovas1988 |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | AKLT1988, VerstraeteCirac2004 |
 | [`BCFT`](../atlas/models/BCFT.md) | Cardy1989, AffleckLudwig1991, FriedanKonechny2004 |
-| [`Bound`](../atlas/models/Bound.md) | MaldacenaShenkerStanford2016, MargolusLevitin1998, Bekenstein1981, CHSH1969, Tsirelson1980, PopescuRohrlich1994, Mermin1990, BuzekHillery1996 |
+| [`Bound`](../atlas/models/Bound.md) | MaldacenaShenkerStanford2016, MargolusLevitin1998, MandelstamTamm1945, SekinoSusskind2008, Bekenstein1981, CHSH1969, Tsirelson1980, PopescuRohrlich1994, Mermin1990, BuzekHillery1996, ShorPreskill2000 |
 | [`ChernSimons3D`](../atlas/models/ChernSimons3D.md) | Witten1989, KnizhnikZamolodchikov1984, Verlinde1988 |
 | [`Cluster1D`](../atlas/models/Cluster1D.md) | BriegelRaussendorf2001 |
 | [`Compass1D`](../atlas/models/Compass1D.md) | BrzezickiDziarmagaOles2007, KugelKhomskii1982, Kitaev2006 |
@@ -20,8 +20,8 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`ExtendedHubbard1D`](../atlas/models/ExtendedHubbard1D.md) | LiebWu1968, Voit1995, Nakamura2000 |
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | FreedmanKitaevLarsenWang2003, ReadRezayi1999, KitaevPreskill2006 |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | GrossNeveu1974, AndreiLowenstein1979 |
-| [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986 |
-| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994 |
+| [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986, CalabreseCardy2004 |
+| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | YangYang1966, LiebSchultzMattis1961, Baxter1972, LutherPeschel1975, McCoyWu1978 |
 | [`Honeycomb`](../atlas/models/Honeycomb.md) |  |
 | [`Hubbard1D`](../atlas/models/Hubbard1D.md) | LiebWu1968, Essler2005, Voit1995, JuttnerKlumperSuzuki1998 |
@@ -66,7 +66,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | BelavinPolyakovZamolodchikov1984, FriedanQiuShenker1984 |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | AndrewsBaxterForrester1984, Huse1984, BelavinPolyakovZamolodchikov1984 |
 | [`XCube`](../atlas/models/XCube.md) | VijayHaahFu2016, SlagleKim2017 |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969 |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004 |
 | [`XYh1D`](../atlas/models/XYh1D.md) | LiebSchultzMattis1961, Pfeuty1970 |
 | [`YangLee`](../atlas/models/YangLee.md) | Cardy1984, YangLee1952 |
 | [`ZnClock`](../atlas/models/ZnClock.md) | JoseKadanoffKirkpatrickNelson1977, ElitzurPearsonShigemitsu1979 |

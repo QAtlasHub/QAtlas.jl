@@ -668,3 +668,15 @@
     tested_in="test/models/quantum/TFIM/test_tfim_highT_freeenergy.jl",
     notes="f/N = -ln2/β - (β/2)(J²+h²) + O(β³); the small-β limit of the exact FreeEnergy.",
 )
+
+# ── Lieb-Robinson velocity (#579 inequality framework Phase 1) ─────────
+@register(
+    TFIM,
+    LiebRobinsonVelocity,
+    Infinite,
+    method=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_lieb_robinson.jl",
+    references=["LiebRobinson1972", "HastingsKoma2006"],
+    notes="v_LR = 2 min(|J|, |h|) tight free-fermion saturated bound (max group velocity over BdG dispersion). At criticality h=J, v_LR=2J. Vanishes at h=0 (classical Ising) or J=0 (decoupled spins). The h-independent 2|J| Hastings-Koma upper bound is loose; use this tight value for entanglement-growth slope (PR #588) and other dynamical formulas.",
+)

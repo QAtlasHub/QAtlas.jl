@@ -132,4 +132,72 @@ function scan_realizes(path::AbstractString)
     return out
 end
 
+# ── @about (model description card): summary + Hamiltonian (LaTeX) ───────
+# Authored with `raw"…"` so LaTeX backslashes survive; in the AST a `raw"…"`
+# literal is an `@raw_str` macrocall, so unwrap it back to its String.
+struct About
+    model::String
+    summary::String
+    hamiltonian::String
+    refs::String
+end
+
+function _strval(v)
+    v isa String && return v
+    if v isa Expr && v.head === :macrocall && v.args[1] === Symbol("@raw_str")
+        return String(v.args[end])
+    end
+    if v isa Expr && v.head === :string
+        # A non-raw "...$(x)..." literal: interpolation holes can't be resolved
+        # statically, so they are dropped. Warn — @about/@reduces string fields
+        # should use raw"..." so LaTeX backslashes and `$` survive verbatim.
+        @warn "AtlasRegistry: dropping interpolation in a scanned macro argument; use raw\"...\"" expr =
+            v
+        return join((p isa String ? p : "" for p in v.args))
+    end
+    return string(v)
+end
+
+function _walk_about!(out, ex)
+    ex isa Expr || return nothing
+    if ex.head === :macrocall && ex.args[1] === Symbol("@about")
+        pos = filter(
+            a -> !(a isa LineNumberNode) && !(a isa Expr && a.head in (:kw, :(=))), ex.args
+        )[2:end]
+        if length(pos) >= 1
+            model = _sym(pos[1])
+            kw = _regkw(ex.args)
+            push!(
+                out,
+                About(
+                    model,
+                    _strval(get(kw, :summary, "")),
+                    _strval(get(kw, :hamiltonian, "")),
+                    _refs_text(get(kw, :references, nothing)),
+                ),
+            )
+        end
+        return nothing
+    end
+    for a in ex.args
+        _walk_about!(out, a)
+    end
+end
+
+function scan_about(path::AbstractString)
+    raw = About[]
+    isfile(path) || return raw
+    _walk_about!(raw, parseall(read(path, String); filename=path))
+    # First-wins on duplicate models, matching the runtime `about()` query (a
+    # linear first-match scan) so the docs view and the API never disagree.
+    out = About[]
+    seen = Set{String}()
+    for a in raw
+        a.model in seen && continue
+        push!(seen, a.model)
+        push!(out, a)
+    end
+    return out
+end
+
 end # module

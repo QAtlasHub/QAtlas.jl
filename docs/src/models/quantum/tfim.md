@@ -543,7 +543,7 @@ docstrings for the exported observable types and TFIM helpers
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 55 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
@@ -561,6 +561,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (qua
 | [`FreeEnergy`](../../atlas/hubs/TFIM_FreeEnergy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 30 |
 | [`GGEValue`](../../atlas/hubs/TFIM_GGEValue_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | [`LiebRobinsonBound`](../../atlas/hubs/TFIM_LiebRobinsonBound_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`LiebRobinsonVelocity`](../../atlas/hubs/TFIM_LiebRobinsonVelocity_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_OBC.md) | `OBC` | 🟢 corroborated-at-p | 12 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
@@ -603,6 +604,9 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
 
 
 

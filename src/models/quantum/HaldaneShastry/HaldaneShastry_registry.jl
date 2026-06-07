@@ -53,3 +53,26 @@
     references=["Haldane1988", "Affleck1986"],
     notes="c_v = π T / (3 v_s) = 2T / (3J). Equals s at LO CFT. Valid β > 5/J.",
 )
+
+# ── CC entanglement at Infinite via Universality(:Heisenberg) (#580 Phase 2)
+@register(
+    HaldaneShastry,
+    VonNeumannEntropy{:equilibrium},
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/HaldaneShastry/test_haldaneshastry_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="Delegates to Universality(:Heisenberg) c=1 Calabrese-Cardy form. HS is gapless free-spinon SU(2)_1 WZW, same c=1 class as Heisenberg1D.",
+)
+
+@register(
+    HaldaneShastry,
+    RenyiEntropy,
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/HaldaneShastry/test_haldaneshastry_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="Delegates to Universality(:Heisenberg) with c -> c*(1+1/alpha)/2 substitution. Reduces to VN at alpha=1.",
+)

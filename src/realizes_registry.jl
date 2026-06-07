@@ -10,3 +10,5 @@
 @realizes IsingSquare :Ising regime = "2D classical Ising at T_c; 2D Ising universality, c = 1/2"
 @realizes CurieWeissIsing :MeanField regime = "complete-graph (infinite-range) Ising; mean-field critical exponents"
 @realizes TASEP :KPZ regime = "current fluctuations of the 1D exclusion process; KPZ universality"
+@realizes HaldaneShastry :Heisenberg regime = "ground state of the 1/r² inverse-square chain; SU(2)_1 WZW, c = 1"
+@realizes IsingTriangular :Ising regime = "ferromagnetic triangular-lattice Ising at T_c; 2D Ising universality, c = 1/2"

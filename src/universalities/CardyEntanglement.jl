@@ -275,27 +275,51 @@ function fetch(
 end
 
 """
-    fetch(::Universality{C}, ::VonNeumannEntropy, ::Infinite; ℓ::Real, kwargs...)
-        -> Float64
+    fetch(::Universality{C}, ::VonNeumannEntropy, ::Infinite;
+          ℓ::Real, beta::Real = Inf, kwargs...) -> Float64
 
 Calabrese–Cardy von Neumann entanglement entropy in the thermodynamic
-limit (`L → ∞`) of a 1+1D CFT, with PBC scaling — i.e. two
-entanglement cuts in an infinite chain:
+limit (`L → ∞`) of a 1+1D CFT, with PBC scaling — two entanglement
+cuts in an infinite chain.
 
-    S(ℓ) = (c/3) log ℓ                                   (Infinite)
+- `beta = Inf` (default): T = 0 ground state.
 
-The non-universal additive constant is dropped.  This is the standard
-"infinite-chain" reference used to extract the central charge from
-finite-size lattice data.
+      S(ℓ) = (c/3) log ℓ                                   (Infinite)
 
-Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) eq. (3.13).
+- `0 < beta < Inf`: finite-temperature thermal state of the CFT.
+
+      S(ℓ, β) = (c/3) log[(β/π) sinh(π ℓ / β)]             (Infinite, T > 0)
+
+Both forms drop the non-universal additive constant.  The β → ∞ limit
+of the finite-T form recovers the T = 0 expression because
+`(β/π) sinh(π ℓ / β) → ℓ`.  Fermi velocity is normalised to unity
+(lattice units); models computing thermal entanglement at a non-unit
+sound velocity should pass `beta` already scaled by their velocity.
+
+Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) §4, eq. (3.13),
+(3.16). Tracking: #580.
 """
 function fetch(
-    model::Universality{C}, ::VonNeumannEntropy, ::Infinite; ℓ::Real, kwargs...
+    model::Universality{C},
+    ::VonNeumannEntropy,
+    ::Infinite;
+    ℓ::Real,
+    beta::Real=Inf,
+    a::Real=1.0,
+    kwargs...,
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite: ℓ must be > 0; got ℓ=$ℓ."))
+    a > 0 ||
+        throw(ArgumentError("Cardy Infinite: lattice spacing a must be > 0; got a=$a."))
     c = _cardy_central_charge(model; kwargs...)
-    return (c / 3) * log(ℓ)
+    if isinf(beta)
+        return (c / 3) * log(ℓ / a)
+    else
+        beta > 0 || throw(
+            ArgumentError("Cardy Infinite finite-T: beta must be > 0; got beta=$beta.")
+        )
+        return (c / 3) * log((beta / (π * a)) * sinh(π * ℓ / beta))
+    end
 end
 
 # ─── Rényi entropy ──────────────────────────────────────────────────────────
@@ -380,12 +404,30 @@ Reduces to the von Neumann `(c/3) log ℓ` at `α = 1` after the
 substitution `c -> c · (1 + 1/α) / 2`.
 """
 function fetch(
-    model::Universality{C}, q::RenyiEntropy, ::Infinite; ℓ::Real, kwargs...
+    model::Universality{C},
+    q::RenyiEntropy,
+    ::Infinite;
+    ℓ::Real,
+    beta::Real=Inf,
+    a::Real=1.0,
+    kwargs...,
 ) where {C}
     ℓ > 0 || throw(ArgumentError("Cardy Infinite Rényi: ℓ must be > 0; got ℓ=$ℓ."))
+    a > 0 || throw(
+        ArgumentError("Cardy Infinite Rényi: lattice spacing a must be > 0; got a=$a.")
+    )
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
-    return (c_eff / 3) * log(ℓ)
+    if isinf(beta)
+        return (c_eff / 3) * log(ℓ / a)
+    else
+        beta > 0 || throw(
+            ArgumentError(
+                "Cardy Infinite Rényi finite-T: beta must be > 0; got beta=$beta."
+            ),
+        )
+        return (c_eff / 3) * log((beta / (π * a)) * sinh(π * ℓ / beta))
+    end
 end
 
 # ─── Infinite bc forwarding for verify() integration ───────────────────────
@@ -443,3 +485,444 @@ end
 fetch(m::MeanField, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 fetch(m::Ising2D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 fetch(m::KPZ1D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Mutual information for two adjacent intervals at Infinite (#580 Phase 2+)
+#
+# For two adjacent intervals of lengths ℓ_A and ℓ_B on an infinite
+# 1+1D-CFT chain at T = 0, I(A:B) = S(A) + S(B) - S(A ∪ B) reduces to
+#
+#     I(A:B) = (c/3) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)]   (T = 0)
+#
+# At β finite each entropy takes the CC sinh form.
+#
+# Reference: Calabrese-Cardy J. Stat. Mech. P06002 (2004); J. Phys. A 42,
+# 504005 (2009). Tracking: #580.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real = Inf, kwargs...) -> Float64
+
+Mutual information of two adjacent intervals of lengths `ℓ_A` and
+`ℓ_B` on an infinite 1+1D-CFT chain.  Closed form follows from the
+single-interval Calabrese-Cardy result via
+`I = S(A) + S(B) − S(A∪B)`:
+
+    I(A:B) = (c/3) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)]      (T = 0)
+
+At finite β each single-interval entropy takes the sinh form.
+
+Refs Calabrese-Cardy 2004 / 2009; issue #580.
+"""
+function fetch(
+    model::Universality{C},
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+) where {C}
+    ℓ_A > 0 || throw(
+        ArgumentError("Cardy Infinite MutualInformation: ℓ_A must be > 0; got ℓ_A=$ℓ_A."),
+    )
+    ℓ_B > 0 || throw(
+        ArgumentError("Cardy Infinite MutualInformation: ℓ_B must be > 0; got ℓ_B=$ℓ_B."),
+    )
+    S_A = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_A, beta=beta, kwargs...)
+    S_B = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_B, beta=beta, kwargs...)
+    S_AB = fetch(model, VonNeumannEntropy(), Infinite(); ℓ=ℓ_A + ℓ_B, beta=beta, kwargs...)
+    return S_A + S_B - S_AB
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Quench-dynamics: linear-growth slope of half-system entanglement (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::EntanglementGrowthSlope, ::Infinite;
+          v::Real, beta_eff::Real, kwargs...) -> Float64
+
+Linear-growth slope `dS_A / dt` of the half-system entanglement entropy
+after a global quench from a thermal-like initial state into a critical
+post-quench Hamiltonian in the same universality class. Calabrese-Cardy
+2005 predicts
+
+    dS_A / dt = (π c v) / (3 beta_eff)            (t < L / (2 v))
+
+where
+
+- `c` is the central charge of the post-quench critical Hamiltonian
+  (provided by the universality dispatch),
+- `v` is the propagation velocity (Lieb-Robinson for free-fermion
+  models; a model-dependent sound velocity in general),
+- `beta_eff` is the effective inverse temperature of the generalised-
+  Gibbs steady state, set by the initial state energy density.
+
+Reference: Calabrese-Cardy J. Stat. Mech. P04010 (2005). Tracking #580.
+"""
+function fetch(
+    model::Universality{C},
+    ::EntanglementGrowthSlope,
+    ::Infinite;
+    v::Real,
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    v > 0 || throw(ArgumentError("EntanglementGrowthSlope: v must be > 0; got v=$v."))
+    beta_eff > 0 || throw(
+        ArgumentError(
+            "EntanglementGrowthSlope: beta_eff must be > 0; got beta_eff=$beta_eff."
+        ),
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    return π * c * v / (3 * beta_eff)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cardy formula: asymptotic high-energy state-counting entropy (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::CardyEntropy, ::Infinite;
+          E::Real, kwargs...) -> Float64
+
+Asymptotic high-energy entropy of a 1+1D CFT (Cardy 1986):
+
+    S_Cardy(E) = 2 π sqrt(c E / 6),
+
+with `c` supplied by the universality class. This is the log of the
+microcanonical density of states at energy `E` on a cylinder of unit
+circumference. Valid asymptotically at large `E`; at low `E` the
+formula systematically underestimates the count.
+
+Reference: Cardy, *Nucl. Phys. B* **270**, 186 (1986).
+"""
+function fetch(
+    model::Universality{C}, ::CardyEntropy, ::Infinite; E::Real, kwargs...
+) where {C}
+    E >= 0 || throw(ArgumentError("CardyEntropy: E must be >= 0; got E=$E."))
+    c = _cardy_central_charge(model; kwargs...)
+    return 2 * π * sqrt(c * E / 6)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Conformal Casimir energy on a cylinder (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::ConformalCasimirEnergy, ::Infinite;
+          L::Real, kwargs...) -> Float64
+
+Universal Casimir ground-state energy of a 1+1D CFT on a cylinder of
+circumference `L` (Cardy 1986 / Blote-Cardy-Nightingale 1986 /
+Affleck 1986):
+
+    E_0(L) = -π c / (6 L).
+
+The sign convention follows the original PRLs (`E_0 < 0` for unitary
+CFTs with `c > 0`). Identified empirically by subtracting `L * e_∞`
+from the lattice ground-state energy on a periodic chain of `L` sites
+and rescaling by `L`.
+
+Reference: Cardy *Nucl. Phys. B* **270**, 186 (1986); Blote-Cardy-
+Nightingale *Phys. Rev. Lett.* **56**, 742 (1986); Affleck *Phys. Rev.
+Lett.* **56**, 746 (1986).
+"""
+function fetch(
+    model::Universality{C}, ::ConformalCasimirEnergy, ::Infinite; L::Real, kwargs...
+) where {C}
+    L > 0 || throw(ArgumentError("ConformalCasimirEnergy: L must be > 0; got L=$L."))
+    c = _cardy_central_charge(model; kwargs...)
+    return -π * c / (6 * L)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Logarithmic negativity for two adjacent intervals at Infinite (#580)
+#
+# Calabrese-Cardy-Tonni 2012 (DOI 10.1103/PhysRevLett.109.130502) found
+# that the universal piece of E = log Tr |rho^{T_B}| for two adjacent
+# intervals of lengths ell_A, ell_B on an infinite 1+1D-CFT chain at
+# T = 0 is
+#
+#     E(ell_A, ell_B) = (c/4) log[ell_A * ell_B / (ell_A + ell_B)],
+#
+# i.e., the same geometric-mean log as the mutual-information universal
+# formula (PR #587) with the prefactor c/3 replaced by c/4.
+#
+# Reference: P. Calabrese, J. Cardy, E. Tonni, Phys. Rev. Lett. 109,
+# 130502 (2012). Tracking: #580.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+Logarithmic negativity of two adjacent intervals at T = 0 on an
+infinite 1+1D-CFT chain (Calabrese-Cardy-Tonni 2012):
+
+    E = (c/4) log[ℓ_A * ℓ_B / (ℓ_A + ℓ_B)]
+
+Returns the universal log piece; non-universal additive constants are
+dropped.
+"""
+function fetch(
+    model::Universality{C},
+    ::LogarithmicNegativity,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    kwargs...,
+) where {C}
+    ℓ_A > 0 ||
+        throw(ArgumentError("LogarithmicNegativity: ell_A must be > 0; got ell_A=$ℓ_A."))
+    ℓ_B > 0 ||
+        throw(ArgumentError("LogarithmicNegativity: ell_B must be > 0; got ell_B=$ℓ_B."))
+    c = _cardy_central_charge(model; kwargs...)
+    return (c / 4) * log(ℓ_A * ℓ_B / (ℓ_A + ℓ_B))
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Affleck-Ludwig boundary entropy log g (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{:Ising}, ::BoundaryEntropy, ::Infinite;
+          boundary_state::Symbol, kwargs...) -> Float64
+
+Affleck-Ludwig universal boundary entropy `log g` for an Ising CFT
+(M(3,4), c = 1/2) Cardy boundary state. From the modular S-matrix of
+the Ising minimal model the universal `g_a = S_{0a} / sqrt(S_{00})`
+values are
+
+    g_1 (identity)  = 1/sqrt(2),   log g = -(1/2) log 2
+    g_σ (spin)      = 1,           log g = 0
+    g_ε (energy)    = 1/sqrt(2),   log g = -(1/2) log 2
+
+Physical interpretation: `|σ⟩` is the "free" (unconstrained) boundary
+and `|1⟩` and `|ε⟩` are the "fixed" boundaries (spin pinned up or
+down). The free boundary has higher `g`, so free flows to fixed under
+RG (g-theorem).
+
+`boundary_state` selects the Cardy state, one of:
+    `:identity` (≡ `:fixed_up`),
+    `:sigma`    (≡ `:free`),
+    `:epsilon`  (≡ `:fixed_down`).
+
+Reference: Affleck-Ludwig PRL **67**, 161 (1991);
+Cardy *Nucl. Phys. B* **324**, 581 (1989) for the Cardy state
+construction. Tracking: #580.
+"""
+function fetch(
+    ::Universality{:Ising}, ::BoundaryEntropy, ::Infinite; boundary_state::Symbol, kwargs...
+)
+    if boundary_state === :identity ||
+        boundary_state === :fixed_up ||
+        boundary_state === :epsilon ||
+        boundary_state === :fixed_down
+        return -log(2) / 2  # log(1/sqrt(2))
+    elseif boundary_state === :sigma || boundary_state === :free
+        return 0.0           # log(1)
+    else
+        throw(
+            ArgumentError(
+                "Universality(:Ising) BoundaryEntropy: boundary_state must be one " *
+                "of :identity / :fixed_up / :sigma / :free / :epsilon / :fixed_down; " *
+                "got \$(boundary_state).",
+            ),
+        )
+    end
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Page entropy for Haar-random pure states (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{:HaarRandom}, ::PageEntropy, ::Infinite;
+          d_A::Integer, d_B::Integer, kwargs...) -> Float64
+
+Page 1993 average entropy of a subsystem `A` for a Haar-random pure
+state in `H_A ⊗ H_B` with `dim(H_A) = d_A`, `dim(H_B) = d_B`:
+
+    <S_A> = sum_{k=n+1}^{m·n} 1/k - (m-1)/(2n)
+
+where `m = min(d_A, d_B)` and `n = max(d_A, d_B)` (the formula is
+invariant under A ↔ B exchange by purity of the global state).
+
+Asymptotic limits:
+- `m == n`:   `<S_A> ≈ log m - 1/2`  (nearly maximal entropy)
+- `m << n`:   `<S_A> ≈ log m - m/(2n)`  (almost maximal volume law)
+- `m >> n`:   `<S_A> ≈ log n - n/(2m)`  (same by A ↔ B symmetry)
+
+Reference: D. N. Page, *Phys. Rev. Lett.* **71**, 1291 (1993),
+DOI 10.1103/PhysRevLett.71.1291.
+"""
+function fetch(
+    ::Universality{:HaarRandom},
+    ::PageEntropy,
+    ::Infinite;
+    d_A::Integer,
+    d_B::Integer,
+    kwargs...,
+)
+    d_A >= 1 || throw(ArgumentError("PageEntropy: d_A must be >= 1; got d_A=$d_A."))
+    d_B >= 1 || throw(ArgumentError("PageEntropy: d_B must be >= 1; got d_B=$d_B."))
+    m, n = minmax(d_A, d_B)
+    s = 0.0
+    for k in (n + 1):(m * n)
+        s += 1.0 / k
+    end
+    return s - (m - 1) / (2.0 * n)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Topological entanglement entropy via total quantum dimension (#580)
+#
+# Kitaev-Preskill 2006 (DOI 10.1103/PhysRevLett.96.110404) and Levin-Wen
+# 2006 (DOI 10.1103/PhysRevLett.96.110405) showed that the subleading
+# constant in the entanglement entropy of a topologically ordered
+# 2D ground state is the universal piece
+#
+#     gamma = log D,      D = sqrt(sum_a d_a^2),
+#
+# where {d_a} are the quantum dimensions of the anyon types and D is
+# the total quantum dimension. Examples:
+#
+#     ToricCode:      anyons {1, e, m, eps},  d_a = (1,1,1,1) -> D = 2  -> gamma = log 2
+#     Ising anyon:    anyons {1, sigma, psi},  d_a = (1, sqrt 2, 1) -> D = 2 -> gamma = log 2
+#     Fibonacci:      anyons {1, tau},  d_a = (1, phi),  phi = (1+sqrt 5)/2 -> D = sqrt(2+phi)
+#
+# Tracking: #580.
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{:TopologicalOrder}, ::TopologicalEntanglementEntropy,
+          ::Infinite; quantum_dimensions::AbstractVector{<:Real}, kwargs...)
+        -> Float64
+
+Universal topological entanglement entropy of a 2D topologically
+ordered ground state in the Kitaev-Preskill / Levin-Wen convention,
+
+    gamma = log D,    D = sqrt(sum_a d_a^2),
+
+with `quantum_dimensions = [d_a]` the vector of anyon quantum
+dimensions. References: Kitaev-Preskill 2006 (PRL 96, 110404);
+Levin-Wen 2006 (PRL 96, 110405).
+"""
+function fetch(
+    ::Universality{:TopologicalOrder},
+    ::TopologicalEntanglementEntropy,
+    ::Infinite;
+    quantum_dimensions::AbstractVector{<:Real},
+    kwargs...,
+)
+    isempty(quantum_dimensions) && throw(
+        ArgumentError(
+            "TopologicalEntanglementEntropy: quantum_dimensions must be non-empty."
+        ),
+    )
+    all(d -> d > 0, quantum_dimensions) || throw(
+        ArgumentError(
+            "TopologicalEntanglementEntropy: all quantum dimensions d_a must be > 0."
+        ),
+    )
+    D_sq = sum(d -> d^2, quantum_dimensions)
+    return 0.5 * log(D_sq)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Per-length saturation of post-quench entanglement (#580)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(::Universality{C}, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Long-time saturation of post-quench entanglement entropy per unit
+length (Calabrese-Cardy 2005):
+
+    S_A(infty) / L = pi c / (6 beta_eff),
+
+with `c` provided by the universality class. Partner to
+EntanglementGrowthSlope (PR #588): the linear-regime extrapolation
+slope * (L / (2 v)) equals this saturation value, expressing the
+crossover at the boundary of the light cone.
+
+Reference: Calabrese-Cardy J. Stat. Mech. P04010 (2005). Tracking #580.
+"""
+function fetch(
+    model::Universality{C},
+    ::EntanglementSaturationDensity,
+    ::Infinite;
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    beta_eff > 0 || throw(
+        ArgumentError(
+            "EntanglementSaturationDensity: beta_eff must be > 0; got beta_eff=$beta_eff.",
+        ),
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    return π * c / (6 * beta_eff)
+end
+
+# -----------------------------------------------------------------------------
+# Thermal energy density (Affleck 1986; Bloete-Cardy-Nightingale 1986)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::ThermalEnergyDensity, ::Infinite;
+          beta::Real, kwargs...) where {C} -> Float64
+
+Leading thermal energy density above the ground state for a
+(1+1)D CFT with central charge ,
+
+    e(T) - e_0 = pi c / (6 beta^2).
+
+This is the universal complement of
+[`ConformalCasimirEnergy`](@ref): modular invariance interchanges the
+finite-size Casimir energy and the finite-temperature thermal energy
+with identical coefficient .
+
+Reference: I. Affleck *Phys. Rev. Lett.* **56**, 746 (1986);
+Bloete-Cardy-Nightingale *Phys. Rev. Lett.* **56**, 742 (1986).
+"""
+function fetch(
+    ::Universality{C}, ::ThermalEnergyDensity, ::Infinite; beta::Real, kwargs...
+) where {C}
+    beta > 0 || throw(
+        DomainError(beta, "ThermalEnergyDensity requires beta > 0; got beta = $beta.")
+    )
+    c = _cardy_central_charge(Universality(C))
+    return π * c / (6 * beta^2)
+end
+
+# -----------------------------------------------------------------------------
+# Thermal entropy density (Bloete-Cardy-Nightingale 1986)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(::Universality{C}, ::CFTThermalEntropyDensity, ::Infinite;
+          beta::Real, kwargs...) where {C} -> Float64
+
+Thermal entropy density of a (1+1)D CFT with central charge
+,
+
+    s(T) = pi c / (3 beta).
+
+Obtained from  of the universal free energy density.
+
+Reference: Bloete-Cardy-Nightingale *Phys. Rev. Lett.* **56**, 742
+(1986); I. Affleck *Phys. Rev. Lett.* **56**, 746 (1986).
+"""
+function fetch(
+    model::Universality{C}, ::CFTThermalEntropyDensity, ::Infinite; beta::Real, kwargs...
+) where {C}
+    beta > 0 || throw(
+        DomainError(beta, "CFTThermalEntropyDensity requires beta > 0; got beta = $beta."),
+    )
+    c = _cardy_central_charge(model)
+    return π * c / (3 * beta)
+end

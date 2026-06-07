@@ -13,12 +13,13 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 4
-- **Total hubs (Model, BC pairs)**: 5
-- **Methods** (derived from `@register`): `bdg`, `cft`, `dense_ed`
+- **Models with this quantity registered**: 5
+- **Total hubs (Model, BC pairs)**: 8
+- **Methods** (derived from `@register`): `bdg`, `cft`, `delegation`, `dense_ed`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
+- CalabreseCardy2004 — 3 hubs
 - CalabreseCardy2009 — 2 hubs
 - Peschel2003 — 1 hub
 
@@ -26,9 +27,10 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 | Model | `OBC` | `Infinite` |
 |---|---|---|
-| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) | — |
+| [`HaldaneShastry`](../models/HaldaneShastry.md) | — | 🟠 [hub](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) |
+| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) | — |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/TFIM_RenyiEntropy_Infinite.md) |
-| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_RenyiEntropy_OBC.md) | — |
+| [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_RenyiEntropy_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

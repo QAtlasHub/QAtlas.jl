@@ -17,8 +17,8 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 6 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 8 |
+| **total claimed hubs** | **8** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -26,12 +26,14 @@ _No `CONVENTION` header found in `src/models/<class>/Bound/Bound.jl` (model file
 
 | Quantity | `Infinite` |
 |---|---|
+| [`BB84KeyRate`](../quantities/BB84KeyRate.md) | 🟠 [hub](../hubs/Bound_BB84KeyRate_Infinite.md) |
 | [`BekensteinBound`](../quantities/BekensteinBound.md) | 🟠 [hub](../hubs/Bound_BekensteinBound_Infinite.md) |
 | [`CHSHBound`](../quantities/CHSHBound.md) | 🟠 [hub](../hubs/Bound_CHSHBound_Infinite.md) |
 | [`ChaosBound`](../quantities/ChaosBound.md) | 🟠 [hub](../hubs/Bound_ChaosBound_Infinite.md) |
 | [`MerminGHZBound`](../quantities/MerminGHZBound.md) | 🟠 [hub](../hubs/Bound_MerminGHZBound_Infinite.md) |
 | [`OptimalCloningFidelity`](../quantities/OptimalCloningFidelity.md) | 🟠 [hub](../hubs/Bound_OptimalCloningFidelity_Infinite.md) |
 | [`QuantumSpeedLimit`](../quantities/QuantumSpeedLimit.md) | 🟠 [hub](../hubs/Bound_QuantumSpeedLimit_Infinite.md) |
+| [`ScramblingTime`](../quantities/ScramblingTime.md) | 🟠 [hub](../hubs/Bound_ScramblingTime_Infinite.md) |
 
 ## References
 
@@ -46,6 +48,8 @@ CHSH1969
 MaldacenaShenkerStanford2016
 MargolusLevitin1998
 Mermin1990
+SekinoSusskind2008
+ShorPreskill2000
 ```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

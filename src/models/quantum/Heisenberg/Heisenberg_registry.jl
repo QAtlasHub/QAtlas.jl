@@ -256,3 +256,26 @@ end
     references=["Affleck1986"],
     notes="c_v = π T / (3 v_s) = 2T / (3J). Equals s(T) at LO CFT. Valid β > 5/J.",
 )
+
+# ── Calabrese-Cardy entanglement at Infinite via Universality(:Heisenberg) (#580 Phase 1)
+@register(
+    Heisenberg1D,
+    VonNeumannEntropy{:equilibrium},
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="Delegates to Universality(:Heisenberg) c=1 Calabrese-Cardy form. S(L, beta) = (1/3) log[(beta/pi) sinh(pi L / beta)] (T>0), (1/3) log L (T=0). Always at SU(2) critical point.",
+)
+
+@register(
+    Heisenberg1D,
+    RenyiEntropy,
+    Infinite,
+    method=:delegation,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_cft_entanglement.jl",
+    references=["CalabreseCardy2004"],
+    notes="Delegates to Universality(:Heisenberg) with c -> c*(1+1/alpha)/2 substitution. Reduces to VN at alpha=1.",
+)

@@ -22,30 +22,76 @@ function fetch(::Bound{:Dynamics}, ::ChaosBound, ::Infinite; β::Real, kwargs...
 end
 
 """
-    fetch(::Bound{:Dynamics}, ::QuantumSpeedLimit, ::Infinite; scheme=:margolus_levitin, E)
+    fetch(::Bound{:Dynamics}, ::QuantumSpeedLimit, ::Infinite;
+          scheme=:margolus_levitin, E, ΔE)
 
-Margolus–Levitin 1998 quantum speed limit — a *lower* bound on the time to
-evolve a state to an orthogonal one,
+Quantum speed limit — a *lower* bound on the time to evolve a state to an
+orthogonal one (ℏ = 1).  Two complementary regimes, selected by `scheme`:
 
-    τ ≥ π / (2E)        (ℏ = 1),
+- `:margolus_levitin` (default, canonical) — Margolus–Levitin 1998,
 
-with `E` the mean energy above the ground state.  `direction=:lower`;
-saturated by an equal superposition of the ground state and one excited
-state.
+      τ ≥ π / (2E),
+
+  with `E` the mean energy above the ground state.
+
+- `:mandelstam_tamm` — Mandelstam–Tamm 1945,
+
+      τ ≥ π / (2 ΔE),
+
+  with `ΔE` the energy uncertainty (root variance of the Hamiltonian in the
+  initial state).
+
+The true speed limit is the tighter (larger) of the two; both are
+`direction=:lower` bounds, each saturated in its own regime.
 """
 function fetch(
     ::Bound{:Dynamics},
     ::QuantumSpeedLimit,
     ::Infinite;
     scheme::Symbol=:margolus_levitin,
-    E::Real,
+    E::Real=NaN,
+    ΔE::Real=NaN,
     kwargs...,
 )
-    scheme === :margolus_levitin || throw(
-        ArgumentError(
-            "QuantumSpeedLimit: scheme must be :margolus_levitin; got :$(scheme)"
-        ),
-    )
-    E > 0 || throw(ArgumentError("QuantumSpeedLimit: E must be positive; got $(E)"))
-    return π / (2 * E)
+    if scheme === :margolus_levitin
+        E > 0 || throw(
+            ArgumentError(
+                "QuantumSpeedLimit(:margolus_levitin): E must be positive; got $(E)"
+            ),
+        )
+        return π / (2 * E)
+    elseif scheme === :mandelstam_tamm
+        ΔE > 0 || throw(
+            ArgumentError(
+                "QuantumSpeedLimit(:mandelstam_tamm): ΔE must be positive; got $(ΔE)"
+            ),
+        )
+        return π / (2 * ΔE)
+    else
+        throw(
+            ArgumentError(
+                "QuantumSpeedLimit: scheme must be :margolus_levitin or :mandelstam_tamm; got :$(scheme)",
+            ),
+        )
+    end
+end
+
+"""
+    fetch(::Bound{:Dynamics}, ::ScramblingTime, ::Infinite; β, N)
+
+Sekino–Susskind 2008 fast-scrambling time — a conjectured *lower* bound on the
+time for a thermal system of `N` effective degrees of freedom to scramble local
+information into global entanglement,
+
+    t_* = (β / 2π) log N        (ℏ = k_B = 1).
+
+Saturated by black holes (the fastest scramblers); for local systems `t_*` is
+parametrically longer.  `direction=:lower`.
+"""
+function fetch(
+    ::Bound{:Dynamics}, ::ScramblingTime, ::Infinite; β::Real, N::Real, kwargs...
+)
+    β > 0 || throw(ArgumentError("ScramblingTime: β must be positive; got $(β)"))
+    N > 1 || throw(ArgumentError("ScramblingTime: N must be > 1; got $(N)"))
+    return β * log(N) / (2π)
 end

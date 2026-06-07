@@ -166,7 +166,7 @@ ansatz](../../calc/xxz-luttinger-parameters.md).
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 2 models register 29 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 2 models register 31 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
@@ -190,6 +190,7 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 29 hubs (
 | `XXZ1D` | [`MagnetizationZLocal`](../../atlas/hubs/XXZ1D_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`MassGap`](../../atlas/hubs/XXZ1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | `XXZ1D` | [`MassGap`](../../atlas/hubs/XXZ1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 15 |
+| `XXZ1D` | [`RenyiEntropy`](../../atlas/hubs/XXZ1D_RenyiEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`RenyiEntropy`](../../atlas/hubs/XXZ1D_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 96 |
 | `XXZ1D` | [`SpecificHeat`](../../atlas/hubs/XXZ1D_SpecificHeat_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`SpecificHeat`](../../atlas/hubs/XXZ1D_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 30 |
@@ -198,9 +199,13 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 29 hubs (
 | `XXZ1D` | [`SusceptibilityZZ`](../../atlas/hubs/XXZ1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟢 corroborated-at-p | 31 |
 | `XXZ1D` | [`ThermalEntropy`](../../atlas/hubs/XXZ1D_ThermalEntropy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | `XXZ1D` | [`ThermalEntropy`](../../atlas/hubs/XXZ1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 30 |
+| `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 48 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
 
 
 

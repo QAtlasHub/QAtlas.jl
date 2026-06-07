@@ -294,3 +294,91 @@ exponents are identical to Onsager's 1944 result.
 function fetch(::TFIM, ::CriticalExponents, ::Infinite; kwargs...)
     return QAtlas.fetch(QAtlas.Universality(:Ising), CriticalExponents(); d=2)
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Lieb-Robinson velocity (#579 inequality framework Phase 1)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(model::TFIM, ::LiebRobinsonVelocity, ::Infinite;
+          J=m.J, h=m.h) -> Float64
+
+Lieb-Robinson velocity of the transverse-field Ising chain. Via the
+Jordan-Wigner mapping the TFIM is a free Bogoliubov-fermion system
+with dispersion `Λ(k) = 2 sqrt(J^2 + h^2 - 2 J h cos k)`. The tight
+Lieb-Robinson velocity is the maximum single-particle group velocity
+saturating the bound: differentiating `Λ(k)` and locating the
+interior stationary point at `cos k = min(|J|, |h|) / max(|J|, |h|)`
+gives
+
+    v_LR = max_k |dΛ/dk| = 2 min(|J|, |h|).
+
+At criticality `h = J` this is `2J = 2h` (Calabrese-Cardy 2006).
+The Hastings-Koma upper bound `2 max(|J|, |h|)` is loose; the value
+returned here is the *tight* free-fermion saturated velocity that
+governs e.g. the linear-growth slope of post-quench entanglement
+(see PR #588 EntanglementGrowthSlope).
+
+At `h = 0` (classical Ising) or `J = 0` (decoupled site spins) the
+chain has no quantum dynamics and `v_LR = 0`.
+
+Reference: Lieb-Robinson 1972; Hastings-Koma 2006 (general bound);
+Calabrese-Cardy 2006 (free-fermion saturation in quench dynamics).
+"""
+function fetch(
+    model::TFIM,
+    ::LiebRobinsonVelocity,
+    ::Infinite;
+    J::Real=model.J,
+    h::Real=model.h,
+    kwargs...,
+)
+    return 2 * min(abs(J), abs(h))
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EntanglementGrowthSlope wrapper at h = J critical (#580 / #579 cross)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(model::TFIM, ::EntanglementGrowthSlope, ::Infinite;
+          beta_eff::Real, kwargs...) -> Float64
+
+Linear-growth slope of post-quench half-system entanglement entropy
+for the TFIM at the Ising critical point `h = J`. Wires together two
+universality-layer pieces
+
+    c = 1/2          (Universality(:Ising) CentralCharge)
+    v_LR = 2 |J|     (TFIM LiebRobinsonVelocity at h = J critical)
+
+into the Calabrese-Cardy 2005 result
+
+    dS_A/dt = π c v_LR / (3 beta_eff) = π J / (3 beta_eff).
+
+For non-critical TFIM (`h ≠ J`, gapped) the CC linear-growth picture
+does not apply and `DomainError` is thrown.
+
+Reference: Calabrese-Cardy *J. Stat. Mech.* P04010 (2005);
+combines universality-layer dispatches from PR #588 and the TFIM
+LiebRobinsonVelocity from PR #586 / fix #592.
+"""
+function fetch(
+    model::TFIM, ::EntanglementGrowthSlope, ::Infinite; beta_eff::Real, kwargs...
+)
+    isapprox(model.h, model.J; atol=1e-10) || throw(
+        DomainError(
+            (model.J, model.h),
+            "TFIM EntanglementGrowthSlope at Infinite is defined only at the Ising " *
+            "critical point h = J (gapless c = 1/2 CFT); off-critical TFIM is gapped " *
+            "and CC linear-growth does not apply. Got (J, h) = (\$(model.J), \$(model.h)).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        EntanglementGrowthSlope(),
+        Infinite();
+        v=fetch(model, LiebRobinsonVelocity(), Infinite()),
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end

@@ -5,13 +5,15 @@
 
 Which concrete models realize each universality class (RG fixed point), and the regime where they do — the `@realizes` backend register, queryable with `realized_by(class)` / `realizations(model)`.
 
-## `Heisenberg` (1)
+## `Heisenberg` (2)
 
+- **HaldaneShastry** — ground state of the 1/r² inverse-square chain; SU(2)_1 WZW, c = 1
 - **Heisenberg1D** — isotropic AFM point; SU(2)_1 WZW, c = 1
 
-## `Ising` (2)
+## `Ising` (3)
 
 - **IsingSquare** — 2D classical Ising at T_c; 2D Ising universality, c = 1/2
+- **IsingTriangular** — ferromagnetic triangular-lattice Ising at T_c; 2D Ising universality, c = 1/2
 - **TFIM** — quantum critical point h = J; (1+1)D Ising CFT, c = 1/2
 
 ## `KPZ` (1)

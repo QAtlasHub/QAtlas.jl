@@ -116,6 +116,23 @@ function fetch(
     kwargs...,
 )
     ℓ ≥ 1 || throw(ArgumentError("VonNeumannEntropy Infinite: ℓ must be ≥ 1; got $ℓ."))
+    # At the Ising critical point h ≈ J the CC form lives at the
+    # universality layer (Universality(:Ising), c = 1/2). TFIM uses the
+    # lattice-spacing convention a = 1/2 inside log, which is selected
+    # via the `a` kwarg added to the universality dispatch (#580).
+    if isapprox(model.h, model.J; atol=1e-10)
+        return fetch(
+            Universality(:Ising),
+            VonNeumannEntropy(),
+            Infinite();
+            ℓ=ℓ,
+            beta=beta,
+            a=1//2,
+            kwargs...,
+        )
+    end
+    # Off-critical / gapped regime: not at a universality fixed point;
+    # use the TFIM-local crossover form which includes the mass scale.
     return _tfim_cc_entanglement(model.J, model.h, ℓ, beta; α=1.0)
 end
 
@@ -138,5 +155,166 @@ The non-universal `S_0` offset is dropped.
 """
 function fetch(model::TFIM, q::RenyiEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...)
     ℓ ≥ 1 || throw(ArgumentError("RenyiEntropy Infinite: ℓ must be ≥ 1; got $ℓ."))
+    if isapprox(model.h, model.J; atol=1e-10)
+        return fetch(Universality(:Ising), q, Infinite(); ℓ=ℓ, beta=beta, a=1//2, kwargs...)
+    end
     return _tfim_cc_entanglement(model.J, model.h, ℓ, beta; α=q.α)
+end
+
+# -----------------------------------------------------------------------------
+# Affleck-Ludwig boundary entropy at criticality (h = J)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::BoundaryEntropy, ::Infinite;
+          h = m.h, J = m.J, boundary_state::Symbol, kwargs...) -> Float64
+
+Affleck-Ludwig boundary entropy `log g` of the critical TFIM at the
+quantum critical point `h = J`. Delegates to `Universality(:Ising)`
+with the same `boundary_state`, which is dimensionless (independent
+of the sound velocity).
+
+Off-critical (`h != J`) is gapped and Affleck-Ludwig does not apply —
+this dispatch throws `DomainError`.
+
+Reference: Affleck-Ludwig *Phys. Rev. Lett.* **67**, 161 (1991).
+"""
+function fetch(
+    m::TFIM,
+    ::BoundaryEntropy,
+    ::Infinite;
+    h::Real=m.h,
+    J::Real=m.J,
+    boundary_state::Symbol,
+    kwargs...,
+)
+    isapprox(abs(h), abs(J); atol=1e-12) || throw(
+        DomainError(
+            (h, J),
+            "TFIM BoundaryEntropy: closed-form Affleck-Ludwig applies only at " *
+            "the critical point |h| = |J|; got (h, J) = ($h, $J).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        BoundaryEntropy(),
+        Infinite();
+        boundary_state=boundary_state,
+        kwargs...,
+    )
+end
+
+# -----------------------------------------------------------------------------
+# Post-quench entanglement saturation density at h = J (Calabrese-Cardy 2005)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::EntanglementSaturationDensity, ::Infinite;
+          beta_eff::Real, h = m.h, J = m.J, kwargs...) -> Float64
+
+Long-time saturation `S_A(infty)/L = pi c / (6 beta_eff)` of the
+half-system entanglement entropy after a global quench at the
+critical TFIM point `|h| = |J|`. Delegates to `Universality(:Ising)`
+(c = 1/2).
+"""
+function fetch(
+    m::TFIM,
+    ::EntanglementSaturationDensity,
+    ::Infinite;
+    beta_eff::Real,
+    h::Real=m.h,
+    J::Real=m.J,
+    kwargs...,
+)
+    isapprox(abs(h), abs(J); atol=1e-12) || throw(
+        DomainError(
+            (h, J),
+            "TFIM EntanglementSaturationDensity: closed form applies only at the " *
+            "critical point |h| = |J|; got (h, J) = ($h, $J).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        EntanglementSaturationDensity(),
+        Infinite();
+        beta_eff=beta_eff,
+        kwargs...,
+    )
+end
+
+# -----------------------------------------------------------------------------
+# Mutual information of two adjacent intervals at h = J (Calabrese-Cardy 2009)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::MutualInformation, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, beta::Real=Inf, kwargs...) -> Float64
+
+Calabrese-Cardy mutual information `I(A:B)` of two adjacent intervals
+at the critical TFIM point `|h| = |J|`, with the same lattice
+spacing convention `a = 1/2` used by the VonNeumannEntropy /
+RenyiEntropy wrappers. The cutoff cancels in
+`S(A) + S(B) - S(A union B)`, so the result is independent of `a`.
+"""
+function fetch(
+    m::TFIM,
+    ::MutualInformation,
+    ::Infinite;
+    ℓ_A::Real,
+    ℓ_B::Real,
+    beta::Real=Inf,
+    kwargs...,
+)
+    isapprox(abs(m.h), abs(m.J); atol=1e-12) || throw(
+        DomainError(
+            (m.h, m.J),
+            "TFIM MutualInformation: closed-form CC applies only at the critical " *
+            "point |h| = |J|; got (h, J) = ($(m.h), $(m.J)).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        MutualInformation(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        beta=beta,
+        a=1//2,
+        kwargs...,
+    )
+end
+
+# -----------------------------------------------------------------------------
+# Logarithmic negativity of two adjacent intervals at h = J (CC-Tonni 2012)
+# -----------------------------------------------------------------------------
+
+"""
+    fetch(m::TFIM, ::LogarithmicNegativity, ::Infinite;
+          ℓ_A::Real, ℓ_B::Real, kwargs...) -> Float64
+
+Calabrese-Cardy-Tonni 2012 logarithmic negativity of two adjacent
+intervals at the critical TFIM point `|h| = |J|`:
+
+    E = (c/4) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)],   c = 1/2.
+
+Delegates to `Universality(:Ising)`.
+"""
+function fetch(
+    m::TFIM, ::LogarithmicNegativity, ::Infinite; ℓ_A::Real, ℓ_B::Real, kwargs...
+)
+    isapprox(abs(m.h), abs(m.J); atol=1e-12) || throw(
+        DomainError(
+            (m.h, m.J),
+            "TFIM LogarithmicNegativity: closed-form CC-Tonni applies only at " *
+            "the critical point |h| = |J|; got (h, J) = ($(m.h), $(m.J)).",
+        ),
+    )
+    return fetch(
+        Universality(:Ising),
+        LogarithmicNegativity(),
+        Infinite();
+        ℓ_A=ℓ_A,
+        ℓ_B=ℓ_B,
+        kwargs...,
+    )
 end

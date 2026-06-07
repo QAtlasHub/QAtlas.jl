@@ -83,6 +83,8 @@ include("core/type.jl")
 include("core/quantities.jl")
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
+include("core/reduces.jl")   # model -> model reductions (limit / special point)
+include("core/about.jl")     # model description cards (summary + Hamiltonian)
 include("core/pfaffian.jl")
 include("core/dense_ed.jl")
 
@@ -91,6 +93,8 @@ export Implementation, implementation_status, implementation_status_markdown
 export references_for
 export definitions, validity, canonical_scheme  # multi-definition catalog / selector
 export Realization, realizes!, @realizes, realizations, realized_by  # model <-> class
+export Reduction, reduces!, @reduces, reductions, reduced_from  # model -> model
+export ModelCard, ABOUT, about!, @about, about  # model description cards
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
@@ -111,7 +115,21 @@ export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  #
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
-export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
+export FermiVelocity,
+    LuttingerVelocity,
+    SpinWaveVelocity,
+    LiebRobinsonVelocity,
+    MutualInformation,
+    EntanglementGrowthSlope,
+    CardyEntropy,
+    ConformalCasimirEnergy,
+    LogarithmicNegativity,
+    BoundaryEntropy,
+    PageEntropy,
+    EntanglementSaturationDensity,
+    ThermalEnergyDensity,
+    CFTThermalEntropyDensity,
+    WignerSemicircleMoment
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)
@@ -122,6 +140,8 @@ export ChaosBound         # MSS chaos / Lyapunov bound (:bound, Dynamics)
 export BekensteinBound    # Bekenstein entropy bound (:bound, Holographic)
 export QuantumSpeedLimit  # Margolus-Levitin speed limit (:bound lower, Dynamics)
 export OptimalCloningFidelity  # Buzek-Hillery cloning bound (:bound upper, QuantumInformation)
+export ScramblingTime     # Sekino-Susskind fast-scrambling time (:bound lower, Dynamics)
+export BB84KeyRate        # Shor-Preskill BB84 secret-key rate (:bound lower, QuantumInformation)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper
@@ -142,14 +162,17 @@ export SpectralFormFactor  # RMT spectral form factor (#243)
 include("universalities/Universality.jl")            # namespace root: Universality{C} + shared types
 include("universalities/E8/E8.jl")
 include("universalities/MeanField/MeanField.jl")
+include("universalities/MeanField/MeanField_registry.jl")  # :universal predicts edge (CriticalExponents)
 include("universalities/Ising2D/Ising2D.jl")
 include("universalities/KPZ/KPZ.jl")
+include("universalities/KPZ/KPZ_registry.jl")  # :universal predicts edge (GrowthExponents)
 include("universalities/Percolation/Percolation.jl")
 include("universalities/Potts/Potts.jl")
 include("universalities/ONModel/ONModel.jl")
 include("universalities/MinimalModel/MinimalModel.jl")
 include("universalities/WZW/WZW.jl")
 include("universalities/CardyEntanglement.jl")       # shared CFT entanglement (cross-class)
+include("universalities/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
 
 # --- Universal bounds (model-independent inequalities) ---
 # A bound is NOT a universality class: it is pinned by the quantity it bounds,
@@ -338,5 +361,19 @@ include("deprecate/legacy_xxz.jl")
 
 # Model <-> universality-class realizations (membership) — after all models.
 include("realizes_registry.jl")
+
+# Model description cards (summary + Hamiltonian) — after all models.
+include("about_registry.jl")
+
+# Model -> model reductions (limit / special point) — after all models.
+include("reduces_registry.jl")
+
+# Knowledge-graph layer: bidirectional queries over the edge stores
+# (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.
+include("core/links.jl")
+include("core/coherence.jl")
+export predicts, predicted_by, bounds_on, cited_by, delegations, implementations_of
+export coherence_report,
+    coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
 
 end # module QAtlas

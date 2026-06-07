@@ -523,6 +523,208 @@ identity.
 const SpinWaveVelocity = LuttingerVelocity
 
 """
+    LiebRobinsonVelocity() <: AbstractQuantity
+
+Lieb-Robinson velocity `v_LR` setting the linear light cone for
+information propagation in a local lattice quantum system: for any
+local operators `A_x`, `B_y` separated by `|x - y|`,
+
+    || [A_x(t), B_y(0)] || <= C * exp(-mu * (|x - y| - v_LR * t)).
+
+For free-fermion-mappable spin chains (TFIM, XY/XYh1D, the XX limit
+of XXZ) the bound is saturated and `v_LR` equals twice the maximum
+single-particle group velocity. Reference: Lieb-Robinson, *Commun.
+Math. Phys.* **28**, 251 (1972); Hastings-Koma, *Commun. Math. Phys.*
+**265**, 781 (2006). Tracking: issue #579 inequality framework.
+"""
+struct LiebRobinsonVelocity <: AbstractQuantity end
+
+"""
+    MutualInformation() <: AbstractQuantity
+
+Mutual information between two subsystems, `I(A:B) = S(A) + S(B) - S(A ∪ B)`.
+
+This struct is the type tag; concrete `fetch` dispatches live at the
+universality layer (see `src/universalities/CardyEntanglement.jl` for
+the Calabrese-Cardy closed forms) and on model files for non-universal
+cases. Tracking: #580 entanglement universality catalog.
+"""
+struct MutualInformation <: AbstractQuantity end
+
+"""
+    EntanglementGrowthSlope() <: AbstractQuantity
+
+Linear-growth slope of the half-system entanglement entropy after a
+global quench from a thermal-like initial state. Calabrese-Cardy 2005
+predicts that, for `t < L / (2 v)`,
+
+    dS_A / dt = (π c v) / (3 β_eff),
+
+where `c` is the central charge of the critical post-quench
+Hamiltonian, `v` is the Lieb-Robinson velocity of correlation
+spreading, and `β_eff` is the effective inverse temperature of the
+generalised-Gibbs steady state set by the initial state. This struct
+is the type tag; concrete dispatches live at the universality layer
+and on model files. Reference: Calabrese-Cardy 2005, *J. Stat. Mech.*
+P04010. Tracking: #580 quench-dynamics phase.
+"""
+struct EntanglementGrowthSlope <: AbstractQuantity end
+
+"""
+    EntanglementSaturationDensity() <: AbstractQuantity
+
+Per-unit-length saturation value of post-quench entanglement entropy
+in the Calabrese-Cardy 2005 picture: in the long-time regime
+`t > L / (2 v)`, the half-system entropy saturates at
+
+    S_A(infty) / L = π c / (6 beta_eff),
+
+where `c` is the central charge of the post-quench critical
+Hamiltonian and `beta_eff` is the effective inverse temperature of the
+generalised-Gibbs steady state. Universal in (c, beta_eff). Partner to
+[`EntanglementGrowthSlope`](@ref) (which gives the dS/dt of the
+linear regime). Reference: Calabrese-Cardy J. Stat. Mech. P04010
+(2005). Tracking: #580.
+"""
+struct EntanglementSaturationDensity <: AbstractQuantity end
+
+"""
+    ThermalEnergyDensity <: AbstractQuantity
+
+Leading low-temperature thermal energy density of a (1+1)D
+conformal field theory above its ground state,
+
+    e(T) - e_0 = pi c T^2 / 6 = pi c / (6 beta^2),
+
+where  is the central charge and  (Affleck 1986;
+Bloete-Cardy-Nightingale 1986). This is the universal counterpart of
+[`ConformalCasimirEnergy`](@ref): the same `c` prefactor that
+controls the Casimir term in finite size also fixes the leading
+thermal-excitation density in finite temperature, via modular
+invariance.
+"""
+struct ThermalEnergyDensity <: AbstractQuantity end
+
+"""
+    CFTThermalEntropyDensity <: AbstractQuantity
+
+Leading low-temperature thermal entropy density (entropy per unit
+length) of a (1+1)D conformal field theory,
+
+    s(T) = pi c T / 3 = pi c / (3 beta),
+
+with  the central charge. This is the temperature derivative of
+the universal CFT free energy density  (Bloete-Cardy-
+Nightingale 1986), and the operational complement of
+[`ThermalEnergyDensity`](@ref).
+"""
+struct CFTThermalEntropyDensity <: AbstractQuantity end
+
+"""
+    WignerSemicircleMoment <: AbstractQuantity
+
+Moments of the Wigner semicircle distribution
+
+    rho(x) = (1 / (2 pi)) sqrt(4 - x^2),   x in [-2, 2],
+
+the universal large-N eigenvalue density of Gaussian random matrix
+ensembles (GOE / GUE / GSE) under Wigner-Mehta normalisation.
+
+The even moments are Catalan numbers,
+
+    m_{2k} = C_k = (2k)! / (k! (k+1)!),
+
+and the odd moments vanish by symmetry. These are the universal large-N
+free-probability moments underlying RMT spectral statistics; they also
+count rooted plane trees / non-crossing pair partitions.
+
+Reference: E. P. Wigner, *Ann. Math.* **62**, 548 (1955); M. L. Mehta
+*Random Matrices* (1991).
+"""
+struct WignerSemicircleMoment <: AbstractQuantity end
+
+"""
+    CardyEntropy() <: AbstractQuantity
+
+Asymptotic high-energy entropy (log of the density of states) of a
+1+1D CFT, given by the Cardy 1986 formula
+
+    S_Cardy(E) = 2 π sqrt(c E / 6),
+
+where `c` is the central charge of the CFT and `E` is the excitation
+energy (in units where the cylinder circumference is 1). This counts
+the number of CFT states at fixed energy `E` and underlies, e.g., the
+Cardy-Verlinde / black-hole-entropy correspondences. Tracking: #580.
+"""
+struct CardyEntropy <: AbstractQuantity end
+
+"""
+    ConformalCasimirEnergy() <: AbstractQuantity
+
+Universal Casimir (ground-state) energy of a 1+1D CFT on a cylinder
+of circumference `L` (PBC). Cardy 1986 / Blote-Cardy-Nightingale 1986
+/ Affleck 1986 showed it is determined entirely by the central charge:
+
+    E_0(L) = -π c / (6 L).
+
+This is the strict thermodynamic-limit subtraction `lim_{L->∞}
+(E_GS(L) - L * e_∞) * L` that extracts the universal finite-size
+correction.  Sign convention follows the original PRL: `E_0 < 0` for
+unitary CFTs with `c > 0`. Tracking: #580.
+"""
+struct ConformalCasimirEnergy <: AbstractQuantity end
+
+"""
+    LogarithmicNegativity() <: AbstractQuantity
+
+Logarithmic negativity `E = log Tr |ρ^{T_B}|` measuring mixed-state
+entanglement between two subsystems. For two adjacent intervals on
+an infinite 1+1D-CFT chain at T = 0, the universal closed form
+(Calabrese-Cardy-Tonni 2012) is
+
+    E(ℓ_A, ℓ_B) = (c/4) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)],
+
+i.e., the same geometric-mean log of the mutual-information universal
+formula with the prefactor c/3 replaced by c/4. Tracking: #580.
+"""
+struct LogarithmicNegativity <: AbstractQuantity end
+
+"""
+    BoundaryEntropy() <: AbstractQuantity
+
+Affleck-Ludwig universal (non-integer) boundary entropy `log g`
+of a conformal boundary state in a 1+1D rational CFT, given by
+
+    g_a = S_{0a} / sqrt(S_{00})
+
+for the Cardy boundary state |a⟩ corresponding to primary `a`, where
+`S_{ab}` is the modular S-matrix. The quantity `log g` is non-negative
+under unitary RG and decreases monotonically (g-theorem). The
+universal "ground-state degeneracy" interpretation goes back to
+Affleck-Ludwig 1991. Tracking: #580.
+"""
+struct BoundaryEntropy <: AbstractQuantity end
+
+"""
+    PageEntropy() <: AbstractQuantity
+
+Page average entropy of a subsystem for a Haar-random pure state in
+`H_A ⊗ H_B`. For `dim(H_A) = m`, `dim(H_B) = n` with `m ≤ n` (else
+swap by purity symmetry), Page 1993 found
+
+    <S_A> = sum_{k=n+1}^{m·n} 1/k - (m-1)/(2n).
+
+For `m = n` this gives `<S_A> ≈ log m - 1/2` (close to maximal but
+reduced by 1/2); for `m << n` it gives `<S_A> ≈ log m - m/(2n)`.
+This is the famous Page curve in dimension space underlying e.g. the
+information-paradox / Page-time analysis of evaporating black holes.
+
+Reference: D. N. Page, *Phys. Rev. Lett.* **71**, 1291 (1993),
+DOI 10.1103/PhysRevLett.71.1291. Tracking: #580.
+"""
+struct PageEntropy <: AbstractQuantity end
+
+"""
     E8Spectrum() <: AbstractQuantity
 
 Zamolodchikov E8 mass spectrum (8 stable particles).  Concrete
@@ -1016,6 +1218,17 @@ Lyapunov exponent `λ_L` of out-of-time-order correlators (`λ_L ≤ 2π/β`).  
 struct ChaosBound <: AbstractQuantity end
 
 """
+    ScramblingTime() <: AbstractQuantity
+
+The fast-scrambling time `t_* = (β/2π) log N` (Sekino–Susskind 2008) — the
+conjectured *lower* bound on the time for a thermal system of `N` degrees of
+freedom to scramble local information into global entanglement; saturated by
+black holes (the fastest scramblers).  A `status=:bound`, `direction=:lower`
+quantity; fetched against a [`Bound`](@ref) domain (`Bound(:Dynamics)`).
+"""
+struct ScramblingTime <: AbstractQuantity end
+
+"""
     BekensteinBound() <: AbstractQuantity
 
 The Bekenstein universal entropy bound — an upper bound on the entropy of a
@@ -1043,3 +1256,14 @@ single-copy fidelity of a `1 → 2` qubit cloner (Bužek–Hillery `F ≤ 5/6`).
 domain (`Bound(:QuantumInformation)`).
 """
 struct OptimalCloningFidelity <: AbstractQuantity end
+
+"""
+    BB84KeyRate() <: AbstractQuantity
+
+The BB84 asymptotic secret-key rate `R(e) = 1 − 2 H₂(e)` (Shor–Preskill 2000),
+with `H₂` the binary entropy and `e` the qubit error rate (QBER).  A provably
+achievable rate — a *lower* bound on the extractable secret-key fraction;
+positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched
+against a [`Bound`](@ref) domain (`Bound(:QuantumInformation)`).
+"""
+struct BB84KeyRate <: AbstractQuantity end

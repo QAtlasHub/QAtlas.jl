@@ -29,3 +29,19 @@ Satisfies Rushbrooke, Widom, and Fisher scaling relations exactly.
 function fetch(::MeanField, ::CriticalExponents; kwargs...)
     return (α=0 // 1, β=1 // 2, γ=1 // 1, δ=3 // 1, ν=1 // 2, η=0 // 1)
 end
+
+"""
+    fetch(::Universality{:MeanField}, ::CriticalExponents; d=4) -> NamedTuple
+
+Mean-field (Landau) critical exponents on the canonical `Universality(:MeanField)`
+namespace — exact for `d ≥ d_c = 4`, d-independent.  `fetch(MeanField(), …)` is
+the legacy alias; this is the namespace form used by the `:universal` registry row.
+"""
+function fetch(::Universality{:MeanField}, ::CriticalExponents; d::Int=4, kwargs...)
+    return fetch(MeanField(), CriticalExponents())
+end
+
+# Scaling-limit (Infinite) form so the :universal predicts edge is fetchable.
+function fetch(u::Universality{:MeanField}, q::CriticalExponents, ::Infinite; kwargs...)
+    return fetch(u, q; kwargs...)
+end

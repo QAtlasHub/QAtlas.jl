@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 120 hubs
+## `analytic` - 122 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -28,12 +28,14 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md)
 - 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md)
+- 🟠 [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
 - 🟠 [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
 - 🟠 [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md)
 - 🟠 [`Bound/ChaosBound/Infinite`](hubs/Bound_ChaosBound_Infinite.md)
 - 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
 - 🟠 [`Bound/OptimalCloningFidelity/Infinite`](hubs/Bound_OptimalCloningFidelity_Infinite.md)
 - 🟠 [`Bound/QuantumSpeedLimit/Infinite`](hubs/Bound_QuantumSpeedLimit_Infinite.md)
+- 🟠 [`Bound/ScramblingTime/Infinite`](hubs/Bound_ScramblingTime_Infinite.md)
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](hubs/ChernSimons3D_PartitionFunction_Infinite.md)
 - 🟢 [`Cluster1D/Energy/Infinite`](hubs/Cluster1D_Energy_Infinite.md)
 - 🟢 [`Cluster1D/MassGap/Infinite`](hubs/Cluster1D_MassGap_Infinite.md)
@@ -234,12 +236,16 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XYh1D/MassGap/OBC`](hubs/XYh1D_MassGap_OBC.md)
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](hubs/XYh1D_SusceptibilityZZ_OBC.md)
 
-## `delegation` - 13 hubs
+## `delegation` - 19 hubs
 
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](hubs/DMIHeisenberg1D_Energy_Infinite.md)
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
+- 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](hubs/HaldaneShastry_RenyiEntropy_Infinite.md)
+- 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md)
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](hubs/Heisenberg1D_LuttingerParameter_Infinite.md)
+- 🟠 [`Heisenberg1D/RenyiEntropy/Infinite`](hubs/Heisenberg1D_RenyiEntropy_Infinite.md)
+- 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md)
 - 🔵 [`HeisenbergXYZ/LuttingerParameter/Infinite`](hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md)
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
@@ -248,6 +254,8 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](hubs/MixedFieldIsing1D_MassGap_Infinite.md)
 - 🔵 [`RandomBondIsing2D/CentralCharge/Infinite`](hubs/RandomBondIsing2D_CentralCharge_Infinite.md)
 - 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
+- 🟠 [`XXZ1D/RenyiEntropy/Infinite`](hubs/XXZ1D_RenyiEntropy_Infinite.md)
+- 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](hubs/XXZ1D_VonNeumannEntropy_Infinite.md)
 - 🟢 [`ZnClock/CentralCharge/Infinite`](hubs/ZnClock_CentralCharge_Infinite.md)
 
 ## `pfaffian` - 9 hubs
@@ -311,12 +319,13 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
 - 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md)
 
-## `closed_form` - 4 hubs
+## `closed_form` - 5 hubs
 
 - 🟠 [`HeisenbergXYZ/CorrelationLength/Infinite`](hubs/HeisenbergXYZ_CorrelationLength_Infinite.md)
 - 🟠 [`HeisenbergXYZ/GroundStateEnergyDensity/Infinite`](hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md)
 - 🟠 [`HeisenbergXYZ/MassGap/Infinite`](hubs/HeisenbergXYZ_MassGap_Infinite.md)
 - 🟠 [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md)
+- 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](hubs/TFIM_LiebRobinsonVelocity_Infinite.md)
 
 ## `dmrg_reference` - 4 hubs
 

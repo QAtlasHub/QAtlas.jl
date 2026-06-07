@@ -97,4 +97,4 @@ function fetch(::Universality{:KPZ}, ::GrowthExponents; d::Int, kwargs...)
     end
     return error("KPZ growth exponents: d=$d not supported (only d ∈ {1, 2, 3}).")
 end
-# (Infinite-bc forwarder for GrowthExponents lives in CardyEntanglement.jl.)
+# (Infinite-bc forwarder for GrowthExponents lives in universalities/behaviour/CardyEntanglement.jl.)

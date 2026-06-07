@@ -72,9 +72,11 @@ type Cfg = {
   opacityScale?: number
   focusOnHover?: boolean
   legend?: boolean
+  search?: boolean
   colors?: Record<string, string>
   statusColors?: Record<string, string>
   realizesColor?: string
+  realizesLabel?: string
   labelColor?: string
   labelStroke?: string
 }
@@ -111,16 +113,17 @@ async function renderGraph(
     drag: enableDrag = true,
     zoom: enableZoom = true,
     scale = 1.0,
-    repelForce = 0.45,
-    centerForce = 0.22,
-    linkDistance = 70,
-    linkStrength = 0.12,
+    repelForce = 0.85,
+    centerForce = 0.2,
+    linkDistance = 105,
+    linkStrength = 0.07,
     fontSize = 0.6,
     opacityScale = 1.1,
     focusOnHover = true,
     colors = {},
     statusColors = {},
     realizesColor = "#9aa0a8",
+    realizesLabel = "realizes",
     labelColor = "#eaeaea",
     labelStroke = "#15171a",
   } = cfg
@@ -159,7 +162,7 @@ async function renderGraph(
     .force("charge", forceManyBody().strength(-100 * repelForce))
     .force("center", forceCenter().strength(centerForce))
     .force("link", forceLink(graphData.links).distance(linkDistance).strength(linkStrength))
-    .force("collide", forceCollide<NodeData>((n) => nodeRadius(n)).iterations(3))
+    .force("collide", forceCollide<NodeData>((n) => nodeRadius(n) + 6).iterations(3))
 
   function nodeRadius(d: NodeData) {
     const numLinks = graphData.links.filter(
@@ -170,6 +173,7 @@ async function renderGraph(
 
   let hoveredNodeId: string | null = null
   let hoveredNeighbours: Set<string> = new Set()
+  let searchMatches: Set<string> = new Set()
   const linkRenderData: LinkRenderData[] = []
   const nodeRenderData: NodeRenderData[] = []
   const tweens = new Map<string, TweenNode>()
@@ -203,6 +207,12 @@ async function renderGraph(
     for (const l of linkRenderData) {
       let alpha = 1
       if (hoveredNodeId) alpha = l.active ? 1 : 0.18
+      else if (searchMatches.size) {
+        const d = l.simulationData
+        const s = searchMatches.has(d.source.id),
+          t = searchMatches.has(d.target.id)
+        alpha = s && t ? 1 : s || t ? 0.4 : 0.05
+      }
       l.color = linkColorOf(l.simulationData)
       tg.add(new Tweened<LinkRenderData>(l).to({ alpha }, 200))
     }
@@ -218,11 +228,12 @@ async function renderGraph(
     const tg = new TweenGroup()
     const def = 1 / scale
     const act = def * 1.1
+    const focusing = hoveredNodeId !== null || searchMatches.size > 0
     for (const n of nodeRenderData) {
       const id = n.simulationData.id
       const isH = hoveredNodeId === id
-      const show = isH || hoveredNeighbours.has(id)
-      const alpha = show ? 1 : hoveredNodeId !== null ? 0 : n.label.alpha
+      const show = isH || hoveredNeighbours.has(id) || searchMatches.has(id)
+      const alpha = show ? 1 : focusing ? 0 : n.label.alpha
       tg.add(
         new Tweened<Text>(n.label).to(
           { alpha, scale: { x: isH ? act : def, y: isH ? act : def } },
@@ -243,6 +254,7 @@ async function renderGraph(
     for (const n of nodeRenderData) {
       let alpha = 1
       if (hoveredNodeId !== null && focusOnHover) alpha = n.active ? 1 : 0.2
+      else if (searchMatches.size) alpha = searchMatches.has(n.simulationData.id) ? 1 : 0.12
       tg.add(new Tweened<Graphics>(n.gfx, tg).to({ alpha }, 200))
     }
     tg.getAll().forEach((t) => t.start())
@@ -302,7 +314,7 @@ async function renderGraph(
       .filter(([k]) => presentStatus.has(k) || (k === "exact" && presentStatus.has("universal")))
       .map(([, c, label]) => `<div>${solid(c)}${label}</div>`)
       .join("")
-    const realizesHtml = hasRealizes ? `<div>${solid(realizesColor)}realizes</div>` : ""
+    const realizesHtml = hasRealizes ? `<div>${solid(realizesColor)}${realizesLabel}</div>` : ""
     const styleHtml =
       `<div style="margin-top:3px">${solid("#cfcfcf")}verified</div>` +
       `<div>${dashed("#cfcfcf")}not verified</div>`
@@ -314,6 +326,29 @@ async function renderGraph(
     legend.innerHTML =
       nodeHtml + sep("edges") + statusHtml + realizesHtml + sep("style") + styleHtml
     graph.appendChild(legend)
+  }
+
+  // Search box: filter nodes by name, highlighting matches (and their labels)
+  // while dimming the rest — the graph has no other search affordance.
+  if (cfg.search !== false) {
+    graph.style.position = graph.style.position || "relative"
+    const box = document.createElement("input")
+    box.type = "search"
+    box.placeholder = "search nodes…"
+    box.style.cssText =
+      "position:absolute;top:10px;right:10px;z-index:5;width:150px;padding:5px 9px;" +
+      "font-size:12px;background:rgba(18,20,24,0.85);color:#e8e8e8;" +
+      "border:1px solid #3a3f47;border-radius:6px;outline:none"
+    box.addEventListener("input", () => {
+      const q = box.value.trim().toLowerCase()
+      searchMatches = new Set()
+      if (q)
+        for (const n of nodes)
+          if (n.text.toLowerCase().includes(q) || n.id.toLowerCase().includes(q))
+            searchMatches.add(n.id)
+      renderPixiFromD3()
+    })
+    graph.appendChild(box)
   }
 
   const stage = app.stage

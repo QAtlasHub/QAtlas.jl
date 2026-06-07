@@ -146,7 +146,7 @@ function _tfim_thermo_obc(quantity::Symbol, N::Int, J::Float64, h::Float64, β::
         Λ = _tfim_bdg_spectrum(N, J, h)
         return sum(Λ) do λ
             x = β * λ / 2
-            _logcosh2(x) - x * tanh(x)
+            return _logcosh2(x) - x * tanh(x)
         end / N
     elseif quantity === :specific_heat
         Λ = _tfim_bdg_spectrum(N, J, h)
@@ -276,7 +276,7 @@ end
 # lives on the native method, so `fetch(m, q, Infinite())` reproduces the exact
 # row while `definitions(m, q, Infinite())` lists the registered approximations.
 function _tfim_thermo_infinite_scheme(m::TFIM, q, ::Val{S}; beta) where {S}
-    error(
+    return error(
         "TFIM $(typeof(q)) Infinite: no scheme :$(S) " *
         "(only :canonical + registered approximations)",
     )
@@ -286,5 +286,5 @@ end
 #   f/N = -ln2/β - (β/2)(J² + h²) + O(β³),  valid for βJ ≪ 1, βh ≪ 1.
 # This is the small-β limit of the exact free energy (the :canonical row).
 function _tfim_thermo_infinite_scheme(m::TFIM, ::FreeEnergy, ::Val{:high_T}; beta)
-    -log(2) / beta - (beta / 2) * (m.J^2 + m.h^2)
+    return -log(2) / beta - (beta / 2) * (m.J^2 + m.h^2)
 end

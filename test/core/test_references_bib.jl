@@ -28,7 +28,9 @@ Path to the canonical references.bib. Overridable via the
 can point at the same file from any working directory.
 """
 function references_bib_path()
-    get(ENV, "QATLAS_REFERENCES_BIB", joinpath(pkgdir(QAtlas), "docs", "references.bib"))
+    return get(
+        ENV, "QATLAS_REFERENCES_BIB", joinpath(pkgdir(QAtlas), "docs", "references.bib")
+    )
 end
 
 """

@@ -275,7 +275,7 @@ end
 # ──────────────────────────────────────────────────────────────────────
 
 function _to_nt(e::Implementation)
-    (
+    return (
         model=e.model,
         quantity=e.quantity,
         bc=e.bc,
@@ -318,12 +318,12 @@ ThermalMPS workload, query the queue you intend to validate against.
 implementation_status() = [_to_nt(e) for e in REGISTRY]
 
 function implementation_status(::Type{M}) where {M<:AbstractQAtlasModel}
-    [_to_nt(e) for e in REGISTRY if e.model === M]
+    return [_to_nt(e) for e in REGISTRY if e.model === M]
 end
 implementation_status(model::AbstractQAtlasModel) = implementation_status(typeof(model))
 
 function implementation_status(::Type{Q}) where {Q<:AbstractQuantity}
-    [_to_nt(e) for e in REGISTRY if e.quantity === Q]
+    return [_to_nt(e) for e in REGISTRY if e.quantity === Q]
 end
 implementation_status(quantity::AbstractQuantity) = implementation_status(typeof(quantity))
 

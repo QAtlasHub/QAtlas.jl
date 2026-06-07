@@ -283,7 +283,7 @@ function _xxz_nlie_grid(
     key = (round(γ; digits=10), N, L_factor, ε_shift)
     lock(_XXZ_NLIE_GRID_CACHE_LOCK) do
         get!(_XXZ_NLIE_GRID_CACHE, key) do
-            XXZKlumperNLIE.build_grid(γ; N=N, L_factor=L_factor, ε_shift=ε_shift)
+            return XXZKlumperNLIE.build_grid(γ; N=N, L_factor=L_factor, ε_shift=ε_shift)
         end
     end
 end

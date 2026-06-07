@@ -270,5 +270,5 @@ end
 # row, so the drift guard `has_native_fetch` requires this method to exist. Delegates
 # to the no-BC implementation; the result is independent of the boundary tag.
 function fetch(model::ToricCode, q::AnyonStatistics, ::Infinite; kwargs...)
-    fetch(model, q; kwargs...)
+    return fetch(model, q; kwargs...)
 end

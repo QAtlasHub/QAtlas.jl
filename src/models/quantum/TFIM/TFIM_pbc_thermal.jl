@@ -320,7 +320,7 @@ function _tfim_pbc_thermo(quantity::Symbol, N::Int, J::Real, h::Real, β::Real)
             return m2 / (N * β)        # χ_xx = ∂m_x/∂h = (∂²_h log Z) / (N β)
         end
     end
-    error("_tfim_pbc_thermo: unknown quantity :$quantity")
+    return error("_tfim_pbc_thermo: unknown quantity :$quantity")
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

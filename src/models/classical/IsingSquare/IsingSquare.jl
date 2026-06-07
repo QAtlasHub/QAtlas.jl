@@ -57,7 +57,7 @@ struct IsingSquare <: AbstractQAtlasModel
     Ly::Int
 end
 function IsingSquare(; J::Real=1.0, Lx::Integer=0, Ly::Integer=0)
-    IsingSquare(Float64(J), Int(Lx), Int(Ly))
+    return IsingSquare(Float64(J), Int(Lx), Int(Ly))
 end
 
 """

@@ -190,7 +190,7 @@ function _kitaev_thermo_obc(
     elseif quantity === :entropy
         return sum(σ) do s
             x = β * s
-            _kitaev_logcosh2(x) - x * tanh(x)
+            return _kitaev_logcosh2(x) - x * tanh(x)
         end / N_sites
     elseif quantity === :specific_heat
         return sum(s -> begin

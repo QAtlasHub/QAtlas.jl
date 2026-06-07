@@ -64,7 +64,7 @@ struct Honeycomb <: AbstractQAtlasModel
     Ly::Int
 end
 function Honeycomb(; t::Real=1.0, Lx::Integer=0, Ly::Integer=0)
-    Honeycomb(Float64(t), Int(Lx), Int(Ly))
+    return Honeycomb(Float64(t), Int(Lx), Int(Ly))
 end
 
 """

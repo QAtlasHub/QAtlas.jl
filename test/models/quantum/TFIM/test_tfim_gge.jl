@@ -110,13 +110,13 @@ end
 
     e_ref, _ = quadgk(0.0, π; rtol=1e-12) do k
         Λ = 2 * sqrt(J^2 + hf^2 - 2 * J * hf * cos(k))
-        (Λ / 2) * (1 - 2 * n_k_local(k))
+        return (Λ / 2) * (1 - 2 * n_k_local(k))
     end
     e_ref = -e_ref / π
 
     mx_ref, _ = quadgk(0.0, π; rtol=1e-12) do k
         Λ = 2 * sqrt(J^2 + hf^2 - 2 * J * hf * cos(k))
-        (hf - J * cos(k)) / Λ * (1 - 2 * n_k_local(k))
+        return (hf - J * cos(k)) / Λ * (1 - 2 * n_k_local(k))
     end
     mx_ref = (2 / π) * mx_ref
 

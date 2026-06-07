@@ -139,7 +139,7 @@ function _fit_rate(ind, atv, subj)
 end
 
 function _v2_env()
-    string(
+    return string(
         "julia-",
         VERSION,
         "; runner=",
@@ -281,7 +281,7 @@ function verify(
         )
         _ef = joinpath(outdir, "evidence-$(sid).jsonl")
         open(_ef, "a") do io
-            println(io, card)
+            return println(io, card)
         end
         @info "verify: emitted v2 card" path = abspath(_ef) status = status
     end
@@ -363,7 +363,7 @@ function _emit_card2(
     )
     _ef = joinpath(outdir, "evidence-$(sid).jsonl")
     open(_ef, "a") do io
-        println(io, card)
+        return println(io, card)
     end
     @info "verify variant: emitted v2 card" path = abspath(_ef) status = status route =
         route

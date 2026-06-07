@@ -101,5 +101,5 @@ end
 # all literature-pin hubs.
 
 function fetch(m::Universality{:Ising}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end

@@ -545,8 +545,8 @@ struct LiebRobinsonVelocity <: AbstractQuantity end
 Mutual information between two subsystems, `I(A:B) = S(A) + S(B) - S(A ∪ B)`.
 
 This struct is the type tag; concrete `fetch` dispatches live at the
-universality layer (see `src/universalities/CardyEntanglement.jl` for
-the Calabrese-Cardy closed forms) and on model files for non-universal
+universality layer (see `src/universalities/behaviour/CardyEntanglement.jl`
+for the Calabrese-Cardy closed forms) and on model files for non-universal
 cases. Tracking: #580 entanglement universality catalog.
 """
 struct MutualInformation <: AbstractQuantity end

@@ -81,19 +81,21 @@ function cited_by(ref::AbstractString)
     ]
 end
 
-# ── delegates : (model, quantity) → class ────────────────────────────────────
+# ── delegates : (model, quantity) → class / model ─────────────────────────────
 """
     delegations(model) -> Vector{NamedTuple}
 
-The quantities `model` computes by delegating to a universality class
-(`method=:delegation` rows), paired with the class(es) the model realizes:
-`(quantity, bc, classes)`.
+The quantities `model` computes by delegating (`method=:delegation` rows),
+paired with the declared targets of the delegation: the universality
+`classes` the model realizes (model→class) and the `targets` it reduces to
+(model→model): `(quantity, bc, classes, targets)`.
 """
 function delegations(model)
     m_T = _as_type(model)
     classes = Symbol[r.class for r in REALIZES if r.model === m_T]
+    targets = Type[r.target for r in REDUCES if r.source === m_T]
     return [
-        (quantity=e.quantity, bc=e.bc, classes=classes) for
+        (quantity=e.quantity, bc=e.bc, classes=classes, targets=targets) for
         e in REGISTRY if e.model === m_T && e.method === :delegation
     ]
 end

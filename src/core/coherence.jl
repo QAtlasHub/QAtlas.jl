@@ -113,21 +113,24 @@ function check_canonical_coherence()
     return out
 end
 
-# ── C4 — delegation has a realized target (triage signal, not a hard error) ──
-# `method=:delegation` is currently untyped: it covers both model→class
-# delegation (which SHOULD have a `realizes` edge) and model→model reduction
-# (which should not).  Until the edge records its target, a missing realizes
-# edge is a `:gap` to triage, not a violated invariant.
+# ── C4 — delegation has a typed target ───────────────────────────────────────
+# `method=:delegation` covers two cases, now both typed by an edge store: a
+# model→class delegation is backed by a `REALIZES` edge (model realizes the
+# class it delegates to), a model→model reduction by a `REDUCES` edge (model
+# becomes the target model in a limit).  A delegation with neither is a genuine
+# coverage gap — the target it delegates to is undeclared.
 function check_delegation_targets()
     out = CoherenceFinding[]
     for e in REGISTRY
         e.method === :delegation || continue
-        any(r -> r.model === e.model, REALIZES) || push!(
+        realizes_class = any(r -> r.model === e.model, REALIZES)
+        reduces_model = any(r -> r.source === e.model, REDUCES)
+        (realizes_class || reduces_model) || push!(
             out,
             CoherenceFinding(
                 :delegation_target,
                 :gap,
-                "$(_kgshort(e.model))/$(_kgshort(e.quantity)) delegates but its model realizes no class — triage: add @realizes (class delegation) or reclassify as model→model",
+                "$(_kgshort(e.model))/$(_kgshort(e.quantity)) delegates but its model neither realizes a class nor reduces to a model — add @realizes (model→class) or @reduces (model→model)",
             ),
         )
     end

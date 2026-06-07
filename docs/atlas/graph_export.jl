@@ -71,7 +71,13 @@ for e in REG
         addnode!("C:" * string(c), string(c), "class", "")
         push!(
             edges,
-            (from="C:" * string(c), to="Q:" * q, kind="provides", status="universal", verified=ver),
+            (
+                from="C:" * string(c),
+                to="Q:" * q,
+                kind="provides",
+                status="universal",
+                verified=ver,
+            ),
         )
     elseif _is_bnd(e.model)
         d = _class(e.model)
@@ -91,7 +97,13 @@ for e in REG
         addnode!("M:" * m, m, "model", _model_url(m))
         push!(
             edges,
-            (from="M:" * m, to="Q:" * q, kind="provides", status=string(e.status), verified=ver),
+            (
+                from="M:" * m,
+                to="Q:" * q,
+                kind="provides",
+                status=string(e.status),
+                verified=ver,
+            ),
         )
     end
 end
@@ -109,7 +121,11 @@ for e in edges
         p = merged[k]
         best = _rank(e.status) > _rank(p.status) ? e.status : p.status
         merged[k] = (
-            from=e.from, to=e.to, kind=e.kind, status=best, verified=p.verified || e.verified
+            from=e.from,
+            to=e.to,
+            kind=e.kind,
+            status=best,
+            verified=p.verified || e.verified,
         )
     else
         merged[k] = e
@@ -118,12 +134,16 @@ end
 edges = sort!(collect(values(merged)); by=e -> (e.from, e.to, e.kind))
 
 # ── emit QAtlasGraph JSON ─────────────────────────────────────────────────────
-node_json(id, n) =
+function node_json(id, n)
     "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"
-nodes_js = join([node_json(id, nodes[id]) for id in sort!(collect(keys(nodes)))], ",\n      ")
-edge_json(e) =
+end
+nodes_js = join(
+    [node_json(id, nodes[id]) for id in sort!(collect(keys(nodes)))], ",\n      "
+)
+function edge_json(e)
     "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\"," *
     "kind:\"$(e.kind)\",status:\"$(e.status)\",verified:$(e.verified)}"
+end
 edges_js = join([edge_json(e) for e in edges], ",\n      ")
 
 n_models = count(id -> startswith(id, "M:"), keys(nodes))

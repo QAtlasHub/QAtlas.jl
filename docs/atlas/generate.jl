@@ -218,6 +218,82 @@ function _quantity_base_name(q::AbstractString)
     return replace(q, r"\{.*\}" => "")
 end
 
+# Model description: a one-sentence summary + Hamiltonian for the top of each
+# model page. Two sources, override + fallback (the hybrid "@about + docstring"
+# design):
+#   * _ABOUT_BY_NAME — curated `@about` cards (LaTeX Hamiltonian, rendered as
+#     display math). Authored in src/about_registry.jl, statically scanned.
+#   * _MODEL_DEFS    — fallback: the first prose paragraph + the indented
+#     Hamiltonian block of the model's struct docstring (Unicode, shown as a
+#     plain code block). Covers every model with a docstring, zero authoring.
+const _MODEL_DEFS = let
+    defs = Dict{String,@NamedTuple{summary::String,hamiltonian::String}}()
+    for (root, _, fs) in walkdir(joinpath(ROOT, "src", "models"))
+        for f in fs
+            endswith(f, ".jl") || continue
+            endswith(f, "_registry.jl") && continue
+            txt = read(joinpath(root, f), String)
+            for m in eachmatch(
+                r"\"\"\"((?:(?!\"\"\").)+)\"\"\"\s*\n\s*struct\s+([A-Z][A-Za-z0-9_]*)(?:\{[^}]*\})?\s*<:\s*AbstractQAtlasModel"s,
+                txt,
+            )
+                docblock = m.captures[1]
+                name = m.captures[2]
+                haskey(defs, name) && continue
+                lines = split(docblock, "\n")
+                # skip the signature block: start at the line after the first blank
+                body_start = 0
+                for (i, ln) in enumerate(lines)
+                    if i > 1 && isempty(strip(ln))
+                        body_start = i + 1
+                        break
+                    end
+                end
+                if body_start == 0 || body_start > length(lines)
+                    defs[name] = (summary="", hamiltonian="")
+                    continue
+                end
+                summary = String[]
+                ham = String[]
+                summary_done = false
+                for ln in lines[body_start:end]
+                    if isempty(strip(ln))
+                        isempty(summary) || (summary_done = true)
+                        continue
+                    end
+                    indented = occursin(r"^(\s{4,}|\t)\S", ln)
+                    if indented
+                        push!(ham, strip(ln))            # first indented block = Hamiltonian
+                    elseif !summary_done && isempty(ham)
+                        push!(summary, strip(ln))         # first prose paragraph = summary
+                    end
+                end
+                defs[name] = (summary=join(summary, " "), hamiltonian=join(ham, "\n"))
+            end
+        end
+    end
+    defs
+end
+
+const _ABOUT_BY_NAME = Dict(
+    a.model => a for
+    a in AtlasRegistry.scan_about(joinpath(ROOT, "src", "about_registry.jl"))
+)
+
+# Resolve (summary, Hamiltonian, is-LaTeX) for a model: prefer the curated
+# `@about` card; fall back to the struct docstring. `ham_latex` selects a
+# ```math block (LaTeX) vs a plain code block (Unicode docstring).
+function _model_intro(model_name::AbstractString)
+    card = get(_ABOUT_BY_NAME, model_name, nothing)
+    ddef = get(_MODEL_DEFS, model_name, (summary="", hamiltonian=""))
+    summary =
+        (card !== nothing && !isempty(strip(card.summary))) ? card.summary : ddef.summary
+    if card !== nothing && !isempty(strip(card.hamiltonian))
+        return (summary=summary, ham=card.hamiltonian, ham_latex=true)
+    end
+    return (summary=summary, ham=ddef.hamiltonian, ham_latex=false)
+end
+
 # Hub-string normalization for orphan-card matching.
 function _normalize_hub(h::AbstractString)
     parts = split(h, "/")
@@ -485,6 +561,19 @@ function render_model_index(model_name::AbstractString)
     P(s...) = println(io, string(s...))
     P("# `", model_name, "` — model index")
     P("")
+    # "What is this model?" — one-sentence summary + Hamiltonian, up top so a
+    # reader (e.g. arriving from the knowledge graph) sees it immediately.
+    intro = _model_intro(model_name)
+    if !isempty(strip(intro.summary))
+        P(intro.summary)
+        P("")
+    end
+    if !isempty(strip(intro.ham))
+        P(intro.ham_latex ? "```math" : "```")
+        P(intro.ham)
+        P("```")
+        P("")
+    end
     P(BANNER)
     P("")
     P(

@@ -27,7 +27,7 @@
 | ⚪ cited-only (frontier — neutral) | 17 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 89 |
 | Inventory cards scanned (whole test/) | 2763 |
-| Registry files parsed | 67 / 67 |
+| Registry files parsed | 71 / 71 |
 | Models | 64 |
 
 **Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **73.0%**

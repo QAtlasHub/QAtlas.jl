@@ -83,6 +83,7 @@ include("core/type.jl")
 include("core/quantities.jl")
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
+include("core/about.jl")     # model description cards (summary + Hamiltonian)
 include("core/pfaffian.jl")
 include("core/dense_ed.jl")
 
@@ -91,6 +92,7 @@ export Implementation, implementation_status, implementation_status_markdown
 export references_for
 export definitions, validity, canonical_scheme  # multi-definition catalog / selector
 export Realization, realizes!, @realizes, realizations, realized_by  # model <-> class
+export ModelCard, ABOUT, about!, @about, about  # model description cards
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
@@ -357,6 +359,9 @@ include("deprecate/legacy_xxz.jl")
 
 # Model <-> universality-class realizations (membership) — after all models.
 include("realizes_registry.jl")
+
+# Model description cards (summary + Hamiltonian) — after all models.
+include("about_registry.jl")
 
 # Knowledge-graph layer: bidirectional queries over the edge stores
 # (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.

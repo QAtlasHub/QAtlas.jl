@@ -45,6 +45,11 @@ function reduces!(
     regime::AbstractString,
     references::AbstractVector{<:AbstractString}=String[],
 )
+    isempty(strip(regime)) && throw(
+        ArgumentError(
+            "reduces!: regime must be a non-empty description of the limit / special point",
+        ),
+    )
     push!(
         REDUCES,
         Reduction(source_T, target_T, String(regime), String[r for r in references]),

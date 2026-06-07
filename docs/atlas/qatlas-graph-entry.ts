@@ -157,6 +157,16 @@ async function renderGraph(
     }))
   const graphData = { nodes, links }
 
+  // Pre-compute each node's degree once. nodeRadius() is called per node every
+  // simulation tick (collide force) and per edge every frame (animate); doing a
+  // full links.filter() in there would make the hot path O(N·E) / O(E²).
+  const degreeOf = new Map<string, number>()
+  for (const n of nodes) degreeOf.set(n.id, 0)
+  for (const l of links) {
+    degreeOf.set(l.source.id, (degreeOf.get(l.source.id) ?? 0) + 1)
+    degreeOf.set(l.target.id, (degreeOf.get(l.target.id) ?? 0) + 1)
+  }
+
   const width = graph.offsetWidth || 800
   const height = Math.max(graph.offsetHeight, 250)
 
@@ -167,10 +177,7 @@ async function renderGraph(
     .force("collide", forceCollide<NodeData>((n) => nodeRadius(n) + 6).iterations(3))
 
   function nodeRadius(d: NodeData) {
-    const numLinks = graphData.links.filter(
-      (l) => l.source.id === d.id || l.target.id === d.id,
-    ).length
-    return 3 + Math.sqrt(numLinks)
+    return 3 + Math.sqrt(degreeOf.get(d.id) ?? 0)
   }
 
   let hoveredNodeId: string | null = null
@@ -179,6 +186,7 @@ async function renderGraph(
   const linkRenderData: LinkRenderData[] = []
   const nodeRenderData: NodeRenderData[] = []
   const tweens = new Map<string, TweenNode>()
+  const abort = new AbortController() // tears down DOM listeners on destroy()
 
   function updateHoverInfo(newId: string | null) {
     hoveredNodeId = newId
@@ -341,15 +349,19 @@ async function renderGraph(
       "position:absolute;top:10px;right:10px;z-index:5;width:150px;padding:5px 9px;" +
       "font-size:12px;background:rgba(18,20,24,0.85);color:#e8e8e8;" +
       "border:1px solid #3a3f47;border-radius:6px;outline:none"
-    box.addEventListener("input", () => {
-      const q = box.value.trim().toLowerCase()
-      searchMatches = new Set()
-      if (q)
-        for (const n of nodes)
-          if (n.text.toLowerCase().includes(q) || n.id.toLowerCase().includes(q))
-            searchMatches.add(n.id)
-      renderPixiFromD3()
-    })
+    box.addEventListener(
+      "input",
+      () => {
+        const q = box.value.trim().toLowerCase()
+        searchMatches = new Set()
+        if (q)
+          for (const n of nodes)
+            if (n.text.toLowerCase().includes(q) || n.id.toLowerCase().includes(q))
+              searchMatches.add(n.id)
+        renderPixiFromD3()
+      },
+      { signal: abort.signal },
+    )
     graph.appendChild(box)
   }
 
@@ -478,6 +490,7 @@ async function renderGraph(
   }
 
   let stop = false
+  let rafId = 0
   function animate(time: number) {
     if (stop) return
     for (const n of nodeRenderData) {
@@ -530,24 +543,36 @@ async function renderGraph(
     }
     tweens.forEach((t) => t.update(time))
     app.renderer.render(stage)
-    requestAnimationFrame(animate)
+    rafId = requestAnimationFrame(animate)
   }
-  requestAnimationFrame(animate)
+  rafId = requestAnimationFrame(animate)
   return () => {
     stop = true
+    cancelAnimationFrame(rafId)
+    abort.abort() // remove the search-box input listener
+    simulation.stop()
     app.destroy()
   }
 }
 
+// Per-element teardown so re-rendering the same container (or unmounting it)
+// disposes the previous PixiJS Application / RAF loop / listeners instead of
+// orphaning them.
+const _destroyers = new WeakMap<HTMLElement, () => void>()
+
 ;(window as any).QAtlasGraph = {
   render(el: HTMLElement | string, data: { nodes: NodeIn[]; links: LinkIn[] }, cfg: Cfg = {}) {
-    const node = typeof el === "string" ? document.getElementById(el) : el
+    const node = (typeof el === "string" ? document.getElementById(el) : el) as HTMLElement | null
     if (!node) return
-    renderGraph(node as HTMLElement, data, cfg).catch((err) => {
-      ;(node as HTMLElement).innerHTML =
-        "<p style='padding:1em'>graph render error: " +
-        (err && err.message ? err.message : err) +
-        "</p>"
-    })
+    _destroyers.get(node)?.()
+    _destroyers.delete(node)
+    renderGraph(node, data, cfg)
+      .then((destroy) => _destroyers.set(node, destroy))
+      .catch((err) => {
+        const p = document.createElement("p")
+        p.style.padding = "1em"
+        p.textContent = "graph render error: " + (err && err.message ? err.message : String(err))
+        node.replaceChildren(p)
+      })
   },
 }

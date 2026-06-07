@@ -147,7 +147,12 @@ function _strval(v)
     if v isa Expr && v.head === :macrocall && v.args[1] === Symbol("@raw_str")
         return String(v.args[end])
     end
-    if v isa Expr && v.head === :string   # interpolation/concat: keep literal parts
+    if v isa Expr && v.head === :string
+        # A non-raw "...$(x)..." literal: interpolation holes can't be resolved
+        # statically, so they are dropped. Warn — @about/@reduces string fields
+        # should use raw"..." so LaTeX backslashes and `$` survive verbatim.
+        @warn "AtlasRegistry: dropping interpolation in a scanned macro argument; use raw\"...\"" expr =
+            v
         return join((p isa String ? p : "" for p in v.args))
     end
     return string(v)
@@ -180,9 +185,18 @@ function _walk_about!(out, ex)
 end
 
 function scan_about(path::AbstractString)
+    raw = About[]
+    isfile(path) || return raw
+    _walk_about!(raw, parseall(read(path, String); filename=path))
+    # First-wins on duplicate models, matching the runtime `about()` query (a
+    # linear first-match scan) so the docs view and the API never disagree.
     out = About[]
-    isfile(path) || return out
-    _walk_about!(out, parseall(read(path, String); filename=path))
+    seen = Set{String}()
+    for a in raw
+        a.model in seen && continue
+        push!(seen, a.model)
+        push!(out, a)
+    end
     return out
 end
 

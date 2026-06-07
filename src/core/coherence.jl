@@ -114,11 +114,15 @@ function check_canonical_coherence()
 end
 
 # ── C4 — delegation has a typed target ───────────────────────────────────────
-# `method=:delegation` covers two cases, now both typed by an edge store: a
+# `method=:delegation` covers two cases, both typed by an edge store: a
 # model→class delegation is backed by a `REALIZES` edge (model realizes the
 # class it delegates to), a model→model reduction by a `REDUCES` edge (model
-# becomes the target model in a limit).  A delegation with neither is a genuine
-# coverage gap — the target it delegates to is undeclared.
+# becomes the target model in a limit).  This is a *presence* check — it asks
+# whether the delegating model declares ANY delegation category (realizes a
+# class, or reduces to a model), not whether a specific row's target matches:
+# the registry row does not record its fetch target, so per-row matching is not
+# possible here.  A model with neither edge is a genuine gap — its delegation
+# target is undeclared anywhere in the graph.
 function check_delegation_targets()
     out = CoherenceFinding[]
     for e in REGISTRY

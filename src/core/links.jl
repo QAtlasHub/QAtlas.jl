@@ -27,7 +27,7 @@ The quantities universality `class` predicts — its `status=:universal` rows:
 function predicts(class::Symbol)
     [
         (quantity=e.quantity, bc=e.bc, scheme=e.scheme) for
-        e in REGISTRY if e.model === Universality{class}
+        e in REGISTRY if e.model === Universality{class} && e.status === :universal
     ]
 end
 

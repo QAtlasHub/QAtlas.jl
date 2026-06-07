@@ -3,10 +3,16 @@
 // site).  Stripped of Quartz internals (contentIndex/slugs/SPA-nav/tags/depth):
 // it takes {nodes, links} directly and renders the Obsidian-style force graph.
 //
-// Bundle to an IIFE that sets window.QAtlasGraph:
-//   esbuild qatlas-graph-entry.ts --bundle --format=iife --global-name=QAtlasGraph \
-//     --minify --outfile=qatlas-graph.js
+// Encoding:
+//   node color  = node type (model / quantity / universality / bound)
+//   edge color  = verified status of the result (exact & universal share a
+//                 color; bound; approx); `realizes` edges use a neutral color
+//   edge style  = solid (verified) / dashed (not verified)
+//   gaps are NOT marked explicitly — an isolated node *is* the gap.
 //
+// Bundle to an IIFE that sets window.QAtlasGraph:
+//   esbuild qatlas-graph-entry.ts --bundle --format=iife --minify \
+//     --outfile=qatlas-graph.js
 //   window.QAtlasGraph.render(container, {nodes, links}, cfg)
 
 import {
@@ -27,7 +33,13 @@ import { Text, Graphics, Application, Container, Circle } from "pixi.js"
 import { Group as TweenGroup, Tween as Tweened } from "@tweenjs/tween.js"
 
 type NodeIn = { id: string; text?: string; group?: string; url?: string }
-type LinkIn = { source: string; target: string; gap?: boolean; kind?: string; label?: string }
+type LinkIn = {
+  source: string
+  target: string
+  kind?: string // "realizes" | "provides"
+  status?: string // exact | bound | approx | universal
+  verified?: boolean
+}
 
 type NodeData = {
   id: string
@@ -39,12 +51,13 @@ type NodeData = {
 type LinkData = {
   source: NodeData
   target: NodeData
-  gap: boolean
   kind: string
+  status: string
+  verified: boolean
 } & SimulationLinkDatum<NodeData>
 
 type GraphicsInfo = { color: number; gfx: Graphics; alpha: number; active: boolean }
-type LinkRenderData = GraphicsInfo & { simulationData: LinkData; gap: boolean }
+type LinkRenderData = GraphicsInfo & { simulationData: LinkData; verified: boolean }
 type NodeRenderData = GraphicsInfo & { simulationData: NodeData; label: Text }
 
 type Cfg = {
@@ -54,15 +67,14 @@ type Cfg = {
   repelForce?: number
   centerForce?: number
   linkDistance?: number
+  linkStrength?: number
   fontSize?: number
   opacityScale?: number
   focusOnHover?: boolean
   legend?: boolean
-  linkStrength?: number
   colors?: Record<string, string>
-  linkColors?: Record<string, string>
-  linkColor?: string
-  gapColor?: string
+  statusColors?: Record<string, string>
+  realizesColor?: string
   labelColor?: string
   labelStroke?: string
 }
@@ -72,17 +84,16 @@ const DEFAULT_COLORS: Record<string, string> = {
   class: "#9b6cc9",
   bound: "#c95f5f",
   quantity: "#5fae6f",
-  gap: "#e8a33d",
   default: "#888888",
 }
 
-const DEFAULT_LINK_COLORS: Record<string, string> = {
-  realizes: "#6f9fd8",
-  implements: "#7faa93",
-  predicts: "#b08fd8",
-  bounds: "#d88f8f",
-  delegates: "#9aa0a8",
-  default: "#b8b8b8",
+// exact & universal deliberately share a color (low visual load).
+const STATUS_COLORS: Record<string, string> = {
+  exact: "#6f9fd8",
+  universal: "#6f9fd8",
+  bound: "#d88f8f",
+  approx: "#e0a84d",
+  default: "#9aa0a8",
 }
 
 function hexToNum(hex: string): number {
@@ -100,25 +111,26 @@ async function renderGraph(
     drag: enableDrag = true,
     zoom: enableZoom = true,
     scale = 1.0,
-    repelForce = 0.5,
-    centerForce = 0.3,
-    linkDistance = 30,
-    fontSize = 0.5,
-    opacityScale = 1.0,
+    repelForce = 0.45,
+    centerForce = 0.22,
+    linkDistance = 70,
+    linkStrength = 0.12,
+    fontSize = 0.6,
+    opacityScale = 1.1,
     focusOnHover = true,
-    linkStrength = 0.18,
     colors = {},
-    linkColors = {},
-    linkColor = "#b8b8b8",
-    gapColor = "#e8a33d",
+    statusColors = {},
+    realizesColor = "#9aa0a8",
     labelColor = "#eaeaea",
     labelStroke = "#15171a",
   } = cfg
   const palette = { ...DEFAULT_COLORS, ...colors }
-  const linkPalette = { ...DEFAULT_LINK_COLORS, ...linkColors }
+  const statusPalette = { ...STATUS_COLORS, ...statusColors }
   const colorOf = (g: string) => hexToNum(palette[g] ?? palette.default)
   const linkColorOf = (l: LinkData) =>
-    hexToNum(l.gap ? gapColor : (linkPalette[l.kind] ?? linkColor))
+    hexToNum(
+      l.kind === "realizes" ? realizesColor : (statusPalette[l.status] ?? statusPalette.default),
+    )
 
   while (graph.firstChild) graph.removeChild(graph.firstChild)
 
@@ -134,8 +146,9 @@ async function renderGraph(
     .map((l) => ({
       source: byId.get(l.source)!,
       target: byId.get(l.target)!,
-      gap: !!l.gap,
-      kind: l.kind ?? "default",
+      kind: l.kind ?? "provides",
+      status: l.status ?? "exact",
+      verified: l.verified ?? false,
     }))
   const graphData = { nodes, links }
 
@@ -189,7 +202,7 @@ async function renderGraph(
     const tg = new TweenGroup()
     for (const l of linkRenderData) {
       let alpha = 1
-      if (hoveredNodeId) alpha = l.active ? 1 : 0.2
+      if (hoveredNodeId) alpha = l.active ? 1 : 0.18
       l.color = linkColorOf(l.simulationData)
       tg.add(new Tweened<LinkRenderData>(l).to({ alpha }, 200))
     }
@@ -261,41 +274,45 @@ async function renderGraph(
   if (cfg.legend !== false) {
     graph.style.position = graph.style.position || "relative"
     const present = new Set(nodes.map((n) => n.group))
-    const presentKinds = new Set(links.map((l) => l.kind))
-    const hasGapEdge = links.some((l) => l.gap)
+    const presentStatus = new Set(links.filter((l) => l.kind !== "realizes").map((l) => l.status))
+    const hasRealizes = links.some((l) => l.kind === "realizes")
     const nodeItems: [string, string][] = [
       ["model", "Model"],
       ["class", "Universality class"],
       ["bound", "Bound domain"],
       ["quantity", "Quantity"],
-      ["gap", "Coherence-gap class"],
     ]
-    const edgeItems: [string, string][] = [
-      ["realizes", "realizes (model→class)"],
-      ["implements", "implements (model→quantity)"],
-      ["predicts", "predicts (class→quantity)"],
-      ["bounds", "bounds (bound→quantity)"],
-      ["delegates", "delegates (model→quantity)"],
+    // exact & universal collapse to one swatch
+    const statusItems: [string, string, string][] = [
+      ["exact", STATUS_COLORS.exact, "exact / universal"],
+      ["bound", STATUS_COLORS.bound, "bound"],
+      ["approx", STATUS_COLORS.approx, "approx"],
     ]
     const dot = (c: string) =>
       `<span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${c};margin-right:7px;vertical-align:middle"></span>`
-    const line = (c: string) =>
-      `<span style="display:inline-block;width:17px;border-top:2px solid ${c};margin:0 7px 3px 0;vertical-align:middle"></span>`
+    const solid = (c: string) =>
+      `<span style="display:inline-block;width:17px;border-top:2px solid ${c};margin:0 7px 4px 0;vertical-align:middle"></span>`
+    const dashed = (c: string) =>
+      `<span style="display:inline-block;width:17px;border-top:2px dashed ${c};margin:0 7px 4px 0;vertical-align:middle"></span>`
     const nodeHtml = nodeItems
       .filter(([g]) => present.has(g))
       .map(([g, label]) => `<div>${dot(palette[g])}${label}</div>`)
       .join("")
-    const edgeHtml = edgeItems
-      .filter(([k]) => presentKinds.has(k))
-      .map(([k, label]) => `<div>${line(linkPalette[k])}${label}</div>`)
+    const statusHtml = statusItems
+      .filter(([k]) => presentStatus.has(k) || (k === "exact" && presentStatus.has("universal")))
+      .map(([, c, label]) => `<div>${solid(c)}${label}</div>`)
       .join("")
-    const gapHtml = hasGapEdge ? `<div>${line(gapColor)}gap: delegates, no realizes</div>` : ""
-    const sep = edgeHtml || gapHtml ? `<div style="margin:5px 0 2px;opacity:0.5">edges</div>` : ""
+    const realizesHtml = hasRealizes ? `<div>${solid(realizesColor)}realizes</div>` : ""
+    const styleHtml =
+      `<div style="margin-top:3px">${solid("#cfcfcf")}verified</div>` +
+      `<div>${dashed("#cfcfcf")}not verified</div>`
+    const sep = (t: string) => `<div style="margin:5px 0 2px;opacity:0.5">${t}</div>`
     const legend = document.createElement("div")
     legend.style.cssText =
       "position:absolute;top:10px;left:10px;padding:8px 11px;font-size:12px;line-height:1.7;" +
       "background:rgba(18,20,24,0.6);color:#e8e8e8;border-radius:6px;pointer-events:none"
-    legend.innerHTML = nodeHtml + sep + edgeHtml + gapHtml
+    legend.innerHTML =
+      nodeHtml + sep("edges") + statusHtml + realizesHtml + sep("style") + styleHtml
     graph.appendChild(legend)
   }
 
@@ -359,7 +376,7 @@ async function renderGraph(
     linkRenderData.push({
       simulationData: l,
       gfx,
-      gap: l.gap,
+      verified: l.verified,
       color: linkColorOf(l),
       alpha: 1,
       active: false,
@@ -444,10 +461,26 @@ async function renderGraph(
       const ux = dx / len,
         uy = dy / len
       const tr = nodeRadius(d.target) + 1.5
-      const ex = tx - ux * tr,
-        ey = ty - uy * tr // line stops at the target node's edge
+      const end = Math.max(len - tr, 0) // stop at the target node's edge
+      const ex = sx + ux * end,
+        ey = sy + uy * end
       l.gfx.clear()
-      l.gfx.moveTo(sx, sy).lineTo(ex, ey).stroke({ alpha: l.alpha, width: 1, color: l.color })
+      if (l.verified) {
+        l.gfx.moveTo(sx, sy).lineTo(ex, ey).stroke({ alpha: l.alpha, width: 1, color: l.color })
+      } else {
+        // dashed line for unverified edges
+        const dash = 5,
+          gp = 4
+        let dd = 0
+        while (dd < end) {
+          const x1 = sx + ux * dd,
+            y1 = sy + uy * dd
+          const d2 = Math.min(dd + dash, end)
+          l.gfx.moveTo(x1, y1).lineTo(sx + ux * d2, sy + uy * d2)
+          dd += dash + gp
+        }
+        l.gfx.stroke({ alpha: l.alpha, width: 1, color: l.color })
+      }
       // arrowhead at the target end
       const ah = 4.5,
         a = Math.atan2(dy, dx)

@@ -4,11 +4,18 @@
 # bundle: docs/src/assets/qatlas-graph.js (built from
 # obsidian-remote-ssh/docs-site/qatlas-graph-entry.ts via esbuild).
 #
-# This loads QAtlas and walks the live edge stores (REGISTRY + REALIZES via
-# links.jl) — models realize classes, classes predict quantities, bounds
-# constrain quantities, models delegate quantities — plus the coherence
-# self-diagnosis (undeveloped classes / delegation-without-realizes) colored as
-# gaps.  Verification and visualization come out of the same graph.
+# Encoding (deliberately minimal — two essential axes):
+#   * node color  = node type (model / universality class / bound domain /
+#                    quantity)
+#   * edge color  = verified status of the result a node provides: exact &
+#                    universal share one color, bound, approx; `realizes`
+#                    (model → class) edges use a neutral color
+#   * edge style  = solid (a test validates it) / dashed (no dedicated test)
+#
+# Two relations only: a model *realizes* a class (model ↔ universality), and a
+# namespace *provides* a quantity (quantity ↔ verified status).  Coherence gaps
+# are NOT drawn — an isolated node (an undeveloped class, a model realizing no
+# class) *is* the gap, visible by its lack of edges.
 #
 # Run: julia --project=. docs/atlas/graph_export.jl  →  docs/src/atlas/graph.md
 
@@ -23,7 +30,7 @@ _clean(s) = occursin(r"^[A-Za-z0-9_]+$", s)
 
 # ── collect nodes + edges (only nodes that appear in an edge) ────────────────
 nodes = Dict{String,NamedTuple}()      # id => (text, group, url)
-edges = Vector{NamedTuple}()           # (from, to, gap)
+edges = Vector{NamedTuple}()           # (from, to, kind, status, verified)
 
 addnode!(id, text, group, url) = get!(nodes, id, (text=text, group=group, url=url))
 
@@ -35,70 +42,88 @@ _concrete(T) = !_is_uni(T) && !_is_bnd(T)
 _model_url(name) = _clean(name) ? "../models/$(name)/" : ""
 _quantity_url(name) = _clean(name) ? "../quantities/$(name)/" : ""
 
-realized_classes = sort(unique(r.class for r in REAL))
-undeveloped = Set(c for c in realized_classes if isempty(QAtlas.predicts(c)))
-
-# realizes : model → class
+# realizes : model → class  (membership is asserted, so always solid)
 for r in REAL
     m = _short(r.model)
     addnode!("M:" * m, m, "model", _model_url(m))
-    addnode!(
-        "C:" * string(r.class), string(r.class), r.class in undeveloped ? "gap" : "class", ""
+    addnode!("C:" * string(r.class), string(r.class), "class", "")
+    push!(
+        edges,
+        (
+            from="M:" * m,
+            to="C:" * string(r.class),
+            kind="realizes",
+            status="exact",
+            verified=true,
+        ),
     )
-    push!(edges, (from="M:" * m, to="C:" * string(r.class), kind="realizes", gap=false))
 end
 
-# predicts : class → quantity
+# provides : namespace → quantity, one per registry row.  The namespace is the
+# universality class (`:universal`), the bound domain (`:bound`), or the
+# concrete model (`:exact`/`:bound`/`:approx`); verified iff a test backs it.
 for e in REG
-    _is_uni(e.model) || continue
-    c = _class(e.model)
     q = _short(e.quantity)
-    addnode!("C:" * string(c), string(c), c in undeveloped ? "gap" : "class", "")
     addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="C:" * string(c), to="Q:" * q, kind="predicts", gap=false))
+    ver = e.tested_in !== nothing
+    if _is_uni(e.model)
+        c = _class(e.model)
+        addnode!("C:" * string(c), string(c), "class", "")
+        push!(
+            edges,
+            (from="C:" * string(c), to="Q:" * q, kind="provides", status="universal", verified=ver),
+        )
+    elseif _is_bnd(e.model)
+        d = _class(e.model)
+        addnode!("B:" * string(d), string(d), "bound", "")
+        push!(
+            edges,
+            (
+                from="B:" * string(d),
+                to="Q:" * q,
+                kind="provides",
+                status=string(e.status),
+                verified=ver,
+            ),
+        )
+    else
+        m = _short(e.model)
+        addnode!("M:" * m, m, "model", _model_url(m))
+        push!(
+            edges,
+            (from="M:" * m, to="Q:" * q, kind="provides", status=string(e.status), verified=ver),
+        )
+    end
 end
 
-# bounds : bound-domain → quantity
-for e in REG
-    _is_bnd(e.model) || continue
-    d = _class(e.model)
-    q = _short(e.quantity)
-    addnode!("B:" * string(d), string(d), "bound", "")
-    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="B:" * string(d), to="Q:" * q, kind="bounds", gap=false))
-end
+# merge edges by (from, to, kind): a (namespace, quantity) appears at several
+# bc/scheme rows but is one edge — keep the strongest claim's color and mark it
+# solid if *any* of its definitions is tested.
+const _STATUS_RANK = Dict("exact" => 4, "universal" => 4, "bound" => 3, "approx" => 2)
+_rank(s) = get(_STATUS_RANK, s, 1)
 
-# delegates : model → quantity  (gap-colored when the model realizes no class)
-for e in REG
-    e.method === :delegation && _concrete(e.model) || continue
-    m = _short(e.model)
-    q = _short(e.quantity)
-    isgap = !any(r -> r.model === e.model, REAL)
-    addnode!("M:" * m, m, "model", _model_url(m))
-    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="M:" * m, to="Q:" * q, kind="delegates", gap=isgap))
+merged = Dict{Tuple{String,String,String},NamedTuple}()
+for e in edges
+    k = (e.from, e.to, e.kind)
+    if haskey(merged, k)
+        p = merged[k]
+        best = _rank(e.status) > _rank(p.status) ? e.status : p.status
+        merged[k] = (
+            from=e.from, to=e.to, kind=e.kind, status=best, verified=p.verified || e.verified
+        )
+    else
+        merged[k] = e
+    end
 end
-
-# implements : model → quantity  (every concrete-model registered quantity that
-# is not a delegation) — the bulk of the vault.
-for e in REG
-    (_concrete(e.model) && e.method !== :delegation) || continue
-    m = _short(e.model)
-    q = _short(e.quantity)
-    addnode!("M:" * m, m, "model", _model_url(m))
-    addnode!("Q:" * q, q, "quantity", _quantity_url(q))
-    push!(edges, (from="M:" * m, to="Q:" * q, kind="implements", gap=false))
-end
-
-# dedup edges by (from, to, kind): a (model, quantity) appears at several
-# bc/scheme rows but is one edge in the graph.
-edges = unique(e -> (e.from, e.to, e.kind), edges)
+edges = sort!(collect(values(merged)); by=e -> (e.from, e.to, e.kind))
 
 # ── emit QAtlasGraph JSON ─────────────────────────────────────────────────────
 node_json(id, n) =
     "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"
-nodes_js = join([node_json(id, n) for (id, n) in nodes], ",\n      ")
-edge_json(e) = "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\",kind:\"$(e.kind)\",gap:$(e.gap)}"
+nodes_js = join([node_json(id, nodes[id]) for id in sort!(collect(keys(nodes)))], ",\n      ")
+edge_json(e) =
+    "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\"," *
+    "kind:\"$(e.kind)\",status:\"$(e.status)\",verified:$(e.verified)}"
 edges_js = join([edge_json(e) for e in edges], ",\n      ")
 
 n_models = count(id -> startswith(id, "M:"), keys(nodes))
@@ -109,12 +134,20 @@ n_quant = count(id -> startswith(id, "Q:"), keys(nodes))
 page = """
 # Knowledge graph
 
-The QAtlas vault as a force-directed network — **models** realize **universality
-classes**, classes **predict** quantities, **bounds** constrain quantities, and
-models **delegate** quantities to their class.  Orange = a coherence *gap* (an
-undeveloped class, or a delegation whose model realizes no class).  Drag nodes,
-scroll to zoom, hover to highlight neighbours, click a model/quantity to open its
-page.
+The QAtlas vault as a force-directed network of two relations: a **model**
+*realizes* a **universality class** (model ↔ universality), and a namespace —
+model, class, or **bound** domain — *provides* a **quantity** (quantity ↔
+verified status).
+
+Node color marks the node type.  Edge color marks the kind of claim the
+provided result makes — **exact / universal** (one color), **bound**, or
+**approx** — and edge style marks verification: a **solid** edge has a
+dedicated test, a **dashed** edge does not.  Coherence *gaps* are not drawn:
+an isolated node (an undeveloped class, or a model realizing no class) *is* the
+gap, visible by its lack of edges.
+
+Drag nodes, scroll to zoom, hover to highlight neighbours and reveal labels,
+click a model or quantity to open its page.
 
 *Rendered by the Quartz graph engine (d3-force + PixiJS), ported to a standalone
 bundle (`assets/qatlas-graph.js`).  Generated by `docs/atlas/graph_export.jl`

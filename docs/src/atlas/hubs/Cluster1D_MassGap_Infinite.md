@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: BriegelRaussendorf2001
+- method `analytic`, status `exact`, reliability `high`, refs: BriegelRaussendorf2001
 - Δ = 2J; single-stabiliser-flip excitation.
 
 ## Corroboration

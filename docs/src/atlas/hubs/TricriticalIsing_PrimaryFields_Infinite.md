@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984
+- method `analytic`, status `exact`, reliability `high`, refs: BelavinPolyakovZamolodchikov1984
 - 6 primaries modulo Kac symmetry.
 
 ## Corroboration

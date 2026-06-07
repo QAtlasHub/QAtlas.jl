@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising1925 | Brush1967
+- method `analytic`, status `exact`, reliability `high`, refs: Ising1925 | Brush1967
 - chi(b,h=0) = b exp(2bJ) per site; h=0 only.
 
 ## Corroboration

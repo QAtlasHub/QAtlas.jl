@@ -25,7 +25,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
 - ⚪ [`YangLee/ConformalWeights/Infinite`](../hubs/YangLee_ConformalWeights_Infinite.md) — cited-only
 
-## `coherent` (39)
+## `coherent` (38)
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
@@ -53,7 +53,6 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🔵 [`S1XXZ1D/Energy/Infinite`](../hubs/S1XXZ1D_Energy_Infinite.md) — coherent
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](../hubs/S1XXZ1D_MassGap_Infinite.md) — coherent
 - 🔵 [`TFIM/GGEValue/Infinite`](../hubs/TFIM_GGEValue_Infinite.md) — coherent
-- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](../hubs/TFIM_MagnetizationXLocal_Infinite.md) — coherent
 - 🔵 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — coherent
 - 🔵 [`TFIM/ThermalEntropy/Infinite`](../hubs/TFIM_ThermalEntropy_Infinite.md) — coherent
@@ -248,9 +247,15 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (73)
+## `uncorroborated-but-feasible` (80)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/BekensteinBound/Infinite`](../hubs/Bound_BekensteinBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/ChaosBound/Infinite`](../hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/QuantumSpeedLimit/Infinite`](../hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
@@ -288,6 +293,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](../hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible

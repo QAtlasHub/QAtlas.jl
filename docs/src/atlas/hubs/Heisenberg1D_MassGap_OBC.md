@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - Delegates to XXZ1D(Δ=1.0).
 
 ## Corroboration

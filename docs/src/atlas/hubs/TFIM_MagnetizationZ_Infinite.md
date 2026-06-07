@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Pfeuty1970
+- method `analytic`, status `exact`, reliability `high`, refs: Pfeuty1970
 - m_z = (1 - (h/J)²)^(1/8) for h < J, else 0 (T = 0 spontaneous).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising1925
+- method `analytic`, status `exact`, reliability `high`, refs: Ising1925
 - ξ(β,h) = 1/log(λ_+/λ_-); at h=0 reduces to 1/log(coth βJ).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: LiebWu1968 | Voit1995
+- method `analytic`, status `exact`, reliability `high`, refs: LiebWu1968 | Voit1995
 - K=1 at U=0 free-fermion limit; finite-U Lieb-Wu Bethe ansatz K_ρ, K_σ deferred Phase 2.
 
 ## Corroboration

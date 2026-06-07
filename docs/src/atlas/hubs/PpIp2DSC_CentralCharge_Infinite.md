@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: ReadGreen2000 | Kitaev2006
+- method `analytic`, status `exact`, reliability `high`, refs: ReadGreen2000 | Kitaev2006
 - Chiral Majorana edge CFT c=1/2 in weak-pairing topological phase (μ>0).
 
 ## Corroboration

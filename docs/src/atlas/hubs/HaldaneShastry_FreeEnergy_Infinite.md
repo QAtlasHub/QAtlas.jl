@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `cft_low_T`, reliability `medium`, refs: Haldane1988 | Affleck1986
+- method `cft_low_T`, status `exact`, reliability `medium`, refs: Haldane1988 | Affleck1986
 - f = -π² J / 24 - π T² / (6 v_s), v_s = π J / 2. Valid β > 5/J.
 
 ## Corroboration

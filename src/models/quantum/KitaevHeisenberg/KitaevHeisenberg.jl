@@ -68,7 +68,7 @@ struct KitaevHeisenberg <: AbstractQAtlasModel
     Γ::Float64
 end
 function KitaevHeisenberg(; K::Real=1.0, J::Real=0.0, Γ::Real=0.0)
-    KitaevHeisenberg(Float64(K), Float64(J), Float64(Γ))
+    return KitaevHeisenberg(Float64(K), Float64(J), Float64(Γ))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

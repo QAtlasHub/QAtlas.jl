@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Saleur1992 | Cardy2001 | PearceRasmussenZuber2006 | VasseurJacobsenSaleur2011
+- method `analytic`, status `exact`, reliability `high`, refs: Saleur1992 | Cardy2001 | PearceRasmussenZuber2006 | VasseurJacobsenSaleur2011
 - c=0 logarithmic CFT (polymer/percolation universality); indecomposable rep structure Phase 2.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
+- method `analytic`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
 - Exact closed-form dispersion minimization for arbitrary Jx, Jy, h.
 
 ## Corroboration

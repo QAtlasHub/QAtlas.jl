@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - E₁ - E₀ from dense ED on 3^N space; finite-N + edge-state corrections to Δ_∞.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `pfaffian`, reliability `high`
+- method `pfaffian`, status `exact`, reliability `high`
 - (1/N) Σ_{ij} e^{-iq(i-j)} ⟨σˣᵢ σˣⱼ⟩ from t=0 Pfaffian correlator.
 
 ## Corroboration

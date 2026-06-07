@@ -15,6 +15,7 @@ struct Claim
     quantity::String
     bc::String
     method::String
+    status::String
     reliability::String
     refs::String
     notes::String
@@ -66,6 +67,7 @@ function _walk!(out, ex)
                     qty,
                     bc,
                     string(get(kw, :method, "")),
+                    string(get(kw, :status, "")),
                     string(get(kw, :reliability, "")),
                     _refs_text(get(kw, :references, nothing)),
                     string(get(kw, :notes, "")),
@@ -82,6 +84,51 @@ end
 function scan_registry(path::AbstractString)
     out = Claim[]
     _walk!(out, parseall(read(path, String); filename=path))
+    return out
+end
+
+# ── @realizes (backend register): model ↔ universality-class membership ──
+# `@register` wires the frontend (the hub/atlas the user sees); `@realizes`
+# is the backend config recording which universality class a model flows to,
+# and the regime where it does.  Statically parsed, same as @register.
+struct Realization
+    model::String
+    class::String
+    regime::String
+    refs::String
+end
+
+function _walk_realizes!(out, ex)
+    ex isa Expr || return nothing
+    if ex.head === :macrocall && ex.args[1] === Symbol("@realizes")
+        pos = filter(
+            a -> !(a isa LineNumberNode) && !(a isa Expr && a.head in (:kw, :(=))), ex.args
+        )[2:end]
+        if length(pos) >= 2
+            model = _sym(pos[1])
+            class = pos[2] isa QuoteNode ? string(pos[2].value) : _sym(pos[2])
+            kw = _regkw(ex.args)
+            push!(
+                out,
+                Realization(
+                    model,
+                    class,
+                    string(get(kw, :regime, "")),
+                    _refs_text(get(kw, :references, nothing)),
+                ),
+            )
+        end
+        return nothing
+    end
+    for a in ex.args
+        _walk_realizes!(out, a)
+    end
+end
+
+function scan_realizes(path::AbstractString)
+    out = Realization[]
+    isfile(path) || return out
+    _walk_realizes!(out, parseall(read(path, String); filename=path))
     return out
 end
 

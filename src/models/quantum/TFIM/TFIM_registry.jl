@@ -564,7 +564,7 @@
     Infinite,
     method=:analytic,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_loschmidt.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_loschmidt.jl",
     references=["Heyl2013", "Heyl2018"],
     notes="λ(t) = -(1/2π) ∫₀^π log|cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k(h_f) t}|² dk via QuadGK.",
 )
@@ -636,14 +636,35 @@
     notes="2D-Ising Onsager exponents (β=1/8, γ=7/4, ν=1) via TFIM↔2D-Ising mapping.",
 )
 
-# ── Loschmidt rate function (quench dynamics, infinite chain) ─────────
+# ── Status-axis worked example: Lieb-Robinson bound (:bound) ────────────
 @register(
     TFIM,
-    LoschmidtRateFunction,
+    LiebRobinsonBound,
     Infinite,
     method=:analytic,
+    status=:bound,
+    direction=:upper,
     reliability=:high,
-    tested_in="test/models/quantum/TFIM/test_tfim_loschmidt.jl",
-    references=["Heyl2013"],
-    notes="λ(t) = -lim_{L→∞} (1/L) log |⟨ψ₀|e^{-iH_f t}|ψ₀⟩|² for TFIM h-quench; closed-form via Bogoliubov mode amplitudes.",
+    tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
+    references=["LiebRobinson1972", "HastingsKoma2006"],
+    notes="v_LR = 2 min(|J|,|h|), the causal-cone slope; saturated by the max group velocity of Λ(k).",
+)
+
+# ── Status-axis worked example: high-temperature free energy (:approx) ──
+# A second definition of (TFIM, FreeEnergy, Infinite) keyed by scheme=:high_T;
+# the canonical row above stays the exact closed form. fetch(...; scheme=:high_T).
+@register(
+    TFIM,
+    FreeEnergy,
+    Infinite,
+    scheme=:high_T,
+    method=:analytic,
+    status=:approx,
+    valid_domain="βJ ≪ 1 and βh ≪ 1 (high temperature)",
+    error_order="O((βJ)³, (βh)³)",
+    canonical=false,
+    reliability=:high,
+    references=["Pfeuty1970"],
+    tested_in="test/models/quantum/TFIM/test_tfim_highT_freeenergy.jl",
+    notes="f/N = -ln2/β - (β/2)(J²+h²) + O(β³); the small-β limit of the exact FreeEnergy.",
 )

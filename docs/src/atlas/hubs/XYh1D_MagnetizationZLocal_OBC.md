@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`
+- method `bdg`, status `exact`, reliability `high`
 - Site-local expectation value vector of σᶻ.
 
 ## Corroboration

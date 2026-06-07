@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Heyl2013 | Heyl2018
+- method `analytic`, status `exact`, reliability `high`, refs: Heyl2013 | Heyl2018
 - λ(t) = -(1/2π) ∫₀^π log|cos²Δθ_k + sin²Δθ_k e^{-2iΛ_k(h_f) t}|² dk via QuadGK.
 
 ## Corroboration

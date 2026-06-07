@@ -560,9 +560,9 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (qua
 | [`FreeEnergy`](../../atlas/hubs/TFIM_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 45 |
 | [`FreeEnergy`](../../atlas/hubs/TFIM_FreeEnergy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 30 |
 | [`GGEValue`](../../atlas/hubs/TFIM_GGEValue_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
+| [`LiebRobinsonBound`](../../atlas/hubs/TFIM_LiebRobinsonBound_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_OBC.md) | `OBC` | 🟢 corroborated-at-p | 12 |
-| [`LoschmidtRateFunction`](../../atlas/hubs/TFIM_LoschmidtRateFunction_Infinite.md) | `Infinite` | 🔵 coherent | 4 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 18 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_PBC.md) | `PBC` | 🟢 corroborated-at-p | 18 |
@@ -603,3 +603,13 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 54 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
+
+
+
+
+
+
+

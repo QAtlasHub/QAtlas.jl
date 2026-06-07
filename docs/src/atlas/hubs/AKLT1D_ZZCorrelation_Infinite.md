@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AKLT1988
+- method `analytic`, status `exact`, reliability `high`, refs: AKLT1988
 - Exact VBS ⟨Sᶻ₀Sᶻ_r⟩ = (-1)^r (4/3) 3^{-|r|} (r≠0), 2/3 (r=0); J-independent. ED in tests verifies finite-N convergence.
 
 ## Corroboration

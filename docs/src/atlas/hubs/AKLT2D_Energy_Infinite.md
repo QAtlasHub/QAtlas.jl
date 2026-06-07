@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AKLT1988 | VerstraeteCirac2004
+- method `analytic`, status `exact`, reliability `high`, refs: AKLT1988 | VerstraeteCirac2004
 - Honeycomb-lattice spin-3/2 AKLT; frustration-free → exact zero GS energy density.
 
 ## Corroboration

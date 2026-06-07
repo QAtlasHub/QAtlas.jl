@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - Full sorted spectrum from 3^N dense ED; N ≤ 8 (3^8 = 6561).
 
 ## Corroboration

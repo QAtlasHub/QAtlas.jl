@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic_imry_ma`, reliability `high`, refs: ImryMa1975 | Imbrie1985 | BricmontKupiainen1987
+- method `analytic_imry_ma`, status `exact`, reliability `high`, refs: ImryMa1975 | Imbrie1985 | BricmontKupiainen1987
 - T_c = 0 for d ≤ 2 at Δ > 0 (Imry-Ma); d ≥ 3 raises DomainError (no closed form, Phase 2 numerical reference).
 
 ## Corroboration

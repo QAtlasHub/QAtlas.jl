@@ -4,6 +4,41 @@ QAtlas is a reference library: every stored value must be
 **demonstrably correct**. The test suite is organised into five layers,
 each with a distinct purpose and level of independence.
 
+Orthogonal to these five layers, every registered row also declares a
+**status** — what *kind* of claim it makes; see the **Registered status**
+section just below.
+
+---
+
+## Registered status — the kind of claim
+
+Independently of *how* a value is verified (the five layers below), each
+registered `(model, quantity, bc)` row declares a **status** describing
+*what kind of mathematical claim* it makes. The vocabulary lives in
+`STATUS_VALUES` (`src/core/registry.jl`) and `register!` rejects anything
+outside it, so a typo fails at load time rather than mislabelling a claim.
+
+| status | meaning | verified by |
+|--------|---------|-------------|
+| `:exact` | analytic closed form; equality to the literature value (the default — every legacy row is `:exact`) | `verify` — equality within `atol` |
+| `:bound` | a one-sided inequality: a *saturating* universal constant, or a *variational* / operator bound | `verify_bound` — an independent witness stays `≤`/`≥` the fetched value, optionally saturating it |
+| `:approx` | a domain-limited approximation (e.g. a high-temperature expansion), valid on a stated region with a known leading error order | `verify_approx` — in-domain agreement, with `valid_domain` and `error_order` recorded on the card |
+
+This axis is **distinct** from two others it is easy to conflate:
+
+- `reliability` (`:high` / `:medium` / `:low`) — how confident the
+  *implementation* is, not what the value claims.
+- the atlas **assurance level** — how *independently corroborated* a value
+  is, derived from the `verify` route, not from the claim kind.
+
+The status rides on the registry row and is rendered on every
+auto-generated atlas hub page next to `method` and `reliability`. Worked
+examples: `TFIM / LiebRobinsonBound / Infinite` (`:bound`, the
+Lieb-Robinson velocity cone saturated by the maximum group velocity) and
+`TFIM / HighTemperatureFreeEnergy / Infinite` (`:approx`, the small-β
+free-energy expansion), both exercised in
+`test/models/quantum/TFIM/test_TFIM_status_examples.jl`.
+
 ---
 
 ## Layer 1 — Unit tests (`test/core/`)

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Ising1925
+- method `analytic`, status `exact`, reliability `high`, refs: Ising1925
 - No finite-temperature phase transition in 1-D; T_c = 0.
 
 ## Corroboration

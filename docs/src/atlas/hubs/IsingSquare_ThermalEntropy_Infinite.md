@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `central_diff`, reliability `high`
+- method `central_diff`, status `exact`, reliability `high`
 - s = β(ε - f).
 
 ## Corroboration

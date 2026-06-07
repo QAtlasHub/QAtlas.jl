@@ -9,6 +9,14 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
 
+## `BekensteinBound` (1)
+
+- 🟠 [`Bound/BekensteinBound/Infinite`](../hubs/Bound_BekensteinBound_Infinite.md) — uncorroborated-but-feasible
+
+## `CHSHBound` (1)
+
+- 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
+
 ## `CentralCharge` (15)
 
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p
@@ -26,6 +34,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`YangLee/CentralCharge/Infinite`](../hubs/YangLee_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
+
+## `ChaosBound` (1)
+
+- 🟠 [`Bound/ChaosBound/Infinite`](../hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
 
 ## `ChargeGap` (2)
 
@@ -180,15 +192,15 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`ToricCode/GroundStateEnergyDensity/Infinite`](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 
+## `LiebRobinsonBound` (1)
+
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
+
 ## `LoschmidtEcho` (3)
 
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](../hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/LoschmidtEcho/OBC`](../hubs/TFIM_LoschmidtEcho_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](../hubs/XXZ1D_LoschmidtEcho_Infinite.md) — corroborated-at-p
-
-## `LoschmidtRateFunction` (1)
-
-- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent
 
 ## `LuttingerParameter` (4)
 
@@ -285,6 +297,14 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/MassGap/PBC`](../hubs/XYh1D_MassGap_PBC.md) — uncorroborated-but-feasible
 
+## `MerminGHZBound` (1)
+
+- 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
+
+## `OptimalCloningFidelity` (1)
+
+- 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
+
 ## `PartitionFunction` (2)
 
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
@@ -294,6 +314,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+
+## `QuantumSpeedLimit` (1)
+
+- 🟠 [`Bound/QuantumSpeedLimit/Infinite`](../hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
 
 ## `RenyiEntropy` (5)
 

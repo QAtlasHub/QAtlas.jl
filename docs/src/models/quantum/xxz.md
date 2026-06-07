@@ -201,3 +201,13 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 29 hubs (
 | `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 48 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
+
+
+
+
+
+
+

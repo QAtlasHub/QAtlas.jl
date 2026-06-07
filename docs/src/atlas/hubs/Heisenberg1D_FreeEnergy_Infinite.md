@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `cft_low_T`, reliability `medium`, refs: Affleck1986 | BloteCardyNightingale1986 | EggertAffleckTakahashi1994
+- method `cft_low_T`, status `exact`, reliability `medium`, refs: Affleck1986 | BloteCardyNightingale1986 | EggertAffleckTakahashi1994
 - f = e₀ - π T² / (6 v_s), v_s = π J / 2. Valid β > 5/J; NaN+warn otherwise.
 
 ## Corroboration

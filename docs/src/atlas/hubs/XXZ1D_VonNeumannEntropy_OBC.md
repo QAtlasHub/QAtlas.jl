@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - Pass subsystem length ℓ; β=Inf gives ground-state EE.
 
 ## Corroboration

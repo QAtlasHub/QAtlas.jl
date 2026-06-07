@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `free_fermion_quadgk_or_klumper_nlie`, reliability `high`, refs: Mahan2000 | Klumper1993
+- method `free_fermion_quadgk_or_klumper_nlie`, status `exact`, reliability `high`, refs: Mahan2000 | Klumper1993
 - XX free-fermion closed form; -1<Δ<1 (Δ≠0) via Klümper NLIE finite-diff (issue #521); NaN+warn at |Δ|≥0.99.
 
 ## Corroboration

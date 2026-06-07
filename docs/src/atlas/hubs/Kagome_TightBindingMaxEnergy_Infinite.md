@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bloch_diagonalization`, reliability `high`
+- method `bloch_diagonalization`, status `exact`, reliability `high`
 - max(λᵢ); forwarded through TightBindingSpectrum.  Sister scalar to TightBindingChecksum: together they discriminate single-eigenvalue perturbations.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `klumper_nlie`, reliability `medium`, refs: Mahan2000 | Coleman2015 | Takahashi1999 | Klumper1993
+- method `klumper_nlie`, status `exact`, reliability `medium`, refs: Mahan2000 | Coleman2015 | Takahashi1999 | Klumper1993
 - Δ = 0: XX free-fermion f(β) by QuadGK (exact); -1 < Δ < 1, |Δ| < 0.99: Klümper QTM NLIE (issue #521); |Δ| ≥ 0.99 or gapped: NaN + warn.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - Bonds split symmetrically: Σᵢ ε_i = ⟨H⟩.
 
 ## Corroboration

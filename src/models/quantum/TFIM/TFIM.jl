@@ -247,6 +247,28 @@ function fetch(model::TFIM, ::CentralCharge, ::Infinite; kwargs...)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Lieb-Robinson velocity bound (status=:bound) — status-axis worked example (v0.24)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite) -> Float64
+
+Lieb-Robinson velocity of the infinite-chain TFIM,
+
+    v_LR = 2 min(|J|, |h|),
+
+the slope of the causal cone bounding commutator spread.  For the
+free-fermion TFIM this tight bound is saturated by the maximum group
+velocity `max_k |dΛ/dk|` of the Bogoliubov dispersion
+`Λ(k) = 2√(J² + h² − 2 J h cos k)`.  Registered with `status=:bound`.
+
+(Lieb & Robinson 1972; Hastings & Koma 2006.)
+"""
+function fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite; kwargs...)
+    return 2 * min(abs(model.J), abs(model.h))
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Critical exponents at the quantum critical point — delegate to 2D Ising universality
 # ═══════════════════════════════════════════════════════════════════════════════
 

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `closed_form`, reliability `high`, refs: McCoyWu1978
+- method `closed_form`, status `exact`, reliability `high`, refs: McCoyWu1978
 - "Critical axial XXZ (Jx=Jy, |Jz/Jx|<=1): 0 (no LRO in 1D). XY anisotropic " * "line (Jz=0, Jx != Jy): McCoy-Wu / Pfeuty Onsager 1/8 exponent " * "M = (1-(Jmin/Jmax)^2)^(1/8) along dominant axis. Massive AFM Neel order " * "and generic XYZ Baxter (1973) elliptic deferred to Phase 3."
 
 ## Corroboration

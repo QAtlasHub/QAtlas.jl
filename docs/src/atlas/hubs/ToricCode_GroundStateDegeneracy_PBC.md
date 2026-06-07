@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Kitaev2003
+- method `analytic`, status `exact`, reliability `high`, refs: Kitaev2003
 - GSD = 4^genus on a closed orientable surface; OBC has unique GS (not registered).
 
 ## Corroboration

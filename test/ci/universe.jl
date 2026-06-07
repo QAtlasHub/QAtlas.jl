@@ -11,6 +11,7 @@ const ALL_DIRS = [
     "core/",
     "util_verify/",
     "universalities/",
+    "bounds/",
     "models/classical/",
     "models/quantum/TFIM/",
     "models/quantum/XXZ/",

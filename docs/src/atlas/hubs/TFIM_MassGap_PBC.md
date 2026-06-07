@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`
+- method `bdg`, status `exact`, reliability `high`
 - Smallest excitation across NS (two-mode flip) and R (one-mode flip) sectors.
 
 ## Corroboration

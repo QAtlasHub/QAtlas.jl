@@ -87,7 +87,7 @@ end
 Embed a single-site `d×d` operator at `site` in an `N`-site chain.
 """
 function site_op(o::AbstractMatrix, d::Int, N::Int, site::Int)
-    kron(_eyed(d^(site - 1)), o, _eyed(d^(N - site)))
+    return kron(_eyed(d^(site - 1)), o, _eyed(d^(N - site)))
 end
 
 """

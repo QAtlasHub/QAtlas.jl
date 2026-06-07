@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Yang1952
+- method `analytic`, status `exact`, reliability `high`, refs: Yang1952
 - M(T) = (1 - sinh⁻⁴(2βJ))^(1/8) for T < T_c.
 
 ## Corroboration

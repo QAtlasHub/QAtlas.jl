@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Onsager1944
+- method `analytic`, status `exact`, reliability `high`, refs: Onsager1944
 - T_c = 2J/log(1+√2).
 
 ## Corroboration

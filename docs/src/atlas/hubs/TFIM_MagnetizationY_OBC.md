@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`
+- method `analytic`, status `exact`, reliability `high`
 - Identically 0 in any Gaussian state (odd-Majorana product).
 
 ## Corroboration

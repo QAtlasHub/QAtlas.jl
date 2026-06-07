@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Polyakov1981
+- method `analytic`, status `exact`, reliability `high`, refs: Polyakov1981
 - c = 1 + 6(b + 1/b)²; invariant under b↔1/b self-duality.
 
 ## Corroboration

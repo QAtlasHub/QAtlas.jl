@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `cft`, reliability `high`, refs: CalabreseCardy2009
+- method `cft`, status `exact`, reliability `high`, refs: CalabreseCardy2009
 - CC Renyi: prefactor (c/6)(1 + 1/α). Same case coverage as VN.
 
 ## Corroboration

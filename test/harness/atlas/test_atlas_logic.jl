@@ -77,6 +77,7 @@ end
                 Energy,
                 Infinite,
                 method=:bethe_ansatz,
+                status=:bound,
                 reliability=:high,
                 references=["Foo 1999", "Bar 2001"],
                 notes="synthetic",
@@ -92,10 +93,12 @@ end
         @test c1.quantity == "Energy"
         @test c1.bc == "Infinite"
         @test c1.method == "bethe_ansatz"
+        @test c1.status == "bound"
         @test c1.reliability == "high"
         @test c1.refs == "Foo 1999 | Bar 2001"
         @test c1.notes == "synthetic"
         @test claims[2].hub == "Foo/MassGap/OBC"
+        @test claims[2].status == ""   # omitted → empty (generate.jl renders "exact")
         @test claims[2].refs == ""
     end
 end

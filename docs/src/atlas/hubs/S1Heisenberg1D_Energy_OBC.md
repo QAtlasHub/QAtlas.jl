@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dense_ed`, reliability `high`
+- method `dense_ed`, status `exact`, reliability `high`
 - Total ⟨H⟩(β) by dense ED on the 3^N Hilbert space; N ≤ 8.
 
 ## Corroboration

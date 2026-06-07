@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Arovas1988
+- method `analytic`, status `exact`, reliability `high`, refs: Arovas1988
 - Exact static structure factor S_zz(q) = 2(1-cos q)/(5+3 cos q); S(0)=0, S(π)=2; J-independent.
 
 ## Corroboration

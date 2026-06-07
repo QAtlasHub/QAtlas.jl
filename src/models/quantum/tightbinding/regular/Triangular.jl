@@ -59,7 +59,7 @@ struct Triangular <: AbstractQAtlasModel
     Ly::Int;
 end
 function Triangular(; t::Real=1.0, Lx::Integer=0, Ly::Integer=0)
-    Triangular(Float64(t), Int(Lx), Int(Ly))
+    return Triangular(Float64(t), Int(Lx), Int(Ly))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

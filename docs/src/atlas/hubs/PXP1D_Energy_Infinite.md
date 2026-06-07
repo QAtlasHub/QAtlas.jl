@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `dmrg_reference`, reliability `medium`, refs: TurnerMichailidisAbaninSerbynPapic2018 | LinMotrunich2019 | IadecolaSchecterXu2019 | Surace2020
+- method `dmrg_reference`, status `exact`, reliability `medium`, refs: TurnerMichailidisAbaninSerbynPapic2018 | LinMotrunich2019 | IadecolaSchecterXu2019 | Surace2020
 - e_0/Ω ≈ -0.6516(2) DMRG/ED reference (PXP-scar literature); Surace 2020 gauge-theory mapping consistent but does not tabulate e_0.
 
 ## Corroboration

@@ -67,7 +67,7 @@ struct ThermoIdentity
 end
 
 function ThermoIdentity(name, requires, check; model_filter=_ -> true)
-    ThermoIdentity(name, requires, check, model_filter)
+    return ThermoIdentity(name, requires, check, model_filter)
 end
 
 """
@@ -173,7 +173,7 @@ perturbed field if `val` is `Dual`.
 function _perturb_field(model, field::Symbol, val)
     field in propertynames(model) || return nothing
     args = map(propertynames(model)) do f
-        f == field ? val : getfield(model, f)
+        return f == field ? val : getfield(model, f)
     end
     try
         return typeof(model).name.wrapper(args...)

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
+- method `bdg`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970
 - transverse susceptibility per site from exact Wick contraction over covariance.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Rigol2007 | CalabreseEsslerFagotti2012
+- method `analytic`, status `exact`, reliability `high`, refs: Rigol2007 | CalabreseEsslerFagotti2012
 - Per-site ε_GGE via QuadGK over the post-quench dispersion with Bogoliubov-mismatch occupations n_k = sin²(θ_k(h₀)−θ_k(h_f)).
 
 ## Corroboration

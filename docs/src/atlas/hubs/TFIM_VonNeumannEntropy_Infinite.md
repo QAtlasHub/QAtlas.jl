@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `cft`, reliability `high`, refs: CalabreseCardy2004 | CalabreseCardy2009
+- method `cft`, status `exact`, reliability `high`, refs: CalabreseCardy2004 | CalabreseCardy2009
 - Closed-form CC; T=0 critical/gapped + T>0 critical (gapped + T>0 errors).
 
 ## Corroboration

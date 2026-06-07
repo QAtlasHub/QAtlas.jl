@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `linear_phonon`, reliability `high`, refs: Toda1967 | Flaschka1974
+- method `linear_phonon`, status `exact`, reliability `high`, refs: Toda1967 | Flaschka1974
 - Linearised acoustic phonon ω(k) = 2√(ab)|sin(k/2)| ⇒ MassGap = 0.  Soliton / quantum-Toda spectrum tracked as Phase 2.
 
 ## Corroboration

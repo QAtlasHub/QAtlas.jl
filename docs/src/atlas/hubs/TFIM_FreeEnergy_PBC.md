@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: LiebSchultzMattis1961
+- method `bdg`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961
 
 ## Corroboration
 

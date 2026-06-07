@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Zamolodchikov2004 | SmirnovZamolodchikov2017 | CavagliaNegroSzecsenyiTateo2016
+- method `analytic`, status `exact`, reliability `high`, refs: Zamolodchikov2004 | SmirnovZamolodchikov2017 | CavagliaNegroSzecsenyiTateo2016
 - Universal irrelevant TT̄ deformation; UV central charge c preserved at all λ. Deformed circle spectrum Phase 2.
 
 ## Corroboration

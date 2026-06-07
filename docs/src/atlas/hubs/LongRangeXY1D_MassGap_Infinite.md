@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970 | MaghrebiGongGorshkov2017
+- method `analytic`, status `exact`, reliability `high`, refs: LiebSchultzMattis1961 | Pfeuty1970 | MaghrebiGongGorshkov2017
 - α=Inf NN XX limit: Δ = 2·max(0, |h|-2J); finite α deferred to Phase 2.
 
 ## Corroboration

@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 113 hubs
+## `analytic` - 120 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -28,6 +28,12 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](hubs/AKLT1D_ZZStructureFactor_Infinite.md)
 - 🟢 [`AKLT2D/Energy/Infinite`](hubs/AKLT2D_Energy_Infinite.md)
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](hubs/BCFT_ResidualEntropy_Infinite.md)
+- 🟠 [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
+- 🟠 [`Bound/CHSHBound/Infinite`](hubs/Bound_CHSHBound_Infinite.md)
+- 🟠 [`Bound/ChaosBound/Infinite`](hubs/Bound_ChaosBound_Infinite.md)
+- 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
+- 🟠 [`Bound/OptimalCloningFidelity/Infinite`](hubs/Bound_OptimalCloningFidelity_Infinite.md)
+- 🟠 [`Bound/QuantumSpeedLimit/Infinite`](hubs/Bound_QuantumSpeedLimit_Infinite.md)
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](hubs/ChernSimons3D_PartitionFunction_Infinite.md)
 - 🟢 [`Cluster1D/Energy/Infinite`](hubs/Cluster1D_Energy_Infinite.md)
 - 🟢 [`Cluster1D/MassGap/Infinite`](hubs/Cluster1D_MassGap_Infinite.md)
@@ -83,9 +89,10 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md)
 - 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md)
 - 🟢 [`TFIM/FidelitySusceptibility/Infinite`](hubs/TFIM_FidelitySusceptibility_Infinite.md)
+- 🟢 [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md)
 - 🔵 [`TFIM/GGEValue/Infinite`](hubs/TFIM_GGEValue_Infinite.md)
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](hubs/TFIM_LiebRobinsonBound_Infinite.md)
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md)
-- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](hubs/TFIM_LoschmidtRateFunction_Infinite.md)
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
 - 🟢 [`TFIM/MagnetizationY/OBC`](hubs/TFIM_MagnetizationY_OBC.md)
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](hubs/TFIM_MagnetizationZ_Infinite.md)

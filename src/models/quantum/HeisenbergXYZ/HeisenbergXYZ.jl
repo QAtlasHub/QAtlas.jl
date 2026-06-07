@@ -67,7 +67,7 @@ struct HeisenbergXYZ <: AbstractQAtlasModel
     Jz::Float64
 end
 function HeisenbergXYZ(; Jx::Real=1.0, Jy::Real=1.0, Jz::Real=1.0)
-    HeisenbergXYZ(Float64(Jx), Float64(Jy), Float64(Jz))
+    return HeisenbergXYZ(Float64(Jx), Float64(Jy), Float64(Jz))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

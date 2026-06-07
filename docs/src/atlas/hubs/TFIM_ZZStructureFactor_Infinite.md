@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `medium`
+- method `bdg`, status `exact`, reliability `medium`
 - Static S_zz(q) via OBC large-N proxy of correlator Fourier sum.
 
 ## Corroboration

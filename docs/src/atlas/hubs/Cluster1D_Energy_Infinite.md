@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: BriegelRaussendorf2001
+- method `analytic`, status `exact`, reliability `high`, refs: BriegelRaussendorf2001
 - E_0/N = -J; ground state is the cluster state (stabiliser model).
 
 ## Corroboration

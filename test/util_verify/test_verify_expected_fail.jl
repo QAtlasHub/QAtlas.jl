@@ -114,7 +114,7 @@ end
             end
             @test count(r -> r isa Test.Broken, res_broken.results) == 1
 
-            verify(
+            return verify(
                 _EFStub(2.0),
                 Energy(:per_site),
                 OBC(4);

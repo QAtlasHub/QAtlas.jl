@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: SherringtonKirkpatrick1975
+- method `analytic`, status `exact`, reliability `high`, refs: SherringtonKirkpatrick1975
 - T_c = J in 1/√N normalisation with J_ij ~ N(0, J²); 0 for J ≤ 0.
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Pfeuty1970
+- method `bdg`, status `exact`, reliability `high`, refs: Pfeuty1970
 - Total ⟨H⟩(β) via the BdG spectrum; ground state when no β kwarg.
 
 ## Corroboration

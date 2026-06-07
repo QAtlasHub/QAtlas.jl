@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (192)
+## `Infinite` (198)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -20,6 +20,12 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT2D/Energy/Infinite`](../hubs/AKLT2D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](../hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`Bound/BekensteinBound/Infinite`](../hubs/Bound_BekensteinBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/CHSHBound/Infinite`](../hubs/Bound_CHSHBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/ChaosBound/Infinite`](../hubs/Bound_ChaosBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/MerminGHZBound/Infinite`](../hubs/Bound_MerminGHZBound_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Bound/QuantumSpeedLimit/Infinite`](../hubs/Bound_QuantumSpeedLimit_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`ChernSimons3D/CentralCharge/Infinite`](../hubs/ChernSimons3D_CentralCharge_Infinite.md) — corroborated-at-p
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
 - 🟢 [`Cluster1D/Energy/Infinite`](../hubs/Cluster1D_Energy_Infinite.md) — corroborated-at-p
@@ -138,8 +144,8 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TFIM/FidelitySusceptibility/Infinite`](../hubs/TFIM_FidelitySusceptibility_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/FreeEnergy/Infinite`](../hubs/TFIM_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🔵 [`TFIM/GGEValue/Infinite`](../hubs/TFIM_GGEValue_Infinite.md) — coherent
+- 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](../hubs/TFIM_LoschmidtEcho_Infinite.md) — corroborated-at-p
-- 🔵 [`TFIM/LoschmidtRateFunction/Infinite`](../hubs/TFIM_LoschmidtRateFunction_Infinite.md) — coherent
 - 🟢 [`TFIM/MagnetizationX/Infinite`](../hubs/TFIM_MagnetizationX_Infinite.md) — corroborated-at-p
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](../hubs/TFIM_MagnetizationXLocal_Infinite.md) — coherent
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](../hubs/TFIM_MagnetizationZ_Infinite.md) — corroborated-at-p

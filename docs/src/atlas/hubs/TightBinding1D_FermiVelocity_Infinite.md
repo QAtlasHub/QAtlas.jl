@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AshcroftMermin1976
+- method `analytic`, status `exact`, reliability `high`, refs: AshcroftMermin1976
 - v_F = 2t sin(k_F) = 2t√(1 - μ²/(4t²)); returns 0 in gapped phase |μ| ≥ 2t (no Fermi surface; convention).
 
 ## Corroboration

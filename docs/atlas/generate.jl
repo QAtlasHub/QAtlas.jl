@@ -74,7 +74,7 @@ end
 ed_infeasible(h) = modelof(h) in AtlasInventory.ED_INFEASIBLE_MODELS
 const _LEVEL_CACHE = Dict{String,AtlasInventory.AssuranceLevel}()
 function levelcode(h)
-    get!(
+    return get!(
         () -> AtlasInventory.assurance_level(mechsof(h), ed_infeasible(h)), _LEVEL_CACHE, h
     )
 end
@@ -110,7 +110,7 @@ rate_inrepo = nfeas == 0 ? 0.0 : round(100 * n_inrepo / nfeas; digits=1)
 
 # ── R5 facets ────────────────────────────────────────────────────────
 function facet_link(h)
-    string(badgeof(h), " [`", h, "`](../hubs/", slugof(h), ".md) — ", levname(h))
+    return string(badgeof(h), " [`", h, "`](../hubs/", slugof(h), ".md) — ", levname(h))
 end
 function group_by(keyfn)
     g = Dict{String,Vector{String}}()
@@ -878,6 +878,8 @@ for h in claimed
     HP(
         "- method `",
         cl.method,
+        "`, status `",
+        isempty(cl.status) ? "exact" : cl.status,
         "`, reliability `",
         cl.reliability,
         "`",
@@ -993,7 +995,7 @@ function write_facet(fname, title, groups, blurb)
         FP("")
     end
     FP("[← back to the Atlas index](../index.md)")
-    write(joinpath(bydir, fname), String(take!(fio)))
+    return write(joinpath(bydir, fname), String(take!(fio)))
 end
 write_facet(
     "model.md", "Atlas — by model", G_model, "Every `src`-claimed hub grouped by model."
@@ -1028,6 +1030,37 @@ write_facet(
     G_regime,
     "Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).",
 )
+
+# by/universality — model ↔ universality-class correspondence (@realizes backend).
+realz = AtlasRegistry.scan_realizes(joinpath(ROOT, "src", "realizes_registry.jl"))
+G_univ = Dict{String,Vector{Tuple{String,String}}}()
+for r in realz
+    push!(get!(G_univ, r.class, Tuple{String,String}[]), (r.model, r.regime))
+end
+uio = IOBuffer()
+UP(s...) = println(uio, string(s...))
+UP("# Atlas — by universality class")
+UP("")
+UP(BANNER)
+UP("")
+UP(
+    "Which concrete models realize each universality class (RG fixed point), and ",
+    "the regime where they do — the `@realizes` backend register, queryable with ",
+    "`realized_by(class)` / `realizations(model)`.",
+)
+UP("")
+for k in sort(collect(keys(G_univ)))
+    ms = sort(G_univ[k])
+    UP("## `", k, "` (", length(ms), ")")
+    UP("")
+    for (model, regime) in ms
+        UP("- **", model, "**", isempty(regime) ? "" : string(" — ", regime))
+    end
+    UP("")
+end
+UP("[← back to the Atlas index](../index.md)")
+write(joinpath(bydir, "universality.md"), String(take!(uio)))
+
 byidx = IOBuffer()
 BI(s...) = println(byidx, string(s...))
 BI("# Atlas — faceted search")
@@ -1046,6 +1079,11 @@ BI("- [By boundary condition](bc.md) — ", length(G_bc), " BCs")
 BI("- [By assurance level](level.md) — R1 taxonomy")
 BI("- [By corroboration mechanism](mechanism.md) — verify `route`")
 BI("- [By regime](regime.md) — resolved physical regimes")
+BI(
+    "- [By universality class](universality.md) — ",
+    length(G_univ),
+    " classes (model ↔ class)",
+)
 BI("")
 BI("[← back to the Atlas index](../index.md)")
 write(joinpath(bydir, "index.md"), String(take!(byidx)))
@@ -1095,7 +1133,8 @@ P(
     "[**Faceted search →**](by/index.md) · ",
     "[by model](by/model.md) · [by quantity](by/quantity.md) · ",
     "[by BC](by/bc.md) · [by level](by/level.md) · ",
-    "[by mechanism](by/mechanism.md) · [by regime](by/regime.md). ",
+    "[by mechanism](by/mechanism.md) · [by regime](by/regime.md) · ",
+    "[by universality](by/universality.md). ",
     "Full-text search is the top bar (Documenter built-in).",
 )
 
@@ -1822,7 +1861,7 @@ function render_models_index()
         univ = _universality_of(m)
         us = isempty(univ) ? "—" : string("`", univ, "`")
         disp = _model_display_name(m)
-        P(
+        return P(
             "| [`",
             disp,
             "`](../atlas/models/",
@@ -1852,7 +1891,7 @@ function render_models_index()
         P("| Model | Quantities | Assurance | Universality |")
         P("|-------|-----------|-----------|--------------|")
         foreach(model_row, ms)
-        P("")
+        return P("")
     end
 
     P("# Models")
@@ -1913,7 +1952,7 @@ function render_models_reference()
     function ref_row(m)
         refs = _model_refs_text(m)
         disp = _model_display_name(m)
-        P("| [`", disp, "`](../atlas/models/", m, ".md) | ", refs, " |")
+        return P("| [`", disp, "`](../atlas/models/", m, ".md) | ", refs, " |")
     end
 
     function ref_section(label, ms)
@@ -1923,7 +1962,7 @@ function render_models_reference()
         P("| Model | Key References |")
         P("|-------|---------------|")
         foreach(ref_row, ms)
-        P("")
+        return P("")
     end
 
     P("# Reference")
@@ -2062,7 +2101,7 @@ function render_sitemap()
     println(io, """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">""")
 
     function loc(rel)
-        println(io, "  <url><loc>", pageurl(rel), "</loc></url>")
+        return println(io, "  <url><loc>", pageurl(rel), "</loc></url>")
     end
 
     # Main structural pages

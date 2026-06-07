@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AKLT1988
+- method `analytic`, status `exact`, reliability `high`, refs: AKLT1988
 - β=∞ only: f_PBC(∞) = -2J/3 (unique VBS GS, all N bond projectors annihilated). Finite β throws DomainError.
 
 ## Corroboration

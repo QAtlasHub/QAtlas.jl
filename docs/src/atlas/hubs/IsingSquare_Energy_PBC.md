@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `central_diff`, reliability `medium`
+- method `central_diff`, status `exact`, reliability `medium`
 - ε = -∂(log Z)/∂β / N via central diff (O(δ²) truncation).
 
 ## Corroboration

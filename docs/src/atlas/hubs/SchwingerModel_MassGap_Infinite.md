@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: Schwinger1962
+- method `analytic`, status `exact`, reliability `high`, refs: Schwinger1962
 - Massless Schwinger m_γ = e/√π via abelian bosonisation; m ≠ 0 raises DomainError (sine-Gordon dual, Phase 2).
 
 ## Corroboration

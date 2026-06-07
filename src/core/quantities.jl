@@ -956,3 +956,90 @@ sigma-model closed forms (Mehta 2004 §16) are deferred to Phase 2.
   *JHEP* **05**, 118 (2017), arXiv:1611.04650 — ramp-plateau picture.
 """
 struct SpectralFormFactor <: AbstractQuantity end
+
+# ─── Registered-status worked example (status axis, v0.24) ──────────────
+# A one-sided BOUND quantity (Lieb-Robinson velocity cone) carried in with
+# the new `status` registry axis — exercising the :bound status,
+# verify_bound, and the atlas status rendering.  (The :approx status and
+# verify_approx ship too; their worked example is deferred to the
+# definition-list redesign, which expresses approximations as non-canonical
+# definitions of an existing quantity rather than a new quantity.)
+
+"""
+    LiebRobinsonBound() <: AbstractQuantity
+
+Lieb-Robinson velocity `v_LR` — the slope of the causal cone bounding the
+spread of operator commutators,
+
+    ‖[A_x(t), B_y(0)]‖ ≤ C · exp(−μ (|x − y| − v_LR · t)).
+
+`fetch` returns `v_LR` itself (the bounding cone slope). This is a
+one-sided `:bound`: any genuinely measured information velocity stays
+`≤ v_LR`, and for free-fermion models the bound is *saturated* by the
+maximum group velocity `max_k |dΛ/dk|`. Registered with `status=:bound`.
+
+(Lieb & Robinson 1972; Hastings & Koma 2006.)
+"""
+struct LiebRobinsonBound <: AbstractQuantity end
+
+"""
+    CHSHBound() <: AbstractQuantity
+
+The CHSH (Bell-inequality) correlator bound — the maximum of
+`S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical
+theory.  A `status=:bound` quantity with the historical name (like
+[`LiebRobinsonBound`](@ref)); fetched against a [`Bound`](@ref) domain
+(not a model), with a `source=` selector choosing *whose* bound
+(`:bell` → 2, `:tsirelson` → 2√2, `:popescu_rohrlich` → 4).
+"""
+struct CHSHBound <: AbstractQuantity end
+
+"""
+    MerminGHZBound() <: AbstractQuantity
+
+The Mermin 3-party Bell-type bound — the maximum of the Mermin operator
+`|⟨M₃⟩|` admissible in a given theory.  A `status=:bound` quantity
+(Mermin 1990); fetched against a [`Bound`](@ref) domain with `source=`
+choosing the bound (`:classical` → 2 local-realistic, `:mermin` → 4
+quantum, saturated by the GHZ state).
+"""
+struct MerminGHZBound <: AbstractQuantity end
+
+"""
+    ChaosBound() <: AbstractQuantity
+
+The Maldacena–Shenker–Stanford bound on quantum chaos — an upper bound on the
+Lyapunov exponent `λ_L` of out-of-time-order correlators (`λ_L ≤ 2π/β`).  A
+`status=:bound` quantity; fetched against a [`Bound`](@ref) domain
+(`Bound(:Dynamics)`).
+"""
+struct ChaosBound <: AbstractQuantity end
+
+"""
+    BekensteinBound() <: AbstractQuantity
+
+The Bekenstein universal entropy bound — an upper bound on the entropy of a
+bounded system (`S ≤ 2π R E`).  A `status=:bound` quantity; fetched against a
+[`Bound`](@ref) domain (`Bound(:Holographic)`).
+"""
+struct BekensteinBound <: AbstractQuantity end
+
+"""
+    QuantumSpeedLimit() <: AbstractQuantity
+
+The quantum speed limit — a *lower* bound on the time to evolve a state to an
+orthogonal one (Margolus–Levitin `τ ≥ π/(2E)`).  A `status=:bound`,
+`direction=:lower` quantity; fetched against a [`Bound`](@ref) domain
+(`Bound(:Dynamics)`).
+"""
+struct QuantumSpeedLimit <: AbstractQuantity end
+
+"""
+    OptimalCloningFidelity() <: AbstractQuantity
+
+The optimal universal quantum cloning fidelity — an upper bound on the
+single-copy fidelity of a `1 → 2` qubit cloner (Bužek–Hillery `F ≤ 5/6`).  A
+`status=:bound`, `direction=:upper` quantity; fetched against a [`Bound`](@ref)
+domain (`Bound(:QuantumInformation)`).
+"""
+struct OptimalCloningFidelity <: AbstractQuantity end

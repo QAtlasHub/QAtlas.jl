@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: KardarParisiZhang1986 | DerridaEvansHakimPasquier1993 | DerridaLebowitz1998
+- method `analytic`, status `exact`, reliability `high`, refs: KardarParisiZhang1986 | DerridaEvansHakimPasquier1993 | DerridaLebowitz1998
 - Mean-field TASEP steady-state current j(ρ) = p ρ (1−ρ); KPZ-class non-equilibrium.
 
 ## Corroboration

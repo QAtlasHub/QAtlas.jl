@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: AKLT1988 | GarciaSaez2013
+- method `analytic`, status `exact`, reliability `high`, refs: AKLT1988 | GarciaSaez2013
 - β=∞ only: χ(∞) = 0 (Haldane gap suppression). Finite β throws DomainError.
 
 ## Corroboration

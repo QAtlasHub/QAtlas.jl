@@ -82,12 +82,15 @@ include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
 include("core/registry.jl")
+include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/pfaffian.jl")
 include("core/dense_ed.jl")
 
 # --- Implementation registry public API ---
 export Implementation, implementation_status, implementation_status_markdown
 export references_for
+export definitions, validity, canonical_scheme  # multi-definition catalog / selector
+export Realization, realizes!, @realizes, realizations, realized_by  # model <-> class
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
@@ -111,6 +114,14 @@ export StringOrderParameter
 export FermiVelocity, LuttingerVelocity, SpinWaveVelocity
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export E8Spectrum
+export LiebRobinsonBound  # status-axis example (:bound)
+export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …
+export CHSHBound          # CHSH / Bell correlator bound (:bound)
+export MerminGHZBound     # Mermin 3-party Bell bound (:bound)
+export ChaosBound         # MSS chaos / Lyapunov bound (:bound, Dynamics)
+export BekensteinBound    # Bekenstein entropy bound (:bound, Holographic)
+export QuantumSpeedLimit  # Margolus-Levitin speed limit (:bound lower, Dynamics)
+export OptimalCloningFidelity  # Buzek-Hillery cloning bound (:bound upper, QuantumInformation)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
 export LoschmidtEcho, LoschmidtRateFunction
 export GGEValue                                          # quench long-time wrapper
@@ -128,17 +139,28 @@ export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
 export MinimalModel, WZWSU2       # 2D rational-CFT dispatch tags
 export WignerSurmise, TracyWidom, MeanRatio  # RMT / Poisson level statistics (#151)
 export SpectralFormFactor  # RMT spectral form factor (#243)
-include("universalities/Universality.jl")
-include("universalities/E8.jl")
-include("universalities/MeanField.jl")
-include("universalities/Ising2D.jl")
-include("universalities/KPZ.jl")
-include("universalities/Percolation.jl")
-include("universalities/Potts.jl")
-include("universalities/ONModel.jl")
-include("universalities/MinimalModel.jl")
-include("universalities/WZW.jl")
-include("universalities/CardyEntanglement.jl")
+include("universalities/Universality.jl")            # namespace root: Universality{C} + shared types
+include("universalities/E8/E8.jl")
+include("universalities/MeanField/MeanField.jl")
+include("universalities/Ising2D/Ising2D.jl")
+include("universalities/KPZ/KPZ.jl")
+include("universalities/Percolation/Percolation.jl")
+include("universalities/Potts/Potts.jl")
+include("universalities/ONModel/ONModel.jl")
+include("universalities/MinimalModel/MinimalModel.jl")
+include("universalities/WZW/WZW.jl")
+include("universalities/CardyEntanglement.jl")       # shared CFT entanglement (cross-class)
+
+# --- Universal bounds (model-independent inequalities) ---
+# A bound is NOT a universality class: it is pinned by the quantity it bounds,
+# its direction (:upper/:lower), and whose bound it is.  See bounds/Bounds.jl.
+include("bounds/Bounds.jl")
+include("bounds/QuantumInformation/QuantumInformation.jl")
+include("bounds/QuantumInformation/QuantumInformation_registry.jl")
+include("bounds/Dynamics/Dynamics.jl")
+include("bounds/Dynamics/Dynamics_registry.jl")
+include("bounds/Holographic/Holographic.jl")
+include("bounds/Holographic/Holographic_registry.jl")
 
 # --- Models ---
 # Layout: `<class>/<Model>/<Model>.jl` (with optional sibling axis files like
@@ -301,8 +323,8 @@ include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibil
 include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)
 include("models/quantum/ToricCode/ToricCode.jl")
 include("models/quantum/ToricCode/ToricCode_registry.jl")  # populates REGISTRY for ToricCode (#162)
-include("universalities/RMT.jl")                            # RMT universality class (#151)
-include("universalities/Poisson.jl")                        # Poisson universality class (#151)
+include("universalities/RMT/RMT.jl")                        # RMT universality class (#151)
+include("universalities/Poisson/Poisson.jl")                # Poisson universality class (#151)
 
 # --- Deprecation shims (legacy API) ---
 # Loaded last so they can route into any already-registered concrete
@@ -313,5 +335,8 @@ include("deprecate/legacy_e8.jl")
 include("deprecate/legacy_honeycomb.jl")
 export Graphene                                         # backward-compat alias
 include("deprecate/legacy_xxz.jl")
+
+# Model <-> universality-class realizations (membership) — after all models.
+include("realizes_registry.jl")
 
 end # module QAtlas

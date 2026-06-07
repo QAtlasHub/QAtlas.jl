@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: LandauLifshitz1980
+- method `analytic`, status `exact`, reliability `high`, refs: LandauLifshitz1980
 - Mean-field T_c = J for J > 0 (k_B = 1); 0 otherwise. Zero-field reference value (no sharp transition at h ≠ 0).
 
 ## Corroboration

@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `medium`
+- method `bdg`, status `exact`, reliability `medium`
 - OBC large-N proxy.  Static (ω = nothing) → uniform χ_zz(β); dynamic (ω::Real, q required) → χ''_zz(q,ω;β) via Kubo commutator.  N_proxy kwarg controls precision.
 
 ## Corroboration

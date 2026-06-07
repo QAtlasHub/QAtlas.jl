@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `bdg`, reliability `high`, refs: Kitaev2001
+- method `bdg`, status `exact`, reliability `high`, refs: Kitaev2001
 - Smallest non-negative BdG eigenvalue (Majorana edge mode in topological phase).
 
 ## Corroboration

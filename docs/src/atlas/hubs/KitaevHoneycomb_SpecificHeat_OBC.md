@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `matter_free_fermion`, reliability `medium`, refs: Kitaev2006 | Lieb1994
+- method `matter_free_fermion`, status `exact`, reliability `medium`, refs: Kitaev2006 | Lieb1994
 - Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.
 
 ## Corroboration

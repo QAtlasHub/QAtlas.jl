@@ -36,7 +36,7 @@ using Logging: with_logger, NullLogger
         # Legacy :lower_bound alias resolves to J/4 with a one-shot @warn
         # (deprecation behaviour; not a verify-card concern).
         Δ_legacy = with_logger(NullLogger()) do
-            QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)
+            return QAtlas.fetch(m, MassGap(), Infinite(); method=:lower_bound)
         end
         @test Δ_legacy ≈ 0.25 atol = 1e-14
         # Unsupported method symbols raise DomainError.

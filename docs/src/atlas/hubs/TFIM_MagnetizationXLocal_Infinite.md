@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `analytic`, reliability `high`, refs: BarouchMcCoy1970 | CalabreseEsslerFagotti2012
+- method `analytic`, status `exact`, reliability `high`, refs: BarouchMcCoy1970 | CalabreseEsslerFagotti2012
 - Closed-form k-integral over the Bogoliubov angles theta_k(h_0,f); QuadGK rtol=1e-12.
 
 ## Corroboration

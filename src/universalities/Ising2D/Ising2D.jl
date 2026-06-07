@@ -103,3 +103,7 @@ end
 function fetch(m::Universality{:Ising}, q::CriticalExponents, ::Infinite; kwargs...)
     return fetch(m, q; kwargs...)
 end
+
+# Class identity: 1+1D CFT central charge — BPZ minimal model M(3,4) (Cardy 1986).
+# Consumed by the universal-behaviour layer (universalities/behaviour/).
+_universality_central_charge(::Universality{:Ising}) = 1 // 2

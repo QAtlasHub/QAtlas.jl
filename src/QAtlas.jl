@@ -81,6 +81,7 @@ export SYK                                              # Sachdev-Ye-Kitaev (#25
 include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
+include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/reduces.jl")   # model -> model reductions (limit / special point)
@@ -159,7 +160,6 @@ export Ising2D, KPZ1D, MeanField  # backward-compatible aliases
 export MinimalModel, WZWSU2       # 2D rational-CFT dispatch tags
 export WignerSurmise, TracyWidom, MeanRatio  # RMT / Poisson level statistics (#151)
 export SpectralFormFactor  # RMT spectral form factor (#243)
-include("universalities/Universality.jl")            # namespace root: Universality{C} + shared types
 include("universalities/E8/E8.jl")
 include("universalities/MeanField/MeanField.jl")
 include("universalities/MeanField/MeanField_registry.jl")  # :universal predicts edge (CriticalExponents)
@@ -171,8 +171,10 @@ include("universalities/Potts/Potts.jl")
 include("universalities/ONModel/ONModel.jl")
 include("universalities/MinimalModel/MinimalModel.jl")
 include("universalities/WZW/WZW.jl")
-include("universalities/CardyEntanglement.jl")       # shared CFT entanglement (cross-class)
-include("universalities/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
+# universal behaviour (cross-class phenomena governed by the class's CFT data)
+include("universalities/behaviour/conformal_casimir.jl")   # Cardy 1/L Casimir correction
+include("universalities/behaviour/CardyEntanglement.jl")   # Calabrese–Cardy entanglement scaling
+include("universalities/behaviour/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
 
 # --- Universal bounds (model-independent inequalities) ---
 # A bound is NOT a universality class: it is pinned by the quantity it bounds,

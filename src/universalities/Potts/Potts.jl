@@ -43,3 +43,9 @@ function fetch(::Universality{:Potts4}, ::CriticalExponents; d::Int=2, kwargs...
     end
     return error("Potts4 universality: only d=2 implemented; got d=$d.")
 end
+
+# Class identity: 1+1D CFT central charges — q=3 is M(5,6) (c=4/5, Dotsenko–Fateev
+# 1984); q=4 is the free-boson radius limit (c=1, Saleur 1987). Consumed by the
+# universal-behaviour layer (universalities/behaviour/).
+_universality_central_charge(::Universality{:Potts3}) = 4 // 5
+_universality_central_charge(::Universality{:Potts4}) = 1 // 1

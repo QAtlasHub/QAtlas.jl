@@ -90,3 +90,9 @@ end
 function fetch(m::Universality{:Heisenberg}, q::CriticalExponents, ::Infinite; kwargs...)
     return fetch(m, q; kwargs...)
 end
+
+# Class identity: 1+1D CFT central charge (distinct from the d=3 O(n) exponents
+# above) — :XY is the compact free boson (c=1, Luttinger liquid), :Heisenberg is
+# SU(2)_1 WZW (c=1, Affleck–Haldane). Consumed by universalities/behaviour/.
+_universality_central_charge(::Universality{:XY}) = 1 // 1
+_universality_central_charge(::Universality{:Heisenberg}) = 1 // 1

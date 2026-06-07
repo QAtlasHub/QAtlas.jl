@@ -74,7 +74,7 @@ end
 ed_infeasible(h) = modelof(h) in AtlasInventory.ED_INFEASIBLE_MODELS
 const _LEVEL_CACHE = Dict{String,AtlasInventory.AssuranceLevel}()
 function levelcode(h)
-    get!(
+    return get!(
         () -> AtlasInventory.assurance_level(mechsof(h), ed_infeasible(h)), _LEVEL_CACHE, h
     )
 end
@@ -110,7 +110,7 @@ rate_inrepo = nfeas == 0 ? 0.0 : round(100 * n_inrepo / nfeas; digits=1)
 
 # ── R5 facets ────────────────────────────────────────────────────────
 function facet_link(h)
-    string(badgeof(h), " [`", h, "`](../hubs/", slugof(h), ".md) — ", levname(h))
+    return string(badgeof(h), " [`", h, "`](../hubs/", slugof(h), ".md) — ", levname(h))
 end
 function group_by(keyfn)
     g = Dict{String,Vector{String}}()
@@ -1084,7 +1084,7 @@ function write_facet(fname, title, groups, blurb)
         FP("")
     end
     FP("[← back to the Atlas index](../index.md)")
-    write(joinpath(bydir, fname), String(take!(fio)))
+    return write(joinpath(bydir, fname), String(take!(fio)))
 end
 write_facet(
     "model.md", "Atlas — by model", G_model, "Every `src`-claimed hub grouped by model."
@@ -1950,7 +1950,7 @@ function render_models_index()
         univ = _universality_of(m)
         us = isempty(univ) ? "—" : string("`", univ, "`")
         disp = _model_display_name(m)
-        P(
+        return P(
             "| [`",
             disp,
             "`](../atlas/models/",
@@ -1980,7 +1980,7 @@ function render_models_index()
         P("| Model | Quantities | Assurance | Universality |")
         P("|-------|-----------|-----------|--------------|")
         foreach(model_row, ms)
-        P("")
+        return P("")
     end
 
     P("# Models")
@@ -2041,7 +2041,7 @@ function render_models_reference()
     function ref_row(m)
         refs = _model_refs_text(m)
         disp = _model_display_name(m)
-        P("| [`", disp, "`](../atlas/models/", m, ".md) | ", refs, " |")
+        return P("| [`", disp, "`](../atlas/models/", m, ".md) | ", refs, " |")
     end
 
     function ref_section(label, ms)
@@ -2051,7 +2051,7 @@ function render_models_reference()
         P("| Model | Key References |")
         P("|-------|---------------|")
         foreach(ref_row, ms)
-        P("")
+        return P("")
     end
 
     P("# Reference")
@@ -2190,7 +2190,7 @@ function render_sitemap()
     println(io, """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">""")
 
     function loc(rel)
-        println(io, "  <url><loc>", pageurl(rel), "</loc></url>")
+        return println(io, "  <url><loc>", pageurl(rel), "</loc></url>")
     end
 
     # Main structural pages

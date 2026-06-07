@@ -54,7 +54,7 @@ struct MixedFieldIsing1D <: AbstractQAtlasModel
     end
 end
 function MixedFieldIsing1D(; J::Real=1.0, h_x::Real=1.0, h_z::Real=0.0)
-    MixedFieldIsing1D(J, h_x, h_z)
+    return MixedFieldIsing1D(J, h_x, h_z)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

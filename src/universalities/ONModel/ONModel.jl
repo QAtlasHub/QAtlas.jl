@@ -85,8 +85,8 @@ end
 
 # ─── Infinite-bc forwarding for verify() integration ───────────────────────
 function fetch(m::Universality{:XY}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Heisenberg}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end

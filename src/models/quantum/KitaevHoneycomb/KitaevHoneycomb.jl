@@ -69,7 +69,7 @@ struct KitaevHoneycomb <: AbstractQAtlasModel
     Kz::Float64
 end
 function KitaevHoneycomb(; Kx::Real=1.0, Ky::Real=1.0, Kz::Real=1.0)
-    KitaevHoneycomb(Float64(Kx), Float64(Ky), Float64(Kz))
+    return KitaevHoneycomb(Float64(Kx), Float64(Ky), Float64(Kz))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

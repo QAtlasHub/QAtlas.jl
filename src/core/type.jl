@@ -99,12 +99,12 @@ fetch methods can use this helper to accept both `OBC(N=24)` and
 function _bc_size end
 
 function _bc_size(::Infinite, kwargs)
-    error("_bc_size called on Infinite; call a size-free fetch method instead")
+    return error("_bc_size called on Infinite; call a size-free fetch method instead")
 end
 function _bc_size(bc::Union{OBC,PBC}, kwargs)
     bc.N > 0 && return bc.N
     haskey(kwargs, :N) && return Int(kwargs[:N])
-    error("$(typeof(bc)): N unspecified — pass via OBC(N=...) or kwargs N=...")
+    return error("$(typeof(bc)): N unspecified — pass via OBC(N=...) or kwargs N=...")
 end
 
 """

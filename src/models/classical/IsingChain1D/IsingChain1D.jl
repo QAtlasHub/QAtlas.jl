@@ -190,7 +190,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @inline function _isingchain1d_require_zero_field(h, qname)
-    iszero(h) || throw(
+    return iszero(h) || throw(
         DomainError(
             h,
             "IsingChain1D $(qname) currently requires h = 0; got h = $h. " *

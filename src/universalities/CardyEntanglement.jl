@@ -438,49 +438,49 @@ end
 # (model, quantity, bc) used by every other CentralCharge hub.
 
 function fetch(m::Universality{:Ising}, q::CentralCharge, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Potts3}, q::CentralCharge, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Potts4}, q::CentralCharge, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:XY}, q::CentralCharge, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Heisenberg}, q::CentralCharge, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 
 # ─── Infinite-bc forwarders for RMT / Poisson quantities (verify integration)
 function fetch(m::Universality{:RMT}, q::WignerSurmise, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 fetch(m::Universality{:RMT}, q::TracyWidom, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 fetch(m::Universality{:RMT}, q::MeanRatio, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 function fetch(m::Universality{:RMT}, q::SpectralFormFactor, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Poisson}, q::WignerSurmise, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Poisson}, q::MeanRatio, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 
 # ─── Infinite-bc forwarders for CriticalExponents / GrowthExponents (verify integration)
 function fetch(m::Universality{:Percolation}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Potts3}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Potts4}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:KPZ}, q::GrowthExponents, ::Infinite; kwargs...)
-    fetch(m, q; kwargs...)
+    return fetch(m, q; kwargs...)
 end
 fetch(m::MeanField, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)
 fetch(m::Ising2D, q::CriticalExponents, ::Infinite; kwargs...) = fetch(m, q; kwargs...)

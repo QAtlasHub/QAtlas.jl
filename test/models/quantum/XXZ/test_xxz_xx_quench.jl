@@ -165,7 +165,7 @@ end
     # Cross-check that XXZ_registry.jl declares the new triple.
     rows = QAtlas.implementation_status()
     matching = filter(rows) do r
-        r.model === XXZ1D && r.quantity === LoschmidtEcho{:rate} && r.bc === Infinite
+        return r.model === XXZ1D && r.quantity === LoschmidtEcho{:rate} && r.bc === Infinite
     end
     @test length(matching) == 1
     if length(matching) == 1

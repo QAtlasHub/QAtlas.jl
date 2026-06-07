@@ -82,7 +82,7 @@ struct HaldaneShastry <: AbstractQAtlasModel
     J::Float64
     function HaldaneShastry(J::Float64)
         J > 0 || throw(DomainError(J, "HaldaneShastry coupling J must be > 0"))
-        new(J)
+        return new(J)
     end
 end
 HaldaneShastry(; J::Real=1.0) = HaldaneShastry(Float64(J))

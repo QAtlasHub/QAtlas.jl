@@ -294,7 +294,7 @@ function _xyh1d_thermo_obc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real
         Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
         return sum(Λ) do λ
             x = β * λ / 2.0
-            _xyh1d_logcosh2(x) - x * tanh(x)
+            return _xyh1d_logcosh2(x) - x * tanh(x)
         end / N
     elseif quantity === :specific_heat
         Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
@@ -538,7 +538,7 @@ function _xyh1d_thermo_pbc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real
         #       Λ = 2√(A²+C²), ∂Λ/∂h = 2 * A / √(A²+C²) = 2A / (Λ/2) = 4A/Λ
         _mz_sector(Λ, ks) = sum(zip(Λ, ks)) do (λ, k)
             A = h - (Jx + Jy) * cos(k)
-            (4.0 * A / λ) * tanh(β * λ / 2.0)
+            return (4.0 * A / λ) * tanh(β * λ / 2.0)
         end / N
         # The sign: ⟨σᶻ⟩ = (1/(Nβ)) ∂logZ/∂h = (1/N) Σ_k (∂logZ_k/∂(βh)) / β * β
         #   = -(1/N) Σ_k (∂Λ_k/∂h) * tanh(βΛ_k/2) * (-1) ... need to be careful.

@@ -25,7 +25,7 @@ The quantities universality `class` predicts — its `status=:universal` rows:
 `(quantity, bc, scheme)`.  Inverse of [`predicted_by`](@ref).
 """
 function predicts(class::Symbol)
-    [
+    return [
         (quantity=e.quantity, bc=e.bc, scheme=e.scheme) for
         e in REGISTRY if e.model === Universality{class} && e.status === :universal
     ]
@@ -75,7 +75,7 @@ Every implementation row citing `ref`: `(model, quantity, bc, scheme, status)`.
 The backlink inverse of the per-row `references` field.
 """
 function cited_by(ref::AbstractString)
-    [
+    return [
         (model=e.model, quantity=e.quantity, bc=e.bc, scheme=e.scheme, status=e.status) for
         e in REGISTRY if ref in e.references
     ]

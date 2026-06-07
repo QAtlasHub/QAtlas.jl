@@ -26,7 +26,7 @@ struct CoherenceFinding
 end
 
 function Base.show(io::IO, f::CoherenceFinding)
-    print(io, "[", f.check, "/", f.severity, "] ", f.message)
+    return print(io, "[", f.check, "/", f.severity, "] ", f.message)
 end
 
 # ── C1 — reference integrity: every cited bibkey exists ──────────────────────

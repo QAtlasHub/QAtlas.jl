@@ -38,10 +38,10 @@ namespace — exact for `d ≥ d_c = 4`, d-independent.  `fetch(MeanField(), …
 the legacy alias; this is the namespace form used by the `:universal` registry row.
 """
 function fetch(::Universality{:MeanField}, ::CriticalExponents; d::Int=4, kwargs...)
-    fetch(MeanField(), CriticalExponents())
+    return fetch(MeanField(), CriticalExponents())
 end
 
 # Scaling-limit (Infinite) form so the :universal predicts edge is fetchable.
 function fetch(u::Universality{:MeanField}, q::CriticalExponents, ::Infinite; kwargs...)
-    fetch(u, q; kwargs...)
+    return fetch(u, q; kwargs...)
 end

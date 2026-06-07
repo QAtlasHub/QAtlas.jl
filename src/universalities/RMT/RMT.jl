@@ -287,5 +287,5 @@ function fetch(
 end
 
 function fetch(m::Universality{:RMT}, q::WignerSemicircleMoment; n::Integer, kwargs...)
-    fetch(m, q, Infinite(); n=n, kwargs...)
+    return fetch(m, q, Infinite(); n=n, kwargs...)
 end

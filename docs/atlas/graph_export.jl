@@ -135,14 +135,14 @@ edges = sort!(collect(values(merged)); by=e -> (e.from, e.to, e.kind))
 
 # ── emit QAtlasGraph JSON ─────────────────────────────────────────────────────
 function node_json(id, n)
-    "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"
+    return "{id:\"$(_js(id))\",text:\"$(_js(n.text))\",group:\"$(n.group)\",url:\"$(_js(n.url))\"}"
 end
 nodes_js = join(
     [node_json(id, nodes[id]) for id in sort!(collect(keys(nodes)))], ",\n      "
 )
 function edge_json(e)
-    "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\"," *
-    "kind:\"$(e.kind)\",status:\"$(e.status)\",verified:$(e.verified)}"
+    return "{source:\"$(_js(e.from))\",target:\"$(_js(e.to))\"," *
+           "kind:\"$(e.kind)\",status:\"$(e.status)\",verified:$(e.verified)}"
 end
 edges_js = join([edge_json(e) for e in edges], ",\n      ")
 
@@ -213,6 +213,6 @@ $(length(edges)) edges.*
 """
 
 open(joinpath(@__DIR__, "..", "src", "atlas", "graph.md"), "w") do io
-    write(io, page)
+    return write(io, page)
 end
 println("graph.md written: ", length(nodes), " nodes, ", length(edges), " edges")

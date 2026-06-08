@@ -21,6 +21,7 @@
 | `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979; Asbóth-Oroszlány-Pályi 2016: W = 1 (|w|>|v|) / 0 (|w|<|v|) | `test/models/quantum/misc/test_ssh.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979; Asbóth-Oroszlány-Pályi 2016: W = 1 (|w|>|v|) / 0 (|w|<|v|) | `test/models/quantum/misc/test_ssh.jl` |
 | `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979; Asbóth-Oroszlány-Pályi 2016: W = 1 (|w|>|v|) / 0 (|w|<|v|) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979; Asbóth-Oroszlány-Pályi 2016: W = 1 (|w|>|v|) / 0 (|w|<|v|) | `test/models/quantum/misc/test_ssh.jl` |
 
 ## Test calls
 
@@ -50,11 +51,15 @@ verify(SSH(; -0.5 = -0.5, 1.2 = 1.2), TopologicalInvariant(), Infinite(); route 
 verify(SSH(; 1.3 = 1.3, -0.5 = -0.5), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = if abs(-0.5) > abs(1.3) 1.0 else 0.0 end, agree_within = 1.0e-9, refs = ["SSH 1979; Asbóth-Oroszlány-Pályi 2016: W = 1 (|w|>|v|) / 0 (|w|<|v|)"])
 ```
 
+```julia
+verify(SSH(; 0.3 = 0.3, -1.5 = -1.5), TopologicalInvariant(), Infinite(); route = :second_closed_form, independent = if abs(-1.5) > abs(0.3) 1.0 else 0.0 end, agree_within = 1.0e-9, refs = ["SSH 1979; Asbóth-Oroszlány-Pályi 2016: W = 1 (|w|>|v|) / 0 (|w|<|v|)"])
+```
+
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 6 · model ED-feasible
+- cards: 7 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

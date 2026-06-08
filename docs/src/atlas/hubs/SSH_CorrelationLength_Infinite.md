@@ -9,27 +9,32 @@
 ## `src` claim
 
 - method `analytic`, status `exact`, reliability `high`, refs: SSH1979
-- ξ = 1/|v − w|; Inf on the gapless line |v| = |w|.
+- ξ = 1/||v|−|w||; Inf on the gapless line |v| = |w|.
 
 ## Corroboration
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: ξ = 1/Δ_gap = 1/|v − w|; v=1,w=0.4 ⇒ ξ = 1/0.6 | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: ξ = 1/Δ_gap = 1/||v|−|w||; v=1,w=0.4 ⇒ ξ = 1/0.6 | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979 opposite-sign: ξ = 1/||v|−|w|| = 1/0.2 = 5 | `test/models/quantum/misc/test_ssh.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(SSH(; v = 1.0, w = 0.4), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / 0.6, agree_within = 1.0e-9, refs = ["SSH 1979: ξ = 1/Δ_gap = 1/|v − w|; v=1,w=0.4 ⇒ ξ = 1/0.6"])
+verify(SSH(; v = 1.0, w = 0.4), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / 0.6, agree_within = 1.0e-9, refs = ["SSH 1979: ξ = 1/Δ_gap = 1/||v|−|w||; v=1,w=0.4 ⇒ ξ = 1/0.6"])
+```
+
+```julia
+verify(SSH(; v = -0.5, w = 0.7), CorrelationLength(), Infinite(); route = :second_closed_form, independent = 1 / 0.2, agree_within = 1.0e-9, refs = ["SSH 1979 opposite-sign: ξ = 1/||v|−|w|| = 1/0.2 = 5"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 2 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

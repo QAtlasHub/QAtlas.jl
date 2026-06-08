@@ -24,7 +24,7 @@
 #                 ends, splitting ~ e^{−N/ξ}; exactly zero at the v = 0 sweet
 #                 spot for any N).
 #   |w| < |v|  → trivial (winding W = 0; no edge modes).
-#   |w| = |v|  → gapless Dirac point at k = π (winding ill-defined).
+#   |w| = |v|  → gapless Dirac point (k = π if vw>0, k = 0 if vw<0; winding ill-defined).
 #
 # References:
 #   - W. P. Su, J. R. Schrieffer, A. J. Heeger,
@@ -35,7 +35,7 @@
 
 # CONVENTION
 #   Hamiltonian: tight-binding hopping amplitudes (this file)
-#   Observable:  Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md)
+#   Spinless fermions — there is no spin observable (this is a charge model).
 
 using LinearAlgebra: eigvals, Symmetric
 using QuadGK: quadgk
@@ -54,17 +54,22 @@ H = \\sum_i \\left( v\\, c_{i,A}^{\\dagger} c_{i,B}
 topological phase (winding `W = 1`, edge modes); `|w| < |v|` is the trivial
 phase (`W = 0`); `|w| = |v|` is the gapless Dirac point.
 
-The two-band dispersion is `E_±(k) = ±√(v² + w² + 2 v w cos k)`; at `k = π` the
-single-particle gap (QAtlas `MassGap`) is `|v − w|` and the band gap
-`E_+ − E_−` is `2|v − w|`.  This is the particle-conserving cousin of the
-[`Kitaev1D`](@ref) Majorana wire (both chiral class, both with protected edge
-modes), without superconducting pairing.
+The two-band dispersion is `E_±(k) = ±√(v² + w² + 2 v w cos k)`; the
+single-particle gap (QAtlas `MassGap`) is `min_k|q(k)| = ||v| − |w||` (`|v − w|`
+for same-sign hoppings) and the band gap `E_+ − E_−` is twice that.  This is the
+particle-conserving cousin of the [`Kitaev1D`](@ref) Majorana wire (both have a
+chiral sublattice symmetry — SSH is class BDI for all `v,w`, Kitaev1D at its
+symmetric point — and protected edge modes), without superconducting pairing.
 """
 struct SSH <: AbstractQAtlasModel
     v::Float64
     w::Float64
 end
-SSH(; v::Real=1.0, w::Real=1.0) = SSH(Float64(v), Float64(w))
+function SSH(; v::Real=1.0, w::Real=1.0)
+    (isfinite(v) && isfinite(w)) ||
+        throw(ArgumentError("SSH: v and w must be finite; got v = $v, w = $w"))
+    return SSH(Float64(v), Float64(w))
+end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Internal: single-particle spectrum (OBC, finite N unit cells = 2N sites)
@@ -95,6 +100,10 @@ function _ssh_obc_spectrum(N::Int, v::Float64, w::Float64)::Vector{Float64}
     vals = eigvals(Symmetric(H))
     pos = filter(e -> e >= -1e-12, vals)
     sort!(pos)
+    length(pos) >= N || error(
+        "_ssh_obc_spectrum: chiral symmetry gave $(length(pos)) non-negative eigenvalues, " *
+        "expected ≥ $N (numerical degeneracy near a zero mode? v = $v, w = $w, N = $N).",
+    )
     return pos[1:N]
 end
 
@@ -159,18 +168,19 @@ end
     fetch(model::SSH, ::MassGap, ::Infinite) -> Float64
 
 Single-particle gap of the infinite SSH chain — the lowest positive
-single-particle energy `min_k |q(k)|`, attained at `k = π`:
+single-particle energy `min_k |q(k)|`:
 
 ```math
-\\Delta_{\\mathrm{gap}} = \\min_k |q(k)| = |v - w|.
+\\Delta_{\\mathrm{gap}} = \\min_k |q(k)| = \\bigl| |v| - |w| \\bigr|
 ```
 
-This Fermi-level-to-band-edge gap equals the smallest non-negative OBC
-eigenvalue ([`MassGap`](@ref) / [`EdgeModeEnergy`](@ref) at `OBC`); the full
-particle-hole *band* gap `E_+ − E_−` is twice this, `2|v − w|`.  Vanishes on
-the gapless line `|v| = |w|`.
+(the minimum sits at `k = π` when `vw > 0` and at `k = 0` when `vw < 0`; for
+same-sign hoppings this reduces to `|v − w|`).  This Fermi-level-to-band-edge
+gap equals the smallest non-negative OBC eigenvalue ([`MassGap`](@ref) /
+[`EdgeModeEnergy`](@ref) at `OBC`); the full particle-hole *band* gap
+`E_+ − E_−` is twice this.  Vanishes on the gapless line `|v| = |w|`.
 """
-fetch(model::SSH, ::MassGap, ::Infinite; kwargs...) = abs(model.v - model.w)
+fetch(model::SSH, ::MassGap, ::Infinite; kwargs...) = abs(abs(model.v) - abs(model.w))
 
 """
     fetch(model::SSH, ::MassGap, bc::OBC; N::Int) -> Float64
@@ -215,11 +225,11 @@ end
     fetch(model::SSH, ::CorrelationLength, ::Infinite) -> Float64
 
 `T = 0` correlation length of the infinite SSH chain, set by the inverse
-single-particle gap, `ξ = 1 / |v − w|`.  Returns `Inf` on the gapless line
+single-particle gap, `ξ = 1 / ||v| − |w||`.  Returns `Inf` on the gapless line
 `|v| = |w|`.
 """
 function fetch(model::SSH, ::CorrelationLength, ::Infinite; kwargs...)
-    gap = abs(model.v - model.w)
+    gap = fetch(model, MassGap(), Infinite())
     return gap <= 0.0 ? Inf : 1 / gap
 end
 
@@ -240,22 +250,27 @@ W = \\frac{1}{2\\pi} \\oint \\mathrm{Im}\\frac{q'(k)}{q(k)}\\, dk
 ```
 
 Computed by Gauss-Kronrod quadrature of the argument-derivative `Im(q'/q)`
-(`q' = i w e^{ik}`) and rounding to the nearest integer.  Throws on the gapless
-line `|v| = |w|`, where `q(π) = 0` and the winding is ill-defined.
+(`q' = i w e^{ik}`); the magnitude `|W| ∈ {0, 1}` is returned (the integral's
+sign flips with `sign(w)` and is not physical here).  Throws on the gapless line
+`|v| = |w|` — where `q` passes through the origin (`q(π) = 0` if `vw > 0`,
+`q(0) = 0` if `vw < 0`) and the winding is ill-defined — and if the integral
+fails to land near an integer (near-gapless parameters).
 """
 function fetch(model::SSH, ::TopologicalInvariant, ::Infinite; kwargs...)
     v = model.v
     w = model.w
-    if isapprox(abs(v), abs(w); atol=1e-12)
-        error(
-            "SSH TopologicalInvariant: |v| = |w| = $(abs(v)) — the gap closes at " *
-            "k = π (q(π) = 0) and the winding number is ill-defined (v = $v, w = $w).",
-        )
-    end
-    integral, _ = quadgk(k -> begin
-        q = v + w * cis(k)            # cis(k) = e^{ik}
-        qp = im * w * cis(k)          # q'(k)
-        imag(qp / q)
-    end, 0, 2π; rtol=1e-10)
-    return round(Int, integral / (2π))
+    gap = abs(abs(v) - abs(w))
+    scale = max(abs(v), abs(w), 1.0)
+    gap <= 1e-8 * scale && error(
+        "SSH TopologicalInvariant: |v| ≈ |w| (gap $(gap) ≪ scale $(scale)) — q passes " *
+        "through the origin and the winding number is ill-defined (v = $v, w = $w).",
+    )
+    # W = (1/2π) ∮ Im(q'/q) dk with q = v + w e^{ik}, q' = i w e^{ik}.
+    integral, _ = quadgk(k -> imag((im * w * cis(k)) / (v + w * cis(k))), 0, 2π; rtol=1e-10)
+    raw = integral / (2π)
+    abs(raw - round(raw)) > 0.25 && error(
+        "SSH TopologicalInvariant: winding integral ($(raw)) is not near an integer — " *
+        "likely near-gapless parameters (v = $v, w = $w).",
+    )
+    return abs(round(Int, raw))
 end

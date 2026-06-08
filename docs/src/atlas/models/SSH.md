@@ -16,7 +16,6 @@ All `(Quantity, BC)` hubs `src` claims for **`SSH`**.  Cells link to the per-hub
 | Field | Value |
 |---|---|
 | Hamiltonian | tight-binding hopping amplitudes (this file) |
-| Observable | Spin S = σ/2  (QAtlas-wide spin convention; see docs/src/conventions.md) |
 
 ## Coverage
 

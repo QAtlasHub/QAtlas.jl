@@ -15,3 +15,8 @@
 @reduces ExtendedHubbard1D Hubbard1D regime = "nearest-neighbour interaction V = 0; the extended Hubbard chain reduces to the Hubbard model"
 @reduces RandomBondIsing2D MinimalModel regime = "pure (zero-disorder) point; 2D Ising CFT, the M(4,3) minimal model, c = 1/2"
 @reduces ZnClock MinimalModel regime = "self-dual critical point of the Z_n clock model maps onto a minimal-model CFT (e.g. n = 4 → M(4,3))"
+@reduces TricriticalPotts3 MinimalModel regime = "tricritical 3-state Potts CFT is the unitary minimal model M(7,6), c = 6/7; CFT data (central charge, conformal weights, primary fields) delegated"
+@reduces YangLee MinimalModel regime = "Yang–Lee edge singularity is the non-unitary minimal model M(5,2), c = -22/5; CFT data delegated"
+@reduces KitaevHeisenberg KitaevHoneycomb regime = "K-only limit J = Γ = 0; the K-J-Γ honeycomb model becomes the exactly-solvable Kitaev honeycomb model"
+@reduces S1XXZ1D S1Heisenberg1D regime = "isotropic point Δ = 1; the spin-1 XXZ chain becomes the spin-1 Heisenberg (Haldane) chain"
+@reduces S1AnisotropicD1D S1Heisenberg1D regime = "zero single-ion anisotropy D = 0; the anisotropic spin-1 chain becomes the spin-1 Heisenberg (Haldane) chain"

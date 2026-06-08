@@ -9,6 +9,14 @@ using QAtlas:
     MajumdarGhosh,
     J1J2Heisenberg1D,
     MixedFieldIsing1D,
+    TricriticalPotts3,
+    YangLee,
+    KitaevHeisenberg,
+    KitaevHoneycomb,
+    S1XXZ1D,
+    S1AnisotropicD1D,
+    S1Heisenberg1D,
+    MinimalModel,
     reductions,
     reduced_from
 
@@ -45,4 +53,31 @@ end
     @test isempty(QAtlas.coherence_errors(fs))
     deleg_gaps = filter(g -> g.check === :delegation_target, QAtlas.coherence_gaps(fs))
     @test isempty(deleg_gaps)
+end
+
+# #658 — the C4/C5 gate and the `delegations` query must recognise descriptive
+# `:<target>_delegation` method tags, not just the literal `:delegation`. Before
+# this fix those rows silently bypassed C4, making the zero-gaps assertion above
+# falsely green.
+@testset "delegation gate recognizes variant method tags (#658)" begin
+    @test QAtlas._is_delegation(:delegation)
+    @test QAtlas._is_delegation(:kitaev_delegation)
+    @test QAtlas._is_delegation(:minimal_model_delegation)
+    @test QAtlas._is_delegation(:s1_heisenberg_delegation)
+    @test !QAtlas._is_delegation(:analytic)
+    @test !QAtlas._is_delegation(:closed_form)
+end
+
+@testset "variant-tagged model→model delegations are backed by @reduces (#658)" begin
+    # each delegates via a :*_delegation tag and was previously invisible to C4;
+    # the @reduces edge now types the delegation target.
+    for (src, tgt) in (
+        (TricriticalPotts3, MinimalModel),
+        (YangLee, MinimalModel),
+        (KitaevHeisenberg, KitaevHoneycomb),
+        (S1XXZ1D, S1Heisenberg1D),
+        (S1AnisotropicD1D, S1Heisenberg1D),
+    )
+        @test tgt in [r.target for r in reductions(src)]
+    end
 end

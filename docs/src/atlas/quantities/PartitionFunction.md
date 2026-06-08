@@ -13,21 +13,24 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 2
-- **Total hubs (Model, BC pairs)**: 2
+- **Models with this quantity registered**: 3
+- **Total hubs (Model, BC pairs)**: 3
 - **Methods** (derived from `@register`): `analytic`, `transfer_matrix`
 - **Universality classes** (where applicable): `Ising`, `WZW`
 
 **Top references** (by hub count):
+- Kasteleyn1961 — 1 hub
 - Onsager1944 — 1 hub
+- TemperleyFisher1961 — 1 hub
 - Verlinde1988 — 1 hub
 - Witten1989 — 1 hub
 
 ## Model × BC matrix
 
-| Model | `PBC` | `Infinite` |
-|---|---|---|
-| [`ChernSimons3D`](../models/ChernSimons3D.md) | — | ⚪ [hub](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) |
-| [`IsingSquare`](../models/IsingSquare.md) | 🟢 [hub](../hubs/IsingSquare_PartitionFunction_PBC.md) | — |
+| Model | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`ChernSimons3D`](../models/ChernSimons3D.md) | — | — | ⚪ [hub](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) |
+| [`DimerLattice`](../models/DimerLattice.md) | 🟢 [hub](../hubs/DimerLattice_PartitionFunction_OBC.md) | — | — |
+| [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_PartitionFunction_PBC.md) | — |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

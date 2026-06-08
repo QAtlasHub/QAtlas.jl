@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 126 hubs
+## `analytic` - 129 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -47,6 +47,9 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md)
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md)
 - 🟢 [`CurieWeissIsing/ThermalEntropy/Infinite`](hubs/CurieWeissIsing_ThermalEntropy_Infinite.md)
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](hubs/DimerLattice_FreeEnergy_Infinite.md)
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](hubs/DimerLattice_PartitionFunction_OBC.md)
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](hubs/DimerLattice_ResidualEntropy_Infinite.md)
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md)
 - 🟢 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md)
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md)

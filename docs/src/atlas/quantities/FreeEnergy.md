@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 14
-- **Total hubs (Model, BC pairs)**: 22
+- **Models with this quantity registered**: 15
+- **Total hubs (Model, BC pairs)**: 23
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `jks_qtm_nlie`, `klumper_nlie`, `matter_free_fermion`, `onsager`, `transfer_matrix`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
@@ -31,6 +31,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 |---|---|---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/AKLT1D_FreeEnergy_Infinite.md) |
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟢 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
+| [`DimerLattice`](../models/DimerLattice.md) | — | — | 🟠 [hub](../hubs/DimerLattice_FreeEnergy_Infinite.md) |
 | [`HaldaneShastry`](../models/HaldaneShastry.md) | — | — | 🟠 [hub](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) |
 | [`Hubbard1D`](../models/Hubbard1D.md) | — | — | 🟠 [hub](../hubs/Hubbard1D_FreeEnergy_Infinite.md) |

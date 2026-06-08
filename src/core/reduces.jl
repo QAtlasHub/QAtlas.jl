@@ -69,11 +69,7 @@ keyword arguments.
 ```
 """
 macro reduces(source_T, target_T, kwargs...)
-    kw = map(kwargs) do k
-        k isa Expr && k.head === :(=) || error("@reduces: expected key=value, got $k")
-        return Expr(:kw, k.args[1], esc(k.args[2]))
-    end
-    return Expr(:call, reduces!, Expr(:parameters, kw...), esc(source_T), esc(target_T))
+    return _forward_kw_macro(reduces!, :reduces, (source_T, target_T), kwargs)
 end
 
 """

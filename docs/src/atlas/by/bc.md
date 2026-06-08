@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (211)
+## `Infinite` (213)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -43,6 +43,8 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/ThermalEntropy/Infinite`](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
@@ -219,12 +221,13 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `OBC` (96)
+## `OBC` (97)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/SpecificHeat/OBC`](../hubs/AKLT1D_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ThermalEntropy/OBC`](../hubs/AKLT1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](../hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p

@@ -79,6 +79,12 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 
+## `DimerLattice` (3)
+
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](../hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
+
 ## `ExtendedHubbard1D` (1)
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent

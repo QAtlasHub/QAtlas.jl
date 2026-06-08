@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (93)
+## `(no card)` (95)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -18,6 +18,8 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`Bound/ScramblingTime/Infinite`](../hubs/Bound_ScramblingTime_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
@@ -123,12 +125,13 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
 - 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 
-## `ed_finite_size` (53)
+## `ed_finite_size` (54)
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ZZStructureFactor/Infinite`](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](../hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p

@@ -153,12 +153,13 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 
-## `FreeEnergy` (22)
+## `FreeEnergy` (23)
 
 - 🟢 [`AKLT1D/FreeEnergy/Infinite`](../hubs/AKLT1D_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/FreeEnergy/PBC`](../hubs/AKLT1D_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/FreeEnergy/Infinite`](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/FreeEnergy/OBC`](../hubs/Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
@@ -318,9 +319,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟠 [`Bound/OptimalCloningFidelity/Infinite`](../hubs/Bound_OptimalCloningFidelity_Infinite.md) — uncorroborated-but-feasible
 
-## `PartitionFunction` (2)
+## `PartitionFunction` (3)
 
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](../hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
 - 🟢 [`IsingSquare/PartitionFunction/PBC`](../hubs/IsingSquare_PartitionFunction_PBC.md) — corroborated-at-p
 
 ## `PrimaryFields` (2)
@@ -343,9 +345,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`XXZ1D/RenyiEntropy/Infinite`](../hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/RenyiEntropy/OBC`](../hubs/XXZ1D_RenyiEntropy_OBC.md) — corroborated-at-p
 
-## `ResidualEntropy` (4)
+## `ResidualEntropy` (5)
 
 - 🟢 [`BCFT/ResidualEntropy/Infinite`](../hubs/BCFT_ResidualEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](../hubs/SpinIce_ResidualEntropy_Infinite.md) — corroborated-at-p

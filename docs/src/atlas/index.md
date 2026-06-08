@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 328 |
-| ED-feasible claimed (risk denominator) | 302 |
+| Hubs `src` claims (registry) | 331 |
+| ED-feasible claimed (risk denominator) | 305 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 183 |
+| 🟢 corroborated-at-p | 184 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 90 |
-| Inventory cards scanned (whole test/) | 2789 |
-| Registry files parsed | 73 / 73 |
-| Models | 65 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 92 |
+| Inventory cards scanned (whole test/) | 2794 |
+| Registry files parsed | 74 / 74 |
+| Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **73.2%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **72.8%**
 
 ## Browse by facet
 
@@ -43,7 +43,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 
 | Section | Count |
 |---|---|
-| 1. Models without CONVENTION header | 1 |
+| 1. Models without CONVENTION header | 2 |
 | 2. Quantities without extracted Definition | 0 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "90 actionable hub(s)"
+!!! warning "92 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -73,6 +73,8 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`Bound/ScramblingTime/Infinite`](hubs/Bound_ScramblingTime_Infinite.md)
     - [`CurieWeissIsing/CriticalExponents/Infinite`](hubs/CurieWeissIsing_CriticalExponents_Infinite.md)
     - [`CurieWeissIsing/Energy/Infinite`](hubs/CurieWeissIsing_Energy_Infinite.md)
+    - [`DimerLattice/FreeEnergy/Infinite`](hubs/DimerLattice_FreeEnergy_Infinite.md)
+    - [`DimerLattice/ResidualEntropy/Infinite`](hubs/DimerLattice_ResidualEntropy_Infinite.md)
     - [`HaldaneShastry/FreeEnergy/Infinite`](hubs/HaldaneShastry_FreeEnergy_Infinite.md)
     - [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md)
     - [`HaldaneShastry/RenyiEntropy/Infinite`](hubs/HaldaneShastry_RenyiEntropy_Infinite.md)
@@ -167,6 +169,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ConformalBootstrap` | 1 | 0 | 0 | 0 | 1 | 0 | feasible |
 | `CurieWeissIsing` | 8 | 0 | 6 | 0 | 0 | 2 | feasible |
 | `DMIHeisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
+| `DimerLattice` | 3 | 0 | 1 | 0 | 0 | 2 | feasible |
 | `ExtendedHubbard1D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
 | `FibonacciAnyons` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
@@ -223,7 +226,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (328) — select to drill down
+## Hubs (331) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -298,6 +301,12 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 ### `DMIHeisenberg1D` (1)
 
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
+
+### `DimerLattice` (3)
+
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
 
 ### `ExtendedHubbard1D` (1)
 

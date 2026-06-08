@@ -9,6 +9,10 @@ Substrate-derived audit of actionable gaps.  Each section is a concrete to-do li
 
 The CI lint enforces `# CONVENTION` headers on new model files, but older files predate the lint.  These models show an absence note on their per-model page; backfilling adds a one-block comment.
 
+**Has source file but missing/unparseable `CONVENTION` block** (1):
+
+- [`DimerLattice`](models/DimerLattice.md)
+
 **Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (1) — model may live elsewhere or be defined inline:
 
 - [`Bound`](models/Bound.md)

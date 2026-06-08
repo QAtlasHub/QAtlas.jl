@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (93)
+## `(no card)` (95)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -18,6 +18,8 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`Bound/ScramblingTime/Infinite`](../hubs/Bound_ScramblingTime_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`CurieWeissIsing/Energy/Infinite`](../hubs/CurieWeissIsing_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
@@ -282,7 +284,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
 
-## `@sweep` (145)
+## `@sweep` (146)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -308,6 +310,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`DimerLattice/PartitionFunction/OBC`](../hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p

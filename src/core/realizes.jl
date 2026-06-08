@@ -72,11 +72,7 @@ type and `:class` as the class symbol; the remaining `key=value` pairs are
 forwarded as keyword arguments.
 """
 macro realizes(model_T, class, kwargs...)
-    kw = map(kwargs) do k
-        k isa Expr && k.head === :(=) || error("@realizes: expected key=value, got $k")
-        return Expr(:kw, k.args[1], esc(k.args[2]))
-    end
-    return Expr(:call, realizes!, Expr(:parameters, kw...), esc(model_T), esc(class))
+    return _forward_kw_macro(realizes!, :realizes, (model_T, class), kwargs)
 end
 
 """

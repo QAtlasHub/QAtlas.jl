@@ -250,18 +250,21 @@ The three positional arguments are spliced as types; the remaining
 [`register!`](@ref).
 """
 macro register(model_T, quantity_T, bc_T, kwargs...)
-    kw_exprs = map(kwargs) do kw
-        kw isa Expr && kw.head === :(=) || error("@register: expected key=value, got $kw")
-        return Expr(:kw, kw.args[1], esc(kw.args[2]))
+    return _forward_kw_macro(register!, :register, (model_T, quantity_T, bc_T), kwargs)
+end
+
+# Shared body of the four declarative-store macros (@register / @realizes /
+# @reduces / @about): validate each `key=value` arg, build the keyword
+# parameters, and return the `backend(; kw...) (positionals...)` forwarding call.
+# `name` is only for the error message.  All four macros expand at include time of
+# the `*_registry.jl` files (long after this is defined), so the forward reference
+# from `@register` above is fine.
+function _forward_kw_macro(backend, name::Symbol, positionals, kwargs)
+    kw = map(kwargs) do k
+        (k isa Expr && k.head === :(=)) || error("@$(name): expected key=value, got $(k)")
+        return Expr(:kw, k.args[1], esc(k.args[2]))
     end
-    return Expr(
-        :call,
-        register!,
-        Expr(:parameters, kw_exprs...),
-        esc(model_T),
-        esc(quantity_T),
-        esc(bc_T),
-    )
+    return Expr(:call, backend, Expr(:parameters, kw...), map(esc, positionals)...)
 end
 
 # ──────────────────────────────────────────────────────────────────────

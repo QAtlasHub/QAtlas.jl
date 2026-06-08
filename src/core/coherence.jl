@@ -14,7 +14,8 @@
 # Each `check_*` walks `REGISTRY` / `REALIZES` (+ `links.jl`) and returns
 # `CoherenceFinding`s.  `coherence_report` runs the STRUCTURAL suite wired today:
 # C1 reference integrity, C2 namespace⟺kind, C3 canonical/scheme coherence,
-# C4 delegation targets, C6 coverage, C8 realization loci.  Two further checks
+# C4 delegation targets, C6 coverage, C8 realization loci, C9 orphan classes
+# (C1 scans every edge store, not just REGISTRY).  Two further checks
 # are DESIGNED but not auto-run: C5 realization-agreement
 # (`check_realization_agreement`) is an opt-in physical probe — the model↔class
 # agreement it asserts is already covered concretely by the verify-card
@@ -39,18 +40,32 @@ function Base.show(io::IO, f::CoherenceFinding)
 end
 
 # ── C1 — reference integrity: every cited bibkey exists ──────────────────────
+# Scans every edge store that carries `references` — not just REGISTRY
+# (@register) but also REALIZES (@realizes), REDUCES (@reduces) and ABOUT
+# (@about) — so a dangling bibkey anywhere in the graph is caught, not only in
+# the implementation rows.
 function check_reference_integrity(bibkeys)
     keys = Set(string.(bibkeys))
     out = CoherenceFinding[]
-    for e in REGISTRY, r in e.references
-        r in keys || push!(
+    function _flag(loc, k)
+        return k in keys || push!(
             out,
             CoherenceFinding(
-                :reference_integrity,
-                :error,
-                "dangling reference '$(r)' in $(_kgshort(e.model))/$(_kgshort(e.quantity))",
+                :reference_integrity, :error, "dangling reference '$(k)' in $(loc)"
             ),
         )
+    end
+    for e in REGISTRY, r in e.references
+        _flag("$(_kgshort(e.model))/$(_kgshort(e.quantity))", r)
+    end
+    for r in REALIZES, k in r.references
+        _flag("realizes $(_kgshort(r.model))→:$(r.class)", k)
+    end
+    for r in REDUCES, k in r.references
+        _flag("reduces $(_kgshort(r.source))→$(_kgshort(r.target))", k)
+    end
+    for c in ABOUT, k in c.references
+        _flag("about $(_kgshort(c.model))", k)
     end
     return out
 end
@@ -177,6 +192,33 @@ function coverage_report()
     return out
 end
 
+# ── C9 — orphan universality classes ─────────────────────────────────────────
+# The inverse of C6: a class that *predicts* universal quantities (has
+# `status=:universal` rows) but is realized by NO model.  The atlas knows the
+# universal class yet has no concrete model flowing to it — a coverage hole, so
+# a `:gap` (a missing-but-expected edge, not an invariant violation): the class
+# is a candidate for a future `@realizes`, or is knowingly carried unrealized.
+function check_orphan_classes()
+    out = CoherenceFinding[]
+    predicting = unique(
+        c for c in (_class_of(e.model) for e in REGISTRY if e.status === :universal) if
+        c !== nothing
+    )
+    realized = Set(r.class for r in REALIZES)
+    for c in sort(predicting)
+        c in realized || push!(
+            out,
+            CoherenceFinding(
+                :orphan_class,
+                :gap,
+                "class :$(c) predicts universal quantities but is realized by no model — " *
+                "add an @realizes (a model flowing to :$(c)) or carry it as unrealized",
+            ),
+        )
+    end
+    return out
+end
+
 # ── C5 — realization agreement (physical) ────────────────────────────────────
 """
     check_realization_agreement(probes; rtol=1e-8) -> Vector{CoherenceFinding}
@@ -283,8 +325,9 @@ end
     coherence_report(; bibkeys=String[]) -> Vector{CoherenceFinding}
 
 Run the structural graph-coherence suite (C1–C4, C6 coverage, C8 realization
-loci). Pass `bibkeys` (the set of keys in references.bib) to include C1.
-`:error` findings must be empty; `:gap` findings are self-reported holes.
+loci, C9 orphan classes). Pass `bibkeys` (the set of keys in references.bib) to
+include C1. `:error` findings must be empty; `:gap` findings are self-reported
+holes (coverage / orphan classes) and need not be empty.
 """
 function coherence_report(; bibkeys=String[])
     findings = CoherenceFinding[]
@@ -294,6 +337,7 @@ function coherence_report(; bibkeys=String[])
     append!(findings, check_delegation_targets())
     append!(findings, coverage_report())
     append!(findings, check_realization_loci())
+    append!(findings, check_orphan_classes())
     return findings
 end
 

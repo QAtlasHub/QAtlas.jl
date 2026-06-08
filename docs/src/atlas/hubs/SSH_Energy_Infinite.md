@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, status `exact`, reliability `high`, refs: SSH1979
-- Half-filled per-site ε₀ by Gauss-Kronrod over the band |q(k)| = √(v²+w²+2vw cos k).
+- Half-filled per-site ε₀ = −(1/4π)∫|q(k)|dk by Gauss-Kronrod; |q(k)| = √(v²+w²+2vw cos k).
 
 ## Corroboration
 

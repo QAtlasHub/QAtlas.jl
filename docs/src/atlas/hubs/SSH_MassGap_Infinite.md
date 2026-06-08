@@ -9,42 +9,57 @@
 ## `src` claim
 
 - method `analytic`, status `exact`, reliability `high`, refs: SSH1979
-- Single-particle gap |v − w| = min_k|q(k)| at k = π (band gap is 2|v−w|).
+- Single-particle gap min_k|q(k)| = ||v|−|w|| (|v−w| for same-sign; band gap is 2×).
 
 ## Corroboration
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|) | `test/models/quantum/misc/test_ssh.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|) | `test/models/quantum/misc/test_ssh.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|) | `test/models/quantum/misc/test_ssh.jl` |
-| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×) | `test/models/quantum/misc/test_ssh.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(SSH(; 1.0 = 1.0, 0.4 = 0.4), MassGap(), Infinite(); route = :second_closed_form, independent = 0.6, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|)"])
+verify(SSH(; 1.0 = 1.0, 0.4 = 0.4), MassGap(), Infinite(); route = :second_closed_form, independent = 0.6, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
 ```
 
 ```julia
-verify(SSH(; 0.4 = 0.4, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.6, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|)"])
+verify(SSH(; 0.4 = 0.4, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.6, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
 ```
 
 ```julia
-verify(SSH(; 0.0 = 0.0, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|)"])
+verify(SSH(; 0.0 = 0.0, 1.0 = 1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
 ```
 
 ```julia
-verify(SSH(; 1.0 = 1.0, 0.0 = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = |v − w| (band gap 2|v−w|)"])
+verify(SSH(; 1.0 = 1.0, 0.0 = 0.0), MassGap(), Infinite(); route = :second_closed_form, independent = 1.0, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
+```
+
+```julia
+verify(SSH(; -0.5 = -0.5, 0.7 = 0.7), MassGap(), Infinite(); route = :second_closed_form, independent = 0.2, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
+```
+
+```julia
+verify(SSH(; 0.6 = 0.6, -1.0 = -1.0), MassGap(), Infinite(); route = :second_closed_form, independent = 0.4, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
+```
+
+```julia
+verify(SSH(; -1.0 = -1.0, -0.4 = -0.4), MassGap(), Infinite(); route = :second_closed_form, independent = 0.6, agree_within = 1.0e-12, refs = ["SSH 1979: single-particle gap = min_k|q(k)| = ||v|−|w|| (band gap 2×)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 4 · model ED-feasible
+- cards: 7 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

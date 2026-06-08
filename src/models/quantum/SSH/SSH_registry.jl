@@ -11,7 +11,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_ssh.jl",
     references=["SSH1979"],
-    notes="Half-filled per-site ε₀ by Gauss-Kronrod over the band |q(k)| = √(v²+w²+2vw cos k).",
+    notes="Half-filled per-site ε₀ = −(1/4π)∫|q(k)|dk by Gauss-Kronrod; |q(k)| = √(v²+w²+2vw cos k).",
 )
 
 # ── Spectrum / criticality ────────────────────────────────────────────
@@ -23,7 +23,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_ssh.jl",
     references=["SSH1979"],
-    notes="Single-particle gap |v − w| = min_k|q(k)| at k = π (band gap is 2|v−w|).",
+    notes="Single-particle gap min_k|q(k)| = ||v|−|w|| (|v−w| for same-sign; band gap is 2×).",
 )
 @register(
     SSH,
@@ -53,7 +53,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_ssh.jl",
     references=["SSH1979"],
-    notes="ξ = 1/|v − w|; Inf on the gapless line |v| = |w|.",
+    notes="ξ = 1/||v|−|w||; Inf on the gapless line |v| = |w|.",
 )
 @register(
     SSH,

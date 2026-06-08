@@ -1,0 +1,287 @@
+# test/util/fluctuation_dissipation.jl — the fluctuation–dissipation foundation.
+#
+# Two layers, both test-side (verification infrastructure, not public API), in
+# the same spirit as thermodynamic_identities.jl:
+#
+#   LAYER 1 (model-independent).  `thermo_from_spectrum` + `gibbs_moments` turn
+#   any energy spectrum {Eₙ} (and any diagonal observable {oₙ}) into the full
+#   canonical thermodynamics — lnZ, ⟨E⟩, F, S, C, Var(E) — by direct Boltzmann
+#   weighting.  The accompanying test (test/identities/test_fluctuation_dissipation.jl)
+#   proves these obey the thermodynamic + fluctuation–dissipation relations
+#
+#       ⟨E⟩    = -∂ lnZ/∂β                       (mean energy)
+#       Var(E) = ∂² lnZ/∂β² = -∂⟨E⟩/∂β           (energy FDT — the core)
+#       C      = β² Var(E)                        (specific heat from fluctuations)
+#       S      = -∂F/∂T                           (entropy as a free-energy response)
+#       ⟨E⟩    = F + T·S                          (Gibbs)
+#       ∂⟨O⟩/∂λ = β·Var(O)   for  H(λ)=H₀-λO      (static linear-response FDT)
+#
+#   to machine precision for *arbitrary* spectra.  The two sides of each
+#   relation are computed by genuinely different routes — an ensemble moment on
+#   one side, a β/λ-derivative (ForwardDiff) on the other — so agreement is a
+#   real theorem check, not the same closed form re-typed (cf. the verify()
+#   `independent=` discipline: an independent witness, never a circular one).
+#
+#   LAYER 2 (atlas tie-in).  The FDT then has to hold for QAtlas's *registered*
+#   response functions.  `independent_energy_variance_per_site` /
+#   `independent_magnetization_variance_per_site` compute Var(E)/N and Var(M)/N
+#   by brute-force enumeration of all 2ᴺ configurations of a model — a
+#   computation that shares no code with the closed-form thermodynamics.  The
+#   `FLUCTUATION_DISSIPATION_IDENTITIES` then assert, through the existing
+#   `ThermoIdentity` harness,
+#
+#       fetch(SpecificHeat)     == β²·Var(E)/N        (energy FDT)
+#       fetch(SusceptibilityZZ) == β·Var(M)/N         (magnetisation FDT, [H,M]=0)
+#
+#   The magnetisation FDT holds only when the magnetisation commutes with H
+#   (diagonal / classical M); models are opted in by the
+#   `has_independent_*_variance` traits — the same care as the Kubo-vs-variance
+#   caveat on SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION in
+#   thermodynamic_identities.jl.
+#
+# Lives in test/util/ for the same reason as thermodynamic_identities.jl: a
+# self-validation tool, not part of QAtlas's public surface.  If downstream
+# packages need it, lift it to src/verification/ as a ForwardDiff weakdep.
+# Included by runtests.jl *after* thermodynamic_identities.jl so the
+# `ThermoIdentity` struct is in scope.
+
+using ForwardDiff
+using QAtlas: fetch, SpecificHeat, SusceptibilityZZ, Infinite, IsingChain1D
+
+# ══════════════════════════════════════════════════════════════════════
+# Layer 1 — model-independent canonical thermodynamics from a spectrum
+# ══════════════════════════════════════════════════════════════════════
+
+"""
+    log_partition(levels, β) -> Real
+
+Log partition function `lnZ(β) = log Σₙ e^{-βEₙ}` of a spectrum `levels`,
+via the numerically-stable log-sum-exp shift
+`lnZ = -βE₀ + log Σₙ e^{-β(Eₙ-E₀)}` with `E₀ = min levels`.
+
+Differentiable: `β` may be a `ForwardDiff.Dual` (the shift `E₀` is a
+constant of the concrete `levels`), so `-∂lnZ/∂β`, `∂²lnZ/∂β²`, … recover
+`⟨E⟩`, `Var(E)`, … by AutoDiff — the *derivative* half of every FDT check.
+"""
+function log_partition(levels::AbstractVector{<:Real}, β::Real)
+    isempty(levels) && throw(ArgumentError("log_partition: empty spectrum"))
+    E0 = minimum(levels)
+    return -β * E0 + log(sum(E -> exp(-β * (E - E0)), levels))
+end
+
+"""
+    boltzmann_weights(levels, β) -> Vector
+
+Normalised Gibbs probabilities `pₙ = e^{-βEₙ}/Z`, computed from the
+shifted weights `e^{-β(Eₙ-E₀)}` so no `exp` overflows even for large
+`|βEₙ|`.
+"""
+function boltzmann_weights(levels::AbstractVector{<:Real}, β::Real)
+    E0 = minimum(levels)
+    w = exp.(-β .* (levels .- E0))
+    return w ./ sum(w)
+end
+
+"""
+    mean_energy(levels, β) -> Real
+
+Ensemble mean energy `⟨E⟩ = Σₙ pₙ Eₙ`.  A standalone, `Dual`-friendly
+function so a test can take `ForwardDiff.derivative(b -> mean_energy(levels,
+b), β)` and compare `-∂⟨E⟩/∂β` against the *variance* `Var(E)` — the
+fluctuation–dissipation theorem.
+"""
+function mean_energy(levels::AbstractVector{<:Real}, β::Real)
+    p = boltzmann_weights(levels, β)
+    return sum(p .* levels)
+end
+
+"""
+    thermo_from_spectrum(levels, β) -> NamedTuple
+
+Full canonical thermodynamics of a spectrum at inverse temperature `β>0`,
+returned as `(; lnZ, E, F, S, C, varE)`:
+
+| field  | meaning                  | formula        |
+| ------ | ------------------------ | -------------- |
+| `lnZ`  | log partition function   | `log Σ e^{-βEₙ}` |
+| `E`    | mean energy `⟨E⟩`        | `Σ pₙ Eₙ`      |
+| `varE` | energy variance `Var(E)` | `⟨E²⟩ - ⟨E⟩²`  |
+| `F`    | Helmholtz free energy    | `-lnZ/β`       |
+| `S`    | entropy (nats)           | `β(⟨E⟩ - F)`   |
+| `C`    | heat capacity            | `β² Var(E)`    |
+
+`C` and `S` are *defined here* through the fluctuation (`β²Var(E)`) and
+Gibbs (`β(E-F)`) relations; the self-consistency test proves these equal
+the independent derivative routes (`-β²∂⟨E⟩/∂β`, `-∂F/∂T`).
+"""
+function thermo_from_spectrum(levels::AbstractVector{<:Real}, β::Real)
+    isempty(levels) && throw(ArgumentError("thermo_from_spectrum: empty spectrum"))
+    β > 0 || throw(ArgumentError("thermo_from_spectrum: requires β > 0; got β = $β"))
+    p = boltzmann_weights(levels, β)
+    E = sum(p .* levels)
+    E2 = sum(p .* abs2.(levels))
+    varE = max(E2 - E^2, zero(E))          # clamp sub-eps negative round-off
+    lnZ = log_partition(levels, β)
+    F = -lnZ / β
+    S = β * (E - F)
+    C = β^2 * varE
+    return (; lnZ, E, F, S, C, varE)
+end
+
+"""
+    gibbs_moments(levels, obs, β) -> NamedTuple
+
+Thermal mean and variance `(; mean, var)` of a *diagonal* observable `obs`
+(its eigenvalues `oₙ` aligned with `levels`), Gibbs-weighted by the
+spectrum at inverse temperature `β`:
+
+    ⟨O⟩ = Σ pₙ oₙ,   Var(O) = Σ pₙ oₙ² - ⟨O⟩².
+
+`obs` being diagonal in the energy eigenbasis is exactly the `[H,O]=0`
+condition under which the static susceptibility equals `β·Var(O)`.
+"""
+function gibbs_moments(levels::AbstractVector{<:Real}, obs::AbstractVector{<:Real}, β::Real)
+    length(levels) == length(obs) ||
+        throw(DimensionMismatch("gibbs_moments: levels and obs length differ"))
+    p = boltzmann_weights(levels, β)
+    m = sum(p .* obs)
+    v = max(sum(p .* abs2.(obs)) - m^2, zero(m))
+    return (; mean=m, var=v)
+end
+
+# ══════════════════════════════════════════════════════════════════════
+# Layer 2 — independent fluctuation providers (brute-force) + FDT identities
+# ══════════════════════════════════════════════════════════════════════
+
+"""
+    has_independent_energy_variance(model)        -> Bool
+    has_independent_magnetization_variance(model) -> Bool
+
+Opt-in traits marking models for which an *independent* (closed-form-free)
+energy / magnetisation variance per site is available — currently the
+small-system brute-force enumerations below.  Default `false`; the
+fluctuation–dissipation identities skip any model that does not overload
+the relevant trait, mirroring `is_su2_symmetric` in
+thermodynamic_identities.jl.
+"""
+has_independent_energy_variance(::Any) = false
+has_independent_magnetization_variance(::Any) = false
+
+has_independent_energy_variance(::IsingChain1D) = true
+has_independent_magnetization_variance(::IsingChain1D) = true
+
+# Enumerate all 2ᴺ spin configurations of the periodic 1-D Ising ring at
+# h = 0 and return (energies, magnetisations).  σ_i = 2·bitᵢ - 1; the ring
+# energy is E(σ) = -J Σᵢ σᵢσᵢ₊₁ (site N wraps to 1) and M(σ) = Σᵢ σᵢ.  This
+# shares no code with the transfer-matrix closed forms — it is the
+# independent witness the FDT identities compare against.
+function _ising1d_ring_configs(N::Int, J::Real)
+    N ≥ 2 || throw(ArgumentError("_ising1d_ring_configs: need N ≥ 2; got $N"))
+    nconf = 1 << N
+    E = Vector{Float64}(undef, nconf)
+    M = Vector{Float64}(undef, nconf)
+    @inbounds for c in 0:(nconf - 1)
+        e = 0.0
+        m = 0.0
+        for i in 0:(N - 1)
+            σi = 2 * ((c >> i) & 1) - 1
+            σj = 2 * ((c >> ((i + 1) % N)) & 1) - 1
+            e -= J * σi * σj
+            m += σi
+        end
+        E[c + 1] = e
+        M[c + 1] = m
+    end
+    return E, M
+end
+
+"""
+    independent_energy_variance_per_site(model, bc; beta, N=16) -> Float64
+
+`Var(E)/N` of `model` at inverse temperature `beta`, from a brute-force
+enumeration over all `2ᴺ` configurations — independent of the model's
+closed-form thermodynamics.  The finite-size error of the *variance* scales
+as `O(N²·tanh(βJ)ᴺ)` (the `N²` from differentiating the `(λ₋/λ₊)ᴺ`
+transfer-matrix gap twice in `β`): `< 2e-5` for `βJ ≤ 0.4, N = 16`, but
+already `~2e-4` by `βJ = 0.5` — use high-T `β` for tight atlas comparisons.
+"""
+function independent_energy_variance_per_site(
+    m::IsingChain1D, ::Infinite; beta::Real, N::Int=16
+)
+    E, _ = _ising1d_ring_configs(N, m.J)
+    return thermo_from_spectrum(E, beta).varE / N
+end
+
+"""
+    independent_magnetization_variance_per_site(model, bc; beta, N=16) -> Float64
+
+`Var(M)/N` of the longitudinal magnetisation `M = Σᵢ σᵢ`, brute-forced
+over all `2ᴺ` configurations.  For the classical Ising chain `M` is
+diagonal (`[H,M]=0`), so `β·Var(M)/N` is the genuine static
+susceptibility.
+"""
+function independent_magnetization_variance_per_site(
+    m::IsingChain1D, ::Infinite; beta::Real, N::Int=16
+)
+    E, M = _ising1d_ring_configs(N, m.J)
+    return gibbs_moments(E, M, beta).var / N
+end
+
+"""
+    SPECIFIC_HEAT_FROM_VARIANCE
+
+Energy fluctuation–dissipation theorem `c_v = β²·Var(E)/N`.  The left side
+is the model's registered `SpecificHeat`; the right side is the brute-force
+energy variance per site (`independent_energy_variance_per_site`).  Holds
+for *every* Hamiltonian (no commutation condition is required), so it is
+the most universal FDT.  `model_filter` admits only models with a
+brute-force provider.
+"""
+const SPECIFIC_HEAT_FROM_VARIANCE = ThermoIdentity(
+    "c_v = β²·Var(E)/N  (energy FDT, brute-force variance)",
+    Type[SpecificHeat],
+    function (model, bc, params)
+        β = params.β
+        c_v = fetch(model, SpecificHeat(), bc; beta=β)
+        varE_per_site = independent_energy_variance_per_site(model, bc; beta=β)
+        return Float64(c_v), Float64(β^2 * varE_per_site)
+    end;
+    model_filter=has_independent_energy_variance,
+)
+
+"""
+    SUSCEPTIBILITY_ZZ_FROM_VARIANCE
+
+Magnetisation fluctuation–dissipation theorem `χ_zz = β·Var(M)/N` for a
+magnetisation that commutes with H (diagonal / classical M).  Left side is
+the registered `SusceptibilityZZ`; right side the brute-force magnetisation
+variance per site.  Unlike the energy FDT this requires `[H,M]=0` — see the
+Kubo-vs-variance caveat on `SUSCEPTIBILITY_XX_KUBO_FROM_MAGNETIZATION` in
+thermodynamic_identities.jl; `model_filter` opts in only models known to
+satisfy it.
+"""
+const SUSCEPTIBILITY_ZZ_FROM_VARIANCE = ThermoIdentity(
+    "χ_zz = β·Var(M)/N  (magnetisation FDT, [H,M]=0)",
+    Type[SusceptibilityZZ],
+    function (model, bc, params)
+        β = params.β
+        χ = fetch(model, SusceptibilityZZ(), bc; beta=β)
+        varM_per_site = independent_magnetization_variance_per_site(model, bc; beta=β)
+        return Float64(χ), Float64(β * varM_per_site)
+    end;
+    model_filter=has_independent_magnetization_variance,
+)
+
+"""
+    FLUCTUATION_DISSIPATION_IDENTITIES
+
+The FDT identity catalogue — energy (`SPECIFIC_HEAT_FROM_VARIANCE`) and
+magnetisation (`SUSCEPTIBILITY_ZZ_FROM_VARIANCE`).  Opt-in (like
+`SYMMETRY_IDENTITIES`): pass via the `identities=` kwarg of
+`verify_thermodynamic_identities`.  Use a finite-size-aware `rtol`: the
+energy-variance correction scales as `O(N²·tanh(βJ)ᴺ)`, so `rtol≈1e-4`
+needs `βJ ≤ 0.4` at `N=16` (it reaches `~2e-4` by `βJ = 0.5`).
+"""
+const FLUCTUATION_DISSIPATION_IDENTITIES = ThermoIdentity[
+    SPECIFIC_HEAT_FROM_VARIANCE, SUSCEPTIBILITY_ZZ_FROM_VARIANCE
+]

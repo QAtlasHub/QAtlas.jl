@@ -19,7 +19,7 @@
 
 @about IsingSquare summary = raw"The 2D classical Ising model on the square lattice — Onsager's exactly-solved ferromagnet with a finite-temperature order-disorder transition." hamiltonian = raw"H = -J\sum_{\langle i,j\rangle} \sigma_i \sigma_j, \qquad \sigma_i = \pm 1"
 
-@about DimerLattice summary = raw"The close-packed dimer model — perfect matchings (dominoes) tiling the square lattice, solved exactly by the Kasteleyn-Temperley-Fisher Pfaffian, with residual entropy $G/\pi$ per site." hamiltonian = raw"Z = \#\{\text{perfect matchings of the } L_x \times L_y \text{ grid}\}"
+@about DimerLattice summary = raw"The close-packed dimer model — perfect matchings (dominoes) tiling the square lattice, solved exactly by the Kasteleyn-Temperley-Fisher Pfaffian, with residual entropy $G/\pi$ per site." hamiltonian = raw"\text{(combinatorial model — no Hamiltonian; partition function)}\quad Z = \#\{\text{perfect matchings of the } L_x \times L_y \text{ grid}\}"
 
 @about IsingTriangular summary = raw"The 2D classical Ising model on the triangular lattice — exactly solved and in the 2D Ising universality class; its antiferromagnet is geometrically frustrated." hamiltonian = raw"H = -J\sum_{\langle i,j\rangle} \sigma_i \sigma_j, \qquad \sigma_i = \pm 1"
 

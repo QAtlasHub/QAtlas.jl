@@ -50,6 +50,9 @@ end
     @test _brute_dimer_count(2, 4) == 5            # 2×n is Fibonacci(n+1)
     @test _brute_dimer_count(4, 4) == 36
     @test _brute_dimer_count(6, 6) == 6728
+    @test _brute_dimer_count(1, 2) == 1            # 1×n strip: 1 tiling for even n
+    @test _brute_dimer_count(1, 4) == 1
+    @test _brute_dimer_count(3, 4) == 11           # odd×even shape anchor
 
     # odd number of sites ⇒ no perfect matching
     @test fetch(DimerLattice(), PartitionFunction(); Lx=3, Ly=3) == 0
@@ -59,6 +62,11 @@ end
     @test_throws ErrorException fetch(DimerLattice(), PartitionFunction())
     @test fetch(DimerLattice(; Lx=4, Ly=4), PartitionFunction()) ==
         fetch(DimerLattice(), PartitionFunction(); Lx=4, Ly=4)
+
+    # negative sizes rejected at construction; counts beyond exact Float64 integer
+    # range (2^53) error loudly rather than return a silent Inf / wrong integer
+    @test_throws ArgumentError DimerLattice(; Lx=-2, Ly=3)
+    @test_throws ErrorException fetch(DimerLattice(), PartitionFunction(); Lx=14, Ly=14)
 
     # FreeEnergy density = −ResidualEntropy (unit weights ⇒ zero internal energy)
     @test fetch(DimerLattice(), FreeEnergy(), Infinite()) ==
@@ -86,7 +94,7 @@ end
         ) / (4 * L * L)
     @test abs(sden(40) - s∞) < abs(sden(10) - s∞)      # monotone approach
     @test abs(sden(80) - s∞) < abs(sden(40) - s∞)
-    @test isapprox(sden(120), s∞; atol=2e-2)           # close at large L
+    @test isapprox(sden(120), s∞; atol=5e-3)           # close at large L
 end
 
 # ── Verification cards (WHY-correct plane) ────────────────────────────────────

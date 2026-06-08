@@ -41,7 +41,11 @@ struct DimerLattice <: AbstractQAtlasModel
     Lx::Int
     Ly::Int
 end
-DimerLattice(; Lx::Integer=0, Ly::Integer=0) = DimerLattice(Int(Lx), Int(Ly))
+function DimerLattice(; Lx::Integer=0, Ly::Integer=0)
+    (Lx >= 0 && Ly >= 0) ||
+        throw(ArgumentError("DimerLattice: Lx, Ly must be ≥ 0 (0 = unset); got $Lx × $Ly"))
+    return DimerLattice(Int(Lx), Int(Ly))
+end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Internal: exact dimer count via the Kasteleyn-Temperley-Fisher product
@@ -52,17 +56,31 @@ DimerLattice(; Lx::Integer=0, Ly::Integer=0) = DimerLattice(Int(Lx), Int(Ly))
 
 Number of perfect matchings (dimer coverings) of the open `m × n` square grid,
 by the Kasteleyn-Temperley-Fisher product formula.  Returns `0.0` when `m·n` is
-odd.  The result is an exact non-negative integer (returned as `Float64`,
-rounded from the product to absorb floating-point error).
+odd.  The count is returned as a `Float64` and is exact only while it stays
+below `2^53` (roughly up to `11×11`); for larger grids — where a `Float64`
+cannot represent consecutive integers, and where the product overflows to `Inf`
+near `L ≈ 50` — this throws rather than return a silently-rounded or `Inf`
+"count".  Use `ResidualEntropy` / `FreeEnergy` for the thermodynamic density.
 """
 function _dimer_count_square(m::Int, n::Int)
     (m >= 1 && n >= 1) || throw(ArgumentError("DimerLattice: need Lx, Ly ≥ 1; got $m × $n"))
     iseven(m * n) || return 0.0          # odd site count ⇒ no perfect matching
     logZ = 0.0
     @inbounds for j in 1:m, k in 1:n
+        # term = 0 needs cos(jπ/(m+1)) = cos(kπ/(n+1)) = 0, i.e. j = (m+1)/2 AND
+        # k = (n+1)/2 both integers ⇒ m, n both odd ⇒ m·n odd, excluded above; so
+        # term > 0 here and log is safe.
         term = 4 * cos(j * π / (m + 1))^2 + 4 * cos(k * π / (n + 1))^2
-        logZ += log(term)                # term > 0 for even m·n (no TRI-momentum zero)
+        logZ += log(term)
     end
+    # round() recovers the exact integer only below 2^53; beyond that Float64
+    # cannot distinguish consecutive integers (and exp overflows to Inf near
+    # L ≈ 50).  Fail loudly rather than return a silently-wrong / Inf count.
+    logZ / 4 > 53 * log(2) && error(
+        "DimerLattice: the $m × $n dimer count exceeds the exactly-representable " *
+        "Float64 integer range (2^53); use ResidualEntropy / FreeEnergy(Infinite) " *
+        "for the per-site density instead.",
+    )
     return round(exp(logZ / 4))
 end
 
@@ -76,6 +94,9 @@ end
 Number of perfect matchings of the open `Lx × Ly` square grid (the unit-weight
 close-packed dimer partition function), via the Kasteleyn-Temperley-Fisher
 product.  `0` when `Lx·Ly` is odd.  `Lx`/`Ly` default to the struct fields.
+Exact while the count fits a `Float64` integer (`< 2^53`, roughly up to
+`11×11`); larger grids throw — use [`ResidualEntropy`](@ref) /
+[`FreeEnergy`](@ref) for the thermodynamic-limit density.
 """
 function fetch(m::DimerLattice, ::PartitionFunction; Lx::Integer=m.Lx, Ly::Integer=m.Ly)
     (Lx > 0 && Ly > 0) || error(
@@ -117,7 +138,8 @@ fetch(::DimerLattice, ::ResidualEntropy, ::Infinite; kwargs...) = catalan / π
     fetch(::DimerLattice, ::FreeEnergy, ::Infinite) -> Float64
 
 Free-energy density per site of the unit-weight close-packed dimer model on the
-infinite square lattice.  With all coverings equally weighted the internal
-energy is zero, so `f = −s = −G/π` (Catalan / π); see [`ResidualEntropy`](@ref).
+infinite square lattice.  The model is combinatorial (all coverings weight 1,
+zero internal energy), so at unit temperature `f = −s = −G/π` (Catalan / π); see
+[`ResidualEntropy`](@ref).
 """
 fetch(::DimerLattice, ::FreeEnergy, ::Infinite; kwargs...) = -catalan / π

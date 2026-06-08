@@ -3,7 +3,7 @@
 The close-packed dimer model — perfect matchings (dominoes) tiling the square lattice, solved exactly by the Kasteleyn-Temperley-Fisher Pfaffian, with residual entropy $G/\pi$ per site.
 
 ```math
-Z = \#\{\text{perfect matchings of the } L_x \times L_y \text{ grid}\}
+\text{(combinatorial model — no Hamiltonian; partition function)}\quad Z = \#\{\text{perfect matchings of the } L_x \times L_y \text{ grid}\}
 ```
 
 !!! note "Provisional v2 view — RES not wired"

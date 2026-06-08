@@ -73,11 +73,7 @@ type; the remaining `key=value` pairs are forwarded as keyword arguments.  Use
 ```
 """
 macro about(model_T, kwargs...)
-    kw = map(kwargs) do k
-        k isa Expr && k.head === :(=) || error("@about: expected key=value, got $k")
-        return Expr(:kw, k.args[1], esc(k.args[2]))
-    end
-    return Expr(:call, about!, Expr(:parameters, kw...), esc(model_T))
+    return _forward_kw_macro(about!, :about, (model_T,), kwargs)
 end
 
 """

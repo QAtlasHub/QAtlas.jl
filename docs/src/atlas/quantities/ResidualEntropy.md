@@ -13,23 +13,24 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 4
-- **Total hubs (Model, BC pairs)**: 4
+- **Models with this quantity registered**: 5
+- **Total hubs (Model, BC pairs)**: 5
 - **Methods** (derived from `@register`): `analytic`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
 - AffleckLudwig1991 — 1 hub
 - Cardy1989 — 1 hub
+- Fisher1961 — 1 hub
 - FriedanKonechny2004 — 1 hub
 - Lieb1967a — 1 hub
-- Pauling1935 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `Infinite` |
 |---|---|
 | [`BCFT`](../models/BCFT.md) | 🟢 [hub](../hubs/BCFT_ResidualEntropy_Infinite.md) |
+| [`DimerLattice`](../models/DimerLattice.md) | 🟠 [hub](../hubs/DimerLattice_ResidualEntropy_Infinite.md) |
 | [`IsingTriangular`](../models/IsingTriangular.md) | 🟢 [hub](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) |
 | [`SixVertex`](../models/SixVertex.md) | 🟢 [hub](../hubs/SixVertex_ResidualEntropy_Infinite.md) |
 | [`SpinIce`](../models/SpinIce.md) | 🟢 [hub](../hubs/SpinIce_ResidualEntropy_Infinite.md) |

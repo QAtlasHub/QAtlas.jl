@@ -17,6 +17,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`ConformalBootstrap`](../atlas/models/ConformalBootstrap.md) | KosPolandSimmonsDuffin2014, Kos2016, SimmonsDuffin2017, Reehorst2021 |
 | [`CurieWeissIsing`](../atlas/models/CurieWeissIsing.md) | LandauLifshitz1980, Landau1937, Stanley1971 |
 | [`DMIHeisenberg1D`](../atlas/models/DMIHeisenberg1D.md) | Hulthen1938, Dzyaloshinsky1958, Moriya1960, AffleckOshikawa1999 |
+| [`DimerLattice`](../atlas/models/DimerLattice.md) | Kasteleyn1961, TemperleyFisher1961, Fisher1961 |
 | [`ExtendedHubbard1D`](../atlas/models/ExtendedHubbard1D.md) | LiebWu1968, Voit1995, Nakamura2000 |
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | FreedmanKitaevLarsenWang2003, ReadRezayi1999, KitaevPreskill2006 |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | GrossNeveu1974, AndreiLowenstein1979 |

@@ -8,6 +8,7 @@ export fetch
 # --- Classical Models ---
 export IsingSquare, PartitionFunction, CriticalTemperature, SpontaneousMagnetization
 export SixVertex
+export DimerLattice                                      # close-packed dimer model (Kasteleyn 1961)
 export IsingTriangular
 export CurieWeissIsing                                   # complete-graph mean-field Ising
 export IsingChain1D                                      # 1-D Ising chain (Ising 1925)
@@ -198,6 +199,8 @@ include("models/classical/IsingSquare/IsingSquare_thermal.jl")
 include("models/classical/IsingSquare/IsingSquare_registry.jl")
 include("models/classical/SixVertex/SixVertex.jl")
 include("models/classical/SixVertex/SixVertex_registry.jl")
+include("models/classical/DimerLattice/DimerLattice.jl")
+include("models/classical/DimerLattice/DimerLattice_registry.jl")  # populates REGISTRY for DimerLattice (#203)
 include("models/classical/IsingTriangular/IsingTriangular.jl")
 include("models/classical/IsingTriangular/IsingTriangular_registry.jl")
 include("models/classical/CurieWeissIsing/CurieWeissIsing.jl")

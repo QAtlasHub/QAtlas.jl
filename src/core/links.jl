@@ -96,7 +96,7 @@ function delegations(model)
     targets = Type[r.target for r in REDUCES if r.source === m_T]
     return [
         (quantity=e.quantity, bc=e.bc, classes=classes, targets=targets) for
-        e in REGISTRY if e.model === m_T && e.method === :delegation
+        e in REGISTRY if e.model === m_T && _is_delegation(e.method)
     ]
 end
 

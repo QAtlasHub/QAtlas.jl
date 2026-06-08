@@ -93,7 +93,7 @@ include("core/dense_ed.jl")
 export Implementation, implementation_status, implementation_status_markdown
 export references_for
 export definitions, validity, canonical_scheme  # multi-definition catalog / selector
-export Realization, realizes!, @realizes, realizations, realized_by  # model <-> class
+export Realization, realizes!, @realizes, realizations, realized_by, realized_class  # model <-> class
 export Reduction, reduces!, @reduces, reductions, reduced_from  # model -> model
 export ModelCard, ABOUT, about!, @about, about  # model description cards
 

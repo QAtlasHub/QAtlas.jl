@@ -23,6 +23,8 @@
 
 @about Kitaev1D summary = raw"The Kitaev chain — a 1D spinless $p$-wave superconductor whose topological phase binds unpaired Majorana zero modes at its ends." hamiltonian = raw"H = \sum_i \left( -t\, c^\dagger_i c_{i+1} + \Delta\, c_i c_{i+1} + \text{h.c.} \right) - \mu\sum_i c^\dagger_i c_i"
 
+@about SSH summary = raw"The Su-Schrieffer-Heeger chain — a 1D dimerised tight-binding model (chiral class BDI) whose topological phase ($|w|>|v|$) carries winding number $W=1$ and protected end zero modes." hamiltonian = raw"H = \sum_i \left( v\, c^\dagger_{i,A} c_{i,B} + w\, c^\dagger_{i,B} c_{i+1,A} + \text{h.c.} \right)"
+
 @about KitaevHoneycomb summary = raw"The Kitaev honeycomb model — an exactly-solvable bond-dependent spin model realizing a $\mathbb{Z}_2$ quantum spin liquid with emergent Majorana fermions." hamiltonian = raw"H = -\sum_{\langle i,j\rangle_\gamma} J_\gamma\, \sigma^\gamma_i \sigma^\gamma_j, \qquad \gamma \in \{x,y,z\}"
 
 @about ToricCode summary = raw"The toric code — Kitaev's exactly-solvable stabilizer model, the paradigmatic $\mathbb{Z}_2$ topological order with deconfined anyonic excitations." hamiltonian = raw"H = -\sum_v A_v - \sum_p B_p, \qquad A_v = \prod_{i\in v}\sigma^x_i,\ \ B_p = \prod_{i\in p}\sigma^z_i"

@@ -13,15 +13,16 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 2
-- **Total hubs (Model, BC pairs)**: 2
+- **Models with this quantity registered**: 3
+- **Total hubs (Model, BC pairs)**: 3
 - **Methods** (derived from `@register`): `analytic`, `pfaffian`
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
-- AsbothOroszlanyPalyi2016 — 1 hub
+- AsbothOroszlanyPalyi2016 — 2 hubs
 - Kitaev2001 — 1 hub
 - ReadGreen2000 — 1 hub
+- SSH1979 — 1 hub
 
 ## Model × BC matrix
 
@@ -29,5 +30,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 |---|---|
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) |
 | [`PpIp2DSC`](../models/PpIp2DSC.md) | 🟢 [hub](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) |
+| [`SSH`](../models/SSH.md) | 🟢 [hub](../hubs/SSH_TopologicalInvariant_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

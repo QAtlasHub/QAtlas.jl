@@ -5,10 +5,11 @@
 
 Which concrete models realize each universality class (RG fixed point), and the regime where they do — the `@realizes` backend register, queryable with `realized_by(class)` / `realizations(model)`.
 
-## `Heisenberg` (2)
+## `Heisenberg` (3)
 
 - **HaldaneShastry** — ground state of the 1/r² inverse-square chain; SU(2)_1 WZW, c = 1
 - **Heisenberg1D** — isotropic AFM point; SU(2)_1 WZW, c = 1
+- **XXZ1D** — isotropic point Δ = 1; SU(2)_1 WZW, c = 1
 
 ## `Ising` (3)
 
@@ -26,6 +27,6 @@ Which concrete models realize each universality class (RG fixed point), and the 
 
 ## `XY` (1)
 
-- **XXZ1D** — critical line -1 < Δ ≤ 1; Luttinger liquid (free boson), c = 1
+- **XXZ1D** — critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1
 
 [← back to the Atlas index](../index.md)

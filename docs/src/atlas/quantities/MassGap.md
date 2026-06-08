@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 25
-- **Total hubs (Model, BC pairs)**: 33
+- **Models with this quantity registered**: 26
+- **Total hubs (Model, BC pairs)**: 35
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
 - **Universality classes** (where applicable): `Ising`
 
@@ -46,6 +46,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) | — | — | 🔵 [hub](../hubs/S1AnisotropicD1D_MassGap_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MassGap_OBC.md) | — | ⚪ [hub](../hubs/S1Heisenberg1D_MassGap_Infinite.md) |
 | [`S1XXZ1D`](../models/S1XXZ1D.md) | — | — | 🔵 [hub](../hubs/S1XXZ1D_MassGap_Infinite.md) |
+| [`SSH`](../models/SSH.md) | 🟠 [hub](../hubs/SSH_MassGap_OBC.md) | — | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
 | [`SchwingerModel`](../models/SchwingerModel.md) | — | — | 🟢 [hub](../hubs/SchwingerModel_MassGap_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_MassGap_OBC.md) | 🟠 [hub](../hubs/TFIM_MassGap_PBC.md) | 🟢 [hub](../hubs/TFIM_MassGap_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |

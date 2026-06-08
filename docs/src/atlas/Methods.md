@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 122 hubs
+## `analytic` - 126 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -80,6 +80,10 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](hubs/PpIp2DSC_TopologicalInvariant_Infinite.md)
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](hubs/SLEkappa_CentralCharge_Infinite.md)
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](hubs/SLEkappa_FractalDimension_Infinite.md)
+- 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md)
+- 🟢 [`SSH/Energy/Infinite`](hubs/SSH_Energy_Infinite.md)
+- 🟢 [`SSH/MassGap/Infinite`](hubs/SSH_MassGap_Infinite.md)
+- 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md)
 - 🟢 [`SYK/ConformalWeights/Infinite`](hubs/SYK_ConformalWeights_Infinite.md)
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md)
 - 🟢 [`SchwingerModel/MassGap/Infinite`](hubs/SchwingerModel_MassGap_Infinite.md)
@@ -132,7 +136,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XYh1D/MassGap/PBC`](hubs/XYh1D_MassGap_PBC.md)
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](hubs/ZnParafermion_CentralCharge_Infinite.md)
 
-## `dense_ed` - 54 hubs
+## `dense_ed` - 56 hubs
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
 - 🟢 [`Heisenberg1D/Energy/OBC`](hubs/Heisenberg1D_Energy_OBC.md)
@@ -171,6 +175,8 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`S1Heisenberg1D/XXCorrelation/OBC`](hubs/S1Heisenberg1D_XXCorrelation_OBC.md)
 - 🟢 [`S1Heisenberg1D/YYCorrelation/OBC`](hubs/S1Heisenberg1D_YYCorrelation_OBC.md)
 - 🟢 [`S1Heisenberg1D/ZZCorrelation/OBC`](hubs/S1Heisenberg1D_ZZCorrelation_OBC.md)
+- 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md)
+- 🟠 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
 - 🟢 [`XXZ1D/Energy/OBC`](hubs/XXZ1D_Energy_OBC.md)
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](hubs/XXZ1D_EnergyLocal_OBC.md)
 - 🟢 [`XXZ1D/FreeEnergy/OBC`](hubs/XXZ1D_FreeEnergy_OBC.md)

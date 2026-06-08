@@ -1,5 +1,64 @@
 # Roadmap and Open Issues
 
+## Architecture (v0.24 — current)
+
+QAtlas is organised as **three parallel namespaces** over a **four-value
+`status` axis**:
+
+- `models/` — concrete Hamiltonians (`TFIM`, `XXZ1D`, …); `status` ∈
+  `:exact` / `:bound` / `:approx`.
+- `universalities/` — `Universality{C}` RG / CFT / RMT classes; `status =
+  :universal` (derived by construction from the namespace, #659).
+- `bounds/` — `Bound{D}` model-independent universal bounds (Tsirelson,
+  Bekenstein, …); `status = :bound`, pinned by a `direction` and a `scheme=`
+  selector when several bounds share a quantity.
+
+A **knowledge-graph layer** (`src/core/links.jl`) makes every relation
+queryable in both directions, and a **structural coherence suite**
+(`src/core/coherence.jl`, C1–C9) self-reports holes: dangling references
+(C1, all edge stores), kind ↔ namespace desync (C2), canonical/scheme
+coherence (C3), undeclared delegation targets (C4), coverage (C6),
+mutually-exclusive critical loci (C8), orphan classes (C9). Four declarative
+stores feed it — `@register` (REGISTRY: how to compute a quantity),
+`@realizes` (model → universality class), `@reduces` (model → model
+reduction), `@about` (model cards) — all sharing one `_forward_kw_macro`
+helper (#660).
+
+**Coherence is structural, not physical.** `coherence_report()` holds
+`:error` findings to **zero** (the hard invariant); `:gap` findings are
+self-reported coverage holes and *need not be empty* (e.g. the `:Potts3` /
+`:Potts4` orphan classes — valid 1+1D CFTs with no realizing model in the
+atlas yet, #661). C5 (realization-agreement) and C7 (bound-satisfaction) are
+*designed but not auto-run* slots; the physical values they would assert are
+checked in `test/verification/` and `test/bounds/` via `verify` /
+`verify_bound`. The coherence layer is the structural complement to those
+tests, not a replacement.
+
+### Decision: single-`Claim` unification — DEFERRED (trigger documented)
+
+The four declarative stores could in principle collapse into one typed
+`Claim` edge, with registry / fetch / verify / atlas / bibliography as views.
+The v0.24 design review (#662) concluded this is **not worth doing now**, and
+the evidence *strengthens* the deferral:
+
+- The stores carry genuinely distinct invariants (REGISTRY's cross-field
+  validation; REALIZES's behavioural `at` predicate + `realized_class`
+  runtime mutual-exclusion). A tagged union reproduces today's per-store
+  validation as per-variant validation with no net win, and weakens the
+  package-load-time guards.
+- The only real duplication — the four macro bodies — was already removed
+  (#660) without touching the type structure.
+- Adding a store is cheap: REDUCES landed without a docs parse-walker or
+  `generate.jl` wiring (the docs harness is 3-way, not 4-way).
+
+**Revisit when EITHER** (a) a fifth store lands that *also* needs cross-store
+coherence checks beyond the C-suite (not expressible as a pure view like
+`links.jl`), **OR** (b) REDUCES / ABOUT grow their own cross-field validation
+*and* inverse-query surface. The companion `Implementation.delegates_to`
+field (upgrading C4 from a presence check to an exact per-row target match,
+partly subsuming C5) shares the same trigger: the first model → class
+delegation on a model already carrying a `@reduces` edge.
+
 ## Remaining Issues
 
 ### Physics accuracy of documentation

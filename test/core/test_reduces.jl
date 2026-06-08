@@ -81,3 +81,27 @@ end
         @test tgt in [r.target for r in reductions(src)]
     end
 end
+
+# #661 — orphan universality classes: a class that predicts (has :universal rows)
+# but is realized by no model is a coverage hole the network now self-reports (C9).
+@testset "orphan universality classes surface as coverage gaps (#661)" begin
+    fs = QAtlas.coherence_report()
+    @test isempty(QAtlas.coherence_errors(fs))            # still no invariant violations
+    orphans = filter(g -> g.check === :orphan_class, QAtlas.coherence_gaps(fs))
+    msgs = join((g.message for g in orphans), " ")
+    # :Potts3 / :Potts4 carry CardyEntanglement :universal rows but no model realizes them
+    @test occursin(":Potts3", msgs)
+    @test occursin(":Potts4", msgs)
+    # a realized class (Ising — TFIM / IsingSquare / …) must never be flagged orphan
+    @test !occursin(":Ising", msgs)
+end
+
+# #661 — C1 reference integrity now scans the edge stores, not just @register rows.
+@testset "C1 reference integrity catches a dangling edge-store bibkey (#661)" begin
+    n = length(QAtlas.REDUCES)
+    QAtlas.reduces!(HeisenbergXYZ, TFIM; regime="ref-test", references=["__NoSuchKey2026"])
+    fs = QAtlas.check_reference_integrity(["SomeRealKey"])   # bibkey set lacking the bogus key
+    @test any(f -> f.severity === :error && occursin("__NoSuchKey2026", f.message), fs)
+    pop!(QAtlas.REDUCES)                                     # undo the probe row
+    @test length(QAtlas.REDUCES) == n
+end

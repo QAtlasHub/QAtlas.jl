@@ -1191,8 +1191,8 @@ The CHSH (Bell-inequality) correlator bound — the maximum of
 `S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical
 theory.  A `status=:bound` quantity with the historical name (like
 [`LiebRobinsonBound`](@ref)); fetched against a [`Bound`](@ref) domain
-(not a model), with a `source=` selector choosing *whose* bound
-(`:bell` → 2, `:tsirelson` → 2√2, `:popescu_rohrlich` → 4).
+(not a model), with a `scheme=` selector choosing the theory regime
+(`:classical` → 2, `:quantum` → 2√2, `:no_signalling` → 4).
 """
 struct CHSHBound <: AbstractQuantity end
 
@@ -1201,9 +1201,9 @@ struct CHSHBound <: AbstractQuantity end
 
 The Mermin 3-party Bell-type bound — the maximum of the Mermin operator
 `|⟨M₃⟩|` admissible in a given theory.  A `status=:bound` quantity
-(Mermin 1990); fetched against a [`Bound`](@ref) domain with `source=`
-choosing the bound (`:classical` → 2 local-realistic, `:mermin` → 4
-quantum, saturated by the GHZ state).
+(Mermin 1990); fetched against a [`Bound`](@ref) domain with `scheme=`
+choosing the theory regime (`:classical` → 2 local-realistic, `:quantum`
+→ 4 quantum, saturated by the GHZ state).
 """
 struct MerminGHZBound <: AbstractQuantity end
 

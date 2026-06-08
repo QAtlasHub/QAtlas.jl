@@ -4,7 +4,7 @@
 # A *bound* is NOT a universality class.  It is pinned by three things:
 #   * what physical quantity it bounds  — the registry `quantity`,
 #   * which way it constrains           — `direction = :upper / :lower`,
-#   * whose bound it is                 — `references` (+ a `source=` selector
+#   * whose bound it is                 — `references` (+ a `scheme=` selector
 #                                          when several bounds share a quantity).
 #
 # Universal (model-independent) bounds — Tsirelson, Bekenstein,
@@ -28,8 +28,8 @@ A universal bound has no home model, so it is fetched against a `Bound`
 domain rather than a Hamiltonian:
 
 ```julia
-QAtlas.fetch(Bound(:QuantumInformation), CHSHBound(), Infinite())                # 2√2 (Tsirelson)
-QAtlas.fetch(Bound(:QuantumInformation), CHSHBound(), Infinite(); source=:bell)  # 2   (local-hidden-variable)
+QAtlas.fetch(Bound(:QuantumInformation), CHSHBound(), Infinite())                     # 2√2 (Tsirelson)
+QAtlas.fetch(Bound(:QuantumInformation), CHSHBound(), Infinite(); scheme=:classical)  # 2   (local-hidden-variable)
 ```
 
 Every bound is registered with `status=:bound` and a `direction`

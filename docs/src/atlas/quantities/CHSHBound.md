@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`CHSHBound`** observable.  Empty c
 
 ## Definition
 
-The CHSH (Bell-inequality) correlator bound — the maximum of `S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical theory.  A `status=:bound` quantity with the historical name (like ``LiebRobinsonBound``); fetched against a ``Bound`` domain (not a model), with a `source=` selector choosing *whose* bound (`:bell` → 2, `:tsirelson` → 2√2, `:popescu_rohrlich` → 4).
+The CHSH (Bell-inequality) correlator bound — the maximum of `S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical theory.  A `status=:bound` quantity with the historical name (like ``LiebRobinsonBound``); fetched against a ``Bound`` domain (not a model), with a `scheme=` selector choosing the theory regime (`:classical` → 2, `:quantum` → 2√2, `:no_signalling` → 4).
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

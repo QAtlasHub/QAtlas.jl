@@ -1,17 +1,26 @@
-# core/coherence.jl — verification DERIVED from the knowledge graph.
+# core/coherence.jl — STRUCTURAL verification DERIVED from the knowledge graph.
 #
-# The thesis: correctness and comprehensiveness are properties of the *network*,
-# not of isolated rows.  Each implementation is constrained by several
+# The thesis: structural correctness and comprehensiveness are properties of the
+# *network*, not of isolated rows.  Each implementation is constrained by several
 # independent cross-paths (its class's universal prediction, the bounds on its
 # quantity, its cited literature, agreement with sibling models).  A wrong or
-# missing implementation violates at least one cross-path; satisfying them all
-# is a far stronger guarantee than any single unit test.  Missing edges are
-# self-reported as coverage gaps.
+# missing edge violates at least one cross-path; missing edges are self-reported
+# as coverage gaps.  This layer is COMPLEMENTARY to — not a replacement for — the
+# physical verify-card tests: it catches graph-level defects (dangling refs,
+# kind/namespace desync, undeclared delegation targets, overlapping loci) that a
+# per-row unit test cannot see, while the *physical values* are checked in
+# `test/verification/` and `test/bounds/` via `verify` / `verify_bound`.
 #
 # Each `check_*` walks `REGISTRY` / `REALIZES` (+ `links.jl`) and returns
-# `CoherenceFinding`s.  `coherence_report` runs the structural suite.  Physical
-# cross-checks (realization-agreement C5, bound-satisfaction C7) need per-quantity
-# invocation probes and are layered on top via `check_realization_agreement`.
+# `CoherenceFinding`s.  `coherence_report` runs the STRUCTURAL suite wired today:
+# C1 reference integrity, C2 namespace⟺kind, C3 canonical/scheme coherence,
+# C4 delegation targets, C6 coverage, C8 realization loci.  Two further checks
+# are DESIGNED but not auto-run: C5 realization-agreement
+# (`check_realization_agreement`) is an opt-in physical probe — the model↔class
+# agreement it asserts is already covered concretely by the verify-card
+# cross-checks (`test/verification/universality/`); C7 bound-satisfaction is a
+# reserved slot with no generic implementation yet — bound saturation is checked
+# per-bound by `verify_bound` in `test/bounds/`.
 
 """
     CoherenceFinding(check, severity, message)
@@ -168,6 +177,12 @@ For each `method=:delegation` row whose `quantity` has an entry in `probes`
 (a `Dict` quantity-instance ⇒ NamedTuple of fetch kwargs), assert the model's
 value equals the realized class's prediction at the probe point — the physical
 cross-validation that makes a delegation edge *true*, not just declared.
+
+!!! note
+    This C5 probe is **not** run by [`coherence_report`](@ref) (which is
+    structural-only): it requires a per-quantity probe dict, so call it directly.
+    The same model↔class agreement is already verified concretely in the
+    verify-card layer (`test/verification/universality/`).
 """
 function check_realization_agreement(probes::AbstractDict; rtol=1e-8)
     out = CoherenceFinding[]

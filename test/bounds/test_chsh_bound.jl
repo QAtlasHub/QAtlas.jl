@@ -28,6 +28,9 @@ using QAtlas: Bound, CHSHBound, Infinite
 
     @testset "argument validation" begin
         @test_throws ArgumentError QAtlas.fetch(qi, CHSHBound(), Infinite(); scheme=:bogus)
+        # the removed `source=` selector is rejected loudly, not silently swallowed
+        # (regression: it used to fall through to the default scheme and return 2√2)
+        @test_throws ArgumentError QAtlas.fetch(qi, CHSHBound(), Infinite(); source=:bell)
     end
 
     @testset "verify_bound — quantum bound saturated by the optimal Bell state" begin

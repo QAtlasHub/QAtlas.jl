@@ -14,6 +14,8 @@ using QAtlas: Bound, MerminGHZBound, Infinite
     @test QAtlas.fetch(qi, MerminGHZBound(), Infinite(); scheme=:quantum) ≈ 4.0 atol = 1e-14
     @test QAtlas.fetch(qi, MerminGHZBound(), Infinite()) ≈ 4.0 atol = 1e-14   # default = quantum
     @test_throws ArgumentError QAtlas.fetch(qi, MerminGHZBound(), Infinite(); scheme=:bogus)
+    # the removed `source=` selector is rejected loudly, not silently swallowed
+    @test_throws ArgumentError QAtlas.fetch(qi, MerminGHZBound(), Infinite(); source=:bell)
 
     @testset "GHZ state saturates the quantum bound" begin
         s = verify_bound(

@@ -31,6 +31,12 @@ function fetch(
     scheme::Symbol=:quantum,
     kwargs...,
 )
+    haskey(kwargs, :source) && throw(
+        ArgumentError(
+            "CHSHBound: `source=` is not a selector; use `scheme=` " *
+            "(:classical / :quantum / :no_signalling)",
+        ),
+    )
     if scheme === :quantum
         return 2 * sqrt(2)
     elseif scheme === :classical
@@ -66,6 +72,12 @@ function fetch(
     scheme::Symbol=:quantum,
     kwargs...,
 )
+    haskey(kwargs, :source) && throw(
+        ArgumentError(
+            "MerminGHZBound: `source=` is not a selector; use `scheme=` " *
+            "(:classical / :quantum)",
+        ),
+    )
     if scheme === :quantum
         return 4.0
     elseif scheme === :classical

@@ -122,8 +122,16 @@ function check_canonical_coherence()
     return out
 end
 
+# A delegation row's method is `:delegation` or a descriptive `:<target>_delegation`
+# variant (e.g. `:kitaev_delegation`, `:minimal_model_delegation`); the C4/C5
+# checks and the `delegations` query recognise all of them via `_is_delegation`,
+# else a variant-tagged delegation silently bypasses the gate (a falsely-green gap).
+function _is_delegation(method::Symbol)
+    return method === :delegation || endswith(String(method), "_delegation")
+end
+
 # ── C4 — delegation has a typed target ───────────────────────────────────────
-# `method=:delegation` covers two cases, both typed by an edge store: a
+# A delegation covers two cases, both typed by an edge store: a
 # model→class delegation is backed by a `REALIZES` edge (model realizes the
 # class it delegates to), a model→model reduction by a `REDUCES` edge (model
 # becomes the target model in a limit).  This is a *presence* check — it asks
@@ -135,7 +143,7 @@ end
 function check_delegation_targets()
     out = CoherenceFinding[]
     for e in REGISTRY
-        e.method === :delegation || continue
+        _is_delegation(e.method) || continue
         realizes_class = any(r -> r.model === e.model, REALIZES)
         reduces_model = any(r -> r.source === e.model, REDUCES)
         (realizes_class || reduces_model) || push!(
@@ -187,7 +195,7 @@ cross-validation that makes a delegation edge *true*, not just declared.
 function check_realization_agreement(probes::AbstractDict; rtol=1e-8)
     out = CoherenceFinding[]
     for e in REGISTRY
-        e.method === :delegation || continue
+        _is_delegation(e.method) || continue
         q = nothing
         for (qi, _) in probes
             typeof(qi) === e.quantity && (q = qi)

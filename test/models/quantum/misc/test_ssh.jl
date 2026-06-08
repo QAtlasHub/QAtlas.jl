@@ -108,6 +108,32 @@ end
     end
 end
 
+# Systematic independent sweep: every Infinite closed form is checked against a
+# DIFFERENT computation (numerical k-minimisation + OBC dense-ED) over a (v,w)
+# grid spanning both phases AND both sign combinations.  This is the rigorous net
+# — a verify() card whose `independent=` is the same closed form re-typed by hand
+# is circular and cannot catch a wrong formula.  `gap_num` here is computed with
+# NO reference to the ||v|-|w|| expression, so this sweep would have caught the
+# opposite-sign gap bug (#669 review) on its own.
+@testset "SSH — closed forms vs independent computations (v,w grid, both signs)" begin
+    kgrid = range(0, 2π; length=4001)
+    for v in (-1.3, -0.5, 0.0, 0.4, 1.0), w in (-1.2, -0.6, 0.3, 1.0, 1.5)
+        abs(abs(v) - abs(w)) > 1e-3 || continue          # skip (near-)gapless points
+        m = SSH(; v=v, w=w)
+        gap_num = minimum(QAtlas._ssh_dispersion(k, v, w) for k in kgrid)
+        # MassGap: analytic ||v|-|w|| vs numerical min_k|q(k)| (independent method)
+        @test isapprox(fetch(m, MassGap(), Infinite()), gap_num; atol=1e-3)
+        # CorrelationLength = 1/gap vs 1/(numerical gap)
+        @test isapprox(fetch(m, CorrelationLength(), Infinite()), 1 / gap_num; rtol=1e-3)
+        # Energy: Gauss-Kronrod integral vs OBC dense-ED half-filled average
+        N = 150
+        ε_ed = -sum(fetch(m, ExactSpectrum(), OBC(N))) / (2N)
+        @test isapprox(fetch(m, Energy(:per_site), Infinite()), ε_ed; atol=2e-2)
+        # TopologicalInvariant: winding integral (fetch) vs the |w|≷|v| threshold
+        @test fetch(m, TopologicalInvariant(), Infinite()) == (abs(w) > abs(v) ? 1 : 0)
+    end
+end
+
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────────
 @testset "SSH — verification cards" begin
     # MassGap Infinite = single-particle gap ||v|-|w|| = min_k|q(k)| (closed form).

@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 24
-- **Total hubs (Model, BC pairs)**: 32
+- **Models with this quantity registered**: 25
+- **Total hubs (Model, BC pairs)**: 33
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `quadgk`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
@@ -46,6 +46,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) | — | — | 🔵 [hub](../hubs/S1AnisotropicD1D_Energy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_Infinite.md) |
 | [`S1XXZ1D`](../models/S1XXZ1D.md) | — | — | 🔵 [hub](../hubs/S1XXZ1D_Energy_Infinite.md) |
+| [`SSH`](../models/SSH.md) | — | — | 🟢 [hub](../hubs/SSH_Energy_Infinite.md) |
 | [`ShastrySutherland`](../models/ShastrySutherland.md) | — | — | 🟠 [hub](../hubs/ShastrySutherland_Energy_Infinite.md) |
 | [`SherringtonKirkpatrick`](../models/SherringtonKirkpatrick.md) | — | — | ⚪ [hub](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |

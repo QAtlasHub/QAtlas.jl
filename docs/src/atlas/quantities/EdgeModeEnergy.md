@@ -13,19 +13,22 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 1
-- **Total hubs (Model, BC pairs)**: 1
-- **Methods** (derived from `@register`): `bdg`
+- **Models with this quantity registered**: 2
+- **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `bdg`, `dense_ed`
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):
 - Alicea2012 — 1 hub
+- AsbothOroszlanyPalyi2016 — 1 hub
 - Kitaev2001 — 1 hub
+- SSH1979 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `OBC` |
 |---|---|
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) |
+| [`SSH`](../models/SSH.md) | 🟢 [hub](../hubs/SSH_EdgeModeEnergy_OBC.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

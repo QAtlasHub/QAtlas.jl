@@ -5,7 +5,7 @@
 
 Full-text search is the bar at the top of every page (Documenter built-in — indexes every hub and facet page). Faceted indices over the locked **Model / Quantity / BC @ regime** schema:
 
-- [By model](model.md) — 64 models
+- [By model](model.md) — 65 models
 - [By quantity](quantity.md) — 63 observables
 - [By boundary condition](bc.md) — 3 BCs
 - [By assurance level](level.md) — R1 taxonomy

@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 5
-- **Total hubs (Model, BC pairs)**: 5
+- **Models with this quantity registered**: 6
+- **Total hubs (Model, BC pairs)**: 6
 - **Methods** (derived from `@register`): `analytic`, `closed_form`
 - **Universality classes** (where applicable): `Ising`
 
@@ -33,6 +33,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | 🟠 [hub](../hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | 🟢 [hub](../hubs/IsingChain1D_CorrelationLength_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_CorrelationLength_Infinite.md) |
+| [`SSH`](../models/SSH.md) | 🟢 [hub](../hubs/SSH_CorrelationLength_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_CorrelationLength_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

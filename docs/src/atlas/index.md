@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 322 |
-| ED-feasible claimed (risk denominator) | 296 |
+| Hubs `src` claims (registry) | 328 |
+| ED-feasible claimed (risk denominator) | 302 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 178 |
+| 🟢 corroborated-at-p | 183 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 89 |
-| Inventory cards scanned (whole test/) | 2763 |
-| Registry files parsed | 71 / 71 |
-| Models | 64 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 90 |
+| Inventory cards scanned (whole test/) | 2784 |
+| Registry files parsed | 73 / 73 |
+| Models | 65 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **73.0%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **73.2%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "89 actionable hub(s)"
+!!! warning "90 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -108,6 +108,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`S1Heisenberg1D/MagnetizationXLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md)
     - [`S1Heisenberg1D/MagnetizationZLocal/OBC`](hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md)
     - [`S1Heisenberg1D/MassGap/OBC`](hubs/S1Heisenberg1D_MassGap_OBC.md)
+    - [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
     - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
     - [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
@@ -198,6 +199,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `S1Heisenberg1D` | 21 | 0 | 13 | 3 | 1 | 4 | feasible |
 | `S1XXZ1D` | 2 | 0 | 0 | 2 | 0 | 0 | feasible |
 | `SLEkappa` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
+| `SSH` | 6 | 0 | 5 | 0 | 0 | 1 | feasible |
 | `SYK` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `SchwingerModel` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `ShastrySutherland` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
@@ -221,7 +223,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (322) — select to drill down
+## Hubs (328) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -531,6 +533,15 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
+
+### `SSH` (6)
+
+- 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
+- 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
+- 🟢 [`SSH/Energy/Infinite`](hubs/SSH_Energy_Infinite.md) — corroborated-at-p
+- 🟢 [`SSH/MassGap/Infinite`](hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
 ### `SYK` (1)
 

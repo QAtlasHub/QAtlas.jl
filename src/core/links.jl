@@ -11,7 +11,7 @@
 # state.  `_as_type` is shared with registry.jl / realizes.jl.
 
 # ── node-type helpers ────────────────────────────────────────────────────────
-_is_universality(::Type{T}) where {T} = T <: Universality
+# `_is_universality` lives in core/universality.jl (register! needs it earlier).
 _is_bound(::Type{T}) where {T} = T <: Bound
 _class_of(::Type{T}) where {T} = T <: Universality ? T.parameters[1]::Symbol : nothing
 _domain_of(::Type{T}) where {T} = T <: Bound ? T.parameters[1]::Symbol : nothing

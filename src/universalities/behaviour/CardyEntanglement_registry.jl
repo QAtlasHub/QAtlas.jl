@@ -60,8 +60,7 @@ for C in _CFT_CLASSES, (q, refs, note) in _CFT_PREDICTIONS
         Universality{C},
         q,
         Infinite;
-        status=:universal,
-        method=:analytic,
+        method=:analytic,  # status=:universal derived by construction (register!)
         reliability=:high,
         references=refs,
         notes=note,

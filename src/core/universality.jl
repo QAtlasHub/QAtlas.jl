@@ -36,6 +36,11 @@ QAtlas.fetch(Universality(:Ising), CriticalExponents(); d=4)   # mean-field
 struct Universality{C} <: AbstractQAtlasModel end
 Universality(name::Symbol) = Universality{name}()
 
+# Namespace predicate: is `T` a Universality node?  Defined here (not in
+# links.jl) so `register!` can derive `status=:universal` by construction — the
+# universality `*_registry.jl` files run long before links.jl is included.
+_is_universality(::Type{T}) where {T} = T <: Universality
+
 """
     CriticalExponents() <: AbstractQuantity
 

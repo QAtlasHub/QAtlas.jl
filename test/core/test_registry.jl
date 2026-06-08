@@ -268,3 +268,30 @@ end
     )
     @test all_tfim == expected
 end
+
+@testset "register! derives :universal for Universality nodes by construction (#659)" begin
+    # A Universality node is :universal by construction — no explicit status= needed,
+    # so the (namespace, status) pair cannot desync (the old double-encoding).
+    n_before = length(REGISTRY)
+    QAtlas.register!(
+        QAtlas.Universality{:__test659},
+        QAtlas.CriticalExponents,
+        Infinite;
+        method=:analytic,
+    )
+    @test REGISTRY[end].status === :universal
+    pop!(REGISTRY)                                   # undo the probe row
+    @test length(REGISTRY) == n_before
+
+    # A disagreeing explicit status on a Universality node is rejected (no row added).
+    @test_throws ArgumentError QAtlas.register!(
+        QAtlas.Universality{:__test659},
+        QAtlas.CriticalExponents,
+        Infinite;
+        status=:bound,
+        direction=:upper,
+    )
+    # :universal on a non-Universality node is rejected (the reverse half).
+    @test_throws ArgumentError QAtlas.register!(TFIM, MassGap, Infinite; status=:universal)
+    @test length(REGISTRY) == n_before
+end

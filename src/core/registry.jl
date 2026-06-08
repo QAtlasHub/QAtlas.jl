@@ -152,6 +152,28 @@ function register!(
     status in STATUS_VALUES || throw(
         ArgumentError("register!: status must be one of $(STATUS_VALUES); got :$(status)"),
     )
+    # `:universal` is fixed by the namespace, not a free choice: a Universality
+    # node is :universal by construction (so the (namespace, status) pair cannot
+    # desync), and :universal is rejected on anything else.  NOTE: deliberately
+    # NOT symmetric with Bound — a concrete model may legitimately carry
+    # status=:bound (e.g. a Lieb–Robinson velocity), so the Bound side stays
+    # one-way and is checked (not enforced) by coherence C2.
+    if _is_universality(model_T)
+        status === :exact && (status = :universal)   # :exact is the unset default
+        status === :universal || throw(
+            ArgumentError(
+                "register!: $(model_T) is a Universality node — status is :universal " *
+                "by construction, not :$(status)",
+            ),
+        )
+    elseif status === :universal
+        throw(
+            ArgumentError(
+                "register!: status=:universal is only for Universality nodes; " *
+                "$(model_T) is not one",
+            ),
+        )
+    end
     # A bound must pin which way it constrains; a non-bound must not.
     if status === :bound
         direction in BOUND_DIRECTIONS || throw(

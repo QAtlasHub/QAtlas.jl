@@ -357,4 +357,21 @@ end
     rate_gap_low = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1)
     rate_gap_lower = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1)
     @test rate_gap_lower < rate_gap_low * 0.1
+
+    # 4. OBC NMRSpinRelaxationRate tests
+    @testset "OBC NMRSpinRelaxationRate" begin
+        m = TFIM(; J=1.0, h=0.5)
+        # Check convergence to Infinite
+        rate_inf = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=2.0, eta=0.2)
+        rate_obc = QAtlas.fetch(m, NMRSpinRelaxationRate(), OBC(100); beta=2.0, eta=0.2)
+        @test isapprox(rate_obc, rate_inf; atol=5e-3)
+
+        # DomainError check
+        @test_throws DomainError QAtlas.fetch(
+            m, NMRSpinRelaxationRate(), OBC(10); beta=0.0
+        )
+        @test_throws DomainError QAtlas.fetch(
+            m, NMRSpinRelaxationRate(), OBC(10); beta=1.0, eta=-0.1
+        )
+    end
 end

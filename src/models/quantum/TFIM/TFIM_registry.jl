@@ -156,6 +156,16 @@
     references=["Sachdev1997"],
     notes="1/T_1(β, η) = 1/π³ ∫₀^π dk₁ ∫₀^π dk₂ f(λ(k₁)) (1-f(λ(k₂))) η / ((λ(k₁)-λ(k₂))² + η²) over BdG dispersion λ(k); QuadGK nested rtol=1e-6.",
 )
+@register(
+    TFIM,
+    NMRSpinRelaxationRate,
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl",
+    references=["Sachdev1997"],
+    notes="1/T_1(β, η) = 1/N² Σ_{m₁,m₂} f(λ_m₁) (1-f(λ_m₂)) (1/π) η / ((λ_m₁ - λ_m₂)² + η²) over finite OBC BdG spectrum λ_m.",
+)
 
 # ── Local one-site observables (per-site index, not bulk-averaged) ────
 @register(

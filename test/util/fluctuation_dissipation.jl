@@ -3,7 +3,7 @@
 # Two layers, both test-side (verification infrastructure, not public API), in
 # the same spirit as thermodynamic_identities.jl:
 #
-#   LAYER 1 (model-independent).  `thermo_from_spectrum` + `gibbs_moments` turn
+#   LAYER 1 (model-independent).  `fd_thermo_from_spectrum` + `fd_gibbs_moments` turn
 #   any energy spectrum {Eₙ} (and any diagonal observable {oₙ}) into the full
 #   canonical thermodynamics — lnZ, ⟨E⟩, F, S, C, Var(E) — by direct Boltzmann
 #   weighting.  The accompanying test (test/identities/test_fluctuation_dissipation.jl)
@@ -53,7 +53,7 @@ using QAtlas: fetch, SpecificHeat, SusceptibilityZZ, Infinite, IsingChain1D
 # ══════════════════════════════════════════════════════════════════════
 
 """
-    log_partition(levels, β) -> Real
+    fd_log_partition(levels, β) -> Real
 
 Log partition function `lnZ(β) = log Σₙ e^{-βEₙ}` of a spectrum `levels`,
 via the numerically-stable log-sum-exp shift
@@ -63,40 +63,40 @@ Differentiable: `β` may be a `ForwardDiff.Dual` (the shift `E₀` is a
 constant of the concrete `levels`), so `-∂lnZ/∂β`, `∂²lnZ/∂β²`, … recover
 `⟨E⟩`, `Var(E)`, … by AutoDiff — the *derivative* half of every FDT check.
 """
-function log_partition(levels::AbstractVector{<:Real}, β::Real)
-    isempty(levels) && throw(ArgumentError("log_partition: empty spectrum"))
+function fd_log_partition(levels::AbstractVector{<:Real}, β::Real)
+    isempty(levels) && throw(ArgumentError("fd_log_partition: empty spectrum"))
     E0 = minimum(levels)
     return -β * E0 + log(sum(E -> exp(-β * (E - E0)), levels))
 end
 
 """
-    boltzmann_weights(levels, β) -> Vector
+    fd_boltzmann_weights(levels, β) -> Vector
 
 Normalised Gibbs probabilities `pₙ = e^{-βEₙ}/Z`, computed from the
 shifted weights `e^{-β(Eₙ-E₀)}` so no `exp` overflows even for large
 `|βEₙ|`.
 """
-function boltzmann_weights(levels::AbstractVector{<:Real}, β::Real)
+function fd_boltzmann_weights(levels::AbstractVector{<:Real}, β::Real)
     E0 = minimum(levels)
     w = exp.(-β .* (levels .- E0))
     return w ./ sum(w)
 end
 
 """
-    mean_energy(levels, β) -> Real
+    fd_mean_energy(levels, β) -> Real
 
 Ensemble mean energy `⟨E⟩ = Σₙ pₙ Eₙ`.  A standalone, `Dual`-friendly
-function so a test can take `ForwardDiff.derivative(b -> mean_energy(levels,
+function so a test can take `ForwardDiff.derivative(b -> fd_mean_energy(levels,
 b), β)` and compare `-∂⟨E⟩/∂β` against the *variance* `Var(E)` — the
 fluctuation–dissipation theorem.
 """
-function mean_energy(levels::AbstractVector{<:Real}, β::Real)
-    p = boltzmann_weights(levels, β)
+function fd_mean_energy(levels::AbstractVector{<:Real}, β::Real)
+    p = fd_boltzmann_weights(levels, β)
     return sum(p .* levels)
 end
 
 """
-    thermo_from_spectrum(levels, β) -> NamedTuple
+    fd_thermo_from_spectrum(levels, β) -> NamedTuple
 
 Full canonical thermodynamics of a spectrum at inverse temperature `β>0`,
 returned as `(; lnZ, E, F, S, C, varE)`:
@@ -114,14 +114,14 @@ returned as `(; lnZ, E, F, S, C, varE)`:
 Gibbs (`β(E-F)`) relations; the self-consistency test proves these equal
 the independent derivative routes (`-β²∂⟨E⟩/∂β`, `-∂F/∂T`).
 """
-function thermo_from_spectrum(levels::AbstractVector{<:Real}, β::Real)
-    isempty(levels) && throw(ArgumentError("thermo_from_spectrum: empty spectrum"))
-    β > 0 || throw(ArgumentError("thermo_from_spectrum: requires β > 0; got β = $β"))
-    p = boltzmann_weights(levels, β)
+function fd_thermo_from_spectrum(levels::AbstractVector{<:Real}, β::Real)
+    isempty(levels) && throw(ArgumentError("fd_thermo_from_spectrum: empty spectrum"))
+    β > 0 || throw(ArgumentError("fd_thermo_from_spectrum: requires β > 0; got β = $β"))
+    p = fd_boltzmann_weights(levels, β)
     E = sum(p .* levels)
     E2 = sum(p .* abs2.(levels))
     varE = max(E2 - E^2, zero(E))          # clamp sub-eps negative round-off
-    lnZ = log_partition(levels, β)
+    lnZ = fd_log_partition(levels, β)
     F = -lnZ / β
     S = β * (E - F)
     C = β^2 * varE
@@ -129,7 +129,7 @@ function thermo_from_spectrum(levels::AbstractVector{<:Real}, β::Real)
 end
 
 """
-    gibbs_moments(levels, obs, β) -> NamedTuple
+    fd_gibbs_moments(levels, obs, β) -> NamedTuple
 
 Thermal mean and variance `(; mean, var)` of a *diagonal* observable `obs`
 (its eigenvalues `oₙ` aligned with `levels`), Gibbs-weighted by the
@@ -140,10 +140,12 @@ spectrum at inverse temperature `β`:
 `obs` being diagonal in the energy eigenbasis is exactly the `[H,O]=0`
 condition under which the static susceptibility equals `β·Var(O)`.
 """
-function gibbs_moments(levels::AbstractVector{<:Real}, obs::AbstractVector{<:Real}, β::Real)
+function fd_gibbs_moments(
+    levels::AbstractVector{<:Real}, obs::AbstractVector{<:Real}, β::Real
+)
     length(levels) == length(obs) ||
-        throw(DimensionMismatch("gibbs_moments: levels and obs length differ"))
-    p = boltzmann_weights(levels, β)
+        throw(DimensionMismatch("fd_gibbs_moments: levels and obs length differ"))
+    p = fd_boltzmann_weights(levels, β)
     m = sum(p .* obs)
     v = max(sum(p .* abs2.(obs)) - m^2, zero(m))
     return (; mean=m, var=v)
@@ -209,7 +211,7 @@ function independent_energy_variance_per_site(
     m::IsingChain1D, ::Infinite; beta::Real, N::Int=16
 )
     E, _ = _ising1d_ring_configs(N, m.J)
-    return thermo_from_spectrum(E, beta).varE / N
+    return fd_thermo_from_spectrum(E, beta).varE / N
 end
 
 """
@@ -224,7 +226,7 @@ function independent_magnetization_variance_per_site(
     m::IsingChain1D, ::Infinite; beta::Real, N::Int=16
 )
     E, M = _ising1d_ring_configs(N, m.J)
-    return gibbs_moments(E, M, beta).var / N
+    return fd_gibbs_moments(E, M, beta).var / N
 end
 
 """

@@ -18,7 +18,7 @@
 #   enumeration (directly, and through the FLUCTUATION_DISSIPATION_IDENTITIES /
 #   ThermoIdentity harness) — fluctuation (independent) == registered response.
 #
-# `thermo_from_spectrum`, `log_partition`, `mean_energy`, `gibbs_moments`, the
+# `fd_thermo_from_spectrum`, `fd_log_partition`, `fd_mean_energy`, `fd_gibbs_moments`, the
 # variance providers, the FDT identities and `verify_thermodynamic_identities`
 # all come from test/util/ (included by runtests before this file).
 # ─────────────────────────────────────────────────────────────────────────────
@@ -40,17 +40,17 @@ using QAtlas: IsingChain1D, SpecificHeat, SusceptibilityZZ, Infinite, fetch
     ]
     βs = (0.1, 0.5, 1.0, 2.0)
     for (name, levels) in spectra, β in βs
-        th = thermo_from_spectrum(levels, β)
+        th = fd_thermo_from_spectrum(levels, β)
 
         # (1) mean energy: ensemble average  ⟨E⟩  ==  -∂lnZ/∂β  (derivative)
-        dlnZ = ForwardDiff.derivative(b -> log_partition(levels, b), β)
+        dlnZ = ForwardDiff.derivative(b -> fd_log_partition(levels, b), β)
         @test isapprox(th.E, -dlnZ; rtol=1e-9, atol=1e-10)
 
         # (2) energy FDT (core):  Var(E)  ==  ∂²lnZ/∂β²  ==  -∂⟨E⟩/∂β
         d2lnZ = ForwardDiff.derivative(
-            b -> ForwardDiff.derivative(bb -> log_partition(levels, bb), b), β
+            b -> ForwardDiff.derivative(bb -> fd_log_partition(levels, bb), b), β
         )
-        dE = ForwardDiff.derivative(b -> mean_energy(levels, b), β)
+        dE = ForwardDiff.derivative(b -> fd_mean_energy(levels, b), β)
         @test isapprox(th.varE, d2lnZ; rtol=1e-6, atol=1e-8)
         @test isapprox(th.varE, -dE; rtol=1e-6, atol=1e-8)
 
@@ -58,7 +58,7 @@ using QAtlas: IsingChain1D, SpecificHeat, SusceptibilityZZ, Infinite, fetch
         @test isapprox(th.C, -β^2 * dE; rtol=1e-6, atol=1e-8)
 
         # (4) entropy as a free-energy response:  S  ==  -∂F/∂T  =  β²·∂F/∂β
-        dF = ForwardDiff.derivative(b -> -log_partition(levels, b) / b, β)
+        dF = ForwardDiff.derivative(b -> -fd_log_partition(levels, b) / b, β)
         @test isapprox(th.S, β^2 * dF; rtol=1e-6, atol=1e-8)
 
         # (5) Gibbs ⟨E⟩ = F + T·S, with S from the DERIVATIVE route (not β(E-F)):
@@ -72,7 +72,7 @@ end
 @testset "FDT layer 1 — linear response: ∂⟨O⟩/∂λ = β·Var(O)  for  H(λ)=H₀-λO" begin
     rng = MersenneTwister(0xf17)
     # ⟨O⟩ of a diagonal observable `obs` under H(λ) = H₀ - λ·O, at field λ.
-    mean_obs(E0, obs, β, λ) = gibbs_moments(E0 .- λ .* obs, obs, β).mean
+    mean_obs(E0, obs, β, λ) = fd_gibbs_moments(E0 .- λ .* obs, obs, β).mean
     cases = [
         ("spin-1 (m=-1,0,1)", [0.0, 0.0, 0.0], [-1.0, 0.0, 1.0]),
         ("two paramagnetic spins", [0.0, 0.5, 0.5, 1.0], [-2.0, 0.0, 0.0, 2.0]),
@@ -82,7 +82,7 @@ end
         # response side: ∂⟨O⟩/∂λ via ForwardDiff
         dO = ForwardDiff.derivative(l -> mean_obs(E0, obs, β, l), λ)
         # fluctuation side: β·Var(O) at the same field
-        varO = gibbs_moments(E0 .- λ .* obs, obs, β).var
+        varO = fd_gibbs_moments(E0 .- λ .* obs, obs, β).var
         @test isapprox(dO, β * varO; rtol=1e-7, atol=1e-9)
     end
 end
@@ -94,13 +94,13 @@ end
         levels = eigvals(Symmetric(build_tfim(lat, J, h)))   # 2ᴺ many-body energies
         @test length(levels) == 1 << N
         for β in (0.3, 0.8, 1.5)
-            th = thermo_from_spectrum(levels, β)
+            th = fd_thermo_from_spectrum(levels, β)
             # variance route (2nd moment) vs derivative route — the FDT theorem
             # on a genuine interacting quantum spectrum.
             d2lnZ = ForwardDiff.derivative(
-                b -> ForwardDiff.derivative(bb -> log_partition(levels, bb), b), β
+                b -> ForwardDiff.derivative(bb -> fd_log_partition(levels, bb), b), β
             )
-            dE = ForwardDiff.derivative(b -> mean_energy(levels, b), β)
+            dE = ForwardDiff.derivative(b -> fd_mean_energy(levels, b), β)
             @test isapprox(th.varE, d2lnZ; rtol=1e-7, atol=1e-9)
             @test isapprox(th.C, -β^2 * dE; rtol=1e-7, atol=1e-9)
             @test th.C ≥ 0          # heat capacity is a variance ⇒ non-negative

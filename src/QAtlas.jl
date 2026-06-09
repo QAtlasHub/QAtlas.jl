@@ -114,6 +114,7 @@ export ChargeGap, SpinGap                                # Hubbard / correlated-
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export MagnetizationX, MagnetizationY, MagnetizationZ
+export Polarization
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation

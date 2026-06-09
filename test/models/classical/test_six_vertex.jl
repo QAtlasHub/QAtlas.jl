@@ -94,18 +94,31 @@ end
     @test QAtlas._six_vertex_phase(m_below.a, m_below.b, m_below.c) === :disordered
 end
 
-@testset "SixVertex — antiferroelectric phase (deferred — Lieb 1967b)" begin
+@testset "SixVertex — antiferroelectric phase (Lieb 1967b)" begin
     # f-model with c = 3 ⇒ Δ = −7/2 < −1, AFE phase.
     m_afe = QAtlas.f_model(3.0)
     @test QAtlas._six_vertex_phase(m_afe.a, m_afe.b, m_afe.c) === :antiferroelectric
 
-    # Phase 3 of issue #163: AFE elliptic-function free energy is not
-    # implemented in this commit.  The fetch must throw an informative
-    # ArgumentError so deferred coverage is visible.
-    @test_throws ArgumentError QAtlas.fetch(m_afe, FreeEnergy(), Infinite())
+    Δ = QAtlas._six_vertex_delta(m_afe.a, m_afe.b, m_afe.c)
+    λ = acosh(-Δ)
+    
+    # Verify free energy is close to the expected elliptic sum
+    f = QAtlas.fetch(m_afe, FreeEnergy(), Infinite())
+    u = λ / 2.0
+    s_expected = 0.0
+    for m in 1:1000
+        t1 = exp(-m * (2.0*λ - 2.0*u))
+        t2 = exp(-m * (2.0*λ + 2.0*u))
+        den = 1.0 + exp(-2.0 * m * λ)
+        s_expected += (t1 - t2) / (m * den)
+    end
+    f_expected = -log(m_afe.a) - (λ - u) - s_expected
+    @test f ≈ f_expected atol = 1e-12
 
-    # Likewise, generic-disordered + AFE residual entropy is deferred.
-    @test_throws ArgumentError QAtlas.fetch(m_afe, ResidualEntropy(), Infinite())
+    # Verify Polarization
+    pol = QAtlas.fetch(m_afe, Polarization(), Infinite())
+    pol_expected = tanh(1 * λ)^2 * tanh(2 * λ)^2 * tanh(3 * λ)^2 * tanh(4 * λ)^2
+    @test pol ≈ pol_expected atol = 1e-6
 end
 
 @testset "SixVertex — disordered free energy (square-ice closed form)" begin
@@ -118,22 +131,25 @@ end
     @test f_si ≈ -QAtlas.fetch(m_si, ResidualEntropy(), Infinite()) atol = 1e-14
 end
 
-@testset "SixVertex — disordered free energy off-diagonal (deferred — phase 2)" begin
+@testset "SixVertex — disordered free energy off-diagonal" begin
     # Generic disordered point (a = b = 1, c = 0.5):
     #   Δ = (1 + 1 − 0.25) / 2 = 0.875 ∈ (-1, 1).
-    # The Lieb / Sutherland 1967 trigonometric integral covering the
-    # full disordered phase is deferred to a follow-up commit (issue
-    # #163 phase 2); the fetch must throw an informative ArgumentError.
     m_d = SixVertex(; a=1.0, b=1.0, c=0.5)
     @test QAtlas._six_vertex_delta(1.0, 1.0, 0.5) ≈ 0.875
     @test QAtlas._six_vertex_phase(m_d.a, m_d.b, m_d.c) === :disordered
-    @test_throws ArgumentError QAtlas.fetch(m_d, FreeEnergy(), Infinite())
+    
+    # Value compared to numerical check
+    f_d = QAtlas.fetch(m_d, FreeEnergy(), Infinite())
+    @test f_d ≈ -0.129202353139369 atol = 1e-12
 
-    # f-model boundary c = 2 (Δ = −1, disordered branch but a = b ≠ c):
-    # also deferred.
+    # f-model boundary c = 2 (Δ = −1, F-model critical point)
     m_crit = QAtlas.f_model(2.0)
     @test QAtlas._six_vertex_phase(m_crit.a, m_crit.b, m_crit.c) === :disordered
-    @test_throws ArgumentError QAtlas.fetch(m_crit, FreeEnergy(), Infinite())
+    f_crit = QAtlas.fetch(m_crit, FreeEnergy(), Infinite())
+    @test f_crit ≈ -0.7831887820803405 atol = 1e-12
+    
+    # Polarization at critical point is 0
+    @test QAtlas.fetch(m_crit, Polarization(), Infinite()) == 0.0
 end
 
 @testset "SixVertex — constructor argument validation" begin
@@ -238,4 +254,39 @@ end
             ],
         )
     end
+end
+
+@testset "SixVertex — Energy and Polarization verification cards" begin
+    # Energy at square-ice point (should be 0.0)
+    verify(
+        SixVertex(; a=1.0, b=1.0, c=1.0),
+        Energy{:per_site}(),
+        Infinite();
+        route=:numerical_derivative,
+        independent=0.0,
+        agree_within=1e-9,
+        refs=["Energy per site is zero at the isotropic square-ice point"],
+    )
+
+    # Polarization in FE phase is 1.0
+    verify(
+        SixVertex(; a=3.0, b=1.0, c=1.0),
+        Polarization(),
+        Infinite();
+        route=:limiting_case,
+        independent=1.0,
+        agree_within=1e-10,
+        refs=["Polarization in FE phase is saturated to 1.0"],
+    )
+
+    # Polarization in disordered phase is 0.0
+    verify(
+        SixVertex(; a=1.0, b=1.0, c=1.0),
+        Polarization(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["Polarization in disordered phase is exactly 0.0"],
+    )
 end

@@ -36,3 +36,48 @@
     references=["Onsager1944", "Houtappel1950"],
     notes="2D Ising universality (Onsager exponents) shared with IsingSquare; delegated to Universality(:Ising) d=2.",
 )
+
+# ── Ferromagnetic (J<0) finite-T thermodynamics — Houtappel 1950 ──────
+@register(
+    IsingTriangular,
+    FreeEnergy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_triangular_thermo.jl",
+    references=["Houtappel1950"],
+    notes="FM (J<0): -βf = ln2 + (1/8π²)∫∫ ln[cosh³2K+sinh³2K-sinh2K(cosθ+cosφ+cos(θ+φ))], K=β|J|.",
+)
+
+@register(
+    IsingTriangular,
+    Energy{:per_site},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_triangular_thermo.jl",
+    references=["Houtappel1950"],
+    notes="FM (J<0): ε = -∂(logZ/N)/∂β (central diff of Houtappel f); ε → -3|J| at T→0.",
+)
+
+@register(
+    IsingTriangular,
+    SpecificHeat,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_triangular_thermo.jl",
+    references=["Houtappel1950"],
+    notes="FM (J<0): c_v = β²∂²(logZ/N)/∂β²; singular at T_c=4|J|/ln3 (2D-Ising universality).",
+)
+
+@register(
+    IsingTriangular,
+    ThermalEntropy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_triangular_thermo.jl",
+    references=["Houtappel1950"],
+    notes="FM (J<0): s = β(ε-f); bounded 0 (T→0) … ln2 (T→∞).",
+)

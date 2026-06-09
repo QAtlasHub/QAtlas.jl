@@ -167,6 +167,15 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
 
+## Houtappel1950 — 6 hubs
+
+- 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
+- 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
+- 🟠 [`IsingTriangular/Energy/Infinite`](hubs/IsingTriangular_Energy_Infinite.md)
+- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](hubs/IsingTriangular_FreeEnergy_Infinite.md)
+- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](hubs/IsingTriangular_SpecificHeat_Infinite.md)
+- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](hubs/IsingTriangular_ThermalEntropy_Infinite.md)
+
 ## Kitaev2001 — 6 hubs
 
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
@@ -410,11 +419,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 - 🟢 [`TFIM/LoschmidtEcho/Infinite`](hubs/TFIM_LoschmidtEcho_Infinite.md)
 - 🟢 [`TFIM/LoschmidtEcho/OBC`](hubs/TFIM_LoschmidtEcho_OBC.md)
-
-## Houtappel1950 — 2 hubs
-
-- 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
-- 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
 
 ## IqbalBeccaSorellaPoilblanc2013 — 2 hubs
 

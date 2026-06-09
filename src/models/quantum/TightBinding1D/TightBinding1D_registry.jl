@@ -76,6 +76,5 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
-    references=[],
     notes="1/T_1(β, η) = 1/π³ ∫₀^π dk₁ ∫₀^π dk₂ f(ε(k₁)) (1-f(ε(k₂))) η / ((ε(k₁)-ε(k₂))² + η²); regularized 1D Korringa rate; QuadGK nested rtol=1e-6.",
 )

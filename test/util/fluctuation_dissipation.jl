@@ -157,6 +157,37 @@ function fd_gibbs_moments(
     return (; mean=m, var=v)
 end
 
+"""
+    fd_free_fermion_thermo(modes, β) -> NamedTuple
+
+Canonical thermodynamics of a set of *independent fermionic modes* with
+single-particle (quasiparticle) energies `modes` (≥ 0) at inverse
+temperature `β>0`, returned as `(; E, varE, C, S)`:
+
+    fₖ     = 1/(e^{βΛₖ}+1)                    (Fermi occupation)
+    ⟨E⟩    = Σₖ Λₖ fₖ                          (excitation energy above vacuum)
+    Var(E) = Σₖ Λₖ² fₖ(1-fₖ)                   (energy fluctuation)
+    C      = β² Var(E)                          (heat capacity)
+    S      = -Σₖ [fₖ ln fₖ + (1-fₖ) ln(1-fₖ)]  (mode entropy)
+
+For free fermions the modes are statistically independent, so the energy
+variance is the *sum* of per-mode variances `Λₖ² fₖ(1-fₖ)` — the
+free-fermion energy FDT.  `Dual`-friendly in `β` (`fₖ(β)` is analytic), so
+`-∂⟨E⟩/∂β = Var(E)` is checkable by AutoDiff with no eigensolve — the
+clean autodiff route the dense-ED spectrum (`fd_thermo_from_spectrum`)
+cannot offer.
+"""
+function fd_free_fermion_thermo(modes::AbstractVector{<:Real}, β::Real)
+    β > 0 || throw(ArgumentError("fd_free_fermion_thermo: requires β > 0; got β = $β"))
+    f = @. 1 / (exp(β * modes) + 1)
+    E = sum(modes .* f)
+    varE = sum(abs2.(modes) .* f .* (1 .- f))
+    C = β^2 * varE
+    s_term(fk) = (fk <= 0 || fk >= 1) ? zero(fk) : -(fk * log(fk) + (1 - fk) * log(1 - fk))
+    S = sum(s_term, f)
+    return (; E, varE, C, S)
+end
+
 # ══════════════════════════════════════════════════════════════════════
 # Layer 2 — independent fluctuation providers (brute-force) + FDT identities
 # ══════════════════════════════════════════════════════════════════════

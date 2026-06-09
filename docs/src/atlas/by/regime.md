@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (101)
+## `(no card)` (104)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -55,6 +55,9 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`IsingTriangular/ZZCorrelation/Infinite`](../hubs/IsingTriangular_ZZCorrelation_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kitaev1D/FreeEnergy/Infinite`](../hubs/Kitaev1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kitaev1D/SpecificHeat/Infinite`](../hubs/Kitaev1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - ⚪ [`KitaevHoneycomb/Energy/OBC`](../hubs/KitaevHoneycomb_Energy_OBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/Energy/PBC`](../hubs/KitaevHoneycomb_Energy_PBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) — cited-only

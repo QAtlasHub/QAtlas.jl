@@ -99,6 +99,18 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](hubs/XXZ1D_SpecificHeat_Infinite.md)
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](hubs/XXZ1D_ThermalEntropy_Infinite.md)
 
+## Kitaev2001 — 9 hubs
+
+- 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
+- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
+- 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
+- 🟠 [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md)
+- 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
+- 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
+- 🟠 [`Kitaev1D/SpecificHeat/Infinite`](hubs/Kitaev1D_SpecificHeat_Infinite.md)
+- 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](hubs/Kitaev1D_ThermalEntropy_Infinite.md)
+- 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
+
 ## Ising1925 — 8 hubs
 
 - 🟢 [`IsingChain1D/CorrelationLength/Infinite`](hubs/IsingChain1D_CorrelationLength_Infinite.md)
@@ -176,15 +188,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
-
-## Kitaev2001 — 6 hubs
-
-- 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
-- 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
-- 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
-- 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
-- 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
 
 ## Onsager1944 — 6 hubs
 

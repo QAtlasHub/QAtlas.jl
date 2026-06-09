@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 337 |
-| ED-feasible claimed (risk denominator) | 311 |
+| Hubs `src` claims (registry) | 340 |
+| ED-feasible claimed (risk denominator) | 314 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 184 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 98 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 101 |
 | Inventory cards scanned (whole test/) | 2794 |
 | Registry files parsed | 74 / 74 |
 | Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **59.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **71.4%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **58.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **70.7%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "98 actionable hub(s)"
+!!! warning "101 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -110,6 +110,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`IsingTriangular/ZZCorrelation/Infinite`](hubs/IsingTriangular_ZZCorrelation_Infinite.md)
     - [`Kagome/TightBindingChecksum/Infinite`](hubs/Kagome_TightBindingChecksum_Infinite.md)
     - [`Kagome/TightBindingMaxEnergy/Infinite`](hubs/Kagome_TightBindingMaxEnergy_Infinite.md)
+    - [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md)
+    - [`Kitaev1D/SpecificHeat/Infinite`](hubs/Kitaev1D_SpecificHeat_Infinite.md)
+    - [`Kitaev1D/ThermalEntropy/Infinite`](hubs/Kitaev1D_ThermalEntropy_Infinite.md)
     - [`Lieb/TightBindingChecksum/Infinite`](hubs/Lieb_TightBindingChecksum_Infinite.md)
     - [`Lieb/TightBindingMaxEnergy/Infinite`](hubs/Lieb_TightBindingMaxEnergy_Infinite.md)
     - [`S1Heisenberg1D/EnergyLocal/OBC`](hubs/S1Heisenberg1D_EnergyLocal_OBC.md)
@@ -190,7 +193,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `J1J2Heisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `Kagome` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `KagomeHeisenbergAFM` | 3 | 0 | 0 | 0 | 3 | 0 | infeasible |
-| `Kitaev1D` | 6 | 0 | 6 | 0 | 0 | 0 | feasible |
+| `Kitaev1D` | 9 | 0 | 6 | 0 | 0 | 3 | feasible |
 | `KitaevHeisenberg` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `KitaevHoneycomb` | 10 | 0 | 1 | 5 | 4 | 0 | infeasible |
 | `Lieb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
@@ -232,7 +235,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (337) — select to drill down
+## Hubs (340) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -440,13 +443,16 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - ⚪ [`KagomeHeisenbergAFM/MassGap/Infinite`](hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) — cited-only
 - ⚪ [`KagomeHeisenbergAFM/TopologicalEntanglementEntropy/Infinite`](hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md) — cited-only
 
-### `Kitaev1D` (6)
+### `Kitaev1D` (9)
 
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md) — corroborated-at-p
+- 🟠 [`Kitaev1D/SpecificHeat/Infinite`](hubs/Kitaev1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](hubs/Kitaev1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
 ### `KitaevHeisenberg` (1)

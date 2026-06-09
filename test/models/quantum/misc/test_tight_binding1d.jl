@@ -16,7 +16,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
-using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, Infinite, fetch
+using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, NMRSpinRelaxationRate, Infinite, fetch
 
 @testset "TightBinding1D" begin
 
@@ -138,6 +138,19 @@ end
         agree_within=1e-12,
         refs=["Ashcroft-Mermin 1976: v_F = 2 t sin(k_F); μ=0 half-filling"],
     )
+
+    # NMR spin relaxation rate low-T Korringa limit with regularization eta=0.1
+    # expected 1/T_1 = 1 / (beta * pi * (eta^2 + 4)) at beta=100.0
+    verify(
+        TightBinding1D(; t=1.0, μ=0.0),
+        NMRSpinRelaxationRate(),
+        Infinite();
+        route=:limiting_case,
+        fetch_kw=(; beta=100.0, eta=0.1),
+        independent=1.0 / (100.0 * π * (0.1^2 + 4.0)),
+        agree_within=1e-5,
+        refs=["Low-temperature regularized Korringa limit: 1/T_1 ~ T / (π * (η² + 4t²))"],
+    )
 end
 # ── additional verification cards (#381 batch 7) ─────────────────────────
 @testset "TightBinding1D — Energy/Infinite free fermion (#381 batch 7)" begin
@@ -247,5 +260,33 @@ end
         @test_throws DomainError QAtlas.fetch(
             QAtlas.TightBinding1D(), QAtlas.SpecificHeat(), QAtlas.Infinite(); beta=0.0
         )
+        @test_throws DomainError QAtlas.fetch(
+            QAtlas.TightBinding1D(), QAtlas.NMRSpinRelaxationRate(), QAtlas.Infinite(); beta=0.0
+        )
+        @test_throws DomainError QAtlas.fetch(
+            QAtlas.TightBinding1D(), QAtlas.NMRSpinRelaxationRate(), QAtlas.Infinite(); beta=1.0, eta=-0.1
+        )
+    end
+
+    # ───────────────────────── NMRSpinRelaxationRate ──────────────────────────
+    @testset "NMRSpinRelaxationRate — regularized 1/T_1" begin
+        # High-T limit (beta -> 0): remains finite
+        m = TightBinding1D(; t=1.0, μ=0.0)
+        rate_high = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=1e-3, eta=0.1)
+        @test rate_high > 0.0
+        @test rate_high < 1.0
+
+        # Low-T limit (beta -> infinity): matches regularized Korringa relation
+        for eta_val in [0.05, 0.1, 0.2]
+            expected_lim = 1.0 / (π * (eta_val^2 + 4.0))
+            rate_low = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=100.0, eta=eta_val)
+            @test isapprox(100.0 * rate_low, expected_lim; rtol=1e-3)
+        end
+
+        # Gapped insulator regime (|μ| > 2t): relaxation is exponentially suppressed at low-T
+        m_gap = TightBinding1D(; t=1.0, μ=3.0)  # gap Δ = 1.0
+        rate_gap_low = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1)
+        rate_gap_lower = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1)
+        @test rate_gap_lower < rate_gap_low * 0.1
     end
 end

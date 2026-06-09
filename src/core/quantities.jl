@@ -87,6 +87,18 @@ Specific heat per site, `c_v(β) = β² (⟨H²⟩ − ⟨H⟩²) / N`.
 struct SpecificHeat <: AbstractQuantity end
 
 """
+    NMRSpinRelaxationRate() <: AbstractQuantity
+
+NMR spin-lattice relaxation rate per site, `1/T_1(β, η)`.
+For non-interacting 1D fermion systems, computed using the regularized double momentum-space integral:
+
+    1/T_1(β, η) = 1/π³ ∫_0^π dk₁ ∫_0^π dk₂ f(ε(k₁)) (1 - f(ε(k₂))) η / ((ε(k₁) - ε(k₂))² + η²)
+
+where `η > 0` is a small regularization width (e.g. `0.1` by default).
+"""
+struct NMRSpinRelaxationRate <: AbstractQuantity end
+
+"""
     MassGap() <: AbstractQuantity
 
 Energy gap between the ground state and the first excited state.

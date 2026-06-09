@@ -20,14 +20,16 @@ using QAtlas:
     SpecificHeat,
     ThermalEntropy,
     SpontaneousMagnetization,
+    ZZCorrelation,
     Infinite,
     fetch
 
-# Connected energy variance Var(E) of a triangular Lx×Ly torus, Boltzmann-
-# weighted over all 2ᴺ configurations.  Wannier convention H = +J Σ σσ, with
-# the three bond directions (1,0), (0,1), (1,1) (mod Lx,Ly) — 3 bonds per site.
-# Shares no code with the Houtappel integral, so it is a genuine cross-check.
-function _tri_torus_var_energy(Lx::Int, Ly::Int, J::Real, β::Real)
+# Brute force over all 2ᴺ configurations of a triangular Lx×Ly torus (Wannier
+# convention H = +J Σ σσ; the three bond directions (1,0), (0,1), (1,1) mod
+# (Lx,Ly) — 3 bonds per site).  Shares no code with the closed forms, so these
+# are genuine cross-checks.  `_tri_torus_energies` returns (config energies, bond
+# count); the variance and the bond-averaged ⟨σσ⟩ = ⟨E⟩/(J·N_bonds) follow.
+function _tri_torus_energies(Lx::Int, Ly::Int, J::Real)
     N = Lx * Ly
     idx(x, y) = mod(x, Lx) + Lx * mod(y, Ly)
     bonds = Tuple{Int,Int}[]
@@ -42,17 +44,27 @@ function _tri_torus_var_energy(Lx::Int, Ly::Int, J::Real, β::Real)
     @inbounds for c in 0:(nconf - 1)
         e = 0.0
         for (i, j) in bonds
-            σi = 2 * ((c >> i) & 1) - 1
-            σj = 2 * ((c >> j) & 1) - 1
-            e += J * σi * σj
+            e += J * (2 * ((c >> i) & 1) - 1) * (2 * ((c >> j) & 1) - 1)
         end
         Es[c + 1] = e
     end
-    emin = minimum(Es)
-    w = exp.(-β .* (Es .- emin))
+    return Es, length(bonds)
+end
+
+function _tri_torus_var_energy(Lx::Int, Ly::Int, J::Real, β::Real)
+    Es, _ = _tri_torus_energies(Lx, Ly, J)
+    w = exp.(-β .* (Es .- minimum(Es)))
     p = w ./ sum(w)
     Em = sum(p .* Es)
     return sum(p .* Es .^ 2) - Em^2
+end
+
+# Bond-averaged nearest-neighbour correlation ⟨σσ⟩ = ⟨E⟩ / (J · N_bonds).
+function _tri_torus_nn_corr(Lx::Int, Ly::Int, J::Real, β::Real)
+    Es, nbonds = _tri_torus_energies(Lx, Ly, J)
+    w = exp.(-β .* (Es .- minimum(Es)))
+    p = w ./ sum(w)
+    return sum(p .* Es) / (J * nbonds)
 end
 
 @testset "IsingTriangular FM thermodynamics (Houtappel 1950)" begin
@@ -118,4 +130,20 @@ end
             @test_throws DomainError fetch(afm, Q, Infinite(); beta=0.5)
         end
     end
+end
+
+@testset "IsingTriangular AFM nearest-neighbour correlation (Wannier, T=0)" begin
+    afm = IsingTriangular(; J=1.0)
+    # Wannier 1950: the frustrated AFM ground manifold has Σσσ = -1 per triangle,
+    # so the bond-averaged T=0 correlation is exactly -1/3.
+    @test fetch(afm, ZZCorrelation(), Infinite(); r=1) == -1 / 3
+    # INDEPENDENT brute force: ⟨σσ⟩ = ⟨E⟩/(J·N_bonds) → -1/3 as T → 0.
+    for (Lx, Ly) in ((4, 4), (3, 4))
+        @test isapprox(_tri_torus_nn_corr(Lx, Ly, 1.0, 6.0), -1 / 3; atol=5e-3)
+    end
+    # general separation (Stephenson 1964) and the FM branch are not implemented
+    @test_throws ArgumentError fetch(afm, ZZCorrelation(), Infinite(); r=2)
+    @test_throws DomainError fetch(
+        IsingTriangular(; J=-1.0), ZZCorrelation(), Infinite(); r=1
+    )
 end

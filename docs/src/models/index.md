@@ -42,7 +42,7 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 5 | 🟣 0 🟢 2 🔵 2 ⚪ 0 🟠 1 | — |
 | [`IsingChain1D`](../atlas/models/IsingChain1D.md) | 8 | 🟣 0 🟢 7 🔵 0 ⚪ 0 🟠 1 | — |
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | 8 | 🟣 0 🟢 7 🔵 2 ⚪ 0 🟠 3 | `Ising` |
-| [`IsingTriangular`](../atlas/models/IsingTriangular.md) | 8 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 6 | `Ising` |
+| [`IsingTriangular`](../atlas/models/IsingTriangular.md) | 9 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 7 | `Ising` |
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`Kagome`](../atlas/models/Kagome.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 3 🟠 0 | — |

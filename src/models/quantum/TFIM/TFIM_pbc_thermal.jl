@@ -402,7 +402,7 @@ end
     fetch(model::TFIM, ::MassGap, bc::PBC; kwargs...) -> Float64
 
 Lowest excitation energy of the N-site PBC TFIM.  See
-[`_tfim_pbc_mass_gap`](@ref) for sector handling.
+`_tfim_pbc_mass_gap` for sector handling.
 """
 function fetch(model::TFIM, ::MassGap, bc::PBC; kwargs...)
     N = _bc_size(bc, kwargs)

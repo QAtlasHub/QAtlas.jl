@@ -11,7 +11,7 @@
 """
     Realization
 
-One `model realizes class` row of the [`REALIZES`](@ref) correspondence: the
+One `model realizes class` row of the `REALIZES` correspondence: the
 concrete `model` flows to `Universality{class}` in the stated `regime`
 (e.g. a quantum critical point), resting on `references`.
 """

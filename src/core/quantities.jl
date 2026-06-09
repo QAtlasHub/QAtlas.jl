@@ -36,7 +36,7 @@ the thermodynamic-identity harness comparing `f + T·s` against per-site
 
 The non-native granularity is provided automatically by a generic
 conversion fallback for 1D BCs (`OBC` / `PBC`) that uses
-[`_bc_size`](@ref).  Models on lattices whose size is not captured by
+the internal `_bc_size` helper.  Models on lattices whose size is not captured by
 `bc.N` (e.g. 2D Kitaev with `Lx, Ly` kwargs) currently support only
 their declared native granularity.
 """
@@ -491,7 +491,7 @@ struct LuttingerParameter <: AbstractQuantity end
 Fermi velocity `v_F = ∂ε/∂k |_{k_F}`.  Meaningful for non-interacting
 / mean-field fermionic band structures (tight-binding lattices,
 Bogoliubov-de Gennes diagonalisations).  In QAtlas this is the type
-returned by models like [`Honeycomb`](@ref) (at the Dirac cones), the
+returned by models like `Honeycomb` (at the Dirac cones), the
 other tight-binding lattices, and the TFIM Majorana mode at the
 critical field.
 """

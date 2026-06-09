@@ -21,7 +21,11 @@ Downloads.download("https://github.com/sotashimozono.png", favicon_path)
 Downloads.download("https://github.com/sotashimozono.png", logo_path)
 
 makedocs(;
-    checkdocs=:exports,
+    # Docs are curated per page (framework reference + per-model @autodocs),
+    # not a single full @autodocs index, so we do not require every exported
+    # docstring to appear in the manual. Cross-references and doctests are
+    # still checked strictly.
+    checkdocs=:none,
     doctest=true,
     sitename="QAtlas.jl",
     repo=Remotes.GitHub("sotashimozono", "QAtlas.jl"),
@@ -29,11 +33,12 @@ makedocs(;
         canonical="https://codes.sota-shimozono.com/QAtlas.jl/stable/",
         prettyurls=get(ENV, "CI", "false") == "true",
         edit_link="main",
-        # `api.md` contains the full `@autodocs` index (public + private). The
-        # threshold is bumped because the API page grows monotonically as the
-        # observable surface expands (e.g. the AKLT finite-T HTSE helpers, #506).
-        size_threshold=1_500_000,
-        size_threshold_warn=1_000_000,
+        # Docs are split per page: api.md is a curated framework reference and
+        # each model page renders only its own model's symbols (atlas-generated
+        # `@autodocs`), so no single generated page approaches this cap — it is
+        # a safety threshold against accidental bloat.
+        size_threshold=1_000_000,
+        size_threshold_warn=600_000,
         mathengine=MathJax3(
             Dict(
                 :tex => Dict(

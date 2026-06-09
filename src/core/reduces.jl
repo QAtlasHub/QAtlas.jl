@@ -12,7 +12,7 @@
 """
     Reduction
 
-One `source reduces to target` row of the [`REDUCES`](@ref) correspondence:
+One `source reduces to target` row of the `REDUCES` correspondence:
 the concrete `source` model becomes the concrete `target` model in the stated
 `regime` (a limit / special point), resting on `references`.  This is what
 makes a model→model delegation coherent — see [`@reduces`](@ref).

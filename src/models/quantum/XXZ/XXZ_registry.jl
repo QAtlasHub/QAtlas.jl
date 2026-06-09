@@ -69,7 +69,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/models/quantum/XXZ/test_XXZ1D.jl",
-    references=["Giamarchi2003"],
+    references=["ChitraGiamarchi1997", "Giamarchi2003"],
     notes="θ_NMR = 2K - 1 in the critical Luttinger liquid regime -1 < Δ ≤ 1.",
 )
 @register(

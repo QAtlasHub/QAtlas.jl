@@ -331,6 +331,16 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`Triangular/TightBindingChecksum/Infinite`](hubs/Triangular_TightBindingChecksum_Infinite.md)
 - 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](hubs/Triangular_TightBindingMaxEnergy_Infinite.md)
 
+## `bethe_ansatz` - 7 hubs
+
+- 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md)
+- 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
+- 🟠 [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md)
+- 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md)
+- 🟠 [`Hubbard1D/MassGap/Infinite`](hubs/Hubbard1D_MassGap_Infinite.md)
+- 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
+- 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md)
+
 ## `central_diff` - 6 hubs
 
 - 🔵 [`IsingSquare/Energy/Infinite`](hubs/IsingSquare_Energy_Infinite.md)
@@ -348,14 +358,6 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](hubs/Heisenberg1D_FreeEnergy_Infinite.md)
 - 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](hubs/Heisenberg1D_SpecificHeat_Infinite.md)
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](hubs/Heisenberg1D_ThermalEntropy_Infinite.md)
-
-## `bethe_ansatz` - 5 hubs
-
-- 🟢 [`Heisenberg1D/GroundStateEnergyDensity/Infinite`](hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md)
-- 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
-- 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md)
-- 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
-- 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md)
 
 ## `closed_form` - 5 hubs
 

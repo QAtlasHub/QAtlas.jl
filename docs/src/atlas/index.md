@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 360 |
-| ED-feasible claimed (risk denominator) | 334 |
+| Hubs `src` claims (registry) | 362 |
+| ED-feasible claimed (risk denominator) | 336 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 186 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 119 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 121 |
 | Inventory cards scanned (whole test/) | 2798 |
 | Registry files parsed | 74 / 74 |
 | Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.7%** · **in-repo-verified rate** (incl. 🔵 coherent): **67.1%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.7%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "119 actionable hub(s)"
+!!! warning "121 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -96,7 +96,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md)
     - [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md)
     - [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md)
+    - [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md)
     - [`Hubbard1D/FreeEnergy/Infinite`](hubs/Hubbard1D_FreeEnergy_Infinite.md)
+    - [`Hubbard1D/MassGap/Infinite`](hubs/Hubbard1D_MassGap_Infinite.md)
     - [`IsingChain1D/Energy/Infinite`](hubs/IsingChain1D_Energy_Infinite.md)
     - [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
     - [`IsingSquare/FreeEnergy/Infinite`](hubs/IsingSquare_FreeEnergy_Infinite.md)
@@ -204,7 +206,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `Heisenberg1D` | 26 | 0 | 13 | 4 | 0 | 9 | feasible |
 | `HeisenbergXYZ` | 6 | 0 | 1 | 1 | 0 | 4 | feasible |
 | `Honeycomb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
-| `Hubbard1D` | 5 | 0 | 2 | 2 | 0 | 1 | feasible |
+| `Hubbard1D` | 7 | 0 | 2 | 2 | 0 | 3 | feasible |
 | `IsingChain1D` | 8 | 0 | 7 | 0 | 0 | 1 | feasible |
 | `IsingSquare` | 12 | 0 | 7 | 2 | 0 | 3 | feasible |
 | `IsingTriangular` | 9 | 0 | 2 | 0 | 0 | 7 | feasible |
@@ -253,7 +255,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (360) — select to drill down
+## Hubs (362) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -400,12 +402,14 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
-### `Hubbard1D` (5)
+### `Hubbard1D` (7)
 
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
+- 🟠 [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/FreeEnergy/Infinite`](hubs/Hubbard1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — coherent
 - 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — corroborated-at-p
+- 🟠 [`Hubbard1D/MassGap/Infinite`](hubs/Hubbard1D_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 
 ### `IsingChain1D` (8)

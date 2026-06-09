@@ -25,7 +25,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`Heisenberg1D`](models/Heisenberg1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 9 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 6 | `closed_form`, `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 4 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
-| [`Hubbard1D`](models/Hubbard1D.md) | — | 5 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 2 | 0 | 1 | feasible | `@sweep` |
+| [`Hubbard1D`](models/Hubbard1D.md) | — | 7 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 2 | 0 | 3 | feasible | `@sweep` |
 | [`IsingChain1D`](models/IsingChain1D.md) | — | 8 | `analytic` | 0 | 7 | 0 | 0 | 1 | feasible | `@ising1d` |
 | [`IsingSquare`](models/IsingSquare.md) | `Ising` | 12 | `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix` | 0 | 7 | 2 | 0 | 3 | feasible | `@onsager` |
 | [`IsingTriangular`](models/IsingTriangular.md) | `Ising` | 9 | `analytic`, `delegation` | 0 | 2 | 0 | 0 | 7 | feasible | `@triangular` |
@@ -91,7 +91,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`CriticalExponents`](quantities/CriticalExponents.md) — 4 models
 - [`CriticalTemperature`](quantities/CriticalTemperature.md) — 6 models
 - [`EdgeModeEnergy`](quantities/EdgeModeEnergy.md) — 2 models
-- [`Energy`](quantities/Energy.md) — 26 models
+- [`Energy`](quantities/Energy.md) — 27 models
 - [`EnergyLocal`](quantities/EnergyLocal.md) — 5 models
 - [`ExactSpectrum`](quantities/ExactSpectrum.md) — 1 models
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
@@ -112,7 +112,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`MagnetizationYLocal`](quantities/MagnetizationYLocal.md) — 3 models
 - [`MagnetizationZ`](quantities/MagnetizationZ.md) — 5 models
 - [`MagnetizationZLocal`](quantities/MagnetizationZLocal.md) — 5 models
-- [`MassGap`](quantities/MassGap.md) — 26 models
+- [`MassGap`](quantities/MassGap.md) — 27 models
 - [`MerminGHZBound`](quantities/MerminGHZBound.md) — 1 models
 - [`NMRRelaxationExponent`](quantities/NMRRelaxationExponent.md) — 2 models
 - [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md) — 2 models

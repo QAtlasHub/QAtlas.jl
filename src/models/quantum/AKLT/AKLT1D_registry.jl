@@ -178,7 +178,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
     references=["AKLT1988"],
-    notes="β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError.",
+    notes="β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).",
 )
 @register(
     AKLT1D,
@@ -188,7 +188,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
     references=["AKLT1988"],
-    notes="β=∞ only: s(∞) = 0 (unique bulk GS in the Haldane phase). Finite β throws DomainError.",
+    notes="β=∞ only: s(∞) = 0 (unique bulk GS in the Haldane phase). Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).",
 )
 @register(
     AKLT1D,
@@ -198,7 +198,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
     references=["AKLT1988"],
-    notes="β=∞ only: c(∞) = 0. Finite β throws DomainError.",
+    notes="β=∞ only: c(∞) = 0. Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).",
 )
 @register(
     AKLT1D,
@@ -209,4 +209,56 @@
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
     references=["AKLT1988", "GarciaSaez2013"],
     notes="β=∞ only: χ(∞) = 0 (Haldane gap suppression). Finite β throws DomainError.",
+)
+
+# ── scheme=:htse — biquadratic-aware finite-β high-temperature expansion (#506) ──
+# Second definitions of the Infinite thermal quantities, keyed by scheme=:htse;
+# the canonical rows above stay the exact β=∞ limits.
+# fetch(model, q, Infinite(); scheme=:htse, beta=...).  The biquadratic
+# (S·S)² enters the per-bond cumulants κₙ automatically — the published
+# bilinear-only HTSE [Lohmann2014] does not supply it.  See AKLT1D_thermal.jl.
+@register(
+    AKLT1D,
+    FreeEnergy,
+    Infinite,
+    scheme=:htse,
+    method=:htse,
+    status=:approx,
+    valid_domain="βJ ≲ 0.4 (high temperature)",
+    error_order="O((βJ)⁵)",
+    canonical=false,
+    reliability=:high,
+    references=["Lohmann2014", "Lou2000", "AKLT1988"],
+    tested_in="test/models/quantum/misc/test_aklt_htse.jl",
+    notes="f = -φ(β)/β, φ = lnZ/N = ln3 + Σ aₙβⁿ (n≤4), aₙ=(-1)ⁿκₙJⁿ/n!; per-bond cumulants κ from exact ED moments, biquadratic included.",
+)
+@register(
+    AKLT1D,
+    SpecificHeat,
+    Infinite,
+    scheme=:htse,
+    method=:htse,
+    status=:approx,
+    valid_domain="βJ ≲ 0.4 (high temperature)",
+    error_order="O((βJ)⁵)",
+    canonical=false,
+    reliability=:high,
+    references=["Lohmann2014", "Lou2000", "AKLT1988"],
+    tested_in="test/models/quantum/misc/test_aklt_htse.jl",
+    notes="c_v = Σ n(n-1)aₙβⁿ (n=2..4); leading κ₂(Jβ)² with κ₂=80/81. Bilinear-limit κ₂=4/3 matches Lohmann2014 per-bond d₂=r²/3 (r=s(s+1)=2).",
+)
+@register(
+    AKLT1D,
+    ThermalEntropy,
+    Infinite,
+    scheme=:htse,
+    method=:htse,
+    status=:approx,
+    valid_domain="βJ ≲ 0.4 (high temperature)",
+    error_order="O((βJ)⁵)",
+    canonical=false,
+    reliability=:high,
+    references=["Lohmann2014", "Lou2000", "AKLT1988"],
+    tested_in="test/models/quantum/misc/test_aklt_htse.jl",
+    notes="s = φ(β) + βε(β), ε=-∂φ/∂β; s → ln3 as β→0 (spin-1 infinite-T entropy).",
 )

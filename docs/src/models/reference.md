@@ -7,7 +7,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 
 | Model | Key References |
 |-------|---------------|
-| [`AKLT1D`](../atlas/models/AKLT1D.md) | AKLT1988, KennedyTasaki1992, GarciaSaez2013, Arovas1988 |
+| [`AKLT1D`](../atlas/models/AKLT1D.md) | AKLT1988, KennedyTasaki1992, GarciaSaez2013, Arovas1988, Lohmann2014, Lou2000 |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | AKLT1988, VerstraeteCirac2004 |
 | [`BCFT`](../atlas/models/BCFT.md) | Cardy1989, AffleckLudwig1991, FriedanKonechny2004 |
 | [`Bound`](../atlas/models/Bound.md) | MaldacenaShenkerStanford2016, MargolusLevitin1998, MandelstamTamm1945, SekinoSusskind2008, Bekenstein1981, CHSH1969, Tsirelson1980, PopescuRohrlich1994, Mermin1990, BuzekHillery1996, ShorPreskill2000 |

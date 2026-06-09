@@ -28,8 +28,8 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **3** |
+| 🟠 uncorroborated-but-feasible | 5 |
+| **total claimed hubs** | **7** |
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
@@ -39,7 +39,11 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 |---|---|
 | [`CriticalExponents`](../quantities/CriticalExponents.md) | 🟠 [hub](../hubs/IsingTriangular_CriticalExponents_Infinite.md) |
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/IsingTriangular_CriticalTemperature_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/IsingTriangular_Energy_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/IsingTriangular_FreeEnergy_Infinite.md) |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/IsingTriangular_SpecificHeat_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) |
 
 ## Derivation notes
 

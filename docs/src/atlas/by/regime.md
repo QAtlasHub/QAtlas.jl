@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (95)
+## `(no card)` (99)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -47,6 +47,10 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`IsingSquare/FreeEnergy/Infinite`](../hubs/IsingSquare_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/SpecificHeat/Infinite`](../hubs/IsingSquare_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](../hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/Energy/Infinite`](../hubs/IsingTriangular_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](../hubs/IsingTriangular_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](../hubs/IsingTriangular_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - ⚪ [`KitaevHoneycomb/Energy/OBC`](../hubs/KitaevHoneycomb_Energy_OBC.md) — cited-only

@@ -160,15 +160,20 @@ S = QAtlas.fetch(IsingTriangular(; J=1.0), ResidualEntropy(), Infinite())
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 3 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 7 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`CriticalExponents`](../../atlas/hubs/IsingTriangular_CriticalExponents_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`CriticalTemperature`](../../atlas/hubs/IsingTriangular_CriticalTemperature_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
+| [`Energy`](../../atlas/hubs/IsingTriangular_Energy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`FreeEnergy`](../../atlas/hubs/IsingTriangular_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`ResidualEntropy`](../../atlas/hubs/IsingTriangular_ResidualEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| [`SpecificHeat`](../../atlas/hubs/IsingTriangular_SpecificHeat_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`ThermalEntropy`](../../atlas/hubs/IsingTriangular_ThermalEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

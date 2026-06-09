@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 331 |
-| ED-feasible claimed (risk denominator) | 305 |
+| Hubs `src` claims (registry) | 335 |
+| ED-feasible claimed (risk denominator) | 309 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 184 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 92 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 96 |
 | Inventory cards scanned (whole test/) | 2794 |
 | Registry files parsed | 74 / 74 |
 | Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **60.3%** · **in-repo-verified rate** (incl. 🔵 coherent): **72.8%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **59.5%** · **in-repo-verified rate** (incl. 🔵 coherent): **71.8%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "92 actionable hub(s)"
+!!! warning "96 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -102,6 +102,10 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`IsingSquare/FreeEnergy/Infinite`](hubs/IsingSquare_FreeEnergy_Infinite.md)
     - [`IsingSquare/SpecificHeat/Infinite`](hubs/IsingSquare_SpecificHeat_Infinite.md)
     - [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
+    - [`IsingTriangular/Energy/Infinite`](hubs/IsingTriangular_Energy_Infinite.md)
+    - [`IsingTriangular/FreeEnergy/Infinite`](hubs/IsingTriangular_FreeEnergy_Infinite.md)
+    - [`IsingTriangular/SpecificHeat/Infinite`](hubs/IsingTriangular_SpecificHeat_Infinite.md)
+    - [`IsingTriangular/ThermalEntropy/Infinite`](hubs/IsingTriangular_ThermalEntropy_Infinite.md)
     - [`Kagome/TightBindingChecksum/Infinite`](hubs/Kagome_TightBindingChecksum_Infinite.md)
     - [`Kagome/TightBindingMaxEnergy/Infinite`](hubs/Kagome_TightBindingMaxEnergy_Infinite.md)
     - [`Lieb/TightBindingChecksum/Infinite`](hubs/Lieb_TightBindingChecksum_Infinite.md)
@@ -180,7 +184,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `Hubbard1D` | 5 | 0 | 2 | 2 | 0 | 1 | feasible |
 | `IsingChain1D` | 8 | 0 | 7 | 0 | 0 | 1 | feasible |
 | `IsingSquare` | 12 | 0 | 7 | 2 | 0 | 3 | feasible |
-| `IsingTriangular` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
+| `IsingTriangular` | 7 | 0 | 2 | 0 | 0 | 5 | feasible |
 | `J1J2Heisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `Kagome` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `KagomeHeisenbergAFM` | 3 | 0 | 0 | 0 | 3 | 0 | infeasible |
@@ -226,7 +230,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (331) — select to drill down
+## Hubs (335) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -407,11 +411,15 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🔵 [`IsingSquare/ThermalEntropy/Infinite`](hubs/IsingSquare_ThermalEntropy_Infinite.md) — coherent
 - 🟢 [`IsingSquare/ThermalEntropy/PBC`](hubs/IsingSquare_ThermalEntropy_PBC.md) — corroborated-at-p
 
-### `IsingTriangular` (3)
+### `IsingTriangular` (7)
 
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingTriangular/Energy/Infinite`](hubs/IsingTriangular_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](hubs/IsingTriangular_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](hubs/IsingTriangular_ResidualEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](hubs/IsingTriangular_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](hubs/IsingTriangular_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 
 ### `J1J2Heisenberg1D` (1)
 

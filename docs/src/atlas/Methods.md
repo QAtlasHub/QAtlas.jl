@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 129 hubs
+## `analytic` - 133 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -67,7 +67,11 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`IsingSquare/CriticalTemperature/Infinite`](hubs/IsingSquare_CriticalTemperature_Infinite.md)
 - 🟢 [`IsingSquare/SpontaneousMagnetization/Infinite`](hubs/IsingSquare_SpontaneousMagnetization_Infinite.md)
 - 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
+- 🟠 [`IsingTriangular/Energy/Infinite`](hubs/IsingTriangular_Energy_Infinite.md)
+- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](hubs/IsingTriangular_FreeEnergy_Infinite.md)
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](hubs/IsingTriangular_ResidualEntropy_Infinite.md)
+- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](hubs/IsingTriangular_SpecificHeat_Infinite.md)
+- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](hubs/IsingTriangular_ThermalEntropy_Infinite.md)
 - ⚪ [`KagomeHeisenbergAFM/TopologicalEntanglementEntropy/Infinite`](hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md)
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)

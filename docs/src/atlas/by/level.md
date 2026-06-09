@@ -253,7 +253,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (92)
+## `uncorroborated-but-feasible` (96)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -295,6 +295,10 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`IsingSquare/FreeEnergy/Infinite`](../hubs/IsingSquare_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/SpecificHeat/Infinite`](../hubs/IsingSquare_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](../hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/Energy/Infinite`](../hubs/IsingTriangular_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](../hubs/IsingTriangular_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](../hubs/IsingTriangular_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kagome/TightBindingMaxEnergy/Infinite`](../hubs/Kagome_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Lieb/TightBindingChecksum/Infinite`](../hubs/Lieb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible

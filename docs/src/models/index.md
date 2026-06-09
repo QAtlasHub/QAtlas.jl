@@ -46,7 +46,7 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`Kagome`](../atlas/models/Kagome.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 3 🟠 0 | — |
-| [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 5 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 0 | — |
+| [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 8 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 3 | — |
 | [`KitaevHeisenberg`](../atlas/models/KitaevHeisenberg.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`KitaevHoneycomb`](../atlas/models/KitaevHoneycomb.md) | 5 | 🟣 0 🟢 1 🔵 5 ⚪ 4 🟠 0 | — |
 | [`Lieb`](../atlas/models/Lieb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |

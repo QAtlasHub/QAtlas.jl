@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 13
-- **Total hubs (Model, BC pairs)**: 21
+- **Models with this quantity registered**: 14
+- **Total hubs (Model, BC pairs)**: 22
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `cft_low_T`, `dense_ed`, `free_fermion_quadgk_or_klumper_nlie`, `matter_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
@@ -36,6 +36,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟢 [hub](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |
 | [`IsingTriangular`](../models/IsingTriangular.md) | — | — | 🟠 [hub](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) |
+| [`Kitaev1D`](../models/Kitaev1D.md) | — | — | 🟠 [hub](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | — | — |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |

@@ -290,6 +290,7 @@ include("models/quantum/KitaevHoneycomb/KitaevHoneycomb.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_thermal.jl")
 include("models/quantum/KitaevHoneycomb/KitaevHoneycomb_registry.jl")
 include("models/quantum/Kitaev1D/Kitaev1D.jl")
+include("models/quantum/Kitaev1D/Kitaev1D_thermal.jl")
 include("models/quantum/Kitaev1D/Kitaev1D_registry.jl")  # populates REGISTRY for Kitaev1D
 include("models/quantum/SSH/SSH.jl")
 include("models/quantum/SSH/SSH_registry.jl")  # populates REGISTRY for SSH

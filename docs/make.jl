@@ -29,10 +29,11 @@ makedocs(;
         canonical="https://codes.sota-shimozono.com/QAtlas.jl/stable/",
         prettyurls=get(ENV, "CI", "false") == "true",
         edit_link="main",
-        # `api.md` contains the full `@autodocs` index. The threshold is bumped
-        # because the API page grows large once the observable surface expands.
-        size_threshold=1_000_000,
-        size_threshold_warn=600_000,
+        # `api.md` contains the full `@autodocs` index (public + private). The
+        # threshold is bumped because the API page grows monotonically as the
+        # observable surface expands (e.g. the AKLT finite-T HTSE helpers, #506).
+        size_threshold=1_500_000,
+        size_threshold_warn=1_000_000,
         mathengine=MathJax3(
             Dict(
                 :tex => Dict(

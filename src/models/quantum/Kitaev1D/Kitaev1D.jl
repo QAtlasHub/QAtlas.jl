@@ -394,7 +394,7 @@ trivial phase (`|μ| > 2|t|`).  Throws on the gapless line `|μ| = 2|t|`
 `Δ = 0` with `|μ| < 2|t|`.
 
 The two 2 × 2 Pfaffians are computed using the generic
-[`pfaffian`](@ref) routine in `src/core/pfaffian.jl`, exercising the
+`pfaffian` routine in `src/core/pfaffian.jl`, exercising the
 same numerical machinery used elsewhere in QAtlas for free-fermion Wick
 contractions.
 """

@@ -71,7 +71,7 @@ disordered (Lieb / Sutherland 1967), Δ < −1 antiferroelectric
 (AFE / F-model, Lieb 1967b).
 
 Convenience constructors for the three classical sub-models
-([`square_ice`](@ref), [`f_model`](@ref), [`kdp_model`](@ref)) are
+(`square_ice`, `f_model`, `kdp_model`) are
 also provided.
 
 Currently registered fetches:

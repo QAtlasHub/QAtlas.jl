@@ -134,8 +134,42 @@ page.
 
 ---
 
-## Full API Index
+## Codebase reference
+
+The framework is three pieces: a **Registry** that records which `(model,
+quantity, bc)` triples are implemented and how; the **Model** and
+boundary-condition types that name a physical system; and the **Quantity**
+types that name what to compute.
+
+`fetch(::Model, …)` itself only exists as per-model `@register` + method pairs
+— each physical quantity is defined alongside that model's conventions — so the
+concrete `fetch` methods are documented on the individual
+[model pages](models/index.md), generated in lock-step with their `@register`
+cards.  This page documents the cross-cutting framework only.
+
+### Registry — `@register`, status, realizations, reductions, model cards
 
 ```@autodocs
-Modules = [QAtlas, QAtlas.XXZKlumperNLIE, QAtlas.Hubbard1DJKSNLIE]
+Modules = [QAtlas]
+Pages = ["core/registry.jl", "core/realizes.jl", "core/reduces.jl", "core/about.jl"]
+```
+
+### Model & boundary conditions
+
+```@autodocs
+Modules = [QAtlas]
+Pages = ["core/type.jl"]
+```
+
+### Quantity
+
+```@autodocs
+Modules = [QAtlas]
+Pages = [
+    "core/quantities.jl",
+    "core/universality.jl",
+    "bounds/Bounds.jl",
+    "universalities/MinimalModel/MinimalModel.jl",
+    "universalities/WZW/WZW.jl",
+]
 ```

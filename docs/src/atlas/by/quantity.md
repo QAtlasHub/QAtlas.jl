@@ -388,12 +388,13 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](../hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 - ⚪ [`MajumdarGhosh/SpinGap/Infinite`](../hubs/MajumdarGhosh_SpinGap_Infinite.md) — cited-only
 
-## `SpontaneousMagnetization` (5)
+## `SpontaneousMagnetization` (6)
 
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟠 [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](../hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingChain1D/SpontaneousMagnetization/Infinite`](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingSquare/SpontaneousMagnetization/Infinite`](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingTriangular/SpontaneousMagnetization/Infinite`](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 
 ## `SteadyStateCurrent` (1)

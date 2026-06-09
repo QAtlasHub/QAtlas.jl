@@ -116,3 +116,37 @@ function fetch(m::IsingTriangular, ::ThermalEntropy, ::Infinite; beta::Real, J::
     f = fetch(m, FreeEnergy(), Infinite(); beta=beta, J=J)
     return beta * (ε - f)
 end
+
+"""
+    fetch(m::IsingTriangular, ::SpontaneousMagnetization; β, J=m.J) -> Float64
+
+Spontaneous magnetisation of the triangular-lattice Ising model.
+
+For the ferromagnet (`J < 0`) the Potts–Domb closed form below `T_c`:
+
+    M(T) = [1 - 16 x³ / ((1-x)³ (1+3x))]^{1/8},   x = e^{-4β|J|},   T < T_c,
+    M(T) = 0,                                                        T ≥ T_c,
+
+with critical exponent `β = 1/8`.  The bracket vanishes exactly at
+`x = 1/3`, i.e. `T_c = 4|J|/ln 3` (the registered Houtappel value), and
+`M → 1` as `T → 0`.
+
+For the antiferromagnet (`J > 0`) the triangular lattice is frustrated with
+no uniform long-range order at any temperature, so `M = 0`.
+
+# References
+- R. M. F. Houtappel, *Physica* **16**, 425 (1950).
+- R. J. Baxter, *Exactly Solved Models in Statistical Mechanics* (1982), Ch 11.
+"""
+function fetch(m::IsingTriangular, ::SpontaneousMagnetization; β::Real, J::Real=m.J)
+    J < 0 || return 0.0    # AFM (J>0): frustrated, no spontaneous magnetisation
+    x = exp(-4 * β * abs(J))
+    frac = 16 * x^3 / ((1 - x)^3 * (1 + 3 * x))
+    return frac ≥ 1 ? 0.0 : (1 - frac)^(1 / 8)   # frac ≥ 1 ⟺ x ≥ 1/3 ⟺ T ≥ T_c
+end
+
+function fetch(
+    m::IsingTriangular, q::SpontaneousMagnetization, ::Infinite; β::Real, J::Real=m.J
+)
+    return fetch(m, q; β=β, J=J)
+end

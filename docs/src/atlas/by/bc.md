@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (217)
+## `Infinite` (218)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -98,6 +98,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟠 [`IsingTriangular/FreeEnergy/Infinite`](../hubs/IsingTriangular_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟠 [`IsingTriangular/SpecificHeat/Infinite`](../hubs/IsingTriangular_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/SpontaneousMagnetization/Infinite`](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`Kagome/TightBindingChecksum/Infinite`](../hubs/Kagome_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible

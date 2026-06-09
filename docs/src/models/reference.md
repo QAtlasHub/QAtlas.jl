@@ -28,7 +28,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`Hubbard1D`](../atlas/models/Hubbard1D.md) | LiebWu1968, Essler2005, Voit1995, JuttnerKlumperSuzuki1998 |
 | [`IsingChain1D`](../atlas/models/IsingChain1D.md) | Ising1925, Brush1967 |
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | Onsager1944, Yang1952 |
-| [`IsingTriangular`](../atlas/models/IsingTriangular.md) | Wannier1950, Houtappel1950, Onsager1944 |
+| [`IsingTriangular`](../atlas/models/IsingTriangular.md) | Wannier1950, Houtappel1950, Onsager1944, Baxter1982 |
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | Hulthen1938, MajumdarGhosh1969, WhiteAffleck1996 |
 | [`Kagome`](../atlas/models/Kagome.md) |  |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | YanHuseWhite2011, DepenbrockMcCullochSchollwock2012, IqbalBeccaSorellaPoilblanc2013, KitaevPreskill2006, LevinWen2006, JiangWangBalents2012 |

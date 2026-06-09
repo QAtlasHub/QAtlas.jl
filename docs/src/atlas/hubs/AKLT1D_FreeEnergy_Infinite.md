@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, status `exact`, reliability `high`, refs: AKLT1988
-- β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError.
+- β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).
 
 ## Corroboration
 

@@ -539,7 +539,16 @@ Same closed form as `GroundStateEnergyDensity` at `Infinite()`; exposed
 through `FreeEnergy` for callers that route generic thermodynamic
 observables.
 """
-function fetch(model::AKLT1D, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
+function fetch(
+    model::AKLT1D,
+    ::FreeEnergy,
+    ::Infinite;
+    scheme::Symbol=:canonical,
+    beta::Real,
+    kwargs...,
+)
+    scheme === :canonical ||
+        return _aklt_thermo_infinite_scheme(model, FreeEnergy(), Val(scheme); beta=beta)
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return -(2.0 / 3.0) * model.J
 end
@@ -551,7 +560,16 @@ Per-site Gibbs entropy at `β = ∞` for the infinite AKLT chain: `0`.
 Bulk Haldane phase has a unique GS modulo finite edge-mode corrections
 (which vanish per-site as `N → ∞`).
 """
-function fetch(::AKLT1D, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...)
+function fetch(
+    model::AKLT1D,
+    ::ThermalEntropy,
+    ::Infinite;
+    scheme::Symbol=:canonical,
+    beta::Real,
+    kwargs...,
+)
+    scheme === :canonical ||
+        return _aklt_thermo_infinite_scheme(model, ThermalEntropy(), Val(scheme); beta=beta)
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return 0.0
 end
@@ -561,7 +579,16 @@ end
 
 Per-site heat capacity at `β = ∞` for the infinite AKLT chain: `0`.
 """
-function fetch(::AKLT1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
+function fetch(
+    model::AKLT1D,
+    ::SpecificHeat,
+    ::Infinite;
+    scheme::Symbol=:canonical,
+    beta::Real,
+    kwargs...,
+)
+    scheme === :canonical ||
+        return _aklt_thermo_infinite_scheme(model, SpecificHeat(), Val(scheme); beta=beta)
     isinf(beta) && beta > 0 || throw(DomainError(beta, _AKLT_NO_FINITE_BETA_MSG))
     return 0.0
 end

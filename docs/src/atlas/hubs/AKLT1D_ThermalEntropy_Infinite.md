@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, status `exact`, reliability `high`, refs: AKLT1988
-- β=∞ only: s(∞) = 0 (unique bulk GS in the Haldane phase). Finite β throws DomainError.
+- β=∞ only: s(∞) = 0 (unique bulk GS in the Haldane phase). Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).
 
 ## Corroboration
 

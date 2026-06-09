@@ -148,9 +148,11 @@ end
     )
     @test length(results) == length(FLUCTUATION_DISSIPATION_IDENTITIES) * length(βs)
     @test all(r -> r.status === :pass, results)
-    ran = unique(r.identity for r in results)
-    @test any(x -> occursin("Var(E)", x), ran)   # energy FDT ran
-    @test any(x -> occursin("Var(M)", x), ran)   # magnetisation FDT ran
+    # Assert each FDT identity RAN *and PASSED* — a skipped row still carries the
+    # identity name, so matching on name alone (with only the line above as a
+    # guard) would falsely green if the trait/dispatch wiring broke.
+    @test any(r -> occursin("Var(E)", r.identity) && r.status === :pass, results)
+    @test any(r -> occursin("Var(M)", r.identity) && r.status === :pass, results)
 end
 
 # ── BONUS — the existing thermodynamic identities also hold for IsingChain1D ──
@@ -163,4 +165,20 @@ end
     @test any(r -> occursin("Gibbs", r.identity) && r.status === :pass, results)
     @test any(r -> occursin("∂ε/∂β", r.identity) && r.status === :pass, results)
     @test any(r -> occursin("∂s/∂β", r.identity) && r.status === :pass, results)
+end
+
+# ── Argument guards — the foundation's defensive contracts must actually throw ─
+@testset "FDT foundation — argument guards throw" begin
+    @test_throws ArgumentError fd_log_partition(Float64[], 1.0)
+    @test_throws ArgumentError fd_thermo_from_spectrum(Float64[], 1.0)
+    @test_throws ArgumentError fd_thermo_from_spectrum([0.0, 1.0], 0.0)    # β > 0
+    @test_throws ArgumentError fd_thermo_from_spectrum([0.0, 1.0], -1.0)
+    @test_throws DimensionMismatch fd_gibbs_moments([0.0, 1.0], [1.0], 1.0)
+    # brute-force providers reject a field term they do not model (h ≠ 0)
+    @test_throws ArgumentError independent_energy_variance_per_site(
+        IsingChain1D(; J=1.0, h=0.3), Infinite(); beta=0.3
+    )
+    @test_throws ArgumentError independent_magnetization_variance_per_site(
+        IsingChain1D(; J=1.0, h=0.3), Infinite(); beta=0.3
+    )
 end

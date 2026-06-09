@@ -120,7 +120,13 @@ function fd_thermo_from_spectrum(levels::AbstractVector{<:Real}, β::Real)
     p = fd_boltzmann_weights(levels, β)
     E = sum(p .* levels)
     E2 = sum(p .* abs2.(levels))
-    varE = max(E2 - E^2, zero(E))          # clamp sub-eps negative round-off
+    raw_varE = E2 - E^2
+    # Var(E) ≥ 0 exactly; only sub-eps cancellation may dip slightly negative.
+    # A large negative value signals a spectrum/weight bug — surface it rather
+    # than silently flooring to 0 (which would sail through a downstream C ≥ 0).
+    raw_varE ≥ -sqrt(eps(float(E2))) * (abs(E2) + 1) ||
+        error("fd_thermo_from_spectrum: Var(E) = $(raw_varE) ≪ 0 — spectrum/weight bug?")
+    varE = max(raw_varE, zero(E))
     lnZ = fd_log_partition(levels, β)
     F = -lnZ / β
     S = β * (E - F)
@@ -210,6 +216,12 @@ already `~2e-4` by `βJ = 0.5` — use high-T `β` for tight atlas comparisons.
 function independent_energy_variance_per_site(
     m::IsingChain1D, ::Infinite; beta::Real, N::Int=16
 )
+    iszero(m.h) || throw(
+        ArgumentError(
+            "independent_energy_variance_per_site: the brute-force ring omits the " *
+            "field term, so only h = 0 is supported; got h = $(m.h).",
+        ),
+    )
     E, _ = _ising1d_ring_configs(N, m.J)
     return fd_thermo_from_spectrum(E, beta).varE / N
 end
@@ -225,6 +237,12 @@ susceptibility.
 function independent_magnetization_variance_per_site(
     m::IsingChain1D, ::Infinite; beta::Real, N::Int=16
 )
+    iszero(m.h) || throw(
+        ArgumentError(
+            "independent_magnetization_variance_per_site: the brute-force ring omits " *
+            "the field term, so only h = 0 is supported; got h = $(m.h).",
+        ),
+    )
     E, M = _ising1d_ring_configs(N, m.J)
     return fd_gibbs_moments(E, M, beta).var / N
 end
@@ -281,8 +299,9 @@ The FDT identity catalogue — energy (`SPECIFIC_HEAT_FROM_VARIANCE`) and
 magnetisation (`SUSCEPTIBILITY_ZZ_FROM_VARIANCE`).  Opt-in (like
 `SYMMETRY_IDENTITIES`): pass via the `identities=` kwarg of
 `verify_thermodynamic_identities`.  Use a finite-size-aware `rtol`: the
-energy-variance correction scales as `O(N²·tanh(βJ)ᴺ)`, so `rtol≈1e-4`
-needs `βJ ≤ 0.4` at `N=16` (it reaches `~2e-4` by `βJ = 0.5`).
+energy-variance correction scales as `O(N²·tanh(βJ)ᴺ)` — at `N=16` it is
+`< 2e-5` for `βJ ≤ 0.4` (so `rtol=1e-4` is safely conservative) but reaches
+`~2e-4` by `βJ = 0.5`.
 """
 const FLUCTUATION_DISSIPATION_IDENTITIES = ThermoIdentity[
     SPECIFIC_HEAT_FROM_VARIANCE, SUSCEPTIBILITY_ZZ_FROM_VARIANCE

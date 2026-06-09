@@ -28,8 +28,8 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 5 |
-| **total claimed hubs** | **7** |
+| 🟠 uncorroborated-but-feasible | 6 |
+| **total claimed hubs** | **8** |
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
@@ -43,6 +43,7 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/IsingTriangular_FreeEnergy_Infinite.md) |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/IsingTriangular_SpecificHeat_Infinite.md) |
+| [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟠 [hub](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) |
 
 ## Derivation notes
@@ -61,6 +62,7 @@ Papers cited by this model's `@register` cards. The full numbered list is on the
 ```@bibliography
 Pages = []
 Canonical = false
+Baxter1982
 Houtappel1950
 Onsager1944
 Wannier1950

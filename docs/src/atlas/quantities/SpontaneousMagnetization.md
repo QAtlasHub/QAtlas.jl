@@ -13,17 +13,17 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 5
-- **Total hubs (Model, BC pairs)**: 5
+- **Models with this quantity registered**: 6
+- **Total hubs (Model, BC pairs)**: 6
 - **Methods** (derived from `@register`): `analytic`, `closed_form`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Baxter1982 — 1 hub
+- Houtappel1950 — 1 hub
 - Ising1925 — 1 hub
 - LandauLifshitz1980 — 1 hub
 - McCoyWu1978 — 1 hub
-- Pfeuty1970 — 1 hub
-- Yang1952 — 1 hub
 
 ## Model × BC matrix
 
@@ -33,6 +33,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | 🟠 [hub](../hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | 🟢 [hub](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | 🟢 [hub](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) |
+| [`IsingTriangular`](../models/IsingTriangular.md) | 🟠 [hub](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

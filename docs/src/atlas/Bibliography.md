@@ -120,6 +120,16 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`XXZ1D/RenyiEntropy/Infinite`](hubs/XXZ1D_RenyiEntropy_Infinite.md)
 - 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](hubs/XXZ1D_VonNeumannEntropy_Infinite.md)
 
+## Houtappel1950 — 7 hubs
+
+- 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
+- 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
+- 🟠 [`IsingTriangular/Energy/Infinite`](hubs/IsingTriangular_Energy_Infinite.md)
+- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](hubs/IsingTriangular_FreeEnergy_Infinite.md)
+- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](hubs/IsingTriangular_SpecificHeat_Infinite.md)
+- 🟠 [`IsingTriangular/SpontaneousMagnetization/Infinite`](hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md)
+- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](hubs/IsingTriangular_ThermalEntropy_Infinite.md)
+
 ## LandauLifshitz1980 — 7 hubs
 
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](hubs/CurieWeissIsing_CriticalTemperature_Infinite.md)
@@ -166,15 +176,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
-
-## Houtappel1950 — 6 hubs
-
-- 🟠 [`IsingTriangular/CriticalExponents/Infinite`](hubs/IsingTriangular_CriticalExponents_Infinite.md)
-- 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
-- 🟠 [`IsingTriangular/Energy/Infinite`](hubs/IsingTriangular_Energy_Infinite.md)
-- 🟠 [`IsingTriangular/FreeEnergy/Infinite`](hubs/IsingTriangular_FreeEnergy_Infinite.md)
-- 🟠 [`IsingTriangular/SpecificHeat/Infinite`](hubs/IsingTriangular_SpecificHeat_Infinite.md)
-- 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](hubs/IsingTriangular_ThermalEntropy_Infinite.md)
 
 ## Kitaev2001 — 6 hubs
 
@@ -370,6 +371,11 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](hubs/TFIM_MagnetizationXLocal_Infinite.md)
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
 
+## Baxter1982 — 2 hubs
+
+- 🟠 [`IsingTriangular/SpontaneousMagnetization/Infinite`](hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md)
+- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+
 ## BriegelRaussendorf2001 — 2 hubs
 
 - 🟢 [`Cluster1D/Energy/Infinite`](hubs/Cluster1D_Energy_Infinite.md)
@@ -526,10 +532,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## BauerBernard2006 — 1 hub
 
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](hubs/SLEkappa_CentralCharge_Infinite.md)
-
-## Baxter1982 — 1 hub
-
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 
 ## Beffara2008 — 1 hub
 

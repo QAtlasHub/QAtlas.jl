@@ -14,7 +14,14 @@
 
 using QAtlas, Test
 using QAtlas:
-    IsingTriangular, FreeEnergy, Energy, SpecificHeat, ThermalEntropy, Infinite, fetch
+    IsingTriangular,
+    FreeEnergy,
+    Energy,
+    SpecificHeat,
+    ThermalEntropy,
+    SpontaneousMagnetization,
+    Infinite,
+    fetch
 
 # Connected energy variance Var(E) of a triangular Lx×Ly torus, Boltzmann-
 # weighted over all 2ᴺ configurations.  Wannier convention H = +J Σ σσ, with
@@ -88,6 +95,21 @@ end
             cv_inf = fetch(m, SpecificHeat(), Infinite(); beta=β)
             @test isapprox(cv_bf, cv_inf; rtol=0.15)
         end
+    end
+
+    @testset "spontaneous magnetisation (Potts–Domb, FM): T_c-vanishing + limits" begin
+        M(β) = fetch(m, SpontaneousMagnetization(); β=β)
+        # The load-bearing independent check: M = 0 just ABOVE T_c and M > 0 just
+        # BELOW it — the Potts–Domb bracket vanishes exactly at the independently
+        # registered T_c = 4|J|/ln3 (x = 3^{-1} = 1/3).
+        @test M(0.9βc) == 0.0                       # T > T_c (x = 3^{-0.9} > 1/3)
+        @test M(1.1βc) > 0.0                        # T < T_c (x = 3^{-1.1} < 1/3)
+        @test M(1.1βc) < M(2.0βc)                   # M grows as T decreases
+        @test isapprox(M(6.0), 1.0; atol=1e-5)      # T → 0: fully ordered
+        @test all(0.0 ≤ M(β) ≤ 1.0 for β in (0.1, 0.3, 0.5, 1.0, 2.0, 6.0))
+        # AFM (J>0): frustrated → no spontaneous (uniform) magnetisation
+        afm = IsingTriangular(; J=1.0)
+        @test fetch(afm, SpontaneousMagnetization(), Infinite(); β=0.5) == 0.0
     end
 
     @testset "AFM branch (J>0) raises DomainError (frustrated, no closed form)" begin

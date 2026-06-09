@@ -81,3 +81,14 @@
     references=["Houtappel1950"],
     notes="FM (J<0): s = β(ε-f); bounded 0 (T→0) … ln2 (T→∞).",
 )
+
+@register(
+    IsingTriangular,
+    SpontaneousMagnetization,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_triangular_thermo.jl",
+    references=["Houtappel1950", "Baxter1982"],
+    notes="FM (J<0): Potts–Domb M=[1-16x³/((1-x)³(1+3x))]^{1/8}, x=e^{-4β|J|}, 0 above T_c. AFM (J>0): 0 (frustrated).",
+)

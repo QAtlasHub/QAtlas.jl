@@ -382,3 +382,22 @@ function fetch(
         kwargs...,
     )
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NMR relaxation exponent (quantum critical point h = J)
+# ─────────────────────────────────────────────────────────────────────────────
+
+"""
+    fetch(model::TFIM, ::NMRRelaxationExponent, ::Infinite; kwargs...) -> Float64
+
+NMR spin-lattice relaxation rate temperature scaling exponent `θ_{NMR} = -3/4`
+at the quantum critical point `h = J`. For non-critical `h ≠ J`, returns `NaN` with a warning.
+"""
+function fetch(model::TFIM, ::NMRRelaxationExponent, ::Infinite; kwargs...)
+    if abs(model.h - model.J) ≤ 1e-6
+        return -0.75
+    else
+        @warn "TFIM NMRRelaxationExponent is only defined at the quantum critical point h = J." h = model.h J = model.J
+        return NaN
+    end
+end

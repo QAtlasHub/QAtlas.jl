@@ -374,4 +374,15 @@ end
             m, NMRSpinRelaxationRate(), OBC(10); beta=1.0, eta=-0.1
         )
     end
+
+    # 5. NMRRelaxationExponent tests
+    @testset "NMRRelaxationExponent at criticality" begin
+        # At critical point h = J, exponent is -0.75
+        m_crit = TFIM(; J=1.0, h=1.0)
+        @test QAtlas.fetch(m_crit, NMRRelaxationExponent(), Infinite()) ≈ -0.75
+
+        # Off-critical: returns NaN (warning is expected)
+        m_off = TFIM(; J=1.0, h=1.5)
+        @test isnan(QAtlas.fetch(m_off, NMRRelaxationExponent(), Infinite()))
+    end
 end

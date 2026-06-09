@@ -656,6 +656,16 @@
     references=["Onsager1944", "Pfeuty1970"],
     notes="2D-Ising Onsager exponents (β=1/8, γ=7/4, ν=1) via TFIM↔2D-Ising mapping.",
 )
+@register(
+    TFIM,
+    NMRRelaxationExponent,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl",
+    references=["Sachdev1997"],
+    notes="θ_NMR = -3/4 = -0.75 at the quantum critical point h = J.",
+)
 
 # ── Status-axis worked example: Lieb-Robinson bound (:bound) ────────────
 @register(

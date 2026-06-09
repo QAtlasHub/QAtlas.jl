@@ -28,7 +28,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 5 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 2 | 0 | 1 | feasible | `@sweep` |
 | [`IsingChain1D`](models/IsingChain1D.md) | — | 8 | `analytic` | 0 | 7 | 0 | 0 | 1 | feasible | `@ising1d` |
 | [`IsingSquare`](models/IsingSquare.md) | `Ising` | 12 | `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix` | 0 | 7 | 2 | 0 | 3 | feasible | `@onsager` |
-| [`IsingTriangular`](models/IsingTriangular.md) | `Ising` | 8 | `analytic`, `delegation` | 0 | 2 | 0 | 0 | 6 | feasible | `@triangular` |
+| [`IsingTriangular`](models/IsingTriangular.md) | `Ising` | 9 | `analytic`, `delegation` | 0 | 2 | 0 | 0 | 7 | feasible | `@triangular` |
 | [`J1J2Heisenberg1D`](models/J1J2Heisenberg1D.md) | — | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`Kagome`](models/Kagome.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`KagomeHeisenbergAFM`](models/KagomeHeisenbergAFM.md) | — | 3 | `analytic`, `dmrg_reference` | 0 | 0 | 0 | 3 | 0 | infeasible | `@sweep` |
@@ -139,7 +139,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`XXStructureFactor`](quantities/XXStructureFactor.md) — 1 models
 - [`YYCorrelation`](quantities/YYCorrelation.md) — 2 models
 - [`YYStructureFactor`](quantities/YYStructureFactor.md) — 1 models
-- [`ZZCorrelation`](quantities/ZZCorrelation.md) — 3 models
+- [`ZZCorrelation`](quantities/ZZCorrelation.md) — 4 models
 - [`ZZStructureFactor`](quantities/ZZStructureFactor.md) — 3 models
 
 [← back to the Atlas index](index.md)

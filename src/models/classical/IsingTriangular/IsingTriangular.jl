@@ -167,6 +167,44 @@ function fetch(m::IsingTriangular, ::ResidualEntropy, ::Infinite; J::Real=m.J)
     end
 end
 
+"""
+    fetch(::IsingTriangular, ::ZZCorrelation{:static}, ::Infinite; r=1, J=m.J) -> Float64
+
+Zero-temperature nearest-neighbour spin–spin correlation `⟨σ_i σ_j⟩` of the
+classical triangular Ising model (Wannier 1950 convention `H = +J Σ σσ`).
+
+For the frustrated antiferromagnet (`J > 0`), `r = 1`, the exact Wannier
+(1950) value
+
+    ⟨σ_i σ_{i+1}⟩_{T=0} = -1/3,
+
+a direct consequence of the ground-state rule that every elementary triangle
+carries exactly one unsatisfied bond (`Σ σσ = -1` per triangle ⇒ `-1/3` per
+bond).  General separations `r > 1` (Stephenson 1964 closed form) and the
+ferromagnetic branch are not implemented here.
+
+# References
+- G. H. Wannier, *Phys. Rev.* **79**, 357 (1950).
+"""
+function fetch(
+    m::IsingTriangular, ::ZZCorrelation{:static}, ::Infinite; r::Integer=1, J::Real=m.J
+)
+    J > 0 || throw(
+        DomainError(
+            J,
+            "IsingTriangular T=0 ⟨σσ⟩ here is the frustrated-AFM (J>0) Wannier " *
+            "result; the FM branch is not implemented (⟨σσ⟩ = ε/3J via Energy).",
+        ),
+    )
+    r == 1 || throw(
+        ArgumentError(
+            "IsingTriangular ZZCorrelation: only nearest-neighbour r=1 (Wannier -1/3) " *
+            "is implemented; general r (Stephenson 1964) is deferred to a follow-up.",
+        ),
+    )
+    return -1 / 3
+end
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # fetch: critical exponents (universality delegation)
 # ═══════════════════════════════════════════════════════════════════════════════

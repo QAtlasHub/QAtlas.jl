@@ -92,3 +92,14 @@
     references=["Houtappel1950", "Baxter1982"],
     notes="FM (J<0): Potts–Domb M=[1-16x³/((1-x)³(1+3x))]^{1/8}, x=e^{-4β|J|}, 0 above T_c. AFM (J>0): 0 (frustrated).",
 )
+
+@register(
+    IsingTriangular,
+    ZZCorrelation{:static},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_triangular_thermo.jl",
+    references=["Wannier1950"],
+    notes="AFM (J>0) T=0 nearest-neighbour ⟨σσ⟩ = -1/3 (every triangle: Σσσ=-1 ⇒ -1/3 per bond). r>1 (Stephenson 1964) deferred.",
+)

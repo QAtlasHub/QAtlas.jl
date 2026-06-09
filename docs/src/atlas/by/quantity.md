@@ -517,9 +517,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🔵 [`TFIM/YYStructureFactor/Infinite`](../hubs/TFIM_YYStructureFactor_Infinite.md) — coherent
 - 🟢 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 
-## `ZZCorrelation` (3)
+## `ZZCorrelation` (4)
 
 - 🟢 [`AKLT1D/ZZCorrelation/Infinite`](../hubs/AKLT1D_ZZCorrelation_Infinite.md) — corroborated-at-p
+- 🟠 [`IsingTriangular/ZZCorrelation/Infinite`](../hubs/IsingTriangular_ZZCorrelation_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`S1Heisenberg1D/ZZCorrelation/OBC`](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 

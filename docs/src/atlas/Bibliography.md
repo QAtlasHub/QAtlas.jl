@@ -338,6 +338,12 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md)
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](hubs/TFIM_VonNeumannEntropy_OBC.md)
 
+## Wannier1950 — 3 hubs
+
+- 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
+- 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](hubs/IsingTriangular_ResidualEntropy_Infinite.md)
+- 🟠 [`IsingTriangular/ZZCorrelation/Infinite`](hubs/IsingTriangular_ZZCorrelation_Infinite.md)
+
 ## WhiteAffleck1996 — 3 hubs
 
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](hubs/J1J2Heisenberg1D_Energy_Infinite.md)
@@ -498,11 +504,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
 - 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md)
-
-## Wannier1950 — 2 hubs
-
-- 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](hubs/IsingTriangular_CriticalTemperature_Infinite.md)
-- 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](hubs/IsingTriangular_ResidualEntropy_Infinite.md)
 
 ## Witten1989 — 2 hubs
 

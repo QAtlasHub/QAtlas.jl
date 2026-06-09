@@ -13,19 +13,21 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 3
-- **Total hubs (Model, BC pairs)**: 3
+- **Models with this quantity registered**: 4
+- **Total hubs (Model, BC pairs)**: 4
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `dense_ed`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
 - AKLT1988 — 1 hub
+- Wannier1950 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `OBC` | `Infinite` |
 |---|---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | — | 🟢 [hub](../hubs/AKLT1D_ZZCorrelation_Infinite.md) |
+| [`IsingTriangular`](../models/IsingTriangular.md) | — | 🟠 [hub](../hubs/IsingTriangular_ZZCorrelation_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | — |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_ZZCorrelation_OBC.md) | — |
 

@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | 🟢 corroborated-at-p | 6 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 0 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 3 |
+| **total claimed hubs** | **9** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `pfaffian`
 
@@ -38,7 +38,10 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | [`CorrelationLength`](../quantities/CorrelationLength.md) | — | 🟢 [hub](../hubs/Kitaev1D_CorrelationLength_Infinite.md) |
 | [`EdgeModeEnergy`](../quantities/EdgeModeEnergy.md) | 🟢 [hub](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) | — |
 | [`Energy`](../quantities/Energy.md) | — | 🟢 [hub](../hubs/Kitaev1D_Energy_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | — | 🟠 [hub](../hubs/Kitaev1D_FreeEnergy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_OBC.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | — | 🟠 [hub](../hubs/Kitaev1D_SpecificHeat_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | — | 🟠 [hub](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) |
 | [`TopologicalInvariant`](../quantities/TopologicalInvariant.md) | — | 🟢 [hub](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) |
 
 ## References

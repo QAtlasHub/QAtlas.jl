@@ -14,6 +14,38 @@
     notes="Per-site ε₀ by Gauss-Kronrod over the PBC dispersion E(k).",
 )
 
+# ── Free-fermion (BdG) finite-T thermodynamics — Kitaev1D_thermal.jl ───
+@register(
+    Kitaev1D,
+    FreeEnergy,
+    Infinite,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_kitaev1d_thermo.jl",
+    references=["Kitaev2001"],
+    notes="BdG f(β) = -(1/2π)∫[E/2 + β⁻¹ln(1+e^{-βE})]dk over the PBC dispersion; β→∞ → ε₀.",
+)
+@register(
+    Kitaev1D,
+    SpecificHeat,
+    Infinite,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_kitaev1d_thermo.jl",
+    references=["Kitaev2001"],
+    notes="c_v = β²Var(H)/L = (β²/8π)∫E²sech²(βE/2)dk (free-fermion energy FDT).",
+)
+@register(
+    Kitaev1D,
+    ThermalEntropy,
+    Infinite,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_kitaev1d_thermo.jl",
+    references=["Kitaev2001"],
+    notes="s(β) = β(ε-f); bounded 0 (T→0) … ln2 (T→∞, two states per spinless mode).",
+)
+
 # ── Spectrum / criticality ────────────────────────────────────────────
 @register(
     Kitaev1D,

@@ -32,7 +32,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`J1J2Heisenberg1D`](models/J1J2Heisenberg1D.md) | — | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`Kagome`](models/Kagome.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`KagomeHeisenbergAFM`](models/KagomeHeisenbergAFM.md) | — | 3 | `analytic`, `dmrg_reference` | 0 | 0 | 0 | 3 | 0 | infeasible | `@sweep` |
-| [`Kitaev1D`](models/Kitaev1D.md) | — | 6 | `analytic`, `bdg`, `pfaffian` | 0 | 6 | 0 | 0 | 0 | feasible | `@critical`, `@sweep`, `@topological` |
+| [`Kitaev1D`](models/Kitaev1D.md) | — | 9 | `analytic`, `bdg`, `pfaffian` | 0 | 6 | 0 | 0 | 3 | feasible | `@critical`, `@sweep`, `@topological` |
 | [`KitaevHeisenberg`](models/KitaevHeisenberg.md) | — | 1 | `kitaev_delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`KitaevHoneycomb`](models/KitaevHoneycomb.md) | — | 10 | `analytic`, `matter_free_fermion` | 0 | 1 | 5 | 4 | 0 | infeasible | `@sweep` |
 | [`Lieb`](models/Lieb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
@@ -97,7 +97,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
 - [`FidelitySusceptibility`](quantities/FidelitySusceptibility.md) — 1 models
 - [`FractalDimension`](quantities/FractalDimension.md) — 1 models
-- [`FreeEnergy`](quantities/FreeEnergy.md) — 16 models
+- [`FreeEnergy`](quantities/FreeEnergy.md) — 17 models
 - [`GGEValue`](quantities/GGEValue.md) — 1 models
 - [`GroundStateDegeneracy`](quantities/GroundStateDegeneracy.md) — 2 models
 - [`GroundStateEnergyDensity`](quantities/GroundStateEnergyDensity.md) — 8 models
@@ -121,7 +121,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`RenyiEntropy`](quantities/RenyiEntropy.md) — 5 models
 - [`ResidualEntropy`](quantities/ResidualEntropy.md) — 5 models
 - [`ScramblingTime`](quantities/ScramblingTime.md) — 1 models
-- [`SpecificHeat`](quantities/SpecificHeat.md) — 13 models
+- [`SpecificHeat`](quantities/SpecificHeat.md) — 14 models
 - [`SpinGap`](quantities/SpinGap.md) — 2 models
 - [`SpontaneousMagnetization`](quantities/SpontaneousMagnetization.md) — 6 models
 - [`SteadyStateCurrent`](quantities/SteadyStateCurrent.md) — 1 models
@@ -129,7 +129,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`SusceptibilityXX`](quantities/SusceptibilityXX.md) — 4 models
 - [`SusceptibilityYY`](quantities/SusceptibilityYY.md) — 4 models
 - [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md) — 8 models
-- [`ThermalEntropy`](quantities/ThermalEntropy.md) — 13 models
+- [`ThermalEntropy`](quantities/ThermalEntropy.md) — 14 models
 - [`TightBindingChecksum`](quantities/TightBindingChecksum.md) — 4 models
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models
 - [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md) — 3 models

@@ -163,32 +163,52 @@ end
 # Energy: thermodynamic limit (Infinite, T = 0)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-"""
-    fetch(model::Kitaev1D, ::Energy{:per_site}, ::Infinite) -> Float64
+# Bulk BdG quasiparticle dispersion E(k) = √((2t cos k + μ)² + 4Δ² sin²k) — the
+# single source for the energy / free-energy / specific-heat integrals below.
+function _kitaev1d_dispersion(k, μ::Real, t::Real, Δ::Real)
+    return sqrt((2t * cos(k) + μ)^2 + 4 * Δ^2 * sin(k)^2)
+end
 
-Ground-state energy per site of the infinite Kitaev1D chain at `T = 0`,
+"""
+    fetch(model::Kitaev1D, ::Energy{:per_site}, ::Infinite; beta=nothing) -> Float64
+
+Energy per site of the infinite Kitaev1D chain.  With no `beta` (or
+`beta = nothing`), the `T = 0` ground state
 
 ```math
 \\varepsilon_0 = -\\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} \\frac{E(k)}{2}\\, dk,
 \\qquad
-E(k) = \\sqrt{(2t\\cos k + \\mu)^2 + 4\\Delta^2 \\sin^2 k}.
+E(k) = \\sqrt{(2t\\cos k + \\mu)^2 + 4\\Delta^2 \\sin^2 k};
 ```
 
-(The factor `1/2` accounts for the BdG particle-hole doubling: only the
-negative-energy band is filled.)
+with `beta = β > 0`, the finite-temperature value
 
-Computed by adaptive Gauss-Kronrod quadrature.
+```math
+\\varepsilon(\\beta) = -\\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi}
+    \\frac{E(k)}{2}\\, \\tanh\\!\\frac{\\beta E(k)}{2}\\, dk
+```
+
+(the factor `1/2` accounts for the BdG particle-hole doubling; `β → ∞`
+recovers `ε₀`).  Adaptive Gauss-Kronrod quadrature.
 """
-function fetch(model::Kitaev1D, ::Energy{:per_site}, ::Infinite; kwargs...)
-    μ = model.μ
-    t = model.t
-    Δ = model.Δ
-    result, _ = quadgk(
-        k -> begin
-            Ek = sqrt((2t * cos(k) + μ)^2 + 4Δ^2 * sin(k)^2)
-            -Ek / 2
-        end, -π, π; rtol=1e-10
-    )
+function fetch(
+    model::Kitaev1D,
+    ::Energy{:per_site},
+    ::Infinite;
+    beta::Union{Real,Nothing}=nothing,
+    kwargs...,
+)
+    μ, t, Δ = model.μ, model.t, model.Δ
+    if beta === nothing
+        result, _ = quadgk(k -> -_kitaev1d_dispersion(k, μ, t, Δ) / 2, -π, π; rtol=1e-10)
+    else
+        beta > 0 ||
+            throw(DomainError(beta, "Kitaev1D Energy requires β > 0; got β = $beta."))
+        result, _ = quadgk(-π, π; rtol=1e-10) do k
+            E = _kitaev1d_dispersion(k, μ, t, Δ)
+            return -(E / 2) * tanh(beta * E / 2)
+        end
+    end
     return result / (2π)
 end
 

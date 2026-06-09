@@ -99,6 +99,16 @@ where `η > 0` is a small regularization width (e.g. `0.1` by default).
 struct NMRSpinRelaxationRate <: AbstractQuantity end
 
 """
+    NMRRelaxationExponent() <: AbstractQuantity
+
+NMR spin-lattice relaxation rate scaling exponent, `\theta_{NMR}` (where `1/T_1 \propto T^{\theta_{NMR}}`).
+For a Luttinger liquid (emergent c=1 CFT), this exponent is determined by the Luttinger parameter `K`:
+
+    \theta_{NMR} = 2K - 1
+"""
+struct NMRRelaxationExponent <: AbstractQuantity end
+
+"""
     MassGap() <: AbstractQuantity
 
 Energy gap between the ground state and the first excited state.

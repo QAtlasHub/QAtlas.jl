@@ -146,6 +146,16 @@
     tested_in="test/models/test_TFIM_thermal.jl"
 )
 
+@register(
+    TFIM,
+    NMRSpinRelaxationRate,
+    Infinite,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl",
+    notes="1/T_1(β, η) = 1/π³ ∫₀^π dk₁ ∫₀^π dk₂ f(λ(k₁)) (1-f(λ(k₂))) η / ((λ(k₁)-λ(k₂))² + η²) over BdG dispersion λ(k); QuadGK nested rtol=1e-6.",
+)
+
 # ── Local one-site observables (per-site index, not bulk-averaged) ────
 @register(
     TFIM,

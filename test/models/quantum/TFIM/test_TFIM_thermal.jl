@@ -336,3 +336,25 @@ end
         refs=["Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0"],
     )
 end
+
+@testset "TFIM — NMRSpinRelaxationRate" begin
+    # 1. DomainError check
+    @test_throws DomainError QAtlas.fetch(
+        TFIM(), NMRSpinRelaxationRate(), Infinite(); beta=0.0
+    )
+    @test_throws DomainError QAtlas.fetch(
+        TFIM(), NMRSpinRelaxationRate(), Infinite(); beta=1.0, eta=-0.1
+    )
+
+    # 2. High-T limit (beta -> 0): remains finite
+    m = TFIM(; J=1.0, h=0.5)
+    rate_high = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=1e-3, eta=0.1)
+    @test rate_high > 0.0
+    @test rate_high < 1.0
+
+    # 3. Gapped regime (h = 1.5, J = 1.0, gap Δ = 1.0): exponentially suppressed at low-T
+    m_gap = TFIM(; J=1.0, h=1.5)
+    rate_gap_low = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1)
+    rate_gap_lower = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1)
+    @test rate_gap_lower < rate_gap_low * 0.1
+end

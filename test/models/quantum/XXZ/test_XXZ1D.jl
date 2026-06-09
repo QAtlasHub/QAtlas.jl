@@ -73,6 +73,20 @@ end
     @test all(diff(ks) .< 0)
 end
 
+@testset "XXZ1D — NMRRelaxationExponent" begin
+    # Δ = 0 (K = 1.0) ⇒ θ_NMR = 2K - 1 = 1.0
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), NMRRelaxationExponent(), Infinite()) ≈ 1.0 atol = 1e-12
+    # Δ = 1 (K = 0.5) ⇒ θ_NMR = 2K - 1 = 0.0
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), NMRRelaxationExponent(), Infinite()) ≈ 0.0 atol = 1e-12
+
+    # Outside critical regime: returns NaN + warn
+    @test isnan(
+        @test_logs (:warn, r"critical Luttinger liquid regime") QAtlas.fetch(
+            XXZ1D(; J=1.0, Δ=1.5), NMRRelaxationExponent(), Infinite()
+        )
+    )
+end
+
 @testset "XXZ1D — LuttingerVelocity (+ SpinWaveVelocity alias)" begin
     # Canonical values at Δ=0 (XX) and Δ=1 (AF Heisenberg)
     @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), LuttingerVelocity(), Infinite()) ≈ 1.0 atol =
@@ -286,5 +300,15 @@ end
         independent=1.0,
         agree_within=1e-14,
         refs=["Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        NMRRelaxationExponent(),
+        Infinite();
+        route=:second_closed_form,
+        independent=1.0,
+        agree_within=1e-12,
+        refs=["Luttinger liquid: θ_NMR = 2K - 1 = 1 at Delta=0 (free fermion XX limit)"],
     )
 end

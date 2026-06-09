@@ -234,3 +234,20 @@ function fetch(model::XXZ1D, ::Energy{:total}, bc::OBC; beta::Real, kwargs...)
     H = _xxz1d_hamiltonian_matrix(model, bc.N)
     return _ed_thermal_energy(H, beta)
 end
+
+# ── NMR relaxation exponent (critical Luttinger liquid) ───────────────
+
+"""
+    fetch(model::XXZ1D, ::NMRRelaxationExponent, ::Infinite; kwargs...) -> Float64
+
+NMR spin-lattice relaxation rate temperature scaling exponent `θ_{NMR} = 2K - 1`
+for the critical Luttinger liquid phase (`-1 < Δ ≤ 1`), where `K` is the Luttinger parameter.
+"""
+function fetch(model::XXZ1D, ::NMRRelaxationExponent, ::Infinite; kwargs...)
+    K = fetch(model, LuttingerParameter(), Infinite(); kwargs...)
+    if isnan(K)
+        @warn "XXZ1D NMRRelaxationExponent is only defined in the critical Luttinger liquid regime -1 < Δ ≤ 1." Δ = model.Δ
+        return NaN
+    end
+    return 2 * K - 1.0
+end

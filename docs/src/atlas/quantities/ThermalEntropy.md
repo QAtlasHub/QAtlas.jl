@@ -14,13 +14,13 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 ## Coverage
 
 - **Models with this quantity registered**: 15
-- **Total hubs (Model, BC pairs)**: 23
+- **Total hubs (Model, BC pairs)**: 25
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `cft_low_T`, `dense_ed`, `free_fermion_quadgk_or_klumper_nlie`, `matter_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Mahan2000 — 5 hubs
 - AKLT1988 — 3 hubs
-- Mahan2000 — 3 hubs
 - Affleck1986 — 2 hubs
 - Kitaev2006 — 2 hubs
 - Lieb1994 — 2 hubs
@@ -41,7 +41,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | — | — |
 | [`SSH`](../models/SSH.md) | — | — | 🟠 [hub](../hubs/SSH_ThermalEntropy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
-| [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
+| [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_PBC.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
 

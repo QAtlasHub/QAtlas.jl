@@ -106,7 +106,8 @@ export Energy,
     MassGap,
     FidelitySusceptibility,
     LoschmidtEcho,
-    NMRSpinRelaxationRate
+    NMRSpinRelaxationRate,
+    NMRRelaxationExponent
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps

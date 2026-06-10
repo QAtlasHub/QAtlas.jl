@@ -72,9 +72,9 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`SixVertex`](../atlas/models/SixVertex.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
 | [`SpinIce`](../atlas/models/SpinIce.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 31 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 11 | `Ising` |
+| [`TFIM`](../atlas/models/TFIM.md) | 33 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 14 | `Ising` |
 | [`TTbar`](../atlas/models/TTbar.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 7 | 🟣 0 🟢 4 🔵 0 ⚪ 0 🟠 3 | — |
+| [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 7 | 🟣 0 🟢 4 🔵 0 ⚪ 0 🟠 15 | — |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
 | [`TodaLattice`](../atlas/models/TodaLattice.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 4 🔵 0 ⚪ 1 🟠 0 | — |
@@ -82,7 +82,7 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | `MinimalModel` |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | `MinimalModel` |
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | 22 | 🟣 0 🟢 17 🔵 5 ⚪ 0 🟠 7 | — |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | 23 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 7 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
 | [`YangLee`](../atlas/models/YangLee.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `MinimalModel` |
 | [`ZnClock`](../atlas/models/ZnClock.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | `Ising` |

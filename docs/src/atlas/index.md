@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 344 |
-| ED-feasible claimed (risk denominator) | 318 |
+| Hubs `src` claims (registry) | 360 |
+| ED-feasible claimed (risk denominator) | 334 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 185 |
+| 🟢 corroborated-at-p | 186 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 104 |
-| Inventory cards scanned (whole test/) | 2797 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 119 |
+| Inventory cards scanned (whole test/) | 2798 |
 | Registry files parsed | 74 / 74 |
 | Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **58.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **70.1%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.7%** · **in-repo-verified rate** (incl. 🔵 coherent): **67.1%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "104 actionable hub(s)"
+!!! warning "119 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -132,13 +132,28 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`TFIM/MagnetizationXLocal/OBC`](hubs/TFIM_MagnetizationXLocal_OBC.md)
     - [`TFIM/MagnetizationZLocal/OBC`](hubs/TFIM_MagnetizationZLocal_OBC.md)
     - [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md)
+    - [`TFIM/NMRRelaxationExponent/Infinite`](hubs/TFIM_NMRRelaxationExponent_Infinite.md)
+    - [`TFIM/NMRSpinRelaxationRate/Infinite`](hubs/TFIM_NMRSpinRelaxationRate_Infinite.md)
+    - [`TFIM/NMRSpinRelaxationRate/OBC`](hubs/TFIM_NMRSpinRelaxationRate_OBC.md)
     - [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
     - [`TFIM/SusceptibilityXX/Infinite`](hubs/TFIM_SusceptibilityXX_Infinite.md)
     - [`TFIM/SusceptibilityZZ/Infinite`](hubs/TFIM_SusceptibilityZZ_Infinite.md)
     - [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
+    - [`TightBinding1D/Energy/OBC`](hubs/TightBinding1D_Energy_OBC.md)
+    - [`TightBinding1D/Energy/PBC`](hubs/TightBinding1D_Energy_PBC.md)
     - [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md)
+    - [`TightBinding1D/FreeEnergy/OBC`](hubs/TightBinding1D_FreeEnergy_OBC.md)
+    - [`TightBinding1D/FreeEnergy/PBC`](hubs/TightBinding1D_FreeEnergy_PBC.md)
+    - [`TightBinding1D/MassGap/OBC`](hubs/TightBinding1D_MassGap_OBC.md)
+    - [`TightBinding1D/MassGap/PBC`](hubs/TightBinding1D_MassGap_PBC.md)
+    - [`TightBinding1D/NMRSpinRelaxationRate/OBC`](hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md)
+    - [`TightBinding1D/NMRSpinRelaxationRate/PBC`](hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md)
     - [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md)
+    - [`TightBinding1D/SpecificHeat/OBC`](hubs/TightBinding1D_SpecificHeat_OBC.md)
+    - [`TightBinding1D/SpecificHeat/PBC`](hubs/TightBinding1D_SpecificHeat_PBC.md)
     - [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md)
+    - [`TightBinding1D/ThermalEntropy/OBC`](hubs/TightBinding1D_ThermalEntropy_OBC.md)
+    - [`TightBinding1D/ThermalEntropy/PBC`](hubs/TightBinding1D_ThermalEntropy_PBC.md)
     - [`TightBindingV1D/FreeEnergy/Infinite`](hubs/TightBindingV1D_FreeEnergy_Infinite.md)
     - [`TightBindingV1D/SpecificHeat/Infinite`](hubs/TightBindingV1D_SpecificHeat_Infinite.md)
     - [`TightBindingV1D/ThermalEntropy/Infinite`](hubs/TightBindingV1D_ThermalEntropy_Infinite.md)
@@ -222,9 +237,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 55 | 0 | 36 | 8 | 0 | 11 | feasible |
+| `TFIM` | 58 | 0 | 36 | 8 | 0 | 14 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TightBinding1D` | 7 | 0 | 4 | 0 | 0 | 3 | feasible |
+| `TightBinding1D` | 19 | 0 | 4 | 0 | 0 | 15 | feasible |
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ToricCode` | 5 | 0 | 4 | 0 | 1 | 0 | infeasible |
@@ -232,13 +247,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `XXZ1D` | 29 | 0 | 17 | 5 | 0 | 7 | feasible |
+| `XXZ1D` | 30 | 0 | 18 | 5 | 0 | 7 | feasible |
 | `XYh1D` | 13 | 0 | 0 | 0 | 0 | 13 | feasible |
 | `YangLee` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (344) — select to drill down
+## Hubs (360) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -607,7 +622,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-### `TFIM` (55)
+### `TFIM` (58)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -637,6 +652,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRRelaxationExponent/Infinite`](hubs/TFIM_NMRRelaxationExponent_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/Infinite`](hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/OBC`](hubs/TFIM_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🔵 [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md) — coherent
@@ -669,15 +687,27 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TTbar/CentralCharge/Infinite`](hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 
-### `TightBinding1D` (7)
+### `TightBinding1D` (19)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/Energy/OBC`](hubs/TightBinding1D_Energy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/Energy/PBC`](hubs/TightBinding1D_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟠 [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/OBC`](hubs/TightBinding1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/PBC`](hubs/TightBinding1D_FreeEnergy_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/MassGap/OBC`](hubs/TightBinding1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/MassGap/PBC`](hubs/TightBinding1D_MassGap_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/NMRSpinRelaxationRate/Infinite`](hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/OBC`](hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/PBC`](hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/OBC`](hubs/TightBinding1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/PBC`](hubs/TightBinding1D_SpecificHeat_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/OBC`](hubs/TightBinding1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/PBC`](hubs/TightBinding1D_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 
 ### `TightBindingV1D` (6)
 
@@ -721,7 +751,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 
-### `XXZ1D` (29)
+### `XXZ1D` (30)
 
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -741,6 +771,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`XXZ1D/MagnetizationZLocal/OBC`](hubs/XXZ1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/MassGap/Infinite`](hubs/XXZ1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/MassGap/OBC`](hubs/XXZ1D_MassGap_OBC.md) — corroborated-at-p
+- 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) — corroborated-at-p
 - 🟠 [`XXZ1D/RenyiEntropy/Infinite`](hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/RenyiEntropy/OBC`](hubs/XXZ1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible

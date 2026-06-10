@@ -99,6 +99,25 @@ where `η > 0` is a small regularization width (e.g. `0.1` by default).
 struct NMRSpinRelaxationRate <: AbstractQuantity end
 
 """
+    NMRRelaxationExponent() <: AbstractQuantity
+
+Low-temperature scaling exponent `θ_NMR` of the NMR spin-lattice relaxation
+rate, `1/T_1 ∝ T^{θ_NMR}` as `T → 0`.
+
+For a quantum critical point the leading exponent follows the general
+fluctuation-dissipation rule `θ_NMR = 2Δ_op − 1`, where `Δ_op` is the scaling
+dimension of the operator the nuclei couple to:
+
+- 1D transverse-field Ising QCP: `Δ_σ = 1/8` ⟹ `θ_NMR = −3/4`.
+- XXZ critical Luttinger liquid (`−1 < Δ ≤ 1`), contact-hyperfine coupling to
+  the dominant *transverse staggered* susceptibility (`Δ_op = 1/(4K)`):
+  `θ_NMR = 1/(2K) − 1`, where `K` is the Luttinger parameter. (The subdominant
+  longitudinal channel contributes `T^{2K−1}`; see Chitra & Giamarchi 1997,
+  Eq. 27.)
+"""
+struct NMRRelaxationExponent <: AbstractQuantity end
+
+"""
     MassGap() <: AbstractQuantity
 
 Energy gap between the ground state and the first excited state.

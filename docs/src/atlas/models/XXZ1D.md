@@ -23,11 +23,11 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 17 |
+| 🟢 corroborated-at-p | 18 |
 | 🔵 coherent | 5 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 7 |
-| **total claimed hubs** | **29** |
+| **total claimed hubs** | **30** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie`
 
@@ -50,6 +50,7 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/XXZ1D_MagnetizationZ_OBC.md) | — |
 | [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_OBC.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_Infinite.md) |
+| [`NMRRelaxationExponent`](../quantities/NMRRelaxationExponent.md) | — | 🟢 [hub](../hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/XXZ1D_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/XXZ1D_SpecificHeat_OBC.md) | 🟠 [hub](../hubs/XXZ1D_SpecificHeat_Infinite.md) |
 | [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityXX_OBC.md) | — |
@@ -77,6 +78,7 @@ Pages = []
 Canonical = false
 CalabreseCardy2004
 CalabreseEsslerFagotti2012
+ChitraGiamarchi1997
 Coleman2015
 EsslerFagotti2016
 Giamarchi2003

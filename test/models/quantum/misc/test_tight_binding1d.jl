@@ -348,4 +348,55 @@ end
         )
         @test rate_gap_lower < rate_gap_low * 0.1
     end
+
+    # ────────────────────────── Finite-Size Extensions ─────────────────────────
+    @testset "Finite-Size Extensions — OBC and PBC" begin
+        # 1. Ground state Energy: check PBC and OBC energy per site convergence to Infinite
+        m = TightBinding1D(; t=1.0, μ=0.5)
+        e_inf = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
+
+        # As N increases, finite PBC/OBC energies per site should converge to e_inf
+        e_pbc_100 = QAtlas.fetch(m, Energy{:per_site}(), PBC(100))
+        e_obc_100 = QAtlas.fetch(m, Energy{:per_site}(), OBC(100))
+        @test isapprox(e_pbc_100, e_inf; atol=1e-2)
+        @test isapprox(e_obc_100, e_inf; atol=1e-2)
+
+        # Total energy checks
+        @test QAtlas.fetch(m, Energy{:total}(), PBC(100)) ≈ e_pbc_100 * 100
+        @test QAtlas.fetch(m, Energy{:total}(), OBC(100)) ≈ e_obc_100 * 100
+
+        # 2. MassGap: gapless metallic case (μ=0.5) should have tiny finite-size gap
+        gap_pbc = QAtlas.fetch(m, MassGap(), PBC(100))
+        gap_obc = QAtlas.fetch(m, MassGap(), OBC(100))
+        @test gap_pbc < 0.1
+        @test gap_obc < 0.1
+
+        # Insulating case (μ=3.0) gap should be close to 1.0 (bulk gap Δ = 1.0)
+        m_ins = TightBinding1D(; t=1.0, μ=3.0)
+        @test QAtlas.fetch(m_ins, MassGap(), PBC(100)) ≈ 1.0 atol=1e-2
+        @test QAtlas.fetch(m_ins, MassGap(), OBC(100)) ≈ 1.0 atol=1e-2
+
+        # 3. FreeEnergy, ThermalEntropy, SpecificHeat
+        # Verify finite size thermodynamics convergence
+        beta = 2.0
+        f_inf = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=beta)
+        s_inf = QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=beta)
+        c_inf = QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=beta)
+
+        f_pbc = QAtlas.fetch(m, FreeEnergy(), PBC(200); beta=beta)
+        s_pbc = QAtlas.fetch(m, ThermalEntropy(), PBC(200); beta=beta)
+        c_pbc = QAtlas.fetch(m, SpecificHeat(), PBC(200); beta=beta)
+
+        @test isapprox(f_pbc, f_inf; atol=1e-3)
+        @test isapprox(s_pbc, s_inf; atol=1e-3)
+        @test isapprox(c_pbc, c_inf; atol=1e-3)
+
+        # 4. NMRSpinRelaxationRate finite size convergence
+        # The sum should converge to the Infinite integral
+        rate_inf = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=2.0, eta=0.2)
+        rate_pbc = QAtlas.fetch(m, NMRSpinRelaxationRate(), PBC(150); beta=2.0, eta=0.2)
+        rate_obc = QAtlas.fetch(m, NMRSpinRelaxationRate(), OBC(150); beta=2.0, eta=0.2)
+        @test isapprox(rate_pbc, rate_inf; atol=5e-3)
+        @test isapprox(rate_obc, rate_inf; atol=5e-3)
+    end
 end

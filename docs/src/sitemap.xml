@@ -123,6 +123,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationZLocal/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MassGap/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MerminGHZBound/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/NMRRelaxationExponent/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/NMRSpinRelaxationRate/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/OptimalCloningFidelity/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/PartitionFunction/</loc></url>
@@ -393,6 +394,9 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MassGap_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MassGap_PBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_NMRRelaxationExponent_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_NMRSpinRelaxationRate_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_NMRSpinRelaxationRate_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_RenyiEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_RenyiEntropy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_SpecificHeat_Infinite/</loc></url>
@@ -422,12 +426,24 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_ZZStructureFactor_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TTbar_CentralCharge_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_Energy_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_Energy_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_Energy_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_FermiVelocity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_FreeEnergy_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_FreeEnergy_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_FreeEnergy_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_MassGap_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_MassGap_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_MassGap_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_NMRSpinRelaxationRate_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_NMRSpinRelaxationRate_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_SpecificHeat_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_SpecificHeat_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_SpecificHeat_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_ThermalEntropy_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_ThermalEntropy_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBinding1D_ThermalEntropy_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBindingV1D_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBindingV1D_FermiVelocity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBindingV1D_FreeEnergy_Infinite/</loc></url>
@@ -467,6 +483,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationZLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MassGap_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_NMRRelaxationExponent_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_RenyiEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_RenyiEntropy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_SpecificHeat_Infinite/</loc></url>

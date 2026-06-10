@@ -58,7 +58,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`SixVertex`](../atlas/models/SixVertex.md) | Lieb1967a, Lieb1967c, Baxter1982 |
 | [`SpinIce`](../atlas/models/SpinIce.md) | Pauling1935 |
 | [`TASEP`](../atlas/models/TASEP.md) | KardarParisiZhang1986, DerridaEvansHakimPasquier1993, DerridaLebowitz1998 |
-| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006 |
+| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, Sachdev1997, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006 |
 | [`TTbar`](../atlas/models/TTbar.md) | Zamolodchikov2004, SmirnovZamolodchikov2017, CavagliaNegroSzecsenyiTateo2016 |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | AshcroftMermin1976, Mahan2000, Coleman2015, Korringa1950 |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | YangYang1966, AshcroftMermin1976, Mahan2000, Coleman2015 |
@@ -68,7 +68,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | BelavinPolyakovZamolodchikov1984, FriedanQiuShenker1984 |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | AndrewsBaxterForrester1984, Huse1984, BelavinPolyakovZamolodchikov1984 |
 | [`XCube`](../atlas/models/XCube.md) | VijayHaahFu2016, SlagleKim2017 |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004 |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, ChitraGiamarchi1997, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004 |
 | [`XYh1D`](../atlas/models/XYh1D.md) | LiebSchultzMattis1961, Pfeuty1970 |
 | [`YangLee`](../atlas/models/YangLee.md) | Cardy1984, YangLee1952 |
 | [`ZnClock`](../atlas/models/ZnClock.md) | JoseKadanoffKirkpatrickNelson1977, ElitzurPearsonShigemitsu1979 |

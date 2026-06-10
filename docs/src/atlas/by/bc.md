@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (226)
+## `Infinite` (229)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -175,6 +175,8 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🔵 [`TFIM/MagnetizationXLocal/Infinite`](../hubs/TFIM_MagnetizationXLocal_Infinite.md) — coherent
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](../hubs/TFIM_MagnetizationZ_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`TFIM/NMRRelaxationExponent/Infinite`](../hubs/TFIM_NMRRelaxationExponent_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/Infinite`](../hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](../hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — coherent
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
@@ -221,6 +223,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/MassGap/Infinite`](../hubs/XXZ1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](../hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) — corroborated-at-p
 - 🟠 [`XXZ1D/RenyiEntropy/Infinite`](../hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](../hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — coherent
@@ -234,7 +237,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `OBC` (97)
+## `OBC` (104)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
@@ -295,6 +298,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TFIM/MagnetizationY/OBC`](../hubs/TFIM_MagnetizationY_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/MassGap/OBC`](../hubs/TFIM_MassGap_OBC.md) — corroborated-at-p
+- 🟠 [`TFIM/NMRSpinRelaxationRate/OBC`](../hubs/TFIM_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/RenyiEntropy/OBC`](../hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SpecificHeat/OBC`](../hubs/TFIM_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — corroborated-at-p
@@ -308,6 +312,12 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TFIM/YYStructureFactor/OBC`](../hubs/TFIM_YYStructureFactor_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ZZCorrelation/OBC`](../hubs/TFIM_ZZCorrelation_OBC.md) — corroborated-at-p
 - 🔵 [`TFIM/ZZStructureFactor/OBC`](../hubs/TFIM_ZZStructureFactor_OBC.md) — coherent
+- 🟠 [`TightBinding1D/Energy/OBC`](../hubs/TightBinding1D_Energy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/OBC`](../hubs/TightBinding1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/MassGap/OBC`](../hubs/TightBinding1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/OBC`](../hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/OBC`](../hubs/TightBinding1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/OBC`](../hubs/TightBinding1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/Energy/OBC`](../hubs/XXZ1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](../hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/FreeEnergy/OBC`](../hubs/XXZ1D_FreeEnergy_OBC.md) — corroborated-at-p
@@ -334,7 +344,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟠 [`XYh1D/MassGap/OBC`](../hubs/XYh1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](../hubs/XYh1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 
-## `PBC` (21)
+## `PBC` (27)
 
 - 🟢 [`AKLT1D/FreeEnergy/PBC`](../hubs/AKLT1D_FreeEnergy_PBC.md) — corroborated-at-p
 - 🟢 [`AKLT1D/SpecificHeat/PBC`](../hubs/AKLT1D_SpecificHeat_PBC.md) — corroborated-at-p
@@ -354,6 +364,12 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TFIM/SpecificHeat/PBC`](../hubs/TFIM_SpecificHeat_PBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ThermalEntropy/PBC`](../hubs/TFIM_ThermalEntropy_PBC.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/Energy/PBC`](../hubs/TightBinding1D_Energy_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/PBC`](../hubs/TightBinding1D_FreeEnergy_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/MassGap/PBC`](../hubs/TightBinding1D_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/PBC`](../hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/PBC`](../hubs/TightBinding1D_SpecificHeat_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/PBC`](../hubs/TightBinding1D_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`ToricCode/GroundStateDegeneracy/PBC`](../hubs/ToricCode_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](../hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 - 🟠 [`XYh1D/MassGap/PBC`](../hubs/XYh1D_MassGap_PBC.md) — uncorroborated-but-feasible

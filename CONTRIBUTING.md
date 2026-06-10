@@ -33,60 +33,60 @@ For each new rigorous result, the accompanying `docs/src/calc/` derivation must 
 
 ```text
 src/
-├── QAtlas.jl                          # Top-level module, includes everything
-├── core/                              # Type hierarchy, registry, atlas plumbing
-│   ├── type.jl                        #   AbstractQAtlasModel, OBC(N), PBC(N), Infinite, Quantity{S}
-│   ├── quantities.jl                  #   Energy, FreeEnergy, MagnetizationX, SusceptibilityZZ, ...
-│   ├── registry.jl                    #   @register macro + Implementation row schema
-│   └── conversions.jl                 #   Generic <-> per-site Energy granularity dispatch
-├── deprecate/                         # Pre-v0.13 Symbol-dispatch shims (removable at v1.0)
-├── universalities/                    # Universality{C}(d) parametric type
-│   ├── Universality.jl                #   base type + exponent table
-│   ├── Ising2D.jl                     #   2D/3D Ising universality
-│   ├── ONModel.jl                     #   XY / Heisenberg / O(N) σ
-│   └── ...
-└── models/
-    │                                  # Layout: <class>/<Model>/<Model>.jl
-    │                                  #         <class>/<Model>/<Model>_registry.jl
-    ├── classical/
-    │   ├── IsingSquare/
-    │   │   ├── IsingSquare.jl         #   IsingSquare(; J, Lx, Ly) + fetch dispatches
-    │   │   └── IsingSquare_registry.jl#   @register declarations
-    │   └── IsingTriangular/
-    │       ├── IsingTriangular.jl
-    │       └── IsingTriangular_registry.jl
-    └── quantum/
-        ├── TFIM/                       #   Multi-file model: TFIM_thermal.jl, TFIM_dynamics.jl, ...
-        ├── XXZ/
-        ├── Hubbard1D/
-        └── TightBinding1D/
+├── QAtlas.jl                          # Top-level module — includes everything, exports
+├── core/                              # Framework: types, registry, relation stores, coherence
+│   ├── type.jl                        #   AbstractQAtlasModel; OBC(N)/PBC(N)/Infinite; generic fetch
+│   ├── quantities.jl                  #   AbstractQuantity + Energy/FreeEnergy/SpecificHeat/Magnetization…
+│   ├── universality.jl                #   Universality{C} + CriticalExponents/GrowthExponents
+│   ├── registry.jl                    #   @register, Implementation row, definitions()/scheme= selector
+│   ├── realizes.jl                    #   @realizes — model ↔ universality class (REALIZES store)
+│   ├── reduces.jl                     #   @reduces — model → model reduction (REDUCES store)
+│   ├── about.jl                       #   @about — model cards (ABOUT store)
+│   ├── links.jl                       #   knowledge-graph layer (bidirectional queries)
+│   ├── coherence.jl                   #   structural coherence suite C1–C9 (errors=0 invariant)
+│   ├── pfaffian.jl  dense_ed.jl       #   shared numerical kernels
+│   └── alias.jl                       #   legacy-name aliases
+├── bounds/                            # Bound{D} model-independent universal bounds (status=:bound)
+├── universalities/                    # Per-class dirs: Ising2D/ ONModel/ MinimalModel/ WZW/ E8/ Potts/ …
+├── models/
+│   ├── classical/<Model>/             #   <Model>.jl + <Model>_registry.jl (e.g. IsingSquare/, SixVertex/)
+│   └── quantum/<Model>/               #   multi-file, e.g. TFIM/ (TFIM.jl, TFIM_thermal.jl, …, TFIM_registry.jl)
+├── about_registry.jl                  # @about declarations (model cards)
+├── realizes_registry.jl              # @realizes declarations (model → class)
+├── reduces_registry.jl               # @reduces declarations (model → model)
+└── deprecate/                         # pre-v0.13 Symbol-dispatch shims (git rm at v1.0)
 
 test/
-├── runtests.jl                         # Entry: respects QATLAS_TEST_PROFILE = fast|full|nightly
-├── util/                               # Reusable test helpers
-│   ├── verify.jl                       #   verify(...) card framework — READ THIS FIRST
-│   ├── bloch.jl                        #   Generic Bloch Hamiltonian builder
-│   ├── classical_partition.jl          #   Brute-force partition function
-│   ├── tight_binding.jl                #   Real-space TB Hamiltonian
-│   ├── spinhalf_ed.jl                  #   Dense spin-1/2 many-body ED
-│   ├── sparse_ed.jl                    #   Sparse ED + KrylovKit Lanczos
-│   └── extrapolate.jl                  #   1/N → ∞ extrapolation helpers
-├── util_verify/                        # Self-tests of the verify framework
-├── harness/atlas/                      # Atlas inventory drift guard, evidence card schema tests
-│   └── test_inventory_drift.jl         #   Regen + diff guard for INVENTORY.jsonl
-├── models/                             # Per-model verify-card test files
-│   ├── classical/
-│   └── quantum/
-├── INVENTORY.jsonl                     # Frozen inventory of registered hubs (regenerated, drift-guarded)
-└── verification/                       # Cross-model checks
+├── runtests.jl                        # Entry: QATLAS_TEST_PROFILE=fast|full; QATLAS_TEST_FILES=subset
+├── Project.toml  Manifest.toml        # test-only deps ([extras]: Lattice2D, ForwardDiff, KrylovKit, …)
+├── util/                              # Reusable helpers
+│   ├── verify.jl                      #   verify(...) card framework — READ THIS FIRST
+│   ├── generic_ed.jl  spinhalf_ed.jl  sparse_ed.jl  tfim_dense_ed.jl
+│   ├── fluctuation_dissipation.jl  thermodynamic_identities.jl
+│   └── bloch.jl  tight_binding.jl  classical_partition.jl  extrapolate.jl
+├── util_verify/                       # Self-tests of the verify framework
+├── lint/                              # CONVENTION-header lint
+├── harness/atlas/                     # Inventory-drift + doc-structure guards
+├── ci/                                # universe.jl test discovery (globs test_*.jl)
+├── models/{classical,quantum}/        # Per-model verify-card test files
+├── universalities/                    # Per-class verify tests
+├── bounds/                            # Bound verify_bound tests
+├── identities/                        # Cross-quantity identities (FDT, Gibbs s=β(u−f), …)
+├── cross_model/                       # Cross-model exact-match tests
+├── core/  verification/               # registry/scheme unit tests; cross-model checks
+├── test_aqua.jl                       # Aqua static checks
+└── INVENTORY.jsonl                    # Frozen hub inventory (regenerated, drift-guarded)
 
 docs/
-├── atlas/
-│   └── generate.jl                     # Regenerates docs/src/atlas/* from REGISTRY + INVENTORY
-└── src/                                # Documenter source
-    ├── calc/                           # Step-by-step derivations (Zettelkasten)
-    ├── conventions.md                  # Sign / S / occupation conventions — REQUIRED READ
-    └── atlas/                          # Auto-generated hub pages (do NOT hand-edit)
+├── atlas/generate.jl                  # Regenerates docs/src/atlas/* + injects per-model @autodocs
+├── make.jl                            # Documenter build (checkdocs=:none, size_threshold guard)
+├── references.bib                     # Bibliography (doiget-verified bibkeys)
+└── src/
+    ├── api.md                         # Hand-written framework reference (Registry/Model/Quantity)
+    ├── conventions.md                 # Sign / S / occupation conventions — REQUIRED READ
+    ├── calc/                          # Step-by-step derivations (Zettelkasten)
+    ├── models/                        # Per-model pages (auto-injected @autodocs between markers)
+    └── atlas/                         # Auto-generated hub/index pages (do NOT hand-edit)
 
 rules/                                  # Checklist-grade implementation rules — READ THESE
 ├── citations.md                        #   DOI policy + doiget literature cross-check
@@ -291,9 +291,9 @@ This rewrites every auto-generated atlas surface, all derived from the fixed sub
 |---|---|---|
 | `docs/src/atlas/index.md` | top atlas + risk-linter + per-model breakdown table | registry + INVENTORY |
 | `docs/src/atlas/ModelList.md` | top searchable catalog, one row per model, columns: Universality, #K, methods, assurance distribution, ED-feasibility, regimes | substrate-derived |
-| `docs/src/atlas/models/<Model>.md` × 58 | per-model `Quantity × BC` matrix, **Convention** block (from `# CONVENTION` header), **Derivation notes** (matched calc/*.md), aggregated methods + refs | registry + INVENTORY + src file comment + calc filenames |
-| `docs/src/atlas/quantities/<Quantity>.md` × 51 | inverse `Model × BC` matrix, methods aggregation, universality coverage, top references | registry + INVENTORY |
-| `docs/src/atlas/hubs/<Model>_<Quantity>_<BC>.md` × 263 | per-hub card with `src` claim, corroboration cards table, reconstructed `verify(...)` call, **Derivation note** link, three-way back-links (Model, Quantity, Atlas) | registry + INVENTORY |
+| `docs/src/atlas/models/<Model>.md` (one per model) | per-model `Quantity × BC` matrix, **Convention** block (from `# CONVENTION` header), **Derivation notes** (matched calc/*.md), aggregated methods + refs | registry + INVENTORY + src file comment + calc filenames |
+| `docs/src/atlas/quantities/<Quantity>.md` (one per quantity) | inverse `Model × BC` matrix, methods aggregation, universality coverage, top references | registry + INVENTORY |
+| `docs/src/atlas/hubs/<Model>_<Quantity>_<BC>.md` (one per registered hub) | per-hub card with `src` claim, corroboration cards table, reconstructed `verify(...)` call, **Derivation note** link, three-way back-links (Model, Quantity, Atlas) | registry + INVENTORY |
 | `docs/src/atlas/by/{model,quantity,bc,level,mechanism,regime}.md` | 1D facet aggregators | INVENTORY |
 | `docs/src/atlas/Bibliography.md` | all citations, deduplicated, with hub backlinks sorted by hub-count | registry refs |
 | `docs/src/atlas/CalcIndex.md` | inverse view: every `docs/src/calc/*.md` ↔ matched models | calc filenames |
@@ -364,12 +364,13 @@ Because QAtlas docstrings are densely cross-linked with `` [`X`](@ref) ``, `make
 
 A PR must pass:
 
-1. **Format check** — `JuliaFormatter.format(path)` is idempotent on every changed `.jl` file.
+1. **Format check** — `JuliaFormatter` **v2** (pinned; v1 formats differently) `format(".")` is idempotent on every changed `.jl` file.
 2. **Convention lint** — every modified model file has its `CONVENTION` header (`test/lint/`).
 3. **Test suite** — `Pkg.test()`, possibly under different `QATLAS_TEST_PROFILE` profiles.
 4. **Inventory drift guard** — `test/harness/atlas/test_inventory_drift.jl` passes (regenerate the atlas if it doesn't).
 5. **Aqua** (`test/test_aqua.jl`) — no stale deps, no piracy, no ambiguities.
 6. **Documenter build** — `julia --project=docs docs/make.jl` succeeds (run on every PR, not just on `main`).
+7. **Version check** — `Project.toml`'s `version` differs from `main` (bump it).
 
 ## Things to watch out for
 

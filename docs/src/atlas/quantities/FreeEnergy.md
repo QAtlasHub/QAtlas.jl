@@ -42,7 +42,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | — | — |
 | [`SSH`](../models/SSH.md) | — | — | 🟠 [hub](../hubs/SSH_FreeEnergy_Infinite.md) |
-| [`SixVertex`](../models/SixVertex.md) | — | — | 🟠 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
+| [`SixVertex`](../models/SixVertex.md) | — | — | 🟢 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_PBC.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_FreeEnergy_Infinite.md) |

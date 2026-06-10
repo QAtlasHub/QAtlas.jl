@@ -1298,3 +1298,13 @@ positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched
 against a [`Bound`](@ref) domain (`Bound(:QuantumInformation)`).
 """
 struct BB84KeyRate <: AbstractQuantity end
+
+"""
+    Polarization() <: AbstractQuantity
+
+The bulk polarization density (or order parameter) per site. For the
+classical 2D six-vertex model, it corresponds to the spontaneous polarization
+(in the ferroelectric phase Δ > 1) or the spontaneous staggered polarization
+(in the antiferroelectric phase Δ < -1).
+"""
+struct Polarization <: AbstractQuantity end

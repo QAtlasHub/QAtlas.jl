@@ -102,6 +102,36 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
         @test_throws DomainError QAtlas.fetch(m, ChargeGap(), Infinite())
         @test_throws DomainError QAtlas.fetch(m, SpinGap(), Infinite())
     end
+
+    @testset "Standard quantity wrappers: Energy{:per_site} and MassGap" begin
+        m = Hubbard1D(; t=1.0, U=4.0, μ=2.0)
+
+        # Energy{:per_site} at half filling matches GroundStateEnergyDensity
+        e0_density = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0_standard = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
+        @test e0_standard ≈ e0_density atol=1e-12
+
+        # MassGap default (:charge) matches ChargeGap
+        gap_charge_std = QAtlas.fetch(m, MassGap(), Infinite())
+        gap_charge_raw = QAtlas.fetch(m, ChargeGap(), Infinite())
+        @test gap_charge_std ≈ gap_charge_raw atol=1e-12
+
+        # MassGap with type=:charge matches ChargeGap
+        gap_charge_explicit = QAtlas.fetch(m, MassGap(), Infinite(); type=:charge)
+        @test gap_charge_explicit ≈ gap_charge_raw atol=1e-12
+
+        # MassGap with type=:spin matches SpinGap (0.0)
+        gap_spin = QAtlas.fetch(m, MassGap(), Infinite(); type=:spin)
+        @test gap_spin == 0.0
+
+        # Invalid type throws ArgumentError
+        @test_throws ArgumentError QAtlas.fetch(m, MassGap(), Infinite(); type=:invalid)
+
+        # Off half filling raises DomainError
+        m_off = Hubbard1D(; t=1.0, U=6.0, μ=2.0)
+        @test_throws DomainError QAtlas.fetch(m_off, Energy{:per_site}(), Infinite())
+        @test_throws DomainError QAtlas.fetch(m_off, MassGap(), Infinite())
+    end
 end
 
 @testset "Hubbard1D — LuttingerParameter free-fermion U=0 (Phase 2)" begin

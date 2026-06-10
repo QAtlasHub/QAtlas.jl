@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 26
-- **Total hubs (Model, BC pairs)**: 36
+- **Models with this quantity registered**: 27
+- **Total hubs (Model, BC pairs)**: 37
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `quadgk`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
@@ -36,6 +36,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`DMIHeisenberg1D`](../models/DMIHeisenberg1D.md) | — | — | 🟢 [hub](../hubs/DMIHeisenberg1D_Energy_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | — |
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | — | 🟢 [hub](../hubs/HeisenbergXYZ_Energy_Infinite.md) |
+| [`Hubbard1D`](../models/Hubbard1D.md) | — | — | 🟠 [hub](../hubs/Hubbard1D_Energy_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟠 [hub](../hubs/IsingChain1D_Energy_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | — | 🟢 [hub](../hubs/IsingSquare_Energy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_Energy_Infinite.md) |
 | [`IsingTriangular`](../models/IsingTriangular.md) | — | — | 🟠 [hub](../hubs/IsingTriangular_Energy_Infinite.md) |

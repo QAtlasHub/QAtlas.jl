@@ -275,7 +275,13 @@ function fetch(
     if s ≤ 0
         return -Inf
     end
-    return (c / 6) * log((2 * L / π) * s)
+    log_g = 0.0
+    if haskey(kwargs, :boundary_state)
+        log_g = fetch(model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state])
+    elseif haskey(kwargs, :log_g)
+        log_g = Float64(kwargs[:log_g])
+    end
+    return (c / 6) * log((2 * L / π) * s) + log_g
 end
 
 """
@@ -392,7 +398,13 @@ function fetch(
     if s ≤ 0
         return -Inf
     end
-    return (c_eff / 6) * log((2 * L / π) * s)
+    log_g = 0.0
+    if haskey(kwargs, :boundary_state)
+        log_g = fetch(model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state])
+    elseif haskey(kwargs, :log_g)
+        log_g = Float64(kwargs[:log_g])
+    end
+    return (c_eff / 6) * log((2 * L / π) * s) + log_g
 end
 
 """
@@ -929,4 +941,195 @@ function fetch(
     )
     c = _cardy_central_charge(model)
     return π * c / (3 * beta)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Post-quench entanglement dynamics (Calabrese-Cardy 2005)
+# ─────────────────────────────────────────────────────────────────────────────
+
+raw"""
+    fetch(::Universality{C}, ::VonNeumannEntropy{:quench}, ::Infinite;
+          ℓ::Real, t::Real, v::Real, beta_eff::Real) -> Float64
+
+Post-quench von Neumann entanglement entropy in the thermodynamic limit
+(Calabrese-Cardy 2005):
+
+    S(ℓ, t) = min(2 v t, ℓ) * pi * c / (6 * beta_eff)
+
+where `c` is the central charge of the post-quench CFT class `C`,
+`v` is the excitation propagation velocity, and `beta_eff` is the effective
+inverse temperature of the initial state.
+"""
+function fetch(
+    model::Universality{C},
+    ::VonNeumannEntropy{:quench},
+    ::Infinite;
+    ℓ::Real,
+    t::Real,
+    v::Real,
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    ℓ > 0 || throw(ArgumentError("Cardy quench Infinite: ℓ must be > 0; got ℓ=$ℓ."))
+    t ≥ 0 || throw(ArgumentError("Cardy quench Infinite: t must be ≥ 0; got t=$t."))
+    v > 0 || throw(ArgumentError("Cardy quench Infinite: v must be > 0; got v=$v."))
+    beta_eff > 0 || throw(
+        ArgumentError(
+            "Cardy quench Infinite: beta_eff must be > 0; got beta_eff=$beta_eff."
+        ),
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    return min(2 * v * t, ℓ) * π * c / (6 * beta_eff)
+end
+
+raw"""
+    fetch(::Universality{C}, ::VonNeumannEntropy{:quench}, ::OBC;
+          ℓ::Real, t::Real, v::Real, beta_eff::Real) -> Float64
+
+Post-quench von Neumann entanglement entropy of a block at the boundary of
+an open chain (Calabrese-Cardy 2005):
+
+    S(ℓ, t) = min(v t, ℓ) * pi * c / (12 * beta_eff) + log g
+
+where `log g` is the Affleck-Ludwig boundary entropy (residual term) of the
+boundary condition, optionally fetched if `boundary_state` is provided.
+"""
+function fetch(
+    model::Universality{C},
+    ::VonNeumannEntropy{:quench},
+    ::OBC;
+    ℓ::Real,
+    t::Real,
+    v::Real,
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    ℓ > 0 || throw(ArgumentError("Cardy quench OBC: ℓ must be > 0; got ℓ=$ℓ."))
+    t ≥ 0 || throw(ArgumentError("Cardy quench OBC: t must be ≥ 0; got t=$t."))
+    v > 0 || throw(ArgumentError("Cardy quench OBC: v must be > 0; got v=$v."))
+    beta_eff > 0 || throw(
+        ArgumentError("Cardy quench OBC: beta_eff must be > 0; got beta_eff=$beta_eff.")
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    log_g = 0.0
+    if haskey(kwargs, :boundary_state)
+        log_g = fetch(model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state])
+    elseif haskey(kwargs, :log_g)
+        log_g = Float64(kwargs[:log_g])
+    end
+    return min(v * t, ℓ) * π * c / (12 * beta_eff) + log_g
+end
+
+raw"""
+    fetch(::Universality{C}, ::VonNeumannEntropy{:quench}, ::PBC;
+          ℓ::Real, L::Real, t::Real, v::Real, beta_eff::Real) -> Float64
+
+Post-quench von Neumann entanglement entropy of a block of length `ℓ` on a
+periodic circle of circumference `L` (Calabrese-Cardy 2005 quasi-particle picture):
+
+    S(ℓ, t) = f_qp(t_mod) * pi * c / (6 * beta_eff)
+
+where the periodic triangular/trapezoidal revival profile is:
+
+    f_qp(t_mod) = 2 * v * t_mod           if 0 <= t_mod < ℓ_c / 2v
+                  ℓ_c                     if ℓ_c / 2v <= t_mod < (L - ℓ_c) / 2v
+                  L - 2 * v * t_mod       if (L - ℓ_c) / 2v <= t_mod < L / v
+
+with `t_mod = mod(t, L / v)` and `ℓ_c = min(ℓ, L - ℓ)`.
+"""
+function fetch(
+    model::Universality{C},
+    ::VonNeumannEntropy{:quench},
+    ::PBC;
+    ℓ::Real,
+    L::Real,
+    t::Real,
+    v::Real,
+    beta_eff::Real,
+    kwargs...,
+) where {C}
+    L > 0 || throw(ArgumentError("Cardy quench PBC: L must be > 0; got L=$L."))
+    0 ≤ ℓ ≤ L ||
+        throw(ArgumentError("Cardy quench PBC: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
+    t ≥ 0 || throw(ArgumentError("Cardy quench PBC: t must be ≥ 0; got t=$t."))
+    v > 0 || throw(ArgumentError("Cardy quench PBC: v must be > 0; got v=$v."))
+    beta_eff > 0 || throw(
+        ArgumentError("Cardy quench PBC: beta_eff must be > 0; got beta_eff=$beta_eff.")
+    )
+    c = _cardy_central_charge(model; kwargs...)
+    ℓ_c = min(ℓ, L - ℓ)
+    t_mod = mod(t, L / v)
+    val = if 0 ≤ t_mod < ℓ_c / (2 * v)
+        2 * v * t_mod
+    elseif ℓ_c / (2 * v) ≤ t_mod < (L - ℓ_c) / (2 * v)
+        ℓ_c
+    else
+        L - 2 * v * t_mod
+    end
+    return val * π * c / (6 * beta_eff)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Boundary entropy (Affleck-Ludwig log g) for XY and Heisenberg
+# ─────────────────────────────────────────────────────────────────────────────
+
+raw"""
+    fetch(::Universality{:XY}, ::BoundaryEntropy, ::Infinite;
+          boundary_state::Symbol, K::Real = 1.0, kwargs...) -> Float64
+
+Affleck-Ludwig universal boundary entropy `log g` for a compact boson CFT
+(XY universality class, c = 1) at Luttinger parameter `K` (defaulting to `1.0`).
+
+`boundary_state` must be one of:
+    `:neumann`  (≡ `:free`),
+    `:dirichlet` (≡ `:fixed`).
+
+The boundary entropies are:
+    log g_N = (1/4) log(K / 2)
+    log g_D = -(1/4) log(2 * K)
+"""
+function fetch(
+    ::Universality{:XY}, ::BoundaryEntropy, ::Infinite; boundary_state::Symbol, K::Real=1.0, kwargs...
+)
+    K > 0 || throw(ArgumentError("BoundaryEntropy (:XY): K must be positive; got K=$K."))
+    if boundary_state === :neumann || boundary_state === :free
+        return 0.25 * log(K / 2.0)
+    elseif boundary_state === :dirichlet || boundary_state === :fixed
+        return -0.25 * log(2.0 * K)
+    else
+        throw(
+            ArgumentError(
+                "Universality(:XY) BoundaryEntropy: boundary_state must be one of " *
+                ":neumann / :free / :dirichlet / :fixed; got $(boundary_state).",
+            ),
+        )
+    end
+end
+
+raw"""
+    fetch(::Universality{:Heisenberg}, ::BoundaryEntropy, ::Infinite;
+          boundary_state::Symbol, kwargs...) -> Float64
+
+Affleck-Ludwig universal boundary entropy `log g` for the SU(2)_1 WZW CFT
+(Heisenberg universality class, c = 1) at d = 1.
+
+`boundary_state` must be one of:
+    `:free` (≡ `:neumann` / SU(2)-symmetric boundary condition: g = 1, log g = 0),
+    `:fixed` (g = 1/sqrt(2), log g = -(1/2) log 2).
+"""
+function fetch(
+    ::Universality{:Heisenberg}, ::BoundaryEntropy, ::Infinite; boundary_state::Symbol, kwargs...
+)
+    if boundary_state === :free || boundary_state === :neumann
+        return 0.0  # SU(2) symmetric boundary has g = 1, log g = 0.
+    elseif boundary_state === :fixed || boundary_state === :dirichlet
+        return -log(2) / 2  # Fixed spin boundary has g = 1/sqrt(2)
+    else
+        throw(
+            ArgumentError(
+                "Universality(:Heisenberg) BoundaryEntropy: boundary_state must be one of " *
+                ":free / :neumann / :fixed / :dirichlet; got $(boundary_state).",
+            ),
+        )
+    end
 end

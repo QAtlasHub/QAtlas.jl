@@ -66,3 +66,30 @@ for C in _CFT_CLASSES, (q, refs, note) in _CFT_PREDICTIONS
         notes=note,
     )
 end
+
+# Register post-quench entanglement dynamics across all boundary conditions
+for C in _CFT_CLASSES, BC in (Infinite, PBC, OBC)
+    register!(
+        Universality{C},
+        VonNeumannEntropy{:quench},
+        BC;
+        method=:analytic,
+        reliability=:high,
+        references=["CalabreseCardy2005"],
+        notes="Universal post-quench von Neumann entanglement entropy time evolution (Calabrese-Cardy 2005).",
+    )
+end
+
+# Register Affleck-Ludwig boundary entropy log g at Infinite BC
+for C in (:Ising, :XY, :Heisenberg)
+    register!(
+        Universality{C},
+        BoundaryEntropy,
+        Infinite;
+        method=:analytic,
+        reliability=:high,
+        references=["AffleckLudwig1991"],
+        notes="Affleck-Ludwig universal boundary entropy log g (Affleck-Ludwig 1991).",
+    )
+end
+

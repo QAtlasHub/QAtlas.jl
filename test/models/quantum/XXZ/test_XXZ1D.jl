@@ -74,9 +74,11 @@ end
 end
 
 @testset "XXZ1D — NMRRelaxationExponent" begin
-    # Δ = 0 (K = 1.0) ⇒ θ_NMR = 2K - 1 = 1.0
-    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), NMRRelaxationExponent(), Infinite()) ≈ 1.0 atol = 1e-12
-    # Δ = 1 (K = 0.5) ⇒ θ_NMR = 2K - 1 = 0.0
+    # Δ = 0 (K = 1.0, XX free fermion) ⇒ θ_NMR = 1/(2K) - 1 = -1/2
+    # (the textbook T^{-1/2} divergence of 1/T_1 in the XX chain)
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), NMRRelaxationExponent(), Infinite()) ≈ -0.5 atol =
+        1e-12
+    # Δ = 1 (K = 0.5, Heisenberg) ⇒ θ_NMR = 1/(2K) - 1 = 0.0 (constant, up to logs)
     @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), NMRRelaxationExponent(), Infinite()) ≈ 0.0 atol = 1e-12
 
     # Outside critical regime: returns NaN + warn
@@ -307,8 +309,10 @@ end
         NMRRelaxationExponent(),
         Infinite();
         route=:second_closed_form,
-        independent=1.0,
+        independent=-0.5,
         agree_within=1e-12,
-        refs=["Luttinger liquid: θ_NMR = 2K - 1 = 1 at Delta=0 (free fermion XX limit)"],
+        refs=[
+            "Sachdev 1994 (doi:10.1103/PhysRevB.50.13006) / Chitra & Giamarchi 1997 (doi:10.1103/PhysRevB.55.5816) Eq.27: leading 1/T_1 ∝ T^{1/(2K)-1}; at the XX free-fermion point K=1 ⇒ θ_NMR = -1/2 (T^{-1/2} divergence).",
+        ],
     )
 end

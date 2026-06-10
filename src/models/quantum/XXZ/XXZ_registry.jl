@@ -70,7 +70,7 @@
     reliability=:high,
     tested_in="test/models/quantum/XXZ/test_XXZ1D.jl",
     references=["ChitraGiamarchi1997", "Giamarchi2003"],
-    notes="θ_NMR = 2K - 1 in the critical Luttinger liquid regime -1 < Δ ≤ 1.",
+    notes="Leading θ_NMR = 1/(2K) - 1 (dominant transverse staggered channel, Δ_op = 1/(4K)) in the critical Luttinger liquid regime -1 < Δ ≤ 1; ChitraGiamarchi1997 Eq.27. Subdominant longitudinal channel gives T^{2K-1}.",
 )
 @register(
     XXZ1D,

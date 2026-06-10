@@ -101,10 +101,19 @@ struct NMRSpinRelaxationRate <: AbstractQuantity end
 """
     NMRRelaxationExponent() <: AbstractQuantity
 
-NMR spin-lattice relaxation rate scaling exponent, `\theta_{NMR}` (where `1/T_1 \propto T^{\theta_{NMR}}`).
-For a Luttinger liquid (emergent c=1 CFT), this exponent is determined by the Luttinger parameter `K`:
+Low-temperature scaling exponent `θ_NMR` of the NMR spin-lattice relaxation
+rate, `1/T_1 ∝ T^{θ_NMR}` as `T → 0`.
 
-    \theta_{NMR} = 2K - 1
+For a quantum critical point the leading exponent follows the general
+fluctuation-dissipation rule `θ_NMR = 2Δ_op − 1`, where `Δ_op` is the scaling
+dimension of the operator the nuclei couple to:
+
+- 1D transverse-field Ising QCP: `Δ_σ = 1/8` ⟹ `θ_NMR = −3/4`.
+- XXZ critical Luttinger liquid (`−1 < Δ ≤ 1`), contact-hyperfine coupling to
+  the dominant *transverse staggered* susceptibility (`Δ_op = 1/(4K)`):
+  `θ_NMR = 1/(2K) − 1`, where `K` is the Luttinger parameter. (The subdominant
+  longitudinal channel contributes `T^{2K−1}`; see Chitra & Giamarchi 1997,
+  Eq. 27.)
 """
 struct NMRRelaxationExponent <: AbstractQuantity end
 

@@ -16,7 +16,36 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
-using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, NMRSpinRelaxationRate, Infinite, fetch
+using QAtlas:
+    TightBinding1D, Energy, MassGap, FermiVelocity, NMRSpinRelaxationRate, Infinite, fetch
+
+# Independent reference for the η-regularized NMR rate: the same q-summed
+# S(q,ω→0) golden-rule integral evaluated by a discrete midpoint k-mode sum over
+# N modes — a DIFFERENT quadrature from the production nested QuadGK, converging
+# to the continuum value as N→∞. Catches normalisation / Fermi-factor errors
+# that a re-typed closed form cannot. (N=400 reproduces the QuadGK value to ~1e-9.)
+_tb1d_nF(x) = x > 0 ? exp(-x) / (1 + exp(-x)) : 1 / (1 + exp(x))
+function _tb1d_nmr_kmode_sum(t, μ, β, η; N=400)
+    ks = [(n - 0.5) * π / N for n in 1:N]
+    εs = [-2t * cos(k) - μ for k in ks]
+    fs = _tb1d_nF.(β .* εs)
+    s = 0.0
+    for n in 1:N, m in 1:N
+        s += fs[n] * (1 - fs[m]) * η / ((εs[n] - εs[m])^2 + η^2)
+    end
+    return s / (π * N^2)
+end
+# η-broadened particle–hole phase space (no Fermi factors); the high-T limit is
+# 1/T₁(β→0) = ¼ · this, since f(1-f) → ¼ when every mode is half-filled.
+function _tb1d_nmr_phasespace(t, μ, η; N=400)
+    ks = [(n - 0.5) * π / N for n in 1:N]
+    εs = [-2t * cos(k) - μ for k in ks]
+    s = 0.0
+    for n in 1:N, m in 1:N
+        s += η / ((εs[n] - εs[m])^2 + η^2)
+    end
+    return s / (π * N^2)
+end
 
 @testset "TightBinding1D" begin
 
@@ -139,18 +168,23 @@ end
         refs=["Ashcroft-Mermin 1976: v_F = 2 t sin(k_F); μ=0 half-filling"],
     )
 
-    # NMR spin relaxation rate low-T Korringa limit with regularization eta=0.1
-    # expected 1/T_1 = 1 / (beta * pi * (eta^2 + 4)) at beta=100.0
-    verify(
-        TightBinding1D(; t=1.0, μ=0.0),
-        NMRSpinRelaxationRate(),
-        Infinite();
-        route=:limiting_case,
-        fetch_kw=(; beta=100.0, eta=0.1),
-        independent=1.0 / (100.0 * π * (0.1^2 + 4.0)),
-        agree_within=1e-5,
-        refs=["Low-temperature regularized Korringa limit: 1/T_1 ~ T / (π * (η² + 4t²))"],
-    )
+    # NMR 1/T₁: the production nested-QuadGK integral vs an INDEPENDENT discrete
+    # k-mode sum of the same q-summed S(q,ω→0) golden-rule integral (a different
+    # quadrature) — this would catch any normalisation / Fermi-factor error.
+    for (β, η) in ((1.0, 0.1), (0.5, 0.2), (2.0, 0.1))
+        verify(
+            TightBinding1D(; t=1.0, μ=0.0),
+            NMRSpinRelaxationRate(),
+            Infinite();
+            route=:ed_finite_size,
+            fetch_kw=(; beta=β, eta=η),
+            independent=_tb1d_nmr_kmode_sum(1.0, 0.0, β, η; N=400),
+            agree_within=1e-5,
+            refs=[
+                "Korringa 1950 (doi:10.1016/0031-8914(50)90105-4): free-fermion golden-rule 1/T₁ ∝ q-summed S(q,ω→0); cross-checked by a discrete N=400 k-mode sum → continuum.",
+            ],
+        )
+    end
 end
 # ── additional verification cards (#381 batch 7) ─────────────────────────
 @testset "TightBinding1D — Energy/Infinite free fermion (#381 batch 7)" begin
@@ -261,10 +295,17 @@ end
             QAtlas.TightBinding1D(), QAtlas.SpecificHeat(), QAtlas.Infinite(); beta=0.0
         )
         @test_throws DomainError QAtlas.fetch(
-            QAtlas.TightBinding1D(), QAtlas.NMRSpinRelaxationRate(), QAtlas.Infinite(); beta=0.0
+            QAtlas.TightBinding1D(),
+            QAtlas.NMRSpinRelaxationRate(),
+            QAtlas.Infinite();
+            beta=0.0,
         )
         @test_throws DomainError QAtlas.fetch(
-            QAtlas.TightBinding1D(), QAtlas.NMRSpinRelaxationRate(), QAtlas.Infinite(); beta=1.0, eta=-0.1
+            QAtlas.TightBinding1D(),
+            QAtlas.NMRSpinRelaxationRate(),
+            QAtlas.Infinite();
+            beta=1.0,
+            eta=-0.1,
         )
     end
 
@@ -276,17 +317,35 @@ end
         @test rate_high > 0.0
         @test rate_high < 1.0
 
-        # Low-T limit (beta -> infinity): matches regularized Korringa relation
-        for eta_val in [0.05, 0.1, 0.2]
-            expected_lim = 1.0 / (π * (eta_val^2 + 4.0))
-            rate_low = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=100.0, eta=eta_val)
-            @test isapprox(100.0 * rate_low, expected_lim; rtol=1e-3)
+        # High-T factorisation: f(1-f) → 1/4 as β→0, so 1/T₁(β→0) = ¼·(η-broadened
+        # particle–hole phase space) — an independent check of the Fermi-factor handling.
+        for eta_val in (0.1, 0.2)
+            rate0 = QAtlas.fetch(
+                m, NMRSpinRelaxationRate(), Infinite(); beta=1e-4, eta=eta_val
+            )
+            @test isapprox(
+                rate0, 0.25 * _tb1d_nmr_phasespace(1.0, 0.0, eta_val; N=400); rtol=1e-2
+            )
+        end
+
+        # Finite-β: the production integral matches the independent k-mode sum.
+        for (β_val, eta_val) in ((0.5, 0.2), (3.0, 0.1))
+            r = QAtlas.fetch(
+                m, NMRSpinRelaxationRate(), Infinite(); beta=β_val, eta=eta_val
+            )
+            @test isapprox(
+                r, _tb1d_nmr_kmode_sum(1.0, 0.0, β_val, eta_val; N=400); rtol=1e-4
+            )
         end
 
         # Gapped insulator regime (|μ| > 2t): relaxation is exponentially suppressed at low-T
         m_gap = TightBinding1D(; t=1.0, μ=3.0)  # gap Δ = 1.0
-        rate_gap_low = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1)
-        rate_gap_lower = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1)
+        rate_gap_low = QAtlas.fetch(
+            m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1
+        )
+        rate_gap_lower = QAtlas.fetch(
+            m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1
+        )
         @test rate_gap_lower < rate_gap_low * 0.1
     end
 end

@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 138 hubs
+## `analytic` - 139 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -121,6 +121,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md)
 - 🟠 [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md)
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md)
+- 🟢 [`TightBinding1D/NMRSpinRelaxationRate/Infinite`](hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md)
 - 🟠 [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md)
 - 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md)
 - 🟢 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md)

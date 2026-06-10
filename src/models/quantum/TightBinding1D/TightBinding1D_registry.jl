@@ -74,8 +74,10 @@
     NMRSpinRelaxationRate,
     Infinite,
     method=:analytic,
-    reliability=:high,
+    status=:approx,
+    reliability=:medium,
+    valid_domain="η > 0 Lorentzian broadening regulator; the physical η→0⁺ limit is cut off by the 1D band-edge van Hove singularities, so the rate is η-dependent and is reported at finite η.",
     tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
     references=["Korringa1950"],
-    notes="1/T_1(β, η) = 1/π³ ∫₀^π dk₁ ∫₀^π dk₂ f(ε(k₁)) (1-f(ε(k₂))) η / ((ε(k₁)-ε(k₂))² + η²); regularized 1D Korringa rate; QuadGK nested rtol=1e-6.",
+    notes="η-regularized free-fermion (Korringa-type) golden-rule rate 1/T₁(β,η) = (1/π³)∫₀^π∫₀^π f(ε₁)(1-f(ε₂)) η/((ε₁-ε₂)²+η²) dk₁dk₂ — the q-summed dynamic structure factor S(q,ω→0) of the 1D tight-binding band, Lorentzian-broadened by η. Evaluated by nested QuadGK (rtol=1e-6); verified against an independent discrete N-mode k-sum and the β→0 ¼-factorisation.",
 )

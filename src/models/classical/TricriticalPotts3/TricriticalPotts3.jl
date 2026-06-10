@@ -44,11 +44,12 @@ RSOS models and by the q = 3 Potts model with dilution
 
 Quantities registered:
 
-| Quantity                       | BC         | Method                              |
-| ------------------------------ | ---------- | ----------------------------------- |
-| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(7, 6)     |
-| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(7, 6)     |
-| [`PrimaryFields`](@ref)        | `Infinite` | delegated to MinimalModel(7, 6)     |
+| Quantity                       | BC         | Method                                  |
+| ------------------------------ | ---------- | --------------------------------------- |
+| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(7, 6)         |
+| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(7, 6)         |
+| [`PrimaryFields`](@ref)        | `Infinite` | delegated to MinimalModel(7, 6)         |
+| [`UniversalityClass`](@ref)     | `Infinite` | `:TricriticalPotts3` universality class |
 
 # References
 

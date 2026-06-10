@@ -53,11 +53,12 @@ and the Andrews-Baxter-Forrester (1984) RSOS models at (p+1, p) = (5, 4).
 
 Quantities registered (Phase 1):
 
-| Quantity                       | BC         | Method                         |
-| ------------------------------ | ---------- | ------------------------------ |
-| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(5,4) |
-| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(5,4) |
-| [`PrimaryFields`](@ref)        | `Infinite` | delegated to MinimalModel(5,4) |
+| Quantity                       | BC         | Method                                 |
+| ------------------------------ | ---------- | -------------------------------------- |
+| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(5,4)         |
+| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(5,4)         |
+| [`PrimaryFields`](@ref)        | `Infinite` | delegated to MinimalModel(5,4)         |
+| [`UniversalityClass`](@ref)     | `Infinite` | `:TricriticalIsing` universality class |
 
 # References
 

@@ -1330,5 +1330,3 @@ where $\sigma = \frac{\pi^2}{24} C_T$. If no angle `theta` is provided, the fetc
 method returns the smooth-limit prefactor $\sigma$.
 """
 struct CornerEntanglementCoefficient <: AbstractQuantity end
-
-

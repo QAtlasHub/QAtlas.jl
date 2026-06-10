@@ -35,7 +35,7 @@ References:
 - Numerical values: Pufu, arXiv:1612.00381 (2017), Table 1.
 """
 function fetch(
-    u::Universality{C}, ::SphereFreeEnergy, ::Infinite; d::Int=3, kwargs...
+    ::Universality{C}, ::SphereFreeEnergy, ::Infinite; d::Int=3, kwargs...
 ) where {C}
     d == 3 || throw(ArgumentError("SphereFreeEnergy: only d=3 (2+1D CFT) is supported; got d=$d"))
 
@@ -86,7 +86,7 @@ References:
 - C_T (O(N)): Chester et al., JHEP 02, 098 (2020).
 """
 function fetch(
-    u::Universality{C},
+    ::Universality{C},
     ::CornerEntanglementCoefficient,
     ::Infinite;
     d::Int=3,
@@ -99,12 +99,14 @@ function fetch(
         ),
     )
 
+    # C_T,free = 3/(32π²) for one free real scalar (d=3 normalisation).
+    # σ = π²/24 · C_T  where  C_T = N_scalar · (C_T/C_T,free) · C_T,free.
     σ = if C === :Ising
-        0.0036974   # π²/24 * 0.94653 * 3/(32π²); Kos et al. 2016
+        0.0036974   # C_T/C_T,free = 0.94653 (Kos et al. 2016); N=1
     elseif C === :XY
-        0.0073773   # π²/24 * 2 * 0.9443 * 3/(32π²); Chester et al. 2020
+        0.0073773   # C_T/C_T,free = 0.9443 per component × N=2 (Chester et al. 2020)
     elseif C === :Heisenberg
-        0.0110496   # π²/24 * 3 * 0.9429 * 3/(32π²); Chester et al. 2020
+        0.0110496   # C_T/C_T,free = 0.9429 per component × N=3 (Chester et al. 2020)
     else
         throw(
             ArgumentError(

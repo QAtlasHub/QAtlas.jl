@@ -26,35 +26,36 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | 🟢 corroborated-at-p | 13 |
 | 🔵 coherent | 4 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 9 |
-| **total claimed hubs** | **26** |
+| 🟠 uncorroborated-but-feasible | 10 |
+| **total claimed hubs** | **27** |
 
-**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz`
+**Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `cft`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz`
 
 ## Quantity × BC matrix
 
-| Quantity | `OBC` | `Infinite` |
-|---|---|---|
-| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — |
-| [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_EnergyLocal_OBC.md) | — |
-| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) |
-| [`LuttingerParameter`](../quantities/LuttingerParameter.md) | — | 🔵 [hub](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) |
-| [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationX_OBC.md) | — |
-| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) | — |
-| [`MagnetizationY`](../quantities/MagnetizationY.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationY_OBC.md) | — |
-| [`MagnetizationYLocal`](../quantities/MagnetizationYLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) | — |
-| [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) | — |
-| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) | — |
-| [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
-| [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) |
-| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) |
-| [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) | — |
-| [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | — |
-| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
-| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) |
-| [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) |
-| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
+| Quantity | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`ConformalTower`](../quantities/ConformalTower.md) | — | 🟠 [hub](../hubs/Heisenberg1D_ConformalTower_PBC.md) | — |
+| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | — |
+| [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_EnergyLocal_OBC.md) | — | — |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) |
+| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | — | 🟢 [hub](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) |
+| [`LuttingerParameter`](../quantities/LuttingerParameter.md) | — | — | 🔵 [hub](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) |
+| [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationX_OBC.md) | — | — |
+| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) | — | — |
+| [`MagnetizationY`](../quantities/MagnetizationY.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationY_OBC.md) | — | — |
+| [`MagnetizationYLocal`](../quantities/MagnetizationYLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) | — | — |
+| [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) | — | — |
+| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) | — | — |
+| [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
+| [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) |
+| [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) | — | — |
+| [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | — | — |
+| [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — | — |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) |
+| [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) |
+| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
 
 ## Derivation notes
 
@@ -80,6 +81,7 @@ Affleck1989
 Bethe1931
 BloteCardyNightingale1986
 CalabreseCardy2004
+Cardy1986
 EggertAffleckTakahashi1994
 Haldane1980
 Hulthen1938

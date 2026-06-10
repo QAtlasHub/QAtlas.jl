@@ -52,6 +52,14 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](../hubs/SchwingerModel_ChiralCondensate_Infinite.md) — corroborated-at-p
 
+## `ConformalTower` (5)
+
+- 🟠 [`Heisenberg1D/ConformalTower/PBC`](../hubs/Heisenberg1D_ConformalTower_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/ConformalTower/OBC`](../hubs/TFIM_ConformalTower_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/ConformalTower/PBC`](../hubs/TFIM_ConformalTower_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`Universality/ConformalTower/OBC`](../hubs/Universality_ConformalTower_OBC.md) — corroborated-at-p
+- 🟢 [`Universality/ConformalTower/PBC`](../hubs/Universality_ConformalTower_PBC.md) — corroborated-at-p
+
 ## `ConformalWeights` (6)
 
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only

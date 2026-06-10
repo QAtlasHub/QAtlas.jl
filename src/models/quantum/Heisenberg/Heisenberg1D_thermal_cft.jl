@@ -291,3 +291,24 @@ function fetch(
         kwargs...,
     )
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Conformal tower of states (SU(2) symmetric point)
+# ─────────────────────────────────────────────────────────────────────────────
+
+raw"""
+    fetch(model::Heisenberg1D, q::ConformalTower, bc::PBC; J::Real=1.0, kwargs...) -> Vector{NamedTuple}
+
+Conformal tower of states excitation energies of the critical spin-1/2 antiferromagnetic
+Heisenberg chain. Delegates to `Universality(:Heisenberg)` with sound velocity `v = π J / 2`
+and system size `L`.
+"""
+function fetch(model::Heisenberg1D, q::ConformalTower, bc::PBC; J::Real=1.0, kwargs...)
+    L = _bc_size(bc, kwargs)
+    v = π * abs(J) / 2
+    return fetch(Universality(:Heisenberg), q, bc; L=L, v=v, J=J, kwargs...)
+end
+
+function fetch(model::Heisenberg1D, ::ConformalTower, bc::OBC; J::Real=1.0, kwargs...)
+    return error("Heisenberg1D ConformalTower is only implemented for PBC boundary conditions.")
+end

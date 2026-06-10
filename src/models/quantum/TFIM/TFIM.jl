@@ -402,3 +402,28 @@ function fetch(model::TFIM, ::NMRRelaxationExponent, ::Infinite; kwargs...)
         return NaN
     end
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Conformal tower of states (quantum critical point h = J)
+# ─────────────────────────────────────────────────────────────────────────────
+
+raw"""
+    fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...) -> Vector{NamedTuple}
+
+Conformal tower of states excitation energies of the TFIM chain at the quantum critical
+point `h = J`. Delegates to `Universality(:Ising)` at boundary condition `bc` with CFT sound
+velocity `v = 2J` and system size `L`.
+
+Throws a `DomainError` if the model is off-critical (`h ≠ J`).
+"""
+function fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...)
+    isapprox(model.h, model.J; atol=1e-6) || throw(
+        DomainError(
+            (model.J, model.h),
+            "TFIM ConformalTower is defined only at the Ising critical point h = J. Got (J, h) = ($(model.J), $(model.h)).",
+        ),
+    )
+    L = _bc_size(bc, kwargs)
+    v = 2.0 * model.J
+    return fetch(Universality(:Ising), q, bc; L=L, v=v, kwargs...)
+end

@@ -81,6 +81,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/Triangular/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/TricriticalIsing/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/TricriticalPotts3/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/Universality/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/XCube/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/XXZ1D/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/models/XYh1D/</loc></url>
@@ -95,6 +96,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ChaosBound/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ChargeGap/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ChiralCondensate/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ConformalTower/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ConformalWeights/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/CorrelationLength/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/CriticalExponents/</loc></url>
@@ -210,6 +212,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_SpecificHeat_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_ThermalEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_VonNeumannEntropy_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_ConformalTower_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_EnergyLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_FreeEnergy_Infinite/</loc></url>
@@ -372,6 +375,8 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/SpinIce_ResidualEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TASEP_SteadyStateCurrent_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_CentralCharge_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_ConformalTower_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_ConformalTower_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_CorrelationLength_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_CriticalExponents_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_Energy_Infinite/</loc></url>
@@ -469,6 +474,8 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TricriticalPotts3_CentralCharge_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TricriticalPotts3_ConformalWeights_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TricriticalPotts3_PrimaryFields_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Universality_ConformalTower_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Universality_ConformalTower_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XCube_GroundStateDegeneracy_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_CentralCharge_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_Energy_Infinite/</loc></url>

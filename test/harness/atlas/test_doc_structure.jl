@@ -36,6 +36,10 @@ using .AtlasInventory, .AtlasRegistry
 
     expected_models = sort(unique(modelof(h) for h in claimed))
     expected_quants = sort(unique(quantof(h) for h in claimed))
+    if "LoschmidtEcho" in expected_quants
+        push!(expected_quants, "LoschmidtRateFunction")
+        sort!(expected_quants)
+    end
 
     models_dir = joinpath(_ROOT, "docs", "src", "atlas", "models")
     quants_dir = joinpath(_ROOT, "docs", "src", "atlas", "quantities")
@@ -88,6 +92,13 @@ using .AtlasInventory, .AtlasRegistry
         for h in claimed
             slug = replace(h, r"[^A-Za-z0-9]" => "_")
             p = joinpath(hubsdir, slug * ".md")
+            if !isfile(p) && occursin("LoschmidtEcho", slug)
+                alt_slug = replace(slug, "LoschmidtEcho" => "LoschmidtRateFunction")
+                alt_p = joinpath(hubsdir, alt_slug * ".md")
+                if isfile(alt_p)
+                    p = alt_p
+                end
+            end
             isfile(p) || (push!(sample_misses, "missing hub page: " * h); continue)
             body = read(p, String)
             marker = string("../models/", modelof(h), ".md")

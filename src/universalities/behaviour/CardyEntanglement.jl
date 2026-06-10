@@ -1104,6 +1104,8 @@ Affleck-Ludwig universal boundary entropy `log g` for a compact boson CFT
 The boundary entropies are:
     log g_N = (1/4) log(K / 2)
     log g_D = -(1/4) log(2 * K)
+
+Reference: Affleck-Ludwig *Phys. Rev. Lett.* **67**, 161 (1991). Tracking: #580.
 """
 function fetch(
     ::Universality{:XY},
@@ -1142,12 +1144,12 @@ Affleck-Ludwig universal boundary entropy `log g` for the SU(2)_1 WZW CFT
               g = 2^{1/4}, log g = (1/4) log 2).
 
 The g-values follow from the Affleck-Ludwig analysis of the SU(2)_1 WZW
-model: the j=1/2 spin-impurity (Kondo) fixed point has g = 2^{1/4}
-(Affleck-Ludwig Nucl. Phys. B 360, 641 (1991), Table 2). Note this differs
+model: the j=1/2 spin-impurity (Kondo) fixed point has g = 2^{1/4},
+as tabulated in the SU(2)_k boundary state analysis. Note this differs
 from the Ising fixed-boundary value g = 1/sqrt(2); the two models are in
 distinct universality classes.
 
-Reference: Affleck-Ludwig *Nucl. Phys. B* **360**, 641 (1991);
+Reference: Affleck-Ludwig *Phys. Rev. Lett.* **67**, 161 (1991);
 Oshikawa-Affleck *Nucl. Phys. B* **495**, 533 (1997). Tracking: #580.
 """
 function fetch(

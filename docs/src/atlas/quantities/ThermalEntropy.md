@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 14
-- **Total hubs (Model, BC pairs)**: 22
+- **Models with this quantity registered**: 15
+- **Total hubs (Model, BC pairs)**: 23
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `central_diff`, `cft_low_T`, `dense_ed`, `free_fermion_quadgk_or_klumper_nlie`, `matter_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
@@ -39,6 +39,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`Kitaev1D`](../models/Kitaev1D.md) | — | — | 🟠 [hub](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | — | — |
+| [`SSH`](../models/SSH.md) | — | — | 🟠 [hub](../hubs/SSH_ThermalEntropy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) |

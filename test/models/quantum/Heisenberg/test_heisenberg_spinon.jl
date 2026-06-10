@@ -123,6 +123,31 @@ using QAtlas, Test
         @test S_default == S_muller
     end
 
+    @testset "Exact 2-spinon S^{zz}: support, finiteness, and limits" begin
+        q = π / 2
+        εL = heisenberg_two_spinon_lower_edge(model, q)
+        εU = heisenberg_two_spinon_upper_edge(model, q)
+        
+        # Zero outside support
+        for ω in (0.0, 0.5 * εL, εL)
+            @test QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω, method=:exact_2spinon) == 0.0
+        end
+        for ω in (εU, εU + 0.1, 10.0 * εU)
+            @test QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω, method=:exact_2spinon) == 0.0
+        end
+        
+        # Finite inside
+        ωmid = (εL + εU) / 2
+        S_exact = QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ωmid, method=:exact_2spinon)
+        @test isfinite(S_exact)
+        @test S_exact > 0
+        
+        # Divergence at ε_L
+        S_near = QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=εL + 1e-5, method=:exact_2spinon)
+        @test S_near > S_exact
+        @test S_near > 1.0
+    end
+
     @testset "Müller S^{zz}: Phase-2 :caux_hagemans raises informative error" begin
         @test_throws ErrorException QAtlas.fetch(
             Heisenberg1D(),

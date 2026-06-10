@@ -203,9 +203,19 @@ end
     Infinite,
     method=:muller_ansatz,
     reliability=:medium,
-    tested_in="test/standalone/test_heisenberg_spinon.jl",
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg_spinon.jl",
     references=["desCloizeauxPearson1962", "MullerThomasBeckBonner1981"],
     notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",
+)
+@register(
+    Heisenberg1D,
+    ZZStructureFactor,
+    Infinite,
+    method=:exact_2spinon,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg_spinon.jl",
+    references=["desCloizeauxPearson1962", "Karbach1997"],
+    notes="Exact 2-spinon longitudinal dynamic structure factor S^{zz}(q,ω) in the thermodynamic limit.",
 )
 
 # ── Luttinger-liquid parameter at SU(2)-symmetric point (Phase 2) ─────

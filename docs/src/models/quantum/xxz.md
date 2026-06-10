@@ -166,7 +166,7 @@ ansatz](../../calc/xxz-luttinger-parameters.md).
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 2 models register 31 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 2 models register 32 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
@@ -201,8 +201,10 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 31 hubs (
 | `XXZ1D` | [`ThermalEntropy`](../../atlas/hubs/XXZ1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 30 |
 | `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 48 |
+| `XXZ1D` | [`ZZStructureFactor`](../../atlas/hubs/XXZ1D_ZZStructureFactor_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 
@@ -233,7 +235,7 @@ Every `fetch(::Model, …)` method registered for these models — together with
 
 ```@autodocs
 Modules = [QAtlas]
-Pages = ["models/quantum/S1XXZ1D/S1XXZ1D.jl", "models/quantum/S1XXZ1D/S1XXZ1D_registry.jl", "models/quantum/XXZ/XXZ.jl", "models/quantum/XXZ/XXZ_bethe.jl", "models/quantum/XXZ/XXZ_klumper_nlie.jl", "models/quantum/XXZ/XXZ_registry.jl", "models/quantum/XXZ/XXZ_thermal.jl", "models/quantum/XXZ/XXZ_xx_infinite.jl", "models/quantum/XXZ/XXZ_xx_quench.jl"]
+Pages = ["models/quantum/S1XXZ1D/S1XXZ1D.jl", "models/quantum/S1XXZ1D/S1XXZ1D_registry.jl", "models/quantum/XXZ/XXZ.jl", "models/quantum/XXZ/XXZ_bethe.jl", "models/quantum/XXZ/XXZ_klumper_nlie.jl", "models/quantum/XXZ/XXZ_registry.jl", "models/quantum/XXZ/XXZ_spinon.jl", "models/quantum/XXZ/XXZ_thermal.jl", "models/quantum/XXZ/XXZ_xx_infinite.jl", "models/quantum/XXZ/XXZ_xx_quench.jl"]
 Private = false
 Order = [:type, :function]
 ```

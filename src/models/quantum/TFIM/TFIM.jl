@@ -31,6 +31,16 @@ The 1D transverse field Ising model with Hamiltonian
 
 `J > 0` is ferromagnetic, `h` is the transverse field.  The critical
 point sits at `h = J`.
+
+Currently registered fetches:
+
+| Quantity                   | BC                 | Coverage                                                              |
+| -------------------------- | ------------------ | --------------------------------------------------------------------- |
+| [`Energy`](@ref)           | `OBC` / `Infinite` | Exact energy computed via BdG transformation                          |
+| [`SpecificHeat`](@ref)     | `Infinite`         | Specific heat at finite temperature                                   |
+| [`FreeEnergy`](@ref)       | `Infinite`         | Free energy density at finite temperature                             |
+| [`ThermalEntropy`](@ref)   | `Infinite`         | Thermal entropy density at finite temperature                         |
+| [`UniversalityClass`](@ref) | `Infinite`         | `:Ising` universality class at the critical point `h = J` (flows to `:IsingSDRG` under strong disorder) |
 """
 struct TFIM <: AbstractQAtlasModel
     J::Float64
@@ -401,29 +411,4 @@ function fetch(model::TFIM, ::NMRRelaxationExponent, ::Infinite; kwargs...)
             model.h J = model.J
         return NaN
     end
-end
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Conformal tower of states (quantum critical point h = J)
-# ─────────────────────────────────────────────────────────────────────────────
-
-raw"""
-    fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...) -> Vector{NamedTuple}
-
-Conformal tower of states excitation energies of the TFIM chain at the quantum critical
-point `h = J`. Delegates to `Universality(:Ising)` at boundary condition `bc` with CFT sound
-velocity `v = 2J` and system size `L`.
-
-Throws a `DomainError` if the model is off-critical (`h ≠ J`).
-"""
-function fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...)
-    isapprox(model.h, model.J; atol=1e-6) || throw(
-        DomainError(
-            (model.J, model.h),
-            "TFIM ConformalTower is defined only at the Ising critical point h = J. Got (J, h) = ($(model.J), $(model.h)).",
-        ),
-    )
-    L = _bc_size(bc, kwargs)
-    v = 2.0 * model.J
-    return fetch(Universality(:Ising), q, bc; L=L, v=v, kwargs...)
 end

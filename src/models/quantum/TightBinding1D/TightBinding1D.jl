@@ -456,13 +456,13 @@ function _tb1d_thermo_finite(
     elseif quantity === :entropy
         return sum(eigenvalues) do ε
             y = β * ε
-            _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
+            return _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
         end / N
     elseif quantity === :specific_heat
         return sum(eigenvalues) do ε
             y = β * ε
             n = _tb1d_nF(y)
-            ε^2 * n * (1 - n)
+            return ε^2 * n * (1 - n)
         end * (β^2 / N)
     elseif quantity === :nmr_relaxation
         eta = Float64(get(kwargs, :eta, 0.1))

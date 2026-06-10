@@ -40,7 +40,7 @@ using QAtlas, Test
             independent=(π * 2.0 / 256.0), # = 0.0625 * π * v / L = π * 2 / (16 * 16)
             agree_within=1e-12,
             refs=[
-                "Cardy 1986 / Blöte-Cardy-Nightingale 1986: Ising OBC free-free spin state dimension h = 1/16",
+                "Cardy 1986 / Blöte-Cardy-Nightingale 1986: Ising OBC fixed-free spin state dimension h = 1/16",
             ],
             fetch_kw=(; L=16.0, v=2.0),
             subject_extract=raw -> raw[2].energy,

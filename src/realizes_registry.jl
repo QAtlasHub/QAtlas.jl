@@ -35,6 +35,36 @@
 @realizes CurieWeissIsing :MeanField regime = "complete-graph (infinite-range) Ising; mean-field critical exponents"
 @realizes TASEP :KPZ regime = "current fluctuations of the 1D exclusion process; KPZ universality"
 
+@realizes Kitaev1D :Ising regime = "critical line |μ| = 2|t|; (1+1)D Ising CFT, c = 1/2" at = (
+    m -> isapprox(abs(m.μ), 2*abs(m.t); atol=1e-10)
+) example = Kitaev1D(; μ=2.0, t=1.0, Δ=1.0)
+
+@realizes ZnClock :Ising regime = "n = 2 clock model; 2D classical Ising CFT, c = 1/2" at = (
+    m -> m.n == 2
+) example = ZnClock(; n=2)
+@realizes ZnClock :Potts3 regime = "n = 3 clock model; 3-state Potts CFT, c = 4/5" at = (
+    m -> m.n == 3
+) example = ZnClock(; n=3)
+
+@realizes ZnParafermion :Ising regime = "n = 2 parafermions; (1+1)D Ising CFT, c = 1/2" at = (
+    m -> m.n == 2
+) example = ZnParafermion(; n=2)
+@realizes ZnParafermion :Potts3 regime = "n = 3 parafermions; 3-state Potts CFT, c = 4/5" at = (
+    m -> m.n == 3
+) example = ZnParafermion(; n=3)
+@realizes ZnParafermion :Potts4 regime = "n = 4 parafermions; compact free boson (c = 1)" at = (
+    m -> m.n == 4
+) example = ZnParafermion(; n=4)
+
+@realizes SixVertex :XY regime = "disordered phase |Δ| < 1; compact free boson (Luttinger liquid / XY class), c = 1" at = (
+    m -> -1 < _six_vertex_delta(m.a, m.b, m.c) < 1
+) example = SixVertex(; a=1.0, b=1.0, c=1.0)
+
+@realizes DimerLattice :XY regime = "close-packed dimer model; height representation is a c = 1 compact free boson (XY class)"
+
+@realizes TricriticalIsing :TricriticalIsing regime = "tricritical point of vacancy-extended Ising; M(5, 4) minimal model, c = 7/10"
+@realizes TricriticalPotts3 :TricriticalPotts3 regime = "dilute q = 3 Potts model at criticality; M(6, 7) minimal model, c = 6/7"
+
 # ─── UniversalityClass registrations (Edges) ───────────────────────────
 @register(
     TFIM,
@@ -108,6 +138,69 @@
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :KPZ"
 )
+@register(
+    Kitaev1D,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Ising"
+)
+@register(
+    ZnClock,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Ising, :Potts3"
+)
+@register(
+    ZnParafermion,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Ising, :Potts3, :Potts4"
+)
+@register(
+    SixVertex,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :XY"
+)
+@register(
+    DimerLattice,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :XY"
+)
+@register(
+    TricriticalIsing,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :TricriticalIsing"
+)
+@register(
+    TricriticalPotts3,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :TricriticalPotts3"
+)
 
 # Declarative registration for Universality{C} -> UniversalityClass
 @register(
@@ -155,4 +248,41 @@
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :KPZ"
 )
+@register(
+    Universality{:Potts3},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :Potts3"
+)
+@register(
+    Universality{:Potts4},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :Potts4"
+)
+@register(
+    Universality{:TricriticalIsing},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :TricriticalIsing"
+)
+@register(
+    Universality{:TricriticalPotts3},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :TricriticalPotts3"
+)
+
 

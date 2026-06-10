@@ -166,6 +166,14 @@ function fetch(
     end
 end
 
+"""
+    fetch(u::Universality{C}, ::UniversalityClass, bc) -> u
+
+Identity: a `Universality{C}` object *is* its own universality class.
+This allows `fetch(fetch(model, UniversalityClass(), bc), UniversalityClass(), bc)`
+to round-trip cleanly, and lets `Universality{C}` instances be used directly
+wherever a model is expected in universality-class queries.
+"""
 function fetch(
     u::Universality{C},
     ::UniversalityClass,

@@ -16,7 +16,6 @@
 ) example = TFIM(; J=1.0, h=1.0)
 @realizes TFIM :IsingSDRG regime = "strong-disorder limit / infinite-randomness fixed point (IRFP) under random bond/field couplings" references = ["Fisher1992", "Fisher1995", "RefaelMoore2004"]
 
-
 @realizes XXZ1D :XY regime = "critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1" at = (
     m -> -1 < m.Δ < 1
 ) example = XXZ1D(; Δ=0.0)
@@ -81,7 +80,7 @@
     method=:analytic,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
-    notes="Emergent universality class: :Ising"
+    notes="Emergent universality class: :Ising (clean TFIM), :IsingSDRG (IRFP / random-bond limit)"
 )
 @register(
     XXZ1D,
@@ -328,5 +327,3 @@
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :IsingSDRG"
 )
-
-

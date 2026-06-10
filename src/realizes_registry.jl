@@ -34,3 +34,125 @@
 @realizes IsingTriangular :Ising regime = "ferromagnetic triangular-lattice Ising at T_c; 2D Ising universality, c = 1/2"
 @realizes CurieWeissIsing :MeanField regime = "complete-graph (infinite-range) Ising; mean-field critical exponents"
 @realizes TASEP :KPZ regime = "current fluctuations of the 1D exclusion process; KPZ universality"
+
+# ─── UniversalityClass registrations (Edges) ───────────────────────────
+@register(
+    TFIM,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Ising"
+)
+@register(
+    XXZ1D,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :XY, :Heisenberg"
+)
+@register(
+    Heisenberg1D,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Heisenberg"
+)
+@register(
+    HaldaneShastry,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Heisenberg"
+)
+@register(
+    IsingSquare,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Ising"
+)
+@register(
+    IsingTriangular,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :Ising"
+)
+@register(
+    CurieWeissIsing,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :MeanField"
+)
+@register(
+    TASEP,
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Emergent universality class: :KPZ"
+)
+
+# Declarative registration for Universality{C} -> UniversalityClass
+@register(
+    Universality{:Ising},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :Ising"
+)
+@register(
+    Universality{:XY},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :XY"
+)
+@register(
+    Universality{:Heisenberg},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :Heisenberg"
+)
+@register(
+    Universality{:MeanField},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :MeanField"
+)
+@register(
+    Universality{:KPZ},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :KPZ"
+)
+

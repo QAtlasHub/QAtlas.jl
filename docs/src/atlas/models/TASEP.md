@@ -24,8 +24,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TASEP`**.  Cells link to the per-h
 | 🟢 corroborated-at-p | 1 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 0 |
-| **total claimed hubs** | **1** |
+| 🟠 uncorroborated-but-feasible | 1 |
+| **total claimed hubs** | **2** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -34,6 +34,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TASEP`**.  Cells link to the per-h
 | Quantity | `Infinite` |
 |---|---|
 | [`SteadyStateCurrent`](../quantities/SteadyStateCurrent.md) | 🟢 [hub](../hubs/TASEP_SteadyStateCurrent_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/TASEP_UniversalityClass_Infinite.md) |
 
 ## References
 

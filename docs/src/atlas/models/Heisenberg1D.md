@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | 🟢 corroborated-at-p | 13 |
 | 🔵 coherent | 4 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 9 |
-| **total claimed hubs** | **26** |
+| 🟠 uncorroborated-but-feasible | 10 |
+| **total claimed hubs** | **27** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz`
 
@@ -53,6 +53,7 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityYY_OBC.md) | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/Heisenberg1D_UniversalityClass_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | 🟠 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) |
 | [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
 

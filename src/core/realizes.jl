@@ -123,3 +123,42 @@ function realized_class(model::AbstractQAtlasModel)
     )
     return only(hits)
 end
+
+function fetch(
+    model::AbstractQAtlasModel,
+    ::UniversalityClass,
+    bc::BoundaryCondition;
+    kwargs...,
+)
+    m_T = typeof(model)
+    entries = [r for r in REALIZES if r.model === m_T]
+    if isempty(entries)
+        error("Model of type $(m_T) has no registered realizations.")
+    end
+
+    class = realized_class(model)
+    if class !== nothing
+        return Universality(class)
+    end
+
+    has_locus_predicates = any(r -> r.at !== nothing, entries)
+    if has_locus_predicates
+        throw(DomainError(model, "Model instance is not at any critical locus (off-critical/gapped)."))
+    end
+
+    if length(entries) == 1
+        return Universality(entries[1].class)
+    else
+        throw(DomainError(model, "Model has multiple realization entries and no critical locus is active/specified."))
+    end
+end
+
+function fetch(
+    u::Universality{C},
+    ::UniversalityClass,
+    bc::BoundaryCondition;
+    kwargs...,
+) where {C}
+    return u
+end
+

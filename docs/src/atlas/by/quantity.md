@@ -521,6 +521,18 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
+## `UniversalityClass` (9)
+
+- 🟠 [`CurieWeissIsing/UniversalityClass/Infinite`](../hubs/CurieWeissIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/UniversalityClass/Infinite`](../hubs/HaldaneShastry_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Heisenberg1D/UniversalityClass/Infinite`](../hubs/Heisenberg1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingSquare/UniversalityClass/Infinite`](../hubs/IsingSquare_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/UniversalityClass/Infinite`](../hubs/IsingTriangular_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TASEP/UniversalityClass/Infinite`](../hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/UniversalityClass/Infinite`](../hubs/TFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Universality/UniversalityClass/Infinite`](../hubs/Universality_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XXZ1D/UniversalityClass/Infinite`](../hubs/XXZ1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+
 ## `VonNeumannEntropy` (8)
 
 - 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible

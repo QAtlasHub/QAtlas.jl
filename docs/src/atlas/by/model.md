@@ -64,7 +64,7 @@ Every `src`-claimed hub grouped by model.
 
 - ⚪ [`ConformalBootstrap/ConformalWeights/Infinite`](../hubs/ConformalBootstrap_ConformalWeights_Infinite.md) — cited-only
 
-## `CurieWeissIsing` (8)
+## `CurieWeissIsing` (9)
 
 - 🟠 [`CurieWeissIsing/CriticalExponents/Infinite`](../hubs/CurieWeissIsing_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](../hubs/CurieWeissIsing_CriticalTemperature_Infinite.md) — corroborated-at-p
@@ -74,6 +74,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/ThermalEntropy/Infinite`](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`CurieWeissIsing/UniversalityClass/Infinite`](../hubs/CurieWeissIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `DMIHeisenberg1D` (1)
 
@@ -98,16 +99,17 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/MassGap/Infinite`](../hubs/GrossNeveu_MassGap_Infinite.md) — corroborated-at-p
 
-## `HaldaneShastry` (6)
+## `HaldaneShastry` (7)
 
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/SpecificHeat/Infinite`](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`HaldaneShastry/UniversalityClass/Infinite`](../hubs/HaldaneShastry_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 
-## `Heisenberg1D` (26)
+## `Heisenberg1D` (27)
 
 - 🟢 [`Heisenberg1D/Energy/OBC`](../hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](../hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
@@ -132,6 +134,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`Heisenberg1D/SusceptibilityZZ/OBC`](../hubs/Heisenberg1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/ThermalEntropy/OBC`](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟠 [`Heisenberg1D/UniversalityClass/Infinite`](../hubs/Heisenberg1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/VonNeumannEntropy/Infinite`](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/VonNeumannEntropy/OBC`](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`Heisenberg1D/ZZStructureFactor/Infinite`](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) — corroborated-at-p
@@ -171,7 +174,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) — corroborated-at-p
 - 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](../hubs/IsingChain1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 
-## `IsingSquare` (12)
+## `IsingSquare` (13)
 
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingSquare/CriticalTemperature/Infinite`](../hubs/IsingSquare_CriticalTemperature_Infinite.md) — corroborated-at-p
@@ -185,8 +188,9 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`IsingSquare/SpontaneousMagnetization/Infinite`](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
 - 🔵 [`IsingSquare/ThermalEntropy/Infinite`](../hubs/IsingSquare_ThermalEntropy_Infinite.md) — coherent
 - 🟢 [`IsingSquare/ThermalEntropy/PBC`](../hubs/IsingSquare_ThermalEntropy_PBC.md) — corroborated-at-p
+- 🟠 [`IsingSquare/UniversalityClass/Infinite`](../hubs/IsingSquare_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-## `IsingTriangular` (9)
+## `IsingTriangular` (10)
 
 - 🟠 [`IsingTriangular/CriticalExponents/Infinite`](../hubs/IsingTriangular_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`IsingTriangular/CriticalTemperature/Infinite`](../hubs/IsingTriangular_CriticalTemperature_Infinite.md) — corroborated-at-p
@@ -196,6 +200,7 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`IsingTriangular/SpecificHeat/Infinite`](../hubs/IsingTriangular_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/SpontaneousMagnetization/Infinite`](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/ThermalEntropy/Infinite`](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`IsingTriangular/UniversalityClass/Infinite`](../hubs/IsingTriangular_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/ZZCorrelation/Infinite`](../hubs/IsingTriangular_ZZCorrelation_Infinite.md) — uncorroborated-but-feasible
 
 ## `J1J2Heisenberg1D` (1)
@@ -372,11 +377,12 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](../hubs/SpinIce_ResidualEntropy_Infinite.md) — corroborated-at-p
 
-## `TASEP` (1)
+## `TASEP` (2)
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
+- 🟠 [`TASEP/UniversalityClass/Infinite`](../hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-## `TFIM` (58)
+## `TFIM` (59)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](../hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](../hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -424,6 +430,7 @@ Every `src`-claimed hub grouped by model.
 - 🔵 [`TFIM/ThermalEntropy/Infinite`](../hubs/TFIM_ThermalEntropy_Infinite.md) — coherent
 - 🟢 [`TFIM/ThermalEntropy/OBC`](../hubs/TFIM_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ThermalEntropy/PBC`](../hubs/TFIM_ThermalEntropy_PBC.md) — corroborated-at-p
+- 🟠 [`TFIM/UniversalityClass/Infinite`](../hubs/TFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](../hubs/TFIM_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/VonNeumannEntropy/OBC`](../hubs/TFIM_VonNeumannEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/XXCorrelation/Infinite`](../hubs/TFIM_XXCorrelation_Infinite.md) — corroborated-at-p
@@ -501,11 +508,15 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
 
+## `Universality` (1)
+
+- 🟠 [`Universality/UniversalityClass/Infinite`](../hubs/Universality_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+
 ## `XCube` (1)
 
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](../hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 
-## `XXZ1D` (30)
+## `XXZ1D` (31)
 
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](../hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -535,6 +546,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — coherent
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟠 [`XXZ1D/UniversalityClass/Infinite`](../hubs/XXZ1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/VonNeumannEntropy/OBC`](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
 

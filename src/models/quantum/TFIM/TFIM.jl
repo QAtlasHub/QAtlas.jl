@@ -31,16 +31,6 @@ The 1D transverse field Ising model with Hamiltonian
 
 `J > 0` is ferromagnetic, `h` is the transverse field.  The critical
 point sits at `h = J`.
-
-Currently registered fetches:
-
-| Quantity                   | BC                 | Coverage                                                              |
-| -------------------------- | ------------------ | --------------------------------------------------------------------- |
-| [`Energy`](@ref)           | `OBC` / `Infinite` | Exact energy computed via BdG transformation                          |
-| [`SpecificHeat`](@ref)     | `Infinite`         | Specific heat at finite temperature                                   |
-| [`FreeEnergy`](@ref)       | `Infinite`         | Free energy density at finite temperature                             |
-| [`ThermalEntropy`](@ref)   | `Infinite`         | Thermal entropy density at finite temperature                         |
-| [`UniversalityClass`](@ref) | `Infinite`         | `:Ising` universality class at the critical point `h = J` (flows to `:IsingSDRG` under strong disorder) |
 """
 struct TFIM <: AbstractQAtlasModel
     J::Float64
@@ -411,4 +401,48 @@ function fetch(model::TFIM, ::NMRRelaxationExponent, ::Infinite; kwargs...)
             model.h J = model.J
         return NaN
     end
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Conformal tower of states (quantum critical point h = J)
+# ─────────────────────────────────────────────────────────────────────────────
+
+raw"""
+    fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...) -> Vector{NamedTuple}
+
+Conformal tower of states excitation energies of the TFIM chain at the quantum critical
+point `h = J` (Ising CFT, M(4,3), c=1/2). Delegates to `Universality(:Ising)` at
+boundary condition `bc` with the exact free-fermion Fermi velocity `v = 2J` and system
+size `L` extracted from `bc`.
+
+The three Ising primary operators and their scaling dimensions are:
+- Identity:  (h, h̄) = (0,    0   ),  Δ = 0
+- Spin σ:    (h, h̄) = (1/16, 1/16),  Δ = 1/8
+- Energy ε:  (h, h̄) = (1/2,  1/2 ),  Δ = 1
+
+Throws a `DomainError` if the model is off-critical (`|h - J| > 1e-6`).
+
+# Arguments
+- `bc::Union{PBC, OBC}`: boundary condition; system size `L` is read from `bc.N`.
+- Keyword `N` accepted as a legacy fallback if `bc` does not carry a size.
+
+# Returns
+`Vector{NamedTuple{(:energy, :dimension, :degeneracy), Tuple{Float64, Float64, Int}}}` —
+see `fetch(::Universality{:Ising}, ::ConformalTower, ...)` for full field documentation.
+
+# References
+- J. Cardy, *Nucl. Phys. B* **270**, 186 (1986). — operator content of 1+1D CFTs.
+- H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, *Phys. Rev. Lett.* **56**, 742 (1986).
+- P. Pfeuty, *Ann. Phys.* **57**, 79 (1970). — TFIM Fermi velocity `v = 2J` at h = J.
+"""
+function fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...)
+    isapprox(model.h, model.J; atol=1e-6) || throw(
+        DomainError(
+            (model.J, model.h),
+            "TFIM ConformalTower is defined only at the Ising critical point h = J. Got (J, h) = ($(model.J), $(model.h)).",
+        ),
+    )
+    L = _bc_size(bc, kwargs)
+    v = 2.0 * model.J
+    return fetch(Universality(:Ising), q, bc; L=L, v=v, kwargs...)
 end

@@ -291,3 +291,49 @@ function fetch(
         kwargs...,
     )
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Conformal tower of states (SU(2) symmetric point)
+# ─────────────────────────────────────────────────────────────────────────────
+
+raw"""
+    fetch(model::Heisenberg1D, q::ConformalTower, bc::PBC; J::Real=1.0, kwargs...) -> Vector{NamedTuple}
+
+Conformal tower of states excitation energies of the critical spin-1/2 antiferromagnetic
+Heisenberg chain (SU(2)_1 WZW universality, c=1). Delegates to `Universality(:Heisenberg)`
+with the des Cloizeaux-Pearson sound velocity `v = π J / 2` and system size `L` extracted
+from `bc`.
+
+The two SU(2)_1 primary representations and their scaling dimensions are:
+- j = 0 (vacuum):  Δ = 0,   degeneracy = 1
+- j = 1/2 (spin):  Δ = 1/4, degeneracy = 4  [(2j+1)² = 4 for both chiral sectors]
+
+(j = 1 is not a WZW primary for k = 1; the constraint is j ≤ k/2 = 1/2.)
+
+The first descendant level at Δ = 1 carries 9 states from 3 left × 3 right SU(2) currents
+acting on the j = 0 vacuum.
+
+Only PBC is implemented. OBC raises `ErrorException`.
+
+# Arguments
+- `bc::PBC`: periodic boundary condition; system size `L` is read from `bc.N`.
+- `J::Real=1.0`: exchange coupling (des Cloizeaux-Pearson velocity v = π|J|/2).
+
+# Returns
+`Vector{NamedTuple{(:energy, :dimension, :degeneracy), Tuple{Float64, Float64, Int}}}` —
+see `fetch(::Universality{:Heisenberg}, ::ConformalTower, ...)` for full documentation.
+
+# References
+- I. Affleck, *Phys. Rev. Lett.* **56**, 746 (1986). — SU(2)_1 WZW spectrum in spin chains.
+- J. Cardy, *Nucl. Phys. B* **270**, 186 (1986). — operator content of 1+1D CFTs.
+- J. des Cloizeaux, J. J. Pearson, *Phys. Rev.* **128**, 2131 (1962). — spinon velocity v = πJ/2.
+"""
+function fetch(model::Heisenberg1D, q::ConformalTower, bc::PBC; J::Real=1.0, kwargs...)
+    L = _bc_size(bc, kwargs)
+    v = π * abs(J) / 2
+    return fetch(Universality(:Heisenberg), q, bc; L=L, v=v, J=J, kwargs...)
+end
+
+function fetch(model::Heisenberg1D, ::ConformalTower, bc::OBC; J::Real=1.0, kwargs...)
+    return error("Heisenberg1D ConformalTower is only implemented for PBC boundary conditions.")
+end

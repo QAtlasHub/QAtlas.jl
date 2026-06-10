@@ -19,7 +19,7 @@
 raw"""
     fetch(::Universality{C}, ::SphereFreeEnergy, ::Infinite; d::Int = 3, kwargs...) -> Float64
 
-Return the universal sphere free energy $F = -\ln Z(S^3)$ of the 2+1D CFT
+Return the universal sphere free energy $F = -\ln |Z(S^3)|$ of the 2+1D CFT
 for the universality class `C` in spatial dimension `d=3`.
 
 Supported classes:

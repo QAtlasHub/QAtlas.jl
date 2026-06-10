@@ -336,3 +336,55 @@ end
         refs=["Tr(σz σz) = Tr(σx) = 0 => ⟨H⟩_{β=0} = 0"],
     )
 end
+
+@testset "TFIM — NMRSpinRelaxationRate" begin
+    # 1. DomainError check
+    @test_throws DomainError QAtlas.fetch(
+        TFIM(), NMRSpinRelaxationRate(), Infinite(); beta=0.0
+    )
+    @test_throws DomainError QAtlas.fetch(
+        TFIM(), NMRSpinRelaxationRate(), Infinite(); beta=1.0, eta=-0.1
+    )
+
+    # 2. High-T limit (beta -> 0): remains finite
+    m = TFIM(; J=1.0, h=0.5)
+    rate_high = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=1e-3, eta=0.1)
+    @test rate_high > 0.0
+    @test rate_high < 1.0
+
+    # 3. Gapped regime (h = 1.5, J = 1.0, gap Δ = 1.0): exponentially suppressed at low-T
+    m_gap = TFIM(; J=1.0, h=1.5)
+    rate_gap_low = QAtlas.fetch(
+        m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1
+    )
+    rate_gap_lower = QAtlas.fetch(
+        m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1
+    )
+    @test rate_gap_lower < rate_gap_low * 0.1
+
+    # 4. OBC NMRSpinRelaxationRate tests
+    @testset "OBC NMRSpinRelaxationRate" begin
+        m = TFIM(; J=1.0, h=0.5)
+        # Check convergence to Infinite
+        rate_inf = QAtlas.fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=2.0, eta=0.2)
+        rate_obc = QAtlas.fetch(m, NMRSpinRelaxationRate(), OBC(100); beta=2.0, eta=0.2)
+        @test isapprox(rate_obc, rate_inf; atol=5e-3)
+
+        # DomainError check
+        @test_throws DomainError QAtlas.fetch(m, NMRSpinRelaxationRate(), OBC(10); beta=0.0)
+        @test_throws DomainError QAtlas.fetch(
+            m, NMRSpinRelaxationRate(), OBC(10); beta=1.0, eta=-0.1
+        )
+    end
+
+    # 5. NMRRelaxationExponent tests
+    @testset "NMRRelaxationExponent at criticality" begin
+        # At critical point h = J, exponent is -0.75
+        m_crit = TFIM(; J=1.0, h=1.0)
+        @test QAtlas.fetch(m_crit, NMRRelaxationExponent(), Infinite()) ≈ -0.75
+
+        # Off-critical: returns NaN (warning is expected)
+        m_off = TFIM(; J=1.0, h=1.5)
+        @test isnan(QAtlas.fetch(m_off, NMRRelaxationExponent(), Infinite()))
+    end
+end

@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | 🟢 corroborated-at-p | 36 |
 | 🔵 coherent | 8 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 11 |
-| **total claimed hubs** | **55** |
+| 🟠 uncorroborated-but-feasible | 14 |
+| **total claimed hubs** | **58** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian`
 
@@ -52,6 +52,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | — | — | 🟢 [hub](../hubs/TFIM_MagnetizationZ_Infinite.md) |
 | [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/TFIM_MagnetizationZLocal_OBC.md) | — | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TFIM_MassGap_OBC.md) | 🟠 [hub](../hubs/TFIM_MassGap_PBC.md) | 🟢 [hub](../hubs/TFIM_MassGap_Infinite.md) |
+| [`NMRRelaxationExponent`](../quantities/NMRRelaxationExponent.md) | — | — | 🟠 [hub](../hubs/TFIM_NMRRelaxationExponent_Infinite.md) |
+| [`NMRSpinRelaxationRate`](../quantities/NMRSpinRelaxationRate.md) | 🟠 [hub](../hubs/TFIM_NMRSpinRelaxationRate_OBC.md) | — | 🟠 [hub](../hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/TFIM_RenyiEntropy_OBC.md) | — | 🟠 [hub](../hubs/TFIM_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_OBC.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_PBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | — | — | 🟢 [hub](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) |
@@ -110,6 +112,7 @@ Onsager1944
 Peschel2003
 Pfeuty1970
 Rigol2007
+Sachdev1997
 Sachdev2011
 ```
 

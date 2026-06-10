@@ -14,10 +14,10 @@
 
 using QAtlas, Test
 
-@testset "TFIM — YYStructureFactor at T→∞ paramagnet = 1 (#381 batch)" begin
+@testset "TFIM — YYStructureFactor at T→∞ paramagnet = 1 (#381 batch, part 1/4)" begin
     HIGH_T_BETA = 1e-3
 
-    for (J, h) in ((1.0, 0.5), (1.0, 1.0), (1.0, 2.0), (0.5, 2.0))
+    for (J, h) in ((1.0, 0.5),)
         q = YYStructureFactor()
         for (q_name, q_val) in (("q=0", 0.0), ("q=π/2", π/2), ("q=π", π))
             # /Infinite

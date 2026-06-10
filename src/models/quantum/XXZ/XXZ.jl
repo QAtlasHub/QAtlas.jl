@@ -234,3 +234,30 @@ function fetch(model::XXZ1D, ::Energy{:total}, bc::OBC; beta::Real, kwargs...)
     H = _xxz1d_hamiltonian_matrix(model, bc.N)
     return _ed_thermal_energy(H, beta)
 end
+
+# ── NMR relaxation exponent (critical Luttinger liquid) ───────────────
+
+"""
+    fetch(model::XXZ1D, ::NMRRelaxationExponent, ::Infinite; kwargs...) -> Float64
+
+Leading low-temperature NMR spin-lattice relaxation exponent
+`θ_NMR = 1/(2K) − 1` for the critical Luttinger-liquid phase (`-1 < Δ ≤ 1`),
+where `K` is the Luttinger parameter (`K = 1` at `Δ = 0`, `K = 1/2` at the
+Heisenberg point `Δ = 1`).
+
+This is the contact-hyperfine result probing the *dominant transverse staggered*
+susceptibility, whose operator has scaling dimension `Δ_op = 1/(4K)`, so
+`θ_NMR = 2Δ_op − 1 = 1/(2K) − 1` (Chitra & Giamarchi 1997, Eq. 27: leading
+`A⊥ T^{1/(2K)−1}` term, dominant over the subdominant longitudinal
+`A∥ T^{2K−1}` for `K > 1/2`). Checks: `T^{−1/2}` at the XX point (`K = 1`) and
+`T^0` (constant, up to logs) at the Heisenberg point (`K = 1/2`).
+"""
+function fetch(model::XXZ1D, ::NMRRelaxationExponent, ::Infinite; kwargs...)
+    K = fetch(model, LuttingerParameter(), Infinite(); kwargs...)
+    if isnan(K)
+        @warn "XXZ1D NMRRelaxationExponent is only defined in the critical Luttinger liquid regime -1 < Δ ≤ 1." Δ =
+            model.Δ
+        return NaN
+    end
+    return 1.0 / (2 * K) - 1.0
+end

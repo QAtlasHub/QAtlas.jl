@@ -150,12 +150,14 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
-## `Hubbard1D` (5)
+## `Hubbard1D` (7)
 
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](../hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
+- 🟠 [`Hubbard1D/Energy/Infinite`](../hubs/Hubbard1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/FreeEnergy/Infinite`](../hubs/Hubbard1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`Hubbard1D/GroundStateEnergyDensity/Infinite`](../hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) — coherent
 - 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](../hubs/Hubbard1D_LuttingerParameter_Infinite.md) — corroborated-at-p
+- 🟠 [`Hubbard1D/MassGap/Infinite`](../hubs/Hubbard1D_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](../hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 
 ## `IsingChain1D` (8)
@@ -359,9 +361,11 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`SherringtonKirkpatrick/CriticalTemperature/Infinite`](../hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md) — corroborated-at-p
 - ⚪ [`SherringtonKirkpatrick/Energy/Infinite`](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) — cited-only
 
-## `SixVertex` (2)
+## `SixVertex` (4)
 
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`SixVertex/Energy/Infinite`](../hubs/SixVertex_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🔵 [`SixVertex/Polarization/Infinite`](../hubs/SixVertex_Polarization_Infinite.md) — coherent
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 
 ## `SpinIce` (1)
@@ -372,7 +376,7 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-## `TFIM` (55)
+## `TFIM` (58)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](../hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/CorrelationLength/Infinite`](../hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -402,6 +406,9 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`TFIM/MassGap/Infinite`](../hubs/TFIM_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/MassGap/OBC`](../hubs/TFIM_MassGap_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRRelaxationExponent/Infinite`](../hubs/TFIM_NMRRelaxationExponent_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/Infinite`](../hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/OBC`](../hubs/TFIM_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](../hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/RenyiEntropy/OBC`](../hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🔵 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — coherent
@@ -434,14 +441,27 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`TTbar/CentralCharge/Infinite`](../hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `TightBinding1D` (6)
+## `TightBinding1D` (19)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/Energy/OBC`](../hubs/TightBinding1D_Energy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/Energy/PBC`](../hubs/TightBinding1D_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/FermiVelocity/Infinite`](../hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟠 [`TightBinding1D/FreeEnergy/Infinite`](../hubs/TightBinding1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/OBC`](../hubs/TightBinding1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/PBC`](../hubs/TightBinding1D_FreeEnergy_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/MassGap/Infinite`](../hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/MassGap/OBC`](../hubs/TightBinding1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/MassGap/PBC`](../hubs/TightBinding1D_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟢 [`TightBinding1D/NMRSpinRelaxationRate/Infinite`](../hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) — corroborated-at-p
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/OBC`](../hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/PBC`](../hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/SpecificHeat/Infinite`](../hubs/TightBinding1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/OBC`](../hubs/TightBinding1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/PBC`](../hubs/TightBinding1D_SpecificHeat_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/OBC`](../hubs/TightBinding1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/PBC`](../hubs/TightBinding1D_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 
 ## `TightBindingV1D` (6)
 
@@ -505,6 +525,7 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`XXZ1D/MagnetizationZLocal/OBC`](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/MassGap/Infinite`](../hubs/XXZ1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/MassGap/OBC`](../hubs/XXZ1D_MassGap_OBC.md) — corroborated-at-p
+- 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](../hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) — corroborated-at-p
 - 🟠 [`XXZ1D/RenyiEntropy/Infinite`](../hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/RenyiEntropy/OBC`](../hubs/XXZ1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](../hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible

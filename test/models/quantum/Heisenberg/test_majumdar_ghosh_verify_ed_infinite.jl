@@ -19,14 +19,10 @@ using QAtlas, Test, KrylovKit, Random
     function mg_pbc_e0(N, J)
         Sx, Sy, Sz = spin_ops(1 // 2)
         SS(i, j) =
-            site_op(Sx, 2, N, i) * site_op(Sx, 2, N, j) +
-            site_op(Sy, 2, N, i) * site_op(Sy, 2, N, j) +
-            site_op(Sz, 2, N, i) * site_op(Sz, 2, N, j)
-        H = zeros(ComplexF64, 2^N, 2^N)
-        for i in 1:N
-            H .+= J * SS(i, mod1(i + 1, N))
-            H .+= (J / 2) * SS(i, mod1(i + 2, N))
-        end
+            embed_two_site_sparse(Sx, Sx, i, j, N) +
+            embed_two_site_sparse(Sy, Sy, i, j, N) +
+            embed_two_site_sparse(Sz, Sz, i, j, N)
+        H = sum(J * SS(i, mod1(i + 1, N)) + (J / 2) * SS(i, mod1(i + 2, N)) for i in 1:N)
         D = 2^N
         vals, _, _ = eigsolve(
             H,

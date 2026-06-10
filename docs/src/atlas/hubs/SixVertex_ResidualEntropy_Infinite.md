@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `analytic`, status `exact`, reliability `high`, refs: Lieb1967a
-- Square ice (a=b=c): S/N = (3/2) log(4/3) ≈ 0.4315231. FE phase (Δ > 1): 0. Generic disordered & AFE residual entropy deferred (issue #163 phase 2/3).
+- method `analytic`, status `exact`, reliability `high`, refs: Lieb1967a | Lieb1967b | Sutherland1967 | Baxter1982
+- Configurational entropy density S = E - f. Square ice (a=b=c): S/N = (3/2) log(4/3) ≈ 0.4315231. FE phase: 0. Calculated off-diagonal using exact FreeEnergy and Energy.
 
 ## Corroboration
 

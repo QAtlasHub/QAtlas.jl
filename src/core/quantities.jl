@@ -87,6 +87,37 @@ Specific heat per site, `c_v(β) = β² (⟨H²⟩ − ⟨H⟩²) / N`.
 struct SpecificHeat <: AbstractQuantity end
 
 """
+    NMRSpinRelaxationRate() <: AbstractQuantity
+
+NMR spin-lattice relaxation rate per site, `1/T_1(β, η)`.
+For non-interacting 1D fermion systems, computed using the regularized double momentum-space integral:
+
+    1/T_1(β, η) = 1/π³ ∫_0^π dk₁ ∫_0^π dk₂ f(ε(k₁)) (1 - f(ε(k₂))) η / ((ε(k₁) - ε(k₂))² + η²)
+
+where `η > 0` is a small regularization width (e.g. `0.1` by default).
+"""
+struct NMRSpinRelaxationRate <: AbstractQuantity end
+
+"""
+    NMRRelaxationExponent() <: AbstractQuantity
+
+Low-temperature scaling exponent `θ_NMR` of the NMR spin-lattice relaxation
+rate, `1/T_1 ∝ T^{θ_NMR}` as `T → 0`.
+
+For a quantum critical point the leading exponent follows the general
+fluctuation-dissipation rule `θ_NMR = 2Δ_op − 1`, where `Δ_op` is the scaling
+dimension of the operator the nuclei couple to:
+
+- 1D transverse-field Ising QCP: `Δ_σ = 1/8` ⟹ `θ_NMR = −3/4`.
+- XXZ critical Luttinger liquid (`−1 < Δ ≤ 1`), contact-hyperfine coupling to
+  the dominant *transverse staggered* susceptibility (`Δ_op = 1/(4K)`):
+  `θ_NMR = 1/(2K) − 1`, where `K` is the Luttinger parameter. (The subdominant
+  longitudinal channel contributes `T^{2K−1}`; see Chitra & Giamarchi 1997,
+  Eq. 27.)
+"""
+struct NMRRelaxationExponent <: AbstractQuantity end
+
+"""
     MassGap() <: AbstractQuantity
 
 Energy gap between the ground state and the first excited state.
@@ -1267,3 +1298,13 @@ positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched
 against a [`Bound`](@ref) domain (`Bound(:QuantumInformation)`).
 """
 struct BB84KeyRate <: AbstractQuantity end
+
+"""
+    Polarization() <: AbstractQuantity
+
+The bulk polarization density (or order parameter) per site. For the
+classical 2D six-vertex model, it corresponds to the spontaneous polarization
+(in the ferroelectric phase Δ > 1) or the spontaneous staggered polarization
+(in the antiferroelectric phase Δ < -1).
+"""
+struct Polarization <: AbstractQuantity end

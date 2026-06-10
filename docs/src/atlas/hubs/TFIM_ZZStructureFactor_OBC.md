@@ -20,24 +20,24 @@
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM OBC at T → ∞: paramagnet ρ = I/2^N ⇒ S_αα(q) = 1 (independent of q and N) | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch4.jl` |
 
 ## Test calls
 

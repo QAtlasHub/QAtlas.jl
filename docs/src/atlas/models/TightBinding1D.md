@@ -24,24 +24,25 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBinding1D`**.  Cells link to 
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 3 |
+| 🟢 corroborated-at-p | 4 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 15 |
+| **total claimed hubs** | **19** |
 
 **Methods** (from `@register`, derived): `analytic`
 
 ## Quantity × BC matrix
 
-| Quantity | `Infinite` |
-|---|---|
-| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
-| [`FermiVelocity`](../quantities/FermiVelocity.md) | 🟢 [hub](../hubs/TightBinding1D_FermiVelocity_Infinite.md) |
-| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
-| [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |
-| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_Infinite.md) |
-| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
+| Quantity | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/TightBinding1D_Energy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_Energy_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
+| [`FermiVelocity`](../quantities/FermiVelocity.md) | — | — | 🟢 [hub](../hubs/TightBinding1D_FermiVelocity_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_PBC.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
+| [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |
+| [`NMRSpinRelaxationRate`](../quantities/NMRSpinRelaxationRate.md) | 🟠 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_PBC.md) | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_PBC.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
 
 ## References
 
@@ -52,6 +53,7 @@ Pages = []
 Canonical = false
 AshcroftMermin1976
 Coleman2015
+Korringa1950
 Mahan2000
 ```
 

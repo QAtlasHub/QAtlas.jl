@@ -73,6 +73,25 @@ end
     @test all(diff(ks) .< 0)
 end
 
+@testset "XXZ1D — NMRRelaxationExponent" begin
+    # Δ = 0 (K = 1.0, XX free fermion) ⇒ θ_NMR = 1/(2K) - 1 = -1/2
+    # (the textbook T^{-1/2} divergence of 1/T_1 in the XX chain)
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), NMRRelaxationExponent(), Infinite()) ≈ -0.5 atol =
+        1e-12
+    # Δ = 1 (K = 0.5, Heisenberg) ⇒ θ_NMR = 1/(2K) - 1 = 0.0 (constant, up to logs)
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), NMRRelaxationExponent(), Infinite()) ≈ 0.0 atol =
+        1e-12
+
+    # Outside critical regime: returns NaN + warn.  The exponent delegates to
+    # LuttingerParameter, which emits its own out-of-range :warn first, so use
+    # match_mode=:any to assert our warning appears among the logs.
+    @test isnan(
+        @test_logs (:warn, r"critical Luttinger liquid regime") match_mode = :any QAtlas.fetch(
+            XXZ1D(; J=1.0, Δ=1.5), NMRRelaxationExponent(), Infinite()
+        )
+    )
+end
+
 @testset "XXZ1D — LuttingerVelocity (+ SpinWaveVelocity alias)" begin
     # Canonical values at Δ=0 (XX) and Δ=1 (AF Heisenberg)
     @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), LuttingerVelocity(), Infinite()) ≈ 1.0 atol =
@@ -286,5 +305,17 @@ end
         independent=1.0,
         agree_within=1e-14,
         refs=["Luttinger liquid: c=1 free compact boson CFT for |Delta| < 1"],
+    )
+
+    verify(
+        XXZ1D(; J=1.0, Δ=0.0),
+        NMRRelaxationExponent(),
+        Infinite();
+        route=:second_closed_form,
+        independent=-0.5,
+        agree_within=1e-12,
+        refs=[
+            "Sachdev 1994 (doi:10.1103/PhysRevB.50.13006) / Chitra & Giamarchi 1997 (doi:10.1103/PhysRevB.55.5816) Eq.27: leading 1/T_1 ∝ T^{1/(2K)-1}; at the XX free-fermion point K=1 ⇒ θ_NMR = -1/2 (T^{-1/2} divergence).",
+        ],
     )
 end

@@ -68,3 +68,148 @@
     references=["Mahan2000"],
     notes="c_μ(β;t,μ) = (β²/π) ∫₀^π ε² n_F(1-n_F) dk; QuadGK rtol=1e-10.",
 )
+
+@register(
+    TightBinding1D,
+    NMRSpinRelaxationRate,
+    Infinite,
+    method=:analytic,
+    status=:approx,
+    reliability=:medium,
+    valid_domain="η > 0 Lorentzian broadening regulator; the physical η→0⁺ limit is cut off by the 1D band-edge van Hove singularities, so the rate is η-dependent and is reported at finite η.",
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Korringa1950"],
+    notes="η-regularized free-fermion (Korringa-type) golden-rule rate 1/T₁(β,η) = (1/π³)∫₀^π∫₀^π f(ε₁)(1-f(ε₂)) η/((ε₁-ε₂)²+η²) dk₁dk₂ — the q-summed dynamic structure factor S(q,ω→0) of the 1D tight-binding band, Lorentzian-broadened by η. Evaluated by nested QuadGK (rtol=1e-6); verified against an independent discrete N-mode k-sum and the β→0 ¼-factorisation.",
+)
+@register(
+    TightBinding1D,
+    Energy{:total},
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["AshcroftMermin1976"],
+    notes="Total ground-state energy E = Σ_{ε≤0} ε for OBC finite N.",
+)
+@register(
+    TightBinding1D,
+    Energy{:total},
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["AshcroftMermin1976"],
+    notes="Total ground-state energy E = Σ_{ε≤0} ε for PBC finite N.",
+)
+@register(
+    TightBinding1D,
+    Energy{:per_site},
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["AshcroftMermin1976"],
+)
+@register(
+    TightBinding1D,
+    Energy{:per_site},
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["AshcroftMermin1976"],
+)
+@register(
+    TightBinding1D,
+    MassGap,
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["AshcroftMermin1976"],
+    notes="Single-particle gap Δ = min |ε_n| for OBC finite N.",
+)
+@register(
+    TightBinding1D,
+    MassGap,
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["AshcroftMermin1976"],
+    notes="Single-particle gap Δ = min |ε_n| for PBC finite N.",
+)
+@register(
+    TightBinding1D,
+    FreeEnergy,
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan2000", "Coleman2015"],
+)
+@register(
+    TightBinding1D,
+    FreeEnergy,
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan2000", "Coleman2015"],
+)
+@register(
+    TightBinding1D,
+    ThermalEntropy,
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan2000"],
+)
+@register(
+    TightBinding1D,
+    ThermalEntropy,
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan2000"],
+)
+@register(
+    TightBinding1D,
+    SpecificHeat,
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan2000"],
+)
+@register(
+    TightBinding1D,
+    SpecificHeat,
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Mahan2000"],
+)
+@register(
+    TightBinding1D,
+    NMRSpinRelaxationRate,
+    OBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Korringa1950"],
+    notes="1/T_1(β, η) = 1/N² Σ_{n₁,n₂} f(ε_n₁) (1-f(ε_n₂)) (1/π) η / ((ε_n₁ - ε_n₂)² + η²) for OBC finite N.",
+)
+@register(
+    TightBinding1D,
+    NMRSpinRelaxationRate,
+    PBC,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_tight_binding1d.jl",
+    references=["Korringa1950"],
+    notes="1/T_1(β, η) = 1/N² Σ_{n₁,n₂} f(ε_n₁) (1-f(ε_n₂)) (1/π) η / ((ε_n₁ - ε_n₂)² + η²) for PBC finite N.",
+)

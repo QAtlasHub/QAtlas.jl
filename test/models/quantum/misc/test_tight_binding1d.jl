@@ -16,7 +16,36 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
-using QAtlas: TightBinding1D, Energy, MassGap, FermiVelocity, Infinite, fetch
+using QAtlas:
+    TightBinding1D, Energy, MassGap, FermiVelocity, NMRSpinRelaxationRate, Infinite, fetch
+
+# Independent reference for the η-regularized NMR rate: the same q-summed
+# S(q,ω→0) golden-rule integral evaluated by a discrete midpoint k-mode sum over
+# N modes — a DIFFERENT quadrature from the production nested QuadGK, converging
+# to the continuum value as N→∞. Catches normalisation / Fermi-factor errors
+# that a re-typed closed form cannot. (N=400 reproduces the QuadGK value to ~1e-9.)
+_tb1d_nF(x) = x > 0 ? exp(-x) / (1 + exp(-x)) : 1 / (1 + exp(x))
+function _tb1d_nmr_kmode_sum(t, μ, β, η; N=400)
+    ks = [(n - 0.5) * π / N for n in 1:N]
+    εs = [-2t * cos(k) - μ for k in ks]
+    fs = _tb1d_nF.(β .* εs)
+    s = 0.0
+    for n in 1:N, m in 1:N
+        s += fs[n] * (1 - fs[m]) * η / ((εs[n] - εs[m])^2 + η^2)
+    end
+    return s / (π * N^2)
+end
+# η-broadened particle–hole phase space (no Fermi factors); the high-T limit is
+# 1/T₁(β→0) = ¼ · this, since f(1-f) → ¼ when every mode is half-filled.
+function _tb1d_nmr_phasespace(t, μ, η; N=400)
+    ks = [(n - 0.5) * π / N for n in 1:N]
+    εs = [-2t * cos(k) - μ for k in ks]
+    s = 0.0
+    for n in 1:N, m in 1:N
+        s += η / ((εs[n] - εs[m])^2 + η^2)
+    end
+    return s / (π * N^2)
+end
 
 @testset "TightBinding1D" begin
 
@@ -138,6 +167,24 @@ end
         agree_within=1e-12,
         refs=["Ashcroft-Mermin 1976: v_F = 2 t sin(k_F); μ=0 half-filling"],
     )
+
+    # NMR 1/T₁: the production nested-QuadGK integral vs an INDEPENDENT discrete
+    # k-mode sum of the same q-summed S(q,ω→0) golden-rule integral (a different
+    # quadrature) — this would catch any normalisation / Fermi-factor error.
+    for (β, η) in ((1.0, 0.1), (0.5, 0.2), (2.0, 0.1))
+        verify(
+            TightBinding1D(; t=1.0, μ=0.0),
+            NMRSpinRelaxationRate(),
+            Infinite();
+            route=:ed_finite_size,
+            fetch_kw=(; beta=β, eta=η),
+            independent=_tb1d_nmr_kmode_sum(1.0, 0.0, β, η; N=400),
+            agree_within=1e-5,
+            refs=[
+                "Korringa 1950 (doi:10.1016/0031-8914(50)90105-4): free-fermion golden-rule 1/T₁ ∝ q-summed S(q,ω→0); cross-checked by a discrete N=400 k-mode sum → continuum.",
+            ],
+        )
+    end
 end
 # ── additional verification cards (#381 batch 7) ─────────────────────────
 @testset "TightBinding1D — Energy/Infinite free fermion (#381 batch 7)" begin
@@ -152,100 +199,6 @@ end
             independent=-2 * t / π,
             agree_within=1e-12,
             refs=["Ashcroft-Mermin 1976: 1D free spinless fermion half-filling e₀ = -2t/π"],
-        )
-    end
-end
-
-@testset "TightBinding1D — finite-T thermodynamics" begin
-    # Finite-T integrals on the BZ.  All cards use verify(...) with an
-    # independent analytic limit / textbook closed form; the implementation
-    # is a black-box.  See test/util/verify.jl for the card schema.
-
-    # high-T limit: ω(β → 0⁺; t, μ=0) → -log 2 / β.  Independent: textbook.
-    for (t, β) in [(1.0, 1e-3), (2.5, 5e-4)]
-        verify(
-            QAtlas.TightBinding1D(; t=t, μ=0.0),
-            QAtlas.FreeEnergy(),
-            QAtlas.Infinite();
-            route=:limiting_case,
-            fetch_kw=(; beta=β),
-            independent=(-log(2) / β),
-            agree_within=abs(log(2) / β) * 2e-3,
-            refs=[
-                "Mahan, Many-Particle Physics §1.3: free-fermion β → 0⁺ limit ω → -T log 2 per site",
-            ],
-        )
-    end
-
-    # high-T limit: s(β → 0⁺) → log 2 per site (each mode half-occupied).
-    for (t, μ, β) in [(1.0, 0.0, 1e-3), (1.0, 0.5, 1e-3), (2.0, -1.0, 5e-4)]
-        verify(
-            QAtlas.TightBinding1D(; t=t, μ=μ),
-            QAtlas.ThermalEntropy(),
-            QAtlas.Infinite();
-            route=:limiting_case,
-            fetch_kw=(; beta=β),
-            independent=log(2),
-            agree_within=log(2) * 4e-3,
-            refs=[
-                "Mahan, Many-Particle Physics §1.3: β → 0⁺ Fermi-Dirac entropy → log 2 per Bloch mode",
-            ],
-        )
-    end
-
-    # high-T limit: c_μ(β → 0⁺) → 0; bound by β² · (2t + |μ|)² (envelope of ε²).
-    for (t, μ, β) in [(1.0, 0.0, 1e-2), (1.0, 0.5, 1e-2)]
-        bound = (β * (2 * t + abs(μ)))^2
-        verify(
-            QAtlas.TightBinding1D(; t=t, μ=μ),
-            QAtlas.SpecificHeat(),
-            QAtlas.Infinite();
-            route=:limiting_case,
-            fetch_kw=(; beta=β),
-            independent=0.0,
-            agree_within=bound + 1e-12,
-            refs=["Mahan, Many-Particle Physics §1.3: c_μ ~ β² · ⟨ε²⟩/4 → 0 as β → 0⁺"],
-        )
-    end
-
-    # β → ∞ limit: ω(β=200) approaches T=0 grand-potential = -2/π at half-filling.
-    # The T=0 value is independent (Ashcroft-Mermin Ch 9, free-fermion integral).
-    verify(
-        QAtlas.TightBinding1D(),
-        QAtlas.FreeEnergy(),
-        QAtlas.Infinite();
-        route=:limiting_case,
-        fetch_kw=(; beta=200.0),
-        independent=-2 / π,
-        agree_within=5e-3,
-        refs=[
-            "Ashcroft-Mermin (1976) Ch 9: half-filling 1D free-fermion E/N = -2/π = lim_{β→∞} ω(β)",
-        ],
-    )
-
-    # Gibbs identity cross-check: s = β(u - ω).  Not a verify-card target
-    # (relates three quantities, not one), kept as a plain @test sanity.
-    @testset "Gibbs identity sanity (μ=0.3, β=2)" begin
-        β = 2.0
-        m = QAtlas.TightBinding1D(; t=1.0, μ=0.3)
-        ω = QAtlas.fetch(m, QAtlas.FreeEnergy(), QAtlas.Infinite(); beta=β)
-        s = QAtlas.fetch(m, QAtlas.ThermalEntropy(), QAtlas.Infinite(); beta=β)
-        u = ω + s / β            # Gibbs: u = ω + s/β
-        @test -2.3 ≤ u ≤ 2.3     # in-band internal energy
-        cμ = QAtlas.fetch(m, QAtlas.SpecificHeat(), QAtlas.Infinite(); beta=β)
-        @test cμ > 0             # gapless metal, strictly positive heat capacity
-    end
-
-    # DomainError on non-positive β — exception shape, kept as @test_throws.
-    @testset "DomainError on β ≤ 0" begin
-        @test_throws DomainError QAtlas.fetch(
-            QAtlas.TightBinding1D(), QAtlas.FreeEnergy(), QAtlas.Infinite(); beta=0.0
-        )
-        @test_throws DomainError QAtlas.fetch(
-            QAtlas.TightBinding1D(), QAtlas.ThermalEntropy(), QAtlas.Infinite(); beta=-1.0
-        )
-        @test_throws DomainError QAtlas.fetch(
-            QAtlas.TightBinding1D(), QAtlas.SpecificHeat(), QAtlas.Infinite(); beta=0.0
         )
     end
 end

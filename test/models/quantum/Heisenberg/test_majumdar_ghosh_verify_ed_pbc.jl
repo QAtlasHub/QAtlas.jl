@@ -9,19 +9,18 @@
 using QAtlas, Test, KrylovKit, Random
 
 @testset "MajumdarGhosh — verify (PBC ED N=6,8,10,12)" begin
-    # Sparse Lanczos GS — see _verify_ed_infinite.jl header for the
-    # O(D³) → O(nnz·k) rationale (N=12: ~4 min → ~1 s).
+    # Sparse Lanczos GS: build H as a SparseMatrixCSC (embed_two_site_sparse,
+    # O(2^N) nnz per bond) instead of dense site_op products, then take only
+    # the lowest eigenpair. This is what the O(D³)→O(nnz·k) note always meant;
+    # the dense build was the real cost (N=12: ~8 min → ~1 s). Eigenvalues are
+    # basis-independent, so the exact MG dimer energy -3J/8 is reproduced.
     function mg_pbc_e0(N, J)
         Sx, Sy, Sz = spin_ops(1 // 2)
         SS(i, j) =
-            site_op(Sx, 2, N, i) * site_op(Sx, 2, N, j) +
-            site_op(Sy, 2, N, i) * site_op(Sy, 2, N, j) +
-            site_op(Sz, 2, N, i) * site_op(Sz, 2, N, j)
-        H = zeros(ComplexF64, 2^N, 2^N)
-        for i in 1:N
-            H .+= J * SS(i, mod1(i + 1, N))
-            H .+= (J / 2) * SS(i, mod1(i + 2, N))
-        end
+            embed_two_site_sparse(Sx, Sx, i, j, N) +
+            embed_two_site_sparse(Sy, Sy, i, j, N) +
+            embed_two_site_sparse(Sz, Sz, i, j, N)
+        H = sum(J * SS(i, mod1(i + 1, N)) + (J / 2) * SS(i, mod1(i + 2, N)) for i in 1:N)
         D = 2^N
         vals, _, _ = eigsolve(
             H,

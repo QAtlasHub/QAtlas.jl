@@ -135,7 +135,6 @@ end
         )
     end
 
-
     # (c) Free-fermion models energy FDT vs independent energy variance
     for (m, name) in [
         (TFIM(; J=1.0, h=0.5), "TFIM"),
@@ -158,7 +157,7 @@ end
         TightBinding1D(; t=1.0, μ=0.5),
     ]
         results = verify_thermodynamic_identities(
-            m, Infinite(); beta=0.5, identities=[SPECIFIC_HEAT_FROM_VARIANCE], rtol=1e-5
+            m, Infinite(); βs=[0.5], identities=[SPECIFIC_HEAT_FROM_VARIANCE], rtol=1e-5
         )
         @test all(r -> r.status === :pass, results)
     end

@@ -34,6 +34,45 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
+using SparseArrays, KrylovKit, Random
+
+# Independent reference for the disordered (critical) free energy: a finite-strip
+# six-vertex transfer matrix. The row-to-row transfer matrix is built from the
+# symmetric six-vertex R-matrix (weights a,b,c) as a width-W periodic monodromy;
+# f = -ln Λ_max(W)/W from its largest eigenvalue (sparse Lanczos). This is a
+# GENUINELY different computation from the production Lieb–Sutherland integral —
+# the square-ice point a=b=c=1 reproduces the exact -(3/2)log(4/3) to ~3e-5, so
+# the extrapolated disordered values are trusted to ~1e-3.
+function _sixvertex_strip_f(a, b, c, W)
+    L = Dict(
+        (1, 1) => sparse([a 0.0; 0.0 b]),     # aux ↑→↑
+        (1, 2) => sparse([0.0 c; 0.0 0.0]),   # aux ↑→↓ (site flips ↓→↑)
+        (2, 1) => sparse([0.0 0.0; c 0.0]),   # aux ↓→↑ (site flips ↑→↓)
+        (2, 2) => sparse([b 0.0; 0.0 a]),     # aux ↓→↓
+    )
+    B = Dict((ai, ci) => L[(ai, ci)] for ai in 1:2, ci in 1:2)
+    for k in 2:W
+        N = Dict{Tuple{Int,Int},SparseMatrixCSC{Float64,Int}}()
+        for ai in 1:2, ci in 1:2
+            acc = spzeros(2^k, 2^k)
+            for bi in 1:2
+                acc += kron(B[(ai, bi)], L[(bi, ci)])
+            end
+            N[(ai, ci)] = acc
+        end
+        B = N
+    end
+    T = B[(1, 1)] + B[(2, 2)]                  # trace over the auxiliary arrow
+    vals, _ = eigsolve(T, randn(MersenneTwister(0), 2^W), 1, :LM; ishermitian=false)
+    return -log(real(vals[1])) / W
+end
+# Richardson 1/W² extrapolation (the disordered phase is critical ⇒ O(1/W²)
+# conformal finite-size corrections) of the strip free energy to W → ∞.
+function _sixvertex_tm_f(a, b, c; W1=10, W2=12)
+    f1 = _sixvertex_strip_f(a, b, c, W1)
+    f2 = _sixvertex_strip_f(a, b, c, W2)
+    return (f2 / W1^2 - f1 / W2^2) / (1 / W1^2 - 1 / W2^2)
+end
 
 @testset "SixVertex — square ice residual entropy (Lieb 1967a)" begin
     m = QAtlas.square_ice()
@@ -94,18 +133,31 @@ end
     @test QAtlas._six_vertex_phase(m_below.a, m_below.b, m_below.c) === :disordered
 end
 
-@testset "SixVertex — antiferroelectric phase (deferred — Lieb 1967b)" begin
+@testset "SixVertex — antiferroelectric phase (Lieb 1967b)" begin
     # f-model with c = 3 ⇒ Δ = −7/2 < −1, AFE phase.
     m_afe = QAtlas.f_model(3.0)
     @test QAtlas._six_vertex_phase(m_afe.a, m_afe.b, m_afe.c) === :antiferroelectric
 
-    # Phase 3 of issue #163: AFE elliptic-function free energy is not
-    # implemented in this commit.  The fetch must throw an informative
-    # ArgumentError so deferred coverage is visible.
-    @test_throws ArgumentError QAtlas.fetch(m_afe, FreeEnergy(), Infinite())
+    Δ = QAtlas._six_vertex_delta(m_afe.a, m_afe.b, m_afe.c)
+    λ = acosh(-Δ)
 
-    # Likewise, generic-disordered + AFE residual entropy is deferred.
-    @test_throws ArgumentError QAtlas.fetch(m_afe, ResidualEntropy(), Infinite())
+    # Verify free energy is close to the expected elliptic sum
+    f = QAtlas.fetch(m_afe, FreeEnergy(), Infinite())
+    u = λ / 2.0
+    s_expected = 0.0
+    for m in 1:1000
+        t1 = exp(-m * (2.0*λ - 2.0*u))
+        t2 = exp(-m * (2.0*λ + 2.0*u))
+        den = 1.0 + exp(-2.0 * m * λ)
+        s_expected += (t1 - t2) / (m * den)
+    end
+    f_expected = -log(m_afe.a) - (λ - u) - s_expected
+    @test f ≈ f_expected atol = 1e-12
+
+    # Verify Polarization
+    pol = QAtlas.fetch(m_afe, Polarization(), Infinite())
+    pol_expected = tanh(1 * λ)^2 * tanh(2 * λ)^2 * tanh(3 * λ)^2 * tanh(4 * λ)^2
+    @test pol ≈ pol_expected atol = 1e-6
 end
 
 @testset "SixVertex — disordered free energy (square-ice closed form)" begin
@@ -118,22 +170,49 @@ end
     @test f_si ≈ -QAtlas.fetch(m_si, ResidualEntropy(), Infinite()) atol = 1e-14
 end
 
-@testset "SixVertex — disordered free energy off-diagonal (deferred — phase 2)" begin
+@testset "SixVertex — disordered free energy off-diagonal" begin
     # Generic disordered point (a = b = 1, c = 0.5):
     #   Δ = (1 + 1 − 0.25) / 2 = 0.875 ∈ (-1, 1).
-    # The Lieb / Sutherland 1967 trigonometric integral covering the
-    # full disordered phase is deferred to a follow-up commit (issue
-    # #163 phase 2); the fetch must throw an informative ArgumentError.
     m_d = SixVertex(; a=1.0, b=1.0, c=0.5)
     @test QAtlas._six_vertex_delta(1.0, 1.0, 0.5) ≈ 0.875
     @test QAtlas._six_vertex_phase(m_d.a, m_d.b, m_d.c) === :disordered
-    @test_throws ArgumentError QAtlas.fetch(m_d, FreeEnergy(), Infinite())
 
-    # f-model boundary c = 2 (Δ = −1, disordered branch but a = b ≠ c):
-    # also deferred.
+    # Generic disordered point (1,1,0.5): no special closed form. Verify the
+    # production Lieb–Sutherland trigonometric integral (src: quadgk over the
+    # Bethe-ansatz integrand) against the INDEPENDENT finite-strip transfer
+    # matrix above — two genuinely different methods (analytic integral vs
+    # finite-size diagonalization), agreeing to the ~1e-3 the W=10,12 1/W²
+    # extrapolation supports.
+    verify(
+        m_d,
+        FreeEnergy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=_sixvertex_tm_f(1.0, 1.0, 0.5),
+        agree_within=1e-3,
+        refs=[
+            "Independent six-vertex transfer matrix f = -ln Λ_max(W)/W (sparse Lanczos, Richardson 1/W² to W→∞); orthogonal to the src Lieb/Sutherland 1967 quadgk integral. Square-ice calibration reproduces -(3/2)log(4/3) to ~3e-5.",
+        ],
+    )
+
+    # F-model boundary c = 2 (Δ = −1, F-model critical point) — same independent
+    # transfer-matrix cross-check; phase stays disordered up to the Δ=−1 edge.
     m_crit = QAtlas.f_model(2.0)
     @test QAtlas._six_vertex_phase(m_crit.a, m_crit.b, m_crit.c) === :disordered
-    @test_throws ArgumentError QAtlas.fetch(m_crit, FreeEnergy(), Infinite())
+    verify(
+        m_crit,
+        FreeEnergy(),
+        Infinite();
+        route=:ed_finite_size,
+        independent=_sixvertex_tm_f(1.0, 1.0, 2.0),
+        agree_within=1e-3,
+        refs=[
+            "Independent six-vertex transfer-matrix extrapolation (orthogonal to src quadgk integral) at the F-model critical boundary Δ=−1.",
+        ],
+    )
+
+    # Polarization at critical point is 0 (exact, by up-down symmetry)
+    @test QAtlas.fetch(m_crit, Polarization(), Infinite()) == 0.0
 end
 
 @testset "SixVertex — constructor argument validation" begin
@@ -238,4 +317,41 @@ end
             ],
         )
     end
+end
+
+@testset "SixVertex — Energy and Polarization verification cards" begin
+    # Energy at square-ice point (should be 0.0)
+    verify(
+        SixVertex(; a=1.0, b=1.0, c=1.0),
+        Energy{:per_site}(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-9,
+        refs=[
+            "Energy per site is zero at the isotropic square-ice point (symmetric limit)"
+        ],
+    )
+
+    # Polarization in FE phase is 1.0
+    verify(
+        SixVertex(; a=3.0, b=1.0, c=1.0),
+        Polarization(),
+        Infinite();
+        route=:limiting_case,
+        independent=1.0,
+        agree_within=1e-10,
+        refs=["Polarization in FE phase is saturated to 1.0"],
+    )
+
+    # Polarization in disordered phase is 0.0
+    verify(
+        SixVertex(; a=1.0, b=1.0, c=1.0),
+        Polarization(),
+        Infinite();
+        route=:limiting_case,
+        independent=0.0,
+        agree_within=1e-10,
+        refs=["Polarization in disordered phase is exactly 0.0"],
+    )
 end

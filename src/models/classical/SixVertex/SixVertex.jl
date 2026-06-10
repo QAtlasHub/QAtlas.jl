@@ -227,23 +227,13 @@ function fetch(m::SixVertex, ::ResidualEntropy, ::Infinite; kwargs...)
     a, b, c = m.a, m.b, m.c
     phase = _six_vertex_phase(a, b, c)
     if phase === :ferroelectric
-        # Frozen FE ground state — a single configuration up to global
-        # symmetry, so the residual entropy density vanishes.
         return 0.0
     elseif phase === :disordered && a == b == c
-        # Square-ice point: Lieb 1967a closed form.
         return _LIEB_SQUARE_ICE_RESIDUAL_ENTROPY
     else
-        throw(
-            ArgumentError(
-                "SixVertex ResidualEntropy: only the square-ice point " *
-                "(a = b = c) and the ferroelectric phase (Δ > 1) are " *
-                "currently implemented. For (a, b, c) = ($a, $b, $c) " *
-                "with phase = $phase the closed form is the " *
-                "Lieb / Sutherland 1967 (disordered) or Lieb 1967b " *
-                "(antiferroelectric) integral, deferred to a follow-up.",
-            ),
-        )
+        E = fetch(m, Energy{:per_site}(), Infinite(); kwargs...)
+        f = fetch(m, FreeEnergy(), Infinite(); kwargs...)
+        return E - f
     end
 end
 
@@ -317,32 +307,116 @@ function fetch(m::SixVertex, ::FreeEnergy, ::Infinite; beta::Real=Inf, kwargs...
     phase = _six_vertex_phase(a, b, c)
     if phase === :ferroelectric
         return _free_energy_fe(a, b, c)
-    elseif phase === :disordered && a == b == c
-        # Square-ice point: f = -(3/2) log(4/3) (Lieb 1967a).
-        return -_LIEB_SQUARE_ICE_RESIDUAL_ENTROPY
     elseif phase === :disordered
+        # Handle symmetry: if a < b, swap a and b.
+        # This keeps w <= 0 in the disordered phase, which matches the standard formulation.
+        if a < b
+            return fetch(SixVertex(b, a, c), FreeEnergy(), Infinite(); beta=beta, kwargs...)
+        end
+
         Δ = _six_vertex_delta(a, b, c)
-        throw(
-            ArgumentError(
-                "SixVertex FreeEnergy: the generic disordered-phase " *
-                "free energy (Lieb/Sutherland 1967 trigonometric " *
-                "integral) is deferred to a follow-up commit (issue " *
-                "#163 phase 2). Currently implemented closed forms in " *
-                "the disordered phase: only the square-ice diagonal " *
-                "a = b = c. For (a, b, c) = ($a, $b, $c) with " *
-                "Δ = $Δ please check back after the next iteration.",
-            ),
-        )
+        # If Δ is extremely close to -1, we apply a tiny regularization to avoid integrand singularity.
+        # This ensures smooth matching with the AFE phase.
+        if Δ <= -1.0 + 1e-11
+            Δ = -1.0 + 1e-11
+        end
+
+        μ = acos(-Δ)
+        w = 2.0 * atan(tan(μ / 2.0) * (b - a) / (b + a))
+        A = π - μ
+        B = μ + w
+
+        function integrand(x)
+            if x == 0.0
+                return (π - μ) * (μ + w) / (2.0 * π)
+            end
+            num1 = -expm1(-2.0 * B * x)
+            num2 = -expm1(-2.0 * A * x)
+            den1 = -expm1(-2.0 * π * x)
+            den2 = 1.0 + exp(-2.0 * μ * x)
+            return 0.5 * exp((w - μ) * x) * num1 * num2 / (x * den1 * den2)
+        end
+
+        val, _ = quadgk(integrand, 0.0, Inf; atol=1e-15, rtol=1e-15)
+        return -log(a) - 2.0 * val
     else  # :antiferroelectric
+        if a < b
+            return fetch(SixVertex(b, a, c), FreeEnergy(), Infinite(); beta=beta, kwargs...)
+        end
+
         Δ = _six_vertex_delta(a, b, c)
-        throw(
-            ArgumentError(
-                "SixVertex FreeEnergy: AFE phase (Δ < −1) free energy " *
-                "is the Lieb 1967b elliptic-function form and is " *
-                "deferred to a follow-up commit (issue #163 phase 3). " *
-                "For (a, b, c) = ($a, $b, $c) with Δ = $Δ please " *
-                "check back after the next iteration.",
-            ),
-        )
+        λ = acosh(-Δ)
+
+        # If λ is extremely small, we use the disordered phase limit to ensure stability.
+        if λ < 1e-5
+            return fetch(SixVertex(a, b, c), FreeEnergy(), Infinite(); beta=beta, kwargs...)
+        end
+
+        X = (a/b - Δ) / sqrt(Δ^2 - 1.0)
+        u = 0.5 * log((X + 1.0) / (X - 1.0))
+
+        s = 0.0
+        for m in 1:1000000
+            t1 = exp(-m * (2.0*λ - 2.0*u))
+            t2 = exp(-m * (2.0*λ + 2.0*u))
+            den = 1.0 + exp(-2.0 * m * λ)
+            term = (t1 - t2) / (m * den)
+            s += term
+            if term < 1e-17
+                break
+            end
+        end
+        return -log(a) - (λ - u) - s
+    end
+end
+
+function fetch(m::SixVertex, ::Energy{:per_site}, ::Infinite; kwargs...)
+    # We use central finite difference with h = 1e-6 to compute the derivative
+    # of the free energy f(a^β, b^β, c^β) with respect to β at β = 1.
+    h = 1e-6
+    a, b, c = m.a, m.b, m.c
+    f_plus = fetch(
+        SixVertex(a^(1.0 + h), b^(1.0 + h), c^(1.0 + h)),
+        FreeEnergy(),
+        Infinite();
+        kwargs...,
+    )
+    f_minus = fetch(
+        SixVertex(a^(1.0 - h), b^(1.0 - h), c^(1.0 - h)),
+        FreeEnergy(),
+        Infinite();
+        kwargs...,
+    )
+    return (f_plus - f_minus) / (2.0 * h)
+end
+
+function fetch(m::SixVertex, ::Polarization, ::Infinite; kwargs...)
+    a, b, c = m.a, m.b, m.c
+    phase = _six_vertex_phase(a, b, c)
+    if phase === :ferroelectric
+        # In the ferroelectric phase, all arrows are aligned.
+        return 1.0
+    elseif phase === :disordered
+        # In the disordered phase, bulk polarization vanishes.
+        return 0.0
+    else # :antiferroelectric
+        # Staggered polarization order parameter: \prod_{n=1}^\infty \tanh^2(n\lambda)
+        Δ = _six_vertex_delta(a, b, c)
+        λ = acosh(-Δ)
+
+        # If λ is extremely small, staggered polarization is 0.
+        if λ < 1e-5
+            return 0.0
+        end
+
+        pol = 1.0
+        for n in 1:100000
+            term = tanh(n * λ)^2
+            pol *= term
+            if 1.0 - term < 1e-16
+                break
+            end
+        end
+        return pol
     end
 end

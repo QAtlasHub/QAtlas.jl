@@ -46,7 +46,16 @@
 # `ThermoIdentity` struct is in scope.
 
 using ForwardDiff
-using QAtlas: fetch, SpecificHeat, SusceptibilityZZ, Infinite, IsingChain1D, TFIM, Kitaev1D, SSH, TightBinding1D
+using QAtlas:
+    fetch,
+    SpecificHeat,
+    SusceptibilityZZ,
+    Infinite,
+    IsingChain1D,
+    TFIM,
+    Kitaev1D,
+    SSH,
+    TightBinding1D
 using QuadGK: quadgk
 
 # ══════════════════════════════════════════════════════════════════════
@@ -296,9 +305,7 @@ brute-force provider.
 """
 
 # Free-fermion energy variance providers
-function independent_energy_variance_per_site(
-    m::TFIM, ::Infinite; beta::Real, N::Int=16
-)
+function independent_energy_variance_per_site(m::TFIM, ::Infinite; beta::Real, N::Int=16)
     integrand = k -> begin
         lambda_val = 2 * sqrt(m.J^2 + m.h^2 - 2 * m.J * m.h * cos(k))
         y = beta * lambda_val
@@ -322,16 +329,17 @@ function independent_energy_variance_per_site(
     return val / (pi * beta^2)
 end
 
-function independent_energy_variance_per_site(
-    m::SSH, ::Infinite; beta::Real, N::Int=16
-)
+function independent_energy_variance_per_site(m::SSH, ::Infinite; beta::Real, N::Int=16)
     integrand = k -> begin
         lambda_val = sqrt(m.v^2 + m.w^2 + 2 * m.v * m.w * cos(k))
         y = beta * lambda_val
         (y / 2)^2 * sech(y / 2)^2
     end
     val, _ = quadgk(integrand, 0.0, pi; rtol=1e-10)
-    return val / (2 * pi * beta^2)
+    # Per-site (2 sites/unit cell): both ±λ bands contribute, giving
+    # Var(E)/N = (1/π)∫₀^π (βλ/2)² sech²(βλ/2) dk / β² — matches the registered
+    # c_v = (1/π)∫₀^π (βλ/2)² sech² via the energy FDT c_v = β² Var(E)/N.
+    return val / (pi * beta^2)
 end
 
 function independent_energy_variance_per_site(

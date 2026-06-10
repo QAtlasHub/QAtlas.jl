@@ -13,17 +13,17 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 26
-- **Total hubs (Model, BC pairs)**: 35
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
+- **Models with this quantity registered**: 27
+- **Total hubs (Model, BC pairs)**: 38
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
 - Pfeuty1970 — 8 hubs
 - LiebSchultzMattis1961 — 5 hubs
+- AshcroftMermin1976 — 4 hubs
 - Kitaev2006 — 3 hubs
 - WhiteHuse1993 — 3 hubs
-- AshcroftMermin1976 — 2 hubs
 
 ## Model × BC matrix
 
@@ -35,6 +35,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`GrossNeveu`](../models/GrossNeveu.md) | — | — | 🟢 [hub](../hubs/GrossNeveu_MassGap_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | — | 🟠 [hub](../hubs/HeisenbergXYZ_MassGap_Infinite.md) |
+| [`Hubbard1D`](../models/Hubbard1D.md) | — | — | 🟠 [hub](../hubs/Hubbard1D_MassGap_Infinite.md) |
 | [`KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) | — | — | ⚪ [hub](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Kitaev1D_MassGap_Infinite.md) |
 | [`KitaevHeisenberg`](../models/KitaevHeisenberg.md) | — | — | 🟢 [hub](../hubs/KitaevHeisenberg_MassGap_Infinite.md) |
@@ -49,7 +50,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`SSH`](../models/SSH.md) | 🟠 [hub](../hubs/SSH_MassGap_OBC.md) | — | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
 | [`SchwingerModel`](../models/SchwingerModel.md) | — | — | 🟢 [hub](../hubs/SchwingerModel_MassGap_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_MassGap_OBC.md) | 🟠 [hub](../hubs/TFIM_MassGap_PBC.md) | 🟢 [hub](../hubs/TFIM_MassGap_Infinite.md) |
-| [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |
+| [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟢 [hub](../hubs/TightBindingV1D_MassGap_Infinite.md) |
 | [`TodaLattice`](../models/TodaLattice.md) | — | — | 🟢 [hub](../hubs/TodaLattice_MassGap_Infinite.md) |
 | [`ToricCode`](../models/ToricCode.md) | — | — | 🟢 [hub](../hubs/ToricCode_MassGap_Infinite.md) |

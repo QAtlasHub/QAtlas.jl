@@ -15,6 +15,26 @@
     references=["LiebWu1968", "Essler2005"],
     notes="Lieb-Wu integral E₀/N = -4t ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).",
 )
+@register(
+    Hubbard1D,
+    Energy{:per_site},
+    Infinite,
+    method=:bethe_ansatz,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_hubbard1d.jl",
+    references=["LiebWu1968", "Essler2005"],
+    notes="Lieb-Wu integral E₀/N = -4t ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).",
+)
+@register(
+    Hubbard1D,
+    MassGap,
+    Infinite,
+    method=:bethe_ansatz,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_hubbard1d.jl",
+    references=["LiebWu1968", "Essler2005", "Ovchinnikov1970"],
+    notes="Lieb-Wu charge gap (default, type=:charge) Δ_c = (16t²/U) ∫₁^∞ √(ω²-1)/sinh(2πtω/U) dω or spin gap (type=:spin) which is 0.0 at half filling.",
+)
 
 @register(
     Hubbard1D,

@@ -356,8 +356,9 @@ function fetch(
     model::Universality{C}, q::RenyiEntropy, ::PBC; ℓ::Real, L::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy PBC Rényi: L must be > 0; got L=$L."))
-    0 ≤ ℓ ≤ L ||
-        throw(ArgumentError("Cardy PBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
+    0 ≤ ℓ ≤ L || throw(
+        ArgumentError("Cardy PBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L.")
+    )
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
     (ℓ == 0 || ℓ == L) && return -Inf
@@ -389,8 +390,9 @@ function fetch(
     model::Universality{C}, q::RenyiEntropy, ::OBC; ℓ::Real, L::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy OBC Rényi: L must be > 0; got L=$L."))
-    0 ≤ ℓ ≤ L ||
-        throw(ArgumentError("Cardy OBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
+    0 ≤ ℓ ≤ L || throw(
+        ArgumentError("Cardy OBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L.")
+    )
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
     (ℓ == 0 || ℓ == L) && return -Inf
@@ -989,10 +991,16 @@ raw"""
 Post-quench von Neumann entanglement entropy of a block at the boundary of
 an open chain (Calabrese-Cardy 2005):
 
-    S(ℓ, t) = min(v t, ℓ) * pi * c / (12 * beta_eff) + log g
+    S(ℓ, t) = min(v t, ℓ) * pi * c / (6 * beta_eff) + log g
 
 where `log g` is the Affleck-Ludwig boundary entropy (residual term) of the
 boundary condition, optionally fetched if `boundary_state` is provided.
+
+The prefactor 1/6 (not 1/12) follows from the quasi-particle picture: a
+block [0, ℓ] at the open boundary has ONE entanglement cut, giving growth
+rate dS/dt = π c v / (6 β_eff) = half the PBC rate (π c v / 3 β_eff for two
+cuts). Saturation S = π c ℓ / (6 β_eff) matches `EntanglementSaturationDensity`.
+Reference: Calabrese–Cardy J. Stat. Mech. P04010 (2005), eq. (5.2).
 """
 function fetch(
     model::Universality{C},
@@ -1013,11 +1021,13 @@ function fetch(
     c = _cardy_central_charge(model; kwargs...)
     log_g = 0.0
     if haskey(kwargs, :boundary_state)
-        log_g = fetch(model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state])
+        log_g = fetch(
+            model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state]
+        )
     elseif haskey(kwargs, :log_g)
         log_g = Float64(kwargs[:log_g])
     end
-    return min(v * t, ℓ) * π * c / (12 * beta_eff) + log_g
+    return min(v * t, ℓ) * π * c / (6 * beta_eff) + log_g
 end
 
 raw"""
@@ -1027,15 +1037,18 @@ raw"""
 Post-quench von Neumann entanglement entropy of a block of length `ℓ` on a
 periodic circle of circumference `L` (Calabrese-Cardy 2005 quasi-particle picture):
 
-    S(ℓ, t) = f_qp(t_mod) * pi * c / (6 * beta_eff)
+    S(ℓ, t) = f_qp(t_fold) * pi * c / (6 * beta_eff)
 
-where the periodic triangular/trapezoidal revival profile is:
+where `t_fold = min(t_mod, L/v - t_mod)` with `t_mod = mod(t, L/v)` folds
+the time into one half-period, and the trapezoidal profile is:
 
-    f_qp(t_mod) = 2 * v * t_mod           if 0 <= t_mod < ℓ_c / 2v
-                  ℓ_c                     if ℓ_c / 2v <= t_mod < (L - ℓ_c) / 2v
-                  L - 2 * v * t_mod       if (L - ℓ_c) / 2v <= t_mod < L / v
+    f_qp(t_fold) = 2 * v * t_fold          if 0 <= t_fold < ℓ_c / (2v)
+                   ℓ_c                     if ℓ_c / (2v) <= t_fold < (L - ℓ_c) / (2v)
+                   L - 2 * v * t_fold      if (L - ℓ_c) / (2v) <= t_fold <= L / (2v)
 
-with `t_mod = mod(t, L / v)` and `ℓ_c = min(ℓ, L - ℓ)`.
+with `ℓ_c = min(ℓ, L - ℓ)`. The half-period fold enforces the symmetry
+f(t_mod) = f(L/v - t_mod), ensuring S ≥ 0 for all t ≥ 0. Without folding,
+the naive formula L - 2*v*t_mod turns negative for t_mod > L/(2v).
 """
 function fetch(
     model::Universality{C},
@@ -1049,8 +1062,9 @@ function fetch(
     kwargs...,
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy quench PBC: L must be > 0; got L=$L."))
-    0 ≤ ℓ ≤ L ||
-        throw(ArgumentError("Cardy quench PBC: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
+    0 ≤ ℓ ≤ L || throw(
+        ArgumentError("Cardy quench PBC: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L.")
+    )
     t ≥ 0 || throw(ArgumentError("Cardy quench PBC: t must be ≥ 0; got t=$t."))
     v > 0 || throw(ArgumentError("Cardy quench PBC: v must be > 0; got v=$v."))
     beta_eff > 0 || throw(
@@ -1058,13 +1072,16 @@ function fetch(
     )
     c = _cardy_central_charge(model; kwargs...)
     ℓ_c = min(ℓ, L - ℓ)
+    # Fold t into one half-period [0, L/(2v)]; the quasi-particle profile is
+    # symmetric about L/(2v): f(t_mod) = f(L/v - t_mod).
     t_mod = mod(t, L / v)
-    val = if 0 ≤ t_mod < ℓ_c / (2 * v)
-        2 * v * t_mod
-    elseif ℓ_c / (2 * v) ≤ t_mod < (L - ℓ_c) / (2 * v)
+    t_fold = min(t_mod, L / v - t_mod)
+    val = if 0 ≤ t_fold < ℓ_c / (2 * v)
+        2 * v * t_fold
+    elseif ℓ_c / (2 * v) ≤ t_fold < (L - ℓ_c) / (2 * v)
         ℓ_c
     else
-        L - 2 * v * t_mod
+        L - 2 * v * t_fold
     end
     return val * π * c / (6 * beta_eff)
 end
@@ -1089,7 +1106,12 @@ The boundary entropies are:
     log g_D = -(1/4) log(2 * K)
 """
 function fetch(
-    ::Universality{:XY}, ::BoundaryEntropy, ::Infinite; boundary_state::Symbol, K::Real=1.0, kwargs...
+    ::Universality{:XY},
+    ::BoundaryEntropy,
+    ::Infinite;
+    boundary_state::Symbol,
+    K::Real=1.0,
+    kwargs...,
 )
     K > 0 || throw(ArgumentError("BoundaryEntropy (:XY): K must be positive; got K=$K."))
     if boundary_state === :neumann || boundary_state === :free
@@ -1114,16 +1136,31 @@ Affleck-Ludwig universal boundary entropy `log g` for the SU(2)_1 WZW CFT
 (Heisenberg universality class, c = 1) at d = 1.
 
 `boundary_state` must be one of:
-    `:free` (≡ `:neumann` / SU(2)-symmetric boundary condition: g = 1, log g = 0),
-    `:fixed` (g = 1/sqrt(2), log g = -(1/2) log 2).
+    `:free` (≡ `:neumann` / SU(2)-symmetric open boundary; j=0 Cardy state:
+             g = 1, log g = 0),
+    `:fixed` (≡ `:dirichlet` / fixed-spin boundary; j=1/2 Cardy state:
+              g = 2^{1/4}, log g = (1/4) log 2).
+
+The g-values follow from the Affleck-Ludwig analysis of the SU(2)_1 WZW
+model: the j=1/2 spin-impurity (Kondo) fixed point has g = 2^{1/4}
+(Affleck-Ludwig Nucl. Phys. B 360, 641 (1991), Table 2). Note this differs
+from the Ising fixed-boundary value g = 1/sqrt(2); the two models are in
+distinct universality classes.
+
+Reference: Affleck-Ludwig *Nucl. Phys. B* **360**, 641 (1991);
+Oshikawa-Affleck *Nucl. Phys. B* **495**, 533 (1997). Tracking: #580.
 """
 function fetch(
-    ::Universality{:Heisenberg}, ::BoundaryEntropy, ::Infinite; boundary_state::Symbol, kwargs...
+    ::Universality{:Heisenberg},
+    ::BoundaryEntropy,
+    ::Infinite;
+    boundary_state::Symbol,
+    kwargs...,
 )
     if boundary_state === :free || boundary_state === :neumann
-        return 0.0  # SU(2) symmetric boundary has g = 1, log g = 0.
+        return 0.0          # j=0 Cardy state: g = 1, log g = 0
     elseif boundary_state === :fixed || boundary_state === :dirichlet
-        return -log(2) / 2  # Fixed spin boundary has g = 1/sqrt(2)
+        return log(2) / 4   # j=1/2 Cardy state: g = 2^(1/4), log g = (1/4) log 2
     else
         throw(
             ArgumentError(

@@ -104,10 +104,17 @@ using QAtlas, Test
         @test QAtlas.fetch(Universality(:XY), BoundaryEntropy(), Infinite(); boundary_state=:neumann, K=2.0) ≈ 0.0 atol=1e-12
         @test QAtlas.fetch(Universality(:XY), BoundaryEntropy(), Infinite(); boundary_state=:dirichlet, K=2.0) ≈ -0.25 * log(4.0) atol=1e-12
 
-        # Heisenberg c = 1
-        # free: log g = 0, fixed: log g = -log(2)/2
-        @test QAtlas.fetch(Universality(:Heisenberg), BoundaryEntropy(), Infinite(); boundary_state=:free) ≈ 0.0 atol=1e-12
-        @test QAtlas.fetch(Universality(:Heisenberg), BoundaryEntropy(), Infinite(); boundary_state=:fixed) ≈ -log(2) / 2 atol=1e-12
+        # Heisenberg c = 1 (SU(2)_1 WZW)
+        # free (j=0 Cardy state):    log g = 0
+        # fixed (j=1/2 Cardy state): log g = (1/4) log 2  [Affleck-Ludwig 1991, Table 2]
+        @test QAtlas.fetch(
+            Universality(:Heisenberg), BoundaryEntropy(), Infinite();
+            boundary_state=:free,
+        ) ≈ 0.0 atol=1e-12
+        @test QAtlas.fetch(
+            Universality(:Heisenberg), BoundaryEntropy(), Infinite();
+            boundary_state=:fixed,
+        ) ≈ log(2) / 4 atol=1e-12
     end
 
     # ── 3. OBC Entanglement with Boundary Entropy ────────────────────────────

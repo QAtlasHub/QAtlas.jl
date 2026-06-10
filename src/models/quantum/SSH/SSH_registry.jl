@@ -65,3 +65,39 @@
     references=["SSH1979", "AsbothOroszlanyPalyi2016"],
     notes="Winding number W = (1/2π)∮ Im(q'/q) dk of q(k)=v+w e^{ik}; 1 (|w|>|v|, topological) / 0 (|w|<|v|, trivial).",
 )
+
+# =========================================================================
+# Finite-T Thermodynamics
+# =========================================================================
+@register(
+    SSH,
+    FreeEnergy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_ssh.jl",
+    references=["SSH1979", "SSH1980"],
+    notes="f(beta) = -1/(2pi beta) \\int_0^pi log(2 cosh(beta \\lambda(k)/2)) dk; QuadGK rtol=1e-10.",
+)
+
+@register(
+    SSH,
+    ThermalEntropy,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_ssh.jl",
+    references=["SSH1979", "SSH1980"],
+    notes="s(beta) = 1/pi \\int_0^pi [ log(1+e^{-beta\\lambda}) + beta\\lambda n_F(beta\\lambda) ] dk; High-T limit log 2 per site.",
+)
+
+@register(
+    SSH,
+    SpecificHeat,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_ssh.jl",
+    references=["SSH1979", "SSH1980"],
+    notes="c_v(beta) = 1/pi \\int_0^pi (beta\\lambda/2)^2 sech^2(beta\\lambda/2) dk; QuadGK rtol=1e-10.",
+)

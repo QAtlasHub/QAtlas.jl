@@ -7,7 +7,7 @@ All `(Model, BC)` hubs `src` claims for the **`FermiVelocity`** observable.  Emp
 
 ## Definition
 
-Fermi velocity `v_F = ∂ε/∂k |_{k_F}`.  Meaningful for non-interacting / mean-field fermionic band structures (tight-binding lattices, Bogoliubov-de Gennes diagonalisations).  In QAtlas this is the type returned by models like ``Honeycomb`` (at the Dirac cones), the other tight-binding lattices, and the TFIM Majorana mode at the critical field.
+Fermi velocity `v_F = ∂ε/∂k |_{k_F}`.  Meaningful for non-interacting / mean-field fermionic band structures (tight-binding lattices, Bogoliubov-de Gennes diagonalisations).  In QAtlas this is the type returned by models like `Honeycomb` (at the Dirac cones), the other tight-binding lattices, and the TFIM Majorana mode at the critical field.
 
 _(extracted from `src/core/quantities.jl` docstring.)_
 

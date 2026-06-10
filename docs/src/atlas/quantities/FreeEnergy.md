@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 17
-- **Total hubs (Model, BC pairs)**: 25
+- **Models with this quantity registered**: 18
+- **Total hubs (Model, BC pairs)**: 26
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `jks_qtm_nlie`, `klumper_nlie`, `matter_free_fermion`, `onsager`, `transfer_matrix`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
@@ -41,6 +41,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`Kitaev1D`](../models/Kitaev1D.md) | — | — | 🟠 [hub](../hubs/Kitaev1D_FreeEnergy_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | — | — |
+| [`SSH`](../models/SSH.md) | — | — | 🟠 [hub](../hubs/SSH_FreeEnergy_Infinite.md) |
 | [`SixVertex`](../models/SixVertex.md) | — | — | 🟠 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |

@@ -64,7 +64,7 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | 19 | 🟣 0 🟢 13 🔵 3 ⚪ 1 🟠 4 | — |
 | [`S1XXZ1D`](../atlas/models/S1XXZ1D.md) | 2 | 🟣 0 🟢 0 🔵 2 ⚪ 0 🟠 0 | — |
 | [`SLEkappa`](../atlas/models/SLEkappa.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
-| [`SSH`](../atlas/models/SSH.md) | 5 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 1 | — |
+| [`SSH`](../atlas/models/SSH.md) | 8 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 4 | — |
 | [`SYK`](../atlas/models/SYK.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |

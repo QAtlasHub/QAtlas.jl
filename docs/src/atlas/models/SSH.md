@@ -25,8 +25,8 @@ All `(Quantity, BC)` hubs `src` claims for **`SSH`**.  Cells link to the per-hub
 | 🟢 corroborated-at-p | 5 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 4 |
+| **total claimed hubs** | **9** |
 
 **Methods** (from `@register`, derived): `analytic`, `dense_ed`
 
@@ -37,7 +37,10 @@ All `(Quantity, BC)` hubs `src` claims for **`SSH`**.  Cells link to the per-hub
 | [`CorrelationLength`](../quantities/CorrelationLength.md) | — | 🟢 [hub](../hubs/SSH_CorrelationLength_Infinite.md) |
 | [`EdgeModeEnergy`](../quantities/EdgeModeEnergy.md) | 🟢 [hub](../hubs/SSH_EdgeModeEnergy_OBC.md) | — |
 | [`Energy`](../quantities/Energy.md) | — | 🟢 [hub](../hubs/SSH_Energy_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | — | 🟠 [hub](../hubs/SSH_FreeEnergy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/SSH_MassGap_OBC.md) | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
+| [`SpecificHeat`](../quantities/SpecificHeat.md) | — | 🟠 [hub](../hubs/SSH_SpecificHeat_Infinite.md) |
+| [`ThermalEntropy`](../quantities/ThermalEntropy.md) | — | 🟠 [hub](../hubs/SSH_ThermalEntropy_Infinite.md) |
 | [`TopologicalInvariant`](../quantities/TopologicalInvariant.md) | — | 🟢 [hub](../hubs/SSH_TopologicalInvariant_Infinite.md) |
 
 ## References
@@ -49,6 +52,7 @@ Pages = []
 Canonical = false
 AsbothOroszlanyPalyi2016
 SSH1979
+SSH1980
 ```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

@@ -50,7 +50,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 21 | `dense_ed`, `literature_value` | 0 | 13 | 3 | 1 | 4 | feasible | `@haldane` |
 | [`S1XXZ1D`](models/S1XXZ1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
 | [`SLEkappa`](models/SLEkappa.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`SSH`](models/SSH.md) | — | 6 | `analytic`, `dense_ed` | 0 | 5 | 0 | 0 | 1 | feasible | `@sweep` |
+| [`SSH`](models/SSH.md) | — | 9 | `analytic`, `dense_ed` | 0 | 5 | 0 | 0 | 4 | feasible | `@sweep` |
 | [`SYK`](models/SYK.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`SchwingerModel`](models/SchwingerModel.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@massless` |
 | [`ShastrySutherland`](models/ShastrySutherland.md) | — | 1 | `exact_dimer` | 0 | 0 | 0 | 0 | 1 | feasible | — |
@@ -97,7 +97,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
 - [`FidelitySusceptibility`](quantities/FidelitySusceptibility.md) — 1 models
 - [`FractalDimension`](quantities/FractalDimension.md) — 1 models
-- [`FreeEnergy`](quantities/FreeEnergy.md) — 17 models
+- [`FreeEnergy`](quantities/FreeEnergy.md) — 18 models
 - [`GGEValue`](quantities/GGEValue.md) — 1 models
 - [`GroundStateDegeneracy`](quantities/GroundStateDegeneracy.md) — 2 models
 - [`GroundStateEnergyDensity`](quantities/GroundStateEnergyDensity.md) — 8 models
@@ -121,7 +121,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`RenyiEntropy`](quantities/RenyiEntropy.md) — 5 models
 - [`ResidualEntropy`](quantities/ResidualEntropy.md) — 5 models
 - [`ScramblingTime`](quantities/ScramblingTime.md) — 1 models
-- [`SpecificHeat`](quantities/SpecificHeat.md) — 14 models
+- [`SpecificHeat`](quantities/SpecificHeat.md) — 15 models
 - [`SpinGap`](quantities/SpinGap.md) — 2 models
 - [`SpontaneousMagnetization`](quantities/SpontaneousMagnetization.md) — 6 models
 - [`SteadyStateCurrent`](quantities/SteadyStateCurrent.md) — 1 models
@@ -129,7 +129,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`SusceptibilityXX`](quantities/SusceptibilityXX.md) — 4 models
 - [`SusceptibilityYY`](quantities/SusceptibilityYY.md) — 4 models
 - [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md) — 8 models
-- [`ThermalEntropy`](quantities/ThermalEntropy.md) — 14 models
+- [`ThermalEntropy`](quantities/ThermalEntropy.md) — 15 models
 - [`TightBindingChecksum`](quantities/TightBindingChecksum.md) — 4 models
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models
 - [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md) — 3 models

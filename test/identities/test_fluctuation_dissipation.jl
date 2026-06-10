@@ -135,6 +135,33 @@ end
         )
     end
 
+    # (c) Free-fermion models energy FDT vs independent energy variance
+    for (m, name) in [
+        (TFIM(; J=1.0, h=0.5), "TFIM"),
+        (Kitaev1D(; t=1.0, μ=0.5, Δ=0.3), "Kitaev1D"),
+        (SSH(; v=0.6, w=1.0), "SSH"),
+        (TightBinding1D(; t=1.0, μ=0.5), "TightBinding1D"),
+    ]
+        for beta_val in [0.2, 0.5, 1.2]
+            c_v = fetch(m, SpecificHeat(), Infinite(); beta=beta_val)
+            varE_ind = independent_energy_variance_per_site(m, Infinite(); beta=beta_val)
+            @test isapprox(c_v, beta_val^2 * varE_ind; rtol=1e-5, atol=1e-7)
+        end
+    end
+
+    # (d) Check that energy FDT is verified through the ThermoIdentity harness for all models
+    for m in [
+        TFIM(; J=1.0, h=0.5),
+        Kitaev1D(; t=1.0, μ=0.5, Δ=0.3),
+        SSH(; v=0.6, w=1.0),
+        TightBinding1D(; t=1.0, μ=0.5),
+    ]
+        results = verify_thermodynamic_identities(
+            m, Infinite(); βs=[0.5], identities=[SPECIFIC_HEAT_FROM_VARIANCE], rtol=1e-5
+        )
+        @test all(r -> r.status === :pass, results)
+    end
+
     # (b) Same statements through the ThermoIdentity harness (exercises the
     # FLUCTUATION_DISSIPATION_IDENTITIES integration).  All must RUN (not skip)
     # and pass — a skip would mean the trait/dispatch wiring broke.

@@ -1,3 +1,4 @@
+using ForwardDiff
 # ─────────────────────────────────────────────────────────────────────────────
 # Test: Su-Schrieffer-Heeger (1979) 1D dimerised tight-binding chain.
 #
@@ -239,5 +240,54 @@ end
                 "SSH 1979 topological sweet spot v=0: exact end zero modes (E_edge = 0 ∀N)"
             ],
         )
+    end
+
+    # =========================================================================
+    # Finite-T Thermodynamics tests
+    # =========================================================================
+    @testset "SSH - Finite-T thermodynamics limits and consistency" begin
+        # High-T limits: entropy -> log 2, specific heat -> 0, free energy -> -T log 2
+        m = SSH(; v=0.6, w=1.0)
+        beta_high = 1e-5
+        @test isapprox(
+            fetch(m, ThermalEntropy(), Infinite(); beta=beta_high), log(2); atol=1e-4
+        )
+        @test isapprox(fetch(m, SpecificHeat(), Infinite(); beta=beta_high), 0.0; atol=1e-4)
+        @test isapprox(
+            fetch(m, FreeEnergy(), Infinite(); beta=beta_high), -log(2)/beta_high; atol=1e-2
+        )
+
+        # Low-T limits: entropy -> 0, specific heat -> 0, free energy -> E_GS
+        beta_low = 100.0
+        egs = fetch(m, Energy(:per_site), Infinite())
+        @test isapprox(
+            fetch(m, ThermalEntropy(), Infinite(); beta=beta_low), 0.0; atol=1e-3
+        )
+        @test isapprox(fetch(m, SpecificHeat(), Infinite(); beta=beta_low), 0.0; atol=1e-3)
+        @test isapprox(fetch(m, FreeEnergy(), Infinite(); beta=beta_low), egs; atol=1e-2)
+
+        # Thermodynamic consistency: u = f + s/beta
+        for beta_val in [0.2, 0.5, 1.5]
+            f = fetch(m, FreeEnergy(), Infinite(); beta=beta_val)
+            s = fetch(m, ThermalEntropy(), Infinite(); beta=beta_val)
+            u = f + s / beta_val
+
+            # u = d(beta * f) / dbeta
+            df = ForwardDiff.derivative(
+                b -> b * fetch(m, FreeEnergy(), Infinite(); beta=b), beta_val
+            )
+            @test isapprox(u, df; rtol=1e-5, atol=1e-7)
+
+            # cv = -beta^2 * du/dbeta
+            cv = fetch(m, SpecificHeat(), Infinite(); beta=beta_val)
+            du = ForwardDiff.derivative(
+                b -> begin
+                    f_val = fetch(m, FreeEnergy(), Infinite(); beta=b)
+                    s_val = fetch(m, ThermalEntropy(), Infinite(); beta=b)
+                    f_val + s_val / b
+                end, beta_val
+            )
+            @test isapprox(cv, -beta_val^2 * du; rtol=1e-5, atol=1e-7)
+        end
     end
 end

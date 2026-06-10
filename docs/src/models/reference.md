@@ -50,7 +50,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | WhiteHuse1993 |
 | [`S1XXZ1D`](../atlas/models/S1XXZ1D.md) | WhiteHuse1993, Schulz1986, TzengYang2008 |
 | [`SLEkappa`](../atlas/models/SLEkappa.md) | Schramm2000, BauerBernard2006, Cardy2005, Beffara2008 |
-| [`SSH`](../atlas/models/SSH.md) | SSH1979, AsbothOroszlanyPalyi2016 |
+| [`SSH`](../atlas/models/SSH.md) | SSH1979, AsbothOroszlanyPalyi2016, SSH1980 |
 | [`SYK`](../atlas/models/SYK.md) | SachdevYe1993, Kitaev2015, MaldacenaStanford2016 |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | Schwinger1962, ColemanJackiwSusskind1975 |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | ShastrySutherland1981, KogaKawakami2000 |

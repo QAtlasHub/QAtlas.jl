@@ -24,10 +24,10 @@ All `(Quantity, BC)` hubs `src` claims for **`YangLee`**.  Cells link to the per
 | 🟢 corroborated-at-p | 1 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 1 |
-| 🟠 uncorroborated-but-feasible | 0 |
-| **total claimed hubs** | **2** |
+| 🟠 uncorroborated-but-feasible | 1 |
+| **total claimed hubs** | **3** |
 
-**Methods** (from `@register`, derived): `minimal_model_delegation`
+**Methods** (from `@register`, derived): `analytic`, `minimal_model_delegation`
 
 ## Quantity × BC matrix
 
@@ -35,6 +35,7 @@ All `(Quantity, BC)` hubs `src` claims for **`YangLee`**.  Cells link to the per
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/YangLee_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | ⚪ [hub](../hubs/YangLee_ConformalWeights_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/YangLee_UniversalityClass_Infinite.md) |
 
 ## References
 

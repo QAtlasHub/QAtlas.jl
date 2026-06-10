@@ -50,7 +50,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 21 | `dense_ed`, `literature_value` | 0 | 13 | 3 | 1 | 4 | feasible | `@haldane` |
 | [`S1XXZ1D`](models/S1XXZ1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
 | [`SLEkappa`](models/SLEkappa.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`SSH`](models/SSH.md) | — | 9 | `analytic`, `dense_ed` | 0 | 5 | 0 | 0 | 4 | feasible | `@sweep` |
+| [`SSH`](models/SSH.md) | — | 10 | `analytic`, `dense_ed` | 0 | 5 | 0 | 0 | 5 | feasible | `@sweep` |
 | [`SYK`](models/SYK.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`SchwingerModel`](models/SchwingerModel.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@massless` |
 | [`ShastrySutherland`](models/ShastrySutherland.md) | — | 1 | `exact_dimer` | 0 | 0 | 0 | 0 | 1 | feasible | — |
@@ -71,7 +71,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`XXZ1D`](models/XXZ1D.md) | — | 31 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 18 | 5 | 0 | 8 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
-| [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
+| [`YangLee`](models/YangLee.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 1 | 0 | 1 | 1 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 2 | `analytic`, `delegation` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`ZnParafermion`](models/ZnParafermion.md) | `Ising` | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
 
@@ -138,7 +138,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`TightBindingMaxEnergy`](quantities/TightBindingMaxEnergy.md) — 4 models
 - [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md) — 3 models
 - [`TopologicalInvariant`](quantities/TopologicalInvariant.md) — 3 models
-- [`UniversalityClass`](quantities/UniversalityClass.md) — 16 models
+- [`UniversalityClass`](quantities/UniversalityClass.md) — 18 models
 - [`VonNeumannEntropy`](quantities/VonNeumannEntropy.md) — 5 models
 - [`XXCorrelation`](quantities/XXCorrelation.md) — 2 models
 - [`XXStructureFactor`](quantities/XXStructureFactor.md) — 1 models

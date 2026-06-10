@@ -25,6 +25,10 @@ using Test
         # Kitaev1D critical line |μ| = 2|t|
         kitaev_crit = Kitaev1D(; μ=2.0, t=1.0, Δ=1.0)
         @test fetch(kitaev_crit, UniversalityClass(), Infinite()) === Universality(:Ising)
+
+        # SSH critical line |v| = |w|
+        ssh_crit = SSH(; v=1.0, w=1.0)
+        @test fetch(ssh_crit, UniversalityClass(), Infinite()) === Universality(:XY)
     end
 
     # 2. Test fetch for classical model instances at critical point T_c
@@ -54,6 +58,9 @@ using Test
 
         # TricriticalPotts3
         @test fetch(TricriticalPotts3(), UniversalityClass(), Infinite()) === Universality(:TricriticalPotts3)
+
+        # YangLee
+        @test fetch(YangLee(), UniversalityClass(), Infinite()) === Universality(:LeeYang)
     end
 
     # 3. Test that off-critical model instances throw DomainError
@@ -70,6 +77,10 @@ using Test
         kitaev_gapped = Kitaev1D(; μ=3.0, t=1.0, Δ=1.0)
         @test_throws DomainError fetch(kitaev_gapped, UniversalityClass(), Infinite())
 
+        # SSH off-critical (|v| != |w|)
+        ssh_gapped = SSH(; v=1.0, w=2.0)
+        @test_throws DomainError fetch(ssh_gapped, UniversalityClass(), Infinite())
+
         # ZnClock unsupported / off-critical (n >= 4)
         @test_throws DomainError fetch(ZnClock(; n=4), UniversalityClass(), Infinite())
 
@@ -82,7 +93,7 @@ using Test
 
     # 4. Test fetch for Universality{C} objects
     @testset "Universality class objects" begin
-        for c in [:Ising, :XY, :Heisenberg, :MeanField, :KPZ, :Potts3, :Potts4, :TricriticalIsing, :TricriticalPotts3]
+        for c in [:Ising, :XY, :Heisenberg, :MeanField, :KPZ, :Potts3, :Potts4, :TricriticalIsing, :TricriticalPotts3, :LeeYang]
             u = Universality(c)
             @test fetch(u, UniversalityClass(), Infinite()) === u
         end

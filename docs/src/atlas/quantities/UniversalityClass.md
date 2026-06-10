@@ -13,8 +13,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 16
-- **Total hubs (Model, BC pairs)**: 16
+- **Models with this quantity registered**: 18
+- **Total hubs (Model, BC pairs)**: 18
 - **Methods** (derived from `@register`): `analytic`
 - **Universality classes** (where applicable): `Ising`, `MeanField`, `MinimalModel`
 
@@ -29,6 +29,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`IsingSquare`](../models/IsingSquare.md) | 🟠 [hub](../hubs/IsingSquare_UniversalityClass_Infinite.md) |
 | [`IsingTriangular`](../models/IsingTriangular.md) | 🟠 [hub](../hubs/IsingTriangular_UniversalityClass_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟠 [hub](../hubs/Kitaev1D_UniversalityClass_Infinite.md) |
+| [`SSH`](../models/SSH.md) | 🟠 [hub](../hubs/SSH_UniversalityClass_Infinite.md) |
 | [`SixVertex`](../models/SixVertex.md) | 🟠 [hub](../hubs/SixVertex_UniversalityClass_Infinite.md) |
 | [`TASEP`](../models/TASEP.md) | 🟠 [hub](../hubs/TASEP_UniversalityClass_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_UniversalityClass_Infinite.md) |
@@ -36,6 +37,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`TricriticalPotts3`](../models/TricriticalPotts3.md) | 🟠 [hub](../hubs/TricriticalPotts3_UniversalityClass_Infinite.md) |
 | [`Universality`](../models/Universality.md) | 🟠 [hub](../hubs/Universality_UniversalityClass_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟠 [hub](../hubs/XXZ1D_UniversalityClass_Infinite.md) |
+| [`YangLee`](../models/YangLee.md) | 🟠 [hub](../hubs/YangLee_UniversalityClass_Infinite.md) |
 | [`ZnClock`](../models/ZnClock.md) | 🟠 [hub](../hubs/ZnClock_UniversalityClass_Infinite.md) |
 | [`ZnParafermion`](../models/ZnParafermion.md) | 🟠 [hub](../hubs/ZnParafermion_UniversalityClass_Infinite.md) |
 

@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 170 hubs
+## `analytic` - 172 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -103,6 +103,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
 - 🟠 [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md)
+- 🟠 [`SSH/UniversalityClass/Infinite`](hubs/SSH_UniversalityClass_Infinite.md)
 - 🟢 [`SYK/ConformalWeights/Infinite`](hubs/SYK_ConformalWeights_Infinite.md)
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md)
 - 🟢 [`SchwingerModel/MassGap/Infinite`](hubs/SchwingerModel_MassGap_Infinite.md)
@@ -176,6 +177,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XXZ1D/UniversalityClass/Infinite`](hubs/XXZ1D_UniversalityClass_Infinite.md)
 - 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
 - 🟠 [`XYh1D/MassGap/PBC`](hubs/XYh1D_MassGap_PBC.md)
+- 🟠 [`YangLee/UniversalityClass/Infinite`](hubs/YangLee_UniversalityClass_Infinite.md)
 - 🟠 [`ZnClock/UniversalityClass/Infinite`](hubs/ZnClock_UniversalityClass_Infinite.md)
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](hubs/ZnParafermion_CentralCharge_Infinite.md)
 - 🟠 [`ZnParafermion/UniversalityClass/Infinite`](hubs/ZnParafermion_UniversalityClass_Infinite.md)

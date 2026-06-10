@@ -17,7 +17,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | 🟠 | Uncorroborated-but-feasible | Claimed but not yet verified |
 | — | *(Universality column)* | No `CriticalExponents` / `CentralCharge` claim registered; actual class may be known |
 
-## Classical Models (13)
+## Classical Models (12)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
@@ -33,9 +33,8 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`SpinIce`](../atlas/models/SpinIce.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TTbar`](../atlas/models/TTbar.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TodaLattice`](../atlas/models/TodaLattice.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`YangLee`](../atlas/models/YangLee.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `MinimalModel` |
 
-## Quantum Models (37)
+## Quantum Models (36)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
@@ -66,7 +65,6 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`S1AnisotropicD1D`](../atlas/models/S1AnisotropicD1D.md) | 2 | 🟣 0 🟢 0 🔵 2 ⚪ 0 🟠 0 | — |
 | [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | 19 | 🟣 0 🟢 13 🔵 3 ⚪ 1 🟠 4 | — |
 | [`S1XXZ1D`](../atlas/models/S1XXZ1D.md) | 2 | 🟣 0 🟢 0 🔵 2 ⚪ 0 🟠 0 | — |
-| [`SSH`](../atlas/models/SSH.md) | 8 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 4 | — |
 | [`SYK`](../atlas/models/SYK.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
@@ -77,7 +75,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
 
-## Other (17)
+## Other (19)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
@@ -89,6 +87,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | 9 | 🟣 0 🟢 7 🔵 2 ⚪ 0 🟠 4 | `Ising` |
 | [`IsingTriangular`](../atlas/models/IsingTriangular.md) | 10 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 8 | `Ising` |
 | [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 9 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 4 | — |
+| [`SSH`](../atlas/models/SSH.md) | 9 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 5 | — |
 | [`SixVertex`](../atlas/models/SixVertex.md) | 5 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 2 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
 | [`TFIM`](../atlas/models/TFIM.md) | 34 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 15 | `Ising` |
@@ -96,6 +95,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`Universality`](../atlas/models/Universality.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
 | [`XXZ1D`](../atlas/models/XXZ1D.md) | 24 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 8 | — |
+| [`YangLee`](../atlas/models/YangLee.md) | 3 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 1 | `MinimalModel` |
 | [`ZnClock`](../atlas/models/ZnClock.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |
 | [`ZnParafermion`](../atlas/models/ZnParafermion.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |
 

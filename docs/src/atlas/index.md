@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 380 |
-| ED-feasible claimed (risk denominator) | 354 |
+| Hubs `src` claims (registry) | 382 |
+| ED-feasible claimed (risk denominator) | 356 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 187 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 137 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 139 |
 | Inventory cards scanned (whole test/) | 2803 |
 | Registry files parsed | 74 / 74 |
 | Models | 67 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **52.8%** · **in-repo-verified rate** (incl. 🔵 coherent): **63.8%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **52.5%** · **in-repo-verified rate** (incl. 🔵 coherent): **63.5%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "137 actionable hub(s)"
+!!! warning "139 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -132,6 +132,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
     - [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
     - [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
+    - [`SSH/UniversalityClass/Infinite`](hubs/SSH_UniversalityClass_Infinite.md)
     - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
     - [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
     - [`SixVertex/UniversalityClass/Infinite`](hubs/SixVertex_UniversalityClass_Infinite.md)
@@ -197,6 +198,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`XYh1D/MassGap/PBC`](hubs/XYh1D_MassGap_PBC.md)
     - [`XYh1D/SusceptibilityZZ/Infinite`](hubs/XYh1D_SusceptibilityZZ_Infinite.md)
     - [`XYh1D/SusceptibilityZZ/OBC`](hubs/XYh1D_SusceptibilityZZ_OBC.md)
+    - [`YangLee/UniversalityClass/Infinite`](hubs/YangLee_UniversalityClass_Infinite.md)
     - [`ZnClock/UniversalityClass/Infinite`](hubs/ZnClock_UniversalityClass_Infinite.md)
     - [`ZnParafermion/UniversalityClass/Infinite`](hubs/ZnParafermion_UniversalityClass_Infinite.md)
 
@@ -247,7 +249,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `S1Heisenberg1D` | 21 | 0 | 13 | 3 | 1 | 4 | feasible |
 | `S1XXZ1D` | 2 | 0 | 0 | 2 | 0 | 0 | feasible |
 | `SLEkappa` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
-| `SSH` | 9 | 0 | 5 | 0 | 0 | 4 | feasible |
+| `SSH` | 10 | 0 | 5 | 0 | 0 | 5 | feasible |
 | `SYK` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `SchwingerModel` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `ShastrySutherland` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
@@ -268,11 +270,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `XXZ1D` | 31 | 0 | 18 | 5 | 0 | 8 | feasible |
 | `XYh1D` | 13 | 0 | 0 | 0 | 0 | 13 | feasible |
-| `YangLee` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
+| `YangLee` | 3 | 0 | 1 | 0 | 1 | 1 | feasible |
 | `ZnClock` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `ZnParafermion` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 
-## Hubs (380) — select to drill down
+## Hubs (382) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -607,7 +609,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 
-### `SSH` (9)
+### `SSH` (10)
 
 - 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
@@ -618,6 +620,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
+- 🟠 [`SSH/UniversalityClass/Infinite`](hubs/SSH_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ### `SYK` (1)
 
@@ -840,10 +843,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`XYh1D/SusceptibilityZZ/Infinite`](hubs/XYh1D_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](hubs/XYh1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 
-### `YangLee` (2)
+### `YangLee` (3)
 
 - 🟢 [`YangLee/CentralCharge/Infinite`](hubs/YangLee_CentralCharge_Infinite.md) — corroborated-at-p
 - ⚪ [`YangLee/ConformalWeights/Infinite`](hubs/YangLee_ConformalWeights_Infinite.md) — cited-only
+- 🟠 [`YangLee/UniversalityClass/Infinite`](hubs/YangLee_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ### `ZnClock` (2)
 

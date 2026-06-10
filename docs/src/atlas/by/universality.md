@@ -24,6 +24,10 @@ Which concrete models realize each universality class (RG fixed point), and the 
 
 - **TASEP** — current fluctuations of the 1D exclusion process; KPZ universality
 
+## `LeeYang` (1)
+
+- **YangLee** — Lee-Yang edge singularity; non-unitary minimal model M(5, 2), c = -22/5
+
 ## `MeanField` (1)
 
 - **CurieWeissIsing** — complete-graph (infinite-range) Ising; mean-field critical exponents
@@ -45,9 +49,10 @@ Which concrete models realize each universality class (RG fixed point), and the 
 
 - **TricriticalPotts3** — dilute q = 3 Potts model at criticality; M(6, 7) minimal model, c = 6/7
 
-## `XY` (3)
+## `XY` (4)
 
 - **DimerLattice** — close-packed dimer model; height representation is a c = 1 compact free boson (XY class)
+- **SSH** — critical line |v| = |w|; (1+1)D free Dirac fermion / XY class, c = 1
 - **SixVertex** — disordered phase |Δ| < 1; compact free boson (Luttinger liquid / XY class), c = 1
 - **XXZ1D** — critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1
 

@@ -20,6 +20,10 @@ Which concrete models realize each universality class (RG fixed point), and the 
 - **ZnClock** — n = 2 clock model; 2D classical Ising CFT, c = 1/2
 - **ZnParafermion** — n = 2 parafermions; (1+1)D Ising CFT, c = 1/2
 
+## `IsingSDRG` (1)
+
+- **TFIM** — strong-disorder limit / infinite-randomness fixed point (IRFP) under random bond/field couplings
+
 ## `KPZ` (1)
 
 - **TASEP** — current fluctuations of the 1D exclusion process; KPZ universality

@@ -93,10 +93,13 @@ using Test
 
     # 4. Test fetch for Universality{C} objects
     @testset "Universality class objects" begin
-        for c in [:Ising, :XY, :Heisenberg, :MeanField, :KPZ, :Potts3, :Potts4, :TricriticalIsing, :TricriticalPotts3, :LeeYang]
+        for c in [:Ising, :XY, :Heisenberg, :MeanField, :KPZ, :Potts3, :Potts4, :TricriticalIsing, :TricriticalPotts3, :LeeYang, :IsingSDRG]
             u = Universality(c)
             @test fetch(u, UniversalityClass(), Infinite()) === u
         end
+
+        # Test IsingSDRG Refael-Moore effective central charge
+        @test fetch(Universality(:IsingSDRG), CentralCharge(), Infinite()) ≈ log(2.0) / 2.0
     end
 end
 

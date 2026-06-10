@@ -14,6 +14,8 @@
 @realizes TFIM :Ising regime = "quantum critical point h = J; (1+1)D Ising CFT, c = 1/2" at = (
     m -> isapprox(m.h, m.J; atol=1e-10)
 ) example = TFIM(; J=1.0, h=1.0)
+@realizes TFIM :IsingSDRG regime = "strong-disorder limit / infinite-randomness fixed point (IRFP) under random bond/field couplings" references = ["Fisher1992", "Fisher1995", "RefaelMoore2004"]
+
 
 @realizes XXZ1D :XY regime = "critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1" at = (
     m -> -1 < m.Δ < 1
@@ -316,6 +318,15 @@
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :LeeYang"
+)
+@register(
+    Universality{:IsingSDRG},
+    UniversalityClass,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_class.jl",
+    notes="Universality class identity: :IsingSDRG"
 )
 
 

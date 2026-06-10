@@ -40,7 +40,7 @@ Currently registered fetches:
 | [`SpecificHeat`](@ref)     | `Infinite`         | Specific heat at finite temperature                                   |
 | [`FreeEnergy`](@ref)       | `Infinite`         | Free energy density at finite temperature                             |
 | [`ThermalEntropy`](@ref)   | `Infinite`         | Thermal entropy density at finite temperature                         |
-| [`UniversalityClass`](@ref) | `Infinite`         | `:Ising` universality class at the critical point `h = J`             |
+| [`UniversalityClass`](@ref) | `Infinite`         | `:Ising` universality class at the critical point `h = J` (flows to `:IsingSDRG` under strong disorder) |
 """
 struct TFIM <: AbstractQAtlasModel
     J::Float64

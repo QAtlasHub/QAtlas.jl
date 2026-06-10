@@ -70,6 +70,7 @@ clear message.
 | Class | ``d`` | ``c`` | Reference |
 |-------|-----|-----|-----------|
 | `Universality(:Ising)` | 2 | ``1/2`` | M(3,4) — Belavin–Polyakov–Zamolodchikov, Nucl. Phys. B 241, 333 (1984) |
+| `Universality(:IsingSDRG)` | 2 | ``\ln(2)/2`` | Strong-disorder renormalization group (SDRG) / infinite-randomness fixed point (IRFP) of 1D random TFIM — Refael–Moore, Phys. Rev. Lett. 93, 260602 (2004) |
 | `Universality(:Potts3)` | 2 | ``4/5`` | M(5,6) — Dotsenko, Nucl. Phys. B 235, 54 (1984) |
 | `Universality(:Potts4)` | 2 | ``1`` | Compact boson at marginal point — di Francesco–Mathieu–Sénéchal §12.3 |
 | `Universality(:XY)` | 2 | ``1`` | BKT free boson — Kosterlitz J. Phys. C 7, 1046 (1974) |

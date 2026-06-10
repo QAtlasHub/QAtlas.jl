@@ -24,11 +24,11 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBinding1D`**.  Cells link to 
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 3 |
+| 🟢 corroborated-at-p | 4 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **6** |
+| **total claimed hubs** | **7** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -40,6 +40,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBinding1D`**.  Cells link to 
 | [`FermiVelocity`](../quantities/FermiVelocity.md) | 🟢 [hub](../hubs/TightBinding1D_FermiVelocity_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |
+| [`NMRSpinRelaxationRate`](../quantities/NMRSpinRelaxationRate.md) | 🟢 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/TightBinding1D_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) |
 
@@ -52,6 +53,7 @@ Pages = []
 Canonical = false
 AshcroftMermin1976
 Coleman2015
+Korringa1950
 Mahan2000
 ```
 

@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 343 |
-| ED-feasible claimed (risk denominator) | 317 |
+| Hubs `src` claims (registry) | 344 |
+| ED-feasible claimed (risk denominator) | 318 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 184 |
+| 🟢 corroborated-at-p | 185 |
 | 🔵 coherent | 38 |
 | ⚪ cited-only (frontier — neutral) | 17 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 104 |
-| Inventory cards scanned (whole test/) | 2794 |
+| Inventory cards scanned (whole test/) | 2797 |
 | Registry files parsed | 74 / 74 |
 | Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **58.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **70.0%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **58.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **70.1%**
 
 ## Browse by facet
 
@@ -224,7 +224,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TFIM` | 55 | 0 | 36 | 8 | 0 | 11 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TightBinding1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
+| `TightBinding1D` | 7 | 0 | 4 | 0 | 0 | 3 | feasible |
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ToricCode` | 5 | 0 | 4 | 0 | 1 | 0 | infeasible |
@@ -238,7 +238,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (343) — select to drill down
+## Hubs (344) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -669,12 +669,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TTbar/CentralCharge/Infinite`](hubs/TTbar_CentralCharge_Infinite.md) — corroborated-at-p
 
-### `TightBinding1D` (6)
+### `TightBinding1D` (7)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md) — corroborated-at-p
 - 🟠 [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBinding1D/NMRSpinRelaxationRate/Infinite`](hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) — corroborated-at-p
 - 🟠 [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 

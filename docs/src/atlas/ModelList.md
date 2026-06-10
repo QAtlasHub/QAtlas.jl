@@ -60,7 +60,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TFIM`](models/TFIM.md) | `Ising` | 55 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 11 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`TightBinding1D`](models/TightBinding1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
+| [`TightBinding1D`](models/TightBinding1D.md) | — | 7 | `analytic` | 0 | 4 | 0 | 0 | 3 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@sweep` |
 | [`TodaLattice`](models/TodaLattice.md) | — | 1 | `linear_phonon` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ToricCode`](models/ToricCode.md) | — | 5 | `analytic` | 0 | 4 | 0 | 1 | 0 | infeasible | `@sweep` |
@@ -114,6 +114,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`MagnetizationZLocal`](quantities/MagnetizationZLocal.md) — 5 models
 - [`MassGap`](quantities/MassGap.md) — 26 models
 - [`MerminGHZBound`](quantities/MerminGHZBound.md) — 1 models
+- [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md) — 1 models
 - [`OptimalCloningFidelity`](quantities/OptimalCloningFidelity.md) — 1 models
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 3 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models

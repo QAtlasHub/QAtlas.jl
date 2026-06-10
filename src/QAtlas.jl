@@ -100,7 +100,13 @@ export Reduction, reduces!, @reduces, reductions, reduced_from  # model -> model
 export ModelCard, ABOUT, about!, @about, about  # model description cards
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
-export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility, LoschmidtEcho
+export Energy,
+    FreeEnergy,
+    SpecificHeat,
+    MassGap,
+    FidelitySusceptibility,
+    LoschmidtEcho,
+    NMRSpinRelaxationRate
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps

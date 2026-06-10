@@ -357,3 +357,73 @@ function fetch(
     )
     return _tb1d_thermo_infinite(:specific_heat, t, μ, beta)
 end
+
+function _tb1d_nmr_relaxation_infinite(t::Real, μ::Real, β::Real, η::Real)
+    integrand_outer =
+        k1 -> begin
+            ε1 = _tb1d_dispersion(k1, t, μ)
+            f1 = _tb1d_nF(β * ε1)
+            integrand_inner = k2 -> begin
+                ε2 = _tb1d_dispersion(k2, t, μ)
+                f2 = _tb1d_nF(β * ε2)
+                lorentz = η / (π * ((ε1 - ε2)^2 + η^2))
+                return f1 * (1.0 - f2) * lorentz
+            end
+            val_inner, _ = quadgk(integrand_inner, 0.0, π; rtol=1e-6)
+            return val_inner
+        end
+    val_outer, _ = quadgk(integrand_outer, 0.0, π; rtol=1e-6)
+    return val_outer / π^2
+end
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NMRSpinRelaxationRate at Infinite — per-site 1/T_1(β, η)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+"""
+    fetch(m::TightBinding1D, ::NMRSpinRelaxationRate, ::Infinite;
+          beta::Real, eta::Real=0.1, t=m.t, μ=m.μ, kwargs...) -> Float64
+
+Per-site NMR spin-lattice relaxation rate \$1/T_1\$ of the 1D non-interacting tight-binding
+chain at inverse temperature `β > 0`, in the Korringa golden-rule (contact-hyperfine,
+\$ω → 0\$) form — the \$q\$-summed dynamic structure factor \$S(q, ω→0)\$ broadened by a
+Lorentzian of width `η > 0`:
+
+    1/T_1(β, η) = 1/π³ ∫_0^π dk₁ ∫_0^π dk₂ f(ε(k₁)) (1 - f(ε(k₂))) η / ((ε(k₁) - ε(k₂))² + η²)
+
+where `ε(k) = -2t cos k - μ` and `f` is the Fermi function.
+
+!!! note "η is a physical regulator, not a removable artifact"
+    In a 1D band the energy-conserving (\$η → 0⁺\$) δ-function is cut off by the
+    inverse-square-root van Hove singularities at the band edges, so the bare Korringa
+    rate is **η-dependent**: this quantity is registered as `status=:approx` and is
+    reported at finite `η` (default `0.1`). It is *not* the canonical 3D metallic
+    Korringa law `1/T_1 ∝ T`; see Korringa (1950) for that limit. The value is verified
+    against an independent discrete N-mode \$k\$-sum and the \$β → 0\$ ¼-factorisation
+    `1/T_1 → ¼ · (η-broadened phase space)`.
+"""
+function fetch(
+    m::TightBinding1D,
+    ::NMRSpinRelaxationRate,
+    ::Infinite;
+    beta::Real,
+    eta::Real=0.1,
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 || throw(
+        DomainError(t, "TightBinding1D NMRSpinRelaxationRate requires t > 0; got t = \$t."),
+    )
+    beta > 0 || throw(
+        DomainError(
+            beta, "TightBinding1D NMRSpinRelaxationRate requires β > 0; got β = \$beta."
+        ),
+    )
+    eta > 0 || throw(
+        DomainError(
+            eta, "TightBinding1D NMRSpinRelaxationRate requires η > 0; got η = \$eta."
+        ),
+    )
+    return _tb1d_nmr_relaxation_infinite(t, μ, beta, eta)
+end

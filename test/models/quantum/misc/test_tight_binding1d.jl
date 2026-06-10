@@ -354,7 +354,7 @@ end
         # 1. Ground state Energy: check PBC and OBC energy per site convergence to Infinite
         m = TightBinding1D(; t=1.0, μ=0.5)
         e_inf = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
-        
+
         # As N increases, finite PBC/OBC energies per site should converge to e_inf
         e_pbc_100 = QAtlas.fetch(m, Energy{:per_site}(), PBC(100))
         e_obc_100 = QAtlas.fetch(m, Energy{:per_site}(), OBC(100))

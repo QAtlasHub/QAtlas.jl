@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 139 hubs
+## `analytic` - 153 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -115,15 +115,28 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TFIM/MagnetizationY/OBC`](hubs/TFIM_MagnetizationY_OBC.md)
 - 🟢 [`TFIM/MagnetizationZ/Infinite`](hubs/TFIM_MagnetizationZ_Infinite.md)
 - 🟢 [`TFIM/MassGap/Infinite`](hubs/TFIM_MassGap_Infinite.md)
+- 🟠 [`TFIM/NMRRelaxationExponent/Infinite`](hubs/TFIM_NMRRelaxationExponent_Infinite.md)
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md)
 - 🟢 [`TTbar/CentralCharge/Infinite`](hubs/TTbar_CentralCharge_Infinite.md)
 - 🟢 [`TightBinding1D/Energy/Infinite`](hubs/TightBinding1D_Energy_Infinite.md)
+- 🟠 [`TightBinding1D/Energy/OBC`](hubs/TightBinding1D_Energy_OBC.md)
+- 🟠 [`TightBinding1D/Energy/PBC`](hubs/TightBinding1D_Energy_PBC.md)
 - 🟢 [`TightBinding1D/FermiVelocity/Infinite`](hubs/TightBinding1D_FermiVelocity_Infinite.md)
 - 🟠 [`TightBinding1D/FreeEnergy/Infinite`](hubs/TightBinding1D_FreeEnergy_Infinite.md)
+- 🟠 [`TightBinding1D/FreeEnergy/OBC`](hubs/TightBinding1D_FreeEnergy_OBC.md)
+- 🟠 [`TightBinding1D/FreeEnergy/PBC`](hubs/TightBinding1D_FreeEnergy_PBC.md)
 - 🟢 [`TightBinding1D/MassGap/Infinite`](hubs/TightBinding1D_MassGap_Infinite.md)
+- 🟠 [`TightBinding1D/MassGap/OBC`](hubs/TightBinding1D_MassGap_OBC.md)
+- 🟠 [`TightBinding1D/MassGap/PBC`](hubs/TightBinding1D_MassGap_PBC.md)
 - 🟢 [`TightBinding1D/NMRSpinRelaxationRate/Infinite`](hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md)
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/OBC`](hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md)
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/PBC`](hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md)
 - 🟠 [`TightBinding1D/SpecificHeat/Infinite`](hubs/TightBinding1D_SpecificHeat_Infinite.md)
+- 🟠 [`TightBinding1D/SpecificHeat/OBC`](hubs/TightBinding1D_SpecificHeat_OBC.md)
+- 🟠 [`TightBinding1D/SpecificHeat/PBC`](hubs/TightBinding1D_SpecificHeat_PBC.md)
 - 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](hubs/TightBinding1D_ThermalEntropy_Infinite.md)
+- 🟠 [`TightBinding1D/ThermalEntropy/OBC`](hubs/TightBinding1D_ThermalEntropy_OBC.md)
+- 🟠 [`TightBinding1D/ThermalEntropy/PBC`](hubs/TightBinding1D_ThermalEntropy_PBC.md)
 - 🟢 [`TightBindingV1D/Energy/Infinite`](hubs/TightBindingV1D_Energy_Infinite.md)
 - 🟢 [`TightBindingV1D/FermiVelocity/Infinite`](hubs/TightBindingV1D_FermiVelocity_Infinite.md)
 - 🟠 [`TightBindingV1D/FreeEnergy/Infinite`](hubs/TightBindingV1D_FreeEnergy_Infinite.md)
@@ -145,6 +158,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](hubs/XXZ1D_LuttingerParameter_Infinite.md)
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](hubs/XXZ1D_LuttingerVelocity_Infinite.md)
 - 🟢 [`XXZ1D/MassGap/Infinite`](hubs/XXZ1D_MassGap_Infinite.md)
+- 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](hubs/XXZ1D_NMRRelaxationExponent_Infinite.md)
 - 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
 - 🟠 [`XYh1D/MassGap/PBC`](hubs/XYh1D_MassGap_PBC.md)
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](hubs/ZnParafermion_CentralCharge_Infinite.md)
@@ -208,7 +222,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](hubs/XXZ1D_ThermalEntropy_OBC.md)
 - 🟢 [`XXZ1D/VonNeumannEntropy/OBC`](hubs/XXZ1D_VonNeumannEntropy_OBC.md)
 
-## `bdg` - 47 hubs
+## `bdg` - 49 hubs
 
 - 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
 - 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
@@ -232,6 +246,8 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](hubs/TFIM_MagnetizationZLocal_OBC.md)
 - 🟢 [`TFIM/MassGap/OBC`](hubs/TFIM_MassGap_OBC.md)
 - 🟠 [`TFIM/MassGap/PBC`](hubs/TFIM_MassGap_PBC.md)
+- 🟠 [`TFIM/NMRSpinRelaxationRate/Infinite`](hubs/TFIM_NMRSpinRelaxationRate_Infinite.md)
+- 🟠 [`TFIM/NMRSpinRelaxationRate/OBC`](hubs/TFIM_NMRSpinRelaxationRate_OBC.md)
 - 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md)
 - 🔵 [`TFIM/SpecificHeat/Infinite`](hubs/TFIM_SpecificHeat_Infinite.md)
 - 🟢 [`TFIM/SpecificHeat/OBC`](hubs/TFIM_SpecificHeat_OBC.md)

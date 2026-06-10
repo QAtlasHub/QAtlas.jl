@@ -58,9 +58,9 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`SixVertex`](models/SixVertex.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`TFIM`](models/TFIM.md) | `Ising` | 55 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 11 | feasible | `@critical`, `@disordered`, `@ordered` |
+| [`TFIM`](models/TFIM.md) | `Ising` | 58 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 14 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`TightBinding1D`](models/TightBinding1D.md) | — | 7 | `analytic` | 0 | 4 | 0 | 0 | 3 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
+| [`TightBinding1D`](models/TightBinding1D.md) | — | 19 | `analytic` | 0 | 4 | 0 | 0 | 15 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@sweep` |
 | [`TodaLattice`](models/TodaLattice.md) | — | 1 | `linear_phonon` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`ToricCode`](models/ToricCode.md) | — | 5 | `analytic` | 0 | 4 | 0 | 1 | 0 | infeasible | `@sweep` |
@@ -68,7 +68,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 3 | `analytic` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
-| [`XXZ1D`](models/XXZ1D.md) | — | 29 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 17 | 5 | 0 | 7 | feasible | `@fm`, `@free_fermion`, `@gapless` |
+| [`XXZ1D`](models/XXZ1D.md) | — | 30 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 18 | 5 | 0 | 7 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
@@ -114,7 +114,8 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`MagnetizationZLocal`](quantities/MagnetizationZLocal.md) — 5 models
 - [`MassGap`](quantities/MassGap.md) — 26 models
 - [`MerminGHZBound`](quantities/MerminGHZBound.md) — 1 models
-- [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md) — 1 models
+- [`NMRRelaxationExponent`](quantities/NMRRelaxationExponent.md) — 2 models
+- [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md) — 2 models
 - [`OptimalCloningFidelity`](quantities/OptimalCloningFidelity.md) — 1 models
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 3 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models

@@ -354,8 +354,12 @@ end
 
     # 3. Gapped regime (h = 1.5, J = 1.0, gap Δ = 1.0): exponentially suppressed at low-T
     m_gap = TFIM(; J=1.0, h=1.5)
-    rate_gap_low = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1)
-    rate_gap_lower = QAtlas.fetch(m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1)
+    rate_gap_low = QAtlas.fetch(
+        m_gap, NMRSpinRelaxationRate(), Infinite(); beta=10.0, eta=0.1
+    )
+    rate_gap_lower = QAtlas.fetch(
+        m_gap, NMRSpinRelaxationRate(), Infinite(); beta=20.0, eta=0.1
+    )
     @test rate_gap_lower < rate_gap_low * 0.1
 
     # 4. OBC NMRSpinRelaxationRate tests
@@ -367,9 +371,7 @@ end
         @test isapprox(rate_obc, rate_inf; atol=5e-3)
 
         # DomainError check
-        @test_throws DomainError QAtlas.fetch(
-            m, NMRSpinRelaxationRate(), OBC(10); beta=0.0
-        )
+        @test_throws DomainError QAtlas.fetch(m, NMRSpinRelaxationRate(), OBC(10); beta=0.0)
         @test_throws DomainError QAtlas.fetch(
             m, NMRSpinRelaxationRate(), OBC(10); beta=1.0, eta=-0.1
         )

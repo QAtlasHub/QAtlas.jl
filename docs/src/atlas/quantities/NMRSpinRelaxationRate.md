@@ -13,18 +13,20 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 1
-- **Total hubs (Model, BC pairs)**: 1
-- **Methods** (derived from `@register`): `analytic`
-- **Universality classes** (where applicable): —
+- **Models with this quantity registered**: 2
+- **Total hubs (Model, BC pairs)**: 5
+- **Methods** (derived from `@register`): `analytic`, `bdg`
+- **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
-- Korringa1950 — 1 hub
+- Korringa1950 — 3 hubs
+- Sachdev1997 — 2 hubs
 
 ## Model × BC matrix
 
-| Model | `Infinite` |
-|---|---|
-| [`TightBinding1D`](../models/TightBinding1D.md) | 🟢 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) |
+| Model | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_NMRSpinRelaxationRate_OBC.md) | — | 🟠 [hub](../hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) |
+| [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

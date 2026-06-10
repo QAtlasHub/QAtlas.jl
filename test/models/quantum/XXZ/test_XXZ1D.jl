@@ -79,7 +79,8 @@ end
     @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=0.0), NMRRelaxationExponent(), Infinite()) ≈ -0.5 atol =
         1e-12
     # Δ = 1 (K = 0.5, Heisenberg) ⇒ θ_NMR = 1/(2K) - 1 = 0.0 (constant, up to logs)
-    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), NMRRelaxationExponent(), Infinite()) ≈ 0.0 atol = 1e-12
+    @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), NMRRelaxationExponent(), Infinite()) ≈ 0.0 atol =
+        1e-12
 
     # Outside critical regime: returns NaN + warn
     @test isnan(

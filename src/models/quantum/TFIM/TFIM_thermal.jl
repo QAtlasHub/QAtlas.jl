@@ -110,8 +110,12 @@ function _tfim_thermo_infinite(quantity::Symbol, J::Real, h::Real, β::Real; kwa
         end
     elseif quantity === :nmr_relaxation
         eta = Float64(get(kwargs, :eta, 0.1))
-        eta > 0 || throw(DomainError(eta, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $eta."))
-        β > 0 || throw(DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β."))
+        eta > 0 || throw(
+            DomainError(eta, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $eta."),
+        )
+        β > 0 || throw(
+            DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β.")
+        )
         return _tfim_nmr_relaxation_infinite(J, h, β, eta)
     else
         error("Unknown thermal quantity: $quantity")
@@ -133,18 +137,20 @@ function _tfim_thermo_infinite(quantity::Symbol, J::Real, h::Real, β::Real; kwa
 end
 
 function _tfim_nmr_relaxation_infinite(J::Real, h::Real, β::Real, η::Real)
-    integrand_outer = k1 -> begin
-        λ1 = _tfim_dispersion(k1, J, h)
-        f1 = λ1 > 0 ? exp(-β * λ1) / (1.0 + exp(-β * λ1)) : 0.5
-        integrand_inner = k2 -> begin
-            λ2 = _tfim_dispersion(k2, J, h)
-            f2 = λ2 > 0 ? exp(-β * λ2) / (1.0 + exp(-β * λ2)) : 0.5
-            lorentz = η / (π * ((λ1 - λ2)^2 + η^2))
-            return f1 * (1.0 - f2) * lorentz
+    integrand_outer =
+        k1 -> begin
+            λ1 = _tfim_dispersion(k1, J, h)
+            f1 = λ1 > 0 ? exp(-β * λ1) / (1.0 + exp(-β * λ1)) : 0.5
+            integrand_inner =
+                k2 -> begin
+                    λ2 = _tfim_dispersion(k2, J, h)
+                    f2 = λ2 > 0 ? exp(-β * λ2) / (1.0 + exp(-β * λ2)) : 0.5
+                    lorentz = η / (π * ((λ1 - λ2)^2 + η^2))
+                    return f1 * (1.0 - f2) * lorentz
+                end
+            val_inner, _ = quadgk(integrand_inner, 0.0, π; rtol=1e-6)
+            return val_inner
         end
-        val_inner, _ = quadgk(integrand_inner, 0.0, π; rtol=1e-6)
-        return val_inner
-    end
     val_outer, _ = quadgk(integrand_outer, 0.0, π; rtol=1e-6)
     return val_outer / π^2
 end
@@ -163,7 +169,9 @@ The transverse magnetisation and its susceptibility require the full
 single-particle Bogoliubov coefficients, not just the spectrum, so this routine
 diagonalises the BdG matrix internally to obtain them.
 """
-function _tfim_thermo_obc(quantity::Symbol, N::Int, J::Float64, h::Float64, β::Real; kwargs...)
+function _tfim_thermo_obc(
+    quantity::Symbol, N::Int, J::Float64, h::Float64, β::Real; kwargs...
+)
     if quantity === :free_energy
         Λ = _tfim_bdg_spectrum(N, J, h)
         # f/N = -(1/Nβ) Σ log(2 cosh(βΛ/2))
@@ -184,8 +192,11 @@ function _tfim_thermo_obc(quantity::Symbol, N::Int, J::Float64, h::Float64, β::
         return _tfim_transverse_obc(quantity, N, J, h, β)
     elseif quantity === :nmr_relaxation
         eta = Float64(get(kwargs, :eta, 0.1))
-        eta > 0 || throw(DomainError(eta, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $eta."))
-        β > 0 || throw(DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β."))
+        eta > 0 || throw(
+            DomainError(eta, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $eta.")
+        )
+        β > 0 ||
+            throw(DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β."))
         Λ = _tfim_bdg_spectrum(N, J, h)
         s = 0.0
         for λ1 in Λ
@@ -293,9 +304,12 @@ for (QTy, qsym) in _TFIM_THERMAL_METHODS
             beta::Real,
             kwargs...,
         )
-            scheme === :canonical &&
-                return _tfim_thermo_infinite($(QuoteNode(qsym)), model.J, model.h, beta; kwargs...)
-            return _tfim_thermo_infinite_scheme(model, $QTy(), Val(scheme); beta=beta, kwargs...)
+            scheme === :canonical && return _tfim_thermo_infinite(
+                $(QuoteNode(qsym)), model.J, model.h, beta; kwargs...
+            )
+            return _tfim_thermo_infinite_scheme(
+                model, $QTy(), Val(scheme); beta=beta, kwargs...
+            )
         end
 
         """
@@ -307,7 +321,9 @@ for (QTy, qsym) in _TFIM_THERMAL_METHODS
         """
         function fetch(model::TFIM, ::$QTy, bc::OBC; beta::Real, kwargs...)
             N = _bc_size(bc, kwargs)
-            return _tfim_thermo_obc($(QuoteNode(qsym)), N, model.J, model.h, beta; kwargs...)
+            return _tfim_thermo_obc(
+                $(QuoteNode(qsym)), N, model.J, model.h, beta; kwargs...
+            )
         end
     end
 end

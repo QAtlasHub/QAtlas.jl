@@ -439,7 +439,7 @@ end
 
 function _tb1d_pbc_spectrum(N::Int, t::Real, μ::Real)
     # ε_n = -2t cos(2nπ / N) - μ, for n = 0,...,N-1
-    return [-2 * t * cos(2 * n * π / N) - μ for n in 0:(N-1)]
+    return [-2 * t * cos(2 * n * π / N) - μ for n in 0:(N - 1)]
 end
 
 function _tb1d_energy_finite(eigenvalues::AbstractVector{<:Real})
@@ -447,7 +447,9 @@ function _tb1d_energy_finite(eigenvalues::AbstractVector{<:Real})
     return sum(ε -> ε ≤ 0 ? ε : 0.0, eigenvalues)
 end
 
-function _tb1d_thermo_finite(quantity::Symbol, eigenvalues::AbstractVector{<:Real}, β::Real; kwargs...)
+function _tb1d_thermo_finite(
+    quantity::Symbol, eigenvalues::AbstractVector{<:Real}, β::Real; kwargs...
+)
     N = length(eigenvalues)
     if quantity === :free_energy
         return -sum(ε -> _tb1d_log1pexp(-β * ε), eigenvalues) / (N * β)
@@ -464,7 +466,12 @@ function _tb1d_thermo_finite(quantity::Symbol, eigenvalues::AbstractVector{<:Rea
         end * (β^2 / N)
     elseif quantity === :nmr_relaxation
         eta = Float64(get(kwargs, :eta, 0.1))
-        eta > 0 || throw(DomainError(eta, "TightBinding1D NMRSpinRelaxationRate requires η > 0; got η = $eta."))
+        eta > 0 || throw(
+            DomainError(
+                eta,
+                "TightBinding1D NMRSpinRelaxationRate requires η > 0; got η = $eta.",
+            ),
+        )
         s = 0.0
         for ε1 in eigenvalues
             f1 = _tb1d_nF(β * ε1)
@@ -486,7 +493,12 @@ end
 
 # ── OBC / PBC energy ──
 function fetch(
-    m::TightBinding1D, ::Energy{:total}, bc::Union{OBC, PBC}; t::Real=m.t, μ::Real=m.μ, kwargs...
+    m::TightBinding1D,
+    ::Energy{:total},
+    bc::Union{OBC,PBC};
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
 )
     t > 0 || throw(DomainError(t, "TightBinding1D Energy requires t > 0; got t = $t."))
     N = _bc_size(bc, kwargs)
@@ -495,7 +507,12 @@ function fetch(
 end
 
 function fetch(
-    m::TightBinding1D, ::Energy{:per_site}, bc::Union{OBC, PBC}; t::Real=m.t, μ::Real=m.μ, kwargs...
+    m::TightBinding1D,
+    ::Energy{:per_site},
+    bc::Union{OBC,PBC};
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
 )
     t > 0 || throw(DomainError(t, "TightBinding1D Energy requires t > 0; got t = $t."))
     N = _bc_size(bc, kwargs)
@@ -505,7 +522,7 @@ end
 
 # ── OBC / PBC one-particle gap ──
 function fetch(
-    m::TightBinding1D, ::MassGap, bc::Union{OBC, PBC}; t::Real=m.t, μ::Real=m.μ, kwargs...
+    m::TightBinding1D, ::MassGap, bc::Union{OBC,PBC}; t::Real=m.t, μ::Real=m.μ, kwargs...
 )
     t > 0 || throw(DomainError(t, "TightBinding1D MassGap requires t > 0; got t = $t."))
     N = _bc_size(bc, kwargs)
@@ -526,16 +543,26 @@ for (QTy, qsym) in _TB1D_THERMAL_QUANTITIES
         function fetch(
             m::TightBinding1D,
             ::$QTy,
-            bc::Union{OBC, PBC};
+            bc::Union{OBC,PBC};
             beta::Real,
             t::Real=m.t,
             μ::Real=m.μ,
             kwargs...,
         )
-            t > 0 || throw(DomainError(t, "TightBinding1D $($(string(QTy))) requires t > 0; got t = $t."))
-            beta > 0 || throw(DomainError(beta, "TightBinding1D $($(string(QTy))) requires β > 0; got β = $beta."))
+            t > 0 || throw(
+                DomainError(
+                    t, "TightBinding1D $($(string(QTy))) requires t > 0; got t = $t."
+                ),
+            )
+            beta > 0 || throw(
+                DomainError(
+                    beta,
+                    "TightBinding1D $($(string(QTy))) requires β > 0; got β = $beta.",
+                ),
+            )
             N = _bc_size(bc, kwargs)
-            eigenvalues = bc isa OBC ? _tb1d_obc_spectrum(N, t, μ) : _tb1d_pbc_spectrum(N, t, μ)
+            eigenvalues =
+                bc isa OBC ? _tb1d_obc_spectrum(N, t, μ) : _tb1d_pbc_spectrum(N, t, μ)
             return _tb1d_thermo_finite($(QuoteNode(qsym)), eigenvalues, beta; kwargs...)
         end
     end

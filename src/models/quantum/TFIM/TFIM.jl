@@ -397,7 +397,8 @@ function fetch(model::TFIM, ::NMRRelaxationExponent, ::Infinite; kwargs...)
     if abs(model.h - model.J) ≤ 1e-6
         return -0.75
     else
-        @warn "TFIM NMRRelaxationExponent is only defined at the quantum critical point h = J." h = model.h J = model.J
+        @warn "TFIM NMRRelaxationExponent is only defined at the quantum critical point h = J." h =
+            model.h J = model.J
         return NaN
     end
 end

@@ -255,7 +255,8 @@ susceptibility, whose operator has scaling dimension `Δ_op = 1/(4K)`, so
 function fetch(model::XXZ1D, ::NMRRelaxationExponent, ::Infinite; kwargs...)
     K = fetch(model, LuttingerParameter(), Infinite(); kwargs...)
     if isnan(K)
-        @warn "XXZ1D NMRRelaxationExponent is only defined in the critical Luttinger liquid regime -1 < Δ ≤ 1." Δ = model.Δ
+        @warn "XXZ1D NMRRelaxationExponent is only defined in the critical Luttinger liquid regime -1 < Δ ≤ 1." Δ =
+            model.Δ
         return NaN
     end
     return 1.0 / (2 * K) - 1.0

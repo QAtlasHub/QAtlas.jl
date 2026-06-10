@@ -14,16 +14,16 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 ## Coverage
 
 - **Models with this quantity registered**: 26
-- **Total hubs (Model, BC pairs)**: 34
+- **Total hubs (Model, BC pairs)**: 36
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `quadgk`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- AshcroftMermin1976 — 4 hubs
 - LiebSchultzMattis1961 — 4 hubs
 - Pfeuty1970 — 4 hubs
 - Hulthen1938 — 3 hubs
 - Kitaev2006 — 3 hubs
-- WhiteHuse1993 — 3 hubs
 
 ## Model × BC matrix
 
@@ -51,7 +51,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`ShastrySutherland`](../models/ShastrySutherland.md) | — | — | 🟠 [hub](../hubs/ShastrySutherland_Energy_Infinite.md) |
 | [`SherringtonKirkpatrick`](../models/SherringtonKirkpatrick.md) | — | — | ⚪ [hub](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
-| [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
+| [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_Energy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_Energy_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟢 [hub](../hubs/TightBindingV1D_Energy_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/XXZ1D_Energy_Infinite.md) |
 | [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_Energy_Infinite.md) |

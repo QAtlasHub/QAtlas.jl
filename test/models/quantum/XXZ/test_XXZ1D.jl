@@ -82,9 +82,11 @@ end
     @test QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), NMRRelaxationExponent(), Infinite()) ≈ 0.0 atol =
         1e-12
 
-    # Outside critical regime: returns NaN + warn
+    # Outside critical regime: returns NaN + warn.  The exponent delegates to
+    # LuttingerParameter, which emits its own out-of-range :warn first, so use
+    # match_mode=:any to assert our warning appears among the logs.
     @test isnan(
-        @test_logs (:warn, r"critical Luttinger liquid regime") QAtlas.fetch(
+        @test_logs (:warn, r"critical Luttinger liquid regime") match_mode = :any QAtlas.fetch(
             XXZ1D(; J=1.0, Δ=1.5), NMRRelaxationExponent(), Infinite()
         )
     )

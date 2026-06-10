@@ -31,7 +31,7 @@ const ε_isotropic_TL = -0.7872986216706852
 end
 
 @testset "KitaevHoneycomb: PBC finite-size scaling → TL (Kx=Ky=Kz=1)" begin
-    # Per `md/testing.md` §4 (limit tests): verify the discrete Bloch sum
+    # Limit-case test (see rules/verification.md): verify the discrete Bloch sum
     # converges to the TL value with tightening tolerance as `L` grows.
     m = KitaevHoneycomb(; Kx=1.0, Ky=1.0, Kz=1.0)
     E_TL = QAtlas.fetch(m, Energy(), Infinite())

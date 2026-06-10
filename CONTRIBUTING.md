@@ -6,6 +6,11 @@ Thank you for your interest in contributing to QAtlas! This guide describes how 
 
 QAtlas is a **dictionary of rigorous results in quantum and statistical physics**. It stores analytically-known exact values in `src/` and cross-validates them against independent numerical / closed-form sources in `test/`. The core value proposition is that every stored result is checked against at least one *theoretically independent* derivation.
 
+> **The checklist-grade implementation rules live in [`rules/`](rules/README.md).** Three non-negotiables:
+> 1. **Every value is independently verified** — a `verify(...)` card reproduces it by a theoretically distinct route ([rules/verification.md](rules/verification.md)).
+> 2. **Every value cites a precise DOI, checked against the paper** — download it with `doiget` and confirm the published value in the paper's own conventions before implementing ([rules/citations.md](rules/citations.md)).
+> 3. **Regenerate the atlas + format before every PR** ([rules/pre-pr-checklist.md](rules/pre-pr-checklist.md)).
+
 ## Design Principles
 
 ### `src/` is a leaf — no lattice-package dependencies
@@ -22,7 +27,7 @@ A value in `src/` is only considered rigorous once it has been **independently v
 
 ### Every numerical value traces to a derivation
 
-For each new rigorous result, the accompanying `docs/src/calc/` derivation must be complete and step-by-step (see [md/docs-conventions.md](md/docs-conventions.md)). Forbidden phrases such as "it can be shown" / "we omit details" / "standard calculation gives" must not appear.
+For each new rigorous result, the accompanying `docs/src/calc/` derivation must be complete and step-by-step (see [rules/documentation.md](rules/documentation.md)). Forbidden phrases such as "it can be shown" / "we omit details" / "standard calculation gives" must not appear.
 
 ## Repository Structure
 
@@ -83,8 +88,12 @@ docs/
     ├── conventions.md                  # Sign / S / occupation conventions — REQUIRED READ
     └── atlas/                          # Auto-generated hub pages (do NOT hand-edit)
 
-md/                                     # Dev memos (Japanese OK, not published)
-└── docs-conventions.md                 # Derivation depth standard
+rules/                                  # Checklist-grade implementation rules — READ THESE
+├── citations.md                        #   DOI policy + doiget literature cross-check
+├── verification.md                     #   verify cards, independent routes
+├── registry-conventions.md             #   @register, status axis, scheme=, CONVENTION header
+├── documentation.md                    #   per-model @autodocs, generate.jl, @ref web, derivation depth
+└── pre-pr-checklist.md                 #   format, atlas regen, version, docs build, gotchas
 ```
 
 ## The model API
@@ -170,6 +179,8 @@ Conventions:
 
 The registry is consumed by `docs/atlas/generate.jl` to auto-generate `docs/src/atlas/hubs/<Model>_<Quantity>_<BC>.md` and the inventory drift guard.
 
+A row also carries a `status` (the 4-value axis `:exact` / `:approx` / `:bound` / `:universal`, orthogonal to `reliability`). A `:approx` row (e.g. a high-temperature series) **requires** a `valid_domain` and usually an `error_order`, and is a second `scheme=…, canonical=false` definition of a hub whose canonical row stays exact — `fetch(m, q, bc; scheme=…)` selects it. See [rules/registry-conventions.md](rules/registry-conventions.md) for the `status`/`scheme=` rules and the `@eval`-method-loop caveat.
+
 #### 3. The CONVENTION header
 
 Every model source file must declare its sign / spin / occupation convention near the top:
@@ -245,6 +256,7 @@ Critical properties:
 - The `subject` is **fetched inside** `verify` — you cannot pre-compute it on the caller side and pass it in. This prevents tautological cards.
 - The `independent` value must be derivable **without** running the same code path as `fetch`. Re-deriving the same integral with the same `quadgk` call is *not* independent.
 - Cite the source of the `independent` value in `refs` precisely (paper + equation / page).
+- For a **literature** `independent` value, get it from the paper itself: download with `doiget`, read the published number in the paper's own conventions, and anchor one clean coefficient to the code. A self-derivation cannot catch a convention error (spin normalisation, sign, per-site vs per-bond). See [rules/citations.md](rules/citations.md).
 - Tolerance `agree_within` is **absolute**. For relative tolerance against a value `x`, pass `agree_within = abs(x) * rtol`.
 
 Limit-only cards (when there is no second closed form) use `route=:limiting_case` and cite the limit:
@@ -330,7 +342,7 @@ H = build_tight_binding(lat, t)
 
 ## Documentation
 
-Writing a new `docs/src/calc/` note? First read [md/docs-conventions.md](md/docs-conventions.md). The depth standard is enforced by:
+Writing a new `docs/src/calc/` note? First read [rules/documentation.md](rules/documentation.md). The depth standard is enforced by:
 
 - grep check: zero matches for `it can be shown`, `we omit`, `standard calculation`, `one can verify`, `it is easy to see`, `it follows immediately`.
 - Structure: `## Main result`, `## Setup`, `## Calculation`, `## References`, `## Used by` — in that order.
@@ -338,9 +350,15 @@ Writing a new `docs/src/calc/` note? First read [md/docs-conventions.md](md/docs
 
 Exemplars: [docs/src/calc/jw-tfim-bdg.md](docs/src/calc/jw-tfim-bdg.md), [docs/src/calc/bethe-ansatz-heisenberg-e0.md](docs/src/calc/bethe-ansatz-heisenberg-e0.md).
 
-Public docs (`docs/src/`) are **English only**. Dev memos under `md/` may be Japanese.
+Public docs (`docs/src/`), `rules/`, and `CONTRIBUTING.md` are **English only**.
 
 `docs/src/atlas/*` is auto-generated — **do not hand-edit**. To change the rendering, edit `docs/atlas/generate.jl` and regenerate.
+
+### Docs architecture (api.md + per-model `@autodocs`)
+
+`docs/src/api.md` is a hand-written **framework reference** (Registry / Model / Quantity, scoped to the `core/` source files). It is *not* a full symbol dump. Each model's `fetch(::Model, …)` docstrings are rendered on **that model's own page**, via an `@autodocs` block that `docs/atlas/generate.jl` injects between `<!-- ATLAS:DOCS:START/END -->` markers (scoped to the model's source directory). So `fetch` documentation stays in lock-step with `@register`, on the model where it lives.
+
+Because QAtlas docstrings are densely cross-linked with `` [`X`](@ref) ``, `make.jl` sets `checkdocs=:none` (curated per page, not one index) but still checks cross-references and doctests strictly. When you write `` [`X`](@ref) ``, ensure `X` is rendered somewhere — a framework symbol on `api.md`, a model symbol on its page; an **internal / non-exported** symbol must be plain `` `X` ``, not an `@ref`. See [rules/documentation.md](rules/documentation.md).
 
 ## CI gates
 

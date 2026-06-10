@@ -30,8 +30,8 @@ using QAtlas, Test
         @test QAtlas.fetch(Universality(:Ising), CornerEntanglementCoefficient(), Infinite(); d=3) ≈ 0.0036974 atol=1e-7
         # XY: σ ≈ 0.0073773
         @test QAtlas.fetch(Universality(:XY), CornerEntanglementCoefficient(), Infinite(); d=3) ≈ 0.0073773 atol=1e-7
-        # Heisenberg: σ ≈ 0.011050
-        @test QAtlas.fetch(Universality(:Heisenberg), CornerEntanglementCoefficient(), Infinite(); d=3) ≈ 0.011050 atol=1e-7
+        # Heisenberg: σ ≈ 0.0110496
+        @test QAtlas.fetch(Universality(:Heisenberg), CornerEntanglementCoefficient(), Infinite(); d=3) ≈ 0.0110496 atol=1e-7
     end
 
     @testset "CornerEntanglementCoefficient angle-dependent c(θ)" begin

@@ -69,9 +69,17 @@ using Test
         tfim_gapped = TFIM(; J=1.0, h=2.0)
         @test_throws DomainError fetch(tfim_gapped, UniversalityClass(), Infinite())
 
-        # XXZ1D off-critical (Δ > 1 or Δ <= -1)
+        # XXZ1D off-critical (Δ > 1)
         xxz_gapped = XXZ1D(; Δ=2.0)
         @test_throws DomainError fetch(xxz_gapped, UniversalityClass(), Infinite())
+
+        # XXZ1D at ferromagnetic Heisenberg point Δ = -1 (FM ordered, not critical)
+        xxz_fm_boundary = XXZ1D(; Δ=-1.0)
+        @test_throws DomainError fetch(xxz_fm_boundary, UniversalityClass(), Infinite())
+
+        # XXZ1D in FM gapped regime Δ < -1
+        xxz_fm_gapped = XXZ1D(; Δ=-2.0)
+        @test_throws DomainError fetch(xxz_fm_gapped, UniversalityClass(), Infinite())
 
         # Kitaev1D off-critical (|μ| != 2|t|)
         kitaev_gapped = Kitaev1D(; μ=3.0, t=1.0, Δ=1.0)

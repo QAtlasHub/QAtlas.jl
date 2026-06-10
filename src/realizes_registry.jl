@@ -71,7 +71,7 @@
     m -> isapprox(abs(m.v), abs(m.w); atol=1e-10)
 ) example = SSH(; v=1.0, w=1.0) references = ["SSH1979"]
 
-@realizes YangLee :LeeYang regime = "Lee-Yang edge singularity; non-unitary minimal model M(5, 2), c = -22/5" references = ["Cardy1984"]
+@realizes YangLee :LeeYang regime = "Lee-Yang edge singularity; non-unitary minimal model M(5, 2), c = -22/5" references = ["Cardy1985"]
 
 # ─── UniversalityClass registrations (Edges) ───────────────────────────
 @register(

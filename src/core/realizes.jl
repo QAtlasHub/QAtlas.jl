@@ -143,13 +143,26 @@ function fetch(
 
     has_locus_predicates = any(r -> r.at !== nothing, entries)
     if has_locus_predicates
-        throw(DomainError(model, "Model instance is not at any critical locus (off-critical/gapped)."))
+        regimes = join(
+            [string("  class=:", r.class, ", regime=\"", r.regime, "\"") for r in entries if r.at !== nothing],
+            "\n",
+        )
+        throw(DomainError(
+            model,
+            string(m_T, " is not at any registered critical locus (off-critical/gapped).\n",
+                   "Current parameters: ", model, "\n",
+                   "Registered critical loci for ", m_T, ":\n", regimes),
+        ))
     end
 
     if length(entries) == 1
         return Universality(entries[1].class)
     else
-        throw(DomainError(model, "Model has multiple realization entries and no critical locus is active/specified."))
+        throw(DomainError(
+            model,
+            string(m_T, " has multiple realization entries but none has an `at` predicate ",
+                   "to identify the active critical locus. Got: ", model, "."),
+        ))
     end
 end
 

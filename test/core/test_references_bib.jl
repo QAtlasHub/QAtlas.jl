@@ -116,3 +116,6 @@ end
     end
     @test dead_allow == String[]
 end
+# NOTE (Issue #696): test_references_bib.jl only checks REGISTRY references
+# (from @register entries). Cross-checking @realizes references against references.bib
+# is tracked in Issue #696.

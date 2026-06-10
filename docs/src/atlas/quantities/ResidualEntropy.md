@@ -20,10 +20,10 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 **Top references** (by hub count):
 - AffleckLudwig1991 — 1 hub
+- Baxter1982 — 1 hub
 - Cardy1989 — 1 hub
 - Fisher1961 — 1 hub
 - FriedanKonechny2004 — 1 hub
-- Lieb1967a — 1 hub
 
 ## Model × BC matrix
 

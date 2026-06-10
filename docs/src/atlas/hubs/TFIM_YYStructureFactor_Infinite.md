@@ -17,15 +17,15 @@
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
-| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch2.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch3.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch4.jl` |
+| `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_yy_batch4.jl` |
 | `@sweep` | `delegation_invariant` | 🟡 asserted | Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared) | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
 | `@sweep` | `delegation_invariant` | 🟡 asserted | Infinite() proxy returns exactly the OBC(N_proxy) value by construction (pass-through identity, == compared) | `test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl` |
 

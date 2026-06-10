@@ -1308,4 +1308,3 @@ classical 2D six-vertex model, it corresponds to the spontaneous polarization
 (in the antiferroelectric phase Δ < -1).
 """
 struct Polarization <: AbstractQuantity end
-

@@ -55,7 +55,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`SchwingerModel`](models/SchwingerModel.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@massless` |
 | [`ShastrySutherland`](models/ShastrySutherland.md) | — | 1 | `exact_dimer` | 0 | 0 | 0 | 0 | 1 | feasible | — |
 | [`SherringtonKirkpatrick`](models/SherringtonKirkpatrick.md) | — | 2 | `analytic`, `variational_reference` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
-| [`SixVertex`](models/SixVertex.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
+| [`SixVertex`](models/SixVertex.md) | — | 4 | `analytic`, `numerical` | 0 | 1 | 1 | 0 | 2 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TFIM`](models/TFIM.md) | `Ising` | 58 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 14 | feasible | `@critical`, `@disordered`, `@ordered` |
@@ -91,7 +91,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`CriticalExponents`](quantities/CriticalExponents.md) — 4 models
 - [`CriticalTemperature`](quantities/CriticalTemperature.md) — 6 models
 - [`EdgeModeEnergy`](quantities/EdgeModeEnergy.md) — 2 models
-- [`Energy`](quantities/Energy.md) — 27 models
+- [`Energy`](quantities/Energy.md) — 28 models
 - [`EnergyLocal`](quantities/EnergyLocal.md) — 5 models
 - [`ExactSpectrum`](quantities/ExactSpectrum.md) — 1 models
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
@@ -118,6 +118,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md) — 2 models
 - [`OptimalCloningFidelity`](quantities/OptimalCloningFidelity.md) — 1 models
 - [`PartitionFunction`](quantities/PartitionFunction.md) — 3 models
+- [`Polarization`](quantities/Polarization.md) — 1 models
 - [`PrimaryFields`](quantities/PrimaryFields.md) — 2 models
 - [`QuantumSpeedLimit`](quantities/QuantumSpeedLimit.md) — 1 models
 - [`RenyiEntropy`](quantities/RenyiEntropy.md) — 5 models

@@ -101,7 +101,7 @@ end
 
     Δ = QAtlas._six_vertex_delta(m_afe.a, m_afe.b, m_afe.c)
     λ = acosh(-Δ)
-    
+
     # Verify free energy is close to the expected elliptic sum
     f = QAtlas.fetch(m_afe, FreeEnergy(), Infinite())
     u = λ / 2.0
@@ -137,7 +137,7 @@ end
     m_d = SixVertex(; a=1.0, b=1.0, c=0.5)
     @test QAtlas._six_vertex_delta(1.0, 1.0, 0.5) ≈ 0.875
     @test QAtlas._six_vertex_phase(m_d.a, m_d.b, m_d.c) === :disordered
-    
+
     # Value compared to numerical check
     f_d = QAtlas.fetch(m_d, FreeEnergy(), Infinite())
     @test f_d ≈ -0.129202353139369 atol = 1e-12
@@ -147,7 +147,7 @@ end
     @test QAtlas._six_vertex_phase(m_crit.a, m_crit.b, m_crit.c) === :disordered
     f_crit = QAtlas.fetch(m_crit, FreeEnergy(), Infinite())
     @test f_crit ≈ -0.7831887820803405 atol = 1e-12
-    
+
     # Polarization at critical point is 0
     @test QAtlas.fetch(m_crit, Polarization(), Infinite()) == 0.0
 end

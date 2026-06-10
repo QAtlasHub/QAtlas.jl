@@ -313,19 +313,19 @@ function fetch(m::SixVertex, ::FreeEnergy, ::Infinite; beta::Real=Inf, kwargs...
         if a < b
             return fetch(SixVertex(b, a, c), FreeEnergy(), Infinite(); beta=beta, kwargs...)
         end
-        
+
         Δ = _six_vertex_delta(a, b, c)
         # If Δ is extremely close to -1, we apply a tiny regularization to avoid integrand singularity.
         # This ensures smooth matching with the AFE phase.
         if Δ <= -1.0 + 1e-11
             Δ = -1.0 + 1e-11
         end
-        
+
         μ = acos(-Δ)
         w = 2.0 * atan(tan(μ / 2.0) * (b - a) / (b + a))
         A = π - μ
         B = μ + w
-        
+
         function integrand(x)
             if x == 0.0
                 return (π - μ) * (μ + w) / (2.0 * π)
@@ -336,25 +336,25 @@ function fetch(m::SixVertex, ::FreeEnergy, ::Infinite; beta::Real=Inf, kwargs...
             den2 = 1.0 + exp(-2.0 * μ * x)
             return 0.5 * exp((w - μ) * x) * num1 * num2 / (x * den1 * den2)
         end
-        
-        val, _ = quadgk(integrand, 0.0, Inf, atol=1e-15, rtol=1e-15)
+
+        val, _ = quadgk(integrand, 0.0, Inf; atol=1e-15, rtol=1e-15)
         return -log(a) - 2.0 * val
     else  # :antiferroelectric
         if a < b
             return fetch(SixVertex(b, a, c), FreeEnergy(), Infinite(); beta=beta, kwargs...)
         end
-        
+
         Δ = _six_vertex_delta(a, b, c)
         λ = acosh(-Δ)
-        
+
         # If λ is extremely small, we use the disordered phase limit to ensure stability.
         if λ < 1e-5
             return fetch(SixVertex(a, b, c), FreeEnergy(), Infinite(); beta=beta, kwargs...)
         end
-        
+
         X = (a/b - Δ) / sqrt(Δ^2 - 1.0)
         u = 0.5 * log((X + 1.0) / (X - 1.0))
-        
+
         s = 0.0
         for m in 1:1000000
             t1 = exp(-m * (2.0*λ - 2.0*u))
@@ -375,8 +375,18 @@ function fetch(m::SixVertex, ::Energy{:per_site}, ::Infinite; kwargs...)
     # of the free energy f(a^β, b^β, c^β) with respect to β at β = 1.
     h = 1e-6
     a, b, c = m.a, m.b, m.c
-    f_plus = fetch(SixVertex(a^(1.0 + h), b^(1.0 + h), c^(1.0 + h)), FreeEnergy(), Infinite(); kwargs...)
-    f_minus = fetch(SixVertex(a^(1.0 - h), b^(1.0 - h), c^(1.0 - h)), FreeEnergy(), Infinite(); kwargs...)
+    f_plus = fetch(
+        SixVertex(a^(1.0 + h), b^(1.0 + h), c^(1.0 + h)),
+        FreeEnergy(),
+        Infinite();
+        kwargs...,
+    )
+    f_minus = fetch(
+        SixVertex(a^(1.0 - h), b^(1.0 - h), c^(1.0 - h)),
+        FreeEnergy(),
+        Infinite();
+        kwargs...,
+    )
     return (f_plus - f_minus) / (2.0 * h)
 end
 
@@ -393,12 +403,12 @@ function fetch(m::SixVertex, ::Polarization, ::Infinite; kwargs...)
         # Staggered polarization order parameter: \prod_{n=1}^\infty \tanh^2(n\lambda)
         Δ = _six_vertex_delta(a, b, c)
         λ = acosh(-Δ)
-        
+
         # If λ is extremely small, staggered polarization is 0.
         if λ < 1e-5
             return 0.0
         end
-        
+
         pol = 1.0
         for n in 1:100000
             term = tanh(n * λ)^2

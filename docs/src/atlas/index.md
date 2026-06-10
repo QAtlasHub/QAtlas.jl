@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 362 |
-| ED-feasible claimed (risk denominator) | 336 |
+| Hubs `src` claims (registry) | 364 |
+| ED-feasible claimed (risk denominator) | 338 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 186 |
-| 🔵 coherent | 38 |
+| 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 121 |
-| Inventory cards scanned (whole test/) | 2798 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 122 |
+| Inventory cards scanned (whole test/) | 2801 |
 | Registry files parsed | 74 / 74 |
 | Models | 66 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.4%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.7%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.6%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "121 actionable hub(s)"
+!!! warning "122 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -126,6 +126,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
     - [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
     - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
+    - [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
     - [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
@@ -236,7 +237,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SchwingerModel` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `ShastrySutherland` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
 | `SherringtonKirkpatrick` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
-| `SixVertex` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
+| `SixVertex` | 4 | 0 | 1 | 1 | 0 | 2 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TFIM` | 58 | 0 | 36 | 8 | 0 | 14 | feasible |
@@ -255,7 +256,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (362) — select to drill down
+## Hubs (364) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -613,9 +614,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`SherringtonKirkpatrick/CriticalTemperature/Infinite`](hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md) — corroborated-at-p
 - ⚪ [`SherringtonKirkpatrick/Energy/Infinite`](hubs/SherringtonKirkpatrick_Energy_Infinite.md) — cited-only
 
-### `SixVertex` (2)
+### `SixVertex` (4)
 
+- 🟠 [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`SixVertex/Polarization/Infinite`](hubs/SixVertex_Polarization_Infinite.md) — coherent
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 
 ### `SpinIce` (1)

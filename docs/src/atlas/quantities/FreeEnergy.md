@@ -14,14 +14,14 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 ## Coverage
 
 - **Models with this quantity registered**: 18
-- **Total hubs (Model, BC pairs)**: 26
+- **Total hubs (Model, BC pairs)**: 28
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `jks_qtm_nlie`, `klumper_nlie`, `matter_free_fermion`, `onsager`, `transfer_matrix`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
+- Coleman2015 — 5 hubs
+- Mahan2000 — 5 hubs
 - AKLT1988 — 3 hubs
-- Coleman2015 — 3 hubs
-- Mahan2000 — 3 hubs
 - Affleck1986 — 2 hubs
 - Kitaev2006 — 2 hubs
 
@@ -42,9 +42,9 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | — | — |
 | [`SSH`](../models/SSH.md) | — | — | 🟠 [hub](../hubs/SSH_FreeEnergy_Infinite.md) |
-| [`SixVertex`](../models/SixVertex.md) | — | — | 🟠 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
+| [`SixVertex`](../models/SixVertex.md) | — | — | 🟢 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
-| [`TightBinding1D`](../models/TightBinding1D.md) | — | — | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
+| [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_PBC.md) | 🟠 [hub](../hubs/TightBinding1D_FreeEnergy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟠 [hub](../hubs/TightBindingV1D_FreeEnergy_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_FreeEnergy_OBC.md) | — | 🔵 [hub](../hubs/XXZ1D_FreeEnergy_Infinite.md) |
 

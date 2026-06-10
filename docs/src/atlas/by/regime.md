@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (108)
+## `(no card)` (126)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -41,7 +41,9 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](../hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](../hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](../hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Hubbard1D/Energy/Infinite`](../hubs/Hubbard1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/FreeEnergy/Infinite`](../hubs/Hubbard1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Hubbard1D/MassGap/Infinite`](../hubs/Hubbard1D_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingChain1D/Energy/Infinite`](../hubs/IsingChain1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/CriticalExponents/Infinite`](../hubs/IsingSquare_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingSquare/FreeEnergy/Infinite`](../hubs/IsingSquare_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
@@ -72,6 +74,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`ShastrySutherland/Energy/Infinite`](../hubs/ShastrySutherland_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`SixVertex/Energy/Infinite`](../hubs/SixVertex_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LiebRobinsonBound/Infinite`](../hubs/TFIM_LiebRobinsonBound_Infinite.md) — uncorroborated-but-feasible
@@ -79,13 +82,28 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`TFIM/MagnetizationXLocal/OBC`](../hubs/TFIM_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MagnetizationZLocal/OBC`](../hubs/TFIM_MagnetizationZLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/MassGap/PBC`](../hubs/TFIM_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRRelaxationExponent/Infinite`](../hubs/TFIM_NMRRelaxationExponent_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/Infinite`](../hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/NMRSpinRelaxationRate/OBC`](../hubs/TFIM_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](../hubs/TFIM_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](../hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SusceptibilityZZ/Infinite`](../hubs/TFIM_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](../hubs/TFIM_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/Energy/OBC`](../hubs/TightBinding1D_Energy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/Energy/PBC`](../hubs/TightBinding1D_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/FreeEnergy/Infinite`](../hubs/TightBinding1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/OBC`](../hubs/TightBinding1D_FreeEnergy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/FreeEnergy/PBC`](../hubs/TightBinding1D_FreeEnergy_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/MassGap/OBC`](../hubs/TightBinding1D_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/MassGap/PBC`](../hubs/TightBinding1D_MassGap_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/OBC`](../hubs/TightBinding1D_NMRSpinRelaxationRate_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/NMRSpinRelaxationRate/PBC`](../hubs/TightBinding1D_NMRSpinRelaxationRate_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/SpecificHeat/Infinite`](../hubs/TightBinding1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/OBC`](../hubs/TightBinding1D_SpecificHeat_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/SpecificHeat/PBC`](../hubs/TightBinding1D_SpecificHeat_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBinding1D/ThermalEntropy/Infinite`](../hubs/TightBinding1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/OBC`](../hubs/TightBinding1D_ThermalEntropy_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TightBinding1D/ThermalEntropy/PBC`](../hubs/TightBinding1D_ThermalEntropy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/FreeEnergy/Infinite`](../hubs/TightBindingV1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
@@ -153,7 +171,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/GroundStateEnergyDensity/Infinite`](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) — corroborated-at-p
 
-## `@free_fermion` (7)
+## `@free_fermion` (8)
 
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](../hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -161,6 +179,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`XXZ1D/LoschmidtEcho/Infinite`](../hubs/XXZ1D_LoschmidtEcho_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerParameter/Infinite`](../hubs/XXZ1D_LuttingerParameter_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/LuttingerVelocity/Infinite`](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) — corroborated-at-p
+- 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](../hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) — corroborated-at-p
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — coherent
 
 ## `@gapless` (9)
@@ -209,10 +228,11 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🔵 [`S1XXZ1D/Energy/Infinite`](../hubs/S1XXZ1D_Energy_Infinite.md) — coherent
 - 🔵 [`S1XXZ1D/MassGap/Infinite`](../hubs/S1XXZ1D_MassGap_Infinite.md) — coherent
 
-## `@half_filling` (2)
+## `@half_filling` (3)
 
 - 🟢 [`TightBinding1D/Energy/Infinite`](../hubs/TightBinding1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`TightBinding1D/MassGap/Infinite`](../hubs/TightBinding1D_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`TightBinding1D/NMRSpinRelaxationRate/Infinite`](../hubs/TightBinding1D_NMRSpinRelaxationRate_Infinite.md) — corroborated-at-p
 
 ## `@ising1d` (7)
 
@@ -297,7 +317,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`XXZ1D/SusceptibilityZZ/OBC`](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) — corroborated-at-p
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](../hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
 
-## `@sweep` (146)
+## `@sweep` (147)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -367,7 +387,8 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`SYK/ConformalWeights/Infinite`](../hubs/SYK_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`SherringtonKirkpatrick/CriticalTemperature/Infinite`](../hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md) — corroborated-at-p
 - ⚪ [`SherringtonKirkpatrick/Energy/Infinite`](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) — cited-only
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — corroborated-at-p
+- 🔵 [`SixVertex/Polarization/Infinite`](../hubs/SixVertex_Polarization_Infinite.md) — coherent
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](../hubs/SpinIce_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p

@@ -505,7 +505,7 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](../hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 
-## `XXZ1D` (30)
+## `XXZ1D` (31)
 
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](../hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p

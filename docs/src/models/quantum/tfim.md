@@ -543,7 +543,7 @@ docstrings for the exported observable types and TFIM helpers
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 55 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 58 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
@@ -575,6 +575,9 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 55 hubs (qua
 | [`MassGap`](../../atlas/hubs/TFIM_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 25 |
 | [`MassGap`](../../atlas/hubs/TFIM_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | [`MassGap`](../../atlas/hubs/TFIM_MassGap_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`NMRRelaxationExponent`](../../atlas/hubs/TFIM_NMRRelaxationExponent_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`NMRSpinRelaxationRate`](../../atlas/hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`NMRSpinRelaxationRate`](../../atlas/hubs/TFIM_NMRSpinRelaxationRate_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`RenyiEntropy`](../../atlas/hubs/TFIM_RenyiEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`RenyiEntropy`](../../atlas/hubs/TFIM_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 74 |
 | [`SpecificHeat`](../../atlas/hubs/TFIM_SpecificHeat_Infinite.md) | `Infinite` | 🔵 coherent | 7 |
@@ -604,6 +607,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 55 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

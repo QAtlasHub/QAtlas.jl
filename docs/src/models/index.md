@@ -34,7 +34,7 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`RandomBondIsing2D`](../atlas/models/RandomBondIsing2D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | `Ising` |
 | [`SLEkappa`](../atlas/models/SLEkappa.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SherringtonKirkpatrick`](../atlas/models/SherringtonKirkpatrick.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | — |
-| [`SixVertex`](../atlas/models/SixVertex.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
+| [`SixVertex`](../atlas/models/SixVertex.md) | 4 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 1 | — |
 | [`SpinIce`](../atlas/models/SpinIce.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TTbar`](../atlas/models/TTbar.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
@@ -62,7 +62,7 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 20 | 🟣 0 🟢 13 🔵 4 ⚪ 0 🟠 9 | — |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | 6 | 🟣 0 🟢 1 🔵 1 ⚪ 0 🟠 4 | — |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
-| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 5 | 🟣 0 🟢 2 🔵 2 ⚪ 0 🟠 1 | — |
+| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 7 | 🟣 0 🟢 2 🔵 2 ⚪ 0 🟠 3 | — |
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TightBinding(Kagome)`](../atlas/models/Kagome.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 3 🟠 0 | — |
@@ -83,13 +83,13 @@ In this page, all model list defined in QAtlas.jl is shown. **66 models** have `
 | [`SYK`](../atlas/models/SYK.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 31 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 11 | `Ising` |
-| [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
+| [`TFIM`](../atlas/models/TFIM.md) | 33 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 14 | `Ising` |
+| [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 7 | 🟣 0 🟢 4 🔵 0 ⚪ 0 🟠 15 | — |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
 | [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 4 🔵 0 ⚪ 1 🟠 0 | — |
 | [`TightBinding(Triangular)`](../atlas/models/Triangular.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | 23 | 🟣 0 🟢 17 🔵 5 ⚪ 0 🟠 8 | — |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | 24 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 8 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
 
 ## Other (1)

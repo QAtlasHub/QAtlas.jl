@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 135 hubs
+## `analytic` - 138 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -91,7 +91,10 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](hubs/SLEkappa_FractalDimension_Infinite.md)
 - 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md)
 - 🟢 [`SSH/Energy/Infinite`](hubs/SSH_Energy_Infinite.md)
+- 🟠 [`SSH/FreeEnergy/Infinite`](hubs/SSH_FreeEnergy_Infinite.md)
 - 🟢 [`SSH/MassGap/Infinite`](hubs/SSH_MassGap_Infinite.md)
+- 🟠 [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
+- 🟠 [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md)
 - 🟢 [`SYK/ConformalWeights/Infinite`](hubs/SYK_ConformalWeights_Infinite.md)
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md)

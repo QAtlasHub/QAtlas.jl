@@ -154,7 +154,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 
-## `FreeEnergy` (25)
+## `FreeEnergy` (26)
 
 - 🟢 [`AKLT1D/FreeEnergy/Infinite`](../hubs/AKLT1D_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
@@ -173,6 +173,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🔵 [`KitaevHoneycomb/FreeEnergy/Infinite`](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) — coherent
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) — cited-only
 - 🟢 [`S1Heisenberg1D/FreeEnergy/OBC`](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
+- 🟠 [`SSH/FreeEnergy/Infinite`](../hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/FreeEnergy/Infinite`](../hubs/TFIM_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/FreeEnergy/OBC`](../hubs/TFIM_FreeEnergy_OBC.md) — corroborated-at-p
@@ -360,7 +361,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟠 [`Bound/ScramblingTime/Infinite`](../hubs/Bound_ScramblingTime_Infinite.md) — uncorroborated-but-feasible
 
-## `SpecificHeat` (22)
+## `SpecificHeat` (23)
 
 - 🟢 [`AKLT1D/SpecificHeat/Infinite`](../hubs/AKLT1D_SpecificHeat_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/SpecificHeat/OBC`](../hubs/AKLT1D_SpecificHeat_OBC.md) — corroborated-at-p
@@ -377,6 +378,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🔵 [`KitaevHoneycomb/SpecificHeat/Infinite`](../hubs/KitaevHoneycomb_SpecificHeat_Infinite.md) — coherent
 - 🔵 [`KitaevHoneycomb/SpecificHeat/OBC`](../hubs/KitaevHoneycomb_SpecificHeat_OBC.md) — coherent
 - 🟢 [`S1Heisenberg1D/SpecificHeat/OBC`](../hubs/S1Heisenberg1D_SpecificHeat_OBC.md) — corroborated-at-p
+- 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`TFIM/SpecificHeat/Infinite`](../hubs/TFIM_SpecificHeat_Infinite.md) — coherent
 - 🟢 [`TFIM/SpecificHeat/OBC`](../hubs/TFIM_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SpecificHeat/PBC`](../hubs/TFIM_SpecificHeat_PBC.md) — corroborated-at-p
@@ -437,7 +439,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`XYh1D/SusceptibilityZZ/Infinite`](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](../hubs/XYh1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
 
-## `ThermalEntropy` (22)
+## `ThermalEntropy` (23)
 
 - 🟢 [`AKLT1D/ThermalEntropy/Infinite`](../hubs/AKLT1D_ThermalEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/ThermalEntropy/OBC`](../hubs/AKLT1D_ThermalEntropy_OBC.md) — corroborated-at-p
@@ -454,6 +456,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/Infinite`](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — coherent
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/OBC`](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — coherent
 - 🟢 [`S1Heisenberg1D/ThermalEntropy/OBC`](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) — corroborated-at-p
+- 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`TFIM/ThermalEntropy/Infinite`](../hubs/TFIM_ThermalEntropy_Infinite.md) — coherent
 - 🟢 [`TFIM/ThermalEntropy/OBC`](../hubs/TFIM_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/ThermalEntropy/PBC`](../hubs/TFIM_ThermalEntropy_PBC.md) — corroborated-at-p

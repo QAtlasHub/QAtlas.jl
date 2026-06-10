@@ -325,15 +325,10 @@ end
 Per-site grand-potential density of the infinite SSH chain at inverse temperature `beta`.
 """
 function fetch(
-    m::SSH,
-    ::FreeEnergy,
-    ::Infinite;
-    beta::Real,
-    v::Real=m.v,
-    w::Real=m.w,
-    kwargs...,
+    m::SSH, ::FreeEnergy, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
 )
-    beta > 0 || throw(DomainError(beta, "SSH FreeEnergy requires beta > 0; got beta = $beta."))
+    beta > 0 ||
+        throw(DomainError(beta, "SSH FreeEnergy requires beta > 0; got beta = $beta."))
     return _ssh_thermo_infinite(:free_energy, v, w, beta)
 end
 
@@ -343,15 +338,10 @@ end
 Per-site thermodynamic entropy of the infinite SSH chain at inverse temperature `beta`.
 """
 function fetch(
-    m::SSH,
-    ::ThermalEntropy,
-    ::Infinite;
-    beta::Real,
-    v::Real=m.v,
-    w::Real=m.w,
-    kwargs...,
+    m::SSH, ::ThermalEntropy, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
 )
-    beta > 0 || throw(DomainError(beta, "SSH ThermalEntropy requires beta > 0; got beta = $beta."))
+    beta > 0 ||
+        throw(DomainError(beta, "SSH ThermalEntropy requires beta > 0; got beta = $beta."))
     return _ssh_thermo_infinite(:entropy, v, w, beta)
 end
 
@@ -361,14 +351,9 @@ end
 Per-site specific heat of the infinite SSH chain at inverse temperature `beta`.
 """
 function fetch(
-    m::SSH,
-    ::SpecificHeat,
-    ::Infinite;
-    beta::Real,
-    v::Real=m.v,
-    w::Real=m.w,
-    kwargs...,
+    m::SSH, ::SpecificHeat, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
 )
-    beta > 0 || throw(DomainError(beta, "SSH SpecificHeat requires beta > 0; got beta = $beta."))
+    beta > 0 ||
+        throw(DomainError(beta, "SSH SpecificHeat requires beta > 0; got beta = $beta."))
     return _ssh_thermo_infinite(:specific_heat, v, w, beta)
 end

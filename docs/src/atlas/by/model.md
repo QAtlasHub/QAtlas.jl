@@ -329,13 +329,16 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](../hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 
-## `SSH` (6)
+## `SSH` (9)
 
 - 🟢 [`SSH/CorrelationLength/Infinite`](../hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/EdgeModeEnergy/OBC`](../hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/Energy/Infinite`](../hubs/SSH_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`SSH/FreeEnergy/Infinite`](../hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/MassGap/Infinite`](../hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
 - 🟠 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
 ## `SYK` (1)

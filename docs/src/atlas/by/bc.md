@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (222)
+## `Infinite` (225)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -146,7 +146,10 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/CorrelationLength/Infinite`](../hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/Energy/Infinite`](../hubs/SSH_Energy_Infinite.md) — corroborated-at-p
+- 🟠 [`SSH/FreeEnergy/Infinite`](../hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/MassGap/Infinite`](../hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
+- 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`SYK/ConformalWeights/Infinite`](../hubs/SYK_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](../hubs/SchwingerModel_ChiralCondensate_Infinite.md) — corroborated-at-p

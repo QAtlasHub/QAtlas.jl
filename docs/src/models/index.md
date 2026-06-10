@@ -17,13 +17,12 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | 🟠 | Uncorroborated-but-feasible | Claimed but not yet verified |
 | — | *(Universality column)* | No `CriticalExponents` / `CentralCharge` claim registered; actual class may be known |
 
-## Classical Models (19)
+## Classical Models (13)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
 | [`BCFT`](../atlas/models/BCFT.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ConformalBootstrap`](../atlas/models/ConformalBootstrap.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 1 🟠 0 | — |
-| [`DimerLattice`](../atlas/models/DimerLattice.md) | 3 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 2 | — |
 | [`IsingChain1D`](../atlas/models/IsingChain1D.md) | 8 | 🟣 0 🟢 7 🔵 0 ⚪ 0 🟠 1 | — |
 | [`LiouvilleCFT`](../atlas/models/LiouvilleCFT.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`LogarithmicCFT`](../atlas/models/LogarithmicCFT.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
@@ -31,17 +30,12 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`RandomBondIsing2D`](../atlas/models/RandomBondIsing2D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | `Ising` |
 | [`SLEkappa`](../atlas/models/SLEkappa.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SherringtonKirkpatrick`](../atlas/models/SherringtonKirkpatrick.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | — |
-| [`SixVertex`](../atlas/models/SixVertex.md) | 4 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 1 | — |
 | [`SpinIce`](../atlas/models/SpinIce.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TTbar`](../atlas/models/TTbar.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TodaLattice`](../atlas/models/TodaLattice.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | `MinimalModel` |
-| [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | `MinimalModel` |
 | [`YangLee`](../atlas/models/YangLee.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `MinimalModel` |
-| [`ZnClock`](../atlas/models/ZnClock.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | `Ising` |
-| [`ZnParafermion`](../atlas/models/ZnParafermion.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | `Ising` |
 
-## Quantum Models (38)
+## Quantum Models (37)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
@@ -60,7 +54,6 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TightBinding(Kagome)`](../atlas/models/Kagome.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 3 🟠 0 | — |
-| [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 8 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 3 | — |
 | [`KitaevHeisenberg`](../atlas/models/KitaevHeisenberg.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`KitaevHoneycomb`](../atlas/models/KitaevHoneycomb.md) | 5 | 🟣 0 🟢 1 🔵 5 ⚪ 4 🟠 0 | — |
 | [`TightBinding(Lieb)`](../atlas/models/Lieb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
@@ -84,20 +77,27 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
 
-## Other (10)
+## Other (17)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
 | [`Bound`](../atlas/models/Bound.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 8 | — |
 | [`CurieWeissIsing`](../atlas/models/CurieWeissIsing.md) | 9 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 3 | `MeanField` |
+| [`DimerLattice`](../atlas/models/DimerLattice.md) | 4 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 3 | — |
 | [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | 7 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 7 | — |
 | [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 21 | 🟣 0 🟢 13 🔵 4 ⚪ 0 🟠 10 | — |
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | 9 | 🟣 0 🟢 7 🔵 2 ⚪ 0 🟠 4 | `Ising` |
 | [`IsingTriangular`](../atlas/models/IsingTriangular.md) | 10 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 8 | `Ising` |
+| [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 9 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 4 | — |
+| [`SixVertex`](../atlas/models/SixVertex.md) | 5 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 2 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
 | [`TFIM`](../atlas/models/TFIM.md) | 34 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 15 | `Ising` |
+| [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
+| [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`Universality`](../atlas/models/Universality.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
 | [`XXZ1D`](../atlas/models/XXZ1D.md) | 24 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 8 | — |
+| [`ZnClock`](../atlas/models/ZnClock.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |
+| [`ZnParafermion`](../atlas/models/ZnParafermion.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |
 
 [Full catalog →](../atlas/ModelList.md) · [By quantity →](../atlas/by/index.md) · [Reference (with citations) →](reference.md)
 

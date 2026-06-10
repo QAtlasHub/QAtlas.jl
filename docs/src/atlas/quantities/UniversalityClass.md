@@ -13,23 +13,30 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 9
-- **Total hubs (Model, BC pairs)**: 9
+- **Models with this quantity registered**: 16
+- **Total hubs (Model, BC pairs)**: 16
 - **Methods** (derived from `@register`): `analytic`
-- **Universality classes** (where applicable): `Ising`, `MeanField`
+- **Universality classes** (where applicable): `Ising`, `MeanField`, `MinimalModel`
 
 ## Model × BC matrix
 
 | Model | `Infinite` |
 |---|---|
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | 🟠 [hub](../hubs/CurieWeissIsing_UniversalityClass_Infinite.md) |
+| [`DimerLattice`](../models/DimerLattice.md) | 🟠 [hub](../hubs/DimerLattice_UniversalityClass_Infinite.md) |
 | [`HaldaneShastry`](../models/HaldaneShastry.md) | 🟠 [hub](../hubs/HaldaneShastry_UniversalityClass_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟠 [hub](../hubs/Heisenberg1D_UniversalityClass_Infinite.md) |
 | [`IsingSquare`](../models/IsingSquare.md) | 🟠 [hub](../hubs/IsingSquare_UniversalityClass_Infinite.md) |
 | [`IsingTriangular`](../models/IsingTriangular.md) | 🟠 [hub](../hubs/IsingTriangular_UniversalityClass_Infinite.md) |
+| [`Kitaev1D`](../models/Kitaev1D.md) | 🟠 [hub](../hubs/Kitaev1D_UniversalityClass_Infinite.md) |
+| [`SixVertex`](../models/SixVertex.md) | 🟠 [hub](../hubs/SixVertex_UniversalityClass_Infinite.md) |
 | [`TASEP`](../models/TASEP.md) | 🟠 [hub](../hubs/TASEP_UniversalityClass_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟠 [hub](../hubs/TFIM_UniversalityClass_Infinite.md) |
+| [`TricriticalIsing`](../models/TricriticalIsing.md) | 🟠 [hub](../hubs/TricriticalIsing_UniversalityClass_Infinite.md) |
+| [`TricriticalPotts3`](../models/TricriticalPotts3.md) | 🟠 [hub](../hubs/TricriticalPotts3_UniversalityClass_Infinite.md) |
 | [`Universality`](../models/Universality.md) | 🟠 [hub](../hubs/Universality_UniversalityClass_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟠 [hub](../hubs/XXZ1D_UniversalityClass_Infinite.md) |
+| [`ZnClock`](../models/ZnClock.md) | 🟠 [hub](../hubs/ZnClock_UniversalityClass_Infinite.md) |
+| [`ZnParafermion`](../models/ZnParafermion.md) | 🟠 [hub](../hubs/ZnParafermion_UniversalityClass_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

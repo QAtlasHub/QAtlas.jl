@@ -80,11 +80,12 @@ Every `src`-claimed hub grouped by model.
 
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 
-## `DimerLattice` (3)
+## `DimerLattice` (4)
 
 - 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`DimerLattice/PartitionFunction/OBC`](../hubs/DimerLattice_PartitionFunction_OBC.md) — corroborated-at-p
 - 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/UniversalityClass/Infinite`](../hubs/DimerLattice_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `ExtendedHubbard1D` (1)
 
@@ -218,7 +219,7 @@ Every `src`-claimed hub grouped by model.
 - ⚪ [`KagomeHeisenbergAFM/MassGap/Infinite`](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) — cited-only
 - ⚪ [`KagomeHeisenbergAFM/TopologicalEntanglementEntropy/Infinite`](../hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md) — cited-only
 
-## `Kitaev1D` (9)
+## `Kitaev1D` (10)
 
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](../hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
@@ -229,6 +230,7 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`Kitaev1D/SpecificHeat/Infinite`](../hubs/Kitaev1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
+- 🟠 [`Kitaev1D/UniversalityClass/Infinite`](../hubs/Kitaev1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `KitaevHeisenberg` (1)
 
@@ -366,12 +368,13 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`SherringtonKirkpatrick/CriticalTemperature/Infinite`](../hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md) — corroborated-at-p
 - ⚪ [`SherringtonKirkpatrick/Energy/Infinite`](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) — cited-only
 
-## `SixVertex` (4)
+## `SixVertex` (5)
 
 - 🟠 [`SixVertex/Energy/Infinite`](../hubs/SixVertex_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🔵 [`SixVertex/Polarization/Infinite`](../hubs/SixVertex_Polarization_Infinite.md) — coherent
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`SixVertex/UniversalityClass/Infinite`](../hubs/SixVertex_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `SpinIce` (1)
 
@@ -496,17 +499,19 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
-## `TricriticalIsing` (3)
+## `TricriticalIsing` (4)
 
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](../hubs/TricriticalIsing_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalIsing/ConformalWeights/Infinite`](../hubs/TricriticalIsing_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TricriticalIsing/UniversalityClass/Infinite`](../hubs/TricriticalIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-## `TricriticalPotts3` (3)
+## `TricriticalPotts3` (4)
 
 - 🟢 [`TricriticalPotts3/CentralCharge/Infinite`](../hubs/TricriticalPotts3_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TricriticalPotts3/UniversalityClass/Infinite`](../hubs/TricriticalPotts3_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `Universality` (1)
 
@@ -571,12 +576,14 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`YangLee/CentralCharge/Infinite`](../hubs/YangLee_CentralCharge_Infinite.md) — corroborated-at-p
 - ⚪ [`YangLee/ConformalWeights/Infinite`](../hubs/YangLee_ConformalWeights_Infinite.md) — cited-only
 
-## `ZnClock` (1)
+## `ZnClock` (2)
 
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟠 [`ZnClock/UniversalityClass/Infinite`](../hubs/ZnClock_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-## `ZnParafermion` (1)
+## `ZnParafermion` (2)
 
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟠 [`ZnParafermion/UniversalityClass/Infinite`](../hubs/ZnParafermion_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 [← back to the Atlas index](../index.md)

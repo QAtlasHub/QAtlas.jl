@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | 🟢 corroborated-at-p | 6 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **9** |
+| 🟠 uncorroborated-but-feasible | 4 |
+| **total claimed hubs** | **10** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `pfaffian`
 
@@ -43,6 +43,7 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | — | 🟠 [hub](../hubs/Kitaev1D_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | — | 🟠 [hub](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) |
 | [`TopologicalInvariant`](../quantities/TopologicalInvariant.md) | — | 🟢 [hub](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/Kitaev1D_UniversalityClass_Infinite.md) |
 
 ## References
 

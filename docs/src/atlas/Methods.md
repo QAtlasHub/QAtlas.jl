@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 163 hubs
+## `analytic` - 170 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -51,6 +51,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`DimerLattice/FreeEnergy/Infinite`](hubs/DimerLattice_FreeEnergy_Infinite.md)
 - 🟢 [`DimerLattice/PartitionFunction/OBC`](hubs/DimerLattice_PartitionFunction_OBC.md)
 - 🟠 [`DimerLattice/ResidualEntropy/Infinite`](hubs/DimerLattice_ResidualEntropy_Infinite.md)
+- 🟠 [`DimerLattice/UniversalityClass/Infinite`](hubs/DimerLattice_UniversalityClass_Infinite.md)
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md)
 - 🟢 [`GrossNeveu/MassGap/Infinite`](hubs/GrossNeveu_MassGap_Infinite.md)
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md)
@@ -82,6 +83,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - ⚪ [`KagomeHeisenbergAFM/TopologicalEntanglementEntropy/Infinite`](hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md)
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
+- 🟠 [`Kitaev1D/UniversalityClass/Infinite`](hubs/Kitaev1D_UniversalityClass_Infinite.md)
 - 🟢 [`KitaevHoneycomb/MassGap/Infinite`](hubs/KitaevHoneycomb_MassGap_Infinite.md)
 - 🟢 [`LiouvilleCFT/CentralCharge/Infinite`](hubs/LiouvilleCFT_CentralCharge_Infinite.md)
 - 🟢 [`LiouvilleCFT/ConformalWeights/Infinite`](hubs/LiouvilleCFT_ConformalWeights_Infinite.md)
@@ -108,6 +110,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 - 🔵 [`SixVertex/Polarization/Infinite`](hubs/SixVertex_Polarization_Infinite.md)
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md)
+- 🟠 [`SixVertex/UniversalityClass/Infinite`](hubs/SixVertex_UniversalityClass_Infinite.md)
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](hubs/SpinIce_ResidualEntropy_Infinite.md)
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md)
 - 🟠 [`TASEP/UniversalityClass/Infinite`](hubs/TASEP_UniversalityClass_Infinite.md)
@@ -159,8 +162,10 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](hubs/TricriticalIsing_CentralCharge_Infinite.md)
 - 🟢 [`TricriticalIsing/ConformalWeights/Infinite`](hubs/TricriticalIsing_ConformalWeights_Infinite.md)
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](hubs/TricriticalIsing_PrimaryFields_Infinite.md)
+- 🟠 [`TricriticalIsing/UniversalityClass/Infinite`](hubs/TricriticalIsing_UniversalityClass_Infinite.md)
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
+- 🟠 [`TricriticalPotts3/UniversalityClass/Infinite`](hubs/TricriticalPotts3_UniversalityClass_Infinite.md)
 - 🟠 [`Universality/UniversalityClass/Infinite`](hubs/Universality_UniversalityClass_Infinite.md)
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](hubs/XCube_GroundStateDegeneracy_PBC.md)
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](hubs/XXZ1D_CentralCharge_Infinite.md)
@@ -171,7 +176,9 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XXZ1D/UniversalityClass/Infinite`](hubs/XXZ1D_UniversalityClass_Infinite.md)
 - 🟠 [`XYh1D/MassGap/Infinite`](hubs/XYh1D_MassGap_Infinite.md)
 - 🟠 [`XYh1D/MassGap/PBC`](hubs/XYh1D_MassGap_PBC.md)
+- 🟠 [`ZnClock/UniversalityClass/Infinite`](hubs/ZnClock_UniversalityClass_Infinite.md)
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](hubs/ZnParafermion_CentralCharge_Infinite.md)
+- 🟠 [`ZnParafermion/UniversalityClass/Infinite`](hubs/ZnParafermion_UniversalityClass_Infinite.md)
 
 ## `dense_ed` - 56 hubs
 

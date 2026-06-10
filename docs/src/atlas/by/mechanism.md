@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (134)
+## `(no card)` (141)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -21,6 +21,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`CurieWeissIsing/UniversalityClass/Infinite`](../hubs/CurieWeissIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/UniversalityClass/Infinite`](../hubs/DimerLattice_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/GroundStateEnergyDensity/Infinite`](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/RenyiEntropy/Infinite`](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
@@ -65,6 +66,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`Kitaev1D/FreeEnergy/Infinite`](../hubs/Kitaev1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kitaev1D/SpecificHeat/Infinite`](../hubs/Kitaev1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`Kitaev1D/UniversalityClass/Infinite`](../hubs/Kitaev1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - ⚪ [`KitaevHoneycomb/Energy/OBC`](../hubs/KitaevHoneycomb_Energy_OBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/Energy/PBC`](../hubs/KitaevHoneycomb_Energy_PBC.md) — cited-only
 - ⚪ [`KitaevHoneycomb/FreeEnergy/OBC`](../hubs/KitaevHoneycomb_FreeEnergy_OBC.md) — cited-only
@@ -80,6 +82,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`ShastrySutherland/Energy/Infinite`](../hubs/ShastrySutherland_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SixVertex/Energy/Infinite`](../hubs/SixVertex_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`SixVertex/UniversalityClass/Infinite`](../hubs/SixVertex_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TASEP/UniversalityClass/Infinite`](../hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
@@ -118,7 +121,9 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TricriticalIsing/UniversalityClass/Infinite`](../hubs/TricriticalIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TricriticalPotts3/UniversalityClass/Infinite`](../hubs/TricriticalPotts3_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Universality/UniversalityClass/Infinite`](../hubs/Universality_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/EnergyLocal/OBC`](../hubs/XXZ1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/MagnetizationXLocal/OBC`](../hubs/XXZ1D_MagnetizationXLocal_OBC.md) — uncorroborated-but-feasible
@@ -141,6 +146,8 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`XYh1D/MassGap/PBC`](../hubs/XYh1D_MassGap_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/SusceptibilityZZ/Infinite`](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/SusceptibilityZZ/OBC`](../hubs/XYh1D_SusceptibilityZZ_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`ZnClock/UniversalityClass/Infinite`](../hubs/ZnClock_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`ZnParafermion/UniversalityClass/Infinite`](../hubs/ZnParafermion_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `delegation_invariant` (19)
 

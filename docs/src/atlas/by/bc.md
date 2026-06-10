@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (242)
+## `Infinite` (249)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -46,6 +46,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`DMIHeisenberg1D/Energy/Infinite`](../hubs/DMIHeisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`DimerLattice/FreeEnergy/Infinite`](../hubs/DimerLattice_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`DimerLattice/ResidualEntropy/Infinite`](../hubs/DimerLattice_ResidualEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`DimerLattice/UniversalityClass/Infinite`](../hubs/DimerLattice_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 - 🟢 [`FibonacciAnyons/TopologicalEntanglementEntropy/Infinite`](../hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`GrossNeveu/CentralCharge/Infinite`](../hubs/GrossNeveu_CentralCharge_Infinite.md) — corroborated-at-p
@@ -121,6 +122,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟠 [`Kitaev1D/SpecificHeat/Infinite`](../hubs/Kitaev1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](../hubs/Kitaev1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](../hubs/Kitaev1D_TopologicalInvariant_Infinite.md) — corroborated-at-p
+- 🟠 [`Kitaev1D/UniversalityClass/Infinite`](../hubs/Kitaev1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`KitaevHeisenberg/MassGap/Infinite`](../hubs/KitaevHeisenberg_MassGap_Infinite.md) — corroborated-at-p
 - ⚪ [`KitaevHoneycomb/Energy/Infinite`](../hubs/KitaevHoneycomb_Energy_Infinite.md) — cited-only
 - 🔵 [`KitaevHoneycomb/FreeEnergy/Infinite`](../hubs/KitaevHoneycomb_FreeEnergy_Infinite.md) — coherent
@@ -168,6 +170,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🔵 [`SixVertex/Polarization/Infinite`](../hubs/SixVertex_Polarization_Infinite.md) — coherent
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](../hubs/SixVertex_ResidualEntropy_Infinite.md) — corroborated-at-p
+- 🟠 [`SixVertex/UniversalityClass/Infinite`](../hubs/SixVertex_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](../hubs/SpinIce_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 - 🟠 [`TASEP/UniversalityClass/Infinite`](../hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
@@ -223,9 +226,11 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TricriticalIsing/CentralCharge/Infinite`](../hubs/TricriticalIsing_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalIsing/ConformalWeights/Infinite`](../hubs/TricriticalIsing_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalIsing/PrimaryFields/Infinite`](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TricriticalIsing/UniversalityClass/Infinite`](../hubs/TricriticalIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TricriticalPotts3/CentralCharge/Infinite`](../hubs/TricriticalPotts3_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`TricriticalPotts3/UniversalityClass/Infinite`](../hubs/TricriticalPotts3_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Universality/UniversalityClass/Infinite`](../hubs/Universality_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](../hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](../hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -248,7 +253,9 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`YangLee/CentralCharge/Infinite`](../hubs/YangLee_CentralCharge_Infinite.md) — corroborated-at-p
 - ⚪ [`YangLee/ConformalWeights/Infinite`](../hubs/YangLee_ConformalWeights_Infinite.md) — cited-only
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟠 [`ZnClock/UniversalityClass/Infinite`](../hubs/ZnClock_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟠 [`ZnParafermion/UniversalityClass/Infinite`](../hubs/ZnParafermion_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
 ## `OBC` (104)
 

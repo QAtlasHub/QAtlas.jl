@@ -100,7 +100,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](hubs/SchwingerModel_ChiralCondensate_Infinite.md)
 - 🟢 [`SchwingerModel/MassGap/Infinite`](hubs/SchwingerModel_MassGap_Infinite.md)
 - 🟢 [`SherringtonKirkpatrick/CriticalTemperature/Infinite`](hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md)
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 - 🔵 [`SixVertex/Polarization/Infinite`](hubs/SixVertex_Polarization_Infinite.md)
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md)
 - 🟢 [`SpinIce/ResidualEntropy/Infinite`](hubs/SpinIce_ResidualEntropy_Infinite.md)

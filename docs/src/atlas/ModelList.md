@@ -55,7 +55,7 @@ Top-level catalog of all **66 models** with claimed hubs.  One row per model; th
 | [`SchwingerModel`](models/SchwingerModel.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@massless` |
 | [`ShastrySutherland`](models/ShastrySutherland.md) | — | 1 | `exact_dimer` | 0 | 0 | 0 | 0 | 1 | feasible | — |
 | [`SherringtonKirkpatrick`](models/SherringtonKirkpatrick.md) | — | 2 | `analytic`, `variational_reference` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
-| [`SixVertex`](models/SixVertex.md) | — | 4 | `analytic`, `numerical` | 0 | 1 | 1 | 0 | 2 | feasible | `@sweep` |
+| [`SixVertex`](models/SixVertex.md) | — | 4 | `analytic`, `numerical` | 0 | 2 | 1 | 0 | 1 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TFIM`](models/TFIM.md) | `Ising` | 58 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 14 | feasible | `@critical`, `@disordered`, `@ordered` |

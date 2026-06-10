@@ -252,7 +252,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 - 🟠 [`IsingTriangular/SpontaneousMagnetization/Infinite`](hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md)
 - 🟠 [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 - 🔵 [`SixVertex/Polarization/Infinite`](hubs/SixVertex_Polarization_Infinite.md)
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md)
 
@@ -366,13 +366,13 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## Lieb1967a — 3 hubs
 
 - 🟠 [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md)
 
 ## Lieb1967b — 3 hubs
 
 - 🟠 [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md)
 
 ## Lohmann2014 — 3 hubs
@@ -419,7 +419,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## Sutherland1967 — 3 hubs
 
 - 🟠 [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 - 🟢 [`SixVertex/ResidualEntropy/Infinite`](hubs/SixVertex_ResidualEntropy_Infinite.md)
 
 ## Wannier1950 — 3 hubs
@@ -813,7 +813,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Lieb1967c — 1 hub
 
-- 🟠 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
+- 🟢 [`SixVertex/FreeEnergy/Infinite`](hubs/SixVertex_FreeEnergy_Infinite.md)
 
 ## LinMotrunich2019 — 1 hub
 

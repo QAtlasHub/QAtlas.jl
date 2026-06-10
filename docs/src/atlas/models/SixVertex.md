@@ -26,10 +26,10 @@ All `(Quantity, BC)` hubs `src` claims for **`SixVertex`**.  Cells link to the p
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 1 |
+| 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 1 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 2 |
+| 🟠 uncorroborated-but-feasible | 1 |
 | **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`, `numerical`
@@ -39,7 +39,7 @@ All `(Quantity, BC)` hubs `src` claims for **`SixVertex`**.  Cells link to the p
 | Quantity | `Infinite` |
 |---|---|
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/SixVertex_Energy_Infinite.md) |
-| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
+| [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/SixVertex_FreeEnergy_Infinite.md) |
 | [`Polarization`](../quantities/Polarization.md) | 🔵 [hub](../hubs/SixVertex_Polarization_Infinite.md) |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/SixVertex_ResidualEntropy_Infinite.md) |
 

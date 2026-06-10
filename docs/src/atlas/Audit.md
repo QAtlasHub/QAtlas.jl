@@ -62,8 +62,9 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-**1 real orphan card hub(s)**:
+**2 real orphan card hub(s)**:
 
+- `f_model/FreeEnergy/Infinite`
 - `TFIM/LoschmidtRateFunction/Infinite`
 
 [← back to the Atlas index](index.md)

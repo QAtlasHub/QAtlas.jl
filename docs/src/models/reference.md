@@ -45,7 +45,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | FreedmanKitaevLarsenWang2003, ReadRezayi1999, KitaevPreskill2006 |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | GrossNeveu1974, AndreiLowenstein1979 |
 | [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986, CalabreseCardy2004 |
-| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, Karbach1997, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
+| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, Karbach1997, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004, Cardy1986 |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | YangYang1966, LiebSchultzMattis1961, Baxter1972, LutherPeschel1975, McCoyWu1978 |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) |  |
 | [`Hubbard1D`](../atlas/models/Hubbard1D.md) | LiebWu1968, Essler2005, Ovchinnikov1970, Voit1995, JuttnerKlumperSuzuki1998 |
@@ -69,7 +69,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`SYK`](../atlas/models/SYK.md) | SachdevYe1993, Kitaev2015, MaldacenaStanford2016 |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | Schwinger1962, ColemanJackiwSusskind1975 |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | ShastrySutherland1981, KogaKawakami2000 |
-| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, Sachdev1997, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006 |
+| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, Sachdev1997, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006, Cardy1986, BloteCardyNightingale1986 |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | AshcroftMermin1976, Mahan2000, Coleman2015, Korringa1950 |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | YangYang1966, AshcroftMermin1976, Mahan2000, Coleman2015 |
 | [`ToricCode`](../atlas/models/ToricCode.md) | Kitaev2003, KitaevPreskill2006, LevinWen2006, NayakSimonSternFreedmanDasSarma2008 |
@@ -83,4 +83,5 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | Model | Key References |
 |-------|---------------|
 | [`Bound`](../atlas/models/Bound.md) | MaldacenaShenkerStanford2016, MargolusLevitin1998, MandelstamTamm1945, SekinoSusskind2008, Bekenstein1981, CHSH1969, Tsirelson1980, PopescuRohrlich1994, Mermin1990, BuzekHillery1996, ShorPreskill2000 |
+| [`Universality`](../atlas/models/Universality.md) | Cardy1986, BloteCardyNightingale1986, Affleck1986 |
 

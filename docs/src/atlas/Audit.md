@@ -13,9 +13,10 @@ The CI lint enforces `# CONVENTION` headers on new model files, but older files 
 
 - [`DimerLattice`](models/DimerLattice.md)
 
-**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (1) — model may live elsewhere or be defined inline:
+**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (2) — model may live elsewhere or be defined inline:
 
 - [`Bound`](models/Bound.md)
+- [`Universality`](models/Universality.md)
 
 ## 2. Quantities without auto-extracted `Definition`
 

@@ -711,3 +711,25 @@
     references=["LiebRobinson1972", "HastingsKoma2006"],
     notes="v_LR = 2 min(|J|, |h|) tight free-fermion saturated bound (max group velocity over BdG dispersion). At criticality h=J, v_LR=2J. Vanishes at h=0 (classical Ising) or J=0 (decoupled spins). The h-independent 2|J| Hastings-Koma upper bound is loose; use this tight value for entanglement-growth slope (PR #588) and other dynamical formulas.",
 )
+
+# ── Conformal tower of states (quantum critical point h = J) ───────────
+@register(
+    TFIM,
+    ConformalTower,
+    PBC,
+    method=:cft,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_conformal_tower.jl",
+    references=["Cardy1986"],
+    notes="Conformal tower of states excitation spectrum E_n - E_0 = (2π v / L) Δ_n scaled by CFT sound velocity v = 2J.",
+)
+@register(
+    TFIM,
+    ConformalTower,
+    OBC,
+    method=:cft,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_conformal_tower.jl",
+    references=["Cardy1986", "BloteCardyNightingale1986"],
+    notes="Conformal tower of states excitation spectrum E_n - E_0 = (π v / L) h_n scaled by CFT sound velocity v = 2J.",
+)

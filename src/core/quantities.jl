@@ -1129,6 +1129,30 @@ class via the same data the `Universality{C}` entry exposes for
 """
 struct CasimirEnergyCorrection <: AbstractQuantity end
 
+@doc raw"""
+    ConformalTower() <: AbstractQuantity
+
+The conformal tower of states excitation spectrum in 1+1D conformal field theories.
+At boundary condition `bc::Union{PBC, OBC}`, returns a sorted vector of NamedTuples
+representing the lowest-lying excitation energies `E_n - E_0` relative to the
+ground state, their scaling dimensions `Δ_n` (or `h_n`), and their degeneracies:
+
+    (energy = E_n - E_0, dimension = Δ_n, degeneracy = g_n)
+
+For periodic boundary conditions (PBC), the excitation energies scale as:
+    E_n - E_0 = (2π v / L) Δ_n
+where `Δ_n = h_n + \bar{h}_n` is the scaling dimension.
+
+For open boundary conditions (OBC), the excitation energies scale as:
+    E_n - E_0 = (π v / L) h_n
+where `h_n` is the boundary scaling dimension.
+
+Keyword arguments:
+- `L::Real`: system size.
+- `v::Real`: CFT sound velocity.
+"""
+struct ConformalTower <: AbstractQuantity end
+
 """
     SteadyStateCurrent() <: AbstractQuantity
 

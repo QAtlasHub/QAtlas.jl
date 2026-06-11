@@ -12,13 +12,13 @@ All 22 step-by-step derivation notes under `docs/src/calc/`, with the model(s) e
 | [`bloch-honeycomb-dispersion.md`](../calc/bloch-honeycomb-dispersion.md) | [`Honeycomb`](models/Honeycomb.md) |
 | [`bloch-kagome-flat-band.md`](../calc/bloch-kagome-flat-band.md) | [`Kagome`](models/Kagome.md) |
 | [`bloch-lieb-flat-band.md`](../calc/bloch-lieb-flat-band.md) | [`Lieb`](models/Lieb.md) |
-| [`calabrese-cardy-obc-vs-pbc.md`](../calc/calabrese-cardy-obc-vs-pbc.md) | [`Heisenberg1D`](models/Heisenberg1D.md), [`TFIM`](models/TFIM.md), [`XXZ1D`](models/XXZ1D.md) |
-| [`e8-mass-spectrum-derivation.md`](../calc/e8-mass-spectrum-derivation.md) | [`TFIM`](models/TFIM.md) |
+| [`calabrese-cardy-obc-vs-pbc.md`](../calc/calabrese-cardy-obc-vs-pbc.md) | [`Heisenberg1D`](models/Heisenberg1D.md), [`TFIM`](models/TFIM.md), [`Universality`](models/Universality.md), [`XXZ1D`](models/XXZ1D.md) |
+| [`e8-mass-spectrum-derivation.md`](../calc/e8-mass-spectrum-derivation.md) | [`TFIM`](models/TFIM.md), [`Universality`](models/Universality.md) |
 | [`heisenberg-dimer-singlet-triplet.md`](../calc/heisenberg-dimer-singlet-triplet.md) | [`Heisenberg1D`](models/Heisenberg1D.md), [`S1Heisenberg1D`](models/S1Heisenberg1D.md) |
 | [`heisenberg-spinons.md`](../calc/heisenberg-spinons.md) | [`Heisenberg1D`](models/Heisenberg1D.md), [`S1Heisenberg1D`](models/S1Heisenberg1D.md) |
-| [`ising-cft-magnetic-perturbation.md`](../calc/ising-cft-magnetic-perturbation.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`IsingTriangular`](models/IsingTriangular.md), [`TFIM`](models/TFIM.md) |
-| [`ising-cft-primary-operators.md`](../calc/ising-cft-primary-operators.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`IsingTriangular`](models/IsingTriangular.md), [`TFIM`](models/TFIM.md) |
-| [`ising-scaling-relations.md`](../calc/ising-scaling-relations.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`IsingTriangular`](models/IsingTriangular.md), [`TFIM`](models/TFIM.md) |
+| [`ising-cft-magnetic-perturbation.md`](../calc/ising-cft-magnetic-perturbation.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`IsingTriangular`](models/IsingTriangular.md), [`TFIM`](models/TFIM.md), [`Universality`](models/Universality.md) |
+| [`ising-cft-primary-operators.md`](../calc/ising-cft-primary-operators.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`IsingTriangular`](models/IsingTriangular.md), [`TFIM`](models/TFIM.md), [`Universality`](models/Universality.md) |
+| [`ising-scaling-relations.md`](../calc/ising-scaling-relations.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`IsingTriangular`](models/IsingTriangular.md), [`TFIM`](models/TFIM.md), [`Universality`](models/Universality.md) |
 | [`jw-tfim-bdg.md`](../calc/jw-tfim-bdg.md) | [`TFIM`](models/TFIM.md) |
 | [`kramers-wannier-duality.md`](../calc/kramers-wannier-duality.md) | [`IsingChain1D`](models/IsingChain1D.md), [`IsingSquare`](models/IsingSquare.md), [`TFIM`](models/TFIM.md) |
 | [`tfim-entanglement-peschel.md`](../calc/tfim-entanglement-peschel.md) | [`TFIM`](models/TFIM.md) |

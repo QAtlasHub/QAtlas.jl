@@ -137,11 +137,12 @@ Full Bethe-ansatz derivation in
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 5 models register 55 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 5 models register 56 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
 | `DMIHeisenberg1D` | [`Energy`](../../atlas/hubs/DMIHeisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
+| `Heisenberg1D` | [`ConformalTower`](../../atlas/hubs/Heisenberg1D_ConformalTower_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`Energy`](../../atlas/hubs/Heisenberg1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 42 |
 | `Heisenberg1D` | [`EnergyLocal`](../../atlas/hubs/Heisenberg1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/Heisenberg1D_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
@@ -198,6 +199,7 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 55 hubs (
 | `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

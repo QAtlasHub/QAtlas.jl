@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 365 |
-| ED-feasible claimed (risk denominator) | 339 |
+| Hubs `src` claims (registry) | 370 |
+| ED-feasible claimed (risk denominator) | 344 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 187 |
+| 🟢 corroborated-at-p | 189 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 122 |
-| Inventory cards scanned (whole test/) | 2803 |
-| Registry files parsed | 75 / 75 |
-| Models | 66 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 125 |
+| Inventory cards scanned (whole test/) | 2806 |
+| Registry files parsed | 76 / 76 |
+| Models | 67 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.7%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **54.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.3%**
 
 ## Browse by facet
 
@@ -43,7 +43,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 
 | Section | Count |
 |---|---|
-| 1. Models without CONVENTION header | 2 |
+| 1. Models without CONVENTION header | 3 |
 | 2. Quantities without extracted Definition | 0 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "122 actionable hub(s)"
+!!! warning "125 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -81,6 +81,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`HaldaneShastry/SpecificHeat/Infinite`](hubs/HaldaneShastry_SpecificHeat_Infinite.md)
     - [`HaldaneShastry/ThermalEntropy/Infinite`](hubs/HaldaneShastry_ThermalEntropy_Infinite.md)
     - [`HaldaneShastry/VonNeumannEntropy/Infinite`](hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md)
+    - [`Heisenberg1D/ConformalTower/PBC`](hubs/Heisenberg1D_ConformalTower_PBC.md)
     - [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md)
     - [`Heisenberg1D/FreeEnergy/Infinite`](hubs/Heisenberg1D_FreeEnergy_Infinite.md)
     - [`Heisenberg1D/MagnetizationXLocal/OBC`](hubs/Heisenberg1D_MagnetizationXLocal_OBC.md)
@@ -127,6 +128,8 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
     - [`ShastrySutherland/Energy/Infinite`](hubs/ShastrySutherland_Energy_Infinite.md)
     - [`SixVertex/Energy/Infinite`](hubs/SixVertex_Energy_Infinite.md)
+    - [`TFIM/ConformalTower/OBC`](hubs/TFIM_ConformalTower_OBC.md)
+    - [`TFIM/ConformalTower/PBC`](hubs/TFIM_ConformalTower_PBC.md)
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
     - [`TFIM/LiebRobinsonBound/Infinite`](hubs/TFIM_LiebRobinsonBound_Infinite.md)
@@ -204,7 +207,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `FibonacciAnyons` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `GrossNeveu` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `HaldaneShastry` | 6 | 0 | 0 | 0 | 0 | 6 | feasible |
-| `Heisenberg1D` | 26 | 0 | 13 | 4 | 0 | 9 | feasible |
+| `Heisenberg1D` | 27 | 0 | 13 | 4 | 0 | 10 | feasible |
 | `HeisenbergXYZ` | 6 | 0 | 1 | 1 | 0 | 4 | feasible |
 | `Honeycomb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `Hubbard1D` | 7 | 0 | 2 | 2 | 0 | 3 | feasible |
@@ -240,7 +243,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 4 | 0 | 2 | 1 | 0 | 1 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `TFIM` | 58 | 0 | 36 | 8 | 0 | 14 | feasible |
+| `TFIM` | 60 | 0 | 36 | 8 | 0 | 16 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 19 | 0 | 4 | 0 | 0 | 15 | feasible |
 | `TightBindingV1D` | 6 | 0 | 3 | 0 | 0 | 3 | feasible |
@@ -249,6 +252,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `Triangular` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `TricriticalIsing` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
+| `Universality` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `XXZ1D` | 31 | 0 | 18 | 5 | 0 | 8 | feasible |
 | `XYh1D` | 13 | 0 | 0 | 0 | 0 | 13 | feasible |
@@ -256,7 +260,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (365) — select to drill down
+## Hubs (370) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -360,8 +364,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`HaldaneShastry/ThermalEntropy/Infinite`](hubs/HaldaneShastry_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`HaldaneShastry/VonNeumannEntropy/Infinite`](hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 
-### `Heisenberg1D` (26)
+### `Heisenberg1D` (27)
 
+- 🟠 [`Heisenberg1D/ConformalTower/PBC`](hubs/Heisenberg1D_ConformalTower_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`Heisenberg1D/Energy/OBC`](hubs/Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟠 [`Heisenberg1D/EnergyLocal/OBC`](hubs/Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Heisenberg1D/FreeEnergy/Infinite`](hubs/Heisenberg1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
@@ -629,9 +634,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 
-### `TFIM` (58)
+### `TFIM` (60)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
+- 🟠 [`TFIM/ConformalTower/OBC`](hubs/TFIM_ConformalTower_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/ConformalTower/PBC`](hubs/TFIM_ConformalTower_PBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/CorrelationLength/Infinite`](hubs/TFIM_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/Energy/Infinite`](hubs/TFIM_Energy_Infinite.md) — corroborated-at-p
@@ -753,6 +760,11 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`TricriticalPotts3/CentralCharge/Infinite`](hubs/TricriticalPotts3_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md) — uncorroborated-but-feasible
+
+### `Universality` (2)
+
+- 🟢 [`Universality/ConformalTower/OBC`](hubs/Universality_ConformalTower_OBC.md) — corroborated-at-p
+- 🟢 [`Universality/ConformalTower/PBC`](hubs/Universality_ConformalTower_PBC.md) — corroborated-at-p
 
 ### `XCube` (1)
 

@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | 🟢 corroborated-at-p | 36 |
 | 🔵 coherent | 8 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 16 |
-| **total claimed hubs** | **60** |
+| 🟠 uncorroborated-but-feasible | 17 |
+| **total claimed hubs** | **61** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian`
 
@@ -62,6 +62,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityYY_OBC.md) | — | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_OBC.md) | 🟢 [hub](../hubs/TFIM_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/TFIM_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | — | 🟠 [hub](../hubs/TFIM_UniversalityClass_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/TFIM_VonNeumannEntropy_OBC.md) | — | 🟠 [hub](../hubs/TFIM_VonNeumannEntropy_Infinite.md) |
 | [`XXCorrelation`](../quantities/XXCorrelation.md) | 🟢 [hub](../hubs/TFIM_XXCorrelation_OBC.md) | — | 🟢 [hub](../hubs/TFIM_XXCorrelation_Infinite.md) |
 | [`XXStructureFactor`](../quantities/XXStructureFactor.md) | 🟢 [hub](../hubs/TFIM_XXStructureFactor_OBC.md) | — | 🔵 [hub](../hubs/TFIM_XXStructureFactor_Infinite.md) |

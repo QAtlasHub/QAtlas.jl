@@ -23,8 +23,8 @@ _No `CONVENTION` header found in `src/models/<class>/DimerLattice/DimerLattice.j
 | 🟢 corroborated-at-p | 1 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 2 |
-| **total claimed hubs** | **3** |
+| 🟠 uncorroborated-but-feasible | 3 |
+| **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -35,6 +35,7 @@ _No `CONVENTION` header found in `src/models/<class>/DimerLattice/DimerLattice.j
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | — | 🟠 [hub](../hubs/DimerLattice_FreeEnergy_Infinite.md) |
 | [`PartitionFunction`](../quantities/PartitionFunction.md) | 🟢 [hub](../hubs/DimerLattice_PartitionFunction_OBC.md) | — |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | — | 🟠 [hub](../hubs/DimerLattice_ResidualEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/DimerLattice_UniversalityClass_Infinite.md) |
 
 ## References
 

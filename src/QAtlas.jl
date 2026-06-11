@@ -119,7 +119,7 @@ export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLoca
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor
-export CentralCharge, LuttingerParameter, CorrelationLength
+export CentralCharge, LuttingerParameter, CorrelationLength, UniversalityClass
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
@@ -401,5 +401,43 @@ include("core/coherence.jl")
 export predicts, predicted_by, bounds_on, cited_by, delegations, implementations_of
 export coherence_report,
     coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Precompile workload — bake the hot `fetch` specializations into the package
+# image so the test suite (and downstream callers) do not re-pay type inference
+# on every fresh process.
+#
+# WHY this matters here specifically: `fetch` is a single generic function with
+# hundreds of (model, quantity, bc) methods plus kwargs forwarding through
+# delegation chains. The first call for each concrete signature triggers heavy
+# constant-propagation inference (minutes in aggregate across the shards). These
+# are the same combinations the verify/identity harness exercises; compiling
+# them once at precompile time moves that cost out of every CI run.
+#
+# Numerics are unaffected — this only pre-warms inference/codegen. Kept on the
+# heaviest TFIM free-fermion thermal paths (the dominant share of CI wall time)
+# plus the OBC structure factors; extend as new hot hubs appear.
+using PrecompileTools: @setup_workload, @compile_workload
+
+@setup_workload begin
+    m = TFIM(; J=1.0, h=0.5)
+    @compile_workload begin
+        for q in (
+            FreeEnergy(),
+            ThermalEntropy(),
+            SpecificHeat(),
+            MagnetizationX(),
+            SusceptibilityXX(),
+        )
+            fetch(m, q, Infinite(); beta=1.0)
+            fetch(m, q, OBC(8); beta=1.0)
+            fetch(m, q, PBC(; N=8); beta=1.0)
+        end
+        fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=1.0, eta=0.1)
+        for SF in (XXStructureFactor(), YYStructureFactor(), ZZStructureFactor())
+            fetch(m, SF, OBC(8); beta=1.0, q=0.0)
+        end
+    end
+end
 
 end # module QAtlas

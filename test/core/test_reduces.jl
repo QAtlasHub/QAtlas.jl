@@ -83,15 +83,20 @@ end
 end
 
 # #661 — orphan universality classes: a class that predicts (has :universal rows)
-# but is realized by no model is a coverage hole the network now self-reports (C9).
+# but is realized by no model is a coverage hole the network self-reports (C9).
+# The model→universality `@realizes` edges close that hole: :Potts3 / :Potts4 —
+# which carry CardyEntanglement :universal rows — are now realized by ZnClock /
+# ZnParafermion, so they no longer surface as orphans.
 @testset "orphan universality classes surface as coverage gaps (#661)" begin
     fs = QAtlas.coherence_report()
     @test isempty(QAtlas.coherence_errors(fs))            # still no invariant violations
     orphans = filter(g -> g.check === :orphan_class, QAtlas.coherence_gaps(fs))
     msgs = join((g.message for g in orphans), " ")
-    # :Potts3 / :Potts4 carry CardyEntanglement :universal rows but no model realizes them
-    @test occursin(":Potts3", msgs)
-    @test occursin(":Potts4", msgs)
+    # :Potts3 / :Potts4 are now realized via @realizes edges, not orphan coverage holes
+    @test !isempty(QAtlas.realized_by(:Potts3))
+    @test !isempty(QAtlas.realized_by(:Potts4))
+    @test !occursin(":Potts3", msgs)
+    @test !occursin(":Potts4", msgs)
     # a realized class (Ising — TFIM / IsingSquare / …) must never be flagged orphan
     @test !occursin(":Ising", msgs)
 end

@@ -60,6 +60,21 @@ for same-sign hoppings) and the band gap `E_+ − E_−` is twice that.  This is
 particle-conserving cousin of the [`Kitaev1D`](@ref) Majorana wire (both have a
 chiral sublattice symmetry — SSH is class BDI for all `v,w`, Kitaev1D at its
 symmetric point — and protected edge modes), without superconducting pairing.
+
+Currently registered fetches:
+
+| Quantity                   | BC                 | Coverage                                                              |
+| -------------------------- | ------------------ | --------------------------------------------------------------------- |
+| [`ExactSpectrum`](@ref)    | `OBC`              | Non-negative single-particle energies via dense diagonalization       |
+| [`Energy`](@ref)           | `Infinite`         | Ground-state energy density via Gauss-Kronrod dispersion integral     |
+| [`MassGap`](@ref)          | `Infinite` / `OBC` | Single-particle gap                                                   |
+| [`EdgeModeEnergy`](@ref)    | `OBC`              | Lowest-lying boundary mode energy                                     |
+| [`CorrelationLength`](@ref)| `Infinite`         | Inverse of single-particle gap                                        |
+| [`TopologicalInvariant`](@ref) | `Infinite`     | Winding number of the chiral off-diagonal loop                        |
+| [`FreeEnergy`](@ref)        | `Infinite`         | Thermal Helmholtz free energy density                                 |
+| [`ThermalEntropy`](@ref)    | `Infinite`         | Thermal entropy density                                               |
+| [`SpecificHeat`](@ref)      | `Infinite`         | Thermal specific heat density                                         |
+| [`UniversalityClass`](@ref) | `Infinite`         | `:XY` universality class on the critical/gapless line `|v| = |w|`     |
 """
 struct SSH <: AbstractQAtlasModel
     v::Float64

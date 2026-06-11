@@ -24,8 +24,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalPotts3`**.  Cells link 
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **3** |
+| 🟠 uncorroborated-but-feasible | 2 |
+| **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`, `minimal_model_delegation`
 
@@ -36,6 +36,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalPotts3`**.  Cells link 
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/TricriticalPotts3_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | 🟢 [hub](../hubs/TricriticalPotts3_ConformalWeights_Infinite.md) |
 | [`PrimaryFields`](../quantities/PrimaryFields.md) | 🟠 [hub](../hubs/TricriticalPotts3_PrimaryFields_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/TricriticalPotts3_UniversalityClass_Infinite.md) |
 
 ## References
 

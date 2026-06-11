@@ -36,6 +36,15 @@ partition function with unit dimer weights is the number of perfect matchings.
 `Lx`, `Ly` may be carried in the struct or passed as keyword arguments to
 `fetch`.  The thermodynamic-limit entropy per site is `G/π` (Catalan / π),
 exposed as [`ResidualEntropy`](@ref) at `Infinite`.
+
+Currently registered fetches:
+
+| Quantity                   | BC         | Coverage                                                              |
+| -------------------------- | ---------- | --------------------------------------------------------------------- |
+| [`PartitionFunction`](@ref)| `OBC`      | Perfect matchings count on finite Lx × Ly grid                        |
+| [`ResidualEntropy`](@ref)   | `Infinite` | Catalan/π ≈ 0.29156 (Fisher 1961)                                     |
+| [`FreeEnergy`](@ref)        | `Infinite` | Free energy density (equal to -ResidualEntropy)                       |
+| [`UniversalityClass`](@ref) | `Infinite` | `:XY` universality class (c = 1 compact free boson)                    |
 """
 struct DimerLattice <: AbstractQAtlasModel
     Lx::Int

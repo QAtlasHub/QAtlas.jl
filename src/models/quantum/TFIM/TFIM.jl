@@ -31,6 +31,16 @@ The 1D transverse field Ising model with Hamiltonian
 
 `J > 0` is ferromagnetic, `h` is the transverse field.  The critical
 point sits at `h = J`.
+
+Currently registered fetches:
+
+| Quantity                   | BC                 | Coverage                                                              |
+| -------------------------- | ------------------ | --------------------------------------------------------------------- |
+| [`Energy`](@ref)           | `OBC` / `Infinite` | Exact energy computed via BdG transformation                          |
+| [`SpecificHeat`](@ref)     | `Infinite`         | Specific heat at finite temperature                                   |
+| [`FreeEnergy`](@ref)       | `Infinite`         | Free energy density at finite temperature                             |
+| [`ThermalEntropy`](@ref)   | `Infinite`         | Thermal entropy density at finite temperature                         |
+| [`UniversalityClass`](@ref) | `Infinite`         | `:Ising` universality class at the critical point `h = J` (flows to `:IsingSDRG` under strong disorder) |
 """
 struct TFIM <: AbstractQAtlasModel
     J::Float64

@@ -46,9 +46,10 @@
 
 Phase-1 quantities:
 
-| Quantity                | BC         | Method                                 |
-| ----------------------- | ---------- | -------------------------------------- |
-| [`CentralCharge`](@ref) | `Infinite` | delegated to `MinimalModel` (n = 2, 3) |
+| Quantity                   | BC         | Method                                 |
+| -------------------------- | ---------- | -------------------------------------- |
+| [`CentralCharge`](@ref)     | `Infinite` | delegated to `MinimalModel` (n = 2, 3) |
+| [`UniversalityClass`](@ref) | `Infinite` | `:Ising` for n = 2, `:Potts3` for n = 3|
 
 For n ≥ 4 the critical theory is a continuous family of c = 1 CFTs
 (Ashkin-Teller for n = 4; intermediate BKT phase for n ≥ 5) whose

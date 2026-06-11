@@ -65,6 +65,29 @@ function fetch(m::Universality{:Ising}, ::CentralCharge; d::Int=2, kwargs...)
 end
 
 """
+    fetch(::Universality{:IsingSDRG}, ::CentralCharge; d::Int=2) -> Float64
+
+Effective central charge of the strong-disorder renormalization group (SDRG)
+fixed point (infinite-randomness fixed point, IRFP) of the 1D random transverse-field
+Ising model (RTFIM).
+
+For d = 2 (1+1D), the clean Ising central charge c = 1/2 is replaced by the Refael-Moore
+effective central charge:
+
+    c_eff = c * log(2) = log(2) / 2  ≈ 0.34657359
+
+Reference: Refael, Moore, Phys. Rev. Lett. 93, 260602 (2004).
+"""
+function fetch(m::Universality{:IsingSDRG}, ::CentralCharge; d::Int=2, kwargs...)
+    if d == 2
+        return log(2.0) / 2.0
+    end
+    return error("Universality{:IsingSDRG} CentralCharge: only d=2 supported; got d=$d.")
+end
+
+_universality_central_charge(::Universality{:IsingSDRG}) = log(2.0) / 2.0
+
+"""
     fetch(::Universality{:Potts3}, ::CentralCharge; d::Int=2) -> Rational{Int}
 
 Central charge of the 3-state Potts universality class.  `d = 2` only.
@@ -458,6 +481,9 @@ end
 # (model, quantity, bc) used by every other CentralCharge hub.
 
 function fetch(m::Universality{:Ising}, q::CentralCharge, ::Infinite; kwargs...)
+    return fetch(m, q; kwargs...)
+end
+function fetch(m::Universality{:IsingSDRG}, q::CentralCharge, ::Infinite; kwargs...)
     return fetch(m, q; kwargs...)
 end
 function fetch(m::Universality{:Potts3}, q::CentralCharge, ::Infinite; kwargs...)

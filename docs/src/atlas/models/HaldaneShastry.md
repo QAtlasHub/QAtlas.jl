@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`HaldaneShastry`**.  Cells link to 
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 6 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 7 |
+| **total claimed hubs** | **7** |
 
 **Methods** (from `@register`, derived): `analytic`, `cft_low_T`, `delegation`
 
@@ -40,6 +40,7 @@ All `(Quantity, BC)` hubs `src` claims for **`HaldaneShastry`**.  Cells link to 
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/HaldaneShastry_UniversalityClass_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_VonNeumannEntropy_Infinite.md) |
 
 ## References

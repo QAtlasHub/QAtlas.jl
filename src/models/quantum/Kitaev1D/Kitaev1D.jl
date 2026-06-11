@@ -67,6 +67,12 @@ This is the 1D Majorana wire and is **distinct** from the 2D
 The TFIM is a special case (`μ = -2h`, `t = J`, `Δ = J`); the BdG
 spectrum of `Kitaev1D(μ=-2h, t=J, Δ=J)` agrees exactly with that of
 `TFIM(J=J, h=h)` at OBC.
+
+Currently registered fetches:
+
+| Quantity                   | BC         | Coverage                                                              |
+| -------------------------- | ---------- | --------------------------------------------------------------------- |
+| [`UniversalityClass`](@ref) | `Infinite` | `:Ising` universality class on the critical line `|μ| = 2|t|`          |
 """
 struct Kitaev1D <: AbstractQAtlasModel
     μ::Float64

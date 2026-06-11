@@ -28,8 +28,8 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingSquare`**.  Cells link to the
 | 🟢 corroborated-at-p | 7 |
 | 🔵 coherent | 2 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **12** |
+| 🟠 uncorroborated-but-feasible | 4 |
+| **total claimed hubs** | **13** |
 
 **Methods** (from `@register`, derived): `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix`
 
@@ -45,6 +45,7 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingSquare`**.  Cells link to the
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/IsingSquare_SpecificHeat_PBC.md) | 🟠 [hub](../hubs/IsingSquare_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | — | 🟢 [hub](../hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/IsingSquare_ThermalEntropy_PBC.md) | 🔵 [hub](../hubs/IsingSquare_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/IsingSquare_UniversalityClass_Infinite.md) |
 
 ## Derivation notes
 

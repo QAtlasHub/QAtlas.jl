@@ -27,8 +27,8 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | 🟢 corroborated-at-p | 6 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 2 |
-| **total claimed hubs** | **8** |
+| 🟠 uncorroborated-but-feasible | 3 |
+| **total claimed hubs** | **9** |
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
@@ -44,6 +44,7 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟢 [hub](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/CurieWeissIsing_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/CurieWeissIsing_UniversalityClass_Infinite.md) |
 
 ## Derivation notes
 

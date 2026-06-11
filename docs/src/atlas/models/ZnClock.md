@@ -24,16 +24,17 @@ All `(Quantity, BC)` hubs `src` claims for **`ZnClock`**.  Cells link to the per
 | 🟢 corroborated-at-p | 1 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 0 |
-| **total claimed hubs** | **1** |
+| 🟠 uncorroborated-but-feasible | 1 |
+| **total claimed hubs** | **2** |
 
-**Methods** (from `@register`, derived): `delegation`
+**Methods** (from `@register`, derived): `analytic`, `delegation`
 
 ## Quantity × BC matrix
 
 | Quantity | `Infinite` |
 |---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/ZnClock_CentralCharge_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/ZnClock_UniversalityClass_Infinite.md) |
 
 ## References
 

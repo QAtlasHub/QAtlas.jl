@@ -17,16 +17,17 @@ _No `CONVENTION` header found in `src/models/<class>/Universality/Universality.j
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 0 |
-| **total claimed hubs** | **2** |
+| 🟠 uncorroborated-but-feasible | 1 |
+| **total claimed hubs** | **3** |
 
 **Methods** (from `@register`, derived): `analytic`
 
 ## Quantity × BC matrix
 
-| Quantity | `OBC` | `PBC` |
-|---|---|---|
-| [`ConformalTower`](../quantities/ConformalTower.md) | 🟢 [hub](../hubs/Universality_ConformalTower_OBC.md) | 🟢 [hub](../hubs/Universality_ConformalTower_PBC.md) |
+| Quantity | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`ConformalTower`](../quantities/ConformalTower.md) | 🟢 [hub](../hubs/Universality_ConformalTower_OBC.md) | 🟢 [hub](../hubs/Universality_ConformalTower_PBC.md) | — |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | — | 🟠 [hub](../hubs/Universality_UniversalityClass_Infinite.md) |
 
 ## Derivation notes
 

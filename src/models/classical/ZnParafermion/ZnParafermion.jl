@@ -52,6 +52,13 @@ CFT with `c = 4/5`.
 
 - `n::Integer = 3` — parafermion level; must satisfy `n ≥ 2`.
 
+Currently registered fetches:
+
+| Quantity                   | BC         | Coverage                                                              |
+| -------------------------- | ---------- | --------------------------------------------------------------------- |
+| [`CentralCharge`](@ref)     | `Infinite` | Coset central charge `c = 2(n-1)/(n+2)`                               |
+| [`UniversalityClass`](@ref) | `Infinite` | `:Ising` for n=2, `:Potts3` for n=3, and `:Potts4` for n=4            |
+
 # Examples
 
 ```julia

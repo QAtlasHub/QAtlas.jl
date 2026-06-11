@@ -76,16 +76,13 @@ also provided.
 
 Currently registered fetches:
 
-| Quantity                  | BC          | Coverage                                |
-| ------------------------- | ----------- | --------------------------------------- |
-| [`ResidualEntropy`](@ref) | `Infinite`  | Square ice (Δ = 1/2) + FE (Δ > 1)       |
-| [`FreeEnergy`](@ref)      | `Infinite`  | FE phase + square-ice point             |
-
-The full disordered-phase free energy (Lieb / Sutherland 1967
-trigonometric integral) and the AFE elliptic-function free energy
-(Lieb 1967b) are out of scope for the present commit (Phase 2 / Phase 3
-of issue #163) and will throw an informative `ArgumentError` if
-requested.
+| Quantity                   | BC          | Coverage                                                 |
+| -------------------------- | ----------- | -------------------------------------------------------- |
+| [`ResidualEntropy`](@ref)   | `Infinite`  | All phases (via E - f thermodynamic relation)            |
+| [`FreeEnergy`](@ref)        | `Infinite`  | All phases (FE, AFE, disordered)                         |
+| [`Energy`](@ref)            | `Infinite`  | All phases (via finite difference of FreeEnergy)         |
+| [`Polarization`](@ref)      | `Infinite`  | All phases                                               |
+| [`UniversalityClass`](@ref) | `Infinite`  | `:XY` universality class in disordered phase `abs(Δ) < 1` |
 
 See also: [`IsingSquare`](@ref) for the closest classical analog.
 """

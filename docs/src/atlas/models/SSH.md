@@ -25,8 +25,8 @@ All `(Quantity, BC)` hubs `src` claims for **`SSH`**.  Cells link to the per-hub
 | 🟢 corroborated-at-p | 5 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **9** |
+| 🟠 uncorroborated-but-feasible | 5 |
+| **total claimed hubs** | **10** |
 
 **Methods** (from `@register`, derived): `analytic`, `dense_ed`
 
@@ -42,6 +42,7 @@ All `(Quantity, BC)` hubs `src` claims for **`SSH`**.  Cells link to the per-hub
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | — | 🟠 [hub](../hubs/SSH_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | — | 🟠 [hub](../hubs/SSH_ThermalEntropy_Infinite.md) |
 | [`TopologicalInvariant`](../quantities/TopologicalInvariant.md) | — | 🟢 [hub](../hubs/SSH_TopologicalInvariant_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/SSH_UniversalityClass_Infinite.md) |
 
 ## References
 

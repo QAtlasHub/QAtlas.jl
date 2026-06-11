@@ -28,8 +28,8 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 7 |
-| **total claimed hubs** | **9** |
+| 🟠 uncorroborated-but-feasible | 8 |
+| **total claimed hubs** | **10** |
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
@@ -45,6 +45,7 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/IsingTriangular_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟠 [hub](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/IsingTriangular_UniversalityClass_Infinite.md) |
 | [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟠 [hub](../hubs/IsingTriangular_ZZCorrelation_Infinite.md) |
 
 ## Derivation notes

@@ -14,6 +14,7 @@ using QAtlas: TFIM, XXZ1D, Heisenberg1D, realizations, realized_by
         ising = [r.model for r in realized_by(:Ising)]
         @test TFIM in ising
         @test IsingSquare in ising            # quantum and 2D-classical both flow to Ising
+        @test TFIM in [r.model for r in realized_by(:IsingSDRG)] # random/disordered limit
         @test XXZ1D in [r.model for r in realized_by(:XY)]
         @test Heisenberg1D in [r.model for r in realized_by(:Heisenberg)]
         @test CurieWeissIsing in [r.model for r in realized_by(:MeanField)]

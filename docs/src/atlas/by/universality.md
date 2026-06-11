@@ -11,22 +11,53 @@ Which concrete models realize each universality class (RG fixed point), and the 
 - **Heisenberg1D** — isotropic AFM point; SU(2)_1 WZW, c = 1
 - **XXZ1D** — isotropic point Δ = 1; SU(2)_1 WZW, c = 1
 
-## `Ising` (3)
+## `Ising` (6)
 
 - **IsingSquare** — 2D classical Ising at T_c; 2D Ising universality, c = 1/2
 - **IsingTriangular** — ferromagnetic triangular-lattice Ising at T_c; 2D Ising universality, c = 1/2
+- **Kitaev1D** — critical line |μ| = 2|t|; (1+1)D Ising CFT, c = 1/2
 - **TFIM** — quantum critical point h = J; (1+1)D Ising CFT, c = 1/2
+- **ZnClock** — n = 2 clock model; 2D classical Ising CFT, c = 1/2
+- **ZnParafermion** — n = 2 parafermions; (1+1)D Ising CFT, c = 1/2
+
+## `IsingSDRG` (1)
+
+- **TFIM** — strong-disorder limit / infinite-randomness fixed point (IRFP) under random bond/field couplings
 
 ## `KPZ` (1)
 
 - **TASEP** — current fluctuations of the 1D exclusion process; KPZ universality
 
+## `LeeYang` (1)
+
+- **YangLee** — Lee-Yang edge singularity; non-unitary minimal model M(5, 2), c = -22/5
+
 ## `MeanField` (1)
 
 - **CurieWeissIsing** — complete-graph (infinite-range) Ising; mean-field critical exponents
 
-## `XY` (1)
+## `Potts3` (2)
 
+- **ZnClock** — n = 3 clock model; 3-state Potts CFT, c = 4/5
+- **ZnParafermion** — n = 3 parafermions; 3-state Potts CFT, c = 4/5
+
+## `Potts4` (1)
+
+- **ZnParafermion** — n = 4 parafermions; compact free boson (c = 1)
+
+## `TricriticalIsing` (1)
+
+- **TricriticalIsing** — tricritical point of vacancy-extended Ising; M(5, 4) minimal model, c = 7/10
+
+## `TricriticalPotts3` (1)
+
+- **TricriticalPotts3** — dilute q = 3 Potts model at criticality; M(6, 7) minimal model, c = 6/7
+
+## `XY` (4)
+
+- **DimerLattice** — close-packed dimer model; height representation is a c = 1 compact free boson (XY class)
+- **SSH** — critical line |v| = |w|; (1+1)D free Dirac fermion / XY class, c = 1
+- **SixVertex** — disordered phase |Δ| < 1; compact free boson (Luttinger liquid / XY class), c = 1
 - **XXZ1D** — critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1
 
 [← back to the Atlas index](../index.md)

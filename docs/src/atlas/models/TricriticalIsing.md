@@ -24,8 +24,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalIsing`**.  Cells link t
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **3** |
+| 🟠 uncorroborated-but-feasible | 2 |
+| **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -36,6 +36,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TricriticalIsing`**.  Cells link t
 | [`CentralCharge`](../quantities/CentralCharge.md) | 🟢 [hub](../hubs/TricriticalIsing_CentralCharge_Infinite.md) |
 | [`ConformalWeights`](../quantities/ConformalWeights.md) | 🟢 [hub](../hubs/TricriticalIsing_ConformalWeights_Infinite.md) |
 | [`PrimaryFields`](../quantities/PrimaryFields.md) | 🟠 [hub](../hubs/TricriticalIsing_PrimaryFields_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/TricriticalIsing_UniversalityClass_Infinite.md) |
 
 ## References
 

@@ -72,6 +72,13 @@ Convention: `J > 0` is antiferromagnetic.  `Δ = 1` is the isotropic
 Heisenberg AF point, `Δ = 0` is the XX (free-fermion) point, `Δ = -1`
 is the isotropic ferromagnet.  For `|Δ| < 1` the chain is critical
 (Luttinger liquid, central charge `c = 1`).
+
+Currently registered fetches:
+
+| Quantity                   | BC                 | Coverage                                                              |
+| -------------------------- | ------------------ | --------------------------------------------------------------------- |
+| [`Energy`](@ref)           | `Infinite`         | Exact ground-state energy density via Yang-Yang Bethe ansatz integral |
+| [`UniversalityClass`](@ref) | `Infinite`         | `:XY` in critical phase `-1 < Δ < 1`, and `:Heisenberg` at `Δ = 1`    |
 """
 struct XXZ1D <: AbstractQAtlasModel
     J::Float64

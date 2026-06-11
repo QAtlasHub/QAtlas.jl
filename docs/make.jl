@@ -85,6 +85,7 @@ makedocs(;
         "Universality Classes" => [
             "universalities/index.md",
             "Ising" => "universalities/ising.md",
+            "Ising SDRG" => "universalities/isingsdrg.md",
             "Percolation" => "universalities/percolation.md",
             "Potts" => "universalities/potts.md",
             "KPZ" => "universalities/kpz.md",

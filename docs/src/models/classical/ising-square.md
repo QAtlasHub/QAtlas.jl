@@ -237,7 +237,7 @@ derivation note under `docs/src/calc/`:
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 12 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 13 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
@@ -253,8 +253,10 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 12 hubs (qua
 | [`SpontaneousMagnetization`](../../atlas/hubs/IsingSquare_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 4 |
 | [`ThermalEntropy`](../../atlas/hubs/IsingSquare_ThermalEntropy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | [`ThermalEntropy`](../../atlas/hubs/IsingSquare_ThermalEntropy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 4 |
+| [`UniversalityClass`](../../atlas/hubs/IsingSquare_UniversalityClass_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

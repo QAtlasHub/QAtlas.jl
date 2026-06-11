@@ -433,7 +433,15 @@ struct YYStructureFactor <: AbstractQuantity end
 # ─── Universality / lattice spectra / advanced ─────────────────────────
 
 """
+    UniversalityClass() <: AbstractQuantity
+
+The emergent universality class of a model at its critical point / scaling regime.
+"""
+struct UniversalityClass <: AbstractQuantity end
+
+"""
     CentralCharge() <: AbstractQuantity
+
 
 Central charge `c` of the emergent CFT.  For 1D critical systems
 extracted from the Calabrese–Cardy entanglement formula; universality

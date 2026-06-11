@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | 🟢 corroborated-at-p | 18 |
 | 🔵 coherent | 5 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 8 |
-| **total claimed hubs** | **31** |
+| 🟠 uncorroborated-but-feasible | 9 |
+| **total claimed hubs** | **32** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `exact_2spinon`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie`
 
@@ -57,6 +57,7 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityYY_OBC.md) | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/XXZ1D_SusceptibilityZZ_OBC.md) | — |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | 🔵 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/XXZ1D_UniversalityClass_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) |
 | [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟠 [hub](../hubs/XXZ1D_ZZStructureFactor_Infinite.md) |
 

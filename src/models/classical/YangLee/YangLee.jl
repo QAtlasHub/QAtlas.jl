@@ -51,10 +51,11 @@ The model has no continuous parameters: M(5, 2) is fixed.
 
 Quantities registered (Phase 1):
 
-| Quantity                       | BC         | Method                         |
-| ------------------------------ | ---------- | ------------------------------ |
-| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(5,2) |
-| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(5,2) |
+| Quantity                       | BC         | Method                                 |
+| ------------------------------ | ---------- | -------------------------------------- |
+| [`CentralCharge`](@ref)        | `Infinite` | delegated to MinimalModel(5,2)         |
+| [`ConformalWeights`](@ref)     | `Infinite` | delegated to MinimalModel(5,2)         |
+| [`UniversalityClass`](@ref)     | `Infinite` | `:LeeYang` universality class           |
 
 The famous negative-dimension primary `h_{1,2} = -1/5` is the edge
 exponent and is what makes the theory non-unitary (c = -22/5 < 0).

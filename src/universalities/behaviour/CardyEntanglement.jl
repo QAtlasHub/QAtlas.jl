@@ -1106,6 +1106,14 @@ The boundary entropies are:
     log g_N = (1/4) log(K / 2)
     log g_D = -(1/4) log(2 * K)
 
+These satisfy g_N · g_D = 1/sqrt(2) (the c = 1 normalisation) and
+g_N / g_D = sqrt(K). Here `K = 1` is the **self-dual radius**, where
+Dirichlet and Neumann coincide at g = 2^{-1/4} (this is the SU(2)-symmetric
+point shared with the [`:Heisenberg`] SU(2)_1 Cardy states). Note this `K`
+convention places the SU(2) point at `K = 1`; it differs by a factor of two
+from the XXZ Luttinger convention used by [`LuttingerParameter`], where the
+isotropic Heisenberg point is `K = 1/2`.
+
 Reference: Affleck-Ludwig *Phys. Rev. Lett.* **67**, 161 (1991). Tracking: #580.
 """
 function fetch(
@@ -1138,20 +1146,29 @@ raw"""
 Affleck-Ludwig universal boundary entropy `log g` for the SU(2)_1 WZW CFT
 (Heisenberg universality class, c = 1) at d = 1.
 
-`boundary_state` must be one of:
-    `:free` (≡ `:neumann` / SU(2)-symmetric open boundary; j=0 Cardy state:
-             g = 1, log g = 0),
-    `:fixed` (≡ `:dirichlet` / fixed-spin boundary; j=1/2 Cardy state:
-              g = 2^{1/4}, log g = (1/4) log 2).
+The SU(2)_1 WZW model has exactly **two** conformal (Cardy) boundary
+states, labelled by the primaries j = 0 (identity) and j = 1/2. Their
+universal g-factors follow from the modular S-matrix
 
-The g-values follow from the Affleck-Ludwig analysis of the SU(2)_1 WZW
-model: the j=1/2 spin-impurity (Kondo) fixed point has g = 2^{1/4},
-as tabulated in the SU(2)_k boundary state analysis. Note this differs
-from the Ising fixed-boundary value g = 1/sqrt(2); the two models are in
-distinct universality classes.
+    g_a = S_{0a} / sqrt(S_{00}),
+    S_{j j'} = sqrt(2/(k+2)) sin[π(2j+1)(2j'+1)/(k+2)],   k = 1,
+
+which gives S_{00} = S_{0,1/2} = 1/sqrt(2), hence
+
+    g_{j=0} = g_{j=1/2} = 2^{-1/4},   log g = -(1/4) log 2.
+
+The two Cardy states are therefore **g-degenerate**: at the SU(2)-symmetric
+point both the `:free` (≡ `:neumann`, j = 0) and `:fixed` (≡ `:dirichlet`,
+j = 1/2) boundary conditions carry the same boundary entropy, -(1/4) log 2.
+This is consistent with the compact-boson [`:XY`] result evaluated at the
+self-dual radius (Luttinger `K = 1`), where Dirichlet and Neumann coincide
+at g = 2^{-1/4}. (A *symmetry-breaking* fully-polarised lattice boundary, or
+a Kondo spin-impurity fixed point, is a different object not described by
+these clean SU(2)_1 Cardy states.)
 
 Reference: Affleck-Ludwig *Phys. Rev. Lett.* **67**, 161 (1991);
-Oshikawa-Affleck *Nucl. Phys. B* **495**, 533 (1997). Tracking: #580.
+Cardy *Nucl. Phys. B* **324**, 581 (1989) (Cardy-state / modular-S
+construction). Tracking: #580.
 """
 function fetch(
     ::Universality{:Heisenberg},
@@ -1160,10 +1177,13 @@ function fetch(
     boundary_state::Symbol,
     kwargs...,
 )
-    if boundary_state === :free || boundary_state === :neumann
-        return 0.0          # j=0 Cardy state: g = 1, log g = 0
-    elseif boundary_state === :fixed || boundary_state === :dirichlet
-        return log(2) / 4   # j=1/2 Cardy state: g = 2^(1/4), log g = (1/4) log 2
+    if boundary_state === :free ||
+        boundary_state === :neumann ||
+        boundary_state === :fixed ||
+        boundary_state === :dirichlet
+        # Both SU(2)_1 Cardy states (j=0 and j=1/2) have g = 2^{-1/4}:
+        # g_a = S_{0a}/sqrt(S_{00}) with S_{00} = S_{0,1/2} = 1/sqrt(2).
+        return -log(2) / 4
     else
         throw(
             ArgumentError(

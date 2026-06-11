@@ -9,12 +9,18 @@
 #                    quantity)
 #   * edge color  = verified status of the result a node provides: exact &
 #                    universal share one color, bound, approx; `realizes`
-#                    (model → class) edges use a neutral color
+#                    (model → class) edges use a neutral color; the meta
+#                    relations below use the palette's default color
 #   * edge style  = solid (a test validates it) / dashed (no dedicated test)
 #
-# Two relations only: a model *realizes* a class (model ↔ universality), and a
-# namespace *provides* a quantity (quantity ↔ verified status).  Coherence gaps
-# are NOT drawn — an isolated node (an undeveloped class, a model realizing no
+# Relations drawn: a model *realizes* a class (model ↔ universality), a
+# namespace *provides* a quantity (quantity ↔ verified status), and the meta
+# edges of the knowledge graph — *reduces* (model → model delegation),
+# *dual* (model ↔ model parameter-mapped equivalence), *limits_to*
+# (model → model asymptotic limit) and *identity* (quantity ↔ quantity exact
+# relation).  The constraint edges (dual / identity / limits_to) are solid:
+# their generated cross-checks run in test/generated/.  Coherence gaps are
+# NOT drawn — an isolated node (an undeveloped class, a model realizing no
 # class) *is* the gap, visible by its lack of edges.
 #
 # Run: julia --project=. docs/atlas/graph_export.jl  →  docs/src/atlas/graph.md
@@ -57,6 +63,51 @@ for r in REAL
             verified=true,
         ),
     )
+end
+
+# meta edges: the model↔model and quantity↔quantity relations of the
+# constraint layer (#697).  All use status="meta" (the palette's default
+# color) so they read as graph structure, not as provided-result claims.
+# reduces — declared delegation routes (C4-typed, no generated value test ⇒ dashed)
+for r in QAtlas.REDUCES
+    s, t = _short(r.source), _short(r.target)
+    addnode!("M:" * s, s, "model", _model_url(s))
+    addnode!("M:" * t, t, "model", _model_url(t))
+    push!(
+        edges, (from="M:" * s, to="M:" * t, kind="reduces", status="meta", verified=false)
+    )
+end
+# dual — parameter-mapped equivalences (generated cross-checks ⇒ solid)
+for d in QAtlas.DUALITIES
+    s, t = _short(d.source), _short(d.target)
+    s == t && continue   # a self-duality has no second node to link
+    addnode!("M:" * s, s, "model", _model_url(s))
+    addnode!("M:" * t, t, "model", _model_url(t))
+    push!(edges, (from="M:" * s, to="M:" * t, kind="dual", status="meta", verified=true))
+end
+# limits_to — asymptotic limits (generated convergence checks ⇒ solid)
+for l in QAtlas.LIMIT_EDGES
+    s, t = _short(l.source), _short(l.target)
+    addnode!("M:" * s, s, "model", _model_url(s))
+    addnode!("M:" * t, t, "model", _model_url(t))
+    push!(
+        edges, (from="M:" * s, to="M:" * t, kind="limits_to", status="meta", verified=true)
+    )
+end
+# identity — quantity↔quantity exact relations: pairwise edges among each
+# identity's participants, so the F–E–S triangle (Gibbs) and the component
+# families (isotropy) render as connected structure instead of isolated leaves
+for e in QAtlas.IDENTITIES
+    ps = QAtlas.participants(e)
+    for i in eachindex(ps), j in (i + 1):length(ps)
+        a, b = _short(ps[i]), _short(ps[j])
+        addnode!("Q:" * a, a, "quantity", _quantity_url(a))
+        addnode!("Q:" * b, b, "quantity", _quantity_url(b))
+        push!(
+            edges,
+            (from="Q:" * a, to="Q:" * b, kind="identity", status="meta", verified=true),
+        )
+    end
 end
 
 # provides : namespace → quantity, one per registry row.  The namespace is the
@@ -125,7 +176,7 @@ for e in edges
             to=e.to,
             kind=e.kind,
             status=best,
-            verified=p.verified || e.verified,
+            verified=(p.verified || e.verified),
         )
     else
         merged[k] = e
@@ -154,17 +205,22 @@ n_quant = count(id -> startswith(id, "Q:"), keys(nodes))
 page = """
 # Knowledge graph
 
-The QAtlas vault as a force-directed network of two relations: a **model**
+The QAtlas vault as a force-directed network.  Base relations: a **model**
 *belongs to* a **universality class** (model ↔ universality), and a namespace —
 model, class, or **bound** domain — *provides* a **quantity** (quantity ↔
-verified status).
+verified status).  Meta relations (neutral color): a model *reduces to* a
+model (delegation route), *is dual to* a model (parameter-mapped equivalence),
+*limits to* a model (asymptotic approach), and a quantity is bound to a
+quantity by an exact *identity* (Gibbs relation, symmetry isotropy, …) — the
+constraint edges whose cross-checks are generated mechanically in
+`test/generated/`.
 
 Node color marks the node type.  Edge color marks the kind of claim the
 provided result makes — **exact / universal** (one color), **bound**, or
 **approx** — and edge style marks verification: a **solid** edge has a
-dedicated test, a **dashed** edge does not.  Coherence *gaps* are not drawn:
-an isolated node (an undeveloped class, or a model belonging to no class) *is*
-the gap, visible by its lack of edges.
+dedicated (or generated) test, a **dashed** edge does not.  Coherence *gaps*
+are not drawn: an isolated node (an undeveloped class, or a model belonging to
+no class) *is* the gap, visible by its lack of edges.
 
 Type in the search box to highlight nodes by name.  Drag nodes, scroll to zoom,
 hover to highlight neighbours and reveal labels, click a model or quantity to

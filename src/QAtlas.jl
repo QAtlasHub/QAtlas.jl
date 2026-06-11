@@ -88,6 +88,13 @@ include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/reduces.jl")   # model -> model reductions (limit / special point)
 include("core/about.jl")     # model description cards (summary + Hamiltonian)
+# Constraint-edge layer (#697): one shared kernel (store registration +
+# generated-check protocol), then each edge type as a thin instantiation.
+include("core/constraints.jl")  # kernel: EDGE_STORES + GeneratedCheck protocol
+include("core/symmetry.jl")     # @symmetry node attributes + LSM checks (C10)
+include("core/identity.jl")     # @identity quantity<->quantity edges (C11)
+include("core/duality.jl")      # @dual model<->model parameter-mapped edges (C12)
+include("core/limits.jl")       # @limits_to asymptotic limit edges (C13)
 include("core/pfaffian.jl")
 include("core/dense_ed.jl")
 
@@ -98,6 +105,24 @@ export definitions, validity, canonical_scheme  # multi-definition catalog / sel
 export Realization, realizes!, @realizes, realizations, realized_by, realized_class  # model <-> class
 export Reduction, reduces!, @reduces, reductions, reduced_from  # model -> model
 export ModelCard, ABOUT, about!, @about, about  # model description cards
+
+# --- Constraint-edge layer public API (#697 kernel + edge types) ---
+export GeneratedCheck, CheckOutcome, generated_checks, run_generated_check
+export SymmetryProfile, symmetry!, @symmetry, symmetry_profile, models_with_symmetry
+export IdentityEdge, identity!, @identity, identities_for, participants
+export Duality, dual!, @dual, dualities
+export LimitEdge, limits_to!, @limits_to, limits_from, limits_into
+
+# --- Quantity taxonomy layer (#690): family supertypes + component trait ---
+export AbstractThermalPotential,
+    AbstractMagnetization,
+    AbstractSusceptibility,
+    AbstractTwoPointCorrelation,
+    AbstractStructureFactor,
+    AbstractGap,
+    AbstractVelocity,
+    AbstractEntanglementMeasure
+export component
 
 # --- Quantity struct exports (new, axis-explicit naming) ---
 export Energy,
@@ -393,6 +418,13 @@ include("about_registry.jl")
 
 # Model -> model reductions (limit / special point) — after all models.
 include("reduces_registry.jl")
+
+# Constraint-edge declarations — after all models (the edges reference model
+# and quantity types; the identity family validation reads REGISTRY).
+include("symmetry_registry.jl")
+include("identity_registry.jl")
+include("duality_registry.jl")
+include("limits_registry.jl")
 
 # Knowledge-graph layer: bidirectional queries over the edge stores
 # (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.

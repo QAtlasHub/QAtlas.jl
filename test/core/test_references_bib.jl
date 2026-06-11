@@ -1,7 +1,9 @@
 # test/core/test_references_bib.jl
 #
-# Key-consistency check: every reference cited in the `@register` REGISTRY
-# must resolve to an entry in references.bib.
+# Key-consistency check: every reference cited in ANY declarative edge store
+# (@register / @realizes / @reduces / @about and the constraint stores, via
+# the EDGE_STORES registration of core/constraints.jl) must resolve to an
+# entry in references.bib (#696).
 #
 # This is the first half of the two-stage reference check:
 #   1. (here, Julia) every cited bibkey resolves to an entry in
@@ -65,6 +67,18 @@ is_bibkey(s::AbstractString) = occursin(r"^[A-Za-z][A-Za-z0-9_]*$", s)
 # justification.
 const KNOWN_UNMIGRATED = Set{String}()
 
+# Every reference cited anywhere in the knowledge graph, via the
+# EDGE_STORES registration (one loop covers @register, @realizes, @reduces,
+# @about, @symmetry, @identity, @dual, @limits_to — and any future store the
+# moment it registers itself).
+function all_cited_references()
+    refs = String[]
+    for spec in QAtlas.EDGE_STORES, row in spec.store
+        append!(refs, String(r) for r in spec.references_of(row))
+    end
+    return refs
+end
+
 @testset "references.bib key consistency" begin
     path = references_bib_path()
     @test isfile(path)
@@ -72,15 +86,20 @@ const KNOWN_UNMIGRATED = Set{String}()
     available = bib_citation_keys(path)
     @test !isempty(available)
 
-    # Every bibkey-form reference cited across the registry must exist.
+    # The registration must actually cover the graph (a regression here means
+    # a store stopped registering itself).
+    @test Set(s.name for s in QAtlas.EDGE_STORES) ⊇
+        Set([:registry, :realizes, :reduces, :about])
+
+    # Every bibkey-form reference cited across every edge store must exist.
     cited = Set{String}()
-    for e in QAtlas.REGISTRY, r in e.references
-        is_bibkey(r) && push!(cited, String(r))
+    for r in all_cited_references()
+        is_bibkey(r) && push!(cited, r)
     end
 
     missing_keys = sort(collect(setdiff(cited, available)))
     if !isempty(missing_keys)
-        @info "bibkeys cited in REGISTRY but absent from references.bib" missing_keys
+        @info "bibkeys cited in edge stores but absent from references.bib" missing_keys
     end
     @test missing_keys == String[]
 end
@@ -88,11 +107,10 @@ end
 @testset "references.bib completeness (no stray free strings)" begin
     available = bib_citation_keys(references_bib_path())
 
-    # Every registry reference must be EITHER a bibkey present in
+    # Every edge-store reference must be EITHER a bibkey present in
     # references.bib OR an explicitly-allowlisted unciteable free string.
     stray = Set{String}()
-    for e in QAtlas.REGISTRY, r in e.references
-        s = String(r)
+    for s in all_cited_references()
         if is_bibkey(s)
             s in available || push!(stray, s)         # dangling bibkey
         else
@@ -109,13 +127,10 @@ end
 
     # Guard against the allowlist rotting: every KNOWN_UNMIGRATED entry must
     # still be cited somewhere (otherwise drop it).
-    all_refs = Set(String(r) for e in QAtlas.REGISTRY for r in e.references)
+    all_refs = Set(all_cited_references())
     dead_allow = sort(collect(setdiff(KNOWN_UNMIGRATED, all_refs)))
     if !isempty(dead_allow)
         @info "KNOWN_UNMIGRATED entries no longer cited — remove them" dead_allow
     end
     @test dead_allow == String[]
 end
-# NOTE (Issue #696): test_references_bib.jl only checks REGISTRY references
-# (from @register entries). Cross-checking @realizes references against references.bib
-# is tracked in Issue #696.

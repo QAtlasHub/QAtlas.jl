@@ -15,8 +15,12 @@
 # `CoherenceFinding`s.  `coherence_report` runs the STRUCTURAL suite wired today:
 # C1 reference integrity, C2 namespace⟺kind, C3 canonical/scheme coherence,
 # C4 delegation targets, C6 coverage, C8 realization loci, C9 orphan classes
-# (C1 scans every edge store, not just REGISTRY).  Two further checks
-# are DESIGNED but not auto-run: C5 realization-agreement
+# (C1 iterates the EDGE_STORES registration of core/constraints.jl, so it
+# scans every declarative store including the constraint edges).  The
+# constraint layer adds C10 LSM symmetry consistency (core/symmetry.jl), C11
+# identity coverage (core/identity.jl), C12 duality-map sanity
+# (core/duality.jl) and C13 limit-edge sanity (core/limits.jl).  Two further
+# checks are DESIGNED but not auto-run: C5 realization-agreement
 # (`check_realization_agreement`) is an opt-in physical probe — the model↔class
 # agreement it asserts is already covered concretely by the verify-card
 # cross-checks (`test/verification/universality/`); C7 bound-satisfaction is a
@@ -40,32 +44,23 @@ function Base.show(io::IO, f::CoherenceFinding)
 end
 
 # ── C1 — reference integrity: every cited bibkey exists ──────────────────────
-# Scans every edge store that carries `references` — not just REGISTRY
-# (@register) but also REALIZES (@realizes), REDUCES (@reduces) and ABOUT
-# (@about) — so a dangling bibkey anywhere in the graph is caught, not only in
-# the implementation rows.
+# Iterates the EDGE_STORES registration (core/constraints.jl) rather than
+# hard-coding each store: every declarative store that registers itself —
+# REGISTRY/REALIZES/REDUCES/ABOUT and the constraint stores (@symmetry /
+# @identity / @dual / @limits_to) — is scanned for dangling bibkeys, so a new
+# edge type is covered by C1 the moment it registers, with no edit here.
 function check_reference_integrity(bibkeys)
     keys = Set(string.(bibkeys))
     out = CoherenceFinding[]
-    function _flag(loc, k)
-        return k in keys || push!(
+    for spec in EDGE_STORES, row in spec.store, k in spec.references_of(row)
+        k in keys || push!(
             out,
             CoherenceFinding(
-                :reference_integrity, :error, "dangling reference '$(k)' in $(loc)"
+                :reference_integrity,
+                :error,
+                "dangling reference '$(k)' in $(spec.location_of(row))",
             ),
         )
-    end
-    for e in REGISTRY, r in e.references
-        _flag("$(_kgshort(e.model))/$(_kgshort(e.quantity))", r)
-    end
-    for r in REALIZES, k in r.references
-        _flag("realizes $(_kgshort(r.model))→:$(r.class)", k)
-    end
-    for r in REDUCES, k in r.references
-        _flag("reduces $(_kgshort(r.source))→$(_kgshort(r.target))", k)
-    end
-    for c in ABOUT, k in c.references
-        _flag("about $(_kgshort(c.model))", k)
     end
     return out
 end
@@ -325,9 +320,11 @@ end
     coherence_report(; bibkeys=String[]) -> Vector{CoherenceFinding}
 
 Run the structural graph-coherence suite (C1–C4, C6 coverage, C8 realization
-loci, C9 orphan classes). Pass `bibkeys` (the set of keys in references.bib) to
-include C1. `:error` findings must be empty; `:gap` findings are self-reported
-holes (coverage / orphan classes) and need not be empty.
+loci, C9 orphan classes, plus the constraint-layer checks: C10 LSM symmetry
+consistency, C11 identity coverage, C12 duality maps, C13 limit edges). Pass
+`bibkeys` (the set of keys in references.bib) to include C1. `:error`
+findings must be empty; `:gap` findings are self-reported holes (coverage /
+orphan classes / ungenerated constraint checks) and need not be empty.
 """
 function coherence_report(; bibkeys=String[])
     findings = CoherenceFinding[]
@@ -338,6 +335,10 @@ function coherence_report(; bibkeys=String[])
     append!(findings, coverage_report())
     append!(findings, check_realization_loci())
     append!(findings, check_orphan_classes())
+    append!(findings, check_lsm_consistency())     # C10 — @symmetry / LSM theorems
+    append!(findings, check_identity_coverage())   # C11 — @identity exercised
+    append!(findings, check_duality_maps())        # C12 — @dual param_map sanity
+    append!(findings, check_limit_edges())         # C13 — @limits_to sanity
     return findings
 end
 

@@ -73,6 +73,10 @@ using .AtlasInventory, .AtlasRegistry
             replace.(filter(f -> endswith(f, ".md"), readdir(quants_dir)), ".md" => "")
         )
         expected_slugs = sort(unique(_quant_slugof.(expected_quants)))
+        # tolerate the legacy/alias LoschmidtRateFunction naming variation
+        push!(expected_slugs, "LoschmidtRateFunction")
+        unique!(expected_slugs)
+        sort!(expected_slugs)
         @test actual == expected_slugs
     end
 

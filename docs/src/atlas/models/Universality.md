@@ -14,19 +14,20 @@ _No `CONVENTION` header found in `src/models/<class>/Universality/Universality.j
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 0 |
+| 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **1** |
+| **total claimed hubs** | **3** |
 
 **Methods** (from `@register`, derived): `analytic`
 
 ## Quantity × BC matrix
 
-| Quantity | `Infinite` |
-|---|---|
-| [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/Universality_UniversalityClass_Infinite.md) |
+| Quantity | `OBC` | `PBC` | `Infinite` |
+|---|---|---|---|
+| [`ConformalTower`](../quantities/ConformalTower.md) | 🟢 [hub](../hubs/Universality_ConformalTower_OBC.md) | 🟢 [hub](../hubs/Universality_ConformalTower_PBC.md) | — |
+| [`UniversalityClass`](../quantities/UniversalityClass.md) | — | — | 🟠 [hub](../hubs/Universality_UniversalityClass_Infinite.md) |
 
 ## Derivation notes
 
@@ -37,5 +38,16 @@ Matched by filename substring (no annotation; substrate-derived):
 - [`ising-cft-magnetic-perturbation.md`](../../calc/ising-cft-magnetic-perturbation.md)
 - [`ising-cft-primary-operators.md`](../../calc/ising-cft-primary-operators.md)
 - [`ising-scaling-relations.md`](../../calc/ising-scaling-relations.md)
+
+## References
+
+Papers cited by this model's `@register` cards. The full numbered list is on the [Reference List](../../references.md).
+
+```@bibliography
+Pages = []
+Canonical = false
+BloteCardyNightingale1986
+Cardy1986
+```
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

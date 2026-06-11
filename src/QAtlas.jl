@@ -125,6 +125,7 @@ export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
 export SphereFreeEnergy, CornerEntanglementCoefficient                        # 2+1D CFT F-theorem / corner entropy
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
+export ConformalTower                                                       # CFT excitation spectrum (#150)
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
 export FermiVelocity,
@@ -184,6 +185,8 @@ include("universalities/MinimalModel/MinimalModel.jl")
 include("universalities/WZW/WZW.jl")
 # universal behaviour (cross-class phenomena governed by the class's CFT data)
 include("universalities/behaviour/conformal_casimir.jl")   # Cardy 1/L Casimir correction
+include("universalities/behaviour/conformal_towers.jl")    # Conformal tower of states
+include("universalities/behaviour/conformal_towers_registry.jl") # Conformal tower of states registry
 include("universalities/behaviour/CardyEntanglement.jl")   # Calabrese–Cardy entanglement scaling
 include("universalities/behaviour/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
 include("universalities/behaviour/conformal_2plus1d.jl")   # 2+1D CFT universalities (F-coefficient / corners)

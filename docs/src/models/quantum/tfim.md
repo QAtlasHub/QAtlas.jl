@@ -543,11 +543,13 @@ docstrings for the exported observable types and TFIM helpers
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 59 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 61 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`CentralCharge`](../../atlas/hubs/TFIM_CentralCharge_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 5 |
+| [`ConformalTower`](../../atlas/hubs/TFIM_ConformalTower_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`ConformalTower`](../../atlas/hubs/TFIM_ConformalTower_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`CorrelationLength`](../../atlas/hubs/TFIM_CorrelationLength_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | [`CriticalExponents`](../../atlas/hubs/TFIM_CriticalExponents_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`Energy`](../../atlas/hubs/TFIM_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 12 |
@@ -608,6 +610,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 59 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

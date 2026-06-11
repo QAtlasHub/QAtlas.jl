@@ -22,7 +22,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`FibonacciAnyons`](models/FibonacciAnyons.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`GrossNeveu`](models/GrossNeveu.md) | — | 2 | `analytic`, `analytic_uv` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`HaldaneShastry`](models/HaldaneShastry.md) | — | 7 | `analytic`, `cft_low_T`, `delegation` | 0 | 0 | 0 | 0 | 7 | feasible | — |
-| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 27 | `analytic`, `bethe_ansatz`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 10 | feasible | `@su2` |
+| [`Heisenberg1D`](models/Heisenberg1D.md) | — | 28 | `analytic`, `bethe_ansatz`, `cft`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 13 | 4 | 0 | 11 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 6 | `closed_form`, `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 4 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`Hubbard1D`](models/Hubbard1D.md) | — | 7 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 2 | 0 | 3 | feasible | `@sweep` |
@@ -58,7 +58,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`SixVertex`](models/SixVertex.md) | — | 5 | `analytic`, `numerical` | 0 | 2 | 1 | 0 | 2 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
-| [`TFIM`](models/TFIM.md) | `Ising` | 59 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 15 | feasible | `@critical`, `@disordered`, `@ordered` |
+| [`TFIM`](models/TFIM.md) | `Ising` | 61 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian` | 0 | 36 | 8 | 0 | 17 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TightBinding1D`](models/TightBinding1D.md) | — | 19 | `analytic` | 0 | 4 | 0 | 0 | 15 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 6 | `analytic` | 0 | 3 | 0 | 0 | 3 | feasible | `@sweep` |
@@ -67,7 +67,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`Triangular`](models/Triangular.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 4 | `analytic` | 0 | 2 | 0 | 0 | 2 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 4 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 2 | feasible | `@sweep` |
-| [`Universality`](models/Universality.md) | — | 1 | `analytic` | 0 | 0 | 0 | 0 | 1 | feasible | — |
+| [`Universality`](models/Universality.md) | — | 3 | `analytic` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`XXZ1D`](models/XXZ1D.md) | — | 32 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `exact_2spinon`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 18 | 5 | 0 | 9 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
@@ -87,6 +87,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`ChaosBound`](quantities/ChaosBound.md) — 1 models
 - [`ChargeGap`](quantities/ChargeGap.md) — 2 models
 - [`ChiralCondensate`](quantities/ChiralCondensate.md) — 1 models
+- [`ConformalTower`](quantities/ConformalTower.md) — 3 models
 - [`ConformalWeights`](quantities/ConformalWeights.md) — 6 models
 - [`CorrelationLength`](quantities/CorrelationLength.md) — 6 models
 - [`CriticalExponents`](quantities/CriticalExponents.md) — 4 models

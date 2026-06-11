@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 172 hubs
+## `analytic` - 174 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -167,6 +167,8 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TricriticalPotts3/ConformalWeights/Infinite`](hubs/TricriticalPotts3_ConformalWeights_Infinite.md)
 - 🟠 [`TricriticalPotts3/PrimaryFields/Infinite`](hubs/TricriticalPotts3_PrimaryFields_Infinite.md)
 - 🟠 [`TricriticalPotts3/UniversalityClass/Infinite`](hubs/TricriticalPotts3_UniversalityClass_Infinite.md)
+- 🟢 [`Universality/ConformalTower/OBC`](hubs/Universality_ConformalTower_OBC.md)
+- 🟢 [`Universality/ConformalTower/PBC`](hubs/Universality_ConformalTower_PBC.md)
 - 🟠 [`Universality/UniversalityClass/Infinite`](hubs/Universality_UniversalityClass_Infinite.md)
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](hubs/XCube_GroundStateDegeneracy_PBC.md)
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](hubs/XXZ1D_CentralCharge_Infinite.md)
@@ -378,6 +380,14 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](hubs/Heisenberg1D_SpecificHeat_Infinite.md)
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](hubs/Heisenberg1D_ThermalEntropy_Infinite.md)
 
+## `cft` - 5 hubs
+
+- 🟠 [`Heisenberg1D/ConformalTower/PBC`](hubs/Heisenberg1D_ConformalTower_PBC.md)
+- 🟠 [`TFIM/ConformalTower/OBC`](hubs/TFIM_ConformalTower_OBC.md)
+- 🟠 [`TFIM/ConformalTower/PBC`](hubs/TFIM_ConformalTower_PBC.md)
+- 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
+- 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
+
 ## `closed_form` - 5 hubs
 
 - 🟠 [`HeisenbergXYZ/CorrelationLength/Infinite`](hubs/HeisenbergXYZ_CorrelationLength_Infinite.md)
@@ -423,11 +433,6 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
 - 🟠 [`XYh1D/MagnetizationZ/Infinite`](hubs/XYh1D_MagnetizationZ_Infinite.md)
 - 🟠 [`XYh1D/SusceptibilityZZ/Infinite`](hubs/XYh1D_SusceptibilityZZ_Infinite.md)
-
-## `cft` - 2 hubs
-
-- 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
-- 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
 
 ## `exact_2spinon` - 2 hubs
 

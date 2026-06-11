@@ -294,3 +294,15 @@ end
     references=["CalabreseCardy2004"],
     notes="Delegates to Universality(:Heisenberg) with c -> c*(1+1/alpha)/2 substitution. Reduces to VN at alpha=1.",
 )
+
+# ── Conformal tower of states (SU(2) symmetric point) ──────────────────
+@register(
+    Heisenberg1D,
+    ConformalTower,
+    PBC,
+    method=:cft,
+    reliability=:high,
+    tested_in="test/universalities/test_universality_conformal_tower.jl",
+    references=["Cardy1986", "Affleck1986"],
+    notes="Conformal tower of states excitation spectrum E_n - E_0 = (2π v / L) Δ_n scaled by sound velocity v = π J / 2.",
+)

@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | 🟢 corroborated-at-p | 36 |
 | 🔵 coherent | 8 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 15 |
-| **total claimed hubs** | **59** |
+| 🟠 uncorroborated-but-feasible | 17 |
+| **total claimed hubs** | **61** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `pfaffian`
 
@@ -36,6 +36,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | Quantity | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | — | — | 🟢 [hub](../hubs/TFIM_CentralCharge_Infinite.md) |
+| [`ConformalTower`](../quantities/ConformalTower.md) | 🟠 [hub](../hubs/TFIM_ConformalTower_OBC.md) | 🟠 [hub](../hubs/TFIM_ConformalTower_PBC.md) | — |
 | [`CorrelationLength`](../quantities/CorrelationLength.md) | — | — | 🟢 [hub](../hubs/TFIM_CorrelationLength_Infinite.md) |
 | [`CriticalExponents`](../quantities/CriticalExponents.md) | — | — | 🟠 [hub](../hubs/TFIM_CriticalExponents_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
@@ -99,9 +100,11 @@ Pages = []
 Canonical = false
 BarouchMcCoy1970
 BelavinPolyakovZamolodchikov1984
+BloteCardyNightingale1986
 CalabreseCardy2004
 CalabreseCardy2009
 CalabreseEsslerFagotti2012
+Cardy1986
 Damski2013
 Gu2010
 HastingsKoma2006

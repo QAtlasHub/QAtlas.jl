@@ -326,4 +326,3 @@ end
     references=["PerezCastillo2020"],
     notes="Exact longitudinal two-spinon dynamical structure factor S^{zz}(q, ω) in the massive regime Δ > 1.",
 )
-

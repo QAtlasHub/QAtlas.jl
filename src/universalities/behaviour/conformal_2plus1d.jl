@@ -37,7 +37,8 @@ References:
 function fetch(
     ::Universality{C}, ::SphereFreeEnergy, ::Infinite; d::Int=3, kwargs...
 ) where {C}
-    d == 3 || throw(ArgumentError("SphereFreeEnergy: only d=3 (2+1D CFT) is supported; got d=$d"))
+    d == 3 ||
+        throw(ArgumentError("SphereFreeEnergy: only d=3 (2+1D CFT) is supported; got d=$d"))
 
     if C === :Ising
         return 0.0612  # 3D Ising CFT; conformal bootstrap / fuzzy sphere consensus (Pufu 2017)
@@ -95,7 +96,7 @@ function fetch(
 ) where {C}
     d == 3 || throw(
         ArgumentError(
-            "CornerEntanglementCoefficient: only d=3 (2+1D CFT) is supported; got d=$d",
+            "CornerEntanglementCoefficient: only d=3 (2+1D CFT) is supported; got d=$d"
         ),
     )
 

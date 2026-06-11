@@ -1309,7 +1309,7 @@ classical 2D six-vertex model, it corresponds to the spontaneous polarization
 """
 struct Polarization <: AbstractQuantity end
 
-raw"""
+@doc raw"""
     SphereFreeEnergy() <: AbstractQuantity
 
 Universal sphere free energy $F = -\ln |Z(S^3)|$ of a 2+1D conformal field theory.
@@ -1317,7 +1317,7 @@ Acts as a measure of the degrees of freedom in 2+1D (the $F$-theorem).
 """
 struct SphereFreeEnergy <: AbstractQuantity end
 
-raw"""
+@doc raw"""
     CornerEntanglementCoefficient() <: AbstractQuantity
 
 Universal corner coefficient in the bipartite entanglement entropy of a 2+1D CFT

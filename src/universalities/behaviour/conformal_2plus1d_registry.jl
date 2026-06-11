@@ -12,7 +12,7 @@ const _CFT_2PLUS1D_PREDICTIONS = (
         CornerEntanglementCoefficient,
         ["BuenoMyersWitczakKrempa2015", "Kos2016", "Chester2020"],
         "Universal corner coefficient sigma = pi^2/24 * C_T in 2+1D CFT entanglement entropy (smooth-limit prefactor).",
-    )
+    ),
 )
 
 for C in (:Ising, :XY, :Heisenberg), (q, refs, note) in _CFT_2PLUS1D_PREDICTIONS

@@ -123,6 +123,7 @@ export CentralCharge, LuttingerParameter, CorrelationLength
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
+export SphereFreeEnergy, CornerEntanglementCoefficient                        # 2+1D CFT F-theorem / corner entropy
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalTower                                                       # CFT excitation spectrum (#150)
 export ConformalWeights, PrimaryFields
@@ -188,6 +189,8 @@ include("universalities/behaviour/conformal_towers.jl")    # Conformal tower of 
 include("universalities/behaviour/conformal_towers_registry.jl") # Conformal tower of states registry
 include("universalities/behaviour/CardyEntanglement.jl")   # Calabrese–Cardy entanglement scaling
 include("universalities/behaviour/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
+include("universalities/behaviour/conformal_2plus1d.jl")   # 2+1D CFT universalities (F-coefficient / corners)
+include("universalities/behaviour/conformal_2plus1d_registry.jl")
 
 # --- Universal bounds (model-independent inequalities) ---
 # A bound is NOT a universality class: it is pinned by the quantity it bounds,
@@ -308,6 +311,7 @@ include("models/quantum/SSH/SSH.jl")
 include("models/quantum/SSH/SSH_registry.jl")  # populates REGISTRY for SSH
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used by XXZ.jl dispatch
+include("models/quantum/XXZ/XXZ_spinon.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_xx_infinite.jl")
 include("models/quantum/XXZ/XXZ_xx_quench.jl")

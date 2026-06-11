@@ -13,14 +13,15 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 3
-- **Total hubs (Model, BC pairs)**: 4
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `muller_ansatz`
+- **Models with this quantity registered**: 4
+- **Total hubs (Model, BC pairs)**: 5
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `exact_2spinon`, `muller_ansatz`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
 - Arovas1988 — 1 hub
 - MullerThomasBeckBonner1981 — 1 hub
+- PerezCastillo2020 — 1 hub
 - desCloizeauxPearson1962 — 1 hub
 
 ## Model × BC matrix
@@ -30,5 +31,6 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`AKLT1D`](../models/AKLT1D.md) | — | 🟢 [hub](../hubs/AKLT1D_ZZStructureFactor_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🔵 [hub](../hubs/TFIM_ZZStructureFactor_OBC.md) | 🔵 [hub](../hubs/TFIM_ZZStructureFactor_Infinite.md) |
+| [`XXZ1D`](../models/XXZ1D.md) | — | 🟠 [hub](../hubs/XXZ1D_ZZStructureFactor_Infinite.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

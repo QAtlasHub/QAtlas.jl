@@ -259,7 +259,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (124)
+## `uncorroborated-but-feasible` (125)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`Bound/BB84KeyRate/Infinite`](../hubs/Bound_BB84KeyRate_Infinite.md) — uncorroborated-but-feasible
@@ -372,6 +372,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`XXZ1D/RenyiEntropy/Infinite`](../hubs/XXZ1D_RenyiEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/SpecificHeat/Infinite`](../hubs/XXZ1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`XXZ1D/ZZStructureFactor/Infinite`](../hubs/XXZ1D_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/Infinite`](../hubs/XYh1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/Energy/OBC`](../hubs/XYh1D_Energy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`XYh1D/EnergyLocal/OBC`](../hubs/XYh1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible

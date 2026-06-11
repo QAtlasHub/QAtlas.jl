@@ -69,7 +69,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 3 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 1 | feasible | `@sweep` |
 | [`Universality`](models/Universality.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`XCube`](models/XCube.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
-| [`XXZ1D`](models/XXZ1D.md) | — | 30 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 18 | 5 | 0 | 7 | feasible | `@fm`, `@free_fermion`, `@gapless` |
+| [`XXZ1D`](models/XXZ1D.md) | — | 31 | `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `exact_2spinon`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie` | 0 | 18 | 5 | 0 | 8 | feasible | `@fm`, `@free_fermion`, `@gapless` |
 | [`XYh1D`](models/XYh1D.md) | — | 13 | `analytic`, `bdg`, `quadgk` | 0 | 0 | 0 | 0 | 13 | feasible | — |
 | [`YangLee`](models/YangLee.md) | `MinimalModel` | 2 | `minimal_model_delegation` | 0 | 1 | 0 | 1 | 0 | feasible | `@sweep` |
 | [`ZnClock`](models/ZnClock.md) | `Ising` | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
@@ -145,6 +145,6 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`YYCorrelation`](quantities/YYCorrelation.md) — 2 models
 - [`YYStructureFactor`](quantities/YYStructureFactor.md) — 1 models
 - [`ZZCorrelation`](quantities/ZZCorrelation.md) — 4 models
-- [`ZZStructureFactor`](quantities/ZZStructureFactor.md) — 3 models
+- [`ZZStructureFactor`](quantities/ZZStructureFactor.md) — 4 models
 
 [← back to the Atlas index](index.md)

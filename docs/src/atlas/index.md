@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 369 |
-| ED-feasible claimed (risk denominator) | 343 |
+| Hubs `src` claims (registry) | 370 |
+| ED-feasible claimed (risk denominator) | 344 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 189 |
 | 🔵 coherent | 39 |
 | ⚪ cited-only (frontier — neutral) | 17 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 124 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 125 |
 | Inventory cards scanned (whole test/) | 2806 |
-| Registry files parsed | 75 / 75 |
+| Registry files parsed | 76 / 76 |
 | Models | 67 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **55.1%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.5%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **54.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **66.3%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "124 actionable hub(s)"
+!!! warning "125 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
     - [`Bound/BekensteinBound/Infinite`](hubs/Bound_BekensteinBound_Infinite.md)
@@ -173,6 +173,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`XXZ1D/RenyiEntropy/Infinite`](hubs/XXZ1D_RenyiEntropy_Infinite.md)
     - [`XXZ1D/SpecificHeat/Infinite`](hubs/XXZ1D_SpecificHeat_Infinite.md)
     - [`XXZ1D/VonNeumannEntropy/Infinite`](hubs/XXZ1D_VonNeumannEntropy_Infinite.md)
+    - [`XXZ1D/ZZStructureFactor/Infinite`](hubs/XXZ1D_ZZStructureFactor_Infinite.md)
     - [`XYh1D/Energy/Infinite`](hubs/XYh1D_Energy_Infinite.md)
     - [`XYh1D/Energy/OBC`](hubs/XYh1D_Energy_OBC.md)
     - [`XYh1D/EnergyLocal/OBC`](hubs/XYh1D_EnergyLocal_OBC.md)
@@ -253,13 +254,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `TricriticalPotts3` | 3 | 0 | 2 | 0 | 0 | 1 | feasible |
 | `Universality` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `XCube` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
-| `XXZ1D` | 30 | 0 | 18 | 5 | 0 | 7 | feasible |
+| `XXZ1D` | 31 | 0 | 18 | 5 | 0 | 8 | feasible |
 | `XYh1D` | 13 | 0 | 0 | 0 | 0 | 13 | feasible |
 | `YangLee` | 2 | 0 | 1 | 0 | 1 | 0 | feasible |
 | `ZnClock` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `ZnParafermion` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 
-## Hubs (369) — select to drill down
+## Hubs (370) — select to drill down
 
 ### `AKLT1D` (19)
 
@@ -769,7 +770,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`XCube/GroundStateDegeneracy/PBC`](hubs/XCube_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 
-### `XXZ1D` (30)
+### `XXZ1D` (31)
 
 - 🟢 [`XXZ1D/CentralCharge/Infinite`](hubs/XXZ1D_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md) — corroborated-at-p
@@ -801,6 +802,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`XXZ1D/ThermalEntropy/OBC`](hubs/XXZ1D_ThermalEntropy_OBC.md) — corroborated-at-p
 - 🟠 [`XXZ1D/VonNeumannEntropy/Infinite`](hubs/XXZ1D_VonNeumannEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`XXZ1D/VonNeumannEntropy/OBC`](hubs/XXZ1D_VonNeumannEntropy_OBC.md) — corroborated-at-p
+- 🟠 [`XXZ1D/ZZStructureFactor/Infinite`](hubs/XXZ1D_ZZStructureFactor_Infinite.md) — uncorroborated-but-feasible
 
 ### `XYh1D` (13)
 

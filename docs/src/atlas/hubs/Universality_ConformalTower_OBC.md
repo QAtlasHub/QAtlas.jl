@@ -15,14 +15,14 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@sweep` | `second_closed_form` | 🟢 structural | Cardy 1986 / Blöte-Cardy-Nightingale 1986: Ising OBC free-free spin state dimension h = 1/16 | `test/universalities/test_universality_conformal_tower.jl` |
+| `@sweep` | `second_closed_form` | 🟢 structural | Cardy 1986 / Blöte-Cardy-Nightingale 1986: Ising OBC fixed-free spin state dimension h = 1/16 | `test/universalities/test_universality_conformal_tower.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Universality(:Ising), ConformalTower(), OBC(); route = :second_closed_form, independent = (π * 2.0) / 256.0, agree_within = 1.0e-12, refs = ["Cardy 1986 / Blöte-Cardy-Nightingale 1986: Ising OBC free-free spin state dimension h = 1/16"], fetch_kw = (; L = 16.0, v = 2.0), subject_extract = (raw->begin (raw[2]).energy end))
+verify(Universality(:Ising), ConformalTower(), OBC(); route = :second_closed_form, independent = (π * 2.0) / 256.0, agree_within = 1.0e-12, refs = ["Cardy 1986 / Blöte-Cardy-Nightingale 1986: Ising OBC fixed-free spin state dimension h = 1/16"], fetch_kw = (; L = 16.0, v = 2.0), subject_extract = (raw->begin (raw[2]).energy end))
 ```
 
 

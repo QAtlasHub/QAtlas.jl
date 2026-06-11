@@ -89,7 +89,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 4 🔵 0 ⚪ 1 🟠 0 | — |
 | [`TightBinding(Triangular)`](../atlas/models/Triangular.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | 23 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 7 | — |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | 24 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 8 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
 
 ## Other (2)

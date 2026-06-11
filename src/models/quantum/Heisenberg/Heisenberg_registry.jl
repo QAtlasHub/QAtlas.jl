@@ -203,9 +203,24 @@ end
     Infinite,
     method=:muller_ansatz,
     reliability=:medium,
-    tested_in="test/standalone/test_heisenberg_spinon.jl",
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg_spinon.jl",
     references=["desCloizeauxPearson1962", "MullerThomasBeckBonner1981"],
     notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",
+)
+# Second definition of (Heisenberg1D, ZZStructureFactor, Infinite) keyed by
+# scheme=:exact_2spinon; the canonical row above stays the Müller ansatz, which
+# is what the bare fetch (method=:muller) returns. fetch(...; method=:exact_2spinon).
+@register(
+    Heisenberg1D,
+    ZZStructureFactor,
+    Infinite,
+    scheme=:exact_2spinon,
+    method=:exact_2spinon,
+    canonical=false,
+    reliability=:high,
+    tested_in="test/models/quantum/Heisenberg/test_heisenberg_spinon.jl",
+    references=["desCloizeauxPearson1962", "Karbach1997"],
+    notes="Exact 2-spinon longitudinal dynamic structure factor S^{zz}(q,ω) in the thermodynamic limit.",
 )
 
 # ── Luttinger-liquid parameter at SU(2)-symmetric point (Phase 2) ─────

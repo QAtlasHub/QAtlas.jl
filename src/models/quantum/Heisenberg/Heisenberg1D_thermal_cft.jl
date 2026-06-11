@@ -335,5 +335,7 @@ function fetch(model::Heisenberg1D, q::ConformalTower, bc::PBC; J::Real=1.0, kwa
 end
 
 function fetch(model::Heisenberg1D, ::ConformalTower, bc::OBC; J::Real=1.0, kwargs...)
-    return error("Heisenberg1D ConformalTower is only implemented for PBC boundary conditions.")
+    return error(
+        "Heisenberg1D ConformalTower is only implemented for PBC boundary conditions."
+    )
 end

@@ -43,12 +43,7 @@ sorted by ascending `energy`.
 - I. Affleck, *Phys. Rev. Lett.* **56**, 746 (1986). — SU(2)_1 WZW spectrum.
 """
 function fetch(
-    u::Universality{C},
-    q::ConformalTower,
-    bc::Union{PBC, OBC};
-    L::Real,
-    v::Real,
-    kwargs...,
+    u::Universality{C}, q::ConformalTower, bc::Union{PBC,OBC}; L::Real, v::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("ConformalTower: L must be positive; got $L"))
     v > 0 || throw(ArgumentError("ConformalTower: v must be positive; got $v"))
@@ -57,12 +52,7 @@ end
 
 # Fallback for other boundary conditions or classes
 function _conformal_tower(
-    u::Universality{C},
-    ::ConformalTower,
-    bc::BoundaryCondition,
-    L::Real,
-    v::Real;
-    kwargs...,
+    u::Universality{C}, ::ConformalTower, bc::BoundaryCondition, L::Real, v::Real; kwargs...
 ) where {C}
     return error(
         "QAtlas Universality{:$C}: ConformalTower is not implemented at $(typeof(bc)) boundary condition.",
@@ -76,12 +66,7 @@ end
 # (the level-1 ε-sector tower, Δ=1+1) but these are in a separate sector with
 # different quantum numbers.
 function _conformal_tower(
-    ::Universality{:Ising},
-    ::ConformalTower,
-    ::PBC,
-    L::Real,
-    v::Real;
-    kwargs...,
+    ::Universality{:Ising}, ::ConformalTower, ::PBC, L::Real, v::Real; kwargs...
 )
     scale = 2 * π * v / L
     return NamedTuple{(:energy, :dimension, :degeneracy),Tuple{Float64,Float64,Int}}[
@@ -98,12 +83,7 @@ end
 # boundary (h=1/2). Note: free-free (f-f) BC gives h ∈ {0, 1/2, 2, ...} (no 1/16).
 # The TFIM with OBC endpoints maps to fixed-free BC via the boundary-state formalism.
 function _conformal_tower(
-    ::Universality{:Ising},
-    ::ConformalTower,
-    ::OBC,
-    L::Real,
-    v::Real;
-    kwargs...,
+    ::Universality{:Ising}, ::ConformalTower, ::OBC, L::Real, v::Real; kwargs...
 )
     scale = π * v / L
     return NamedTuple{(:energy, :dimension, :degeneracy),Tuple{Float64,Float64,Int}}[
@@ -119,12 +99,7 @@ end
 # Degeneracies: j=1/2 sector has (2j+1)^2 = 4 primary states (both chiral sectors);
 # at Δ=1: 3 left-current modes × 3 right-current modes = 9 descendants of the j=0 vacuum.
 function _conformal_tower(
-    ::Universality{:Heisenberg},
-    ::ConformalTower,
-    ::PBC,
-    L::Real,
-    v::Real;
-    kwargs...,
+    ::Universality{:Heisenberg}, ::ConformalTower, ::PBC, L::Real, v::Real; kwargs...
 )
     scale = 2 * π * v / L
     return NamedTuple{(:energy, :dimension, :degeneracy),Tuple{Float64,Float64,Int}}[

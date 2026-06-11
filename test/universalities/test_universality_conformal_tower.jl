@@ -12,9 +12,7 @@ using QAtlas, Test
             route=:second_closed_form,
             independent=(0.25 * π * 2.0 / 16.0),
             agree_within=1e-12,
-            refs=[
-                "Cardy 1986: Ising PBC spin state dimension Δ = 1/8",
-            ],
+            refs=["Cardy 1986: Ising PBC spin state dimension Δ = 1/8"],
             fetch_kw=(; L=16.0, v=2.0),
             subject_extract=raw -> raw[2].energy,
         )
@@ -65,7 +63,7 @@ using QAtlas, Test
             independent=(0.5 * π * 2.0 / 16.0), # = 0.25 * 2π v / L
             agree_within=1e-12,
             refs=[
-                "Cardy 1986 / Affleck 1986: Heisenberg PBC spinon state dimension Δ = 1/4",
+                "Cardy 1986 / Affleck 1986: Heisenberg PBC spinon state dimension Δ = 1/4"
             ],
             fetch_kw=(; L=16.0, v=2.0),
             subject_extract=raw -> raw[2].energy,

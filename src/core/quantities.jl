@@ -1129,7 +1129,7 @@ class via the same data the `Universality{C}` entry exposes for
 """
 struct CasimirEnergyCorrection <: AbstractQuantity end
 
-raw"""
+@doc raw"""
     ConformalTower() <: AbstractQuantity
 
 The conformal tower of states excitation spectrum in 1+1D conformal field theories.

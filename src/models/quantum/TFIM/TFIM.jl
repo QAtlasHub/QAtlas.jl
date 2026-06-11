@@ -435,7 +435,7 @@ see `fetch(::Universality{:Ising}, ::ConformalTower, ...)` for full field docume
 - H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, *Phys. Rev. Lett.* **56**, 742 (1986).
 - P. Pfeuty, *Ann. Phys.* **57**, 79 (1970). — TFIM Fermi velocity `v = 2J` at h = J.
 """
-function fetch(model::TFIM, q::ConformalTower, bc::Union{PBC, OBC}; kwargs...)
+function fetch(model::TFIM, q::ConformalTower, bc::Union{PBC,OBC}; kwargs...)
     isapprox(model.h, model.J; atol=1e-6) || throw(
         DomainError(
             (model.J, model.h),

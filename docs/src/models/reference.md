@@ -45,7 +45,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | FreedmanKitaevLarsenWang2003, ReadRezayi1999, KitaevPreskill2006 |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | GrossNeveu1974, AndreiLowenstein1979 |
 | [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986, CalabreseCardy2004 |
-| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
+| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, Karbach1997, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | YangYang1966, LiebSchultzMattis1961, Baxter1972, LutherPeschel1975, McCoyWu1978 |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) |  |
 | [`Hubbard1D`](../atlas/models/Hubbard1D.md) | LiebWu1968, Essler2005, Ovchinnikov1970, Voit1995, JuttnerKlumperSuzuki1998 |
@@ -75,7 +75,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`ToricCode`](../atlas/models/ToricCode.md) | Kitaev2003, KitaevPreskill2006, LevinWen2006, NayakSimonSternFreedmanDasSarma2008 |
 | [`TightBinding(Triangular)`](../atlas/models/Triangular.md) |  |
 | [`XCube`](../atlas/models/XCube.md) | VijayHaahFu2016, SlagleKim2017 |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, ChitraGiamarchi1997, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004 |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, ChitraGiamarchi1997, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004, PerezCastillo2020 |
 | [`XYh1D`](../atlas/models/XYh1D.md) | LiebSchultzMattis1961, Pfeuty1970 |
 
 ## Other

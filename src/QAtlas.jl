@@ -123,6 +123,7 @@ export CentralCharge, LuttingerParameter, CorrelationLength
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
+export SphereFreeEnergy, CornerEntanglementCoefficient                        # 2+1D CFT F-theorem / corner entropy
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalWeights, PrimaryFields
 export StringOrderParameter
@@ -185,6 +186,8 @@ include("universalities/WZW/WZW.jl")
 include("universalities/behaviour/conformal_casimir.jl")   # Cardy 1/L Casimir correction
 include("universalities/behaviour/CardyEntanglement.jl")   # Calabrese–Cardy entanglement scaling
 include("universalities/behaviour/CardyEntanglement_registry.jl")  # :universal predicts edges (CFT classes)
+include("universalities/behaviour/conformal_2plus1d.jl")   # 2+1D CFT universalities (F-coefficient / corners)
+include("universalities/behaviour/conformal_2plus1d_registry.jl")
 
 # --- Universal bounds (model-independent inequalities) ---
 # A bound is NOT a universality class: it is pinned by the quantity it bounds,

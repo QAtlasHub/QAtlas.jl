@@ -1308,3 +1308,25 @@ classical 2D six-vertex model, it corresponds to the spontaneous polarization
 (in the antiferroelectric phase Δ < -1).
 """
 struct Polarization <: AbstractQuantity end
+
+@doc raw"""
+    SphereFreeEnergy() <: AbstractQuantity
+
+Universal sphere free energy $F = -\ln |Z(S^3)|$ of a 2+1D conformal field theory.
+Acts as a measure of the degrees of freedom in 2+1D (the $F$-theorem).
+"""
+struct SphereFreeEnergy <: AbstractQuantity end
+
+@doc raw"""
+    CornerEntanglementCoefficient() <: AbstractQuantity
+
+Universal corner coefficient in the bipartite entanglement entropy of a 2+1D CFT
+with a boundary corner of angle $\theta$:
+
+    S(ρ_A) = a |∂A| - c(\theta) \ln(L/\epsilon) + o(\ln(L/\epsilon)).
+
+For a nearly smooth boundary $\theta \to \pi$, $c(\theta) \approx \sigma (\pi - \theta)^2$
+where $\sigma = \frac{\pi^2}{24} C_T$. If no angle `theta` is provided, the fetch
+method returns the smooth-limit prefactor $\sigma$.
+"""
+struct CornerEntanglementCoefficient <: AbstractQuantity end

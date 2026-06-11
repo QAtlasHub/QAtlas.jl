@@ -88,7 +88,8 @@ for C in (:Ising, :XY, :Heisenberg)
         Infinite;
         method=:analytic,
         reliability=:high,
-        references=["AffleckLudwig1991"],
-        notes="Affleck-Ludwig universal boundary entropy log g (Affleck-Ludwig 1991).",
+        references=["AffleckLudwig1991", "Cardy1989"],
+        notes="Affleck-Ludwig universal boundary entropy log g from the Cardy-state " *
+              "modular S-matrix g_a = S_0a/sqrt(S_00) (Affleck-Ludwig 1991; Cardy 1989).",
     )
 end

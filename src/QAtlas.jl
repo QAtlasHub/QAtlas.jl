@@ -417,7 +417,7 @@ export coherence_report,
 using PrecompileTools: @setup_workload, @compile_workload
 
 @setup_workload begin
-    m = TFIM(; J = 1.0, h = 0.5)
+    m = TFIM(; J=1.0, h=0.5)
     @compile_workload begin
         for q in (
             FreeEnergy(),
@@ -426,13 +426,13 @@ using PrecompileTools: @setup_workload, @compile_workload
             MagnetizationX(),
             SusceptibilityXX(),
         )
-            fetch(m, q, Infinite(); beta = 1.0)
-            fetch(m, q, OBC(8); beta = 1.0)
-            fetch(m, q, PBC(; N = 8); beta = 1.0)
+            fetch(m, q, Infinite(); beta=1.0)
+            fetch(m, q, OBC(8); beta=1.0)
+            fetch(m, q, PBC(; N=8); beta=1.0)
         end
-        fetch(m, NMRSpinRelaxationRate(), Infinite(); beta = 1.0, eta = 0.1)
+        fetch(m, NMRSpinRelaxationRate(), Infinite(); beta=1.0, eta=0.1)
         for SF in (XXStructureFactor(), YYStructureFactor(), ZZStructureFactor())
-            fetch(m, SF, OBC(8); beta = 1.0, q = 0.0)
+            fetch(m, SF, OBC(8); beta=1.0, q=0.0)
         end
     end
 end

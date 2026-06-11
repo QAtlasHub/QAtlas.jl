@@ -94,7 +94,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`Universality`](../atlas/models/Universality.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | 24 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 8 | — |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | 25 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 9 | — |
 | [`YangLee`](../atlas/models/YangLee.md) | 3 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 1 | `MinimalModel` |
 | [`ZnClock`](../atlas/models/ZnClock.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |
 | [`ZnParafermion`](../atlas/models/ZnParafermion.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |

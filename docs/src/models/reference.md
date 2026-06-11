@@ -69,7 +69,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`CurieWeissIsing`](../atlas/models/CurieWeissIsing.md) | LandauLifshitz1980, Landau1937, Stanley1971 |
 | [`DimerLattice`](../atlas/models/DimerLattice.md) | Kasteleyn1961, TemperleyFisher1961, Fisher1961 |
 | [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | Haldane1988, Shastry1988, Affleck1986, CalabreseCardy2004 |
-| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
+| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | Hulthen1938, Bethe1931, desCloizeauxPearson1962, MullerThomasBeckBonner1981, Karbach1997, LutherPeschel1975, Affleck1989, Haldane1980, Affleck1986, BloteCardyNightingale1986, EggertAffleckTakahashi1994, CalabreseCardy2004 |
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | Onsager1944, Yang1952 |
 | [`IsingTriangular`](../atlas/models/IsingTriangular.md) | Wannier1950, Houtappel1950, Onsager1944, Baxter1982 |
 | [`Kitaev1D`](../atlas/models/Kitaev1D.md) | Kitaev2001, Alicea2012, AsbothOroszlanyPalyi2016 |
@@ -80,7 +80,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | BelavinPolyakovZamolodchikov1984, FriedanQiuShenker1984 |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | AndrewsBaxterForrester1984, Huse1984, BelavinPolyakovZamolodchikov1984 |
 | [`Universality`](../atlas/models/Universality.md) |  |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, ChitraGiamarchi1997, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004 |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | YangYang1966, Takahashi1999, Hulthen1938, Giamarchi2003, desCloizeauxPearson1962, ChitraGiamarchi1997, Mahan2000, Coleman2015, Klumper1993, CalabreseEsslerFagotti2012, Heyl2013, EsslerFagotti2016, YangYang1969, CalabreseCardy2004, PerezCastillo2020 |
 | [`YangLee`](../atlas/models/YangLee.md) | Cardy1984, YangLee1952 |
 | [`ZnClock`](../atlas/models/ZnClock.md) | JoseKadanoffKirkpatrickNelson1977, ElitzurPearsonShigemitsu1979 |
 | [`ZnParafermion`](../atlas/models/ZnParafermion.md) | FateevZamolodchikov1985 |

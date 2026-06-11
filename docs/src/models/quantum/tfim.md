@@ -26,7 +26,7 @@ H = -J \sum_{i} \sigma^z_i \sigma^z_{i+1} - h \sum_{i} \sigma^x_i
 
 **Universality**: the critical point belongs to the
 [2D Ising universality class](../../universalities/ising.md) via the
-quantum-classical mapping (1+1D quantum ↔ 2D classical). With random (disordered) couplings, the critical behavior is instead governed by the strong-disorder renormalization group (SDRG) limit, mapping to the [IsingSDRG universality class](../../universalities/isingsdrg.md) with an effective central charge $c_{\text{eff}} = \ln 2 / 2 \approx 0.34657$.
+quantum-classical mapping (1+1D quantum ↔ 2D classical).
 
 ---
 
@@ -520,9 +520,9 @@ Physical / methodological backing of each fetch surface:
   the 1+1D TFIM maps to the 2D classical Ising model via the
   quantum-classical correspondence
   ($\beta_{\text{classical}} \leftrightarrow$ imaginary time).
-- **Disordered version**: [Random TFIM](../../verification/disordered.md) / [IsingSDRG](../../universalities/isingsdrg.md) —
-  the Fisher infinite-randomness fixed point (IRFP) at $[\ln J]_{\text{avg}} = [\ln h]_{\text{avg}}$
-  realizes the `IsingSDRG` universality class with effective central charge $c_{\text{eff}} = \ln 2 / 2 \approx 0.34657$.
+- **Disordered version**: [Random TFIM](../../verification/disordered.md) —
+  the Fisher infinite-randomness fixed point at
+  $[\ln J]_{\text{avg}} = [\ln h]_{\text{avg}}$.
 - **E8 spectrum**: [E8 universality](../../universalities/e8.md) —
   perturbing the critical TFIM at $h = J$ by a longitudinal field
   $\lambda \sigma^z$ is the $\Phi_{(1,2)} = \sigma$ magnetic
@@ -608,11 +608,6 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 59 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
-
-
-
-
-
 
 
 

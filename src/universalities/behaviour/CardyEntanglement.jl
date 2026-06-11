@@ -277,7 +277,9 @@ function fetch(
     end
     log_g = 0.0
     if haskey(kwargs, :boundary_state)
-        log_g = fetch(model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state])
+        log_g = fetch(
+            model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state]
+        )
     elseif haskey(kwargs, :log_g)
         log_g = Float64(kwargs[:log_g])
     end
@@ -356,9 +358,8 @@ function fetch(
     model::Universality{C}, q::RenyiEntropy, ::PBC; ℓ::Real, L::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy PBC Rényi: L must be > 0; got L=$L."))
-    0 ≤ ℓ ≤ L || throw(
-        ArgumentError("Cardy PBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L.")
-    )
+    0 ≤ ℓ ≤ L ||
+        throw(ArgumentError("Cardy PBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
     (ℓ == 0 || ℓ == L) && return -Inf
@@ -390,9 +391,8 @@ function fetch(
     model::Universality{C}, q::RenyiEntropy, ::OBC; ℓ::Real, L::Real, kwargs...
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy OBC Rényi: L must be > 0; got L=$L."))
-    0 ≤ ℓ ≤ L || throw(
-        ArgumentError("Cardy OBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L.")
-    )
+    0 ≤ ℓ ≤ L ||
+        throw(ArgumentError("Cardy OBC Rényi: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
     c = _cardy_central_charge(model; kwargs...)
     c_eff = _cardy_renyi_c(c, q.α)
     (ℓ == 0 || ℓ == L) && return -Inf
@@ -402,7 +402,9 @@ function fetch(
     end
     log_g = 0.0
     if haskey(kwargs, :boundary_state)
-        log_g = fetch(model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state])
+        log_g = fetch(
+            model, BoundaryEntropy(), Infinite(); boundary_state=kwargs[:boundary_state]
+        )
     elseif haskey(kwargs, :log_g)
         log_g = Float64(kwargs[:log_g])
     end
@@ -1062,9 +1064,8 @@ function fetch(
     kwargs...,
 ) where {C}
     L > 0 || throw(ArgumentError("Cardy quench PBC: L must be > 0; got L=$L."))
-    0 ≤ ℓ ≤ L || throw(
-        ArgumentError("Cardy quench PBC: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L.")
-    )
+    0 ≤ ℓ ≤ L ||
+        throw(ArgumentError("Cardy quench PBC: ℓ must satisfy 0 ≤ ℓ ≤ L; got ℓ=$ℓ, L=$L."))
     t ≥ 0 || throw(ArgumentError("Cardy quench PBC: t must be ≥ 0; got t=$t."))
     v > 0 || throw(ArgumentError("Cardy quench PBC: v must be > 0; got v=$v."))
     beta_eff > 0 || throw(

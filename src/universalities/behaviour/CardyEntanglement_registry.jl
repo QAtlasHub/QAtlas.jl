@@ -92,4 +92,3 @@ for C in (:Ising, :XY, :Heisenberg)
         notes="Affleck-Ludwig universal boundary entropy log g (Affleck-Ludwig 1991).",
     )
 end
-

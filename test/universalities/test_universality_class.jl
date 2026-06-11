@@ -34,30 +34,40 @@ using Test
     # 2. Test fetch for classical model instances at critical point T_c
     @testset "Classical models" begin
         @test fetch(IsingSquare(), UniversalityClass(), Infinite()) === Universality(:Ising)
-        @test fetch(IsingTriangular(), UniversalityClass(), Infinite()) === Universality(:Ising)
-        @test fetch(CurieWeissIsing(), UniversalityClass(), Infinite()) === Universality(:MeanField)
+        @test fetch(IsingTriangular(), UniversalityClass(), Infinite()) ===
+            Universality(:Ising)
+        @test fetch(CurieWeissIsing(), UniversalityClass(), Infinite()) ===
+            Universality(:MeanField)
         @test fetch(TASEP(), UniversalityClass(), Infinite()) === Universality(:KPZ)
 
         # ZnClock
-        @test fetch(ZnClock(; n=2), UniversalityClass(), Infinite()) === Universality(:Ising)
-        @test fetch(ZnClock(; n=3), UniversalityClass(), Infinite()) === Universality(:Potts3)
+        @test fetch(ZnClock(; n=2), UniversalityClass(), Infinite()) ===
+            Universality(:Ising)
+        @test fetch(ZnClock(; n=3), UniversalityClass(), Infinite()) ===
+            Universality(:Potts3)
 
         # ZnParafermion
-        @test fetch(ZnParafermion(; n=2), UniversalityClass(), Infinite()) === Universality(:Ising)
-        @test fetch(ZnParafermion(; n=3), UniversalityClass(), Infinite()) === Universality(:Potts3)
-        @test fetch(ZnParafermion(; n=4), UniversalityClass(), Infinite()) === Universality(:Potts4)
+        @test fetch(ZnParafermion(; n=2), UniversalityClass(), Infinite()) ===
+            Universality(:Ising)
+        @test fetch(ZnParafermion(; n=3), UniversalityClass(), Infinite()) ===
+            Universality(:Potts3)
+        @test fetch(ZnParafermion(; n=4), UniversalityClass(), Infinite()) ===
+            Universality(:Potts4)
 
         # SixVertex (disordered phase |Δ| < 1)
-        @test fetch(SixVertex(; a=1.0, b=1.0, c=1.0), UniversalityClass(), Infinite()) === Universality(:XY)
+        @test fetch(SixVertex(; a=1.0, b=1.0, c=1.0), UniversalityClass(), Infinite()) ===
+            Universality(:XY)
 
         # DimerLattice (c = 1 compact free boson)
         @test fetch(DimerLattice(), UniversalityClass(), Infinite()) === Universality(:XY)
 
         # TricriticalIsing
-        @test fetch(TricriticalIsing(), UniversalityClass(), Infinite()) === Universality(:TricriticalIsing)
+        @test fetch(TricriticalIsing(), UniversalityClass(), Infinite()) ===
+            Universality(:TricriticalIsing)
 
         # TricriticalPotts3
-        @test fetch(TricriticalPotts3(), UniversalityClass(), Infinite()) === Universality(:TricriticalPotts3)
+        @test fetch(TricriticalPotts3(), UniversalityClass(), Infinite()) ===
+            Universality(:TricriticalPotts3)
 
         # YangLee
         @test fetch(YangLee(), UniversalityClass(), Infinite()) === Universality(:LeeYang)
@@ -93,15 +103,31 @@ using Test
         @test_throws DomainError fetch(ZnClock(; n=4), UniversalityClass(), Infinite())
 
         # ZnParafermion unsupported / off-critical (n = 5)
-        @test_throws DomainError fetch(ZnParafermion(; n=5), UniversalityClass(), Infinite())
+        @test_throws DomainError fetch(
+            ZnParafermion(; n=5), UniversalityClass(), Infinite()
+        )
 
         # SixVertex off-critical (|Δ| >= 1, e.g. ferroelectric or AFE)
-        @test_throws DomainError fetch(SixVertex(; a=3.0, b=1.0, c=1.0), UniversalityClass(), Infinite())
+        @test_throws DomainError fetch(
+            SixVertex(; a=3.0, b=1.0, c=1.0), UniversalityClass(), Infinite()
+        )
     end
 
     # 4. Test fetch for Universality{C} objects
     @testset "Universality class objects" begin
-        for c in [:Ising, :XY, :Heisenberg, :MeanField, :KPZ, :Potts3, :Potts4, :TricriticalIsing, :TricriticalPotts3, :LeeYang, :IsingSDRG]
+        for c in [
+            :Ising,
+            :XY,
+            :Heisenberg,
+            :MeanField,
+            :KPZ,
+            :Potts3,
+            :Potts4,
+            :TricriticalIsing,
+            :TricriticalPotts3,
+            :LeeYang,
+            :IsingSDRG,
+        ]
             u = Universality(c)
             @test fetch(u, UniversalityClass(), Infinite()) === u
         end
@@ -110,4 +136,3 @@ using Test
         @test fetch(Universality(:IsingSDRG), CentralCharge(), Infinite()) ≈ log(2.0) / 2.0
     end
 end
-

@@ -14,7 +14,9 @@
 @realizes TFIM :Ising regime = "quantum critical point h = J; (1+1)D Ising CFT, c = 1/2" at = (
     m -> isapprox(m.h, m.J; atol=1e-10)
 ) example = TFIM(; J=1.0, h=1.0)
-@realizes TFIM :IsingSDRG regime = "strong-disorder limit / infinite-randomness fixed point (IRFP) under random bond/field couplings" references = ["Fisher1992", "Fisher1995", "RefaelMoore2004"]
+@realizes TFIM :IsingSDRG regime = "strong-disorder limit / infinite-randomness fixed point (IRFP) under random bond/field couplings" references = [
+    "Fisher1992", "Fisher1995", "RefaelMoore2004"
+]
 
 @realizes XXZ1D :XY regime = "critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1" at = (
     m -> -1 < m.Δ < 1
@@ -42,10 +44,14 @@
 
 @realizes ZnClock :Ising regime = "n = 2 clock model; 2D classical Ising CFT, c = 1/2" at = (
     m -> m.n == 2
-) example = ZnClock(; n=2) references = ["JoseKadanoffKirkpatrickNelson1977", "ElitzurPearsonShigemitsu1979"]
+) example = ZnClock(; n=2) references = [
+    "JoseKadanoffKirkpatrickNelson1977", "ElitzurPearsonShigemitsu1979"
+]
 @realizes ZnClock :Potts3 regime = "n = 3 clock model; 3-state Potts CFT, c = 4/5" at = (
     m -> m.n == 3
-) example = ZnClock(; n=3) references = ["JoseKadanoffKirkpatrickNelson1977", "ElitzurPearsonShigemitsu1979"]
+) example = ZnClock(; n=3) references = [
+    "JoseKadanoffKirkpatrickNelson1977", "ElitzurPearsonShigemitsu1979"
+]
 
 @realizes ZnParafermion :Ising regime = "n = 2 parafermions; (1+1)D Ising CFT, c = 1/2" at = (
     m -> m.n == 2
@@ -61,16 +67,24 @@
     m -> -1 < _six_vertex_delta(m.a, m.b, m.c) < 1
 ) example = SixVertex(; a=1.0, b=1.0, c=1.0) references = ["Lieb1967a", "Sutherland1967"]
 
-@realizes DimerLattice :XY regime = "close-packed dimer model; height representation is a c = 1 compact free boson (XY class)" references = ["Kasteleyn1961", "Fisher1961"]
+@realizes DimerLattice :XY regime = "close-packed dimer model; height representation is a c = 1 compact free boson (XY class)" references = [
+    "Kasteleyn1961", "Fisher1961"
+]
 
-@realizes TricriticalIsing :TricriticalIsing regime = "tricritical point of vacancy-extended Ising; M(5, 4) minimal model, c = 7/10" references = ["BelavinPolyakovZamolodchikov1984", "FriedanQiuShenker1984"]
-@realizes TricriticalPotts3 :TricriticalPotts3 regime = "dilute q = 3 Potts model at criticality; M(6, 7) minimal model, c = 6/7" references = ["AndrewsBaxterForrester1984", "Huse1984"]
+@realizes TricriticalIsing :TricriticalIsing regime = "tricritical point of vacancy-extended Ising; M(5, 4) minimal model, c = 7/10" references = [
+    "BelavinPolyakovZamolodchikov1984", "FriedanQiuShenker1984"
+]
+@realizes TricriticalPotts3 :TricriticalPotts3 regime = "dilute q = 3 Potts model at criticality; M(6, 7) minimal model, c = 6/7" references = [
+    "AndrewsBaxterForrester1984", "Huse1984"
+]
 
 @realizes SSH :XY regime = "critical line |v| = |w|; (1+1)D free Dirac fermion / XY class, c = 1" at = (
     m -> isapprox(abs(m.v), abs(m.w); atol=1e-10)
 ) example = SSH(; v=1.0, w=1.0) references = ["SSH1979"]
 
-@realizes YangLee :LeeYang regime = "Lee-Yang edge singularity; non-unitary minimal model M(5, 2), c = -22/5" references = ["Cardy1985"]
+@realizes YangLee :LeeYang regime = "Lee-Yang edge singularity; non-unitary minimal model M(5, 2), c = -22/5" references = [
+    "Cardy1985"
+]
 
 # ─── UniversalityClass registrations (Edges) ───────────────────────────
 @register(

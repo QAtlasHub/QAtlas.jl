@@ -125,10 +125,7 @@ function realized_class(model::AbstractQAtlasModel)
 end
 
 function fetch(
-    model::AbstractQAtlasModel,
-    ::UniversalityClass,
-    bc::BoundaryCondition;
-    kwargs...,
+    model::AbstractQAtlasModel, ::UniversalityClass, bc::BoundaryCondition; kwargs...
 )
     m_T = typeof(model)
     entries = [r for r in REALIZES if r.model === m_T]
@@ -144,25 +141,45 @@ function fetch(
     has_locus_predicates = any(r -> r.at !== nothing, entries)
     if has_locus_predicates
         regimes = join(
-            [string("  class=:", r.class, ", regime=\"", r.regime, "\"") for r in entries if r.at !== nothing],
+            [
+                string("  class=:", r.class, ", regime=\"", r.regime, "\"") for
+                r in entries if r.at !== nothing
+            ],
             "\n",
         )
-        throw(DomainError(
-            model,
-            string(m_T, " is not at any registered critical locus (off-critical/gapped).\n",
-                   "Current parameters: ", model, "\n",
-                   "Registered critical loci for ", m_T, ":\n", regimes),
-        ))
+        throw(
+            DomainError(
+                model,
+                string(
+                    m_T,
+                    " is not at any registered critical locus (off-critical/gapped).\n",
+                    "Current parameters: ",
+                    model,
+                    "\n",
+                    "Registered critical loci for ",
+                    m_T,
+                    ":\n",
+                    regimes,
+                ),
+            ),
+        )
     end
 
     if length(entries) == 1
         return Universality(entries[1].class)
     else
-        throw(DomainError(
-            model,
-            string(m_T, " has multiple realization entries but none has an `at` predicate ",
-                   "to identify the active critical locus. Got: ", model, "."),
-        ))
+        throw(
+            DomainError(
+                model,
+                string(
+                    m_T,
+                    " has multiple realization entries but none has an `at` predicate ",
+                    "to identify the active critical locus. Got: ",
+                    model,
+                    ".",
+                ),
+            ),
+        )
     end
 end
 
@@ -175,11 +192,7 @@ to round-trip cleanly, and lets `Universality{C}` instances be used directly
 wherever a model is expected in universality-class queries.
 """
 function fetch(
-    u::Universality{C},
-    ::UniversalityClass,
-    bc::BoundaryCondition;
-    kwargs...,
+    u::Universality{C}, ::UniversalityClass, bc::BoundaryCondition; kwargs...
 ) where {C}
     return u
 end
-

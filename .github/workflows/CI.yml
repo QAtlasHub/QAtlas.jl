@@ -88,6 +88,12 @@ jobs:
       - uses: julia-actions/cache@v3
         with:
           cache-name: shard-${{ matrix.sid }}
+          # The default include-matrix:true serializes the ENTIRE matrix context
+          # (including the multi-KB `files` list) into the cache key, blowing the
+          # 512-char key limit — every restore AND save failed with
+          # "Key Validation Error", so each shard recompiled all deps from
+          # scratch on every run. matrix.sid is already in cache-name.
+          include-matrix: 'false'
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
         with:

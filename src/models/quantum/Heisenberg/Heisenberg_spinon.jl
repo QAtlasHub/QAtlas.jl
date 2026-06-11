@@ -39,6 +39,12 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Imports
+# ═══════════════════════════════════════════════════════════════════════════════
+
+using QuadGK: quadgk
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Single-spinon dispersion
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -222,6 +228,46 @@ than relying on a numerical cap.
       factor of the Heisenberg chain", J. Stat. Mech. P12013 (2006)
       (Phase 2 reference, not yet implemented).
 """
+function _heisenberg_szz_exact_I(t::Real)
+    tf = float(t)
+    integrand(x) = begin
+        if x < 1e-8
+            return -1.0 - tf^2 / 4
+        end
+        f_x =
+            2 * ((1.0 + exp(-4x)) * cos(x * tf) - 2.0 * exp(-2x)) /
+            (x * (1.0 - exp(-4x)) * (1.0 + exp(-2x)))
+        f_sub = 2 * cos(x * tf) * (1.0 - exp(-x)) / x
+        return f_x - f_sub
+    end
+    val, _ = quadgk(integrand, 0.0, 50.0; atol=1e-14, rtol=1e-14)
+    return val + log(1.0 + 1.0 / tf^2)
+end
+
+function _heisenberg_szz_exact(J::Real, q::Real, ω::Real)
+    Jf = float(J)
+    qf = float(q)
+    ωf = float(ω)
+    εL = (π * Jf / 2) * abs(sin(qf))
+    εU = π * Jf * abs(sin(qf / 2))
+
+    if ωf <= εL || ωf >= εU
+        return 0.0
+    end
+
+    ω_unit = ωf / Jf
+    εL_unit = εL / Jf
+    εU_unit = εU / Jf
+
+    val_sqrt = sqrt((εU_unit^2 - εL_unit^2) / (ω_unit^2 - εL_unit^2))
+    t = (4 / π) * log(val_sqrt + sqrt(val_sqrt^2 - 1))
+
+    I = _heisenberg_szz_exact_I(t)
+    M = 0.5 * exp(-I)
+
+    return M / sqrt(εU^2 - ωf^2)
+end
+
 function fetch(
     ::Heisenberg1D,
     ::ZZStructureFactor,
@@ -232,19 +278,24 @@ function fetch(
     J::Real=1.0,
     kwargs...,
 )
+    J > 0 ||
+        throw(DomainError(J, "Heisenberg1D ZZStructureFactor requires J > 0; got J = $J."))
+
     if method === :muller
         return _heisenberg_szz_muller(J, q, ω)
+    elseif method === :exact_2spinon
+        return _heisenberg_szz_exact(J, q, ω)
     elseif method === :caux_hagemans
         return error(
             "Heisenberg1D ZZStructureFactor Infinite: method=:caux_hagemans " *
             "(exact 2-spinon form-factor sum, Caux–Hagemans 2006) is reserved " *
-            "for Phase 2 and not yet implemented.  Use method=:muller for the " *
-            "Phase-1 ansatz.",
+            "for Phase 2 and not yet implemented.  Use method=:exact_2spinon for the " *
+            "exact 2-spinon contribution, or method=:muller for the Phase-1 ansatz.",
         )
     else
         return error(
             "Heisenberg1D ZZStructureFactor Infinite: unknown method=:$(method); " *
-            "supported: :muller (Phase 1).  :caux_hagemans is Phase 2 (TODO).",
+            "supported: :muller (ansatz), :exact_2spinon (exact 2-spinon).",
         )
     end
 end

@@ -315,3 +315,14 @@ end
     references=["CalabreseCardy2004"],
     notes="Same critical-regime guard as VN. Standard c -> c*(1+1/alpha)/2 substitution. Reduces to VN at alpha=1.",
 )
+
+@register(
+    XXZ1D,
+    ZZStructureFactor,
+    Infinite,
+    method=:exact_2spinon,
+    reliability=:high,
+    tested_in="test/models/quantum/XXZ/test_xxz_spinon.jl",
+    references=["PerezCastillo2020"],
+    notes="Exact longitudinal two-spinon dynamical structure factor S^{zz}(q, ω) in the massive regime Δ > 1.",
+)

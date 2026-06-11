@@ -305,6 +305,7 @@ include("models/quantum/SSH/SSH.jl")
 include("models/quantum/SSH/SSH_registry.jl")  # populates REGISTRY for SSH
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used by XXZ.jl dispatch
+include("models/quantum/XXZ/XXZ_spinon.jl")
 include("models/quantum/XXZ/XXZ_thermal.jl")
 include("models/quantum/XXZ/XXZ_xx_infinite.jl")
 include("models/quantum/XXZ/XXZ_xx_quench.jl")

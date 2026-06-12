@@ -22,6 +22,10 @@
 # at K = 1` (the SU(2)₁ self-dual-boson coincidence behind the #699 incident)
 # — the latter needs kwargs-mapped universality fetches, tracked in #699.
 
+# The thermal sweep most rows share — declared once so a new dual entry
+# inherits the standard grid by name instead of copying values.
+const _THERMAL_SWEEP = (beta=[0.5, 1.0, 2.0],)
+
 # ── TFIM Kramers–Wannier self-duality: J ↔ h ──────────────────────────
 # The quasiparticle spectrum ε(k) = 2√(J² + h² − 2Jh·cos k) is symmetric
 # under J ↔ h, so every spectral/thermal scalar coincides at mapped
@@ -37,10 +41,10 @@
     involution = true,
     examples = [TFIM(; J=1.0, h=0.5), TFIM(; J=0.3, h=1.2)],
     quantities = [
-        (quantity=Energy{:per_site}, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
-        (quantity=FreeEnergy, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
-        (quantity=ThermalEntropy, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
-        (quantity=SpecificHeat, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
+        (quantity=Energy{:per_site}, bc=Infinite, sweep=_THERMAL_SWEEP),
+        (quantity=FreeEnergy, bc=Infinite, sweep=_THERMAL_SWEEP),
+        (quantity=ThermalEntropy, bc=Infinite, sweep=_THERMAL_SWEEP),
+        (quantity=SpecificHeat, bc=Infinite, sweep=_THERMAL_SWEEP),
         (quantity=MassGap, bc=Infinite),
     ],
     regime = "exact self-duality of the quantum chain (order ↔ disorder, J ↔ h)",
@@ -61,10 +65,10 @@
     kind = :jordan_wigner,
     examples = [TFIM(; J=1.0, h=0.5), TFIM(; J=0.7, h=1.3)],
     quantities = [
-        (quantity=Energy{:per_site}, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
-        (quantity=FreeEnergy, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
-        (quantity=ThermalEntropy, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
-        (quantity=SpecificHeat, bc=Infinite, sweep=(beta=[0.5, 1.0, 2.0],)),
+        (quantity=Energy{:per_site}, bc=Infinite, sweep=_THERMAL_SWEEP),
+        (quantity=FreeEnergy, bc=Infinite, sweep=_THERMAL_SWEEP),
+        (quantity=ThermalEntropy, bc=Infinite, sweep=_THERMAL_SWEEP),
+        (quantity=SpecificHeat, bc=Infinite, sweep=_THERMAL_SWEEP),
         (quantity=MassGap, bc=Infinite),
     ],
     regime = "exact fermionization on the whole (J, h) plane",

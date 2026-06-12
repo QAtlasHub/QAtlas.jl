@@ -121,28 +121,78 @@ end
     # shipped profiles must be LSM-consistent
     @test isempty(filter(f -> f.severity === :error, QAtlas.check_lsm_consistency()))
 
-    # gapped + unique GS + SU(2) + translation + spin-1/2 ⟹ contradicts LSM
-    QAtlas.symmetry!(
-        _LSMProbe;
-        internal=:SU2,
-        translation=true,
-        site_spin=1//2,
-        gapped=true,
-        gs_degeneracy=1,
-    )
-    fs = QAtlas.check_lsm_consistency()
-    @test any(f -> f.severity === :error && occursin("_LSMProbe", f.message), fs)
-    pop!(QAtlas.SYMMETRY_PROFILES)
+    # gapped + unique GS + SU(2) + translation + spin-1/2 ⟹ contradicts LSM.
+    # try/finally so a failing assertion cannot leak the probe into the global
+    # store and corrupt every later test file.
+    try
+        QAtlas.symmetry!(
+            _LSMProbe;
+            internal=:SU2,
+            translation=true,
+            site_spin=1//2,
+            gapped=true,
+            gs_degeneracy=1,
+        )
+        fs = QAtlas.check_lsm_consistency()
+        @test any(f -> f.severity === :error && occursin("_LSMProbe", f.message), fs)
+    finally
+        pop!(QAtlas.SYMMETRY_PROFILES)
+    end
 
     # gapped but degeneracy undeclared ⟹ self-reported :gap, not :error
-    QAtlas.symmetry!(_LSMProbe; internal=:U1, translation=true, site_spin=3//2, gapped=true)
-    fs = QAtlas.check_lsm_consistency()
-    @test any(f -> f.severity === :gap && occursin("_LSMProbe", f.message), fs)
-    @test !any(f -> f.severity === :error && occursin("_LSMProbe", f.message), fs)
-    pop!(QAtlas.SYMMETRY_PROFILES)
+    try
+        QAtlas.symmetry!(
+            _LSMProbe; internal=:U1, translation=true, site_spin=3//2, gapped=true
+        )
+        fs = QAtlas.check_lsm_consistency()
+        @test any(f -> f.severity === :gap && occursin("_LSMProbe", f.message), fs)
+        @test !any(f -> f.severity === :error && occursin("_LSMProbe", f.message), fs)
+    finally
+        pop!(QAtlas.SYMMETRY_PROFILES)
+    end
 
     # integer spin (Haldane): gapped + unique is fine — S1Heisenberg1D ships so
     @test !any(f -> occursin("S1Heisenberg1D", f.message), QAtlas.check_lsm_consistency())
+end
+
+@testset "C10b symmetry corroboration runner detects a contradiction" begin
+    # every shipped corroboration check passes (gapped facts match MassGap)
+    shipped = generated_checks(; kinds=(:symmetry,))
+    @test !isempty(shipped)
+    for c in shipped
+        @test run_generated_check(c).status === :pass
+    end
+
+    # Flip Heisenberg1D's profile to a CONTRADICTING gapped=true while its
+    # registered MassGap@Infinite is exactly 0 (gapless) — the runner must
+    # return :fail.  Swap-and-restore under try/finally so the global store is
+    # untouched after the test, regardless of assertion outcome.
+    idx = findfirst(p -> p.model === Heisenberg1D, QAtlas.SYMMETRY_PROFILES)
+    @test idx !== nothing
+    saved = QAtlas.SYMMETRY_PROFILES[idx]
+    try
+        deleteat!(QAtlas.SYMMETRY_PROFILES, idx)
+        QAtlas.symmetry!(
+            Heisenberg1D;
+            internal=:SU2,
+            translation=true,
+            site_spin=1//2,
+            gapped=true,
+            gs_degeneracy=2,   # keeps C10 LSM satisfied (degenerate, not unique)
+        )
+        chk = only(
+            filter(
+                c -> startswith(c.id, "symmetry/gapped/Heisenberg1D/"),
+                generated_checks(; kinds=(:symmetry,)),
+            ),
+        )
+        out = run_generated_check(chk)
+        @test out.status === :fail   # declares gapped=true but the fetched gap is 0
+    finally
+        i2 = findfirst(p -> p.model === Heisenberg1D, QAtlas.SYMMETRY_PROFILES)
+        i2 === nothing || deleteat!(QAtlas.SYMMETRY_PROFILES, i2)
+        insert!(QAtlas.SYMMETRY_PROFILES, idx, saved)
+    end
 end
 
 # ── @identity ────────────────────────────────────────────────────────
@@ -150,13 +200,15 @@ end
     edges = identities_for(FreeEnergy)
     @test any(e -> e.name === :gibbs, edges)
     gibbs = only(filter(e -> e.name === :gibbs, QAtlas.IDENTITIES))
-    @test gibbs.mode === :tuple
+    @test gibbs isa QAtlas.TupleIdentityEdge
     @test Set(participants(gibbs)) == Set([Energy{:per_site}, FreeEnergy, ThermalEntropy])
     # family identities pick up members through the taxonomy + component
     iso = only(filter(e -> e.name === :su2_susceptibility_isotropy, QAtlas.IDENTITIES))
-    @test iso.mode === :component_isotropy
+    @test iso isa QAtlas.IsotropyIdentityEdge
     @test SusceptibilityXX in participants(iso)
     @test iso in identities_for(SusceptibilityZZ)
+    # the two concrete edge types share AbstractIdentityEdge
+    @test gibbs isa QAtlas.AbstractIdentityEdge && iso isa QAtlas.AbstractIdentityEdge
     # validation
     @test_throws ArgumentError QAtlas.identity!(:gibbs; family=AbstractSusceptibility)
     @test_throws ArgumentError QAtlas.identity!(:_neither)
@@ -167,6 +219,13 @@ end
         family=AbstractSusceptibility,
     )
     @test_throws ArgumentError QAtlas.identity!(:_concrete_family; family=FreeEnergy)
+    # tolerance footgun: rtol ≥ 1 passes everything → rejected
+    @test_throws ArgumentError QAtlas.identity!(
+        :_bad_rtol;
+        quantities=(a=FreeEnergy, b=ThermalEntropy),
+        check=(v, p) -> (v.a, v.b),
+        rtol=1.0,
+    )
 end
 
 # ── @dual ────────────────────────────────────────────────────────────
@@ -178,19 +237,24 @@ end
     # shipped edges: param_map sanity holds (zero :error)
     @test isempty(filter(f -> f.severity === :error, QAtlas.check_duality_maps()))
 
-    # synthetic: param_map landing on the wrong type is an :error
-    QAtlas.dual!(
-        :_broken_probe,
-        TFIM,
-        Kitaev1D;
-        param_map=m -> m,                       # returns a TFIM, not a Kitaev1D
-        kind=:probe,
-        quantities=[(quantity=MassGap, bc=Infinite)],
-        examples=[TFIM(; J=1.0, h=0.5)],
-    )
-    fs = QAtlas.check_duality_maps()
-    @test any(f -> f.severity === :error && occursin("_broken_probe", f.message), fs)
-    pop!(QAtlas.DUALITIES)
+    # synthetic: param_map landing on the wrong type is an :error, and the
+    # malformed image must NOT crash the check (the C12 `continue` guard) — so
+    # the whole report still returns rather than throwing.
+    try
+        QAtlas.dual!(
+            :_broken_probe,
+            TFIM,
+            Kitaev1D;
+            param_map=m -> m,                   # returns a TFIM, not a Kitaev1D
+            kind=:probe,
+            quantities=[(quantity=MassGap, bc=Infinite)],
+            examples=[TFIM(; J=1.0, h=0.5)],
+        )
+        fs = QAtlas.check_duality_maps()        # must not throw
+        @test any(f -> f.severity === :error && occursin("_broken_probe", f.message), fs)
+    finally
+        pop!(QAtlas.DUALITIES)
+    end
 
     # validation: empty examples / empty quantities rejected
     @test_throws ArgumentError QAtlas.dual!(
@@ -265,10 +329,11 @@ end
     @test out isa QAtlas.CheckOutcome
     @test out.status === :pass
     @test out.abs_err < 1e-8
-    # a throwing runner is reported as :fail, never raises
+    # a throwing runner is reported as :error (NOT :fail — a thrown exception is
+    # a config/dispatch bug, not a numerical disagreement), never raises
     boom = QAtlas.GeneratedCheck(:identity, "probe/boom", "probe", () -> error("boom"))
     out = run_generated_check(boom)
-    @test out.status === :fail && occursin("boom", out.detail)
+    @test out.status === :error && occursin("boom", out.detail)
 end
 
 # ── the hard invariant stays: zero coherence errors with C10–C13 wired ──

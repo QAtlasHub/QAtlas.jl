@@ -9,9 +9,10 @@
 # identity coverage with zero hand-written tests, and a change to any
 # participating quantity has a declared blast radius (selective CI).
 #
-# Two modes, one store:
+# Two edge types under `AbstractIdentityEdge`, one store (queries and
+# generators dispatch on the type — no `mode` tag, no nothing-filled halves):
 #
-#   * `:tuple` — an explicit relation over named quantities:
+#   * `TupleIdentityEdge` — an explicit relation over named quantities:
 #         @identity(:gibbs,
 #             quantities = (f=FreeEnergy, e=Energy{:per_site}, s=ThermalEntropy),
 #             check = (v, p) -> (v.f, v.e - v.s / p.beta),
@@ -20,7 +21,7 @@
 #     and returns the `(lhs, rhs)` pair that must agree — returning both sides
 #     (rather than a Bool) keeps failures diagnosable.
 #
-#   * `:component_isotropy` — the #690 × #700 integration: a quantity FAMILY
+#   * `IsotropyIdentityEdge` — the #690 × #700 integration: a quantity FAMILY
 #     (an abstract supertype from the taxonomy layer) whose components must
 #     coincide for models declaring a symmetry:
 #         @identity(:su2_susceptibility_isotropy,
@@ -36,21 +37,48 @@
 # the independence filter of duality/limit edges does not apply here.
 
 """
-    IdentityEdge
+    AbstractIdentityEdge
 
-One quantity↔quantity identity — see [`@identity`](@ref).  `mode` is `:tuple`
-(explicit `quantities` + `check`) or `:component_isotropy` (`family` +
-`requires_internal`).  `sweep` is the fetch-kwargs grid the generated checks
-run on; `finite_N` the size used for `OBC`/`PBC` hubs; `exclusions` lists
-`Model => reason` pairs that are emitted as visible `:skip` checks rather
-than silently dropped.
+A quantity↔quantity identity — one of the two concrete modes below.  Splitting
+the two modes into distinct types (rather than one struct with a `mode` tag and
+half its fields left `nothing`) makes the inactive-half states unrepresentable
+and lets the queries/generators dispatch instead of branch.  Shared fields,
+present on both: `name`, `sweep` (fetch-kwargs grid), `finite_N` (OBC/PBC hub
+size), `rtol`/`atol`, `exclusions` (`Model`/`(Model,BC) => reason` pairs
+emitted as visible `:skip` checks), `notes`, `references`.
 """
-struct IdentityEdge
+abstract type AbstractIdentityEdge end
+
+"""
+    TupleIdentityEdge <: AbstractIdentityEdge
+
+An explicit relation over named quantities: `check(vals, point) -> (lhs, rhs)`
+must agree for every hub implementing all of `quantities` (a NamedTuple
+`name => quantity Type`).  See [`@identity`](@ref).
+"""
+struct TupleIdentityEdge <: AbstractIdentityEdge
     name::Symbol
-    mode::Symbol
-    quantities::NamedTuple                 # :tuple mode — name => quantity Type
-    check::Union{Function,Nothing}         # :tuple mode — (vals, point) -> (lhs, rhs)
-    family::Union{Type,Nothing}            # :component_isotropy mode
+    quantities::NamedTuple
+    check::Function
+    sweep::NamedTuple
+    finite_N::Int
+    rtol::Float64
+    atol::Float64
+    exclusions::Vector{Pair{Any,String}}
+    notes::String
+    references::Vector{String}
+end
+
+"""
+    IsotropyIdentityEdge <: AbstractIdentityEdge
+
+A component-isotropy relation over a quantity `family` (an abstract taxonomy
+supertype): the family's components must coincide, optionally gated on a
+`requires_internal` symmetry.  See [`@identity`](@ref).
+"""
+struct IsotropyIdentityEdge <: AbstractIdentityEdge
+    name::Symbol
+    family::Type
     requires_internal::Union{Symbol,Nothing}
     sweep::NamedTuple
     finite_N::Int
@@ -62,25 +90,31 @@ struct IdentityEdge
 end
 
 """
-    IDENTITIES :: Vector{IdentityEdge}
+    IDENTITIES :: Vector{AbstractIdentityEdge}
 
 The quantity↔quantity identity store, populated at include-time by
 [`identity!`](@ref) / [`@identity`](@ref).  Query with
 [`identities_for`](@ref) / [`participants`](@ref); the generated checks are
 the `:identity` kind of [`generated_checks`](@ref).
 """
-const IDENTITIES = IdentityEdge[]
+const IDENTITIES = AbstractIdentityEdge[]
 
 """
     identity!(name; quantities=nothing, check=nothing, family=nothing,
               requires_internal=nothing, sweep=(;), finite_N=8,
               rtol=1e-8, atol=1e-10, exclusions=[], notes="", references=String[])
 
-Record an identity edge.  Exactly one of the two mode signatures must be
-given: (`quantities` + `check`) for a `:tuple` identity, or `family` (an
+Record an identity edge (a [`TupleIdentityEdge`](@ref) or
+[`IsotropyIdentityEdge`](@ref)).  Exactly one of the two mode signatures must
+be given: (`quantities` + `check`) for a tuple identity, or `family` (an
 abstract quantity supertype, optionally `requires_internal` symmetry-gated)
-for `:component_isotropy`.  Tuple participants must be field-less quantity
-types (instantiable from the bare type).
+for component isotropy.  Tuple participants must be field-less quantity types
+(instantiable from the bare type).
+
+`finite_N` is the OBC/PBC hub size the generated checks run at; the default 8
+suits spin-1/2 hubs but is a 3ᴺ dense-ED trap for spin-1 models — prefer 6 for
+families that reach S=1 chains (see `src/identity_registry.jl`).  `rtol` must
+be in `[0, 1)` (a value ≥ 1 would pass every check) and `atol ≥ 0`.
 """
 function identity!(
     name::Symbol;
@@ -98,6 +132,7 @@ function identity!(
 )
     any(e -> e.name === name, IDENTITIES) &&
         throw(ArgumentError("identity!: :$(name) already declared"))
+    _check_tolerances(:identity, rtol, atol)
     tuple_mode = quantities !== nothing
     family_mode = family !== nothing
     tuple_mode ⊻ family_mode || throw(
@@ -153,13 +188,22 @@ function identity!(
             )
         push!(excl, Pair{Any,String}(k, String(last(p))))
     end
-    push!(
-        IDENTITIES,
-        IdentityEdge(
+    edge = if tuple_mode
+        TupleIdentityEdge(
             name,
-            tuple_mode ? :tuple : :component_isotropy,
-            tuple_mode ? quantities : NamedTuple(),
+            quantities,
             check,
+            sweep,
+            finite_N,
+            Float64(rtol),
+            Float64(atol),
+            excl,
+            String(notes),
+            String[r for r in references],
+        )
+    else
+        IsotropyIdentityEdge(
+            name,
             family,
             requires_internal,
             sweep,
@@ -169,14 +213,15 @@ function identity!(
             excl,
             String(notes),
             String[r for r in references],
-        ),
-    )
+        )
+    end
+    push!(IDENTITIES, edge)
     return nothing
 end
 
 # The declared skip reason for a hub, if any: an exclusion keyed by the model
 # type covers every bc; a (model, bc) tuple covers that hub only.
-function _exclusion_reason(e::IdentityEdge, model_T::Type, bc_T::Type)
+function _exclusion_reason(e::AbstractIdentityEdge, model_T::Type, bc_T::Type)
     for (k, reason) in e.exclusions
         if k === model_T || (k isa Tuple && k[1] === model_T && k[2] === bc_T)
             return reason
@@ -213,35 +258,30 @@ function _family_members(family::Type)
     return members
 end
 
+_participates(e::TupleIdentityEdge, q_T::Type) = any(Q -> Q === q_T, values(e.quantities))
+function _participates(e::IsotropyIdentityEdge, q_T::Type)
+    return q_T <: e.family && component(q_T) !== nothing
+end
+
 """
-    identities_for(quantity) -> Vector{IdentityEdge}
+    identities_for(quantity) -> Vector{AbstractIdentityEdge}
 
 The identity edges `quantity` (instance or type) participates in — tuple
 identities naming it, and family identities whose family it belongs to.
 """
 function identities_for(quantity)
     q_T = _as_type(quantity)
-    out = IdentityEdge[]
-    for e in IDENTITIES
-        if e.mode === :tuple
-            any(Q -> Q === q_T, values(e.quantities)) && push!(out, e)
-        else
-            q_T <: e.family && component(q_T) !== nothing && push!(out, e)
-        end
-    end
-    return out
+    return AbstractIdentityEdge[e for e in IDENTITIES if _participates(e, q_T)]
 end
 
 """
-    participants(edge::IdentityEdge) -> Vector{Type}
+    participants(edge::AbstractIdentityEdge) -> Vector{Type}
 
 The quantity types `edge` relates: the declared tuple, or the family's
 component-carrying concrete members.
 """
-function participants(edge::IdentityEdge)
-    edge.mode === :tuple && return Type[Q for Q in values(edge.quantities)]
-    return Type[T for T in _family_members(edge.family)]
-end
+participants(e::TupleIdentityEdge) = Type[Q for Q in values(e.quantities)]
+participants(e::IsotropyIdentityEdge) = Type[T for T in _family_members(e.family)]
 
 # ──────────────────────────────────────────────────────────────────────
 # C11 — static identity coherence (no fetch execution)
@@ -250,47 +290,62 @@ end
 """
     check_identity_coverage() -> Vector{CoherenceFinding}
 
-C11: every identity edge should be *exercised* — an edge none of whose
-participant sets is implemented by any hub generates zero checks, i.e. the
-declared relation constrains nothing.  Self-reported as a `:gap` (a
-missing-but-expected hub, not an invariant violation).  A symmetry-gated
-family identity whose `requires_internal` matches no [`@symmetry`](@ref)
-profile is likewise a `:gap` (the gate is closed for want of profiles).
+C11: every identity edge should be *exercised* — an edge that generates zero
+checks constrains nothing, a self-reported `:gap`.  Dispatches per edge type:
+a tuple identity no hub implements; a gated isotropy identity whose
+`requires_internal` matches no [`@symmetry`](@ref) profile (gate closed); or
+ANY isotropy identity — gated or not — with no hub implementing ≥ 2 distinct
+family components (the ungated case the modal version silently skipped).
 """
 function check_identity_coverage()
     out = CoherenceFinding[]
     for e in IDENTITIES
-        if e.mode === :tuple
-            isempty(_implemented_hubs(values(e.quantities))) && push!(
-                out,
-                CoherenceFinding(
-                    :identity_coverage,
-                    :gap,
-                    "identity :$(e.name) has no (model, bc) hub implementing all of " *
-                    "$(join(_kgshort.(collect(values(e.quantities))), ", ")) — it " *
-                    "generates no checks",
-                ),
-            )
-        elseif e.requires_internal !== nothing
-            isempty(models_with_symmetry(e.requires_internal)) && push!(
-                out,
-                CoherenceFinding(
-                    :identity_coverage,
-                    :gap,
-                    "identity :$(e.name) requires internal :$(e.requires_internal) " *
-                    "but no @symmetry profile declares it — the gate is closed",
-                ),
-            )
-        end
+        f = _coverage_finding(e)
+        f === nothing || push!(out, f)
     end
     return out
+end
+
+function _coverage_finding(e::TupleIdentityEdge)
+    isempty(_implemented_hubs(values(e.quantities))) || return nothing
+    return CoherenceFinding(
+        :identity_coverage,
+        :gap,
+        "identity :$(e.name) has no (model, bc) hub implementing all of " *
+        "$(join(_kgshort.(collect(values(e.quantities))), ", ")) — it generates no checks",
+    )
+end
+
+function _coverage_finding(e::IsotropyIdentityEdge)
+    if e.requires_internal !== nothing && isempty(models_with_symmetry(e.requires_internal))
+        return CoherenceFinding(
+            :identity_coverage,
+            :gap,
+            "identity :$(e.name) requires internal :$(e.requires_internal) but no " *
+            "@symmetry profile declares it — the gate is closed",
+        )
+    end
+    # Generates a check only where some (gated) hub implements ≥ 2 distinct
+    # components; if none does, the edge is inert — covers the ungated case too.
+    isempty(_isotropy_hubs(e)) || return nothing
+    gate = if e.requires_internal === nothing
+        ""
+    else
+        " (gated on internal :$(e.requires_internal))"
+    end
+    return CoherenceFinding(
+        :identity_coverage,
+        :gap,
+        "identity :$(e.name) over $(_kgshort(e.family))$(gate) has no hub implementing " *
+        "≥ 2 distinct components — it generates no checks",
+    )
 end
 
 # ──────────────────────────────────────────────────────────────────────
 # Generator — the :identity kind of generated_checks()
 # ──────────────────────────────────────────────────────────────────────
 
-function _identity_tuple_checks(e::IdentityEdge)
+function _identity_tuple_checks(e::TupleIdentityEdge)
     out = GeneratedCheck[]
     for hub in _implemented_hubs(values(e.quantities))
         hub_id = string(
@@ -298,16 +353,11 @@ function _identity_tuple_checks(e::IdentityEdge)
         )
         reason = _exclusion_reason(e, hub.model, hub.bc)
         if reason !== nothing
-            push!(
-                out,
-                GeneratedCheck(
-                    :identity, hub_id, "EXCLUDED: $(reason)", () -> _skip_outcome(reason)
-                ),
-            )
+            _push_excluded_check!(out, :identity, hub_id, reason)
             continue
         end
         for point in _sweep_points(e.sweep)
-            id = isempty(keys(point)) ? hub_id : string(hub_id, "/", _point_id(point))
+            id = hub_id * _point_suffix(point)
             names = keys(e.quantities)
             qtypes = values(e.quantities)
             model_T, bc_T = hub.model, hub.bc
@@ -342,34 +392,43 @@ function _identity_tuple_checks(e::IdentityEdge)
     return out
 end
 
-function _identity_isotropy_checks(e::IdentityEdge)
-    out = GeneratedCheck[]
+# The hubs an isotropy edge generates checks on: `(model, bc, reps)` where
+# `reps` is one representative quantity per distinct component (≥ 2 of them),
+# restricted to the symmetry gate when present.  Shared by the generator and
+# the C11 coverage check so the two cannot disagree on "does this generate?".
+# One representative per component because isotropy equates DIFFERENT
+# components; same-component family variants (e.g. two modes of an :xx
+# correlator) are not an isotropy statement and would collide the
+# component-keyed ids.  Deterministic order.
+function _isotropy_hubs(e::IsotropyIdentityEdge)
     members = _family_members(e.family)
-    gated_models = if e.requires_internal === nothing
+    gated = if e.requires_internal === nothing
         nothing
     else
         Set(models_with_symmetry(e.requires_internal))
     end
-    # one pass: (model, bc) hub => family members it implements
     impl = Dict{Tuple{Type,Type},Vector{Type}}()
     for Q in members, hub in _implemented_hubs((Q,))
         push!(get!(impl, (hub.model, hub.bc), Type[]), Q)
     end
+    out = Tuple{Type,Type,Vector{Type}}[]
     for key in sort!(collect(keys(impl)); by=k -> (_kgshort(k[1]), _kgshort(k[2])))
         model_T, bc_T = key
-        gated_models === nothing || model_T in gated_models || continue
-        present = sort!(impl[key]; by=string)
-        # One representative per component: isotropy equates DIFFERENT
-        # components, so same-component family variants (e.g. two modes of an
-        # :xx correlator) are not an isotropy statement — and including them
-        # would collide the component-keyed check ids.
+        gated === nothing || model_T in gated || continue
         comps = Set{Symbol}()
         reps = Type[]
-        for Q in present
+        for Q in sort!(impl[key]; by=string)
             c = component(Q)::Symbol
             c in comps || (push!(reps, Q); push!(comps, c))
         end
-        length(reps) ≥ 2 || continue
+        length(reps) ≥ 2 && push!(out, (model_T, bc_T, reps))
+    end
+    return out
+end
+
+function _identity_isotropy_checks(e::IsotropyIdentityEdge)
+    out = GeneratedCheck[]
+    for (model_T, bc_T, reps) in _isotropy_hubs(e)
         ref_Q = reps[1]
         for other_Q in reps[2:end], point in _sweep_points(e.sweep)
             pair = string(component(ref_Q), "=", component(other_Q))
@@ -382,16 +441,11 @@ function _identity_isotropy_checks(e::IdentityEdge)
                 _kgshort(bc_T),
                 "/",
                 pair,
-                isempty(keys(point)) ? "" : "/" * _point_id(point),
+                _point_suffix(point),
             )
             reason = _exclusion_reason(e, model_T, bc_T)
             if reason !== nothing
-                push!(
-                    out,
-                    GeneratedCheck(
-                        :identity, id, "EXCLUDED: $(reason)", () -> _skip_outcome(reason)
-                    ),
-                )
+                _push_excluded_check!(out, :identity, id, reason)
                 continue
             end
             runner = function ()
@@ -427,13 +481,13 @@ end
 function identity_checks()
     out = GeneratedCheck[]
     for e in IDENTITIES
-        append!(
-            out,
-            e.mode === :tuple ? _identity_tuple_checks(e) : _identity_isotropy_checks(e),
-        )
+        append!(out, _edge_checks(e))
     end
     return out
 end
+
+_edge_checks(e::TupleIdentityEdge) = _identity_tuple_checks(e)
+_edge_checks(e::IsotropyIdentityEdge) = _identity_isotropy_checks(e)
 
 register_check_generator!(:identity, identity_checks)
 register_edge_store!(:identity, IDENTITIES; location_of=e -> "identity :$(e.name)")

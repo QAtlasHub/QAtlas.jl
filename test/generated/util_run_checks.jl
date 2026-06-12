@@ -3,13 +3,14 @@
 # the shard planner never schedule it directly).
 #
 # Contract: every emitted check passes; declared exclusions surface as
-# visible :skip with their reason (no silent caps).
+# visible :skip with their reason (no silent caps); a runner that throws is an
+# :error (a config/dispatch bug, reported distinctly from a numerical :fail).
 
 using QAtlas, Test
 using QAtlas: run_generated_check
 
 function run_generated_suite(checks; label::AbstractString)
-    n_pass = n_skip = 0
+    n_pass = n_skip = n_fail = n_error = 0
     for c in checks
         out = run_generated_check(c)
         if out.status === :skip
@@ -18,9 +19,12 @@ function run_generated_suite(checks; label::AbstractString)
             continue
         end
         out.status === :pass && (n_pass += 1)
+        out.status === :fail && (n_fail += 1)
+        out.status === :error && (n_error += 1)
         @testset "$(c.id)" begin
             if out.status !== :pass
-                @info "generated check failed" c.id c.description out.lhs out.rhs out.abs_err out.rel_err out.detail
+                # :fail = physics disagrees, :error = the runner threw (bug)
+                @info "generated check $(out.status)" c.id c.description out.lhs out.rhs out.abs_err out.rel_err out.detail
             end
             @test out.status === :pass
         end
@@ -32,6 +36,10 @@ function run_generated_suite(checks; label::AbstractString)
         " pass / ",
         n_skip,
         " declared-skip / ",
+        n_fail,
+        " fail / ",
+        n_error,
+        " error / ",
         length(checks),
         " emitted",
     )

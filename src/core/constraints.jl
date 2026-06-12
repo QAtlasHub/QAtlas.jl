@@ -76,14 +76,16 @@ const EDGE_STORES = EdgeStoreSpec[]
     register_edge_store!(name, store; references_of, location_of)
 
 Register a declarative store for generic graph-wide passes.  `references_of`
-defaults to `row -> row.references` (every current store carries a
-`references` field); `location_of` should pin the row precisely enough that a
-dangling-bibkey finding is actionable.
+defaults to a `references`-field reader that yields `String[]` for a row type
+without that field (so a future bibkey-less store contributes nothing to C1
+instead of throwing inside it); `location_of` should pin the row precisely
+enough that a dangling-bibkey finding is actionable.
 """
 function register_edge_store!(
     name::Symbol,
     store::Vector;
-    references_of::Function=row -> row.references,
+    references_of::Function=row ->
+        hasproperty(row, :references) ? row.references : String[],
     location_of::Function=row -> string(name, " row"),
 )
     any(s -> s.name === name, EDGE_STORES) &&
@@ -115,9 +117,20 @@ register_edge_store!(:about, ABOUT; location_of=c -> "about $(_kgshort(c.model))
 """
     CheckOutcome
 
-The result of running one [`GeneratedCheck`](@ref): `status` is `:pass` /
-`:fail` / `:skip`, `lhs`/`rhs` are the two compared values (`NaN` when
-skipped), and `detail` carries the skip reason or failure context.
+The result of running one [`GeneratedCheck`](@ref).  `status` is one of:
+
+  * `:pass`  — the check ran and the two values agree;
+  * `:fail`  — the check ran and the values DISAGREE (a genuine numerical
+               contradiction); `lhs`/`rhs`/`abs_err`/`rel_err` are meaningful;
+  * `:skip`  — the check is declared inapplicable (an exclusion); numerics are
+               `NaN`, `detail` is the reason;
+  * `:error` — the runner THREW (a config/dispatch bug, NOT a numerical
+               disagreement); numerics are `NaN`, `detail` carries the
+               exception.  Kept distinct from `:fail` so a broken edge is not
+               mis-read as a physics contradiction.
+
+`:fail` and `:error` are both test failures, but only `:fail` means "the
+physics disagrees".
 """
 struct CheckOutcome
     status::Symbol
@@ -164,18 +177,33 @@ end
 
 _skip_outcome(reason::String) = CheckOutcome(:skip, NaN, NaN, NaN, NaN, reason)
 
+# Reject tolerance footguns at declaration time: an `rtol ≥ 1` passes every
+# check (a common atol↔rtol slot mistake), and a negative tolerance is
+# meaningless.  Shared by the identity / dual / limit factories.
+function _check_tolerances(who::Symbol, rtol::Real, atol::Real)
+    (0 ≤ rtol < 1) || throw(
+        ArgumentError(
+            "$(who)!: rtol must be in [0, 1); got $(rtol) (rtol ≥ 1 passes everything)"
+        ),
+    )
+    atol ≥ 0 || throw(ArgumentError("$(who)!: atol must be ≥ 0; got $(atol)"))
+    return nothing
+end
+
 """
     run_generated_check(c::GeneratedCheck) -> CheckOutcome
 
-Run `c`, converting a thrown exception into a `:fail` outcome whose `detail`
-carries the error — generated suites report every check rather than aborting
-at the first throwing hub.
+Run `c`, converting a thrown exception into an `:error` outcome (NOT `:fail`)
+whose `detail` carries the exception — a runner only ever throws on a
+config/dispatch bug, so it must not be conflated with a numerical `:fail`.
+Generated suites report every check rather than aborting at the first
+throwing hub.
 """
 function run_generated_check(c::GeneratedCheck)
     try
         return c.run()
     catch err
-        return CheckOutcome(:fail, NaN, NaN, NaN, NaN, string(typeof(err), ": ", err))
+        return CheckOutcome(:error, NaN, NaN, NaN, NaN, string(typeof(err), ": ", err))
     end
 end
 
@@ -216,11 +244,25 @@ function generated_checks(; kinds=nothing)
     out = GeneratedCheck[]
     for (kind, gen) in CHECK_GENERATORS
         (kinds === nothing || kind in kinds) || continue
-        append!(out, gen()::Vector{GeneratedCheck})
+        # A throwing generator is a bug, not a runtime check failure; surface
+        # it loudly AND name the culprit kind (a bare rethrow would leave the
+        # caller guessing which of the registered generators died).
+        local emitted
+        try
+            emitted = gen()::Vector{GeneratedCheck}
+        catch err
+            error("generated_checks: the :$(kind) generator threw — $(err)")
+        end
+        append!(out, emitted)
     end
     sort!(out; by=c -> c.id)
-    allunique(c.id for c in out) ||
-        error("generated_checks: duplicate check ids — a generator is not deterministic")
+    if !allunique(c.id for c in out)
+        dups = [id for id in (c.id for c in out) if count(==(id), (c.id for c in out)) > 1]
+        error(
+            "generated_checks: duplicate check ids $(sort!(unique(dups))) — a " *
+            "generator is not deterministic (ids must be unique across kinds)",
+        )
+    end
     return out
 end
 
@@ -302,12 +344,70 @@ function _canonical_row(model_T::Type, quantity_T::Type, bc_T::Type)
 end
 
 """
+    _both_endpoints_independent(source_T, target_T, quantity_T, bc_T) -> Bool
+
+Both model endpoints have a canonical, independent (non-delegating) registry
+row for `(quantity_T, bc_T)` — the precondition shared by the duality (#699)
+and limit (#701) generators for emitting a genuine two-implementation
+cross-check.
+"""
+function _both_endpoints_independent(source_T, target_T, quantity_T, bc_T)
+    for m_T in (source_T, target_T)
+        row = _canonical_row(m_T, quantity_T, bc_T)
+        (row !== nothing && _is_independent_row(row)) || return false
+    end
+    return true
+end
+
+"""
+    _check_endpoint_rows!(out, source_T, target_T, quantity_T, bc_T, tag, label)
+
+Shared C12/C13 endpoint-row coherence: append a `:gap` finding (tagged `tag`,
+prefixed `label`) for each of the two model endpoints whose `(quantity, bc)`
+row is missing or delegation-backed — the cross-check the edge promises
+cannot be generated, or would be circular.
+"""
+function _check_endpoint_rows!(
+    out, source_T, target_T, quantity_T, bc_T, tag::Symbol, label::AbstractString
+)
+    for (side, m_T) in ((:source, source_T), (:target, target_T))
+        row = _canonical_row(m_T, quantity_T, bc_T)
+        if row === nothing
+            push!(
+                out,
+                CoherenceFinding(
+                    tag,
+                    :gap,
+                    "$(label) lists $(_kgshort(quantity_T)) at $(_kgshort(bc_T)) but " *
+                    "the $(side) side ($(_kgshort(m_T))) has no canonical row — the " *
+                    "promised cross-check cannot be generated",
+                ),
+            )
+        elseif !_is_independent_row(row)
+            push!(
+                out,
+                CoherenceFinding(
+                    tag,
+                    :gap,
+                    "$(label): the $(side) row for $(_kgshort(quantity_T)) at " *
+                    "$(_kgshort(bc_T)) is delegation-backed — the cross-check would " *
+                    "be circular and is not generated",
+                ),
+            )
+        end
+    end
+    return out
+end
+
+"""
     _equivalent_rows(rowq::Type, Q::Type) -> Bool
 
 Extension point of [`_row_covers`](@ref): declare that a registered quantity
 type covers a *different* requested type because `fetch` routes between them
-automatically.  New equivalence axes add a method HERE (next to the quantity
-that owns the routing), not an edit to the kernel's hub enumeration.
+automatically.  New equivalence axes add a method right below this fallback
+(co-located with the quantity that owns the routing would be cleaner but the
+kernel is the single import point all generators see), NOT an edit to the
+hub-enumeration loop.
 """
 _equivalent_rows(::Type, ::Type) = false
 # Energy granularity: per-site/total conversion is automatic by design and
@@ -382,3 +482,17 @@ end
 
 # Compact deterministic id fragment for a sweep point: "beta=0.5,q=3.14".
 _point_id(p::NamedTuple) = join([string(k, "=", getfield(p, k)) for k in keys(p)], ",")
+
+# The "/<point>" id suffix for a sweep point — empty for the no-sweep point.
+# Collapses the `isempty(keys(p)) ? "" : "/" * _point_id(p)` idiom repeated by
+# every generator.
+_point_suffix(p::NamedTuple) = isempty(keys(p)) ? "" : "/" * _point_id(p)
+
+# Emit a visible :skip GeneratedCheck for an excluded hub (declared exclusions
+# never silently vanish).  Shared by the identity generators.
+function _push_excluded_check!(
+    out, kind::Symbol, id::AbstractString, reason::AbstractString
+)
+    push!(out, GeneratedCheck(kind, id, "EXCLUDED: $(reason)", () -> _skip_outcome(reason)))
+    return out
+end

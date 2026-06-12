@@ -86,6 +86,9 @@ const DUALITIES = Duality[]
 Record a duality edge.  `quantities` is an iterable of NamedTuples
 `(quantity=Q, bc=BC[, sweep=(…)][, value_map=f])` — the explicit allowlist of
 observables the duality maps; `examples` must be non-empty source instances.
+`involution=true` (param_map² ≈ id, checked on the examples) requires
+`source_T === target_T` — a self-duality; cross-family edges cannot be
+involutions.  `rtol ∈ [0, 1)`, `atol ≥ 0`.
 """
 function dual!(
     name::Symbol,
@@ -105,6 +108,7 @@ function dual!(
 )
     any(d -> d.name === name, DUALITIES) &&
         throw(ArgumentError("dual!: :$(name) already declared"))
+    _check_tolerances(:dual, rtol, atol)
     isempty(examples) && throw(
         ArgumentError(
             "dual!: a duality needs example source instances for its generated " *
@@ -292,34 +296,15 @@ function check_duality_maps()
             end
         end
         for spec in d.quantities
-            for (side, m_T) in ((:source, d.source), (:target, d.target))
-                row = _canonical_row(m_T, spec.quantity, spec.bc)
-                if row === nothing
-                    push!(
-                        out,
-                        CoherenceFinding(
-                            :duality_map,
-                            :gap,
-                            "dual :$(d.name) lists $(_kgshort(spec.quantity)) at " *
-                            "$(_kgshort(spec.bc)) but the $(side) side " *
-                            "($(_kgshort(m_T))) has no canonical row — the promised " *
-                            "cross-check cannot be generated",
-                        ),
-                    )
-                elseif !_is_independent_row(row)
-                    push!(
-                        out,
-                        CoherenceFinding(
-                            :duality_map,
-                            :gap,
-                            "dual :$(d.name): the $(side) row for " *
-                            "$(_kgshort(spec.quantity)) at $(_kgshort(spec.bc)) is " *
-                            "delegation-backed — the cross-check would be circular " *
-                            "and is not generated",
-                        ),
-                    )
-                end
-            end
+            _check_endpoint_rows!(
+                out,
+                d.source,
+                d.target,
+                spec.quantity,
+                spec.bc,
+                :duality_map,
+                "dual :$(d.name)",
+            )
         end
     end
     return out
@@ -331,20 +316,13 @@ end
 
 # A duality cross-check is only emitted when both endpoint rows exist and are
 # independent (non-delegating) — the structural condition that makes it a
-# genuine two-implementation comparison.  Missing/delegating rows are visible
-# as C12 :gap findings, not silently skipped here.
-function _dual_rows_independent(d::Duality, spec::DualityQuantitySpec)
-    for m_T in (d.source, d.target)
-        row = _canonical_row(m_T, spec.quantity, spec.bc)
-        (row !== nothing && _is_independent_row(row)) || return false
-    end
-    return true
-end
-
+# genuine two-implementation comparison (the shared kernel helper).
+# Missing/delegating rows are visible as C12 :gap findings, not silently
+# skipped here.
 function dual_checks()
     out = GeneratedCheck[]
     for d in DUALITIES, spec in d.quantities
-        _dual_rows_independent(d, spec) || continue
+        _both_endpoints_independent(d.source, d.target, spec.quantity, spec.bc) || continue
         for (i, ex) in enumerate(d.examples), point in _sweep_points(spec.sweep)
             id = string(
                 "dual/",
@@ -355,7 +333,7 @@ function dual_checks()
                 _kgshort(spec.bc),
                 "/ex",
                 i,
-                isempty(keys(point)) ? "" : "/" * _point_id(point),
+                _point_suffix(point),
             )
             runner = function ()
                 bc = _bc_instance(spec.bc; finite_N=d.finite_N)

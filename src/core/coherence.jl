@@ -321,10 +321,11 @@ end
 
 Run the structural graph-coherence suite (C1–C4, C6 coverage, C8 realization
 loci, C9 orphan classes, plus the constraint-layer checks: C10 LSM symmetry
-consistency, C11 identity coverage, C12 duality maps, C13 limit edges). Pass
-`bibkeys` (the set of keys in references.bib) to include C1. `:error`
-findings must be empty; `:gap` findings are self-reported holes (coverage /
-orphan classes / ungenerated constraint checks) and need not be empty.
+consistency, C10b symmetry-corroboration coverage, C11 identity coverage,
+C12 duality maps, C13 limit edges). Pass `bibkeys` (the set of keys in
+references.bib) to include C1. `:error` findings must be empty; `:gap`
+findings are self-reported holes (coverage / orphan classes / ungenerated
+constraint checks) and need not be empty.
 """
 function coherence_report(; bibkeys=String[])
     findings = CoherenceFinding[]
@@ -335,8 +336,9 @@ function coherence_report(; bibkeys=String[])
     append!(findings, coverage_report())
     append!(findings, check_realization_loci())
     append!(findings, check_orphan_classes())
-    append!(findings, check_lsm_consistency())     # C10 — @symmetry / LSM theorems
-    append!(findings, check_identity_coverage())   # C11 — @identity exercised
+    append!(findings, check_lsm_consistency())          # C10 — @symmetry / LSM theorems
+    append!(findings, check_symmetry_corroboration())   # C10b — gapped fact corroborable
+    append!(findings, check_identity_coverage())        # C11 — @identity exercised
     append!(findings, check_duality_maps())        # C12 — @dual param_map sanity
     append!(findings, check_limit_edges())         # C13 — @limits_to sanity
     return findings

@@ -4,8 +4,9 @@
 # INDEPENDENTLY (the non-delegating rule).  XXZ1D's ground-state energy
 # density is the Yang–Yang Bethe-ansatz integral/sum; Heisenberg1D's is the
 # closed Hulthén value J(1/4 − ln 2) — two independent implementations whose
-# Δ → 1⁺ agreement is a genuine cross-check (the generated form of the
-# hand-written Δ-sequence pattern of #691).
+# Δ → 1⁻ agreement (approached from the planar side; see the edge below) is a
+# genuine cross-check (the generated form of the hand-written Δ-sequence
+# pattern of #691).
 #
 # NOT declared here (yet): XXZ Δ → ∞ → IsingChain1D (the classical-Ising
 # anisotropy limit needs the energy normalisation map between the quantum and

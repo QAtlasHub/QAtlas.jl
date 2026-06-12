@@ -112,6 +112,9 @@ function limits_to!(
         BC = spec.bc
         BC isa Type && BC <: BoundaryCondition ||
             throw(ArgumentError("limits_to!: bc $(BC) is not a boundary-condition type"))
+        spec.final_atol ≥ 0 || throw(
+            ArgumentError("limits_to!: final_atol must be ≥ 0; got $(spec.final_atol)")
+        )
         push!(
             specs,
             LimitQuantitySpec(
@@ -228,33 +231,15 @@ function check_limit_edges()
             )
         end
         for spec in l.quantities
-            for (side, m_T) in ((:source, l.source), (:target, l.target))
-                row = _canonical_row(m_T, spec.quantity, spec.bc)
-                if row === nothing
-                    push!(
-                        out,
-                        CoherenceFinding(
-                            :limit_edge,
-                            :gap,
-                            "limits_to :$(l.name) lists $(_kgshort(spec.quantity)) at " *
-                            "$(_kgshort(spec.bc)) but the $(side) side " *
-                            "($(_kgshort(m_T))) has no canonical row",
-                        ),
-                    )
-                elseif !_is_independent_row(row)
-                    push!(
-                        out,
-                        CoherenceFinding(
-                            :limit_edge,
-                            :gap,
-                            "limits_to :$(l.name): the $(side) row for " *
-                            "$(_kgshort(spec.quantity)) at $(_kgshort(spec.bc)) is " *
-                            "delegation-backed — the convergence check would be " *
-                            "circular and is not generated",
-                        ),
-                    )
-                end
-            end
+            _check_endpoint_rows!(
+                out,
+                l.source,
+                l.target,
+                spec.quantity,
+                spec.bc,
+                :limit_edge,
+                "limits_to :$(l.name)",
+            )
         end
     end
     return out
@@ -268,18 +253,10 @@ end
 # both at machine precision must not fail monotonicity on round-off alone.
 const _MONO_ATOL_FLOOR = 1e-14
 
-function _limit_rows_independent(l::LimitEdge, spec::LimitQuantitySpec)
-    for m_T in (l.source, l.target)
-        row = _canonical_row(m_T, spec.quantity, spec.bc)
-        (row !== nothing && _is_independent_row(row)) || return false
-    end
-    return true
-end
-
 function limit_checks()
     out = GeneratedCheck[]
     for l in LIMIT_EDGES, spec in l.quantities
-        _limit_rows_independent(l, spec) || continue
+        _both_endpoints_independent(l.source, l.target, spec.quantity, spec.bc) || continue
         for point in _sweep_points(spec.sweep)
             id = string(
                 "limit/",
@@ -288,7 +265,7 @@ function limit_checks()
                 _kgshort(spec.quantity),
                 "/",
                 _kgshort(spec.bc),
-                isempty(keys(point)) ? "" : "/" * _point_id(point),
+                _point_suffix(point),
             )
             runner = function ()
                 bc = _bc_instance(spec.bc; finite_N=l.finite_N)
@@ -322,7 +299,7 @@ function limit_checks()
                     errs[end],
                     0.0,
                     errs[end],
-                    NaN,
+                    errs[end] / max(errs[end], eps()),
                     "error sequence not shrinking: " * detail,
                 )
                 return _outcome(

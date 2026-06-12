@@ -109,7 +109,13 @@ export ModelCard, ABOUT, about!, @about, about  # model description cards
 # --- Constraint-edge layer public API (#697 kernel + edge types) ---
 export GeneratedCheck, CheckOutcome, generated_checks, run_generated_check
 export SymmetryProfile, symmetry!, @symmetry, symmetry_profile, models_with_symmetry
-export IdentityEdge, identity!, @identity, identities_for, participants
+export AbstractIdentityEdge,
+    TupleIdentityEdge,
+    IsotropyIdentityEdge,
+    identity!,
+    @identity,
+    identities_for,
+    participants
 export Duality, dual!, @dual, dualities
 export LimitEdge, limits_to!, @limits_to, limits_from, limits_into
 

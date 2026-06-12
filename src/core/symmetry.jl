@@ -210,6 +210,36 @@ function check_lsm_consistency()
     return out
 end
 
+# ── C10b — corroboration coverage ────────────────────────────────────────────
+"""
+    check_symmetry_corroboration() -> Vector{CoherenceFinding}
+
+A profile that declares a `gapped` fact but has no canonical, independent
+`MassGap` row at `Infinite` generates no [`symmetry_checks`](@ref) — the
+spectral claim is a graph fact with nothing to corroborate it.  Reported as a
+`:gap`, mirroring the C12/C13 pattern (a promised cross-check that cannot be
+generated is a self-reported hole, not an `:error`).
+"""
+function check_symmetry_corroboration()
+    out = CoherenceFinding[]
+    for p in SYMMETRY_PROFILES
+        p.gapped === nothing && continue
+        row = _canonical_row(p.model, MassGap, Infinite)
+        (row !== nothing && _is_independent_row(row)) && continue
+        push!(
+            out,
+            CoherenceFinding(
+                :symmetry_corroboration,
+                :gap,
+                "$(_kgshort(p.model)) declares gapped=$(p.gapped) but has no " *
+                "canonical, independent MassGap row at Infinite — the declaration " *
+                "is uncorroborated (no symmetry check is generated)",
+            ),
+        )
+    end
+    return out
+end
+
 register_edge_store!(
     :symmetry, SYMMETRY_PROFILES; location_of=p -> "symmetry $(_kgshort(p.model))"
 )

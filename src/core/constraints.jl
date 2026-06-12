@@ -133,9 +133,9 @@ end
 
 One executable cross-check derived from (a constraint edge × the
 implementations present in `REGISTRY`).  `kind` names the generating edge type
-(`:identity` / `:dual` / `:limit`), `id` is a deterministic identifier (stable
-across runs — the sharding/reporting key), and `run` is a zero-argument
-callable returning a [`CheckOutcome`](@ref).
+(`:identity` / `:dual` / `:limit` / `:symmetry`), `id` is a deterministic
+identifier (stable across runs — the sharding/reporting key), and `run` is a
+zero-argument callable returning a [`CheckOutcome`](@ref).
 """
 struct GeneratedCheck
     kind::Symbol
@@ -285,15 +285,40 @@ end
 # against its own delegation target verifies nothing.
 _is_independent_row(e::Implementation) = !_is_delegation(e.method)
 
-# Does a registry row's quantity cover the requested one?  Exact match, plus
-# the Energy-granularity equivalence: per-site/total conversion is automatic
-# by design and conversion fallbacks are deliberately NOT registered (see the
+"""
+    _canonical_row(model_T, quantity_T, bc_T) -> Union{Implementation,Nothing}
+
+The canonical `REGISTRY` row of an exact `(model, quantity, bc)` hub, or
+`nothing` — the shared lookup behind the duality/limit coherence checks and
+generators (one definition instead of four copies of the scan loop).
+"""
+function _canonical_row(model_T::Type, quantity_T::Type, bc_T::Type)
+    for e in REGISTRY
+        if e.model === model_T && e.quantity === quantity_T && e.bc === bc_T && e.canonical
+            return e
+        end
+    end
+    return nothing
+end
+
+"""
+    _equivalent_rows(rowq::Type, Q::Type) -> Bool
+
+Extension point of [`_row_covers`](@ref): declare that a registered quantity
+type covers a *different* requested type because `fetch` routes between them
+automatically.  New equivalence axes add a method HERE (next to the quantity
+that owns the routing), not an edit to the kernel's hub enumeration.
+"""
+_equivalent_rows(::Type, ::Type) = false
+# Energy granularity: per-site/total conversion is automatic by design and
+# conversion fallbacks are deliberately NOT registered (see the
 # core/registry.jl header), so an `Energy{:total}` row covers an
 # `Energy{:per_site}` request and vice versa.
-function _row_covers(rowq::Type, Q::Type)
-    rowq === Q && return true
-    return rowq <: Energy && Q <: Energy
-end
+_equivalent_rows(::Type{<:Energy}, ::Type{<:Energy}) = true
+
+# Does a registry row's quantity cover the requested one?  Exact match, plus
+# any declared `_equivalent_rows` routing equivalence.
+_row_covers(rowq::Type, Q::Type) = rowq === Q || _equivalent_rows(rowq, Q)
 
 """
     _implemented_hubs(quantities; require_independent=false) -> Vector{NamedTuple}

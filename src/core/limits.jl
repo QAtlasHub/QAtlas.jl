@@ -39,7 +39,9 @@ end
 One asymptotic model→model limit — see [`@limits_to`](@ref).  `param` is the
 driven source field, `approach` the strictly-monotone parameter sequence
 (ordered toward the limit), `rate` optional human-readable convergence-rate
-metadata, and `quantities` the per-quantity convergence specs.
+metadata, `quantities` the per-quantity convergence specs, and `mono_slack`
+the relative slack of the error-shrinkage requirement (declare a looser value
+for slowly/non-uniformly converging limits, e.g. logarithmic rates).
 """
 struct LimitEdge
     name::Symbol
@@ -51,6 +53,7 @@ struct LimitEdge
     rate::Union{String,Nothing}
     quantities::Vector{LimitQuantitySpec}
     finite_N::Int
+    mono_slack::Float64
     notes::String
     references::Vector{String}
 end
@@ -67,12 +70,14 @@ const LIMIT_EDGES = LimitEdge[]
 
 """
     limits_to!(name, source_T, target_T; param, approach, regime,
-               quantities, rate=nothing, finite_N=8, notes="",
-               references=String[])
+               quantities, rate=nothing, finite_N=8, mono_slack=0.1,
+               notes="", references=String[])
 
 Record an asymptotic limit edge.  `approach` must be strictly monotone (its
 direction encodes the side the limit is taken from); `quantities` is an
-iterable of NamedTuples `(quantity=Q, bc=BC, final_atol=ε[, sweep=(…)])`.
+iterable of NamedTuples `(quantity=Q, bc=BC, final_atol=ε[, sweep=(…)])`;
+`mono_slack` is the relative tolerance of the error-shrinkage requirement
+(each error may exceed its predecessor by at most this fraction).
 """
 function limits_to!(
     name::Symbol,
@@ -84,9 +89,11 @@ function limits_to!(
     quantities,
     rate::Union{AbstractString,Nothing}=nothing,
     finite_N::Int=8,
+    mono_slack::Real=0.1,
     notes::AbstractString="",
     references::AbstractVector{<:AbstractString}=String[],
 )
+    mono_slack ≥ 0 || throw(ArgumentError("limits_to!: mono_slack must be ≥ 0"))
     any(l -> l.name === name, LIMIT_EDGES) &&
         throw(ArgumentError("limits_to!: :$(name) already declared"))
     length(approach) ≥ 2 ||
@@ -129,6 +136,7 @@ function limits_to!(
             rate === nothing ? nothing : String(rate),
             specs,
             finite_N,
+            Float64(mono_slack),
             String(notes),
             String[r for r in references],
         ),
@@ -221,16 +229,7 @@ function check_limit_edges()
         end
         for spec in l.quantities
             for (side, m_T) in ((:source, l.source), (:target, l.target))
-                row = nothing
-                for e in REGISTRY
-                    if e.model === m_T &&
-                        e.quantity === spec.quantity &&
-                        e.bc === spec.bc &&
-                        e.canonical
-                        row = e
-                        break
-                    end
-                end
+                row = _canonical_row(m_T, spec.quantity, spec.bc)
                 if row === nothing
                     push!(
                         out,
@@ -265,20 +264,14 @@ end
 # Generator — the :limit kind of generated_checks()
 # ──────────────────────────────────────────────────────────────────────
 
+# Absolute floor of the error-shrinkage comparison: two consecutive errors
+# both at machine precision must not fail monotonicity on round-off alone.
+const _MONO_ATOL_FLOOR = 1e-14
+
 function _limit_rows_independent(l::LimitEdge, spec::LimitQuantitySpec)
     for m_T in (l.source, l.target)
-        found = false
-        for e in REGISTRY
-            if e.model === m_T &&
-                e.quantity === spec.quantity &&
-                e.bc === spec.bc &&
-                e.canonical
-                _is_independent_row(e) || return false
-                found = true
-                break
-            end
-        end
-        found || return false
+        row = _canonical_row(m_T, spec.quantity, spec.bc)
+        (row !== nothing && _is_independent_row(row)) || return false
     end
     return true
 end
@@ -306,10 +299,13 @@ function limit_checks()
                     v = fetch(_with_param(l.source(), l.param, x), q, bc; point...)
                     push!(errs, abs(Float64(v) - Float64(t)))
                 end
-                # weak monotonicity along the sequence (10% slack absorbs
-                # benign numerical wiggle near machine precision) …
+                # weak monotonicity along the sequence: the declared
+                # mono_slack absorbs the limit's own convergence wiggle, the
+                # absolute floor the machine-precision noise of an
+                # already-converged tail …
                 shrinking = all(
-                    errs[i + 1] ≤ 1.1 * errs[i] + 1e-14 for i in 1:(length(errs) - 1)
+                    errs[i + 1] ≤ (1 + l.mono_slack) * errs[i] + _MONO_ATOL_FLOOR for
+                    i in 1:(length(errs) - 1)
                 )
                 # … and the terminal error must land below the declared atol.
                 detail = string(

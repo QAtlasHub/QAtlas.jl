@@ -3,7 +3,7 @@
 # Unlike the other constraint stores these are node ATTRIBUTES, not edges: a
 # declarative record of each model family's symmetry data (internal group,
 # translation invariance, time reversal, on-site spin) plus its declared
-# spectral facts (gapped? ground-state degeneracy?).  Two consumers:
+# spectral facts (gapped? ground-state degeneracy?).  Three consumers:
 #
 #   * LSM-type COHERENCE CHECKS (`check_lsm_consistency`, run in the C-suite):
 #     the first checks that encode *theorems* over the registry rather than
@@ -16,6 +16,11 @@
 #     models whose profile declares that internal symmetry — replacing the
 #     hand-maintained `is_su2_symmetric` trait of the test harness with a
 #     registry query.
+#
+#   * SPECTRAL CORROBORATION (`symmetry_checks`, the :symmetry kind of
+#     `generated_checks`): a declared `gapped` fact is cross-checked against
+#     the registered `MassGap` implementation, so the profile store and
+#     REGISTRY cannot silently contradict each other.
 #
 # Profiles describe the model FAMILY at generic parameters.  A family whose
 # symmetry is parameter-dependent (XXZ1D is U(1) generically, SU(2) only at
@@ -208,3 +213,79 @@ end
 register_edge_store!(
     :symmetry, SYMMETRY_PROFILES; location_of=p -> "symmetry $(_kgshort(p.model))"
 )
+
+# ──────────────────────────────────────────────────────────────────────
+# Generator — the :symmetry kind of generated_checks()
+# ──────────────────────────────────────────────────────────────────────
+
+# Threshold separating "vanishing" from "open" gaps in the corroboration
+# checks: closed-form / literature gaps are exact, so the floor only absorbs
+# round-off — a declared-gapless model must fetch |Δ| ≤ this, a
+# declared-gapped one Δ > this.
+const _GAP_ATOL = 1e-10
+
+"""
+    symmetry_checks() -> Vector{GeneratedCheck}
+
+Cross-store corroboration of the [`@symmetry`](@ref) spectral declarations:
+for every profile that declares `gapped` (true or false) AND whose model has
+a canonical, independent `MassGap` row at `Infinite`, emit a check comparing
+the declaration against the fetched gap.  This closes the
+two-sources-of-truth seam between the profile store and `REGISTRY`: a
+`MassGap` implementation change that contradicts the declared profile (or a
+wrong profile) fails loudly instead of drifting silently.  Profiles with
+`gapped=nothing` (parameter-dependent families) and models without an
+independent `MassGap` row emit nothing — the declaration carries no claim to
+corroborate, or no second implementation exists to corroborate it against.
+"""
+function symmetry_checks()
+    out = GeneratedCheck[]
+    for p in SYMMETRY_PROFILES
+        p.gapped === nothing && continue
+        row = _canonical_row(p.model, MassGap, Infinite)
+        (row !== nothing && _is_independent_row(row)) || continue
+        model_T = p.model
+        gapped = p.gapped
+        id = string("symmetry/gapped/", _kgshort(model_T), "/Infinite")
+        runner = function ()
+            gap = Float64(fetch(model_T(), MassGap(), Infinite()))
+            if gapped
+                return CheckOutcome(
+                    gap > _GAP_ATOL ? :pass : :fail,
+                    gap,
+                    _GAP_ATOL,
+                    NaN,
+                    NaN,
+                    "profile declares gapped=true: fetched MassGap must exceed " *
+                    "the $(_GAP_ATOL) floor",
+                )
+            else
+                return _outcome(
+                    gap,
+                    0.0;
+                    rtol=0.0,
+                    atol=_GAP_ATOL,
+                    detail="profile declares gapped=false: fetched MassGap must vanish",
+                )
+            end
+        end
+        push!(
+            out,
+            GeneratedCheck(
+                :symmetry,
+                id,
+                string(
+                    "symmetry profile of ",
+                    _kgshort(model_T),
+                    " declares gapped=",
+                    gapped,
+                    " — corroborated against the registered MassGap at Infinite",
+                ),
+                runner,
+            ),
+        )
+    end
+    return out
+end
+
+register_check_generator!(:symmetry, symmetry_checks)

@@ -35,11 +35,17 @@
 #   * IsingSquare@PBC / KitaevHoneycomb@OBC: 2D fetches take Lx/Ly kwargs,
 #     not bc.N — the generator's 1D finite_N materialization does not apply
 #     (their Infinite hubs DO run and pass).
+# finite_N=6 matches the hand-written identity files (Heisenberg1D at OBC(6),
+# S1Heisenberg1D at OBC(4)): the Gibbs relation is an internal-consistency
+# statement of the SAME finite system, exact at every N, so small N loses no
+# coverage — while N=8 put the spin-1 hubs at 3^8 = 6561-dimensional dense ED
+# per fetch and made the generated suite CI's long pole (52 min → seconds).
 @identity(
     :gibbs,
     quantities = (e=Energy{:per_site}, f=FreeEnergy, s=ThermalEntropy),
     check = (v, p) -> (v.e, v.f + v.s / p.beta),
     sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
     exclusions = [
         SSH => "Energy fetch returns T=0 ground-state energy (beta swallowed); thermal ε not implemented — Gibbs does not apply as stated (#508 kwargs-swallow audit)",
         TightBinding1D => "Energy fetch returns T=0 ground-state energy (beta swallowed); thermal ε not implemented — Gibbs does not apply as stated (#508 kwargs-swallow audit)",
@@ -60,6 +66,7 @@
     family = AbstractSusceptibility,
     requires_internal = :SU2,
     sweep = (beta=[0.5, 1.0],),
+    finite_N = 6,
     notes = "SU(2) invariance forces equal diagonal susceptibilities along all spin axes.",
 )
 
@@ -71,5 +78,16 @@
     family = AbstractMagnetization,
     requires_internal = :SU2,
     sweep = (beta=[0.5, 1.0],),
+    finite_N = 6,
     notes = "SU(2) invariance forces equal (vanishing) magnetization along all spin axes.",
 )
+
+# DELETION CRITERION for the hand-written duplicates (#698 migration): the
+# harness identities in test/util/thermodynamic_identities.jl and the
+# per-model files in test/identities/ stay until (a) the derivative-form
+# identities (c_v, m_x = -∂f/∂h) are generatable, (b) the zero-value SU(2)
+# checks (m_α = 0, not just pairwise equality) have a generated form, and
+# (c) the parameter-conditional gates (XXZ1D at Δ ≈ 1) are expressible via
+# profile `at` predicates.  Until then the overlap (Gibbs + pairwise
+# isotropy on Heisenberg1D/S1Heisenberg1D) is accepted as the parity
+# reference, NOT an oversight.

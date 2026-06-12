@@ -109,7 +109,10 @@ Conventions:
   (XXZ1D is `:U1`; the Δ=1 SU(2) point is an enhancement, not the family).
   Declared spectral facts (`gapped`, `gs_degeneracy`) feed the C10 LSM check:
   a gapped-and-unique declaration on a translation-invariant half-odd-integer
-  chain with continuous symmetry is a coherence `:error`.
+  chain with continuous symmetry is a coherence `:error`.  A declared
+  `gapped` fact is additionally corroborated at test time against the
+  registered `MassGap` implementation (the `:symmetry` generated kind), so
+  the profile store and `REGISTRY` cannot silently contradict each other.
 - `@identity` exclusions are visible `:skip` checks with a reason — never
   silent drops.
 - `@measured` (experimental anchors, #702) is the planned fifth store on the

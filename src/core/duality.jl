@@ -111,6 +111,17 @@ function dual!(
             "cross-checks (pick points off any self-dual locus)",
         ),
     )
+    # An involution maps a parameter manifold to ITSELF; with distinct
+    # endpoint families param_map² is not even type-stable, so the C12
+    # involution probe would feed param_map a foreign type.
+    involution &&
+        source_T !== target_T &&
+        throw(
+            ArgumentError(
+                "dual!: involution=true requires source === target (a self-duality); " *
+                "got $(source_T) ↔ $(target_T)",
+            ),
+        )
     specs = DualityQuantitySpec[]
     for spec in quantities
         Q = spec.quantity
@@ -242,17 +253,33 @@ function check_duality_maps()
                 )
                 continue
             end
-            mapped isa d.target || push!(
-                out,
-                CoherenceFinding(
-                    :duality_map,
-                    :error,
-                    "dual :$(d.name) param_map(example #$(i)) is a $(typeof(mapped)), " *
-                    "not a $(_kgshort(d.target)) instance",
-                ),
-            )
-            if d.involution && mapped isa d.source
-                back = d.param_map(mapped)
+            if !(mapped isa d.target)
+                push!(
+                    out,
+                    CoherenceFinding(
+                        :duality_map,
+                        :error,
+                        "dual :$(d.name) param_map(example #$(i)) is a " *
+                        "$(typeof(mapped)), not a $(_kgshort(d.target)) instance",
+                    ),
+                )
+                continue   # a malformed image must not feed the involution probe
+            end
+            if d.involution   # dual! guarantees source === target here
+                back = try
+                    d.param_map(mapped)
+                catch err
+                    push!(
+                        out,
+                        CoherenceFinding(
+                            :duality_map,
+                            :error,
+                            "dual :$(d.name) param_map threw on its own image of " *
+                            "example #$(i) ($(typeof(err))) — not an involution",
+                        ),
+                    )
+                    continue
+                end
                 _instances_approx(back, ex) || push!(
                     out,
                     CoherenceFinding(
@@ -266,16 +293,7 @@ function check_duality_maps()
         end
         for spec in d.quantities
             for (side, m_T) in ((:source, d.source), (:target, d.target))
-                row = nothing
-                for e in REGISTRY
-                    if e.model === m_T &&
-                        e.quantity === spec.quantity &&
-                        e.bc === spec.bc &&
-                        e.canonical
-                        row = e
-                        break
-                    end
-                end
+                row = _canonical_row(m_T, spec.quantity, spec.bc)
                 if row === nothing
                     push!(
                         out,
@@ -317,18 +335,8 @@ end
 # as C12 :gap findings, not silently skipped here.
 function _dual_rows_independent(d::Duality, spec::DualityQuantitySpec)
     for m_T in (d.source, d.target)
-        found = false
-        for e in REGISTRY
-            if e.model === m_T &&
-                e.quantity === spec.quantity &&
-                e.bc === spec.bc &&
-                e.canonical
-                _is_independent_row(e) || return false
-                found = true
-                break
-            end
-        end
-        found || return false
+        row = _canonical_row(m_T, spec.quantity, spec.bc)
+        (row !== nothing && _is_independent_row(row)) || return false
     end
     return true
 end

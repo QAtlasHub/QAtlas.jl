@@ -359,9 +359,19 @@ function _identity_isotropy_checks(e::IdentityEdge)
         model_T, bc_T = key
         gated_models === nothing || model_T in gated_models || continue
         present = sort!(impl[key]; by=string)
-        length(present) ≥ 2 || continue
-        ref_Q = present[1]
-        for other_Q in present[2:end], point in _sweep_points(e.sweep)
+        # One representative per component: isotropy equates DIFFERENT
+        # components, so same-component family variants (e.g. two modes of an
+        # :xx correlator) are not an isotropy statement — and including them
+        # would collide the component-keyed check ids.
+        comps = Set{Symbol}()
+        reps = Type[]
+        for Q in present
+            c = component(Q)::Symbol
+            c in comps || (push!(reps, Q); push!(comps, c))
+        end
+        length(reps) ≥ 2 || continue
+        ref_Q = reps[1]
+        for other_Q in reps[2:end], point in _sweep_points(e.sweep)
             pair = string(component(ref_Q), "=", component(other_Q))
             id = string(
                 "identity/",

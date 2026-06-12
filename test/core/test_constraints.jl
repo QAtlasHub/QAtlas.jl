@@ -202,6 +202,17 @@ end
         quantities=[(quantity=MassGap, bc=Infinite)],
         examples=[],
     )
+    # an involution maps a manifold to itself: distinct endpoints rejected
+    @test_throws ArgumentError QAtlas.dual!(
+        :_inv_mismatch,
+        TFIM,
+        Kitaev1D;
+        param_map=identity,
+        kind=:probe,
+        involution=true,
+        quantities=[(quantity=MassGap, bc=Infinite)],
+        examples=[TFIM(; J=1.0, h=0.5)],
+    )
 end
 
 # ── @limits_to ───────────────────────────────────────────────────────
@@ -237,7 +248,7 @@ end
     @test !isempty(checks)
     @test issorted([c.id for c in checks])
     @test allunique(c.id for c in checks)
-    @test all(c.kind in (:identity, :dual, :limit) for c in checks)
+    @test all(c.kind in (:identity, :dual, :limit, :symmetry) for c in checks)
     # kind selection
     only_ids = generated_checks(; kinds=(:identity,))
     @test all(c -> c.kind === :identity, only_ids)

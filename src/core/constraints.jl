@@ -416,8 +416,12 @@ _equivalent_rows(::Type, ::Type) = false
 # `Energy{:per_site}` request and vice versa.
 _equivalent_rows(::Type{<:Energy}, ::Type{<:Energy}) = true
 
-# Does a registry row's quantity cover the requested one?  Exact match, plus
-# any declared `_equivalent_rows` routing equivalence.
+"""
+    _row_covers(rowq::Type, Q::Type) -> Bool
+
+Whether a registry row carrying quantity `rowq` covers a request for `Q`:
+exact match, or any declared [`_equivalent_rows`](@ref) routing equivalence.
+"""
 _row_covers(rowq::Type, Q::Type) = rowq === Q || _equivalent_rows(rowq, Q)
 
 """

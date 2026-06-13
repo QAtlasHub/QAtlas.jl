@@ -252,7 +252,7 @@ jobs:
             echo "$summary"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v7
         with:
           file: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}

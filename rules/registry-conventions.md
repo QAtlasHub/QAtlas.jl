@@ -70,6 +70,54 @@ Some models define their thermal `fetch` methods through an `@eval` loop over a
 `@eval` / `_*_METHODS` loop in the model's files — adding a duplicate triggers a
 method-overwrite warning and a registry `canon` clash.
 
+## Constraint edges: `@symmetry` / `@identity` / `@dual` / `@limits_to`
+
+Beyond *describe* (`@register`) and *route* (`@reduces`), the third edge role
+is *constrain* (#697): declared relations the implementations must satisfy.
+All four share one kernel (`src/core/constraints.jl`) — store registration
+(C1 covers every store automatically), static coherence checks (C10–C13 in
+the L0 gate), and a **test generator**: `generated_checks()` enumerates
+(edge × implementations present) and `test/generated/` runs the result, so a
+new model gets identity/duality/limit coverage with zero hand-written tests.
+
+```julia
+@symmetry Heisenberg1D internal=:SU2 translation=true site_spin=1//2 gapped=false
+@identity(:gibbs,
+    quantities = (e=Energy{:per_site}, f=FreeEnergy, s=ThermalEntropy),
+    check = (v, p) -> (v.e, v.f + v.s / p.beta), sweep = (beta=[0.5, 1.0, 2.0],))
+@identity(:su2_susceptibility_isotropy,
+    family = AbstractSusceptibility, requires_internal = :SU2, sweep = (beta=[0.5, 1.0],))
+@dual(:tfim_kramers_wannier, TFIM, TFIM,
+    param_map = (m -> TFIM(; J=m.h, h=m.J)), kind=:kramers_wannier, involution=true,
+    examples = [TFIM(; J=1.0, h=0.5)], quantities = [(quantity=MassGap, bc=Infinite)])
+@limits_to(:xxz_isotropic_limit, XXZ1D, Heisenberg1D,
+    param=:Δ, approach=[1.1, 1.01, 1.001, 1.0001], regime="Δ → 1⁺",
+    quantities = [(quantity=GroundStateEnergyDensity, bc=Infinite, final_atol=5e-4)])
+```
+
+Conventions:
+
+- Declarations live in `src/<kind>_registry.jl` (append-only, pure-literal,
+  one row per physical claim) and cite `references.bib` bibkeys — C1 scans
+  every store via the `EDGE_STORES` registration.
+- `@dual` / `@limits_to` quantity lists are explicit **allowlists** with
+  per-quantity `value_map` for convention shifts (e.g. the Jordan–Wigner
+  `−h` density offset); generated cross-checks require BOTH endpoint rows to
+  be independent (non-delegating) — circular verification is structurally
+  excluded.
+- `@symmetry` profiles describe the model FAMILY at generic parameters
+  (XXZ1D is `:U1`; the Δ=1 SU(2) point is an enhancement, not the family).
+  Declared spectral facts (`gapped`, `gs_degeneracy`) feed the C10 LSM check:
+  a gapped-and-unique declaration on a translation-invariant half-odd-integer
+  chain with continuous symmetry is a coherence `:error`.  A declared
+  `gapped` fact is additionally corroborated at test time against the
+  registered `MassGap` implementation (the `:symmetry` generated kind), so
+  the profile store and `REGISTRY` cannot silently contradict each other.
+- `@identity` exclusions are visible `:skip` checks with a reason — never
+  silent drops.
+- `@measured` (experimental anchors, #702) is the planned fifth store on the
+  same kernel; do not hand-roll a new store shape.
+
 ## Coherence: `errors = 0` is the hard invariant
 
 `src/core/coherence.jl` (C1–C9) structurally self-reports holes.

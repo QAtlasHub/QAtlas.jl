@@ -154,6 +154,25 @@ Modules = [QAtlas]
 Pages = ["core/registry.jl", "core/realizes.jl", "core/reduces.jl", "core/about.jl"]
 ```
 
+### Constraint edges — `@symmetry`, `@identity`, `@dual`, `@limits_to`
+
+The third edge role (after *describe* and *route*): declared relations that
+implementations must satisfy, sharing one kernel — store registration, static
+coherence (C10–C13), and a test generator whose output `generated_checks()`
+is run by `test/generated/`.  See `rules/registry-conventions.md` for the
+declaration conventions.
+
+```@autodocs
+Modules = [QAtlas]
+Pages = [
+    "core/constraints.jl",
+    "core/symmetry.jl",
+    "core/identity.jl",
+    "core/duality.jl",
+    "core/limits.jl",
+]
+```
+
 ### Model & boundary conditions
 
 ```@autodocs

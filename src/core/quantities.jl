@@ -15,6 +15,106 @@
 # in `core/type.jl` + canonicalize aliases in `core/alias.jl`.  That path
 # is routed through `_symbol_to_quantity` in `deprecate/` (Milestone 1).
 
+# ─── Quantity taxonomy: abstract family layer (#690) ────────────────────
+#
+# Families that are physically the same object up to a component / index
+# (χ_xx/χ_yy/χ_zz, m_x/m_y/m_z, …) share an intermediate abstract supertype
+# between the concrete leaf and `AbstractQuantity`.  Purely additive: every
+# leaf keeps its name and `<: AbstractQuantity` still holds transitively, so
+# all existing dispatch is unchanged.  The layer is what lets
+#   * identities be declared once against a family instead of per leaf
+#     (`@identity … family=AbstractSusceptibility`, core/identity.jl), and
+#   * the atlas graph group a family as one node cluster instead of N
+#     disconnected leaves.
+# The component that the leaf's *name* encodes is recovered by the
+# [`component`](@ref) trait.
+
+"""
+    AbstractThermalPotential <: AbstractQuantity
+
+Thermodynamic-potential family: `Energy`, `FreeEnergy`, `ThermalEntropy`,
+`SpecificHeat`, `ResidualEntropy` — the quantities related by the Gibbs /
+Maxwell identities (`f = ε − T·s`, `c_v = -β² ∂ε/∂β`, …).
+"""
+abstract type AbstractThermalPotential <: AbstractQuantity end
+
+"""
+    AbstractMagnetization <: AbstractQuantity
+
+Magnetization family (`MagnetizationX/Y/Z` and their `…Local` site-resolved
+variants); the spin axis is the [`component`](@ref).
+"""
+abstract type AbstractMagnetization <: AbstractQuantity end
+
+"""
+    AbstractSusceptibility <: AbstractQuantity
+
+Static susceptibility family (`SusceptibilityXX/YY/ZZ`); the diagonal spin
+axis is the [`component`](@ref).
+"""
+abstract type AbstractSusceptibility <: AbstractQuantity end
+
+"""
+    AbstractTwoPointCorrelation <: AbstractQuantity
+
+Real-space two-point correlator family (`XXCorrelation`, `YYCorrelation`,
+`ZZCorrelation`); the spin-axis pair is the [`component`](@ref).
+"""
+abstract type AbstractTwoPointCorrelation <: AbstractQuantity end
+
+"""
+    AbstractStructureFactor <: AbstractQuantity
+
+Fourier-space structure-factor family (`XXStructureFactor`,
+`YYStructureFactor`, `ZZStructureFactor`); the spin-axis pair is the
+[`component`](@ref).
+"""
+abstract type AbstractStructureFactor <: AbstractQuantity end
+
+"""
+    AbstractGap <: AbstractQuantity
+
+Spectral-gap family (`MassGap`, `ChargeGap`, `SpinGap`); the excitation
+channel is the [`component`](@ref).
+"""
+abstract type AbstractGap <: AbstractQuantity end
+
+"""
+    AbstractVelocity <: AbstractQuantity
+
+Characteristic-velocity family (`FermiVelocity`, `LuttingerVelocity`,
+`LiebRobinsonVelocity`).
+"""
+abstract type AbstractVelocity <: AbstractQuantity end
+
+"""
+    AbstractEntanglementMeasure <: AbstractQuantity
+
+Entanglement-measure family (`VonNeumannEntropy`, `RenyiEntropy`,
+`LogarithmicNegativity`, `MutualInformation`,
+`TopologicalEntanglementEntropy`, `PageEntropy`).
+"""
+abstract type AbstractEntanglementMeasure <: AbstractQuantity end
+
+"""
+    component(q) -> Union{Symbol,Nothing}
+    component(::Type{<:AbstractQuantity}) -> Union{Symbol,Nothing}
+
+The component / index that a family leaf's *type name* encodes: the spin
+axis of a magnetization (`:x`/`:y`/`:z`), the diagonal axis pair of a
+susceptibility / correlator / structure factor (`:xx`/`:yy`/`:zz`), or the
+excitation channel of a gap (`:mass`/`:charge`/`:spin`).  `nothing` for
+quantities that carry no component (the default), including the
+site-resolved `…Local` magnetizations (whose extra site argument makes them
+a different fetch shape).
+
+Identities that hold per-component (e.g. the static FDT
+`χ_αα = β·Var(M_α)/N`, or the SU(2) isotropy `χ_xx = χ_yy = χ_zz`) pair
+family members by matching `component` — see `core/identity.jl`.
+"""
+component(q::AbstractQuantity) = component(typeof(q))
+component(::Type{<:AbstractQuantity}) = nothing
+
 # ─── Scalar thermodynamics ──────────────────────────────────────────────
 
 """
@@ -40,7 +140,7 @@ the internal `_bc_size` helper.  Models on lattices whose size is not captured b
 `bc.N` (e.g. 2D Kitaev with `Lx, Ly` kwargs) currently support only
 their declared native granularity.
 """
-struct Energy{G} <: AbstractQuantity
+struct Energy{G} <: AbstractThermalPotential
     function Energy{G}() where {G}
         G isa Symbol || error("Energy granularity must be a Symbol, got $(typeof(G))")
         G in (:natural, :total, :per_site) ||
@@ -77,14 +177,14 @@ function native_energy_granularity end
 
 Helmholtz free energy per site, `f = -β⁻¹ log Z / N`.
 """
-struct FreeEnergy <: AbstractQuantity end
+struct FreeEnergy <: AbstractThermalPotential end
 
 """
     SpecificHeat() <: AbstractQuantity
 
 Specific heat per site, `c_v(β) = β² (⟨H²⟩ − ⟨H⟩²) / N`.
 """
-struct SpecificHeat <: AbstractQuantity end
+struct SpecificHeat <: AbstractThermalPotential end
 
 """
     NMRSpinRelaxationRate() <: AbstractQuantity
@@ -122,7 +222,7 @@ struct NMRRelaxationExponent <: AbstractQuantity end
 
 Energy gap between the ground state and the first excited state.
 """
-struct MassGap <: AbstractQuantity end
+struct MassGap <: AbstractGap end
 
 """
     FidelitySusceptibility() <: AbstractQuantity
@@ -144,7 +244,7 @@ struct FidelitySusceptibility <: AbstractQuantity end
 Thermal / thermodynamic entropy per site, `s(β) = −∂f/∂T` where `f` is the
 free energy per site.  Real-valued, non-negative, monotone in `T`.
 """
-struct ThermalEntropy <: AbstractQuantity end
+struct ThermalEntropy <: AbstractThermalPotential end
 
 """
     VonNeumannEntropy{M}() <: AbstractQuantity
@@ -173,7 +273,7 @@ phantom type that splits the dispatch into:
 See `docs/src/calc/tfim-quench-entanglement.md` for the
 free-fermion derivation in the TFIM.
 """
-struct VonNeumannEntropy{M} <: AbstractQuantity
+struct VonNeumannEntropy{M} <: AbstractEntanglementMeasure
     function VonNeumannEntropy{M}() where {M}
         M isa Symbol || error("VonNeumannEntropy mode must be a Symbol, got $(typeof(M))")
         M in (:equilibrium, :quench) ||
@@ -199,7 +299,7 @@ The inner constructor rejects `α ≤ 0` and `α = 1` (use
 `VonNeumannEntropy()` explicitly) — this is intentional, to force the
 call site to be explicit about which entropy it wants.
 """
-struct RenyiEntropy <: AbstractQuantity
+struct RenyiEntropy <: AbstractEntanglementMeasure
     α::Float64
     function RenyiEntropy(α::Real)
         α > 0 || throw(ArgumentError("RenyiEntropy: α must be positive; got $α"))
@@ -234,7 +334,7 @@ from [`ThermalEntropy`](@ref) to keep the zero-temperature limit
 explicit at the dispatch level (avoiding β → ∞ extrapolations of a
 finite-T fetch).
 """
-struct ResidualEntropy <: AbstractQuantity end
+struct ResidualEntropy <: AbstractThermalPotential end
 
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
@@ -247,14 +347,14 @@ magnetization; the axis-explicit name avoids the "transverse" /
 "longitudinal" ambiguity that depends on the model's Hamiltonian
 choice.
 """
-struct MagnetizationX <: AbstractQuantity end
+struct MagnetizationX <: AbstractMagnetization end
 
 """
     MagnetizationY() <: AbstractQuantity
 
 Bulk-averaged `⟨σʸ⟩`.
 """
-struct MagnetizationY <: AbstractQuantity end
+struct MagnetizationY <: AbstractMagnetization end
 
 """
     MagnetizationZ() <: AbstractQuantity
@@ -264,7 +364,7 @@ this is the order parameter at low temperature; finite-system fetch
 methods may return the absolute value / the ordered-phase limit as
 documented.
 """
-struct MagnetizationZ <: AbstractQuantity end
+struct MagnetizationZ <: AbstractMagnetization end
 
 """
     MagnetizationXLocal{M}() <: AbstractQuantity
@@ -290,7 +390,7 @@ See `docs/src/calc/tfim-sigma-x-quench.md` for the closed-form
 derivation in the TFIM (Calabrese–Essler–Fagotti, J. Stat. Mech.
 P07016 (2012); Barouch–McCoy–Dresden, PRA **2** (1970)).
 """
-struct MagnetizationXLocal{M} <: AbstractQuantity
+struct MagnetizationXLocal{M} <: AbstractMagnetization
     function MagnetizationXLocal{M}() where {M}
         M isa Symbol ||
             error("MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))")
@@ -310,14 +410,14 @@ for any real Hermitian Hamiltonian (parity / time-reversal); a model
 that returns it explicitly does so as an exact baseline against
 random-sample estimators that fluctuate around zero.
 """
-struct MagnetizationYLocal <: AbstractQuantity end
+struct MagnetizationYLocal <: AbstractMagnetization end
 
 """
     MagnetizationZLocal() <: AbstractQuantity
 
 Site-resolved `⟨σᶻ_i⟩` vector of length `N_bulk`.
 """
-struct MagnetizationZLocal <: AbstractQuantity end
+struct MagnetizationZLocal <: AbstractMagnetization end
 
 """
     EnergyLocal() <: AbstractQuantity
@@ -335,14 +435,14 @@ struct EnergyLocal <: AbstractQuantity end
 Static transverse susceptibility,
 `χ_xx(β) = β · (⟨M_x²⟩ − ⟨M_x⟩²) / N`.
 """
-struct SusceptibilityXX <: AbstractQuantity end
+struct SusceptibilityXX <: AbstractSusceptibility end
 
 """
     SusceptibilityYY() <: AbstractQuantity
 
 Analogue for the y-axis.
 """
-struct SusceptibilityYY <: AbstractQuantity end
+struct SusceptibilityYY <: AbstractSusceptibility end
 
 """
     SusceptibilityZZ() <: AbstractQuantity
@@ -350,7 +450,7 @@ struct SusceptibilityYY <: AbstractQuantity end
 Uniform longitudinal susceptibility,
 `χ_zz(β) = β · (⟨M_z²⟩ − ⟨M_z⟩²) / N`.
 """
-struct SusceptibilityZZ <: AbstractQuantity end
+struct SusceptibilityZZ <: AbstractSusceptibility end
 
 # ─── Real-space two-point correlators ───────────────────────────────────
 #
@@ -379,7 +479,7 @@ The companion type for Fourier-space structure factors is
 [`ZZStructureFactor`](@ref), kept separate because it carries (q, ω)
 arguments instead of (i, j, t).
 """
-struct ZZCorrelation{M} <: AbstractQuantity end
+struct ZZCorrelation{M} <: AbstractTwoPointCorrelation end
 ZZCorrelation(; mode::Symbol=:static) = ZZCorrelation{mode}()
 
 """
@@ -389,7 +489,7 @@ ZZCorrelation(; mode::Symbol=:static) = ZZCorrelation{mode}()
 Real-space 2-point `⟨σˣ_i σˣ_j⟩` correlator.  See
 [`ZZCorrelation`](@ref) for the `mode` semantics.
 """
-struct XXCorrelation{M} <: AbstractQuantity end
+struct XXCorrelation{M} <: AbstractTwoPointCorrelation end
 XXCorrelation(; mode::Symbol=:static) = XXCorrelation{mode}()
 
 """
@@ -398,7 +498,7 @@ XXCorrelation(; mode::Symbol=:static) = XXCorrelation{mode}()
 
 Real-space 2-point `⟨σʸ_i σʸ_j⟩` correlator.
 """
-struct YYCorrelation{M} <: AbstractQuantity end
+struct YYCorrelation{M} <: AbstractTwoPointCorrelation end
 YYCorrelation(; mode::Symbol=:static) = YYCorrelation{mode}()
 
 # ─── Fourier-space structure factors (q, ω) ────────────────────────────
@@ -414,21 +514,21 @@ Kept as a separate type from [`ZZCorrelation`](@ref) because the
 argument domain is (q, ω) instead of (i, j, t) and because existing
 users already expect a dedicated `StructureFactor` quantity.
 """
-struct ZZStructureFactor <: AbstractQuantity end
+struct ZZStructureFactor <: AbstractStructureFactor end
 
 """
     XXStructureFactor() <: AbstractQuantity
 
 Fourier-space equivalent of [`XXCorrelation`](@ref).
 """
-struct XXStructureFactor <: AbstractQuantity end
+struct XXStructureFactor <: AbstractStructureFactor end
 
 """
     YYStructureFactor() <: AbstractQuantity
 
 Fourier-space equivalent of [`YYCorrelation`](@ref).
 """
-struct YYStructureFactor <: AbstractQuantity end
+struct YYStructureFactor <: AbstractStructureFactor end
 
 # ─── Universality / lattice spectra / advanced ─────────────────────────
 
@@ -534,7 +634,7 @@ returned by models like `Honeycomb` (at the Dirac cones), the
 other tight-binding lattices, and the TFIM Majorana mode at the
 critical field.
 """
-struct FermiVelocity <: AbstractQuantity end
+struct FermiVelocity <: AbstractVelocity end
 
 """
     LuttingerVelocity() <: AbstractQuantity
@@ -548,7 +648,7 @@ bosonised 1D critical theory.
 For a free-fermion model this coincides with [`FermiVelocity`](@ref);
 for interacting systems `u` includes the Luttinger renormalisation.
 """
-struct LuttingerVelocity <: AbstractQuantity end
+struct LuttingerVelocity <: AbstractVelocity end
 
 """
     const SpinWaveVelocity = LuttingerVelocity
@@ -576,7 +676,7 @@ single-particle group velocity. Reference: Lieb-Robinson, *Commun.
 Math. Phys.* **28**, 251 (1972); Hastings-Koma, *Commun. Math. Phys.*
 **265**, 781 (2006). Tracking: issue #579 inequality framework.
 """
-struct LiebRobinsonVelocity <: AbstractQuantity end
+struct LiebRobinsonVelocity <: AbstractVelocity end
 
 """
     MutualInformation() <: AbstractQuantity
@@ -588,7 +688,7 @@ universality layer (see `src/universalities/behaviour/CardyEntanglement.jl`
 for the Calabrese-Cardy closed forms) and on model files for non-universal
 cases. Tracking: #580 entanglement universality catalog.
 """
-struct MutualInformation <: AbstractQuantity end
+struct MutualInformation <: AbstractEntanglementMeasure end
 
 """
     EntanglementGrowthSlope() <: AbstractQuantity
@@ -726,7 +826,7 @@ an infinite 1+1D-CFT chain at T = 0, the universal closed form
 i.e., the same geometric-mean log of the mutual-information universal
 formula with the prefactor c/3 replaced by c/4. Tracking: #580.
 """
-struct LogarithmicNegativity <: AbstractQuantity end
+struct LogarithmicNegativity <: AbstractEntanglementMeasure end
 
 """
     BoundaryEntropy() <: AbstractQuantity
@@ -761,7 +861,7 @@ information-paradox / Page-time analysis of evaporating black holes.
 Reference: D. N. Page, *Phys. Rev. Lett.* **71**, 1291 (1993),
 DOI 10.1103/PhysRevLett.71.1291. Tracking: #580.
 """
-struct PageEntropy <: AbstractQuantity end
+struct PageEntropy <: AbstractEntanglementMeasure end
 
 """
     E8Spectrum() <: AbstractQuantity
@@ -935,7 +1035,7 @@ and exactly zero in a metal / superconductor.
 Implemented analytically for [`Hubbard1D`](@ref) at half filling via
 the Lieb–Wu (1968) closed-form integral.
 """
-struct ChargeGap <: AbstractQuantity end
+struct ChargeGap <: AbstractGap end
 
 """
     SpinGap() <: AbstractQuantity
@@ -949,7 +1049,7 @@ flips one spin.  Zero whenever the spinon branch is gapless (e.g. the
 half-filled 1D Hubbard chain — rigorous Lieb–Wu result), positive in a
 spin-gapped phase (Haldane chain, BCS superconductor, …).
 """
-struct SpinGap <: AbstractQuantity end
+struct SpinGap <: AbstractGap end
 # ─── Quench / nonequilibrium long-time ensembles ────────────────────────
 
 """
@@ -1023,7 +1123,7 @@ Kitaev–Preskill (2006) and Levin–Wen (2006) showed `γ = log 𝒟`, where
 order.  Returns a `Float64`.  For the toric code (Z₂ topological order,
 four Abelian anyons) `γ = log 2`.
 """
-struct TopologicalEntanglementEntropy <: AbstractQuantity end
+struct TopologicalEntanglementEntropy <: AbstractEntanglementMeasure end
 
 """
     AnyonStatistics() <: AbstractQuantity
@@ -1362,3 +1462,25 @@ where $\sigma = \frac{\pi^2}{24} C_T$. If no angle `theta` is provided, the fetc
 method returns the smooth-limit prefactor $\sigma$.
 """
 struct CornerEntanglementCoefficient <: AbstractQuantity end
+
+# ─── component trait: concrete methods (#690) ────────────────────────────
+# The component a leaf's type name encodes; `nothing` (the AbstractQuantity
+# default above) everywhere else.  The `…Local` magnetizations deliberately
+# define NO component: their extra site argument makes them a different
+# fetch shape, so component-paired identity generation must not pick them up.
+
+component(::Type{MagnetizationX}) = :x
+component(::Type{MagnetizationY}) = :y
+component(::Type{MagnetizationZ}) = :z
+component(::Type{SusceptibilityXX}) = :xx
+component(::Type{SusceptibilityYY}) = :yy
+component(::Type{SusceptibilityZZ}) = :zz
+component(::Type{<:XXCorrelation}) = :xx
+component(::Type{<:YYCorrelation}) = :yy
+component(::Type{<:ZZCorrelation}) = :zz
+component(::Type{XXStructureFactor}) = :xx
+component(::Type{YYStructureFactor}) = :yy
+component(::Type{ZZStructureFactor}) = :zz
+component(::Type{MassGap}) = :mass
+component(::Type{ChargeGap}) = :charge
+component(::Type{SpinGap}) = :spin

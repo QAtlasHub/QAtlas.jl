@@ -116,6 +116,42 @@ end
     @test startswith(lines[1], "{\"has_gaps\":")
 end
 
+@testset "query: describe — the full per-model grounding record" begin
+    rs = QAtlas.describe(:TFIM)
+    @test length(rs) == 1
+    r = rs[1]
+    @test r.model == "TFIM"
+    @test !isempty(r.quantities)                 # the observables — disambiguating structural content
+    @test !isempty(r.relations)                  # the graph neighborhood
+    @test r.summary isa String                   # "" if uncarded, honest
+    # the dogfood trap: FibonacciAnyons is uncarded (no prose), but the structure still identifies it
+    fib = QAtlas.describe(:fibonacci)
+    @test length(fib) == 1 && fib[1].model == "FibonacciAnyons"
+    @test fib[1].summary == ""                   # honestly uncarded (no @about card)
+    # JSONL: a header line then one rich record per model
+    io = IOBuffer()
+    QAtlas.describe_jsonl(io, :TFIM)
+    lines = split(strip(String(take!(io))), '\n')
+    @test length(lines) == 2                      # header + 1 record
+    @test startswith(lines[1], "{\"count\":1")
+    @test occursin("\"quantities\":", lines[2]) && occursin("\"relations\":", lines[2])
+end
+
+@testset "query: realizing(class) — inverse edge query (class → models)" begin
+    is = QAtlas.realizing(:Ising)
+    @test !isempty(is)
+    @test all(r -> r.kind === :realizes && r.to == "Ising", is)
+    @test "TFIM" in (r.from for r in is)          # TFIM realizes the Ising class
+    @test [r.from for r in QAtlas.realizing(:ising)] == [r.from for r in is]  # case-insensitive
+    @test all(r -> r.to == "Ising", QAtlas.realizing(:ising))  # exact: does NOT catch IsingSDRG
+    io = IOBuffer()
+    QAtlas.realizing_jsonl(io, :Ising)
+    lines = split(strip(String(take!(io))), '\n')
+    @test length(lines) == length(is) + 1
+    @test startswith(lines[1], "{\"available\":true")
+    @test all(l -> occursin("\"kind\":\"realizes\"", l), lines[2:end])
+end
+
 @testset "query: not-available search → single false summary, no hit lines" begin
     io = IOBuffer()
     QAtlas.search_jsonl(io; model=:NoSuchModelXYZ)

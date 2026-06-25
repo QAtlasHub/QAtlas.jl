@@ -337,6 +337,58 @@ function gaps(model)
     return out
 end
 
+# ---- describe: the full per-model grounding record (the use-face payoff) ----
+
+"""
+    ModelRecord
+
+Everything the atlas records about one model in a single grounding record: `summary` / `hamiltonian`
+(from the `@about` card — `""` if uncarded, coverage is partial), the distinct `quantities`
+available, the `relations` (graph neighborhood), and aggregated `references`. The structural content
+(quantities + relations) lets an LLM disambiguate a model even when no prose card exists.
+"""
+struct ModelRecord
+    model::String
+    summary::String
+    hamiltonian::String
+    quantities::Vector{String}
+    relations::Vector{Relation}
+    references::Vector{String}
+end
+
+"""
+    describe(model) -> Vector{ModelRecord}
+
+The full record for each model matching `model` (a Type, or a fuzzy Symbol/String): summary +
+Hamiltonian where carded, the distinct quantities available, the graph neighborhood, and the
+aggregated references — the record an LLM grounds a physics statement on. See [`describe_jsonl`](@ref).
+"""
+function describe(model)
+    out = ModelRecord[]
+    for M in _model_types(model)
+        hits = search(; model=M).hits
+        card = about(M)
+        quantities = sort(unique(h.quantity for h in hits))
+        refs = String[]
+        for h in hits
+            append!(refs, h.references)
+        end
+        card === nothing || append!(refs, card.references)
+        push!(
+            out,
+            ModelRecord(
+                _label(M),
+                card === nothing ? "" : card.summary,
+                card === nothing ? "" : card.hamiltonian,
+                quantities,
+                relations(M),
+                sort(unique(refs)),
+            ),
+        )
+    end
+    return out
+end
+
 # ---- JSONL serialization (hand-rolled; fields are clean identifiers / bibkeys) ----
 
 function _json_escape(s::AbstractString)
@@ -507,3 +559,88 @@ function gaps_jsonl(io::IO, model)
     return nothing
 end
 gaps_jsonl(model) = gaps_jsonl(stdout, model)
+
+function _json_record(r::ModelRecord)
+    rels = string('[', join((_json_relation(x) for x in r.relations), ','), ']')
+    return string(
+        "{\"model\":",
+        _jstr(r.model),
+        ",\"summary\":",
+        _jstr(r.summary),
+        ",\"hamiltonian\":",
+        _jstr(r.hamiltonian),
+        ",\"quantities\":",
+        _jarr(r.quantities),
+        ",\"relations\":",
+        rels,
+        ",\"references\":",
+        _jarr(r.references),
+        "}",
+    )
+end
+
+"""
+    describe_jsonl([io=stdout], model) -> nothing
+
+Stream [`describe`](@ref) as JSONL: a `{count, query}` header line then one rich model-record object
+per line (summary, hamiltonian, quantities, relations, references).
+"""
+function describe_jsonl(io::IO, model)
+    recs = describe(model)
+    print(io, "{\"count\":", length(recs), ",\"query\":", _json_query((; model)), "}\n")
+    for r in recs
+        print(io, _json_record(r), "\n")
+    end
+    return nothing
+end
+describe_jsonl(model) = describe_jsonl(stdout, model)
+
+# ---- realizing: the inverse of a model's :realizes edge — which models realize a class ----
+
+"""
+    realizing(class) -> Vector{Relation}
+
+The models that realize a universality `class` (a Symbol/String, case-insensitive exact match) — the
+inverse of the model→class `:realizes` edge `relations` returns. Answers "which physical models can I
+study the Ising / Heisenberg / KPZ / … class with". See [`realizing_jsonl`](@ref).
+"""
+function realizing(class)
+    want = lowercase(string(class))
+    rels = Relation[]
+    for r in REALIZES
+        lowercase(string(r.class)) == want || continue
+        push!(
+            rels,
+            Relation(
+                :realizes, _label(r.model), string(r.class), r.regime, copy(r.references)
+            ),
+        )
+    end
+    sort!(rels; by=x -> x.from)
+    return rels
+end
+
+"""
+    realizing_jsonl([io=stdout], class) -> nothing
+
+Stream [`realizing`](@ref) as JSONL: a `{available, query, count}` summary line then one `:realizes`
+Relation per line.
+"""
+function realizing_jsonl(io::IO, class)
+    rels = realizing(class)
+    print(
+        io,
+        "{\"available\":",
+        !isempty(rels),
+        ",\"query\":",
+        _json_query((; class)),
+        ",\"count\":",
+        length(rels),
+        "}\n",
+    )
+    for r in rels
+        print(io, _json_relation(r), "\n")
+    end
+    return nothing
+end
+realizing_jsonl(class) = realizing_jsonl(stdout, class)

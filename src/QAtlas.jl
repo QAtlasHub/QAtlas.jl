@@ -445,6 +445,7 @@ export coherence_report,
 # quantity / bc / regime. Reads REGISTRY + the edge stores, so it comes after they are populated.
 include("core/query.jl")
 export search, search_jsonl, available, relations, relations_jsonl, gaps, gaps_jsonl
+export describe, describe_jsonl, realizing, realizing_jsonl
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Precompile workload — bake the hot `fetch` specializations into the package

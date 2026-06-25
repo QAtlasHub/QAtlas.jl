@@ -178,6 +178,115 @@ The bare yes/no: does the atlas have anything matching the facets? Convenience o
 """
 available(; kwargs...) = search(; kwargs...).available
 
+# ---- edge / relation search: a model's graph neighborhood ----
+
+"""
+    Relation
+
+One edge in a model's graph neighborhood: `kind`
+(`:dual`/`:limit_to`/`:limit_from`/`:reduces_to`/`:reduces_from`/`:realizes`/`:symmetry`), the
+`from`/`to` endpoints (model names; a universality class for `:realizes`; `""` for `:symmetry`), a
+`detail` summary, and `references`.
+"""
+struct Relation
+    kind::Symbol
+    from::String
+    to::String
+    detail::String
+    references::Vector{String}
+end
+
+# The registered model Types matching a facet (a Type, or a fuzzy Symbol/String).
+function _model_types(facet)
+    seen = Type[]
+    for impl in REGISTRY
+        impl.model in seen && continue
+        _match(facet, impl.model) || continue
+        push!(seen, impl.model)
+    end
+    return seen
+end
+
+"""
+    relations(model) -> Vector{Relation}
+
+The graph neighborhood of `model` (a Type, or a fuzzy Symbol/String facet): every duality, limit,
+reduction, realization, and symmetry edge it participates in, one `Relation` each. See
+[`relations_jsonl`](@ref) for JSONL output.
+"""
+function relations(model)
+    rels = Relation[]
+    for M in _model_types(model)
+        nm = _label(M)
+        for d in DUALITIES
+            (d.source === M || d.target === M) || continue
+            partner = d.source === M ? d.target : d.source
+            push!(
+                rels,
+                Relation(
+                    :dual,
+                    nm,
+                    _label(partner),
+                    "kind=$(d.kind); $(d.regime)",
+                    copy(d.references),
+                ),
+            )
+        end
+        for l in LIMIT_EDGES
+            l.source === M && push!(
+                rels,
+                Relation(
+                    :limit_to,
+                    nm,
+                    _label(l.target),
+                    "param=$(l.param); $(l.regime)",
+                    copy(l.references),
+                ),
+            )
+            l.target === M && push!(
+                rels,
+                Relation(
+                    :limit_from,
+                    _label(l.source),
+                    nm,
+                    "param=$(l.param); $(l.regime)",
+                    copy(l.references),
+                ),
+            )
+        end
+        for r in REDUCES
+            r.source === M && push!(
+                rels,
+                Relation(:reduces_to, nm, _label(r.target), r.regime, copy(r.references)),
+            )
+            r.target === M && push!(
+                rels,
+                Relation(:reduces_from, _label(r.source), nm, r.regime, copy(r.references)),
+            )
+        end
+        for r in REALIZES
+            r.model === M && push!(
+                rels,
+                Relation(:realizes, nm, string(r.class), r.regime, copy(r.references)),
+            )
+        end
+        for p in SYMMETRY_PROFILES
+            p.model === M && push!(
+                rels,
+                Relation(
+                    :symmetry,
+                    nm,
+                    "",
+                    "internal=$(p.internal), translation=$(p.translation)",
+                    copy(p.references),
+                ),
+            )
+        end
+    end
+    sort!(rels; by=r -> (string(r.kind), r.from, r.to))
+    return rels
+end
+
 # ---- JSONL serialization (hand-rolled; fields are clean identifiers / bibkeys) ----
 
 function _json_escape(s::AbstractString)
@@ -266,3 +375,44 @@ function search_jsonl(io::IO=stdout; kwargs...)
     end
     return nothing
 end
+
+function _json_relation(r::Relation)
+    return string(
+        "{\"kind\":",
+        _jstr(r.kind),
+        ",\"from\":",
+        _jstr(r.from),
+        ",\"to\":",
+        _jstr(r.to),
+        ",\"detail\":",
+        _jstr(r.detail),
+        ",\"references\":",
+        _jarr(r.references),
+        "}",
+    )
+end
+
+"""
+    relations_jsonl([io=stdout], model) -> nothing
+
+Stream [`relations`](@ref) as JSONL: a `{available, query, count}` summary line then one Relation
+object per line.
+"""
+function relations_jsonl(io::IO, model)
+    rels = relations(model)
+    print(
+        io,
+        "{\"available\":",
+        !isempty(rels),
+        ",\"query\":",
+        _json_query((; model)),
+        ",\"count\":",
+        length(rels),
+        "}\n",
+    )
+    for r in rels
+        print(io, _json_relation(r), "\n")
+    end
+    return nothing
+end
+relations_jsonl(model) = relations_jsonl(stdout, model)

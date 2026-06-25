@@ -64,6 +64,25 @@ end
     @test all(l -> occursin("\"cross_checked\":", l), lines[2:end])
 end
 
+@testset "query: relations — a model's graph neighborhood (edge search)" begin
+    rs = QAtlas.relations(:TFIM)
+    @test !isempty(rs)
+    @test :dual in (r.kind for r in rs)                      # TFIM is Kramers–Wannier self-dual
+    @test all(r -> r.from == "TFIM" || r.to == "TFIM", rs)   # every relation touches TFIM
+    @test all(r -> r.references isa Vector, rs)
+    io = IOBuffer()
+    QAtlas.relations_jsonl(io, :TFIM)
+    lines = split(strip(String(take!(io))), '\n')
+    @test length(lines) == length(rs) + 1                    # summary + one per relation
+    @test startswith(lines[1], "{\"available\":true")
+    @test all(l -> occursin("\"kind\":", l), lines[2:end])
+    io2 = IOBuffer()
+    QAtlas.relations_jsonl(io2, :NoSuchModelXYZ)             # no such model → false summary, no lines
+    out2 = strip(String(take!(io2)))
+    @test startswith(out2, "{\"available\":false")
+    @test !occursin('\n', out2)
+end
+
 @testset "query: not-available search → single false summary, no hit lines" begin
     io = IOBuffer()
     QAtlas.search_jsonl(io; model=:NoSuchModelXYZ)

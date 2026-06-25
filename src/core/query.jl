@@ -287,6 +287,42 @@ function relations(model)
     return rels
 end
 
+# ---- gap / absence search: a model's coverage holes ----
+
+"""
+    Gap
+
+A coverage hole — something the atlas does NOT have. `kind` is `:regime` (a `REGIMES` capability the
+`model` does not cover); `subject` names what is missing. Atlas-wide structural gaps are separate —
+see `coherence_gaps()`.
+"""
+struct Gap
+    kind::Symbol
+    subject::String
+    model::String
+end
+
+"""
+    gaps(model) -> Vector{Gap}
+
+What the atlas does NOT have for `model` (a Type, or a fuzzy Symbol/String facet): for each `regime`
+in `REGIMES` the model does not cover, a `Gap(:regime, regime, model)`. The grounded negative of
+[`search`](@ref) — no guessed "expected set", just the known capability facets the model lacks. See
+[`gaps_jsonl`](@ref) for JSONL.
+"""
+function gaps(model)
+    out = Gap[]
+    for M in _model_types(model)
+        nm = _label(M)
+        for regime in keys(REGIMES)
+            isempty(search(; model=M, regime=regime).hits) &&
+                push!(out, Gap(:regime, string(regime), nm))
+        end
+    end
+    sort!(out; by=g -> (g.model, g.subject))
+    return out
+end
+
 # ---- JSONL serialization (hand-rolled; fields are clean identifiers / bibkeys) ----
 
 function _json_escape(s::AbstractString)
@@ -416,3 +452,40 @@ function relations_jsonl(io::IO, model)
     return nothing
 end
 relations_jsonl(model) = relations_jsonl(stdout, model)
+
+function _json_gap(g::Gap)
+    return string(
+        "{\"kind\":",
+        _jstr(g.kind),
+        ",\"subject\":",
+        _jstr(g.subject),
+        ",\"model\":",
+        _jstr(g.model),
+        "}",
+    )
+end
+
+"""
+    gaps_jsonl([io=stdout], model) -> nothing
+
+Stream [`gaps`](@ref) as JSONL: a `{has_gaps, query, count}` summary line then one Gap object per
+line.
+"""
+function gaps_jsonl(io::IO, model)
+    gs = gaps(model)
+    print(
+        io,
+        "{\"has_gaps\":",
+        !isempty(gs),
+        ",\"query\":",
+        _json_query((; model)),
+        ",\"count\":",
+        length(gs),
+        "}\n",
+    )
+    for g in gs
+        print(io, _json_gap(g), "\n")
+    end
+    return nothing
+end
+gaps_jsonl(model) = gaps_jsonl(stdout, model)

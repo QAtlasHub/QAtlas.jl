@@ -443,7 +443,7 @@ export coherence_report,
 # Availability search (the "use" face): "does the atlas have X?" → yes/no + JSONL, by model /
 # quantity / bc / regime. Reads REGISTRY + the edge stores, so it comes after they are populated.
 include("core/query.jl")
-export search, search_jsonl, available, relations, relations_jsonl
+export search, search_jsonl, available, relations, relations_jsonl, gaps, gaps_jsonl
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Precompile workload — bake the hot `fetch` specializations into the package

@@ -83,6 +83,21 @@ end
     @test !occursin('\n', out2)
 end
 
+@testset "query: gaps — per-model coverage holes (absence search)" begin
+    g = QAtlas.gaps(:TFIM)
+    @test all(x -> x.kind === :regime && x.model == "TFIM", g)
+    # grounded: gaps + covered regimes partition all REGIMES (no guessed "expected set")
+    covered = count(r -> QAtlas.available(; model=:TFIM, regime=r), keys(QAtlas.REGIMES))
+    @test length(g) + covered == length(QAtlas.REGIMES)
+    # each reported gap is genuinely absent
+    @test all(x -> !QAtlas.available(; model=:TFIM, regime=Symbol(x.subject)), g)
+    io = IOBuffer()
+    QAtlas.gaps_jsonl(io, :TFIM)
+    lines = split(strip(String(take!(io))), '\n')
+    @test length(lines) == length(g) + 1
+    @test startswith(lines[1], "{\"has_gaps\":")
+end
+
 @testset "query: not-available search → single false summary, no hit lines" begin
     io = IOBuffer()
     QAtlas.search_jsonl(io; model=:NoSuchModelXYZ)

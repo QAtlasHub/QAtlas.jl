@@ -34,14 +34,16 @@ const REGIMES = (
 """
     Hit
 
-One available (model, quantity, bc) hub, with its provenance. `cross_checked` is `true` when the
-model participates in an executable cross-check (a duality, limit, or LSM-symmetry edge) — the
-QAtlas-specific trust signal (model-level in this version).
+One available (model, quantity, bc) hub, with its provenance: `method` (how the value is obtained),
+`status`, `reliability`, `references`, and `cross_checked` — `true` when the model participates in
+an executable cross-check (a duality, limit, or LSM-symmetry edge), the QAtlas-specific trust signal
+(model-level in this version).
 """
 struct Hit
     model::String
     quantity::String
     bc::String
+    method::Symbol        # how the value is obtained (:bdg, :bethe_ansatz, :analytic, …)
     status::Symbol        # :exact / :bound / :approx / :universal
     reliability::Symbol   # :high / :medium / :low
     cross_checked::Bool
@@ -71,6 +73,9 @@ _match(want::Symbol, @nospecialize(T)) = occursin(_norm(want), _norm(_label(T)))
 _match(want::AbstractString, @nospecialize(T)) = occursin(_norm(want), _norm(_label(T)))
 _match(want::Type, @nospecialize(T)) = T <: want
 
+# A reference facet matches if any of a row's bibkeys contains it (case/underscore-insensitive).
+_ref_match(want, refs) = any(r -> occursin(_norm(want), _norm(r)), refs)
+
 # Models tied into an executable cross-check (duality / limit / LSM symmetry). Model-level for now.
 function _cross_checked_models()
     s = Set{Type}()
@@ -89,15 +94,35 @@ function _cross_checked_models()
 end
 
 """
-    search(; model=nothing, quantity=nothing, bc=nothing, regime=nothing) -> QueryResult
+    search(; model, quantity, bc, regime, status, reliability, method, reference, cross_checked) -> QueryResult
 
-Does the atlas have data matching the given facets? Any facet left `nothing` is unconstrained.
-`model`/`quantity`/`bc` accept a Type (exact / family) or a Symbol/String (fuzzy substring on the
-name); `regime` is one of `keys(REGIMES)` (`:ground_state`, `:finite_temperature`, `:dynamics`,
-`:universality`). Returns a [`QueryResult`](@ref) — see [`search_jsonl`](@ref) for JSONL output and
-[`available`](@ref) for just the boolean.
+Does the atlas have data matching the given facets? Any facet left `nothing` is unconstrained; all
+given facets are AND-combined.
+
+- `model`/`quantity`/`bc` — a Type (exact, or a family like `AbstractGap`) or a Symbol/String
+  (fuzzy: case- and underscore-insensitive substring on the name).
+- `regime` — one of `keys(REGIMES)` (`:ground_state`, `:finite_temperature`, `:dynamics`,
+  `:universality`).
+- `status` (`:exact`/`:bound`/`:approx`/`:universal`) and `reliability` (`:high`/`:medium`/`:low`)
+  — exact Symbol match.
+- `method` — a Symbol/String, fuzzy (so `:bethe` finds `:bethe_ansatz`).
+- `reference` — a bibkey substring, fuzzy (so `"Pfeuty"` finds `"Pfeuty1970"`).
+- `cross_checked` — `true`/`false`, the trust filter.
+
+Returns a [`QueryResult`](@ref) — see [`search_jsonl`](@ref) for JSONL and [`available`](@ref) for
+just the boolean.
 """
-function search(; model=nothing, quantity=nothing, bc=nothing, regime=nothing)
+function search(;
+    model=nothing,
+    quantity=nothing,
+    bc=nothing,
+    regime=nothing,
+    status=nothing,
+    reliability=nothing,
+    method=nothing,
+    reference=nothing,
+    cross_checked=nothing,
+)
     regime === nothing ||
         haskey(REGIMES, regime) ||
         throw(ArgumentError("unknown regime $(repr(regime)); known: $(keys(REGIMES))"))
@@ -108,21 +133,42 @@ function search(; model=nothing, quantity=nothing, bc=nothing, regime=nothing)
         _match(quantity, impl.quantity) || continue
         _match(bc, impl.bc) || continue
         regime === nothing || REGIMES[regime](impl) || continue
+        status === nothing || impl.status === status || continue
+        reliability === nothing || impl.reliability === reliability || continue
+        method === nothing || _match(method, impl.method) || continue
+        reference === nothing || _ref_match(reference, impl.references) || continue
+        xc = impl.model in xchecked
+        cross_checked === nothing || xc === cross_checked || continue
         push!(
             hits,
             Hit(
                 _label(impl.model),
                 _label(impl.quantity),
                 _label(impl.bc),
+                impl.method,
                 impl.status,
                 impl.reliability,
-                impl.model in xchecked,
+                xc,
                 copy(impl.references),
             ),
         )
     end
     sort!(hits; by=h -> (h.model, h.quantity, h.bc))
-    return QueryResult((; model, quantity, bc, regime), !isempty(hits), hits)
+    return QueryResult(
+        (;
+            model,
+            quantity,
+            bc,
+            regime,
+            status,
+            reliability,
+            method,
+            reference,
+            cross_checked,
+        ),
+        !isempty(hits),
+        hits,
+    )
 end
 
 """
@@ -166,6 +212,8 @@ function _json_hit(h::Hit)
         _jstr(h.quantity),
         ",\"bc\":",
         _jstr(h.bc),
+        ",\"method\":",
+        _jstr(h.method),
         ",\"status\":",
         _jstr(h.status),
         ",\"reliability\":",
@@ -182,7 +230,8 @@ function _json_query(q::NamedTuple)
     parts = String[]
     for (k, v) in pairs(q)
         v === nothing && continue
-        push!(parts, string(_jstr(k), ":", _jstr(v isa Type ? _label(v) : v)))
+        val = v isa Bool ? string(v) : _jstr(v isa Type ? _label(v) : v)
+        push!(parts, string(_jstr(k), ":", val))
     end
     return string('{', join(parts, ','), '}')
 end

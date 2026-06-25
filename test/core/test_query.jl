@@ -20,6 +20,23 @@ end
     @test_throws ArgumentError QAtlas.search(; regime=:not_a_regime)
 end
 
+@testset "query: rich node facets — status / reliability / method / reference / cross_checked" begin
+    ex = QAtlas.search(; model=:TFIM, status=:exact)
+    @test ex.available
+    @test all(h -> h.status === :exact, ex.hits)            # exact Symbol match
+    @test all(h -> h.method isa Symbol, ex.hits)            # method now surfaces in the hit
+    pf = QAtlas.search(; reference="Pfeuty")                 # bibkey substring (fuzzy)
+    @test pf.available
+    @test all(h -> any(r -> occursin("pfeuty", lowercase(r)), h.references), pf.hits)
+    @test QAtlas.available(; method=:bethe)                 # fuzzy → finds :bethe_ansatz
+    xc = QAtlas.search(; model=:TFIM, cross_checked=true)   # the trust filter
+    @test xc.available && all(h -> h.cross_checked, xc.hits)
+    @test !QAtlas.available(; model=:TFIM, status=:no_such_status)  # AND-combined, honest miss
+    io = IOBuffer()
+    QAtlas.search_jsonl(io; model=:TFIM, status=:exact)
+    @test occursin("\"method\":", String(take!(io)))        # method in the JSONL hit
+end
+
 @testset "query: fuzzy facet matching (case/underscore-insensitive)" begin
     @test QAtlas.available(; model=:tfim)                    # lowercase Symbol
     @test QAtlas.available(; quantity=:specific_heat)        # underscore vs SpecificHeat

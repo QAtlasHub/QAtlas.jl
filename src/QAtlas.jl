@@ -84,6 +84,7 @@ include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
+include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/reduces.jl")   # model -> model reductions (limit / special point)

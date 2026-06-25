@@ -46,6 +46,8 @@ struct Hit
     method::Symbol        # how the value is obtained (:bdg, :bethe_ansatz, :analytic, …)
     status::Symbol        # :exact / :bound / :approx / :universal
     reliability::Symbol   # :high / :medium / :low
+    thermal::Symbol       # orthogonal axis: :zero / :finite / :both / :unknown
+    dynamical::Symbol     # orthogonal axis: :static / :transport / :dynamic / :unknown
     cross_checked::Bool
     references::Vector{String}
 end
@@ -75,6 +77,10 @@ _match(want::Type, @nospecialize(T)) = T <: want
 
 # A reference facet matches if any of a row's bibkeys contains it (case/underscore-insensitive).
 _ref_match(want, refs) = any(r -> occursin(_norm(want), _norm(r)), refs)
+
+# An orthogonal-axis facet matches its stored value; `:both` (a hub spanning T=0 and T>0) matches
+# either `thermal` query.
+_axis_match(want, have) = want === have || have === :both
 
 # Models tied into an executable cross-check (duality / limit / LSM symmetry). Model-level for now.
 function _cross_checked_models()
@@ -122,6 +128,8 @@ function search(;
     method=nothing,
     reference=nothing,
     cross_checked=nothing,
+    thermal=nothing,
+    dynamical=nothing,
 )
     regime === nothing ||
         haskey(REGIMES, regime) ||
@@ -137,6 +145,8 @@ function search(;
         reliability === nothing || impl.reliability === reliability || continue
         method === nothing || _match(method, impl.method) || continue
         reference === nothing || _ref_match(reference, impl.references) || continue
+        thermal === nothing || _axis_match(thermal, impl.thermal) || continue
+        dynamical === nothing || _axis_match(dynamical, impl.dynamical) || continue
         xc = impl.model in xchecked
         cross_checked === nothing || xc === cross_checked || continue
         push!(
@@ -148,6 +158,8 @@ function search(;
                 impl.method,
                 impl.status,
                 impl.reliability,
+                impl.thermal,
+                impl.dynamical,
                 xc,
                 copy(impl.references),
             ),
@@ -165,6 +177,8 @@ function search(;
             method,
             reference,
             cross_checked,
+            thermal,
+            dynamical,
         ),
         !isempty(hits),
         hits,
@@ -363,6 +377,10 @@ function _json_hit(h::Hit)
         _jstr(h.status),
         ",\"reliability\":",
         _jstr(h.reliability),
+        ",\"thermal\":",
+        _jstr(h.thermal),
+        ",\"dynamical\":",
+        _jstr(h.dynamical),
         ",\"cross_checked\":",
         h.cross_checked,
         ",\"references\":",

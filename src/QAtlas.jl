@@ -175,6 +175,7 @@ export FermiVelocity,
     CFTThermalEntropyDensity,
     WignerSemicircleMoment
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
+export DynamicLocalization, driven_band_harmonic_weights # ac-driven free-fermion nonlinear response (Dunlap-Kenkre 1986)
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)
 export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …
@@ -371,6 +372,7 @@ include("models/quantum/S1XXZ1D/S1XXZ1D_registry.jl")  # populates REGISTRY for 
 include("models/quantum/Cluster1D/Cluster1D.jl")
 include("models/quantum/Cluster1D/Cluster1D_registry.jl")  # populates REGISTRY for Cluster1D (#301)
 include("models/quantum/TightBindingV1D/TightBindingV1D.jl")
+include("models/quantum/TightBindingV1D/TightBindingV1D_driven.jl")  # ac-driven nonlinear response: DynamicLocalization + harmonics
 include("models/quantum/TightBindingV1D/TightBindingV1D_registry.jl")  # populates REGISTRY for TightBindingV1D (#296)
 include("models/quantum/LongRangeIsing1D/LongRangeIsing1D.jl")
 include("models/quantum/LongRangeIsing1D/LongRangeIsing1D_registry.jl")  # populates REGISTRY for LongRangeIsing1D (#293)

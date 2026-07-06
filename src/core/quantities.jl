@@ -1463,6 +1463,26 @@ method returns the smooth-limit prefactor $\sigma$.
 """
 struct CornerEntanglementCoefficient <: AbstractQuantity end
 
+"""
+    DynamicLocalization() <: AbstractQuantity
+
+Cycle-averaged effective-hopping renormalization of a tight-binding band driven
+by a spatially-uniform monochromatic ac electric field (Peierls coupling).  In
+units `e = ℏ = a = 1`, a field `E(τ) = E₀ cos(ωτ)` gives the dimensionless drive
+`K = E₀/ω`, and the hopping is renormalized by the exact, nonperturbative Bessel
+factor
+
+    t_eff / t = J₀(K).
+
+The band collapses — "dynamic localization" — at the zeros of `J₀` (first at
+`K = 2.404826…`), where a static tilt drives no current despite `E₀ ≠ 0`.  This
+is the hallmark exact nonlinear (all-orders-in-field) response of the ac-driven
+free-fermion chain (Dunlap–Kenkre 1986; Holthaus–Hone 1996); the full harmonic
+content of the current is the Bessel spectrum `Jₙ(K)`
+(see `driven_band_harmonic_weights`).
+"""
+struct DynamicLocalization <: AbstractQuantity end
+
 # ─── component trait: concrete methods (#690) ────────────────────────────
 # The component a leaf's type name encodes; `nothing` (the AbstractQuantity
 # default above) everywhere else.  The `…Local` magnetizations deliberately

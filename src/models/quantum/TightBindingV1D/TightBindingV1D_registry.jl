@@ -67,3 +67,17 @@
     references=["Mahan2000"],
     notes="V=0 c_μ(β;t,μ) = (β²/π) ∫₀^π ε² n_F(1-n_F) dk; V≠0 deferred to Phase 2.",
 )
+
+@register(
+    TightBindingV1D,
+    DynamicLocalization,
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/identities/test_driven_free_fermion_nonlinear_response.jl",
+    references=["DunlapKenkre1986", "HolthausHone1996"],
+    notes="AC-driven free-fermion (V=0) nonlinear response: renormalized hopping " *
+          "t_eff = t·J₀(E₀/ω); dynamic localization at J₀ zeros (K≈2.4048); harmonic " *
+          "current spectrum = Bessel Jₙ(K) via driven_band_harmonic_weights. " *
+          "V≠0 deferred to Phase 2.",
+)

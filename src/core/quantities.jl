@@ -1483,6 +1483,26 @@ content of the current is the Bessel spectrum `Jₙ(K)`
 """
 struct DynamicLocalization <: AbstractQuantity end
 
+"""
+    HighHarmonicAmplitude() <: AbstractQuantity
+
+Peak amplitude of the `harmonic`-th harmonic (frequency `n ω`) of the intraband
+current of a tight-binding band driven by a monochromatic ac field — the
+exact, all-orders-in-field higher-order response (high-harmonic generation).
+
+For drive `K = E₀/ω` the n-th harmonic amplitude of the current, maximized over
+crystal momentum, is the Bessel envelope
+
+    A₀(K) = 2t |J₀(K)|,      Aₙ(K) = 4t |Jₙ(K)|   (n ≥ 1),
+
+so `harmonic = 1` is the linear response, `harmonic ≥ 2` the genuinely nonlinear
+higher harmonics.  For small `K`, `Aₙ ∝ Kⁿ` — the n-th harmonic is the order-n
+(χ⁽ⁿ⁾) response, whose leading coefficient is `nonlinear_susceptibility`.  The
+`n = 0` value is the dynamic-localization envelope (`2·|`[`DynamicLocalization`](@ref)`|`).
+(Dunlap–Kenkre 1986; Holthaus–Hone 1996.)
+"""
+struct HighHarmonicAmplitude <: AbstractQuantity end
+
 # ─── component trait: concrete methods (#690) ────────────────────────────
 # The component a leaf's type name encodes; `nothing` (the AbstractQuantity
 # default above) everywhere else.  The `…Local` magnetizations deliberately

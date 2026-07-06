@@ -35,7 +35,13 @@
 
 using QAtlas, Test, LinearAlgebra
 using QAtlas:
-    TightBindingV1D, DynamicLocalization, Infinite, fetch, driven_band_harmonic_weights
+    TightBindingV1D,
+    DynamicLocalization,
+    HighHarmonicAmplitude,
+    Infinite,
+    fetch,
+    driven_band_harmonic_weights,
+    nonlinear_susceptibility
 
 # ── independent machinery: driven ring, RK4, bare DFT ────────────────────────
 # (underscore-prefixed to stay clear of the shared included-test namespace)
@@ -229,5 +235,84 @@ const _DFFNLR_J0_ZERO1 = 2.404825557695773   # first zero of J₀ (dynamic local
         )
         @test_throws DomainError driven_band_harmonic_weights(1.0; nmax=-1)
         @test length(driven_band_harmonic_weights(1.0)) == 7    # nmax=6 default ⇒ 0..6
+    end
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Higher-order response: the n-th harmonic promoted to a first-class quantity
+# (HighHarmonicAmplitude), plus the perturbative order-n susceptibility
+# (nonlinear_susceptibility).  Same independent route — RK4 simulation + bare
+# DFT — verifies the registered amplitudes; the perturbative χ⁽ⁿ⁾ is checked as
+# the exact K → 0 limit of the (all-orders) Bessel amplitude.
+# ─────────────────────────────────────────────────────────────────────────────
+@testset "driven free-fermion higher-order response — n-th harmonic & χ⁽ⁿ⁾" begin
+    t = 1.0
+    ω = 1.0
+    L = 16
+    N = 128
+    S = 8
+    m = TightBindingV1D(; t=t)
+
+    # ── HighHarmonicAmplitude == RK4+DFT peak n-th harmonic (all orders) ──────
+    # peak over k: even n at k = π/2 (∝ sin k), odd n at k = 0 (∝ cos k).
+    @testset "Aₙ = 2t|J₀| / 4t|Jₙ| == simulation  (K=$K)" for K in (0.9, 1.7, 2.6)
+        jeven = _dffnlr_series(L, t, K, ω, π / 2, N, S)   # dc + even harmonics
+        jodd = _dffnlr_series(L, t, K, ω, 0.0, N, S)      # odd harmonics
+        for n in 0:6
+            A = fetch(m, HighHarmonicAmplitude(), Infinite(); drive=K, harmonic=n)
+            meas = iseven(n) ? _dffnlr_amp(jeven, n) : _dffnlr_amp(jodd, n)
+            @test A >= 0
+            @test isapprox(A, abs(meas); atol=3e-3)
+        end
+    end
+
+    # ── n = 0 cross-check: envelope == 2·|DynamicLocalization| ────────────────
+    for K in (0.5, 1.5, 2.404825557695773)
+        A0 = fetch(m, HighHarmonicAmplitude(), Infinite(); drive=K, harmonic=0)
+        tloc = fetch(m, DynamicLocalization(), Infinite(); drive=K)
+        @test isapprox(A0, 2 * abs(tloc); atol=1e-10)
+    end
+
+    # ── perturbative χ⁽ⁿ⁾ = 4t/(n!(2ω)ⁿ) is the K→0 order-n limit of Aₙ ───────
+    @testset "χ⁽ⁿ⁾ closed form and small-field limit" begin
+        @test isapprox(
+            nonlinear_susceptibility(; order=1, omega=ω, t=t), 2t / ω; rtol=1e-12
+        )
+        @test isapprox(
+            nonlinear_susceptibility(; order=2, omega=ω, t=t), t / (2ω^2); rtol=1e-12
+        )
+        @test isapprox(
+            nonlinear_susceptibility(; order=3, omega=ω, t=t), t / (12ω^3); rtol=1e-12
+        )
+        # exact Aₙ(K)/E₀ⁿ → χ⁽ⁿ⁾ as the field E₀ = K ω → 0.
+        for n in 1:4
+            χ = nonlinear_susceptibility(; order=n, omega=ω, t=t)
+            Ksmall = 1e-3
+            E0 = Ksmall * ω
+            A = fetch(m, HighHarmonicAmplitude(), Infinite(); drive=Ksmall, harmonic=n)
+            @test isapprox(A / E0^n, χ; rtol=1e-4)
+        end
+        # ω-scaling χ⁽ⁿ⁾ ∝ ω^{-n}
+        @test isapprox(
+            nonlinear_susceptibility(; order=3, omega=2.0),
+            nonlinear_susceptibility(; order=3, omega=1.0) / 8;
+            rtol=1e-12,
+        )
+    end
+
+    # ── guards ────────────────────────────────────────────────────────────────
+    @testset "higher-order guards" begin
+        @test_throws DomainError fetch(
+            m, HighHarmonicAmplitude(), Infinite(); drive=1.0, harmonic=-1
+        )
+        @test_throws DomainError fetch(
+            TightBindingV1D(; t=1.0, V=0.3),
+            HighHarmonicAmplitude(),
+            Infinite();
+            drive=1.0,
+            harmonic=2,
+        )
+        @test_throws DomainError nonlinear_susceptibility(; order=0)
+        @test_throws DomainError nonlinear_susceptibility(; order=2, omega=-1.0)
     end
 end

@@ -110,3 +110,76 @@ function driven_band_harmonic_weights(drive::Real; nmax::Integer=6)
     )
     return Float64[besselj(n, drive) for n in 0:nmax]
 end
+
+"""
+    fetch(m::TightBindingV1D, ::HighHarmonicAmplitude, ::Infinite;
+          drive, harmonic, t=m.t, V=m.V, kwargs...) -> Float64
+
+Peak amplitude of the `harmonic`-th harmonic (`n ω`) of the intraband current of
+the ac-driven free-fermion (V = 0) chain — the exact, all-orders-in-field
+higher-order response.  With `drive = K = E₀/ω`, maximizing over crystal
+momentum,
+
+    A₀(K) = 2t |J₀(K)|,      Aₙ(K) = 4t |Jₙ(K)|   (n ≥ 1).
+
+`harmonic = 1` is the linear response; `harmonic ≥ 2` the nonlinear higher
+harmonics.  The leading small-field (perturbative χ⁽ⁿ⁾) coefficient is
+`nonlinear_susceptibility(; order=harmonic)`.
+
+`V ≠ 0` raises `DomainError` (Phase 2 via JW ↔ XXZ1D).
+"""
+function fetch(
+    m::TightBindingV1D,
+    ::HighHarmonicAmplitude,
+    ::Infinite;
+    drive::Real,
+    harmonic::Integer,
+    t::Real=m.t,
+    V::Real=m.V,
+    kwargs...,
+)
+    t > 0 || throw(
+        DomainError(t, "TightBindingV1D HighHarmonicAmplitude requires t > 0; got t = $t."),
+    )
+    harmonic >= 0 || throw(
+        DomainError(
+            harmonic,
+            "TightBindingV1D HighHarmonicAmplitude requires harmonic ≥ 0; got $harmonic.",
+        ),
+    )
+    if !iszero(V)
+        throw(
+            DomainError(
+                V,
+                "TightBindingV1D HighHarmonicAmplitude: V ≠ 0 (JW-equivalent to interacting " *
+                "XXZ, Yang-Yang 1966) deferred to Phase 2. Got V = $V.",
+            ),
+        )
+    end
+    jn = driven_band_harmonic_weights(drive; nmax=harmonic)[harmonic + 1]  # Jₙ(K)
+    return (harmonic == 0 ? 2 : 4) * t * abs(jn)
+end
+
+"""
+    nonlinear_susceptibility(; order::Integer, omega::Real=1.0, t::Real=1.0) -> Float64
+
+Leading-order (perturbative χ⁽ⁿ⁾) nonlinear conductivity of the ac-driven
+free-fermion band: the coefficient of `E₀^order` in the peak `order`-th harmonic
+current, obtained from the small-drive limit `Jₙ(K) ≈ (K/2)ⁿ/n!` (`K = E₀/ω`):
+
+    χ⁽ⁿ⁾ = 4t / (n! (2ω)ⁿ),     n = order ≥ 1.
+
+`order = 1` is the linear (Drude) conductivity `2t/ω`; `order = 2` the
+rectification / second-harmonic coefficient `t/(2ω²)`; and so on.  The exact,
+all-orders amplitude is [`HighHarmonicAmplitude`](@ref) = `4t|Jₙ(E₀/ω)|`, of
+which this is the `K → 0` leading term.
+"""
+function nonlinear_susceptibility(; order::Integer, omega::Real=1.0, t::Real=1.0)
+    order >= 1 || throw(
+        DomainError(order, "nonlinear_susceptibility requires order ≥ 1; got $order.")
+    )
+    omega > 0 ||
+        throw(DomainError(omega, "nonlinear_susceptibility requires ω > 0; got $omega."))
+    # BigInt/BigFloat denominator so large `order` cannot silently overflow Int64.
+    return Float64(4 * t / (factorial(big(order)) * big(2 * omega)^order))
+end

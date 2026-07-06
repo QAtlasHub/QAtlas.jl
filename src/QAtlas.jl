@@ -176,6 +176,7 @@ export FermiVelocity,
     WignerSemicircleMoment
 export SteadyStateCurrent                                # TASEP / non-equilibrium current (#241)
 export DynamicLocalization, driven_band_harmonic_weights # ac-driven free-fermion nonlinear response (Dunlap-Kenkre 1986)
+export HighHarmonicAmplitude, nonlinear_susceptibility   # higher-order (χ⁽ⁿ⁾ / n-th harmonic) response
 export E8Spectrum
 export LiebRobinsonBound  # status-axis example (:bound)
 export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …

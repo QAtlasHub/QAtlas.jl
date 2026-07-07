@@ -440,6 +440,11 @@ export predicts, predicted_by, bounds_on, cited_by, delegations, implementations
 export coherence_report,
     coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
 
+# Availability search (the "use" face): "does the atlas have X?" → yes/no + JSONL, by model /
+# quantity / bc / regime. Reads REGISTRY + the edge stores, so it comes after they are populated.
+include("core/query.jl")
+export search, search_jsonl, available, relations, relations_jsonl, gaps, gaps_jsonl
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Precompile workload — bake the hot `fetch` specializations into the package
 # image so the test suite (and downstream callers) do not re-pay type inference

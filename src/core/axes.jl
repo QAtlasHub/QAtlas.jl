@@ -52,13 +52,18 @@ function _fetch_declares_beta(M::Type, Q::Type, BC::Type)
     return false
 end
 
-# ── quantity family: a TOTAL, regular classification of every quantity into a
-# super-family. This is the regular facet that makes the "use" search complete —
-# correlations / structure factors / magnetization / susceptibility each get a
-# family, so no quantity class can silently fall through the coarse `regime` facet
-# (the design defect the availability review surfaced). Defined on the abstract
-# families in quantities.jl (all loaded before this file, like `thermal_axis`);
-# `:other` is the honest catch-all that keeps the classification total.
+"""
+    quantity_family(Q::Type) -> Symbol
+
+The quantity's super-family — a TOTAL, regular classification into one of
+`:correlation`, `:structure_factor`, `:magnetization`, `:susceptibility`,
+`:thermodynamic`, `:gap`, `:entanglement`, `:velocity`, or `:other`. The `family`
+search facet is keyed on this; because the classification is total (with `:other`
+the honest catch-all), no quantity class can silently fall through the coarse
+`regime` facet — the design defect the availability review surfaced. Defined on
+the abstract quantity families in `quantities.jl` (all loaded before this file,
+like `thermal_axis`), so a concrete quantity dispatches to its family's method.
+"""
 quantity_family(::Type) = :other
 quantity_family(::Type{<:AbstractTwoPointCorrelation}) = :correlation
 quantity_family(::Type{<:AbstractStructureFactor}) = :structure_factor

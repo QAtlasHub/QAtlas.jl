@@ -9,12 +9,12 @@ jobs:
   format-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: julia-actions/setup-julia@v3
         with:
           version: '1'
       - name: Install JuliaFormatter
-        run: julia -e 'using Pkg; Pkg.add(name="JuliaFormatter", version="2"); using JuliaFormatter; @info "JuliaFormatter $(pkgversion(JuliaFormatter))"'
+        run: julia -e 'using Pkg; Pkg.add("JuliaFormatter"); using JuliaFormatter; @info "JuliaFormatter $(pkgversion(JuliaFormatter))"'
       - name: Check formatting
         run: |
           julia -e '

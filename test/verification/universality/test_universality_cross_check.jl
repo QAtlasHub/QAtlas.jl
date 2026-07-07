@@ -519,8 +519,7 @@ end
     x̄ = sum(invN) / n
     ȳ = sum(corrN) / n
     c1 =
-        sum((invN[i] - x̄) * (corrN[i] - ȳ) for i in 1:n) /
-        sum((invN[i] - x̄)^2 for i in 1:n)
+        sum((invN[i] - x̄) * (corrN[i] - ȳ) for i in 1:n) / sum((invN[i] - x̄)^2 for i in 1:n)
     c0 = ȳ - c1 * x̄
     @test isapprox(c0, corrN[end]; atol=5e-4)
     @test c1 < 0  # corrN approaches its limit from below at OBC critical TFIM

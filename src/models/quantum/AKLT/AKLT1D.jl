@@ -452,7 +452,7 @@ fetches for finite gap-suppressed values, or HeisenbergS1.jl's
 ED-based path for finite-N numerical references.
 """
 function fetch(::AKLT1D, ::SusceptibilityZZ, ::OBC; beta::Real, kwargs...)
-    throw(
+    return throw(
         DomainError(
             beta,
             "AKLT1D OBC SusceptibilityZZ diverges at β = Inf (edge-mode Curie tail; " *

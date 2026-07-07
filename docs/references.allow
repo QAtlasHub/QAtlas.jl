@@ -1,0 +1,15 @@
+# docs/references.allow — explicit exceptions for the reference check.
+#
+# The Verify references CI (.github/workflows/VerifyReferences.yml) FAILS on any
+# entry in docs/references.bib whose DOI / arXiv id does not resolve on Crossref
+# or arXiv (status `illegal` or `absent`). If a reference is genuinely real but
+# unresolvable — a brand-new paper not yet indexed, a dataset DOI Crossref does
+# not cover, a preprint with no DOI — list it here to acknowledge it by hand.
+# Anything NOT listed here stays a hard failure, so a fabricated citation can
+# never slip through unnoticed.
+#
+# One DOI, arXiv id, OR bibkey per line. `#` starts a comment — put the REASON
+# there so every exception is self-documenting. Matching is case-insensitive.
+# Examples (delete these — they are illustration only):
+#   # 10.1234/brand-new.2026    # accepted 2026-07-06, not yet in Crossref (arXiv:2607.xxxxx)
+#   # SmithUnpublished2026      # private communication, no DOI

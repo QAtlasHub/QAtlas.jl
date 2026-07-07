@@ -84,6 +84,7 @@ include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
+include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/reduces.jl")   # model -> model reductions (limit / special point)
@@ -442,6 +443,13 @@ include("core/coherence.jl")
 export predicts, predicted_by, bounds_on, cited_by, delegations, implementations_of
 export coherence_report,
     coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
+
+# Availability search (the "use" face): "does the atlas have X?" → yes/no + JSONL, by model /
+# quantity / bc / regime. Reads REGISTRY + the edge stores, so it comes after they are populated.
+include("core/query.jl")
+export search, search_jsonl, available, relations, relations_jsonl, gaps, gaps_jsonl
+export describe, describe_jsonl, realizing, realizing_jsonl
+export query_schema, query_schema_jsonl, quantity_family, Facet  # self-describing query + family facet
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Precompile workload — bake the hot `fetch` specializations into the package

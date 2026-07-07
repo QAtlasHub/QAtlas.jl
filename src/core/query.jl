@@ -34,10 +34,19 @@ const REGIMES = (
 """
     Hit
 
-One available (model, quantity, bc) hub, with its provenance: `method` (how the value is obtained),
-`status`, `reliability`, `references`, and `cross_checked` — `true` when the model participates in
-an executable cross-check (a duality, limit, or LSM-symmetry edge), the QAtlas-specific trust signal
-(model-level in this version).
+One available (model, quantity, bc) hub, with its provenance AND how to obtain the
+value. Provenance: `method`, `status`, `reliability`, `references`, `cross_checked`
+(`true` when the model is in an executable cross-check — a duality, limit, or
+LSM-symmetry edge — the QAtlas trust signal, model-level here). Actionability:
+
+- `params` — the fetch's declared keyword arguments (`i`, `j`, `beta`, `N`, `k`,
+  couplings, …): the call signature, so a hit says not just *available* but *how to
+  call it*. A fetch that declares `N`/`finite_N` is evaluable at any finite size
+  (the OBC/PBC hubs are finite-N closed forms; `Infinite` is the thermodynamic
+  limit) — the atlas has no separate `N` dimension, so this is where size shows up.
+- `notes` / `valid_domain` — the closed form's remark and where it holds (from the
+  `Implementation` row), so a consumer can match its numerics to the functional
+  form / validity range. `valid_domain` is `""` when unset.
 """
 struct Hit
     model::String
@@ -50,6 +59,9 @@ struct Hit
     dynamical::Symbol     # orthogonal axis: :static / :transport / :dynamic / :unknown
     cross_checked::Bool
     references::Vector{String}
+    params::Vector{String}  # fetch's declared kwargs — the call signature (how to obtain it)
+    notes::String           # the Implementation row's note (functional form / caveats)
+    valid_domain::String    # where the value holds (:approx rows); "" when unset
 end
 
 """
@@ -97,6 +109,24 @@ function _cross_checked_models()
         push!(s, p.model)
     end
     return s
+end
+
+# The fetch's declared keyword arguments for a (model, quantity, bc) hub — the call
+# signature a consumer needs (i/j sites, beta, N/finite_N, k, couplings…). Same
+# introspection `axes.jl` uses; the `kwargs...` slurp is dropped. Best-effort: an
+# empty vector if no method resolves.
+function _fetch_params(M::Type, Q::Type, BC::Type)
+    ps = String[]
+    try
+        for mth in methods(fetch, Tuple{M,Q,BC})
+            for kw in Base.kwarg_decl(mth)
+                kw === :kwargs && continue
+                push!(ps, String(kw))
+            end
+        end
+    catch
+    end
+    return sort(unique(ps))
 end
 
 """
@@ -162,6 +192,9 @@ function search(;
                 impl.dynamical,
                 xc,
                 copy(impl.references),
+                _fetch_params(impl.model, impl.quantity, impl.bc),
+                impl.notes,
+                impl.valid_domain === nothing ? "" : impl.valid_domain,
             ),
         )
     end
@@ -437,6 +470,12 @@ function _json_hit(h::Hit)
         h.cross_checked,
         ",\"references\":",
         _jarr(h.references),
+        ",\"params\":",
+        _jarr(h.params),
+        ",\"notes\":",
+        _jstr(h.notes),
+        ",\"valid_domain\":",
+        _jstr(h.valid_domain),
         "}",
     )
 end
@@ -457,7 +496,8 @@ end
 Stream a [`search`](@ref) as JSONL. The first line is a summary —
 `{"available":…,"query":…,"count":N,"verified":K}` — so a consumer can branch on it without reading
 the rest; each following line is one hit object (model, quantity, bc, status, reliability,
-cross_checked, references). `verified` counts hits that are cross-checked or exact/universal.
+cross_checked, references, and `params`/`notes`/`valid_domain` — the fetch call signature and
+where the value holds). `verified` counts hits that are cross-checked or exact/universal.
 """
 function search_jsonl(io::IO=stdout; kwargs...)
     r = search(; kwargs...)

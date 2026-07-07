@@ -55,6 +55,36 @@ end
     @test occursin("\"thermal\":", String(take!(io)))        # axes surface in the JSONL hit
 end
 
+@testset "query: hit carries the fetch call signature + notes/valid_domain" begin
+    r = QAtlas.search(; model=:TFIM)
+    @test r.available
+    # every hit now carries the three actionability fields, well-typed
+    @test all(h -> h.params isa Vector{String}, r.hits)
+    @test all(h -> h.notes isa String && h.valid_domain isa String, r.hits)
+    @test all(h -> h.params == sort(unique(h.params)), r.hits)   # sorted-unique, no `kwargs` slurp
+    @test all(h -> !("kwargs" in h.params), r.hits)
+    @test any(h -> !isempty(h.params), r.hits)                   # the call signature is exposed
+    @test any(h -> !isempty(h.notes), r.hits)                    # notes surface
+    # a finite-temperature quantity exposes its temperature kwarg → "how to call it"
+    sh = QAtlas.search(; model=:TFIM, quantity=:SpecificHeat)
+    @test sh.available
+    @test any(
+        h -> any(
+            p ->
+                occursin("beta", lowercase(p)) || p == "β" || lowercase(p) == "temperature",
+            h.params,
+        ),
+        sh.hits,
+    )
+    # JSONL surfaces the new fields (additive keys)
+    io = IOBuffer()
+    QAtlas.search_jsonl(io; model=:TFIM, quantity=:SpecificHeat)
+    s = String(take!(io))
+    @test occursin("\"params\":", s)
+    @test occursin("\"notes\":", s)
+    @test occursin("\"valid_domain\":", s)
+end
+
 @testset "query: fuzzy facet matching (case/underscore-insensitive)" begin
     @test QAtlas.available(; model=:tfim)                    # lowercase Symbol
     @test QAtlas.available(; quantity=:specific_heat)        # underscore vs SpecificHeat

@@ -85,6 +85,48 @@ end
     @test occursin("\"valid_domain\":", s)
 end
 
+@testset "query: family facet is total; regime no longer drops correlations" begin
+    # family is a TOTAL classification — every registered hub gets one
+    all_hits = QAtlas.search().hits
+    @test all(h -> h.family isa Symbol && h.family !== Symbol(""), all_hits)
+    # the family facet finds correlations — the class `regime` used to silently drop
+    corr = QAtlas.search(; family=:correlation)
+    @test corr.available && all(h -> h.family === :correlation, corr.hits)
+    @test all(h -> occursin("Correlation", h.quantity), corr.hits)
+    @test QAtlas.available(; model=:Heisenberg, family=:correlation)
+    # THE FIX: regime=:ground_state now surfaces T=0-accessible correlations
+    gs = QAtlas.search(; model=:Heisenberg1D, regime=:ground_state)
+    @test any(h -> occursin("Correlation", h.quantity), gs.hits)
+    # NO REGRESSION: the previous ground_state members are still ground_state
+    @test QAtlas.available(; quantity=:MassGap, regime=:ground_state)                   # <:AbstractGap
+    @test QAtlas.available(; quantity=:GroundStateEnergyDensity, regime=:ground_state)  # thermal=:unknown, kept explicitly
+    # family surfaces in the JSONL hit
+    io = IOBuffer()
+    QAtlas.search_jsonl(io; model=:Heisenberg1D, family=:correlation)
+    @test occursin("\"family\":\"correlation\"", String(take!(io)))
+end
+
+@testset "query: query_schema — the query convention is self-describing" begin
+    sch = QAtlas.query_schema()
+    @test sch isa Vector{QAtlas.Facet}
+    names = [f.name for f in sch]
+    @test all(in(names), (:model, :quantity, :bc, :family, :thermal, :dynamical, :regime))
+    # enumerated facets carry their valid values, drawn live from the registry
+    fam = only(f for f in sch if f.name === :family)
+    @test fam.kind === :structural && "correlation" in fam.values
+    th = only(f for f in sch if f.name === :thermal)
+    @test th.kind === :axis && Set(th.values) == Set(["zero", "finite", "both", "unknown"])
+    bcf = only(f for f in sch if f.name === :bc)
+    @test "OBC" in bcf.values && "Infinite" in bcf.values
+    # JSONL shape: header + one facet per line
+    io = IOBuffer()
+    QAtlas.query_schema_jsonl(io)
+    lines = split(strip(String(take!(io))), '\n')
+    @test startswith(lines[1], "{\"facets\":")
+    @test length(lines) == length(sch) + 1
+    @test all(l -> occursin("\"name\":", l) && occursin("\"values\":", l), lines[2:end])
+end
+
 @testset "query: fuzzy facet matching (case/underscore-insensitive)" begin
     @test QAtlas.available(; model=:tfim)                    # lowercase Symbol
     @test QAtlas.available(; quantity=:specific_heat)        # underscore vs SpecificHeat

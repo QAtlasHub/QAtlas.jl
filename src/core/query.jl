@@ -16,26 +16,44 @@
 """
     REGIMES
 
-Coarse capability facets, each a predicate over a registry row. Declarative and extensible — add a
-regime by adding a predicate. `:dynamics` is intentionally sparse today (QAtlas has velocities but
-no spectral / real-time data yet); a search for it honestly reports the gap.
+Coarse capability facets, kept as a convenience over the canonical query axes
+(`family` × `thermal` × `dynamical` × `status`). Each predicate is now **derived
+from those axes** rather than a hand-picked quantity list, so a whole quantity
+class can no longer silently fall through: the thermal regimes are keyed on the
+`thermal` axis (so `:ground_state` surfaces T=0-accessible correlations,
+magnetization, … — not only gaps/entanglement), and each predicate is a superset
+of its previous hand-list (no regression). `:dynamics` stays sparse (velocities are
+`:transport`; genuine spectral/real-time data would be `:dynamic`); a search for it
+honestly reports the gap. For a rigorous query, prefer the axes directly.
 """
 const REGIMES = (
     ground_state=impl -> (
+        impl.thermal === :zero ||
+        impl.thermal === :both ||
         impl.quantity <: AbstractGap ||
         impl.quantity <: AbstractEntanglementMeasure ||
         impl.quantity === GroundStateEnergyDensity
     ),
-    finite_temperature=impl -> impl.quantity <: AbstractThermalPotential,
+    finite_temperature=impl -> (
+        impl.thermal === :finite ||
+        impl.thermal === :both ||
+        impl.quantity <: AbstractThermalPotential
+    ),
     universality=impl -> impl.status === :universal,
-    dynamics=impl -> impl.quantity <: AbstractVelocity,
+    dynamics=impl -> (
+        impl.dynamical === :dynamic ||
+        impl.dynamical === :transport ||
+        impl.quantity <: AbstractVelocity
+    ),
 )
 
 """
     Hit
 
-One available (model, quantity, bc) hub, with its provenance AND how to obtain the
-value. Provenance: `method`, `status`, `reliability`, `references`, `cross_checked`
+One available (model, quantity, bc) hub, with its `family` (the quantity's
+super-family — `:correlation`, `:magnetization`, …; total, so it never silently
+drops a class), its provenance, AND how to obtain the value. Provenance: `method`,
+`status`, `reliability`, `references`, `cross_checked`
 (`true` when the model is in an executable cross-check — a duality, limit, or
 LSM-symmetry edge — the QAtlas trust signal, model-level here). Actionability:
 
@@ -52,6 +70,7 @@ struct Hit
     model::String
     quantity::String
     bc::String
+    family::Symbol        # quantity super-family (:correlation, :magnetization, …); TOTAL
     method::Symbol        # how the value is obtained (:bdg, :bethe_ansatz, :analytic, …)
     status::Symbol        # :exact / :bound / :approx / :universal
     reliability::Symbol   # :high / :medium / :low
@@ -137,8 +156,11 @@ given facets are AND-combined.
 
 - `model`/`quantity`/`bc` — a Type (exact, or a family like `AbstractGap`) or a Symbol/String
   (fuzzy: case- and underscore-insensitive substring on the name).
+- `family` — the quantity super-family (`:correlation`, `:structure_factor`, `:magnetization`,
+  `:susceptibility`, `:thermodynamic`, `:gap`, `:entanglement`, `:velocity`, `:other`), exact
+  Symbol match. TOTAL: every quantity has one, so no class silently drops (unlike `regime`).
 - `regime` — one of `keys(REGIMES)` (`:ground_state`, `:finite_temperature`, `:dynamics`,
-  `:universality`).
+  `:universality`), a convenience derived from the axes; prefer `family`/`thermal`/`dynamical`.
 - `status` (`:exact`/`:bound`/`:approx`/`:universal`) and `reliability` (`:high`/`:medium`/`:low`)
   — exact Symbol match.
 - `method` — a Symbol/String, fuzzy (so `:bethe` finds `:bethe_ansatz`).
@@ -152,6 +174,7 @@ function search(;
     model=nothing,
     quantity=nothing,
     bc=nothing,
+    family=nothing,
     regime=nothing,
     status=nothing,
     reliability=nothing,
@@ -170,6 +193,7 @@ function search(;
         _match(model, impl.model) || continue
         _match(quantity, impl.quantity) || continue
         _match(bc, impl.bc) || continue
+        family === nothing || quantity_family(impl.quantity) === family || continue
         regime === nothing || REGIMES[regime](impl) || continue
         status === nothing || impl.status === status || continue
         reliability === nothing || impl.reliability === reliability || continue
@@ -185,6 +209,7 @@ function search(;
                 _label(impl.model),
                 _label(impl.quantity),
                 _label(impl.bc),
+                quantity_family(impl.quantity),
                 impl.method,
                 impl.status,
                 impl.reliability,
@@ -204,6 +229,7 @@ function search(;
             model,
             quantity,
             bc,
+            family,
             regime,
             status,
             reliability,
@@ -456,6 +482,8 @@ function _json_hit(h::Hit)
         _jstr(h.quantity),
         ",\"bc\":",
         _jstr(h.bc),
+        ",\"family\":",
+        _jstr(h.family),
         ",\"method\":",
         _jstr(h.method),
         ",\"status\":",
@@ -684,3 +712,79 @@ function realizing_jsonl(io::IO, class)
     return nothing
 end
 realizing_jsonl(class) = realizing_jsonl(stdout, class)
+
+# ---- query_schema: the query convention, self-describing (discover what you can ask) ----
+
+"""
+    Facet
+
+One searchable facet of [`search`](@ref): its `name`, `kind`
+(`:structural`/`:axis`/`:provenance`/`:derived`), the `match` rule
+(`:type_or_fuzzy`/`:enum`/`:fuzzy`/`:bool`), and the enumerated `values` where the
+domain is finite (`String[]` when open, e.g. free-text model/quantity names).
+"""
+struct Facet
+    name::Symbol
+    kind::Symbol
+    match::Symbol
+    values::Vector{String}
+end
+
+"""
+    query_schema() -> Vector{Facet}
+
+The self-describing catalog of [`search`](@ref)'s facets — every facet, its kind,
+its match rule, and (where finite) its valid values, drawn live from the registry
+(the registered `bc` / `family` / `method` / `reliability` sets) and the fixed
+axis / status vocabularies. Lets a consumer (an LLM, a UI) discover *what it can
+ask, and with which values*, without reading source — the anti-hallucination
+principle applied to the query layer itself. See [`query_schema_jsonl`](@ref).
+"""
+function query_schema()
+    reg_vals(f) = sort(unique(String(f(i)) for i in REGISTRY))
+    return Facet[
+        Facet(:model, :structural, :type_or_fuzzy, String[]),
+        Facet(:quantity, :structural, :type_or_fuzzy, String[]),
+        Facet(
+            :bc, :structural, :type_or_fuzzy, sort(unique(_label(i.bc) for i in REGISTRY))
+        ),
+        Facet(:family, :structural, :enum, reg_vals(i -> quantity_family(i.quantity))),
+        Facet(:thermal, :axis, :enum, ["zero", "finite", "both", "unknown"]),
+        Facet(:dynamical, :axis, :enum, ["static", "transport", "dynamic", "unknown"]),
+        Facet(:regime, :derived, :enum, sort(String.(collect(keys(REGIMES))))),
+        Facet(:status, :provenance, :enum, sort(String.(collect(STATUS_VALUES)))),
+        Facet(:reliability, :provenance, :enum, reg_vals(i -> i.reliability)),
+        Facet(:method, :provenance, :fuzzy, reg_vals(i -> i.method)),
+        Facet(:reference, :provenance, :fuzzy, String[]),
+        Facet(:cross_checked, :provenance, :bool, ["true", "false"]),
+    ]
+end
+
+function _json_facet(f::Facet)
+    return string(
+        "{\"name\":",
+        _jstr(f.name),
+        ",\"kind\":",
+        _jstr(f.kind),
+        ",\"match\":",
+        _jstr(f.match),
+        ",\"values\":",
+        _jarr(f.values),
+        "}",
+    )
+end
+
+"""
+    query_schema_jsonl([io=stdout]) -> nothing
+
+Stream [`query_schema`](@ref) as JSONL: a `{"facets":N}` header then one Facet
+object per line (`name`, `kind`, `match`, `values`).
+"""
+function query_schema_jsonl(io::IO=stdout)
+    fs = query_schema()
+    print(io, "{\"facets\":", length(fs), "}\n")
+    for f in fs
+        print(io, _json_facet(f), "\n")
+    end
+    return nothing
+end

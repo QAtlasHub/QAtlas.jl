@@ -446,6 +446,7 @@ export coherence_report,
 include("core/query.jl")
 export search, search_jsonl, available, relations, relations_jsonl, gaps, gaps_jsonl
 export describe, describe_jsonl, realizing, realizing_jsonl
+export query_schema, query_schema_jsonl, quantity_family, Facet  # self-describing query + family facet
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Precompile workload — bake the hot `fetch` specializations into the package

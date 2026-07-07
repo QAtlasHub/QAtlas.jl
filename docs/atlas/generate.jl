@@ -618,7 +618,11 @@ function render_model_index(model_name::AbstractString)
         get(levcounts, AtlasInventory.UNIVERSALITY_CORROBORATED, 0),
         " |",
     )
-    P("| 🟢 corroborated-at-p | ", get(levcounts, AtlasInventory.CORROBORATED_AT_P, 0), " |")
+    P(
+        "| 🟢 corroborated-at-p | ",
+        get(levcounts, AtlasInventory.CORROBORATED_AT_P, 0),
+        " |",
+    )
     P("| 🔵 coherent | ", get(levcounts, AtlasInventory.COHERENT, 0), " |")
     P("| ⚪ cited-only | ", get(levcounts, AtlasInventory.CITED_ONLY, 0), " |")
     P(
@@ -855,7 +859,9 @@ function render_model_list()
         "name to drill into its `Quantity × BC` matrix.",
     )
     P("")
-    P("| Model | Universality | #K | Methods | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED | Regimes (top 3) |")
+    P(
+        "| Model | Universality | #K | Methods | 🟣 | 🟢 | 🔵 | ⚪ | 🟠 | ED | Regimes (top 3) |",
+    )
     P("|---|---|---|---|---|---|---|---|---|---|---|")
     for m in models
         hs = sort(filter(h -> modelof(h) == m, claimed))

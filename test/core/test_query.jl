@@ -37,6 +37,24 @@ end
     @test occursin("\"method\":", String(take!(io)))        # method in the JSONL hit
 end
 
+@testset "query: orthogonal axes — thermal × dynamical (captured at @register)" begin
+    ft = QAtlas.search(; thermal=:finite)
+    @test ft.available
+    @test all(h -> h.thermal in (:finite, :both), ft.hits)  # :both spans, matches :finite query
+    @test QAtlas.available(; thermal=:zero)
+    tr = QAtlas.search(; dynamical=:transport)               # velocities are :transport, not :dynamic
+    @test tr.available
+    @test all(h -> h.dynamical === :transport, tr.hits)
+    # THE FIX: real dynamics (:dynamic) is honestly absent → no more velocity overclaim
+    @test !QAtlas.available(; dynamical=:dynamic)
+    @test !QAtlas.available(; thermal=:finite, dynamical=:dynamic)  # the conjunction, honestly empty
+    en = QAtlas.search(; quantity=QAtlas.Energy)             # Energy is :both (T=0 or thermal)
+    @test en.available && any(h -> h.thermal === :both, en.hits)
+    io = IOBuffer()
+    QAtlas.search_jsonl(io; thermal=:finite)
+    @test occursin("\"thermal\":", String(take!(io)))        # axes surface in the JSONL hit
+end
+
 @testset "query: fuzzy facet matching (case/underscore-insensitive)" begin
     @test QAtlas.available(; model=:tfim)                    # lowercase Symbol
     @test QAtlas.available(; quantity=:specific_heat)        # underscore vs SpecificHeat

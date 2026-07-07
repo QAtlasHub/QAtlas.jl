@@ -59,7 +59,7 @@ end
 # Generic fallback: unknown scheme (or a quantity without an :htse definition,
 # e.g. SusceptibilityZZ — its HTSE needs separate magnetisation cumulants).
 function _aklt_thermo_infinite_scheme(::AKLT1D, q, ::Val{S}; beta) where {S}
-    throw(
+    return throw(
         ArgumentError(
             "AKLT1D $(typeof(q)) Infinite: no scheme :$(S) (only :canonical + :htse)"
         ),

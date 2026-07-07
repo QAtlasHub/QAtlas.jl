@@ -76,7 +76,7 @@ function fetch(::Universality{:RMT}, ::MeanRatio; β::Int, kwargs...)
     elseif β == 4
         return 0.6744
     end
-    throw(DomainError(β, "Universality(:RMT)/MeanRatio: β must be in {1, 2, 4}"))
+    return throw(DomainError(β, "Universality(:RMT)/MeanRatio: β must be in {1, 2, 4}"))
 end
 
 # ─── Tracy-Widom F_β(x) — tabulated + tail asymptotics ───────────────────────

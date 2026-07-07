@@ -300,7 +300,7 @@ function _bc_instance(::Type{BC}; finite_N::Int) where {BC<:BoundaryCondition}
     BC === Infinite && return Infinite()
     BC === OBC && return OBC(finite_N)
     BC === PBC && return PBC(; N=finite_N)
-    throw(ArgumentError("_bc_instance: unsupported boundary-condition type $(BC)"))
+    return throw(ArgumentError("_bc_instance: unsupported boundary-condition type $(BC)"))
 end
 
 """

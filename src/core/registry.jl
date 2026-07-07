@@ -53,6 +53,8 @@ struct Implementation
     tested_in::Union{String,Nothing}
     references::Vector{String}
     notes::String
+    thermal::Symbol                      # orthogonal axis: :zero / :finite / :both / :unknown
+    dynamical::Symbol                    # orthogonal axis: :static / :transport / :dynamic / :unknown
 end
 
 """
@@ -148,6 +150,8 @@ function register!(
     tested_in::Union{String,Nothing}=nothing,
     references::AbstractVector{<:AbstractString}=String[],
     notes::AbstractString="",
+    thermal::Union{Symbol,Nothing}=nothing,
+    dynamical::Union{Symbol,Nothing}=nothing,
 )
     status in STATUS_VALUES || throw(
         ArgumentError("register!: status must be one of $(STATUS_VALUES); got :$(status)"),
@@ -228,6 +232,8 @@ function register!(
             tested_in,
             String[r for r in references],
             String(notes),
+            _derive_thermal(thermal, model_T, quantity_T, bc_T),
+            _derive_dynamical(dynamical, quantity_T),
         ),
     )
     return nothing

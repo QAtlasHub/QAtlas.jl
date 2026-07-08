@@ -45,14 +45,36 @@ end
     tr = QAtlas.search(; dynamical=:transport)               # velocities are :transport, not :dynamic
     @test tr.available
     @test all(h -> h.dynamical === :transport, tr.hits)
-    # THE FIX: real dynamics (:dynamic) is honestly absent → no more velocity overclaim
-    @test !QAtlas.available(; dynamical=:dynamic)
-    @test !QAtlas.available(; thermal=:finite, dynamical=:dynamic)  # the conjunction, honestly empty
+    # per-scheme tagging: real-time correlations / quench observables ARE :dynamic now
+    dyn = QAtlas.search(; dynamical=:dynamic)
+    @test dyn.available && all(h -> h.dynamical === :dynamic, dyn.hits)
+    @test QAtlas.available(; thermal=:finite, dynamical=:dynamic)   # dynamic correlations are thermal=:both
     en = QAtlas.search(; quantity=QAtlas.Energy)             # Energy is :both (T=0 or thermal)
     @test en.available && any(h -> h.thermal === :both, en.hits)
     io = IOBuffer()
     QAtlas.search_jsonl(io; thermal=:finite)
     @test occursin("\"thermal\":", String(take!(io)))        # axes surface in the JSONL hit
+end
+
+@testset "query: per-scheme dynamical tagging (dynamic correlations / quench)" begin
+    da = QAtlas.dynamical_axis
+    @test da(QAtlas.ZZCorrelation{:dynamic}) === :dynamic
+    @test da(QAtlas.ZZCorrelation{:lightcone}) === :dynamic
+    @test da(QAtlas.ZZCorrelation{:static}) === :static
+    @test da(QAtlas.ZZCorrelation{:connected}) === :static
+    @test da(QAtlas.VonNeumannEntropy{:quench}) === :dynamic
+    @test da(QAtlas.VonNeumannEntropy{:equilibrium}) === :static
+    @test da(QAtlas.LoschmidtEcho{:amplitude}) === :dynamic
+    # search now surfaces the dynamic hubs; equilibrium schemes stay out
+    dyn = QAtlas.search(; dynamical=:dynamic)
+    @test dyn.available
+    @test any(h -> occursin("Correlation", h.quantity), dyn.hits)   # e.g. XXCorrelation{:dynamic}
+    @test !any(
+        h -> endswith(h.quantity, "{:static}") || endswith(h.quantity, "{:connected}"),
+        dyn.hits,
+    )
+    # the axis-derived `regime=:dynamics` convenience now surfaces them too
+    @test QAtlas.available(; regime=:dynamics)
 end
 
 @testset "query: hit carries the fetch call signature + notes/valid_domain" begin

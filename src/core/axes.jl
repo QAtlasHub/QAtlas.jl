@@ -25,11 +25,32 @@ thermal_axis(::Type{<:AbstractStructureFactor}) = :both
 
 # ── dynamical axis: :static / :transport / :dynamic / :unknown ──
 # QAtlas is overwhelmingly equilibrium, so :static is the honest positive default; the few genuinely
-# non-static observables are tagged individually. A velocity is :transport, NOT :dynamic — so
-# `search(dynamical=:dynamic)` honestly returns empty until real spectral/real-time data exists
-# (e.g. a future dynamical critical exponent or A(ω) would be tagged :dynamic here).
+# non-static observables are tagged individually. A velocity is :transport, NOT :dynamic.
+# Real-time / non-equilibrium SCHEMES (the type parameter of a scheme-tagged quantity) make a hub
+# :dynamic — so a `{:dynamic}`/`{:lightcone}` correlation, a `{:quench}` entanglement/magnetization,
+# or a Loschmidt echo is honestly surfaced by `search(dynamical=:dynamic)` (the availability-review
+# follow-up). Equilibrium schemes (:static / :connected / :equilibrium) stay :static; extend the set
+# by adding a scheme to `_dynamic_scheme`.
 dynamical_axis(::Type) = :static
 dynamical_axis(::Type{<:AbstractVelocity}) = :transport
+
+_dynamic_scheme(s) = s in (:dynamic, :lightcone, :quench)
+function dynamical_axis(::Type{<:XXCorrelation{M}}) where {M}
+    return _dynamic_scheme(M) ? :dynamic : :static
+end
+function dynamical_axis(::Type{<:YYCorrelation{M}}) where {M}
+    return _dynamic_scheme(M) ? :dynamic : :static
+end
+function dynamical_axis(::Type{<:ZZCorrelation{M}}) where {M}
+    return _dynamic_scheme(M) ? :dynamic : :static
+end
+function dynamical_axis(::Type{<:VonNeumannEntropy{M}}) where {M}
+    return _dynamic_scheme(M) ? :dynamic : :static
+end
+function dynamical_axis(::Type{<:MagnetizationXLocal{M}}) where {M}
+    return _dynamic_scheme(M) ? :dynamic : :static
+end
+dynamical_axis(::Type{<:LoschmidtEcho}) = :dynamic  # Loschmidt echo is a real-time quench quantity
 
 # ── @register-time derivation: explicit > quantity trait > fetch-introspection > :unknown ──
 function _derive_thermal(explicit, M::Type, Q::Type, BC::Type)

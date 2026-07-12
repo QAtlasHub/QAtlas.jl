@@ -395,7 +395,7 @@ papers that closed-form value derives from and is checked against*.
 These are exactly the keys rendered on the model's documentation page and
 in the global [Reference List](@ref); resolve a key to its full entry
 there (or in
-[`docs/references.bib`](https://github.com/sotashimozono/QAtlas.jl/blob/main/docs/references.bib)).
+[`docs/references.bib`](https://github.com/QAtlasHub/QAtlas.jl/blob/main/docs/references.bib)).
 
 Arguments may be instances or types, mirroring
 [`implementation_status`](@ref). With fewer arguments the references are

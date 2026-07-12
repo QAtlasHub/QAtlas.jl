@@ -5,10 +5,10 @@
 > with heavy LLM assistance (Claude) and are being independently
 > reviewed. Found an error — a formula, a proof step, a citation, a
 > type signature? Please
-> [**open an issue**](https://github.com/sotashimozono/QAtlas.jl/issues/new?labels=docs&title=%5Bdocs%5D%20error%20report)
+> [**open an issue**](https://github.com/QAtlasHub/QAtlas.jl/issues/new?labels=docs&title=%5Bdocs%5D%20error%20report)
 > or a PR. Recent review cycles have already caught one flagship bug
 > (E₈ mass ratios `m₇`, `m₈` were 2× the literature value, fixed in
-> [PR #83](https://github.com/sotashimozono/QAtlas.jl/pull/83));
+> [PR #83](https://github.com/QAtlasHub/QAtlas.jl/pull/83));
 > more eyes keep making the package better.
 
 [![docs: stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://codes.sota-shimozono.com/QAtlas.jl/stable/)
@@ -17,8 +17,8 @@
 [![Code Style: Blue](https://img.shields.io/badge/Code%20Style-Blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
 
-[![codecov](https://codecov.io/gh/sotashimozono/QAtlas.jl/graph/badge.svg?token=dnvvwd7DVo)](https://codecov.io/gh/sotashimozono/QAtlas.jl)
-[![Build Status](https://github.com/sotashimozono/QAtlas.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/sotashimozono/QAtlas.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/QAtlasHub/QAtlas.jl/graph/badge.svg?token=dnvvwd7DVo)](https://codecov.io/gh/QAtlasHub/QAtlas.jl)
+[![Build Status](https://github.com/QAtlasHub/QAtlas.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/QAtlasHub/QAtlas.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **QAtlas** (QUAntum Reference Table for Exact Tests) is a Julia

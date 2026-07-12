@@ -12,7 +12,7 @@ is the universality class itself, from which the central charge is
 read out via `fetch(Universality{C}(), CentralCharge())`.
 
 This page documents the *universality* dispatch added in
-[#149](https://github.com/sotashimozono/QAtlas.jl/issues/149). The
+[#149](https://github.com/QAtlasHub/QAtlas.jl/issues/149). The
 rigorous twist-operator derivation of the ``c/3`` vs ``c/6`` prefactors
 lives separately in
 [`docs/src/calc/calabrese-cardy-obc-vs-pbc.md`](../calc/calabrese-cardy-obc-vs-pbc.md).

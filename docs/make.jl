@@ -154,7 +154,7 @@ makedocs(;
 
 deploydocs(;
     versions=["stable", "dev"],
-    repo="github.com/sotashimozono/QAtlas.jl.git",
+    repo="github.com/QAtlasHub/QAtlas.jl.git",
     devbranch="main",
     push_preview=true,
 )

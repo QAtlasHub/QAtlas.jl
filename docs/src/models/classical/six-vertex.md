@@ -173,7 +173,7 @@ These are thin wrappers around `SixVertex(; a, b, c)`.
 ## Verification
 
 The standalone test
-[`test/standalone/test_six_vertex.jl`](https://github.com/sotashimozono/QAtlas.jl/blob/main/test/standalone/test_six_vertex.jl)
+[`test/standalone/test_six_vertex.jl`](https://github.com/QAtlasHub/QAtlas.jl/blob/main/test/standalone/test_six_vertex.jl)
 covers:
 
 - Square ice ``S/N = (3/2) \log(4/3) pprox 0.4315231087`` at

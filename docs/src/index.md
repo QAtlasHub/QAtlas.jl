@@ -52,5 +52,5 @@ Individual sections also show a small **report** link when you hover over
 an H2 or H3 heading. Use it to flag a specific derivation or formula that
 looks wrong.
 
-All reports go to [sotashimozono/QAtlas.jl Issues](https://github.com/sotashimozono/QAtlas.jl/issues).
+All reports go to [QAtlasHub/QAtlas.jl Issues](https://github.com/QAtlasHub/QAtlas.jl/issues).
 Corrections and pull requests are equally welcome.

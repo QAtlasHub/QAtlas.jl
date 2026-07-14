@@ -84,7 +84,7 @@ QAtlas.fetch(m, SpecificHeat(),   Infinite(); beta=1.0)    # → > 0
 
 For any Δ ≠ 0 these four calls emit a `@warn` and return `NaN` —
 the general-Δ thermal Bethe ansatz / NLIE is tracked in
-[issue #108](https://github.com/sotashimozono/QAtlas.jl/issues/108).
+[issue #108](https://github.com/QAtlasHub/QAtlas.jl/issues/108).
 
 ## v0.17 Highlights — Dense-ED Full Suite
 

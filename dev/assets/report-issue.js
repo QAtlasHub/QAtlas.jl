@@ -1,5 +1,5 @@
 (function () {
-    const REPO = "sotashimozono/QAtlas.jl";
+    const REPO = "QAtlasHub/QAtlas.jl";
 
     function issueUrl(title, body) {
         const params = new URLSearchParams({

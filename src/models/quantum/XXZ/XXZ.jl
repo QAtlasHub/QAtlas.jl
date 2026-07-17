@@ -236,10 +236,27 @@ METTS).
 Convention matches [`fetch(::TFIM, ::Energy, ::OBC)`](@ref): finite-size
 boundary conditions return total energy; only `Infinite()` returns per-site
 (`⟨H⟩/N`, the only finite quantity in the thermodynamic limit).
+
+## Grand-canonical (`mu`)
+
+With `mu ≠ 0` the average is taken in the **grand-canonical ensemble** of the
+shifted generator `Ĥ_μ = Ĥ - μ N̂`, `N̂ = Ŝᶻ_tot = Σᵢ Sᶻᵢ` (spin-½ units):
+
+    ⟨Ĥ⟩_{β,μ} = Tr(Ĥ exp(-β(Ĥ - μ N̂))) / Tr(exp(-β(Ĥ - μ N̂))).
+
+The measured operator is still the **unshifted** `Ĥ`; only the ensemble is
+reweighted (`XXZ1D` conserves `N̂`, so `μ` shifts the magnetisation sector).
+This is the independent reference for grand-canonical TPQ (gTPQ, Hyuga et al.,
+PRB 90, 121110(R) (2014)); pair it with `fetch(model, MagnetizationZ(), OBC(N);
+beta, mu)` for `⟨N̂⟩`. `mu = 0` (default) is the canonical energy above.
 """
-function fetch(model::XXZ1D, ::Energy{:total}, bc::OBC; beta::Real, kwargs...)
-    H = _xxz1d_hamiltonian_matrix(model, bc.N)
-    return _ed_thermal_energy(H, beta)
+function fetch(model::XXZ1D, ::Energy{:total}, bc::OBC; beta::Real, mu::Real=0.0, kwargs...)
+    if iszero(mu)
+        H = _xxz1d_hamiltonian_matrix(model, bc.N)
+        return _ed_thermal_energy(H, beta)
+    end
+    F = _xxz1d_grand_kernel(model, bc.N, beta, mu)
+    return _xxz1d_thermal_expectation_op(F, F.H)
 end
 
 # ── NMR relaxation exponent (critical Luttinger liquid) ───────────────

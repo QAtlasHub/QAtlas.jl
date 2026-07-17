@@ -64,6 +64,37 @@ function _xxz1d_thermal_kernel(model::XXZ1D, N::Int, β::Real)
 end
 
 """
+    _xxz1d_grand_kernel(model, N, beta, mu) -> NamedTuple
+
+Grand-canonical counterpart of [`_xxz1d_thermal_kernel`](@ref): diagonalise the
+**shifted generator** `Ĥ_μ = Ĥ - μ N̂` and return the Boltzmann weights of
+`Ĥ_μ`, so that
+
+    ⟨A⟩_{β,μ} = Σₙ wₙ ⟨n|A|n⟩,   wₙ ∝ exp(-β Eₙ^{(μ)}),  |n⟩, Eₙ^{(μ)} of Ĥ_μ.
+
+The conserved charge is the total spin-z `N̂ = Ŝᶻ_tot = Σᵢ Sᶻᵢ` in **spin-½
+units** (`Sᶻ = σᶻ/2`), so `μ` is the chemical potential / uniform longitudinal
+field conjugate to it; `Ĥ_μ = Ĥ - (μ/2) Σᵢ σᶻᵢ`. `XXZ1D` has U(1) `Ŝᶻ_tot`
+conservation, so `[Ĥ, N̂] = 0` and `μ` merely reweights the magnetisation
+sectors. Fields: `evals`/`evecs`/`weights` of `Ĥ_μ`, plus the **unshifted**
+`H` (= `Ĥ`) and `Sz` (= `N̂`) matrices so callers can read off `⟨Ĥ⟩` and
+`⟨N̂⟩` under the grand ensemble. `mu = 0` reproduces
+[`_xxz1d_thermal_kernel`](@ref) up to the returned extra fields.
+"""
+function _xxz1d_grand_kernel(model::XXZ1D, N::Int, β::Real, μ::Real)
+    H = _xxz1d_hamiltonian_matrix(model, N)
+    Sz = 0.5 .* _xxz1d_total_M(N, _σz)      # N̂ = Σ Sᶻ_i = (1/2) Σ σᶻ_i (spin-½ units)
+    Hμ = H .- μ .* Sz                        # grand-canonical generator Ĥ - μ N̂
+    F = eigen(Hermitian(Hμ))
+    evals = F.values
+    evecs = F.vectors
+    emin = minimum(evals)
+    ws = exp.(-β .* (evals .- emin))
+    weights = ws ./ sum(ws)
+    return (; evals=evals, evecs=evecs, weights=weights, H=H, Sz=Sz)
+end
+
+"""
     _xxz1d_thermal_expectation_op(F::NamedTuple, A::AbstractMatrix) -> Float64
 
 Compute `⟨A⟩_β = Σₙ wₙ ⟨n|A|n⟩` for a Hermitian operator `A`, using a
@@ -189,18 +220,30 @@ function fetch(model::XXZ1D, ::MagnetizationY, bc::OBC; beta::Real, kwargs...)
 end
 
 """
-    fetch(model::XXZ1D, ::MagnetizationZ, ::OBC; beta) -> Float64
+    fetch(model::XXZ1D, ::MagnetizationZ, ::OBC; beta, mu=0.0) -> Float64
 
-Per-site bulk magnetisation `⟨Σᵢ σᶻᵢ⟩_β / N`.  Σᵢ σᶻᵢ commutes with `H`
-(U(1) symmetry), so the thermal average is `Tr(M_z exp(-βH))/Z`; for
-even `N` and any real `β` the σᶻ-product basis groups symmetrically
-between sectors of opposite total Sᶻ and the average is zero.
-For odd `N` the unique smallest-Sᶻ-magnitude sector is half-filled
-±½ (still S_z = ±½), so the average is again zero up to round-off.
+Per-site bulk magnetisation `⟨Σᵢ σᶻᵢ⟩_β / N` (Pauli convention). Σᵢ σᶻᵢ
+commutes with `H` (U(1) symmetry), so the thermal average is
+`Tr(M_z exp(-βH))/Z`; at `mu = 0`, for even `N` and any real `β` the
+σᶻ-product basis groups symmetrically between sectors of opposite total Sᶻ and
+the average is zero (odd `N` likewise up to round-off).
+
+## Grand-canonical (`mu`)
+
+With `mu ≠ 0` the average is taken in the grand-canonical ensemble of
+`Ĥ_μ = Ĥ - μ N̂`, `N̂ = Ŝᶻ_tot = Σᵢ Sᶻᵢ` (spin-½ units) — a uniform
+longitudinal field that polarises the chain, so the magnetisation is non-zero
+and increases with `μ`. Returned in the **Pauli** convention `⟨Σᵢ σᶻᵢ⟩/N`; the
+total spin-z charge is `⟨N̂⟩ = (N/2)·` this value (`Sᶻ = σᶻ/2`). Reference for
+gTPQ's particle-number / magnetisation estimator.
 """
-function fetch(model::XXZ1D, ::MagnetizationZ, bc::OBC; beta::Real, kwargs...)
+function fetch(model::XXZ1D, ::MagnetizationZ, bc::OBC; beta::Real, mu::Real=0.0, kwargs...)
     N = _bc_size(bc, kwargs)
-    F = _xxz1d_thermal_kernel(model, N, beta)
+    F = if iszero(mu)
+        _xxz1d_thermal_kernel(model, N, beta)
+    else
+        _xxz1d_grand_kernel(model, N, beta, mu)
+    end
     Mz = _xxz1d_total_M(N, _σz)
     return _xxz1d_thermal_expectation_op(F, Mz) / N
 end

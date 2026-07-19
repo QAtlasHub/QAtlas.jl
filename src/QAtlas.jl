@@ -38,7 +38,8 @@ using AbstractQAtlas:
     NMRSpinRelaxationRate,
     TopologicalEntanglementEntropy,
     TopologicalInvariant,
-    UniversalityClass
+    UniversalityClass,
+    Magnetization
 # `native_energy_granularity` is extended by bare `native_energy_granularity(::M, ::BC) = …`
 # methods in model files, which `using` forbids ("must be explicitly imported to be
 # extended"); it must therefore come in via `import` (#734).
@@ -189,6 +190,7 @@ export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
+export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export Polarization
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal

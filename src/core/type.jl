@@ -1,16 +1,8 @@
 
-"""
-    AbstractQAtlasModel
-
-Abstract parent type for every QAtlas model.  Concrete subtypes carry
-their physics parameters as typed fields (e.g.
-`struct TFIM <: AbstractQAtlasModel; J::Float64; h::Float64; end`).
-
-The older `Model{S}(params::Dict)` phantom-typed wrapper is still an
-`AbstractQAtlasModel` (via the deprecated alias below) but new models
-must use concrete structs.
-"""
-abstract type AbstractQAtlasModel end
+# `AbstractQAtlasModel` (the root model type) is defined once in AbstractQAtlas
+# and imported + re-exported at the top of `QAtlas.jl` (#734).  The deprecation
+# surface below (`AbstractModel` alias, `Model{M}` wrapper) stays in QAtlas and
+# subtypes the shared root.
 
 """
     const AbstractModel = AbstractQAtlasModel
@@ -43,16 +35,10 @@ end
 # re-exported at the top of `QAtlas.jl` (#734).  Concrete-model `fetch` methods
 # dispatch on the same shared BC types, so behaviour is unchanged.
 
-"""
-    AbstractQuantity
-
-Abstract parent type for quantities.  New code defines concrete structs
-(e.g. `struct MagnetizationX <: AbstractQuantity end`) so dispatch is
-static and naming is explicit (axis, entropy variant, …).  The older
-`Quantity{S}` phantom-type wrapper is retained for legacy symbol-based
-dispatch; see the `Quantity(::Symbol)` shim below.
-"""
-abstract type AbstractQuantity end
+# `AbstractQuantity` (the root quantity type) is defined once in AbstractQAtlas
+# and imported + re-exported at the top of `QAtlas.jl` (#734).  The legacy
+# `Quantity{Q}` phantom wrapper below stays in QAtlas and subtypes the shared
+# root.
 
 """
     Quantity{Q} <: AbstractQuantity  (deprecated)

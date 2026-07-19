@@ -1,15 +1,17 @@
 name = "QAtlas"
 uuid = "2bd488d2-d3e6-46ee-afb3-5515643db0c7"
-version = "0.25.5"
+version = "0.25.6"
 authors = ["sota shimozono <shimozono-sota631@g.ecc.u-tokyo.ac.jp>"]
 
 [deps]
+AbstractQAtlas = "dcea2817-62f8-4a75-b498-1b50a9ed1e4d"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
 QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [compat]
+AbstractQAtlas = "0.3"
 Aqua = "0.8"
 ForwardDiff = "0.10, 1"
 KrylovKit = "0.8, 0.9, 0.10"

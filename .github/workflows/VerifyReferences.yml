@@ -1,109 +1,24 @@
 name: Verify references
-
-# Stage 2 of the two-stage citation check: every DOI / arXiv id in the
-# bibliography must resolve to real metadata (Crossref / arXiv) via `doiget
-# verify`, or the check FAILS. A reference that does not exist can never pass
-# silently — it either fails here or is explicitly excepted in
-# docs/references.allow (with a reason). The full result is posted as a sticky
-# PR comment AND the job summary, so a broken citation is visible without
-# opening the CI logs.
-#
-# Stage 1 (the offline half — every bibkey cited in src/ has an entry in the
-# bibliography, cited ⊆ bib) is the Julia test test/core/test_references_bib.jl,
-# which reads the same QATLAS_REFERENCES_BIB env var so the two never disagree
-# on which file is canonical.
-#
-# Gating (the authority is .github/scripts/verify_references_gate.py, not
-# doiget's own exit code):
-#   illegal | absent            -> FAIL   (malformed, or does not resolve)
-#   unreachable | unverifiable  -> warn   (transient network / 429 / id-less;
-#                                          not gated, so flakiness never blocks)
-#   a BROKEN id/key in references.allow -> downgraded to an acknowledged exception
-# Completeness: every entry in the bibliography must produce a verify record; a
-# truncated / aborted run (entries left unchecked) also fails.
-
+# Every DOI / arXiv id in the bibliography must resolve to real metadata
+# (Crossref / arXiv), or this check fails. Delegated to the shared
+# QAtlasHub/doiget-citation-check action (prebuilt doiget + gate + allow-list
+# + sticky PR comment) so the whole fleet runs one identical, canonical check.
 on:
   pull_request:
-    paths:
-      - "docs/references.bib"
-      - "docs/references.allow"
-      - ".github/workflows/VerifyReferences.yml"
-      - ".github/scripts/verify_references_gate.py"
+    paths: ['docs/references.bib', 'docs/references.allow', '.github/workflows/VerifyReferences.yml']
   push:
     branches: [main]
-    paths:
-      - "docs/references.bib"
-      - "docs/references.allow"
+    paths: ['docs/references.bib', 'docs/references.allow']
   workflow_dispatch:
-
 permissions:
   contents: read
-  pull-requests: write # post the sticky result comment
-
-# Single source of truth for the bibliography path. The Julia key-consistency
-# test (test/core/test_references_bib.jl) reads the same env var, so the two
-# reference checks never disagree on which file.
-env:
-  QATLAS_REFERENCES_BIB: docs/references.bib
-  REFERENCES_ALLOW: docs/references.allow
-
+  pull-requests: write
 jobs:
-  verify:
-    name: verify references resolve
-    # GitHub-hosted: the job builds the doiget Rust binary and needs outbound
-    # access to Crossref / arXiv, so this lane is intentionally not on the
-    # self-hosted Julia runner.
+  citations:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      # doiget's resolver cache (docs/CACHE.md): an unchanged bibliography
-      # resolves with zero network calls; keyed on the .bib so a new reference
-      # re-fetches only the delta.
-      - uses: actions/cache@v6
+      - uses: actions/checkout@v4
+      - uses: QAtlasHub/doiget-citation-check@v1
         with:
-          path: ~/.cache/doiget
-          key: doiget-resolver-${{ hashFiles(env.QATLAS_REFERENCES_BIB) }}
-          restore-keys: doiget-resolver-
-      # Pinned to the same toolchain SHA the doiget workspace CI uses.
-      - uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
-      - name: Install doiget
-        run: cargo install --git https://github.com/sotashimozono/doiget.git --tag v0.8.6 --locked doiget-cli
-      - name: Verify references
-        id: check
-        run: |
-          # Resolve every reference. Keep the JSON-Lines even if doiget's own
-          # exit code is nonzero — the gate script is the authority on pass/fail.
-          doiget verify "$QATLAS_REFERENCES_BIB" --format auto --mode json > verify.jsonl || true
-          # Writes report.md, and broken=/unverified=/fail=/ok= to $GITHUB_OUTPUT.
-          # Never fails the step (|| true) so the PR comment below always posts;
-          # the Gate step decides the job outcome from the `fail` count.
-          python3 .github/scripts/verify_references_gate.py \
-            --bib "$QATLAS_REFERENCES_BIB" \
-            --allow "$REFERENCES_ALLOW" \
-            --report report.md \
-            --github-output "$GITHUB_OUTPUT" < verify.jsonl || true
-          cat report.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
-      - name: Comment result on the PR
-        if: ${{ github.event_name == 'pull_request' }}
-        # Fork PRs get a read-only token and cannot comment; don't error on that.
-        continue-on-error: true
-        uses: actions/github-script@v9
-        with:
-          script: |
-            const fs = require('fs');
-            const body = fs.readFileSync('report.md', 'utf8');
-            const marker = '<!-- verify-references-gate -->';
-            const { owner, repo } = context.repo;
-            const issue_number = context.issue.number;
-            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number });
-            const existing = comments.find((c) => c.body && c.body.includes(marker));
-            if (existing) {
-              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
-            } else {
-              await github.rest.issues.createComment({ owner, repo, issue_number, body });
-            }
-      - name: Gate — fail on broken or unverified references
-        if: ${{ steps.check.outputs.fail != '0' }}
-        run: |
-          echo "::error::${{ steps.check.outputs.fail }} reference(s) failed — broken=${{ steps.check.outputs.broken }} (unresolved/malformed, not in docs/references.allow), unverified=${{ steps.check.outputs.unverified }} (produced no verify record)"
-          exit 1
+          bib: docs/references.bib
+          allow: docs/references.allow

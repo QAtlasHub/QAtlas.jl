@@ -11,7 +11,38 @@ module QAtlas
 # `Quantity{Q}` wrappers), which now subtype the shared roots.  Remaining
 # duplicate definitions in `src/core/` are replaced in later per-slice steps.
 using AbstractQAtlas:
-    AbstractQAtlasModel, AbstractQuantity, BoundaryCondition, Infinite, OBC, PBC, _bc_size
+    AbstractQAtlasModel,
+    AbstractQuantity,
+    BoundaryCondition,
+    Infinite,
+    OBC,
+    PBC,
+    _bc_size,
+    AbstractThermalPotential,
+    AbstractMagnetization,
+    AbstractSusceptibility,
+    AbstractTwoPointCorrelation,
+    AbstractStructureFactor,
+    AbstractGap,
+    AbstractVelocity,
+    AbstractEntanglementMeasure,
+    Energy,
+    FreeEnergy,
+    SpecificHeat,
+    ThermalEntropy,
+    CentralCharge,
+    CorrelationLength,
+    MassGap,
+    MutualInformation,
+    NMRRelaxationExponent,
+    NMRSpinRelaxationRate,
+    TopologicalEntanglementEntropy,
+    TopologicalInvariant,
+    UniversalityClass
+# `native_energy_granularity` is extended by bare `native_energy_granularity(::M, ::BC) = …`
+# methods in model files, which `using` forbids ("must be explicitly imported to be
+# extended"); it must therefore come in via `import` (#734).
+import AbstractQAtlas: native_energy_granularity
 
 export AbstractModel, Model
 export BoundaryCondition, Infinite, PBC, OBC

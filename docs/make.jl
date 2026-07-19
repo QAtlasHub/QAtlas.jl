@@ -28,7 +28,7 @@ makedocs(;
     checkdocs=:none,
     doctest=true,
     sitename="QAtlas.jl",
-    repo=Remotes.GitHub("sotashimozono", "QAtlas.jl"),
+    repo=Remotes.GitHub("QAtlasHub", "QAtlas.jl"),
     format=Documenter.HTML(;
         canonical="https://codes.sota-shimozono.com/QAtlas.jl/stable/",
         prettyurls=get(ENV, "CI", "false") == "true",

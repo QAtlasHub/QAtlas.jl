@@ -19,9 +19,9 @@
 # Phase 2 (DMRG / TLL).
 #
 # References:
-#   F. D. M. Haldane, PRL 50, 1153 (1983).
-#   S. R. White, D. A. Huse, Phys. Rev. B 48, 3844 (1993).
-#   H. J. Schulz, Phys. Rev. B 34, 6372 (1986).
+#   F. D. M. Haldane, [Haldane1983](@cite).
+#   S. R. White, D. A. Huse, [WhiteHuse1993](@cite).
+#   H. J. Schulz, [Schulz1986](@cite).
 #   Y.-C. Tzeng, H. Yang, M.-F. Yang, Phys. Rev. B 96, 064419 (2017).
 # ─────────────────────────────────────────────────────────────────────────────
 

@@ -43,14 +43,14 @@
 # References
 # ==========
 #
-#   - F. D. M. Haldane, Phys. Rev. Lett. 60, 635 (1988) — model
+#   - F. D. M. Haldane, [Haldane1988](@cite) — model
 #     definition + Gutzwiller GS + spinon dispersion
-#   - B. S. Shastry, Phys. Rev. Lett. 60, 639 (1988) — independent
+#   - B. S. Shastry, [Shastry1988](@cite) — independent
 #     introduction with explicit spectrum
-#   - F. D. M. Haldane, Phys. Rev. Lett. 66, 1529 (1991) — Yangian
+#   - F. D. M. Haldane, [Haldane1991](@cite) — Yangian
 #     algebra and full spectrum
 #   - F. D. M. Haldane, Z. N. C. Ha, J. C. Talstra, D. Bernard, V.
-#     Pasquier, Phys. Rev. Lett. 69, 2021 (1992) — Yangian highest
+#     Pasquier, [Haldane1992](@cite) — Yangian highest
 #     weight basis and dynamical correlators
 # ─────────────────────────────────────────────────────────────────────────────
 

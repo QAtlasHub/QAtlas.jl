@@ -12,12 +12,12 @@
 #   M. L. Mehta, "Random Matrices", 3rd ed., Elsevier (2004).
 #   E. P. Wigner, Conference on Neutron Physics by Time-of-Flight,
 #       Oak Ridge Natl. Lab. Rep. ORNL-2309, 59 (1957) — surmise.
-#   F. J. Dyson, J. Math. Phys. 3, 140 (1962) — three-fold way.
-#   C. A. Tracy, H. Widom, Commun. Math. Phys. 159, 151 (1994) — F_2.
-#   C. A. Tracy, H. Widom, Commun. Math. Phys. 177, 727 (1996) — F_1, F_4.
-#   F. Bornemann, Math. Comp. 79, 871 (2010) — high-precision F_β table.
+#   F. J. Dyson, [Dyson1962](@cite) — three-fold way.
+#   C. A. Tracy, H. Widom, [TracyWidom1994](@cite) — F_2.
+#   C. A. Tracy, H. Widom, [TracyWidom1996](@cite) — F_1, F_4.
+#   F. Bornemann, [Bornemann2010](@cite) — high-precision F_β table.
 #   Y. Y. Atas, E. Bogomolny, O. Giraud, G. Roux,
-#       Phys. Rev. Lett. 110, 084101 (2013) — ⟨r⟩.
+#       [Atas2013](@cite) — ⟨r⟩.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ─── Wigner surmise (closed form) ────────────────────────────────────────────

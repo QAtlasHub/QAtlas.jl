@@ -10,9 +10,9 @@
 # References:
 #   - I. R. Klebanov, S. S. Pufu, and B. R. Safdi, JHEP 11, 038 (2011) — F-theorem framework.
 #   - S. S. Pufu, arXiv:1612.00381 (2017) — F-theorem review; numerical F values for 3D CFTs.
-#   - F. Kos, D. Poland, D. Simmons-Duffin, and A. Vichi, JHEP 08, 036 (2016) — 3D Ising bootstrap C_T.
+#   - F. Kos, D. Poland, D. Simmons-Duffin, and A. Vichi, [Kos2016](@cite) — 3D Ising bootstrap C_T.
 #   - S. M. Chester et al., JHEP 02, 098 (2020) — O(2)/O(3) bootstrap C_T.
-#   - P. Bueno, R. C. Myers, and W. Witczak-Krempa, PRL 115, 021602 (2015) — sigma = pi^2/24 * C_T.
+#   - P. Bueno, R. C. Myers, and W. Witczak-Krempa, [BuenoMyersWitczakKrempa2015](@cite) — sigma = pi^2/24 * C_T.
 
 # ─── SphereFreeEnergy ────────────────────────────────────────────────────────
 
@@ -82,8 +82,8 @@ Supported classes:
 - `:Heisenberg`  : 3D O(3) Heisenberg model CFT (σ ≈ 0.0110496, from C_T/C_T,free ≈ 3 × 0.9429)
 
 References:
-- Formula σ = π²/24 · C_T: Bueno, Myers, Witczak-Krempa, PRL 115, 021602 (2015).
-- C_T (Ising): Kos, Poland, Simmons-Duffin, Vichi, JHEP 08, 036 (2016).
+- Formula σ = π²/24 · C_T: Bueno, Myers, Witczak-Krempa, [BuenoMyersWitczakKrempa2015](@cite).
+- C_T (Ising): Kos, Poland, Simmons-Duffin, Vichi, [Kos2016](@cite).
 - C_T (O(N)): Chester et al., JHEP 02, 098 (2020).
 """
 function fetch(

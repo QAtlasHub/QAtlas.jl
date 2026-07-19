@@ -75,7 +75,7 @@ on an N-site chain or ring with boundary condition `bc`.
 
 # References
     A. Auerbach, "Interacting Electrons and Quantum Magnetism" (1994), §2.
-    H. Bethe, Z. Physik 71, 205 (1931).
+    H. Bethe, [Bethe1931](@cite).
 """
 function fetch(::Heisenberg1D, ::ExactSpectrum; N::Int, J::Real=1.0, bc::Symbol=:OBC)
     if N == 2 && bc == :OBC
@@ -153,7 +153,7 @@ finite-size extrapolation verification using ED at N = 4, 6, 8.
 
 # References
     H. Bethe, "Zur Theorie der Metalle. I. Eigenwerte und Eigenfunktionen
-      der linearen Atomkette", Z. Physik 71, 205–226 (1931) — original
+      der linearen Atomkette", [Bethe1931](@cite) — original
       Bethe ansatz solution.
     L. Hulthén, "Über das Austauschproblem eines Kristalles",
       Ark. Mat. Astron. Fys. 26A, No. 11, 1–106 (1938) — first

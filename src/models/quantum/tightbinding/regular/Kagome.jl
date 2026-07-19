@@ -21,9 +21,9 @@
 # degenerates to {−4t, +2t, +2t}.
 #
 # References:
-#   I. Syôzi, "Statistics of Kagomé Lattice", Prog. Theor. Phys. 6, 306 (1951).
+#   I. Syôzi, "Statistics of Kagomé Lattice", [Syozi1951](@cite).
 #   D. L. Bergman, C. Wu, L. Balents, "Band touching from real-space
-#     topology in frustrated hopping models", Phys. Rev. B 78, 125104 (2008).
+#     topology in frustrated hopping models", [BergmanWuBalents2008](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION
@@ -96,8 +96,8 @@ remaining `2·Lx·Ly − 1` eigenvalues lie in `[−4t, +2t)`.
 A sorted `Vector{Float64}` of length `3·Lx·Ly`.
 
 # References
-    I. Syôzi, Prog. Theor. Phys. 6, 306 (1951).
-    D. L. Bergman et al., Phys. Rev. B 78, 125104 (2008).
+    I. Syôzi, [Syozi1951](@cite).
+    D. L. Bergman et al., [BergmanWuBalents2008](@cite).
 """
 function fetch(
     m::Kagome, ::TightBindingSpectrum; Lx::Integer=m.Lx, Ly::Integer=m.Ly, t::Real=m.t

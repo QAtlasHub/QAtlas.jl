@@ -19,9 +19,9 @@
 # to Phase 2.
 #
 # References:
-#   - E. H. Lieb, F. Y. Wu, PRL 20, 1445 (1968) — V=0 Bethe ansatz.
-#   - J. Voit, Rep. Prog. Phys. 58, 977 (1995) — 1D bosonization review.
-#   - M. Nakamura, Phys. Rev. B 61, 16377 (2000) — CDW/SDW/BOW phase
+#   - E. H. Lieb, F. Y. Wu, [LiebWu1968](@cite) — V=0 Bethe ansatz.
+#   - J. Voit, [Voit1995](@cite) — 1D bosonization review.
+#   - M. Nakamura, [Nakamura2000](@cite) — CDW/SDW/BOW phase
 #     diagram of the U-V chain at half filling.
 # ─────────────────────────────────────────────────────────────────────────────
 

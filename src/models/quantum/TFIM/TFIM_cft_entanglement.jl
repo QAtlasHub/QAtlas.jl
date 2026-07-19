@@ -36,8 +36,8 @@
 #
 # References:
 #   - P. Calabrese, J. Cardy, J. Stat. Mech. P06002 (2004) — original CC.
-#   - P. Calabrese, J. Cardy, J. Phys. A 42, 504005 (2009) — review.
-#   - P. Calabrese, J. Cardy, B. Doyon, J. Phys. A 42, 500301 (2009) — Renyi.
+#   - P. Calabrese, J. Cardy, [CalabreseCardy2009](@cite) — review.
+#   - P. Calabrese, J. Cardy, B. Doyon, [CalabreseCardyDoyon2009](@cite) — Renyi.
 # ─────────────────────────────────────────────────────────────────────────────
 
 """

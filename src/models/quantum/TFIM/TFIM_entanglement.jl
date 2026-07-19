@@ -56,11 +56,11 @@
 # - I. Peschel, J. Phys. A 36, L205 (2003), eq. (9).
 # - G. Vidal, J. I. Latorre, E. Rico, A. Kitaev, Phys. Rev. Lett. 90,
 #   227902 (2003), §III.
-# - J. I. Latorre, E. Rico, G. Vidal, Quantum Inf. Comput. 4, 48 (2004),
+# - J. I. Latorre, E. Rico, G. Vidal, [LatorreRicoVidal2004](@cite),
 #   §2.
 # - M. Fagotti, P. Calabrese, Phys. Rev. Lett. 104, 227203 (2010) —
 #   JW-factorisation argument for contiguous blocks.
-# - P. Calabrese, J. Cardy, J. Phys. A 42, 504005 (2009),
+# - P. Calabrese, J. Cardy, [CalabreseCardy2009](@cite),
 #   arXiv:0905.4013 — Rényi entropies in 1+1d CFT.
 # ─────────────────────────────────────────────────────────────────────────────
 

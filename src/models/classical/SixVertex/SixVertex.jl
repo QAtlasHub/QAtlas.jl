@@ -36,7 +36,7 @@
 #   E. H. Lieb, "Exact solution of the two-dimensional Slater KDP model
 #     of a ferroelectric", Phys. Rev. Lett. 19, 108 (1967c).
 #   B. Sutherland, "Exact solution of a two-dimensional model for
-#     hydrogen-bonded crystals", Phys. Rev. Lett. 19, 103 (1967).
+#     hydrogen-bonded crystals", [Sutherland1967](@cite).
 #   R. J. Baxter, "Exactly Solved Models in Statistical Mechanics"
 #     (Academic Press, 1982), ch. 8.
 # ─────────────────────────────────────────────────────────────────────────────

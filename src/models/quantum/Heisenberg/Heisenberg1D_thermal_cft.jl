@@ -41,14 +41,14 @@
 # References
 # ==========
 #
-#   - I. Affleck, Phys. Rev. Lett. 56, 746 (1986)
+#   - I. Affleck, [Affleck1986](@cite)
 #   - H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, Phys. Rev. Lett.
 #     56, 742 (1986)
-#   - S. Lukyanov, A. Zamolodchikov, Nucl. Phys. B 493, 571 (1997)
+#   - S. Lukyanov, A. Zamolodchikov, [LukyanovZamolodchikov1997](@cite)
 #     — sound velocity at the isotropic point
 #   - S. Eggert, I. Affleck, M. Takahashi, Phys. Rev. Lett. 73, 332
 #     (1994) — multiplicative log corrections
-#   - A. Klümper, Z. Phys. B 91, 507 (1993) — Δ → 1 limit of XXZ NLIE
+#   - A. Klümper, [Klumper1993](@cite) — Δ → 1 limit of XXZ NLIE
 # ─────────────────────────────────────────────────────────────────────────────
 
 const _HEIS_CFT_BETA_MIN = 5.0  # in units of 1/J; below this β the LO CFT degrades > 5 %

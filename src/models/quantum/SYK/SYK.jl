@@ -30,10 +30,10 @@
 # to Phase 2.
 #
 # References:
-#   - S. Sachdev, J. Ye, Phys. Rev. Lett. 70, 3339 (1993).
+#   - S. Sachdev, J. Ye, [SachdevYe1993](@cite).
 #   - A. Kitaev, "A simple model of quantum holography",
 #     KITP talks (2015).
-#   - J. Maldacena, D. Stanford, Phys. Rev. D 94, 106002 (2016).
+#   - J. Maldacena, D. Stanford, [MaldacenaStanford2016](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

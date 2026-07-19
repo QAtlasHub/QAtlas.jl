@@ -19,10 +19,10 @@
 #
 # References:
 #   - M. Kardar, G. Parisi, Y.-C. Zhang,
-#     Phys. Rev. Lett. 56, 889 (1986) — KPZ universality class.
+#     [KardarParisiZhang1986](@cite) — KPZ universality class.
 #   - B. Derrida, M. R. Evans, V. Hakim, V. Pasquier,
-#     J. Phys. A 26, 1493 (1993).
-#   - B. Derrida, J. L. Lebowitz, Phys. Rev. Lett. 80, 209 (1998).
+#     [DerridaEvansHakimPasquier1993](@cite).
+#   - B. Derrida, J. L. Lebowitz, [DerridaLebowitz1998](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

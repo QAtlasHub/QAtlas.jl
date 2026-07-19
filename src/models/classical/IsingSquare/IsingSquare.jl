@@ -10,7 +10,7 @@
 #
 # References:
 #   L. Onsager, "Crystal Statistics. I. A Two-Dimensional Model with an
-#   Order-Disorder Transition", Phys. Rev. 65, 117 (1944).
+#   Order-Disorder Transition", [Onsager1944](@cite).
 #   B. M. McCoy and T. T. Wu, "The Two-Dimensional Ising Model",
 #   Harvard University Press (1973).
 # ─────────────────────────────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ against direct ensemble averages.
 - `J::Real`: Ising coupling constant (default 1.0; J > 0 ferromagnetic)
 
 # References
-    L. Onsager, Phys. Rev. 65, 117 (1944).
+    L. Onsager, [Onsager1944](@cite).
     B. M. McCoy and T. T. Wu, "The Two-Dimensional Ising Model" (1973).
 """
 function fetch(
@@ -257,7 +257,7 @@ Equivalently, the critical reduced coupling is K_c = J/T_c = ln(1+√2)/2,
 or sinh(2K_c) = 1.
 
 # References
-    L. Onsager, "Crystal Statistics. I.", Phys. Rev. 65, 117 (1944).
+    L. Onsager, "Crystal Statistics. I.", [Onsager1944](@cite).
 """
 function fetch(m::IsingSquare, ::CriticalTemperature; J::Real=m.J)
     return 2J / log(1 + sqrt(2))
@@ -295,7 +295,7 @@ Special values:
 
 # References
     C. N. Yang, "The spontaneous magnetization of a two-dimensional Ising
-    model", Phys. Rev. 85, 808 (1952).
+    model", [Yang1952](@cite).
 """
 function fetch(m::IsingSquare, ::SpontaneousMagnetization; β::Real, J::Real=m.J)
     s = sinh(2 * β * J)

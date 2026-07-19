@@ -26,10 +26,10 @@
 # References
 # ==========
 #
-#   - F. D. M. Haldane, Phys. Rev. Lett. 60, 635 (1988) — model + e_0
-#   - F. D. M. Haldane, Phys. Rev. Lett. 66, 1529 (1991) — Yangian,
+#   - F. D. M. Haldane, [Haldane1988](@cite) — model + e_0
+#   - F. D. M. Haldane, [Haldane1991](@cite) — Yangian,
 #     spinon dispersion confirming v_s = π J / 2
-#   - I. Affleck, Phys. Rev. Lett. 56, 746 (1986) — c=1 CFT form
+#   - I. Affleck, [Affleck1986](@cite) — c=1 CFT form
 #   - B. A. Bernevig, F. D. M. Haldane, N. Regnault, J. Phys. A 41,
 #     304005 (2008) — semion gas thermodynamics (issue #524)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -222,8 +222,7 @@ weaker (no exponential light cone), but the QUASIPARTICLE / spinon
 propagation velocity that governs entanglement spreading at low
 energies is v_s = pi J / 2.
 
-Reference: F. D. M. Haldane PRL 60, 635 (1988); B. S. Shastry PRL 60,
-639 (1988); Y. Kuramoto-N. Kato-A. Sutherland review on long-range
+Reference: [Haldane1988](@cite); [Shastry1988](@cite); Y. Kuramoto-N. Kato-A. Sutherland review on long-range
 integrable models.
 """
 function fetch(

@@ -74,7 +74,7 @@ critical point `K_c = ln(1+√2)/2`, where `A − B → 0` at `φ = 0`).
 QuadGK's adaptive quadrature handles the integrable square-root edge
 without intervention.
 
-Reference: L. Onsager, Phys. Rev. 65, 117 (1944), Eq. (105).
+Reference: L. Onsager, [Onsager1944](@cite), Eq. (105).
 """
 function _onsager_log_z_per_site(K::Real)
     B = sinh(2K)

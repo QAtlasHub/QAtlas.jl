@@ -32,7 +32,7 @@
 # all T > 0; only at T = 0 do the two transfer-matrix eigenvalues
 # become degenerate.
 #
-# Reference: E. Ising, Z. Phys. 31, 253 (1925).
+# Reference: E. Ising, [Ising1925](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

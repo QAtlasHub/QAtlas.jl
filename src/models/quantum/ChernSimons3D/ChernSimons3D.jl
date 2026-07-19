@@ -31,8 +31,8 @@
 # integrable representations) and are tracked as Phase 2.
 #
 # References:
-#   - E. Witten, Comm. Math. Phys. 121, 351 (1989).
-#   - V. G. Knizhnik, A. B. Zamolodchikov, Nucl. Phys. B 247, 83 (1984).
+#   - E. Witten, [Witten1989](@cite).
+#   - V. G. Knizhnik, A. B. Zamolodchikov, [KnizhnikZamolodchikov1984](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

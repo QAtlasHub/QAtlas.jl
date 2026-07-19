@@ -18,8 +18,8 @@
 # computations at modest sizes (3^N Hilbert space, capped at N ≤ 8).
 #
 # References:
-#   F. D. M. Haldane, Phys. Lett. A 93, 464 (1983); PRL 50, 1153 (1983).
-#   T. Kennedy and H. Tasaki, Phys. Rev. B 45, 304 (1992) — string order.
+#   F. D. M. Haldane, [Haldane1983a](@cite); [Haldane1983](@cite).
+#   T. Kennedy and H. Tasaki, [KennedyTasaki1992](@cite) — string order.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

@@ -21,11 +21,11 @@
 #   c -> c · (1 + 1/α) / 2,
 #
 # which reduces to `c` at α = 1.  See Calabrese–Cardy J. Stat. Mech. P06002
-# (2004) eq. (3.12) and J. Phys. A 42, 504005 (2009) eq. (28),(30).
+# (2004) eq. (3.12) and [CalabreseCardy2009](@cite) eq. (28),(30).
 #
 # References:
 #   - P. Calabrese, J. Cardy, J. Stat. Mech. P06002 (2004).
-#   - P. Calabrese, J. Cardy, J. Phys. A 42, 504005 (2009).
+#   - P. Calabrese, J. Cardy, [CalabreseCardy2009](@cite).
 #
 # A step-by-step derivation of the c/3 vs c/6 prefactor (replica trick,
 # twist-operator, cylinder-vs-strip conformal map) lives in
@@ -51,7 +51,7 @@ charge `c = 1/2`).  For `d ≥ 3` the universality class is not a
 1+1D CFT and an `ErrorException` is thrown — call sites that want a
 generic-CFT entanglement formula must use a 1+1D class.
 
-Reference: Belavin, Polyakov, Zamolodchikov, Nucl. Phys. B 241, 333 (1984).
+Reference: Belavin, Polyakov, Zamolodchikov, [BelavinPolyakovZamolodchikov1984](@cite).
 """
 function fetch(m::Universality{:Ising}, ::CentralCharge; d::Int=2, kwargs...)
     if d == 2
@@ -76,7 +76,7 @@ effective central charge:
 
     c_eff = c * log(2) = log(2) / 2  ≈ 0.34657359
 
-Reference: Refael, Moore, Phys. Rev. Lett. 93, 260602 (2004).
+Reference: Refael, Moore, [RefaelMoore2004](@cite).
 """
 function fetch(m::Universality{:IsingSDRG}, ::CentralCharge; d::Int=2, kwargs...)
     if d == 2
@@ -94,7 +94,7 @@ Central charge of the 3-state Potts universality class.  `d = 2` only.
 The 2D 3-state Potts model is the Virasoro minimal model `M(5,6)` with
 `c = 4/5`.
 
-Reference: Dotsenko, Nucl. Phys. B 235, 54 (1984); di Francesco–
+Reference: Dotsenko, [Dotsenko1984](@cite); di Francesco–
 Mathieu–Sénéchal §7.4.
 """
 function fetch(m::Universality{:Potts3}, ::CentralCharge; d::Int=2, kwargs...)
@@ -129,7 +129,7 @@ The 2D XY model has a Berezinskii–Kosterlitz–Thouless transition; the
 critical line below `T_BKT` is described by a free compact boson with
 `c = 1`.
 
-Reference: Kosterlitz, J. Phys. C 7, 1046 (1974); di Francesco–
+Reference: Kosterlitz, [Kosterlitz1974](@cite); di Francesco–
 Mathieu–Sénéchal §6.
 
 For `d ≥ 3` the class is not a 1+1D CFT and the call errors.
@@ -156,7 +156,7 @@ a 1+1D CFT (the 2D Heisenberg model has Goldstone modes; the 3D one
 has no critical line at finite T) — call sites that want a
 generic-CFT entanglement formula must use a 1+1D class.
 
-Reference: Affleck–Haldane, Phys. Rev. B 36, 5291 (1987); di Francesco–
+Reference: Affleck–Haldane, [AffleckHaldane1987](@cite); di Francesco–
 Mathieu–Sénéchal §15.6 (SU(2)_1 WZW).
 """
 function fetch(m::Universality{:Heisenberg}, ::CentralCharge; d::Int=1, kwargs...)
@@ -239,7 +239,7 @@ Boundary cases:
 - `ℓ = L/2`: maximum.
 
 Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) eq. (3.8);
-J. Phys. A 42, 504005 (2009) eq. (28).
+[CalabreseCardy2009](@cite) eq. (28).
 """
 function fetch(
     model::Universality{C}, ::VonNeumannEntropy, ::PBC; ℓ::Real, L::Real, kwargs...
@@ -274,7 +274,7 @@ For a block in the **bulk** of an open chain (e.g. sites L/4..L/4+ℓ
 with both endpoints away from the boundary), there are **two** bulk
 cuts and the prefactor reverts to `c/3`, with a different log
 argument involving conformal cross-ratios of four points (Calabrese–
-Cardy J. Phys. A 42, 504005 (2009) §3.3).  This bulk-block formula is
+[CalabreseCardy2009](@cite) §3.3).  This bulk-block formula is
 *not* implemented by this method.
 
 The non-universal additive constant `c'_1` and the Affleck–Ludwig
@@ -283,8 +283,8 @@ At the balanced bipartition (`ℓ = L/2`) the OBC value is *half* of the
 PBC value (one entanglement cut vs two).
 
 Reference: Calabrese–Cardy J. Stat. Mech. P06002 (2004) eq. (3.16);
-J. Phys. A 42, 504005 (2009) eq. (30).  Affleck–Ludwig boundary
-entropy: Affleck–Ludwig, Phys. Rev. Lett. 67, 161 (1991).
+[CalabreseCardy2009](@cite) eq. (30).  Affleck–Ludwig boundary
+entropy: Affleck–Ludwig, [AffleckLudwig1991](@cite).
 """
 function fetch(
     model::Universality{C}, ::VonNeumannEntropy, ::OBC; ℓ::Real, L::Real, kwargs...
@@ -408,7 +408,7 @@ so
 
 The non-universal `c'_1` and Affleck–Ludwig `log g` are dropped.
 
-Reference: Calabrese–Cardy J. Phys. A 42, 504005 (2009) eq. (30).
+Reference: Calabrese–[CalabreseCardy2009](@cite) eq. (30).
 """
 function fetch(
     model::Universality{C}, q::RenyiEntropy, ::OBC; ℓ::Real, L::Real, kwargs...

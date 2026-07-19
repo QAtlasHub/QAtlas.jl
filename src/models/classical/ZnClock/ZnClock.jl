@@ -26,8 +26,8 @@
 #
 # References:
 #   - J. V. José, L. P. Kadanoff, S. Kirkpatrick, D. R. Nelson,
-#     Phys. Rev. B 16, 1217 (1977).
-#   - S. Elitzur, R. B. Pearson, J. Shigemitsu, Phys. Rev. D 19, 3698 (1979).
+#     [JoseKadanoffKirkpatrickNelson1977](@cite).
+#   - S. Elitzur, R. B. Pearson, J. Shigemitsu, [ElitzurPearsonShigemitsu1979](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

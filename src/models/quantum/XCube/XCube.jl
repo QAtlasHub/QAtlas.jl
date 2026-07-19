@@ -30,9 +30,9 @@
 # Haah's code (fully-mobile-free) are tracked as Phase 2.
 #
 # References:
-#   - J. Haah, Phys. Rev. A 83, 042330 (2011).
-#   - S. Vijay, J. Haah, L. Fu, Phys. Rev. B 94, 235157 (2016).
-#   - K. Slagle, Y. B. Kim, Phys. Rev. B 96, 195139 (2017).
+#   - J. Haah, [Haah2011](@cite).
+#   - S. Vijay, J. Haah, L. Fu, [VijayHaahFu2016](@cite).
+#   - K. Slagle, Y. B. Kim, [SlagleKim2017](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

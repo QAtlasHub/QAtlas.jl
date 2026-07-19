@@ -28,7 +28,7 @@
 #     magnetism: transition metal compounds", Sov. Phys. Usp. 25, 231
 #     (1982) — original orbital compass / Kugel–Khomskii model.
 #   • A. Kitaev, "Anyons in an exactly solved model and beyond", Annals
-#     of Physics 321, 2 (2006) — JW-dual dimerised Kitaev chain.
+#     of [Kitaev2006](@cite) — JW-dual dimerised Kitaev chain.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

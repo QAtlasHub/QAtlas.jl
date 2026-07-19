@@ -27,10 +27,10 @@
 #   - `FractalDimension` (Phase 2) via Beffara's theorem.
 #
 # References:
-#   - O. Schramm, Israel J. Math. 118, 221 (2000).
-#   - V. Beffara, Annals Probab. 36, 1421 (2008) — d_H = 1 + κ/8.
-#   - M. Bauer, D. Bernard, Phys. Rep. 432, 115 (2006) — SLE-CFT.
-#   - J. Cardy, Annals Phys. 318, 81 (2005) — physicist review.
+#   - O. Schramm, [Schramm2000](@cite).
+#   - V. Beffara, [Beffara2008](@cite) — d_H = 1 + κ/8.
+#   - M. Bauer, D. Bernard, [BauerBernard2006](@cite) — SLE-CFT.
+#   - J. Cardy, [Cardy2005](@cite) — physicist review.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

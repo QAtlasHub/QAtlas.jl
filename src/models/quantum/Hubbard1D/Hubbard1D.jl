@@ -32,12 +32,12 @@
 #
 #   - E. H. Lieb, F. Y. Wu, "Absence of Mott transition in an exact
 #     solution of the short-range, one-band model in one dimension",
-#     Phys. Rev. Lett. 20, 1445 (1968).
+#     [LiebWu1968](@cite).
 #   - F. H. L. Essler, H. Frahm, F. Göhmann, A. Klümper, V. E. Korepin,
 #     "The One-Dimensional Hubbard Model", Cambridge University Press
 #     (2005) — the canonical textbook.
 #   - E. H. Lieb, F. Y. Wu, "The one-dimensional Hubbard model: a
-#     reminiscence", Physica A 321, 1 (2003).
+#     reminiscence", [LiebWu2003](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

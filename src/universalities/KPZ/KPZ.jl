@@ -6,12 +6,12 @@
 # via the `GrowthExponents` tag rather than `CriticalExponents`.
 #
 # References (exact, d=1):
-#   M. Kardar, G. Parisi, Y.-C. Zhang, Phys. Rev. Lett. 56, 889 (1986).
-#   T. Sasamoto, H. Spohn, Nucl. Phys. B 834, 523 (2010).
+#   M. Kardar, G. Parisi, Y.-C. Zhang, [KardarParisiZhang1986](@cite).
+#   T. Sasamoto, H. Spohn, [SasamotoSpohn2010](@cite).
 #
 # References (numerical, d≥2):
 #   A. Pagnani, G. Parisi, Phys. Rev. E 92, 010101(R) (2015)  — d = 2.
-#   J. Kelling, G. Ódor, Phys. Rev. E 84, 061150 (2011)       — d = 3.
+#   J. Kelling, G. Ódor, [KellingOdor2011](@cite)       — d = 3.
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
@@ -82,7 +82,7 @@ function fetch(::Universality{:KPZ}, ::GrowthExponents; d::Int, kwargs...)
             z_err=0.009,
         )
     elseif d == 3
-        # Kelling & Ódor, PRE 84, 061150 (2011).  The paper quotes
+        # Kelling & Ódor, [KellingOdor2011](@cite).  The paper quotes
         # rough estimates rather than tight 1-σ; we adopt 0.01 as a
         # conservative uncertainty consistent with the cross-method
         # spread reported in the literature (cf. Halpin-Healy 2013).

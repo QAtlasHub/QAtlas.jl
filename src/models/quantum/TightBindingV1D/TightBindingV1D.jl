@@ -33,7 +33,7 @@
 #
 # References:
 #   - C. N. Yang, C. P. Yang, "One-dimensional chain of anisotropic
-#     spin-spin interactions", Phys. Rev. 150, 321 (1966).
+#     spin-spin interactions", [YangYang1966a](@cite).
 #   - N. W. Ashcroft, N. D. Mermin, *Solid State Physics* (1976),
 #     Chapter 9 (tight-binding bands).
 # ─────────────────────────────────────────────────────────────────────────────

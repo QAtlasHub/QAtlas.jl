@@ -5,7 +5,7 @@
 # for the critical XXZ chain (-1 < Δ < 1) in the thermodynamic limit, at
 # arbitrary temperature and zero magnetic field.
 #
-# Following Klümper, Z. Phys. B 91, 507 (1993)  [DOI 10.1007/BF01316831],
+# Following Klümper, [Klumper1993](@cite)  [DOI 10.1007/BF01316831],
 # equations (5.4)-(5.7).  The Hamiltonian convention is matched to
 # QAtlas's XXZ1D
 #

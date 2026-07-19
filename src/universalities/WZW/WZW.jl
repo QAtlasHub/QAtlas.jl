@@ -4,12 +4,12 @@
 # References:
 #   Knizhnik, Zamolodchikov,
 #     "Current algebra and Wess-Zumino model in two dimensions",
-#     Nucl. Phys. B 247, 83 (1984).
-#   Witten, Comm. Math. Phys. 92, 455 (1984).
+#     [KnizhnikZamolodchikov1984](@cite).
+#   Witten, [Witten1984](@cite).
 #   Di Francesco, Mathieu, Sénéchal,
 #     "Conformal Field Theory" (Springer, 1997), Ch. 15.
 #   Affleck, "Quantum spin chains and the Haldane gap",
-#     J. Phys.: Condens. Matter 1, 3047 (1989) — Heisenberg = SU(2)_1 WZW.
+#     J. Phys.: [Affleck1989](@cite) — Heisenberg = SU(2)_1 WZW.
 #
 # Level k = 1, 2, 3, ...  Sugawara central charge:
 #

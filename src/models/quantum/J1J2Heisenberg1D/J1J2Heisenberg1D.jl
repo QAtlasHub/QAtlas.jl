@@ -32,10 +32,10 @@
 # axis-explicit convention.
 #
 # References:
-#   - H. Bethe, Z. Physik 71, 205 (1931).
+#   - H. Bethe, [Bethe1931](@cite).
 #   - L. Hulthén, Ark. Mat. Astron. Fys. 26A, No. 11 (1938).
-#   - C. K. Majumdar, D. K. Ghosh, J. Math. Phys. 10, 1388 (1969).
-#   - S. R. White, I. Affleck, Phys. Rev. B 54, 9862 (1996) — DMRG study
+#   - C. K. Majumdar, D. K. Ghosh, [MajumdarGhosh1969](@cite).
+#   - S. R. White, I. Affleck, [WhiteAffleck1996](@cite) — DMRG study
 #     of the generic-j J₁-J₂ chain; identifies the dimer phase and the
 #     Lifshitz point j_L ≈ 0.5206 separating commensurate / incommensurate
 #     short-range order.

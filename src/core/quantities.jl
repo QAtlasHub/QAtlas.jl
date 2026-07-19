@@ -29,72 +29,7 @@
 # The component that the leaf's *name* encodes is recovered by the
 # [`component`](@ref) trait.
 
-"""
-    AbstractThermalPotential <: AbstractQuantity
-
-Thermodynamic-potential family: `Energy`, `FreeEnergy`, `ThermalEntropy`,
-`SpecificHeat`, `ResidualEntropy` — the quantities related by the Gibbs /
-Maxwell identities (`f = ε − T·s`, `c_v = -β² ∂ε/∂β`, …).
-"""
-abstract type AbstractThermalPotential <: AbstractQuantity end
-
-"""
-    AbstractMagnetization <: AbstractQuantity
-
-Magnetization family (`MagnetizationX/Y/Z` and their `…Local` site-resolved
-variants); the spin axis is the [`component`](@ref).
-"""
-abstract type AbstractMagnetization <: AbstractQuantity end
-
-"""
-    AbstractSusceptibility <: AbstractQuantity
-
-Static susceptibility family (`SusceptibilityXX/YY/ZZ`); the diagonal spin
-axis is the [`component`](@ref).
-"""
-abstract type AbstractSusceptibility <: AbstractQuantity end
-
-"""
-    AbstractTwoPointCorrelation <: AbstractQuantity
-
-Real-space two-point correlator family (`XXCorrelation`, `YYCorrelation`,
-`ZZCorrelation`); the spin-axis pair is the [`component`](@ref).
-"""
-abstract type AbstractTwoPointCorrelation <: AbstractQuantity end
-
-"""
-    AbstractStructureFactor <: AbstractQuantity
-
-Fourier-space structure-factor family (`XXStructureFactor`,
-`YYStructureFactor`, `ZZStructureFactor`); the spin-axis pair is the
-[`component`](@ref).
-"""
-abstract type AbstractStructureFactor <: AbstractQuantity end
-
-"""
-    AbstractGap <: AbstractQuantity
-
-Spectral-gap family (`MassGap`, `ChargeGap`, `SpinGap`); the excitation
-channel is the [`component`](@ref).
-"""
-abstract type AbstractGap <: AbstractQuantity end
-
-"""
-    AbstractVelocity <: AbstractQuantity
-
-Characteristic-velocity family (`FermiVelocity`, `LuttingerVelocity`,
-`LiebRobinsonVelocity`).
-"""
-abstract type AbstractVelocity <: AbstractQuantity end
-
-"""
-    AbstractEntanglementMeasure <: AbstractQuantity
-
-Entanglement-measure family (`VonNeumannEntropy`, `RenyiEntropy`,
-`LogarithmicNegativity`, `MutualInformation`,
-`TopologicalEntanglementEntropy`, `PageEntropy`).
-"""
-abstract type AbstractEntanglementMeasure <: AbstractQuantity end
+# The 8 abstract quantity families now live in AbstractQAtlas, imported in src/QAtlas.jl (#734).
 
 """
     component(q) -> Union{Symbol,Nothing}
@@ -117,112 +52,9 @@ component(::Type{<:AbstractQuantity}) = nothing
 
 # ─── Scalar thermodynamics ──────────────────────────────────────────────
 
-"""
-    Energy{G}() <: AbstractQuantity
-    Energy()                 # G = :natural — model-and-BC-natural granularity
-    Energy(:total)           # explicit ⟨H⟩
-    Energy(:per_site)        # explicit ⟨H⟩ / N
-
-Ground-state / thermal energy expectation.  The type parameter `G` makes
-the granularity (total vs per-site) a dispatch axis instead of a hidden
-docstring contract.
-
-`Energy()` resolves to the model's native granularity via the
-[`native_energy_granularity`](@ref) trait — keeping every existing
-`fetch(model, Energy(), bc; ...)` call site working unchanged.  Use the
-explicit constructors when the caller needs a specific granularity (e.g.
-the thermodynamic-identity harness comparing `f + T·s` against per-site
-`ε`).
-
-The non-native granularity is provided automatically by a generic
-conversion fallback for 1D BCs (`OBC` / `PBC`) that uses
-the internal `_bc_size` helper.  Models on lattices whose size is not captured by
-`bc.N` (e.g. 2D Kitaev with `Lx, Ly` kwargs) currently support only
-their declared native granularity.
-"""
-struct Energy{G} <: AbstractThermalPotential
-    function Energy{G}() where {G}
-        G isa Symbol || error("Energy granularity must be a Symbol, got $(typeof(G))")
-        G in (:natural, :total, :per_site) ||
-            error("unknown Energy granularity :$G; expected :natural, :total, or :per_site")
-        return new{G}()
-    end
-end
-Energy() = Energy{:natural}()
-Energy(g::Symbol) = Energy{g}()
-
-"""
-    native_energy_granularity(model, bc) -> :total | :per_site
-
-Trait declaring which granularity the given `model` returns natively for
-[`Energy`](@ref) at boundary condition `bc`.  Used by the `Energy()`
-(`:natural`) router and by the generic conversion fallbacks.
-
-Every model that supports `Energy` must add a method per supported BC,
-e.g.
-
-```julia
-QAtlas.native_energy_granularity(::TFIM, ::OBC) = :total
-QAtlas.native_energy_granularity(::TFIM, ::Infinite) = :per_site
-```
-
-A missing method is caught at the call site as a `MethodError`, which
-is intentional: it forces new models to declare the convention rather
-than silently inheriting an unrelated default.
-"""
-function native_energy_granularity end
-
-"""
-    FreeEnergy() <: AbstractQuantity
-
-Helmholtz free energy per site, `f = -β⁻¹ log Z / N`.
-"""
-struct FreeEnergy <: AbstractThermalPotential end
-
-"""
-    SpecificHeat() <: AbstractQuantity
-
-Specific heat per site, `c_v(β) = β² (⟨H²⟩ − ⟨H⟩²) / N`.
-"""
-struct SpecificHeat <: AbstractThermalPotential end
-
-"""
-    NMRSpinRelaxationRate() <: AbstractQuantity
-
-NMR spin-lattice relaxation rate per site, `1/T_1(β, η)`.
-For non-interacting 1D fermion systems, computed using the regularized double momentum-space integral:
-
-    1/T_1(β, η) = 1/π³ ∫_0^π dk₁ ∫_0^π dk₂ f(ε(k₁)) (1 - f(ε(k₂))) η / ((ε(k₁) - ε(k₂))² + η²)
-
-where `η > 0` is a small regularization width (e.g. `0.1` by default).
-"""
-struct NMRSpinRelaxationRate <: AbstractQuantity end
-
-"""
-    NMRRelaxationExponent() <: AbstractQuantity
-
-Low-temperature scaling exponent `θ_NMR` of the NMR spin-lattice relaxation
-rate, `1/T_1 ∝ T^{θ_NMR}` as `T → 0`.
-
-For a quantum critical point the leading exponent follows the general
-fluctuation-dissipation rule `θ_NMR = 2Δ_op − 1`, where `Δ_op` is the scaling
-dimension of the operator the nuclei couple to:
-
-- 1D transverse-field Ising QCP: `Δ_σ = 1/8` ⟹ `θ_NMR = −3/4`.
-- XXZ critical Luttinger liquid (`−1 < Δ ≤ 1`), contact-hyperfine coupling to
-  the dominant *transverse staggered* susceptibility (`Δ_op = 1/(4K)`):
-  `θ_NMR = 1/(2K) − 1`, where `K` is the Luttinger parameter. (The subdominant
-  longitudinal channel contributes `T^{2K−1}`; see Chitra & Giamarchi 1997,
-  Eq. 27.)
-"""
-struct NMRRelaxationExponent <: AbstractQuantity end
-
-"""
-    MassGap() <: AbstractQuantity
-
-Energy gap between the ground state and the first excited state.
-"""
-struct MassGap <: AbstractGap end
+# `Energy{G}`, its outer constructors, and the `native_energy_granularity` trait
+# stub now live in AbstractQAtlas (#734) -- imported in src/QAtlas.jl.  The
+# BC-granularity `fetch` routing methods below dispatch on the imported symbols.
 
 """
     FidelitySusceptibility() <: AbstractQuantity
@@ -237,14 +69,6 @@ struct FidelitySusceptibility <: AbstractQuantity end
 # `AbstractQuantity` in the IsingSquare refactor commit (M1.7).
 
 # ─── Entropies (explicit variants; see user-requested naming) ──────────
-
-"""
-    ThermalEntropy() <: AbstractQuantity
-
-Thermal / thermodynamic entropy per site, `s(β) = −∂f/∂T` where `f` is the
-free energy per site.  Real-valued, non-negative, monotone in `T`.
-"""
-struct ThermalEntropy <: AbstractThermalPotential end
 
 """
     VonNeumannEntropy{M}() <: AbstractQuantity
@@ -533,23 +357,6 @@ struct YYStructureFactor <: AbstractStructureFactor end
 # ─── Universality / lattice spectra / advanced ─────────────────────────
 
 """
-    UniversalityClass() <: AbstractQuantity
-
-The emergent universality class of a model at its critical point / scaling regime.
-"""
-struct UniversalityClass <: AbstractQuantity end
-
-"""
-    CentralCharge() <: AbstractQuantity
-
-
-Central charge `c` of the emergent CFT.  For 1D critical systems
-extracted from the Calabrese–Cardy entanglement formula; universality
-pages return literature values.
-"""
-struct CentralCharge <: AbstractQuantity end
-
-"""
     ConformalWeights() <: AbstractQuantity
 
 Primary scaling dimension `h` of a 2D rational CFT.  For Virasoro
@@ -585,20 +392,6 @@ a model — e.g. the SLE_κ curve's `d_H(κ) = min(2, 1 + κ/8)`
 space dimension.
 """
 struct FractalDimension <: AbstractQuantity end
-
-"""
-    CorrelationLength() <: AbstractQuantity
-
-Two-point correlation length `ξ` controlling the exponential decay of
-connected equal-time correlators in a gapped phase,
-
-    ⟨σ_α(0) σ_α(r)⟩_c ~ e^{-r/ξ}    (r → ∞).
-
-For a critical system `ξ = ∞`; implementations return `Inf` in that
-case.  At `T = 0` and 1D free-fermion models like TFIM, `ξ` is set by
-the inverse mass gap (`ξ = 1/(2|h - J|)`).
-"""
-struct CorrelationLength <: AbstractQuantity end
 
 """
     StringOrderParameter() <: AbstractQuantity
@@ -677,18 +470,6 @@ Math. Phys.* **28**, 251 (1972); Hastings-Koma, *Commun. Math. Phys.*
 **265**, 781 (2006). Tracking: issue #579 inequality framework.
 """
 struct LiebRobinsonVelocity <: AbstractVelocity end
-
-"""
-    MutualInformation() <: AbstractQuantity
-
-Mutual information between two subsystems, `I(A:B) = S(A) + S(B) - S(A ∪ B)`.
-
-This struct is the type tag; concrete `fetch` dispatches live at the
-universality layer (see `src/universalities/behaviour/CardyEntanglement.jl`
-for the Calabrese-Cardy closed forms) and on model files for non-universal
-cases. Tracking: #580 entanglement universality catalog.
-"""
-struct MutualInformation <: AbstractEntanglementMeasure end
 
 """
     EntanglementGrowthSlope() <: AbstractQuantity
@@ -871,27 +652,6 @@ implementation lives in `src/universalities/E8.jl`; the type is defined
 here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
-
-"""
-    TopologicalInvariant() <: AbstractQuantity
-
-Topological `Z_2` invariant of a 1D BdG superconductor (Kitaev 2001).
-Defined as the Pfaffian sign at the time-reversal-invariant momenta
-`k = 0` and `k = π`,
-
-```math
-\\nu = \\operatorname{sgn}\\bigl[\\operatorname{Pf}(H_{\\mathrm{BdG}}(k=0))
-                                  \\cdot \\operatorname{Pf}(H_{\\mathrm{BdG}}(k=\\pi))\\bigr]
-       \\in \\{+1, -1\\},
-```
-
-with `ν = -1` in the topological phase and `ν = +1` in the trivial
-phase.  For a gapless bulk (Pfaffian zero at `k = 0` or `k = π`) the
-invariant is ill-defined and implementations should signal an error.
-
-Currently used by [`Kitaev1D`](@ref).
-"""
-struct TopologicalInvariant <: AbstractQuantity end
 
 """
     EdgeModeEnergy() <: AbstractQuantity
@@ -1108,22 +868,6 @@ on the `fetch` call.  Trivially `1` for any gapped, symmetry-unbroken
 phase.
 """
 struct GroundStateDegeneracy <: AbstractQuantity end
-
-"""
-    TopologicalEntanglementEntropy() <: AbstractQuantity
-
-Constant subleading correction `γ` in the area-law bipartite
-entanglement entropy of a 2D topologically ordered ground state on a
-simply-connected disk region:
-
-    S(ρ_A) = α |∂A| − γ + O(|∂A|⁻¹).
-
-Kitaev–Preskill (2006) and Levin–Wen (2006) showed `γ = log 𝒟`, where
-`𝒟 = √(Σ_a d_a²)` is the total quantum dimension of the topological
-order.  Returns a `Float64`.  For the toric code (Z₂ topological order,
-four Abelian anyons) `γ = log 2`.
-"""
-struct TopologicalEntanglementEntropy <: AbstractEntanglementMeasure end
 
 """
     AnyonStatistics() <: AbstractQuantity

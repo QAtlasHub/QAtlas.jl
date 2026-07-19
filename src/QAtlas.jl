@@ -1,15 +1,14 @@
 module QAtlas
 
 # AbstractQAtlas — the model-independent base this atlas implements, in the
-# AbstractFFTs→FFTW idiom (the dependency never points the other way).  This
-# is the first step of the staged core-vocabulary migration (#734): the
-# abstract type vocabulary (`AbstractQuantity` / `BoundaryCondition` / …) and
-# the universal relations are the single source of truth in AbstractQAtlas,
-# and QAtlas re-exports them for API compatibility.  Only the module name is
-# brought in (no exported names enter scope), so nothing collides yet — the
-# duplicate definitions in `src/core/` still stand until the later per-slice
-# steps replace them.
-using AbstractQAtlas: AbstractQAtlas
+# AbstractFFTs→FFTW idiom (the dependency never points the other way).  The
+# staged core-vocabulary migration (#734) makes AbstractQAtlas the single
+# source of truth for the shared type vocabulary; QAtlas imports and
+# re-exports each slice for API compatibility.  Migrated so far: the
+# BoundaryCondition family (`BoundaryCondition` / `Infinite` / `OBC` / `PBC`)
+# and the `_bc_size` helper.  Remaining duplicate definitions in `src/core/`
+# are replaced in later per-slice steps.
+using AbstractQAtlas: BoundaryCondition, Infinite, OBC, PBC, _bc_size
 
 export AbstractModel, Model
 export BoundaryCondition, Infinite, PBC, OBC

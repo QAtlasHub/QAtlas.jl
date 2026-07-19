@@ -38,74 +38,10 @@ function Model(name::Symbol; kwargs...)
     return Model{canon}(Dict{Symbol,Any}(kwargs))
 end
 
-"""
-    BoundaryCondition
-
-Abstract parent type.  The three concrete subtypes carry system-size
-information where applicable, so `fetch` can read it from the
-BC instead of `kwargs`.
-
-- `Infinite` — thermodynamic limit; no size.
-- `PBC(N::Int)` — periodic boundary conditions at finite `N`.
-- `OBC(N::Int)` — open boundary conditions at finite `N`.
-
-For backward compatibility, the zero-argument constructors `PBC()` and
-`OBC()` exist and set `N = 0`, which signals "caller will pass `N` via
-kwargs" — legacy fetch methods still look at `kwargs[:N]`.  New fetch
-methods read `bc.N` directly.
-"""
-abstract type BoundaryCondition end
-
-"""
-    Infinite()
-
-Thermodynamic-limit boundary condition — no finite size.
-"""
-struct Infinite <: BoundaryCondition end
-
-"""
-    OBC(N::Int)
-    OBC(; N::Int = 0)
-
-Open boundary condition.  `N` is the chain length.  `N = 0` is a legacy
-sentinel meaning "size unspecified — caller passes it via kwargs";
-`fetch` methods that accept `OBC(0)` must look up `kwargs[:N]`.
-"""
-struct OBC <: BoundaryCondition
-    N::Int
-end
-OBC(; N::Int=0) = OBC(N)
-
-"""
-    PBC(N::Int)
-    PBC(; N::Int = 0)
-
-Periodic boundary condition.  See [`OBC`](@ref) for the `N = 0`
-sentinel.
-"""
-struct PBC <: BoundaryCondition
-    N::Int
-end
-PBC(; N::Int=0) = PBC(N)
-
-"""
-    _bc_size(bc::BoundaryCondition, kwargs) -> Int
-
-Return the effective system size for `bc`.  Prefers `bc.N` when it is
-positive; otherwise looks up `kwargs[:N]`; otherwise throws.  Legacy
-fetch methods can use this helper to accept both `OBC(N=24)` and
-`OBC(); N=24` call forms.
-"""
-function _bc_size end
-
-function _bc_size(::Infinite, kwargs)
-    return error("_bc_size called on Infinite; call a size-free fetch method instead")
-end
-function _bc_size(bc::Union{OBC,PBC}, kwargs)
-    bc.N > 0 && return bc.N
-    haskey(kwargs, :N) && return Int(kwargs[:N])
-    return error("$(typeof(bc)): N unspecified — pass via OBC(N=...) or kwargs N=...")
-end
+# `BoundaryCondition` / `Infinite` / `OBC` / `PBC` and the `_bc_size` helper are
+# defined once in AbstractQAtlas (the single source of truth) and imported +
+# re-exported at the top of `QAtlas.jl` (#734).  Concrete-model `fetch` methods
+# dispatch on the same shared BC types, so behaviour is unchanged.
 
 """
     AbstractQuantity

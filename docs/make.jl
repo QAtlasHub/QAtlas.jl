@@ -23,9 +23,16 @@ Downloads.download("https://github.com/sotashimozono.png", logo_path)
 makedocs(;
     # Docs are curated per page (framework reference + per-model @autodocs),
     # not a single full @autodocs index, so we do not require every exported
-    # docstring to appear in the manual. Cross-references and doctests are
-    # still checked strictly.
+    # docstring to appear in the manual. Doctests are still checked strictly.
+    # Cross-references are `warnonly`: part of the shared vocabulary (`Energy`,
+    # `SpecificHeat`, boundary conditions, the abstract families, …) is now
+    # re-exported from AbstractQAtlas, whose docstrings live in that package
+    # rather than here (#734), so their `[`X`](@ref)` links cannot resolve
+    # against `modules=[QAtlas]`. Proper cross-package linking (e.g.
+    # DocumenterInterLinks against AbstractQAtlas's deployed docs) is a
+    # follow-up once the migration settles.
     checkdocs=:none,
+    warnonly=[:cross_references],
     doctest=true,
     sitename="QAtlas.jl",
     repo=Remotes.GitHub("QAtlasHub", "QAtlas.jl"),

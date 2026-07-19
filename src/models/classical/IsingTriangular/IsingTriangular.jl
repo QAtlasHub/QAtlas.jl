@@ -27,11 +27,11 @@
 #
 # References:
 #   G. H. Wannier, "Antiferromagnetism. The triangular Ising net",
-#     Phys. Rev. 79, 357 (1950).
+#     [Wannier1950](@cite).
 #   R. M. F. Houtappel, "Order-disorder in hexagonal lattices",
-#     Physica 16, 425 (1950).
+#     [Houtappel1950](@cite).
 #   J. Stephenson, "Ising-model spin correlations on the triangular
-#     lattice", J. Math. Phys. 5, 1009 (1964).  [Future work — two-point
+#     lattice", [Stephenson1964](@cite).  [Future work — two-point
 #     correlations, not implemented in this commit.]
 # ─────────────────────────────────────────────────────────────────────────────
 

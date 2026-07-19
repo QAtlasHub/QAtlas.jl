@@ -697,8 +697,8 @@ with the Loschmidt echo `L(t) = |G(t)|² ∈ [0, 1]` and the rate function
     λ(t) = -lim_{N→∞} log L(t)/N (thermodynamic limit / Infinite)
 
 Non-analytic cusps in `λ(t)` are dynamical quantum phase transitions
-(DQPT).  See Heyl, Polkovnikov, Kehrein, PRL 110, 135704 (2013) and the
-review Heyl, Rep. Prog. Phys. 81, 054001 (2018).
+(DQPT).  See Heyl, Polkovnikov, Kehrein, [Heyl2013](@cite) and the
+review Heyl, [Heyl2018](@cite).
 
 The mode `M::Symbol ∈ (:amplitude, :rate)` is a phantom type parameter
 so that `:amplitude` (returns `L(t)`) and `:rate` (returns `λ(t)`)
@@ -824,7 +824,7 @@ For an integrable system the ordinary (canonical) Gibbs ensemble does
 not describe the long-time relaxed state: every mode-occupation
 `n_k = ⟨c_k† c_k⟩` is a separate conserved quantity, so the diagonal
 ensemble is a *generalised* Gibbs ensemble fixed by the full
-distribution `{n_k}`.  See Rigol et al. PRL 98, 050405 (2007) for the
+distribution `{n_k}`.  See Rigol et al. [Rigol2007](@cite) for the
 foundational argument and Calabrese, Essler, Fagotti J. Stat. Mech.
 (2012) P07016 / P07022 for the TFIM-specific closed-form expressions.
 

@@ -29,10 +29,10 @@
 # at a single point in coupling space.
 #
 # References:
-#   - B. S. Shastry, B. Sutherland, Physica B+C 108, 1069 (1981).
-#   - S. Miyahara, K. Ueda, Phys. Rev. Lett. 82, 3701 (1999).
-#   - A. Koga, N. Kawakami, Phys. Rev. Lett. 84, 4461 (2000).
-#   - H. Kageyama et al., Phys. Rev. Lett. 82, 3168 (1999) — material.
+#   - B. S. Shastry, B. Sutherland, Physica B+[ShastrySutherland1981](@cite).
+#   - S. Miyahara, K. Ueda, [MiyaharaUeda1999](@cite).
+#   - A. Koga, N. Kawakami, [KogaKawakami2000](@cite).
+#   - H. Kageyama et al., [Kageyama1999](@cite) — material.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Exact-dimer phase boundary alpha_c = J/J' below which the singlet-product

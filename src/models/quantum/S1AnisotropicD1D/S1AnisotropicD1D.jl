@@ -27,9 +27,9 @@
 # (Chen-Roncaglia 2008; Tzeng-Yang-Hsu 2017).
 #
 # References:
-#   - F. D. M. Haldane, Phys. Lett. A 93, 464 (1983); PRL 50, 1153 (1983).
-#   - S. R. White, D. A. Huse, Phys. Rev. B 48, 3844 (1993) — Δ ≈ 0.41048 J.
-#   - W. Chen, K. Hida, B. C. Sanctuary, Phys. Rev. B 67, 104401 (2003).
+#   - F. D. M. Haldane, [Haldane1983a](@cite); [Haldane1983](@cite).
+#   - S. R. White, D. A. Huse, [WhiteHuse1993](@cite) — Δ ≈ 0.41048 J.
+#   - W. Chen, K. Hida, B. C. Sanctuary, [ChenHidaSanctuary2003](@cite).
 #   - Y.-C. Chen, R. Roncaglia, J. Stat. Mech. P10024 (2008) — D-driven SPT
 #     ↔ trivial transition in the S=1 chain with single-ion D.
 #   - Y.-D. Tzeng, H.-H. Hung, Y.-C. Chen, M.-F. Yang, Phys. Rev. B 96,

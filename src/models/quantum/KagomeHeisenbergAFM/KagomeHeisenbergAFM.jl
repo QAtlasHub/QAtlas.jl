@@ -28,9 +28,9 @@
 # infrastructure, are tracked as Phase 2.
 #
 # References:
-#   - S. Yan, D. A. Huse, S. R. White, Science 332, 1173 (2011).
+#   - S. Yan, D. A. Huse, S. R. White, [YanHuseWhite2011](@cite).
 #   - S. Depenbrock, I. P. McCulloch, U. Schollwöck,
-#     Phys. Rev. Lett. 109, 067201 (2012).
+#     [DepenbrockMcCullochSchollwock2012](@cite).
 #   - Y. Iqbal, F. Becca, S. Sorella, D. Poilblanc,
 #     Phys. Rev. B 87, 060405(R) (2013).
 # ─────────────────────────────────────────────────────────────────────────────
@@ -73,7 +73,7 @@ KagomeHeisenbergAFM(; J::Real=1.0) = KagomeHeisenbergAFM(Float64(J))
 # Ground-state energy density e_0/J of the spin-1/2 Heisenberg AFM on
 # the kagome lattice.  Reference: Yan-Huse-White, Science 332, 1173
 # (2011), cylindrical DMRG extrapolated to the 2-D limit.  Confirmed by
-# Depenbrock-McCulloch-Schollwock, PRL 109, 067201 (2012); the central
+# Depenbrock-McCulloch-Schollwock, [DepenbrockMcCullochSchollwock2012](@cite); the central
 # value matches across both works at the -0.4386(5) band.  Update if a
 # tighter literature consensus emerges (e.g. He-Zhu-Chen 2017 et seq.).
 const _KAGOME_AFM_ENERGY_DENSITY_PER_J = -0.4386

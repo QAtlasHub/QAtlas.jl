@@ -25,9 +25,9 @@
 #
 # References:
 #   G. H. Wannier, "Antiferromagnetism. The Triangular Ising Net",
-#     Phys. Rev. 79, 357 (1950).
+#     [Wannier1950](@cite).
 #   T. Koretsune and M. Ogata, "Electronic structures of triangular
-#     lattice models", J. Phys. Soc. Jpn. 76, 074706 (2007) — review
+#     lattice models", [Kimura2007](@cite) — review
 #     of the NN tight-binding spectrum and Van Hove singularity.
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -93,7 +93,7 @@ divisible by 3).
 A sorted `Vector{Float64}` of length `Lx·Ly`.
 
 # References
-    G. H. Wannier, Phys. Rev. 79, 357 (1950).
+    G. H. Wannier, [Wannier1950](@cite).
 """
 function fetch(
     m::Triangular, ::TightBindingSpectrum; Lx::Integer=m.Lx, Ly::Integer=m.Ly, t::Real=m.t

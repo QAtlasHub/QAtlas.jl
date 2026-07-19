@@ -77,7 +77,7 @@
 #
 # References:
 #   - Gu, "Fidelity approach to quantum phase transitions",
-#     Int. J. Mod. Phys. B 24, 4371 (2010) — review (Eq. 5.55 for TFIM).
+#     [Gu2010](@cite) — review (Eq. 5.55 for TFIM).
 #   - Damski, "Fidelity approach to quantum phase transitions", PRB 87, 165101
 #     (2013) — closed form for TFIM (his Eq. 23–24, in the convention with
 #     J = 1 and h ≡ g; differs from ours by an overall factor of 2 due to a
@@ -241,7 +241,7 @@ numerical differentiation).  Cost O(N³).
 
 `per_site=true` returns `χ_F / N`.
 
-References: Gu, Int. J. Mod. Phys. B 24, 4371 (2010); Damski,
+References: Gu, [Gu2010](@cite); Damski,
 PRB 87, 165101 (2013).
 """
 function fetch(
@@ -269,7 +269,7 @@ Both branches diverge as `1 / |J − h|` at the critical point
 `|h| = J` — a `DomainError` is thrown if `||h| − |J||` is below
 `1e-14`.
 
-References: Gu, Int. J. Mod. Phys. B 24, 4371 (2010); Damski,
+References: Gu, [Gu2010](@cite); Damski,
 PRB 87, 165101 (2013).
 """
 function fetch(

@@ -31,10 +31,10 @@
 # deferred to Phase 2.
 #
 # References:
-#   - S. F. Edwards, P. W. Anderson, J. Phys. F 5, 965 (1975).
-#   - H. Nishimori, Prog. Theor. Phys. 66, 1169 (1981).
-#   - A. Honecker, M. Picco, P. Pujol, Phys. Rev. Lett. 87, 047201 (2001).
-#   - L. Onsager, Phys. Rev. 65, 117 (1944).
+#   - S. F. Edwards, P. W. Anderson, [EdwardsAnderson1975](@cite).
+#   - H. Nishimori, [Nishimori1981](@cite).
+#   - A. Honecker, M. Picco, P. Pujol, [HoneckerPiccoPujol2001](@cite).
+#   - L. Onsager, [Onsager1944](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

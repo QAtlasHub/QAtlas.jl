@@ -29,10 +29,10 @@
 #
 # References:
 #   - A. A. Belavin, A. M. Polyakov, A. B. Zamolodchikov,
-#     Nucl. Phys. B 241, 333 (1984).
-#   - D. Friedan, Z. Qiu, S. Shenker, Phys. Rev. Lett. 52, 1575 (1984).
+#     [BelavinPolyakovZamolodchikov1984](@cite).
+#   - D. Friedan, Z. Qiu, S. Shenker, [FriedanQiuShenker1984](@cite).
 #   - G. E. Andrews, R. J. Baxter, P. J. Forrester,
-#     J. Stat. Phys. 35, 193 (1984).
+#     [AndrewsBaxterForrester1984](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

@@ -27,10 +27,10 @@
 #
 # References:
 #   - A. B. Zamolodchikov, hep-th/0401146 (2004).
-#   - F. A. Smirnov, A. B. Zamolodchikov, Nucl. Phys. B 915, 363 (2017).
+#   - F. A. Smirnov, A. B. Zamolodchikov, [SmirnovZamolodchikov2017](@cite).
 #   - A. Cavaglià, S. Negro, I. M. Szécsényi, R. Tateo,
-#     JHEP 10, 112 (2016).
-#   - L. McGough, M. Mezei, H. Verlinde, JHEP 04, 010 (2018).
+#     [CavagliaNegroSzecsenyiTateo2016](@cite).
+#   - L. McGough, M. Mezei, H. Verlinde, [McGoughMezeiVerlinde2018](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

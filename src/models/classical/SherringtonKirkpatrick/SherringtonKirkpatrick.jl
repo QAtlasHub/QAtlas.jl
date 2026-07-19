@@ -37,9 +37,9 @@
 # measure on `[0,1]`) and remain tracked for later phases.
 #
 # References:
-#   - D. Sherrington, S. Kirkpatrick, Phys. Rev. Lett. 35, 1792 (1975).
+#   - D. Sherrington, S. Kirkpatrick, [SherringtonKirkpatrick1975](@cite).
 #   - G. Parisi, J. Phys. A 13, L115 (1980).
-#   - M. Talagrand, Annals Math. 163, 221 (2006).
+#   - M. Talagrand, [Talagrand2006](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION
@@ -118,9 +118,9 @@ QAtlas.native_energy_granularity(::SherringtonKirkpatrick, ::Infinite) = :per_si
 # Hardcoded reference value for the SK T=0 Parisi full-RSB ground-state
 # energy density.  References:
 #   - G. Parisi, J. Phys. A 13, L115 (1980): full-RSB variational solution.
-#   - A. Crisanti, T. Rizzo, Phys. Rev. E 65, 046137 (2002): high-precision
+#   - A. Crisanti, T. Rizzo, [CrisantiRizzo2002](@cite): high-precision
 #     numerical evaluation gives e_0/J = -0.7631667 +/- 0.00001.
-#   - M. Talagrand, Annals Math. 163, 221 (2006): rigorous proof of the
+#   - M. Talagrand, [Talagrand2006](@cite): rigorous proof of the
 #     Parisi formula.
 # Update if a tighter literature consensus emerges (e.g. recent
 # Schmidt / Crisanti-Rizzo evaluations).

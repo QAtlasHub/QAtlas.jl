@@ -29,19 +29,19 @@
 # References (DOIs given for direct lookup via doiget / DOI resolver):
 #   I. Affleck, T. Kennedy, E. H. Lieb, H. Tasaki,
 #     "Valence bond ground states in isotropic quantum antiferromagnets",
-#     Commun. Math. Phys. 115, 477 (1988).  doi:10.1007/BF01218021
+#     [AKLT1988](@cite).  doi:10.1007/BF01218021
 #   T. Kennedy and H. Tasaki,
 #     "Hidden Z₂ × Z₂ symmetry breaking in Haldane-gap antiferromagnets",
-#     Phys. Rev. B 45, 304 (1992) — string order parameter.
+#     [KennedyTasaki1992](@cite) — string order parameter.
 #     doi:10.1103/PhysRevB.45.304
 #   D. P. Arovas, A. Auerbach, F. D. M. Haldane,
 #     "Extended Heisenberg models of antiferromagnetism: Analogies to the
-#     fractional quantum Hall effect", Phys. Rev. Lett. 60, 531 (1988) —
+#     fractional quantum Hall effect", [Arovas1988](@cite) —
 #     static structure factor of the AKLT chain.
 #     doi:10.1103/PhysRevLett.60.531
 #   A. García-Saez, V. Murg, and F. Verstraete,
 #     "Spectral gap of the Affleck-Kennedy-Lieb-Tasaki Hamiltonian",
-#     Phys. Rev. B 88, 245118 (2013); arXiv:1308.3631 — DMRG gap.
+#     [GarciaSaez2013](@cite); arXiv:1308.3631 — DMRG gap.
 #     doi:10.1103/PhysRevB.88.245118
 #
 # Finite-temperature context (no analytic reduction known at the AKLT
@@ -49,13 +49,13 @@
 # Takhtajan-Babujian θ = π/4 and Lai-Sutherland θ = -π/4 BLBQ points):
 #   S. Lou, T. Xiang, Z. Su,
 #     "Thermodynamics of the Bilinear-Biquadratic Spin-One Heisenberg
-#     Chain", Phys. Rev. Lett. 85, 2380 (2000) — TMRG numerical reference
+#     Chain", [Lou2000](@cite) — TMRG numerical reference
 #     for BLBQ thermodynamic curves (includes the AKLT point).
 #     doi:10.1103/PhysRevLett.85.2380
 #   A. Lohmann, H.-J. Schmidt, J. Richter,
 #     "Tenth-order high-temperature expansion for the susceptibility and
 #     the specific heat of spin-s Heisenberg models with arbitrary
-#     exchange patterns", Phys. Rev. B 89, 014415 (2014) — HTSE
+#     exchange patterns", [Lohmann2014](@cite) — HTSE
 #     methodology baseline (bilinear Heisenberg only; biquadratic
 #     extension to AKLT is not in the literature; see QAtlas issue #506).
 #     doi:10.1103/PhysRevB.89.014415

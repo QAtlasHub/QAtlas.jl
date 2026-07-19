@@ -22,8 +22,8 @@
 #
 # References:
 #   - G. E. Andrews, R. J. Baxter, P. J. Forrester,
-#     J. Stat. Phys. 35, 193 (1984).
-#   - D. A. Huse, Phys. Rev. B 30, 3908 (1984).
+#     [AndrewsBaxterForrester1984](@cite).
+#   - D. A. Huse, [Huse1984](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

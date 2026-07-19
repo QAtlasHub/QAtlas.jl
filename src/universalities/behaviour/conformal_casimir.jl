@@ -14,9 +14,9 @@
 # kinematic consequence of the conformal cylinder ↔ strip map.
 #
 # References:
-#   J. Cardy, Nucl. Phys. B 270, 186 (1986).
-#   H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, Phys. Rev. Lett. 56, 742 (1986).
-#   I. Affleck, Phys. Rev. Lett. 56, 746 (1986).
+#   J. Cardy, [Cardy1986](@cite).
+#   H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, [BloteCardyNightingale1986](@cite).
+#   I. Affleck, [Affleck1986](@cite).
 
 raw"""
     fetch(::Universality{C}, ::CasimirEnergyCorrection, ::PBC; L, v) -> Real

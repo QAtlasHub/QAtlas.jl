@@ -28,7 +28,7 @@
 #
 # References:
 #   - W. P. Su, J. R. Schrieffer, A. J. Heeger,
-#     Phys. Rev. Lett. 42, 1698 (1979).
+#     [SSH1979](@cite).
 #   - J. K. Asbóth, L. Oroszlány, A. Pályi, "A Short Course on Topological
 #     Insulators", Lect. Notes Phys. 919 (2016) Ch. 1.
 # ─────────────────────────────────────────────────────────────────────────────

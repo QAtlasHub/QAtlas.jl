@@ -19,9 +19,9 @@
 # representation of square-lattice dimers is a c = 1 compact free boson.
 #
 # References:
-#   - P. W. Kasteleyn, Physica 27, 1209 (1961).
-#   - H. N. V. Temperley, M. E. Fisher, Phil. Mag. 6, 1061 (1961).
-#   - M. E. Fisher, Phys. Rev. 124, 1664 (1961).
+#   - P. W. Kasteleyn, [Kasteleyn1961](@cite).
+#   - H. N. V. Temperley, M. E. Fisher, [TemperleyFisher1961](@cite).
+#   - M. E. Fisher, [Fisher1961](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 using Base.MathConstants: catalan

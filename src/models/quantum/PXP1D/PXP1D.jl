@@ -34,13 +34,13 @@
 # Z₂-state survival probability) are tracked as Phase 2.
 #
 # References:
-#   - P. Fendley, K. Sengupta, S. Sachdev, Phys. Rev. B 69, 075106 (2004).
-#   - H. Bernien et al., Nature 551, 579 (2017).
+#   - P. Fendley, K. Sengupta, S. Sachdev, [FendleySenguptaSachdev2004](@cite).
+#   - H. Bernien et al., [Bernien2017](@cite).
 #   - C. J. Turner, A. A. Michailidis, D. A. Abanin, M. Serbyn, Z. Papić,
-#     Nat. Phys. 14, 745 (2018).
-#   - C. J. Lin, O. I. Motrunich, Phys. Rev. Lett. 122, 173401 (2019).
-#   - T. Iadecola, M. Schecter, S. Xu, Phys. Rev. B 100, 184312 (2019).
-#   - F. M. Surace et al., Phys. Rev. X 10, 021041 (2020).
+#     [Turner2018](@cite).
+#   - C. J. Lin, O. I. Motrunich, [LinMotrunich2019](@cite).
+#   - T. Iadecola, M. Schecter, S. Xu, [IadecolaSchecterXu2019](@cite).
+#   - F. M. Surace et al., [Surace2020](@cite).
 #   - M. Serbyn, D. A. Abanin, Z. Papić, Rep. Prog. Phys. 84, 086601 (2021).
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -95,12 +95,12 @@ native_energy_granularity(::PXP1D, ::Infinite) = :per_site
 # density in units of the coupling Ω.  Value sourced from DMRG / ED
 # numerics in the PXP-scar literature; see:
 #   - C. J. Turner, A. A. Michailidis, D. A. Abanin, M. Serbyn, Z. Papić,
-#     Nat. Phys. 14, 745 (2018) — quantum many-body scars, ED reference.
-#   - C. J. Lin, O. I. Motrunich, Phys. Rev. Lett. 122, 173401 (2019) —
+#     [Turner2018](@cite) — quantum many-body scars, ED reference.
+#   - C. J. Lin, O. I. Motrunich, [LinMotrunich2019](@cite) —
 #     scarring and slow thermalisation, ED/DMRG numerics.
-#   - T. Iadecola, M. Schecter, S. Xu, Phys. Rev. B 100, 184312 (2019) —
+#   - T. Iadecola, M. Schecter, S. Xu, [IadecolaSchecterXu2019](@cite) —
 #     bond-bimagnon states, DMRG reference for PXP ground state.
-#   - F. M. Surace et al., Phys. Rev. X 10, 021041 (2020) — U(1) lattice
+#   - F. M. Surace et al., [Surace2020](@cite) — U(1) lattice
 #     gauge theory mapping (Schwinger-model phase diagram; consistent
 #     with the DMRG/ED value above but does not itself tabulate e_0).
 #   - M. Serbyn, D. A. Abanin, Z. Papić, Rep. Prog. Phys. 84, 086601 (2021).

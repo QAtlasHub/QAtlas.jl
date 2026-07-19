@@ -21,9 +21,9 @@
 #                 DMRG, to be implemented in a follow-up).
 #
 # References:
-#   - Pfeuty, Ann. Phys. 57, 79 (1970)
-#   - McCoy & Wu, Phys. Rev. B 18, 4886 (1978)
-#   - Banuls, Cirac & Hastings, Phys. Rev. Lett. 106, 050405 (2011)
+#   - Pfeuty, [Pfeuty1970](@cite)
+#   - McCoy & Wu, [McCoyWu1978a](@cite)
+#   - Banuls, Cirac & Hastings, [BanulsCiracHastings2011](@cite)
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

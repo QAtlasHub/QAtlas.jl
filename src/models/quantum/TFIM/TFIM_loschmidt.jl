@@ -2,8 +2,8 @@
 # Transverse Field Ising Model — Loschmidt echo + dynamical quantum phase
 # transitions (DQPT) for sudden quenches H_0 → H_f.
 #
-# Reference: Heyl–Polkovnikov–Kehrein, PRL 110, 135704 (2013); Heyl,
-# Rep. Prog. Phys. 81, 054001 (2018).
+# Reference: Heyl–Polkovnikov–Kehrein, [Heyl2013](@cite); Heyl,
+# [Heyl2018](@cite).
 #
 # The Loschmidt amplitude after preparing |ψ_0⟩ as the ground state of
 # H_0 = TFIM(J, h_0) and quenching to H_f = TFIM(J, h_f) is
@@ -267,8 +267,8 @@ size `bc.N` after a sudden quench `H_0 = TFIM(J, h_0) → H_f = TFIM(J, h_f)`.
 `model_f`; only `h` differs).  Computed by diagonalising both BdG
 matrices and evaluating the per-mode Bogoliubov overlap product.
 
-References: Heyl-Polkovnikov-Kehrein, PRL 110, 135704 (2013); Heyl,
-Rep. Prog. Phys. 81, 054001 (2018).
+References: Heyl-Polkovnikov-Kehrein, [Heyl2013](@cite); Heyl,
+[Heyl2018](@cite).
 """
 function fetch(
     model_f::TFIM, ::LoschmidtEcho{:amplitude}, bc::OBC; initial::TFIM, t::Real, kwargs...
@@ -324,8 +324,8 @@ evaluated by `QuadGK.quadgk`.  At a DQPT critical time the integrand has a
 log-divergence at `k = k^*`; QuadGK's adaptive subdivision handles the
 integrable singularity.
 
-References: Heyl-Polkovnikov-Kehrein, PRL 110, 135704 (2013); Heyl,
-Rep. Prog. Phys. 81, 054001 (2018).
+References: Heyl-Polkovnikov-Kehrein, [Heyl2013](@cite); Heyl,
+[Heyl2018](@cite).
 """
 function fetch(
     model_f::TFIM,

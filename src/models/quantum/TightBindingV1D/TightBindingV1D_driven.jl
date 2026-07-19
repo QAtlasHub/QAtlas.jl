@@ -45,7 +45,7 @@
 #     moving under the influence of an electric field", Phys. Rev. B 34, 3625
 #     (1986).
 #   - M. Holthaus, D. W. Hone, "Localization effects in ac-driven tight-binding
-#     lattices", Philos. Mag. B 74, 105 (1996).
+#     lattices", [HolthausHone1996](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 using SpecialFunctions: besselj, besselj0

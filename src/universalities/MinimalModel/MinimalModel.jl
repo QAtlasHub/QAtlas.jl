@@ -4,8 +4,8 @@
 # References:
 #   Belavin, Polyakov, Zamolodchikov (BPZ),
 #     "Infinite conformal symmetry in two-dimensional quantum field
-#      theory", Nucl. Phys. B 241, 333 (1984).
-#   Friedan, Qiu, Shenker, Phys. Rev. Lett. 52, 1575 (1984)
+#      theory", [BelavinPolyakovZamolodchikov1984](@cite).
+#   Friedan, Qiu, Shenker, [FriedanQiuShenker1984](@cite)
 #     — minimal-model unitarity.
 #   Di Francesco, Mathieu, Sénéchal,
 #     "Conformal Field Theory" (Springer, 1997), Ch. 7.

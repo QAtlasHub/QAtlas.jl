@@ -23,8 +23,8 @@
 # sine-Gordon duality remain tracked as Phase 3.
 #
 # References:
-#   - J. Schwinger, Phys. Rev. 128, 2425 (1962).
-#   - S. Coleman, R. Jackiw, L. Susskind, Annals Phys. 93, 267 (1975).
+#   - J. Schwinger, [Schwinger1962](@cite).
+#   - S. Coleman, R. Jackiw, L. Susskind, [ColemanJackiwSusskind1975](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

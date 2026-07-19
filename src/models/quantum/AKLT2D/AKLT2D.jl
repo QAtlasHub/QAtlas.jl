@@ -29,7 +29,7 @@
 # References:
 #   I. Affleck, T. Kennedy, E. H. Lieb, H. Tasaki,
 #     "Valence bond ground states in isotropic quantum antiferromagnets",
-#     Commun. Math. Phys. 115, 477 (1988).
+#     [AKLT1988](@cite).
 #   F. Verstraete and J. I. Cirac,
 #     "Renormalization algorithms for quantum-many body systems in two
 #      and higher dimensions", cond-mat/0407066 (2004) — PEPS realisation.

@@ -25,10 +25,10 @@
 # quantity type and is still deferred.
 #
 # References:
-#   - A. M. Polyakov, Phys. Lett. B 103, 207 (1981).
-#   - H. Dorn, H.-J. Otto, Nucl. Phys. B 429, 375 (1994).
+#   - A. M. Polyakov, [Polyakov1981](@cite).
+#   - H. Dorn, H.-J. Otto, [DornOtto1994](@cite).
 #   - A. B. Zamolodchikov, A. B. Zamolodchikov,
-#     Nucl. Phys. B 477, 577 (1996).
+#     [ZamolodchikovZamolodchikov1996](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

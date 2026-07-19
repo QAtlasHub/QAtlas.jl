@@ -28,9 +28,9 @@
 #
 # References:
 #   - E. Lieb, T. Schultz, D. Mattis, "Two soluble models of an
-#     antiferromagnetic chain", Annals Phys. 16, 407 (1961).
+#     antiferromagnetic chain", [LiebSchultzMattis1961](@cite).
 #   - P. Pfeuty, "The one-dimensional Ising model with a transverse
-#     field", Annals Phys. 57, 79 (1970).
+#     field", [Pfeuty1970](@cite).
 #   - T. Koffel, M. Lewenstein, L. Tagliacozzo, Phys. Rev. Lett. 109,
 #     267203 (2012).
 #   - M. F. Maghrebi, Z.-X. Gong, A. V. Gorshkov, Phys. Rev. Lett. 119,

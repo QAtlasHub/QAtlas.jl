@@ -26,10 +26,10 @@
 # as a follow-up phase.
 #
 # References:
-#   - M. Toda, J. Phys. Soc. Jpn. 22, 431 (1967).
-#   - H. Flaschka, Phys. Rev. B 9, 1924 (1974) — Lax representation.
-#   - M. Hénon, Phys. Rev. B 9, 1921 (1974) — integrals of motion.
-#   - M. C. Gutzwiller, Annals Phys. 133, 304 (1981) — quantum Toda.
+#   - M. Toda, [Toda1967](@cite).
+#   - H. Flaschka, [Flaschka1974](@cite) — Lax representation.
+#   - M. Hénon, [Henon1974](@cite) — integrals of motion.
+#   - M. C. Gutzwiller, [Gutzwiller1981](@cite) — quantum Toda.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

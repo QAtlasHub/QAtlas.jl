@@ -5,7 +5,7 @@
 # Serves as the baseline reference for all universality classes.
 #
 # References:
-#   L. D. Landau, Zh. Eksp. Teor. Fiz. 7, 19 (1937).
+#   L. D. Landau, [Landau1937](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 """

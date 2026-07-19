@@ -72,7 +72,7 @@ same way).
 
 # References
     L. D. Faddeev, L. A. Takhtajan, "What is the spin of a spin wave?",
-      Phys. Lett. A 85, 375 (1981).
+      [FaddeevTakhtajan1981](@cite).
 """
 function heisenberg_spinon_dispersion(model::Heisenberg1D, k::Real; J::Real=1.0)
     return (π * float(J) / 2) * abs(sin(float(k)))
@@ -102,7 +102,7 @@ Special values:
 
 # References
     J. des Cloizeaux, J. J. Pearson, "Spin-wave spectrum of the
-      antiferromagnetic linear chain", Phys. Rev. 128, 2131 (1962).
+      antiferromagnetic linear chain", [desCloizeauxPearson1962](@cite).
 """
 function heisenberg_two_spinon_lower_edge(model::Heisenberg1D, q::Real; J::Real=1.0)
     return (π * float(J) / 2) * abs(sin(float(q)))
@@ -127,7 +127,7 @@ gapless points where the continuum collapses to a line.
 
 # References
     J. des Cloizeaux, J. J. Pearson, "Spin-wave spectrum of the
-      antiferromagnetic linear chain", Phys. Rev. 128, 2131 (1962).
+      antiferromagnetic linear chain", [desCloizeauxPearson1962](@cite).
 """
 function heisenberg_two_spinon_upper_edge(model::Heisenberg1D, q::Real; J::Real=1.0)
     return π * float(J) * abs(sin(float(q) / 2))
@@ -223,7 +223,7 @@ than relying on a numerical cap.
 # References
     G. Müller, H. Thomas, H. Beck, J. C. Bonner, "Quantum spin
       dynamics of the antiferromagnetic linear chain in zero and
-      nonzero magnetic field", Phys. Rev. B 24, 1429 (1981).
+      nonzero magnetic field", [MullerThomasBeckBonner1981](@cite).
     J.-S. Caux, R. Hagemans, "The four-spinon dynamical structure
       factor of the Heisenberg chain", J. Stat. Mech. P12013 (2006)
       (Phase 2 reference, not yet implemented).

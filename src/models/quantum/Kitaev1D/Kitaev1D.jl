@@ -31,9 +31,9 @@
 #
 # References:
 #   - A. Yu. Kitaev, "Unpaired Majorana fermions in quantum wires",
-#     Phys.-Usp. 44, 131 (2001).
+#     Phys.-[Kitaev2001](@cite).
 #   - J. Alicea, "New directions for the pursuit of Majorana fermions in
-#     solid state systems", Rep. Prog. Phys. 75, 076501 (2012).
+#     solid state systems", [Alicea2012](@cite).
 #   - J. K. Asbóth, L. Oroszlány, A. Pályi, "A Short Course on Topological
 #     Insulators", Lect. Notes Phys. 919 (2016) — Pfaffian invariant.
 # ─────────────────────────────────────────────────────────────────────────────

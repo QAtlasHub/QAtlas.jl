@@ -23,13 +23,13 @@
 #
 # References:
 #
-#   - H. J. Briegel, R. Raussendorf, Phys. Rev. Lett. 86, 910 (2001) —
+#   - H. J. Briegel, R. Raussendorf, [BriegelRaussendorf2001](@cite) —
 #     persistent entanglement, cluster state.
-#   - R. Raussendorf, H. J. Briegel, Phys. Rev. Lett. 86, 5188 (2001) —
+#   - R. Raussendorf, H. J. Briegel, [RaussendorfBriegel2001](@cite) —
 #     one-way quantum computer.
 #   - D. V. Else, S. D. Bartlett, A. C. Doherty, New J. Phys. 14, 113016
 #     (2012) — symmetry protection of the cluster Hamiltonian.
-#   - R. Verresen, R. Moessner, F. Pollmann, Phys. Rev. B 96, 165124 (2017)
+#   - R. Verresen, R. Moessner, F. Pollmann, [VerresenMoessnerPollmann2017](@cite)
 #     — relation to two coupled Kitaev chains.
 # ─────────────────────────────────────────────────────────────────────────────
 

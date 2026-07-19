@@ -26,10 +26,10 @@
 # delegating to [`MinimalModel(5, 2)`](@ref).
 #
 # References:
-#   - C. N. Yang and T. D. Lee, Phys. Rev. 87, 404 (1952);
-#     T. D. Lee and C. N. Yang, Phys. Rev. 87, 410 (1952).
-#   - J. L. Cardy, Phys. Rev. Lett. 54, 1354 (1985).
-#   - M. E. Fisher, Phys. Rev. Lett. 40, 1610 (1978).
+#   - C. N. Yang and T. D. Lee, [YangLee1952](@cite);
+#     T. D. Lee and C. N. Yang, [LeeYang1952](@cite).
+#   - J. L. Cardy, [Cardy1985](@cite).
+#   - M. E. Fisher, [Fisher1978](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

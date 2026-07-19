@@ -6,7 +6,7 @@
 #
 #   G. Jüttner, A. Klümper, J. Suzuki, "The Hubbard chain at finite
 #   temperatures: ab initio calculations of Tomonaga-Luttinger liquid
-#   properties", Nucl. Phys. B 522, 471 (1998), arXiv:cond-mat/9711310.
+#   properties", [JuttnerKlumperSuzuki1998](@cite), arXiv:cond-mat/9711310.
 #
 # Currently SUPPORTS H = 0 AND μ = U/2 (half-filling) ONLY. The 3-channel
 # Newton solver enforces b̄ = b via the H=0 half-filling symmetry;
@@ -28,7 +28,7 @@ The submodule exported helpers atomic_free_energy and
 atomic_free_energy_half_filling are exposed for documentation and
 verification.
 
-Reference: Juttner, Klumper, Suzuki, Nucl. Phys. B 522, 471 (1998),
+Reference: Juttner, Klumper, Suzuki, [JuttnerKlumperSuzuki1998](@cite),
 arXiv:cond-mat/9711310 (JuttnerKlumperSuzuki1998).
 """
 module Hubbard1DJKSNLIE

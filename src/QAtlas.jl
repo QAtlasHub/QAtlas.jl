@@ -4,11 +4,14 @@ module QAtlas
 # AbstractFFTs→FFTW idiom (the dependency never points the other way).  The
 # staged core-vocabulary migration (#734) makes AbstractQAtlas the single
 # source of truth for the shared type vocabulary; QAtlas imports and
-# re-exports each slice for API compatibility.  Migrated so far: the
-# BoundaryCondition family (`BoundaryCondition` / `Infinite` / `OBC` / `PBC`)
-# and the `_bc_size` helper.  Remaining duplicate definitions in `src/core/`
-# are replaced in later per-slice steps.
-using AbstractQAtlas: BoundaryCondition, Infinite, OBC, PBC, _bc_size
+# re-exports each slice for API compatibility.  Migrated so far: the abstract
+# roots (`AbstractQAtlasModel` / `AbstractQuantity`) and the BoundaryCondition
+# family (`BoundaryCondition` / `Infinite` / `OBC` / `PBC`) with `_bc_size`.
+# QAtlas keeps the deprecation surface (`AbstractModel` alias, `Model{M}` /
+# `Quantity{Q}` wrappers), which now subtype the shared roots.  Remaining
+# duplicate definitions in `src/core/` are replaced in later per-slice steps.
+using AbstractQAtlas:
+    AbstractQAtlasModel, AbstractQuantity, BoundaryCondition, Infinite, OBC, PBC, _bc_size
 
 export AbstractModel, Model
 export BoundaryCondition, Infinite, PBC, OBC

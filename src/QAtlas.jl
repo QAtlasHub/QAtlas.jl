@@ -45,6 +45,11 @@ using AbstractQAtlas:
 # methods in model files, which `using` forbids ("must be explicitly imported to be
 # extended"); it must therefore come in via `import` (#734).
 import AbstractQAtlas: native_energy_granularity
+# `fetch` is AbstractQAtlas's generic function; QAtlas implements the concrete
+# `(model, quantity, bc)` methods (bare-extended in model files, hence `import`
+# not `using`).  Sharing one `fetch` across the ecosystem is the AbstractFFTs
+# idiom — QAtlas is the concrete atlas that implements AbstractQAtlas (#734).
+import AbstractQAtlas: fetch
 
 export AbstractModel, Model
 export BoundaryCondition, Infinite, PBC, OBC

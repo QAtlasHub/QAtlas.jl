@@ -254,28 +254,33 @@ struct EnergyLocal <: AbstractQuantity end
 
 # ─── Susceptibilities (axis pair) ────────────────────────────────────────
 
+# The static axis-pair susceptibilities adopt AbstractQAtlas's index-parametric
+# `Susceptibility{I}` (#734).  The fused `SusceptibilityXX/YY/ZZ` names stay as
+# deprecated aliases so existing fetch methods, registry rows, and downstream
+# code keep working; new code should use `Susceptibility(:x, :x)` etc.
+
 """
-    SusceptibilityXX() <: AbstractQuantity
+    const SusceptibilityXX = Susceptibility{(:x, :x)}   # deprecated alias
 
 Static transverse susceptibility,
-`χ_xx(β) = β · (⟨M_x²⟩ − ⟨M_x⟩²) / N`.
+`χ_xx(β) = β · (⟨M_x²⟩ − ⟨M_x⟩²) / N`.  **Deprecated** — use `Susceptibility(:x, :x)`.
 """
-struct SusceptibilityXX <: AbstractSusceptibility end
+const SusceptibilityXX = Susceptibility{(:x, :x)}
 
 """
-    SusceptibilityYY() <: AbstractQuantity
+    const SusceptibilityYY = Susceptibility{(:y, :y)}   # deprecated alias
 
-Analogue for the y-axis.
+Analogue for the y-axis.  **Deprecated** — use `Susceptibility(:y, :y)`.
 """
-struct SusceptibilityYY <: AbstractSusceptibility end
+const SusceptibilityYY = Susceptibility{(:y, :y)}
 
 """
-    SusceptibilityZZ() <: AbstractQuantity
+    const SusceptibilityZZ = Susceptibility{(:z, :z)}   # deprecated alias
 
 Uniform longitudinal susceptibility,
-`χ_zz(β) = β · (⟨M_z²⟩ − ⟨M_z⟩²) / N`.
+`χ_zz(β) = β · (⟨M_z²⟩ − ⟨M_z⟩²) / N`.  **Deprecated** — use `Susceptibility(:z, :z)`.
 """
-struct SusceptibilityZZ <: AbstractSusceptibility end
+const SusceptibilityZZ = Susceptibility{(:z, :z)}
 
 # ─── Real-space two-point correlators ───────────────────────────────────
 #

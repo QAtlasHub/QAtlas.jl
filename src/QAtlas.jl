@@ -39,7 +39,8 @@ using AbstractQAtlas:
     TopologicalEntanglementEntropy,
     TopologicalInvariant,
     UniversalityClass,
-    Magnetization
+    Magnetization,
+    Susceptibility
 # `native_energy_granularity` is extended by bare `native_energy_granularity(::M, ::BC) = …`
 # methods in model files, which `using` forbids ("must be explicitly imported to be
 # extended"); it must therefore come in via `import` (#734).
@@ -194,6 +195,7 @@ export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export Polarization
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
+export Susceptibility  # index-parametric (AbstractQAtlas); SusceptibilityXX/YY/ZZ are deprecated aliases
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export XXCorrelation, YYCorrelation, ZZCorrelation
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor

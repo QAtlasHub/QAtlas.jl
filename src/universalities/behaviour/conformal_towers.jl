@@ -3,8 +3,8 @@
 # Universal BEHAVIOUR: Conformal tower of states excitation spectrum in 1+1D CFT.
 #
 # References:
-#   J. Cardy, Nucl. Phys. B 270, 186 (1986).
-#   H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, Phys. Rev. Lett. 56, 742 (1986).
+#   J. Cardy, [Cardy1986](@cite).
+#   H. W. J. Blöte, J. L. Cardy, M. P. Nightingale, [BloteCardyNightingale1986](@cite).
 
 raw"""
     fetch(::Universality{C}, ::ConformalTower, bc::Union{PBC, OBC}; L::Real, v::Real) -> Vector{NamedTuple}

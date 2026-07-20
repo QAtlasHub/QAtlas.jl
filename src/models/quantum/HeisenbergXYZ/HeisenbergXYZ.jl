@@ -25,8 +25,8 @@
 # Baxter-elliptic phase 2 implementation.
 #
 # References:
-#   - R. J. Baxter, Annals Phys. 70, 193 (1972).
-#   - L. D. Faddeev, L. A. Takhtajan, J. Soviet Math. 24, 241 (1984).
+#   - R. J. Baxter, [Baxter1972a](@cite).
+#   - L. D. Faddeev, L. A. Takhtajan, [FaddeevTakhtajan1984](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

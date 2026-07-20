@@ -26,9 +26,9 @@
 # follow-up scope (#257 phase 2).
 #
 # References:
-#   - L. Pauling, J. Am. Chem. Soc. 57, 2680 (1935).
-#   - S. T. Bramwell, M. J. P. Gingras, Science 294, 1495 (2001).
-#   - C. Castelnovo, R. Moessner, S. L. Sondhi, Nature 451, 42 (2008).
+#   - L. Pauling, [Pauling1935](@cite).
+#   - S. T. Bramwell, M. J. P. Gingras, [BramwellGingras2001](@cite).
+#   - C. Castelnovo, R. Moessner, S. L. Sondhi, [CastelnovoMoessnerSondhi2008](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

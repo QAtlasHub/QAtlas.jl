@@ -26,8 +26,8 @@
 # `CentralCharge` at `g ≠ 0` remain tracked as Phase 3.
 #
 # References:
-#   - D. J. Gross, A. Neveu, Phys. Rev. D 10, 3235 (1974).
-#   - N. Andrei, J. H. Lowenstein, Phys. Rev. Lett. 43, 1698 (1979).
+#   - D. J. Gross, A. Neveu, [GrossNeveu1974](@cite).
+#   - N. Andrei, J. H. Lowenstein, [AndreiLowenstein1979](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

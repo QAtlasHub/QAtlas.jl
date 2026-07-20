@@ -9,7 +9,7 @@
 #   XY d=3: Chester, Landry, Liu, Poland, Simmons-Duffin, Su, Vichi,
 #     JHEP 02, 098 (2020) — conformal bootstrap.
 #   Heisenberg d=3: Chester, Landry, Liu, Poland, Simmons-Duffin, Su,
-#     Vichi, Phys. Rev. D 104, 105013 (2021).
+#     Vichi, [Chester2021](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 """

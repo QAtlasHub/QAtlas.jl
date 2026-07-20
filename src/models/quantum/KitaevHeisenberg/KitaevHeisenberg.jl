@@ -26,8 +26,8 @@
 #
 # References:
 #   - A. Kitaev, "Anyons in an exactly solved model and beyond",
-#     Annals Phys. 321, 2 (2006).
-#   - G. Jackeli, G. Khaliullin, Phys. Rev. Lett. 102, 017205 (2009).
+#     [Kitaev2006](@cite).
+#   - G. Jackeli, G. Khaliullin, [JackeliKhaliullin2009](@cite).
 #   - J. G. Rau, E. K.-H. Lee, H.-Y. Kee, Phys. Rev. Lett. 112,
 #     077204 (2014).
 # ─────────────────────────────────────────────────────────────────────────────

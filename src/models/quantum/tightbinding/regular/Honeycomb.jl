@@ -25,9 +25,9 @@
 #   |f(k)|² = t² [3 + 2cos(k·a₁) + 2cos(k·a₂) + 2cos(k·(a₂−a₁))]
 #
 # References:
-#   P. R. Wallace, "The Band Theory of Graphite", Phys. Rev. 71, 622 (1947).
+#   P. R. Wallace, "The Band Theory of Graphite", [Wallace1947](@cite).
 #   A. H. Castro Neto et al., "The electronic properties of graphene",
-#     Rev. Mod. Phys. 81, 109 (2009).
+#     [CastroNeto2009](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -112,8 +112,8 @@ Dirac points where the argument vanishes exactly.
 A sorted `Vector{Float64}` of length `2·Lx·Ly`.
 
 # References
-    P. R. Wallace, Phys. Rev. 71, 622 (1947).
-    A. H. Castro Neto et al., Rev. Mod. Phys. 81, 109 (2009).
+    P. R. Wallace, [Wallace1947](@cite).
+    A. H. Castro Neto et al., [CastroNeto2009](@cite).
 """
 function fetch(
     m::Honeycomb, ::TightBindingSpectrum; Lx::Integer=m.Lx, Ly::Integer=m.Ly, t::Real=m.t

@@ -47,9 +47,9 @@
 # are tracked as **Phase 2**.
 #
 # References:
-#   - J. L. Cardy, Nucl. Phys. B 324, 581 (1989).
-#   - I. Affleck, A. W. W. Ludwig, Phys. Rev. Lett. 67, 161 (1991).
-#   - D. Friedan, A. Konechny, Phys. Rev. Lett. 93, 030402 (2004).
+#   - J. L. Cardy, [Cardy1989](@cite).
+#   - I. Affleck, A. W. W. Ludwig, [AffleckLudwig1991](@cite).
+#   - D. Friedan, A. Konechny, [FriedanKonechny2004](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

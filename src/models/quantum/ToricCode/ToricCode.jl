@@ -62,14 +62,14 @@
 # References
 # ──────────
 #   - A. Yu. Kitaev, "Fault-tolerant quantum computation by anyons",
-#     Annals Phys. 303, 2 (2003).
+#     [Kitaev2003](@cite).
 #   - A. Kitaev, J. Preskill, "Topological entanglement entropy",
-#     Phys. Rev. Lett. 96, 110404 (2006).
+#     [KitaevPreskill2006](@cite).
 #   - M. Levin, X.-G. Wen, "Detecting topological order in a ground state
-#     wave function", Phys. Rev. Lett. 96, 110405 (2006).
+#     wave function", [LevinWen2006](@cite).
 #   - C. Nayak, S. H. Simon, A. Stern, M. Freedman, S. Das Sarma,
 #     "Non-Abelian anyons and topological quantum computation",
-#     Rev. Mod. Phys. 80, 1083 (2008).
+#     [NayakSimonSternFreedmanDasSarma2008](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

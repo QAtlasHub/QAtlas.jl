@@ -24,8 +24,8 @@
 # distinctly from finite-N exact data.
 #
 # References:
-#   F. D. M. Haldane, PRL 50, 1153 (1983).
-#   S. R. White, D. A. Huse, Phys. Rev. B 48, 3844 (1993) —
+#   F. D. M. Haldane, [Haldane1983](@cite).
+#   S. R. White, D. A. Huse, [WhiteHuse1993](@cite) —
 #     DMRG values  Δ ≈ 0.41048 J,  e₀ ≈ -1.401484 J.
 # ─────────────────────────────────────────────────────────────────────────────
 

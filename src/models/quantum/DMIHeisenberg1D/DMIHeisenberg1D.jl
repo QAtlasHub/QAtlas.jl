@@ -31,11 +31,11 @@
 # the modern `Energy{:per_site}` axis-explicit convention.
 #
 # References:
-#   - H. Bethe, Z. Physik 71, 205 (1931).
+#   - H. Bethe, [Bethe1931](@cite).
 #   - L. Hulthén, Ark. Mat. Astron. Fys. 26A, No. 11 (1938).
-#   - I. E. Dzyaloshinskii, J. Phys. Chem. Solids 4, 241 (1958).
-#   - T. Moriya, Phys. Rev. 120, 91 (1960).
-#   - I. Affleck, M. Oshikawa, Phys. Rev. B 60, 1038 (1999) — spiral
+#   - I. E. Dzyaloshinskii, [Dzyaloshinsky1958](@cite).
+#   - T. Moriya, [Moriya1960](@cite).
+#   - I. Affleck, M. Oshikawa, [AffleckOshikawa1999](@cite) — spiral
 #     ground state and gauge transformation to twisted XXZ for the
 #     spin-½ Heisenberg-DM chain.
 # ─────────────────────────────────────────────────────────────────────────────

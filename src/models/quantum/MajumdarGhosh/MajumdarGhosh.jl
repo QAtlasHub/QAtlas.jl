@@ -37,14 +37,14 @@
 # References:
 #
 #   - C. K. Majumdar, D. K. Ghosh, "On Next-Nearest-Neighbor Interaction
-#     in Linear Chain. I/II", J. Math. Phys. 10, 1388 (1969) — exact
+#     in Linear Chain. I/II", [MajumdarGhosh1969](@cite) — exact
 #     dimer ground state at J₂/J₁ = 1/2.
 #   - B. S. Shastry, B. Sutherland, "Excitation spectrum of a dimerized
 #     next-neighbour antiferromagnetic chain", J. Phys. C 14, L765
 #     (1981) — analytical lower bound Δ ≥ J/4.
 #   - S. R. White, I. Affleck, "Dimerization and incommensurate spiral
 #     spin correlations in the zigzag spin chain: Analogies to the
-#     Kondo lattice", Phys. Rev. B 54, 9862 (1996) — DMRG gap
+#     Kondo lattice", [WhiteAffleck1996](@cite) — DMRG gap
 #     Δ ≈ 0.234 J at the MG point.
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -229,7 +229,7 @@ end
 
 # Hardcoded DMRG reference for the Majumdar–Ghosh ground-state-to-first-
 # excited spin gap.  References:
-#   * S. R. White, I. Affleck, Phys. Rev. B 54, 9862 (1996) — DMRG study
+#   * S. R. White, I. Affleck, [WhiteAffleck1996](@cite) — DMRG study
 #     of the J1-J2 chain at the MG point, gap Δ ≈ 0.234 J.
 #   * S. Eggert, Phys. Rev. B 54, R9612 (1996) — DMRG cross-check.
 # (The Shastry-Sutherland 1981 analytical lower bound Δ ≥ J/4 = 0.25 J is

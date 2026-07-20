@@ -7,7 +7,7 @@
 #   * mean ratio ⟨r⟩ = 2 log 2 - 1 ≈ 0.3863
 #
 # Reference: Y. Y. Atas, E. Bogomolny, O. Giraud, G. Roux,
-#   Phys. Rev. Lett. 110, 084101 (2013).
+#   [Atas2013](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 """

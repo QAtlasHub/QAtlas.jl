@@ -29,11 +29,11 @@
 # and are tracked as Phase 2.
 #
 # References:
-#   - Y. Imry, S. Ma, Phys. Rev. Lett. 35, 1399 (1975).
-#   - J. Imbrie, Comm. Math. Phys. 98, 145 (1985).
-#   - J. Bricmont, A. Kupiainen, Phys. Rev. Lett. 59, 1829 (1987).
-#   - G. Parisi, N. Sourlas, Phys. Rev. Lett. 43, 744 (1979).
-#   - G. Tarjus, M. Tissier, Phys. Rev. Lett. 93, 267008 (2004).
+#   - Y. Imry, S. Ma, [ImryMa1975](@cite).
+#   - J. Imbrie, [Imbrie1985](@cite).
+#   - J. Bricmont, A. Kupiainen, [BricmontKupiainen1987](@cite).
+#   - G. Parisi, N. Sourlas, [ParisiSourlas1979](@cite).
+#   - G. Tarjus, M. Tissier, [TarjusTissier2004](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION

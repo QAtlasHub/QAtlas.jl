@@ -53,7 +53,7 @@
 # References:
 #   - C. N. Yang & C. P. Yang, "One-Dimensional Chain of Anisotropic
 #     Spin–Spin Interactions. II. Properties of the Ground-State Energy
-#     per Lattice Site for an Infinite System", Phys. Rev. 150, 327 (1966).
+#     per Lattice Site for an Infinite System", [YangYang1966](@cite).
 #   - M. Takahashi, "Thermodynamics of One-Dimensional Solvable Models"
 #     (Cambridge University Press, 1999), §4.3 and §5.1.
 #   - Existing project derivation:

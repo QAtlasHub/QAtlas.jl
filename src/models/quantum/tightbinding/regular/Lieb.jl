@@ -32,9 +32,9 @@
 #
 # References:
 #   E. H. Lieb, "Two Theorems on the Hubbard Model",
-#     Phys. Rev. Lett. 62, 1201 (1989).
+#     [Lieb1989](@cite).
 #   H. Tasaki, "From Nagaoka's Ferromagnetism to Flat-Band Ferromagnetism
-#     and Beyond", Prog. Theor. Phys. 99, 489 (1998).
+#     and Beyond", [Tasaki1998](@cite).
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -105,7 +105,7 @@ eigenvalues is therefore
 A sorted `Vector{Float64}` of length `3·Lx·Ly`.
 
 # References
-    E. H. Lieb, Phys. Rev. Lett. 62, 1201 (1989).
+    E. H. Lieb, [Lieb1989](@cite).
 """
 function fetch(
     m::Lieb, ::TightBindingSpectrum; Lx::Integer=m.Lx, Ly::Integer=m.Ly, t::Real=m.t

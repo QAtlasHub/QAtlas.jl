@@ -44,9 +44,9 @@
 #
 # References
 #   - A. Kitaev, "Anyons in an exactly solved model and beyond",
-#     Ann. Phys. 321, 2 (2006).
-#   - E. H. Lieb, PRL 73, 2158 (1994) — flux-free ground state.
-#   - J. Nasu, M. Udagawa, Y. Motome, PRL 113, 197205 (2014) — full
+#     [Kitaev2006](@cite).
+#   - E. H. Lieb, [Lieb1994](@cite) — flux-free ground state.
+#   - J. Nasu, M. Udagawa, Y. Motome, [NasuUdagawaMotome2014](@cite) — full
 #     finite-T thermodynamics including flux fluctuations.
 # ─────────────────────────────────────────────────────────────────────────────
 

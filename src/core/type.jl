@@ -54,29 +54,11 @@ function Quantity(q::Symbol)
 end
 Quantity(q::AbstractString) = Quantity(Symbol(q))
 
-"""
-    fetch(model, quantity, bc; kwargs...)
-
-Return the stored / computed value of `quantity` for `model` under
-boundary condition `bc`.  The canonical signature takes a concrete
-model struct + concrete quantity struct + BC; a legacy
-`fetch(::Symbol, ::Symbol, bc; kwargs...)` shim is also provided in
-`src/deprecate/legacy_fetch.jl` for backward compatibility.
-
-Each `(model, quantity, bc)` triple must be implemented as a separate
-method; this top-level definition throws an informative error for
-un-implemented triples.
-"""
-function fetch(
-    model::AbstractQAtlasModel, quantity::AbstractQuantity, bc::BoundaryCondition; kwargs...
-)
-    return error(
-        "QAtlas: no fetch method for model=$(typeof(model)), " *
-        "quantity=$(typeof(quantity)), bc=$(typeof(bc)). " *
-        "Define `fetch(::$(typeof(model)), ::$(typeof(quantity)), ::$(typeof(bc)); ...)` " *
-        "in src/models/... to register the implementation.",
-    )
-end
+# `fetch` is AbstractQAtlas's generic function — QAtlas `import`s it (see
+# src/QAtlas.jl) and implements one method per `(model, quantity, bc)` triple in
+# src/models/... (#734).  The generic fallback that errors on an un-implemented
+# triple now lives in AbstractQAtlas; QAtlas no longer defines its own, so the
+# whole ecosystem shares one `fetch` generic (the AbstractFFTs→FFTW idiom).
 
 # Note: the legacy `fetch(::Symbol, ::Symbol, bc; kwargs...)` shim has
 # been moved to `src/deprecate/legacy_fetch.jl` so the deprecation

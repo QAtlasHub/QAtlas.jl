@@ -26,7 +26,10 @@ using Aqua
         # fails CI.
         undocumented_names=true,
         persistent_tasks=false,
-        piracies=true,
+        # `fetch` is AbstractQAtlas's generic function; QAtlas is its concrete
+        # implementer, so the legacy `fetch(::Symbol, ::Symbol, ::BC)` deprecation
+        # shim is not piracy in spirit — treat the shared `fetch` as own (#734).
+        piracies=(treat_as_own=[QAtlas.fetch],),
         unbound_args=true,
     )
 

@@ -162,33 +162,34 @@ struct ResidualEntropy <: AbstractThermalPotential end
 
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
+# The global bulk magnetizations adopt AbstractQAtlas's axis-parametric
+# `Magnetization{A}` (#734).  The fused `MagnetizationX/Y/Z` names stay as
+# deprecated aliases so existing fetch methods, registry rows, and downstream
+# code keep working; new code should use `Magnetization(:x)` / `(:y)` / `(:z)`.
+
 """
-    MagnetizationX() <: AbstractQuantity
+    const MagnetizationX = Magnetization{:x}   # deprecated alias
 
 Bulk-averaged `⟨σˣ⟩` in Pauli convention (= 2 ⟨Sˣ⟩ in spin-1/2 units).
 For a spin-1/2 chain `H = -J ΣSᶻSᶻ - h ΣSˣ` this is the transverse
-magnetization; the axis-explicit name avoids the "transverse" /
-"longitudinal" ambiguity that depends on the model's Hamiltonian
-choice.
+magnetization.  **Deprecated** — use `Magnetization(:x)`.
 """
-struct MagnetizationX <: AbstractMagnetization end
+const MagnetizationX = Magnetization{:x}
 
 """
-    MagnetizationY() <: AbstractQuantity
+    const MagnetizationY = Magnetization{:y}   # deprecated alias
 
-Bulk-averaged `⟨σʸ⟩`.
+Bulk-averaged `⟨σʸ⟩`.  **Deprecated** — use `Magnetization(:y)`.
 """
-struct MagnetizationY <: AbstractMagnetization end
+const MagnetizationY = Magnetization{:y}
 
 """
-    MagnetizationZ() <: AbstractQuantity
+    const MagnetizationZ = Magnetization{:z}   # deprecated alias
 
-Bulk-averaged `⟨σᶻ⟩`.  For Z₂-symmetric phases on an infinite system
-this is the order parameter at low temperature; finite-system fetch
-methods may return the absolute value / the ordered-phase limit as
-documented.
+Bulk-averaged `⟨σᶻ⟩`.  For Z₂-symmetric phases on an infinite system this is
+the order parameter at low temperature.  **Deprecated** — use `Magnetization(:z)`.
 """
-struct MagnetizationZ <: AbstractMagnetization end
+const MagnetizationZ = Magnetization{:z}
 
 """
     MagnetizationXLocal{M}() <: AbstractQuantity

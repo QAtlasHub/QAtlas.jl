@@ -26,27 +26,22 @@ thermal_axis(::Type{<:AbstractStructureFactor}) = :both
 # ── dynamical axis: :static / :transport / :dynamic / :unknown ──
 # QAtlas is overwhelmingly equilibrium, so :static is the honest positive default; the few genuinely
 # non-static observables are tagged individually. A velocity is :transport, NOT :dynamic.
-# Real-time / non-equilibrium SCHEMES (the type parameter of a scheme-tagged quantity) make a hub
-# :dynamic — so a `{:dynamic}`/`{:lightcone}` correlation, a `{:quench}` entanglement/magnetization,
-# or a Loschmidt echo is honestly surfaced by `search(dynamical=:dynamic)` (the availability-review
-# follow-up). Equilibrium schemes (:static / :connected / :equilibrium) stay :static; extend the set
-# by adding a scheme to `_dynamic_scheme`.
+# Real-time / non-equilibrium observables make a hub :dynamic, so they are honestly surfaced by
+# `search(dynamical=:dynamic)` (the availability-review follow-up). Since #734 the scheme is carried
+# by the TYPE rather than a phantom mode parameter, so this is plain type dispatch: each genuinely
+# non-static quantity gets one line here and everything equilibrium falls through to :static.
 dynamical_axis(::Type) = :static
 dynamical_axis(::Type{<:AbstractVelocity}) = :transport
 
-_dynamic_scheme(s) = s in (:dynamic, :lightcone, :quench)
-# Real-space correlators are now split by scheme onto distinct types (#734):
+# Real-space correlators are split by scheme onto distinct types (#734):
 # the retarded (dynamic) and light-cone spreading correlators are :dynamic; the
 # static / connected equal-time correlators fall through to the :static default.
 dynamical_axis(::Type{<:DynamicalCorrelation}) = :dynamic
 dynamical_axis(::Type{<:LightconeSpinCorrelation}) = :dynamic
-function dynamical_axis(::Type{<:VonNeumannEntropy{M}}) where {M}
-    return _dynamic_scheme(M) ? :dynamic : :static
-end
-function dynamical_axis(::Type{<:MagnetizationXLocal{M}}) where {M}
-    return _dynamic_scheme(M) ? :dynamic : :static
-end
-dynamical_axis(::Type{<:LoschmidtEcho}) = :dynamic  # Loschmidt echo is a real-time quench quantity
+dynamical_axis(::Type{<:QuenchEntanglementEntropy}) = :dynamic
+dynamical_axis(::Type{<:QuenchLocalMagnetization}) = :dynamic
+dynamical_axis(::Type{<:LoschmidtAmplitude}) = :dynamic   # real-time quench quantities
+dynamical_axis(::Type{<:LoschmidtRateFunction}) = :dynamic
 
 # ── @register-time derivation: explicit > quantity trait > fetch-introspection > :unknown ──
 function _derive_thermal(explicit, M::Type, Q::Type, BC::Type)

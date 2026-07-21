@@ -71,7 +71,7 @@
 using LinearAlgebra: eigvals, Hermitian
 
 """
-    fetch(model_f::TFIM, ::VonNeumannEntropy{:quench}, bc::OBC;
+    fetch(model_f::TFIM, ::QuenchEntanglementEntropy, bc::OBC;
           initial::TFIM, ℓ::Int, t::Real, kwargs...) -> Float64
 
 Post-quench von Neumann entanglement entropy of the first `ℓ` sites of
@@ -95,7 +95,7 @@ Required keyword arguments
 - `t::Real`               — post-quench time.
 
 `N` is read from `OBC(N)` (or legacy `kwargs[:N]`).  At `t = 0` the
-result coincides with the equilibrium `VonNeumannEntropy{:equilibrium}`
+result coincides with the equilibrium `VonNeumannEntropy`
 of the *initial* model — this is the back-compat sanity check exercised
 in `test/standalone/test_tfim_quench_entanglement.jl`.
 
@@ -107,7 +107,7 @@ Phys. A 36, L205 (2003).
 """
 function fetch(
     model_f::TFIM,
-    ::VonNeumannEntropy{:quench},
+    ::QuenchEntanglementEntropy,
     bc::OBC;
     initial::TFIM,
     ℓ::Int,
@@ -117,7 +117,7 @@ function fetch(
     N = _bc_size(bc, kwargs)
     1 ≤ ℓ ≤ N - 1 || throw(
         ArgumentError(
-            "VonNeumannEntropy{:quench}: ℓ must satisfy 1 ≤ ℓ ≤ N - 1; got ℓ = $ℓ, N = $N.",
+            "QuenchEntanglementEntropy: ℓ must satisfy 1 ≤ ℓ ≤ N - 1; got ℓ = $ℓ, N = $N.",
         ),
     )
 

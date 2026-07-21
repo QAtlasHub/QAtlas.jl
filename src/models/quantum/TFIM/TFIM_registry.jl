@@ -178,7 +178,7 @@
 )
 @register(
     TFIM,
-    MagnetizationXLocal{:equilibrium},
+    LocalMagnetization{:x},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -186,7 +186,7 @@
 )
 @register(
     TFIM,
-    MagnetizationXLocal{:quench},
+    QuenchLocalMagnetization{:x},
     OBC,
     method=:majorana_evolution,
     reliability=:high,
@@ -196,7 +196,7 @@
 )
 @register(
     TFIM,
-    MagnetizationXLocal{:quench},
+    QuenchLocalMagnetization{:x},
     Infinite,
     method=:analytic,
     reliability=:high,
@@ -206,7 +206,7 @@
 )
 @register(
     TFIM,
-    MagnetizationZLocal,
+    LocalMagnetization{:z},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -268,7 +268,7 @@
 # ── Entanglement (T = 0; β kwarg defaults to Inf) ─────────────────────
 @register(
     TFIM,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     OBC,
     method=:bdg,
     reliability=:high,
@@ -451,7 +451,7 @@
 # ── Tier 2: CC entanglement at Infinite ──────────────────────────────
 @register(
     TFIM,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     Infinite,
     method=:cft,
     reliability=:high,
@@ -570,7 +570,7 @@
 # ── Quench dynamics: Loschmidt echo + DQPT rate function ─────────────
 @register(
     TFIM,
-    LoschmidtEcho{:amplitude},
+    LoschmidtAmplitude,
     OBC,
     method=:bdg,
     reliability=:high,
@@ -580,7 +580,7 @@
 )
 @register(
     TFIM,
-    LoschmidtEcho{:rate},
+    LoschmidtRateFunction,
     OBC,
     method=:bdg,
     reliability=:high,
@@ -590,7 +590,7 @@
 )
 @register(
     TFIM,
-    LoschmidtEcho{:rate},
+    LoschmidtRateFunction,
     Infinite,
     method=:analytic,
     reliability=:high,
@@ -623,7 +623,7 @@
 # ── Quench entanglement entropy (issue #144) ─────────────────────────
 @register(
     TFIM,
-    VonNeumannEntropy{:quench},
+    QuenchEntanglementEntropy,
     OBC,
     method=:bdg,
     reliability=:high,

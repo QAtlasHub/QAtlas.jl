@@ -145,9 +145,9 @@ function _xx_quench_assert_free_fermion(model_f::XXZ1D, model_0::XXZ1D)
 end
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Public fetch dispatch for `LoschmidtEcho{:rate}` at Infinite().
+# Public fetch dispatch for `LoschmidtRateFunction` at Infinite().
 #
-#   fetch(model_f::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite;
+#   fetch(model_f::XXZ1D, ::LoschmidtRateFunction, ::Infinite;
 #         initial::XXZ1D, t::Real) -> Float64
 #
 # Δ = 0 only.  Returns `λ(t) ≡ 0` for every (J₀, J_f) — see `(♣) / (♠)`
@@ -157,7 +157,7 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
-    fetch(model_f::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite;
+    fetch(model_f::XXZ1D, ::LoschmidtRateFunction, ::Infinite;
           initial::XXZ1D, t::Real) -> Float64
 
 Loschmidt rate function
@@ -214,14 +214,14 @@ sign combination of `(initial.J, model_f.J)`).
 ```julia-repl
 julia> m = XXZ1D(; J=1.0, Δ=0.0);
 
-julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite(); initial=m, t=1.0)
+julia> fetch(m, LoschmidtRateFunction(), Infinite(); initial=m, t=1.0)
 0.0
 
-julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite();
+julia> fetch(m, LoschmidtRateFunction(), Infinite();
              initial=XXZ1D(; J=0.5, Δ=0.0), t=1.0)
 0.0
 
-julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite();
+julia> fetch(m, LoschmidtRateFunction(), Infinite();
              initial=XXZ1D(; J=-1.0, Δ=0.0), t=1.0)   # sign-flip — also 0
 0.0
 ```
@@ -235,7 +235,7 @@ julia> fetch(m, LoschmidtEcho(; mode=:rate), Infinite();
 - F.H.L. Essler, M. Fagotti, *J. Stat. Mech.* (2016) 064002.
 """
 function fetch(
-    model_f::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite; initial::XXZ1D, t::Real, kwargs...
+    model_f::XXZ1D, ::LoschmidtRateFunction, ::Infinite; initial::XXZ1D, t::Real, kwargs...
 )
     _xx_quench_assert_free_fermion(model_f, initial)
     # |ψ₀⟩ = |GS(initial.J)⟩ is a number eigenstate of H_XX(model_f.J)

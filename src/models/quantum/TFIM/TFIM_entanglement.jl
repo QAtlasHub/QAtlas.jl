@@ -86,7 +86,7 @@ function _peschel_mode_entropy(ν::Float64)::Float64
 end
 
 """
-    fetch(model::TFIM, ::VonNeumannEntropy{:equilibrium}, bc::OBC;
+    fetch(model::TFIM, ::VonNeumannEntropy, bc::OBC;
           ℓ::Int, beta::Float64 = Inf, kwargs...) -> Float64
 
 Von Neumann entanglement entropy of the first `ℓ` spins of the N-site
@@ -105,12 +105,7 @@ to 1e-10 in `test/models/test_TFIM_entanglement.jl`).
 See full derivation in `docs/src/calc/jw-tfim-bdg.md`.
 """
 function fetch(
-    model::TFIM,
-    ::VonNeumannEntropy{:equilibrium},
-    bc::OBC;
-    ℓ::Int,
-    beta::Float64=Inf,
-    kwargs...,
+    model::TFIM, ::VonNeumannEntropy, bc::OBC; ℓ::Int, beta::Float64=Inf, kwargs...
 )
     N = _bc_size(bc, kwargs)
     1 ≤ ℓ ≤ N - 1 || throw(

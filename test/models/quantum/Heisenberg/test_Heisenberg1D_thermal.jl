@@ -46,8 +46,12 @@ end
 @testset "Heisenberg1D OBC: local observables match XXZ1D(Δ=1)" begin
     J, N, β = 1.0, 5, 1.0
     model_xxz = XXZ1D(; J=J, Δ=1.0)
-    for Q in
-        (MagnetizationXLocal(), MagnetizationYLocal(), MagnetizationZLocal(), EnergyLocal())
+    for Q in (
+        LocalMagnetization(:x),
+        LocalMagnetization(:y),
+        LocalMagnetization(:z),
+        EnergyLocal(),
+    )
         v_heis = QAtlas.fetch(Heisenberg1D(), Q, OBC(N); beta=β, J=J)
         v_xxz = QAtlas.fetch(model_xxz, Q, OBC(N); beta=β)
         @test all(isapprox.(v_heis, v_xxz; atol=1e-12))

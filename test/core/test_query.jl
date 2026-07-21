@@ -62,9 +62,9 @@ end
     @test da(QAtlas.LightconeSpinCorrelation{:z,:z}) === :dynamic
     @test da(QAtlas.SpinCorrelation{:z,:z}) === :static
     @test da(QAtlas.ConnectedSpinCorrelation{:z,:z}) === :static
-    @test da(QAtlas.VonNeumannEntropy{:quench}) === :dynamic
-    @test da(QAtlas.VonNeumannEntropy{:equilibrium}) === :static
-    @test da(QAtlas.LoschmidtEcho{:amplitude}) === :dynamic
+    @test da(QAtlas.QuenchEntanglementEntropy) === :dynamic
+    @test da(QAtlas.VonNeumannEntropy) === :static
+    @test da(QAtlas.LoschmidtAmplitude) === :dynamic
     # search now surfaces the dynamic hubs; equilibrium schemes stay out
     dyn = QAtlas.search(; dynamical=:dynamic)
     @test dyn.available

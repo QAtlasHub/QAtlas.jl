@@ -6,7 +6,7 @@
 using QAtlas, Test
 
 @testset "Universality :: Quench Dynamics & Boundary Entropies" begin
-    # ── 1. Post-Quench Entanglement (VonNeumannEntropy{:quench}) ─────────────
+    # ── 1. Post-Quench Entanglement (QuenchEntanglementEntropy) ─────────────
     @testset "Infinite BC global quench" begin
         # c = 1/2 (Ising)
         model = Universality(:Ising)
@@ -19,7 +19,13 @@ using QAtlas, Test
         # S = 2 * v * t * pi * c / (6 * beta_eff) = 2 * 1.5 * 1.0 * pi * 0.5 / 12 = 0.125 * pi
         t1 = 1.0
         S1 = QAtlas.fetch(
-            model, VonNeumannEntropy(:quench), Infinite(); ℓ=ℓ, t=t1, v=v, beta_eff=beta_eff
+            model,
+            QuenchEntanglementEntropy(),
+            Infinite();
+            ℓ=ℓ,
+            t=t1,
+            v=v,
+            beta_eff=beta_eff,
         )
         @test S1 ≈ (2 * v * t1) * π * c / (6 * beta_eff) atol=1e-12
 
@@ -27,7 +33,13 @@ using QAtlas, Test
         # S = ℓ * pi * c / (6 * beta_eff) = 10 * pi * 0.5 / 12 = 5/12 * pi
         t2 = 5.0
         S2 = QAtlas.fetch(
-            model, VonNeumannEntropy(:quench), Infinite(); ℓ=ℓ, t=t2, v=v, beta_eff=beta_eff
+            model,
+            QuenchEntanglementEntropy(),
+            Infinite();
+            ℓ=ℓ,
+            t=t2,
+            v=v,
+            beta_eff=beta_eff,
         )
         @test S2 ≈ ℓ * π * c / (6 * beta_eff) atol=1e-12
     end
@@ -47,14 +59,14 @@ using QAtlas, Test
         # of ℓ sites, independent of the boundary); only the filling time differs.
         t1 = 1.0
         S1 = QAtlas.fetch(
-            model, VonNeumannEntropy(:quench), OBC(); ℓ=ℓ, t=t1, v=v, beta_eff=beta_eff
+            model, QuenchEntanglementEntropy(), OBC(); ℓ=ℓ, t=t1, v=v, beta_eff=beta_eff
         )
         @test S1 ≈ (v * t1) * π * c / (6 * beta_eff) atol=1e-12
 
         # t = 4.0 (t > ℓ/v = 2.5) -> saturation at the thermal entropy πcℓ/(6β_eff)
         t2 = 4.0
         S2 = QAtlas.fetch(
-            model, VonNeumannEntropy(:quench), OBC(); ℓ=ℓ, t=t2, v=v, beta_eff=beta_eff
+            model, QuenchEntanglementEntropy(), OBC(); ℓ=ℓ, t=t2, v=v, beta_eff=beta_eff
         )
         @test S2 ≈ ℓ * π * c / (6 * beta_eff) atol=1e-12
 
@@ -64,7 +76,7 @@ using QAtlas, Test
         log_g = 0.25 * log(0.5)
         S1_bdy = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             OBC();
             ℓ=ℓ,
             t=t1,
@@ -77,7 +89,7 @@ using QAtlas, Test
 
         S1_direct = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             OBC();
             ℓ=ℓ,
             t=t1,
@@ -107,7 +119,7 @@ using QAtlas, Test
 
         S_t1 = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             PBC();
             ℓ=ℓ,
             L=L,
@@ -119,7 +131,7 @@ using QAtlas, Test
 
         S_t5 = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             PBC();
             ℓ=ℓ,
             L=L,
@@ -131,7 +143,7 @@ using QAtlas, Test
 
         S_t9 = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             PBC();
             ℓ=ℓ,
             L=L,
@@ -144,7 +156,7 @@ using QAtlas, Test
         # Check periodicity by adding L/v = 20.0 to times
         S_t21 = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             PBC();
             ℓ=ℓ,
             L=L,
@@ -156,7 +168,7 @@ using QAtlas, Test
 
         S_t49 = QAtlas.fetch(
             model,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             PBC();
             ℓ=ℓ,
             L=L,

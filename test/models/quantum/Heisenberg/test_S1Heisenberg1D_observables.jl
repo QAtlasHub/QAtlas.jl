@@ -172,11 +172,11 @@ end
     for (J, N, β) in ((1.0, 3, 0.5), (1.3, 4, 1.0), (0.7, 4, 2.0))
         m = S1Heisenberg1D(; J=J)
         # Mz_local sum = N * MagnetizationZ
-        mz_local = QAtlas.fetch(m, MagnetizationZLocal(), OBC(N); beta=β)
+        mz_local = QAtlas.fetch(m, LocalMagnetization(:z), OBC(N); beta=β)
         mz_bulk = QAtlas.fetch(m, MagnetizationZ(), OBC(N); beta=β)
         @test sum(mz_local) ≈ N * mz_bulk atol=1e-10
         # Same for X
-        mx_local = QAtlas.fetch(m, MagnetizationXLocal(), OBC(N); beta=β)
+        mx_local = QAtlas.fetch(m, LocalMagnetization(:x), OBC(N); beta=β)
         mx_bulk = QAtlas.fetch(m, MagnetizationX(), OBC(N); beta=β)
         @test sum(mx_local) ≈ N * mx_bulk atol=1e-10
         # Energy_local sum = ⟨H⟩

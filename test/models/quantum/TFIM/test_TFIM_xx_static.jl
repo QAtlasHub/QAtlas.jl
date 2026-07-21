@@ -9,7 +9,7 @@
 #   2. Boundary conditions of σˣ algebra:
 #        ⟨(σˣ_i)²⟩ = 1  (since (σˣ)² = I)  ⇒ static at i = j returns 1.
 #   3. Connected formula:  C^c_{ij} = C_{ij} − ⟨σˣ_i⟩ ⟨σˣ_j⟩
-#      with `⟨σˣ_i⟩` from `MagnetizationXLocal` (which uses the same
+#      with `⟨σˣ_i⟩` from `LocalMagnetization(:x)` (which uses the same
 #      Majorana-covariance internals).
 #   4. Connected at i = j: 1 − ⟨σˣ_i⟩².
 #   5. ED comparison at small N for thermal β ∈ {1.0, 2.5, Inf} —
@@ -47,7 +47,7 @@ using QAtlas, Test, LinearAlgebra
     @testset "Connected = static - ⟨σˣ_i⟩⟨σˣ_j⟩" begin
         h, N, β = 0.7, 10, 2.0
         model = TFIM(; J=1.0, h=h)
-        mx_local = QAtlas.fetch(model, MagnetizationXLocal(), OBC(N); beta=β)
+        mx_local = QAtlas.fetch(model, LocalMagnetization(:x), OBC(N); beta=β)
         for i in 3:(N - 2), j in (i + 1):(N - 2)
             v_st = QAtlas.fetch(model, SpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=j)
             v_cn = QAtlas.fetch(
@@ -60,7 +60,7 @@ using QAtlas, Test, LinearAlgebra
     @testset "Connected at i = j: 1 - ⟨σˣ⟩²" begin
         model = TFIM(; J=1.0, h=0.7)
         N, β = 8, 1.0
-        mx_local = QAtlas.fetch(model, MagnetizationXLocal(), OBC(N); beta=β)
+        mx_local = QAtlas.fetch(model, LocalMagnetization(:x), OBC(N); beta=β)
         for i in 2:(N - 1)
             v_cn = QAtlas.fetch(
                 model, ConnectedSpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=i

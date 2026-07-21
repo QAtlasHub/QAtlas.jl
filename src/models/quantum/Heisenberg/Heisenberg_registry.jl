@@ -104,7 +104,7 @@
 # ── Local site-resolved observables ───────────────────────────────────
 @register(
     Heisenberg1D,
-    MagnetizationXLocal{:equilibrium},
+    LocalMagnetization{:x},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -112,7 +112,7 @@
 )
 @register(
     Heisenberg1D,
-    MagnetizationYLocal,
+    LocalMagnetization{:y},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -120,7 +120,7 @@
 )
 @register(
     Heisenberg1D,
-    MagnetizationZLocal,
+    LocalMagnetization{:z},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -183,7 +183,7 @@ end
 # ── Entanglement ──────────────────────────────────────────────────────
 @register(
     Heisenberg1D,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -282,7 +282,7 @@ end
 # ── Calabrese-Cardy entanglement at Infinite via Universality(:Heisenberg) (#580 Phase 1)
 @register(
     Heisenberg1D,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     Infinite,
     method=:delegation,
     reliability=:high,

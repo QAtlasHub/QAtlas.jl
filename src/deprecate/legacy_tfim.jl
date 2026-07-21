@@ -88,8 +88,8 @@ end
 
 # ── Site-local quantities (TFIM_local.jl) ──────────────────────────────
 const _LEGACY_TFIM_LOCAL_MAP = (
-    (:magnetization_x_local, MagnetizationXLocal),
-    (:magnetization_z_local, MagnetizationZLocal),
+    (:magnetization_x_local, LocalMagnetization{:x}),
+    (:magnetization_z_local, LocalMagnetization{:z}),
     (:energy_local, EnergyLocal),
 )
 for (qsym, QTy) in _LEGACY_TFIM_LOCAL_MAP

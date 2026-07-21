@@ -157,7 +157,7 @@ m_f = TFIM(J = 1.0, h = 0.5)   # ferromagnetic — quench crosses h = J
 # OBC finite N (BdG diagonalisation)
 λ_obc = QAtlas.fetch(m_f, LoschmidtRateFunction(), OBC(64);
                      initial = m_0, t = 1.0)
-L_obc = QAtlas.fetch(m_f, LoschmidtEcho(:amplitude), OBC(64);
+L_obc = QAtlas.fetch(m_f, LoschmidtAmplitude(), OBC(64);
                      initial = m_0, t = 1.0)
 ```
 

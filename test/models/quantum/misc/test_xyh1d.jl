@@ -84,9 +84,9 @@ end
     end
 end
 
-@testset "XYh1D — MagnetizationZLocal (OBC)" begin
+@testset "XYh1D — LocalMagnetization(:z) (OBC)" begin
     let m = XYh1D(; Jx=1.0, Jy=1.0, h=0.0), β = 1.0, N = 12
-        mz = QAtlas.fetch(m, MagnetizationZLocal(), OBC(N); beta=β)
+        mz = QAtlas.fetch(m, LocalMagnetization(:z), OBC(N); beta=β)
         @test length(mz) == N
         @test all(isfinite, mz)
     end
@@ -94,8 +94,8 @@ end
 
 @testset "XYh1D — site-local observables (X, Y, EnergyLocal)" begin
     let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 12
-        mx = QAtlas.fetch(m, MagnetizationXLocal{:equilibrium}(), OBC(N); beta=β)
-        my = QAtlas.fetch(m, MagnetizationYLocal(), OBC(N); beta=β)
+        mx = QAtlas.fetch(m, LocalMagnetization{:x}(), OBC(N); beta=β)
+        my = QAtlas.fetch(m, LocalMagnetization(:y), OBC(N); beta=β)
         @test length(mx) == N && all(iszero, mx)
         @test length(my) == N && all(iszero, my)
 

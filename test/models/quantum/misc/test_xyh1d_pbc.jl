@@ -113,7 +113,7 @@ end
 
 @testset "XYh1D PBC — Site-local observables uniformity" begin
     let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 100
-        mz_local = QAtlas.fetch(m, MagnetizationZLocal(), PBC(N=N); beta=β)
+        mz_local = QAtlas.fetch(m, LocalMagnetization(:z), PBC(N=N); beta=β)
         @test length(mz_local) == N
         @test all(isfinite, mz_local)
         # Translational invariance: all sites equal to first
@@ -124,8 +124,8 @@ end
     end
 
     let m = XYh1D(; Jx=1.0, Jy=0.5, h=0.6), β = 1.0, N = 50
-        mx = QAtlas.fetch(m, MagnetizationXLocal{:equilibrium}(), PBC(N=N); beta=β)
-        my = QAtlas.fetch(m, MagnetizationYLocal(), PBC(N=N); beta=β)
+        mx = QAtlas.fetch(m, LocalMagnetization{:x}(), PBC(N=N); beta=β)
+        my = QAtlas.fetch(m, LocalMagnetization(:y), PBC(N=N); beta=β)
         @test length(mx) == N && all(iszero, mx)
         @test length(my) == N && all(iszero, my)
     end

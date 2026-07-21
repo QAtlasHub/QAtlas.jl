@@ -184,12 +184,11 @@ end
 # Local (site-resolved) observables  (OBC)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# `MagnetizationXLocal` is parametric (equilibrium / quench); S1Heisenberg1D
-# only implements the equilibrium thermal branch.  Dispatching on the
-# concrete equilibrium mode keeps quench fetches from silently routing here.
-for (Q, axis_sym) in ((:MagnetizationXLocal, :x), (:MagnetizationZLocal, :z))
+# S1Heisenberg1D implements only the equilibrium thermal branch; since #734 that
+# is simply the `LocalMagnetization` type (the post-quench values live on the
+# separate `QuenchLocalMagnetization`), so no mode guard is needed.
+for (Q, axis_sym) in ((:(LocalMagnetization{:x}), :x), (:(LocalMagnetization{:z}), :z))
     axis_str = string(axis_sym)
-    Qsig = Q === :MagnetizationXLocal ? :(MagnetizationXLocal{:equilibrium}) : Q
     @eval begin
         """
             fetch(model::S1Heisenberg1D, ::$($Q), ::OBC; beta) -> Vector{Float64}
@@ -198,7 +197,7 @@ for (Q, axis_sym) in ((:MagnetizationXLocal, :x), (:MagnetizationZLocal, :z))
         Heisenberg chain.  Sums to `N · MagnetizationX/Y/Z` (per-site bulk
         average) by construction.
         """
-        function fetch(model::S1Heisenberg1D, ::$Qsig, bc::OBC; beta::Real, kwargs...)
+        function fetch(model::S1Heisenberg1D, ::$Q, bc::OBC; beta::Real, kwargs...)
             N = bc.N
             kernel = _s1_thermal_kernel(model, N, beta)
             S = _S1_AXIS_MATS.$axis_sym
@@ -303,7 +302,7 @@ function _s1_partial_trace_A(ρ::AbstractMatrix, ℓ::Int, N::Int)
 end
 
 """
-    fetch(model::S1Heisenberg1D, ::VonNeumannEntropy{:equilibrium}, ::OBC;
+    fetch(model::S1Heisenberg1D, ::VonNeumannEntropy, ::OBC;
           ℓ::Int, beta::Real = Inf) -> Float64
 
 Von Neumann entanglement entropy `S_vN = -Tr ρ_A log ρ_A` of the first
@@ -316,12 +315,7 @@ Both `ℓ` and `N = bc.N` are bounded by `_MAX_ED_SITES_S1` because the
 full `3^N × 3^N` ρ is built explicitly.
 """
 function fetch(
-    model::S1Heisenberg1D,
-    ::VonNeumannEntropy{:equilibrium},
-    bc::OBC;
-    ℓ::Int,
-    beta::Real=Inf,
-    kwargs...,
+    model::S1Heisenberg1D, ::VonNeumannEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...
 )
     N = bc.N
     1 ≤ ℓ ≤ N - 1 || throw(

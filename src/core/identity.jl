@@ -221,7 +221,9 @@ end
 
 # The declared skip reason for a hub, if any: an exclusion keyed by the model
 # type covers every bc; a (model, bc) tuple covers that hub only.
-function _exclusion_reason(e::AbstractIdentityEdge, model_T::Type, bc_T::Type)
+# Untyped in `e`: this reads only `.exclusions`, so it serves the bound edges of
+# core/bound.jl as well — the exclusion vocabulary is shared, not identity-specific.
+function _exclusion_reason(e, model_T::Type, bc_T::Type)
     for (k, reason) in e.exclusions
         if k === model_T || (k isa Tuple && k[1] === model_T && k[2] === bc_T)
             return reason

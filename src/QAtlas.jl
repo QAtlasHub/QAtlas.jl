@@ -57,6 +57,14 @@ using AbstractQAtlas:
     # carrier quantities ABQ kept.
     @relation,
     @inequality,
+    # ...and the inequality verbs, so a BOUND edge (core/bound.jl) can delegate
+    # its criterion to AbstractQAtlas exactly as :gibbs delegates its arithmetic.
+    AbstractInequality,
+    slack,
+    variable_slots,
+    # the inequalities bound_registry.jl declares edges for
+    SpecificHeatPositivity,
+    SusceptibilityPositivity,
     CarrierDensity,
     EffectiveMass,
     HallCoefficient,
@@ -167,7 +175,8 @@ include("core/about.jl")     # model description cards (summary + Hamiltonian)
 # generated-check protocol), then each edge type as a thin instantiation.
 include("core/constraints.jl")  # kernel: EDGE_STORES + GeneratedCheck protocol
 include("core/symmetry.jl")     # @symmetry node attributes + LSM checks (C10)
-include("core/identity.jl")     # @identity quantity<->quantity edges (C11)
+include("core/identity.jl")      # @identity quantity<->quantity edges (C11)
+include("core/bound.jl")         # @bound: the inequality sibling (#734 Phase B)
 include("core/duality.jl")      # @dual model<->model parameter-mapped edges (C12)
 include("core/limits.jl")       # @limits_to asymptotic limit edges (C13)
 include("core/pfaffian.jl")
@@ -219,6 +228,7 @@ export ChargeGap, SpinGap                                # Hubbard / correlated-
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export EdwardsAndersonParameter, SpinGlassSusceptibility  # spin-glass order (#730)
+export BoundEdge, BOUNDS, bound!, @bound  # inequality edges (core/bound.jl)
 export QuenchEntanglementEntropy  # QAtlas-side post-quench S(ℓ,t) (was VonNeumannEntropy{:quench})
 export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ
@@ -517,6 +527,7 @@ include("reduces_registry.jl")
 # and quantity types; the identity family validation reads REGISTRY).
 include("symmetry_registry.jl")
 include("identity_registry.jl")
+include("bound_registry.jl")            # @bound inequality edges (#734 Phase B)
 include("relations/model_specific.jl")   # #730: model-specific relations, hosted here
 include("duality_registry.jl")
 include("limits_registry.jl")

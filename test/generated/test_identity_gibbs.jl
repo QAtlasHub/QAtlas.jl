@@ -28,3 +28,22 @@ using QAtlas: generated_checks
 
     run_generated_suite(checks; label="generated gibbs checks")
 end
+
+# The edge no longer restates `f = ε − T·s`; it asks AbstractQAtlas's
+# `FreeEnergyLegendre` to derive `f` (#734 Phase B).  Pin that delegation against
+# the closed form it replaced, so an upstream convention change — sign, per-site
+# granularity, β-vs-T — fails HERE with a two-line diff instead of silently
+# redefining what ":gibbs" asserts for every hub in the atlas.
+@testset ":gibbs arithmetic is AbstractQAtlas's FreeEnergyLegendre" begin
+    for (e, s, beta) in ((-1.3, 0.42, 0.5), (-0.75, 0.1, 2.0), (0.0, 0.0, 1.0))
+        f_closed = e - s / beta   # the formula this edge used to carry inline
+        f_derived = QAtlas.solve(QAtlas.FreeEnergyLegendre(), Val(:F); U=e, S=s, β=beta)
+        @test f_derived ≈ f_closed atol = 1e-14
+    end
+    # β-or-T keyword convention must agree (T = 2 ⇔ β = 0.5).
+    @test QAtlas.solve(QAtlas.FreeEnergyLegendre(), Val(:F); U=-1.3, S=0.42, T=2.0) ≈
+        QAtlas.solve(QAtlas.FreeEnergyLegendre(), Val(:F); U=-1.3, S=0.42, β=0.5)
+    # Exact inputs stay exact — the relation is algebraic, not floating-point.
+    @test QAtlas.solve(QAtlas.FreeEnergyLegendre(), Val(:F); U=-1//2, S=1//4, β=1//2) ==
+        -1//2 - (1//4) / (1//2)
+end

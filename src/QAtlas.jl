@@ -57,6 +57,10 @@ using AbstractQAtlas:
     EffectiveMass,
     HallCoefficient,
     Mobility
+    # Relations layer (#734 Phase B): the universal identities themselves, so an
+    # @identity edge can delegate its arithmetic instead of restating it.
+    FreeEnergyLegendre,
+    solve
 # `native_energy_granularity` is extended by bare `native_energy_granularity(::M, ::BC) = …`
 # methods in model files, which `using` forbids ("must be explicitly imported to be
 # extended"); it must therefore come in via `import` (#734).

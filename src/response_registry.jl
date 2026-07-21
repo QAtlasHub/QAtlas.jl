@@ -88,3 +88,46 @@ const _BETA_PINNED_ENERGY_MODELS = [
     rtol_floor = 1e-4,
     notes = "C = β² Var(E), Var(E) = -∂⟨E⟩/∂β — the fluctuation route, independent of C = T ∂S/∂T.",
 )
+
+# ── M = −∂F/∂h  and  χ = ∂M/∂h ────────────────────────────────────────
+# MODEL-axis derivatives: `h` is a field of the model, not a fetch kwarg, so
+# these rebuild the model at each step and are finite-difference only (see
+# `_diff_target`).  Reported at the finite-difference tolerance accordingly.
+#
+# WHY AN ALLOW-LIST AND NOT AN EXCLUSION LIST.  AbstractQAtlas types the subject
+# `Magnetization{:z}` / `Susceptibility{(:z,:z)}`, so these relations hold only
+# where `h` is the LONGITUDINAL field.  It is not, in this atlas:
+#
+#     -h Σ σᶻ  (longitudinal, valid)   IsingChain1D, CurieWeissIsing, LongRangeXY1D
+#     -h Σ σˣ  (TRANSVERSE, invalid)   TFIM, LongRangeIsing1D
+#
+# For a transverse-field model −∂F/∂h is ⟨σˣ⟩, not M_z. Both differentiation
+# backends would agree on that wrong number, so `derivative_agreement` cannot
+# save us — the cross-check catches a bad METHOD, never a relation applied to a
+# Hamiltonian it does not describe. Hence opt-in: a model added later is skipped
+# rather than checked against physics that does not apply to it.
+const _LONGITUDINAL_FIELD_MODELS = [IsingChain1D, CurieWeissIsing]
+
+@response(
+    :magnetization_response,
+    relation = MagnetizationResponse,
+    derived = (dF_dh=∂(FreeEnergy, :h; then=d -> -d),),
+    models = _LONGITUDINAL_FIELD_MODELS,
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,
+    rtol_floor = 1e-4,
+    notes = "M_z = -∂F/∂h — valid only where h is the longitudinal field.",
+)
+
+@response(
+    :susceptibility_response,
+    relation = SusceptibilityResponse,
+    derived = (dM_dh=∂(Magnetization{:z}, :h),),
+    models = _LONGITUDINAL_FIELD_MODELS,
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,
+    rtol_floor = 1e-4,
+    notes = "χ_zz = ∂M_z/∂h — the isothermal susceptibility as a field response.",
+)

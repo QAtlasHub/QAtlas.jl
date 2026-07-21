@@ -31,6 +31,19 @@
 A slot supplied by differentiating `fetch(model, quantity(), bc)` with respect
 to `wrt`, which is `:T` (temperature) or `:β` (inverse temperature).
 
+Two optional transforms cover the slots that are not simply `d⟨Q⟩/dx`:
+
+- `of(value, x)` — what to differentiate, as a function of the fetched value and
+  the axis variable.  `GibbsHelmholtz` wants `d(βF)/dβ`, not `dF/dβ`, so it
+  passes `of = (F, β) -> β * F`.
+- `then(derivative)` — post-processing.  `SpecificHeatFDT`'s energy variance is
+  `var_E = -∂U/∂β`, so it passes `then = d -> -d`.
+
+Both default to the identity, and both are deliberately plain functions rather
+than a symbolic mini-language: the whole point of this layer is that the algebra
+lives in AbstractQAtlas, so anything expressible here should stay small enough to
+read at the declaration site.
+
 Only the temperature axis is supported here.  A field derivative (`dF/dh`, for
 `MagnetizationResponse`) is deliberately absent: `h` is a MODEL parameter, not a
 fetch kwarg, so differentiating along it means reconstructing the model at each
@@ -41,7 +54,11 @@ leaving them uncovered.
 struct DerivedInput
     quantity::Type
     wrt::Symbol
-    function DerivedInput(quantity::Type, wrt::Symbol)
+    of::Function
+    then::Function
+    function DerivedInput(
+        quantity::Type, wrt::Symbol; of::Function=(v, x) -> v, then::Function=identity
+    )
         wrt in (:T, :β) || throw(
             ArgumentError(
                 "DerivedInput: `wrt` must be :T or :β (the temperature axis); got " *
@@ -49,7 +66,7 @@ struct DerivedInput
                 "does not exist yet — see the docstring.",
             ),
         )
-        return new(quantity, wrt)
+        return new(quantity, wrt, of, then)
     end
 end
 
@@ -58,7 +75,9 @@ end
 
 Terse constructor for [`DerivedInput`](@ref): `∂(FreeEnergy, :T)` is `dF/dT`.
 """
-∂(quantity::Type, wrt::Symbol) = DerivedInput(quantity, wrt)
+function ∂(quantity::Type, wrt::Symbol; of::Function=(v, x) -> v, then::Function=identity)
+    return DerivedInput(quantity, wrt; of=of, then=then)
+end
 
 """
     ResponseEdge
@@ -244,10 +263,36 @@ function response_checks()
                     # failed physical identity — so it becomes a visible skip.
                     for (n, d) in pairs(e.derived)
                         kw, x0 = _diff_axis(d.wrt, point)
-                        g = x -> fetch(m, _quantity_instance(d.quantity), bc; kw(x)...)
-                        val, _, trusted, why = derivative_agreement(g, x0; primary=backend)
+                        g =
+                            x -> d.of(
+                                fetch(m, _quantity_instance(d.quantity), bc; kw(x)...),
+                                x,
+                            )
+                        # A fetch can be non-differentiable by the chosen backend even
+                        # when its signature says `::Real`: some implementations narrow to
+                        # Float64 internally, and an AD dual then dies on a
+                        # `MethodError(Float64, Dual)`.  (Measured: AKLT2D and Cluster1D
+                        # do this for Energy{:per_site}.)  That is a fact about the
+                        # METHOD, exactly like a cross-check disagreement, so it becomes a
+                        # visible skip rather than an :error.
+                        #
+                        # Deliberately NOT a fallback to finite differences: this edge's
+                        # rtol was computed for `backend` before the run, so silently
+                        # substituting a lower-accuracy method would report an FD result
+                        # at an AD tolerance.  Scoped to the derivative alone — a throw
+                        # from the subject fetch or from `solve` is a real error and still
+                        # surfaces as one.
+                        local val, trusted, why
+                        try
+                            val, _, trusted, why = derivative_agreement(g, x0; primary=backend)
+                        catch err
+                            return _skip_outcome(
+                                "$(n): not differentiable by $(nameof(typeof(backend))) " *
+                                "— $(sprint(showerror, err))",
+                            )
+                        end
                         trusted || return _skip_outcome("$(n): $(why)")
-                        args[n] = val
+                        args[n] = d.then(val)
                     end
                     expected = solve(rel, Val(e.subject); args...)
                     actual = fetch(m, _quantity_instance(subject_T), bc; point...)

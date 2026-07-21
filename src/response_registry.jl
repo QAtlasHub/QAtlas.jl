@@ -33,3 +33,58 @@
     rtol_floor = 1e-4,
     notes = "C = T ∂S/∂T — the caloric definition, independent of the C = β² Var(E) route.",
 )
+
+# Hubs whose `Energy{:per_site}` does not respond to the swept β.  Split out from
+# the list above because the reason is different and the affected edges are the
+# ones with an ENERGY subject or an energy derivative — a different hub set from
+# the entropy-subject edges, which is why they surfaced only when
+# :gibbs_helmholtz arrived.  The first three carry the wording
+# identity_registry.jl already uses for :gibbs.
+const _BETA_PINNED_ENERGY_MODELS = [
+    SSH => "Energy fetch returns T=0 ground-state energy (beta swallowed); thermal ε not implemented — the relation does not apply as stated (#508 kwargs-swallow audit)",
+    TightBinding1D => "Energy fetch returns T=0 ground-state energy (beta swallowed); thermal ε not implemented (#508 kwargs-swallow audit)",
+    TightBindingV1D => "Energy fetch returns T=0 ground-state energy (beta swallowed); thermal ε not implemented (#508 kwargs-swallow audit)",
+    # CIRCULAR, not merely β-pinned: SixVertex's Energy{:per_site} IS ∂(βF)/∂β,
+    # computed internally by a hard-coded central difference of f(a^β, b^β, c^β)
+    # at β = 1.  Checking Gibbs–Helmholtz against it would verify the model with
+    # the very relation it already assumes — the circularity the atlas's
+    # independence axis exists to prevent — and it ignores the swept β besides.
+    SixVertex => "Energy{:per_site} is itself computed as ∂(βF)/∂β by an internal finite difference pinned at β = 1; checking this relation against it would be circular",
+]
+
+# ── U = ∂(βF)/∂β ──────────────────────────────────────────────────────
+# The Gibbs–Helmholtz relation.  What is differentiated is the PRODUCT βF, not
+# F alone — that is what `of` is for.  Independent of :entropy_response despite
+# relating the same two potentials: this is the β-derivative of βF, that one is
+# the T-derivative of F, and an implementation can satisfy one while breaking
+# the other.
+@response(
+    :gibbs_helmholtz,
+    relation = GibbsHelmholtz,
+    derived = (dβF_dβ=∂(FreeEnergy, :β; of=(F, β) -> β * F),),
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    exclusions = vcat(_THERMO_DERIVATIVE_EXCLUSIONS, _BETA_PINNED_ENERGY_MODELS),
+    rtol_floor = 1e-4,
+    notes = "U = ∂(βF)/∂β — Gibbs–Helmholtz; equivalently U = -∂ln Z/∂β.",
+)
+
+# ── C = β² Var(E) ─────────────────────────────────────────────────────
+# The energy-fluctuation route to the specific heat.  `var_E` is not a fetchable
+# quantity, but it does not need to be: Var(E) = -∂⟨E⟩/∂β exactly, so `then`
+# supplies it by negating the derivative of the energy.  With `Energy{:per_site}`
+# the relation's `N` stays 1 — per-site C against per-site variance.
+#
+# This is a genuinely INDEPENDENT route to C: :specific_heat_from_entropy gets it
+# from the entropy, this one from the energy.  A model that computes C by one
+# formula and S or U by another is exactly what these two disagree on.
+@response(
+    :specific_heat_fdt,
+    relation = SpecificHeatFDT,
+    derived = (var_E=∂(Energy{:per_site}, :β; then=d -> -d),),
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    exclusions = vcat(_THERMO_DERIVATIVE_EXCLUSIONS, _BETA_PINNED_ENERGY_MODELS),
+    rtol_floor = 1e-4,
+    notes = "C = β² Var(E), Var(E) = -∂⟨E⟩/∂β — the fluctuation route, independent of C = T ∂S/∂T.",
+)

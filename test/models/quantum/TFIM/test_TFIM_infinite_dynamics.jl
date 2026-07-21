@@ -45,7 +45,7 @@ using QAtlas, Test
         model = TFIM(; J=1.0, h=1.0)
         S = QAtlas.fetch(
             model,
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             beta=Inf,
             q=π / 2,
@@ -78,7 +78,7 @@ using QAtlas, Test
         S_omega_sum = sum(
             QAtlas.fetch(
                 model,
-                ZZStructureFactor(),
+                DynamicalSpinStructureFactor(:z, :z),
                 Infinite();
                 beta=10.0,
                 q=q,

@@ -156,7 +156,7 @@ function _xxz_szz_term(
 end
 
 """
-    fetch(model::XXZ1D, ::ZZStructureFactor, ::Infinite;
+    fetch(model::XXZ1D, ::DynamicalSpinStructureFactor{:z,:z}, ::Infinite;
           q::Real, ω::Real, J::Real = model.J, method::Symbol = :exact_2spinon,
           kwargs...) -> Float64
 
@@ -165,7 +165,7 @@ spin-1/2 antiferromagnetic XXZ chain in the massive regime Δ > 1.
 """
 function fetch(
     model::XXZ1D,
-    ::ZZStructureFactor,
+    ::DynamicalSpinStructureFactor{:z,:z},
     ::Infinite;
     q::Real,
     ω::Real,

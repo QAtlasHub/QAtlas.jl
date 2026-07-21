@@ -199,7 +199,7 @@ end
 # is registered as a Quantity here.
 @register(
     Heisenberg1D,
-    ZZStructureFactor,
+    DynamicalSpinStructureFactor{:z,:z},
     Infinite,
     method=:muller_ansatz,
     reliability=:medium,
@@ -207,12 +207,12 @@ end
     references=["desCloizeauxPearson1962", "MullerThomasBeckBonner1981"],
     notes="Phase 1 closed-form Müller ansatz for S^{zz}(q,ω); exact Caux–Hagemans 2006 result reserved for Phase 2.",
 )
-# Second definition of (Heisenberg1D, ZZStructureFactor, Infinite) keyed by
-# scheme=:exact_2spinon; the canonical row above stays the Müller ansatz, which
-# is what the bare fetch (method=:muller) returns. fetch(...; method=:exact_2spinon).
+# Second definition of (Heisenberg1D, DynamicalSpinStructureFactor{:z,:z}, Infinite)
+# keyed by scheme=:exact_2spinon; the canonical row above stays the Müller ansatz,
+# which is what the bare fetch (method=:muller) returns. fetch(...; method=:exact_2spinon).
 @register(
     Heisenberg1D,
-    ZZStructureFactor,
+    DynamicalSpinStructureFactor{:z,:z},
     Infinite,
     scheme=:exact_2spinon,
     method=:exact_2spinon,

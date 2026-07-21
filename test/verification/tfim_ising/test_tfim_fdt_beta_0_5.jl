@@ -38,7 +38,7 @@ using QAtlas, Test
         )
         verify(
             model,
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             route=:sum_rule,
             fetch_kw=(; beta=β, q=q, ω=ω, N_proxy=N_proxy, t_max=t_max, dt=dt),

@@ -333,32 +333,37 @@ YYCorrelation(; mode::Symbol=:static) = YYCorrelation{mode}()
 
 # ─── Fourier-space structure factors (q, ω) ────────────────────────────
 
-"""
-    ZZStructureFactor() <: AbstractQuantity
-
-Fourier-space structure factor
-`S_zz(q, ω) = ∫ dt e^{iωt} (1/N) Σ_{ij} e^{iq·(i-j)} ⟨σᶻ_i(t)σᶻ_j(0)⟩`
-(or its static limit, depending on the model's fetch signature).
-
-Kept as a separate type from [`ZZCorrelation`](@ref) because the
-argument domain is (q, ω) instead of (i, j, t) and because existing
-users already expect a dedicated `StructureFactor` quantity.
-"""
-struct ZZStructureFactor <: AbstractStructureFactor end
+# The structure factors adopt AbstractQAtlas's axis-parametric structure
+# factors (#734), splitting the previously-overloaded `S^{αα}(q [, ω])` (one
+# type, static-or-dynamic by an `ω` kwarg) onto two clean typed quantities:
+# `SpinStructureFactor{A,B}` (static `S^{αα}(q)`) and
+# `DynamicalSpinStructureFactor{A,B}` (dynamic `S^{αα}(q, ω)`).  The fused
+# `ZZ/XX/YYStructureFactor` names stay as deprecated aliases for the STATIC
+# factor; dynamic fetch methods now dispatch on `DynamicalSpinStructureFactor`.
 
 """
-    XXStructureFactor() <: AbstractQuantity
+    const ZZStructureFactor = SpinStructureFactor{:z,:z}   # deprecated alias
 
-Fourier-space equivalent of [`XXCorrelation`](@ref).
+Static longitudinal structure factor `S^{zz}(q)`.  **Deprecated** — use
+`SpinStructureFactor(:z, :z)` for the static factor, or
+`DynamicalSpinStructureFactor(:z, :z)` for the dynamic `S^{zz}(q, ω)`.
 """
-struct XXStructureFactor <: AbstractStructureFactor end
+const ZZStructureFactor = SpinStructureFactor{:z,:z}
 
 """
-    YYStructureFactor() <: AbstractQuantity
+    const XXStructureFactor = SpinStructureFactor{:x,:x}   # deprecated alias
 
-Fourier-space equivalent of [`YYCorrelation`](@ref).
+Static transverse structure factor `S^{xx}(q)`.  **Deprecated** — use
+`SpinStructureFactor(:x, :x)`.
 """
-struct YYStructureFactor <: AbstractStructureFactor end
+const XXStructureFactor = SpinStructureFactor{:x,:x}
+
+"""
+    const YYStructureFactor = SpinStructureFactor{:y,:y}   # deprecated alias
+
+Static `S^{yy}(q)`.  **Deprecated** — use `SpinStructureFactor(:y, :y)`.
+"""
+const YYStructureFactor = SpinStructureFactor{:y,:y}
 
 # ─── Universality / lattice spectra / advanced ─────────────────────────
 

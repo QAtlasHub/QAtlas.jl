@@ -120,15 +120,14 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LiebRobinsonBound/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LiebRobinsonVelocity/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LightconeSpinCorrelation/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LoschmidtEcho/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LocalMagnetization/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LoschmidtAmplitude/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LoschmidtRateFunction/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LuttingerParameter/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LuttingerVelocity/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationX/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationXLocal/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationY/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationYLocal/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationZ/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MagnetizationZLocal/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MassGap/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/MerminGHZBound/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/NMRRelaxationExponent/</loc></url>
@@ -138,6 +137,8 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/Polarization/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/PrimaryFields/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/QuantumSpeedLimit/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/QuenchEntanglementEntropy/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/QuenchLocalMagnetization/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/RenyiEntropy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ResidualEntropy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ScramblingTime/</loc></url>
@@ -227,13 +228,11 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_FreeEnergy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_FreeEnergy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_LocalMagnetization_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_LuttingerParameter_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationX_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationXLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationY_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationYLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationZ_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationZLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MassGap_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_RenyiEntropy_Infinite/</loc></url>
@@ -345,11 +344,10 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_EnergyLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_FreeEnergy_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_LocalMagnetization_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MagnetizationX_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MagnetizationXLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MagnetizationY_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MagnetizationZ_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MagnetizationZLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_MassGap_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/S1Heisenberg1D_RenyiEntropy_OBC/</loc></url>
@@ -410,22 +408,24 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LiebRobinsonBound_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LiebRobinsonVelocity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LightconeSpinCorrelation_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LoschmidtEcho_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LoschmidtEcho_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LocalMagnetization_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LoschmidtAmplitude_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LoschmidtRateFunction_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_LoschmidtRateFunction_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationX_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationX_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationX_PBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationXLocal_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationXLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationY_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationZ_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MagnetizationZLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MassGap_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_MassGap_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_NMRRelaxationExponent_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_NMRSpinRelaxationRate_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_NMRSpinRelaxationRate_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_QuenchEntanglementEntropy_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_QuenchLocalMagnetization_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_QuenchLocalMagnetization_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_RenyiEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_RenyiEntropy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_SpecificHeat_Infinite/</loc></url>
@@ -508,15 +508,13 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_FreeEnergy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_FreeEnergy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_GroundStateEnergyDensity_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LoschmidtEcho_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LocalMagnetization_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LoschmidtRateFunction_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LuttingerParameter_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LuttingerVelocity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationX_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationXLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationY_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationYLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationZ_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MagnetizationZLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_MassGap_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_NMRRelaxationExponent_Infinite/</loc></url>
@@ -535,11 +533,9 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_EnergyLocal_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MagnetizationXLocal_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MagnetizationYLocal_OBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_LocalMagnetization_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MagnetizationZ_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MagnetizationZ_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MagnetizationZLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MassGap_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_MassGap_PBC/</loc></url>

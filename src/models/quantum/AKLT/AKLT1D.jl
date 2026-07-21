@@ -279,7 +279,7 @@ end
 #     doi:10.1103/PhysRevLett.60.531
 
 """
-    fetch(model::AKLT1D, ::ZZCorrelation{:static}, ::Infinite; r::Integer) -> Float64
+    fetch(model::AKLT1D, ::SpinCorrelation{:z,:z}, ::Infinite; r::Integer) -> Float64
 
 Exact equal-time spin-z two-point function of the AKLT VBS ground
 state at separation `r`:
@@ -293,7 +293,7 @@ with [`fetch(::AKLT1D, ::CorrelationLength, ::Infinite)`](@ref)
 `ξ = 1/log 3`.  Since `⟨Sᶻ⟩ = 0` in the VBS this equal-time value is
 already the connected correlation.
 """
-function fetch(::AKLT1D, ::ZZCorrelation{:static}, ::Infinite; r::Integer, kwargs...)
+function fetch(::AKLT1D, ::SpinCorrelation{:z,:z}, ::Infinite; r::Integer, kwargs...)
     r == 0 && return 2.0 / 3.0
     a = abs(r)
     return (iseven(a) ? 1.0 : -1.0) * (4.0 / 3.0) * 3.0^(-a)
@@ -309,7 +309,7 @@ Exact static (equal-time) spin-z structure factor of the AKLT chain,
 (Arovas–Auerbach–Haldane 1988).  `S_zz(0) = 0` by total-`Sᶻ`
 conservation; antiferromagnetic peak `S_zz(π) = 2`.  `J`-independent.
 This is the lattice-Fourier sum of the closed-form
-[`ZZCorrelation`](@ref) `(−1)^r (4/3) 3^{−|r|}`.
+[`SpinCorrelation`](@ref) `(−1)^r (4/3) 3^{−|r|}`.
 """
 function fetch(::AKLT1D, ::ZZStructureFactor, ::Infinite; q::Real, kwargs...)
     c = cos(q)

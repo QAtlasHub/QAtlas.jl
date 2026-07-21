@@ -88,7 +88,7 @@ end
             for r in 1:4
                 v_th = QAtlas.fetch(
                     TFIM(; J=1.0, h=h_phase),
-                    ZZCorrelation{:static}(),
+                    SpinCorrelation(:z, :z),
                     OBC(; N=10);
                     beta=Inf,
                     i=2,
@@ -97,7 +97,7 @@ end
                 v_gs = real(
                     QAtlas.fetch(
                         TFIM(; J=1.0, h=h_phase),
-                        ZZCorrelation{:dynamic}(),
+                        DynamicalCorrelation(:z, :z),
                         OBC(; N=10);
                         i=2,
                         j=2 + r,
@@ -224,7 +224,7 @@ end
                 op = _op_site(_SZ, i, N) * _op_site(_SZ, j, N)
                 ed_val = real(tr(ρ * op))
                 qa_val = QAtlas.fetch(
-                    TFIM(; J=J, h=h), ZZCorrelation{:static}(), OBC(; N=N); beta=β, i=i, j=j
+                    TFIM(; J=J, h=h), SpinCorrelation(:z, :z), OBC(; N=N); beta=β, i=i, j=j
                 )
                 @test qa_val ≈ ed_val atol=1e-10
             end

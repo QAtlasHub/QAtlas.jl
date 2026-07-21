@@ -59,7 +59,7 @@
         N, J, h, β = 8, 1.0, 1.2, 1.0
         ε_loc = QAtlas.fetch(TFIM(; J=J, h=h), EnergyLocal(), OBC(; N=N); beta=β)
         mx_loc = QAtlas.fetch(TFIM(; J=J, h=h), MagnetizationXLocal(), OBC(; N=N); beta=β)
-        C = QAtlas.fetch(TFIM(; J=J, h=h), ZZCorrelation{:static}(), OBC(; N=N); beta=β)
+        C = QAtlas.fetch(TFIM(; J=J, h=h), SpinCorrelation(:z, :z), OBC(; N=N); beta=β)
 
         # ε_i reconstructed from the Pfaffian nearest-neighbour correlator.
         ε_ref = Vector{Float64}(undef, N)

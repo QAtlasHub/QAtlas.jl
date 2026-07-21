@@ -4,8 +4,8 @@
 # Companion to `TFIM_dynamics.jl`.  All the heavy lifting (Majorana
 # Hamiltonian assembly, BdG-thermal Majorana 2-point function, Wick / Pfaffian
 # evaluation) is already provided there; this file only adds equal-time
-# (`t = 0`) `fetch` dispatches for `XXCorrelation{:static}` /
-# `XXCorrelation{:connected}` and an `Infinite`-proxy variant that re-uses
+# (`t = 0`) `fetch` dispatches for `SpinCorrelation{:x,:x}` /
+# `ConnectedSpinCorrelation{:x,:x}` and an `Infinite`-proxy variant that re-uses
 # the OBC routine at a large N.
 #
 # Conventions:
@@ -33,7 +33,7 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model::TFIM, ::XXCorrelation{:static}, bc::OBC;
+    fetch(model::TFIM, ::SpinCorrelation{:x,:x}, bc::OBC;
           beta::Real = Inf, i::Int, j::Int, kwargs...) -> Float64
 
 Static (equal-time) thermal transverse correlator
@@ -49,7 +49,7 @@ At `i = j`, `⟨(σˣ)²⟩ = ⟨I⟩ = 1` regardless of (β, J, h).
 """
 function fetch(
     model::TFIM,
-    ::XXCorrelation{:static},
+    ::SpinCorrelation{:x,:x},
     bc::OBC;
     beta::Real=Inf,
     i::Int,
@@ -63,13 +63,13 @@ function fetch(
 end
 
 """
-    fetch(model::TFIM, ::XXCorrelation{:connected}, bc::OBC;
+    fetch(model::TFIM, ::ConnectedSpinCorrelation{:x,:x}, bc::OBC;
           beta::Real = Inf, i::Int, j::Int, kwargs...) -> Float64
 
 Connected static thermal transverse correlator
 `⟨σˣ_i σˣ_j⟩_β − ⟨σˣ_i⟩_β ⟨σˣ_j⟩_β` for the OBC TFIM.
 
-Unlike `ZZCorrelation{:connected}` (where ⟨σᶻ⟩ = 0 by Z₂ on OBC and the
+Unlike `ConnectedSpinCorrelation{:z,:z}` (where ⟨σᶻ⟩ = 0 by Z₂ on OBC and the
 connected and bare correlators coincide), `⟨σˣ⟩_β ≠ 0` in general — σˣ
 is the field-coupled order parameter and acquires a non-zero
 expectation `Σ[2i-1, 2i]` from the BdG-thermal covariance.
@@ -83,7 +83,7 @@ evolution `R = I` at `t = 0`, the 4×4 Pfaffian for `⟨σˣ_i σˣ_j⟩_β`.
 """
 function fetch(
     model::TFIM,
-    ::XXCorrelation{:connected},
+    ::ConnectedSpinCorrelation{:x,:x},
     bc::OBC;
     beta::Real=Inf,
     i::Int,
@@ -114,7 +114,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model::TFIM, ::XXCorrelation{:static}, ::Infinite;
+    fetch(model::TFIM, ::SpinCorrelation{:x,:x}, ::Infinite;
           beta::Real = Inf, i::Int, j::Int,
           N_proxy::Int = 80, kwargs...) -> Float64
 
@@ -133,7 +133,7 @@ Raise `N_proxy` if more accuracy is needed; the cost is the single
 """
 function fetch(
     model::TFIM,
-    ::XXCorrelation{:static},
+    ::SpinCorrelation{:x,:x},
     ::Infinite;
     beta::Real=Inf,
     i::Int,
@@ -141,20 +141,20 @@ function fetch(
     N_proxy::Int=80,
     kwargs...,
 )
-    return fetch(model, XXCorrelation{:static}(), OBC(N_proxy); beta=beta, i=i, j=j)
+    return fetch(model, SpinCorrelation(:x, :x), OBC(N_proxy); beta=beta, i=i, j=j)
 end
 
 """
-    fetch(model::TFIM, ::XXCorrelation{:connected}, ::Infinite;
+    fetch(model::TFIM, ::ConnectedSpinCorrelation{:x,:x}, ::Infinite;
           beta::Real = Inf, i::Int, j::Int,
           N_proxy::Int = 80, kwargs...) -> Float64
 
 Connected static `⟨σˣ_i σˣ_j⟩_β,c` in the thermodynamic limit, via the
-same OBC large-N proxy as `XXCorrelation{:static}, Infinite()`.
+same OBC large-N proxy as `SpinCorrelation{:x,:x}, Infinite()`.
 """
 function fetch(
     model::TFIM,
-    ::XXCorrelation{:connected},
+    ::ConnectedSpinCorrelation{:x,:x},
     ::Infinite;
     beta::Real=Inf,
     i::Int,
@@ -162,5 +162,5 @@ function fetch(
     N_proxy::Int=80,
     kwargs...,
 )
-    return fetch(model, XXCorrelation{:connected}(), OBC(N_proxy); beta=beta, i=i, j=j)
+    return fetch(model, ConnectedSpinCorrelation(:x, :x), OBC(N_proxy); beta=beta, i=i, j=j)
 end

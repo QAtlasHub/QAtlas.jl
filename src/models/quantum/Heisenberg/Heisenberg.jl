@@ -261,12 +261,13 @@ function fetch(
     return fetch(XXZ1D(; J=J, Δ=1.0), MagnetizationXLocal(), bc; beta=beta, kwargs...)
 end
 
-# Two-point correlators (static + connected).
-for CorrTy in (:XXCorrelation, :YYCorrelation, :ZZCorrelation)
-    for mode in (:static, :connected)
+# Two-point correlators (static + connected).  #734: dispatch on and delegate
+# to the new axis-parametric correlator types (Heisenberg1D = XXZ1D at Δ = 1).
+for axis in (:x, :y, :z)
+    for CorrT in (SpinCorrelation{axis,axis}, ConnectedSpinCorrelation{axis,axis})
         @eval function fetch(
             ::Heisenberg1D,
-            ::$CorrTy{$(QuoteNode(mode))},
+            ::$CorrT,
             bc::OBC;
             beta::Real,
             i::Int,
@@ -274,15 +275,7 @@ for CorrTy in (:XXCorrelation, :YYCorrelation, :ZZCorrelation)
             J::Real=1.0,
             kwargs...,
         )
-            return fetch(
-                XXZ1D(; J=J, Δ=1.0),
-                $CorrTy{$(QuoteNode(mode))}(),
-                bc;
-                beta=beta,
-                i=i,
-                j=j,
-                kwargs...,
-            )
+            return fetch(XXZ1D(; J=J, Δ=1.0), $CorrT(), bc; beta=beta, i=i, j=j, kwargs...)
         end
     end
 end

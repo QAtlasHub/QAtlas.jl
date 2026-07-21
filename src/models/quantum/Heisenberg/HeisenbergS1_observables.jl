@@ -109,9 +109,13 @@ end
 
 for (Q, axis_sym) in ((:XXCorrelation, :x), (:YYCorrelation, :y), (:ZZCorrelation, :z))
     axis_str = string(axis_sym)
+    # #734: dispatch on the new axis-parametric correlator types; `Q` is kept
+    # only for the (unchanged) error-message text that names the old fused type.
+    StaticT = SpinCorrelation{axis_sym,axis_sym}
+    ConnectedT = ConnectedSpinCorrelation{axis_sym,axis_sym}
     @eval begin
         """
-            fetch(model::S1Heisenberg1D, ::$($Q){:static}, ::OBC;
+            fetch(model::S1Heisenberg1D, ::$($StaticT), ::OBC;
                   beta, i::Int, j::Int) -> Float64
 
         Static thermal correlator `⟨S^$($axis_str)_i S^$($axis_str)_j⟩_β`
@@ -120,7 +124,7 @@ for (Q, axis_sym) in ((:XXCorrelation, :x), (:YYCorrelation, :y), (:ZZCorrelatio
         """
         function fetch(
             model::S1Heisenberg1D,
-            ::$Q{:static},
+            ::$StaticT,
             bc::OBC;
             beta::Real,
             i::Int,
@@ -140,7 +144,7 @@ for (Q, axis_sym) in ((:XXCorrelation, :x), (:YYCorrelation, :y), (:ZZCorrelatio
         end
 
         """
-            fetch(model::S1Heisenberg1D, ::$($Q){:connected}, ::OBC;
+            fetch(model::S1Heisenberg1D, ::$($ConnectedT), ::OBC;
                   beta, i::Int, j::Int) -> Float64
 
         Connected (cumulant) correlator
@@ -149,7 +153,7 @@ for (Q, axis_sym) in ((:XXCorrelation, :x), (:YYCorrelation, :y), (:ZZCorrelatio
         """
         function fetch(
             model::S1Heisenberg1D,
-            ::$Q{:connected},
+            ::$ConnectedT,
             bc::OBC;
             beta::Real,
             i::Int,

@@ -19,7 +19,7 @@ function mean_far(N::Int, J::Float64, h::Float64, i0::Int)
         s += real(
             QAtlas.fetch(
                 TFIM(; J=J, h=h),
-                ZZCorrelation{:dynamic}(),
+                DynamicalCorrelation(:z, :z),
                 OBC(; N=N);
                 i=i0,
                 j=i0 + r,

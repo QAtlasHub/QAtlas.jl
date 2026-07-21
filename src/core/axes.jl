@@ -35,15 +35,11 @@ dynamical_axis(::Type) = :static
 dynamical_axis(::Type{<:AbstractVelocity}) = :transport
 
 _dynamic_scheme(s) = s in (:dynamic, :lightcone, :quench)
-function dynamical_axis(::Type{<:XXCorrelation{M}}) where {M}
-    return _dynamic_scheme(M) ? :dynamic : :static
-end
-function dynamical_axis(::Type{<:YYCorrelation{M}}) where {M}
-    return _dynamic_scheme(M) ? :dynamic : :static
-end
-function dynamical_axis(::Type{<:ZZCorrelation{M}}) where {M}
-    return _dynamic_scheme(M) ? :dynamic : :static
-end
+# Real-space correlators are now split by scheme onto distinct types (#734):
+# the retarded (dynamic) and light-cone spreading correlators are :dynamic; the
+# static / connected equal-time correlators fall through to the :static default.
+dynamical_axis(::Type{<:DynamicalCorrelation}) = :dynamic
+dynamical_axis(::Type{<:LightconeSpinCorrelation}) = :dynamic
 function dynamical_axis(::Type{<:VonNeumannEntropy{M}}) where {M}
     return _dynamic_scheme(M) ? :dynamic : :static
 end

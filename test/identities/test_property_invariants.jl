@@ -235,10 +235,10 @@ end
         i = rand(2:(N - 1))
         j = rand(2:(N - 1))
         c_zz = QAtlas.fetch(
-            TFIM(; J=1.0, h=h), ZZCorrelation{:static}(), OBC(N); beta=β, i=i, j=j
+            TFIM(; J=1.0, h=h), SpinCorrelation(:z, :z), OBC(N); beta=β, i=i, j=j
         )
         c_xx = QAtlas.fetch(
-            TFIM(; J=1.0, h=h), XXCorrelation{:static}(), OBC(N); beta=β, i=i, j=j
+            TFIM(; J=1.0, h=h), SpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=j
         )
         @test abs(c_zz) ≤ 1 + 1e-10
         @test abs(c_xx) ≤ 1 + 1e-10

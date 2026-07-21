@@ -53,13 +53,13 @@
     # ───────────────────────────────────────────────────────────────────────
     # Layer 3: ZZ connected correlator at OBC equals the static one (Z₂).
     # ───────────────────────────────────────────────────────────────────────
-    @testset "ZZCorrelation{:connected} = ZZCorrelation{:static} (Z₂)" begin
+    @testset "ConnectedSpinCorrelation{:z,:z} = SpinCorrelation{:z,:z} (Z₂)" begin
         for h in (0.5, 1.0, 1.5)
             for β in (Inf, 2.0, 0.5)
                 for r in 1:4
                     v_static = QAtlas.fetch(
                         TFIM(; J=1.0, h=h),
-                        ZZCorrelation{:static}(),
+                        SpinCorrelation(:z, :z),
                         OBC(; N=10);
                         beta=β,
                         i=2,
@@ -67,7 +67,7 @@
                     )
                     v_conn = QAtlas.fetch(
                         TFIM(; J=1.0, h=h),
-                        ZZCorrelation{:connected}(),
+                        ConnectedSpinCorrelation(:z, :z),
                         OBC(; N=10);
                         beta=β,
                         i=2,

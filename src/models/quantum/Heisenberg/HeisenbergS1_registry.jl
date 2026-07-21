@@ -96,7 +96,7 @@
 # ── Two-point correlators (static / connected, OBC) ───────────────────
 @register(
     S1Heisenberg1D,
-    XXCorrelation{:static},
+    SpinCorrelation{:x,:x},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -104,7 +104,7 @@
 )
 @register(
     S1Heisenberg1D,
-    YYCorrelation{:static},
+    SpinCorrelation{:y,:y},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -112,7 +112,7 @@
 )
 @register(
     S1Heisenberg1D,
-    ZZCorrelation{:static},
+    SpinCorrelation{:z,:z},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -120,7 +120,7 @@
 )
 @register(
     S1Heisenberg1D,
-    XXCorrelation{:connected},
+    ConnectedSpinCorrelation{:x,:x},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -128,7 +128,7 @@
 )
 @register(
     S1Heisenberg1D,
-    YYCorrelation{:connected},
+    ConnectedSpinCorrelation{:y,:y},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -136,7 +136,7 @@
 )
 @register(
     S1Heisenberg1D,
-    ZZCorrelation{:connected},
+    ConnectedSpinCorrelation{:z,:z},
     OBC,
     method=:dense_ed,
     reliability=:high,

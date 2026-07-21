@@ -450,13 +450,18 @@ function _xxz1d_static_corr(
     return c2 - ci * cj
 end
 
-# Generate fetch methods for the four (mode, axis) combinations we support.
-const _XXZ1D_CORR_AXES = ((XXCorrelation, _σx), (YYCorrelation, _σy), (ZZCorrelation, _σz))
+# Generate fetch methods for the two modes × three axes we support.  #734: the
+# static / connected correlators are now the axis-parametric AbstractQAtlas types.
+const _XXZ1D_CORR_AXES = (
+    (SpinCorrelation{:x,:x}, ConnectedSpinCorrelation{:x,:x}, _σx),
+    (SpinCorrelation{:y,:y}, ConnectedSpinCorrelation{:y,:y}, _σy),
+    (SpinCorrelation{:z,:z}, ConnectedSpinCorrelation{:z,:z}, _σz),
+)
 
-for (CorrTy, σα) in _XXZ1D_CORR_AXES
+for (StaticT, ConnectedT, σα) in _XXZ1D_CORR_AXES
     @eval begin
         function fetch(
-            model::XXZ1D, ::$CorrTy{:static}, bc::OBC; beta::Real, i::Int, j::Int, kwargs...
+            model::XXZ1D, ::$StaticT, bc::OBC; beta::Real, i::Int, j::Int, kwargs...
         )
             N = _bc_size(bc, kwargs)
             F = _xxz1d_thermal_kernel(model, N, beta)
@@ -464,13 +469,7 @@ for (CorrTy, σα) in _XXZ1D_CORR_AXES
         end
 
         function fetch(
-            model::XXZ1D,
-            ::$CorrTy{:connected},
-            bc::OBC;
-            beta::Real,
-            i::Int,
-            j::Int,
-            kwargs...,
+            model::XXZ1D, ::$ConnectedT, bc::OBC; beta::Real, i::Int, j::Int, kwargs...
         )
             N = _bc_size(bc, kwargs)
             F = _xxz1d_thermal_kernel(model, N, beta)

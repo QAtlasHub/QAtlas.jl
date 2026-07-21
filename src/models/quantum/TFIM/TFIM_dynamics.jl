@@ -377,7 +377,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model::TFIM, ::ZZCorrelation{:dynamic}, bc::OBC;
+    fetch(model::TFIM, ::DynamicalCorrelation{(:z, :z)}, bc::OBC;
           i::Int, j::Int, t::Float64, beta::Float64 = Inf) -> ComplexF64
 
 Exact `⟨σᶻ_i(t) σᶻ_j(0)⟩_β` for the OBC TFIM.  `beta = Inf` (the default)
@@ -385,7 +385,7 @@ gives the ground-state result.  `N` comes from `bc.N`.
 """
 function fetch(
     model::TFIM,
-    ::ZZCorrelation{:dynamic},
+    ::DynamicalCorrelation{(:z, :z)},
     bc::OBC;
     i::Int,
     j::Int,
@@ -398,14 +398,14 @@ function fetch(
 end
 
 """
-    fetch(model::TFIM, ::XXCorrelation{:dynamic}, bc::OBC;
+    fetch(model::TFIM, ::DynamicalCorrelation{(:x, :x)}, bc::OBC;
           i::Int, j::Int, t::Float64, beta::Float64 = Inf) -> ComplexF64
 
 Exact `⟨σˣ_i(t) σˣ_j(0)⟩_β` for the OBC TFIM.
 """
 function fetch(
     model::TFIM,
-    ::XXCorrelation{:dynamic},
+    ::DynamicalCorrelation{(:x, :x)},
     bc::OBC;
     i::Int,
     j::Int,
@@ -418,7 +418,7 @@ function fetch(
 end
 
 """
-    fetch(model::TFIM, ::ZZCorrelation{:lightcone}, bc::OBC;
+    fetch(model::TFIM, ::LightconeSpinCorrelation{:z,:z}, bc::OBC;
           center::Int, times::AbstractVector{<:Real}, beta::Float64 = Inf) -> Matrix{ComplexF64}
 
 Exact spreading correlation `C[it, ix] = ⟨σᶻ_ix(t_it) σᶻ_center(0)⟩_β` for all
@@ -426,7 +426,7 @@ sites `ix ∈ 1:N` and `t_it ∈ times`.
 """
 function fetch(
     model::TFIM,
-    ::ZZCorrelation{:lightcone},
+    ::LightconeSpinCorrelation{:z,:z},
     bc::OBC;
     center::Int,
     times::AbstractVector{<:Real},
@@ -438,7 +438,7 @@ function fetch(
 end
 
 """
-    fetch(model::TFIM, ::ZZCorrelation{:static}, bc::OBC;
+    fetch(model::TFIM, ::SpinCorrelation{:z,:z}, bc::OBC;
           beta::Float64, [i::Int, j::Int]) -> Matrix{Float64} or Float64
 
 Static (equal-time) thermal correlator `⟨σᶻ_i σᶻ_j⟩_β` for the OBC TFIM.
@@ -447,7 +447,7 @@ N×N matrix.
 """
 function fetch(
     model::TFIM,
-    ::ZZCorrelation{:static},
+    ::SpinCorrelation{:z,:z},
     bc::OBC;
     beta::Float64,
     i::Union{Int,Nothing}=nothing,
@@ -462,7 +462,7 @@ function fetch(
 end
 
 """
-    fetch(model::TFIM, ::ZZCorrelation{:connected}, bc::OBC;
+    fetch(model::TFIM, ::ConnectedSpinCorrelation{:z,:z}, bc::OBC;
           beta::Float64, [i::Int, j::Int]) -> Matrix{Float64} or Float64
 
 Connected static thermal correlator
@@ -483,7 +483,7 @@ in the source.
 """
 function fetch(
     model::TFIM,
-    ::ZZCorrelation{:connected},
+    ::ConnectedSpinCorrelation{:z,:z},
     bc::OBC;
     beta::Float64,
     i::Union{Int,Nothing}=nothing,
@@ -494,7 +494,7 @@ function fetch(
     # returns the connected correlator under that assumption.  Wire to it
     # directly; if a future TFIM variant adds explicit symmetry breaking,
     # subtract `mz[i] * mz[j]` here using `MagnetizationZLocal`.
-    return fetch(model, ZZCorrelation{:static}(), bc; beta=beta, i=i, j=j, kwargs...)
+    return fetch(model, SpinCorrelation(:z, :z), bc; beta=beta, i=i, j=j, kwargs...)
 end
 
 """

@@ -60,6 +60,9 @@ using AbstractQAtlas:
     # ...and the inequality verbs, so a BOUND edge (core/bound.jl) can delegate
     # its criterion to AbstractQAtlas exactly as :gibbs delegates its arithmetic.
     AbstractInequality,
+    AbstractRelation,
+    EntropyResponse,
+    SpecificHeatFromEntropy,
     slack,
     variable_slots,
     # the inequalities bound_registry.jl declares edges for
@@ -178,6 +181,7 @@ include("core/derivative.jl")    # derived-input suppliers (AD via ext, FD fallb
 include("core/symmetry.jl")     # @symmetry node attributes + LSM checks (C10)
 include("core/identity.jl")      # @identity quantity<->quantity edges (C11)
 include("core/bound.jl")         # @bound: the inequality sibling (#734 Phase B)
+include("core/response.jl")      # @response: relations needing a derived input
 include("core/duality.jl")      # @dual model<->model parameter-mapped edges (C12)
 include("core/limits.jl")       # @limits_to asymptotic limit edges (C13)
 include("core/pfaffian.jl")
@@ -233,7 +237,8 @@ export BoundEdge, BOUNDS, bound!, @bound  # inequality edges (core/bound.jl)
 # Derived-input suppliers (core/derivative.jl).  The AD backends are package
 # EXTENSIONS — neither ForwardDiff nor Zygote is a hard dependency.
 export AbstractDiffBackend, FiniteDifference, ForwardDiffBackend, ZygoteBackend
-export derivative, backend_available, preferred_backend, default_rtol
+export derivative, derivative_agreement, backend_available, preferred_backend, default_rtol
+export ResponseEdge, RESPONSES, response!, @response, DerivedInput, ∂
 export QuenchEntanglementEntropy  # QAtlas-side post-quench S(ℓ,t) (was VonNeumannEntropy{:quench})
 export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ
@@ -533,6 +538,7 @@ include("reduces_registry.jl")
 include("symmetry_registry.jl")
 include("identity_registry.jl")
 include("bound_registry.jl")            # @bound inequality edges (#734 Phase B)
+include("response_registry.jl")         # @response derivative-supplied edges
 include("relations/model_specific.jl")   # #730: model-specific relations, hosted here
 include("duality_registry.jl")
 include("limits_registry.jl")

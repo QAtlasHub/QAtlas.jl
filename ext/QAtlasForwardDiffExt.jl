@@ -16,4 +16,8 @@ using ForwardDiff: ForwardDiff
 QAtlas.derivative(::ForwardDiffBackend, f, x::Real) = ForwardDiff.derivative(f, float(x))
 QAtlas.backend_available(::ForwardDiffBackend) = true
 
+# Lets a root-finder solve on primals and re-attach the exact implicit
+# derivative afterwards — see QAtlas._primal.
+QAtlas._primal(x::ForwardDiff.Dual) = ForwardDiff.value(x)
+
 end

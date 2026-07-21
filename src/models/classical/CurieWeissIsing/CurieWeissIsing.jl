@@ -132,6 +132,29 @@ end
 function _curie_weiss_solve_m(
     beta_J::Real, beta_h::Real=0.0; tol::Real=1e-14, maxiter::Int=200
 )
+    # Bisection is the right SOLVER and the wrong thing to differentiate: the
+    # β-dependence of its answer flows through the bracket endpoints and the
+    # comparison branches, not through g(m) = 0, so forward-mode AD returns a
+    # number with no relation to dm/dβ.  Measured before this fix, on the
+    # ordered phase: AD gave T·dS/dT = -0.0127 where the truth is +0.3659 —
+    # the wrong SIGN, which no tolerance can be defended against.
+    #
+    # So: solve on primals (unchanged, still bisection), then re-attach the
+    # derivative analytically with one Newton step from the converged root.
+    # g(m₀) = 0 there, so the VALUE is untouched; the dual part becomes
+    # dm = -(∂g/∂β)/(∂g/∂m), which is exactly the implicit-function theorem.
+    bJ, bh = _primal(beta_J), _primal(beta_h)
+    if !(bJ === beta_J && bh === beta_h)
+        m0 = _curie_weiss_solve_m(bJ, bh; tol=tol, maxiter=maxiter)
+        # Disordered / saturated branches are locally constant in β.
+        (bJ <= 1 && iszero(bh)) && return m0 * one(beta_J)
+        dg_dm = 1 - bJ * sech(bJ * m0 + bh)^2
+        # At the transition ∂g/∂m → 0 and dm/dβ genuinely diverges.  Let it
+        # come out non-finite rather than fabricate a finite wrong number:
+        # `derivative_agreement` then reports "cannot evaluate here", which is
+        # the honest verdict at a non-differentiable point.
+        return m0 - (m0 - tanh(beta_J * m0 + beta_h)) / dg_dm
+    end
     if iszero(beta_h)
         # ── zero-field branch ────────────────────────────────────────
         if beta_J <= 1

@@ -312,9 +312,23 @@ end
     @test !isempty(checks)
     @test issorted([c.id for c in checks])
     @test allunique(c.id for c in checks)
-    # Closed vocabulary on purpose: a new edge type must be declared here, so it
-    # cannot start emitting checks unnoticed.  `:bound` joined in #734 Phase B.
-    @test all(c.kind in (:identity, :dual, :limit, :symmetry, :bound) for c in checks)
+    # Closed vocabulary on purpose: a new edge type must be DECLARED here, so it
+    # cannot start emitting checks unnoticed.  `:bound` and `:response` joined
+    # in #734 Phase B.
+    declared_kinds = (:identity, :dual, :limit, :symmetry, :bound, :response)
+    @test all(c.kind in declared_kinds for c in checks)
+    # ...and say so usefully when it is forgotten.  Registering a generator and
+    # forgetting this list has now happened twice; comparing against the
+    # registry turns "some check has an unexpected kind" into a message that
+    # names the generator, without weakening the guard (the list is still
+    # hand-maintained — deriving it from the registry would defeat the point).
+    registered_kinds = Set(first(p) for p in QAtlas.CHECK_GENERATORS)
+    undeclared = sort(collect(setdiff(registered_kinds, Set(declared_kinds))))
+    if !isempty(undeclared)
+        @error "check generator(s) registered but absent from declared_kinds — add \
+                them here" undeclared
+    end
+    @test isempty(undeclared)
     # kind selection
     only_ids = generated_checks(; kinds=(:identity,))
     @test all(c -> c.kind === :identity, only_ids)

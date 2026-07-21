@@ -251,41 +251,39 @@ end
 # ─── Site-resolved magnetisations (Vector of length N) ────────────────────
 
 """
-    fetch(model::XXZ1D, ::MagnetizationXLocal{:equilibrium}, ::OBC; beta) -> Vector{Float64}
+    fetch(model::XXZ1D, ::LocalMagnetization{:x}, ::OBC; beta) -> Vector{Float64}
 
 Site-resolved `[⟨σˣ_i⟩_β for i = 1:N]`.  Identically zero up to
 dense-ED round-off because `σˣ_i` flips a single Sᶻ and the XXZ
 Hamiltonian conserves total Sᶻ.
 """
-function fetch(
-    model::XXZ1D, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Real, kwargs...
-)
+function fetch(model::XXZ1D, ::LocalMagnetization{:x}, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     F = _xxz1d_thermal_kernel(model, N, beta)
     return Float64[_xxz1d_thermal_expectation_op(F, _xxz1d_sx(N, i)) for i in 1:N]
 end
 
 """
-    fetch(model::XXZ1D, ::MagnetizationYLocal, ::OBC; beta) -> Vector{Float64}
+    fetch(model::XXZ1D, ::LocalMagnetization{:y}, ::OBC; beta) -> Vector{Float64}
 
 Site-resolved `[⟨σʸ_i⟩_β for i = 1:N]`.  Identically zero by the same
-U(1) argument as `MagnetizationXLocal` plus parity (σʸ_i is purely
+U(1) argument as `LocalMagnetization(:x)` plus parity (σʸ_i is purely
 imaginary in the σᶻ basis).
 """
-function fetch(model::XXZ1D, ::MagnetizationYLocal, bc::OBC; beta::Real, kwargs...)
+function fetch(model::XXZ1D, ::LocalMagnetization{:y}, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     F = _xxz1d_thermal_kernel(model, N, beta)
     return Float64[_xxz1d_thermal_expectation_op(F, _xxz1d_sy(N, i)) for i in 1:N]
 end
 
 """
-    fetch(model::XXZ1D, ::MagnetizationZLocal, ::OBC; beta) -> Vector{Float64}
+    fetch(model::XXZ1D, ::LocalMagnetization{:z}, ::OBC; beta) -> Vector{Float64}
 
 Site-resolved `[⟨σᶻ_i⟩_β for i = 1:N]`.  Each ⟨σᶻ_i⟩ is identically
 zero up to round-off in the canonical Boltzmann ensemble (sectors of
 opposite S_z come in equal weight pairs).
 """
-function fetch(model::XXZ1D, ::MagnetizationZLocal, bc::OBC; beta::Real, kwargs...)
+function fetch(model::XXZ1D, ::LocalMagnetization{:z}, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     F = _xxz1d_thermal_kernel(model, N, beta)
     return Float64[_xxz1d_thermal_expectation_op(F, _xxz1d_sz(N, i)) for i in 1:N]
@@ -634,7 +632,7 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
-    fetch(::XXZ1D, ::VonNeumannEntropy{:equilibrium}, ::Infinite;
+    fetch(::XXZ1D, ::VonNeumannEntropy, ::Infinite;
           ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
 
 Single-interval von Neumann entanglement entropy of the XXZ chain in
@@ -644,12 +642,7 @@ Delegates to the c = 1 Calabrese-Cardy form via Universality(:XY)
 (or Universality(:Heisenberg) at Δ = 1 for symmetry).
 """
 function fetch(
-    model::XXZ1D,
-    ::VonNeumannEntropy{:equilibrium},
-    ::Infinite;
-    ℓ::Int,
-    beta::Real=Inf,
-    kwargs...,
+    model::XXZ1D, ::VonNeumannEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
 )
     Δ = model.Δ
     if Δ == 1.0
@@ -669,7 +662,7 @@ function fetch(
         throw(
             DomainError(
                 Δ,
-                "XXZ1D VonNeumannEntropy{:equilibrium} at Infinite: only the critical " *
+                "XXZ1D VonNeumannEntropy at Infinite: only the critical " *
                 "Luttinger-liquid regime -1 < Δ ≤ 1 admits a c = 1 Calabrese-Cardy " *
                 "closed form; for |Δ| > 1 the chain is gapped and no scale-invariant " *
                 "thermodynamic-limit closed form applies. Got Δ = \$Δ.",

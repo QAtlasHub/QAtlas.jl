@@ -146,7 +146,7 @@
 # ── Local one-site / one-bond observables (OBC) ───────────────────────
 @register(
     S1Heisenberg1D,
-    MagnetizationXLocal{:equilibrium},
+    LocalMagnetization{:x},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -154,7 +154,7 @@
 )
 @register(
     S1Heisenberg1D,
-    MagnetizationZLocal,
+    LocalMagnetization{:z},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -203,7 +203,7 @@
 # ── Entanglement (T = 0; β kwarg defaults to Inf) ─────────────────────
 @register(
     S1Heisenberg1D,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     OBC,
     method=:dense_ed,
     reliability=:high,

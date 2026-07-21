@@ -171,9 +171,9 @@ end
         @test sum(ε) ≈ E_total atol = 1e-10
 
         # Local magnetisations (length N, near-zero by U(1) symmetry)
-        mxv = QAtlas.fetch(m, MagnetizationXLocal(), OBC(N); beta=β)
-        myv = QAtlas.fetch(m, MagnetizationYLocal(), OBC(N); beta=β)
-        mzv = QAtlas.fetch(m, MagnetizationZLocal(), OBC(N); beta=β)
+        mxv = QAtlas.fetch(m, LocalMagnetization(:x), OBC(N); beta=β)
+        myv = QAtlas.fetch(m, LocalMagnetization(:y), OBC(N); beta=β)
+        mzv = QAtlas.fetch(m, LocalMagnetization(:z), OBC(N); beta=β)
         @test length(mxv) == N
         @test length(myv) == N
         @test length(mzv) == N

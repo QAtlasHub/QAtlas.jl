@@ -478,7 +478,7 @@ clarity / API completeness.
 If at some point a TFIM variant breaks Z₂ explicitly (e.g. by adding
 a longitudinal field), the implementation will still be correct
 provided the per-site `⟨σᶻ_i⟩_β` is taken from
-[`MagnetizationZLocal`](@ref) and subtracted off — see the comment
+[`LocalMagnetization`](@ref) and subtracted off — see the comment
 in the source.
 """
 function fetch(
@@ -493,7 +493,7 @@ function fetch(
     # In TFIM at OBC ⟨σᶻ_i⟩ = 0 by Z₂ symmetry.  The static routine already
     # returns the connected correlator under that assumption.  Wire to it
     # directly; if a future TFIM variant adds explicit symmetry breaking,
-    # subtract `mz[i] * mz[j]` here using `MagnetizationZLocal`.
+    # subtract `mz[i] * mz[j]` here using `LocalMagnetization(:z)`.
     return fetch(model, SpinCorrelation(:z, :z), bc; beta=beta, i=i, j=j, kwargs...)
 end
 

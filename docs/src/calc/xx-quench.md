@@ -1,7 +1,7 @@
 # XX (Δ = 0) Free-Fermion Quench Observables
 
 This page documents the closed-form quench observables exposed by
-`QAtlas.fetch(::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite; ...)`
+`QAtlas.fetch(::XXZ1D, ::LoschmidtRateFunction, ::Infinite; ...)`
 introduced in issue #148 (phase 1).
 
 ## Setup
@@ -119,7 +119,7 @@ becomes the meaningful return value.
 
 ```julia
 fetch(model_f::XXZ1D,
-      ::LoschmidtEcho{:rate},
+      ::LoschmidtRateFunction,
       ::Infinite;
       initial::XXZ1D,
       t::Real) -> Float64
@@ -138,7 +138,7 @@ julia> m_f = XXZ1D(; J=1.0, Δ=0.0);
 
 julia> m_0 = XXZ1D(; J=0.5, Δ=0.0);
 
-julia> fetch(m_f, LoschmidtEcho(; mode=:rate), Infinite();
+julia> fetch(m_f, LoschmidtRateFunction(), Infinite();
              initial=m_0, t=1.0)
 0.0
 ```

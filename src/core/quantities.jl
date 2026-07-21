@@ -70,43 +70,37 @@ struct FidelitySusceptibility <: AbstractQuantity end
 
 # ─── Entropies (explicit variants; see user-requested naming) ──────────
 
+# The equilibrium von Neumann entropy adopts AbstractQAtlas's `VonNeumannEntropy`
+# singleton (#734) — the type that its universal entanglement relations are stated
+# over, so QAtlas's values become checkable against them (the #56 contract).  The
+# `:quench` mode of the old parametric type is a genuinely different observable
+# (a real-time, non-equilibrium S(ℓ, t) with an `initial` Hamiltonian) and becomes
+# `QuenchEntanglementEntropy` below.  It is kept QAtlas-side for now: AbstractQAtlas
+# has no post-quench protocol vocabulary yet (a promotion candidate for ABQ#4).
+
 """
-    VonNeumannEntropy{M}() <: AbstractQuantity
-    VonNeumannEntropy()                   # M = :equilibrium (default)
-    VonNeumannEntropy(:equilibrium)       # explicit equilibrium S(ℓ)
-    VonNeumannEntropy(:quench)            # post-quench S(ℓ, t)
+    QuenchEntanglementEntropy() <: AbstractEntanglementMeasure
 
-Von Neumann entanglement entropy of a reduced density matrix,
-`S_vN = −Tr ρ_A log ρ_A`.  The mode parameter `M::Symbol` is a
-phantom type that splits the dispatch into:
+Time-evolved entanglement entropy `S_vN(ℓ, t) = −Tr ρ_A(t) log ρ_A(t)` after a
+sudden quench from the ground state of an `initial::AbstractQAtlasModel` (`H_0`,
+passed as the `initial` keyword to `fetch`) to the post-quench Hamiltonian (the
+`model` argument).
 
-- `:equilibrium` — equilibrium / thermal value
-  `S_vN = -Tr ρ_A log ρ_A` of the GS or thermal reduced density
-  matrix on the first `ℓ` sites (kwarg `ℓ`).  This is the original
-  meaning; the no-argument constructor `VonNeumannEntropy()` keeps
-  back-compatibility by routing here.
+Calabrese–Cardy quasi-particle picture (J. Stat. Mech. P04010 (2005)): linear
+growth `S(ℓ, t) ≈ (c/3) v_E t` for `t ≪ ℓ/(2 v_E)`, saturating at
+`(c/3) log ℓ + const` for `t ≫ ℓ/(2 v_E)`.
 
-- `:quench` — time-evolved entanglement entropy
-  `S_vN(ℓ, t) = -Tr ρ_A(t) log ρ_A(t)` after a sudden quench from
-  the ground state of an `initial::AbstractQAtlasModel` (`H_0`) to
-  the post-quench Hamiltonian (the `model` argument to `fetch`).
-  Calabrese–Cardy quasi-particle picture (J. Stat. Mech. P04010
-  (2005)): linear growth `S(ℓ, t) ≈ (c/3) v_E t` for `t ≪ ℓ/(2 v_E)`,
-  saturating at `(c/3) log ℓ + const` for `t ≫ ℓ/(2 v_E)`.
-
-See `docs/src/calc/tfim-quench-entanglement.md` for the
-free-fermion derivation in the TFIM.
+The equilibrium counterpart is AbstractQAtlas's [`VonNeumannEntropy`](@ref).
+See `docs/src/calc/tfim-quench-entanglement.md` for the free-fermion derivation
+in the TFIM.
 """
-struct VonNeumannEntropy{M} <: AbstractEntanglementMeasure
-    function VonNeumannEntropy{M}() where {M}
-        M isa Symbol || error("VonNeumannEntropy mode must be a Symbol, got $(typeof(M))")
-        M in (:equilibrium, :quench) ||
-            error("unknown VonNeumannEntropy mode :$M; expected :equilibrium or :quench")
-        return new{M}()
-    end
-end
-VonNeumannEntropy() = VonNeumannEntropy{:equilibrium}()
-VonNeumannEntropy(m::Symbol) = VonNeumannEntropy{m}()
+struct QuenchEntanglementEntropy <: AbstractEntanglementMeasure end
+
+# NOTE: no `VonNeumannEntropy(::Symbol)` deprecation shim.  The name now belongs
+# to AbstractQAtlas, so a mode-mapping method defined here would be type piracy on
+# its constructor (Aqua's `piracies` check is hard-on).  `VonNeumannEntropy()`
+# keeps its meaning — the equilibrium entropy — and `VonNeumannEntropy(:quench)`
+# breaks loudly with a MethodError; use `QuenchEntanglementEntropy()` instead.
 
 """
     RenyiEntropy(α) <: AbstractQuantity
@@ -191,58 +185,95 @@ the order parameter at low temperature.  **Deprecated** — use `Magnetization(:
 """
 const MagnetizationZ = Magnetization{:z}
 
+# The site-resolved magnetizations follow the same axis-parametric shape as
+# `Magnetization{A}` above, but stay QAtlas-side: they return a **Vector over
+# sites**, not the scalar AbstractQAtlas's quantity vocabulary is built on
+# (same reason `LightconeSpinCorrelation` is kept here).  The equilibrium /
+# quench split that used to be a phantom `M` on `MagnetizationXLocal` is now
+# two distinct types, so the value shape is fixed by the type: `LocalMagnetization`
+# is a Vector over sites, `QuenchLocalMagnetization` a scalar at one `(i, t)`.
+
 """
-    MagnetizationXLocal{M}() <: AbstractQuantity
-    MagnetizationXLocal()                       # M = :equilibrium (default)
-    MagnetizationXLocal(:equilibrium)           # explicit equilibrium ⟨σˣ_i⟩_β
-    MagnetizationXLocal(:quench)                # post-quench ⟨σˣ_i⟩(t)
+    LocalMagnetization{A}() <: AbstractMagnetization
+    LocalMagnetization(a::Symbol)
 
-Site-resolved `⟨σˣ_i⟩` quantity.  The mode parameter `M::Symbol` is a
-phantom type that splits the dispatch into:
+Site-resolved equilibrium magnetization `[⟨σ^A_i⟩_β for i = 1:N]` along axis
+`A ∈ (:x, :y, :z)` — a `Vector{Float64}` of length `N_bulk`.
 
-- `:equilibrium` — site-resolved thermal expectation
-  `[⟨σˣ_i⟩_β for i = 1:N]` (Vector{Float64}).  This is the original
-  meaning; the no-argument constructor `MagnetizationXLocal()` keeps
-  back-compatibility by routing here.
+`LocalMagnetization(:y)` is identically zero for any real Hermitian
+Hamiltonian (parity / time-reversal); a model that returns it explicitly does
+so as an exact baseline against random-sample estimators that fluctuate
+around zero.
 
-- `:quench` — time-evolved local transverse magnetisation
-  `⟨σˣ_i⟩(t) = ⟨ψ_0|e^{iH_f t} σˣ_i e^{-iH_f t}|ψ_0⟩` after a sudden
-  quench from the ground state of an `initial::AbstractQAtlasModel`
-  (`H_0`) to the post-quench Hamiltonian (the `model` argument to
-  `fetch`).  Returns a single `Float64` for one `(i, t)` pair.
-
-See `docs/src/calc/tfim-sigma-x-quench.md` for the closed-form
-derivation in the TFIM (Calabrese–Essler–Fagotti, J. Stat. Mech.
-P07016 (2012); Barouch–McCoy–Dresden, PRA **2** (1970)).
+The post-quench counterpart is [`QuenchLocalMagnetization`](@ref).
 """
-struct MagnetizationXLocal{M} <: AbstractMagnetization
-    function MagnetizationXLocal{M}() where {M}
-        M isa Symbol ||
-            error("MagnetizationXLocal mode must be a Symbol, got \$(typeof(M))")
-        M in (:equilibrium, :quench) ||
-            error("unknown MagnetizationXLocal mode :\$M; expected :equilibrium or :quench")
-        return new{M}()
+struct LocalMagnetization{A} <: AbstractMagnetization
+    function LocalMagnetization{A}() where {A}
+        A isa Symbol || error("LocalMagnetization axis must be a Symbol, got $(typeof(A))")
+        return new{A}()
     end
 end
-MagnetizationXLocal() = MagnetizationXLocal{:equilibrium}()
-MagnetizationXLocal(m::Symbol) = MagnetizationXLocal{m}()
+LocalMagnetization(a::Symbol) = LocalMagnetization{a}()
 
 """
-    MagnetizationYLocal() <: AbstractQuantity
+    QuenchLocalMagnetization{A}() <: AbstractMagnetization
+    QuenchLocalMagnetization(a::Symbol)
 
-Site-resolved `⟨σʸ_i⟩` vector of length `N_bulk`.  Identically zero
-for any real Hermitian Hamiltonian (parity / time-reversal); a model
-that returns it explicitly does so as an exact baseline against
-random-sample estimators that fluctuate around zero.
+Time-evolved site-resolved magnetization after a sudden quench,
+
+    ⟨σ^A_i⟩(t) = ⟨ψ_0| e^{iH_f t} σ^A_i e^{-iH_f t} |ψ_0⟩,
+
+from the ground state of an `initial::AbstractQAtlasModel` (`H_0`, passed as
+the `initial` keyword to `fetch`) to the post-quench Hamiltonian (the `model`
+argument).  Returns a single `Float64` for one `(i, t)` pair — unlike the
+equilibrium [`LocalMagnetization`](@ref), which returns the whole site vector.
+
+See `docs/src/calc/tfim-sigma-x-quench.md` for the closed-form derivation in
+the TFIM (Calabrese–Essler–Fagotti, J. Stat. Mech. P07016 (2012);
+Barouch–McCoy–Dresden, PRA **2** (1970)).
 """
-struct MagnetizationYLocal <: AbstractMagnetization end
+struct QuenchLocalMagnetization{A} <: AbstractMagnetization
+    function QuenchLocalMagnetization{A}() where {A}
+        A isa Symbol ||
+            error("QuenchLocalMagnetization axis must be a Symbol, got $(typeof(A))")
+        return new{A}()
+    end
+end
+QuenchLocalMagnetization(a::Symbol) = QuenchLocalMagnetization{a}()
 
 """
-    MagnetizationZLocal() <: AbstractQuantity
+    MagnetizationXLocal(; mode = :equilibrium)   (deprecated)
 
-Site-resolved `⟨σᶻ_i⟩` vector of length `N_bulk`.
+Deprecated — returns the axis-parametric site-resolved quantity for `⟨σˣ_i⟩`
+in `mode` (`:equilibrium`→[`LocalMagnetization`](@ref),
+`:quench`→[`QuenchLocalMagnetization`](@ref)).  The type was parametric on the
+mode, so no `const` alias is possible and dispatch on `MagnetizationXLocal{:m}`
+is removed; use the target types directly in new code.
 """
-struct MagnetizationZLocal <: AbstractMagnetization end
+MagnetizationXLocal(; mode::Symbol=:equilibrium) = _local_magnetization_by_mode(:x, mode)
+MagnetizationXLocal(m::Symbol) = _local_magnetization_by_mode(:x, m)
+
+function _local_magnetization_by_mode(a::Symbol, mode::Symbol)
+    mode === :equilibrium && return LocalMagnetization(a)
+    mode === :quench && return QuenchLocalMagnetization(a)
+    return error(
+        "unknown local-magnetization mode :$mode; expected :equilibrium or :quench"
+    )
+end
+
+"""
+    const MagnetizationYLocal = LocalMagnetization{:y}   # deprecated alias
+
+Site-resolved `⟨σʸ_i⟩`.  **Deprecated** — use `LocalMagnetization(:y)`.
+"""
+const MagnetizationYLocal = LocalMagnetization{:y}
+
+"""
+    const MagnetizationZLocal = LocalMagnetization{:z}   # deprecated alias
+
+Site-resolved `⟨σᶻ_i⟩`.  **Deprecated** — use `LocalMagnetization(:z)`.
+"""
+const MagnetizationZLocal = LocalMagnetization{:z}
 
 """
     EnergyLocal() <: AbstractQuantity
@@ -704,59 +735,67 @@ Currently used by [`Kitaev1D`](@ref).
 struct EdgeModeEnergy <: AbstractQuantity end
 # ─── Quench dynamics: Loschmidt echo / DQPT rate function ──────────────
 
+# Loschmidt-echo family for sudden-quench dynamics.  After preparing `|ψ_0⟩` as
+# the ground state of an "initial" model `H_0` and quenching to the "final" model
+# `H_f` (the first positional argument to `fetch`), the Loschmidt amplitude is
+#
+#     G(t) = ⟨ψ_0 | e^{-i H_f t} | ψ_0⟩,
+#
+# with the echo `L(t) = |G(t)|² ∈ [0, 1]` and the rate function
+# `λ(t) = -log L(t)/N`.  #734: the `{:amplitude}` / `{:rate}` phantom mode is
+# split onto two types — they return different quantities (a probability vs an
+# intensive rate) and only the rate is defined at `Infinite`, so the mode was
+# never really one quantity.  Both stay QAtlas-side; AbstractQAtlas has no
+# quench-protocol vocabulary yet (promotion candidate for ABQ#4).
+
 """
-    LoschmidtEcho{M}() <: AbstractQuantity
-    LoschmidtEcho(:amplitude)
-    LoschmidtEcho(:rate)
-    LoschmidtRateFunction()        # alias for LoschmidtEcho{:rate}
+    LoschmidtAmplitude() <: AbstractQuantity
 
-Loschmidt-echo family for sudden-quench dynamics.  After preparing
-`|ψ_0⟩` as the ground state of an "initial" model `H_0` and quenching to
-the "final" model `H_f` (passed as the first positional argument to
-`fetch`), the Loschmidt amplitude is
+The Loschmidt echo `L(t) = |⟨ψ_0|e^{-i H_f t}|ψ_0⟩|² ∈ [0, 1]` after a sudden
+quench, at finite `N`.  Not defined at `Infinite`: `L(t)` vanishes identically
+in the thermodynamic limit (extensive cumulants) — use
+[`LoschmidtRateFunction`](@ref) there.
 
-    G(t) = ⟨ψ_0 | e^{-i H_f t} | ψ_0⟩,
+The pre-quench Hamiltonian is passed via the `initial` keyword on `fetch`.
+"""
+struct LoschmidtAmplitude <: AbstractQuantity end
 
-with the Loschmidt echo `L(t) = |G(t)|² ∈ [0, 1]` and the rate function
+"""
+    LoschmidtRateFunction() <: AbstractQuantity
+
+The Loschmidt rate function
 
     λ(t) = -log L(t) / N         (finite N)
     λ(t) = -lim_{N→∞} log L(t)/N (thermodynamic limit / Infinite)
 
-Non-analytic cusps in `λ(t)` are dynamical quantum phase transitions
-(DQPT).  See Heyl, Polkovnikov, Kehrein, [Heyl2013](@cite) and the
-review Heyl, [Heyl2018](@cite).
-
-The mode `M::Symbol ∈ (:amplitude, :rate)` is a phantom type parameter
-so that `:amplitude` (returns `L(t)`) and `:rate` (returns `λ(t)`)
-dispatch separately.  The convenience alias
-[`LoschmidtRateFunction`](@ref) is the only flavour defined for
-`Infinite`, since the `:amplitude` itself is identically zero in the
-thermodynamic limit (extensive cumulants).
-
-The pre-quench Hamiltonian is passed via the `initial` keyword on
-`fetch`, e.g.
+Non-analytic cusps in `λ(t)` are dynamical quantum phase transitions (DQPT).
+See Heyl, Polkovnikov, Kehrein, [Heyl2013](@cite) and the review Heyl,
+[Heyl2018](@cite).  The pre-quench Hamiltonian is passed via the `initial`
+keyword on `fetch`, e.g.
 
     fetch(TFIM(J=1.0, h=0.5), LoschmidtRateFunction(), Infinite();
           initial=TFIM(J=1.0, h=2.0), t=1.0)
+
+The un-normalised echo itself is [`LoschmidtAmplitude`](@ref).
 """
-struct LoschmidtEcho{M} <: AbstractQuantity
-    function LoschmidtEcho{M}() where {M}
-        M isa Symbol || error("LoschmidtEcho mode must be a Symbol, got $(typeof(M))")
-        M in (:amplitude, :rate) ||
-            error("unknown LoschmidtEcho mode :$M; expected :amplitude or :rate")
-        return new{M}()
-    end
+struct LoschmidtRateFunction <: AbstractQuantity end
+
+"""
+    LoschmidtEcho(; mode = :rate)   (deprecated)
+
+Deprecated — returns [`LoschmidtRateFunction`](@ref) for `mode = :rate` and
+[`LoschmidtAmplitude`](@ref) for `mode = :amplitude`.  The type was parametric
+on the mode, so no `const` alias is possible and dispatch on
+`LoschmidtEcho{:m}` is removed; use the target types directly in new code.
+"""
+LoschmidtEcho(; mode::Symbol=:rate) = _loschmidt_by_mode(mode)
+LoschmidtEcho(m::Symbol) = _loschmidt_by_mode(m)
+
+function _loschmidt_by_mode(mode::Symbol)
+    mode === :rate && return LoschmidtRateFunction()
+    mode === :amplitude && return LoschmidtAmplitude()
+    return error("unknown LoschmidtEcho mode :$mode; expected :amplitude or :rate")
 end
-LoschmidtEcho(m::Symbol) = LoschmidtEcho{m}()
-LoschmidtEcho(; mode::Symbol=:rate) = LoschmidtEcho{mode}()
-
-"""
-    const LoschmidtRateFunction = LoschmidtEcho{:rate}
-
-Convenience alias for the rate-function flavour
-`λ(t) = -log L(t)/N`.  See [`LoschmidtEcho`](@ref).
-"""
-const LoschmidtRateFunction = LoschmidtEcho{:rate}
 
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
 # `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,

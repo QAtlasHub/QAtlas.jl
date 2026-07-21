@@ -257,7 +257,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model_f::TFIM, ::LoschmidtEcho{:amplitude}, bc::OBC;
+    fetch(model_f::TFIM, ::LoschmidtAmplitude, bc::OBC;
           initial::TFIM, t::Real, kwargs...) -> Float64
 
 Loschmidt echo `L(t) = |⟨ψ_0|e^{-iH_f t}|ψ_0⟩|²` for an OBC chain of
@@ -271,7 +271,7 @@ References: Heyl-Polkovnikov-Kehrein, [Heyl2013](@cite); Heyl,
 [Heyl2018](@cite).
 """
 function fetch(
-    model_f::TFIM, ::LoschmidtEcho{:amplitude}, bc::OBC; initial::TFIM, t::Real, kwargs...
+    model_f::TFIM, ::LoschmidtAmplitude, bc::OBC; initial::TFIM, t::Real, kwargs...
 )
     isapprox(initial.J, model_f.J; atol=1e-12) || throw(
         ArgumentError(
@@ -286,14 +286,14 @@ function fetch(
 end
 
 """
-    fetch(model_f::TFIM, ::LoschmidtEcho{:rate}, bc::OBC;
+    fetch(model_f::TFIM, ::LoschmidtRateFunction, bc::OBC;
           initial::TFIM, t::Real, kwargs...) -> Float64
 
 Loschmidt rate function `λ(t) = -log L(t) / N` for the OBC TFIM
-quench `h_0 → h_f`.  See [`LoschmidtEcho`](@ref).
+quench `h_0 → h_f`.  See [`LoschmidtRateFunction`](@ref).
 """
 function fetch(
-    model_f::TFIM, ::LoschmidtEcho{:rate}, bc::OBC; initial::TFIM, t::Real, kwargs...
+    model_f::TFIM, ::LoschmidtRateFunction, bc::OBC; initial::TFIM, t::Real, kwargs...
 )
     isapprox(initial.J, model_f.J; atol=1e-12) || throw(
         ArgumentError(
@@ -312,7 +312,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model_f::TFIM, ::LoschmidtEcho{:rate}, ::Infinite;
+    fetch(model_f::TFIM, ::LoschmidtRateFunction, ::Infinite;
           initial::TFIM, t::Real, atol::Real=1e-10, rtol::Real=1e-8, kwargs...)
         -> Float64
 
@@ -329,7 +329,7 @@ References: Heyl-Polkovnikov-Kehrein, [Heyl2013](@cite); Heyl,
 """
 function fetch(
     model_f::TFIM,
-    ::LoschmidtEcho{:rate},
+    ::LoschmidtRateFunction,
     ::Infinite;
     initial::TFIM,
     t::Real,

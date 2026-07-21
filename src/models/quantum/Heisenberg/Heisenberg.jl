@@ -239,26 +239,21 @@ for QTy in (
 end
 
 # Site-resolved local observables (Vector{Float64}).
-# Note: `MagnetizationXLocal` is parametric on the mode `M` (equilibrium / quench);
-# Heisenberg1D currently only implements the equilibrium branch so we dispatch
-# explicitly on `MagnetizationXLocal{:equilibrium}` to avoid accidentally
-# capturing quench requests that this model does not support.
-for QTy in (:MagnetizationYLocal, :MagnetizationZLocal, :EnergyLocal)
+# #734: the equilibrium / quench split is now carried by two distinct types
+# (`LocalMagnetization` vs `QuenchLocalMagnetization`) rather than a phantom mode,
+# so dispatching on the equilibrium type can no longer capture a quench request —
+# the `:x` axis needs no special-cased guard method any more.
+for QTy in (
+    :(LocalMagnetization{:x}),
+    :(LocalMagnetization{:y}),
+    :(LocalMagnetization{:z}),
+    :EnergyLocal,
+)
     @eval function fetch(
         ::Heisenberg1D, ::$QTy, bc::OBC; beta::Real, J::Real=1.0, kwargs...
     )
         return fetch(XXZ1D(; J=J, Δ=1.0), $QTy(), bc; beta=beta, kwargs...)
     end
-end
-function fetch(
-    ::Heisenberg1D,
-    ::MagnetizationXLocal{:equilibrium},
-    bc::OBC;
-    beta::Real,
-    J::Real=1.0,
-    kwargs...,
-)
-    return fetch(XXZ1D(; J=J, Δ=1.0), MagnetizationXLocal(), bc; beta=beta, kwargs...)
 end
 
 # Two-point correlators (static + connected).  #734: dispatch on and delegate
@@ -285,12 +280,7 @@ end
 # The Heisenberg chain is gapless for all J (always at the SU(2) critical
 # point), so no gapped crossover is needed.
 function fetch(
-    ::Heisenberg1D,
-    ::VonNeumannEntropy{:equilibrium},
-    ::Infinite;
-    ℓ::Int,
-    beta::Real=Inf,
-    kwargs...,
+    ::Heisenberg1D, ::VonNeumannEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
 )
     return fetch(
         Universality(:Heisenberg),
@@ -311,7 +301,7 @@ end
 # Entanglement: VonNeumannEntropy and RenyiEntropy.
 function fetch(
     ::Heisenberg1D,
-    ::VonNeumannEntropy{:equilibrium},
+    ::VonNeumannEntropy,
     bc::OBC;
     ℓ::Int,
     beta::Real=Inf,

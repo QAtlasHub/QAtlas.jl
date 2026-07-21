@@ -71,7 +71,7 @@ end
 for C in _CFT_CLASSES, BC in (Infinite, PBC, OBC)
     register!(
         Universality{C},
-        VonNeumannEntropy{:quench},
+        QuenchEntanglementEntropy,
         BC;
         method=:analytic,
         reliability=:high,

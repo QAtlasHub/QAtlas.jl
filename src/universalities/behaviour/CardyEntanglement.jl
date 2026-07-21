@@ -978,7 +978,7 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 
 raw"""
-    fetch(::Universality{C}, ::VonNeumannEntropy{:quench}, ::Infinite;
+    fetch(::Universality{C}, ::QuenchEntanglementEntropy, ::Infinite;
           ℓ::Real, t::Real, v::Real, beta_eff::Real) -> Float64
 
 Post-quench von Neumann entanglement entropy in the thermodynamic limit
@@ -992,7 +992,7 @@ inverse temperature of the initial state.
 """
 function fetch(
     model::Universality{C},
-    ::VonNeumannEntropy{:quench},
+    ::QuenchEntanglementEntropy,
     ::Infinite;
     ℓ::Real,
     t::Real,
@@ -1013,7 +1013,7 @@ function fetch(
 end
 
 raw"""
-    fetch(::Universality{C}, ::VonNeumannEntropy{:quench}, ::OBC;
+    fetch(::Universality{C}, ::QuenchEntanglementEntropy, ::OBC;
           ℓ::Real, t::Real, v::Real, beta_eff::Real) -> Float64
 
 Post-quench von Neumann entanglement entropy of a block at the boundary of
@@ -1032,7 +1032,7 @@ Reference: Calabrese–Cardy J. Stat. Mech. P04010 (2005), eq. (5.2).
 """
 function fetch(
     model::Universality{C},
-    ::VonNeumannEntropy{:quench},
+    ::QuenchEntanglementEntropy,
     ::OBC;
     ℓ::Real,
     t::Real,
@@ -1059,7 +1059,7 @@ function fetch(
 end
 
 raw"""
-    fetch(::Universality{C}, ::VonNeumannEntropy{:quench}, ::PBC;
+    fetch(::Universality{C}, ::QuenchEntanglementEntropy, ::PBC;
           ℓ::Real, L::Real, t::Real, v::Real, beta_eff::Real) -> Float64
 
 Post-quench von Neumann entanglement entropy of a block of length `ℓ` on a
@@ -1080,7 +1080,7 @@ the naive formula L - 2*v*t_mod turns negative for t_mod > L/(2v).
 """
 function fetch(
     model::Universality{C},
-    ::VonNeumannEntropy{:quench},
+    ::QuenchEntanglementEntropy,
     ::PBC;
     ℓ::Real,
     L::Real,

@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Standalone test: TFIM Loschmidt echo + DQPT rate function (issue #143).
 #
-# Validates `LoschmidtEcho{:amplitude}` (OBC), `LoschmidtEcho{:rate}` (OBC and
+# Validates `LoschmidtAmplitude` (OBC), `LoschmidtRateFunction` (OBC and
 # Infinite) for sudden quenches `H_0 = TFIM(J, h_0) → H_f = TFIM(J, h_f)`.
 #
 # Reference: Heyl–Polkovnikov–Kehrein, PRL 110, 135704 (2013); Heyl, Rep. Prog.
@@ -47,7 +47,7 @@ end
         m_0 = TFIM(; J=J, h=2.0)
         m_f = TFIM(; J=J, h=0.5)
         N = 32
-        @test QAtlas.fetch(m_f, LoschmidtEcho(:amplitude), OBC(N); initial=m_0, t=0.0) ≈ 1.0 atol =
+        @test QAtlas.fetch(m_f, LoschmidtAmplitude(), OBC(N); initial=m_0, t=0.0) ≈ 1.0 atol =
             1e-12
         @test QAtlas.fetch(m_f, LoschmidtRateFunction(), OBC(N); initial=m_0, t=0.0) ≈ 0.0 atol =
             1e-12
@@ -60,7 +60,7 @@ end
         m = TFIM(; J=J, h=1.3)
         N = 24
         for t in (0.1, 0.7, 2.5, 5.0)
-            @test QAtlas.fetch(m, LoschmidtEcho(:amplitude), OBC(N); initial=m, t=t) ≈ 1.0 atol =
+            @test QAtlas.fetch(m, LoschmidtAmplitude(), OBC(N); initial=m, t=t) ≈ 1.0 atol =
                 1e-10
             @test QAtlas.fetch(m, LoschmidtRateFunction(), OBC(N); initial=m, t=t) ≈ 0.0 atol =
                 1e-10
@@ -76,7 +76,7 @@ end
         N = 24
         ts = range(0.0, 6.0; length=25)
         for t in ts
-            L = QAtlas.fetch(m_f, LoschmidtEcho(:amplitude), OBC(N); initial=m_0, t=t)
+            L = QAtlas.fetch(m_f, LoschmidtAmplitude(), OBC(N); initial=m_0, t=t)
             λ = QAtlas.fetch(m_f, LoschmidtRateFunction(), OBC(N); initial=m_0, t=t)
             @test -1e-10 ≤ L ≤ 1 + 1e-10
             @test λ ≥ -1e-10

@@ -2,7 +2,7 @@
 # Standalone test: XX (Δ = 0) free-fermion quench observables for
 # `XXZ1D` at `Infinite()`.
 #
-# Validates `fetch(::XXZ1D, ::LoschmidtEcho{:rate}, ::Infinite;
+# Validates `fetch(::XXZ1D, ::LoschmidtRateFunction, ::Infinite;
 #                  initial::XXZ1D, t::Real)` against the closed-form
 # analytical result derived in `src/models/quantum/XXZ/XXZ_xx_quench.jl`:
 #
@@ -33,7 +33,7 @@
 using QAtlas, Test
 
 const _XX = XXZ1D(; J=1.0, Δ=0.0)
-const _LE_RATE = LoschmidtEcho(; mode=:rate)
+const _LE_RATE = LoschmidtRateFunction()
 
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -165,7 +165,9 @@ end
     # Cross-check that XXZ_registry.jl declares the new triple.
     rows = QAtlas.implementation_status()
     matching = filter(rows) do r
-        return r.model === XXZ1D && r.quantity === LoschmidtEcho{:rate} && r.bc === Infinite
+        return r.model === XXZ1D &&
+               r.quantity === LoschmidtRateFunction &&
+               r.bc === Infinite
     end
     @test length(matching) == 1
     if length(matching) == 1
@@ -183,7 +185,7 @@ end
     # argument: det(D0^dag U_f(t) D0) = exp(i*phase) with |.| = 1.
     verify(
         XXZ1D(; J=1.0, Δ=0.0),
-        LoschmidtEcho(; mode=:rate),
+        LoschmidtRateFunction(),
         Infinite();
         route=:second_closed_form,
         fetch_kw=(; initial=XXZ1D(; J=0.5, Δ=0.0), t=1.0),
@@ -194,7 +196,7 @@ end
 
     verify(
         XXZ1D(; J=1.0, Δ=0.0),
-        LoschmidtEcho(; mode=:rate),
+        LoschmidtRateFunction(),
         Infinite();
         route=:limiting_case,
         fetch_kw=(; initial=XXZ1D(; J=1.0, Δ=0.0), t=2.5),

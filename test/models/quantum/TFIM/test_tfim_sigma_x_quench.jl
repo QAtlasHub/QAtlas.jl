@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Standalone test: TFIM ⟨σˣ_i⟩(t) sudden quench (issue #145).
 #
-# Validates the new `MagnetizationXLocal{:quench}` quantity on both the
+# Validates the new `QuenchLocalMagnetization{:x}` quantity on both the
 # OBC (Majorana covariance evolution) and `Infinite()` (closed-form
 # k-integral) branches.
 #
@@ -25,24 +25,24 @@ const J = 1.0
             m_0 = TFIM(; J=J, h=h_0)
             m_f = TFIM(; J=J, h=h_f)
             v0 = QAtlas.fetch(
-                m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=0.0
+                m_f, QuenchLocalMagnetization(:x), Infinite(); initial=m_0, t=0.0
             )
             gs = QAtlas.fetch(m_0, MagnetizationX(), Infinite(); beta=Inf)
             @test v0 ≈ gs atol = 1e-10
         end
     end
 
-    # OBC: t=0 must equal the equilibrium MagnetizationXLocal at h_0,
+    # OBC: t=0 must equal the equilibrium LocalMagnetization(:x) at h_0,
     # central site (boundary effects negligible at the centre for N moderate).
     N = 24
     for h_0 in (0.4, 1.0, 1.8, 3.0)
         for h_f in (0.7, 1.3, 2.5)
             m_0 = TFIM(; J=J, h=h_0)
             m_f = TFIM(; J=J, h=h_f)
-            mx_eq = QAtlas.fetch(m_0, MagnetizationXLocal(), OBC(N); beta=Inf)
+            mx_eq = QAtlas.fetch(m_0, LocalMagnetization(:x), OBC(N); beta=Inf)
             for i in (1, N ÷ 4, N ÷ 2, 3N ÷ 4, N)
                 v0 = QAtlas.fetch(
-                    m_f, MagnetizationXLocal(:quench), OBC(N); initial=m_0, i=i, t=0.0
+                    m_f, QuenchLocalMagnetization(:x), OBC(N); initial=m_0, i=i, t=0.0
                 )
                 @test v0 ≈ mx_eq[i] atol = 1e-12
             end
@@ -56,7 +56,7 @@ end
         m = TFIM(; J=J, h=h)
         gs = QAtlas.fetch(m, MagnetizationX(), Infinite(); beta=Inf)
         for t in (0.0, 0.1, 1.0, 3.7, 11.5)
-            v = QAtlas.fetch(m, MagnetizationXLocal(:quench), Infinite(); initial=m, t=t)
+            v = QAtlas.fetch(m, QuenchLocalMagnetization(:x), Infinite(); initial=m, t=t)
             @test v ≈ gs atol = 1e-12
         end
     end
@@ -65,11 +65,11 @@ end
     N = 16
     for h in (0.5, 1.2, 2.0)
         m = TFIM(; J=J, h=h)
-        mx_eq = QAtlas.fetch(m, MagnetizationXLocal(), OBC(N); beta=Inf)
+        mx_eq = QAtlas.fetch(m, LocalMagnetization(:x), OBC(N); beta=Inf)
         for t in (0.0, 0.5, 2.3, 7.1)
             for i in (1, N ÷ 2, N)
                 v = QAtlas.fetch(
-                    m, MagnetizationXLocal(:quench), OBC(N); initial=m, i=i, t=t
+                    m, QuenchLocalMagnetization(:x), OBC(N); initial=m, i=i, t=t
                 )
                 @test v ≈ mx_eq[i] atol = 1e-10
             end
@@ -84,7 +84,7 @@ end
     # cross-verified against literature / an independent integrator).
     m_0 = TFIM(; J=1.0, h=2.0)
     m_f = TFIM(; J=1.0, h=0.5)
-    v = QAtlas.fetch(m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=1.0)
+    v = QAtlas.fetch(m_f, QuenchLocalMagnetization(:x), Infinite(); initial=m_0, t=1.0)
     @test v ≈ 0.28761380338145004 atol = 1e-8
 end
 
@@ -104,10 +104,10 @@ end
         m_0 = TFIM(; J=J, h=c.h_0)
         m_f = TFIM(; J=J, h=c.h_f)
         v_inf = QAtlas.fetch(
-            m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=c.t
+            m_f, QuenchLocalMagnetization(:x), Infinite(); initial=m_0, t=c.t
         )
         v_obc = QAtlas.fetch(
-            m_f, MagnetizationXLocal(:quench), OBC(N); initial=m_0, i=N ÷ 2, t=c.t
+            m_f, QuenchLocalMagnetization(:x), OBC(N); initial=m_0, i=N ÷ 2, t=c.t
         )
         @test v_obc ≈ v_inf atol = 1e-4
     end
@@ -152,7 +152,7 @@ end
         S = 0.0
         for (idx, t) in enumerate(ts)
             v = QAtlas.fetch(
-                m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=t
+                m_f, QuenchLocalMagnetization(:x), Infinite(); initial=m_0, t=t
             )
             w = (idx == 1 || idx == nt) ? 0.5 : 1.0
             S += w * v
@@ -162,14 +162,14 @@ end
     end
 end
 
-@testset "TFIM σˣ quench — back-compat: MagnetizationXLocal() unchanged" begin
-    # Existing call sites use `MagnetizationXLocal()` (no parameter) and
+@testset "TFIM σˣ quench — back-compat: LocalMagnetization(:x) unchanged" begin
+    # Existing call sites use `LocalMagnetization(:x)` (no parameter) and
     # expect a Vector{Float64} with the equilibrium thermal magnetisation.
     # Verify the parametric refactor preserves this exactly.
     N = 12
     m = TFIM(; J=1.0, h=0.7)
-    mx_old_style = QAtlas.fetch(m, MagnetizationXLocal(), OBC(N); beta=10.0)
-    mx_new_style = QAtlas.fetch(m, MagnetizationXLocal(:equilibrium), OBC(N); beta=10.0)
+    mx_old_style = QAtlas.fetch(m, LocalMagnetization(:x), OBC(N); beta=10.0)
+    mx_new_style = QAtlas.fetch(m, LocalMagnetization(:x), OBC(N); beta=10.0)
     @test mx_old_style isa Vector{Float64}
     @test length(mx_old_style) == N
     @test mx_old_style ≈ mx_new_style atol = 1e-14
@@ -179,12 +179,17 @@ end
     m_0 = TFIM(; J=1.0, h=0.5)
     m_f = TFIM(; J=2.0, h=0.5)  # different J
     @test_throws ArgumentError QAtlas.fetch(
-        m_f, MagnetizationXLocal(:quench), Infinite(); initial=m_0, t=1.0
+        m_f, QuenchLocalMagnetization(:x), Infinite(); initial=m_0, t=1.0
     )
     @test_throws ArgumentError QAtlas.fetch(
-        m_f, MagnetizationXLocal(:quench), OBC(8); initial=m_0, i=4, t=1.0
+        m_f, QuenchLocalMagnetization(:x), OBC(8); initial=m_0, i=4, t=1.0
     )
-    # mode validation
+    # Deprecated fused-name shim (#734): the `mode` kwarg/positional maps onto
+    # the split types, and an unknown mode still errors.
+    @test MagnetizationXLocal() === LocalMagnetization(:x)
+    @test MagnetizationXLocal(:equilibrium) === LocalMagnetization(:x)
+    @test MagnetizationXLocal(:quench) === QuenchLocalMagnetization(:x)
+    @test MagnetizationXLocal(; mode=:quench) === QuenchLocalMagnetization(:x)
     @test_throws Exception MagnetizationXLocal(:bogus)
 end
 
@@ -196,7 +201,7 @@ end
     let m0 = TFIM(; J=1.0, h=2.0), mf = TFIM(; J=1.0, h=0.5)
         verify(
             mf,
-            MagnetizationXLocal(:quench),
+            QuenchLocalMagnetization(:x),
             Infinite();
             route=:limiting_case,
             fetch_kw=(; initial=m0, t=0.0),
@@ -210,7 +215,7 @@ end
     let m = TFIM(; J=1.0, h=1.3)
         verify(
             m,
-            MagnetizationXLocal(:quench),
+            QuenchLocalMagnetization(:x),
             Infinite();
             route=:limiting_case,
             fetch_kw=(; initial=m, t=3.7),

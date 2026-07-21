@@ -4,7 +4,7 @@
     The spin-1 dense-ED observable surface debuted in v0.17. The local
     Hilbert space is 3-dimensional, so the global space is $3^N$ and
     the hard cap is $N \le 8$. Method signatures and kwarg names may
-    change in v0.19. `MagnetizationYLocal` is intentionally omitted
+    change in v0.19. `LocalMagnetization(:y)` is intentionally omitted
     (Tier 3 in the observable issue) until a use case appears.
 
 ## Hamiltonian
@@ -42,14 +42,14 @@ OBC rows are dense-ED with cap $N \le 8$ ($3^N \le 6561$).
 | `Energy{:per_site}` | conversion | $\approx -1.40148\,J$ (White–Huse 1993) |
 | `FreeEnergy` / `ThermalEntropy` / `SpecificHeat` | dense-ED | — |
 | `MagnetizationX` / `Y` / `Z` | dense-ED | — |
-| `MagnetizationXLocal` / `MagnetizationZLocal` | dense-ED | — |
+| `LocalMagnetization(:x)` / `LocalMagnetization(:z)` | dense-ED | — |
 | `SusceptibilityXX` / `YY` / `ZZ` | dense-ED | — |
 | `XXCorrelation` / `YY` / `ZZ` (`:static`, `:connected`) | dense-ED | — |
 | `VonNeumannEntropy` / `RenyiEntropy` | partial trace | — |
 | `MassGap` | dense-ED ($E_1 - E_0$) | $\approx 0.41048\,J$ (Haldane gap) |
 | `EnergyLocal` | dense-ED (symmetric bond split) | — |
 
-`MagnetizationYLocal` is **not** registered (Tier 3, deferred).
+`LocalMagnetization(:y)` is **not** registered (Tier 3, deferred).
 
 ## Spin-1 Convention
 

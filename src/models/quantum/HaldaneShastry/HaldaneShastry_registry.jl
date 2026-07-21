@@ -57,7 +57,7 @@
 # ── CC entanglement at Infinite via Universality(:Heisenberg) (#580 Phase 2)
 @register(
     HaldaneShastry,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     Infinite,
     method=:delegation,
     reliability=:high,

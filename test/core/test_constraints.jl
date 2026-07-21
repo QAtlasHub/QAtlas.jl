@@ -26,7 +26,7 @@ using QAtlas:
     SusceptibilityYY,
     SusceptibilityZZ,
     MagnetizationX,
-    MagnetizationZLocal,
+    LocalMagnetization,
     XXStructureFactor,
     VonNeumannEntropy,
     LuttingerVelocity,
@@ -51,11 +51,11 @@ struct _DegProbe <: QAtlas.AbstractQAtlasModel end
     @test Energy{:per_site} <: AbstractThermalPotential
     @test SusceptibilityXX <: AbstractSusceptibility
     @test MagnetizationX <: AbstractMagnetization
-    @test MagnetizationZLocal <: AbstractMagnetization
+    @test LocalMagnetization{:z} <: AbstractMagnetization
     @test XXStructureFactor <: AbstractStructureFactor
     @test MassGap <: AbstractGap && ChargeGap <: AbstractGap
     @test LuttingerVelocity <: AbstractVelocity
-    @test VonNeumannEntropy{:equilibrium} <: AbstractEntanglementMeasure
+    @test VonNeumannEntropy <: AbstractEntanglementMeasure
 end
 
 @testset "component trait recovers the name-encoded index" begin
@@ -65,7 +65,7 @@ end
     @test component(MassGap) === :mass
     @test component(ChargeGap) === :charge
     # …Local variants deliberately carry NO component (different fetch shape)
-    @test component(MagnetizationZLocal) === nothing
+    @test component(LocalMagnetization{:z}) === nothing
     # default: quantities without a family index
     @test component(FreeEnergy) === nothing
 end

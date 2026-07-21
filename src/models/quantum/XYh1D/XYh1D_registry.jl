@@ -117,7 +117,7 @@ end
 # ── Site-local Equilibrium Observables ────────────────────────────────
 @register(
     XYh1D,
-    MagnetizationZLocal,
+    LocalMagnetization{:z},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -126,7 +126,7 @@ end
 )
 @register(
     XYh1D,
-    MagnetizationXLocal{:equilibrium},
+    LocalMagnetization{:x},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -135,7 +135,7 @@ end
 )
 @register(
     XYh1D,
-    MagnetizationYLocal,
+    LocalMagnetization{:y},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -193,7 +193,7 @@ end
 # ── Site-local observables at PBC (Phase 2, #292) ──────────────────────
 register!(
     XYh1D,
-    MagnetizationZLocal,
+    LocalMagnetization{:z},
     PBC;
     method=:translational_invariance,
     reliability=:high,
@@ -203,7 +203,7 @@ register!(
 )
 register!(
     XYh1D,
-    MagnetizationXLocal{:equilibrium},
+    LocalMagnetization{:x},
     PBC;
     method=:symmetry,
     reliability=:high,
@@ -213,7 +213,7 @@ register!(
 )
 register!(
     XYh1D,
-    MagnetizationYLocal,
+    LocalMagnetization{:y},
     PBC;
     method=:symmetry,
     reliability=:high,

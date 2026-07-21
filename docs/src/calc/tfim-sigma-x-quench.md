@@ -1,7 +1,7 @@
 # Sudden Quench of the Local Transverse Magnetisation in the TFIM
 
 This page documents the closed-form derivation of ``\langle\sigma^x_i\rangle(t)``
-exposed by `MagnetizationXLocal{:quench}` for the transverse-field Ising model
+exposed by `QuenchLocalMagnetization(:x)` for the transverse-field Ising model
 (TFIM).  The quench setup follows Calabrese–Essler–Fagotti
 (J. Stat. Mech. **P07016** (2012)); the underlying Bogoliubov machinery dates
 to Barouch–McCoy–Dresden (Phys. Rev. A **2** (1970) 1075).
@@ -161,16 +161,16 @@ integral and a finite (controllable) deviation appears.
 ## API
 
 ```julia
-struct MagnetizationXLocal{M} <: AbstractQuantity end          # M ∈ {:equilibrium, :quench}
-MagnetizationXLocal()              = MagnetizationXLocal{:equilibrium}()
-MagnetizationXLocal(:quench)       = MagnetizationXLocal{:quench}()
+struct QuenchLocalMagnetization{A} <: AbstractMagnetization end   # A = axis, e.g. :x
+QuenchLocalMagnetization(a::Symbol) = QuenchLocalMagnetization{a}()
+# the equilibrium counterpart is LocalMagnetization{A} (a whole site vector)
 
 # OBC, single (i, t) point
-fetch(model_f::TFIM, ::MagnetizationXLocal{:quench}, ::OBC;
+fetch(model_f::TFIM, ::QuenchLocalMagnetization{:x}, ::OBC;
       initial::TFIM, i::Int, t::Real, kwargs...) -> Float64
 
 # Infinite, single t point
-fetch(model_f::TFIM, ::MagnetizationXLocal{:quench}, ::Infinite;
+fetch(model_f::TFIM, ::QuenchLocalMagnetization{:x}, ::Infinite;
       initial::TFIM, t::Real, kwargs...) -> Float64
 ```
 

@@ -34,6 +34,7 @@ using AbstractQAtlas:
     CorrelationLength,
     MassGap,
     MutualInformation,
+    VonNeumannEntropy,
     NMRRelaxationExponent,
     NMRSpinRelaxationRate,
     TopologicalEntanglementEntropy,
@@ -193,7 +194,6 @@ export Energy,
     SpecificHeat,
     MassGap,
     FidelitySusceptibility,
-    LoschmidtEcho,
     NMRSpinRelaxationRate,
     NMRRelaxationExponent
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
@@ -201,10 +201,14 @@ export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
+export QuenchEntanglementEntropy  # QAtlas-side post-quench S(ℓ,t) (was VonNeumannEntropy{:quench})
 export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ
 export Polarization
-export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
+export LocalMagnetization, QuenchLocalMagnetization  # axis-parametric site-resolved (QAtlas-side: Vector-valued)
+export MagnetizationXLocal  # deprecated fused-name constructor function
+export MagnetizationYLocal, MagnetizationZLocal  # deprecated aliases
+export EnergyLocal
 export Susceptibility  # index-parametric (AbstractQAtlas); SusceptibilityXX/YY/ZZ are deprecated aliases
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
 export SpinCorrelation, ConnectedSpinCorrelation, DynamicalCorrelation  # axis-parametric (AbstractQAtlas)
@@ -251,7 +255,8 @@ export OptimalCloningFidelity  # Buzek-Hillery cloning bound (:bound upper, Quan
 export ScramblingTime     # Sekino-Susskind fast-scrambling time (:bound lower, Dynamics)
 export BB84KeyRate        # Shor-Preskill BB84 secret-key rate (:bound lower, QuantumInformation)
 export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
-export LoschmidtEcho, LoschmidtRateFunction
+export LoschmidtAmplitude, LoschmidtRateFunction  # split quench flavours (was LoschmidtEcho{:amplitude,:rate})
+export LoschmidtEcho  # deprecated fused-name constructor function
 export GGEValue                                          # quench long-time wrapper
 
 # --- TFIM Infinite dynamic helpers ---
@@ -465,7 +470,7 @@ include("models/quantum/SYK/SYK.jl")
 include("models/quantum/SYK/SYK_registry.jl")  # populates REGISTRY for SYK (#251)
 
 include("models/quantum/TFIM/TFIM_fidelity.jl")            # FidelitySusceptibility (#147)
-include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # VonNeumannEntropy{:quench} (#144)
+include("models/quantum/TFIM/TFIM_quench_entanglement.jl") # QuenchEntanglementEntropy (#144)
 include("models/quantum/ToricCode/ToricCode.jl")
 include("models/quantum/ToricCode/ToricCode_registry.jl")  # populates REGISTRY for ToricCode (#162)
 include("universalities/RMT/RMT.jl")                        # RMT universality class (#151)

@@ -23,7 +23,7 @@
 
 using QAtlas, Test
 
-@testset "TFIM VonNeumannEntropy{:quench} — back-compat sanity (t = 0)" begin
+@testset "TFIM QuenchEntanglementEntropy — back-compat sanity (t = 0)" begin
     # At t = 0 the post-quench reduced density matrix equals that of the
     # initial-Hamiltonian ground state; thus the quench S(ℓ, 0) must
     # match the *equilibrium* S(ℓ) of `initial`.
@@ -33,13 +33,13 @@ using QAtlas, Test
         m_f = TFIM(; J=1.0, h=hf)
         S_eq_init = QAtlas.fetch(m_0, VonNeumannEntropy(), OBC(N); ℓ=ℓ)
         S_quench_t0 = QAtlas.fetch(
-            m_f, VonNeumannEntropy{:quench}(), OBC(N); initial=m_0, ℓ=ℓ, t=0.0
+            m_f, QuenchEntanglementEntropy(), OBC(N); initial=m_0, ℓ=ℓ, t=0.0
         )
         @test S_quench_t0 ≈ S_eq_init atol = 1e-12
     end
 end
 
-@testset "TFIM VonNeumannEntropy{:quench} — h_0 = h_f leaves S(ℓ, t) invariant" begin
+@testset "TFIM QuenchEntanglementEntropy — h_0 = h_f leaves S(ℓ, t) invariant" begin
     # The ground state is an eigenstate of H, so |Ψ(t)⟩ = exp(-i E_0 t) |Ψ_0⟩
     # and the reduced density matrix is unchanged.  Numerically, the
     # Majorana congruence Σ → R Σ R^T must reduce to a similarity that
@@ -48,15 +48,15 @@ end
     ℓ = 8
     for h in (0.5, 1.0, 2.0)
         m = TFIM(; J=1.0, h=h)
-        S_t0 = QAtlas.fetch(m, VonNeumannEntropy{:quench}(), OBC(N); initial=m, ℓ=ℓ, t=0.0)
+        S_t0 = QAtlas.fetch(m, QuenchEntanglementEntropy(), OBC(N); initial=m, ℓ=ℓ, t=0.0)
         for t in (0.7, 1.5, 3.0, 5.0)
-            S_t = QAtlas.fetch(m, VonNeumannEntropy{:quench}(), OBC(N); initial=m, ℓ=ℓ, t=t)
+            S_t = QAtlas.fetch(m, QuenchEntanglementEntropy(), OBC(N); initial=m, ℓ=ℓ, t=t)
             @test S_t ≈ S_t0 atol = 1e-9
         end
     end
 end
 
-@testset "TFIM VonNeumannEntropy{:quench} — monotone linear growth then saturation" begin
+@testset "TFIM QuenchEntanglementEntropy — monotone linear growth then saturation" begin
     # Calabrese–Cardy quasi-particle picture: for a quench from an
     # initial gapped TFIM into the gapless TFIM (h_f = J = 1), S(ℓ, t)
     # grows ≈ linearly until t* = ℓ / (2 v_E) and saturates at a
@@ -78,7 +78,7 @@ end
 
     ts_grow = (0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0)
     Ss_grow = [
-        QAtlas.fetch(m_f, VonNeumannEntropy{:quench}(), OBC(N); initial=m_0, ℓ=ℓ, t=t) for
+        QAtlas.fetch(m_f, QuenchEntanglementEntropy(), OBC(N); initial=m_0, ℓ=ℓ, t=t) for
         t in ts_grow
     ]
     # Strict monotonic increase over the linear-growth window.
@@ -87,10 +87,10 @@ end
     end
 
     S_sat_a = QAtlas.fetch(
-        m_f, VonNeumannEntropy{:quench}(), OBC(N); initial=m_0, ℓ=ℓ, t=8.0
+        m_f, QuenchEntanglementEntropy(), OBC(N); initial=m_0, ℓ=ℓ, t=8.0
     )
     S_sat_b = QAtlas.fetch(
-        m_f, VonNeumannEntropy{:quench}(), OBC(N); initial=m_0, ℓ=ℓ, t=12.0
+        m_f, QuenchEntanglementEntropy(), OBC(N); initial=m_0, ℓ=ℓ, t=12.0
     )
     # Saturation: well above the small initial value and within finite-N
     # revival window of each other.
@@ -114,44 +114,46 @@ end
     @test 0.2 < slope < 0.6
 end
 
-@testset "TFIM VonNeumannEntropy{:quench} — pinned value (regression)" begin
+@testset "TFIM QuenchEntanglementEntropy — pinned value (regression)" begin
     # Pin one numerical value computed at the time the implementation
     # was written.  The atol is chosen comfortably above the round-off
     # ceiling of the matrix exponential + Hermitian eigendecomposition
     # (~1e-12 relative).
     m_0 = TFIM(; J=1.0, h=2.0)
     m_f = TFIM(; J=1.0, h=1.0)
-    S = QAtlas.fetch(m_f, VonNeumannEntropy{:quench}(), OBC(32); initial=m_0, ℓ=8, t=1.0)
+    S = QAtlas.fetch(m_f, QuenchEntanglementEntropy(), OBC(32); initial=m_0, ℓ=8, t=1.0)
     @test S ≈ 0.5338124210270956 atol = 1e-10
 end
 
-@testset "TFIM VonNeumannEntropy{:quench} — input validation" begin
+@testset "TFIM QuenchEntanglementEntropy — input validation" begin
     m_0 = TFIM(; J=1.0, h=2.0)
     m_f = TFIM(; J=1.0, h=1.0)
     @test_throws ArgumentError QAtlas.fetch(
-        m_f, VonNeumannEntropy{:quench}(), OBC(8); initial=m_0, ℓ=0, t=1.0
+        m_f, QuenchEntanglementEntropy(), OBC(8); initial=m_0, ℓ=0, t=1.0
     )
     @test_throws ArgumentError QAtlas.fetch(
-        m_f, VonNeumannEntropy{:quench}(), OBC(8); initial=m_0, ℓ=8, t=1.0
+        m_f, QuenchEntanglementEntropy(), OBC(8); initial=m_0, ℓ=8, t=1.0
     )
 end
 
-@testset "TFIM VonNeumannEntropy — equilibrium back-compat under parametric rewrite" begin
-    # Ensure the no-argument constructor still routes to :equilibrium and
-    # delivers the original Peschel value.  This guards against the
-    # parametric phantom-type change accidentally breaking the ergonomic
-    # `VonNeumannEntropy()` API used throughout the test suite.
+@testset "TFIM VonNeumannEntropy — equilibrium back-compat after the mode split" begin
+    # #734: `VonNeumannEntropy` is now AbstractQAtlas's singleton and the
+    # post-quench branch is the separate `QuenchEntanglementEntropy`.  Guard the
+    # ergonomic `VonNeumannEntropy()` API used throughout the test suite: it must
+    # still mean the equilibrium entropy and still deliver the Peschel value.
     N = 16
     m = TFIM(; J=1.0, h=1.0)
-    @test VonNeumannEntropy() isa VonNeumannEntropy{:equilibrium}
-    @test VonNeumannEntropy(:equilibrium) === VonNeumannEntropy{:equilibrium}()
-    @test VonNeumannEntropy(:quench) === VonNeumannEntropy{:quench}()
-    @test_throws ErrorException VonNeumannEntropy(:bogus)
+    @test VonNeumannEntropy() isa VonNeumannEntropy
+    @test QuenchEntanglementEntropy() isa QuenchEntanglementEntropy
+    # The two branches are now distinct types, not two instantiations of one.
+    @test VonNeumannEntropy !== QuenchEntanglementEntropy
+    @test QuenchEntanglementEntropy <: QAtlas.AbstractEntanglementMeasure
+    # The mode-keyed constructor is gone with the parametric type (no shim: a
+    # `VonNeumannEntropy(::Symbol)` method here would be piracy on AbstractQAtlas).
+    @test_throws MethodError VonNeumannEntropy(:quench)
 
-    S_default = QAtlas.fetch(m, VonNeumannEntropy(), OBC(N); ℓ=8)
-    S_explicit = QAtlas.fetch(m, VonNeumannEntropy{:equilibrium}(), OBC(N); ℓ=8)
-    @test S_default ≈ S_explicit atol = 1e-14
-    @test S_default > 0  # non-trivial entanglement at criticality
+    S = QAtlas.fetch(m, VonNeumannEntropy(), OBC(N); ℓ=8)
+    @test S > 0  # non-trivial entanglement at criticality
 end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
@@ -161,7 +163,7 @@ end
     let m0 = TFIM(; J=1.0, h=2.0), mf = TFIM(; J=1.0, h=0.5), N = 8, ℓ = 4
         verify(
             mf,
-            VonNeumannEntropy(:quench),
+            QuenchEntanglementEntropy(),
             OBC(N);
             route=:limiting_case,
             fetch_kw=(; initial=m0, ℓ=ℓ, t=0.0),

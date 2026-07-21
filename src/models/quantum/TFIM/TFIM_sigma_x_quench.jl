@@ -121,7 +121,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model_f::TFIM, ::MagnetizationXLocal{:quench}, bc::OBC;
+    fetch(model_f::TFIM, ::QuenchLocalMagnetization{:x}, bc::OBC;
           initial::TFIM, i::Int, t::Real, kwargs...) -> Float64
 
 Time-evolved local transverse magnetisation `⟨σˣ_i⟩(t)` of the OBC
@@ -148,7 +148,7 @@ Calabrese–Essler–Fagotti, J. Stat. Mech. **P07016** (2012).
 """
 function fetch(
     model_f::TFIM,
-    ::MagnetizationXLocal{:quench},
+    ::QuenchLocalMagnetization{:x},
     bc::OBC;
     initial::TFIM,
     i::Int,
@@ -166,7 +166,7 @@ function fetch(
 end
 
 """
-    fetch(model_f::TFIM, ::MagnetizationXLocal{:quench}, ::Infinite;
+    fetch(model_f::TFIM, ::QuenchLocalMagnetization{:x}, ::Infinite;
           initial::TFIM, t::Real, kwargs...) -> Float64
 
 Translationally-invariant `⟨σˣ⟩(t)` for the infinite TFIM after a
@@ -184,7 +184,7 @@ Fagotti, J. Stat. Mech. P07016 (2012).
 """
 function fetch(
     model_f::TFIM,
-    ::MagnetizationXLocal{:quench},
+    ::QuenchLocalMagnetization{:x},
     ::Infinite;
     initial::TFIM,
     t::Real,

@@ -24,7 +24,7 @@ using QAtlas, Test
     )
         verify(
             TFIM(; J=J, h=h_f),
-            LoschmidtEcho(),
+            LoschmidtRateFunction(),
             Infinite();
             route=:second_closed_form,
             independent=0.0,
@@ -38,7 +38,7 @@ using QAtlas, Test
         for N in (8, 12)
             verify(
                 TFIM(; J=J, h=h_f),
-                LoschmidtEcho(),
+                LoschmidtRateFunction(),
                 OBC(N);
                 route=:second_closed_form,
                 independent=0.0,

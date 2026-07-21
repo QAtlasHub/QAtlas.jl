@@ -318,9 +318,9 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model::XYh1D, ::MagnetizationZLocal, bc::OBC; beta, kwargs...)
+    fetch(model::XYh1D, ::LocalMagnetization{:z}, bc::OBC; beta, kwargs...)
 """
-function fetch(model::XYh1D, ::MagnetizationZLocal, bc::OBC; beta::Float64, kwargs...)
+function fetch(model::XYh1D, ::LocalMagnetization{:z}, bc::OBC; beta::Float64, kwargs...)
     N = _bc_size(bc, kwargs)
     hmat = _xyh1d_majorana_ham(N, model.Jx, model.Jy, model.h)
     Σ = _xyh1d_majorana_thermal_covariance(hmat, beta)
@@ -328,17 +328,17 @@ function fetch(model::XYh1D, ::MagnetizationZLocal, bc::OBC; beta::Float64, kwar
 end
 
 """
-    fetch(model::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta, kwargs...)
+    fetch(model::XYh1D, ::LocalMagnetization{:x}, bc::OBC; beta, kwargs...)
 """
-function fetch(::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::OBC; beta::Real, kwargs...)
+function fetch(::XYh1D, ::LocalMagnetization{:x}, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     return zeros(Float64, N)
 end
 
 """
-    fetch(model::XYh1D, ::MagnetizationYLocal, bc::OBC; beta, kwargs...)
+    fetch(model::XYh1D, ::LocalMagnetization{:y}, bc::OBC; beta, kwargs...)
 """
-function fetch(::XYh1D, ::MagnetizationYLocal, bc::OBC; beta::Real, kwargs...)
+function fetch(::XYh1D, ::LocalMagnetization{:y}, bc::OBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     return zeros(Float64, N)
 end
@@ -711,31 +711,31 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model::XYh1D, ::MagnetizationZLocal, bc::PBC; beta) -> Vector{Float64}
+    fetch(model::XYh1D, ::LocalMagnetization{:z}, bc::PBC; beta) -> Vector{Float64}
 
 Site-resolved ⟨σᶻ_i⟩ on the PBC chain. Translational invariance gives a
 uniform vector of length N filled with the bulk MagnetizationZ value.
 """
-function fetch(model::XYh1D, ::MagnetizationZLocal, bc::PBC; beta::Real, kwargs...)
+function fetch(model::XYh1D, ::LocalMagnetization{:z}, bc::PBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
     return _xyh1d_pbc_local_mz(N, model.Jx, model.Jy, model.h, beta)
 end
 
 """
-    fetch(model::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::PBC; beta) -> Vector{Float64}
+    fetch(model::XYh1D, ::LocalMagnetization{:x}, bc::PBC; beta) -> Vector{Float64}
 
 Vanishes by Z₂ symmetry σˣ → −σˣ; returns zeros of length N.
 """
-function fetch(::XYh1D, ::MagnetizationXLocal{:equilibrium}, bc::PBC; beta::Real, kwargs...)
+function fetch(::XYh1D, ::LocalMagnetization{:x}, bc::PBC; beta::Real, kwargs...)
     return zeros(Float64, _bc_size(bc, kwargs))
 end
 
 """
-    fetch(model::XYh1D, ::MagnetizationYLocal, bc::PBC; beta) -> Vector{Float64}
+    fetch(model::XYh1D, ::LocalMagnetization{:y}, bc::PBC; beta) -> Vector{Float64}
 
 Vanishes by Z₂ symmetry σʸ → −σʸ; returns zeros of length N.
 """
-function fetch(::XYh1D, ::MagnetizationYLocal, bc::PBC; beta::Real, kwargs...)
+function fetch(::XYh1D, ::LocalMagnetization{:y}, bc::PBC; beta::Real, kwargs...)
     return zeros(Float64, _bc_size(bc, kwargs))
 end
 

@@ -60,9 +60,9 @@ another granularity by `core/registry.jl`.
 | [`VonNeumannEntropy`](@ref)               | ✅ Peschel         | —                  | ✅ CC (T=0 crit/gapped + T>0 crit)         |
 | [`RenyiEntropy`](@ref)`(α)`               | ✅ Peschel         | —                  | ✅ CC                                     |
 | [`EnergyLocal`](@ref)                     | ✅                 | —                  | —                                         |
-| [`MagnetizationXLocal`](@ref) `{:equilibrium}` | ✅                 | —                  | —                                         |
-| [`MagnetizationXLocal`](@ref) `{:quench}`     | ✅                 | —                  | ✅ closed-form k-integral (#145)          |
-| [`MagnetizationZLocal`](@ref)             | ✅                 | —                  | —                                         |
+| [`LocalMagnetization`](@ref)`(:x)`        | ✅                 | —                  | —                                         |
+| [`QuenchLocalMagnetization`](@ref)`(:x)`  | ✅                 | —                  | ✅ closed-form k-integral (#145)          |
+| [`LocalMagnetization`](@ref)`(:z)`        | ✅                 | —                  | —                                         |
 | [`SpontaneousMagnetization`](@ref)        | —                  | —                  | ✅ alias of `MagnetizationZ`              |
 | [`CentralCharge`](@ref)                   | —                  | —                  | ✅ 1/2 (critical) / 0                     |
 

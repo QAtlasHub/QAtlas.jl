@@ -89,7 +89,7 @@ function _tfim_cc_entanglement(J::Real, h::Real, ℓ::Integer, β::Real; α::Rea
 end
 
 """
-    fetch(model::TFIM, ::VonNeumannEntropy{:equilibrium}, ::Infinite;
+    fetch(model::TFIM, ::VonNeumannEntropy, ::Infinite;
           ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
 
 Calabrese-Cardy von Neumann entanglement entropy of a contiguous block
@@ -108,12 +108,7 @@ under `β → ∞`.  The off-critical + finite-T case errors out (not yet
 implemented).
 """
 function fetch(
-    model::TFIM,
-    ::VonNeumannEntropy{:equilibrium},
-    ::Infinite;
-    ℓ::Int,
-    beta::Real=Inf,
-    kwargs...,
+    model::TFIM, ::VonNeumannEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
 )
     ℓ ≥ 1 || throw(ArgumentError("VonNeumannEntropy Infinite: ℓ must be ≥ 1; got $ℓ."))
     # At the Ising critical point h ≈ J the CC form lives at the

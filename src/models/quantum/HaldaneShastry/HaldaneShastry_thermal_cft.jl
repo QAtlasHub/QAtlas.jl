@@ -161,7 +161,7 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
-    fetch(::HaldaneShastry, ::VonNeumannEntropy{:equilibrium}, ::Infinite;
+    fetch(::HaldaneShastry, ::VonNeumannEntropy, ::Infinite;
           ℓ::Int, beta::Real = Inf, kwargs...) -> Float64
 
 Single-interval von Neumann entanglement entropy of the
@@ -172,12 +172,7 @@ c = 1 Calabrese-Cardy form via `Universality(:Heisenberg)`.
 - `beta < Inf`: thermal state, `S = (1/3) log[(β/π) sinh(π ℓ / β)]`.
 """
 function fetch(
-    ::HaldaneShastry,
-    ::VonNeumannEntropy{:equilibrium},
-    ::Infinite;
-    ℓ::Int,
-    beta::Real=Inf,
-    kwargs...,
+    ::HaldaneShastry, ::VonNeumannEntropy, ::Infinite; ℓ::Int, beta::Real=Inf, kwargs...
 )
     return fetch(
         Universality(:Heisenberg),

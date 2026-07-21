@@ -147,7 +147,7 @@
 # ── Site-resolved local observables ───────────────────────────────────
 @register(
     XXZ1D,
-    MagnetizationXLocal{:equilibrium},
+    LocalMagnetization{:x},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -155,7 +155,7 @@
 )
 @register(
     XXZ1D,
-    MagnetizationYLocal,
+    LocalMagnetization{:y},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -163,7 +163,7 @@
 )
 @register(
     XXZ1D,
-    MagnetizationZLocal,
+    LocalMagnetization{:z},
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -228,7 +228,7 @@ end
 # ── Entanglement (β = Inf default → ground-state pure-state entropy) ──
 @register(
     XXZ1D,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     OBC,
     method=:dense_ed,
     reliability=:high,
@@ -279,7 +279,7 @@ end
 # ── Quench observables (Δ = 0 / XX free fermion only; issue #148 phase 1) ──
 @register(
     XXZ1D,
-    LoschmidtEcho{:rate},
+    LoschmidtRateFunction,
     Infinite,
     method=:free_fermion_analytic,
     reliability=:high,
@@ -303,7 +303,7 @@ end
 # ── CC entanglement at Infinite via Universality(:XY) / (:Heisenberg) (#580 Phase 2)
 @register(
     XXZ1D,
-    VonNeumannEntropy{:equilibrium},
+    VonNeumannEntropy,
     Infinite,
     method=:delegation,
     reliability=:high,

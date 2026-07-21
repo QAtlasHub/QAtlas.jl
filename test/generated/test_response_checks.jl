@@ -79,3 +79,25 @@ end
     @test !isempty(from_S) && !isempty(from_U)
     @test !isempty(intersect(from_S, from_U))   # hubs covered by both routes
 end
+
+@testset "model-axis derivatives are opt-in and finite-difference only" begin
+    # The allow-list is the defence the cross-check cannot provide: for a
+    # transverse-field model both backends agree on -∂F/∂h = ⟨σˣ⟩, which is not
+    # M_z, so nothing numerical would flag it.  TFIM must therefore be absent.
+    ids = [c.id for c in generated_checks(; kinds=(:response,))]
+    mag = filter(startswith("response/magnetization_response/"), ids)
+    @test !isempty(mag)
+    @test any(occursin("/CurieWeissIsing/"), mag)
+    @test !any(occursin("/TFIM/"), mag)          # transverse field — must not be checked
+    # An edge with no allow-list keeps generating everywhere.
+    @test any(occursin("/TFIM/"), filter(startswith("response/entropy_response/"), ids))
+
+    # A model axis is pinned to finite differences: rebuilding a struct whose
+    # fields are ::Float64 with an AD dual destroys the derivative silently.
+    fd_axis = QAtlas.∂(QAtlas.FreeEnergy, :h)
+    st_axis = QAtlas.∂(QAtlas.FreeEnergy, :T)
+    @test QAtlas._axis_backend(fd_axis, QAtlas.ForwardDiffBackend()) isa
+        QAtlas.FiniteDifference
+    @test QAtlas._axis_backend(st_axis, QAtlas.ForwardDiffBackend()) isa
+        QAtlas.ForwardDiffBackend
+end

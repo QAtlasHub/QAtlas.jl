@@ -275,6 +275,60 @@ for axis in (:x, :y, :z)
     end
 end
 
+import SpecialFunctions
+
+# Helper for the alternating zeta function: zeta_a(s) = (1 - 2^(1-s)) * zeta(s)
+_zeta_a(s::Int) = (1 - 2.0^(1-s)) * SpecialFunctions.zeta(s)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Exact Ground-State Correlation Functions (Infinite, T=0)
+# ═══════════════════════════════════════════════════════════════════════════════
+for CorrTy in (:XXCorrelation, :YYCorrelation, :ZZCorrelation)
+    for mode in (:static, :connected)
+        @eval function fetch(
+            ::Heisenberg1D,
+            ::$CorrTy{$(QuoteNode(mode))},
+            ::Infinite;
+            beta::Real=Inf,
+            i::Int,
+            j::Int,
+            J::Real=1.0,
+            kwargs...,
+        )
+            isinf(beta) || throw(ArgumentError("Exact infinite-size correlation functions for Heisenberg1D are only available at T=0 (beta=Inf)."))
+            
+            r = abs(i - j)
+            
+            if r == 0
+                return 0.25  # <S^z_i S^z_i> = 1/4
+            elseif r == 1
+                return 1/12 - 1/3 * log(2)
+            elseif r == 2
+                return 1/12 - 4/3 * log(2) + _zeta_a(3)
+            elseif r == 3
+                z1 = log(2)
+                z3 = _zeta_a(3)
+                z5 = _zeta_a(5)
+                return 1/12 - 3*z1 + 74/9*z3 - 56/9*z1*z3 - 8/3*z3^2 - 50/9*z5 + 80/9*z1*z5
+            elseif r == 4
+                z1 = log(2)
+                z3 = _zeta_a(3)
+                z5 = _zeta_a(5)
+                z7 = _zeta_a(7)
+                return 1/12 - 16/3*z1 + 290/9*z3 - 72*z1*z3 - 1172/9*z3^2 - 700/9*z5 - 400/3*z5^2 + 4640/9*z1*z5 - 220/9*z3*z5 + 455/9*z7 - 3920/9*z1*z7 + 280*z3*z7
+            elseif r == 5
+                z1 = log(2)
+                z3 = _zeta_a(3)
+                z5 = _zeta_a(5)
+                z7 = _zeta_a(7)
+                z9 = _zeta_a(9)
+                return 1/12 - 25/3*z1 + 800/9*z3 - 1192/3*z1*z3 - 15368/9*z3^2 - 608*z3^3 - 4228/9*z5 + 64256/9*z1*z5 - 976/9*z3*z5 + 3648*z1*z3*z5 - 3328/3*z3^2*z5 - 76640/3*z5^2 + 66560/3*z1*z5^2 + 12640/3*z3*z5^2 + 6400/3*z5^3 + 9674/9*z7 - 225848/9*z1*z7 + 56952*z3*z7 - 116480/3*z1*z3*z7 - 35392/3*z3^2*z7 + 7840*z5*z7 - 8960*z3*z5*z7 - 66640/3*z7^2 + 31360*z1*z7^2 - 686*z9 + 18368*z1*z9 - 53312*z3*z9 + 35392*z1*z3*z9 + 16128*z3^2*z9 + 38080*z5*z9 - 53760*z1*z5*z9
+            else
+                error("NotImplemented: Exact analytical correlation functions for Heisenberg1D are only implemented up to distance r=5. Got r=$r.")
+            end
+        end
+    end
+end
 # Entanglement at Infinite delegates to Universality(:Heisenberg) which
 # carries the c=1 Calabrese–Cardy closed forms (issue #580 Phase 1).
 # The Heisenberg chain is gapless for all J (always at the SU(2) critical

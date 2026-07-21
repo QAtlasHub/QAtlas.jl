@@ -312,7 +312,9 @@ end
     @test !isempty(checks)
     @test issorted([c.id for c in checks])
     @test allunique(c.id for c in checks)
-    @test all(c.kind in (:identity, :dual, :limit, :symmetry) for c in checks)
+    # Closed vocabulary on purpose: a new edge type must be declared here, so it
+    # cannot start emitting checks unnoticed.  `:bound` joined in #734 Phase B.
+    @test all(c.kind in (:identity, :dual, :limit, :symmetry, :bound) for c in checks)
     # kind selection
     only_ids = generated_checks(; kinds=(:identity,))
     @test all(c -> c.kind === :identity, only_ids)

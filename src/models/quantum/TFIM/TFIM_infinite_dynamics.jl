@@ -15,17 +15,18 @@
 #      Λ(k) + Λ(q_total − k) = ω.  Returns 0 outside the 2-spinon
 #      continuum.  Public helper, exported from `QAtlas`.
 #
-#   3. `fetch(model, ZZStructureFactor(), Infinite(); β, q, ω, …)` — dynamic
-#      longitudinal structure factor S_zz(q, ω; β), realised as the
+#   3. `fetch(model, DynamicalSpinStructureFactor(:z,:z), Infinite(); β, q, ω, …)`
+#      — dynamic longitudinal structure factor S_zz(q, ω; β), realised as the
 #      large-N OBC proxy of the time- and space-Fourier transform of
 #      ⟨σᶻ_i(t) σᶻ_j(0)⟩_β.  σᶻ in TFIM is non-local after Jordan–Wigner
 #      so a closed-form free-fermion form-factor expression is intricate;
 #      QAtlas defers it to the OBC Pfaffian routine in `TFIM_dynamics.jl`,
 #      reusing the cached Majorana covariance / evolution matrices.
 #
-# The static branch (`ω === nothing`) of `ZZStructureFactor, Infinite` is
-# already provided in `TFIM_zaxis.jl`.  This file overrides that method
-# with a router that dispatches on `ω` so both branches coexist.
+# The #734 split of the previously-overloaded `ZZStructureFactor` router:
+# the static `S_zz(q; β)` is `fetch(_, SpinStructureFactor(:z,:z), Infinite())`
+# and the dynamic `S_zz(q, ω; β)` is
+# `fetch(_, DynamicalSpinStructureFactor(:z,:z), Infinite())`, defined below.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -180,35 +181,35 @@ function _tfim_zz_structure_factor_dynamic_proxy(
 end
 
 """
-    fetch(model::TFIM, ::ZZStructureFactor, ::Infinite;
-          beta::Real, q::Real, ω::Union{Real,Nothing} = nothing,
-          N_proxy::Int = 64, t_max::Real = 20.0, dt::Real = 0.1, kwargs...)
-        -> Float64
+    fetch(model::TFIM, ::SpinStructureFactor{:z,:z}, ::Infinite;
+          beta::Real, q::Real, N_proxy::Int = 80, kwargs...) -> Float64
 
-Longitudinal structure factor `S_zz(q, [ω,] β)` of the infinite TFIM.
-This router dispatches on `ω`:
+Static longitudinal structure factor `S_zz(q; β)` of the infinite TFIM,
+computed by the large-N OBC proxy `_zz_static_structure_factor` (default
+`N_proxy = 80`; same path as defined in `TFIM_zaxis.jl`).  Passing an `ω`
+kwarg is an error — split #734 moved the dynamic `S_zz(q, ω; β)` onto the
+`DynamicalSpinStructureFactor{:z,:z}` method below.
 
-* `ω === nothing` (default) → static `S_zz(q, β)`, computed by the
-  large-N OBC proxy `_zz_static_structure_factor` (default
-  `N_proxy = 80`; same path as defined in `TFIM_zaxis.jl`).
+    fetch(model::TFIM, ::DynamicalSpinStructureFactor{:z,:z}, ::Infinite;
+          beta::Real, q::Real, ω::Real, N_proxy::Int = 64,
+          t_max::Real = 20.0, dt::Real = 0.1, kwargs...) -> Float64
 
-* `ω::Real` → dynamic `S_zz(q, ω; β)`, computed as the OBC large-N
-  proxy of the time- and space-Fourier transform of
-  `⟨σᶻ_i(t) σᶻ_j(0)⟩_β`,
+Dynamic `S_zz(q, ω; β)`, computed as the OBC large-N proxy of the time- and
+space-Fourier transform of `⟨σᶻ_i(t) σᶻ_j(0)⟩_β`,
 
-      S_zz(q, ω; β) = ∫dt e^{iωt} · (1/N_b) Σ_{i,j ∈ bulk}
-                            e^{-iq(i-j)} ⟨σᶻ_i(t) σᶻ_j(0)⟩_β,
+    S_zz(q, ω; β) = ∫dt e^{iωt} · (1/N_b) Σ_{i,j ∈ bulk}
+                          e^{-iq(i-j)} ⟨σᶻ_i(t) σᶻ_j(0)⟩_β,
 
-  with `t ∈ [-t_max, t_max]` discretised at spacing `dt` and `(i, j)`
-  restricted to the central bulk window `[N/4, 3N/4]` of an
-  `N_proxy`-site OBC chain.
+with `t ∈ [-t_max, t_max]` discretised at spacing `dt` and `(i, j)`
+restricted to the central bulk window `[N/4, 3N/4]` of an `N_proxy`-site
+OBC chain.
 
-  Default `N_proxy = 64`, `t_max = 20.0`, `dt = 0.1` is a balance of
-  precision and cost; the dominant errors are
-  (a) ω-resolution `~ π/t_max ≈ 0.157`,
-  (b) UV cutoff `~ π/dt ≈ 31.4`,
-  (c) finite-size finite-bulk corrections `~ exp(−(N_proxy − 4 ξ)/ξ)`.
-  Raise the appropriate parameter to tighten any of these.
+Default `N_proxy = 64`, `t_max = 20.0`, `dt = 0.1` is a balance of
+precision and cost; the dominant errors are
+(a) ω-resolution `~ π/t_max ≈ 0.157`,
+(b) UV cutoff `~ π/dt ≈ 31.4`,
+(c) finite-size finite-bulk corrections `~ exp(−(N_proxy − 4 ξ)/ξ)`.
+Raise the appropriate parameter to tighten any of these.
 
 Performance: `O(|ts| · N_b² · M³)` Pfaffians per `(q, ω)` point, where
 `M ≈ 2 (i + j) − 2`.  At default settings this is ~1 sec/point on a
@@ -222,21 +223,33 @@ TPQMPS / DMRG dynamic structure factor reference values.
 """
 function fetch(
     model::TFIM,
-    ::ZZStructureFactor,
+    ::SpinStructureFactor{:z,:z},
     ::Infinite;
     beta::Real,
     q::Real,
-    ω::Union{Real,Nothing}=nothing,
-    N_proxy::Int=ω === nothing ? 80 : 64,
+    N_proxy::Int=80,
+    kwargs...,
+)
+    haskey(kwargs, :ω) && error(
+        "Static SpinStructureFactor(:z, :z) takes no ω; use " *
+        "DynamicalSpinStructureFactor(:z, :z) for the dynamic S^{zz}(q, ω).",
+    )
+    # Same proxy path as the OBC method in TFIM_dynamics.jl.
+    return _zz_static_structure_factor(N_proxy, model.J, model.h, beta, q)
+end
+
+function fetch(
+    model::TFIM,
+    ::DynamicalSpinStructureFactor{:z,:z},
+    ::Infinite;
+    beta::Real,
+    q::Real,
+    ω::Real,
+    N_proxy::Int=64,
     t_max::Real=20.0,
     dt::Real=0.1,
     kwargs...,
 )
-    if ω === nothing
-        # Static branch — preserve the behaviour of the method previously
-        # defined in TFIM_zaxis.jl by routing to the same proxy.
-        return _zz_static_structure_factor(N_proxy, model.J, model.h, beta, q)
-    end
     return _tfim_zz_structure_factor_dynamic_proxy(
         model.J, model.h, beta, q, ω, N_proxy, t_max, dt
     )

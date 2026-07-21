@@ -471,9 +471,18 @@
 )
 
 # ── Tier 2: dynamic structure factor at Infinite (proxy) ────────────
-# Note: the static `ZZStructureFactor, Infinite` is registered via the
-# router method in TFIM_infinite_dynamics.jl (when ω === nothing).
-# The dynamic branch (ω::Real) is the new content.
+# The static `SpinStructureFactor{:z,:z}` (= ZZStructureFactor alias) at
+# Infinite is registered above; the dynamic `S_zz(q, ω)` branch dispatches on
+# `DynamicalSpinStructureFactor{:z,:z}` (split #734) and is registered here.
+@register(
+    TFIM,
+    DynamicalSpinStructureFactor{:z,:z},
+    Infinite,
+    method=:bdg,
+    reliability=:medium,
+    tested_in="test/models/quantum/TFIM/test_TFIM_infinite_dynamics.jl",
+    notes="Dynamic S_zz(q, ω) via OBC large-N proxy of the time+space Fourier transform of ⟨σᶻ_i(t) σᶻ_j(0)⟩_β; N_proxy/t_max/dt control the proxy precision.",
+)
 
 # ── Tier 3: σʸ correlators + MagnetizationY/SusceptibilityYY OBC ────
 # (defined in TFIM_yy.jl; closes the YY gap left by PR #130 Tier 2)

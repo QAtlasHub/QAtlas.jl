@@ -10,14 +10,26 @@ using QAtlas, Test
     @testset "Domain validations" begin
         # J <= 0 throws DomainError
         @test_throws DomainError QAtlas.fetch(
-            XXZ1D(; J=-1.0, Δ=1.5), ZZStructureFactor(), Infinite(); q=1.0, ω=1.0
+            XXZ1D(; J=-1.0, Δ=1.5),
+            DynamicalSpinStructureFactor(:z, :z),
+            Infinite();
+            q=1.0,
+            ω=1.0,
         )
         # Δ <= 1.0 throws DomainError
         @test_throws DomainError QAtlas.fetch(
-            XXZ1D(; J=1.0, Δ=1.0), ZZStructureFactor(), Infinite(); q=1.0, ω=1.0
+            XXZ1D(; J=1.0, Δ=1.0),
+            DynamicalSpinStructureFactor(:z, :z),
+            Infinite();
+            q=1.0,
+            ω=1.0,
         )
         @test_throws DomainError QAtlas.fetch(
-            XXZ1D(; J=1.0, Δ=0.5), ZZStructureFactor(), Infinite(); q=1.0, ω=1.0
+            XXZ1D(; J=1.0, Δ=0.5),
+            DynamicalSpinStructureFactor(:z, :z),
+            Infinite();
+            q=1.0,
+            ω=1.0,
         )
     end
 
@@ -36,15 +48,18 @@ using QAtlas, Test
         omegaminus = (2.0 * I_val / (1.0 + κ)) * sqrt(1.0 + κ^2 - 2.0 * κ * cos(q))
 
         # Test zero outside support
-        @test QAtlas.fetch(model, ZZStructureFactor(), Infinite(); q=q, ω=0.5 * omega0) ==
-            0.0
         @test QAtlas.fetch(
-            model, ZZStructureFactor(), Infinite(); q=q, ω=1.5 * omegaminus
+            model, DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=0.5 * omega0
+        ) == 0.0
+        @test QAtlas.fetch(
+            model, DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=1.5 * omegaminus
         ) == 0.0
 
         # Test finite positive inside support
         ωmid = (omega0 + omegaminus) / 2
-        S = QAtlas.fetch(model, ZZStructureFactor(), Infinite(); q=q, ω=ωmid)
+        S = QAtlas.fetch(
+            model, DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=ωmid
+        )
         @test isfinite(S)
         @test S > 0
     end
@@ -59,14 +74,19 @@ using QAtlas, Test
         ω = 1.9
 
         S_heisenberg = QAtlas.fetch(
-            Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω, method=:exact_2spinon
+            Heisenberg1D(),
+            DynamicalSpinStructureFactor(:z, :z),
+            Infinite();
+            q=q,
+            ω=ω,
+            method=:exact_2spinon,
         )
 
         # Compare with XXZ at Δ -> 1.0
         for Δ in (1.001, 1.0001, 1.00001)
             S_xxz = QAtlas.fetch(
                 XXZ1D(; J=1.0, Δ=Δ),
-                ZZStructureFactor(),
+                DynamicalSpinStructureFactor(:z, :z),
                 Infinite();
                 q=q,
                 ω=ω,

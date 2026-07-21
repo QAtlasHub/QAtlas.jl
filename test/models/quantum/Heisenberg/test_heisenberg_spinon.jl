@@ -70,13 +70,15 @@ using QAtlas, Test
         εU = heisenberg_two_spinon_upper_edge(model, q)
         # Below lower edge
         for ω in (0.0, 0.5 * εL, εL)
-            @test QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω) ==
-                0.0
+            @test QAtlas.fetch(
+                Heisenberg1D(), DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=ω
+            ) == 0.0
         end
         # Above upper edge
         for ω in (εU, εU + 0.1, 10 * εU)
-            @test QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω) ==
-                0.0
+            @test QAtlas.fetch(
+                Heisenberg1D(), DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=ω
+            ) == 0.0
         end
     end
 
@@ -86,7 +88,9 @@ using QAtlas, Test
         εU = heisenberg_two_spinon_upper_edge(model, q)
         # mid-band sample
         ωmid = (εL + εU) / 2
-        S = QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ωmid)
+        S = QAtlas.fetch(
+            Heisenberg1D(), DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=ωmid
+        )
         @test isfinite(S)
         @test S > 0
         # closed-form check: 1 / (2 √(ω² − ε_L²))
@@ -103,7 +107,11 @@ using QAtlas, Test
             push!(
                 S_values,
                 QAtlas.fetch(
-                    Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=εL + δ
+                    Heisenberg1D(),
+                    DynamicalSpinStructureFactor(:z, :z),
+                    Infinite();
+                    q=q,
+                    ω=εL + δ,
                 ),
             )
         end
@@ -116,9 +124,16 @@ using QAtlas, Test
     @testset "Müller S^{zz}: explicit Müller method symbol works" begin
         q = π / 2
         ω = 1.0
-        S_default = QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω)
+        S_default = QAtlas.fetch(
+            Heisenberg1D(), DynamicalSpinStructureFactor(:z, :z), Infinite(); q=q, ω=ω
+        )
         S_muller = QAtlas.fetch(
-            Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω, method=:muller
+            Heisenberg1D(),
+            DynamicalSpinStructureFactor(:z, :z),
+            Infinite();
+            q=q,
+            ω=ω,
+            method=:muller,
         )
         @test S_default == S_muller
     end
@@ -132,7 +147,7 @@ using QAtlas, Test
         for ω in (0.0, 0.5 * εL, εL)
             @test QAtlas.fetch(
                 Heisenberg1D(),
-                ZZStructureFactor(),
+                DynamicalSpinStructureFactor(:z, :z),
                 Infinite();
                 q=q,
                 ω=ω,
@@ -142,7 +157,7 @@ using QAtlas, Test
         for ω in (εU, εU + 0.1, 10.0 * εU)
             @test QAtlas.fetch(
                 Heisenberg1D(),
-                ZZStructureFactor(),
+                DynamicalSpinStructureFactor(:z, :z),
                 Infinite();
                 q=q,
                 ω=ω,
@@ -154,7 +169,7 @@ using QAtlas, Test
         ωmid = (εL + εU) / 2
         S_exact = QAtlas.fetch(
             Heisenberg1D(),
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             q=q,
             ω=ωmid,
@@ -166,7 +181,7 @@ using QAtlas, Test
         # Divergence at ε_L
         S_near = QAtlas.fetch(
             Heisenberg1D(),
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             q=q,
             ω=εL + 1e-5,
@@ -179,7 +194,7 @@ using QAtlas, Test
     @testset "Müller S^{zz}: Phase-2 :caux_hagemans raises informative error" begin
         @test_throws ErrorException QAtlas.fetch(
             Heisenberg1D(),
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             q=π / 2,
             ω=1.0,
@@ -187,7 +202,7 @@ using QAtlas, Test
         )
         @test_throws ErrorException QAtlas.fetch(
             Heisenberg1D(),
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             q=π / 2,
             ω=1.0,
@@ -217,10 +232,22 @@ using QAtlas, Test
         # of energy.  Therefore S^{zz}(q, λ ω; λ J) = (1/λ) S^{zz}(q, ω; J).
         q = π / 2
         ω = 1.0
-        S1 = QAtlas.fetch(Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=ω, J=1.0)
+        S1 = QAtlas.fetch(
+            Heisenberg1D(),
+            DynamicalSpinStructureFactor(:z, :z),
+            Infinite();
+            q=q,
+            ω=ω,
+            J=1.0,
+        )
         for λ in (0.5, 2.0, 3.0)
             S_scaled = QAtlas.fetch(
-                Heisenberg1D(), ZZStructureFactor(), Infinite(); q=q, ω=λ * ω, J=λ * 1.0
+                Heisenberg1D(),
+                DynamicalSpinStructureFactor(:z, :z),
+                Infinite();
+                q=q,
+                ω=λ * ω,
+                J=λ * 1.0,
             )
             @test S_scaled ≈ S1 / λ atol = 1e-14
         end
@@ -240,7 +267,7 @@ end
         S_indep = 1 / (2 * sqrt(ω^2 - εL^2))
         verify(
             Heisenberg1D(),
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             route=:second_closed_form,
             fetch_kw=(; q=q, ω=ω, J=J, method=:muller),
@@ -255,7 +282,7 @@ end
         εU = π * J * abs(sin(q / 2))
         verify(
             Heisenberg1D(),
-            ZZStructureFactor(),
+            DynamicalSpinStructureFactor(:z, :z),
             Infinite();
             route=:second_closed_form,
             fetch_kw=(; q=q, ω=εU + 0.5, J=J, method=:muller),

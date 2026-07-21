@@ -189,7 +189,7 @@ function _heisenberg_szz_muller(J::Real, q::Real, ω::Real)
 end
 
 """
-    fetch(model::Heisenberg1D, ::ZZStructureFactor, ::Infinite;
+    fetch(model::Heisenberg1D, ::DynamicalSpinStructureFactor{:z,:z}, ::Infinite;
           q::Real, ω::Real, method::Symbol = :muller, J::Real = 1.0,
           kwargs...) -> Float64
 
@@ -270,7 +270,7 @@ end
 
 function fetch(
     ::Heisenberg1D,
-    ::ZZStructureFactor,
+    ::DynamicalSpinStructureFactor{:z,:z},
     ::Infinite;
     q::Real,
     ω::Real,

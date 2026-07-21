@@ -318,7 +318,7 @@ end
 
 @register(
     XXZ1D,
-    ZZStructureFactor,
+    DynamicalSpinStructureFactor{:z,:z},
     Infinite,
     method=:exact_2spinon,
     reliability=:high,

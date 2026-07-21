@@ -47,10 +47,14 @@ using AbstractQAtlas:
     SpinCorrelation,
     ConnectedSpinCorrelation,
     DynamicalCorrelation,
-    # Relations layer: `@relation` / `@inequality` let QAtlas host the
-    # model-specific relations AbstractQAtlas purged as non-universal (#730),
-    # in the SAME registry and behind the same verbs.  The transport pair is
-    # type-keyed onto the carrier quantities ABQ kept.
+    # Relations layer (#734 Phase B): the universal identities themselves, so an
+    # @identity edge can delegate its arithmetic instead of restating it.
+    FreeEnergyLegendre,
+    solve,
+    # ...and the macros (#730), which let QAtlas HOST the model-specific
+    # relations AbstractQAtlas purged as non-universal, in that same registry
+    # and behind the same verbs.  The transport pair is type-keyed onto the
+    # carrier quantities ABQ kept.
     @relation,
     @inequality,
     CarrierDensity,

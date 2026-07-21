@@ -154,6 +154,33 @@ finite-T fetch).
 """
 struct ResidualEntropy <: AbstractThermalPotential end
 
+# ─── Spin glass ─────────────────────────────────────────────────────────
+#
+# These two came back from AbstractQAtlas with the model-specific spin-glass
+# relations (#730): a quenched-disorder order parameter is not part of a
+# model-independent vocabulary.  They are the typed slots of the relations in
+# `src/relations/model_specific.jl`.
+
+"""
+    EdwardsAndersonParameter() <: AbstractQuantity
+
+The Edwards–Anderson spin-glass order parameter `q_EA = [⟨s_i⟩²]`
+([EdwardsAnderson1975](@cite)) — the disorder-averaged squared local
+magnetization.  Nonzero *with* zero net magnetization is the signature of the
+spin-glass phase, where spins freeze in random directions.
+"""
+struct EdwardsAndersonParameter <: AbstractQuantity end
+
+"""
+    SpinGlassSusceptibility() <: AbstractQuantity
+
+The spin-glass susceptibility `χ_SG = (1/N) Σ_ij [⟨s_i s_j⟩_c²]` — the ordering
+susceptibility of the [`EdwardsAndersonParameter`](@ref), diverging at the
+spin-glass transition.  Distinct from the ordinary [`Susceptibility`](@ref),
+which stays finite there.
+"""
+struct SpinGlassSusceptibility <: AbstractQuantity end
+
 # ─── Magnetizations (axis explicit) ─────────────────────────────────────
 
 # The global bulk magnetizations adopt AbstractQAtlas's axis-parametric

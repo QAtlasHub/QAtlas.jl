@@ -103,11 +103,12 @@ for (qsym, QTy) in _LEGACY_TFIM_LOCAL_MAP
 end
 
 # ── Dynamics / correlators / structure factors (TFIM_dynamics.jl) ──────
-# These use parametric ZZCorrelation{:mode} dispatch in the new API.
+# These route the old Symbol-keyed quantities onto the new axis-parametric
+# correlator types (#734).
 function fetch(m::Model{:TFIM}, ::Quantity{:sz_sz_correlation}, bc::OBC; kwargs...)
     return fetch(
         _tfim_from_legacy_model(m),
-        ZZCorrelation{:dynamic}(),
+        DynamicalCorrelation(:z, :z),
         _bc_with_legacy_N(bc, m);
         kwargs...,
     )
@@ -115,7 +116,7 @@ end
 function fetch(m::Model{:TFIM}, ::Quantity{:sx_sx_correlation}, bc::OBC; kwargs...)
     return fetch(
         _tfim_from_legacy_model(m),
-        XXCorrelation{:dynamic}(),
+        DynamicalCorrelation(:x, :x),
         _bc_with_legacy_N(bc, m);
         kwargs...,
     )
@@ -123,7 +124,7 @@ end
 function fetch(m::Model{:TFIM}, ::Quantity{:sz_sz_spreading}, bc::OBC; kwargs...)
     return fetch(
         _tfim_from_legacy_model(m),
-        ZZCorrelation{:lightcone}(),
+        LightconeSpinCorrelation(:z, :z),
         _bc_with_legacy_N(bc, m);
         kwargs...,
     )
@@ -131,7 +132,7 @@ end
 function fetch(m::Model{:TFIM}, ::Quantity{:zz_static_thermal}, bc::OBC; kwargs...)
     return fetch(
         _tfim_from_legacy_model(m),
-        ZZCorrelation{:static}(),
+        SpinCorrelation(:z, :z),
         _bc_with_legacy_N(bc, m);
         kwargs...,
     )

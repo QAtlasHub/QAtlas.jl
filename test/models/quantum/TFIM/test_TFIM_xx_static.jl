@@ -3,8 +3,8 @@
 # (`src/models/quantum/TFIM/TFIM_xx_static.jl`).
 #
 # Layers:
-#   1. T = 0 self-consistency: the new `XXCorrelation{:static}` equals the
-#      real part of the existing `XXCorrelation{:dynamic}` evaluated at
+#   1. T = 0 self-consistency: the new `SpinCorrelation{:x,:x}` equals the
+#      real part of the existing `DynamicalCorrelation{(:x, :x)}` evaluated at
 #      `t = 0`.
 #   2. Boundary conditions of σˣ algebra:
 #        ⟨(σˣ_i)²⟩ = 1  (since (σˣ)² = I)  ⇒ static at i = j returns 1.
@@ -25,9 +25,11 @@ using QAtlas, Test, LinearAlgebra
         for h in (0.5, 1.0, 1.5), N in (8, 12)
             model = TFIM(; J=1.0, h=h)
             for i in 2:(N - 1), j in i:(N - 1)
-                v_static = QAtlas.fetch(model, XXCorrelation{:static}(), OBC(N); i=i, j=j)
+                v_static = QAtlas.fetch(model, SpinCorrelation(:x, :x), OBC(N); i=i, j=j)
                 v_dynamic_re = real(
-                    QAtlas.fetch(model, XXCorrelation{:dynamic}(), OBC(N); i=i, j=j, t=0.0)
+                    QAtlas.fetch(
+                        model, DynamicalCorrelation(:x, :x), OBC(N); i=i, j=j, t=0.0
+                    ),
                 )
                 @test v_static ≈ v_dynamic_re atol=1e-10
             end
@@ -37,7 +39,7 @@ using QAtlas, Test, LinearAlgebra
     @testset "i = j returns ⟨(σˣ)²⟩ = 1" begin
         for h in (0.5, 1.5), β in (Inf, 1.0)
             model = TFIM(; J=1.0, h=h)
-            v = QAtlas.fetch(model, XXCorrelation{:static}(), OBC(8); beta=β, i=4, j=4)
+            v = QAtlas.fetch(model, SpinCorrelation(:x, :x), OBC(8); beta=β, i=4, j=4)
             @test v ≈ 1.0 atol=1e-10
         end
     end
@@ -47,9 +49,9 @@ using QAtlas, Test, LinearAlgebra
         model = TFIM(; J=1.0, h=h)
         mx_local = QAtlas.fetch(model, MagnetizationXLocal(), OBC(N); beta=β)
         for i in 3:(N - 2), j in (i + 1):(N - 2)
-            v_st = QAtlas.fetch(model, XXCorrelation{:static}(), OBC(N); beta=β, i=i, j=j)
+            v_st = QAtlas.fetch(model, SpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=j)
             v_cn = QAtlas.fetch(
-                model, XXCorrelation{:connected}(), OBC(N); beta=β, i=i, j=j
+                model, ConnectedSpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=j
             )
             @test v_cn ≈ v_st - mx_local[i] * mx_local[j] atol=1e-10
         end
@@ -61,7 +63,7 @@ using QAtlas, Test, LinearAlgebra
         mx_local = QAtlas.fetch(model, MagnetizationXLocal(), OBC(N); beta=β)
         for i in 2:(N - 1)
             v_cn = QAtlas.fetch(
-                model, XXCorrelation{:connected}(), OBC(N); beta=β, i=i, j=i
+                model, ConnectedSpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=i
             )
             @test v_cn ≈ 1.0 - mx_local[i]^2 atol=1e-10
         end
@@ -85,7 +87,7 @@ using QAtlas, Test, LinearAlgebra
                 op = _op_site(_SX, i, N) * _op_site(_SX, j, N)
                 ed_val = real(tr(ρ * op))
                 qa_val = QAtlas.fetch(
-                    TFIM(; J=J, h=h), XXCorrelation{:static}(), OBC(N); beta=β, i=i, j=j
+                    TFIM(; J=J, h=h), SpinCorrelation(:x, :x), OBC(N); beta=β, i=i, j=j
                 )
                 @test qa_val ≈ ed_val atol=1e-10
             end
@@ -97,9 +99,9 @@ using QAtlas, Test, LinearAlgebra
         h, β, i, j = 0.7, 2.0, 40, 50
         model = TFIM(; J=1.0, h=h)
         v_inf = QAtlas.fetch(
-            model, XXCorrelation{:static}(), Infinite(); beta=β, i=i, j=j, N_proxy=80
+            model, SpinCorrelation(:x, :x), Infinite(); beta=β, i=i, j=j, N_proxy=80
         )
-        v_obc = QAtlas.fetch(model, XXCorrelation{:static}(), OBC(80); beta=β, i=i, j=j)
+        v_obc = QAtlas.fetch(model, SpinCorrelation(:x, :x), OBC(80); beta=β, i=i, j=j)
         @test v_inf == v_obc
     end
 end

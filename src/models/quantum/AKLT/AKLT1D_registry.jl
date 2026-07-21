@@ -75,7 +75,7 @@
 # ── VBS ground-state correlations (Infinite, closed form) ────────────
 @register(
     AKLT1D,
-    ZZCorrelation{:static},
+    SpinCorrelation{:z,:z},
     Infinite,
     method=:analytic,
     reliability=:high,

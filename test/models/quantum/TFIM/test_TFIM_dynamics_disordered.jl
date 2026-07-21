@@ -31,7 +31,7 @@
             v1 = real(
                 QAtlas.fetch(
                     TFIM(; J=J, h=h),
-                    ZZCorrelation{:dynamic}(),
+                    DynamicalCorrelation(:z, :z),
                     OBC(; N=N);
                     i=i0,
                     j=i0 + r1,
@@ -41,7 +41,7 @@
             v2 = real(
                 QAtlas.fetch(
                     TFIM(; J=J, h=h),
-                    ZZCorrelation{:dynamic}(),
+                    DynamicalCorrelation(:z, :z),
                     OBC(; N=N);
                     i=i0,
                     j=i0 + r2,

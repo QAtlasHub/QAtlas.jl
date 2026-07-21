@@ -162,10 +162,17 @@
 )
 
 # ── Two-point correlators (static + connected) ────────────────────────
-for CorrTy in (XXCorrelation, YYCorrelation, ZZCorrelation), mode in (:static, :connected)
+for CorrT in (
+    SpinCorrelation{:x,:x},
+    SpinCorrelation{:y,:y},
+    SpinCorrelation{:z,:z},
+    ConnectedSpinCorrelation{:x,:x},
+    ConnectedSpinCorrelation{:y,:y},
+    ConnectedSpinCorrelation{:z,:z},
+)
     register!(
         Heisenberg1D,
-        CorrTy{mode},
+        CorrT,
         OBC;
         method=:dense_ed,
         reliability=:high,

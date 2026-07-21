@@ -26,7 +26,12 @@
             ED = real(gs' * _op_site(_SZ, i, N) * _op_site(_SZ, j, N) * gs)
             QAT = real(
                 QAtlas.fetch(
-                    TFIM(; J=J, h=h), ZZCorrelation{:dynamic}(), OBC(; N=N); i=i, j=j, t=0.0
+                    TFIM(; J=J, h=h),
+                    DynamicalCorrelation(:z, :z),
+                    OBC(; N=N);
+                    i=i,
+                    j=j,
+                    t=0.0,
                 ),
             )
             @test QAT ≈ ED atol=1e-10
@@ -37,7 +42,12 @@
             ED = real(gs' * _op_site(_SX, i, N) * _op_site(_SX, j, N) * gs)
             QAT = real(
                 QAtlas.fetch(
-                    TFIM(; J=J, h=h), XXCorrelation{:dynamic}(), OBC(; N=N); i=i, j=j, t=0.0
+                    TFIM(; J=J, h=h),
+                    DynamicalCorrelation(:x, :x),
+                    OBC(; N=N);
+                    i=i,
+                    j=j,
+                    t=0.0,
                 ),
             )
             @test QAT ≈ ED atol=1e-10
@@ -51,7 +61,7 @@
                 exp(im * E[1] * t) *
                 (gs' * _op_site(_SZ, i, N) * Ut * _op_site(_SZ, j, N) * gs)
             QAT = QAtlas.fetch(
-                TFIM(; J=J, h=h), ZZCorrelation{:dynamic}(), OBC(; N=N); i=i, j=j, t=t
+                TFIM(; J=J, h=h), DynamicalCorrelation(:z, :z), OBC(; N=N); i=i, j=j, t=t
             )
             @test real(QAT) ≈ real(ED) atol=1e-10
             @test imag(QAT) ≈ imag(ED) atol=1e-10
@@ -63,7 +73,7 @@
         N, J, h = 12, 1.0, 0.7
         for i in (1, 4, 8, 12)
             v = QAtlas.fetch(
-                TFIM(; J=J, h=h), ZZCorrelation{:dynamic}(), OBC(; N=N); i=i, j=i, t=0.0
+                TFIM(; J=J, h=h), DynamicalCorrelation(:z, :z), OBC(; N=N); i=i, j=i, t=0.0
             )
             @test real(v) ≈ 1.0 atol=1e-10
             @test abs(imag(v)) < 1e-10
@@ -77,7 +87,7 @@
         times = [0.0, 0.5, 1.0]
         C = QAtlas.fetch(
             TFIM(; J=J, h=h),
-            ZZCorrelation{:lightcone}(),
+            LightconeSpinCorrelation(:z, :z),
             OBC(; N=N);
             center=center,
             times=times,
@@ -87,7 +97,12 @@
         # Each entry should match an individual call.
         for (it, t) in enumerate(times), ix in 1:N
             ref = QAtlas.fetch(
-                TFIM(; J=J, h=h), ZZCorrelation{:dynamic}(), OBC(; N=N); i=ix, j=center, t=t
+                TFIM(; J=J, h=h),
+                DynamicalCorrelation(:z, :z),
+                OBC(; N=N);
+                i=ix,
+                j=center,
+                t=t,
             )
             @test C[it, ix] ≈ ref atol=1e-10
         end

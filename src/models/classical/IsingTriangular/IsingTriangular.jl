@@ -168,7 +168,7 @@ function fetch(m::IsingTriangular, ::ResidualEntropy, ::Infinite; J::Real=m.J)
 end
 
 """
-    fetch(::IsingTriangular, ::ZZCorrelation{:static}, ::Infinite; r=1, J=m.J) -> Float64
+    fetch(::IsingTriangular, ::SpinCorrelation{:z,:z}, ::Infinite; r=1, J=m.J) -> Float64
 
 Zero-temperature nearest-neighbour spin–spin correlation `⟨σ_i σ_j⟩` of the
 classical triangular Ising model (Wannier 1950 convention `H = +J Σ σσ`).
@@ -187,7 +187,7 @@ ferromagnetic branch are not implemented here.
 - G. H. Wannier, *Phys. Rev.* **79**, 357 (1950).
 """
 function fetch(
-    m::IsingTriangular, ::ZZCorrelation{:static}, ::Infinite; r::Integer=1, J::Real=m.J
+    m::IsingTriangular, ::SpinCorrelation{:z,:z}, ::Infinite; r::Integer=1, J::Real=m.J
 )
     J > 0 || throw(
         DomainError(

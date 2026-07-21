@@ -90,16 +90,16 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(model::TFIM, ::YYCorrelation{:static}, bc::OBC;
+    fetch(model::TFIM, ::SpinCorrelation{:y,:y}, bc::OBC;
           beta=Inf, i, j) -> Float64
 
 Static thermal correlator `⟨σʸ_i σʸ_j⟩_β` on the OBC TFIM.  Equivalent
-to the `t = 0` slice of [`YYCorrelation`](@ref) with `mode = :dynamic`,
+to the `t = 0` slice of [`DynamicalCorrelation`](@ref)`(:y, :y)`,
 returned as `Float64` (the imaginary part is round-off only at t = 0).
 """
 function fetch(
     model::TFIM,
-    ::YYCorrelation{:static},
+    ::SpinCorrelation{:y,:y},
     bc::OBC;
     beta::Real=Inf,
     i::Int,
@@ -116,7 +116,7 @@ function fetch(
 end
 
 """
-    fetch(model::TFIM, ::YYCorrelation{:connected}, bc::OBC;
+    fetch(model::TFIM, ::ConnectedSpinCorrelation{:y,:y}, bc::OBC;
           beta=Inf, i, j) -> Float64
 
 Connected thermal correlator `⟨σʸ_i σʸ_j⟩_β − ⟨σʸ_i⟩ ⟨σʸ_j⟩`.  Since
@@ -126,7 +126,7 @@ returns `1 - 0² = 1`.
 """
 function fetch(
     model::TFIM,
-    ::YYCorrelation{:connected},
+    ::ConnectedSpinCorrelation{:y,:y},
     bc::OBC;
     beta::Real=Inf,
     i::Int,
@@ -134,11 +134,11 @@ function fetch(
     kwargs...,
 )
     N = _bc_size(bc, kwargs)
-    return fetch(model, YYCorrelation{:static}(), bc; beta=beta, i=i, j=j, N=N)
+    return fetch(model, SpinCorrelation(:y, :y), bc; beta=beta, i=i, j=j, N=N)
 end
 
 """
-    fetch(model::TFIM, ::YYCorrelation{:dynamic}, bc::OBC;
+    fetch(model::TFIM, ::DynamicalCorrelation{(:y, :y)}, bc::OBC;
           beta=Inf, i, j, t) -> ComplexF64
 
 Real-time correlator `⟨σʸ_i(t) σʸ_j(0)⟩_β`.  Returns `ComplexF64`; the
@@ -148,7 +148,7 @@ odd in t — see the time-domain identity tests in
 """
 function fetch(
     model::TFIM,
-    ::YYCorrelation{:dynamic},
+    ::DynamicalCorrelation{(:y, :y)},
     bc::OBC;
     i::Int,
     j::Int,

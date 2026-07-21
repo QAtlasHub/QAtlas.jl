@@ -232,7 +232,7 @@
 )
 @register(
     TFIM,
-    ZZCorrelation{:static},
+    SpinCorrelation{:z,:z},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -240,7 +240,7 @@
 )
 @register(
     TFIM,
-    ZZCorrelation{:dynamic},
+    DynamicalCorrelation{(:z, :z)},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -249,7 +249,7 @@
 )
 @register(
     TFIM,
-    ZZCorrelation{:lightcone},
+    LightconeSpinCorrelation{:z,:z},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -258,7 +258,7 @@
 )
 @register(
     TFIM,
-    XXCorrelation{:dynamic},
+    DynamicalCorrelation{(:x, :x)},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -391,7 +391,7 @@
 # ── ZZ correlator connected mode (OBC) ───────────────────────────────
 @register(
     TFIM,
-    ZZCorrelation{:connected},
+    ConnectedSpinCorrelation{:z,:z},
     OBC,
     method=:bdg,
     reliability=:high,
@@ -402,7 +402,7 @@
 # ── Tier 2: XX static + connected via Pfaffian Wick contraction ─────
 @register(
     TFIM,
-    XXCorrelation{:static},
+    SpinCorrelation{:x,:x},
     OBC,
     method=:pfaffian,
     reliability=:high,
@@ -412,7 +412,7 @@
 )
 @register(
     TFIM,
-    XXCorrelation{:connected},
+    ConnectedSpinCorrelation{:x,:x},
     OBC,
     method=:pfaffian,
     reliability=:high,
@@ -420,7 +420,7 @@
 )
 @register(
     TFIM,
-    XXCorrelation{:static},
+    SpinCorrelation{:x,:x},
     Infinite,
     method=:pfaffian,
     reliability=:medium,
@@ -429,7 +429,7 @@
 )
 @register(
     TFIM,
-    XXCorrelation{:connected},
+    ConnectedSpinCorrelation{:x,:x},
     Infinite,
     method=:pfaffian,
     reliability=:medium,
@@ -488,7 +488,7 @@
 # (defined in TFIM_yy.jl; closes the YY gap left by PR #130 Tier 2)
 @register(
     TFIM,
-    YYCorrelation{:static},
+    SpinCorrelation{:y,:y},
     OBC,
     method=:pfaffian,
     reliability=:high,
@@ -497,7 +497,7 @@
 )
 @register(
     TFIM,
-    YYCorrelation{:connected},
+    ConnectedSpinCorrelation{:y,:y},
     OBC,
     method=:pfaffian,
     reliability=:high,
@@ -506,7 +506,7 @@
 )
 @register(
     TFIM,
-    YYCorrelation{:dynamic},
+    DynamicalCorrelation{(:y, :y)},
     OBC,
     method=:pfaffian,
     reliability=:high,

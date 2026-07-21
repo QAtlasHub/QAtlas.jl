@@ -206,15 +206,22 @@
 )
 
 # ── Two-point correlators (static + connected) ────────────────────────
-for CorrTy in (XXCorrelation, YYCorrelation, ZZCorrelation), mode in (:static, :connected)
+for CorrT in (
+    SpinCorrelation{:x,:x},
+    SpinCorrelation{:y,:y},
+    SpinCorrelation{:z,:z},
+    ConnectedSpinCorrelation{:x,:x},
+    ConnectedSpinCorrelation{:y,:y},
+    ConnectedSpinCorrelation{:z,:z},
+)
     register!(
         XXZ1D,
-        CorrTy{mode},
+        CorrT,
         OBC;
         method=:dense_ed,
         reliability=:high,
         tested_in="test/models/test_XXZ1D_observables.jl",
-        notes="(i,j) ⟨σᵅᵢ σᵅⱼ⟩_β; mode=:connected subtracts the disconnected piece.",
+        notes="(i,j) ⟨σᵅᵢ σᵅⱼ⟩_β; the connected variant subtracts the disconnected piece.",
     )
 end
 

@@ -42,7 +42,10 @@ using AbstractQAtlas:
     Magnetization,
     Susceptibility,
     SpinStructureFactor,
-    DynamicalSpinStructureFactor
+    DynamicalSpinStructureFactor,
+    SpinCorrelation,
+    ConnectedSpinCorrelation,
+    DynamicalCorrelation
 # `native_energy_granularity` is extended by bare `native_energy_granularity(::M, ::BC) = …`
 # methods in model files, which `using` forbids ("must be explicitly imported to be
 # extended"); it must therefore come in via `import` (#734).
@@ -204,7 +207,9 @@ export Polarization
 export MagnetizationXLocal, MagnetizationYLocal, MagnetizationZLocal, EnergyLocal
 export Susceptibility  # index-parametric (AbstractQAtlas); SusceptibilityXX/YY/ZZ are deprecated aliases
 export SusceptibilityXX, SusceptibilityYY, SusceptibilityZZ
-export XXCorrelation, YYCorrelation, ZZCorrelation
+export SpinCorrelation, ConnectedSpinCorrelation, DynamicalCorrelation  # axis-parametric (AbstractQAtlas)
+export LightconeSpinCorrelation  # QAtlas-side matrix-valued diagnostic
+export XXCorrelation, YYCorrelation, ZZCorrelation  # deprecated fused-name constructor functions
 export SpinStructureFactor, DynamicalSpinStructureFactor  # axis-parametric (AbstractQAtlas)
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor  # deprecated static aliases
 export CentralCharge, LuttingerParameter, CorrelationLength, UniversalityClass

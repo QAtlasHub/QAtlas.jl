@@ -282,54 +282,69 @@ Uniform longitudinal susceptibility,
 """
 const SusceptibilityZZ = Susceptibility{(:z, :z)}
 
-# ─── Real-space two-point correlators ───────────────────────────────────
-#
-# `XXCorrelation` / `YYCorrelation` / `ZZCorrelation` all carry a `mode`
-# field so the same type dispatches static / dynamic / light-cone / …
-# variants.  A model may implement only a subset of modes; `fetch`
-# methods should error explicitly for unsupported modes.
+# Real-space two-point correlators adopt AbstractQAtlas's parametric quantities
+# (#734): SpinCorrelation{A,B} (:static, full ⟨SS⟩), ConnectedSpinCorrelation{A,B}
+# (:connected, ⟨SS⟩_c), and DynamicalCorrelation{(A,B)} (:dynamic, retarded
+# ⟨S(t)S⟩).  The :lightcone mode is a matrix-valued numerical diagnostic and
+# stays QAtlas-side as `LightconeSpinCorrelation{A,B}` below.  The fused
+# `ZZ/XX/YYCorrelation` names become deprecated constructor functions mapping
+# the old `mode` kwarg onto these types (the type is parametric, so no `const`
+# alias is possible; dispatch on `ZZCorrelation{:m}` is removed).
 
 """
-    ZZCorrelation{M}() <: AbstractQuantity
-    ZZCorrelation(; mode::Symbol = :static)
+    LightconeSpinCorrelation{A,B}() <: AbstractTwoPointCorrelation
+    LightconeSpinCorrelation(a::Symbol, b::Symbol)
 
-Real-space 2-point correlator `⟨σᶻ_i σᶻ_j⟩`.  The mode `M::Symbol` is
-a phantom type parameter so dispatch can specialise on it.
-
-Supported `mode` values (by convention; individual models need only
-implement the ones they support):
-
-- `:static` — equal-time, thermal or zero-temperature value
-- `:connected` — `⟨σᶻ_i σᶻ_j⟩ − ⟨σᶻ_i⟩⟨σᶻ_j⟩`
-- `:dynamic` — retarded real-time correlator `⟨σᶻ_i(t) σᶻ_j(0)⟩`
-- `:lightcone` — space-time spreading `⟨σᶻ_i(t) σᶻ_j(0)⟩` as a
-  matrix over (site, time)
-
-The companion type for Fourier-space structure factors is
-[`ZZStructureFactor`](@ref), kept separate because it carries (q, ω)
-arguments instead of (i, j, t).
+Light-cone spreading of the real-time spin correlator `⟨S^A_i(t) S^B_j(0)⟩`
+as a **matrix over (site, time)** — a QAtlas-specific numerical diagnostic
+(returns an array, not a scalar), kept here rather than in AbstractQAtlas's
+scalar-quantity vocabulary.  `LightconeSpinCorrelation(:z, :z)` is the σᶻ cone.
 """
-struct ZZCorrelation{M} <: AbstractTwoPointCorrelation end
-ZZCorrelation(; mode::Symbol=:static) = ZZCorrelation{mode}()
+struct LightconeSpinCorrelation{A,B} <: AbstractTwoPointCorrelation
+    function LightconeSpinCorrelation{A,B}() where {A,B}
+        (A isa Symbol && B isa Symbol) ||
+            error("LightconeSpinCorrelation axes must be Symbols, got ($A, $B)")
+        return new{A,B}()
+    end
+end
+LightconeSpinCorrelation(a::Symbol, b::Symbol) = LightconeSpinCorrelation{a,b}()
 
-"""
-    XXCorrelation{M}() <: AbstractQuantity
-    XXCorrelation(; mode::Symbol = :static)
-
-Real-space 2-point `⟨σˣ_i σˣ_j⟩` correlator.  See
-[`ZZCorrelation`](@ref) for the `mode` semantics.
-"""
-struct XXCorrelation{M} <: AbstractTwoPointCorrelation end
-XXCorrelation(; mode::Symbol=:static) = XXCorrelation{mode}()
+# Deprecated fused-name constructor functions (#734): map the old `mode` onto
+# the new typed quantities.  New code should use the target types directly.
+function _spin_correlation_by_mode(a::Symbol, b::Symbol, mode::Symbol)
+    mode === :static && return SpinCorrelation(a, b)
+    mode === :connected && return ConnectedSpinCorrelation(a, b)
+    mode === :dynamic && return DynamicalCorrelation(a, b)
+    mode === :lightcone && return LightconeSpinCorrelation(a, b)
+    return error(
+        "unknown correlation mode :$mode; expected :static, :connected, " *
+        ":dynamic, or :lightcone",
+    )
+end
 
 """
-    YYCorrelation{M}() <: AbstractQuantity
-    YYCorrelation(; mode::Symbol = :static)
+    ZZCorrelation(; mode = :static)   (deprecated)
 
-Real-space 2-point `⟨σʸ_i σʸ_j⟩` correlator.
+Deprecated — returns the axis-parametric quantity for `⟨σᶻ σᶻ⟩` in `mode`
+(`:static`→[`SpinCorrelation`](@ref), `:connected`→[`ConnectedSpinCorrelation`](@ref),
+`:dynamic`→[`DynamicalCorrelation`](@ref), `:lightcone`→[`LightconeSpinCorrelation`](@ref)).
+Use those types directly in new code.
 """
-struct YYCorrelation{M} <: AbstractTwoPointCorrelation end
-YYCorrelation(; mode::Symbol=:static) = YYCorrelation{mode}()
+ZZCorrelation(; mode::Symbol=:static) = _spin_correlation_by_mode(:z, :z, mode)
+
+"""
+    XXCorrelation(; mode = :static)   (deprecated)
+
+`⟨σˣ σˣ⟩`; see [`ZZCorrelation`](@ref) for the mode mapping.
+"""
+XXCorrelation(; mode::Symbol=:static) = _spin_correlation_by_mode(:x, :x, mode)
+
+"""
+    YYCorrelation(; mode = :static)   (deprecated)
+
+`⟨σʸ σʸ⟩`; see [`ZZCorrelation`](@ref) for the mode mapping.
+"""
+YYCorrelation(; mode::Symbol=:static) = _spin_correlation_by_mode(:y, :y, mode)
 
 # ─── Fourier-space structure factors (q, ω) ────────────────────────────
 
@@ -1270,9 +1285,13 @@ component(::Type{MagnetizationZ}) = :z
 component(::Type{SusceptibilityXX}) = :xx
 component(::Type{SusceptibilityYY}) = :yy
 component(::Type{SusceptibilityZZ}) = :zz
-component(::Type{<:XXCorrelation}) = :xx
-component(::Type{<:YYCorrelation}) = :yy
-component(::Type{<:ZZCorrelation}) = :zz
+# Correlators are now axis-parametric (#734): the component is the diagonal
+# axis pair read off the type parameters (e.g. SpinCorrelation{:z,:z} -> :zz),
+# preserving the old fused-name mapping across all four correlator types.
+component(::Type{<:SpinCorrelation{A,B}}) where {A,B} = Symbol(A, B)
+component(::Type{<:ConnectedSpinCorrelation{A,B}}) where {A,B} = Symbol(A, B)
+component(::Type{<:LightconeSpinCorrelation{A,B}}) where {A,B} = Symbol(A, B)
+component(::Type{<:DynamicalCorrelation{I}}) where {I} = Symbol(I...)
 component(::Type{XXStructureFactor}) = :xx
 component(::Type{YYStructureFactor}) = :yy
 component(::Type{ZZStructureFactor}) = :zz

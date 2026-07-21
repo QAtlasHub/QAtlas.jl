@@ -58,17 +58,17 @@ end
 
 @testset "query: per-scheme dynamical tagging (dynamic correlations / quench)" begin
     da = QAtlas.dynamical_axis
-    @test da(QAtlas.ZZCorrelation{:dynamic}) === :dynamic
-    @test da(QAtlas.ZZCorrelation{:lightcone}) === :dynamic
-    @test da(QAtlas.ZZCorrelation{:static}) === :static
-    @test da(QAtlas.ZZCorrelation{:connected}) === :static
+    @test da(QAtlas.DynamicalCorrelation{(:z, :z)}) === :dynamic
+    @test da(QAtlas.LightconeSpinCorrelation{:z,:z}) === :dynamic
+    @test da(QAtlas.SpinCorrelation{:z,:z}) === :static
+    @test da(QAtlas.ConnectedSpinCorrelation{:z,:z}) === :static
     @test da(QAtlas.VonNeumannEntropy{:quench}) === :dynamic
     @test da(QAtlas.VonNeumannEntropy{:equilibrium}) === :static
     @test da(QAtlas.LoschmidtEcho{:amplitude}) === :dynamic
     # search now surfaces the dynamic hubs; equilibrium schemes stay out
     dyn = QAtlas.search(; dynamical=:dynamic)
     @test dyn.available
-    @test any(h -> occursin("Correlation", h.quantity), dyn.hits)   # e.g. XXCorrelation{:dynamic}
+    @test any(h -> occursin("Correlation", h.quantity), dyn.hits)   # e.g. DynamicalCorrelation{(:x, :x)}
     @test !any(
         h -> endswith(h.quantity, "{:static}") || endswith(h.quantity, "{:connected}"),
         dyn.hits,

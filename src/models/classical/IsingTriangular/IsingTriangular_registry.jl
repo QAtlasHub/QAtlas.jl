@@ -95,7 +95,7 @@
 
 @register(
     IsingTriangular,
-    ZZCorrelation{:static},
+    SpinCorrelation{:z,:z},
     Infinite,
     method=:analytic,
     reliability=:high,

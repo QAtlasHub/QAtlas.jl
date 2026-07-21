@@ -125,13 +125,29 @@ backend_available(::AbstractDiffBackend) = false
 
 The tolerance an edge should use when its derived input came from `backend`.
 
-This is not a style preference.  Forward-mode AD is exact to round-off, so an
-AD-supplied identity can be held to the same `1e-6` the hand-written model
-tests already use.  A central difference carries truncation error — measured at
-`5.4e-5` relative against the analytic entropy on CurieWeissIsing — so holding
-an FD-supplied check to `1e-6` would manufacture failures that say nothing
-about the physics.  Returning the tolerance from the backend keeps the two from
-being confused.
+Forward-mode AD is exact to round-off **for a fetch that is a closed form, a
+quadrature or a dense diagonalization**, so an AD-supplied identity there can be
+held to the same `1e-6` the hand-written model tests use.  A central difference
+carries truncation error — measured at `5.4e-5` relative against the analytic
+entropy on CurieWeissIsing — so holding an FD-supplied check to `1e-6` would
+manufacture failures that say nothing about the physics.
+
+!!! warning "A tolerance cannot rescue a wrong derivative"
+    AD is not uniformly the better answer.  Through an **iterative solve** it
+    differentiates the iteration rather than the solution, and the derivative
+    can be converged nowhere near as well as the value.  Measured on
+    CurieWeissIsing's ordered phase, where the magnetization solves
+    `m = tanh(βJm)`:
+
+    | T | fetched `C` | AD `T·dS/dT` | FD `T·dS/dT` |
+    |---|---|---|---|
+    | 0.5 | 0.36594804 | **−0.01267792** | 0.36594804 |
+    | 1/3 | 0.09345921 | **−0.00438224** | 0.09345921 |
+
+    AD gets the SIGN wrong while FD is exact to eight digits.  No choice of
+    `rtol` distinguishes that from a physics failure, which is why
+    [`derivative_agreement`](@ref) exists: the defence is cross-checking two
+    backends, not tightening a tolerance.
 """
 default_rtol(::FiniteDifference) = 1e-3
 default_rtol(::AbstractDiffBackend) = 1e-6
@@ -142,6 +158,11 @@ default_rtol(::AbstractDiffBackend) = 1e-6
 The most accurate backend currently loaded: ForwardDiff, else Zygote, else a
 [`FiniteDifference`](@ref).  With `allow_fd = false` it throws instead of
 falling back, for a caller that must not silently change accuracy class.
+
+"Most accurate" is the ranking for the fetches this atlas is mostly made of.
+It is NOT a guarantee: see the warning on [`default_rtol`](@ref) for a hub where
+AD is qualitatively wrong and the finite difference is right.  A caller that
+cares should use [`derivative_agreement`](@ref) rather than trusting the rank.
 """
 function preferred_backend(; allow_fd::Bool=true)
     for b in (ForwardDiffBackend(), ZygoteBackend())
@@ -154,3 +175,67 @@ function preferred_backend(; allow_fd::Bool=true)
         "fallback.",
     )
 end
+
+"""
+    derivative_agreement(f, x; primary = preferred_backend()) -> (value, backend, trusted, detail)
+
+`df/dx` from `primary`, **cross-checked against an independent differentiation
+method**, because the failure mode that matters here is not imprecision but a
+silently wrong answer.
+
+Returns the primary value, the backend that produced it, whether the two methods
+agree to the cross-checking method's own tolerance, and a human-readable reason
+when they do not.
+
+Why this and not a tighter tolerance: forward-mode AD through an iterative solve
+differentiates the iteration, not the solution, and can come back with the wrong
+sign (measured — see [`default_rtol`](@ref)).  A disagreement between two
+methods is evidence about the METHOD, not about the physics, so a caller should
+report it as "cannot evaluate here", never as a failed physical identity.  It
+also catches a second case for free: at a phase transition the quantity is
+non-differentiable, a central difference straddles the jump while AD takes a
+one-sided limit, and the two disagree — which is exactly the right verdict.
+
+With only one backend available there is nothing to cross-check against, so
+`trusted` is `true` and `detail` says so; the caller keeps whatever confidence
+the single method deserves.
+"""
+function derivative_agreement(f, x::Real; primary::AbstractDiffBackend=preferred_backend())
+    value = derivative(primary, f, x)
+    primary isa FiniteDifference && return (value, primary, true, "single backend (FD)")
+    cross = FiniteDifference()
+    local other
+    try
+        other = derivative(cross, f, x)
+    catch err
+        return (value, primary, true, "cross-check unavailable: $(sprint(showerror, err))")
+    end
+    scale = max(abs(value), abs(other), eps())
+    rel = abs(value - other) / scale
+    rel ≤ default_rtol(cross) && return (value, primary, true, "agrees with FD")
+    return (
+        value,
+        primary,
+        false,
+        "derivative not reproducible across methods: " *
+        "$(nameof(typeof(primary)))=$(value) vs FiniteDifference=$(other) " *
+        "(rel $(round(rel; sigdigits=3))). Typical causes: an iterative solve AD " *
+        "differentiates through, or a non-differentiable point such as a phase " *
+        "transition.",
+    )
+end
+
+"""
+    _primal(x) -> Real
+
+The value of `x` with any AD tag stripped; the identity for ordinary numbers.
+The ForwardDiff extension specializes it for `Dual`.
+
+This is what lets a fetch built on a NON-DIFFERENTIABLE root-finder still hand
+back an exact derivative: solve on primals, then re-attach the derivative
+analytically (see `_curie_weiss_solve_m`).  Bisection is the motivating case —
+it is numerically excellent and its AD derivative is meaningless, because the
+β-dependence flows through the bracket endpoints and the comparison branches
+rather than through the equation being solved.
+"""
+_primal(x::Real) = x

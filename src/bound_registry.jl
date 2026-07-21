@@ -19,6 +19,19 @@
 # shows up here even when two equally-wrong quantities would still satisfy an
 # identity between themselves.
 
+# Shared by the bound and response registries: the hubs whose finite-T
+# thermodynamics the 1D generator cannot materialize, or that self-declare a
+# validity window.  Same list :gibbs carries — kept in one place so the three
+# edge kinds cannot drift apart on which hubs are honestly out of scope.
+const _THERMO_DERIVATIVE_EXCLUSIONS = [
+    (IsingSquare, PBC) => "2D PBC fetches take Lx/Ly kwargs, not bc.N — generator finite-size materialization is 1D-only",
+    (KitaevHoneycomb, OBC) => "2D OBC fetches take Lx/Ly kwargs, not bc.N — generator finite-size materialization is 1D-only",
+    IsingTriangular => "default J > 0 is the frustrated AFM branch (no Houtappel closed form); finite-T requires J < 0",
+    AKLT1D => "finite-β canonical thermodynamics supports β = ∞ only (HTSE is a separate :approx scheme, #506)",
+    Heisenberg1D => "Infinite-BC thermodynamics is a c=1 CFT low-T expansion valid only for β > 5/J; it warns and returns NaN on this sweep (#521 Path A will replace it)",
+    HaldaneShastry => "Infinite-BC thermodynamics returns NaN outside its low-T validity window, same CFT-expansion guard as Heisenberg1D",
+]
+
 # ── C_v ≥ 0 ───────────────────────────────────────────────────────────
 # Thermodynamic stability: the specific heat is a variance (β²·Var(E)) and so
 # cannot be negative for any equilibrium state at any β.  Exact at every N, so
@@ -28,18 +41,7 @@
     inequality = SpecificHeatPositivity,
     sweep = (beta=[0.5, 1.0, 2.0],),
     finite_N = 6,
-    exclusions = [
-        # 2D fetches take Lx/Ly rather than bc.N — the generator's finite-N
-        # materialization is 1D-only (same gap :gibbs records).
-        (IsingSquare, PBC) => "2D PBC fetches take Lx/Ly kwargs, not bc.N — generator finite-size materialization is 1D-only",
-        (KitaevHoneycomb, OBC) => "2D OBC fetches take Lx/Ly kwargs, not bc.N — generator finite-size materialization is 1D-only",
-        # Physics-of-the-branch / validity-range gaps, all self-declared by the
-        # fetch itself (it errors or warns and returns NaN rather than lying).
-        IsingTriangular => "default J > 0 is the frustrated AFM branch (no Houtappel closed form); finite-T requires J < 0",
-        AKLT1D => "finite-β canonical thermodynamics supports β = ∞ only (HTSE is a separate :approx scheme, #506)",
-        Heisenberg1D => "SpecificHeat at Infinite is a c=1 CFT low-T expansion valid only for β > 5/J; it warns and returns NaN on this sweep (#521 Path A will replace it)",
-        HaldaneShastry => "SpecificHeat at Infinite returns NaN outside its low-T validity window, same CFT-expansion guard as Heisenberg1D",
-    ],
+    exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,
     notes = "C_v = β² Var(E) ≥ 0 — thermodynamic stability; holds at every N and β.",
 )
 
@@ -53,8 +55,6 @@
     inequality = SusceptibilityPositivity,
     sweep = (beta=[0.5, 1.0],),
     finite_N = 6,
-    exclusions = [
-        AKLT1D => "finite-β canonical thermodynamics supports β = ∞ only (HTSE is a separate :approx scheme, #506)",
-    ],
+    exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,
     notes = "χ_αα = β Var(M_α) ≥ 0 for every axis pair — thermodynamic stability.",
 )

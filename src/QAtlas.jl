@@ -63,6 +63,8 @@ using AbstractQAtlas:
     AbstractRelation,
     EntropyResponse,
     SpecificHeatFromEntropy,
+    GibbsHelmholtz,
+    SpecificHeatFDT,
     slack,
     variable_slots,
     # the inequalities bound_registry.jl declares edges for

@@ -40,10 +40,20 @@
 # statement of the SAME finite system, exact at every N, so small N loses no
 # coverage — while N=8 put the spin-1 hubs at 3^8 = 6561-dimensional dense ED
 # per fetch and made the generated suite CI's long pole (52 min → seconds).
+# The ARITHMETIC is not restated here: it is AbstractQAtlas's `FreeEnergyLegendre`
+# (`F - (U - S/β)`, relations/fundamental.jl), and this edge asks it to derive `f`
+# from the hub's own `e` and `s`.  That makes the generated check the conformance
+# statement the split was for (#734): QAtlas's fetched FreeEnergy must equal what
+# the universal relation implies from QAtlas's fetched Energy and ThermalEntropy.
+# `solve` is generic over any variable the relation is affine in, so there is no
+# QAtlas-side rearrangement to drift out of sync.  Both sides stay physical
+# numbers (fetched f vs derived f), keeping failures diagnosable — a residual-vs-0
+# pair would not.  Granularity: the relation is type-keyed per-site, matching the
+# `Energy{:per_site}` participant below.
 @identity(
     :gibbs,
     quantities = (e=Energy{:per_site}, f=FreeEnergy, s=ThermalEntropy),
-    check = (v, p) -> (v.e, v.f + v.s / p.beta),
+    check = (v, p) -> (v.f, solve(FreeEnergyLegendre(), Val(:F); U=v.e, S=v.s, β=p.beta)),
     sweep = (beta=[0.5, 1.0, 2.0],),
     finite_N = 6,
     exclusions = [

@@ -174,6 +174,7 @@ include("core/about.jl")     # model description cards (summary + Hamiltonian)
 # Constraint-edge layer (#697): one shared kernel (store registration +
 # generated-check protocol), then each edge type as a thin instantiation.
 include("core/constraints.jl")  # kernel: EDGE_STORES + GeneratedCheck protocol
+include("core/derivative.jl")    # derived-input suppliers (AD via ext, FD fallback)
 include("core/symmetry.jl")     # @symmetry node attributes + LSM checks (C10)
 include("core/identity.jl")      # @identity quantity<->quantity edges (C11)
 include("core/bound.jl")         # @bound: the inequality sibling (#734 Phase B)
@@ -229,6 +230,10 @@ export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export EdwardsAndersonParameter, SpinGlassSusceptibility  # spin-glass order (#730)
 export BoundEdge, BOUNDS, bound!, @bound  # inequality edges (core/bound.jl)
+# Derived-input suppliers (core/derivative.jl).  The AD backends are package
+# EXTENSIONS — neither ForwardDiff nor Zygote is a hard dependency.
+export AbstractDiffBackend, FiniteDifference, ForwardDiffBackend, ZygoteBackend
+export derivative, backend_available, preferred_backend, default_rtol
 export QuenchEntanglementEntropy  # QAtlas-side post-quench S(ℓ,t) (was VonNeumannEntropy{:quench})
 export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ

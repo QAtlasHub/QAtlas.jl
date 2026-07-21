@@ -50,10 +50,23 @@ using AbstractQAtlas:
     # Relations layer (#734 Phase B): the universal identities themselves, so an
     # @identity edge can delegate its arithmetic instead of restating it.
     FreeEnergyLegendre,
-    solve
+    solve,
+    # ...and the macros (#730), which let QAtlas HOST the model-specific
+    # relations AbstractQAtlas purged as non-universal, in that same registry
+    # and behind the same verbs.  The transport pair is type-keyed onto the
+    # carrier quantities ABQ kept.
+    @relation,
+    @inequality,
+    CarrierDensity,
+    EffectiveMass,
+    HallCoefficient,
+    Mobility
 # `native_energy_granularity` is extended by bare `native_energy_granularity(::M, ::BC) = …`
 # methods in model files, which `using` forbids ("must be explicitly imported to be
 # extended"); it must therefore come in via `import` (#734).
+# The module name itself, so `__init__` can reach AbstractQAtlas's relation
+# registry (`using ...: name` binds names, not the module).
+using AbstractQAtlas: AbstractQAtlas
 import AbstractQAtlas: native_energy_granularity
 # `fetch` is AbstractQAtlas's generic function; QAtlas implements the concrete
 # `(model, quantity, bc)` methods (bare-extended in model files, hence `import`
@@ -205,6 +218,7 @@ export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
+export EdwardsAndersonParameter, SpinGlassSusceptibility  # spin-glass order (#730)
 export QuenchEntanglementEntropy  # QAtlas-side post-quench S(ℓ,t) (was VonNeumannEntropy{:quench})
 export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ
@@ -503,6 +517,7 @@ include("reduces_registry.jl")
 # and quantity types; the identity family validation reads REGISTRY).
 include("symmetry_registry.jl")
 include("identity_registry.jl")
+include("relations/model_specific.jl")   # #730: model-specific relations, hosted here
 include("duality_registry.jl")
 include("limits_registry.jl")
 
@@ -557,6 +572,25 @@ using PrecompileTools: @setup_workload, @compile_workload
             fetch(m, SF, OBC(8); beta=1.0, q=0.0)
         end
     end
+end
+
+# ── Load-time relation re-registration (#730) ──────────────────────────────
+#
+# `@relation` inserts into AbstractQAtlas's `_RELATION_REGISTRY` as a top-level
+# SIDE EFFECT on another module's state.  That effect is not serialized into our
+# precompiled image and a precompiled module body is never re-executed, so on a
+# fresh `using QAtlas` the relations declared in src/relations/model_specific.jl
+# would exist as working types while being absent from `all_relations()` and
+# `relations_constraining(...)`.  AbstractQAtlas documents this for downstream
+# packages and prescribes exactly this remedy.  The `isa` guard keeps a
+# non-precompiled dev session (where the original push DID take effect) from
+# registering everything twice.
+function __init__()
+    for r in MODEL_SPECIFIC_RELATIONS
+        any(x -> x isa typeof(r), AbstractQAtlas._RELATION_REGISTRY) ||
+            push!(AbstractQAtlas._RELATION_REGISTRY, r)
+    end
+    return nothing
 end
 
 end # module QAtlas

@@ -24,6 +24,7 @@ const ALL_DIRS = [
     "models/quantum/misc/",
     "models/quantum/tightbinding/",
     "identities/",
+    "relations/",
     "generated/",
     "lint/",
     "verification/tfim_ising/",

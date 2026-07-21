@@ -102,6 +102,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/CriticalExponents/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/CriticalTemperature/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/DynamicLocalization/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/DynamicalSpinStructureFactor/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/EdgeModeEnergy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/Energy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/EnergyLocal/</loc></url>
@@ -219,6 +220,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_UniversalityClass_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_VonNeumannEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_ConformalTower_PBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_DynamicalSpinStructureFactor_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_EnergyLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_FreeEnergy_Infinite/</loc></url>
@@ -245,7 +247,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_UniversalityClass_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_VonNeumannEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_VonNeumannEntropy_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_ZZStructureFactor_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_CorrelationLength_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite/</loc></url>
@@ -392,6 +393,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_ConformalTower_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_CorrelationLength_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_CriticalExponents_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_DynamicalSpinStructureFactor_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TFIM_Energy_PBC/</loc></url>
@@ -497,6 +499,7 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Universality_UniversalityClass_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XCube_GroundStateDegeneracy_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_CentralCharge_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_DynamicalSpinStructureFactor_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_EnergyLocal_OBC/</loc></url>
@@ -527,7 +530,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_UniversalityClass_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_VonNeumannEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_VonNeumannEntropy_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_ZZStructureFactor_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XYh1D_EnergyLocal_OBC/</loc></url>

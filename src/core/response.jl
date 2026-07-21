@@ -268,7 +268,29 @@ function response_checks()
                                 fetch(m, _quantity_instance(d.quantity), bc; kw(x)...),
                                 x,
                             )
-                        val, _, trusted, why = derivative_agreement(g, x0; primary=backend)
+                        # A fetch can be non-differentiable by the chosen backend even
+                        # when its signature says `::Real`: some implementations narrow to
+                        # Float64 internally, and an AD dual then dies on a
+                        # `MethodError(Float64, Dual)`.  (Measured: AKLT2D and Cluster1D
+                        # do this for Energy{:per_site}.)  That is a fact about the
+                        # METHOD, exactly like a cross-check disagreement, so it becomes a
+                        # visible skip rather than an :error.
+                        #
+                        # Deliberately NOT a fallback to finite differences: this edge's
+                        # rtol was computed for `backend` before the run, so silently
+                        # substituting a lower-accuracy method would report an FD result
+                        # at an AD tolerance.  Scoped to the derivative alone — a throw
+                        # from the subject fetch or from `solve` is a real error and still
+                        # surfaces as one.
+                        local val, trusted, why
+                        try
+                            val, _, trusted, why = derivative_agreement(g, x0; primary=backend)
+                        catch err
+                            return _skip_outcome(
+                                "$(n): not differentiable by $(nameof(typeof(backend))) " *
+                                "— $(sprint(showerror, err))",
+                            )
+                        end
                         trusted || return _skip_outcome("$(n): $(why)")
                         args[n] = d.then(val)
                     end

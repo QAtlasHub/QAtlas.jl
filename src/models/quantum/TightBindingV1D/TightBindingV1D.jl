@@ -233,30 +233,64 @@ end
     return βε > 0 ? exp(-βε) / (1 + exp(-βε)) : 1 / (1 + exp(βε))
 end
 
-function _tbv1d_thermo_infinite(quantity::Symbol, t::Real, μ::Real, β::Real)
-    if quantity === :free_energy
-        integrand = k -> _tbv1d_log1pexp(-β * _tbv1d_dispersion(k, t, μ))
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return -val / (π * β)
-    elseif quantity === :entropy
-        integrand = k -> begin
-            εk = _tbv1d_dispersion(k, t, μ)
-            y = β * εk
-            _tbv1d_log1pexp(-y) + y * _tbv1d_nF(y)
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return val / π
-    elseif quantity === :specific_heat
-        integrand = k -> begin
-            εk = _tbv1d_dispersion(k, t, μ)
-            n = _tbv1d_nF(β * εk)
-            εk^2 * n * (1 - n)
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return β^2 * val / π
-    else
-        error("Unknown TightBindingV1D thermal quantity: $quantity")
-    end
+# ── Type-dispatched integrands ───────────────────────────────────────────────
+#
+# The quantity reaches these kernels as a type in the AbstractQAtlas vocabulary.
+# Selecting the integrand from a `Symbol` discarded that, leaving `integrand` a
+# union of anonymous closure types at the `quadgk` call site, so the adaptive
+# quadrature machinery was instantiated once per branch of the union.  A named
+# integrand struct dispatched on the quantity keeps the static information the
+# vocabulary already carries.
+#
+# The integrand expressions and the `quadgk` calls are unchanged, so the values
+# are unchanged.
+
+# Each field keeps its own type; see the note on `_SSHIntegrand` for why these
+# are not promoted to a common one.
+struct _TBV1DIntegrand{Q,T<:Real,M<:Real,B<:Real}
+    t::T
+    μ::M
+    β::B
+end
+
+function _TBV1DIntegrand{Q}(t::Real, μ::Real, β::Real) where {Q}
+    return _TBV1DIntegrand{Q,typeof(t),typeof(μ),typeof(β)}(t, μ, β)
+end
+
+@inline (g::_TBV1DIntegrand{FreeEnergy})(k) =
+    _tbv1d_log1pexp(-g.β * _tbv1d_dispersion(k, g.t, g.μ))
+
+@inline function (g::_TBV1DIntegrand{ThermalEntropy})(k)
+    y = g.β * _tbv1d_dispersion(k, g.t, g.μ)
+    return _tbv1d_log1pexp(-y) + y * _tbv1d_nF(y)
+end
+
+@inline function (g::_TBV1DIntegrand{SpecificHeat})(k)
+    εk = _tbv1d_dispersion(k, g.t, g.μ)
+    n = _tbv1d_nF(g.β * εk)
+    return εk^2 * n * (1 - n)
+end
+
+_tbv1d_quad(g::_TBV1DIntegrand) = first(quadgk(g, 0.0, π; rtol=1e-10))
+
+"""
+    _tbv1d_thermo_infinite(quantity, t, μ, β) -> Real
+
+Per-site thermodynamic potential of the infinite V = 0 chain, dispatched on the
+concrete quantity type.
+"""
+function _tbv1d_thermo_infinite end
+
+function _tbv1d_thermo_infinite(::FreeEnergy, t::Real, μ::Real, β::Real)
+    return -_tbv1d_quad(_TBV1DIntegrand{FreeEnergy}(t, μ, β)) / (π * β)
+end
+
+function _tbv1d_thermo_infinite(::ThermalEntropy, t::Real, μ::Real, β::Real)
+    return _tbv1d_quad(_TBV1DIntegrand{ThermalEntropy}(t, μ, β)) / π
+end
+
+function _tbv1d_thermo_infinite(::SpecificHeat, t::Real, μ::Real, β::Real)
+    return β^2 * _tbv1d_quad(_TBV1DIntegrand{SpecificHeat}(t, μ, β)) / π
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -277,7 +311,7 @@ inverse temperature `β > 0`, currently implemented only at `V = 0`:
 """
 function fetch(
     m::TightBindingV1D,
-    ::FreeEnergy,
+    q::FreeEnergy,
     ::Infinite;
     beta::Real,
     t::Real=m.t,
@@ -298,7 +332,7 @@ function fetch(
             ),
         )
     end
-    return _tbv1d_thermo_infinite(:free_energy, t, μ, beta)
+    return _tbv1d_thermo_infinite(q, t, μ, beta)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -318,7 +352,7 @@ Per-site Gibbs entropy of the V = 0 tight-binding t-V chain:
 """
 function fetch(
     m::TightBindingV1D,
-    ::ThermalEntropy,
+    q::ThermalEntropy,
     ::Infinite;
     beta::Real,
     t::Real=m.t,
@@ -338,7 +372,7 @@ function fetch(
             ),
         )
     end
-    return _tbv1d_thermo_infinite(:entropy, t, μ, beta)
+    return _tbv1d_thermo_infinite(q, t, μ, beta)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -359,7 +393,7 @@ tight-binding t-V chain:
 """
 function fetch(
     m::TightBindingV1D,
-    ::SpecificHeat,
+    q::SpecificHeat,
     ::Infinite;
     beta::Real,
     t::Real=m.t,
@@ -379,5 +413,5 @@ function fetch(
             ),
         )
     end
-    return _tbv1d_thermo_infinite(:specific_heat, t, μ, beta)
+    return _tbv1d_thermo_infinite(q, t, μ, beta)
 end

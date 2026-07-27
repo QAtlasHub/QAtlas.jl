@@ -245,15 +245,16 @@ end
 # The integrand expressions and the `quadgk` calls are unchanged, so the values
 # are unchanged.
 
-struct _TBV1DIntegrand{Q,T<:Real}
+# Each field keeps its own type; see the note on `_SSHIntegrand` for why these
+# are not promoted to a common one.
+struct _TBV1DIntegrand{Q,T<:Real,M<:Real,B<:Real}
     t::T
-    μ::T
-    β::T
+    μ::M
+    β::B
 end
 
 function _TBV1DIntegrand{Q}(t::Real, μ::Real, β::Real) where {Q}
-    tp, μp, βp = promote(t, μ, β)
-    return _TBV1DIntegrand{Q,typeof(tp)}(tp, μp, βp)
+    return _TBV1DIntegrand{Q,typeof(t),typeof(μ),typeof(β)}(t, μ, β)
 end
 
 @inline (g::_TBV1DIntegrand{FreeEnergy})(k) =

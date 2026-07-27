@@ -316,15 +316,21 @@ end
 # The integrand expressions and the `quadgk` calls are unchanged, so the values
 # are unchanged.
 
-struct _SSHIntegrand{Q,T<:Real}
-    v::T
-    w::T
-    beta::T
+# Each field keeps its OWN type, exactly as the closures this replaced captured
+# them.  Promoting them to a common type would drag the model parameters up to
+# whatever `beta` is — and when `beta` is a `ForwardDiff.Dual` (the derived-input
+# suppliers differentiate through these), `v`/`w` become Duals too and no longer
+# match `_ssh_dispersion(::Real, ::Float64, ::Float64)`.  Even where the
+# dispersion is generic enough not to error, promoting runs the whole quadrature
+# in Dual arithmetic for parameters that carry no derivative information.
+struct _SSHIntegrand{Q,V<:Real,W<:Real,B<:Real}
+    v::V
+    w::W
+    beta::B
 end
 
 function _SSHIntegrand{Q}(v::Real, w::Real, beta::Real) where {Q}
-    vp, wp, bp = promote(v, w, beta)
-    return _SSHIntegrand{Q,typeof(vp)}(vp, wp, bp)
+    return _SSHIntegrand{Q,typeof(v),typeof(w),typeof(beta)}(v, w, beta)
 end
 
 @inline function (g::_SSHIntegrand{FreeEnergy})(k)

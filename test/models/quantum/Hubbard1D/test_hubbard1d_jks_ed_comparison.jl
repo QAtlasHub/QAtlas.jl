@@ -19,14 +19,14 @@ function _ed_hubbard_chain(
         e = 0.0
         for i in 1:N
             su, sd = 2*(i-1), 2*(i-1)+1
-            nu = (s >> su) & 1;
+            nu = (s >> su) & 1
             nd = (s >> sd) & 1
             e += U*nu*nd - μ*(nu+nd)
         end
         H_diag[s + 1] = e
     end
-    rows = Int[];
-    cols = Int[];
+    rows = Int[]
+    cols = Int[]
     vals = Float64[]
     bonds = pbc ? collect(1:N) : collect(1:(N - 1))
     for i in bonds
@@ -42,11 +42,11 @@ function _ed_hubbard_chain(
                     sg2 = iseven(c2) ? 1 : -1
                     s3 = s2 | (1 << si)
                     sg = sg1*sg2
-                    push!(rows, s3+1);
-                    push!(cols, s+1);
+                    push!(rows, s3+1)
+                    push!(cols, s+1)
                     push!(vals, -t*sg)
-                    push!(rows, s+1);
-                    push!(cols, s3+1);
+                    push!(rows, s+1)
+                    push!(cols, s3+1)
                     push!(vals, -t*sg)
                 end
             end
@@ -54,8 +54,7 @@ function _ed_hubbard_chain(
     end
     H = Matrix(sparse(rows, cols, vals, dim, dim))
     for i in 1:dim
-        ;
-        H[i, i] += H_diag[i];
+        H[i, i] += H_diag[i]
     end
     eigs = eigvals(Hermitian(H))
     emin = minimum(eigs)

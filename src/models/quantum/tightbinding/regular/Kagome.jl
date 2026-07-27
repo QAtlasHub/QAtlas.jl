@@ -49,10 +49,9 @@ The spectrum exhibits a dispersionless flat band at E = +2t touching the
 lower dispersive bands at the Γ-point.
 """
 struct Kagome <: AbstractQAtlasModel
-    ;
-    t::Float64;
-    Lx::Int;
-    Ly::Int;
+    t::Float64
+    Lx::Int
+    Ly::Int
 end
 Kagome(; t::Real=1.0, Lx::Integer=0, Ly::Integer=0) = Kagome(Float64(t), Int(Lx), Int(Ly))
 

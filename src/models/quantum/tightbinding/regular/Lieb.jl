@@ -59,10 +59,9 @@ The spectrum contains a dispersionless flat band at `E = 0` for every
 momentum, with an additional three-fold band touching at the M-point.
 """
 struct Lieb <: AbstractQAtlasModel
-    ;
-    t::Float64;
-    Lx::Int;
-    Ly::Int;
+    t::Float64
+    Lx::Int
+    Ly::Int
 end
 Lieb(; t::Real=1.0, Lx::Integer=0, Ly::Integer=0) = Lieb(Float64(t), Int(Lx), Int(Ly))
 

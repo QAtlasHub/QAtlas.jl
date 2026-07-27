@@ -66,15 +66,15 @@ using QAtlas.Hubbard1DJKSNLIE:
     @testset "FE evaluator eq (49) third form integrand uses /c factor" begin
         # Smoke: changing only c (not cbar) should change f_jks via /c factor.
         grid = JKSContourGrid(16, 1.0; x_max=2.0)
-        aux1 = JKSAuxFunctions(16);
-        fill!(aux1.c, ComplexF64(1.0));
-        fill!(aux1.c_bar, ComplexF64(1.0));
-        fill!(aux1.b, ComplexF64(1.0));
+        aux1 = JKSAuxFunctions(16)
+        fill!(aux1.c, ComplexF64(1.0))
+        fill!(aux1.c_bar, ComplexF64(1.0))
+        fill!(aux1.b, ComplexF64(1.0))
         fill!(aux1.b_bar, ComplexF64(1.0))
-        aux2 = JKSAuxFunctions(16);
-        fill!(aux2.c, ComplexF64(0.5));
-        fill!(aux2.c_bar, ComplexF64(1.0));
-        fill!(aux2.b, ComplexF64(1.0));
+        aux2 = JKSAuxFunctions(16)
+        fill!(aux2.c, ComplexF64(0.5))
+        fill!(aux2.c_bar, ComplexF64(1.0))
+        fill!(aux2.b, ComplexF64(1.0))
         fill!(aux2.b_bar, ComplexF64(1.0))
         f1 = free_energy_jks(aux1, grid, 0.1, 4.0; mu=2.0)
         f2 = free_energy_jks(aux2, grid, 0.1, 4.0; mu=2.0)

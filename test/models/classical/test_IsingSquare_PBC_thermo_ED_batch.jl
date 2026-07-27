@@ -23,10 +23,10 @@ function _brute_ising_thermo(Lx::Int, Ly::Int, J::Real, beta::Real)
         E = 0.0
         for i in 1:Lx, j in 1:Ly
             idx = (i - 1) * Ly + j
-            i2 = i % Lx + 1;
+            i2 = i % Lx + 1
             idx2 = (i2 - 1) * Ly + j
             E += -J * spin[idx] * spin[idx2]
-            j2 = j % Ly + 1;
+            j2 = j % Ly + 1
             idx2 = (i - 1) * Ly + j2
             E += -J * spin[idx] * spin[idx2]
         end

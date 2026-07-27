@@ -9,8 +9,10 @@ on:
   workflow_dispatch:        # manual re-trigger entrypoint
 
 concurrency:
+  # Cancel a PR's superseded runs when it is pushed again; queue (never cancel)
+  # runs on main, where the shards feed the timing-history and evidence jobs.
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: write   # record-timings pushes the orphan ci-timings branch
@@ -21,8 +23,8 @@ jobs:
   # universe.jl, single source of truth + completeness guard).  This job
   # only decides HOW to split: it Longest-Processing-Time bin-packs the
   # universe using the `ci-timings` orphan branch when present, else
-  # falls back to deterministic round-robin.  Change shard count N here
-  # and nowhere else.
+  # falls back to deterministic round-robin.  Change the shard counts in the
+  # `SHARDS` env of the `gen` step below and nowhere else.
   # ───────────────────────────────────────────────────────────────────────────
   plan:
     name: Plan shards
@@ -48,9 +50,24 @@ jobs:
             : > timings.tsv
           fi
       - id: gen
+        env:
+          # The org is on the GitHub Free plan: 20 concurrent jobs for the WHOLE
+          # organisation, shared with every other workflow and every other open
+          # PR.  A 16-way fan-out is therefore never realised on a PR — measured
+          # on run 30241591516 (22 jobs, all green): peak 9 jobs ran at once,
+          # 178.5 min was spent QUEUED against 137.4 min actually running, and
+          # the `All tests passed` gate itself waited 570 s for a slot.  The
+          # extra shards do not shorten the run; they queue, and they crowd out
+          # the cheap required checks that gate the merge.
+          #
+          # So: fan out only as wide as the account can actually run on a PR,
+          # and keep the full 16 for push:main and the nightly job, where
+          # nothing else is competing.
+          SHARDS: ${{ github.event_name == 'pull_request' && '8' || '16' }}
         run: |
           set -euo pipefail
-          N=16
+          N="$SHARDS"
+          echo "Planning $N shards (event=${{ github.event_name }})."
           plan=$(julia test/ci/plan_shards.jl "$N" timings.tsv)
           count=$(jq 'length' <<<"$plan")
           if [ "$count" -lt 1 ]; then

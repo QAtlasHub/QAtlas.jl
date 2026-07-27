@@ -82,15 +82,22 @@ end
 # called with the same limits and tolerance, so the returned values are
 # bit-identical to the Symbol-dispatched implementation.
 
-struct _TFIMIntegrand{Q,T<:Real}
-    J::T
-    h::T
-    β::T
+# Each field keeps its OWN type, as the closures these replaced captured them.
+# Promoting them to a common type drags the model parameters up to whatever `β`
+# is, and `β` arrives as a `ForwardDiff.Dual` whenever the derived-input
+# suppliers differentiate through `fetch` — so the whole quadrature would run in
+# Dual arithmetic for parameters carrying no derivative information, which is
+# the opposite of the point of the type-dispatch sweep.  (In SSH, whose
+# dispersion is declared with `Float64` parameters, the same promotion was an
+# outright MethodError — QAtlas #770, `shard s15`.)
+struct _TFIMIntegrand{Q,TJ<:Real,TH<:Real,TB<:Real}
+    J::TJ
+    h::TH
+    β::TB
 end
 
 function _TFIMIntegrand{Q}(J::Real, h::Real, β::Real) where {Q}
-    Jp, hp, βp = promote(J, h, β)
-    return _TFIMIntegrand{Q,typeof(Jp)}(Jp, hp, βp)
+    return _TFIMIntegrand{Q,typeof(J),typeof(h),typeof(β)}(J, h, β)
 end
 
 # f = -(1/πβ) ∫ log(2 cosh(βΛ/2)) dk
@@ -174,13 +181,13 @@ end
 # was minted inside the outer closure's own specialization, so the inner
 # Gauss-Kronrod machinery was instantiated once per specialization of the outer
 # one.  Naming both integrands breaks that product.
-struct _TFIMNMRInner{T<:Real}
-    J::T
-    h::T
-    β::T
-    η::T
-    λ1::T
-    f1::T
+struct _TFIMNMRInner{TJ<:Real,TH<:Real,TB<:Real,TE<:Real,TL<:Real,TF<:Real}
+    J::TJ
+    h::TH
+    β::TB
+    η::TE
+    λ1::TL
+    f1::TF
 end
 
 @inline function (g::_TFIMNMRInner)(k2)
@@ -190,23 +197,22 @@ end
     return g.f1 * (1.0 - f2) * lorentz
 end
 
-struct _TFIMNMROuter{T<:Real}
-    J::T
-    h::T
-    β::T
-    η::T
+struct _TFIMNMROuter{TJ<:Real,TH<:Real,TB<:Real,TE<:Real}
+    J::TJ
+    h::TH
+    β::TB
+    η::TE
 end
 
 @inline function (g::_TFIMNMROuter)(k1)
     λ1 = _tfim_dispersion(k1, g.J, g.h)
     f1 = _fermi(g.β, λ1)
-    inner = _TFIMNMRInner(promote(g.J, g.h, g.β, g.η, λ1, f1)...)
+    inner = _TFIMNMRInner(g.J, g.h, g.β, g.η, λ1, f1)
     return first(quadgk(inner, 0.0, π; rtol=1e-6))
 end
 
 function _tfim_nmr_relaxation_infinite(J::Real, h::Real, β::Real, η::Real)
-    Jp, hp, βp, ηp = promote(J, h, β, η)
-    val_outer, _ = quadgk(_TFIMNMROuter(Jp, hp, βp, ηp), 0.0, π; rtol=1e-6)
+    val_outer, _ = quadgk(_TFIMNMROuter(J, h, β, η), 0.0, π; rtol=1e-6)
     return val_outer / π^2
 end
 

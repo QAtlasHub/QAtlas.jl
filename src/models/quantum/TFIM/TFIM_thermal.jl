@@ -20,16 +20,18 @@
 # a sum over the N positive BdG quasiparticle energies returned by
 # `_tfim_bdg_spectrum(N, J, h)` in `TFIM.jl`.
 #
-# Quantities exposed via `fetch`:
+# Quantities exposed via `fetch` (the kernels dispatch on the quantity type):
 #
-#   :free_energy              f(β)        = -T log Z / N
-#   :entropy                  s(β)        = β (ε - f)
-#   :specific_heat            c_v(β)      = ∂ε/∂T
-#   :transverse_magnetization m_x(β)      = ⟨σˣ_i⟩
-#   :transverse_susceptibility χ_xx(β)    = β · Var(Σᵢ σˣᵢ) / N
+#   FreeEnergy                f(β)        = -T log Z / N
+#   ThermalEntropy            s(β)        = β (ε - f)
+#   SpecificHeat              c_v(β)      = ∂ε/∂T
+#   Magnetization{:x}         m_x(β)      = ⟨σˣ_i⟩
+#   Susceptibility{(:x,:x)}   χ_xx(β)     = β · Var(Σᵢ σˣᵢ) / N
 #
 # All five are implemented for both `OBC` (per-site, exact at finite N) and
 # `Infinite` (per-site, exact in the thermodynamic limit).
+# `NMRSpinRelaxationRate` is available for both as well, with a Lorentzian
+# broadening `eta`.
 # ─────────────────────────────────────────────────────────────────────────────
 
 using LinearAlgebra: eigvals, Symmetric
@@ -62,96 +64,149 @@ end
 # Thermodynamic potentials — Infinite (per-site)
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# ── Type-dispatched integrands ───────────────────────────────────────────────
+#
+# The quantity is already a TYPE in the AbstractQAtlas vocabulary (`FreeEnergy`,
+# `Magnetization{:x}`, `Susceptibility{(:x,:x)}`, …).  Selecting the integrand
+# from a `Symbol` threw that static information away: `integrand` was inferred
+# as a `Union` of five anonymous closure types, so the whole adaptive-quadrature
+# machinery was instantiated once per branch of that union — and again for every
+# distinct forwarded-`kwargs` NamedTuple type and every element type.  Carrying
+# the quantity type through to the kernel restores the dispatch the vocabulary
+# already provides and makes each kernel type-stable.
+#
+# A named struct is used instead of a closure so the integrand type is shared by
+# every call site rather than minted afresh at each syntactic location.
+#
+# The integrand expressions themselves are unchanged, and `quadgk` is still
+# called with the same limits and tolerance, so the returned values are
+# bit-identical to the Symbol-dispatched implementation.
+
+struct _TFIMIntegrand{Q,T<:Real}
+    J::T
+    h::T
+    β::T
+end
+
+function _TFIMIntegrand{Q}(J::Real, h::Real, β::Real) where {Q}
+    Jp, hp, βp = promote(J, h, β)
+    return _TFIMIntegrand{Q,typeof(Jp)}(Jp, hp, βp)
+end
+
+# f = -(1/πβ) ∫ log(2 cosh(βΛ/2)) dk
+@inline (g::_TFIMIntegrand{FreeEnergy})(k) =
+    _logcosh2(g.β * _tfim_dispersion(k, g.J, g.h) / 2)
+
+# s = (1/π) ∫ [log(2 cosh(βΛ/2)) - (βΛ/2) tanh(βΛ/2)] dk
+@inline function (g::_TFIMIntegrand{ThermalEntropy})(k)
+    x = g.β * _tfim_dispersion(k, g.J, g.h) / 2
+    return _logcosh2(x) - x * tanh(x)
+end
+
+# c_v = (1/π) ∫ (βΛ/2)² sech²(βΛ/2) dk
+@inline function (g::_TFIMIntegrand{SpecificHeat})(k)
+    x = g.β * _tfim_dispersion(k, g.J, g.h) / 2
+    return x^2 * sech(x)^2
+end
+
+# m_x = (2/π) ∫ ((h - J cos k)/Λ) tanh(βΛ/2) dk
+@inline function (g::_TFIMIntegrand{MagnetizationX})(k)
+    A = g.h - g.J * cos(k)
+    Λk = _tfim_dispersion(k, g.J, g.h)
+    return (A / Λk) * tanh(g.β * Λk / 2)
+end
+
+# χ_xx = (2/π) ∫ [ (1/Λ - 4A²/Λ³) tanh(βΛ/2) + (2β A²/Λ²) sech²(βΛ/2) ] dk
+@inline function (g::_TFIMIntegrand{SusceptibilityXX})(k)
+    A = g.h - g.J * cos(k)
+    Λk = _tfim_dispersion(k, g.J, g.h)
+    return (1 / Λk - 4 * A^2 / Λk^3) * tanh(g.β * Λk / 2) +
+           (2 * g.β * A^2 / Λk^2) * sech(g.β * Λk / 2)^2
+end
+
+# The single place the Gauss-Kronrod machinery is instantiated for these paths.
+_tfim_quad(g::_TFIMIntegrand) = first(quadgk(g, 0.0, π; rtol=1e-10))
+
 """
-    _tfim_thermo_infinite(quantity, J, h, β) -> Float64
+    _tfim_thermo_infinite(quantity, J, h, β) -> Real
 
-Compute one of the per-site thermodynamic potentials of the infinite TFIM at
-inverse temperature `β`.  `quantity` is a `Symbol` from
-`(:free_energy, :entropy, :specific_heat, :transverse_magnetization,
- :transverse_susceptibility)`.
-
-The integrals are evaluated via adaptive Gauss-Kronrod quadrature.
+Per-site thermodynamic potential of the infinite TFIM at inverse temperature
+`β`, dispatched on the concrete quantity type.  The integrals are evaluated by
+adaptive Gauss-Kronrod quadrature over the BdG dispersion.
 """
-function _tfim_thermo_infinite(quantity::Symbol, J::Real, h::Real, β::Real; kwargs...)
-    integrand = if quantity === :free_energy
-        # f = -(1/πβ) ∫ log(2 cosh(βΛ/2)) dk
-        k -> begin
-            Λk = _tfim_dispersion(k, J, h)
-            _logcosh2(β * Λk / 2)
-        end
-    elseif quantity === :entropy
-        # s = (1/π) ∫ [log(2 cosh(βΛ/2)) - (βΛ/2) tanh(βΛ/2)] dk
-        k -> begin
-            Λk = _tfim_dispersion(k, J, h)
-            x = β * Λk / 2
-            _logcosh2(x) - x * tanh(x)
-        end
-    elseif quantity === :specific_heat
-        # c_v = (1/π) ∫ (βΛ/2)² sech²(βΛ/2) dk
-        k -> begin
-            Λk = _tfim_dispersion(k, J, h)
-            x = β * Λk / 2
-            x^2 * sech(x)^2
-        end
-    elseif quantity === :transverse_magnetization
-        # m_x = (2/π) ∫ ((h - J cos k)/Λ) tanh(βΛ/2) dk
-        k -> begin
-            A = h - J * cos(k)
-            Λk = _tfim_dispersion(k, J, h)
-            (A / Λk) * tanh(β * Λk / 2)
-        end
-    elseif quantity === :transverse_susceptibility
-        # χ_xx = (2/π) ∫ [ (1/Λ - 4A²/Λ³) tanh(βΛ/2) + (2β A²/Λ²) sech²(βΛ/2) ] dk
-        k -> begin
-            A = h - J * cos(k)
-            Λk = _tfim_dispersion(k, J, h)
-            (1 / Λk - 4 * A^2 / Λk^3) * tanh(β * Λk / 2) +
-            (2 * β * A^2 / Λk^2) * sech(β * Λk / 2)^2
-        end
-    elseif quantity === :nmr_relaxation
-        eta = Float64(get(kwargs, :eta, 0.1))
-        eta > 0 || throw(
-            DomainError(eta, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $eta."),
-        )
-        β > 0 || throw(
-            DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β.")
-        )
-        return _tfim_nmr_relaxation_infinite(J, h, β, eta)
-    else
-        error("Unknown thermal quantity: $quantity")
-    end
+function _tfim_thermo_infinite end
 
-    if quantity === :nmr_relaxation
-        return integrand # already computed relaxation rate
-    end
+function _tfim_thermo_infinite(::FreeEnergy, J::Real, h::Real, β::Real)
+    return -_tfim_quad(_TFIMIntegrand{FreeEnergy}(J, h, β)) / (π * β)
+end
 
-    val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
+function _tfim_thermo_infinite(::ThermalEntropy, J::Real, h::Real, β::Real)
+    return _tfim_quad(_TFIMIntegrand{ThermalEntropy}(J, h, β)) / π
+end
 
-    if quantity === :free_energy
-        return -val / (π * β)
-    elseif quantity === :transverse_magnetization || quantity === :transverse_susceptibility
-        return (2 / π) * val
-    else  # entropy, specific_heat
-        return val / π
-    end
+function _tfim_thermo_infinite(::SpecificHeat, J::Real, h::Real, β::Real)
+    return _tfim_quad(_TFIMIntegrand{SpecificHeat}(J, h, β)) / π
+end
+
+function _tfim_thermo_infinite(::MagnetizationX, J::Real, h::Real, β::Real)
+    return (2 / π) * _tfim_quad(_TFIMIntegrand{MagnetizationX}(J, h, β))
+end
+
+function _tfim_thermo_infinite(::SusceptibilityXX, J::Real, h::Real, β::Real)
+    return (2 / π) * _tfim_quad(_TFIMIntegrand{SusceptibilityXX}(J, h, β))
+end
+
+function _tfim_thermo_infinite(::NMRSpinRelaxationRate, J::Real, h::Real, β::Real, η::Real)
+    η > 0 || throw(DomainError(η, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $η."))
+    β > 0 || throw(DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β."))
+    return _tfim_nmr_relaxation_infinite(J, h, β, η)
+end
+
+# Fermi occupation of a BdG mode, with the λ = 0 zero mode at half filling.
+# `oftype` keeps the branch type-stable (for `Float64` it is the literal `0.5`
+# the previous inline expression returned).
+@inline function _fermi(β::Real, λ::Real)
+    e = exp(-β * λ)
+    return λ > 0 ? e / (1.0 + e) : oftype(e, 0.5)
+end
+
+# The NMR rate is a nested quadrature.  As closures the inner integrand type
+# was minted inside the outer closure's own specialization, so the inner
+# Gauss-Kronrod machinery was instantiated once per specialization of the outer
+# one.  Naming both integrands breaks that product.
+struct _TFIMNMRInner{T<:Real}
+    J::T
+    h::T
+    β::T
+    η::T
+    λ1::T
+    f1::T
+end
+
+@inline function (g::_TFIMNMRInner)(k2)
+    λ2 = _tfim_dispersion(k2, g.J, g.h)
+    f2 = _fermi(g.β, λ2)
+    lorentz = g.η / (π * ((g.λ1 - λ2)^2 + g.η^2))
+    return g.f1 * (1.0 - f2) * lorentz
+end
+
+struct _TFIMNMROuter{T<:Real}
+    J::T
+    h::T
+    β::T
+    η::T
+end
+
+@inline function (g::_TFIMNMROuter)(k1)
+    λ1 = _tfim_dispersion(k1, g.J, g.h)
+    f1 = _fermi(g.β, λ1)
+    inner = _TFIMNMRInner(promote(g.J, g.h, g.β, g.η, λ1, f1)...)
+    return first(quadgk(inner, 0.0, π; rtol=1e-6))
 end
 
 function _tfim_nmr_relaxation_infinite(J::Real, h::Real, β::Real, η::Real)
-    integrand_outer =
-        k1 -> begin
-            λ1 = _tfim_dispersion(k1, J, h)
-            f1 = λ1 > 0 ? exp(-β * λ1) / (1.0 + exp(-β * λ1)) : 0.5
-            integrand_inner =
-                k2 -> begin
-                    λ2 = _tfim_dispersion(k2, J, h)
-                    f2 = λ2 > 0 ? exp(-β * λ2) / (1.0 + exp(-β * λ2)) : 0.5
-                    lorentz = η / (π * ((λ1 - λ2)^2 + η^2))
-                    return f1 * (1.0 - f2) * lorentz
-                end
-            val_inner, _ = quadgk(integrand_inner, 0.0, π; rtol=1e-6)
-            return val_inner
-        end
-    val_outer, _ = quadgk(integrand_outer, 0.0, π; rtol=1e-6)
+    Jp, hp, βp, ηp = promote(J, h, β, η)
+    val_outer, _ = quadgk(_TFIMNMROuter(Jp, hp, βp, ηp), 0.0, π; rtol=1e-6)
     return val_outer / π^2
 end
 
@@ -169,48 +224,54 @@ The transverse magnetisation and its susceptibility require the full
 single-particle Bogoliubov coefficients, not just the spectrum, so this routine
 diagonalises the BdG matrix internally to obtain them.
 """
+function _tfim_thermo_obc end
+
+function _tfim_thermo_obc(::FreeEnergy, N::Int, J::Float64, h::Float64, β::Real)
+    Λ = _tfim_bdg_spectrum(N, J, h)
+    # f/N = -(1/Nβ) Σ log(2 cosh(βΛ/2))
+    return -sum(λ -> _logcosh2(β * λ / 2), Λ) / (N * β)
+end
+
+function _tfim_thermo_obc(::ThermalEntropy, N::Int, J::Float64, h::Float64, β::Real)
+    Λ = _tfim_bdg_spectrum(N, J, h)
+    return sum(Λ) do λ
+        x = β * λ / 2
+        return _logcosh2(x) - x * tanh(x)
+    end / N
+end
+
+function _tfim_thermo_obc(::SpecificHeat, N::Int, J::Float64, h::Float64, β::Real)
+    Λ = _tfim_bdg_spectrum(N, J, h)
+    return sum(Λ) do λ
+        x = β * λ / 2
+        return x^2 * sech(x)^2
+    end / N
+end
+
+function _tfim_thermo_obc(q::MagnetizationX, N::Int, J::Float64, h::Float64, β::Real)
+    return _tfim_transverse_obc(q, N, J, h, β)
+end
+
+function _tfim_thermo_obc(q::SusceptibilityXX, N::Int, J::Float64, h::Float64, β::Real)
+    return _tfim_transverse_obc(q, N, J, h, β)
+end
+
 function _tfim_thermo_obc(
-    quantity::Symbol, N::Int, J::Float64, h::Float64, β::Real; kwargs...
+    ::NMRSpinRelaxationRate, N::Int, J::Float64, h::Float64, β::Real, η::Real
 )
-    if quantity === :free_energy
-        Λ = _tfim_bdg_spectrum(N, J, h)
-        # f/N = -(1/Nβ) Σ log(2 cosh(βΛ/2))
-        return -sum(λ -> _logcosh2(β * λ / 2), Λ) / (N * β)
-    elseif quantity === :entropy
-        Λ = _tfim_bdg_spectrum(N, J, h)
-        return sum(Λ) do λ
-            x = β * λ / 2
-            return _logcosh2(x) - x * tanh(x)
-        end / N
-    elseif quantity === :specific_heat
-        Λ = _tfim_bdg_spectrum(N, J, h)
-        return sum(λ -> begin
-            x = β * λ / 2
-            x^2 * sech(x)^2
-        end, Λ) / N
-    elseif quantity === :transverse_magnetization || quantity === :transverse_susceptibility
-        return _tfim_transverse_obc(quantity, N, J, h, β)
-    elseif quantity === :nmr_relaxation
-        eta = Float64(get(kwargs, :eta, 0.1))
-        eta > 0 || throw(
-            DomainError(eta, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $eta.")
-        )
-        β > 0 ||
-            throw(DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β."))
-        Λ = _tfim_bdg_spectrum(N, J, h)
-        s = 0.0
-        for λ1 in Λ
-            f1 = λ1 > 0 ? exp(-β * λ1) / (1.0 + exp(-β * λ1)) : 0.5
-            for λ2 in Λ
-                f2 = λ2 > 0 ? exp(-β * λ2) / (1.0 + exp(-β * λ2)) : 0.5
-                lorentz = eta / (π * ((λ1 - λ2)^2 + eta^2))
-                s += f1 * (1.0 - f2) * lorentz
-            end
+    η > 0 || throw(DomainError(η, "TFIM NMRSpinRelaxationRate requires η > 0; got η = $η."))
+    β > 0 || throw(DomainError(β, "TFIM NMRSpinRelaxationRate requires β > 0; got β = $β."))
+    Λ = _tfim_bdg_spectrum(N, J, h)
+    s = 0.0
+    for λ1 in Λ
+        f1 = _fermi(β, λ1)
+        for λ2 in Λ
+            f2 = _fermi(β, λ2)
+            lorentz = η / (π * ((λ1 - λ2)^2 + η^2))
+            s += f1 * (1.0 - f2) * lorentz
         end
-        return s / N^2
-    else
-        error("Unknown thermal quantity: $quantity")
     end
+    return s / N^2
 end
 
 """
@@ -259,32 +320,34 @@ expectation.  Uses the Majorana covariance formula
 The transverse susceptibility is computed via `_xx_uniform_susceptibility`
 (exact Wick contraction, no numerical differentiation).
 """
-function _tfim_transverse_obc(quantity::Symbol, N::Int, J::Float64, h::Float64, β::Real)
+function _tfim_transverse_obc(::MagnetizationX, N::Int, J::Float64, h::Float64, β::Real)
     hmat = _majorana_ham(N, J, h)
     Σ = _majorana_thermal_covariance(hmat, β)
-    if quantity === :transverse_magnetization
-        return sum(_sx_expect(Σ, i) for i in 1:N) / N
-    else  # :transverse_susceptibility
-        return _xx_uniform_susceptibility(N, J, h, β)
-    end
+    return sum(_sx_expect(Σ, i) for i in 1:N) / N
+end
+
+function _tfim_transverse_obc(::SusceptibilityXX, N::Int, J::Float64, h::Float64, β::Real)
+    return _xx_uniform_susceptibility(N, J, h, β)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # fetch dispatch
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# (quantity struct, internal symbol) pairs — the internal helpers
-# `_tfim_thermo_infinite` / `_tfim_thermo_obc` still key off the symbol.
-# The concrete-struct dispatch below is meta-programmed over this list
-# so adding a thermal quantity only requires adding one row + wiring
-# the inner Symbol branch.
+# (quantity type, human-readable name) pairs.  The kernels
+# `_tfim_thermo_infinite` / `_tfim_thermo_obc` dispatch on the quantity type
+# itself, so this list only drives the generated `fetch` methods and their
+# docstrings; adding a thermal quantity means adding one row plus the
+# corresponding kernel method.
+#
+# `NMRSpinRelaxationRate` is not in the list: it takes an extra broadening
+# parameter and so gets hand-written `fetch` methods below.
 const _TFIM_THERMAL_METHODS = (
     (FreeEnergy, :free_energy),
     (ThermalEntropy, :entropy),
     (SpecificHeat, :specific_heat),
     (MagnetizationX, :transverse_magnetization),
     (SusceptibilityXX, :transverse_susceptibility),
-    (NMRSpinRelaxationRate, :nmr_relaxation),
 )
 
 for (QTy, qsym) in _TFIM_THERMAL_METHODS
@@ -298,18 +361,16 @@ for (QTy, qsym) in _TFIM_THERMAL_METHODS
         """
         function fetch(
             model::TFIM,
-            ::$QTy,
+            q::$QTy,
             ::Infinite;
             scheme::Symbol=:canonical,
             beta::Real,
             kwargs...,
         )
-            scheme === :canonical && return _tfim_thermo_infinite(
-                $(QuoteNode(qsym)), model.J, model.h, beta; kwargs...
+            scheme === :canonical || return _tfim_thermo_infinite_scheme(
+                model, q, Val(scheme); beta=beta, kwargs...
             )
-            return _tfim_thermo_infinite_scheme(
-                model, $QTy(), Val(scheme); beta=beta, kwargs...
-            )
+            return _tfim_thermo_infinite(q, model.J, model.h, beta)
         end
 
         """
@@ -319,13 +380,58 @@ for (QTy, qsym) in _TFIM_THERMAL_METHODS
         inverse temperature `beta`.  Computed exactly via the BdG
         diagonalisation.
         """
-        function fetch(model::TFIM, ::$QTy, bc::OBC; beta::Real, kwargs...)
+        function fetch(model::TFIM, q::$QTy, bc::OBC; beta::Real, kwargs...)
             N = _bc_size(bc, kwargs)
-            return _tfim_thermo_obc(
-                $(QuoteNode(qsym)), N, model.J, model.h, beta; kwargs...
-            )
+            return _tfim_thermo_obc(q, N, model.J, model.h, beta)
         end
     end
+end
+
+# ── NMR spin relaxation rate ────────────────────────────────────────────────
+#
+# The Lorentzian broadening is taken as a named keyword rather than pulled out
+# of the forwarded `kwargs`, so the numeric kernels are not specialized on the
+# caller's keyword NamedTuple type.  `Float64(eta)` reproduces the conversion
+# the previous `Float64(get(kwargs, :eta, 0.1))` performed.
+const _TFIM_DEFAULT_ETA = 0.1
+
+"""
+    fetch(model::TFIM, ::NMRSpinRelaxationRate, ::Infinite; beta::Real, eta::Real=0.1, kwargs...)
+
+Per-site NMR spin relaxation rate `1/T₁` of the TFIM in the thermodynamic limit,
+from the Lorentzian-broadened two-quasiparticle scattering integral.
+"""
+function fetch(
+    model::TFIM,
+    q::NMRSpinRelaxationRate,
+    ::Infinite;
+    scheme::Symbol=:canonical,
+    beta::Real,
+    eta::Real=_TFIM_DEFAULT_ETA,
+    kwargs...,
+)
+    scheme === :canonical || return _tfim_thermo_infinite_scheme(
+        model, q, Val(scheme); beta=beta, eta=eta, kwargs...
+    )
+    return _tfim_thermo_infinite(q, model.J, model.h, beta, Float64(eta))
+end
+
+"""
+    fetch(model::TFIM, ::NMRSpinRelaxationRate, bc::OBC; beta::Real, eta::Real=0.1, kwargs...)
+
+Per-site NMR spin relaxation rate `1/T₁` of the OBC TFIM with `N = bc.N` sites,
+summed over the exact BdG quasiparticle spectrum.
+"""
+function fetch(
+    model::TFIM,
+    q::NMRSpinRelaxationRate,
+    bc::OBC;
+    beta::Real,
+    eta::Real=_TFIM_DEFAULT_ETA,
+    kwargs...,
+)
+    N = _bc_size(bc, kwargs)
+    return _tfim_thermo_obc(q, N, model.J, model.h, beta, Float64(eta))
 end
 
 # ── Non-canonical (approximation) schemes of Infinite thermal quantities ──

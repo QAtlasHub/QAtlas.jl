@@ -13,6 +13,12 @@ on:
   pull_request_target:
     types: [opened, reopened, synchronize]
 
+concurrency:
+  # Cancel a PR's superseded runs when it is pushed again; queue (never cancel)
+  # runs on main, where these workflows publish or record state.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: write
   pull-requests: write

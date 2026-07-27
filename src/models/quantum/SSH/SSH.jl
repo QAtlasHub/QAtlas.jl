@@ -304,34 +304,64 @@ end
     return x > 0 ? exp(-x) / (1 + exp(-x)) : 1 / (1 + exp(x))
 end
 
-function _ssh_thermo_infinite(quantity::Symbol, v::Real, w::Real, beta::Real)
-    if quantity === :free_energy
-        integrand = k -> begin
-            lambda_val = _ssh_dispersion(k, v, w)
-            y = beta * lambda_val
-            y + 2 * _ssh_log1pexp(-y)
-        end
-        val, _ = quadgk(integrand, 0.0, pi; rtol=1e-10)
-        return -val / (2 * pi * beta)
-    elseif quantity === :entropy
-        integrand = k -> begin
-            lambda_val = _ssh_dispersion(k, v, w)
-            y = beta * lambda_val
-            _ssh_log1pexp(-y) + y * _ssh_nF(y)
-        end
-        val, _ = quadgk(integrand, 0.0, pi; rtol=1e-10)
-        return val / pi
-    elseif quantity === :specific_heat
-        integrand = k -> begin
-            lambda_val = _ssh_dispersion(k, v, w)
-            y = beta * lambda_val
-            (y / 2)^2 * sech(y / 2)^2
-        end
-        val, _ = quadgk(integrand, 0.0, pi; rtol=1e-10)
-        return val / pi
-    else
-        error("Unknown SSH thermal quantity: $quantity")
-    end
+# ── Type-dispatched integrands ───────────────────────────────────────────────
+#
+# The quantity reaches these kernels as a type in the AbstractQAtlas vocabulary.
+# Selecting the integrand from a `Symbol` discarded that, leaving `integrand` a
+# union of anonymous closure types at the `quadgk` call site, so the adaptive
+# quadrature machinery was instantiated once per branch of the union.  A named
+# integrand struct dispatched on the quantity keeps the static information the
+# vocabulary already carries.
+#
+# The integrand expressions and the `quadgk` calls are unchanged, so the values
+# are unchanged.
+
+struct _SSHIntegrand{Q,T<:Real}
+    v::T
+    w::T
+    beta::T
+end
+
+function _SSHIntegrand{Q}(v::Real, w::Real, beta::Real) where {Q}
+    vp, wp, bp = promote(v, w, beta)
+    return _SSHIntegrand{Q,typeof(vp)}(vp, wp, bp)
+end
+
+@inline function (g::_SSHIntegrand{FreeEnergy})(k)
+    y = g.beta * _ssh_dispersion(k, g.v, g.w)
+    return y + 2 * _ssh_log1pexp(-y)
+end
+
+@inline function (g::_SSHIntegrand{ThermalEntropy})(k)
+    y = g.beta * _ssh_dispersion(k, g.v, g.w)
+    return _ssh_log1pexp(-y) + y * _ssh_nF(y)
+end
+
+@inline function (g::_SSHIntegrand{SpecificHeat})(k)
+    y = g.beta * _ssh_dispersion(k, g.v, g.w)
+    return (y / 2)^2 * sech(y / 2)^2
+end
+
+_ssh_quad(g::_SSHIntegrand) = first(quadgk(g, 0.0, pi; rtol=1e-10))
+
+"""
+    _ssh_thermo_infinite(quantity, v, w, beta) -> Real
+
+Per-site thermodynamic potential of the infinite SSH chain, dispatched on the
+concrete quantity type.
+"""
+function _ssh_thermo_infinite end
+
+function _ssh_thermo_infinite(::FreeEnergy, v::Real, w::Real, beta::Real)
+    return -_ssh_quad(_SSHIntegrand{FreeEnergy}(v, w, beta)) / (2 * pi * beta)
+end
+
+function _ssh_thermo_infinite(::ThermalEntropy, v::Real, w::Real, beta::Real)
+    return _ssh_quad(_SSHIntegrand{ThermalEntropy}(v, w, beta)) / pi
+end
+
+function _ssh_thermo_infinite(::SpecificHeat, v::Real, w::Real, beta::Real)
+    return _ssh_quad(_SSHIntegrand{SpecificHeat}(v, w, beta)) / pi
 end
 
 """
@@ -340,11 +370,11 @@ end
 Per-site grand-potential density of the infinite SSH chain at inverse temperature `beta`.
 """
 function fetch(
-    m::SSH, ::FreeEnergy, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
+    m::SSH, q::FreeEnergy, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
 )
     beta > 0 ||
         throw(DomainError(beta, "SSH FreeEnergy requires beta > 0; got beta = $beta."))
-    return _ssh_thermo_infinite(:free_energy, v, w, beta)
+    return _ssh_thermo_infinite(q, v, w, beta)
 end
 
 """
@@ -353,11 +383,11 @@ end
 Per-site thermodynamic entropy of the infinite SSH chain at inverse temperature `beta`.
 """
 function fetch(
-    m::SSH, ::ThermalEntropy, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
+    m::SSH, q::ThermalEntropy, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
 )
     beta > 0 ||
         throw(DomainError(beta, "SSH ThermalEntropy requires beta > 0; got beta = $beta."))
-    return _ssh_thermo_infinite(:entropy, v, w, beta)
+    return _ssh_thermo_infinite(q, v, w, beta)
 end
 
 """
@@ -366,9 +396,9 @@ end
 Per-site specific heat of the infinite SSH chain at inverse temperature `beta`.
 """
 function fetch(
-    m::SSH, ::SpecificHeat, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
+    m::SSH, q::SpecificHeat, ::Infinite; beta::Real, v::Real=m.v, w::Real=m.w, kwargs...
 )
     beta > 0 ||
         throw(DomainError(beta, "SSH SpecificHeat requires beta > 0; got beta = $beta."))
-    return _ssh_thermo_infinite(:specific_heat, v, w, beta)
+    return _ssh_thermo_infinite(q, v, w, beta)
 end

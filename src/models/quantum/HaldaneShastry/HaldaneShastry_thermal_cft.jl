@@ -73,14 +73,14 @@ function _haldane_shastry_cft_specific_heat(J::Real, beta::Real)
 end
 
 """
-    _haldane_shastry_cft_validity_warn(quantity::Symbol, J::Real, beta::Real)
+    _haldane_shastry_cft_validity_warn(quantity::AbstractQuantity, J::Real, beta::Real)
 
 NaN-return + warning above the LO CFT validity floor.
 """
-function _haldane_shastry_cft_validity_warn(quantity::Symbol, J::Real, beta::Real)
+function _haldane_shastry_cft_validity_warn(quantity::AbstractQuantity, J::Real, beta::Real)
     @warn (
         "HaldaneShastry " *
-        String(quantity) *
+        String(nameof(typeof(quantity))) *
         " at Infinite() uses a c=1 " *
         "CFT low-T expansion that is only validated for β > $(_HS_CFT_BETA_MIN)/J. " *
         "At β = $(beta) (T = $(round(1/beta; digits=3))) the LO term may carry > 5% " *
@@ -98,14 +98,14 @@ end
 Per-site free energy of the infinite HS chain via leading-order c = 1
 CFT: `f = -π² J / 24 - T² / (3 J)`. Valid β > 5/J; NaN+warn outside.
 """
-function fetch(m::HaldaneShastry, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
+function fetch(m::HaldaneShastry, q::FreeEnergy, ::Infinite; beta::Real, kwargs...)
     isempty(kwargs) || @warn(
         "fetch(HaldaneShastry, FreeEnergy, Infinite) received unrecognized kwargs; they are ignored.",
         kwargs=collect(keys(kwargs))
     )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     if beta * m.J ≤ _HS_CFT_BETA_MIN
-        return _haldane_shastry_cft_validity_warn(:FreeEnergy, m.J, beta)
+        return _haldane_shastry_cft_validity_warn(q, m.J, beta)
     end
     return _haldane_shastry_cft_freeenergy(m.J, beta)
 end
@@ -115,14 +115,14 @@ end
 
 Per-site entropy via leading-order c = 1 CFT: `s = 2 T / (3 J)`.
 """
-function fetch(m::HaldaneShastry, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...)
+function fetch(m::HaldaneShastry, q::ThermalEntropy, ::Infinite; beta::Real, kwargs...)
     isempty(kwargs) || @warn(
         "fetch(HaldaneShastry, ThermalEntropy, Infinite) received unrecognized kwargs; they are ignored.",
         kwargs=collect(keys(kwargs))
     )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     if beta * m.J ≤ _HS_CFT_BETA_MIN
-        return _haldane_shastry_cft_validity_warn(:ThermalEntropy, m.J, beta)
+        return _haldane_shastry_cft_validity_warn(q, m.J, beta)
     end
     return _haldane_shastry_cft_entropy(m.J, beta)
 end
@@ -133,14 +133,14 @@ end
 Per-site specific heat via leading-order c = 1 CFT: `c_v = 2 T / (3 J)`.
 Coincides with the entropy at LO.
 """
-function fetch(m::HaldaneShastry, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
+function fetch(m::HaldaneShastry, q::SpecificHeat, ::Infinite; beta::Real, kwargs...)
     isempty(kwargs) || @warn(
         "fetch(HaldaneShastry, SpecificHeat, Infinite) received unrecognized kwargs; they are ignored.",
         kwargs=collect(keys(kwargs))
     )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     if beta * m.J ≤ _HS_CFT_BETA_MIN
-        return _haldane_shastry_cft_validity_warn(:SpecificHeat, m.J, beta)
+        return _haldane_shastry_cft_validity_warn(q, m.J, beta)
     end
     return _haldane_shastry_cft_specific_heat(m.J, beta)
 end

@@ -232,16 +232,23 @@ end
 # The integrand expressions and the `quadgk` call are unchanged, so the values
 # are unchanged.
 
-struct _XYh1DIntegrand{Q,T<:Real}
-    Jx::T
-    Jy::T
-    h::T
-    β::T
+# Each field keeps its OWN type, as the closures these replaced captured them.
+# Promoting them to a common type drags the model parameters up to whatever `β`
+# is, and `β` arrives as a `ForwardDiff.Dual` whenever the derived-input
+# suppliers differentiate through `fetch` — so the whole quadrature would run in
+# Dual arithmetic for parameters carrying no derivative information, which is
+# the opposite of the point of the type-dispatch sweep.  (In SSH, whose
+# dispersion is declared with `Float64` parameters, the same promotion was an
+# outright MethodError — QAtlas #770, `shard s15`.)
+struct _XYh1DIntegrand{Q,TX<:Real,TY<:Real,TH<:Real,TB<:Real}
+    Jx::TX
+    Jy::TY
+    h::TH
+    β::TB
 end
 
 function _XYh1DIntegrand{Q}(Jx::Real, Jy::Real, h::Real, β::Real) where {Q}
-    a, b, c, d = promote(Jx, Jy, h, β)
-    return _XYh1DIntegrand{Q,typeof(a)}(a, b, c, d)
+    return _XYh1DIntegrand{Q,typeof(Jx),typeof(Jy),typeof(h),typeof(β)}(Jx, Jy, h, β)
 end
 
 @inline (g::_XYh1DIntegrand{FreeEnergy})(k) =

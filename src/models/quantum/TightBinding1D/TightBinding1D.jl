@@ -232,15 +232,22 @@ end
 # The integrand expressions and the `quadgk` call are unchanged, so the values
 # are unchanged.
 
-struct _TB1DIntegrand{Q,T<:Real}
-    t::T
-    μ::T
-    β::T
+# Each field keeps its OWN type, as the closures these replaced captured them.
+# Promoting them to a common type drags the model parameters up to whatever `β`
+# is, and `β` arrives as a `ForwardDiff.Dual` whenever the derived-input
+# suppliers differentiate through `fetch` — so the whole quadrature would run in
+# Dual arithmetic for parameters carrying no derivative information, which is
+# the opposite of the point of the type-dispatch sweep.  (In SSH, whose
+# dispersion is declared with `Float64` parameters, the same promotion was an
+# outright MethodError — QAtlas #770, `shard s15`.)
+struct _TB1DIntegrand{Q,TT<:Real,TM<:Real,TB<:Real}
+    t::TT
+    μ::TM
+    β::TB
 end
 
 function _TB1DIntegrand{Q}(t::Real, μ::Real, β::Real) where {Q}
-    tp, μp, βp = promote(t, μ, β)
-    return _TB1DIntegrand{Q,typeof(tp)}(tp, μp, βp)
+    return _TB1DIntegrand{Q,typeof(t),typeof(μ),typeof(β)}(t, μ, β)
 end
 
 @inline (g::_TB1DIntegrand{FreeEnergy})(k) =
@@ -395,13 +402,13 @@ end
 # outer closure's own specialization, so the inner Gauss-Kronrod machinery was
 # instantiated once per specialization of the outer one.  Naming both integrands
 # breaks that product.
-struct _TB1DNMRInner{T<:Real}
-    t::T
-    μ::T
-    β::T
-    η::T
-    ε1::T
-    f1::T
+struct _TB1DNMRInner{TT<:Real,TM<:Real,TB<:Real,TE<:Real,TS<:Real,TF<:Real}
+    t::TT
+    μ::TM
+    β::TB
+    η::TE
+    ε1::TS
+    f1::TF
 end
 
 @inline function (g::_TB1DNMRInner)(k2)
@@ -411,23 +418,22 @@ end
     return g.f1 * (1.0 - f2) * lorentz
 end
 
-struct _TB1DNMROuter{T<:Real}
-    t::T
-    μ::T
-    β::T
-    η::T
+struct _TB1DNMROuter{TT<:Real,TM<:Real,TB<:Real,TE<:Real}
+    t::TT
+    μ::TM
+    β::TB
+    η::TE
 end
 
 @inline function (g::_TB1DNMROuter)(k1)
     ε1 = _tb1d_dispersion(k1, g.t, g.μ)
     f1 = _tb1d_nF(g.β * ε1)
-    inner = _TB1DNMRInner(promote(g.t, g.μ, g.β, g.η, ε1, f1)...)
+    inner = _TB1DNMRInner(g.t, g.μ, g.β, g.η, ε1, f1)
     return first(quadgk(inner, 0.0, π; rtol=1e-6))
 end
 
 function _tb1d_nmr_relaxation_infinite(t::Real, μ::Real, β::Real, η::Real)
-    tp, μp, βp, ηp = promote(t, μ, β, η)
-    val_outer, _ = quadgk(_TB1DNMROuter(tp, μp, βp, ηp), 0.0, π; rtol=1e-6)
+    val_outer, _ = quadgk(_TB1DNMROuter(t, μ, β, η), 0.0, π; rtol=1e-6)
     return val_outer / π^2
 end
 

@@ -184,6 +184,48 @@ Pkg.add("QAtlas")
 
 Requires Julia ≥ 1.12. Documentation: [codes.sota-shimozono.com/QAtlas.jl/stable](https://codes.sota-shimozono.com/QAtlas.jl/stable/).
 
+### Precompilation time, and how to opt out
+
+QAtlas ships a `PrecompileTools` workload that pre-warms the heaviest TFIM free-fermion thermal
+paths, so an interactive session reaches those answers with no first-call latency. It is the
+dominant cost of installing the package:
+
+| | |
+|---|---|
+| `Pkg.precompile()` as shipped | **~440 s** |
+| with the workload gated off | **~10 s** |
+| `using QAtlas` once precompiled | 0.27 s |
+
+If you use QAtlas as a **test-time oracle** — a handful of `fetch` calls, typically not on the
+TFIM thermal paths — that warm start buys you nothing and you can turn it off. Set the
+[PrecompileTools](https://github.com/JuliaLang/PrecompileTools.jl) preference in the project that
+depends on QAtlas:
+
+```julia
+using Preferences, UUIDs
+set_preferences!(
+    UUID("aea7be01-6a6a-4083-8856-8a6e6704d82a"),   # PrecompileTools
+    "precompile_workloads" => false;
+    force = true,
+)
+```
+
+which writes to that project's `LocalPreferences.toml`:
+
+```toml
+[PrecompileTools]
+precompile_workloads = false
+```
+
+**What it costs you.** The workload is not wasted work — it is work moved earlier. With the gate
+off, the same compilation happens on first call for whatever you actually use: re-running all 19
+workload signatures cold takes ~402 s, while a single unrelated call such as
+`fetch(IsingSquare(; J), FreeEnergy(), Infinite(); beta)` takes **0.44 s**. So gating is a clear win
+when you touch few paths, and roughly neutral when you touch the TFIM thermal ones.
+
+Do not commit `LocalPreferences.toml` from a package repository that others depend on — the
+preference belongs to the environment that decides it.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the depth standard applied to derivations in `docs/src/calc/`, the citation format, and the concrete-struct API conventions. Corrections to physics content, scaling-relation cross-checks, and independent-source confirmations are especially welcome.

@@ -289,38 +289,79 @@ Compute one of the per-site thermodynamic potentials of the PBC TFIM.
 - `:transverse_magnetization` → m_x = ∂_h log Z / (Nβ)
 - `:transverse_susceptibility`→ χ_xx = ∂²_h log Z / (Nβ)
 """
-function _tfim_pbc_thermo(quantity::Symbol, N::Int, J::Real, h::Real, β::Real)
-    states = _all_sector_states(N, J, h, β)
-    log_Z, weights = _logZ_and_weights(states)
-    if quantity === :free_energy
-        return -log_Z / (N * β)
+# The quantity arrives as a type from the AbstractQAtlas vocabulary; keying the
+# kernel off a `Symbol` re-derived at the `fetch` site meant every quantity name
+# was written twice and the branch was resolved by constant propagation rather
+# than by dispatch.  The shared setup (sector states, log Z, Boltzmann weights)
+# and the two cumulant pairs are factored into helpers so the per-quantity
+# methods carry only their own arithmetic, unchanged.
+
+function _tfim_pbc_setup(N::Int, J::Real, h::Real, β::Real)
+    let states = _all_sector_states(N, J, h, β)
+        (states, _logZ_and_weights(states)...)
     end
-    if quantity === :energy_per_site || quantity === :entropy || quantity === :specific_heat
-        dLs = ntuple(i -> states[i].dLdβ, 4)
-        d2Ls = ntuple(i -> states[i].d2Ldβ2, 4)
-        m1, m2 = _cumulant_first_second(weights, dLs, d2Ls)
-        # ∂_β log Z = m1; ∂²_β log Z = m2
-        ε = -m1 / N
-        if quantity === :energy_per_site
-            return ε
-        elseif quantity === :entropy
-            f = -log_Z / (N * β)
-            return β * (ε - f)
-        else
-            return β^2 * m2 / N    # c_v = -β² ∂_β ε = β² ∂²_β log Z / N
-        end
-    end
-    if quantity === :transverse_magnetization || quantity === :transverse_susceptibility
-        dLs = ntuple(i -> states[i].dLdh, 4)
-        d2Ls = ntuple(i -> states[i].d2Ldh2, 4)
-        m1, m2 = _cumulant_first_second(weights, dLs, d2Ls)
-        if quantity === :transverse_magnetization
-            return m1 / (N * β)        # m_x = -∂f/∂h = (∂_h log Z) / (N β)
-        else
-            return m2 / (N * β)        # χ_xx = ∂m_x/∂h = (∂²_h log Z) / (N β)
-        end
-    end
-    return error("_tfim_pbc_thermo: unknown quantity :$quantity")
+end
+
+# ∂_β log Z = m1; ∂²_β log Z = m2
+function _tfim_pbc_beta_cumulants(states, weights)
+    dLs = ntuple(i -> states[i].dLdβ, 4)
+    d2Ls = ntuple(i -> states[i].d2Ldβ2, 4)
+    return _cumulant_first_second(weights, dLs, d2Ls)
+end
+
+# ∂_h log Z = m1; ∂²_h log Z = m2
+function _tfim_pbc_h_cumulants(states, weights)
+    dLs = ntuple(i -> states[i].dLdh, 4)
+    d2Ls = ntuple(i -> states[i].d2Ldh2, 4)
+    return _cumulant_first_second(weights, dLs, d2Ls)
+end
+
+"""
+    _tfim_pbc_thermo(quantity, N, J, h, β) -> Real
+
+Per-site thermodynamic potential of the PBC TFIM, dispatched on the concrete
+quantity type.
+"""
+function _tfim_pbc_thermo end
+
+function _tfim_pbc_thermo(::FreeEnergy, N::Int, J::Real, h::Real, β::Real)
+    _, log_Z, _ = _tfim_pbc_setup(N, J, h, β)
+    return -log_Z / (N * β)
+end
+
+function _tfim_pbc_thermo(::Energy{:per_site}, N::Int, J::Real, h::Real, β::Real)
+    states, _, weights = _tfim_pbc_setup(N, J, h, β)
+    m1, _ = _tfim_pbc_beta_cumulants(states, weights)
+    return -m1 / N
+end
+
+function _tfim_pbc_thermo(::ThermalEntropy, N::Int, J::Real, h::Real, β::Real)
+    states, log_Z, weights = _tfim_pbc_setup(N, J, h, β)
+    m1, _ = _tfim_pbc_beta_cumulants(states, weights)
+    ε = -m1 / N
+    f = -log_Z / (N * β)
+    return β * (ε - f)
+end
+
+# c_v = -β² ∂_β ε = β² ∂²_β log Z / N
+function _tfim_pbc_thermo(::SpecificHeat, N::Int, J::Real, h::Real, β::Real)
+    states, _, weights = _tfim_pbc_setup(N, J, h, β)
+    _, m2 = _tfim_pbc_beta_cumulants(states, weights)
+    return β^2 * m2 / N
+end
+
+# m_x = -∂f/∂h = (∂_h log Z) / (N β)
+function _tfim_pbc_thermo(::MagnetizationX, N::Int, J::Real, h::Real, β::Real)
+    states, _, weights = _tfim_pbc_setup(N, J, h, β)
+    m1, _ = _tfim_pbc_h_cumulants(states, weights)
+    return m1 / (N * β)
+end
+
+# χ_xx = ∂m_x/∂h = (∂²_h log Z) / (N β)
+function _tfim_pbc_thermo(::SusceptibilityXX, N::Int, J::Real, h::Real, β::Real)
+    states, _, weights = _tfim_pbc_setup(N, J, h, β)
+    _, m2 = _tfim_pbc_h_cumulants(states, weights)
+    return m2 / (N * β)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -370,19 +411,15 @@ end
 # fetch dispatch (PBC)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Generate fetch methods over (struct quantity, internal Symbol) pairs.
+# Generate fetch methods over the quantity types the kernel implements.
 const _TFIM_PBC_THERMAL_METHODS = (
-    (FreeEnergy, :free_energy),
-    (ThermalEntropy, :entropy),
-    (SpecificHeat, :specific_heat),
-    (MagnetizationX, :transverse_magnetization),
-    (SusceptibilityXX, :transverse_susceptibility),
+    FreeEnergy, ThermalEntropy, SpecificHeat, MagnetizationX, SusceptibilityXX
 )
 
-for (QTy, qsym) in _TFIM_PBC_THERMAL_METHODS
-    @eval function fetch(model::TFIM, ::$QTy, bc::PBC; beta::Real, kwargs...)
+for QTy in _TFIM_PBC_THERMAL_METHODS
+    @eval function fetch(model::TFIM, q::$QTy, bc::PBC; beta::Real, kwargs...)
         N = _bc_size(bc, kwargs)
-        return _tfim_pbc_thermo($(QuoteNode(qsym)), N, model.J, model.h, beta)
+        return _tfim_pbc_thermo(q, N, model.J, model.h, beta)
     end
 end
 
@@ -393,9 +430,9 @@ Per-site energy `ε(β) = -∂_β log Z / N` of the N-site PBC TFIM.  Native
 granularity for PBC TFIM (the `:total` granularity is provided by the
 generic conversion fallback in `src/core/quantities.jl`).
 """
-function fetch(model::TFIM, ::Energy{:per_site}, bc::PBC; beta::Real, kwargs...)
+function fetch(model::TFIM, q::Energy{:per_site}, bc::PBC; beta::Real, kwargs...)
     N = _bc_size(bc, kwargs)
-    return _tfim_pbc_thermo(:energy_per_site, N, model.J, model.h, beta)
+    return _tfim_pbc_thermo(q, N, model.J, model.h, beta)
 end
 
 """

@@ -96,68 +96,91 @@ end
 # Thermodynamic potentials — Infinite (per-site)
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# ── Type-dispatched BZ integrands ────────────────────────────────────────────
+#
+# Single-mode spectrum is ±λ (matter Majorana convention
+# H = i Σ M_αβ c_α c_β; eigenvalues of one f-mode are ±σ_k where
+# σ_k = svdvals(M)). Hence Z_k = 2 cosh(βλ), ⟨H_k⟩ = -λ tanh(βλ),
+# not the (λ/2, βλ/2) form that would apply if H carried an
+# additional 1/2 prefactor.  Matches the GS formula
+# `ε_gs = -(1/(8π²)) ∫ |f| d²θ` already in `KitaevHoneycomb.jl`
+# at β → ∞.
+#
+# The quantity reaches these kernels as a type in the AbstractQAtlas vocabulary;
+# selecting the integrand from a `Symbol` left it a union of four anonymous
+# closure types at the `_kitaev_bz_integral` call site.  Dispatching a named
+# integrand struct on the quantity keeps the static information the vocabulary
+# already carries.  The integrand expressions and the quadrature call are
+# unchanged, so the values are unchanged.
+
+struct _KitaevIntegrand{Q,T<:Real}
+    β::T
+end
+
+_KitaevIntegrand{Q}(β::Real) where {Q} = _KitaevIntegrand{Q,typeof(β)}(β)
+
+# f = -(1/(2β·(2π)²)) ∫ log(2 cosh(βλ)) d²θ
+@inline (g::_KitaevIntegrand{FreeEnergy})(m, θ₁, θ₂) =
+    _kitaev_logcosh2(g.β * _kitaev_fk_abs(m, θ₁, θ₂))
+
+# s = (1/(2·(2π)²)) ∫ [log(2 cosh(βλ)) - βλ tanh(βλ)] d²θ
+@inline function (g::_KitaevIntegrand{ThermalEntropy})(m, θ₁, θ₂)
+    x = g.β * _kitaev_fk_abs(m, θ₁, θ₂)
+    return _kitaev_logcosh2(x) - x * tanh(x)
+end
+
+# c_v = (1/(2·(2π)²)) ∫ (βλ)² sech²(βλ) d²θ
+@inline function (g::_KitaevIntegrand{SpecificHeat})(m, θ₁, θ₂)
+    x = g.β * _kitaev_fk_abs(m, θ₁, θ₂)
+    return x^2 * sech(x)^2
+end
+
+# ε = -(1/(2·(2π)²)) ∫ λ tanh(βλ) d²θ
+@inline function (g::_KitaevIntegrand{Energy{:per_site}})(m, θ₁, θ₂)
+    λ = _kitaev_fk_abs(m, θ₁, θ₂)
+    return λ * tanh(g.β * λ)
+end
+
 """
-    _kitaev_thermo_infinite(quantity, model, β; rtol) -> Float64
+    _kitaev_thermo_infinite(quantity, model, β; rtol) -> Real
 
 Per-site matter-sector thermodynamic potential of the infinite Kitaev
-honeycomb at inverse temperature `β`.  `quantity` is one of
-`(:free_energy, :entropy, :specific_heat, :energy)`.
+honeycomb at inverse temperature `β`, dispatched on the concrete quantity type
+(`FreeEnergy`, `ThermalEntropy`, `SpecificHeat`, `Energy{:per_site}`).
 
 The integrals are evaluated via adaptive Gauss-Kronrod quadrature over
 the BZ (see [`_kitaev_bz_integral`](@ref)).  The leading factor
 `1/(2·(2π)²)` accounts for the per-site (two sublattice atoms) and the
 2D BZ volume.
 """
+function _kitaev_thermo_infinite end
+
 function _kitaev_thermo_infinite(
-    quantity::Symbol, model::KitaevHoneycomb, β::Real; rtol::Float64=1e-8
+    q::FreeEnergy, model::KitaevHoneycomb, β::Real; rtol::Float64=1e-8
 )
-    # Single-mode spectrum is ±λ (matter Majorana convention
-    # H = i Σ M_αβ c_α c_β; eigenvalues of one f-mode are ±σ_k where
-    # σ_k = svdvals(M)). Hence Z_k = 2 cosh(βλ), ⟨H_k⟩ = -λ tanh(βλ),
-    # not the (λ/2, βλ/2) form that would apply if H carried an
-    # additional 1/2 prefactor.  Matches the GS formula
-    # `ε_gs = -(1/(8π²)) ∫ |f| d²θ` already in `KitaevHoneycomb.jl`
-    # at β → ∞.
-    integrand = if quantity === :free_energy
-        # f = -(1/(2β·(2π)²)) ∫ log(2 cosh(βλ)) d²θ
-        (m, θ₁, θ₂) -> begin
-            λ = _kitaev_fk_abs(m, θ₁, θ₂)
-            _kitaev_logcosh2(β * λ)
-        end
-    elseif quantity === :entropy
-        # s = (1/(2·(2π)²)) ∫ [log(2 cosh(βλ)) - βλ tanh(βλ)] d²θ
-        (m, θ₁, θ₂) -> begin
-            λ = _kitaev_fk_abs(m, θ₁, θ₂)
-            x = β * λ
-            _kitaev_logcosh2(x) - x * tanh(x)
-        end
-    elseif quantity === :specific_heat
-        # c_v = (1/(2·(2π)²)) ∫ (βλ)² sech²(βλ) d²θ
-        (m, θ₁, θ₂) -> begin
-            λ = _kitaev_fk_abs(m, θ₁, θ₂)
-            x = β * λ
-            x^2 * sech(x)^2
-        end
-    elseif quantity === :energy
-        # ε = -(1/(2·(2π)²)) ∫ λ tanh(βλ) d²θ
-        (m, θ₁, θ₂) -> begin
-            λ = _kitaev_fk_abs(m, θ₁, θ₂)
-            λ * tanh(β * λ)
-        end
-    else
-        error("Unknown Kitaev thermal quantity: $quantity")
-    end
+    val = _kitaev_bz_integral(_KitaevIntegrand{FreeEnergy}(β), model; rtol=rtol)
+    return -val / (2 * β * (2π)^2)
+end
 
-    val = _kitaev_bz_integral(integrand, model; rtol=rtol)
+function _kitaev_thermo_infinite(
+    q::ThermalEntropy, model::KitaevHoneycomb, β::Real; rtol::Float64=1e-8
+)
+    val = _kitaev_bz_integral(_KitaevIntegrand{ThermalEntropy}(β), model; rtol=rtol)
+    return val / (2 * (2π)^2)
+end
 
-    # Per-site = (1/2) · (1/(2π)²) · ∫ ...
-    if quantity === :free_energy
-        return -val / (2 * β * (2π)^2)
-    elseif quantity === :energy
-        return -val / (2 * (2π)^2)
-    else  # entropy, specific_heat
-        return val / (2 * (2π)^2)
-    end
+function _kitaev_thermo_infinite(
+    q::SpecificHeat, model::KitaevHoneycomb, β::Real; rtol::Float64=1e-8
+)
+    val = _kitaev_bz_integral(_KitaevIntegrand{SpecificHeat}(β), model; rtol=rtol)
+    return val / (2 * (2π)^2)
+end
+
+function _kitaev_thermo_infinite(
+    q::Energy{:per_site}, model::KitaevHoneycomb, β::Real; rtol::Float64=1e-8
+)
+    val = _kitaev_bz_integral(_KitaevIntegrand{Energy{:per_site}}(β), model; rtol=rtol)
+    return -val / (2 * (2π)^2)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -165,44 +188,61 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    _kitaev_thermo_obc(quantity, model, Lx, Ly, β) -> Float64
+    _kitaev_thermo_obc(quantity, model, Lx, Ly, β) -> Real
 
 Per-site matter-sector thermodynamic potential of the `Lx × Ly` OBC
-honeycomb strip at inverse temperature `β`, computed by summing each BdG
-positive Majorana mode's contribution.
+honeycomb strip at inverse temperature `β`, dispatched on the concrete
+quantity type and computed by summing each BdG positive Majorana mode's
+contribution.
 
 The bipartite hopping matrix `M = _obc_hopping_matrix(model, Lx, Ly)` has
 `Lx·Ly` positive singular values `σ_k`; the lattice carries
 `N_sites = 2·Lx·Ly` sites, so per-site potentials scale as
 `(1/(2·Lx·Ly)) Σ_k g(σ_k)` with `g` the free-fermion-mode kernel.
 """
-function _kitaev_thermo_obc(
-    quantity::Symbol, model::KitaevHoneycomb, Lx::Integer, Ly::Integer, β::Real
-)
-    # Single-mode spectrum ±σ_k: see the comment block in
-    # `_kitaev_thermo_infinite` above.
+function _kitaev_thermo_obc end
+
+# Single-mode spectrum ±σ_k: see the comment block in
+# `_kitaev_thermo_infinite` above.
+function _kitaev_obc_modes(model::KitaevHoneycomb, Lx::Integer, Ly::Integer)
     M = _obc_hopping_matrix(model, Lx, Ly)
-    σ = svdvals(M)
-    N_sites = 2 * Lx * Ly
-    if quantity === :free_energy
-        # f = -(1/(N_sites · β)) Σ log(2 cosh(βσ_k))
-        return -sum(s -> _kitaev_logcosh2(β * s), σ) / (N_sites * β)
-    elseif quantity === :entropy
-        return sum(σ) do s
-            x = β * s
-            return _kitaev_logcosh2(x) - x * tanh(x)
-        end / N_sites
-    elseif quantity === :specific_heat
-        return sum(s -> begin
-            x = β * s
-            x^2 * sech(x)^2
-        end, σ) / N_sites
-    elseif quantity === :energy
-        # ε = -(1/N_sites) Σ_k σ_k tanh(βσ_k)
-        return -sum(s -> s * tanh(β * s), σ) / N_sites
-    else
-        error("Unknown Kitaev thermal quantity: $quantity")
-    end
+    return svdvals(M), 2 * Lx * Ly
+end
+
+# f = -(1/(N_sites · β)) Σ log(2 cosh(βσ_k))
+function _kitaev_thermo_obc(
+    ::FreeEnergy, model::KitaevHoneycomb, Lx::Integer, Ly::Integer, β::Real
+)
+    σ, N_sites = _kitaev_obc_modes(model, Lx, Ly)
+    return -sum(s -> _kitaev_logcosh2(β * s), σ) / (N_sites * β)
+end
+
+function _kitaev_thermo_obc(
+    ::ThermalEntropy, model::KitaevHoneycomb, Lx::Integer, Ly::Integer, β::Real
+)
+    σ, N_sites = _kitaev_obc_modes(model, Lx, Ly)
+    return sum(σ) do s
+        x = β * s
+        return _kitaev_logcosh2(x) - x * tanh(x)
+    end / N_sites
+end
+
+function _kitaev_thermo_obc(
+    ::SpecificHeat, model::KitaevHoneycomb, Lx::Integer, Ly::Integer, β::Real
+)
+    σ, N_sites = _kitaev_obc_modes(model, Lx, Ly)
+    return sum(σ) do s
+        x = β * s
+        return x^2 * sech(x)^2
+    end / N_sites
+end
+
+# ε = -(1/N_sites) Σ_k σ_k tanh(βσ_k)
+function _kitaev_thermo_obc(
+    ::Energy{:per_site}, model::KitaevHoneycomb, Lx::Integer, Ly::Integer, β::Real
+)
+    σ, N_sites = _kitaev_obc_modes(model, Lx, Ly)
+    return -sum(s -> s * tanh(β * s), σ) / N_sites
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -236,7 +276,7 @@ et al. 2014).
 function _kitaev_energy_per_site_infinite_thermal(
     model::KitaevHoneycomb, β::Real; rtol::Float64=1e-8
 )
-    return _kitaev_thermo_infinite(:energy, model, β; rtol=rtol)
+    return _kitaev_thermo_infinite(Energy{:per_site}(), model, β; rtol=rtol)
 end
 
 """
@@ -256,7 +296,7 @@ Same matter-sector approximation regime as the `Infinite` variant.
 function _kitaev_energy_per_site_obc_thermal(
     model::KitaevHoneycomb, Lx::Integer, Ly::Integer, β::Real
 )
-    return _kitaev_thermo_obc(:energy, model, Lx, Ly, β)
+    return _kitaev_thermo_obc(Energy{:per_site}(), model, Lx, Ly, β)
 end
 
 # Concrete `Energy{:per_site}` thermal methods.  Dispatching on the
@@ -335,13 +375,13 @@ for (QTy, qsym) in _KITAEV_THERMAL_METHODS
         """
         function fetch(
             model::KitaevHoneycomb,
-            ::$QTy,
+            q::$QTy,
             ::Infinite;
             beta::Real,
             rtol::Float64=1e-8,
             kwargs...,
         )
-            return _kitaev_thermo_infinite($(QuoteNode(qsym)), model, beta; rtol=rtol)
+            return _kitaev_thermo_infinite(q, model, beta; rtol=rtol)
         end
 
         """
@@ -355,7 +395,7 @@ for (QTy, qsym) in _KITAEV_THERMAL_METHODS
         """
         function fetch(
             model::KitaevHoneycomb,
-            ::$QTy,
+            q::$QTy,
             ::OBC;
             Lx::Integer,
             Ly::Integer,
@@ -364,7 +404,7 @@ for (QTy, qsym) in _KITAEV_THERMAL_METHODS
         )
             Lx > 0 && Ly > 0 ||
                 error("KitaevHoneycomb OBC: Lx, Ly must be positive (got Lx=$Lx, Ly=$Ly).")
-            return _kitaev_thermo_obc($(QuoteNode(qsym)), model, Lx, Ly, beta)
+            return _kitaev_thermo_obc(q, model, Lx, Ly, beta)
         end
     end
 end

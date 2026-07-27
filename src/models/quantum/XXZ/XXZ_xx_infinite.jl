@@ -98,49 +98,85 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 # Internal kernel: per-site thermodynamic potential of the XX chain at finite β.
 #
-# `quantity` ∈ (:free_energy, :energy, :entropy, :specific_heat).
+# `quantity` is one of `FreeEnergy`, `Energy{:per_site}`, `ThermalEntropy`,
+# `SpecificHeat` — the kernel dispatches on the type.
 #
 # Integrals are evaluated by adaptive Gauss-Kronrod quadrature on [0, π];
 # the symmetry k ↔ -k is folded into the prefactor (1/π for the symmetric
 # integrands, 1/(2π) for `e`; see header for the derivation).  Each branch
 # returns the per-site value in the spin-S convention used by XXZ.jl
-# (so the β → ∞ limit of `:energy` reproduces -J/π exactly).
+# (so the β → ∞ limit of `Energy{:per_site}` reproduces -J/π exactly).
 # ─────────────────────────────────────────────────────────────────────────────
-function _xx_thermo_infinite(quantity::Symbol, J::Real, β::Real)
-    if quantity === :free_energy
-        # f(β) = -(1/(πβ)) ∫₀^π log(2 cosh(βε(k)/2)) dk
-        integrand = k -> _xx_logcosh2(β * _xx_dispersion(k, J) / 2)
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return -val / (π * β)
-    elseif quantity === :energy
-        # e(β) = -(1/(2π)) ∫₀^π ε(k) tanh(β ε(k) / 2) dk
-        integrand = k -> begin
-            εk = _xx_dispersion(k, J)
-            εk * tanh(β * εk / 2)
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return -val / (2 * π)
-    elseif quantity === :entropy
-        # s(β) = (1/π) ∫₀^π [ log(2 cosh(βε/2)) - (βε/2) tanh(βε/2) ] dk
-        integrand = k -> begin
-            εk = _xx_dispersion(k, J)
-            x = β * εk / 2
-            _xx_logcosh2(x) - x * tanh(x)
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return val / π
-    elseif quantity === :specific_heat
-        # C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk
-        integrand = k -> begin
-            εk = _xx_dispersion(k, J)
-            x = β * εk / 2
-            x^2 * sech(x)^2
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return val / π
-    else
-        error("Unknown XX thermal quantity: $quantity")
-    end
+# ── Type-dispatched integrands ───────────────────────────────────────────────
+#
+# The quantity reaches this kernel as a type in the AbstractQAtlas vocabulary;
+# selecting the integrand from a `Symbol` left it a union of four anonymous
+# closure types at the `quadgk` call site.  A named integrand struct dispatched
+# on the quantity keeps the static information the vocabulary already carries.
+# The integrand expressions and the `quadgk` calls are unchanged, so the values
+# are unchanged.
+
+# Each field keeps its OWN type, exactly as the closures this replaced captured
+# them.  Promoting them to a common type would drag `J` up to whatever `β` is —
+# and `β` arrives as a `ForwardDiff.Dual` whenever the derived-input suppliers
+# differentiate through `fetch`, which would run the whole quadrature in Dual
+# arithmetic for a coupling that carries no derivative information.  (In SSH the
+# same promotion was an outright `MethodError`, because its dispersion is
+# declared with `Float64` parameters.)
+struct _XXIntegrand{Q,TJ<:Real,TB<:Real}
+    J::TJ
+    β::TB
+end
+
+function _XXIntegrand{Q}(J::Real, β::Real) where {Q}
+    return _XXIntegrand{Q,typeof(J),typeof(β)}(J, β)
+end
+
+@inline (g::_XXIntegrand{FreeEnergy})(k) = _xx_logcosh2(g.β * _xx_dispersion(k, g.J) / 2)
+
+@inline function (g::_XXIntegrand{Energy{:per_site}})(k)
+    εk = _xx_dispersion(k, g.J)
+    return εk * tanh(g.β * εk / 2)
+end
+
+@inline function (g::_XXIntegrand{ThermalEntropy})(k)
+    x = g.β * _xx_dispersion(k, g.J) / 2
+    return _xx_logcosh2(x) - x * tanh(x)
+end
+
+@inline function (g::_XXIntegrand{SpecificHeat})(k)
+    x = g.β * _xx_dispersion(k, g.J) / 2
+    return x^2 * sech(x)^2
+end
+
+_xx_quad(g::_XXIntegrand) = first(quadgk(g, 0.0, π; rtol=1e-10))
+
+"""
+    _xx_thermo_infinite(quantity, J, β) -> Real
+
+Per-site thermodynamic potential of the infinite XX (Δ = 0) chain, dispatched
+on the concrete quantity type.
+"""
+function _xx_thermo_infinite end
+
+# f(β) = -(1/(πβ)) ∫₀^π log(2 cosh(βε(k)/2)) dk
+function _xx_thermo_infinite(::FreeEnergy, J::Real, β::Real)
+    return -_xx_quad(_XXIntegrand{FreeEnergy}(J, β)) / (π * β)
+end
+
+# e(β) = -(1/(2π)) ∫₀^π ε(k) tanh(β ε(k) / 2) dk
+function _xx_thermo_infinite(::Energy{:per_site}, J::Real, β::Real)
+    return -_xx_quad(_XXIntegrand{Energy{:per_site}}(J, β)) / (2 * π)
+end
+
+# s(β) = (1/π) ∫₀^π [ log(2 cosh(βε/2)) - (βε/2) tanh(βε/2) ] dk
+function _xx_thermo_infinite(::ThermalEntropy, J::Real, β::Real)
+    return _xx_quad(_XXIntegrand{ThermalEntropy}(J, β)) / π
+end
+
+# C(β) = (1/π) ∫₀^π (βε/2)² sech²(βε/2) dk
+function _xx_thermo_infinite(::SpecificHeat, J::Real, β::Real)
+    return _xx_quad(_XXIntegrand{SpecificHeat}(J, β)) / π
 end
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -196,7 +232,7 @@ function fetch(model::XXZ1D, ::Energy{:per_site}, ::Infinite; kwargs...)
     if haskey(kwargs, :beta)
         β = kwargs[:beta]
         if _xx_is_free_fermion(model)
-            return _xx_thermo_infinite(:energy, model.J, β)
+            return _xx_thermo_infinite(Energy{:per_site}(), model.J, β)
         end
         return _xx_warn_general_delta(:energy, model.Δ)
     end
@@ -240,7 +276,7 @@ function fetch(model::XXZ1D, ::FreeEnergy, ::Infinite; beta::Real, kwargs...)
         kwargs=collect(keys(kwargs))
     )
     if _xx_is_free_fermion(model)
-        return _xx_thermo_infinite(:free_energy, model.J, beta)
+        return _xx_thermo_infinite(FreeEnergy(), model.J, beta)
     end
     if -1 < model.Δ < 1
         e0 = fetch(model, Energy{:per_site}(), Infinite())
@@ -269,7 +305,7 @@ function fetch(model::XXZ1D, ::ThermalEntropy, ::Infinite; beta::Real, kwargs...
         kwargs=collect(keys(kwargs))
     )
     if _xx_is_free_fermion(model)
-        return _xx_thermo_infinite(:entropy, model.J, beta)
+        return _xx_thermo_infinite(ThermalEntropy(), model.J, beta)
     end
     if -1 < model.Δ < 1
         return _xxz_klumper_entropy(model, beta)
@@ -293,7 +329,7 @@ function fetch(model::XXZ1D, ::SpecificHeat, ::Infinite; beta::Real, kwargs...)
         kwargs=collect(keys(kwargs))
     )
     if _xx_is_free_fermion(model)
-        return _xx_thermo_infinite(:specific_heat, model.J, beta)
+        return _xx_thermo_infinite(SpecificHeat(), model.J, beta)
     end
     if -1 < model.Δ < 1
         return _xxz_klumper_specific_heat(model, beta)

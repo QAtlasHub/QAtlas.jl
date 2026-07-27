@@ -223,51 +223,82 @@ end
     return a + log1p(exp(-2.0 * a))
 end
 
-function _xyh1d_thermo_infinite(quantity::Symbol, Jx::Real, Jy::Real, h::Real, β::Real)
-    integrand = if quantity === :free_energy
-        k -> begin
-            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
-            _xyh1d_logcosh2(β * Λk / 2.0)
-        end
-    elseif quantity === :entropy
-        k -> begin
-            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
-            x = β * Λk / 2.0
-            _xyh1d_logcosh2(x) - x * tanh(x)
-        end
-    elseif quantity === :specific_heat
-        k -> begin
-            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
-            x = β * Λk / 2.0
-            x^2 * sech(x)^2
-        end
-    elseif quantity === :transverse_magnetization
-        k -> begin
-            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
-            A = h - (Jx + Jy) * cos(k)
-            (2.0 * A / Λk) * tanh(β * Λk / 2.0)
-        end
-    elseif quantity === :transverse_susceptibility
-        k -> begin
-            A = h - (Jx + Jy) * cos(k)
-            Λk = _xyh1d_dispersion(k, Jx, Jy, h)
-            # (2/Λ - 8A²/Λ³) tanh(βΛ/2) + (4β A²/Λ²) sech²(βΛ/2)
-            (2.0 / Λk - 8.0 * A^2 / Λk^3) * tanh(β * Λk / 2.0) +
-            (4.0 * β * A^2 / Λk^2) * sech(β * Λk / 2.0)^2
-        end
-    else
-        error("Unknown thermal quantity: $quantity")
-    end
+# ── Type-dispatched integrands ───────────────────────────────────────────────
+#
+# The quantity reaches these kernels as a type in the AbstractQAtlas vocabulary;
+# selecting the integrand from a `Symbol` left it a union of five anonymous
+# closure types at the `quadgk` call site.  Named integrand structs dispatched
+# on the quantity keep the static information the vocabulary already carries.
+# The integrand expressions and the `quadgk` call are unchanged, so the values
+# are unchanged.
 
-    val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
+struct _XYh1DIntegrand{Q,T<:Real}
+    Jx::T
+    Jy::T
+    h::T
+    β::T
+end
 
-    if quantity === :free_energy
-        return -val / (π * β)
-    elseif quantity === :transverse_magnetization || quantity === :transverse_susceptibility
-        return (1.0 / π) * val
-    else  # entropy, specific_heat
-        return val / π
-    end
+function _XYh1DIntegrand{Q}(Jx::Real, Jy::Real, h::Real, β::Real) where {Q}
+    a, b, c, d = promote(Jx, Jy, h, β)
+    return _XYh1DIntegrand{Q,typeof(a)}(a, b, c, d)
+end
+
+@inline (g::_XYh1DIntegrand{FreeEnergy})(k) =
+    _xyh1d_logcosh2(g.β * _xyh1d_dispersion(k, g.Jx, g.Jy, g.h) / 2.0)
+
+@inline function (g::_XYh1DIntegrand{ThermalEntropy})(k)
+    x = g.β * _xyh1d_dispersion(k, g.Jx, g.Jy, g.h) / 2.0
+    return _xyh1d_logcosh2(x) - x * tanh(x)
+end
+
+@inline function (g::_XYh1DIntegrand{SpecificHeat})(k)
+    x = g.β * _xyh1d_dispersion(k, g.Jx, g.Jy, g.h) / 2.0
+    return x^2 * sech(x)^2
+end
+
+@inline function (g::_XYh1DIntegrand{MagnetizationZ})(k)
+    Λk = _xyh1d_dispersion(k, g.Jx, g.Jy, g.h)
+    A = g.h - (g.Jx + g.Jy) * cos(k)
+    return (2.0 * A / Λk) * tanh(g.β * Λk / 2.0)
+end
+
+# (2/Λ - 8A²/Λ³) tanh(βΛ/2) + (4β A²/Λ²) sech²(βΛ/2)
+@inline function (g::_XYh1DIntegrand{SusceptibilityZZ})(k)
+    A = g.h - (g.Jx + g.Jy) * cos(k)
+    Λk = _xyh1d_dispersion(k, g.Jx, g.Jy, g.h)
+    return (2.0 / Λk - 8.0 * A^2 / Λk^3) * tanh(g.β * Λk / 2.0) +
+           (4.0 * g.β * A^2 / Λk^2) * sech(g.β * Λk / 2.0)^2
+end
+
+_xyh1d_quad(g::_XYh1DIntegrand) = first(quadgk(g, 0.0, π; rtol=1e-10))
+
+"""
+    _xyh1d_thermo_infinite(quantity, Jx, Jy, h, β) -> Real
+
+Per-site thermodynamic potential of the infinite XY chain in a transverse
+field, dispatched on the concrete quantity type.
+"""
+function _xyh1d_thermo_infinite end
+
+function _xyh1d_thermo_infinite(::FreeEnergy, Jx::Real, Jy::Real, h::Real, β::Real)
+    return -_xyh1d_quad(_XYh1DIntegrand{FreeEnergy}(Jx, Jy, h, β)) / (π * β)
+end
+
+function _xyh1d_thermo_infinite(::ThermalEntropy, Jx::Real, Jy::Real, h::Real, β::Real)
+    return _xyh1d_quad(_XYh1DIntegrand{ThermalEntropy}(Jx, Jy, h, β)) / π
+end
+
+function _xyh1d_thermo_infinite(::SpecificHeat, Jx::Real, Jy::Real, h::Real, β::Real)
+    return _xyh1d_quad(_XYh1DIntegrand{SpecificHeat}(Jx, Jy, h, β)) / π
+end
+
+function _xyh1d_thermo_infinite(::MagnetizationZ, Jx::Real, Jy::Real, h::Real, β::Real)
+    return (1.0 / π) * _xyh1d_quad(_XYh1DIntegrand{MagnetizationZ}(Jx, Jy, h, β))
+end
+
+function _xyh1d_thermo_infinite(::SusceptibilityZZ, Jx::Real, Jy::Real, h::Real, β::Real)
+    return (1.0 / π) * _xyh1d_quad(_XYh1DIntegrand{SusceptibilityZZ}(Jx, Jy, h, β))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -286,31 +317,43 @@ function _xyh1d_zz_uniform_susceptibility(N::Int, Jx::Real, Jy::Real, h::Real, �
     return β * s / N
 end
 
-function _xyh1d_thermo_obc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
-    if quantity === :free_energy
-        Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
-        return -sum(λ -> _xyh1d_logcosh2(β * λ / 2.0), Λ) / (N * β)
-    elseif quantity === :entropy
-        Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
-        return sum(Λ) do λ
-            x = β * λ / 2.0
-            return _xyh1d_logcosh2(x) - x * tanh(x)
-        end / N
-    elseif quantity === :specific_heat
-        Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
-        return sum(λ -> begin
-            x = β * λ / 2.0
-            x^2 * sech(x)^2
-        end, Λ) / N
-    elseif quantity === :transverse_magnetization
-        hmat = _xyh1d_majorana_ham(N, Jx, Jy, h)
-        Σ = _xyh1d_majorana_thermal_covariance(hmat, β)
-        return sum(Σ[2i - 1, 2i] for i in 1:N) / N
-    elseif quantity === :transverse_susceptibility
-        return _xyh1d_zz_uniform_susceptibility(N, Jx, Jy, h, β)
-    else
-        error("Unknown thermal quantity: $quantity")
-    end
+"""
+    _xyh1d_thermo_obc(quantity, N, Jx, Jy, h, β) -> Real
+
+Per-site thermodynamic potential of the OBC finite-N XY chain, dispatched on
+the concrete quantity type.
+"""
+function _xyh1d_thermo_obc end
+
+function _xyh1d_thermo_obc(::FreeEnergy, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
+    return -sum(λ -> _xyh1d_logcosh2(β * λ / 2.0), Λ) / (N * β)
+end
+
+function _xyh1d_thermo_obc(::ThermalEntropy, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
+    return sum(Λ) do λ
+        x = β * λ / 2.0
+        return _xyh1d_logcosh2(x) - x * tanh(x)
+    end / N
+end
+
+function _xyh1d_thermo_obc(::SpecificHeat, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    Λ = _xyh1d_bdg_spectrum(N, Jx, Jy, h)
+    return sum(Λ) do λ
+        x = β * λ / 2.0
+        return x^2 * sech(x)^2
+    end / N
+end
+
+function _xyh1d_thermo_obc(::MagnetizationZ, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    hmat = _xyh1d_majorana_ham(N, Jx, Jy, h)
+    Σ = _xyh1d_majorana_thermal_covariance(hmat, β)
+    return sum(Σ[2i - 1, 2i] for i in 1:N) / N
+end
+
+function _xyh1d_thermo_obc(::SusceptibilityZZ, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    return _xyh1d_zz_uniform_susceptibility(N, Jx, Jy, h, β)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -376,19 +419,15 @@ const _XYH1D_THERMAL_METHODS = (
     (SusceptibilityZZ, :transverse_susceptibility),
 )
 
-for (QTy, qsym) in _XYH1D_THERMAL_METHODS
+for (QTy, _) in _XYH1D_THERMAL_METHODS
     @eval begin
-        function fetch(model::XYh1D, ::$QTy, ::Infinite; beta::Real, kwargs...)
-            return _xyh1d_thermo_infinite(
-                $(QuoteNode(qsym)), model.Jx, model.Jy, model.h, beta
-            )
+        function fetch(model::XYh1D, q::$QTy, ::Infinite; beta::Real, kwargs...)
+            return _xyh1d_thermo_infinite(q, model.Jx, model.Jy, model.h, beta)
         end
 
-        function fetch(model::XYh1D, ::$QTy, bc::OBC; beta::Real, kwargs...)
+        function fetch(model::XYh1D, q::$QTy, bc::OBC; beta::Real, kwargs...)
             N = _bc_size(bc, kwargs)
-            return _xyh1d_thermo_obc(
-                $(QuoteNode(qsym)), N, model.Jx, model.Jy, model.h, beta
-            )
+            return _xyh1d_thermo_obc(q, N, model.Jx, model.Jy, model.h, beta)
         end
     end
 end
@@ -492,7 +531,9 @@ Sector weights: w_s = Z_s / Z_total (computed via log-sum-exp).
 
 All derived quantities follow from ∂/∂β of log Z_PBC.
 """
-function _xyh1d_thermo_pbc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+# Shared two-sector setup: spectra, momenta, the log-sum-exp combined log Z and
+# the two macro-sector Boltzmann weights.
+function _xyh1d_pbc_sectors(N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
     Λ_AP, Λ_P = _xyh1d_pbc_spectrum(N, Jx, Jy, h)
     ks_AP = _xyh1d_pbc_momenta(N, :AP)
     ks_P = _xyh1d_pbc_momenta(N, :P)
@@ -502,92 +543,72 @@ function _xyh1d_thermo_pbc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real
     lZ = max(lZ_AP, lZ_P) + log1p(exp(-abs(lZ_AP - lZ_P)))
     w_AP = exp(lZ_AP - lZ)
     w_P = exp(lZ_P - lZ)
+    return (Λ_AP, Λ_P, ks_AP, ks_P, lZ, w_AP, w_P)
+end
 
-    if quantity === :free_energy
-        return -lZ / (N * β)
+"""
+    _xyh1d_thermo_pbc(quantity, N, Jx, Jy, h, β) -> Real
 
-    elseif quantity === :entropy
-        # S_s/N = (1/N) Σ_k [ log(2cosh) − (βΛ/2) tanh(βΛ/2) ]
-        _s(Λ) = sum(λ -> begin
-            x = β * λ / 2
-            _xyh1d_logcosh2(x) + log(2) - x * tanh(x)
-        end, Λ) / N
-        # Mixing entropy of the two macro-sectors
-        _xlogx(w) = w > 1e-300 ? w * log(w) : 0.0
-        S_mix = -(_xlogx(w_AP) + _xlogx(w_P)) / N
-        return w_AP * _s(Λ_AP) + w_P * _s(Λ_P) + S_mix
+Per-site thermodynamic potential of the PBC finite-N XY chain, dispatched on
+the concrete quantity type.
+"""
+function _xyh1d_thermo_pbc end
 
-    elseif quantity === :specific_heat
-        # Cv/N = β² [ w_AP * (Cv_AP/N + β²(E_AP/N - Ē)²)
-        #           + w_P  * (Cv_P/N  + β²(E_P/N  - Ē)²) ]
-        # where Ē = w_AP E_AP/N + w_P E_P/N
-        _e(Λ) = -sum(λ -> (λ / 2) * tanh(β * λ / 2), Λ) / N
-        _cv(Λ) = sum(λ -> (β * λ / 2)^2 * sech(β * λ / 2)^2, Λ) / N
-        E_AP, E_P = _e(Λ_AP), _e(Λ_P)
-        C_AP, C_P = _cv(Λ_AP), _cv(Λ_P)
-        Ē = w_AP * E_AP + w_P * E_P
-        return w_AP * (C_AP + β^2 * N * (E_AP - Ē)^2) + w_P * (C_P + β^2 * N * (E_P - Ē)^2)
+function _xyh1d_thermo_pbc(::FreeEnergy, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    _, _, _, _, lZ, _, _ = _xyh1d_pbc_sectors(N, Jx, Jy, h, β)
+    return -lZ / (N * β)
+end
 
-    elseif quantity === :transverse_magnetization
-        # ⟨σᶻ⟩/N = -(1/(Nβ)) ∂logZ/∂h
-        #         = -(1/N) Σ_k (∂Λ/∂h) tanh(βΛ/2)
-        # ∂Λ/∂h = (h − (Jx+Jy)cos k) / (Λ/2)  [using our dispersion with factor 2]
-        #       Actually: Λ = 2√(A² + C²), A = h-(Jx+Jy)cos k, C = (Jx-Jy)sin k
-        #       ∂Λ/∂h = 2A / Λ * (A/|A|) ... let me be careful:
-        #       ∂Λ/∂h = 2 * (h - (Jx+Jy)cos k) / (Λ/2) ... no:
-        #       Λ = 2√(A²+C²), ∂Λ/∂h = 2 * A / √(A²+C²) = 2A / (Λ/2) = 4A/Λ
-        _mz_sector(Λ, ks) = sum(zip(Λ, ks)) do (λ, k)
-            A = h - (Jx + Jy) * cos(k)
-            return (4.0 * A / λ) * tanh(β * λ / 2.0)
-        end / N
-        # The sign: ⟨σᶻ⟩ = (1/(Nβ)) ∂logZ/∂h = (1/N) Σ_k (∂logZ_k/∂(βh)) / β * β
-        #   = -(1/N) Σ_k (∂Λ_k/∂h) * tanh(βΛ_k/2) * (-1) ... need to be careful.
-        # Free energy f = -logZ/(Nβ),  ∂f/∂h = -1/(Nβ) ∂logZ/∂h
-        # ⟨σᶻ⟩ = -∂f/∂h ... depends on sign convention.
-        # Using our convention: H = - h Σ σᶻ, so ⟨σᶻ⟩ = -∂F/∂(Nh) = (1/Nβ)∂logZ/∂h
-        # ∂logZ_s/∂h = Σ_k tanh(βΛ_k/2) * ∂(βΛ_k)/∂h / 2 * 2
-        #            = Σ_k tanh(βΛ_k/2) * β * ∂Λ_k/∂h
-        # ∂Λ_k/∂h = 4A/Λ where A = h-(Jx+Jy)cos k
-        # Therefore ⟨σᶻ⟩_s = (1/N) Σ_k tanh(βΛ/2) * ∂Λ/∂h
-        #                    = (1/N) Σ_k tanh(βΛ/2) * 4A/Λ
-        # Note: this matches what's used in _xyh1d_thermo_infinite for :transverse_magnetization
-        #   integrand = (2A/Λ) * tanh(βΛ/2) which integrates over [0,π] (half BZ), so factor of 2.
-        # For the finite sum, we sum over the full k-range [0,2π), which gives the same.
-        mz_AP = _mz_sector(Λ_AP, ks_AP)
-        mz_P = _mz_sector(Λ_P, ks_P)
-        # Weighted average from both sectors:
-        # ∂logZ/∂h = w_AP * ∂logZ_AP/∂h + w_P * ∂logZ_P/∂h  (in terms of N*β factor)
-        # ⟨σᶻ⟩/N = w_AP * ⟨σᶻ⟩_AP/N + w_P * ⟨σᶻ⟩_P/N
-        return w_AP * mz_AP + w_P * mz_P
+# S_s/N = (1/N) Σ_k [ log(2cosh) − (βΛ/2) tanh(βΛ/2) ], plus the mixing entropy
+# of the two macro-sectors.
+function _xyh1d_thermo_pbc(::ThermalEntropy, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    Λ_AP, Λ_P, _, _, _, w_AP, w_P = _xyh1d_pbc_sectors(N, Jx, Jy, h, β)
+    _s(Λ) = sum(Λ) do λ
+        x = β * λ / 2
+        return _xyh1d_logcosh2(x) + log(2) - x * tanh(x)
+    end / N
+    _xlogx(w) = w > 1e-300 ? w * log(w) : 0.0
+    S_mix = -(_xlogx(w_AP) + _xlogx(w_P)) / N
+    return w_AP * _s(Λ_AP) + w_P * _s(Λ_P) + S_mix
+end
 
-    elseif quantity === :transverse_susceptibility
-        # χ = β * (⟨(σᶻ_total)²⟩ - ⟨σᶻ_total⟩²) / N
-        # For each sector, the susceptibility within the sector:
-        # χ_s = β/N Σ_{i,j} ⟨σᶻᵢ σᶻⱼ⟩_s,c
-        # For the free-fermion sector, this is:
-        # χ_s/N = (1/N) Σ_k [β sech²(βΛ_k/2) * (∂Λ_k/∂h)²/4
-        #                   + (1/N) cross terms]
-        # For translational invariance in PBC, the connected correlator is diagonal in k:
-        # χ_s/N = (1/N) Σ_k sech²(βΛ_k/2) * β * (4A/Λ)²/4
-        #       = (1/N) Σ_k sech²(βΛ_k/2) * β * (2A/Λ)²  ... let me re-derive.
-        # ∂²logZ_s/∂(βh)² = Σ_k sech²(βΛ_k/2) * (β ∂Λ_k/∂h)²/4 + ... 
-        # Actually: ∂²logZ_s/∂h² = β² Var_s(H_field) where H_field = -h Σ σᶻ
-        # χ = -(1/N) ∂²F/∂h² = (1/(Nβ)) ∂²logZ/∂h²
-        # ∂²logZ_s/∂h² = β Σ_k sech²(βΛ_k/2) * (∂Λ_k/∂h)² 
-        #               + β Σ_k tanh(βΛ_k/2) * ∂²Λ_k/∂h²
-        # ∂²Λ_k/∂h² = 4/Λ_k - 16A²/Λ_k³
-        # Giving: χ_s = (1/N) Σ_k [ sech²(βΛ/2)*(4A/Λ)²*β/4 + tanh(βΛ/2)*(4/Λ - 16A²/Λ³) ]
-        # Wait, let's be more careful. χ = (β/N) (⟨M²⟩ - ⟨M⟩²)
-        # For PBC with translational invariance:
-        # Use finite-difference approximation numerically (most robust):
-        δh = h * 1e-5 + 1e-8
-        mz_plus = _xyh1d_thermo_pbc(:transverse_magnetization, N, Jx, Jy, h + δh, β)
-        mz_minus = _xyh1d_thermo_pbc(:transverse_magnetization, N, Jx, Jy, h - δh, β)
-        return (mz_plus - mz_minus) / (2δh)
+# Cv/N = β² [ w_AP * (Cv_AP/N + β²(E_AP/N - Ē)²)
+#           + w_P  * (Cv_P/N  + β²(E_P/N  - Ē)²) ]
+# where Ē = w_AP E_AP/N + w_P E_P/N
+function _xyh1d_thermo_pbc(::SpecificHeat, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    Λ_AP, Λ_P, _, _, _, w_AP, w_P = _xyh1d_pbc_sectors(N, Jx, Jy, h, β)
+    _e(Λ) = -sum(λ -> (λ / 2) * tanh(β * λ / 2), Λ) / N
+    _cv(Λ) = sum(λ -> (β * λ / 2)^2 * sech(β * λ / 2)^2, Λ) / N
+    E_AP, E_P = _e(Λ_AP), _e(Λ_P)
+    C_AP, C_P = _cv(Λ_AP), _cv(Λ_P)
+    Ē = w_AP * E_AP + w_P * E_P
+    return w_AP * (C_AP + β^2 * N * (E_AP - Ē)^2) + w_P * (C_P + β^2 * N * (E_P - Ē)^2)
+end
 
-    else
-        error("Unknown PBC thermal quantity: $quantity")
-    end
+# ⟨σᶻ⟩/N = (1/(Nβ)) ∂logZ/∂h = (1/N) Σ_k (∂Λ_k/∂h) tanh(βΛ_k/2),
+# with Λ = 2√(A² + C²), A = h − (Jx+Jy)cos k, C = (Jx−Jy)sin k, so ∂Λ/∂h = 4A/Λ.
+# This matches the `MagnetizationZ` integrand at `Infinite`, which uses 2A/Λ over
+# the half BZ [0, π]; the finite sum here runs over the full k range.
+function _xyh1d_thermo_pbc(::MagnetizationZ, N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
+    Λ_AP, Λ_P, ks_AP, ks_P, _, w_AP, w_P = _xyh1d_pbc_sectors(N, Jx, Jy, h, β)
+    _mz_sector(Λ, ks) = sum(zip(Λ, ks)) do (λ, k)
+        A = h - (Jx + Jy) * cos(k)
+        return (4.0 * A / λ) * tanh(β * λ / 2.0)
+    end / N
+    # ⟨σᶻ⟩/N = w_AP * ⟨σᶻ⟩_AP/N + w_P * ⟨σᶻ⟩_P/N
+    return w_AP * _mz_sector(Λ_AP, ks_AP) + w_P * _mz_sector(Λ_P, ks_P)
+end
+
+# χ = β (⟨M²⟩ − ⟨M⟩²)/N.  Taken as a central difference of the magnetisation in
+# `h`, which is the robust route here (the two-sector weights depend on `h` too,
+# so the per-sector closed form is not the whole answer).
+function _xyh1d_thermo_pbc(
+    q::SusceptibilityZZ, N::Int, Jx::Real, Jy::Real, h::Real, β::Real
+)
+    δh = h * 1e-5 + 1e-8
+    mz_plus = _xyh1d_thermo_pbc(MagnetizationZ(), N, Jx, Jy, h + δh, β)
+    mz_minus = _xyh1d_thermo_pbc(MagnetizationZ(), N, Jx, Jy, h - δh, β)
+    return (mz_plus - mz_minus) / (2δh)
 end
 
 """
@@ -597,7 +618,7 @@ Site-local ⟨σᶻᵢ⟩ for PBC.  By translational invariance, all sites are e
 returns a uniform vector of length N equal to the bulk ⟨σᶻ⟩/site.
 """
 function _xyh1d_pbc_local_mz(N::Int, Jx::Real, Jy::Real, h::Real, β::Real)
-    mz_bulk = _xyh1d_thermo_pbc(:transverse_magnetization, N, Jx, Jy, h, β)
+    mz_bulk = _xyh1d_thermo_pbc(MagnetizationZ(), N, Jx, Jy, h, β)
     return fill(mz_bulk, N)
 end
 
@@ -694,13 +715,11 @@ const _XYH1D_PBC_THERMAL_METHODS = (
     (SusceptibilityZZ, :transverse_susceptibility),
 )
 
-for (QTy, qsym) in _XYH1D_PBC_THERMAL_METHODS
+for (QTy, _) in _XYH1D_PBC_THERMAL_METHODS
     @eval begin
-        function fetch(model::XYh1D, ::$QTy, bc::PBC; beta::Real, kwargs...)
+        function fetch(model::XYh1D, q::$QTy, bc::PBC; beta::Real, kwargs...)
             N = _bc_size(bc, kwargs)
-            return _xyh1d_thermo_pbc(
-                $(QuoteNode(qsym)), N, model.Jx, model.Jy, model.h, beta
-            )
+            return _xyh1d_thermo_pbc(q, N, model.Jx, model.Jy, model.h, beta)
         end
     end
 end

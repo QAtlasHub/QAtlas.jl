@@ -116,14 +116,20 @@ end
 # The integrand expressions and the `quadgk` calls are unchanged, so the values
 # are unchanged.
 
-struct _XXIntegrand{Q,T<:Real}
-    J::T
-    β::T
+# Each field keeps its OWN type, exactly as the closures this replaced captured
+# them.  Promoting them to a common type would drag `J` up to whatever `β` is —
+# and `β` arrives as a `ForwardDiff.Dual` whenever the derived-input suppliers
+# differentiate through `fetch`, which would run the whole quadrature in Dual
+# arithmetic for a coupling that carries no derivative information.  (In SSH the
+# same promotion was an outright `MethodError`, because its dispersion is
+# declared with `Float64` parameters.)
+struct _XXIntegrand{Q,TJ<:Real,TB<:Real}
+    J::TJ
+    β::TB
 end
 
 function _XXIntegrand{Q}(J::Real, β::Real) where {Q}
-    Jp, βp = promote(J, β)
-    return _XXIntegrand{Q,typeof(Jp)}(Jp, βp)
+    return _XXIntegrand{Q,typeof(J),typeof(β)}(J, β)
 end
 
 @inline (g::_XXIntegrand{FreeEnergy})(k) = _xx_logcosh2(g.β * _xx_dispersion(k, g.J) / 2)

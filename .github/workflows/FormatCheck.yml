@@ -5,6 +5,12 @@ name: Format Check
 on:
   pull_request:
 
+concurrency:
+  # Cancel a PR's superseded runs when it is pushed again; queue (never cancel)
+  # runs on main, where these workflows publish or record state.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   format-check:
     runs-on: ubuntu-latest
@@ -13,15 +19,36 @@ jobs:
       - uses: julia-actions/setup-julia@v3
         with:
           version: '1'
+      # PINNED — do not relax to `Pkg.add("JuliaFormatter")`.
+      #
+      # `format()` output changes between JuliaFormatter releases, so an
+      # unpinned install turns this required check red on *every* open PR the
+      # day a new version ships, for reasons unrelated to the PR.  It happened
+      # with 2.10.x and again on 2026-07-27 when 2.12.3 reflowed 8 files that
+      # main had been formatted against.
+      #
+      # `PackageSpec(; version=v"...")` is the only exact pin: `version="2.12.3"`
+      # is a caret range and `version="=2.12.3"` is a parse error.
+      #
+      # To upgrade: bump the version here and run the same version locally over
+      # the repo (`format(".")`) in the SAME commit.
       - name: Install JuliaFormatter
-        run: julia -e 'using Pkg; Pkg.add("JuliaFormatter"); using JuliaFormatter; @info "JuliaFormatter $(pkgversion(JuliaFormatter))"'
+        run: |
+          julia -e '
+            using Pkg
+            Pkg.add(PackageSpec(; name="JuliaFormatter", version=v"2.12.3"))
+            using JuliaFormatter
+            v = pkgversion(JuliaFormatter)
+            @info "JuliaFormatter $v"
+            v == v"2.12.3" || error("expected JuliaFormatter 2.12.3, resolved $v")
+          '
       - name: Check formatting
         run: |
           julia -e '
             using JuliaFormatter
             ok = format(".", verbose=true, overwrite=false)
             if !ok
-              println(stderr, "❌ Formatting issues found. Run JuliaFormatter locally: julia -e \"using JuliaFormatter; format(\\\".\\\")\"")
+              println(stderr, "❌ Formatting issues found. Run JuliaFormatter 2.12.3 locally: julia -e \"using Pkg; Pkg.add(PackageSpec(; name=\\\"JuliaFormatter\\\", version=v\\\"2.12.3\\\")); using JuliaFormatter; format(\\\".\\\")\"")
               exit(1)
             end
             println("✅ All files are properly formatted.")

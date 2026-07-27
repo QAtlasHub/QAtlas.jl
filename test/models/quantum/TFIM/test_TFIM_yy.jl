@@ -105,7 +105,7 @@ end
         N = 4
         H = _build_tfim_dense(N, 1.0, h)
         E, V = eigen(Hermitian(H))
-        ws = exp.(-β .* (E .- E[1]));
+        ws = exp.(-β .* (E .- E[1]))
         ws ./= sum(ws)
         ρ = V * (Diagonal(ComplexF64.(ws))) * V'
         M_y = sum(_op_site(_SY, k, N) for k in 1:N)

@@ -509,7 +509,7 @@ function _xyh1d_thermo_pbc(quantity::Symbol, N::Int, Jx::Real, Jy::Real, h::Real
     elseif quantity === :entropy
         # S_s/N = (1/N) Σ_k [ log(2cosh) − (βΛ/2) tanh(βΛ/2) ]
         _s(Λ) = sum(λ -> begin
-            x = β * λ / 2;
+            x = β * λ / 2
             _xyh1d_logcosh2(x) + log(2) - x * tanh(x)
         end, Λ) / N
         # Mixing entropy of the two macro-sectors

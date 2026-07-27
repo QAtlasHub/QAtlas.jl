@@ -53,10 +53,9 @@ K-points), reflecting geometric frustration: the absence of
 particle-hole (chiral) symmetry on a non-bipartite lattice.
 """
 struct Triangular <: AbstractQAtlasModel
-    ;
-    t::Float64;
-    Lx::Int;
-    Ly::Int;
+    t::Float64
+    Lx::Int
+    Ly::Int
 end
 function Triangular(; t::Real=1.0, Lx::Integer=0, Ly::Integer=0)
     return Triangular(Float64(t), Int(Lx), Int(Ly))

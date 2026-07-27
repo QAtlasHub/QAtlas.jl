@@ -220,30 +220,63 @@ end
     return βε > 0 ? exp(-βε) / (1 + exp(-βε)) : 1 / (1 + exp(βε))
 end
 
-function _tb1d_thermo_infinite(quantity::Symbol, t::Real, μ::Real, β::Real)
-    if quantity === :free_energy
-        integrand = k -> _tb1d_log1pexp(-β * _tb1d_dispersion(k, t, μ))
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return -val / (π * β)
-    elseif quantity === :entropy
-        integrand = k -> begin
-            εk = _tb1d_dispersion(k, t, μ)
-            y = β * εk
-            _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return val / π
-    elseif quantity === :specific_heat
-        integrand = k -> begin
-            εk = _tb1d_dispersion(k, t, μ)
-            n = _tb1d_nF(β * εk)
-            εk^2 * n * (1 - n)
-        end
-        val, _ = quadgk(integrand, 0.0, π; rtol=1e-10)
-        return β^2 * val / π
-    else
-        error("Unknown TightBinding1D thermal quantity: $quantity")
-    end
+# ── Type-dispatched integrands ───────────────────────────────────────────────
+#
+# The quantity reaches these kernels as a type in the AbstractQAtlas vocabulary;
+# routing it through a `Symbol` and an anonymous closure per branch made the
+# whole adaptive-quadrature machinery instantiate once per closure type, once
+# more per constant-propagated `Symbol`, and once more per forwarded `kwargs`
+# NamedTuple type.  A named integrand struct dispatched on the quantity type
+# keeps the information the vocabulary already carries.
+#
+# The integrand expressions and the `quadgk` call are unchanged, so the values
+# are unchanged.
+
+struct _TB1DIntegrand{Q,T<:Real}
+    t::T
+    μ::T
+    β::T
+end
+
+function _TB1DIntegrand{Q}(t::Real, μ::Real, β::Real) where {Q}
+    tp, μp, βp = promote(t, μ, β)
+    return _TB1DIntegrand{Q,typeof(tp)}(tp, μp, βp)
+end
+
+@inline (g::_TB1DIntegrand{FreeEnergy})(k) =
+    _tb1d_log1pexp(-g.β * _tb1d_dispersion(k, g.t, g.μ))
+
+@inline function (g::_TB1DIntegrand{ThermalEntropy})(k)
+    y = g.β * _tb1d_dispersion(k, g.t, g.μ)
+    return _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
+end
+
+@inline function (g::_TB1DIntegrand{SpecificHeat})(k)
+    εk = _tb1d_dispersion(k, g.t, g.μ)
+    n = _tb1d_nF(g.β * εk)
+    return εk^2 * n * (1 - n)
+end
+
+_tb1d_quad(g::_TB1DIntegrand) = first(quadgk(g, 0.0, π; rtol=1e-10))
+
+"""
+    _tb1d_thermo_infinite(quantity, t, μ, β) -> Real
+
+Per-site thermodynamic potential of the infinite tight-binding chain,
+dispatched on the concrete quantity type.
+"""
+function _tb1d_thermo_infinite end
+
+function _tb1d_thermo_infinite(::FreeEnergy, t::Real, μ::Real, β::Real)
+    return -_tb1d_quad(_TB1DIntegrand{FreeEnergy}(t, μ, β)) / (π * β)
+end
+
+function _tb1d_thermo_infinite(::ThermalEntropy, t::Real, μ::Real, β::Real)
+    return _tb1d_quad(_TB1DIntegrand{ThermalEntropy}(t, μ, β)) / π
+end
+
+function _tb1d_thermo_infinite(::SpecificHeat, t::Real, μ::Real, β::Real)
+    return β^2 * _tb1d_quad(_TB1DIntegrand{SpecificHeat}(t, μ, β)) / π
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -271,7 +304,7 @@ Evaluated by `QuadGK.quadgk` with `rtol = 1e-10`.  The T = 0
 """
 function fetch(
     m::TightBinding1D,
-    ::FreeEnergy,
+    q::FreeEnergy,
     ::Infinite;
     beta::Real,
     t::Real=m.t,
@@ -281,7 +314,7 @@ function fetch(
     t > 0 || throw(DomainError(t, "TightBinding1D FreeEnergy requires t > 0; got t = $t."))
     beta > 0 ||
         throw(DomainError(beta, "TightBinding1D FreeEnergy requires β > 0; got β = $beta."))
-    return _tb1d_thermo_infinite(:free_energy, t, μ, beta)
+    return _tb1d_thermo_infinite(q, t, μ, beta)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -307,7 +340,7 @@ the Sommerfeld expansion gives `s ~ (π/3) v_F⁻¹ T` per site.
 """
 function fetch(
     m::TightBinding1D,
-    ::ThermalEntropy,
+    q::ThermalEntropy,
     ::Infinite;
     beta::Real,
     t::Real=m.t,
@@ -319,7 +352,7 @@ function fetch(
     beta > 0 || throw(
         DomainError(beta, "TightBinding1D ThermalEntropy requires β > 0; got β = $beta."),
     )
-    return _tb1d_thermo_infinite(:entropy, t, μ, beta)
+    return _tb1d_thermo_infinite(q, t, μ, beta)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -343,7 +376,7 @@ and T → ∞ (~ β² · ⟨ε²⟩ / 4 → 0) limits are returned correctly.
 """
 function fetch(
     m::TightBinding1D,
-    ::SpecificHeat,
+    q::SpecificHeat,
     ::Infinite;
     beta::Real,
     t::Real=m.t,
@@ -355,24 +388,46 @@ function fetch(
     beta > 0 || throw(
         DomainError(beta, "TightBinding1D SpecificHeat requires β > 0; got β = $beta.")
     )
-    return _tb1d_thermo_infinite(:specific_heat, t, μ, beta)
+    return _tb1d_thermo_infinite(q, t, μ, beta)
+end
+
+# Nested quadrature.  As closures the inner integrand type was minted inside the
+# outer closure's own specialization, so the inner Gauss-Kronrod machinery was
+# instantiated once per specialization of the outer one.  Naming both integrands
+# breaks that product.
+struct _TB1DNMRInner{T<:Real}
+    t::T
+    μ::T
+    β::T
+    η::T
+    ε1::T
+    f1::T
+end
+
+@inline function (g::_TB1DNMRInner)(k2)
+    ε2 = _tb1d_dispersion(k2, g.t, g.μ)
+    f2 = _tb1d_nF(g.β * ε2)
+    lorentz = g.η / (π * ((g.ε1 - ε2)^2 + g.η^2))
+    return g.f1 * (1.0 - f2) * lorentz
+end
+
+struct _TB1DNMROuter{T<:Real}
+    t::T
+    μ::T
+    β::T
+    η::T
+end
+
+@inline function (g::_TB1DNMROuter)(k1)
+    ε1 = _tb1d_dispersion(k1, g.t, g.μ)
+    f1 = _tb1d_nF(g.β * ε1)
+    inner = _TB1DNMRInner(promote(g.t, g.μ, g.β, g.η, ε1, f1)...)
+    return first(quadgk(inner, 0.0, π; rtol=1e-6))
 end
 
 function _tb1d_nmr_relaxation_infinite(t::Real, μ::Real, β::Real, η::Real)
-    integrand_outer =
-        k1 -> begin
-            ε1 = _tb1d_dispersion(k1, t, μ)
-            f1 = _tb1d_nF(β * ε1)
-            integrand_inner = k2 -> begin
-                ε2 = _tb1d_dispersion(k2, t, μ)
-                f2 = _tb1d_nF(β * ε2)
-                lorentz = η / (π * ((ε1 - ε2)^2 + η^2))
-                return f1 * (1.0 - f2) * lorentz
-            end
-            val_inner, _ = quadgk(integrand_inner, 0.0, π; rtol=1e-6)
-            return val_inner
-        end
-    val_outer, _ = quadgk(integrand_outer, 0.0, π; rtol=1e-6)
+    tp, μp, βp, ηp = promote(t, μ, β, η)
+    val_outer, _ = quadgk(_TB1DNMROuter(tp, μp, βp, ηp), 0.0, π; rtol=1e-6)
     return val_outer / π^2
 end
 
@@ -447,44 +502,53 @@ function _tb1d_energy_finite(eigenvalues::AbstractVector{<:Real})
     return sum(ε -> ε ≤ 0 ? ε : 0.0, eigenvalues)
 end
 
-function _tb1d_thermo_finite(
-    quantity::Symbol, eigenvalues::AbstractVector{<:Real}, β::Real; kwargs...
-)
+"""
+    _tb1d_thermo_finite(quantity, eigenvalues, β) -> Real
+
+Per-site thermodynamic potential of the finite tight-binding chain from its
+single-particle spectrum, dispatched on the concrete quantity type.
+"""
+function _tb1d_thermo_finite end
+
+function _tb1d_thermo_finite(::FreeEnergy, eigenvalues::AbstractVector{<:Real}, β::Real)
     N = length(eigenvalues)
-    if quantity === :free_energy
-        return -sum(ε -> _tb1d_log1pexp(-β * ε), eigenvalues) / (N * β)
-    elseif quantity === :entropy
-        return sum(eigenvalues) do ε
-            y = β * ε
-            return _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
-        end / N
-    elseif quantity === :specific_heat
-        return sum(eigenvalues) do ε
-            y = β * ε
-            n = _tb1d_nF(y)
-            return ε^2 * n * (1 - n)
-        end * (β^2 / N)
-    elseif quantity === :nmr_relaxation
-        eta = Float64(get(kwargs, :eta, 0.1))
-        eta > 0 || throw(
-            DomainError(
-                eta,
-                "TightBinding1D NMRSpinRelaxationRate requires η > 0; got η = $eta.",
-            ),
-        )
-        s = 0.0
-        for ε1 in eigenvalues
-            f1 = _tb1d_nF(β * ε1)
-            for ε2 in eigenvalues
-                f2 = _tb1d_nF(β * ε2)
-                lorentz = eta / (π * ((ε1 - ε2)^2 + eta^2))
-                s += f1 * (1.0 - f2) * lorentz
-            end
+    return -sum(ε -> _tb1d_log1pexp(-β * ε), eigenvalues) / (N * β)
+end
+
+function _tb1d_thermo_finite(::ThermalEntropy, eigenvalues::AbstractVector{<:Real}, β::Real)
+    N = length(eigenvalues)
+    return sum(eigenvalues) do ε
+        y = β * ε
+        return _tb1d_log1pexp(-y) + y * _tb1d_nF(y)
+    end / N
+end
+
+function _tb1d_thermo_finite(::SpecificHeat, eigenvalues::AbstractVector{<:Real}, β::Real)
+    N = length(eigenvalues)
+    return sum(eigenvalues) do ε
+        y = β * ε
+        n = _tb1d_nF(y)
+        return ε^2 * n * (1 - n)
+    end * (β^2 / N)
+end
+
+function _tb1d_thermo_finite(
+    ::NMRSpinRelaxationRate, eigenvalues::AbstractVector{<:Real}, β::Real, η::Real
+)
+    η > 0 || throw(
+        DomainError(η, "TightBinding1D NMRSpinRelaxationRate requires η > 0; got η = $η."),
+    )
+    N = length(eigenvalues)
+    s = 0.0
+    for ε1 in eigenvalues
+        f1 = _tb1d_nF(β * ε1)
+        for ε2 in eigenvalues
+            f2 = _tb1d_nF(β * ε2)
+            lorentz = η / (π * ((ε1 - ε2)^2 + η^2))
+            s += f1 * (1.0 - f2) * lorentz
         end
-        return s / N^2
-    else
-        error("Unknown TightBinding1D finite quantity: $quantity")
     end
+    return s / N^2
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -531,18 +595,13 @@ function fetch(
 end
 
 # ── OBC / PBC thermal quantities ──
-const _TB1D_THERMAL_QUANTITIES = (
-    (FreeEnergy, :free_energy),
-    (ThermalEntropy, :entropy),
-    (SpecificHeat, :specific_heat),
-    (NMRSpinRelaxationRate, :nmr_relaxation),
-)
+const _TB1D_THERMAL_QUANTITIES = (FreeEnergy, ThermalEntropy, SpecificHeat)
 
-for (QTy, qsym) in _TB1D_THERMAL_QUANTITIES
+for QTy in _TB1D_THERMAL_QUANTITIES
     @eval begin
         function fetch(
             m::TightBinding1D,
-            ::$QTy,
+            q::$QTy,
             bc::Union{OBC,PBC};
             beta::Real,
             t::Real=m.t,
@@ -563,7 +622,36 @@ for (QTy, qsym) in _TB1D_THERMAL_QUANTITIES
             N = _bc_size(bc, kwargs)
             eigenvalues =
                 bc isa OBC ? _tb1d_obc_spectrum(N, t, μ) : _tb1d_pbc_spectrum(N, t, μ)
-            return _tb1d_thermo_finite($(QuoteNode(qsym)), eigenvalues, beta; kwargs...)
+            return _tb1d_thermo_finite(q, eigenvalues, beta)
         end
     end
+end
+
+# The generated methods above spell the quantity as `string(QTy)`, which renders
+# the qualified name `AbstractQAtlas.NMRSpinRelaxationRate`.  Bind it once so
+# this hand-written method produces byte-identical messages.
+const _TB1D_NMR_NAME = string(NMRSpinRelaxationRate)
+
+# `NMRSpinRelaxationRate` takes the Lorentzian broadening as a named keyword
+# rather than through the forwarded `kwargs`, so the numeric kernel is not
+# specialized on the caller's keyword NamedTuple type.  `Float64(eta)`
+# reproduces the conversion the previous `Float64(get(kwargs, :eta, 0.1))` did.
+function fetch(
+    m::TightBinding1D,
+    q::NMRSpinRelaxationRate,
+    bc::Union{OBC,PBC};
+    beta::Real,
+    eta::Real=0.1,
+    t::Real=m.t,
+    μ::Real=m.μ,
+    kwargs...,
+)
+    t > 0 ||
+        throw(DomainError(t, "TightBinding1D $_TB1D_NMR_NAME requires t > 0; got t = $t."))
+    beta > 0 || throw(
+        DomainError(beta, "TightBinding1D $_TB1D_NMR_NAME requires β > 0; got β = $beta."),
+    )
+    N = _bc_size(bc, kwargs)
+    eigenvalues = bc isa OBC ? _tb1d_obc_spectrum(N, t, μ) : _tb1d_pbc_spectrum(N, t, μ)
+    return _tb1d_thermo_finite(q, eigenvalues, beta, Float64(eta))
 end

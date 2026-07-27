@@ -90,15 +90,15 @@ function _heisenberg1d_cft_specific_heat(J::Real, beta::Real)
 end
 
 """
-    _heisenberg1d_cft_validity_warn(quantity::Symbol, J::Real, beta::Real)
+    _heisenberg1d_cft_validity_warn(quantity::AbstractQuantity, J::Real, beta::Real)
 
 Emit a `@warn` naming Klümper-Δ→1 (#521 Path A) as the proper extension
 and return NaN. Called when β is below the LO-CFT validity floor.
 """
-function _heisenberg1d_cft_validity_warn(quantity::Symbol, J::Real, beta::Real)
+function _heisenberg1d_cft_validity_warn(quantity::AbstractQuantity, J::Real, beta::Real)
     @warn (
         "Heisenberg1D " *
-        String(quantity) *
+        String(nameof(typeof(quantity))) *
         " at Infinite() uses a c=1 " *
         "CFT low-T expansion that is only accurate for β > $(_HEIS_CFT_BETA_MIN)/J. " *
         "At β = $(beta) (T = $(round(1/beta; digits=3))) the LO term has > 5% " *
@@ -117,7 +117,9 @@ Per-site free energy of the infinite spin-1/2 Heisenberg AF chain via
 leading-order c = 1 CFT. Returns `e₀ - π T² / (6 v_s)` for β > 5/J;
 otherwise NaN + warn. `β ≤ 0` raises `DomainError`.
 """
-function fetch(::Heisenberg1D, ::FreeEnergy, ::Infinite; beta::Real, J::Real=1.0, kwargs...)
+function fetch(
+    ::Heisenberg1D, q::FreeEnergy, ::Infinite; beta::Real, J::Real=1.0, kwargs...
+)
     isempty(kwargs) || @warn(
         "fetch(Heisenberg1D, FreeEnergy, Infinite) received unrecognized kwargs; they are ignored.",
         kwargs=collect(keys(kwargs))
@@ -125,7 +127,7 @@ function fetch(::Heisenberg1D, ::FreeEnergy, ::Infinite; beta::Real, J::Real=1.0
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     J > 0 || throw(DomainError(J, "J must be > 0"))
     if beta * J ≤ _HEIS_CFT_BETA_MIN
-        return _heisenberg1d_cft_validity_warn(:FreeEnergy, J, beta)
+        return _heisenberg1d_cft_validity_warn(q, J, beta)
     end
     return _heisenberg1d_cft_freeenergy(J, beta)
 end
@@ -136,7 +138,7 @@ end
 Per-site entropy via leading-order c = 1 CFT: `s = π T / (3 v_s) = 2T / (3J)`.
 """
 function fetch(
-    ::Heisenberg1D, ::ThermalEntropy, ::Infinite; beta::Real, J::Real=1.0, kwargs...
+    ::Heisenberg1D, q::ThermalEntropy, ::Infinite; beta::Real, J::Real=1.0, kwargs...
 )
     isempty(kwargs) || @warn(
         "fetch(Heisenberg1D, ThermalEntropy, Infinite) received unrecognized kwargs; they are ignored.",
@@ -145,7 +147,7 @@ function fetch(
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     J > 0 || throw(DomainError(J, "J must be > 0"))
     if beta * J ≤ _HEIS_CFT_BETA_MIN
-        return _heisenberg1d_cft_validity_warn(:ThermalEntropy, J, beta)
+        return _heisenberg1d_cft_validity_warn(q, J, beta)
     end
     return _heisenberg1d_cft_entropy(J, beta)
 end
@@ -156,7 +158,7 @@ end
 Per-site heat capacity via leading-order c = 1 CFT: `c_v = π T / (3 v_s) = 2T / (3J)`.
 """
 function fetch(
-    ::Heisenberg1D, ::SpecificHeat, ::Infinite; beta::Real, J::Real=1.0, kwargs...
+    ::Heisenberg1D, q::SpecificHeat, ::Infinite; beta::Real, J::Real=1.0, kwargs...
 )
     isempty(kwargs) || @warn(
         "fetch(Heisenberg1D, SpecificHeat, Infinite) received unrecognized kwargs; they are ignored.",
@@ -165,7 +167,7 @@ function fetch(
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     J > 0 || throw(DomainError(J, "J must be > 0"))
     if beta * J ≤ _HEIS_CFT_BETA_MIN
-        return _heisenberg1d_cft_validity_warn(:SpecificHeat, J, beta)
+        return _heisenberg1d_cft_validity_warn(q, J, beta)
     end
     return _heisenberg1d_cft_specific_heat(J, beta)
 end

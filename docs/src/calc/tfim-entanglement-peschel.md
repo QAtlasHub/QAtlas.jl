@@ -37,6 +37,36 @@ against a full-ED SVD reference for $N = 10$ at every $\ell \in
 [1, N - 1]$ and three $(J, h)$ points, agreeing to $\sim 10^{-14}$
 (machine precision).
 
+### Naming the block: `region` as well as `ℓ`
+
+The same method also accepts `region = Region(a:b)`, a block anywhere in the
+chain rather than only the leading `1:ℓ` (`ℓ = k` is exactly
+`region = Region(1:k)`). Restricting the Majorana covariance to that block's
+indices is the same equation (1); nothing about the derivation changes.
+
+What does change is the range of validity. The Jordan–Wigner factorisation
+argument above holds for **one contiguous interval** — the parity operator left
+on $A$ commutes with $\rho_A$ only then. For two or more disjoint intervals the
+fermionic and spin entropies genuinely differ, so the method **throws** rather
+than returning the fermionic one. Measured at $N = 8$, $J = 1$, $h = 0.5$:
+
+| region | $S_{\text{spin}}$ (ED) | $S_{\text{fermion}}$ | gap |
+|---|---|---|---|
+| $\{3,4\}$, $\{5,6\}$, $\{3,4,5,6\}$ | — | — | $\sim 10^{-14}$ |
+| $\{1,3\}$ | 0.7036 | 1.2026 | 0.499 |
+| $\{2,4\}$ | 0.7215 | 1.2795 | 0.558 |
+| $\{1,2,5,6\}$ | 0.7192 | 1.3194 | 0.600 |
+
+The gap is 70–80%, not a rounding error — and *no entropy inequality would flag
+it*, since both columns are honest von Neumann entropies of honest states. That
+is why this is a hard error and not a documented caveat.
+
+It costs nothing for the region inequalities themselves: choosing the blocks
+**adjacent** ($A = 1{:}2$, $B = 3{:}4$, $C = 5{:}6$) makes every entropy
+subadditivity, Araki–Lieb, strong subadditivity and weak monotonicity need —
+$S(A), S(B), S(C), S(A\cup B), S(B\cup C), S(A\cup B\cup C)$ — a single interval
+again.
+
 ---
 
 ## Setup

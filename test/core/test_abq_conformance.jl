@@ -120,8 +120,21 @@ it is not QAtlas's to fix: 68 of the 129 have no quantity slot at all (blocked
 upstream), and 51 more name quantities this atlas does not compute.
 """
 const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
-    :SusceptibilityFDT => "needs var_M, the magnetization variance — the sibling of the \
-                           var_E supplier that SpecificHeatFDT already uses"
+    # NOT simply "needs a var_M supplier".  χ = β·var_M, and the only supplier
+    # shape available here is a derivative — but Var(M) = (1/β)·∂M/∂h, so
+    # supplying it that way makes the relation assert χ = ∂M/∂h, which is exactly
+    # what `susceptibility_response` already checks.  It would read as a new
+    # check and be the same one rearranged.
+    #
+    # `SpecificHeatFDT` is independent for a reason that has no analogue here: it
+    # reaches C through the ENERGY while `:specific_heat_from_entropy` reaches it
+    # through the ENTROPY.  There is no second route to χ.
+    #
+    # Closing this needs a GENUINE fluctuation — ⟨M²⟩ − ⟨M⟩² computed from the
+    # state, not a rearranged derivative.  The dense-ED hubs can produce one.
+    :SusceptibilityFDT => "needs a genuine var_M = ⟨M²⟩ − ⟨M⟩²; supplying it as a \
+                           derivative collapses the relation onto \
+                           susceptibility_response — see the note above",
 )
 
 @testset "AbstractQAtlas relation conformance" begin

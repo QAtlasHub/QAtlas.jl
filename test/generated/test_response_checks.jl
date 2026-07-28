@@ -41,8 +41,11 @@ end
 end
 
 @testset "response! refuses what it cannot materialize" begin
-    # A field derivative needs a model-parameter mechanism that does not exist.
-    @test_throws ArgumentError QAtlas.∂(QAtlas.FreeEnergy, :h)
+    # A MODEL axis is now supported (`_diff_target` rebuilds the model with
+    # `_with_param`), so `:h` is no longer rejected — it is pinned to finite
+    # differences instead.  What must still be rejected is a field the model
+    # does not have; that throws at evaluation, from `_with_param`.
+    @test QAtlas.∂(QAtlas.FreeEnergy, :h) isa QAtlas.DerivedInput
     # An untyped slot left unsupplied would be a check that never runs.
     @test_throws ArgumentError QAtlas.response!(
         :_probe_unsupplied; relation=QAtlas.EntropyResponse, derived=NamedTuple()
@@ -87,16 +90,25 @@ end
     ids = [c.id for c in generated_checks(; kinds=(:response,))]
     mag = filter(startswith("response/magnetization_response/"), ids)
     sus = filter(startswith("response/susceptibility_response/"), ids)
+    # Log what was generated: when one of these assertions fails the useful
+    # information is WHICH hubs appeared, and `@test any(...)` does not print it.
+    @info "model-axis edges" mag sus
     @test !isempty(mag)
-    @test any(occursin("/CurieWeissIsing/"), mag)
-    @test any(occursin("/IsingChain1D/"), mag)
-    @test !any(occursin("/TFIM/"), mag)          # transverse field — must not be checked
     @test !isempty(sus)
-    @test any(occursin("/CurieWeissIsing/"), sus)
+    # The allow-list is opt-IN, so only the two longitudinal-field models appear.
+    @test all(i -> occursin("/CurieWeissIsing/", i) || occursin("/IsingChain1D/", i), mag)
+    @test all(i -> occursin("/CurieWeissIsing/", i), sus)
+    # A transverse-field model must never be checked against M_z = -∂F/∂h.
+    @test !any(occursin("/TFIM/"), mag)
     # IsingChain1D's SusceptibilityZZ is h = 0 only, and this edge sits at h ≠ 0.
     @test !any(occursin("/IsingChain1D/"), sus)
-    # An edge with no allow-list keeps generating everywhere.
-    @test any(occursin("/TFIM/"), filter(startswith("response/entropy_response/"), ids))
+    # An edge with no `models` allow-list reaches strictly more hubs than one
+    # with it.  (`entropy_response` happens to exclude TFIM for an unrelated
+    # reason — see _THERMO_DERIVATIVE_EXCLUSIONS — so assert the structural
+    # property, not a particular model.)
+    open_edge = filter(startswith("response/entropy_response/"), ids)
+    hubs_of(v) = Set(join(split(i, "/")[3:4], "/") for i in v)
+    @test length(hubs_of(open_edge)) > length(hubs_of(mag))
 
     # A model axis is pinned to finite differences: rebuilding a struct whose
     # fields are ::Float64 with an AD dual destroys the derivative silently.

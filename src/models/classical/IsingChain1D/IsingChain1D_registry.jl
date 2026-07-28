@@ -77,7 +77,9 @@
     reliability=:high,
     tested_in="test/models/classical/test_ising_chain_1d.jl",
     references=["Ising1925", "Brush1967"],
-    notes="chi(b,h=0) = b exp(2bJ) per site; h=0 only.",
+    notes="chi(b,h) = b cosh(bh) e^{-4bJ} / (sinh^2(bh) + e^{-4bJ})^{3/2} per site, " *
+          "from d/dh of the transfer-matrix magnetisation; reduces to b exp(2bJ) at h=0. " *
+          "DERIVATION-BACKED like the Magnetization{:z} row it differentiates (#762).",
 )
 
 @register(

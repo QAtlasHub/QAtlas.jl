@@ -233,8 +233,8 @@ end
     method=:dense_ed,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
-    notes="Dense-ED partial trace over the SPIN complement, so the subsystem may "
-          "be ANY region — pass `region` (a Region, contiguous or not) or the block "
+    notes="Dense-ED partial trace over the SPIN complement, so the subsystem may " *
+          "be ANY region — pass `region` (a Region, contiguous or not) or the block " *
           "length `ℓ`, which means Region(1:ℓ); β=Inf gives ground-state EE (#780).",
 )
 @register(

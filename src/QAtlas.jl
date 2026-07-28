@@ -193,6 +193,7 @@ include("core/symmetry.jl")     # @symmetry node attributes + LSM checks (C10)
 include("core/identity.jl")      # @identity quantity<->quantity edges (C11)
 include("core/bound.jl")         # @bound: the inequality sibling (#734 Phase B)
 include("core/response.jl")      # @response: relations needing a derived input
+include("core/region_checks.jl")  # @region: the entropy inequalities over REGIONS (#780 step 3)
 include("core/duality.jl")      # @dual model<->model parameter-mapped edges (C12)
 include("core/limits.jl")       # @limits_to asymptotic limit edges (C13)
 include("core/pfaffian.jl")
@@ -550,6 +551,7 @@ include("symmetry_registry.jl")
 include("identity_registry.jl")
 include("bound_registry.jl")            # @bound inequality edges (#734 Phase B)
 include("response_registry.jl")         # @response derivative-supplied edges
+include("region_registry.jl")
 include("relations/model_specific.jl")   # #730: model-specific relations, hosted here
 include("duality_registry.jl")
 include("limits_registry.jl")

@@ -33,13 +33,22 @@
 # rejects it.  So: materializable on a hub iff it has at least one QUANTITY slot
 # and every quantity slot is implemented there.
 #
-# A relation with no quantity slot at all cannot be hung on a hub by any
-# generator, and no amount of QAtlas-side work changes that — the block is
-# upstream, in how AbstractQAtlas declares the relation.  That is where the whole
-# entanglement family sits: `Subadditivity`'s S_A / S_B / S_AB are all untyped,
-# because there is no region-parameterized entropy quantity to type them WITH.
+# A relation with no quantity slot at all cannot be hung on a hub by a
+# TYPE-DISPATCHING generator (`@identity` / `@bound` / `@response`), because
+# there is nothing to look up.  This file used to say the block was therefore
+# upstream and unfixable, and named the entanglement family as the example:
+# `Subadditivity`'s S_A / S_B / S_AB are untyped, since there is no
+# region-parameterized entropy quantity to type them WITH.
 #
-# The metric is self-checking: it reproduces exactly the seven relations that are
+# THAT WAS WRONG, and #780 is the correction.  The slots are untyped BY DESIGN:
+# they are the same quantity — `VonNeumannEntropy` — on different REGIONS, and
+# AbstractQAtlas keys those by VALUE (`RegionSupport`), not by type.  A generator
+# that dispatches on regions instead of on types reaches them fine; `@region`
+# (core/region_checks.jl) is that generator, and `_region_wired_relations()`
+# below reads its relations back.  So "no quantity slot" means "not reachable by
+# type dispatch", NOT "not reachable".
+#
+# The metric is self-checking: it reproduces exactly the relations that are
 # actually wired and emitting checks.  Two looser variants tried first did not —
 # one over-counted by using `quantities()`, the other under-counted by treating
 # `InverseTemperature` as something a hub must implement.
@@ -93,6 +102,27 @@ function _wired_relations()
             push!(wired, nameof(typeof(getproperty(edge, field))))
         end
     end
+    return union(wired, _region_wired_relations())
+end
+
+# ── relations wired by the :region generator ────────────────────────────────
+#
+# A `RegionEdge` stores BLOCKS, not a relation object: which inequalities apply
+# is DISCOVERED by ABQ's `region_report` from the region set, at runtime.  So the
+# field scan above cannot see them, and they would read as unwired.
+#
+# Read them back exactly the way the generator computes them — a placeholder bag
+# over the declared blocks — so the two cannot drift.  Change the blocks and this
+# follows; teach ABQ a new region inequality and this picks it up with no edit.
+function _region_wired_relations()
+    wired = Set{Symbol}()
+    for e in QAtlas.REGION_EDGES
+        family = QAtlas._region_family(e.blocks)
+        probe = ABQ.bag((ABQ.entanglement_entropy(Region(s...)) => 0.0 for s in family)...)
+        for row in ABQ.region_report(probe)
+            push!(wired, nameof(typeof(row.relation)))
+        end
+    end
     return wired
 end
 
@@ -114,10 +144,13 @@ somewhere — but are not.  The value names what is missing, so the list reads a
 work queue rather than a suppression list.  Remove an entry in the same PR that
 wires the relation.
 
-This list is the whole of QAtlas's remaining #734 surface, and it is three
-entries long.  The large body of unmaterialized ABQ relations is not here because
-it is not QAtlas's to fix: 68 of the 129 have no quantity slot at all (blocked
-upstream), and 51 more name quantities this atlas does not compute.
+This list is the whole of QAtlas's remaining #734 surface reachable by TYPE
+dispatch.  The large body of unmaterialized ABQ relations is not here because it
+is not reachable that way: most have no quantity slot at all, and many more name
+quantities this atlas does not compute.  "No quantity slot" is not a verdict of
+unreachability — the region inequalities had none and are wired now, by
+dispatching on regions instead (#780) — so that bucket is a QUEUE of relations
+needing a differently-shaped generator, not a closed set.
 """
 const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # NOT simply "needs a var_M supplier".  χ = β·var_M, and the only supplier
@@ -146,13 +179,20 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
 
     wired = union(_wired_relations(), keys(WIRED_WITHOUT_A_STORED_RELATION))
 
-    materializable = Dict{Symbol,Int}()   # name => hub count
-    no_quantity_slot = Symbol[]           # blocked upstream in ABQ
+    materializable = Dict{Symbol,Int}()   # name => hub count, by TYPE dispatch
+    wired_by_region = _region_wired_relations()
+    no_quantity_slot = Symbol[]           # not reachable by type dispatch, not yet wired
     unimplemented_here = Symbol[]         # QAtlas does not compute those quantities
     for rel in rels
         name = nameof(typeof(rel))
         if isempty(_quantity_slots(rel))
-            push!(no_quantity_slot, name)
+            # No quantity slot means "no TYPE to dispatch on", which is a
+            # statement about the generator shape, not about reachability.  A
+            # relation already wired by region dispatch is not blocked by
+            # anything and must not be counted as if it were (#780) — that
+            # bucket is a queue, and leaving a solved item in it would misreport
+            # the remaining work as larger than it is.
+            name in wired_by_region || push!(no_quantity_slot, name)
             continue
         end
         n = _materializable_hub_count(rel, hubs)
@@ -221,6 +261,15 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
         end
     end
 
+    # The :region checks carry their relation in the id rather than on an edge,
+    # so they are collected by the same discovered set, not by a field scan.
+    for r in _region_wired_relations()
+        append!(
+            get!(checks_by_relation, r, QAtlas.GeneratedCheck[]),
+            filter(c -> c.kind === :region && occursin("/$(r)/", c.id), all_checks),
+        )
+    end
+
     "Does any check of this relation reach a verdict?  A skip is not one."
     function _reaches_a_verdict(rel::Symbol)
         for c in get(checks_by_relation, rel, QAtlas.GeneratedCheck[])
@@ -256,9 +305,9 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     #    discouraging total.
     @info "ABQ relation conformance" relations = length(rels) materializable = length(
         materializable
-    ) wired = length(intersect(keys(materializable), wired)) allow_listed = length(
+    ) wired_by_type = length(intersect(keys(materializable), wired)) allow_listed = length(
         MATERIALIZABLE_BUT_UNWIRED
-    ) blocked_upstream_no_quantity_slot = length(no_quantity_slot) quantities_not_implemented_here = length(
-        unimplemented_here
-    )
+    ) wired_by_region = length(wired_by_region) no_type_slot_not_yet_wired = length(
+        no_quantity_slot
+    ) quantities_not_implemented_here = length(unimplemented_here)
 end

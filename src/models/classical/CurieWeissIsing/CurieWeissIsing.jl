@@ -255,6 +255,47 @@ function fetch(
     return _curie_weiss_solve_m(beta * J, 0.0)
 end
 
+"""
+    fetch(::CurieWeissIsing, ::Magnetization{:z}, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Magnetisation per site `m(β, J, h)` of the Curie-Weiss Ising model at finite
+field: the stable root of the self-consistency equation
+
+    m = tanh(β J m + β h)
+
+solved by [`_curie_weiss_solve_m`](@ref).  At `h = 0` this reduces to
+[`SpontaneousMagnetization`](@ref) — the same solver called with `βh = 0`.
+
+This is an INDEPENDENT route, not a rewriting of the free energy: the value
+comes from bisecting the self-consistency equation, while `FreeEnergy` evaluates
+the Landau form.  A field-response check (`M = -∂F/∂h`) over the two is
+therefore a genuine cross-check of two different computations.
+
+Differentiable in `β` and `h`: the solver re-attaches the derivative from the
+implicit-function theorem rather than differentiating through the bisection
+(see the comment on `_curie_weiss_solve_m`).
+
+# References
+
+- L. D. Landau, E. M. Lifshitz, *Statistical Physics* (1980), §143 — the
+  mean-field self-consistency equation.
+"""
+function fetch(
+    m::CurieWeissIsing,
+    ::Magnetization{:z},
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 || throw(
+        DomainError(beta, "CurieWeissIsing Magnetization requires β > 0; got β = $beta."),
+    )
+    return _curie_weiss_solve_m(beta * J, beta * h)
+end
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # Critical exponents — delegate to mean-field universality
 # ═══════════════════════════════════════════════════════════════════════════════

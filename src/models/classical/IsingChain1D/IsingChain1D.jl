@@ -315,6 +315,46 @@ function fetch(
 end
 
 """
+    fetch(::IsingChain1D, ::Magnetization{:z}, ::Infinite;
+          beta::Real, J=m.J, h=m.h) -> Float64
+
+Magnetisation per site of the 1-D Ising chain in a longitudinal field,
+
+    m(β, h) = sinh(βh) / sqrt(sinh²(βh) + e^{-4βJ}),
+
+the transfer-matrix result.  `m(β, 0) = 0` for every finite `β` — the 1-D chain
+has no spontaneous magnetisation (Ising 1925) — and `m → tanh(βh)` as `J → 0`,
+the free-spin limit.
+
+!!! note "Derivation-backed, and deliberately recorded as such"
+    This closed form IS `-∂f/∂h` of [`FreeEnergy`](@ref), carried out
+    analytically on the same transfer-matrix eigenvalue.  A field-response check
+    against a NUMERICAL `-∂F/∂h` therefore validates the algebra and the
+    differentiation machinery — it is not two independent physical routes, the
+    way the Curie-Weiss self-consistency root is.  See QAtlas #762 on making
+    derivation-backed rows machine-visible.
+
+# References
+
+- E. Ising, *Z. Phys.* **31**, 253 (1925).
+"""
+function fetch(
+    m::IsingChain1D,
+    ::Magnetization{:z},
+    ::Infinite;
+    beta::Real,
+    J::Real=m.J,
+    h::Real=m.h,
+    kwargs...,
+)
+    beta > 0 || throw(
+        DomainError(beta, "IsingChain1D Magnetization requires β > 0; got β = $beta.")
+    )
+    sh = sinh(beta * h)
+    return sh / sqrt(sh^2 + exp(-4 * beta * J))
+end
+
+"""
     fetch(::IsingChain1D, ::SpontaneousMagnetization, ::Infinite;
           beta::Real, J=m.J, h=m.h) -> Float64
 

@@ -88,3 +88,67 @@ const _BETA_PINNED_ENERGY_MODELS = [
     rtol_floor = 1e-4,
     notes = "C = β² Var(E), Var(E) = -∂⟨E⟩/∂β — the fluctuation route, independent of C = T ∂S/∂T.",
 )
+# ── M_z = -∂F/∂h  and  χ_zz = ∂M_z/∂h ─────────────────────────────────
+# MODEL-axis derivatives: `h` is a field of the model, not a fetch kwarg, so
+# these rebuild the model at each step and are finite-difference only (see
+# `_diff_target`).  Reported at the finite-difference tolerance accordingly.
+#
+# WHY AN ALLOW-LIST AND NOT AN EXCLUSION LIST.  AbstractQAtlas types the subject
+# `Magnetization{:z}` / `Susceptibility{(:z,:z)}`, so these relations hold only
+# where `h` is the LONGITUDINAL field.  It is not, in this atlas:
+#
+#     -h Σ σᶻ  (longitudinal, valid)   IsingChain1D, CurieWeissIsing
+#     -h Σ σˣ  (TRANSVERSE, invalid)   TFIM, LongRangeIsing1D
+#
+# For a transverse-field model -∂F/∂h is ⟨σˣ⟩, not M_z.  Both differentiation
+# backends would agree on that wrong number, so `derivative_agreement` cannot
+# save us — the cross-check catches a bad METHOD, never a relation applied to a
+# Hamiltonian it does not describe.  Hence opt-in: a model added later is
+# skipped rather than checked against physics that does not apply to it.
+const _LONGITUDINAL_FIELD_MODELS = [IsingChain1D, CurieWeissIsing]
+
+# WHERE these are evaluated, and why it is NOT the default model.  At h = 0 both
+# sides vanish by symmetry, so the check would be vacuous in the disordered
+# phase; and below T_c the free energy has a KINK at h = 0 (a first-order
+# transition in the field), where a central difference straddles the jump and
+# returns 0 while the true one-sided derivative is the spontaneous
+# magnetisation.  Measured on CurieWeissIsing at βJ = 2: m(0⁺) = 0.9575 against
+# a central difference of 0.  Both edges are therefore placed at h ≠ 0, where F
+# is differentiable and the identity has content.
+
+# IsingChain1D is absent from this one on purpose: its `SusceptibilityZZ` is
+# implemented at h = 0 only ("closed forms exist; this is scope, not
+# feasibility"), and this edge is evaluated at h ≠ 0.  The h ≠ 0 closed form,
+# χ_zz = β cosh(βh) e^{-4βJ} / (sinh²βh + e^{-4βJ})^{3/2}, follows directly from
+# the M_z row and reduces to the existing β e^{2βJ} at h = 0; adding it and
+# putting IsingChain1D back here is its own change.
+@response(
+    :susceptibility_response,
+    relation = SusceptibilityResponse,
+    derived = (dM_dh=∂(Magnetization{:z}, :h),),
+    at = (h=0.35,),
+    models = [CurieWeissIsing],
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,
+    rtol_floor = 1e-4,
+    notes = "χ_zz = ∂M_z/∂h — the isothermal susceptibility as a field response.",
+)
+
+@response(
+    :magnetization_response,
+    relation = MagnetizationResponse,
+    # NO `then` negation: AbstractQAtlas's relation is M = -dF_dh (verified:
+    # solve(MagnetizationResponse(), Val(:M); dF_dh=0.5) == -0.5), so the slot
+    # wants the RAW ∂F/∂h.  Negating here too made it M = +∂F/∂h.  At h = 0 the
+    # error was invisible — both sides are 0 — which is why this edge is placed
+    # at h ≠ 0.
+    derived = (dF_dh=∂(FreeEnergy, :h),),
+    at = (h=0.35,),
+    models = _LONGITUDINAL_FIELD_MODELS,
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,
+    rtol_floor = 1e-4,
+    notes = "M_z = -∂F/∂h — valid only where h is the longitudinal field.",
+)

@@ -41,8 +41,11 @@ end
 end
 
 @testset "response! refuses what it cannot materialize" begin
-    # A field derivative needs a model-parameter mechanism that does not exist.
-    @test_throws ArgumentError QAtlas.∂(QAtlas.FreeEnergy, :h)
+    # A MODEL axis is now supported (`_diff_target` rebuilds the model with
+    # `_with_param`), so `:h` is no longer rejected — it is pinned to finite
+    # differences instead.  What must still be rejected is a field the model
+    # does not have; that throws at evaluation, from `_with_param`.
+    @test QAtlas.∂(QAtlas.FreeEnergy, :h) isa QAtlas.DerivedInput
     # An untyped slot left unsupplied would be a check that never runs.
     @test_throws ArgumentError QAtlas.response!(
         :_probe_unsupplied; relation=QAtlas.EntropyResponse, derived=NamedTuple()
@@ -78,4 +81,61 @@ end
     from_U = hubs("response/specific_heat_fdt/")
     @test !isempty(from_S) && !isempty(from_U)
     @test !isempty(intersect(from_S, from_U))   # hubs covered by both routes
+end
+
+@testset "model-axis derivatives are opt-in, placed, and finite-difference only" begin
+    # The allow-list is the defence the cross-check cannot provide: for a
+    # transverse-field model both backends agree on -∂F/∂h = ⟨σˣ⟩, which is not
+    # M_z, so nothing numerical would flag it.
+    ids = [c.id for c in generated_checks(; kinds=(:response,))]
+    mag = filter(startswith("response/magnetization_response/"), ids)
+    sus = filter(startswith("response/susceptibility_response/"), ids)
+    # Log what was generated: when one of these assertions fails the useful
+    # information is WHICH hubs appeared, and `@test any(...)` does not print it.
+    @info "model-axis edges" mag sus
+    @test !isempty(mag)
+    @test !isempty(sus)
+    # The allow-list is opt-IN, so only the two longitudinal-field models appear.
+    @test all(i -> occursin("/CurieWeissIsing/", i) || occursin("/IsingChain1D/", i), mag)
+    @test all(i -> occursin("/CurieWeissIsing/", i), sus)
+    # A transverse-field model must never be checked against M_z = -∂F/∂h.
+    @test !any(occursin("/TFIM/"), mag)
+    # IsingChain1D's SusceptibilityZZ is h = 0 only, and this edge sits at h ≠ 0.
+    @test !any(occursin("/IsingChain1D/"), sus)
+    # An edge with no `models` allow-list reaches strictly more hubs than one
+    # with it.  (`entropy_response` happens to exclude TFIM for an unrelated
+    # reason — see _THERMO_DERIVATIVE_EXCLUSIONS — so assert the structural
+    # property, not a particular model.)
+    open_edge = filter(startswith("response/entropy_response/"), ids)
+    hubs_of(v) = Set(join(split(i, "/")[3:4], "/") for i in v)
+    @test length(hubs_of(open_edge)) > length(hubs_of(mag))
+
+    # A model axis is pinned to finite differences: rebuilding a struct whose
+    # fields are ::Float64 with an AD dual destroys the derivative silently.
+    fd_axis = QAtlas.∂(QAtlas.FreeEnergy, :h)
+    st_axis = QAtlas.∂(QAtlas.FreeEnergy, :T)
+    @test QAtlas._axis_backend(fd_axis, QAtlas.ForwardDiffBackend()) isa
+        QAtlas.FiniteDifference
+    @test QAtlas._axis_backend(st_axis, QAtlas.ForwardDiffBackend()) isa
+        QAtlas.ForwardDiffBackend
+end
+
+@testset "a placed edge is evaluated where the identity has content" begin
+    # `at` exists because the DEFAULT model is the useless point for a field
+    # response: at h = 0 both M_z and -∂F/∂h vanish by symmetry, so the check
+    # passes while testing nothing — and below T_c it is worse than useless,
+    # because F has a kink there and a central difference straddles the jump.
+    # Measured on CurieWeissIsing at βJ = 2: m(0⁺) = 0.9575, central diff = 0.
+    m0 = QAtlas.CurieWeissIsing(; J=1.0, h=0.0)
+    placed = QAtlas._at_params(m0, (h=0.35,))
+    @test placed.h == 0.35
+    @test placed.J == m0.J
+    @test QAtlas._at_params(m0, NamedTuple()) === m0
+    # A field the model does not have is a declaration bug, not a silent no-op.
+    @test_throws ArgumentError QAtlas._at_params(m0, (nosuchfield=1.0,))
+
+    # The vacuity this guards against, stated as an assertion.
+    @test QAtlas.fetch(m0, QAtlas.Magnetization{:z}(), QAtlas.Infinite(); beta=0.5) == 0.0
+    @test QAtlas.fetch(placed, QAtlas.Magnetization{:z}(), QAtlas.Infinite(); beta=0.5) >
+        0.1
 end

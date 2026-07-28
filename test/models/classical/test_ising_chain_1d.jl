@@ -322,3 +322,60 @@ end
         IsingChain1D(; J=1.0, h=0.3), Magnetization{:z}(), Infinite(); beta=0.0
     )
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Longitudinal susceptibility at finite field.
+#
+# χ(β,h) = β cosh(βh) e^{-4βJ} / (sinh²βh + e^{-4βJ})^{3/2} is ∂m/∂h of the
+# transfer-matrix magnetisation, so the numerical field derivative is the check
+# of the ALGEBRA (derivation-backed, like the M_z row — see #762).  The h = 0
+# reduction to β e^{2βJ} is the independent anchor: that form is textbook
+# (Brush 1967) and predates this generalisation.
+# ─────────────────────────────────────────────────────────────────────────────
+@testset "IsingChain1D susceptibility at finite field" begin
+    # Reduces EXACTLY to the zero-field textbook form it replaces.
+    for (J, β) in ((1.0, 0.5), (1.0, 2.0), (0.4, 3.0), (2.0, 0.3))
+        χ = QAtlas.fetch(IsingChain1D(; J=J, h=0.0), SusceptibilityZZ(), Infinite(); beta=β)
+        @test χ ≈ β * exp(2 * β * J) rtol = 1e-13
+    end
+
+    # At h ≠ 0 it is ∂m/∂h.
+    for (J, h, β) in ((1.0, 0.35, 0.5), (1.0, 0.35, 2.0), (0.5, 1.0, 1.0), (2.0, 0.2, 0.7))
+        χ = QAtlas.fetch(IsingChain1D(; J=J, h=h), SusceptibilityZZ(), Infinite(); beta=β)
+        δ = 1e-6
+        mp = QAtlas.fetch(
+            IsingChain1D(; J=J, h=h + δ), Magnetization{:z}(), Infinite(); beta=β
+        )
+        mm = QAtlas.fetch(
+            IsingChain1D(; J=J, h=h - δ), Magnetization{:z}(), Infinite(); beta=β
+        )
+        @test χ ≈ (mp - mm) / (2δ) rtol = 1e-6
+    end
+
+    # Positive, even in h, and saturating: a field aligns the spins, leaving
+    # less room to respond.
+    for h in (0.5, 1.0, 2.0)
+        χp = QAtlas.fetch(
+            IsingChain1D(; J=1.0, h=h), SusceptibilityZZ(), Infinite(); beta=1.0
+        )
+        χm = QAtlas.fetch(
+            IsingChain1D(; J=1.0, h=(-h)), SusceptibilityZZ(), Infinite(); beta=1.0
+        )
+        @test χp > 0
+        @test χp ≈ χm rtol = 1e-14
+    end
+    χ0 = QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=0.0), SusceptibilityZZ(), Infinite(); beta=1.0
+    )
+    χ1 = QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=1.0), SusceptibilityZZ(), Infinite(); beta=1.0
+    )
+    χ2 = QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=2.0), SusceptibilityZZ(), Infinite(); beta=1.0
+    )
+    @test χ0 > χ1 > χ2
+
+    @test_throws DomainError QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=0.3), SusceptibilityZZ(), Infinite(); beta=0.0
+    )
+end

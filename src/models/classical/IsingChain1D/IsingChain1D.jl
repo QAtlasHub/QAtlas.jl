@@ -289,9 +289,18 @@ end
     fetch(::IsingChain1D, ::SusceptibilityZZ, ::Infinite;
           beta::Real, J=m.J, h=m.h) -> Float64
 
-Zero-field longitudinal susceptibility per site (Brush 1967):
+Longitudinal susceptibility per site at arbitrary field,
 
-    χ(β, h=0) = β e^{2 β J}.
+    χ(β, h) = β cosh(βh) e^{-4βJ} / (sinh²(βh) + e^{-4βJ})^{3/2},
+
+obtained by differentiating the transfer-matrix magnetisation
+`m = sinh(βh)/√(sinh²(βh) + e^{-4βJ})` with respect to `h`.  At `h = 0` it
+reduces to the textbook zero-field form `χ = β e^{2βJ}` (Brush 1967) exactly.
+
+!!! note "Derivation-backed"
+    Like the `Magnetization{:z}` row it comes from, this is `∂m/∂h` carried out
+    analytically rather than an independent route, so a response check against a
+    numerical field derivative tests the algebra and the machinery (#762).
 
 # References
 - E. Ising, *Z. Phys.* **31**, 253 (1925).
@@ -310,8 +319,9 @@ function fetch(
     beta > 0 || throw(
         DomainError(beta, "IsingChain1D SusceptibilityZZ requires β > 0; got β = $beta."),
     )
-    _isingchain1d_require_zero_field(h, "SusceptibilityZZ")
-    return beta * exp(2 * beta * J)
+    sh = sinh(beta * h)
+    a = exp(-4 * beta * J)
+    return beta * cosh(beta * h) * a / (sh^2 + a)^(3//2)
 end
 
 """

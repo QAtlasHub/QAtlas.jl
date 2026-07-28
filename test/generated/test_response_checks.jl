@@ -97,11 +97,18 @@ end
     @test !isempty(sus)
     # The allow-list is opt-IN, so only the two longitudinal-field models appear.
     @test all(i -> occursin("/CurieWeissIsing/", i) || occursin("/IsingChain1D/", i), mag)
-    @test all(i -> occursin("/CurieWeissIsing/", i), sus)
     # A transverse-field model must never be checked against M_z = -∂F/∂h.
-    @test !any(occursin("/TFIM/"), mag)
-    # IsingChain1D's SusceptibilityZZ is h = 0 only, and this edge sits at h ≠ 0.
-    @test !any(occursin("/IsingChain1D/"), sus)
+    # NOTE the two-argument form.  `occursin(x)` curries the HAYSTACK, not the
+    # needle — `occursin("/TFIM/")` builds `Fix2(occursin, "/TFIM/")`, which asks
+    # whether the id occurs inside "/TFIM/" and is therefore always false.  A
+    # NEGATIVE assertion written that way passes vacuously; this one did, and
+    # tested nothing, until a positive assertion in the same style failed loudly
+    # enough to be traced.  (`startswith`/`endswith` curry the pattern, which is
+    # what makes the asymmetry easy to miss.)
+    @test !any(i -> occursin("/TFIM/", i), mag)
+    # Both longitudinal-field models now carry a susceptibility at h ≠ 0.
+    @test all(i -> occursin("/CurieWeissIsing/", i) || occursin("/IsingChain1D/", i), sus)
+    @test any(i -> occursin("/IsingChain1D/", i), sus)
     # An edge with no `models` allow-list reaches strictly more hubs than one
     # with it.  (`entropy_response` happens to exclude TFIM for an unrelated
     # reason — see _THERMO_DERIVATIVE_EXCLUSIONS — so assert the structural

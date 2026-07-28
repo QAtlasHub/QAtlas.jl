@@ -116,18 +116,12 @@ const _LONGITUDINAL_FIELD_MODELS = [IsingChain1D, CurieWeissIsing]
 # a central difference of 0.  Both edges are therefore placed at h ≠ 0, where F
 # is differentiable and the identity has content.
 
-# IsingChain1D is absent from this one on purpose: its `SusceptibilityZZ` is
-# implemented at h = 0 only ("closed forms exist; this is scope, not
-# feasibility"), and this edge is evaluated at h ≠ 0.  The h ≠ 0 closed form,
-# χ_zz = β cosh(βh) e^{-4βJ} / (sinh²βh + e^{-4βJ})^{3/2}, follows directly from
-# the M_z row and reduces to the existing β e^{2βJ} at h = 0; adding it and
-# putting IsingChain1D back here is its own change.
 @response(
     :susceptibility_response,
     relation = SusceptibilityResponse,
     derived = (dM_dh=∂(Magnetization{:z}, :h),),
     at = (h=0.35,),
-    models = [CurieWeissIsing],
+    models = _LONGITUDINAL_FIELD_MODELS,
     sweep = (beta=[0.5, 1.0, 2.0],),
     finite_N = 6,
     exclusions = _THERMO_DERIVATIVE_EXCLUSIONS,

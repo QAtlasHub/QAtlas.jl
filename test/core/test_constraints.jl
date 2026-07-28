@@ -314,14 +314,17 @@ end
     @test allunique(c.id for c in checks)
     # Closed vocabulary on purpose: a new edge type must be DECLARED here, so it
     # cannot start emitting checks unnoticed.  `:bound` and `:response` joined
-    # in #734 Phase B.
-    declared_kinds = (:identity, :dual, :limit, :symmetry, :bound, :response)
+    # in #734 Phase B; `:region` in #780 step 3.
+    declared_kinds = (:identity, :dual, :limit, :symmetry, :bound, :response, :region)
     @test all(c.kind in declared_kinds for c in checks)
     # ...and say so usefully when it is forgotten.  Registering a generator and
-    # forgetting this list has now happened twice; comparing against the
-    # registry turns "some check has an unexpected kind" into a message that
-    # names the generator, without weakening the guard (the list is still
-    # hand-maintained — deriving it from the registry would defeat the point).
+    # forgetting this list has now happened THREE times — most recently `:region`,
+    # whose author ran only the two new test files locally and never reached this
+    # one.  Comparing against the registry turns "some check has an unexpected
+    # kind" into a message that names the generator, without weakening the guard
+    # (the list is still hand-maintained — deriving it from the registry would
+    # defeat the point).  Three occurrences is the argument FOR the guard, not
+    # against it: each time, CI said exactly what was missing.
     registered_kinds = Set(first(p) for p in QAtlas.CHECK_GENERATORS)
     undeclared = sort(collect(setdiff(registered_kinds, Set(declared_kinds))))
     if !isempty(undeclared)

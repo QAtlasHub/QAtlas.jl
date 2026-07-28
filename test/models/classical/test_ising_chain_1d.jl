@@ -255,12 +255,15 @@ end
     end
 end
 
-@testset "IsingChain1D — h ≠ 0 DomainError on new quantities" begin
+@testset "IsingChain1D — h ≠ 0 DomainError on the still-zero-field quantities" begin
     m = IsingChain1D(; J=1.0, h=0.3)
     @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite(); beta=1.0)
     @test_throws DomainError QAtlas.fetch(m, SpecificHeat(), Infinite(); beta=1.0)
     @test_throws DomainError QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=1.0)
-    @test_throws DomainError QAtlas.fetch(m, SusceptibilityZZ(), Infinite(); beta=1.0)
+    # `SusceptibilityZZ` used to be on this list.  It now has an h ≠ 0 closed
+    # form (see the finite-field testset above), so it must NOT throw — and the
+    # guard stays meaningful for the three that still lack one.
+    @test QAtlas.fetch(m, SusceptibilityZZ(), Infinite(); beta=1.0) > 0
     @test QAtlas.fetch(m, SpontaneousMagnetization(), Infinite(); beta=1.0) == 0.0
 end
 

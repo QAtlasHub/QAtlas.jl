@@ -274,7 +274,11 @@
     reliability=:high,
     tested_in="test/models/test_TFIM_entanglement.jl",
     references=["Peschel2003"],
-    notes="Free-fermion correlation-matrix method; pass subsystem length ℓ.",
+    notes="Free-fermion correlation-matrix method; pass the subsystem as `region` " *
+          "(a Region, anywhere in the chain) or as the block length `ℓ`, which is " *
+          "sugar for Region(1:ℓ). Single contiguous interval only — a multi-interval " *
+          "region throws, because the Jordan-Wigner string factorises only for one " *
+          "interval and the free-fermion answer would be the FERMIONIC entropy (#780).",
 )
 
 # ── PBC free-fermion thermal (per-site) — TFIM_pbc_thermal.jl ─────────

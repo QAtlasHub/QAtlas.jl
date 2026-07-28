@@ -35,6 +35,9 @@ using AbstractQAtlas:
     MassGap,
     MutualInformation,
     VonNeumannEntropy,
+    # Regions: the value-keyed support that lets `region_report` auto-discover the
+    # entropy inequalities over a bag of S(A) (#780).
+    Region,
     NMRRelaxationExponent,
     NMRSpinRelaxationRate,
     TopologicalEntanglementEntropy,
@@ -91,6 +94,9 @@ import AbstractQAtlas: fetch
 
 export AbstractModel, Model
 export BoundaryCondition, Infinite, PBC, OBC
+# Regions (AbstractQAtlas): the value-keyed support behind the entropy
+# inequalities, and now a fetch argument for the entanglement entropies (#780).
+export Region
 export AbstractQuantity, Quantity
 export fetch
 
@@ -172,6 +178,7 @@ export SYK                                              # Sachdev-Ye-Kitaev (#25
 include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
+include("core/regions.jl")     # `region`/`ℓ` fetch argument for the entanglement entropies (#780)
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
 include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
 include("core/registry.jl")

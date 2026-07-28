@@ -87,15 +87,33 @@ end
 
 """
     fetch(model::TFIM, ::VonNeumannEntropy, bc::OBC;
+          region::Region, beta::Float64 = Inf, kwargs...) -> Float64
+    fetch(model::TFIM, ::VonNeumannEntropy, bc::OBC;
           ℓ::Int, beta::Float64 = Inf, kwargs...) -> Float64
 
-Von Neumann entanglement entropy of the first `ℓ` spins of the N-site
-OBC TFIM in the thermal state at inverse temperature `beta` (or the
-ground state when `beta = Inf`), computed by Peschel's correlation-
-matrix method — see equation (1) in the file header.
+Von Neumann entanglement entropy of a block of the N-site OBC TFIM in the
+thermal state at inverse temperature `beta` (or the ground state when
+`beta = Inf`), computed by Peschel's correlation-matrix method — see
+equation (1) in the file header.
+
+The block is named either by a `Region` or by the block length `ℓ`, which is
+sugar for `Region(1:ℓ)`; give exactly one.  A `Region` may sit anywhere in the
+chain — `Region(3, 4)` is the block on sites 3 and 4 — which is what lets the
+region entropy inequalities be instantiated on ADJACENT blocks (`A = 1:2`,
+`B = 3:4`, `C = 5:6`), where every union they need is again a single interval.
+
+!!! warning "Single interval only"
+    This is a free-fermion route, so it is exact for the SPIN entropy only
+    while the region is one contiguous interval: the Jordan–Wigner string
+    factorises across the boundary only then.  A multi-interval region throws
+    rather than silently returning the FERMIONIC entropy — measured on
+    `N = 8, J = 1, h = 0.5` the two differ by 0.50–0.60 nats on regions like
+    `{1,3}` or `{1,2,5,6}`, and no entropy inequality would flag the
+    difference, because both are honest von Neumann entropies.  See
+    `src/core/regions.jl`.
 
 - `N = _bc_size(bc, kwargs)` (read from `OBC(N)` or legacy `kwargs[:N]`).
-- `ℓ` must satisfy `1 ≤ ℓ ≤ N - 1`.
+- The region must lie in `1:N` and leave a non-empty complement.
 - Cost is `O(ℓ³)`; for typical `N = 200, ℓ = 100` this runs in a few
   milliseconds, whereas the full-ED SVD baseline scales as `O(4^N)`.
 
@@ -105,22 +123,27 @@ to 1e-10 in `test/models/test_TFIM_entanglement.jl`).
 See full derivation in `docs/src/calc/jw-tfim-bdg.md`.
 """
 function fetch(
-    model::TFIM, ::VonNeumannEntropy, bc::OBC; ℓ::Int, beta::Float64=Inf, kwargs...
+    model::TFIM,
+    ::VonNeumannEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Float64=Inf,
+    kwargs...,
 )
     N = _bc_size(bc, kwargs)
-    1 ≤ ℓ ≤ N - 1 || throw(
-        ArgumentError(
-            "VonNeumannEntropy: ℓ must satisfy 1 ≤ ℓ ≤ N - 1; got ℓ = $ℓ, N = $N."
-        ),
-    )
+    sites = _entanglement_sites(N, region, ℓ)
+    _require_single_interval(sites, "TFIM VonNeumannEntropy")
+    L = length(sites)
+    idx = _majorana_indices(sites)
     hmat = _majorana_ham(N, model.J, model.h)
     Σ = _majorana_thermal_covariance(hmat, beta)
-    Σ_A = Σ[1:(2ℓ), 1:(2ℓ)]
+    Σ_A = Σ[idx, idx]
     # Eigenvalues of `i Σ_A` are real (Hermitian) and come in ± ν pairs.
-    # Ascending sort places the ℓ non-negative ν's in the upper half.
+    # Ascending sort places the L non-negative ν's in the upper half.
     λ = eigvals(Hermitian(im .* Σ_A))
     S = 0.0
-    @inbounds for k in (ℓ + 1):(2ℓ)
+    @inbounds for k in (L + 1):(2L)
         S += _peschel_mode_entropy(λ[k])
     end
     return S
@@ -173,7 +196,12 @@ end
 
 """
     fetch(model::TFIM, q::RenyiEntropy, bc::OBC;
+          region::Region, beta::Float64 = Inf, kwargs...) -> Float64
+    fetch(model::TFIM, q::RenyiEntropy, bc::OBC;
           ℓ::Int, beta::Float64 = Inf, kwargs...) -> Float64
+
+The block is named by `region` or by `ℓ` exactly as in the von Neumann method
+above, and carries the same single-interval restriction.
 
 Rényi entropy of order `α = q.α` (`α ≠ 1`) for the first `ℓ` spins of
 the N-site OBC TFIM in the thermal state at inverse temperature `beta`
@@ -192,18 +220,27 @@ spin Rényi entropy for a contiguous block.
 Cost is `O(ℓ³)` from the Hermitian eigendecomposition of `i Σ_A`,
 identical to the von Neumann path.
 """
-function fetch(model::TFIM, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Float64=Inf, kwargs...)
+function fetch(
+    model::TFIM,
+    q::RenyiEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Float64=Inf,
+    kwargs...,
+)
     N = _bc_size(bc, kwargs)
-    1 ≤ ℓ ≤ N - 1 || throw(
-        ArgumentError("RenyiEntropy: ℓ must satisfy 1 ≤ ℓ ≤ N - 1; got ℓ = $ℓ, N = $N.")
-    )
+    sites = _entanglement_sites(N, region, ℓ)
+    _require_single_interval(sites, "TFIM RenyiEntropy")
+    L = length(sites)
+    idx = _majorana_indices(sites)
     α = q.α
     hmat = _majorana_ham(N, model.J, model.h)
     Σ = _majorana_thermal_covariance(hmat, beta)
-    Σ_A = Σ[1:(2ℓ), 1:(2ℓ)]
+    Σ_A = Σ[idx, idx]
     λ = eigvals(Hermitian(im .* Σ_A))
     S = 0.0
-    @inbounds for k in (ℓ + 1):(2ℓ)
+    @inbounds for k in (L + 1):(2L)
         S += _peschel_mode_renyi(λ[k], α)
     end
     return S

@@ -91,3 +91,17 @@
     references=["LandauLifshitz1980"],
     notes="χ(β;J,h) = β(1-m*²)/[1 - βJ(1-m*²)] (∂m/∂h); Curie-Weiss law β/(1-βJ) at h=0, T>T_c; J≤0: β sech²(βh).",
 )
+
+@register(
+    CurieWeissIsing,
+    Magnetization{:z},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_curie_weiss_ising.jl",
+    references=["LandauLifshitz1980"],
+    notes="m(β,J,h) = stable root of m = tanh(βJm + βh), by bisection. " *
+          "INDEPENDENT of FreeEnergy (which evaluates the Landau form), so a " *
+          "field-response check over the two compares two different computations. " *
+          "At h=0 it is SpontaneousMagnetization.",
+)

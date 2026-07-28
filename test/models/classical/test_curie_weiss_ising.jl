@@ -390,3 +390,38 @@ end
             QAtlas.fetch(m_neg, SusceptibilityZZ(), Infinite(); beta=β) atol = 1e-12
     end
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Magnetisation at finite field.
+#
+# Unlike the 1-D chain's closed form, this is an INDEPENDENT route: the value
+# is the root of m = tanh(βJm + βh) found by bisection, while `FreeEnergy`
+# evaluates the Landau form.  Agreement between m and -∂f/∂h therefore compares
+# two different computations, which is what makes it worth checking.
+# ─────────────────────────────────────────────────────────────────────────────
+@testset "CurieWeissIsing magnetisation at finite field" begin
+    for (J, h, β) in ((1.0, 0.3, 0.5), (1.0, 0.2, 2.0), (2.0, 0.05, 1.0), (1.0, -0.4, 1.5))
+        m = CurieWeissIsing(; J=J, h=h)
+        mz = QAtlas.fetch(m, Magnetization{:z}(), Infinite(); beta=β)
+        # It solves the self-consistency equation it claims to solve.
+        @test mz ≈ tanh(β * J * mz + β * h) atol = 1e-12
+        # ...and agrees with the independent free-energy route.
+        δ = 1e-6
+        fp = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, J=J, h=h + δ)
+        fm = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, J=J, h=h - δ)
+        @test mz ≈ -(fp - fm) / (2δ) atol = 1e-6
+        @test abs(mz) <= 1
+        @test sign(mz) == sign(h)          # the stable root follows the field
+    end
+
+    # At h = 0 it IS the spontaneous magnetisation — same solver, βh = 0.
+    for (J, β) in ((2.0, 1.0), (1.0, 2.0), (1.0, 0.5))
+        m0 = CurieWeissIsing(; J=J, h=0.0)
+        @test QAtlas.fetch(m0, Magnetization{:z}(), Infinite(); beta=β) ==
+            QAtlas.fetch(m0, SpontaneousMagnetization(), Infinite(); beta=β)
+    end
+
+    @test_throws DomainError QAtlas.fetch(
+        CurieWeissIsing(; J=1.0, h=0.3), Magnetization{:z}(), Infinite(); beta=0.0
+    )
+end

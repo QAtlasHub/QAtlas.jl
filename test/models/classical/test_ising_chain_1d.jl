@@ -273,3 +273,52 @@ end
         @test s ≈ β * (u - f) atol = 1e-12
     end
 end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Magnetisation in a longitudinal field.
+#
+# The closed form m = sinh(βh)/√(sinh²(βh) + e^{-4βJ}) is `-∂f/∂h` carried out
+# analytically, so the numerical field derivative is the natural check of the
+# ALGEBRA (it is deliberately not an independent physical route — see the
+# registry note and #762).  The limits are independent, though: m(h=0) = 0 is
+# Ising's no-transition result, and m → tanh(βh) as J → 0 is the free spin.
+# ─────────────────────────────────────────────────────────────────────────────
+@testset "IsingChain1D magnetisation in a field" begin
+    for (J, h, β) in ((1.0, 0.3, 1.0), (1.0, 0.8, 2.0), (0.5, 0.2, 3.0), (2.0, 1.5, 0.7))
+        m = IsingChain1D(; J=J, h=h)
+        mz = QAtlas.fetch(m, Magnetization{:z}(), Infinite(); beta=β)
+        # -∂f/∂h by a central difference, independent of the closed-form code
+        δ = 1e-6
+        fp = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, J=J, h=h + δ)
+        fm = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, J=J, h=h - δ)
+        @test mz ≈ -(fp - fm) / (2δ) atol = 1e-7
+        @test abs(mz) <= 1
+    end
+
+    # No spontaneous magnetisation in 1-D at any finite temperature (Ising 1925).
+    @test QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=0.0), Magnetization{:z}(), Infinite(); beta=5.0
+    ) == 0.0
+
+    # Free-spin limit: with no coupling the chain is N independent spins.
+    m_free = QAtlas.fetch(
+        IsingChain1D(; J=1e-12, h=0.4), Magnetization{:z}(), Infinite(); beta=1.0
+    )
+    @test m_free ≈ tanh(0.4) atol = 1e-6
+
+    # Odd in h, and saturating.
+    m_pos = QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=0.5), Magnetization{:z}(), Infinite(); beta=1.0
+    )
+    m_neg = QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=-0.5), Magnetization{:z}(), Infinite(); beta=1.0
+    )
+    @test m_pos ≈ -m_neg atol = 1e-14
+    @test QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=50.0), Magnetization{:z}(), Infinite(); beta=1.0
+    ) ≈ 1.0 atol = 1e-12
+
+    @test_throws DomainError QAtlas.fetch(
+        IsingChain1D(; J=1.0, h=0.3), Magnetization{:z}(), Infinite(); beta=0.0
+    )
+end

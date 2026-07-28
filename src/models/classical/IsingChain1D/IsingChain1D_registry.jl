@@ -90,3 +90,17 @@
     references=["Ising1925"],
     notes="m_spont = 0 for all T > 0 (no LRO in 1D Ising); independent of h.",
 )
+
+@register(
+    IsingChain1D,
+    Magnetization{:z},
+    Infinite,
+    method=:analytic,
+    reliability=:high,
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
+    references=["Ising1925"],
+    notes="m(β,h) = sinh(βh)/√(sinh²(βh) + e^{-4βJ}) from the transfer matrix. " *
+          "DERIVATION-BACKED: this closed form is -∂f/∂h carried out analytically " *
+          "on the same eigenvalue FreeEnergy uses, so a response check against a " *
+          "numerical -∂F/∂h tests the algebra, not two independent routes (#762).",
+)

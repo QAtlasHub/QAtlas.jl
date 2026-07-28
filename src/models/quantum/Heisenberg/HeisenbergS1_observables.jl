@@ -303,6 +303,8 @@ end
 
 """
     fetch(model::S1Heisenberg1D, ::VonNeumannEntropy, ::OBC;
+          region::Region, beta::Real = Inf) -> Float64
+    fetch(model::S1Heisenberg1D, ::VonNeumannEntropy, ::OBC;
           ℓ::Int, beta::Real = Inf) -> Float64
 
 Von Neumann entanglement entropy `S_vN = -Tr ρ_A log ρ_A` of the first
@@ -315,14 +317,18 @@ Both `ℓ` and `N = bc.N` are bounded by `_MAX_ED_SITES_S1` because the
 full `3^N × 3^N` ρ is built explicitly.
 """
 function fetch(
-    model::S1Heisenberg1D, ::VonNeumannEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...
+    model::S1Heisenberg1D,
+    ::VonNeumannEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Real=Inf,
+    kwargs...,
 )
     N = bc.N
-    1 ≤ ℓ ≤ N - 1 || throw(
-        ArgumentError("VonNeumannEntropy: ℓ must satisfy 1 ≤ ℓ ≤ N - 1 (got ℓ=$ℓ, N=$N)"),
-    )
+    sites = _entanglement_sites(N, region, ℓ)
     kernel = _s1_thermal_kernel(model, N, beta)
-    ρA = _s1_partial_trace_A(kernel.ρ, ℓ, N)
+    ρA = _partial_trace_sites(kernel.ρ, sites, N; d=3)
     λs = real.(eigvals(Hermitian((ρA + ρA') / 2)))
     S = 0.0
     @inbounds for λ in λs
@@ -335,6 +341,8 @@ end
 
 """
     fetch(model::S1Heisenberg1D, q::RenyiEntropy, ::OBC;
+          region::Region, beta::Real = Inf) -> Float64
+    fetch(model::S1Heisenberg1D, q::RenyiEntropy, ::OBC;
           ℓ::Int, beta::Real = Inf) -> Float64
 
 Rényi entropy `S_α = log Tr ρ_A^α / (1 - α)` for the OBC spin-1
@@ -342,14 +350,19 @@ Heisenberg chain.  See [`VonNeumannEntropy`](@ref) for the partial-trace
 convention.
 """
 function fetch(
-    model::S1Heisenberg1D, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...
+    model::S1Heisenberg1D,
+    q::RenyiEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Real=Inf,
+    kwargs...,
 )
     N = bc.N
-    1 ≤ ℓ ≤ N - 1 ||
-        throw(ArgumentError("RenyiEntropy: ℓ must satisfy 1 ≤ ℓ ≤ N - 1 (got ℓ=$ℓ, N=$N)"))
+    sites = _entanglement_sites(N, region, ℓ)
     α = q.α
     kernel = _s1_thermal_kernel(model, N, beta)
-    ρA = _s1_partial_trace_A(kernel.ρ, ℓ, N)
+    ρA = _partial_trace_sites(kernel.ρ, sites, N; d=3)
     λs = real.(eigvals(Hermitian((ρA + ρA') / 2)))
     s = 0.0
     @inbounds for λ in λs

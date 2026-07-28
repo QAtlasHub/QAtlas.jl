@@ -208,7 +208,9 @@
     method=:dense_ed,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
-    notes="Partial trace of dense thermal ρ; subsystem length ℓ ∈ [1, N-1].",
+    notes="Partial trace of dense thermal ρ over the SPIN complement, so the "
+          "subsystem may be ANY region — pass `region` (a Region, contiguous or "
+          "not) or the block length `ℓ` ∈ [1, N-1], which means Region(1:ℓ) (#780).",
 )
 @register(
     S1Heisenberg1D,

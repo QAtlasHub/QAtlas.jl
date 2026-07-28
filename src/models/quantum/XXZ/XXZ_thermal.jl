@@ -540,48 +540,63 @@ end
 """
     _xxz1d_reduced_density_matrix(model, N, ℓ, β) -> Matrix{ComplexF64}
 
-Reduced density matrix of the first `ℓ` sites at inverse temperature `β`.
-For `β = Inf` we use the ground-state pure state `|0⟩` (the lowest
-eigenvector of `H`); for finite `β` we build the full thermal density
+Reduced density matrix on `sites` (any subset, contiguous or not) at inverse
+temperature `β`.  For `β = Inf` we use the ground-state pure state `|0⟩` (the
+lowest eigenvector of `H`); for finite `β` we build the full thermal density
 matrix and partial-trace.
+
+Both branches go through the shared `_partial_trace_sites` /
+`_reduced_from_pure` (`src/core/regions.jl`), which carry the atlas's normative
+site convention — site 1 is the SLOWEST-varying tensor factor, matching
+`_pauli_string`.  The bespoke code these replaced kept the LAST `ℓ` sites while
+its docstring claimed the first (#785); nothing observable changed here, since
+purity and the chain's reflection symmetry make `S(first ℓ) = S(last ℓ)`, but a
+region argument would have inherited the inversion and silently answered for
+`Region(N+1 .- sites)`.
 
 The full thermal path costs `O(D²)` memory (D = 2^N); at the
 `_MAX_ED_SITES = 12` ceiling that's a 4096×4096 complex matrix
 (~256 MB), still cheap.
 """
-function _xxz1d_reduced_density_matrix(model::XXZ1D, N::Int, ℓ::Int, β::Real)
-    1 ≤ ℓ ≤ N - 1 ||
-        throw(ArgumentError("entanglement: ℓ must satisfy 1 ≤ ℓ ≤ N-1; got ℓ=$ℓ, N=$N"))
+function _xxz1d_reduced_density_matrix(
+    model::XXZ1D, N::Int, sites::AbstractVector{<:Integer}, β::Real
+)
     if isinf(β)
         H = _xxz1d_hamiltonian_matrix(model, N)
         F = eigen(Hermitian(H))
-        ψ = F.vectors[:, 1]
-        # ρ_A = Tr_B |ψ⟩⟨ψ|  =  reshape(ψ, (dA, dB)) · adjoint
-        dA = 2^ℓ
-        dB = 2^(N - ℓ)
-        Ψ = reshape(ψ, (dA, dB))
-        return Ψ * Ψ'
+        return _reduced_from_pure(F.vectors[:, 1], sites, N; d=2)
     end
     F = _xxz1d_thermal_kernel(model, N, β)
     ρ = _xxz1d_thermal_density_matrix(F)
-    return _xxz1d_partial_trace_B(ρ, ℓ, N)
+    return _partial_trace_sites(ρ, sites, N; d=2)
 end
 
 """
+    fetch(model::XXZ1D, ::VonNeumannEntropy, ::OBC; region, beta=Inf) -> Float64
     fetch(model::XXZ1D, ::VonNeumannEntropy, ::OBC; ℓ, beta=Inf) -> Float64
 
-Von Neumann entanglement entropy `S = -Tr ρ_A log ρ_A` of the first `ℓ`
-sites of the OBC XXZ chain at inverse temperature `beta` (or the
+Von Neumann entanglement entropy `S = -Tr ρ_A log ρ_A` of a subsystem of the
+OBC XXZ chain, named either by a `Region` or by the block length `ℓ` (sugar for
+`Region(1:ℓ)`).  Unlike the free-fermion hubs this is a dense-ED trace over the
+SPIN complement, so the region may be ANY subset — `Region(1, 3)` and
+`Region(2, 4)` are fine, with no Jordan-Wigner restriction at inverse temperature `beta` (or the
 ground state when `beta = Inf`).
 
 Computed by exact ED + partial trace; cost `O(2^{2N})` memory and
 `O(2^{3ℓ})` for the `eigen` of `ρ_A`.  Capped by `_MAX_ED_SITES`.
 """
 function fetch(
-    model::XXZ1D, ::VonNeumannEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...
+    model::XXZ1D,
+    ::VonNeumannEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Real=Inf,
+    kwargs...,
 )
     N = _bc_size(bc, kwargs)
-    ρA = _xxz1d_reduced_density_matrix(model, N, ℓ, beta)
+    sites = _entanglement_sites(N, region, ℓ)
+    ρA = _xxz1d_reduced_density_matrix(model, N, sites, beta)
     λ = eigvals(Hermitian(ρA))
     S = 0.0
     @inbounds for p in λ
@@ -593,6 +608,7 @@ function fetch(
 end
 
 """
+    fetch(model::XXZ1D, q::RenyiEntropy, ::OBC; region, beta=Inf) -> Float64
     fetch(model::XXZ1D, q::RenyiEntropy, ::OBC; ℓ, beta=Inf) -> Float64
 
 Rényi entropy of order `α = q.α` for the first `ℓ` sites,
@@ -602,9 +618,18 @@ Rényi entropy of order `α = q.α` for the first `ℓ` sites,
 `α = 1` is rejected at the `RenyiEntropy` constructor; use
 `VonNeumannEntropy()` for that limit.
 """
-function fetch(model::XXZ1D, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, kwargs...)
+function fetch(
+    model::XXZ1D,
+    q::RenyiEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Real=Inf,
+    kwargs...,
+)
     N = _bc_size(bc, kwargs)
-    ρA = _xxz1d_reduced_density_matrix(model, N, ℓ, beta)
+    sites = _entanglement_sites(N, region, ℓ)
+    ρA = _xxz1d_reduced_density_matrix(model, N, sites, beta)
     λ = real.(eigvals(Hermitian(ρA)))
     α = q.α
     s = 0.0

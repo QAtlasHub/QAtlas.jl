@@ -120,13 +120,8 @@ it is not QAtlas's to fix: 68 of the 129 have no quantity slot at all (blocked
 upstream), and 51 more name quantities this atlas does not compute.
 """
 const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
-    :MagnetizationResponse => "needs dF/dh.  core/response.jl supplies the temperature \
-                               axis only, and `h` is a MODEL parameter, not a fetch \
-                               kwarg — the model-parameter axis is written in PR #760",
-    :SusceptibilityResponse => "needs dM/dh; same model-parameter axis as \
-                                MagnetizationResponse — PR #760",
     :SusceptibilityFDT => "needs var_M, the magnetization variance — the sibling of the \
-                           var_E supplier that SpecificHeatFDT already uses",
+                           var_E supplier that SpecificHeatFDT already uses"
 )
 
 @testset "AbstractQAtlas relation conformance" begin
@@ -181,7 +176,59 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     end
     @test isempty(gone)
 
-    # 3. Same for the stored-relation exemption.
+    # 3. A wired relation must actually emit checks.  Declaring an edge whose
+    #    generator produces nothing is coverage on paper only — and it is easy to
+    #    do by accident: `MagnetizationResponse` was declared exactly that way,
+    #    because its subject `Magnetization{:z}` was implemented on no hub whose
+    #    `h` is longitudinal.
+    #
+    #    A check that RUNS but always SKIPS is the same failure wearing a
+    #    disguise, and it is the one that actually got through: wiring
+    #    `SusceptibilityResponse` generated six checks that every one came back
+    #    `skip — no fetch method for Magnetization{:z}`.  Generated-but-never-run
+    #    is not coverage either, so `emitted` counts only checks that reach a
+    #    verdict.
+    # Map each edge's relation to the checks it generated, then ask only whether
+    # ONE of them reaches a verdict — short-circuiting, because running all ~500
+    # generated checks here would turn a bookkeeping guard into the slowest test
+    # in the suite.
+    checks_by_relation = Dict{Symbol,Vector{QAtlas.GeneratedCheck}}()
+    all_checks = generated_checks()
+    for spec in QAtlas.EDGE_STORES, edge in spec.store
+        hasproperty(edge, :name) || continue
+        rels_here = Symbol[]
+        for field in (:relation, :inequality)
+            hasproperty(edge, field) || continue
+            push!(rels_here, nameof(typeof(getproperty(edge, field))))
+        end
+        isempty(rels_here) && continue
+        mine = filter(c -> occursin("/$(edge.name)/", c.id), all_checks)
+        for r in rels_here
+            append!(get!(checks_by_relation, r, QAtlas.GeneratedCheck[]), mine)
+        end
+    end
+
+    "Does any check of this relation reach a verdict?  A skip is not one."
+    function _reaches_a_verdict(rel::Symbol)
+        for c in get(checks_by_relation, rel, QAtlas.GeneratedCheck[])
+            run_generated_check(c).status === :skip || return true
+        end
+        return false
+    end
+
+    silent = sort([
+        r for
+        r in intersect(keys(materializable), _wired_relations()) if !_reaches_a_verdict(r)
+    ])
+    if !isempty(silent)
+        @error "relations are wired but no check of theirs reaches a verdict — every \
+                one is absent or skipped, which is not coverage.  Fix the edge (usually \
+                a missing fetch method for a derived input) or drop it and record the \
+                reason in MATERIALIZABLE_BUT_UNWIRED" silent
+    end
+    @test isempty(silent)
+
+    # 4. Same for the stored-relation exemption.
     for (name, _) in WIRED_WITHOUT_A_STORED_RELATION
         if name in _wired_relations()
             @error "relation is now readable off an edge store — delete its \
@@ -190,7 +237,7 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
         @test !(name in _wired_relations())
     end
 
-    # 4. Report the standing position, so a CI log carries the numbers #734 is
+    # 5. Report the standing position, so a CI log carries the numbers #734 is
     #    ultimately measured against — including the ones that are NOT ours to
     #    close, so the split stays visible instead of folding into one
     #    discouraging total.

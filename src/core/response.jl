@@ -44,12 +44,24 @@ than a symbolic mini-language: the whole point of this layer is that the algebra
 lives in AbstractQAtlas, so anything expressible here should stay small enough to
 read at the declaration site.
 
-Only the temperature axis is supported here.  A field derivative (`dF/dh`, for
-`MagnetizationResponse`) is deliberately absent: `h` is a MODEL parameter, not a
-fetch kwarg, so differentiating along it means reconstructing the model at each
-step and every model spells its field differently.  That needs a model-parameter
-mechanism, and inventing one silently for two relations would be worse than
-leaving them uncovered.
+`wrt` is either a STATE axis or a MODEL axis, and the two differentiate
+differently:
+
+- `:T` / `:β` — the state point.  Varied through the `fetch` kwargs, so the
+  derivative can use whatever backend is loaded.
+- anything else — a model FIELD (`:h`, `:J`, `:Δ`, …), varied by rebuilding the
+  model with `_with_param`, the same reconstruction `@limits_to` already uses to
+  walk `param = :Δ`.  A field that does not exist is a declaration bug and
+  `_with_param` throws.
+
+!!! warning "A model axis is finite-difference only"
+    Model structs type their parameters concretely (`struct TFIM …; J::Float64;
+    h::Float64; end`), so rebuilding one with an AD dual runs it through
+    `Float64(...)` and destroys the derivative — silently.  A model axis is
+    therefore pinned to [`FiniteDifference`](@ref) and reported at its tolerance.
+    Making AD work here means parameterizing the model structs, which is a
+    breaking change to a type dispatched on in ~50 places; that belongs in its
+    own PR, not smuggled in here.
 """
 struct DerivedInput
     quantity::Type
@@ -59,13 +71,6 @@ struct DerivedInput
     function DerivedInput(
         quantity::Type, wrt::Symbol; of::Function=(v, x) -> v, then::Function=identity
     )
-        wrt in (:T, :β) || throw(
-            ArgumentError(
-                "DerivedInput: `wrt` must be :T or :β (the temperature axis); got " *
-                ":$(wrt). Field derivatives need a model-parameter mechanism that " *
-                "does not exist yet — see the docstring.",
-            ),
-        )
         return new(quantity, wrt, of, then)
     end
 end
@@ -102,6 +107,8 @@ struct ResponseEdge
     relation::AbstractRelation
     subject::Symbol
     derived::NamedTuple
+    at::NamedTuple
+    models::Union{Nothing,Vector{Type}}
     rtol_floor::Float64
     sweep::NamedTuple
     finite_N::Int
@@ -137,6 +144,8 @@ function response!(
     name::Symbol;
     relation,
     derived::NamedTuple,
+    at::NamedTuple=NamedTuple(),
+    models::Union{Nothing,AbstractVector}=nothing,
     rtol_floor::Real=0.0,
     sweep::NamedTuple=NamedTuple(),
     finite_N::Int=8,
@@ -186,6 +195,8 @@ function response!(
             rel,
             first(qslots)[1],
             derived,
+            at,
+            models === nothing ? nothing : Type[m for m in models],
             Float64(rtol_floor),
             sweep,
             finite_N,
@@ -211,25 +222,49 @@ end
 # Generator — the :response kind of generated_checks()
 # ──────────────────────────────────────────────────────────────────────
 
-# The fetch kwargs and evaluation point for differentiating along `wrt` at a
-# sweep point that carries `beta`.  β and T are one axis reparameterized, which
-# is why only these two are allowed.
-function _diff_axis(wrt::Symbol, point::NamedTuple)
+# What varying `wrt` means, as (build(x) -> (model, kwargs), x₀, backend).
+#
+# A STATE axis moves the fetch kwargs and leaves the model alone; a MODEL axis
+# rebuilds the model and leaves the state point alone.  The backend travels with
+# it because a model axis cannot use AD at all: model structs type their fields
+# `Float64`, so reconstructing one with a dual silently drops the derivative.
+# Returning the backend here — rather than choosing one per generator — keeps
+# that fact attached to the axis that causes it.
+function _diff_target(d::DerivedInput, m, point::NamedTuple, preferred)
     β = getfield(point, :beta)
-    wrt === :β && return (x -> merge(point, (; beta=x)), float(β))
-    return (x -> merge(point, (; beta=1 / x)), 1 / float(β))
+    d.wrt === :β && return (x -> (m, merge(point, (; beta=x))), float(β), preferred)
+    d.wrt === :T && return (x -> (m, merge(point, (; beta=1 / x))), 1 / float(β), preferred)
+    x0 = float(getfield(m, d.wrt))   # absent field ⇒ throws: a declaration bug
+    return (x -> (_with_param(m, d.wrt, x), point), x0, FiniteDifference())
 end
 
 function response_checks()
     out = GeneratedCheck[]
-    backend = preferred_backend()
+    preferred = preferred_backend()
     for e in RESPONSES
-        # The derivative's accuracy AND the fetched values' accuracy both bound
-        # what this check can assert; the looser of the two wins.
-        rtol = max(default_rtol(backend), e.rtol_floor)
+        # Three things bound what this check can assert: each derivative's
+        # backend, and the accuracy of the fetched values.  The loosest wins — a
+        # model axis pinned to finite differences drags the whole edge to the
+        # finite-difference tolerance, which is the honest report.
+        rtol = max(
+            e.rtol_floor,
+            maximum(
+                default_rtol(_axis_backend(d, preferred)) for d in values(e.derived);
+                init=0.0,
+            ),
+        )
         slots = variable_slots(e.relation)
         subject_T = only(T for (n, T) in slots if n === e.subject)
         for hub in _implemented_hubs(Type[subject_T])
+            # An allow-list marks a relation that is NOT universal over the atlas.
+            # `MagnetizationResponse` assumes the field conjugates to M_z, which is
+            # false for a transverse-field model — and both differentiation
+            # backends would agree on that wrong physics, so the cross-check
+            # cannot catch it.  Default (nothing) keeps generating on every hub
+            # implementing the subject; an explicit list is opt-IN, so a model
+            # added later is silently skipped rather than silently checked against
+            # physics that does not apply to it.
+            e.models === nothing || hub.model in e.models || continue
             hub_id = string(
                 "response/", e.name, "/", _kgshort(hub.model), "/", _kgshort(hub.bc)
             )
@@ -242,7 +277,7 @@ function response_checks()
                 id = hub_id * _point_suffix(point)
                 model_T, bc_T, rel = hub.model, hub.bc, e.relation
                 runner = function ()
-                    m = model_T()
+                    m = _at_params(model_T(), e.at)
                     bc = _bc_instance(bc_T; finite_N=e.finite_N)
                     args = Dict{Symbol,Any}()
                     for (n, T) in slots
@@ -261,13 +296,17 @@ function response_checks()
                     # the METHOD (an iterative solve AD differentiates through, a
                     # non-differentiable point) and must not be reported as a
                     # failed physical identity — so it becomes a visible skip.
+                    used = String[]
                     for (n, d) in pairs(e.derived)
-                        kw, x0 = _diff_axis(d.wrt, point)
-                        g =
-                            x -> d.of(
-                                fetch(m, _quantity_instance(d.quantity), bc; kw(x)...),
+                        build, x0, b = _diff_target(d, m, point, preferred)
+                        push!(used, String(nameof(typeof(b))))
+                        g = function (x)
+                            mm, kw = build(x)
+                            return d.of(
+                                fetch(mm, _quantity_instance(d.quantity), bc; kw...),
                                 x,
                             )
+                        end
                         # A fetch can be non-differentiable by the chosen backend even
                         # when its signature says `::Real`: some implementations narrow to
                         # Float64 internally, and an AD dual then dies on a
@@ -276,19 +315,18 @@ function response_checks()
                         # METHOD, exactly like a cross-check disagreement, so it becomes a
                         # visible skip rather than an :error.
                         #
-                        # Deliberately NOT a fallback to finite differences: this edge's
-                        # rtol was computed for `backend` before the run, so silently
-                        # substituting a lower-accuracy method would report an FD result
-                        # at an AD tolerance.  Scoped to the derivative alone — a throw
-                        # from the subject fetch or from `solve` is a real error and still
-                        # surfaces as one.
+                        # Deliberately NOT a fallback to a lower-accuracy backend: this
+                        # edge's rtol was computed for `b` before the run, so substituting
+                        # one silently would report its result at the wrong tolerance.
+                        # Scoped to the derivative alone — a throw from the subject fetch
+                        # or from `solve` is a real error and still surfaces as one.
                         local val, trusted, why
                         try
-                            val, _, trusted, why = derivative_agreement(g, x0; primary=backend)
+                            val, _, trusted, why = derivative_agreement(g, x0; primary=b)
                         catch err
                             return _skip_outcome(
-                                "$(n): not differentiable by $(nameof(typeof(backend))) " *
-                                "— $(sprint(showerror, err))",
+                                "$(n): not differentiable by $(nameof(typeof(b))) — " *
+                                "$(sprint(showerror, err))",
                             )
                         end
                         trusted || return _skip_outcome("$(n): $(why)")
@@ -301,7 +339,11 @@ function response_checks()
                         expected;
                         rtol=rtol,
                         atol=1e-10,
-                        detail="derivative via $(nameof(typeof(backend)))",
+                        # Name the backend(s) actually used, not a single global
+                        # one: an edge can mix a state axis (AD when loaded) with
+                        # a model axis (finite differences always), and the
+                        # reported tolerance is the loosest of them.
+                        detail="derivative via $(join(unique(used), ", "))",
                     )
                 end
                 push!(
@@ -327,6 +369,35 @@ function response_checks()
         end
     end
     return out
+end
+
+"""
+    _at_params(model, at::NamedTuple) -> model
+
+Rebuild `model` with the fields in `at` overridden, so a `@response` edge can
+say WHERE to evaluate.  Needed because the generator otherwise tests the default
+model, and for a field-response relation the default is exactly the useless
+point: at `h = 0` both `M_z` and `-∂F/∂h` vanish by symmetry, so the check is
+vacuous in the disordered phase and straddles a first-order jump in the ordered
+one (measured on CurieWeissIsing at βJ = 2: m(0⁺) = 0.9575 while the central
+difference returns 0).
+
+A field named in `at` that the model does not have throws, via `_with_param` —
+a declaration bug should not silently evaluate somewhere else.
+"""
+function _at_params(model, at::NamedTuple)
+    isempty(at) && return model
+    for (f, v) in pairs(at)
+        model = _with_param(model, f, v)
+    end
+    return model
+end
+
+# A model axis cannot use AD (see `_diff_target`); a state axis uses whatever is
+# loaded.  Kept beside the generator so the tolerance computation and the closure
+# construction cannot disagree about which backend an axis gets.
+function _axis_backend(d::DerivedInput, preferred)
+    return d.wrt in (:T, :β) ? preferred : FiniteDifference()
 end
 
 register_check_generator!(:response, response_checks)

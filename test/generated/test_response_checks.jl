@@ -79,3 +79,51 @@ end
     @test !isempty(from_S) && !isempty(from_U)
     @test !isempty(intersect(from_S, from_U))   # hubs covered by both routes
 end
+
+@testset "model-axis derivatives are opt-in, placed, and finite-difference only" begin
+    # The allow-list is the defence the cross-check cannot provide: for a
+    # transverse-field model both backends agree on -∂F/∂h = ⟨σˣ⟩, which is not
+    # M_z, so nothing numerical would flag it.
+    ids = [c.id for c in generated_checks(; kinds=(:response,))]
+    mag = filter(startswith("response/magnetization_response/"), ids)
+    sus = filter(startswith("response/susceptibility_response/"), ids)
+    @test !isempty(mag)
+    @test any(occursin("/CurieWeissIsing/"), mag)
+    @test any(occursin("/IsingChain1D/"), mag)
+    @test !any(occursin("/TFIM/"), mag)          # transverse field — must not be checked
+    @test !isempty(sus)
+    @test any(occursin("/CurieWeissIsing/"), sus)
+    # IsingChain1D's SusceptibilityZZ is h = 0 only, and this edge sits at h ≠ 0.
+    @test !any(occursin("/IsingChain1D/"), sus)
+    # An edge with no allow-list keeps generating everywhere.
+    @test any(occursin("/TFIM/"), filter(startswith("response/entropy_response/"), ids))
+
+    # A model axis is pinned to finite differences: rebuilding a struct whose
+    # fields are ::Float64 with an AD dual destroys the derivative silently.
+    fd_axis = QAtlas.∂(QAtlas.FreeEnergy, :h)
+    st_axis = QAtlas.∂(QAtlas.FreeEnergy, :T)
+    @test QAtlas._axis_backend(fd_axis, QAtlas.ForwardDiffBackend()) isa
+        QAtlas.FiniteDifference
+    @test QAtlas._axis_backend(st_axis, QAtlas.ForwardDiffBackend()) isa
+        QAtlas.ForwardDiffBackend
+end
+
+@testset "a placed edge is evaluated where the identity has content" begin
+    # `at` exists because the DEFAULT model is the useless point for a field
+    # response: at h = 0 both M_z and -∂F/∂h vanish by symmetry, so the check
+    # passes while testing nothing — and below T_c it is worse than useless,
+    # because F has a kink there and a central difference straddles the jump.
+    # Measured on CurieWeissIsing at βJ = 2: m(0⁺) = 0.9575, central diff = 0.
+    m0 = QAtlas.CurieWeissIsing(; J=1.0, h=0.0)
+    placed = QAtlas._at_params(m0, (h=0.35,))
+    @test placed.h == 0.35
+    @test placed.J == m0.J
+    @test QAtlas._at_params(m0, NamedTuple()) === m0
+    # A field the model does not have is a declaration bug, not a silent no-op.
+    @test_throws ArgumentError QAtlas._at_params(m0, (nosuchfield=1.0,))
+
+    # The vacuity this guards against, stated as an assertion.
+    @test QAtlas.fetch(m0, QAtlas.Magnetization{:z}(), QAtlas.Infinite(); beta=0.5) == 0.0
+    @test QAtlas.fetch(placed, QAtlas.Magnetization{:z}(), QAtlas.Infinite(); beta=0.5) >
+        0.1
+end

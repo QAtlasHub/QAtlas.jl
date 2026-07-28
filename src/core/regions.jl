@@ -137,6 +137,85 @@ function _require_single_interval(sites::AbstractVector{<:Integer}, who::Abstrac
 end
 
 """
+    _partial_trace_sites(ρ, sites, N; d=2) -> Matrix
+
+Reduced density matrix of `ρ` (a `d^N × d^N` matrix) on `sites`, tracing out the
+complement.  `sites` may be any subset — contiguous or not.
+
+THE CONVENTION, which is normative for this atlas: **site 1 is the slowest-
+varying tensor factor**, i.e. the leftmost in `reduce(kron, ops)`.  That is what
+`_pauli_string` and `_spin1_string` build, so it is what the density matrices
+handed to this function carry.  Under it, site `i` is tensor dimension `N+1-i`
+of the ket group and `2N+1-i` of the bra group.
+
+The convention is not readable off a `reshape`: column-major makes the FIRST
+reshape slot the FASTEST-varying one, so `reshape(ρ, (dA, dB, dA, dB))` keeps
+the LAST sites while `reshape(ρ, (dB, dA, dB, dA))` keeps the first.  The atlas
+had one of each (#785), and neither produced a wrong number, because purity
+(`S(A) = S(Aᶜ)`) and reflection symmetry make `S(first ℓ) = S(last ℓ)` on these
+chains.  A region API removes both alibis: ask for `Region(2,3)` under the wrong
+convention and you get `Region(N-2, N-1)` — and the entropy inequalities cannot
+catch it, since a consistent relabelling of regions satisfies all of them.  So
+this is settled by construction in the tests, on a product state where the
+entropy is 0 everywhere and only the reduced state itself can decide.
+"""
+function _partial_trace_sites(
+    ρ::AbstractMatrix, sites::AbstractVector{<:Integer}, N::Int; d::Int=2
+)
+    rest = setdiff(1:N, sites)
+    isempty(rest) && return Matrix(ρ)
+    T = reshape(Array(ρ), ntuple(_ -> d, 2N))
+    ket(i) = N + 1 - i
+    bra(i) = 2N + 1 - i
+    # `reverse` so that within each group the LOWEST site number ends up
+    # slowest-varying again, preserving the convention inside the block.
+    perm = (
+        reverse(ket.(sites))...,
+        reverse(ket.(rest))...,
+        reverse(bra.(sites))...,
+        reverse(bra.(rest))...,
+    )
+    dA = d^length(sites)
+    dB = d^length(rest)
+    # `permutedims` moves the A dimensions to the FRONT, which in column-major
+    # order makes them the FAST group -- the opposite of the unpermuted layout,
+    # where site 1 is slowest overall and A is the SLOW group.  So the reshape
+    # here is (dA, dB, dA, dB), not the (dB, dA, dB, dA) that is correct for a
+    # helper reading the natural layout (`_s1_partial_trace_A`).  Within the A
+    # composite the `reverse` above leaves site 1 slowest, matching `kron`.
+    R = reshape(permutedims(T, perm), (dA, dB, dA, dB))
+    ρA = zeros(eltype(ρ), dA, dA)
+    @inbounds for a1 in 1:dA, a2 in 1:dA
+        s = zero(eltype(ρ))
+        for b in 1:dB
+            s += R[a1, b, a2, b]
+        end
+        ρA[a1, a2] = s
+    end
+    return ρA
+end
+
+"""
+    _reduced_from_pure(ψ, sites, N; d=2) -> Matrix
+
+Reduced density matrix of the pure state `ψ` on `sites`, without forming the
+`d^N × d^N` outer product.  Same convention as [`_partial_trace_sites`](@ref).
+"""
+function _reduced_from_pure(
+    ψ::AbstractVector, sites::AbstractVector{<:Integer}, N::Int; d::Int=2
+)
+    rest = setdiff(1:N, sites)
+    isempty(rest) && return ψ * ψ'
+    T = reshape(Array(ψ), ntuple(_ -> d, N))
+    perm = (reverse((N + 1) .- sites)..., reverse((N + 1) .- rest)...)
+    dA = d^length(sites)
+    dB = d^length(rest)
+    # A was permuted to the front ⇒ it is the FIRST slot of the reshape
+    M = reshape(permutedims(T, perm), (dA, dB))
+    return M * M'
+end
+
+"""
     _majorana_indices(sites) -> Vector{Int}
 
 The Majorana indices of `sites` under the convention that the pair

@@ -303,18 +303,35 @@ function fetch(
     ::Heisenberg1D,
     ::VonNeumannEntropy,
     bc::OBC;
-    ℓ::Int,
+    region=nothing,
+    ℓ=nothing,
     beta::Real=Inf,
     J::Real=1.0,
     kwargs...,
 )
-    return fetch(XXZ1D(; J=J, Δ=1.0), VonNeumannEntropy(), bc; ℓ=ℓ, beta=beta, kwargs...)
+    # forward the region/ℓ pair UNRESOLVED so XXZ1D does the one validation
+    return fetch(
+        XXZ1D(; J=J, Δ=1.0),
+        VonNeumannEntropy(),
+        bc;
+        region=region,
+        ℓ=ℓ,
+        beta=beta,
+        kwargs...,
+    )
 end
 
 function fetch(
-    ::Heisenberg1D, q::RenyiEntropy, bc::OBC; ℓ::Int, beta::Real=Inf, J::Real=1.0, kwargs...
+    ::Heisenberg1D,
+    q::RenyiEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Real=Inf,
+    J::Real=1.0,
+    kwargs...,
 )
-    return fetch(XXZ1D(; J=J, Δ=1.0), q, bc; ℓ=ℓ, beta=beta, kwargs...)
+    return fetch(XXZ1D(; J=J, Δ=1.0), q, bc; region=region, ℓ=ℓ, beta=beta, kwargs...)
 end
 
 # Mass gap.

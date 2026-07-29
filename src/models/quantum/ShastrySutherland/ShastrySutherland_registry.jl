@@ -9,6 +9,7 @@
     Energy{:per_site},
     Infinite,
     method=:exact_dimer,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/standalone/test_shastry_sutherland.jl",
     references=["ShastrySutherland1981", "KogaKawakami2000"],

@@ -12,6 +12,7 @@
     Energy{:per_site},
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt2d.jl",
     references=["AKLT1988", "VerstraeteCirac2004"],

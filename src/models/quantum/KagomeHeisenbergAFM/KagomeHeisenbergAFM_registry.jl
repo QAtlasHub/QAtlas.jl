@@ -7,6 +7,7 @@
     Energy{:per_site},
     Infinite,
     method=:dmrg_reference,
+    cost=:closed_form,
     status=:approx,
     valid_domain="thermodynamic limit, extrapolated from cylindrical DMRG",
     error_order="quoted uncertainty 5e-4; cylinder-geometry extrapolation, not a closed form",
@@ -21,6 +22,7 @@
     MassGap,
     Infinite,
     method=:dmrg_reference,
+    cost=:closed_form,
     status=:approx,
     valid_domain="Z2 spin-liquid scenario ONLY -- the ground state of the kagome AFM is not settled, and the competing gapless Dirac spin liquid predicts no spin gap at all",
     error_order="SCENARIO-DEPENDENT, not merely imprecise: this is an open question in the literature, so the disagreement is O(1) and not a quoted error bar",
@@ -35,6 +37,7 @@
     TopologicalEntanglementEntropy,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl",
     references=[

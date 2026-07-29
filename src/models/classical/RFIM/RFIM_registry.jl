@@ -7,6 +7,7 @@
     CriticalTemperature,
     Infinite,
     method=:analytic_imry_ma,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/standalone/test_rfim.jl",
     references=["ImryMa1975", "Imbrie1985", "BricmontKupiainen1987"],

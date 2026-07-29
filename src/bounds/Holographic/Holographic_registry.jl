@@ -5,6 +5,7 @@
     BekensteinBound,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     status=:bound,
     direction=:upper,
     reliability=:high,

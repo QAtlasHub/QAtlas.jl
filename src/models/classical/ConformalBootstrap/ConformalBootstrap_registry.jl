@@ -10,6 +10,7 @@
     ConformalWeights,
     Infinite,
     method=:bootstrap_reference,
+    cost=:closed_form,
     status=:approx,
     valid_domain="3D Ising universality class",
     error_order="rigorous numerical-bootstrap error bars, e.g. Δ_σ = 0.5181489(10)",

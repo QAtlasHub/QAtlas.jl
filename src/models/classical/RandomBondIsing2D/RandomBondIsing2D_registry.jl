@@ -7,6 +7,7 @@
     CentralCharge,
     Infinite,
     method=:delegation,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/classical/test_random_bond_ising_2d.jl",
     references=["EdwardsAnderson1975", "Nishimori1981", "HoneckerPiccoPujol2001"],

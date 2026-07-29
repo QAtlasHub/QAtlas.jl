@@ -112,6 +112,27 @@ Why this is not inferable from `method`: it is not.  SSH's `MassGap@OBC` was
 labelled `:dense_ed` while diagonalising a 2N x 2N SINGLE-PARTICLE matrix in
 O(N^3) — a name can be wrong, `max_size` is a claim the implementation has to
 honour.
+
+Nor is it inferable from `bc`.  The tempting rule is "`Infinite` has no system
+size, so nothing can scale with one, so it is `:closed_form`".  That is false
+for a large part of this atlas, and applying it would publish "free" on routes
+that run a solver on every call.  Three ways an `Infinite` row is not a
+formula, each MEASURED here rather than argued:
+
+  * it evaluates an INTEGRAL.  `TFIM`, `XXZ1D`, `XYh1D`, `Kitaev1D` and
+    `SSH`'s Infinite thermodynamics all reach `QuadGK`; `IsingSquare`'s
+    `:onsager` free energy and `SixVertex`'s `:analytic` one do too, and
+    `IsingTriangular`'s Houtappel form is a NESTED quadrature.
+  * it SOLVES.  `Hubbard1D/FreeEnergy` runs a beta-continuation with a
+    numerical-Jacobian Newton step (bounded, so it does terminate) and does
+    not return inside 600 s.
+  * it hides a size in a PROXY.  `TFIM`'s Infinite `SusceptibilityZZ` and
+    `SpinStructureFactor` route to a large-N OBC Pfaffian with a default
+    `N_proxy`; measured 10.6 s, 16.8 s and 18.1 s per call.  `Infinite` did
+    not remove the system size, it moved it out of the caller's sight.
+
+The discriminator that does hold is behavioural: does the route, when run,
+reach a quadrature / eigensolve / root-find?  That is what these labels record.
 """
 const COST_VALUES = (:unknown, :closed_form, :polynomial, :exponential)
 

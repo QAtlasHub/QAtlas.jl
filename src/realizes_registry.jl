@@ -92,6 +92,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Ising (clean TFIM), :IsingSDRG (IRFP / random-bond limit)"
@@ -101,6 +102,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :XY, :Heisenberg"
@@ -110,6 +112,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Heisenberg"
@@ -119,6 +122,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Heisenberg"
@@ -128,6 +132,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Ising"
@@ -137,6 +142,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Ising"
@@ -146,6 +152,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :MeanField"
@@ -155,6 +162,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :KPZ"
@@ -164,6 +172,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Ising"
@@ -173,6 +182,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Ising, :Potts3"
@@ -182,6 +192,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :Ising, :Potts3, :Potts4"
@@ -191,6 +202,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :XY"
@@ -200,6 +212,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :XY"
@@ -209,6 +222,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :TricriticalIsing"
@@ -218,6 +232,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :TricriticalPotts3"
@@ -227,6 +242,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :XY"
@@ -236,6 +252,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Emergent universality class: :LeeYang"
@@ -247,6 +264,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :Ising"
@@ -256,6 +274,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :XY"
@@ -265,6 +284,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :Heisenberg"
@@ -274,6 +294,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :MeanField"
@@ -283,6 +304,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :KPZ"
@@ -292,6 +314,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :Potts3"
@@ -301,6 +324,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :Potts4"
@@ -310,6 +334,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :TricriticalIsing"
@@ -319,6 +344,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :TricriticalPotts3"
@@ -328,6 +354,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :LeeYang"
@@ -337,6 +364,7 @@
     UniversalityClass,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_universality_class.jl",
     notes="Universality class identity: :IsingSDRG"

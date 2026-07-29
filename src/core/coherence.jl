@@ -315,6 +315,51 @@ function check_realization_loci()
     return out
 end
 
+# ── C14 — cost axis coherence ────────────────────────────────────────────────
+# The cost axis earns its place only if a label is a claim the implementation
+# has to honour.  `register!` already refuses `:exponential` without a
+# `max_size`; two further things are checkable from the graph alone.
+#
+#   * `Infinite` carries no system size, so nothing can be exponential in one.
+#     A `cost=:exponential` row at `Infinite` has either the wrong bc or the
+#     wrong cost, and both mislead.
+#   * an unclassified row is a HOLE, not a neutral default.  To a caller
+#     choosing a route, `:unknown` reads exactly like "cheap" — the same
+#     failure mode the axis was introduced to end.  Reporting it as a `:gap`
+#     keeps the remaining backlog visible instead of letting it settle quietly
+#     into the schema.
+#
+# Deliberately NOT checked: a delegation row's cost against its target's.  The
+# registry row does not record its fetch target (see C4), so the pairing cannot
+# be made without guessing which row it meant — and guessing is the thing the
+# axis exists to stop.
+function check_cost_coherence()
+    out = CoherenceFinding[]
+    for e in REGISTRY
+        if e.cost === :exponential && e.bc <: Infinite
+            push!(
+                out,
+                CoherenceFinding(
+                    :cost_coherence,
+                    :error,
+                    "$(_kgshort(e.model))/$(_kgshort(e.quantity)) is cost=:exponential at Infinite — there is no system size to be exponential in",
+                ),
+            )
+        end
+        if e.cost === :unknown
+            push!(
+                out,
+                CoherenceFinding(
+                    :cost_coherence,
+                    :gap,
+                    "$(_kgshort(e.model))/$(_kgshort(e.quantity))/$(_kgshort(e.bc)) has cost=:unknown — a caller cannot tell it from a cheap route",
+                ),
+            )
+        end
+    end
+    return out
+end
+
 # ── aggregate (structural suite) ─────────────────────────────────────────────
 """
     coherence_report(; bibkeys=String[]) -> Vector{CoherenceFinding}
@@ -322,10 +367,10 @@ end
 Run the structural graph-coherence suite (C1–C4, C6 coverage, C8 realization
 loci, C9 orphan classes, plus the constraint-layer checks: C10 LSM symmetry
 consistency, C10b symmetry-corroboration coverage, C11 identity coverage,
-C12 duality maps, C13 limit edges). Pass `bibkeys` (the set of keys in
-references.bib) to include C1. `:error` findings must be empty; `:gap`
+C12 duality maps, C13 limit edges, C14 cost axis). Pass `bibkeys` (the set of
+keys in references.bib) to include C1. `:error` findings must be empty; `:gap`
 findings are self-reported holes (coverage / orphan classes / ungenerated
-constraint checks) and need not be empty.
+constraint checks / unclassified cost) and need not be empty.
 """
 function coherence_report(; bibkeys=String[])
     findings = CoherenceFinding[]
@@ -341,6 +386,7 @@ function coherence_report(; bibkeys=String[])
     append!(findings, check_identity_coverage())        # C11 — @identity exercised
     append!(findings, check_duality_maps())        # C12 — @dual param_map sanity
     append!(findings, check_limit_edges())         # C13 — @limits_to sanity
+    append!(findings, check_cost_coherence())      # C14 — cost axis coherence
     return findings
 end
 

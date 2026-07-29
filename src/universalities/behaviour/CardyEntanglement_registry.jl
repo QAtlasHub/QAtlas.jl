@@ -61,6 +61,7 @@ for C in _CFT_CLASSES, (q, refs, note) in _CFT_PREDICTIONS
         q,
         Infinite;
         method=:analytic,  # status=:universal derived by construction (register!)
+        cost=:closed_form,
         reliability=:high,
         references=refs,
         notes=note,
@@ -74,6 +75,9 @@ for C in _CFT_CLASSES, BC in (Infinite, PBC, OBC)
         QuenchEntanglementEntropy,
         BC;
         method=:analytic,
+        # A closed form in (t, l) at every bc — the Calabrese-Cardy result is an
+        # expression, not a solve, so the label holds for PBC and OBC as well.
+        cost=:closed_form,
         reliability=:high,
         references=["CalabreseCardy2005"],
         notes="Universal post-quench von Neumann entanglement entropy time evolution (Calabrese-Cardy 2005).",
@@ -87,6 +91,7 @@ for C in (:Ising, :XY, :Heisenberg)
         BoundaryEntropy,
         Infinite;
         method=:analytic,
+        cost=:closed_form,
         reliability=:high,
         references=["AffleckLudwig1991", "Cardy1989"],
         notes="Affleck-Ludwig universal boundary entropy log g from the Cardy-state " *

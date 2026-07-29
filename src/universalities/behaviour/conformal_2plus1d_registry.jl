@@ -21,6 +21,7 @@ for C in (:Ising, :XY, :Heisenberg), (q, refs, note) in _CFT_2PLUS1D_PREDICTIONS
         q,
         Infinite;
         method=:analytic,
+        cost=:closed_form,
         reliability=:high,
         references=refs,
         notes=note,

@@ -8,6 +8,7 @@
     CentralCharge,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_ttbar.jl",
     references=[

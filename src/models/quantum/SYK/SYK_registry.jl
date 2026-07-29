@@ -8,6 +8,7 @@
     ConformalWeights,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_syk.jl",
     references=["SachdevYe1993", "Kitaev2015", "MaldacenaStanford2016"],

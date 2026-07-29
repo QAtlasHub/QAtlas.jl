@@ -10,6 +10,7 @@
     MassGap,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_compass1d.jl",
     references=["BrzezickiDziarmagaOles2007", "KugelKhomskii1982", "Kitaev2006"],

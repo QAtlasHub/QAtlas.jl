@@ -108,39 +108,6 @@ end
 # so the AKLT chain inherits the same `_MAX_ED_SITES_S1 = 8` budget for
 # 3^N dense ED.
 
-"""
-    _aklt_hamiltonian_matrix(model::AKLT1D, N::Int, ::OBC) -> Matrix{ComplexF64}
-
-Assemble the dense `3^N × 3^N` OBC Hamiltonian
-
-    H = J Σᵢ [ Sᵢ · Sᵢ₊₁ + (1/3) (Sᵢ · Sᵢ₊₁)² ]
-
-via explicit tensor products built from the spin-1 primitives in
-`HeisenbergS1.jl`.  Capped by `_MAX_ED_SITES_S1`.
-"""
-function _aklt_hamiltonian_matrix(model::AKLT1D, N::Int, ::OBC)
-    N ≥ 2 || throw(ArgumentError("AKLT1D OBC chain needs N ≥ 2 (got N = $N)"))
-    N ≤ _MAX_ED_SITES_S1 || throw(
-        ArgumentError("spin-1 dense ED is capped at N ≤ $(_MAX_ED_SITES_S1) (got N = $N)"),
-    )
-    J = model.J
-    D = 3^N
-    # 9×9 single-bond block: S₁·S₂ + (1/3)(S₁·S₂)²
-    SdotS = kron(_S1_x, _S1_x) + kron(_S1_y, _S1_y) + kron(_S1_z, _S1_z)
-    bond = J * (SdotS + (1.0 / 3.0) * (SdotS * SdotS))
-    H = zeros(ComplexF64, D, D)
-    for i in 1:(N - 1)
-        d_left = 3^(i - 1)
-        d_right = 3^(N - i - 1)
-        H .+= kron(
-            Matrix{ComplexF64}(I, d_left, d_left),
-            bond,
-            Matrix{ComplexF64}(I, d_right, d_right),
-        )
-    end
-    return H
-end
-
 # ═══════════════════════════════════════════════════════════════════════════════
 # Infinite-system closed-form values
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -227,27 +194,19 @@ function fetch(model::AKLT1D, ::StringOrderParameter, ::Infinite; kwargs...)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# OBC dense-ED — full spectrum on N ≤ 8 sites
+# NOT HERE: the OBC full spectrum by many-body dense ED.
+#
+# It was `fetch(::AKLT1D, ::ExactSpectrum, ::OBC)`, a `3^N` diagonalisation
+# capped at N <= 8.  The atlas advertises only routes another package can afford
+# to ask for -- closed forms, Bethe ansatz / NLIE, and free-fermion
+# (BdG / single-particle) diagonalisation -- and an exponential route is a poor
+# oracle however correct it is.
+#
+# ED still does the job it is good at, one directory over: `test/util/aklt_dense_ed.jl`
+# supplies it as a TEST INSTRUMENT, and `test_aklt_structural.jl` uses it to
+# confirm this file's ANALYTIC claims -- E_0(N) = -(2/3)(N-1) exactly, and the
+# 4-fold OBC ground-state degeneracy of the AKLT edge-mode theorem.
 # ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    fetch(model::AKLT1D, ::ExactSpectrum, ::OBC; N::Int) -> Vector{Float64}
-
-Sorted full eigenvalue spectrum of the OBC AKLT chain on `N` sites,
-computed by dense ED on the `3^N`-dimensional Hilbert space.  Capped by
-`_MAX_ED_SITES_S1` (so `N ≤ 8`, `3^8 = 6561`).
-
-Under OBC the AKLT ground state is **4-fold degenerate** (S=½ edge
-modes at each end, total spin `S_tot ∈ {0, 1}` from singlet ⊕ triplet
-of the two edge ½-spins), and dense ED on `N ≤ 8` already exhibits
-this degeneracy with `Δ_low_4 = E₃ − E₀` of order `10^{-13}` (only
-floating-point noise).
-"""
-function fetch(model::AKLT1D, ::ExactSpectrum, bc::OBC; N::Int=bc.N, kwargs...)
-    N > 0 || throw(ArgumentError("AKLT1D ExactSpectrum: N must be positive (got $N)"))
-    H = _aklt_hamiltonian_matrix(model, N, OBC(N))
-    return sort(real.(eigvals(Hermitian(H))))
-end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # VBS ground-state spin correlations — exact closed form (AKLT 1988)

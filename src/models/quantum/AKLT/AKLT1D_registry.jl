@@ -61,16 +61,10 @@
     notes="Haldane gap Δ ≈ 0.350 J; DMRG numerical-exact, no closed form.",
 )
 
-# ── OBC dense ED (cap N ≤ 8 from _MAX_ED_SITES_S1) ───────────────────
-@register(
-    AKLT1D,
-    ExactSpectrum,
-    OBC,
-    method=:dense_ed,
-    reliability=:high,
-    tested_in="test/standalone/test_aklt.jl",
-    notes="Full sorted spectrum from 3^N dense ED; N ≤ 8 (3^8 = 6561).",
-)
+# NOT REGISTERED: the OBC full spectrum by many-body dense ED (3^N, N <= 8).
+# An exponential route is a poor oracle however correct it is, so the atlas does
+# not advertise it; `test/util/aklt_dense_ed.jl` keeps it as a test instrument
+# and `test_aklt_structural.jl` checks this model's ANALYTIC claims against it.
 
 # ── VBS ground-state correlations (Infinite, closed form) ────────────
 @register(

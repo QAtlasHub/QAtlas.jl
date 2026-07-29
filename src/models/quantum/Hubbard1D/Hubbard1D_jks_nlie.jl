@@ -538,6 +538,38 @@ function free_energy_jks(
     mu::Real=U/2,
     N_cheb::Int=64,
 )
+    f = free_energy_jks_complex(aux, grid, beta, U; mu=mu, N_cheb=N_cheb)
+    # Imag should be O(machine eps) when aux is a true NLIE solution.  An O(1)
+    # imag means the equations being solved are not the right ones; surface it
+    # rather than silently returning the real part.
+    if abs(imag(f)) > 1e-3 * max(abs(real(f)), 1.0)
+        @warn "free_energy_jks: non-negligible imag part discarded" imag_part = imag(f) real_part = real(
+            f
+        ) beta = beta U = U
+    end
+    return real(f)
+end
+
+"""
+    free_energy_jks_complex(aux, grid, beta, U; mu=U/2, N_cheb=64) -> ComplexF64
+
+`free_energy_jks` before the imaginary part is discarded.
+
+The free energy of a Hermitian Hamiltonian is real, so `imag(f)` is a
+zero-by-construction quantity and therefore an INDEPENDENT check on the whole
+pipeline — the auxiliary functions, the contours they were solved on and this
+evaluator all have to be right together for it to vanish.  Exposed separately so
+a test can assert on it instead of parsing a `@warn`; the size of `imag(f)` is
+the sharpest cheap signal that the solved equations are not eq (47).
+"""
+function free_energy_jks_complex(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real;
+    mu::Real=U/2,
+    N_cheb::Int=64,
+)
     # Stage E.1: Chebyshev-Gauss quadrature + paper page-14 direct form.
     #
     # log Lambda = -int_{-1}^1 K(x) log[(1+c+cb)^2/(c*cb)] dx
@@ -598,18 +630,7 @@ function free_energy_jks(
 
     log_Lambda = int_1 + int_2 - beta * U / 4
 
-    f = -(1 / beta) * log_Lambda
-
-    # Imag should be O(machine eps) when aux is a true NLIE solution.
-    # An O(1) imag indicates aux is not converged or formula is wrong;
-    # surface this rather than silently returning the real part.
-    if abs(imag(f)) > 1e-3 * max(abs(real(f)), 1.0)
-        @warn "free_energy_jks: non-negligible imag part discarded" imag_part=imag(f) real_part=real(
-            f
-        ) beta=beta U=U
-    end
-
-    return real(f)
+    return -(1 / beta) * log_Lambda
 end
 
 # ─────────────────────────────────────────────────────────────────────────────

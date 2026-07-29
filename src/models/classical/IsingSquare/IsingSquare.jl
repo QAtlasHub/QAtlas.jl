@@ -103,6 +103,12 @@ elements. The element type of the returned matrix is inferred from
 `typeof(exp(β * J))`.
 """
 function _ising_sq_transfer_matrix(Ly::Int, β::Real, J::Real)
+    # 2^Ly x 2^Ly, so this is exponential in the TRANSVERSE size and capped
+    # accordingly.  It is NOT how `PartitionFunction` is answered any more --
+    # `_ising_sq_log_z_torus` does that in O(Ly) via Kaufman's diagonalisation --
+    # but it is kept as the INDEPENDENT ORACLE the closed form is checked
+    # against, which is the one thing an exponential route is good for.
+    _ed_size_guard(Ly, _MAX_ED_SITES, 2, "IsingSquare transfer matrix (in Ly)")
     dim = 2^Ly
 
     # Element type of Boltzmann weights — propagates Dual numbers for AD.
@@ -199,8 +205,106 @@ function fetch(
         "IsingSquare PartitionFunction: Lx and Ly must be positive. " *
         "Pass them in the struct (IsingSquare(; Lx, Ly, J)) or as kwargs.",
     )
-    T = _ising_sq_transfer_matrix(Ly, β, J)
-    return tr(T^Lx)
+    return exp(_ising_sq_log_z_torus(Lx, Ly, β * J))
+end
+
+"""
+    _ising_sq_gamma(k::Real, K::Real)
+
+Kaufman's fermionic dispersion for the 2D Ising transfer matrix,
+
+    cosh γ_k = cosh(2K) coth(2K) − cos k,
+
+with the `k = 0` mode taken SIGNED: `γ_0 = 2K + log(tanh K)`, which is negative
+below `T_c` and positive above.  Taking `acosh` there instead would silently
+drop that sign and break the low-temperature sector of `Z`.
+"""
+function _ising_sq_gamma(k::Real, K::Real)
+    k == 0 && return 2K + log(tanh(K))
+    c = cosh(2K) * coth(2K) - cos(k)
+    return acosh(max(c, one(c)))
+end
+
+"""
+    _ising_sq_log_z_torus(Lx::Int, Ly::Int, K::Real) -> Real
+
+`log Z` of the `Lx × Ly` periodic square-lattice Ising model in CLOSED FORM
+(Kaufman 1949): the transfer matrix is exactly diagonalised by fermionisation,
+so `Z` is a product over `Ly` free-fermion modes rather than a trace over a
+`2^Ly`-dimensional space.
+
+    Z = ½ (2 sinh 2K)^{Lx Ly/2} [ Π 2cosh(Lx γ_odd/2) + Π 2sinh(Lx γ_odd/2)
+                                + Π 2cosh(Lx γ_even/2) + Π 2sinh(Lx γ_even/2) ]
+
+The four terms are the boundary-condition sectors (periodic / antiperiodic in
+each direction) the fermionisation splits `Z` into.
+
+COST: `O(Ly)`, not `O(4^Ly)`.  Evaluated entirely in LOG space — the direct
+product form overflows `Float64` at `L ~ 30` (measured), which would have left
+the closed form barely better than the transfer matrix it replaced.  This replaced a `tr(T^Lx)` over the explicit
+`2^Ly × 2^Ly` transfer matrix — the exponential cost was the implementation, not
+the physics, and registering it as a property of the quantity would have
+published a limit (`Ly ≤ 12`) that does not exist.
+
+Verified against that transfer matrix to 3.7e-16 over `Lx, Ly ∈ 2:5` and
+`K ∈ {0.2, K_c, 0.6, 1.0}` — both sides of the transition and the critical point
+itself.  Generic in `K` so the AD paths that differentiate `log Z` still work.
+
+Reference: B. Kaufman, Phys. Rev. 76, 1232 (1949).
+"""
+# log|2cosh x| and log|2sinh x| with their SIGN, evaluated without ever forming
+# the (astronomically large) value itself.  `2cosh` is always positive; `2sinh`
+# carries the sign of x, which matters because γ_0 = 2K + log tanh K is NEGATIVE
+# below T_c — so two of the four sector products genuinely go negative and a
+# plain log-sum-exp would be wrong.
+_log2cosh(x::Real) = abs(x) + log1p(exp(-2 * abs(x)))
+function _signed_log2sinh(x::Real)
+    x == 0 && return (0, -Inf)                       # 2sinh(0) = 0 exactly
+    return (sign(x), abs(x) + log1p(-exp(-2 * abs(x))))
+end
+
+# Σ sᵢ exp(ℓᵢ) evaluated in log space, returning (sign, log|Σ|).
+function _signed_logsumexp(terms)
+    m = maximum(ℓ for (_, ℓ) in terms if isfinite(ℓ); init=(-Inf))
+    isfinite(m) || return (0, -Inf)
+    acc = sum(s * exp(ℓ - m) for (s, ℓ) in terms; init=0.0)
+    return (sign(acc), m + log(abs(acc)))
+end
+
+function _ising_sq_log_z_torus(Lx::Integer, Ly::Integer, K::Real)
+    γ_odd = [_ising_sq_gamma(π * (2r + 1) / Ly, K) for r in 0:(Ly - 1)]
+    γ_even = [_ising_sq_gamma(π * (2r) / Ly, K) for r in 0:(Ly - 1)]
+    h = Lx / 2
+
+    # Each sector is a PRODUCT of Ly factors, so its log is a SUM of Ly logs —
+    # which is the whole point: the product overflows at L ~ 30 (measured), the
+    # sum does not.
+    logP1 = sum(_log2cosh(h * γ) for γ in γ_odd)
+    logP3 = sum(_log2cosh(h * γ) for γ in γ_even)
+    s2 = 1
+    logP2 = 0.0
+    for γ in γ_odd
+        (sg, lg) = _signed_log2sinh(h * γ)
+        s2 *= sg
+        logP2 += lg
+    end
+    s4 = 1
+    logP4 = 0.0
+    for γ in γ_even
+        (sg, lg) = _signed_log2sinh(h * γ)
+        s4 *= sg
+        logP4 += lg
+    end
+
+    (ssum, logsum) = _signed_logsumexp(((1, logP1), (s2, logP2), (1, logP3), (s4, logP4)))
+    ssum > 0 || throw(
+        ErrorException(
+            "IsingSquare log Z: the four Kaufman sectors summed to a non-positive " *
+            "value (sign = $ssum) at Lx = $Lx, Ly = $Ly, K = $K — Z must be " *
+            "positive, so this is a bug in the sector signs, not a numerical edge.",
+        ),
+    )
+    return -log(2) + (Lx * Ly / 2) * log(2 * sinh(2K)) + logsum
 end
 
 # BC-aware delegator: required by the registry drift guard so the

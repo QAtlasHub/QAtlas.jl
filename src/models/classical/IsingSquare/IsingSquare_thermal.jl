@@ -143,13 +143,15 @@ end
 """
     _ising_sq_log_z(m, Lx, Ly, β, J) -> Real
 
-`log tr(T^Lx)` for the `Lx × Ly` torus — the finite-N partition
-function in log form, generic in `β` and `J` so `ForwardDiff` Duals
-propagate through the transfer matrix.
+`log Z` for the `Lx × Ly` torus.  Delegates to
+[`_ising_sq_log_z_torus`](@ref) (Kaufman's closed form, `O(Ly)`), which
+replaced the `log tr(T^Lx)` over the explicit `2^Ly × 2^Ly` transfer matrix.
+
+Generic in `β` and `J` so `ForwardDiff` Duals propagate: the per-site energy and
+the specific heat differentiate this function.
 """
 function _ising_sq_log_z(::IsingSquare, Lx::Integer, Ly::Integer, β::Real, J::Real)
-    T = _ising_sq_transfer_matrix(Ly, β, J)
-    return log(tr(T^Lx))
+    return _ising_sq_log_z_torus(Lx, Ly, β * J)
 end
 
 """

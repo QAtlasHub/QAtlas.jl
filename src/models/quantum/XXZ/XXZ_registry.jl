@@ -14,6 +14,8 @@
     Energy{:total},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_thermal.jl",
     references=["YangYang1966", "Takahashi1999"],
@@ -77,6 +79,8 @@
     MassGap,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
     notes="E₁ - E₀ from full-spectrum dense ED.",
@@ -98,6 +102,8 @@
     FreeEnergy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_thermal.jl"
 )
@@ -106,6 +112,8 @@
     ThermalEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_thermal.jl"
 )
@@ -114,6 +122,8 @@
     SpecificHeat,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_thermal.jl"
 )
@@ -124,6 +134,8 @@
     MagnetizationX,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -132,6 +144,8 @@
     MagnetizationY,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -140,6 +154,8 @@
     MagnetizationZ,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -150,6 +166,8 @@
     LocalMagnetization{:x},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -158,6 +176,8 @@
     LocalMagnetization{:y},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -166,6 +186,8 @@
     LocalMagnetization{:z},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -174,6 +196,8 @@
     EnergyLocal,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
     notes="Bonds split symmetrically: Σᵢ ε_i = ⟨H⟩.",
@@ -185,6 +209,8 @@
     SusceptibilityXX,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -193,6 +219,8 @@
     SusceptibilityYY,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -201,6 +229,8 @@
     SusceptibilityZZ,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl"
 )
@@ -219,6 +249,8 @@ for CorrT in (
         CorrT,
         OBC;
         method=:dense_ed,
+        cost=:exponential,
+        max_size=12,
         reliability=:high,
         tested_in="test/models/test_XXZ1D_observables.jl",
         notes="(i,j) ⟨σᵅᵢ σᵅⱼ⟩_β; the connected variant subtracts the disconnected piece.",
@@ -231,6 +263,8 @@ end
     VonNeumannEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
     notes="Dense-ED partial trace over the SPIN complement, so the subsystem may " *
@@ -242,6 +276,8 @@ end
     RenyiEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_XXZ1D_observables.jl",
     notes="S_α = log Tr ρ_A^α / (1 - α); pass subsystem ℓ and order α.",

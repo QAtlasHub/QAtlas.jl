@@ -51,9 +51,7 @@ Returns the `3^N × 3^N` operator that places each `Sᵅ` at its listed
 site and the 3×3 identity elsewhere.
 """
 function _spin1_string(N::Int, site_ops::Pair{Int,Matrix{ComplexF64}}...)
-    N ≤ _MAX_ED_SITES_S1 || throw(
-        ArgumentError("spin-1 dense ED is capped at N ≤ $(_MAX_ED_SITES_S1) (got N = $N)"),
-    )
+    _ed_size_guard(N, _MAX_ED_SITES_S1, 3, "spin-1 dense ED")
     lookup = Dict(site_ops...)
     ops = [get(lookup, k, _S1_id) for k in 1:N]
     return reduce(kron, ops)
@@ -88,9 +86,7 @@ Capped by `_MAX_ED_SITES_S1`.
 """
 function _s1_heisenberg_hamiltonian_matrix(model::S1Heisenberg1D, N::Int)
     N ≥ 2 || throw(ArgumentError("S1Heisenberg1D OBC chain needs N ≥ 2 (got N = $N)"))
-    N ≤ _MAX_ED_SITES_S1 || throw(
-        ArgumentError("spin-1 dense ED is capped at N ≤ $(_MAX_ED_SITES_S1) (got N = $N)"),
-    )
+    _ed_size_guard(N, _MAX_ED_SITES_S1, 3, "spin-1 dense ED")
     J = model.J
     D = 3^N
     # Combine the three Sᵅ⊗Sᵅ contractions into a single 9×9 bond block

@@ -12,6 +12,8 @@
     Energy{:total},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
     notes="Total ⟨H⟩(β) by dense ED on the 3^N Hilbert space; N ≤ 8.",
@@ -21,6 +23,8 @@
     FreeEnergy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
 )
@@ -29,6 +33,8 @@
     ThermalEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
 )
@@ -37,6 +43,8 @@
     SpecificHeat,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
 )
@@ -47,6 +55,8 @@
     MagnetizationX,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -55,6 +65,8 @@
     MagnetizationY,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -63,6 +75,8 @@
     MagnetizationZ,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -73,6 +87,8 @@
     SusceptibilityXX,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -81,6 +97,8 @@
     SusceptibilityYY,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -89,6 +107,8 @@
     SusceptibilityZZ,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -99,6 +119,8 @@
     SpinCorrelation{:x,:x},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -107,6 +129,8 @@
     SpinCorrelation{:y,:y},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -115,6 +139,8 @@
     SpinCorrelation{:z,:z},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -123,6 +149,8 @@
     ConnectedSpinCorrelation{:x,:x},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -131,6 +159,8 @@
     ConnectedSpinCorrelation{:y,:y},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -139,6 +169,8 @@
     ConnectedSpinCorrelation{:z,:z},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -149,6 +181,8 @@
     LocalMagnetization{:x},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -157,6 +191,8 @@
     LocalMagnetization{:z},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -165,6 +201,8 @@
     EnergyLocal,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
 )
@@ -175,6 +213,8 @@
     MassGap,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
     notes="E₁ - E₀ from dense ED on 3^N space; finite-N + edge-state corrections to Δ_∞.",
@@ -184,6 +224,9 @@
     MassGap,
     Infinite,
     method=:literature_value,
+    status=:approx,
+    valid_domain="spin-1 Heisenberg chain, thermodynamic limit",
+    error_order="DMRG numerical value (White-Huse 1993); no closed form is known",
     reliability=:medium,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
     references=["WhiteHuse1993"],
@@ -194,6 +237,9 @@
     Energy{:per_site},
     Infinite,
     method=:literature_value,
+    status=:approx,
+    valid_domain="spin-1 Heisenberg chain, thermodynamic limit",
+    error_order="DMRG numerical value (White-Huse 1993); no closed form is known",
     reliability=:medium,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
     references=["WhiteHuse1993"],
@@ -206,6 +252,8 @@
     VonNeumannEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
     notes="Partial trace of dense thermal ρ over the SPIN complement, so the " *
@@ -217,6 +265,8 @@
     RenyiEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
     reliability=:high,
     tested_in="test/models/test_S1Heisenberg1D_observables.jl",
     notes="S_α = log Tr ρ_A^α / (1-α); same partial-trace path as VonNeumann.",

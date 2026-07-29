@@ -33,6 +33,47 @@ const _σy = ComplexF64[0 -im; im 0]
 const _σz = ComplexF64[1 0; 0 -1]
 
 """
+    _ed_size_guard(N::Int, cap::Int, d::Int, what::AbstractString)
+
+The single gate every many-body dense-ED path in this atlas passes through.
+Throws above `cap`, and says ONCE per session that the route is exponential.
+
+WHY A WARNING AND NOT A REMOVAL.  An exponential route is still a correct route,
+and for a model with no closed form it is the only one there is.  What it must
+not do is look like the scalable ones: a caller who asks a hub for a value and
+gets a `2^N` diagonalisation should be told, because the answer stops existing a
+few sites later.  So the atlas keeps the route, registers the cost
+(`cost=:exponential`, `max_size`) as data rather than prose, and says so at the
+moment the cost is actually incurred.
+
+`maxlog=1` — this fires inside the innermost operator builder, so without it a
+single sweep would emit thousands of identical lines.  The registry carries the
+same fact statically for anyone who wants to plan ahead instead of being told
+afterwards.
+"""
+function _ed_size_guard(N::Int, cap::Int, d::Int, what::AbstractString)
+    N ≤ cap || throw(
+        ArgumentError(
+            "$what: many-body dense ED is capped at N ≤ $cap (got N = $N). The cost " *
+            "is O($(d)^N) in both memory and time, so this is a hard limit, not a " *
+            "tuning knob — use a route registered with cost=:polynomial or " *
+            ":closed_form if the model has one.",
+        ),
+    )
+    # Build the message first.  `@warn msg key=value...` parses the FIRST
+    # argument as the message and everything after it as key/value pairs, so a
+    # `*`-concatenated literal followed by `maxlog=1` is ambiguous to read and
+    # fragile under reformatting — the formatter split `maxlog =` from its `1`
+    # and the macro stopped parsing.
+    msg =
+        "$what: many-body dense ED — O($(d)^N), so only small systems are reachable " *
+        "(cap N ≤ $cap). Registered as cost=:exponential with max_size=$cap; where a " *
+        "scalable route exists it is the canonical one."
+    @warn msg N = N maxlog = 1
+    return nothing
+end
+
+"""
     _pauli_string(N::Int, site_ops::Pair{Int,Matrix{ComplexF64}}...) -> Matrix{ComplexF64}
 
 Return the `2^N × 2^N` tensor product that places each `σ_k` at its
@@ -47,9 +88,9 @@ _pauli_string(5, 3 => _σx)
 _pauli_string(5, 2 => _σx, 4 => _σz)
 ```
 """
+
 function _pauli_string(N::Int, site_ops::Pair{Int,Matrix{ComplexF64}}...)
-    N ≤ _MAX_ED_SITES ||
-        throw(ArgumentError("dense ED is capped at N ≤ $_MAX_ED_SITES (got N = $N)"))
+    _ed_size_guard(N, _MAX_ED_SITES, 2, "spin-1/2 dense ED")
     lookup = Dict(site_ops...)
     ops = [get(lookup, k, _σ0) for k in 1:N]
     return reduce(kron, ops)

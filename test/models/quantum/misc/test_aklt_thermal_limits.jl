@@ -31,7 +31,7 @@ using LinearAlgebra: Hermitian, eigvals
     # ── Independent dense-ED cross-check (bond-projector says E_GS_OBC =
     #    -(2J/3)(N-1) exactly; ED on the OBC Hamiltonian should agree). ──────
     for J in (0.5, 1.0), N in (3, 4, 5, 6)
-        H = _aklt_dense_hamiltonian(AKLT1D(; J=J), N)
+        H = QAtlas._aklt_hamiltonian_matrix(AKLT1D(; J=J), N, OBC(N))
         E_gs = real(eigvals(Hermitian(H))[1])
         f_ed = E_gs / N
         f_fetch = QAtlas.fetch(AKLT1D(; J=J), FreeEnergy(), OBC(N); beta=Inf)
@@ -52,7 +52,7 @@ end
     # finite N-dependent gap (the OBC AKLT spectrum: 4 (nearly) degenerate
     # ground states from spin-½ edge modes, then a Haldane-like gap).
     for N in (3, 4, 5, 6)
-        H = _aklt_dense_hamiltonian(AKLT1D(), N)
+        H = QAtlas._aklt_hamiltonian_matrix(AKLT1D(), N, OBC(N))
         ev = sort(real.(eigvals(Hermitian(H))))
         @test ev[4] - ev[1] < 1e-9                # 4-fold manifold
         @test ev[5] - ev[1] > 0.1                 # gapped to next state

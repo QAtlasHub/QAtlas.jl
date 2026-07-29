@@ -9,6 +9,9 @@
     Energy{:per_site},
     Infinite,
     method=:dmrg_reference,
+    status=:approx,
+    valid_domain="thermodynamic limit of the PXP chain",
+    error_order="quoted DMRG/ED uncertainty 2e-4; a measured number, not a closed form",
     reliability=:medium,
     tested_in="test/models/quantum/misc/test_pxp1d.jl",
     references=[

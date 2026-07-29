@@ -8,6 +8,7 @@
     MassGap,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_long_range_xy1d.jl",
     references=["LiebSchultzMattis1961", "Pfeuty1970", "MaghrebiGongGorshkov2017"],

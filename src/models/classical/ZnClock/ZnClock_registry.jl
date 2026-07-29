@@ -8,6 +8,7 @@
     CentralCharge,
     Infinite,
     method=:delegation,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_zn_clock.jl",
     references=["JoseKadanoffKirkpatrickNelson1977", "ElitzurPearsonShigemitsu1979"],

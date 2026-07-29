@@ -8,6 +8,7 @@
     MassGap,
     Infinite,
     method=:kitaev_delegation,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/standalone/test_kitaev_heisenberg.jl",
     references=["Kitaev2006", "RauLeeKee2014"],

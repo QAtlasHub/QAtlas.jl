@@ -10,6 +10,7 @@
     MassGap,
     Infinite,
     method=:delegation,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_mixed_field_ising1d.jl",
     references=["Pfeuty1970", "McCoyWu1978"],

@@ -8,6 +8,7 @@
     ResidualEntropy,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:medium,
     tested_in="test/standalone/test_spin_ice.jl",
     references=["Pauling1935"],

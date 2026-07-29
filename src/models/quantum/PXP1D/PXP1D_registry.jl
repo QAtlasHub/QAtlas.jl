@@ -9,6 +9,7 @@
     Energy{:per_site},
     Infinite,
     method=:dmrg_reference,
+    cost=:closed_form,
     status=:approx,
     valid_domain="thermodynamic limit of the PXP chain",
     error_order="quoted DMRG/ED uncertainty 2e-4; a measured number, not a closed form",

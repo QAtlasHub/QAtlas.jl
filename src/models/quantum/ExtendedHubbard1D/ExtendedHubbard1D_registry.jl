@@ -12,6 +12,7 @@
     ChargeGap,
     Infinite,
     method=:delegation,
+    cost=:polynomial,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_extended_hubbard1d.jl",
     references=["LiebWu1968", "Voit1995", "Nakamura2000"],

@@ -14,6 +14,7 @@
     Energy{:per_site},
     Infinite,
     method=:delegation,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/Heisenberg/test_dmi_heisenberg1d.jl",
     references=["Hulthen1938", "Dzyaloshinsky1958", "Moriya1960", "AffleckOshikawa1999"],

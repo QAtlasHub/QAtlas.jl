@@ -5,6 +5,7 @@
     TopologicalEntanglementEntropy,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_fibonacci_anyons.jl",
     references=["FreedmanKitaevLarsenWang2003", "ReadRezayi1999", "KitaevPreskill2006"],

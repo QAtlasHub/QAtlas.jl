@@ -6,6 +6,7 @@ register!(
     GrowthExponents,
     Infinite;
     method=:analytic,  # status=:universal derived by construction (register!)
+    cost=:closed_form,
     reliability=:high,
     notes="KPZ scaling exponents (β_growth, α_rough, z) — Kardar-Parisi-Zhang 1986; exact in d=1, numerical d=2,3.",
 )

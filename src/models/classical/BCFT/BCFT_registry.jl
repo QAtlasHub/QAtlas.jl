@@ -8,6 +8,7 @@
     ResidualEntropy,
     Infinite,
     method=:analytic,
+    cost=:closed_form,
     reliability=:high,
     tested_in="test/universalities/test_bcft.jl",
     references=["Cardy1989", "AffleckLudwig1991", "FriedanKonechny2004"],

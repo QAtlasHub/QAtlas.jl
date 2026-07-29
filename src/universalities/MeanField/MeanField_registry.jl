@@ -6,6 +6,7 @@ register!(
     CriticalExponents,
     Infinite;
     method=:analytic,  # status=:universal derived by construction (register!)
+    cost=:closed_form,
     reliability=:high,
     notes="Landau mean-field critical exponents (α=0, β=1/2, γ=1, δ=3, ν=1/2, η=0); exact for d >= d_c = 4.",
 )

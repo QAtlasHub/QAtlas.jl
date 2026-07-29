@@ -8,6 +8,7 @@
     MassGap,
     Infinite,
     method=:linear_phonon,
+    cost=:closed_form,
     status=:approx,
     valid_domain="harmonic (linearised) branch only -- small oscillations about the " *
                  "equilibrium chain",

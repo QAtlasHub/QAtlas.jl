@@ -81,6 +81,26 @@
     Infinite,
     method=:jks_qtm_nlie,
     cost=:polynomial,
+    # The QTM/NLIE FORMULATION is exact — a finite closed set of equations for
+    # three auxiliary functions, not a truncation of the infinite TBA hierarchy.
+    # This IMPLEMENTATION is not, and the limitation was carried only in the
+    # prose of `notes` where no query could see it (the same over-claim #792
+    # fixed elsewhere).
+    status = :approx,
+    valid_domain="beta <= 1e-3 at H = 0, mu = U/2 (half filling), t = 1. " *
+                 "Verified against ED to within 1%% there across U in {2, 4, 8}. " *
+                 "Outside it: measured deviation from ED by beta ~ 0.1, and no " *
+                 "value at all for beta >= 0.5, where the beta-continuation " *
+                 "stalls and `fetch` returns NaN.",
+    error_order="NOT a convergent discretisation error. The c-channel " *
+                "convolution is taken over the full [-x_max, x_max] grid with " *
+                "the alpha-shifted kernel, where eq (47) restricts it to a " *
+                "contour surrounding [-1, 1] (the c functions are analytic " *
+                "outside it). MEASURED at beta = 0.1: 74%% of K1 * log C comes " *
+                "from |x| > 1, only 4 of 128 grid points lie inside [-1, 1], and " *
+                "refining grid_N 32 -> 256 moves the answer non-monotonically " *
+                "instead of converging. The discarded imaginary part of f runs " *
+                "4%% of Re f at beta = 0.1 and 34%% at beta = 0.3.",
     reliability=:medium,
     tested_in="test/models/quantum/Hubbard1D/test_hubbard1d_jks_paper_precise.jl",
     references=["JuttnerKlumperSuzuki1998"],

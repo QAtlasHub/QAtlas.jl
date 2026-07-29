@@ -8,6 +8,13 @@
     MassGap,
     Infinite,
     method=:linear_phonon,
+    status=:approx,
+    valid_domain="harmonic (linearised) branch only -- small oscillations about the " *
+                 "equilibrium chain",
+    error_order="the LINEARISATION is the approximation, not a small parameter: the " *
+                "Toda lattice is integrable and its spectrum also carries a SOLITON " *
+                "sector that this branch does not see, so MassGap = 0 is a statement " *
+                "about the acoustic phonons alone (quantum Toda tracked as Phase 2).",
     reliability=:high,
     tested_in="test/standalone/test_toda_lattice.jl",
     references=["Toda1967", "Flaschka1974"],

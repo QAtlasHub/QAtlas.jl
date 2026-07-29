@@ -50,6 +50,13 @@
     Energy{:per_site},
     PBC,
     method=:central_diff,
+    status=:approx,
+    references=["Onsager1944"],
+    valid_domain="away from T_c; the underlying log Z is Onsager-exact, the " *
+                 "DERIVATIVE is not",
+    error_order="central difference: O(delta^2) truncation + O(eps/delta) round-off. " *
+                "Numerically approximate, physically exact -- the approximation is " *
+                "the differencing, not the model.",
     reliability=:medium,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="ε = -∂(log Z)/∂β / N via central diff (O(δ²) truncation).",
@@ -59,6 +66,12 @@
     ThermalEntropy,
     PBC,
     method=:central_diff,
+    status=:approx,
+    references=["Onsager1944"],
+    valid_domain="away from T_c; inherits the domain of the energy row it is built " *
+                 "from",
+    error_order="no differencing of its own -- s = beta(eps - f) propagates the " *
+                "energy row's central-difference error linearly.",
     reliability=:medium,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="s = β(ε - f).",
@@ -68,6 +81,13 @@
     SpecificHeat,
     PBC,
     method=:central_diff,
+    status=:approx,
+    references=["Onsager1944"],
+    valid_domain="away from T_c, where c_v genuinely DIVERGES and no finite error " *
+                 "statement holds",
+    error_order="3-point stencil for a SECOND derivative: O(delta^2) truncation but " *
+                "O(eps/delta^2) round-off -- markedly worse conditioned than the " *
+                "first-derivative rows, which is why it is called out separately.",
     reliability=:medium,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="c_v = β² ∂²(log Z)/∂β² / N via 3-point stencil.",
@@ -87,6 +107,13 @@
     Energy{:per_site},
     Infinite,
     method=:central_diff,
+    status=:approx,
+    references=["Onsager1944"],
+    valid_domain="away from T_c; the underlying log Z is Onsager-exact, the " *
+                 "DERIVATIVE is not",
+    error_order="central difference: O(delta^2) truncation + O(eps/delta) round-off. " *
+                "Numerically approximate, physically exact -- the approximation is " *
+                "the differencing, not the model.",
     reliability=:high,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="ε = -∂(log Z/N)/∂β via central diff on Onsager log Z.",
@@ -96,6 +123,12 @@
     ThermalEntropy,
     Infinite,
     method=:central_diff,
+    status=:approx,
+    references=["Onsager1944"],
+    valid_domain="away from T_c; inherits the domain of the energy row it is built " *
+                 "from",
+    error_order="no differencing of its own -- s = beta(eps - f) propagates the " *
+                "energy row's central-difference error linearly.",
     reliability=:high,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="s = β(ε - f).",
@@ -105,6 +138,13 @@
     SpecificHeat,
     Infinite,
     method=:central_diff,
+    status=:approx,
+    references=["Onsager1944"],
+    valid_domain="away from T_c, where c_v genuinely DIVERGES and no finite error " *
+                 "statement holds",
+    error_order="3-point stencil for a SECOND derivative: O(delta^2) truncation but " *
+                "O(eps/delta^2) round-off -- markedly worse conditioned than the " *
+                "first-derivative rows, which is why it is called out separately.",
     reliability=:medium,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="Diverges at T_c (ln(1+√2)/2 ≈ 0.4407); finite elsewhere.",

@@ -887,6 +887,7 @@ function hubbard1d_jks_free_energy(
     solver::Symbol=:full_newton_continuation,
     beta_start::Real=0.01,
     outer_maxsteps::Int=200,
+    jacobian::Symbol=:analytic,
 )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
     U >= 0 || throw(DomainError(U, "U must be >= 0"))
@@ -928,7 +929,15 @@ function hubbard1d_jks_free_energy(
     sol = if solver == :full_newton
         # Stage C.24+ paper-precise 3-channel Newton (high T only).
         solve_jks_nlie_full_newton(
-            grid, beta, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+            grid,
+            beta,
+            U,
+            mu;
+            alpha=alpha,
+            H=H,
+            tol=tol,
+            maxiter=maxiter,
+            jacobian=jacobian,
         )
     elseif solver == :full_newton_continuation
         # Stage G.1: β-continuation for wide-β robustness (default).
@@ -944,6 +953,7 @@ function hubbard1d_jks_free_energy(
             tol=tol,
             maxiter=maxiter,
             outer_maxsteps=outer_maxsteps,
+            jacobian=jacobian,
         )
     else
         throw(
@@ -1127,6 +1137,117 @@ function jks_jacobian_full_finite_diff(
 end
 
 """
+    jks_jacobian_full_analytic(aux, grid, beta, U, mu, alpha; H=0.0)
+        -> Matrix{ComplexF64}
+
+Jacobian of the full `3N` residual with respect to `[log b; log c; log c_bar]`,
+assembled from its closed-form block structure instead of by differencing the
+residual once per column.
+
+This is not a micro-optimisation.  Perturbing `log b[k]` changes the convolved
+function at exactly ONE node, so its effect on `K ⊛ f` is the single column
+`K[:, k]` scaled by a scalar.  The finite-difference route cannot see that — it
+re-runs the whole residual, six dense `N × N` matvecs, once per column — so it
+pays `O(N³)` to build a matrix that is `O(N²)` to write down.  At the default
+`grid_N = 128` that is 384 residual evaluations per Newton step against one
+assembly pass.  It is also EXACT, where `jac_eps = 1e-6` forward differences
+give roughly six digits, and an inaccurate Jacobian costs Newton its quadratic
+convergence — the reason the β-continuation stalls and burns its step budget.
+
+The blocks follow from eq (47) with `f_B = log(1 + b)` and `f_C = log(1 + c)`:
+
+    res_b    = log b    − [ −βH + K₂ f_B + K₁ (log c − f_C) ]
+    res_c    = log c    − [ ψ_c    − K₁ f_B − K₁ f_C ]
+    res_cbar = log cbar − [ ψ_cbar + K₁ f_B + K₁ f_C ]
+
+so, writing `Db = diag(b/(1+b))` and `Dc = diag(c/(1+c))` for the two pointwise
+derivatives `∂f_B/∂log b` and `∂f_C/∂log c`,
+
+    J = [ I − K₂ Db     −K₁ (I − Dc)     0 ]
+        [     K₁ Db      I + K₁ Dc       0 ]
+        [    −K₁ Db        −K₁ Dc        I ]
+
+`b_bar` enters no residual — the b channel computes `log(1 + 1/b̄)` but does not
+use it in its right-hand side — which is why the third block column is empty off
+the diagonal.  [`jks_jacobian_full_finite_diff`](@ref) is kept as the test
+oracle: an independent route to the same matrix, differing only by the
+differencing error.
+"""
+function jks_jacobian_full_analytic(
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+)
+    beta > 0 || throw(DomainError(beta, "beta must be > 0"))
+    alpha > 0 || throw(DomainError(alpha, "alpha must be > 0"))
+    length(aux) == grid.N ||
+        throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
+
+    N = grid.N
+    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
+    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+
+    db = aux.b ./ (1 .+ aux.b)          # ∂ log(1 + b) / ∂ log b
+    dc = aux.c ./ (1 .+ aux.c)          # ∂ log(1 + c) / ∂ log c
+
+    # `K .* transpose(d)` is `K * Diagonal(d)` without materialising the
+    # diagonal or paying a matrix-matrix product.
+    K1_db = K1 .* transpose(db)
+    K2_db = K2 .* transpose(db)
+    K1_dc = K1 .* transpose(dc)
+    K1_1mdc = K1 .* transpose(1 .- dc)  # ∂(log c − log(1+c))/∂log c = 1/(1+c)
+
+    J = zeros(ComplexF64, 3 * N, 3 * N)
+    b_rows, c_rows, cbar_rows = 1:N, (N + 1):(2 * N), (2 * N + 1):(3 * N)
+    b_cols, c_cols, cbar_cols = 1:N, (N + 1):(2 * N), (2 * N + 1):(3 * N)
+
+    J[b_rows, b_cols] .= .-K2_db
+    J[c_rows, b_cols] .= K1_db
+    J[cbar_rows, b_cols] .= .-K1_db
+    J[b_rows, c_cols] .= .-K1_1mdc
+    J[c_rows, c_cols] .= K1_dc
+    J[cbar_rows, c_cols] .= .-K1_dc
+    for k in 1:N                        # the three identity blocks on log(·)
+        J[k, k] += 1
+        J[N + k, N + k] += 1
+        J[2 * N + k, 2 * N + k] += 1
+    end
+    return J
+end
+
+"""
+    _jks_jacobian(mode, aux, grid, beta, U, mu, alpha; H=0.0, jac_eps=1e-6)
+
+Dispatch the Jacobian build.  `:analytic` is the default everywhere; the
+`:finite_diff` route stays reachable so a caller (and the test suite) can
+compare the two on the same state.
+"""
+function _jks_jacobian(
+    mode::Symbol,
+    aux::JKSAuxFunctions,
+    grid::JKSContourGrid,
+    beta::Real,
+    U::Real,
+    mu::Real,
+    alpha::Real;
+    H::Real=0.0,
+    jac_eps::Real=1e-6,
+)
+    if mode === :analytic
+        return jks_jacobian_full_analytic(aux, grid, beta, U, mu, alpha; H=H)
+    elseif mode === :finite_diff
+        return jks_jacobian_full_finite_diff(
+            aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps
+        )
+    end
+    return throw(ArgumentError("jacobian must be :analytic or :finite_diff; got :$(mode)"))
+end
+
+"""
     solve_jks_nlie_full_newton(grid, beta, U, mu; alpha=U/6, H=0, tol=1e-6,
                                 maxiter=50, jac_eps=1e-6,
                                 damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01))
@@ -1144,6 +1265,7 @@ function solve_jks_nlie_full_newton(
     tol::Real=1e-6,
     maxiter::Int=50,
     jac_eps::Real=1e-6,
+    jacobian::Symbol=:analytic,
     damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
 )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
@@ -1162,7 +1284,7 @@ function solve_jks_nlie_full_newton(
             return JKSSolution(aux, iter, last_residual, true)
         end
 
-        J = jks_jacobian_full_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
+        J = _jks_jacobian(jacobian, aux, grid, beta, U, mu, alpha; H=H, jac_eps=jac_eps)
 
         delta = try
             J \ (-res)
@@ -1236,6 +1358,7 @@ function solve_jks_nlie_full_newton_from(
     tol::Real=1e-6,
     maxiter::Int=50,
     jac_eps::Real=1e-6,
+    jacobian::Symbol=:analytic,
     damps=(1.0, 0.5, 0.25, 0.1, 0.05, 0.01),
 )
     beta > 0 || throw(DomainError(beta, "beta must be > 0"))
@@ -1254,7 +1377,7 @@ function solve_jks_nlie_full_newton_from(
             return JKSSolution(aux, iter, last_residual, true)
         end
 
-        J = jks_jacobian_full_finite_diff(aux, grid, beta, U, mu, alpha; H=H, eps=jac_eps)
+        J = _jks_jacobian(jacobian, aux, grid, beta, U, mu, alpha; H=H, jac_eps=jac_eps)
 
         delta = try
             J \ (-res)
@@ -1336,13 +1459,14 @@ function solve_jks_nlie_full_newton_continuation(
     tol::Real=1e-6,
     maxiter::Int=40,
     outer_maxsteps::Int=200,
+    jacobian::Symbol=:analytic,
 )
     beta_target > 0 || throw(DomainError(beta_target, "beta_target must be > 0"))
 
     bs = min(beta_start, beta_target)
     aux = init_atomic_limit(grid, bs, U, mu; h=H)
     sol_init = solve_jks_nlie_full_newton_from(
-        aux, grid, bs, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+        aux, grid, bs, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter, jacobian=jacobian
     )
     if !sol_init.converged
         return JKSSolution(sol_init.aux, sol_init.iterations, sol_init.residual, false)
@@ -1365,7 +1489,16 @@ function solve_jks_nlie_full_newton_continuation(
 
         beta_try = min(beta_current * (1 + step), beta_target)
         sol = solve_jks_nlie_full_newton_from(
-            aux, grid, beta_try, U, mu; alpha=alpha, H=H, tol=tol, maxiter=maxiter
+            aux,
+            grid,
+            beta_try,
+            U,
+            mu;
+            alpha=alpha,
+            H=H,
+            tol=tol,
+            maxiter=maxiter,
+            jacobian=jacobian,
         )
         total_iter += sol.iterations
 

@@ -220,8 +220,15 @@ below `T_c` and positive above.  Taking `acosh` there instead would silently
 drop that sign and break the low-temperature sector of `Z`.
 """
 function _ising_sq_gamma(k::Real, K::Real)
-    k == 0 && return 2K + log(tanh(K))
-    c = cosh(2K) * coth(2K) - cos(k)
+    # |K|, not K.  On the bipartite square lattice the antiferromagnet maps to
+    # the ferromagnet by sigma -> -sigma on one sublattice, so Z is EVEN in J and
+    # the mode energies depend only on |K|.  Written with K, `log(tanh K)` is NaN
+    # for K < 0 and the whole closed form silently returns NaN -- a wrong answer
+    # for a physically ordinary input, where the transfer matrix it replaced
+    # simply worked.
+    a = abs(K)
+    k == 0 && return 2a + log(tanh(a))
+    c = cosh(2a) * coth(2a) - cos(k)
     return acosh(max(c, one(c)))
 end
 
@@ -272,6 +279,19 @@ function _signed_logsumexp(terms)
 end
 
 function _ising_sq_log_z_torus(Lx::Integer, Ly::Integer, K::Real)
+    # K = 0 (beta = 0 or J = 0) is a SINGULAR POINT OF THE PARAMETRISATION, not
+    # of the physics.  Kaufman's variables all blow up there -- sinh 2K = 0 makes
+    # the prefactor log(0), coth K diverges, and gamma_0 = 2K + log tanh K is
+    # log(0) -- while the answer is the most trivial one there is: no bond
+    # carries weight, so every one of the 2^{Lx Ly} configurations contributes 1.
+    #
+    # The transfer matrix handled this without special-casing (its entries just
+    # become 1), so this is a regression the closed form introduces and has to
+    # pay for explicitly.  Both `beta = 0` and `J = 0` are DOCUMENTED special
+    # values of this fetch and are pinned in
+    # `test/models/classical/test_ising_square_pfaffian.jl`.
+    iszero(K) && return (Lx * Ly) * log(oftype(float(K), 2))
+
     γ_odd = [_ising_sq_gamma(π * (2r + 1) / Ly, K) for r in 0:(Ly - 1)]
     γ_even = [_ising_sq_gamma(π * (2r) / Ly, K) for r in 0:(Ly - 1)]
     h = Lx / 2
@@ -304,7 +324,7 @@ function _ising_sq_log_z_torus(Lx::Integer, Ly::Integer, K::Real)
             "positive, so this is a bug in the sector signs, not a numerical edge.",
         ),
     )
-    return -log(2) + (Lx * Ly / 2) * log(2 * sinh(2K)) + logsum
+    return -log(2) + (Lx * Ly / 2) * log(2 * sinh(2 * abs(K))) + logsum
 end
 
 # BC-aware delegator: required by the registry drift guard so the

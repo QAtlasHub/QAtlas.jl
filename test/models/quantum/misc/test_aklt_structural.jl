@@ -23,7 +23,7 @@ using QAtlas, Test, LinearAlgebra
     @testset "OBC ExactSpectrum shape (sorted, real, length 3^N)" begin
         m = AKLT1D(; J=1.0)
         for N in (2, 3, 4)
-            λ = QAtlas.fetch(m, ExactSpectrum(), OBC(N))
+            λ = _aklt_dense_spectrum(m, N)
             @test length(λ) == 3^N
             @test issorted(λ)
             @test all(isreal, λ)
@@ -35,7 +35,7 @@ using QAtlas, Test, LinearAlgebra
         # degenerate ground states. Structural; not a single value.
         m = AKLT1D(; J=1.0)
         for N in (4, 6, 8)
-            λ = QAtlas.fetch(m, ExactSpectrum(), OBC(N))
+            λ = _aklt_dense_spectrum(m, N)
             @test λ[4] - λ[1] < 1e-8                   # 4-fold manifold
             @test λ[5] - λ[4] > 0.05                    # well separated
         end
@@ -47,7 +47,7 @@ using QAtlas, Test, LinearAlgebra
         m = AKLT1D(; J=1.0)
         e_inf = -2 / 3
         for N in (4, 6, 8)
-            E0 = QAtlas.fetch(m, ExactSpectrum(), OBC(N))[1]
+            E0 = _aklt_dense_spectrum(m, N)[1]
             @test E0 ≈ -(2 / 3) * (N - 1) atol = 1e-10
             @test E0 / N > e_inf
             @test abs(E0 / N - e_inf) ≤ 2 / (3N)

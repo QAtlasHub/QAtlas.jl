@@ -29,21 +29,25 @@
     SSH,
     MassGap,
     OBC,
-    method=:dense_ed,
+    method=:single_particle_diagonalization,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_ssh.jl",
     references=["SSH1979"],
-    notes="Smallest non-negative single-particle eigenvalue (edge-mode splitting in topological phase).",
+    notes="Smallest non-negative single-particle eigenvalue (edge-mode splitting in " *
+          "topological phase). Diagonalises the 2N x 2N SINGLE-PARTICLE matrix, so the " *
+          "cost is O(N^3) and there is no Hilbert-space cap -- this was mislabelled " *
+          "`:dense_ed`, which reads as exponential many-body ED.",
 )
 @register(
     SSH,
     EdgeModeEnergy,
     OBC,
-    method=:dense_ed,
+    method=:single_particle_diagonalization,
     reliability=:high,
     tested_in="test/models/quantum/misc/test_ssh.jl",
     references=["SSH1979", "AsbothOroszlanyPalyi2016"],
-    notes="Same value as MassGap@OBC; named for the chiral edge-mode interpretation (exactly 0 at v = 0).",
+    notes="Same value as MassGap@OBC; named for the chiral edge-mode interpretation " *
+          "(exactly 0 at v = 0). Single-particle route, O(N^3) -- see MassGap@OBC.",
 )
 @register(
     SSH,

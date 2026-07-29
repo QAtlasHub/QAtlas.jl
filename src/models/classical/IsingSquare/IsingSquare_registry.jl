@@ -8,7 +8,8 @@
     IsingSquare,
     PartitionFunction,
     PBC,
-    method=:transfer_matrix,
+    method=:kaufman_free_fermion,
+    cost=:polynomial,
     reliability=:high,
     tested_in="test/util/classical_partition.jl",
     references=["Onsager1944"],
@@ -40,7 +41,8 @@
     IsingSquare,
     FreeEnergy,
     PBC,
-    method=:transfer_matrix,
+    method=:kaufman_free_fermion,
+    cost=:polynomial,
     reliability=:high,
     tested_in="test/models/test_IsingSquare_thermal.jl",
     notes="f = -log tr(T^Lx) / (β Lx Ly).",
@@ -50,6 +52,7 @@
     Energy{:per_site},
     PBC,
     method=:central_diff,
+    cost=:polynomial,
     status=:approx,
     references=["Onsager1944"],
     valid_domain="away from T_c; the underlying log Z is Onsager-exact, the " *
@@ -66,6 +69,7 @@
     ThermalEntropy,
     PBC,
     method=:central_diff,
+    cost=:polynomial,
     status=:approx,
     references=["Onsager1944"],
     valid_domain="away from T_c; inherits the domain of the energy row it is built " *
@@ -81,6 +85,7 @@
     SpecificHeat,
     PBC,
     method=:central_diff,
+    cost=:polynomial,
     status=:approx,
     references=["Onsager1944"],
     valid_domain="away from T_c, where c_v genuinely DIVERGES and no finite error " *

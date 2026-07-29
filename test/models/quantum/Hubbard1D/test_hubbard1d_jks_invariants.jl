@@ -9,7 +9,9 @@
 #
 #   1. `imag(f)` — the free energy of a Hermitian Hamiltonian is real, so this
 #      is zero by construction. Its size is the sharpest cheap signal that the
-#      equations being solved are not eq (47).
+#      equations being solved are not eq (47), and measuring it is what showed
+#      the defect is present at EVERY temperature rather than switching on at
+#      mid-T (see the table below).
 #   2. grid convergence — a well-posed discretisation moves LESS as the grid
 #      refines. The current one wanders, which is what integrating a contour
 #      over the wrong domain looks like.
@@ -71,22 +73,30 @@ end
     end
 
     @testset "imag(f) vanishes — zero by construction for a Hermitian H" begin
-        # Inside the domain the row is registered valid on (beta <= 1e-3) this
-        # holds; outside it does not, and that is the bug, pinned.
-        for beta in (1e-4, 1e-3)
+        # It does not vanish at ANY temperature. MEASURED (U = 4, half filling,
+        # grid_N = 128):
+        #
+        #   beta    Re f        Im f      |Im/Re|
+        #   1e-5    -138645     0.2547    1.8e-6
+        #   1e-4     -13862     0.2549    1.8e-5
+        #   1e-3      -1383.5   0.2574    1.9e-4
+        #   1e-2       -135.7   0.2808    2.1e-3
+        #   0.1         -11.08  0.4541    4.1e-2
+        #   0.3          -2.030 0.6854    3.4e-1
+        #
+        # The ABSOLUTE error barely moves across four decades of beta; the ratio
+        # moves by five, because |Re f| ~ 1/beta diverges. So the row's
+        # "exact at high T to within 1%" is that division and not agreement —
+        # the defect is present throughout, and high T only hides it.
+        #
+        # Pinned at all four points, including inside the registered valid
+        # domain: a fix has to make this vanish everywhere, not shrink a ratio.
+        for beta in (1e-4, 1e-3, 0.1, 0.3)
             got = _solved(beta)
             @test got !== nothing
             sol, grid = got
             f = free_energy_jks_complex(sol.aux, grid, beta, _U; mu=_MU)
-            @test abs(imag(f)) < 1e-6 * max(abs(real(f)), 1.0)
-        end
-        for beta in (0.1, 0.3)
-            got = _solved(beta)
-            @test got !== nothing
-            sol, grid = got
-            f = free_energy_jks_complex(sol.aux, grid, beta, _U; mu=_MU)
-            # MEASURED: 4%% of |Re f| at beta = 0.1, 34%% at beta = 0.3.
-            @test_broken abs(imag(f)) < 1e-6 * max(abs(real(f)), 1.0)
+            @test_broken abs(imag(f)) < 1e-8 * max(abs(real(f)), 1.0)
         end
     end
 

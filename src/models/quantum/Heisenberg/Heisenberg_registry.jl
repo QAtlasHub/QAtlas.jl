@@ -24,6 +24,8 @@
     Energy{:total},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl",
     notes="Delegates to XXZ1D(Δ=1.0); J passed via kwargs.",
@@ -35,6 +37,8 @@
     MassGap,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl",
     notes="Delegates to XXZ1D(Δ=1.0).",
@@ -55,6 +59,8 @@
     FreeEnergy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -63,6 +69,8 @@
     ThermalEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -71,6 +79,8 @@
     SpecificHeat,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -81,6 +91,8 @@
     MagnetizationX,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -89,6 +101,8 @@
     MagnetizationY,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -97,6 +111,8 @@
     MagnetizationZ,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -107,6 +123,8 @@
     LocalMagnetization{:x},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -115,6 +133,8 @@
     LocalMagnetization{:y},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -123,6 +143,8 @@
     LocalMagnetization{:z},
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -131,6 +153,8 @@
     EnergyLocal,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -141,6 +165,8 @@
     SusceptibilityXX,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -149,6 +175,8 @@
     SusceptibilityYY,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -157,6 +185,8 @@
     SusceptibilityZZ,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -175,6 +205,8 @@ for CorrT in (
         CorrT,
         OBC;
         method=:dense_ed,
+        cost=:exponential,
+        max_size=12,
         reliability=:high,
         tested_in="test/models/test_Heisenberg1D_thermal.jl",
     )
@@ -186,6 +218,8 @@ end
     VonNeumannEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -194,6 +228,8 @@ end
     RenyiEntropy,
     OBC,
     method=:dense_ed,
+    cost=:exponential,
+    max_size=12,
     reliability=:high,
     tested_in="test/models/test_Heisenberg1D_thermal.jl"
 )
@@ -209,6 +245,9 @@ end
     DynamicalSpinStructureFactor{:z,:z},
     Infinite,
     method=:muller_ansatz,
+    status=:approx,
+    valid_domain="two-spinon continuum of S^zz(q, omega) for the isotropic chain",
+    error_order="closed-form ansatz for the 2-spinon lineshape; the exact Caux-Hagemans result differs, most visibly in the tails and in the multi-spinon weight",
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg_spinon.jl",
     references=["desCloizeauxPearson1962", "MullerThomasBeckBonner1981"],
@@ -251,6 +290,9 @@ end
     FreeEnergy,
     Infinite,
     method=:cft_low_T,
+    status=:approx,
+    valid_domain="low temperature, T << J (linear-dispersion / CFT regime)",
+    error_order="leading CFT term only; logarithmic marginal corrections not included",
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
     references=["Affleck1986", "BloteCardyNightingale1986", "EggertAffleckTakahashi1994"],
@@ -262,6 +304,9 @@ end
     ThermalEntropy,
     Infinite,
     method=:cft_low_T,
+    status=:approx,
+    valid_domain="low temperature, T << J (linear-dispersion / CFT regime)",
+    error_order="leading CFT term only; logarithmic marginal corrections not included",
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
     references=["Affleck1986"],
@@ -273,6 +318,9 @@ end
     SpecificHeat,
     Infinite,
     method=:cft_low_T,
+    status=:approx,
+    valid_domain="low temperature, T << J (linear-dispersion / CFT regime)",
+    error_order="leading CFT term only; logarithmic marginal corrections not included",
     reliability=:medium,
     tested_in="test/models/quantum/Heisenberg/test_heisenberg1d_thermal_cft.jl",
     references=["Affleck1986"],
@@ -308,6 +356,9 @@ end
     ConformalTower,
     PBC,
     method=:cft,
+    status=:approx,
+    valid_domain="critical (gapless) chain, asymptotic in system size",
+    error_order="leading CFT scaling only; logarithmic marginal corrections not included",
     reliability=:high,
     tested_in="test/universalities/test_universality_conformal_tower.jl",
     references=["Cardy1986", "Affleck1986"],

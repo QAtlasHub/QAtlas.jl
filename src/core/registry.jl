@@ -55,6 +55,8 @@ struct Implementation
     notes::String
     thermal::Symbol                      # orthogonal axis: :zero / :finite / :both / :unknown
     dynamical::Symbol                    # orthogonal axis: :static / :transport / :dynamic / :unknown
+    cost::Symbol                         # how the work scales in system size — see COST_VALUES
+    max_size::Union{Int,Nothing}         # largest N this route can actually answer for
 end
 
 """
@@ -90,6 +92,28 @@ The four kinds are also signalled by the *namespace* of the call: a concrete
 package load time rather than silently mislabelling a claim.
 """
 const STATUS_VALUES = (:exact, :bound, :approx, :universal)
+
+"""
+    COST_VALUES
+
+How a registered route's work scales in the system size — an axis ORTHOGONAL to
+`status`.  A route can be perfectly `:exact` and still be unaffordable to ask
+for, and that is a different fact about it than whether it is approximate.
+
+- `:closed_form`  — no size dependence worth naming (an analytic expression)
+- `:polynomial`   — free-fermion / single-particle diagonalisation, quadrature
+- `:exponential`  — many-body ED on a `d^N` Hilbert space
+- `:unknown`      — not yet classified
+
+`:exponential` REQUIRES `max_size`: a route that cannot say where it stops is
+not documenting a limit, it is hiding one.
+
+Why this is not inferable from `method`: it is not.  SSH's `MassGap@OBC` was
+labelled `:dense_ed` while diagonalising a 2N x 2N SINGLE-PARTICLE matrix in
+O(N^3) — a name can be wrong, `max_size` is a claim the implementation has to
+honour.
+"""
+const COST_VALUES = (:unknown, :closed_form, :polynomial, :exponential)
 
 """
     BOUND_DIRECTIONS
@@ -152,7 +176,21 @@ function register!(
     notes::AbstractString="",
     thermal::Union{Symbol,Nothing}=nothing,
     dynamical::Union{Symbol,Nothing}=nothing,
+    cost::Symbol=:unknown,
+    max_size::Union{Int,Nothing}=nothing,
 )
+    cost in COST_VALUES ||
+        throw(ArgumentError("register!: cost must be one of $(COST_VALUES); got :$(cost)"))
+    # An exponential route that will not say where it stops is hiding a limit
+    # rather than documenting one, and a caller cannot plan around it.
+    if cost === :exponential && max_size === nothing
+        throw(
+            ArgumentError(
+                "register!: cost=:exponential requires max_size (the largest N this " *
+                "route can answer for); $(model_T)/$(quantity_T)/$(bc_T) gave none",
+            ),
+        )
+    end
     status in STATUS_VALUES || throw(
         ArgumentError("register!: status must be one of $(STATUS_VALUES); got :$(status)"),
     )
@@ -234,6 +272,8 @@ function register!(
             String(notes),
             _derive_thermal(thermal, model_T, quantity_T, bc_T),
             _derive_dynamical(dynamical, quantity_T),
+            cost,
+            max_size,
         ),
     )
     return nothing

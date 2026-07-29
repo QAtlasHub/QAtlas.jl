@@ -55,16 +55,30 @@
     MassGap,
     Infinite,
     method=:literature_value,
+    status=:approx,
+    valid_domain="AKLT chain, thermodynamic limit",
+    error_order="DMRG numerical value; no closed form is known",
     reliability=:medium,
     tested_in="test/standalone/test_aklt.jl",
     references=["GarciaSaez2013"],
     notes="Haldane gap Δ ≈ 0.350 J; DMRG numerical-exact, no closed form.",
 )
 
-# NOT REGISTERED: the OBC full spectrum by many-body dense ED (3^N, N <= 8).
-# An exponential route is a poor oracle however correct it is, so the atlas does
-# not advertise it; `test/util/aklt_dense_ed.jl` keeps it as a test instrument
-# and `test_aklt_structural.jl` checks this model's ANALYTIC claims against it.
+# ── OBC many-body dense ED — kept, and registered WITH its cost ───────
+# The only route to the full spectrum for this model, so it stays; what changes
+# is that the atlas now states the price rather than implying there is none.
+@register(
+    AKLT1D,
+    ExactSpectrum,
+    OBC,
+    method=:dense_ed,
+    cost=:exponential,
+    max_size=8,
+    reliability=:high,
+    tested_in="test/models/quantum/misc/test_aklt_structural.jl",
+    notes="Full sorted spectrum from 3^N dense ED; N <= 8 (3^8 = 6561). " *
+          "cost=:exponential -- `_ed_size_guard` warns once when it is paid.",
+)
 
 # ── VBS ground-state correlations (Infinite, closed form) ────────────
 @register(

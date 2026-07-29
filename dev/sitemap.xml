@@ -108,7 +108,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/EdgeModeEnergy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/Energy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/EnergyLocal/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ExactSpectrum/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/FermiVelocity/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/FidelitySusceptibility/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/FractalDimension/</loc></url>
@@ -164,7 +163,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/ZZStructureFactor/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_CorrelationLength_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_Energy_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_ExactSpectrum_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_FreeEnergy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_FreeEnergy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_FreeEnergy_PBC/</loc></url>

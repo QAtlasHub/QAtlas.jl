@@ -337,17 +337,6 @@ end
 )
 
 # ── Ground-state energy density (Bethe-ansatz / ferromagnetic limit) ──
-@register(
-    XXZ1D,
-    GroundStateEnergyDensity,
-    Infinite,
-    method=:bethe_ansatz,
-    cost=:closed_form,
-    reliability=:high,
-    tested_in="test/identities/test_identities_XXZ1D.jl",
-    references=["YangYang1969", "desCloizeauxPearson1962"],
-    notes="e₀(Δ) at the isotropic AF point (Δ=1) reduces to Heisenberg1D Hulthén value J(1/4-ln 2); at the FM point (Δ=-1) the aligned state is exact, e₀ = -J/4.",
-)
 
 # ── CC entanglement at Infinite via Universality(:XY) / (:Heisenberg) (#580 Phase 2)
 @register(

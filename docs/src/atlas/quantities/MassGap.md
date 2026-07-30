@@ -5,17 +5,11 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cells = this model doesn't yet have a `MassGap` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Energy gap between the ground state and the first excited state.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 27
 - **Total hubs (Model, BC pairs)**: 38
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`, `single_particle_diagonalization`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):

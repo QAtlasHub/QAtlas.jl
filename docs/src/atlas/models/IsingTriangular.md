@@ -43,10 +43,10 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingTriangular`**.  Cells link to
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/IsingTriangular_FreeEnergy_Infinite.md) |
 | [`ResidualEntropy`](../quantities/ResidualEntropy.md) | 🟢 [hub](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/IsingTriangular_SpecificHeat_Infinite.md) |
+| [`SpinCorrelation`](../quantities/SpinCorrelation.md) | 🟠 [hub](../hubs/IsingTriangular_SpinCorrelation_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟠 [hub](../hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/IsingTriangular_ThermalEntropy_Infinite.md) |
 | [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/IsingTriangular_UniversalityClass_Infinite.md) |
-| [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟠 [hub](../hubs/IsingTriangular_ZZCorrelation_Infinite.md) |
 
 ## Derivation notes
 

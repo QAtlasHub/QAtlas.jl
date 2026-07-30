@@ -5,17 +5,11 @@
 
 All `(Model, BC)` hubs `src` claims for the **`FreeEnergy`** observable.  Empty cells = this model doesn't yet have a `FreeEnergy` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Helmholtz free energy per site, `f = -β⁻¹ log Z / N`.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 18
 - **Total hubs (Model, BC pairs)**: 28
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `jks_qtm_nlie`, `klumper_nlie`, `matter_free_fermion`, `onsager`, `transfer_matrix`
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `cft_low_T`, `dense_ed`, `jks_qtm_nlie`, `kaufman_free_fermion`, `klumper_nlie`, `matter_free_fermion`, `onsager`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):

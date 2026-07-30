@@ -16,7 +16,7 @@ using QAtlas, Test
     for J in (0.5, 1.0, 2.0, 3.7)
         verify(
             MajumdarGhosh(; J=J),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             Infinite();
             route=:second_closed_form,
             independent=-3 * J / 8,
@@ -67,7 +67,7 @@ using QAtlas, Test
 end
 
 # ── additional verification card (#381 batch) ─────────────────────────────
-@testset "MajumdarGhosh — GroundStateEnergyDensity/PBC closed-form (#381 batch)" begin
+@testset "MajumdarGhosh — Energy{:per_site}/PBC closed-form (#381 batch)" begin
     # The dimer-product state is an exact eigenstate of the J1-J2 ring at
     # J2 = J/2 for any even N (Majumdar-Ghosh 1969), so e0 = -3J/8 is
     # size-independent on PBC.
@@ -75,7 +75,7 @@ end
         for J in (0.5, 1.0, 2.0)
             verify(
                 MajumdarGhosh(; J=J),
-                GroundStateEnergyDensity(),
+                Energy{:per_site}(),
                 PBC(N);
                 route=:second_closed_form,
                 independent=-3 * J / 8,

@@ -9,7 +9,7 @@
 using QAtlas, Test
 
 @testset "Heisenberg1D — Hulthén closed-form cards (#381 batch)" begin
-    # GroundStateEnergyDensity/Infinite: e₀ = J(1/4 − log 2) (Hulthén 1938,
+    # Energy{:per_site}/Infinite: e₀ = J(1/4 − log 2) (Hulthén 1938,
     # Bethe-ansatz exact). Linear J-scaling.
     # J-sweep avoids J=1.0 (already covered by the existing sibling
     # second_closed_form card at J=1) and adds J=3.0 to widen the linear-
@@ -19,7 +19,7 @@ using QAtlas, Test
     for J in (0.5, 2.0, 3.0)
         verify(
             Heisenberg1D(),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             Infinite();
             route=:second_closed_form,
             independent=J * (1 / 4 - log(2)),

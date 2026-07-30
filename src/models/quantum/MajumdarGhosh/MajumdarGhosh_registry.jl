@@ -7,7 +7,7 @@
 # ── Closed-form ground state energy density ───────────────────────────
 @register(
     MajumdarGhosh,
-    GroundStateEnergyDensity,
+    Energy{:per_site},
     Infinite,
     method=:analytic,
     cost=:closed_form,
@@ -18,7 +18,7 @@
 )
 @register(
     MajumdarGhosh,
-    GroundStateEnergyDensity,
+    Energy{:per_site},
     PBC,
     method=:analytic,
     reliability=:high,

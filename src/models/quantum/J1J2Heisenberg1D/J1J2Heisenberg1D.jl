@@ -26,7 +26,7 @@
 #
 # Phase 1 implementation strategy: delegate the two closed-form points to
 # the existing `Heisenberg1D` (j = 0) and `MajumdarGhosh` (j = 1/2)
-# models, using their `GroundStateEnergyDensity` fetch — the legacy tag
+# models, using their `Energy{:per_site}` fetch — the legacy tag
 # is what those models currently expose at `Infinite`.  The public
 # surface of `J1J2Heisenberg1D` itself uses the modern `Energy{:per_site}`
 # axis-explicit convention.
@@ -106,11 +106,11 @@ Ground-state energy density of the spin-½ J₁-J₂ Heisenberg chain in the
 thermodynamic limit.  Phase 1 supports only the two closed-form points:
 
 - `j = J₂/J₁ = 0`   → Bethe-Hulthén: `E/N = J₁ · (1/4 − ln 2)`.
-  Delegates to `fetch(Heisenberg1D(), GroundStateEnergyDensity(),
+  Delegates to `fetch(Heisenberg1D(), Energy{:per_site}(),
   Infinite(); J=J1)`.
 
 - `j = 1/2`         → Majumdar-Ghosh dimer GS: `E/N = −3 J₁ / 8`.
-  Delegates to `fetch(MajumdarGhosh(; J=J1), GroundStateEnergyDensity(),
+  Delegates to `fetch(MajumdarGhosh(; J=J1), Energy{:per_site}(),
   Infinite())`.
 
 - otherwise         → `DomainError`: no closed form; numerical DMRG
@@ -121,7 +121,7 @@ Floating-point tolerance for the j = 0 and j = 1/2 matches is `atol =
 
 Note on delegation: `Heisenberg1D` and `MajumdarGhosh` currently expose
 their thermodynamic-limit energy density via the legacy
-`GroundStateEnergyDensity` quantity, not the modern `Energy{:per_site}`
+`Energy{:per_site}` quantity, not the modern `Energy{:per_site}`
 axis.  This wrapper bridges to the modern axis on the public surface
 while keeping the closed-form constants in a single source-of-truth
 location (the delegate model).
@@ -150,14 +150,14 @@ function fetch(
     j = J2 / J1
     if isapprox(j, 0.0; atol=1e-12)
         # j = 0 → pure Heisenberg.  Heisenberg1D exposes the Bethe-Hulthén
-        # density via the legacy `GroundStateEnergyDensity` tag, with `J`
+        # density via the legacy `Energy{:per_site}` tag, with `J`
         # as a kwarg (the struct itself carries no parameters).
-        return fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); J=J1)
+        return fetch(Heisenberg1D(), Energy{:per_site}(), Infinite(); J=J1)
     elseif isapprox(j, 0.5; atol=1e-12)
         # j = 1/2 → Majumdar-Ghosh.  `MajumdarGhosh` is parameterised by
         # `J` as a struct field; route through its legacy
-        # `GroundStateEnergyDensity` fetch.
-        return fetch(MajumdarGhosh(; J=J1), GroundStateEnergyDensity(), Infinite())
+        # `Energy{:per_site}` fetch.
+        return fetch(MajumdarGhosh(; J=J1), Energy{:per_site}(), Infinite())
     else
         throw(
             DomainError(

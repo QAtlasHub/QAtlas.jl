@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`LiebRobinsonVelocity`** observable.  Empty cells = this model doesn't yet have a `LiebRobinsonVelocity` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Lieb-Robinson velocity `v_LR` setting the linear light cone for information propagation in a local lattice quantum system: for any local operators `A_x`, `B_y` separated by `|x - y|`,
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

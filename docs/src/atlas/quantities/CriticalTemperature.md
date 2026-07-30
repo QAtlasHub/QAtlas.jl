@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`CriticalTemperature`** observable.  Empty cells = this model doesn't yet have a `CriticalTemperature` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Exact critical temperature of a classical model.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 6

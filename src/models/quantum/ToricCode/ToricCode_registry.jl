@@ -2,7 +2,7 @@
 # implementation map for the Kitaev (2003) toric code.
 #
 # All ToricCode quantities are closed-form analytical results:
-#   - GroundStateEnergyDensity at Infinite      = −(J_e + J_m)
+#   - Energy{:per_site} at Infinite      = −(J_e + J_m)
 #   - MassGap at Infinite                       = 2 · min(J_e, J_m)
 #   - GroundStateDegeneracy at PBC              = 4^genus
 #   - TopologicalEntanglementEntropy at Infinite = log 2
@@ -19,7 +19,7 @@
 
 @register(
     ToricCode,
-    GroundStateEnergyDensity,
+    Energy{:per_site},
     Infinite,
     method=:analytic,
     cost=:closed_form,

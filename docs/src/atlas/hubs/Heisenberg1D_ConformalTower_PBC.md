@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `cft`, status `exact`, reliability `high`, refs: Cardy1986 | Affleck1986
+- method `cft`, status `approx`, reliability `high`, refs: Cardy1986 | Affleck1986
 - Conformal tower of states excitation spectrum E_n - E_0 = (2π v / L) Δ_n scaled by sound velocity v = π J / 2.
 
 ## Corroboration

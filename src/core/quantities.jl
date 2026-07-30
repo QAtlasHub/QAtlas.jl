@@ -789,7 +789,7 @@ function _loschmidt_by_mode(mode::Symbol)
 end
 
 # Other spectrum / universality tag types (`TightBindingSpectrum`,
-# `ExactSpectrum`, `GroundStateEnergyDensity`, `CriticalExponents`,
+# `ExactSpectrum`, `CriticalExponents`,
 # `GrowthExponents`) are currently defined in their respective model /
 # universality source files as bare `struct X end`.  Later commits
 # (M1.6-M1.8) subtype them to `AbstractQuantity` in place.
@@ -1331,20 +1331,10 @@ Dispatch tag for the full sorted eigenvalue spectrum of a finite model.
 """
 struct ExactSpectrum <: AbstractQuantity end
 
-"""
-    GroundStateEnergyDensity
-
-Dispatch tag for the ground-state energy per site in the thermodynamic
-limit (N → ∞).
-
-NOTE, unresolved: AbstractQAtlas's `Energy{G}` carries a granularity axis
-(`:natural`/`:total`/`:per_site`) but no ground-state-versus-thermal axis — that
-distinction is carried by whether `beta` is passed. Where a model has only a `T = 0`
-closed form the two collapse (MEASURED: Hubbard1D's `GroundStateEnergyDensity` and
-`Energy{:per_site}` at `Infinite` both `return _hubbard1d_e0(model.t, model.U)`), and
-where a model has both they do not (XXZ1D's `Energy{:per_site}` at `Infinite` is the
-beta-dependent thermal energy). So this is not simply redundant with `Energy{:per_site}`,
-and whether it belongs in the base vocabulary depends on settling that axis. Moved here
-rather than to AbstractQAtlas for that reason.
-"""
-struct GroundStateEnergyDensity <: AbstractQuantity end
+# `GroundStateEnergyDensity` is gone. The ground-state energy density is
+# `Energy{:per_site}` fetched WITHOUT a `beta` — the same call convention that makes
+# `FreeEnergy` serve both temperatures, and one the codebase already relied on: the
+# HeisenbergXYZ shim used to reach XXZ1D through `Energy{:per_site}` with the comment
+# "its GS-energy semantics agree at Infinite". MEASURED before removal, every hub that
+# carried both returned the identical value from both (AKLT1D `-(2/3)J` twice, Hubbard1D
+# `_hubbard1d_e0` twice, XXZ1D and HeisenbergXYZ the same branch logic twice).

@@ -35,8 +35,8 @@ All `(Quantity, BC)` hubs `src` claims for **`HaldaneShastry`**.  Cells link to 
 
 | Quantity | `Infinite` |
 |---|---|
+| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/HaldaneShastry_Energy_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/HaldaneShastry_FreeEnergy_Infinite.md) |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | 🟠 [hub](../hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/HaldaneShastry_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/HaldaneShastry_ThermalEntropy_Infinite.md) |

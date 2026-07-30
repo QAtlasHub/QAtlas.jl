@@ -24,9 +24,9 @@ All `(Quantity, BC)` hubs `src` claims for **`ToricCode`**.  Cells link to the p
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 4 |
+| 🟢 corroborated-at-p | 3 |
 | 🔵 coherent | 0 |
-| ⚪ cited-only | 1 |
+| ⚪ cited-only | 2 |
 | 🟠 uncorroborated-but-feasible | 0 |
 | **total claimed hubs** | **5** |
 
@@ -40,8 +40,8 @@ All `(Quantity, BC)` hubs `src` claims for **`ToricCode`**.  Cells link to the p
 | Quantity | `PBC` | `Infinite` |
 |---|---|---|
 | [`AnyonStatistics`](../quantities/AnyonStatistics.md) | — | ⚪ [hub](../hubs/ToricCode_AnyonStatistics_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | — | ⚪ [hub](../hubs/ToricCode_Energy_Infinite.md) |
 | [`GroundStateDegeneracy`](../quantities/GroundStateDegeneracy.md) | 🟢 [hub](../hubs/ToricCode_GroundStateDegeneracy_PBC.md) | — |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/ToricCode_GroundStateEnergyDensity_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | — | 🟢 [hub](../hubs/ToricCode_MassGap_Infinite.md) |
 | [`TopologicalEntanglementEntropy`](../quantities/TopologicalEntanglementEntropy.md) | — | 🟢 [hub](../hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) |
 

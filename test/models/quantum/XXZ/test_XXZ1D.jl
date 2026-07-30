@@ -29,8 +29,8 @@ end
     e_fm = QAtlas.fetch(XXZ1D(; J=1.0, Δ=-1.0), Energy(), Infinite())
     @test e_fm ≈ -0.25 atol = 1e-14
 
-    # GroundStateEnergyDensity alias returns the same value.
-    e_gs = QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), GroundStateEnergyDensity(), Infinite())
+    # Energy{:per_site} alias returns the same value.
+    e_gs = QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), Energy{:per_site}(), Infinite())
     @test e_gs ≈ e_af
 end
 
@@ -135,9 +135,9 @@ end
     # factor). Without this test the two are independent dictionary
     # entries that happen to compute the same physics.
     for J in (1.0, 2.5, -0.7)
-        e_heis = QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(); J=J)
+        e_heis = QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(); J=J)
         e_xxz_energy = QAtlas.fetch(XXZ1D(; J=J, Δ=1.0), Energy(), Infinite())
-        e_xxz_gs = QAtlas.fetch(XXZ1D(; J=J, Δ=1.0), GroundStateEnergyDensity(), Infinite())
+        e_xxz_gs = QAtlas.fetch(XXZ1D(; J=J, Δ=1.0), Energy{:per_site}(), Infinite())
         @test e_xxz_energy ≈ e_heis atol = 1e-12
         @test e_xxz_gs ≈ e_heis atol = 1e-12
     end
@@ -289,10 +289,10 @@ end
 
     verify(
         XXZ1D(; J=1.0, Δ=1.0),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        independent=QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite()),
         agree_within=1e-12,
         refs=["XXZ1D at Delta=1 === Heisenberg1D: two independent code paths must agree"],
     )

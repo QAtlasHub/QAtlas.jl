@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `analytic`, status `exact`, reliability `high`, refs: Ising1925 | Brush1967
-- chi(b,h=0) = b exp(2bJ) per site; h=0 only.
+- "chi(b,h) = b cosh(bh) e^{-4bJ} / (sinh^2(bh) + e^{-4bJ})^{3/2} per site, " * "from d/dh of the transfer-matrix magnetisation; reduces to b exp(2bJ) at h=0. " * "DERIVATION-BACKED like the Magnetization{:z} row it differentiates (#762)."
 
 ## Corroboration
 

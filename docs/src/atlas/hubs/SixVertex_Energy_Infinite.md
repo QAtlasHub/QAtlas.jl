@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `numerical`, status `exact`, reliability `high`, refs: Lieb1967a | Lieb1967b | Sutherland1967 | Baxter1982
+- method `numerical`, status `approx`, reliability `high`, refs: Lieb1967a | Lieb1967b | Sutherland1967 | Baxter1982
 - Thermodynamic energy per site computed via central finite difference (h=1e-6) of the exact free energy.
 
 ## Corroboration

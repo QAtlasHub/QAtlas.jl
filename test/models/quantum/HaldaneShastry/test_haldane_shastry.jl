@@ -1,7 +1,7 @@
 # test/models/quantum/HaldaneShastry/test_haldane_shastry.jl
 #
 # Scaffold tests for the spin-1/2 Haldane-Shastry chain (#225):
-#   (a) GroundStateEnergyDensity@Infinite closed form E_0/N = -π² J / 24
+#   (a) Energy{:per_site}@Infinite closed form E_0/N = -π² J / 24
 #   (b) spinon dispersion ε(0) = ε(π) = 0, max at k = π/2 equals J π² / 8
 #   (c) sound velocity v_s = π J / 2 (matches Heisenberg c=1 SU(2)_1)
 #   (d) construction validation: J ≤ 0 raises DomainError
@@ -12,7 +12,7 @@ using Test
 using QAtlas
 using QAtlas:
     HaldaneShastry,
-    GroundStateEnergyDensity,
+    Energy,
     Infinite,
     haldane_shastry_spinon_dispersion,
     haldane_shastry_sound_velocity
@@ -20,7 +20,7 @@ using QAtlas:
 @testset "HaldaneShastry — scaffold (#225)" begin
     @testset "GS energy density E_0/N = -π² J / 24" begin
         m = HaldaneShastry()
-        e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0 = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         @test isapprox(e0, -π^2 / 24; atol=1e-12)
     end
 
@@ -48,8 +48,8 @@ using QAtlas:
     end
 
     @testset "E_0/N linear in J" begin
-        e0_1 = QAtlas.fetch(HaldaneShastry(; J=1.0), GroundStateEnergyDensity(), Infinite())
-        e0_3 = QAtlas.fetch(HaldaneShastry(; J=3.0), GroundStateEnergyDensity(), Infinite())
+        e0_1 = QAtlas.fetch(HaldaneShastry(; J=1.0), Energy{:per_site}(), Infinite())
+        e0_3 = QAtlas.fetch(HaldaneShastry(; J=3.0), Energy{:per_site}(), Infinite())
         @test isapprox(e0_3, 3 * e0_1; atol=1e-12)
     end
 end

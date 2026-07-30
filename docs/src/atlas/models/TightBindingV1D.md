@@ -23,8 +23,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBindingV1D`**.  Cells link to
 | 🟢 corroborated-at-p | 3 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 5 |
+| **total claimed hubs** | **8** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -32,9 +32,11 @@ All `(Quantity, BC)` hubs `src` claims for **`TightBindingV1D`**.  Cells link to
 
 | Quantity | `Infinite` |
 |---|---|
+| [`DynamicLocalization`](../quantities/DynamicLocalization.md) | 🟠 [hub](../hubs/TightBindingV1D_DynamicLocalization_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/TightBindingV1D_Energy_Infinite.md) |
 | [`FermiVelocity`](../quantities/FermiVelocity.md) | 🟢 [hub](../hubs/TightBindingV1D_FermiVelocity_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/TightBindingV1D_FreeEnergy_Infinite.md) |
+| [`HighHarmonicAmplitude`](../quantities/HighHarmonicAmplitude.md) | 🟠 [hub](../hubs/TightBindingV1D_HighHarmonicAmplitude_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/TightBindingV1D_MassGap_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟠 [hub](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟠 [hub](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) |
@@ -48,6 +50,8 @@ Pages = []
 Canonical = false
 AshcroftMermin1976
 Coleman2015
+DunlapKenkre1986
+HolthausHone1996
 Mahan2000
 YangYang1966
 ```

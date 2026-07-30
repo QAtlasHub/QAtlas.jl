@@ -106,12 +106,14 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 4 hubs (quan
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
-| [`GroundStateEnergyDensity`](../../atlas/hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 5 |
-| [`GroundStateEnergyDensity`](../../atlas/hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) | `PBC` | 🟢 corroborated-at-p | 13 |
+| [`Energy`](../../atlas/hubs/MajumdarGhosh_Energy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`Energy`](../../atlas/hubs/MajumdarGhosh_Energy_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`MassGap`](../../atlas/hubs/MajumdarGhosh_MassGap_Infinite.md) | `Infinite` | ⚪ cited-only | 8 |
 | [`SpinGap`](../../atlas/hubs/MajumdarGhosh_SpinGap_Infinite.md) | `Infinite` | ⚪ cited-only | 4 |
 
 <!-- ATLAS:HUBS:END -->
+
+
 
 
 

@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`YYStructureFactor`** observable.  Empty cells = this model doesn't yet have a `YYStructureFactor` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Fourier-space equivalent of ``YYCorrelation``.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

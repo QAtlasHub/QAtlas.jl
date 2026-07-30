@@ -29,8 +29,8 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingChain1D`**.  Cells link to th
 | 🟢 corroborated-at-p | 7 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 1 |
-| **total claimed hubs** | **8** |
+| 🟠 uncorroborated-but-feasible | 2 |
+| **total claimed hubs** | **9** |
 
 **Methods** (from `@register`, derived): `analytic`
 
@@ -42,6 +42,7 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingChain1D`**.  Cells link to th
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/IsingChain1D_CriticalTemperature_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/IsingChain1D_Energy_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/IsingChain1D_FreeEnergy_Infinite.md) |
+| [`Magnetization`](../quantities/Magnetization.md) | 🟠 [hub](../hubs/IsingChain1D_Magnetization_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/IsingChain1D_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟢 [hub](../hubs/IsingChain1D_SpontaneousMagnetization_Infinite.md) |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/IsingChain1D_SusceptibilityZZ_Infinite.md) |

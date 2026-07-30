@@ -757,6 +757,11 @@
     cost=:closed_form,
     status=:bound,
     direction=:upper,
+    # `canonical` defaults to TRUE, so a second row on a hub must say otherwise or the
+    # hub ends up with two bare-fetch defaults — which `test_registry.jl`'s "every hub
+    # has exactly one canonical definition" caught. The `:canonical` row above stays the
+    # one a bare `fetch(model, LiebRobinsonVelocity(), Infinite())` returns.
+    canonical = false,
     reliability=:high,
     tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
     references=["LiebRobinson1972", "HastingsKoma2006"],

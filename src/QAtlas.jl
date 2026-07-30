@@ -42,7 +42,7 @@ using AbstractQAtlas:
     #   relations_constraining(QAtlas.RenyiEntropy)         == 0
     RenyiEntropy,
     LiebRobinsonVelocity,
-    # Same rule, next batch (#807): the FAMILIES were already imported from above
+    # Same rule, next batch (AbstractQAtlas.jl#126): the FAMILIES were already imported
     # (`AbstractGap`, `AbstractVelocity`, `AbstractThermalPotential`,
     # `AbstractEntanglementMeasure`) while these MEMBERS were declared locally. For
     # the gaps that inverted the layering — the base package held the vague

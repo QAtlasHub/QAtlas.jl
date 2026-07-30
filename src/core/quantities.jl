@@ -1343,3 +1343,33 @@ component(::Type{ZZStructureFactor}) = :zz
 component(::Type{MassGap}) = :mass
 component(::Type{ChargeGap}) = :charge
 component(::Type{SpinGap}) = :spin
+
+# ─── Spectra and ground-state energies ───────────────────────────────────
+#
+# Both were declared in models/quantum/Heisenberg/Heisenberg.jl until they were moved
+# here. Neither is Heisenberg's — see the note left in that file.
+
+"""
+    ExactSpectrum
+
+Dispatch tag for the full sorted eigenvalue spectrum of a finite model.
+"""
+struct ExactSpectrum <: AbstractQuantity end
+
+"""
+    GroundStateEnergyDensity
+
+Dispatch tag for the ground-state energy per site in the thermodynamic
+limit (N → ∞).
+
+NOTE, unresolved: AbstractQAtlas's `Energy{G}` carries a granularity axis
+(`:natural`/`:total`/`:per_site`) but no ground-state-versus-thermal axis — that
+distinction is carried by whether `beta` is passed. Where a model has only a `T = 0`
+closed form the two collapse (MEASURED: Hubbard1D's `GroundStateEnergyDensity` and
+`Energy{:per_site}` at `Infinite` both `return _hubbard1d_e0(model.t, model.U)`), and
+where a model has both they do not (XXZ1D's `Energy{:per_site}` at `Infinite` is the
+beta-dependent thermal energy). So this is not simply redundant with `Energy{:per_site}`,
+and whether it belongs in the base vocabulary depends on settling that axis. Moved here
+rather than to AbstractQAtlas for that reason.
+"""
+struct GroundStateEnergyDensity <: AbstractQuantity end

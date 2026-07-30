@@ -35,8 +35,9 @@ module Hubbard1DJKSNLIE
 
 export atomic_free_energy, atomic_free_energy_half_filling
 
-# SingularException needed for selective catch in Newton solvers.
-using LinearAlgebra: SingularException
+# SingularException needed for selective catch in Newton solvers; norm and
+# LAPACKException are used by the eq (53) Newton solve in Hubbard1D_jks_eq53.jl.
+using LinearAlgebra: SingularException, LAPACKException, norm
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Atomic limit (t = 0) — closed form
@@ -117,14 +118,12 @@ jks_driving_b(x::Real; h::Real=0.0) = -float(h)
 #
 # What this file adds (appended to Hubbard1D_jks_nlie.jl Stage A):
 #
-#   (1) Concrete `jks_kernel_K_n_concrete(s, n, gamma) -> ComplexF64`
-#       evaluator. The Stage-A stub `jks_kernel_K_n` is kept for
-#       backward compatibility but is now redirected to the concrete
-#       version.
+#   (1) The three eq (38) kernels `jks_kernel_K1`, `jks_kernel_K1bar`,
+#       `jks_kernel_K2`, each `(s, gamma) -> ComplexF64`.
 #   (2) `JKSContourGrid(N, gamma; x_max)` struct holding the discretized
 #       contour points x_j.
-#   (3) `build_kernel_matrix(grid, n) -> Matrix{ComplexF64}` Toeplitz-
-#       style discrete convolution operator.
+#   (3) `build_kernel_matrix_shifted(grid, kernel, alpha)` Toeplitz-
+#       style discrete convolution operator, taking the kernel function.
 #   (4) `apply_kernel(K_mat, f) -> Vector{ComplexF64}` discrete convolution.
 #
 # Stage C will use these to write the Picard NLIE residual and solver,
@@ -135,28 +134,88 @@ jks_driving_b(x::Real; h::Real=0.0) = -float(h)
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Kernel — concrete implementation
+# Kernels — eq (38), three separately defined functions
 # ═══════════════════════════════════════════════════════════════════════════════
+#
+# eq (38) does not define a family indexed by n. It defines three functions,
+# each as its own difference of the Cauchy kernel `k(s) = 1/(2 pi i s)`:
+#
+#     K1(s)    =  k(s)        - k(s + 2ig)  =  (g/pi) / [s (s + 2ig)]
+#     K1bar(s) = -k(s)        + k(s - 2ig)  =  (g/pi) / [s (s - 2ig)]
+#     K2(s)    =  k(s - 2ig)  - k(s + 2ig)  =  (2g/pi) / (s^2 + 4g^2)
+#
+# The `K_n(s) = g/(pi s (s + 2nig))` form this file used to carry reproduces K1
+# at n = 1 and K1bar at n = -1, but at n = 2 it gives `g/(pi s (s + 4ig))`,
+# which is a different function from K2 — complex on the real axis where K2 is
+# real and even. See #798; the closed-form identities are asserted in
+# test/models/quantum/Hubbard1D/test_hubbard1d_jks_invariants.jl.
+#
+# Which kernel goes where is fixed by eq (47) and is not interchangeable:
+#
+#     ln b    = -betaH + K2 |_| ln B + K1bar o (ln cbar - ln Cbar)
+#     ln c    = ...            - K1bar |_| ln Bbar - K1bar o ln Cbar
+#     ln cbar = ...            + K1    |_| ln B    + K1    o ln C
+#
+# (`|_|` is the wide loop Im s = +/-alpha, `o` the narrow loop about the real
+# axis; eq (44) relates them by the residue of K1bar.)
+#
+# gamma: the paper fixes `gamma = U/4` (eq (30)) with NO upper bound -- the
+# strong-coupling reduction to the Heisenberg chain is taken as `gamma -> inf`.
+# These guards therefore read `gamma > 0`. They used to read `0 < gamma < pi`,
+# which is the XXZ anisotropy range and has nothing to do with U/4: MEASURED, it
+# threw `DomainError` for U >= 13 (gamma = 3.25 > pi) while U = 12 went through,
+# an undocumented ceiling on a row whose `valid_domain` bounds only beta.
 
 """
-    jks_kernel_K_n_concrete(s, n, gamma) -> ComplexF64
+    jks_kernel_K1(s, gamma) -> ComplexF64
 
-JKS kernel `K_n(s) = gamma / (pi * s * (s + 2 n i gamma))` from eq (38).
+JKS kernel `K1(s) = k(s) - k(s + 2i gamma) = gamma / (pi s (s + 2i gamma))`,
+eq (38), with `k(s) = 1/(2 pi i s)`.
 
-Vanishes at infinity (`K_n(s) ~ gamma/(pi s^2)` for `|s| -> infty`) and
-has simple poles at `s = 0` and `s = -2 n i gamma`.
+Simple poles at `s = 0` and `s = -2i gamma`; decays as `gamma/(pi s^2)`.
 
-For `s == 0` returns `Inf + 0im` since the pole at the origin is the
-singular feature that the contour deformation in eq (47) exploits;
-numerical callers should evaluate at `s + i*eps` (small) instead.
+For `s == 0` returns `Inf + 0im`: the pole at the origin is the singular
+feature the contour deformation in eq (47) exploits, so numerical callers
+evaluate at `s + i alpha` for a finite shift `alpha` instead — see
+[`build_kernel_matrix_shifted`](@ref).
 """
-function jks_kernel_K_n_concrete(s::Number, n::Integer, gamma::Real)
-    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
-    0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
-    if s == zero(s)
-        return ComplexF64(Inf, 0.0)
-    end
-    return ComplexF64(gamma / (pi * s * (s + 2 * n * im * gamma)))
+function jks_kernel_K1(s::Number, gamma::Real)
+    gamma > 0 || throw(DomainError(gamma, "gamma must be > 0"))
+    s == zero(s) && return ComplexF64(Inf, 0.0)
+    return ComplexF64(gamma / (pi * s * (s + 2 * im * gamma)))
+end
+
+"""
+    jks_kernel_K1bar(s, gamma) -> ComplexF64
+
+JKS kernel `K1bar(s) = -k(s) + k(s - 2i gamma) = gamma / (pi s (s - 2i gamma))`,
+eq (38). The complex conjugate partner of [`jks_kernel_K1`](@ref): its second
+pole sits at `s = +2i gamma` rather than `-2i gamma`.
+
+This is the kernel the c channel convolves with throughout eq (47), and the one
+whose residue supplies the `- ln Bbar` term when the narrow loop is deformed to
+the wide one in eq (44).
+"""
+function jks_kernel_K1bar(s::Number, gamma::Real)
+    gamma > 0 || throw(DomainError(gamma, "gamma must be > 0"))
+    s == zero(s) && return ComplexF64(Inf, 0.0)
+    return ComplexF64(gamma / (pi * s * (s - 2 * im * gamma)))
+end
+
+"""
+    jks_kernel_K2(s, gamma) -> ComplexF64
+
+JKS kernel `K2(s) = k(s - 2i gamma) - k(s + 2i gamma) = 2 gamma / (pi (s^2 + 4 gamma^2))`,
+eq (38).
+
+Unlike `K1`/`K1bar` this is a Lorentzian: **real and even on the real axis**, with
+no pole at the origin. It is regular for all real `s`, so it needs no contour
+shift to be evaluated — the shift its callers apply comes from the wide loop in
+eq (47), not from regularization.
+"""
+function jks_kernel_K2(s::Number, gamma::Real)
+    gamma > 0 || throw(DomainError(gamma, "gamma must be > 0"))
+    return ComplexF64(2 * gamma / (pi * (s^2 + 4 * gamma^2)))
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -193,7 +252,7 @@ struct JKSContourGrid
     function JKSContourGrid(N::Int, gamma::Real; x_max::Real=10.0)
         # Uniform grid constructor.
         N > 1 || throw(DomainError(N, "JKSContourGrid requires N > 1"))
-        0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
+        gamma > 0 || throw(DomainError(gamma, "gamma must be > 0"))
         x_max > 0 || throw(DomainError(x_max, "x_max must be > 0"))
         x = collect(range(-x_max, x_max; length=N))
         dx = x[2] - x[1]
@@ -205,7 +264,7 @@ struct JKSContourGrid
         # Caller provides sorted x array; trapezoidal weights computed.
         N = length(x)
         N > 1 || throw(DomainError(N, "non-uniform grid requires N > 1"))
-        0 < gamma < pi || throw(DomainError(gamma, "gamma must be in (0, pi)"))
+        gamma > 0 || throw(DomainError(gamma, "gamma must be > 0"))
         issorted(x) || throw(ArgumentError("x must be sorted ascending"))
         xf = collect(Float64, x)
         w = zeros(Float64, N)
@@ -763,27 +822,30 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
-    build_kernel_matrix_shifted(grid, n, alpha_shift) -> Matrix{ComplexF64}
+    build_kernel_matrix_shifted(grid, kernel, alpha_shift) -> Matrix{ComplexF64}
 
 Kernel matrix with diagonal regularized by the physical contour shift
 `alpha_shift` (typically 0 < alpha_shift < eta = U/4) rather than the
 tiny `eps = 1e-10` used by `build_kernel_matrix`.
 
-K[j, k] = jks_kernel_K_n_concrete(x_j - x_k + i * alpha_shift, n, gamma) * dx
+K[j, k] = kernel(x_j - x_k + i * alpha_shift, gamma) * dx
 
-The j = k diagonal evaluates at K(i * alpha_shift), which is O(1) for
+`kernel` is one of [`jks_kernel_K1`](@ref), [`jks_kernel_K1bar`](@ref),
+[`jks_kernel_K2`](@ref) — eq (38) defines three functions, not a family indexed
+by an integer, and which one a term takes is fixed by eq (47). Passing the
+function itself rather than an index is what keeps that choice visible at the
+call site.
+
+The j = k diagonal evaluates at `kernel(i * alpha_shift)`, which is O(1) for
 alpha_shift ~ eta.
 """
-function build_kernel_matrix_shifted(grid::JKSContourGrid, n::Integer, alpha_shift::Real)
-    n > 0 || throw(DomainError(n, "kernel index n must be > 0"))
+function build_kernel_matrix_shifted(grid::JKSContourGrid, kernel, alpha_shift::Real)
     alpha_shift > 0 || throw(DomainError(alpha_shift, "alpha_shift must be > 0"))
     N = grid.N
     K = zeros(ComplexF64, N, N)
     for j in 1:N, k in 1:N
         K[j, k] =
-            jks_kernel_K_n_concrete(
-                grid.x[j] - grid.x[k] + im * alpha_shift, n, grid.gamma
-            ) * grid.weights[k]
+            kernel(grid.x[j] - grid.x[k] + im * alpha_shift, grid.gamma) * grid.weights[k]
     end
     return K
 end
@@ -811,8 +873,8 @@ function jks_nlie_residual_shifted(
     length(aux) == grid.N ||
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
-    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
-    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+    K1 = build_kernel_matrix_shifted(grid, jks_kernel_K1, alpha)
+    K2 = build_kernel_matrix_shifted(grid, jks_kernel_K2, alpha)
 
     psi_b = jks_driving_b(grid, beta, U, alpha; H=H)
 
@@ -1023,7 +1085,7 @@ function jks_nlie_residual_c(
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
     # Paper eq (47): log c = psi_c - K_1 ⊓⊔ log B - K_1 ◦ log C
-    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
+    K1 = build_kernel_matrix_shifted(grid, jks_kernel_K1, alpha)
 
     psi_c = jks_driving_c(grid, beta, U, mu; H=H)
 
@@ -1056,7 +1118,7 @@ function jks_nlie_residual_cbar(
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
     # Paper eq (47): log cbar = psi_cbar + K_1 ⊓⊔ log B + K_1 ◦ log C
-    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
+    K1 = build_kernel_matrix_shifted(grid, jks_kernel_K1, alpha)
 
     psi_cbar = jks_driving_cbar(grid, beta, U, mu; H=H)
 
@@ -1209,8 +1271,8 @@ function jks_jacobian_full_analytic(
         throw(DimensionMismatch("aux length $(length(aux)) != grid.N $(grid.N)"))
 
     N = grid.N
-    K1 = build_kernel_matrix_shifted(grid, 1, alpha)
-    K2 = build_kernel_matrix_shifted(grid, 2, alpha)
+    K1 = build_kernel_matrix_shifted(grid, jks_kernel_K1, alpha)
+    K2 = build_kernel_matrix_shifted(grid, jks_kernel_K2, alpha)
 
     db = aux.b ./ (1 .+ aux.b)          # ∂ log(1 + b) / ∂ log b
     dc = aux.c ./ (1 .+ aux.c)          # ∂ log(1 + c) / ∂ log c
@@ -1537,5 +1599,7 @@ function solve_jks_nlie_full_newton_continuation(
     end
     return JKSSolution(aux, total_iter, last_residual, beta_current >= beta_target - 1e-12)
 end
+
+include("Hubbard1D_jks_eq53.jl")
 
 end  # module Hubbard1DJKSNLIE

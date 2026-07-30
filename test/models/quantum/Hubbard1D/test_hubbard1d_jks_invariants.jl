@@ -13,8 +13,8 @@
 #      the defect is present at EVERY temperature rather than switching on at
 #      mid-T (see the table below).
 #   2. grid convergence — a well-posed discretisation moves LESS as the grid
-#      refines. The current one wanders, which is what integrating a contour
-#      over the wrong domain looks like.
+#      refines. It used to wander; correcting K2 to its eq (38) form fixed that,
+#      so this one is now a live assertion rather than a pinned failure.
 #   3. the ED gap is not finite size — comparing N = 4 against N = 6, and OBC
 #      against PBC, separates "the NLIE disagrees with the TDL" from "a 4-site
 #      open chain is not the TDL".
@@ -29,7 +29,9 @@ using QAtlas
 using QAtlas: Hubbard1D, FreeEnergy, Infinite
 using QAtlas.Hubbard1DJKSNLIE:
     JKSContourGrid,
-    jks_kernel_K_n_concrete,
+    jks_kernel_K1,
+    jks_kernel_K1bar,
+    jks_kernel_K2,
     solve_jks_nlie_full_newton_continuation,
     free_energy_jks,
     free_energy_jks_complex,
@@ -50,48 +52,59 @@ end
 
 @testset "Hubbard1D JKS NLIE — invariants (#798)" begin
     @testset "the kernels are the ones eq (38) defines" begin
-        # eq (38) defines three kernels from k(s) = 1/(2 pi i s):
-        #     K1  =  k(s) - k(s + 2ig)   = (g/pi) / [s (s + 2ig)]
-        #     K1b = -k(s) + k(s - 2ig)   = (g/pi) / [s (s - 2ig)]
-        #     K2  =  k(s - 2ig) - k(s + 2ig) = (2g/pi) / (s^2 + 4g^2)
-        # The module carries ONE closed form, `K_n(s) = g/(pi s (s + 2nig))`,
-        # and indexes it by n. That is right for n = 1 and is a different
-        # function for n = 2 — K2 is real and even on the real axis, this is
-        # neither. Rebuilding from k here shares no algebra with the closed
-        # form, so it is an independent check rather than a restatement.
+        # eq (38) defines three kernels as differences of k(s) = 1/(2 pi i s):
+        #     K1    =  k(s)       - k(s + 2ig)  = (g/pi) / [s (s + 2ig)]
+        #     K1bar = -k(s)       + k(s - 2ig)  = (g/pi) / [s (s - 2ig)]
+        #     K2    =  k(s - 2ig) - k(s + 2ig)  = (2g/pi) / (s^2 + 4g^2)
+        # Rebuilding them from k here shares no algebra with the closed forms
+        # in the module, so this is an independent check and not a restatement.
         k(s) = 1 / (2im * pi * s)
         pts = (0.3 + 0.1im, 1.0 + 0.0im, 2.5 - 0.4im, -0.7 + 0.9im)
         for gamma in (0.5, 1.0), s in pts
-            @test jks_kernel_K_n_concrete(s, 1, gamma) ≈ k(s) - k(s + 2im * gamma)
-            @test_broken jks_kernel_K_n_concrete(s, 2, gamma) ≈
-                k(s - 2im * gamma) - k(s + 2im * gamma)
+            @test jks_kernel_K1(s, gamma) ≈ k(s) - k(s + 2im * gamma)
+            @test jks_kernel_K1bar(s, gamma) ≈ -k(s) + k(s - 2im * gamma)
+            @test jks_kernel_K2(s, gamma) ≈ k(s - 2im * gamma) - k(s + 2im * gamma)
         end
-        # K2 is real on the real axis; whatever is being used for it is not.
+        # K2 is a Lorentzian: real and even on the real axis, and regular at 0.
+        # The `K_n(s) = g/(pi s (s + 2nig))` form this module used to carry was
+        # none of those at n = 2, which is how #798 surfaced.
         for gamma in (0.5, 1.0), x in (0.4, 1.3, 3.0)
-            @test_broken abs(imag(jks_kernel_K_n_concrete(x, 2, gamma))) < 1e-12
+            @test abs(imag(jks_kernel_K2(x, gamma))) < 1e-12
+            @test jks_kernel_K2(-x, gamma) ≈ jks_kernel_K2(x, gamma)
+        end
+        @test isfinite(jks_kernel_K2(0.0, 0.5))
+        # K1 and K1bar are reflections of each other across the real axis.
+        for gamma in (0.5, 1.0), x in (0.4, 1.3, 3.0)
+            @test jks_kernel_K1bar(x, gamma) ≈ conj(jks_kernel_K1(x, gamma))
         end
     end
 
     @testset "imag(f) vanishes — zero by construction for a Hermitian H" begin
         # It does not vanish at ANY temperature. MEASURED (U = 4, half filling,
-        # grid_N = 128):
+        # grid_N = 128), with the eq (38) kernels now in place:
         #
         #   beta    Re f        Im f      |Im/Re|
-        #   1e-5    -138645     0.2547    1.8e-6
-        #   1e-4     -13862     0.2549    1.8e-5
-        #   1e-3      -1383.5   0.2574    1.9e-4
-        #   1e-2       -135.7   0.2808    2.1e-3
-        #   0.1         -11.08  0.4541    4.1e-2
-        #   0.3          -2.030 0.6854    3.4e-1
+        #   1e-4     -13872     0.2820    2.0e-5
+        #   1e-3      -1384.6   0.2838    2.1e-4
+        #   1e-2       -135.9   0.3014    2.2e-3
+        #   0.1        -11.016  0.3936    3.6e-2
         #
-        # The ABSOLUTE error barely moves across four decades of beta; the ratio
-        # moves by five, because |Re f| ~ 1/beta diverges. So the row's
+        # The ABSOLUTE error barely moves across three decades of beta; the ratio
+        # moves by three, because |Re f| ~ 1/beta diverges. So the row's
         # "exact at high T to within 1%" is that division and not agreement —
         # the defect is present throughout, and high T only hides it.
         #
+        # beta = 0.3 was in this list and is not any more: with the corrected K2
+        # the beta-continuation stalls there (it converged with the K_n(n=2)
+        # function that is not eq (38)'s K2). The boundary is now between 0.25
+        # and 0.3. See the PR that introduced the kernels — correcting K2 alone
+        # narrows the row, because eq (53) evaluates K2 at the shifts +-a-a and
+        # +-a+a while this solver still applies a single +a, and fixing that
+        # needs B^+ and B^- separately, i.e. the six-unknown split.
+        #
         # Pinned at all four points, including inside the registered valid
         # domain: a fix has to make this vanish everywhere, not shrink a ratio.
-        for beta in (1e-4, 1e-3, 0.1, 0.3)
+        for beta in (1e-4, 1e-3, 1e-2, 0.1)
             got = _solved(beta)
             @test got !== nothing
             sol, grid = got
@@ -101,20 +114,28 @@ end
     end
 
     @testset "refining the grid moves the answer less, not differently" begin
-        # A convergent quadrature has |f(2N) - f(N)| shrinking. MEASURED at
-        # beta = 0.1: -11.469, -11.089, -11.080, -11.087, -11.092 for grid_N
-        # 32, 64, 128, 192, 256 — it turns around, which is what refining a
-        # grid on [-x_max, x_max] toward a contour around [-1, 1] does.
+        # A convergent quadrature has |f(2N) - f(N)| shrinking. This was
+        # `@test_broken`: with the `K_n(s, n=2)` function that is not eq (38)'s K2,
+        # refining at beta = 0.1 gave -11.469, -11.089, -11.080, -11.087, -11.092
+        # for grid_N 32, 64, 128, 192, 256 — it turned around, which is what
+        # refining a grid on [-x_max, x_max] toward a contour around [-1, 1] does.
+        #
+        # Correcting K2 to the eq (38) Lorentzian made it monotone, so this is now
+        # a live assertion. Note what it does NOT say: the row is still wrong at
+        # mid-T (the imag(f) block above stays broken, and the ED comparison in
+        # test_hubbard1d_jks_ed_comparison.jl still deviates 26%). A convergent
+        # quadrature of the wrong equations converges to the wrong answer.
         beta = 0.1
         fs = Float64[]
         for gn in (32, 64, 128, 256)
             got = _solved(beta; grid_N=gn)
             @test got !== nothing
+            got === nothing && continue
             sol, grid = got
             push!(fs, free_energy_jks(sol.aux, grid, beta, _U; mu=_MU))
         end
         steps = abs.(diff(fs))
-        @test_broken all(steps[i + 1] < steps[i] for i in 1:(length(steps) - 1))
+        @test all(steps[i + 1] < steps[i] for i in 1:(length(steps) - 1))
     end
 
     @testset "the ED gap is not a finite-size effect" begin

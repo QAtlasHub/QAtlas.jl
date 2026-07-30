@@ -23,10 +23,10 @@ All `(Quantity, BC)` hubs `src` claims for **`MajumdarGhosh`**.  Cells link to t
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 2 |
+| 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 2 |
-| 🟠 uncorroborated-but-feasible | 0 |
+| 🟠 uncorroborated-but-feasible | 2 |
 | **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`, `dmrg_reference`
@@ -35,7 +35,7 @@ All `(Quantity, BC)` hubs `src` claims for **`MajumdarGhosh`**.  Cells link to t
 
 | Quantity | `PBC` | `Infinite` |
 |---|---|---|
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | 🟢 [hub](../hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC.md) | 🟢 [hub](../hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/MajumdarGhosh_Energy_PBC.md) | 🟠 [hub](../hubs/MajumdarGhosh_Energy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | — | ⚪ [hub](../hubs/MajumdarGhosh_MassGap_Infinite.md) |
 | [`SpinGap`](../quantities/SpinGap.md) | — | ⚪ [hub](../hubs/MajumdarGhosh_SpinGap_Infinite.md) |
 

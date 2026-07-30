@@ -11,7 +11,7 @@ using QAtlas:
     FreeEnergy,
     ThermalEntropy,
     SpecificHeat,
-    GroundStateEnergyDensity,
+    Energy{:per_site},
     Infinite
 
 @testset "HaldaneShastry — Infinite c=1 CFT thermal (#524 stopgap)" begin
@@ -45,7 +45,7 @@ using QAtlas:
 
     @testset "β → ∞ approaches Haldane GS density" begin
         m = HaldaneShastry(; J=1.0)
-        e0_inf = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0_inf = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         f_inf = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=1000.0)
         s_inf = QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=1000.0)
         @test isapprox(f_inf, e0_inf; atol=1e-5)

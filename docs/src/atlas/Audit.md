@@ -22,7 +22,51 @@ The CI lint enforces `# CONVENTION` headers on new model files, but older files 
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.
 
-!!! tip "All quantities have an extracted Definition."
+**42 quantities**:
+
+- [`CentralCharge`](quantities/CentralCharge.md)
+- [`ChargeGap`](quantities/ChargeGap.md)
+- [`ConnectedSpinCorrelation`](quantities/ConnectedSpinCorrelation.md)
+- [`CorrelationLength`](quantities/CorrelationLength.md)
+- [`CriticalExponents`](quantities/CriticalExponents.md)
+- [`CriticalTemperature`](quantities/CriticalTemperature.md)
+- [`DynamicalCorrelation`](quantities/DynamicalCorrelation.md)
+- [`DynamicalSpinStructureFactor`](quantities/DynamicalSpinStructureFactor.md)
+- [`Energy`](quantities/Energy.md)
+- [`FermiVelocity`](quantities/FermiVelocity.md)
+- [`FreeEnergy`](quantities/FreeEnergy.md)
+- [`LiebRobinsonVelocity`](quantities/LiebRobinsonVelocity.md)
+- [`LightconeSpinCorrelation`](quantities/LightconeSpinCorrelation.md)
+- [`LocalMagnetization`](quantities/LocalMagnetization.md)
+- [`LuttingerVelocity`](quantities/LuttingerVelocity.md)
+- [`Magnetization`](quantities/Magnetization.md)
+- [`MagnetizationX`](quantities/MagnetizationX.md)
+- [`MagnetizationY`](quantities/MagnetizationY.md)
+- [`MagnetizationZ`](quantities/MagnetizationZ.md)
+- [`MassGap`](quantities/MassGap.md)
+- [`NMRRelaxationExponent`](quantities/NMRRelaxationExponent.md)
+- [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md)
+- [`PartitionFunction`](quantities/PartitionFunction.md)
+- [`QuenchEntanglementEntropy`](quantities/QuenchEntanglementEntropy.md)
+- [`QuenchLocalMagnetization`](quantities/QuenchLocalMagnetization.md)
+- [`RenyiEntropy`](quantities/RenyiEntropy.md)
+- [`ResidualEntropy`](quantities/ResidualEntropy.md)
+- [`SpecificHeat`](quantities/SpecificHeat.md)
+- [`SpinCorrelation`](quantities/SpinCorrelation.md)
+- [`SpinGap`](quantities/SpinGap.md)
+- [`SpontaneousMagnetization`](quantities/SpontaneousMagnetization.md)
+- [`SusceptibilityXX`](quantities/SusceptibilityXX.md)
+- [`SusceptibilityYY`](quantities/SusceptibilityYY.md)
+- [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md)
+- [`ThermalEntropy`](quantities/ThermalEntropy.md)
+- [`TopologicalEntanglementEntropy`](quantities/TopologicalEntanglementEntropy.md)
+- [`TopologicalInvariant`](quantities/TopologicalInvariant.md)
+- [`UniversalityClass`](quantities/UniversalityClass.md)
+- [`VonNeumannEntropy`](quantities/VonNeumannEntropy.md)
+- [`XXStructureFactor`](quantities/XXStructureFactor.md)
+- [`YYStructureFactor`](quantities/YYStructureFactor.md)
+- [`ZZStructureFactor`](quantities/ZZStructureFactor.md)
+
 ## 3. Orphan calc notes (matched to no model)
 
 `docs/src/calc/*.md` whose filename doesn't substring-match any registered model.  Likely true derivation notes that describe a method (e.g. `calabrese-cardy-obc-vs-pbc.md`, `ad-thermodynamics-from-z.md`) rather than a model, but worth scanning to confirm.
@@ -63,9 +107,16 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-**2 real orphan card hub(s)**:
+**9 real orphan card hub(s)**:
 
+- `AKLT1D/ZZCorrelation/Infinite`
 - `f_model/FreeEnergy/Infinite`
-- `TFIM/LoschmidtRateFunction/Infinite`
+- `S1Heisenberg1D/XXCorrelation/OBC`
+- `S1Heisenberg1D/YYCorrelation/OBC`
+- `S1Heisenberg1D/ZZCorrelation/OBC`
+- `TFIM/XXCorrelation/Infinite`
+- `TFIM/XXCorrelation/OBC`
+- `TFIM/YYCorrelation/OBC`
+- `TFIM/ZZCorrelation/OBC`
 
 [← back to the Atlas index](index.md)

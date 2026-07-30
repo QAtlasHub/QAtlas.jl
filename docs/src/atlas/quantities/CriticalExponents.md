@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`CriticalExponents`** observable.  Empty cells = this model doesn't yet have a `CriticalExponents` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Standard set of equilibrium critical exponents {α, β, γ, δ, ν, η} of a universality class. Returns a `NamedTuple`.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 4

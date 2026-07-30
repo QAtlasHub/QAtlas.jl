@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `transfer_matrix`, status `exact`, reliability `high`
+- method `kaufman_free_fermion`, status `exact`, reliability `high`
 - f = -log tr(T^Lx) / (β Lx Ly).
 
 ## Corroboration

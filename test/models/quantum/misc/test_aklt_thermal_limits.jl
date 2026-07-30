@@ -85,7 +85,7 @@ end
     for J in (0.5, 0.7, 1.0, 1.3, 2.5)
         m = AKLT1D(; J=J)
         f_inf = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=Inf)
-        e_gs = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e_gs = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         @test f_inf ≈ e_gs atol = 1e-14
         @test f_inf ≈ -(2.0 / 3.0) * J atol = 1e-14
         @test QAtlas.fetch(m, ThermalEntropy(), Infinite(); beta=Inf) == 0.0

@@ -102,7 +102,7 @@ end
     # FM point Δ = -1: exact saturated ground state, e0 = -J/4.
     verify(
         XXZ1D(; J=1.0, Δ=-1.0),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:second_closed_form,
         independent=-0.25,
@@ -113,10 +113,10 @@ end
     # Δ = 1 ≡ Heisenberg1D (independent code path).
     verify(
         XXZ1D(; J=1.0, Δ=1.0),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        independent=QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite()),
         agree_within=1e-12,
         refs=["XXZ1D(Δ=1) ≡ Heisenberg1D: independent code paths must agree"],
     )

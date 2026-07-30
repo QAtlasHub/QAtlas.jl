@@ -105,16 +105,9 @@ native_energy_granularity(::XXZ1D, ::Infinite) = :per_site
 # finite-T (β kwarg) free-fermion path at Δ = 0.  The ground-state
 # logic for Δ ∈ {-1, 0, 1} is preserved bit-for-bit there; general-Δ
 # Bethe-ansatz remains a v0.13 follow-up (issue #108).
-"""
-    fetch(model::XXZ1D, ::GroundStateEnergyDensity, ::Infinite) -> Float64
-
-Alias for [`fetch(::XXZ1D, ::Energy, ::Infinite)`](@ref) kept so that
-the `GroundStateEnergyDensity` quantity — already exported by
-`Heisenberg.jl` — works uniformly across 1D Bethe-ansatz chains.
-"""
-function fetch(model::XXZ1D, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
-    return fetch(model, Energy(), Infinite(); kwargs...)
-end
+# The `GroundStateEnergyDensity` method that used to live here is gone: it returned the
+# same value as this hub's `Energy{:per_site}` at `Infinite`, which already answers
+# without a `beta` by returning the ground state. See core/quantities.jl.
 
 # ── Central charge & Luttinger-liquid parameters (critical regime) ─────
 

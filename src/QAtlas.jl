@@ -159,7 +159,7 @@ export TightBindingChecksum, TightBindingMaxEnergy  # scalar invariants for veri
 # that also uses `Lattice2D`.  `Graphene` *is* exported as the
 # backward-compat top-level alias for `Honeycomb` (see src/deprecate/)
 # since the name does not collide with anything in Lattice2D.
-export Heisenberg1D, ExactSpectrum, GroundStateEnergyDensity
+export Heisenberg1D, ExactSpectrum
 export Hubbard1D                                         # Lieb-Wu Bethe ansatz half-filling
 export MajumdarGhosh                                     # spin-1/2 J1-J2 chain at MG point
 export HaldaneShastry, haldane_shastry_spinon_dispersion, haldane_shastry_sound_velocity         # spin-1/2 1/r^2 inverse-square Heisenberg chain

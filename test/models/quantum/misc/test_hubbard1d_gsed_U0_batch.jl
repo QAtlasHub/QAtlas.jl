@@ -16,7 +16,7 @@ using QAtlas, Test
         U = 1e-4 * t
         verify(
             Hubbard1D(; t=t, U=U, μ=U/2),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             Infinite();
             route=:limiting_case,
             independent=-4 * t / π,
@@ -38,7 +38,7 @@ end
         U = 100.0 * t
         verify(
             Hubbard1D(; t=t, U=U, μ=U/2),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             Infinite();
             route=:limiting_case,
             independent=-4 * t^2 * log(2) / U,

@@ -101,11 +101,11 @@ function ToricCode(; J_e::Real=1.0, J_m::Real=1.0)
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# GroundStateEnergyDensity — Infinite (per vertex+plaquette pair)
+# Energy{:per_site} — Infinite (per vertex+plaquette pair)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::ToricCode, ::GroundStateEnergyDensity, ::Infinite) -> Float64
+    fetch(::ToricCode, ::Energy{:per_site}, ::Infinite) -> Float64
 
 Ground-state energy density `ε₀ = −(J_e + J_m)`.
 
@@ -113,7 +113,7 @@ Closed-form: every stabilizer commutes with every other, so the ground
 state simultaneously saturates `A_v = +1` ∀v and `B_p = +1` ∀p. The energy
 contribution per (vertex + plaquette) unit cell is `−J_e − J_m`.
 """
-function fetch(model::ToricCode, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
+function fetch(model::ToricCode, ::Energy{:per_site}, ::Infinite; kwargs...)
     return -(model.J_e + model.J_m)
 end
 

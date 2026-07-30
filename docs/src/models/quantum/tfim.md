@@ -543,15 +543,19 @@ docstrings for the exported observable types and TFIM helpers
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 61 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 65 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
 | [`CentralCharge`](../../atlas/hubs/TFIM_CentralCharge_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 5 |
 | [`ConformalTower`](../../atlas/hubs/TFIM_ConformalTower_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`ConformalTower`](../../atlas/hubs/TFIM_ConformalTower_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`ConnectedSpinCorrelation`](../../atlas/hubs/TFIM_ConnectedSpinCorrelation_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`ConnectedSpinCorrelation`](../../atlas/hubs/TFIM_ConnectedSpinCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`CorrelationLength`](../../atlas/hubs/TFIM_CorrelationLength_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | [`CriticalExponents`](../../atlas/hubs/TFIM_CriticalExponents_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`DynamicalCorrelation`](../../atlas/hubs/TFIM_DynamicalCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`DynamicalSpinStructureFactor`](../../atlas/hubs/TFIM_DynamicalSpinStructureFactor_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
 | [`Energy`](../../atlas/hubs/TFIM_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 12 |
 | [`Energy`](../../atlas/hubs/TFIM_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 58 |
 | [`Energy`](../../atlas/hubs/TFIM_Energy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 16 |
@@ -562,29 +566,33 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 61 hubs (qua
 | [`FreeEnergy`](../../atlas/hubs/TFIM_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 45 |
 | [`FreeEnergy`](../../atlas/hubs/TFIM_FreeEnergy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 30 |
 | [`GGEValue`](../../atlas/hubs/TFIM_GGEValue_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
-| [`LiebRobinsonBound`](../../atlas/hubs/TFIM_LiebRobinsonBound_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`LiebRobinsonVelocity`](../../atlas/hubs/TFIM_LiebRobinsonVelocity_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
-| [`LoschmidtEcho`](../../atlas/hubs/TFIM_LoschmidtEcho_OBC.md) | `OBC` | 🟢 corroborated-at-p | 12 |
+| [`LightconeSpinCorrelation`](../../atlas/hubs/TFIM_LightconeSpinCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`LocalMagnetization`](../../atlas/hubs/TFIM_LocalMagnetization_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`LoschmidtAmplitude`](../../atlas/hubs/TFIM_LoschmidtAmplitude_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`LoschmidtRateFunction`](../../atlas/hubs/TFIM_LoschmidtRateFunction_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 10 |
+| [`LoschmidtRateFunction`](../../atlas/hubs/TFIM_LoschmidtRateFunction_OBC.md) | `OBC` | 🟢 corroborated-at-p | 12 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 18 |
 | [`MagnetizationX`](../../atlas/hubs/TFIM_MagnetizationX_PBC.md) | `PBC` | 🟢 corroborated-at-p | 18 |
-| [`MagnetizationXLocal`](../../atlas/hubs/TFIM_MagnetizationXLocal_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
-| [`MagnetizationXLocal`](../../atlas/hubs/TFIM_MagnetizationXLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`MagnetizationY`](../../atlas/hubs/TFIM_MagnetizationY_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
 | [`MagnetizationZ`](../../atlas/hubs/TFIM_MagnetizationZ_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 5 |
-| [`MagnetizationZLocal`](../../atlas/hubs/TFIM_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`MassGap`](../../atlas/hubs/TFIM_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 25 |
 | [`MassGap`](../../atlas/hubs/TFIM_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | [`MassGap`](../../atlas/hubs/TFIM_MassGap_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`NMRRelaxationExponent`](../../atlas/hubs/TFIM_NMRRelaxationExponent_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`NMRSpinRelaxationRate`](../../atlas/hubs/TFIM_NMRSpinRelaxationRate_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`NMRSpinRelaxationRate`](../../atlas/hubs/TFIM_NMRSpinRelaxationRate_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`QuenchEntanglementEntropy`](../../atlas/hubs/TFIM_QuenchEntanglementEntropy_OBC.md) | `OBC` | 🔵 coherent | 1 |
+| [`QuenchLocalMagnetization`](../../atlas/hubs/TFIM_QuenchLocalMagnetization_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
+| [`QuenchLocalMagnetization`](../../atlas/hubs/TFIM_QuenchLocalMagnetization_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`RenyiEntropy`](../../atlas/hubs/TFIM_RenyiEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`RenyiEntropy`](../../atlas/hubs/TFIM_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 74 |
 | [`SpecificHeat`](../../atlas/hubs/TFIM_SpecificHeat_Infinite.md) | `Infinite` | 🔵 coherent | 7 |
 | [`SpecificHeat`](../../atlas/hubs/TFIM_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 40 |
 | [`SpecificHeat`](../../atlas/hubs/TFIM_SpecificHeat_PBC.md) | `PBC` | 🟢 corroborated-at-p | 18 |
+| [`SpinCorrelation`](../../atlas/hubs/TFIM_SpinCorrelation_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`SpinCorrelation`](../../atlas/hubs/TFIM_SpinCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`SpontaneousMagnetization`](../../atlas/hubs/TFIM_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 7 |
 | [`SusceptibilityXX`](../../atlas/hubs/TFIM_SusceptibilityXX_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`SusceptibilityXX`](../../atlas/hubs/TFIM_SusceptibilityXX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 18 |
@@ -597,19 +605,16 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 61 hubs (qua
 | [`ThermalEntropy`](../../atlas/hubs/TFIM_ThermalEntropy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 15 |
 | [`UniversalityClass`](../../atlas/hubs/TFIM_UniversalityClass_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`VonNeumannEntropy`](../../atlas/hubs/TFIM_VonNeumannEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`VonNeumannEntropy`](../../atlas/hubs/TFIM_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 42 |
-| [`XXCorrelation`](../../atlas/hubs/TFIM_XXCorrelation_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 21 |
-| [`XXCorrelation`](../../atlas/hubs/TFIM_XXCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
+| [`VonNeumannEntropy`](../../atlas/hubs/TFIM_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 41 |
 | [`XXStructureFactor`](../../atlas/hubs/TFIM_XXStructureFactor_Infinite.md) | `Infinite` | 🔵 coherent | 14 |
 | [`XXStructureFactor`](../../atlas/hubs/TFIM_XXStructureFactor_OBC.md) | `OBC` | 🟢 corroborated-at-p | 27 |
-| [`YYCorrelation`](../../atlas/hubs/TFIM_YYCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 1 |
 | [`YYStructureFactor`](../../atlas/hubs/TFIM_YYStructureFactor_Infinite.md) | `Infinite` | 🔵 coherent | 14 |
 | [`YYStructureFactor`](../../atlas/hubs/TFIM_YYStructureFactor_OBC.md) | `OBC` | 🟢 corroborated-at-p | 27 |
-| [`ZZCorrelation`](../../atlas/hubs/TFIM_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 3 |
-| [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_Infinite.md) | `Infinite` | 🔵 coherent | 14 |
+| [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_Infinite.md) | `Infinite` | 🔵 coherent | 12 |
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

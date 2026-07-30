@@ -23,7 +23,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 |-------|-----------|-----------|--------------|
 | [`BCFT`](../atlas/models/BCFT.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ConformalBootstrap`](../atlas/models/ConformalBootstrap.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 1 🟠 0 | — |
-| [`IsingChain1D`](../atlas/models/IsingChain1D.md) | 8 | 🟣 0 🟢 7 🔵 0 ⚪ 0 🟠 1 | — |
+| [`IsingChain1D`](../atlas/models/IsingChain1D.md) | 9 | 🟣 0 🟢 7 🔵 0 ⚪ 0 🟠 2 | — |
 | [`LiouvilleCFT`](../atlas/models/LiouvilleCFT.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`LogarithmicCFT`](../atlas/models/LogarithmicCFT.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`RFIM`](../atlas/models/RFIM.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
@@ -38,7 +38,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
-| [`AKLT1D`](../atlas/models/AKLT1D.md) | 12 | 🟣 0 🟢 17 🔵 0 ⚪ 1 🟠 1 | — |
+| [`AKLT1D`](../atlas/models/AKLT1D.md) | 11 | 🟣 0 🟢 15 🔵 0 ⚪ 1 🟠 2 | — |
 | [`AKLT2D`](../atlas/models/AKLT2D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ChernSimons3D`](../atlas/models/ChernSimons3D.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 0 | `WZW` |
 | [`Cluster1D`](../atlas/models/Cluster1D.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
@@ -47,9 +47,9 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`ExtendedHubbard1D`](../atlas/models/ExtendedHubbard1D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | — |
 | [`FibonacciAnyons`](../atlas/models/FibonacciAnyons.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
-| [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | 6 | 🟣 0 🟢 1 🔵 1 ⚪ 0 🟠 4 | — |
+| [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | 5 | 🟣 0 🟢 1 🔵 1 ⚪ 0 🟠 3 | — |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
-| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 7 | 🟣 0 🟢 2 🔵 2 ⚪ 0 🟠 3 | — |
+| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 6 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 3 | — |
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TightBinding(Kagome)`](../atlas/models/Kagome.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 3 🟠 0 | — |
@@ -58,43 +58,43 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`TightBinding(Lieb)`](../atlas/models/Lieb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`LongRangeIsing1D`](../atlas/models/LongRangeIsing1D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | — |
 | [`LongRangeXY1D`](../atlas/models/LongRangeXY1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`MajumdarGhosh`](../atlas/models/MajumdarGhosh.md) | 3 | 🟣 0 🟢 2 🔵 0 ⚪ 2 🟠 0 | — |
+| [`MajumdarGhosh`](../atlas/models/MajumdarGhosh.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 2 🟠 2 | — |
 | [`MixedFieldIsing1D`](../atlas/models/MixedFieldIsing1D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | — |
 | [`PXP1D`](../atlas/models/PXP1D.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 1 🟠 0 | — |
 | [`PpIp2DSC`](../atlas/models/PpIp2DSC.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`S1AnisotropicD1D`](../atlas/models/S1AnisotropicD1D.md) | 2 | 🟣 0 🟢 0 🔵 2 ⚪ 0 🟠 0 | — |
-| [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | 19 | 🟣 0 🟢 13 🔵 3 ⚪ 1 🟠 4 | — |
+| [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | 17 | 🟣 0 🟢 10 🔵 3 ⚪ 1 🟠 5 | — |
 | [`S1XXZ1D`](../atlas/models/S1XXZ1D.md) | 2 | 🟣 0 🟢 0 🔵 2 ⚪ 0 🟠 0 | — |
 | [`SYK`](../atlas/models/SYK.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`SchwingerModel`](../atlas/models/SchwingerModel.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 7 | 🟣 0 🟢 4 🔵 0 ⚪ 0 🟠 15 | — |
-| [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 3 | — |
-| [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 4 🔵 0 ⚪ 1 🟠 0 | — |
+| [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 8 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 5 | — |
+| [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 3 🔵 0 ⚪ 2 🟠 0 | — |
 | [`TightBinding(Triangular)`](../atlas/models/Triangular.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
-| [`XYh1D`](../atlas/models/XYh1D.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 13 | — |
+| [`XYh1D`](../atlas/models/XYh1D.md) | 6 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 11 | — |
 
 ## Other (19)
 
 | Model | Quantities | Assurance | Universality |
 |-------|-----------|-----------|--------------|
 | [`Bound`](../atlas/models/Bound.md) | 8 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 8 | — |
-| [`CurieWeissIsing`](../atlas/models/CurieWeissIsing.md) | 9 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 3 | `MeanField` |
+| [`CurieWeissIsing`](../atlas/models/CurieWeissIsing.md) | 10 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 4 | `MeanField` |
 | [`DimerLattice`](../atlas/models/DimerLattice.md) | 4 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 3 | — |
 | [`HaldaneShastry`](../atlas/models/HaldaneShastry.md) | 7 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 7 | — |
-| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 22 | 🟣 0 🟢 13 🔵 4 ⚪ 0 🟠 11 | — |
+| [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 19 | 🟣 0 🟢 12 🔵 4 ⚪ 0 🟠 10 | — |
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | 9 | 🟣 0 🟢 7 🔵 2 ⚪ 0 🟠 4 | `Ising` |
 | [`IsingTriangular`](../atlas/models/IsingTriangular.md) | 10 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 8 | `Ising` |
 | [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 9 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 4 | — |
 | [`SSH`](../atlas/models/SSH.md) | 9 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 5 | — |
 | [`SixVertex`](../atlas/models/SixVertex.md) | 5 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 2 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 35 | 🟣 0 🟢 36 🔵 8 ⚪ 0 🟠 17 | `Ising` |
+| [`TFIM`](../atlas/models/TFIM.md) | 38 | 🟣 0 🟢 32 🔵 10 ⚪ 0 🟠 23 | `Ising` |
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`Universality`](../atlas/models/Universality.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | — |
-| [`XXZ1D`](../atlas/models/XXZ1D.md) | 25 | 🟣 0 🟢 18 🔵 5 ⚪ 0 🟠 9 | — |
+| [`XXZ1D`](../atlas/models/XXZ1D.md) | 22 | 🟣 0 🟢 17 🔵 5 ⚪ 0 🟠 7 | — |
 | [`YangLee`](../atlas/models/YangLee.md) | 3 | 🟣 0 🟢 1 🔵 0 ⚪ 1 🟠 1 | `MinimalModel` |
 | [`ZnClock`](../atlas/models/ZnClock.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |
 | [`ZnParafermion`](../atlas/models/ZnParafermion.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | `Ising` |

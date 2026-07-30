@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `dense_ed`, status `exact`, reliability `high`
-- Pass subsystem length ℓ; β=Inf gives ground-state EE.
+- "Dense-ED partial trace over the SPIN complement, so the subsystem may " * "be ANY region — pass `region` (a Region, contiguous or not) or the block " * "length `ℓ`, which means Region(1:ℓ); β=Inf gives ground-state EE (#780)."
 
 ## Corroboration
 

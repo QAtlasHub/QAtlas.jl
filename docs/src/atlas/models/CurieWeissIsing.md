@@ -27,8 +27,8 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | 🟢 corroborated-at-p | 6 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **9** |
+| 🟠 uncorroborated-but-feasible | 4 |
+| **total claimed hubs** | **10** |
 
 **Methods** (from `@register`, derived): `analytic`, `delegation`
 
@@ -40,6 +40,7 @@ All `(Quantity, BC)` hubs `src` claims for **`CurieWeissIsing`**.  Cells link to
 | [`CriticalTemperature`](../quantities/CriticalTemperature.md) | 🟢 [hub](../hubs/CurieWeissIsing_CriticalTemperature_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/CurieWeissIsing_Energy_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) |
+| [`Magnetization`](../quantities/Magnetization.md) | 🟠 [hub](../hubs/CurieWeissIsing_Magnetization_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟢 [hub](../hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md) |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md) |

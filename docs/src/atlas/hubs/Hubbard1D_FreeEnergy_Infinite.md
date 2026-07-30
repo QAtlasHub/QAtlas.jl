@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `jks_qtm_nlie`, status `exact`, reliability `medium`, refs: JuttnerKlumperSuzuki1998
-- "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄). FE evaluator uses " * "Chebyshev-Gauss quadrature on the cut [-1, 1] (handles 1/sqrt(1-x^2) " * "singularity exactly) + paper page-14 direct-form log Λ. " * "Currently SUPPORTS H=0 AND μ = U/2 (half-filling) ONLY: the b/b̄ " * "particle-hole symmetry is enforced in the solver via b̄ = b, which " * "is exact at H=0 half-filling and breaks for H ≠ 0 or off-half-filling. " * "U-independent and exact at high T to within 1%% (β <= 1e-3 across " * "U ∈ {2, 4, 8}). Mid-T (β ~ 0.1) deviation from ED is a formula-level " * "bug (Stage G.3+ followup)."
+- method `jks_qtm_nlie`, status `approx`, reliability `medium`, refs: JuttnerKlumperSuzuki1998
+- "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄). FE evaluator uses " * "Chebyshev-Gauss quadrature on the cut [-1, 1] (handles 1/sqrt(1-x^2) " * "singularity exactly) + paper page-14 direct-form log Λ. " * "Currently SUPPORTS H=0 AND μ = U/2 (half-filling) ONLY: the b/b̄ " * "particle-hole symmetry is enforced in the solver via b̄ = b, which " * "is exact at H=0 half-filling and breaks for H ≠ 0 or off-half-filling. " * "Kernels are the three eq (38) functions K1, K1bar, K2. Mid-T " * "(β ~ 0.1) deviation from ED is a formula-level bug, tracked in #798: " * "the residuals still convolve the c channel with K1 where eq (47) says " * "K1bar, use log(1+b) where it says log(1+1/b), and carry one boundary " * "value per function where eq (53) needs two. CONVENTION: the JKS paper's " * "Coulomb term is symmetric, U(n_down-1/2)(n_up-1/2), so ITS half filling " * "is mu = 0 and f_paper(mu) = f_plain(mu+U/2) + U/4 relative to the plain " * "U n_up n_down form the Lieb-Wu rows above use. This route is fed " * "mu = U/2 as though it were the paper's half filling, so it has been " * "solving a doped system and comparing it against half-filled ED. A " * "corrected eq (53) solver lives in Hubbard1D_jks_eq53.jl and reproduces " * "the closed-form high-T limit; wiring this row to it is the #798 followup."
 
 ## Corroboration
 

@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`XYh1D`**.  Cells link to the per-h
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 13 |
-| **total claimed hubs** | **13** |
+| 🟠 uncorroborated-but-feasible | 11 |
+| **total claimed hubs** | **11** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `quadgk`
 
@@ -37,10 +37,8 @@ All `(Quantity, BC)` hubs `src` claims for **`XYh1D`**.  Cells link to the per-h
 |---|---|---|---|
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/XYh1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/XYh1D_EnergyLocal_OBC.md) | — | — |
-| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationXLocal_OBC.md) | — | — |
-| [`MagnetizationYLocal`](../quantities/MagnetizationYLocal.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationYLocal_OBC.md) | — | — |
+| [`LocalMagnetization`](../quantities/LocalMagnetization.md) | 🟠 [hub](../hubs/XYh1D_LocalMagnetization_OBC.md) | — | — |
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZ_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_MagnetizationZ_Infinite.md) |
-| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/XYh1D_MagnetizationZLocal_OBC.md) | — | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/XYh1D_MassGap_OBC.md) | 🟠 [hub](../hubs/XYh1D_MassGap_PBC.md) | 🟠 [hub](../hubs/XYh1D_MassGap_Infinite.md) |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟠 [hub](../hubs/XYh1D_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_SusceptibilityZZ_Infinite.md) |
 

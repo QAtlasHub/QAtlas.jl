@@ -6,27 +6,27 @@
 using Test
 using QuadGK: quadgk
 using QAtlas
-using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
+using QAtlas: fetch, Energy{:per_site}, Infinite, HeisenbergXYZ
 
-@testset "HeisenbergXYZ — GroundStateEnergyDensity@Infinite (Phase 2)" begin
+@testset "HeisenbergXYZ — Energy{:per_site}@Infinite (Phase 2)" begin
     @testset "Heisenberg isotropic limit (Jx=Jy=Jz=J, AFM)" begin
         # Bethe 1931 / Hulthen 1938: ε₀ = J·(1/4 - ln 2)
         m = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.0)
-        f = fetch(m, GroundStateEnergyDensity(), Infinite())
+        f = fetch(m, Energy{:per_site}(), Infinite())
         @test f ≈ 0.25 - log(2) atol=1e-12
     end
 
     @testset "XX free-fermion point (Jx=Jy=1, Jz=0) — XXZ delegation" begin
         # ε₀ = -1/π (free-fermion XX chain, QAtlas S=σ/2 normalization)
         m = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=0.0)
-        f = fetch(m, GroundStateEnergyDensity(), Infinite())
+        f = fetch(m, Energy{:per_site}(), Infinite())
         @test f ≈ -1/π atol=1e-12
     end
 
     @testset "Anisotropic XY line (Jx=2, Jy=1, Jz=0) — LSM closed form" begin
         # Strict anisotropy on Jz=0 line: LSM 1961 integral
         m = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.0)
-        f = fetch(m, GroundStateEnergyDensity(), Infinite())
+        f = fetch(m, Energy{:per_site}(), Infinite())
         # Verify against direct LSM integral evaluation
         ref, _ = quadgk(k -> sqrt(4 + 1 + 4 * cos(2k)), 0.0, π / 2; rtol=1e-12)
         @test f ≈ -ref / (4π) atol=1e-10
@@ -38,7 +38,7 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
         # Jx=Jy=1, Jz=0 hits the Jx=Jy branch (XXZ delegation) first; verify
         # the value matches XXZ1D(J=1, Δ=0) Energy(:per_site) directly.
         m_xx = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=0.0)
-        f_dispatch = fetch(m_xx, GroundStateEnergyDensity(), Infinite())
+        f_dispatch = fetch(m_xx, Energy{:per_site}(), Infinite())
         f_xxz = fetch(QAtlas.XXZ1D(; J=1.0, Δ=0.0), QAtlas.Energy{:per_site}(), Infinite())
         @test f_dispatch ≈ f_xxz atol=1e-12
     end
@@ -46,7 +46,7 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
     @testset "Axial XXZ delegation: arbitrary Δ" begin
         for Δ in (-0.5, 0.0, 0.5, 0.9)
             m = HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=Δ)
-            f = fetch(m, GroundStateEnergyDensity(), Infinite())
+            f = fetch(m, Energy{:per_site}(), Infinite())
             f_ref = fetch(
                 QAtlas.XXZ1D(; J=1.0, Δ=Δ), QAtlas.Energy{:per_site}(), Infinite()
             )
@@ -56,17 +56,17 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
 
     @testset "Generic XYZ (Jx≠Jy, Jz≠0) raises DomainError" begin
         m = HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.5)
-        @test_throws DomainError fetch(m, GroundStateEnergyDensity(), Infinite())
+        @test_throws DomainError fetch(m, Energy{:per_site}(), Infinite())
     end
 
     @testset "Axial XXZ with non-positive Jx raises DomainError" begin
         m = HeisenbergXYZ(; Jx=0.0, Jy=0.0, Jz=1.0)
-        @test_throws DomainError fetch(m, GroundStateEnergyDensity(), Infinite())
+        @test_throws DomainError fetch(m, Energy{:per_site}(), Infinite())
         m_fm = HeisenbergXYZ(; Jx=-1.0, Jy=-1.0, Jz=0.5)
-        @test_throws DomainError fetch(m_fm, GroundStateEnergyDensity(), Infinite())
+        @test_throws DomainError fetch(m_fm, Energy{:per_site}(), Infinite())
     end
 
-    @testset "Energy{:per_site} matches GroundStateEnergyDensity across regimes" begin
+    @testset "Energy{:per_site} matches Energy{:per_site} across regimes" begin
         using QAtlas: Energy
         for m in (
             HeisenbergXYZ(; Jx=1.0, Jy=1.0, Jz=1.0),  # Heisenberg
@@ -75,7 +75,7 @@ using QAtlas: fetch, GroundStateEnergyDensity, Infinite, HeisenbergXYZ
             HeisenbergXYZ(; Jx=2.0, Jy=1.0, Jz=0.0),  # anisotropic XY
             HeisenbergXYZ(; Jx=3.0, Jy=0.5, Jz=0.0),  # extreme anisotropic XY
         )
-            f_gsed = fetch(m, GroundStateEnergyDensity(), Infinite())
+            f_gsed = fetch(m, Energy{:per_site}(), Infinite())
             f_ener = fetch(m, Energy{:per_site}(), Infinite())
             @test f_gsed == f_ener
         end

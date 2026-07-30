@@ -31,7 +31,7 @@ All `(Quantity, BC)` hubs `src` claims for **`IsingSquare`**.  Cells link to the
 | 🟠 uncorroborated-but-feasible | 4 |
 | **total claimed hubs** | **13** |
 
-**Methods** (from `@register`, derived): `analytic`, `central_diff`, `delegation`, `onsager`, `transfer_matrix`
+**Methods** (from `@register`, derived): `analytic`, `central_diff`, `delegation`, `kaufman_free_fermion`, `onsager`
 
 ## Quantity × BC matrix
 

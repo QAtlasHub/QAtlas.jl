@@ -26,7 +26,7 @@
     approach = [0.9, 0.99, 0.999, 0.9999],
     regime = "Δ → 1⁻ (isotropic antiferromagnetic limit from the planar side)",
     rate = "e₀(Δ) is smooth up to the BKT point, so the error is dominated by the linear Δ-dependence ~ |de₀/dΔ|·(1 − Δ)",
-    quantities = [(quantity=GroundStateEnergyDensity, bc=Infinite, final_atol=5.0e-5)],
+    quantities = [(quantity=Energy{:per_site}, bc=Infinite, final_atol=5.0e-5)],
     references = ["YangYang1969", "Hulthen1938", "desCloizeauxPearson1962"],
     notes = "Yang–Yang integral e₀(Δ) (source) against the closed Hulthén value (target): two independent implementations.",
 )

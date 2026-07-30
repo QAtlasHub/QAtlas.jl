@@ -91,7 +91,7 @@ MajumdarGhosh(; J::Real=1.0) = MajumdarGhosh(Float64(J))
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::MajumdarGhosh, ::GroundStateEnergyDensity, ::Infinite; kwargs...) -> Float64
+    fetch(::MajumdarGhosh, ::Energy{:per_site}, ::Infinite; kwargs...) -> Float64
 
 Exact thermodynamic-limit ground-state energy density of the Majumdar–
 Ghosh chain:
@@ -109,16 +109,16 @@ beyond the standard surface.
 # Example
 
 ```jldoctest
-julia> QAtlas.fetch(MajumdarGhosh(), GroundStateEnergyDensity(), Infinite())
+julia> QAtlas.fetch(MajumdarGhosh(), Energy{:per_site}(), Infinite())
 -0.375
 ```
 """
-function fetch(m::MajumdarGhosh, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
+function fetch(m::MajumdarGhosh, ::Energy{:per_site}, ::Infinite; kwargs...)
     return -3 * m.J / 8
 end
 
 """
-    fetch(::MajumdarGhosh, ::GroundStateEnergyDensity, ::PBC; N::Int, kwargs...) -> Float64
+    fetch(::MajumdarGhosh, ::Energy{:per_site}, ::PBC; N::Int, kwargs...) -> Float64
 
 Ground-state energy density for the Majumdar–Ghosh chain on a periodic
 ring of `N` sites.  Because the dimer-product state is an exact
@@ -133,7 +133,7 @@ number of sites to close into a ring without a defect).
 
 - C. K. Majumdar, D. K. Ghosh, J. Math. Phys. **10**, 1388 (1969).
 """
-function fetch(m::MajumdarGhosh, ::GroundStateEnergyDensity, bc::PBC; kwargs...)
+function fetch(m::MajumdarGhosh, ::Energy{:per_site}, bc::PBC; kwargs...)
     n = _bc_size(bc, kwargs)
     n > 0 || throw(DomainError(n, "MajumdarGhosh PBC: N must be a positive even integer."))
     iseven(n) || throw(

@@ -40,12 +40,10 @@ end
     # Heisenberg1D delegates to XXZ1D(Δ=1); both code paths must agree.
     verify(
         Heisenberg1D(),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(
-            XXZ1D(; J=1.0, Δ=1.0), GroundStateEnergyDensity(), Infinite()
-        ),
+        independent=QAtlas.fetch(XXZ1D(; J=1.0, Δ=1.0), Energy{:per_site}(), Infinite()),
         agree_within=1e-12,
         refs=["Heisenberg1D ≡ XXZ1D(Δ=1): Hulthén e0 = J(1/4 − log 2)"],
     )
@@ -53,7 +51,7 @@ end
     # Closed-form Hulthén value cross-check (second derivation).
     verify(
         Heisenberg1D(),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:second_closed_form,
         independent=0.25 - log(2.0),

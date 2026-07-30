@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`NMRRelaxationExponent`** observable.  Empty cells = this model doesn't yet have a `NMRRelaxationExponent` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Low-temperature scaling exponent `θ_NMR` of the NMR spin-lattice relaxation rate, `1/T_1 ∝ T^{θ_NMR}` as `T → 0`.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 2

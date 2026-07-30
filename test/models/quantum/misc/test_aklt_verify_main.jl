@@ -35,7 +35,7 @@ using QAtlas, Test, LinearAlgebra
     for J in (0.5, 1.0, 2.5)
         verify(
             AKLT1D(; J=J),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             Infinite();
             route=:second_closed_form,
             independent=-2 * J / 3,

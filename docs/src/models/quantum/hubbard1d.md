@@ -106,7 +106,7 @@ QAtlas.fetch(Hubbard1D(; t=1, U=6, μ=2),
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 2 models register 8 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 2 models register 7 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
@@ -114,12 +114,12 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 8 hubs (q
 | `Hubbard1D` | [`ChargeGap`](../../atlas/hubs/Hubbard1D_ChargeGap_Infinite.md) | `Infinite` | 🔵 coherent | 6 |
 | `Hubbard1D` | [`Energy`](../../atlas/hubs/Hubbard1D_Energy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Hubbard1D` | [`FreeEnergy`](../../atlas/hubs/Hubbard1D_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| `Hubbard1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Hubbard1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🔵 coherent | 5 |
 | `Hubbard1D` | [`LuttingerParameter`](../../atlas/hubs/Hubbard1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | `Hubbard1D` | [`MassGap`](../../atlas/hubs/Hubbard1D_MassGap_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Hubbard1D` | [`SpinGap`](../../atlas/hubs/Hubbard1D_SpinGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 
@@ -154,7 +154,7 @@ Every `fetch(::Model, …)` method registered for these models — together with
 
 ```@autodocs
 Modules = [QAtlas]
-Pages = ["models/quantum/ExtendedHubbard1D/ExtendedHubbard1D.jl", "models/quantum/ExtendedHubbard1D/ExtendedHubbard1D_registry.jl", "models/quantum/Hubbard1D/Hubbard1D.jl", "models/quantum/Hubbard1D/Hubbard1D_jks_nlie.jl", "models/quantum/Hubbard1D/Hubbard1D_registry.jl"]
+Pages = ["models/quantum/ExtendedHubbard1D/ExtendedHubbard1D.jl", "models/quantum/ExtendedHubbard1D/ExtendedHubbard1D_registry.jl", "models/quantum/Hubbard1D/Hubbard1D.jl", "models/quantum/Hubbard1D/Hubbard1D_jks_eq53.jl", "models/quantum/Hubbard1D/Hubbard1D_jks_nlie.jl", "models/quantum/Hubbard1D/Hubbard1D_registry.jl"]
 Private = false
 Order = [:type, :function]
 ```

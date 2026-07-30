@@ -42,8 +42,8 @@ chain (or more generally any finite spin-1/2 cluster). Hamiltonian:
 """
 struct Heisenberg1D <: AbstractQAtlasModel end
 
-# `ExactSpectrum` and `GroundStateEnergyDensity` used to be declared in this file.
-# Neither is Heisenberg's: `GroundStateEnergyDensity` carries 9 registry rows across 8
+# `ExactSpectrum` and `Energy{:per_site}` used to be declared in this file.
+# Neither is Heisenberg's: `Energy{:per_site}` carries 9 registry rows across 8
 # models (AKLT1D, HaldaneShastry, Heisenberg1D, HeisenbergXYZ, Hubbard1D, MajumdarGhosh,
 # ToricCode, XXZ1D) and appears in 24 source files. A model file owning a cross-model
 # quantity is how `PartitionFunction` came to be declared in IsingSquare.jl and then
@@ -114,7 +114,7 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::Heisenberg1D, ::GroundStateEnergyDensity; J=1.0) -> Float64
+    fetch(::Heisenberg1D, ::Energy{:per_site}; J=1.0) -> Float64
 
 Exact ground-state energy per site of the spin-1/2 antiferromagnetic
 Heisenberg chain in the thermodynamic limit (N → ∞, PBC):
@@ -152,22 +152,22 @@ finite-size extrapolation verification using ED at N = 4, 6, 8.
       Ark. Mat. Astron. Fys. 26A, No. 11, 1–106 (1938) — first
       evaluation of e₀ = 1/4 − ln 2 from the Bethe equations.
 """
-function fetch(::Heisenberg1D, ::GroundStateEnergyDensity; J::Real=1.0)
+function fetch(::Heisenberg1D, ::Energy{:per_site}; J::Real=1.0)
     return J * (1 // 4 - log(2))
 end
 
 """
-    fetch(::Heisenberg1D, ::GroundStateEnergyDensity, ::Infinite; J=1.0) -> Float64
+    fetch(::Heisenberg1D, ::Energy{:per_site}, ::Infinite; J=1.0) -> Float64
 
 BC-explicit dispatch sister of the legacy `fetch(::Heisenberg1D,
-::GroundStateEnergyDensity; J=1.0)` method.  The thermodynamic-limit
+::Energy{:per_site}; J=1.0)` method.  The thermodynamic-limit
 ground-state energy density is only meaningful at `Infinite`, so the
 two methods return the same Hulthén value
 `e₀ = J(1/4 - ln 2)`.  Provided so `which(fetch, ::Heisenberg1D,
-::GroundStateEnergyDensity, ::Infinite)` resolves and the registry
+::Energy{:per_site}, ::Infinite)` resolves and the registry
 drift guard passes.
 """
-function fetch(::Heisenberg1D, ::GroundStateEnergyDensity, ::Infinite; J::Real=1.0)
+function fetch(::Heisenberg1D, ::Energy{:per_site}, ::Infinite; J::Real=1.0)
     return J * (1 // 4 - log(2))
 end
 

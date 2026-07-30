@@ -13,7 +13,7 @@ using QAtlas, Test
     @test e0 ≈ 0.25 - log(2)
     e0_3 = QAtlas.fetch(J1J2Heisenberg1D(; J1=3.0, J2=0.0), Energy{:per_site}(), Infinite())
     @test e0_3 ≈ 3 * (0.25 - log(2))
-    @test e0 ≈ QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); J=1.0)
+    @test e0 ≈ QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite(); J=1.0)
 end
 
 @testset "J1J2Heisenberg1D — j = 1/2 (Majumdar-Ghosh) (Phase 1)" begin
@@ -22,7 +22,7 @@ end
     @test QAtlas.fetch(J1J2Heisenberg1D(), Energy{:per_site}(), Infinite()) ≈ -3 / 8
     e0_2 = QAtlas.fetch(J1J2Heisenberg1D(; J1=2.0, J2=1.0), Energy{:per_site}(), Infinite())
     @test e0_2 ≈ -3 / 4
-    @test e0 ≈ QAtlas.fetch(MajumdarGhosh(; J=1.0), GroundStateEnergyDensity(), Infinite())
+    @test e0 ≈ QAtlas.fetch(MajumdarGhosh(; J=1.0), Energy{:per_site}(), Infinite())
 end
 
 @testset "J1J2Heisenberg1D — generic j throws DomainError (Phase 1)" begin
@@ -47,7 +47,7 @@ end
         Energy(:per_site),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        independent=QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite()),
         agree_within=1e-12,
         refs=["J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938)"],
     )
@@ -58,9 +58,7 @@ end
         Energy(:per_site),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(
-            MajumdarGhosh(; J=1.0), GroundStateEnergyDensity(), Infinite()
-        ),
+        independent=QAtlas.fetch(MajumdarGhosh(; J=1.0), Energy{:per_site}(), Infinite()),
         agree_within=1e-12,
         refs=["J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8)"],
     )

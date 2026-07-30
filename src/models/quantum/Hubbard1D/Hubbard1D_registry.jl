@@ -1,21 +1,10 @@
 # models/quantum/Hubbard1D/Hubbard1D_registry.jl — declarative implementation map.
 #
 # Hubbard1D Phase 1 implements Lieb–Wu (1968) closed-form integrals at
-# half filling only: `GroundStateEnergyDensity`, `ChargeGap`, `SpinGap`
+# half filling only: `Energy{:per_site}`, `ChargeGap`, `SpinGap`
 # at `Infinite()`.  Each row below mirrors a `fetch` method in
 # `Hubbard1D.jl`.
 
-@register(
-    Hubbard1D,
-    GroundStateEnergyDensity,
-    Infinite,
-    method=:bethe_ansatz,
-    cost=:polynomial,
-    reliability=:high,
-    tested_in="test/standalone/test_hubbard1d.jl",
-    references=["LiebWu1968", "Essler2005"],
-    notes="Lieb-Wu integral E₀/N = -4t ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).",
-)
 @register(
     Hubbard1D,
     Energy{:per_site},

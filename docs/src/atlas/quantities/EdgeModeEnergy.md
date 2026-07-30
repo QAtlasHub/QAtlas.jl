@@ -15,7 +15,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 - **Models with this quantity registered**: 2
 - **Total hubs (Model, BC pairs)**: 2
-- **Methods** (derived from `@register`): `bdg`, `dense_ed`
+- **Methods** (derived from `@register`): `bdg`, `single_particle_diagonalization`
 - **Universality classes** (where applicable): —
 
 **Top references** (by hub count):

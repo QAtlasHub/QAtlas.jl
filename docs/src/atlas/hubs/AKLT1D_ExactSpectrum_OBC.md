@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `dense_ed`, status `exact`, reliability `high`
-- Full sorted spectrum from 3^N dense ED; N ≤ 8 (3^8 = 6561).
+- "Full sorted spectrum from 3^N dense ED; N <= 8 (3^8 = 6561). " * "cost=:exponential -- `_ed_size_guard` warns once when it is paid."
 
 ## Corroboration
 

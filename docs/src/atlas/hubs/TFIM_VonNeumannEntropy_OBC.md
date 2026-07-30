@@ -9,13 +9,12 @@
 ## `src` claim
 
 - method `bdg`, status `exact`, reliability `high`, refs: Peschel2003
-- Free-fermion correlation-matrix method; pass subsystem length ℓ.
+- "Free-fermion correlation-matrix method; pass the subsystem as `region` " * "(a Region, anywhere in the chain) or as the block length `ℓ`, which is " * "sugar for Region(1:ℓ). Single contiguous interval only — a multi-interval " * "region throws, because the Jordan-Wigner string factorises only for one " * "interval and the free-fermion answer would be the FERMIONIC entropy (#780)."
 
 ## Corroboration
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@ordered` | `limiting_case` | 🟡 asserted | t=0: quench EE equals the initial ground-state entanglement | `test/models/quantum/TFIM/test_tfim_quench_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J) | `test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J) | `test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl` |
 | `@sweep` | `ed_finite_size` | 🟢 structural | Direct Schmidt-SVD of the _build_tfim_dense ground state | `test/models/quantum/TFIM/test_TFIM_entanglement.jl` |
@@ -61,10 +60,6 @@
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
-
-```julia
-verify(TFIM(; J = 1.0, h = 0.5), VonNeumannEntropy(:quench), OBC(8); route = :limiting_case, fetch_kw = (; initial = TFIM(; J = 1.0, h = 2.0), 4 = 4, t = 0.0), independent = QAtlas.fetch(TFIM(; J = 1.0, h = 2.0), VonNeumannEntropy(), OBC(8); 4 = 4, beta = Inf), agree_within = 1.0e-8, refs = ["t=0: quench EE equals the initial ground-state entanglement"])
-```
 
 ```julia
 verify(TFIM(; 1.0 = 1.0, 1.0 = 1.0), VonNeumannEntropy(), OBC(8); route = :ed_finite_size, fetch_kw = (; 4 = 4, beta = Inf), independent = -(sum((s->begin p = s ^ 2 if p > 1.0e-15 p * log(p) else 0.0 end end), LinearAlgebra.svdvals(reshape((LinearAlgebra.eigen(_build_tfim_dense(8, 1.0, 1.0))).vectors[:, 1], (2 ^ 4, 2 ^ (8 - 4)))))), agree_within = 1.0e-8, refs = ["Schmidt-SVD of _build_tfim_dense GS (Calabrese-Cardy c=1/2 at h=J)"])
@@ -234,7 +229,7 @@ verify(TFIM(; 2.0 = 2.0, h = 0.0), VonNeumannEntropy(), OBC(8); route = :second_
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 42 · model ED-feasible
+- cards: 41 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

@@ -34,7 +34,7 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
 
     @testset "Pinned E₀/N at U/t = 4" begin
         m = Hubbard1D(; t=1.0, U=4.0, μ=2.0)
-        e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0 = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         @test e0 ≈ _PINNED_E0_U4 atol = 1e-8
     end
 
@@ -42,7 +42,7 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
         # At U/t = 0.01 the Lieb–Wu integral should be very close to
         # the free-fermion value -4t/π.
         m = Hubbard1D(; t=1.0, U=0.01, μ=0.005)
-        e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0 = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         @test e0 ≈ -4.0 / π atol = 1e-2
     end
 
@@ -51,7 +51,7 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
         # Heisenberg AFM with effective coupling J = 4 t²/U; the GS
         # energy density is -J log 2 = -4 t² log 2 / U.
         m = Hubbard1D(; t=1.0, U=100.0, μ=50.0)
-        e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0 = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         e0_asymp = -4.0 * 1.0^2 * log(2.0) / 100.0
         @test isapprox(e0, e0_asymp; rtol=0.05)
     end
@@ -98,7 +98,7 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
     @testset "Off half-filling raises DomainError" begin
         # μ = U/3 (≠ U/2) — Phase 2 territory.
         m = Hubbard1D(; t=1.0, U=6.0, μ=2.0)  # U/2 = 3.0, μ = 2.0
-        @test_throws DomainError QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         @test_throws DomainError QAtlas.fetch(m, ChargeGap(), Infinite())
         @test_throws DomainError QAtlas.fetch(m, SpinGap(), Infinite())
     end
@@ -106,8 +106,8 @@ const _PINNED_DC_U4 = 1.2867270220129354   # quadgk rtol=1e-12 at t=1, U=4
     @testset "Standard quantity wrappers: Energy{:per_site} and MassGap" begin
         m = Hubbard1D(; t=1.0, U=4.0, μ=2.0)
 
-        # Energy{:per_site} at half filling matches GroundStateEnergyDensity
-        e0_density = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        # Energy{:per_site} at half filling matches Energy{:per_site}
+        e0_density = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         e0_standard = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         @test e0_standard ≈ e0_density atol=1e-12
 
@@ -183,7 +183,7 @@ end
 end
 
 # ── additional verification cards (#381 batch) ─────────────────────────────
-# Scope note: GroundStateEnergyDensity at U → 0 was deliberately omitted
+# Scope note: Energy{:per_site} at U → 0 was deliberately omitted
 # from this batch — the src `_hubbard1d_e0` returns -4t²/π (not the
 # textbook free-fermion value -4t/π) at the U → 0 half-filling limit;
 # the prefactor discrepancy is a separate src issue from corroboration.

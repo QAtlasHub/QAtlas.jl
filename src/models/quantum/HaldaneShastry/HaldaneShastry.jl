@@ -92,7 +92,7 @@ HaldaneShastry(; J::Real=1.0) = HaldaneShastry(Float64(J))
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::HaldaneShastry, ::GroundStateEnergyDensity, ::Infinite; kwargs...) -> Float64
+    fetch(::HaldaneShastry, ::Energy{:per_site}, ::Infinite; kwargs...) -> Float64
 
 Exact thermodynamic-limit ground-state energy density of the Haldane-
 Shastry chain (Haldane 1988, Shastry 1988):
@@ -111,13 +111,13 @@ chord-distance Hamiltonian — so no finite-size correction enters.
 # Example
 
 ```jldoctest
-julia> QAtlas.fetch(HaldaneShastry(), GroundStateEnergyDensity(), Infinite())
+julia> QAtlas.fetch(HaldaneShastry(), Energy{:per_site}(), Infinite())
 -0.4112335167120566
 ```
 """
-function fetch(m::HaldaneShastry, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
+function fetch(m::HaldaneShastry, ::Energy{:per_site}, ::Infinite; kwargs...)
     isempty(kwargs) || @warn(
-        "fetch(HaldaneShastry, GroundStateEnergyDensity, Infinite) received unrecognized kwargs; they are ignored.",
+        "fetch(HaldaneShastry, Energy{:per_site}, Infinite) received unrecognized kwargs; they are ignored.",
         kwargs=collect(keys(kwargs))
     )
     return -π^2 * m.J / 24

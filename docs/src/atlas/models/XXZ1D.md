@@ -23,11 +23,11 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 18 |
+| 🟢 corroborated-at-p | 17 |
 | 🔵 coherent | 5 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 9 |
-| **total claimed hubs** | **32** |
+| 🟠 uncorroborated-but-feasible | 7 |
+| **total claimed hubs** | **29** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `delegation`, `dense_ed`, `exact_2spinon`, `free_fermion_analytic`, `free_fermion_quadgk_or_klumper_nlie`, `klumper_nlie`
 
@@ -36,19 +36,17 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | Quantity | `OBC` | `Infinite` |
 |---|---|---|
 | [`CentralCharge`](../quantities/CentralCharge.md) | — | 🟢 [hub](../hubs/XXZ1D_CentralCharge_Infinite.md) |
+| [`DynamicalSpinStructureFactor`](../quantities/DynamicalSpinStructureFactor.md) | — | 🟠 [hub](../hubs/XXZ1D_DynamicalSpinStructureFactor_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/XXZ1D_Energy_OBC.md) | 🟢 [hub](../hubs/XXZ1D_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/XXZ1D_EnergyLocal_OBC.md) | — |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/XXZ1D_FreeEnergy_OBC.md) | 🔵 [hub](../hubs/XXZ1D_FreeEnergy_Infinite.md) |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | 🟢 [hub](../hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) |
-| [`LoschmidtEcho`](../quantities/LoschmidtEcho.md) | — | 🟢 [hub](../hubs/XXZ1D_LoschmidtEcho_Infinite.md) |
+| [`LocalMagnetization`](../quantities/LocalMagnetization.md) | 🟠 [hub](../hubs/XXZ1D_LocalMagnetization_OBC.md) | — |
+| [`LoschmidtRateFunction`](../quantities/LoschmidtRateFunction.md) | — | 🟢 [hub](../hubs/XXZ1D_LoschmidtRateFunction_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | — | 🟢 [hub](../hubs/XXZ1D_LuttingerParameter_Infinite.md) |
 | [`LuttingerVelocity`](../quantities/LuttingerVelocity.md) | — | 🟢 [hub](../hubs/XXZ1D_LuttingerVelocity_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/XXZ1D_MagnetizationX_OBC.md) | — |
-| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationXLocal_OBC.md) | — |
 | [`MagnetizationY`](../quantities/MagnetizationY.md) | 🔵 [hub](../hubs/XXZ1D_MagnetizationY_OBC.md) | — |
-| [`MagnetizationYLocal`](../quantities/MagnetizationYLocal.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationYLocal_OBC.md) | — |
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/XXZ1D_MagnetizationZ_OBC.md) | — |
-| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/XXZ1D_MagnetizationZLocal_OBC.md) | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_OBC.md) | 🟢 [hub](../hubs/XXZ1D_MassGap_Infinite.md) |
 | [`NMRRelaxationExponent`](../quantities/NMRRelaxationExponent.md) | — | 🟢 [hub](../hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/XXZ1D_RenyiEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_RenyiEntropy_Infinite.md) |
@@ -59,7 +57,6 @@ All `(Quantity, BC)` hubs `src` claims for **`XXZ1D`**.  Cells link to the per-h
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/XXZ1D_ThermalEntropy_OBC.md) | 🔵 [hub](../hubs/XXZ1D_ThermalEntropy_Infinite.md) |
 | [`UniversalityClass`](../quantities/UniversalityClass.md) | — | 🟠 [hub](../hubs/XXZ1D_UniversalityClass_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/XXZ1D_VonNeumannEntropy_OBC.md) | 🟠 [hub](../hubs/XXZ1D_VonNeumannEntropy_Infinite.md) |
-| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | 🟠 [hub](../hubs/XXZ1D_ZZStructureFactor_Infinite.md) |
 
 ## Derivation notes
 
@@ -91,7 +88,6 @@ Mahan2000
 PerezCastillo2020
 Takahashi1999
 YangYang1966
-YangYang1969
 desCloizeauxPearson1962
 ```
 

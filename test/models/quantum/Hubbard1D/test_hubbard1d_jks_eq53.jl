@@ -17,7 +17,7 @@ using Test
 using LinearAlgebra
 using SparseArrays
 using QAtlas
-using QAtlas: Hubbard1D, GroundStateEnergyDensity, Infinite
+using QAtlas: Hubbard1D, Energy{:per_site}, Infinite
 using QAtlas.Hubbard1DJKSNLIE:
     JKSGrids53,
     JKSState53,
@@ -381,7 +381,7 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
         # and instead grows to 10.8% of |f| by beta = 1. That is the remaining
         # defect, and the bounds below are set from these numbers so it cannot
         # quietly get worse.
-        e0 = QAtlas.fetch(Hubbard1D(; t=1.0, U=_U), GroundStateEnergyDensity(), Infinite())
+        e0 = QAtlas.fetch(Hubbard1D(; t=1.0, U=_U), Energy{:per_site}(), Infinite())
         low_T_target = e0 - _U / 4
         @info "Lieb-Wu low-T target for f_paper(mu=0)" E0_over_L = e0 target = low_T_target
         reached = 0.1

@@ -28,7 +28,7 @@ All `(Quantity, BC)` hubs `src` claims for **`SSH`**.  Cells link to the per-hub
 | 🟠 uncorroborated-but-feasible | 5 |
 | **total claimed hubs** | **10** |
 
-**Methods** (from `@register`, derived): `analytic`, `dense_ed`
+**Methods** (from `@register`, derived): `analytic`, `single_particle_diagonalization`
 
 ## Quantity × BC matrix
 

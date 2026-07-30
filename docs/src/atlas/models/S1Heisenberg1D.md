@@ -23,11 +23,11 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 13 |
+| 🟢 corroborated-at-p | 10 |
 | 🔵 coherent | 3 |
 | ⚪ cited-only | 1 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **21** |
+| 🟠 uncorroborated-but-feasible | 5 |
+| **total claimed hubs** | **19** |
 
 **Methods** (from `@register`, derived): `dense_ed`, `literature_value`
 
@@ -35,25 +35,23 @@ All `(Quantity, BC)` hubs `src` claims for **`S1Heisenberg1D`**.  Cells link to 
 
 | Quantity | `OBC` | `Infinite` |
 |---|---|---|
+| [`ConnectedSpinCorrelation`](../quantities/ConnectedSpinCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_ConnectedSpinCorrelation_OBC.md) | — |
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_OBC.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) | — |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | — |
+| [`LocalMagnetization`](../quantities/LocalMagnetization.md) | 🟠 [hub](../hubs/S1Heisenberg1D_LocalMagnetization_OBC.md) | — |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) | — |
-| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) | — |
 | [`MagnetizationY`](../quantities/MagnetizationY.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationY_OBC.md) | — |
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/S1Heisenberg1D_MagnetizationZ_OBC.md) | — |
-| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md) | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MassGap_OBC.md) | ⚪ [hub](../hubs/S1Heisenberg1D_MassGap_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) | — |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SpecificHeat_OBC.md) | — |
+| [`SpinCorrelation`](../quantities/SpinCorrelation.md) | 🟠 [hub](../hubs/S1Heisenberg1D_SpinCorrelation_OBC.md) | — |
 | [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) | — |
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | — |
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | — |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) | — |
-| [`XXCorrelation`](../quantities/XXCorrelation.md) | 🟢 [hub](../hubs/S1Heisenberg1D_XXCorrelation_OBC.md) | — |
-| [`YYCorrelation`](../quantities/YYCorrelation.md) | 🟢 [hub](../hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | — |
-| [`ZZCorrelation`](../quantities/ZZCorrelation.md) | 🟢 [hub](../hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | — |
 
 ## Derivation notes
 

@@ -8,7 +8,7 @@
 
 using Test
 using QAtlas
-using QAtlas: Hubbard1D, FreeEnergy, Infinite, GroundStateEnergyDensity
+using QAtlas: Hubbard1D, FreeEnergy, Infinite, Energy{:per_site}
 using QAtlas.Hubbard1DJKSNLIE: atomic_free_energy
 
 using LinearAlgebra: Hermitian, eigen
@@ -100,7 +100,7 @@ using SparseArrays: spzeros
 
     @testset "Comparison with Lieb-Wu GS energy at low T (β = 5)" begin
         m = Hubbard1D(; t=1.0, U=4.0, μ=2.0)
-        e0 = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+        e0 = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
         β = 5.0
         f_lo_t = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β)
         if isnan(f_lo_t)

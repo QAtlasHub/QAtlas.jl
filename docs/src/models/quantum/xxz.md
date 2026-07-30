@@ -166,28 +166,26 @@ ansatz](../../calc/xxz-luttinger-parameters.md).
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 2 models register 34 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 2 models register 31 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
 | `S1XXZ1D` | [`Energy`](../../atlas/hubs/S1XXZ1D_Energy_Infinite.md) | `Infinite` | 🔵 coherent | 4 |
 | `S1XXZ1D` | [`MassGap`](../../atlas/hubs/S1XXZ1D_MassGap_Infinite.md) | `Infinite` | 🔵 coherent | 3 |
 | `XXZ1D` | [`CentralCharge`](../../atlas/hubs/XXZ1D_CentralCharge_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
+| `XXZ1D` | [`DynamicalSpinStructureFactor`](../../atlas/hubs/XXZ1D_DynamicalSpinStructureFactor_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`Energy`](../../atlas/hubs/XXZ1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 12 |
 | `XXZ1D` | [`Energy`](../../atlas/hubs/XXZ1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 15 |
 | `XXZ1D` | [`EnergyLocal`](../../atlas/hubs/XXZ1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`FreeEnergy`](../../atlas/hubs/XXZ1D_FreeEnergy_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | `XXZ1D` | [`FreeEnergy`](../../atlas/hubs/XXZ1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 21 |
-| `XXZ1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/XXZ1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
-| `XXZ1D` | [`LoschmidtEcho`](../../atlas/hubs/XXZ1D_LoschmidtEcho_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| `XXZ1D` | [`LocalMagnetization`](../../atlas/hubs/XXZ1D_LocalMagnetization_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `XXZ1D` | [`LoschmidtRateFunction`](../../atlas/hubs/XXZ1D_LoschmidtRateFunction_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 | `XXZ1D` | [`LuttingerParameter`](../../atlas/hubs/XXZ1D_LuttingerParameter_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 9 |
 | `XXZ1D` | [`LuttingerVelocity`](../../atlas/hubs/XXZ1D_LuttingerVelocity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 | `XXZ1D` | [`MagnetizationX`](../../atlas/hubs/XXZ1D_MagnetizationX_OBC.md) | `OBC` | 🔵 coherent | 24 |
-| `XXZ1D` | [`MagnetizationXLocal`](../../atlas/hubs/XXZ1D_MagnetizationXLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`MagnetizationY`](../../atlas/hubs/XXZ1D_MagnetizationY_OBC.md) | `OBC` | 🔵 coherent | 24 |
-| `XXZ1D` | [`MagnetizationYLocal`](../../atlas/hubs/XXZ1D_MagnetizationYLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`MagnetizationZ`](../../atlas/hubs/XXZ1D_MagnetizationZ_OBC.md) | `OBC` | 🔵 coherent | 24 |
-| `XXZ1D` | [`MagnetizationZLocal`](../../atlas/hubs/XXZ1D_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`MassGap`](../../atlas/hubs/XXZ1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | `XXZ1D` | [`MassGap`](../../atlas/hubs/XXZ1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 15 |
 | `XXZ1D` | [`NMRRelaxationExponent`](../../atlas/hubs/XXZ1D_NMRRelaxationExponent_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
@@ -203,9 +201,9 @@ In the [Verified Atlas](../../atlas/index.md), these 2 models register 34 hubs (
 | `XXZ1D` | [`UniversalityClass`](../../atlas/hubs/XXZ1D_UniversalityClass_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `XXZ1D` | [`VonNeumannEntropy`](../../atlas/hubs/XXZ1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 48 |
-| `XXZ1D` | [`ZZStructureFactor`](../../atlas/hubs/XXZ1D_ZZStructureFactor_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 
 <!-- ATLAS:HUBS:END -->
+
 
 
 

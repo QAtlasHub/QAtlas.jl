@@ -15,8 +15,6 @@
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@ordered` | `sum_rule` | 🟡 asserted | Kubo FDT: S_zz(q,ω;β) = 2 χ''_zz(q,ω;β) / (1 − e^{-βω}); proxy params N_proxy=24, t_max=10, dt=0.1 (Mahan ch.3) | `test/verification/tfim_ising/test_tfim_fdt_beta_0_5.jl` |
-| `@ordered` | `sum_rule` | 🟡 asserted | Kubo FDT: S_zz(q,ω;β) = 2 χ''_zz(q,ω;β) / (1 − e^{-βω}); proxy params N_proxy=24, t_max=10, dt=0.1 (Mahan ch.3) | `test/verification/tfim_ising/test_tfim_fdt_beta_1_0.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
 | `@sweep` | `limiting_case` | 🟡 asserted | TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis | `test/models/quantum/TFIM/test_TFIM_structure_factor_paramagnet_zz_batch.jl` |
@@ -33,14 +31,6 @@
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
-
-```julia
-verify(TFIM(; J = 1.0, h = 0.5), ZZStructureFactor(), Infinite(); route = :sum_rule, fetch_kw = (; beta = 0.5, π / 2 = π / 2, collect(range(0.6, 3.0; length = 5)) = collect(range(0.6, 3.0; length = 5)), 24 = 24, 10.0 = 10.0, 0.1 = 0.1), independent = (2 * QAtlas.fetch(TFIM(; J = 1.0, h = 0.5), SusceptibilityZZ(), Infinite(); beta = 0.5, π / 2 = π / 2, collect(range(0.6, 3.0; length = 5)) = collect(range(0.6, 3.0; length = 5)), 24 = 24, 10.0 = 10.0, 0.1 = 0.1)) / (1 - exp(-0.5 * collect(range(0.6, 3.0; length = 5)))), agree_within = 0.05, at = ["β=$(0.5)", "q=$(π / 2)", "ω=$(collect(range(0.6, 3.0; length = 5)))"], refs = ["Kubo FDT: S_zz(q,ω;β) = 2 χ''_zz(q,ω;β) / (1 − e^{-βω}); proxy params N_proxy=24, t_max=10, dt=0.1 (Mahan ch.3)"])
-```
-
-```julia
-verify(TFIM(; J = 1.0, h = 0.5), ZZStructureFactor(), Infinite(); route = :sum_rule, fetch_kw = (; beta = 1.0, π / 2 = π / 2, collect(range(0.6, 3.0; length = 5)) = collect(range(0.6, 3.0; length = 5)), 24 = 24, 10.0 = 10.0, 0.1 = 0.1), independent = (2 * QAtlas.fetch(TFIM(; J = 1.0, h = 0.5), SusceptibilityZZ(), Infinite(); beta = 1.0, π / 2 = π / 2, collect(range(0.6, 3.0; length = 5)) = collect(range(0.6, 3.0; length = 5)), 24 = 24, 10.0 = 10.0, 0.1 = 0.1)) / (1 - exp(-1.0 * collect(range(0.6, 3.0; length = 5)))), agree_within = 0.05, at = ["β=$(1.0)", "q=$(π / 2)", "ω=$(collect(range(0.6, 3.0; length = 5)))"], refs = ["Kubo FDT: S_zz(q,ω;β) = 2 χ''_zz(q,ω;β) / (1 − e^{-βω}); proxy params N_proxy=24, t_max=10, dt=0.1 (Mahan ch.3)"])
-```
 
 ```julia
 verify(TFIM(; 1.0 = 1.0, 0.5 = 0.5), ZZStructureFactor(), Infinite(); route = :limiting_case, independent = 1.0, agree_within = 0.01, refs = ["TFIM at T → ∞: ρ = I/2^N ⇒ ⟨σ^α_i σ^α_j⟩ = δ_{ij} ⇒ S_αα(q) = 1 for any q, any axis"], fetch_kw = (; ZZStructureFactor() = 0.0, beta = 0.001))
@@ -94,7 +84,7 @@ verify(TFIM(; 0.5 = 0.5, 2.0 = 2.0), ZZStructureFactor(), Infinite(); route = :l
 ## Assurance (provisional)
 
 - level: **coherent** 🔵
-- cards: 14 · model ED-feasible
+- cards: 12 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

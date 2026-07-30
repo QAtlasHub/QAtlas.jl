@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ChargeGap`** observable.  Empty cells = this model doesn't yet have a `ChargeGap` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Charge (Mott) gap of an electron system,
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 2

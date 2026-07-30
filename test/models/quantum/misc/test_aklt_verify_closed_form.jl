@@ -10,12 +10,12 @@
 using QAtlas, Test, LinearAlgebra
 
 @testset "AKLT1D — closed-form / DMRG cards (#381 batch)" begin
-    # GroundStateEnergyDensity/Infinite: AKLT 1988 exact VBS GS energy
+    # Energy{:per_site}/Infinite: AKLT 1988 exact VBS GS energy
     # density e₀ = -2J/3, J-linear, J-independent of the wavefunction.
     for J in (0.5, 1.0, 2.0, 3.7)
         verify(
             AKLT1D(; J=J),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             Infinite();
             route=:second_closed_form,
             independent=-2 * J / 3,

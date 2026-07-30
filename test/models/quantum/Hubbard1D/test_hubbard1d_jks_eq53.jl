@@ -429,6 +429,57 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
         end
     end
 
+    @testset "where the low-T imag(f) comes from -- discretisation or formulation" begin
+        # imag(f) is zero by construction for a Hermitian H, and MEASURED it grows
+        # 0.14% -> 1.3% -> 10.8% of |f| across beta = 0.1, 0.3, 1.0 on the coarse
+        # walk grid. Something is wrong at low T; this separates WHICH kind of
+        # wrong, by the same test that found the b-equation error at high T:
+        #
+        #   refine  ->  error falls    =>  discretisation, fix the grid
+        #   refine  ->  error plateaus =>  formulation, fix the equations
+        #
+        # Each axis is refined alone so the answer says which one matters. Recorded
+        # through `@info` rather than bounded here: the point is the trend, and a
+        # bound on the trend would need the trend measured first.
+        beta = 0.5
+        base = (Nw=64, Nn=16, x_max=32.0)
+
+        function _imag_ratio(Nw, Nn, x_max)
+            grids = JKSGrids53(Nw, Nn, _G, _A; x_max=x_max)
+            sol = solve_jks53_continuation(grids, beta, _U, _MU; tol=1e-10)
+            sol.converged || return (NaN, NaN, false)
+            f = free_energy_jks53(sol.state, grids, beta, _U; mu=_MU)
+            return (abs(imag(f)) / max(abs(real(f)), 1.0), real(f), true)
+        end
+
+        # narrow grid: the c/cbar channel on [-1, 1], where the PV convolutions and
+        # the +- 1/2 Dlog boundary terms live. Nn = 16 is coarse for a function with
+        # sqrt(1-x^2) structure, so this is the first suspect.
+        narrow = NamedTuple[]
+        for Nn in (16, 32, 64)
+            r, f, ok = _imag_ratio(base.Nw, Nn, base.x_max)
+            push!(narrow, (Nn=Nn, imag_ratio=r, f=f, converged=ok))
+        end
+        @info "low-T imag(f) vs narrow-grid Nn" beta = beta rows = narrow
+
+        # wide grid: the b channel. Its tail is already restored analytically, so a
+        # trend here would point at resolution rather than truncation.
+        wide = NamedTuple[]
+        for Nw in (64, 128)
+            r, f, ok = _imag_ratio(Nw, base.Nn, base.x_max)
+            push!(wide, (Nw=Nw, imag_ratio=r, f=f, converged=ok))
+        end
+        @info "low-T imag(f) vs wide-grid Nw" beta = beta rows = wide
+
+        # The one assertion: SOME refinement has to help. If refining every axis
+        # leaves imag(f) where it was, the remaining defect is in the equations and
+        # not in the mesh -- which is a different bug and needs to fail loudly here
+        # rather than be absorbed into a tolerance.
+        ratios = [r.imag_ratio for r in vcat(narrow, wide) if r.converged]
+        @test length(ratios) >= 3
+        @test minimum(ratios) < 0.9 * first(ratios)
+    end
+
     @testset "refining the grid moves the answer less, not differently" begin
         # A convergent discretisation has |f(fine) - f(coarse)| shrinking. This is
         # what separated formulation error from discretisation error while #798 was

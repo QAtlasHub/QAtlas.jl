@@ -60,12 +60,15 @@ function IsingSquare(; J::Real=1.0, Lx::Integer=0, Ly::Integer=0)
     return IsingSquare(Float64(J), Int(Lx), Int(Ly))
 end
 
-"""
-    PartitionFunction() <: AbstractQuantity
-
-Canonical partition function `Z = Σ_σ exp(-β H(σ))`.
-"""
-struct PartitionFunction <: AbstractQuantity end
+# `PartitionFunction`, `CriticalTemperature` and `SpontaneousMagnetization` are
+# AbstractQAtlas's — see the note on the import list in QAtlas.jl. They were declared
+# HERE, in a model file, which is the wrong home for globally exported quantities and
+# is also how they came to be a second set of types: `QAtlas.PartitionFunction !==
+# AbstractQAtlas.PartitionFunction`, so every relation keyed on the base type could
+# not see an atlas value. Adopting the base ones also fixes their classification --
+# `PartitionFunction <: AbstractThermalPotential` and
+# `SpontaneousMagnetization <: AbstractMagnetization` there, both merely
+# `<: AbstractQuantity` here.
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Internal: transfer matrix for a row of Ly spins (PBC in y)
@@ -347,24 +350,6 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 # Dispatch tags: Onsager + Yang exact results
 # ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    CriticalTemperature() <: AbstractQuantity
-
-Exact critical temperature of a classical model.
-"""
-struct CriticalTemperature <: AbstractQuantity end
-
-"""
-    SpontaneousMagnetization() <: AbstractQuantity
-
-Spontaneous magnetization of a classical model as a function of
-temperature.  Retained under this name for backward compatibility
-with the classical-Ising literature; new code may prefer the
-axis-explicit [`MagnetizationZ`](@ref) together with a `T < T_c`
-context.
-"""
-struct SpontaneousMagnetization <: AbstractQuantity end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # fetch: Onsager critical temperature

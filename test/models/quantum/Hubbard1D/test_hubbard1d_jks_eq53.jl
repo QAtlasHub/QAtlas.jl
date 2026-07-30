@@ -356,24 +356,36 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
             ed6 = _ed_hubbard_free_energy(6, 1.0, _U, _U / 2, 0.1; pbc=false) + _U / 4
             @info "eq (53) at beta = 0.1" f = real(f) imag_f = imag(f) f_wide = real(fw) ed_N4_pbc =
                 ed4 ed_N6_obc = ed6 rel_vs_ed4 = abs((real(f) - ed4) / ed4)
-            # The two ED points bracket the TDL to 0.083% here, so 5% is loose by
-            # a factor of 60 and still an order of magnitude inside the old route's
-            # 26%. It tests kind, not precision.
-            @test abs((real(f) - ed4) / ed4) < 0.05
-            @test abs((real(f) - ed6) / ed6) < 0.05
-            @test abs(imag(f)) < 0.05 * max(abs(real(f)), 1.0)
+            # MEASURED in CI: f = -13.884474 against ED -13.962448 (N=4 PBC) and
+            # -13.954208 (N=6 OBC), i.e. 0.56% -- where the eq (47) route is 26%.
+            # The two ED points bracket the TDL to 0.083%, so 0.56% is still about
+            # 7x the finite-size uncertainty: real disagreement remains here, part
+            # of it from this deliberately coarse grid. Bound set at 2%.
+            @test abs((real(f) - ed4) / ed4) < 0.02
+            @test abs((real(f) - ed6) / ed6) < 0.02
+            # MEASURED imag(f) = 0.0199, i.e. 0.14% of |f| (eq (47): 0.394, 3.6%).
+            @test abs(imag(f)) < 0.005 * max(abs(real(f)), 1.0)
             @test isapprox(real(f), real(fw); rtol=1e-3)
         end
 
-        # Beyond beta = 0.1 nothing is asserted yet -- how far the continuation
-        # reaches has not been measured, and a bound guessed here would be a bound
-        # nobody checked. The walk logs what happens so the next pass can set them
-        # from data; where it does converge, the temperature-independent invariants
-        # must still hold.
+        # MEASURED in CI, from the pass that added this walk:
+        #
+        #   beta   f            imag(f)   imag/|f|   note
+        #   0.1    -13.884474   0.0199    0.14%      ED gap 0.56% (eq 47: 26%)
+        #   0.3     -4.688110   0.0627    1.3%
+        #   1.0     -1.667090   0.179     10.8%      Lieb-Wu gap -0.0934
+        #   4.0    did not converge (residual 0.016)
+        #
+        # So the route reaches beta = 1.0 where eq (47) stalled at 0.25, and it is
+        # NOT yet right at low T: imag(f) is zero by construction for a Hermitian H
+        # and instead grows to 10.8% of |f| by beta = 1. That is the remaining
+        # defect, and the bounds below are set from these numbers so it cannot
+        # quietly get worse.
         e0 = QAtlas.fetch(Hubbard1D(; t=1.0, U=_U), GroundStateEnergyDensity(), Infinite())
         low_T_target = e0 - _U / 4
         @info "Lieb-Wu low-T target for f_paper(mu=0)" E0_over_L = e0 target = low_T_target
         reached = 0.1
+        walk = Tuple{Float64,Float64}[]
         for beta in (0.3, 1.0, 4.0)
             s = solve_jks53_continuation(grids, beta, _U, _MU; tol=1e-10)
             if !s.converged
@@ -389,12 +401,32 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
             # and the two forms of eq (56) share no quadrature.
             @test abs(imag(f)) < 0.2 * max(abs(real(f)), 1.0)
             @test isapprox(real(f), real(fw); rtol=1e-2)
-            # f is decreasing in beta and bounded below by the ground state.
-            @test real(f) > low_T_target - 1.0
+            # f is bounded ABOVE by the ground-state energy density, not below:
+            # f = e - T s with s > 0, and df/dT = -s < 0, so f(T) <= f(0) = e0 and
+            # f -> -T log 4 as T -> inf. An earlier version of this line asserted
+            # `real(f) > low_T_target - 1.0` and failed at beta = 0.3 with
+            # -4.688 > -2.574 -- the inequality was backwards, and the solver was
+            # right.
+            @test real(f) <= low_T_target + 1e-6
+            push!(walk, (beta, real(f)))
         end
-        @info "eq (53) continuation reached" beta_max = reached
-        # The old route stalled at 0.25; not regressing past that is the floor.
-        @test reached >= 0.1
+        @info "eq (53) continuation reached" beta_max = reached walk = walk
+        # MEASURED: the continuation reaches beta = 1.0. The eq (47) route stalled
+        # at 0.25, so this is the floor now, not 0.1.
+        @test reached >= 1.0
+        # f rises monotonically toward the ground state as T falls -- MEASURED
+        # -13.884 (0.1) -> -4.688 (0.3) -> -1.667 (1.0), approaching -1.5737 from
+        # below, gap shrinking 3.11 -> 0.093. Monotonicity is a thermodynamic law
+        # (df/dbeta = (e - f)/beta > 0 wherever the entropy is positive), so this
+        # needs no oracle.
+        @test length(walk) >= 2
+        for i in 2:length(walk)
+            @test walk[i][2] > walk[i - 1][2]
+        end
+        if !isempty(walk)
+            @test walk[end][2] < low_T_target
+            @test abs(walk[end][2] - low_T_target) < 0.5
+        end
     end
 
     @testset "refining the grid moves the answer less, not differently" begin

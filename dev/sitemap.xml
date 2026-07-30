@@ -115,7 +115,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/FreeEnergy/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/GGEValue/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/GroundStateDegeneracy/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/GroundStateEnergyDensity/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/HighHarmonicAmplitude/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LiebRobinsonVelocity/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/quantities/LightconeSpinCorrelation/</loc></url>
@@ -167,7 +166,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_FreeEnergy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_FreeEnergy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_FreeEnergy_PBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_SpecificHeat_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/AKLT1D_SpecificHeat_OBC/</loc></url>
@@ -215,8 +213,8 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/FibonacciAnyons_TopologicalEntanglementEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/GrossNeveu_CentralCharge_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/GrossNeveu_MassGap_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_FreeEnergy_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_RenyiEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_SpecificHeat_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_ThermalEntropy_Infinite/</loc></url>
@@ -224,11 +222,11 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HaldaneShastry_VonNeumannEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_ConformalTower_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_DynamicalSpinStructureFactor_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_Energy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_EnergyLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_FreeEnergy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_FreeEnergy_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_LocalMagnetization_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_LuttingerParameter_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_MagnetizationX_OBC/</loc></url>
@@ -250,7 +248,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Heisenberg1D_VonNeumannEntropy_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_CorrelationLength_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_Energy_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_LuttingerParameter_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite/</loc></url>
@@ -259,7 +256,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_ChargeGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_FreeEnergy_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_LuttingerParameter_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Hubbard1D_SpinGap_Infinite/</loc></url>
@@ -329,8 +325,8 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/LogarithmicCFT_CentralCharge_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/LongRangeIsing1D_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/LongRangeXY1D_MassGap_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MajumdarGhosh_GroundStateEnergyDensity_Infinite/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MajumdarGhosh_GroundStateEnergyDensity_PBC/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MajumdarGhosh_Energy_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MajumdarGhosh_Energy_PBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MajumdarGhosh_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MajumdarGhosh_SpinGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/MixedFieldIsing1D_MassGap_Infinite/</loc></url>
@@ -483,8 +479,8 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TightBindingV1D_ThermalEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/TodaLattice_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/ToricCode_AnyonStatistics_Infinite/</loc></url>
+  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/ToricCode_Energy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/ToricCode_GroundStateDegeneracy_PBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/ToricCode_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/ToricCode_MassGap_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/ToricCode_TopologicalEntanglementEntropy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/Triangular_TightBindingChecksum_Infinite/</loc></url>
@@ -508,7 +504,6 @@
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_EnergyLocal_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_FreeEnergy_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_FreeEnergy_OBC/</loc></url>
-  <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_GroundStateEnergyDensity_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LocalMagnetization_OBC/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LoschmidtRateFunction_Infinite/</loc></url>
   <url><loc>https://codes.sota-shimozono.com/QAtlas.jl/stable/atlas/hubs/XXZ1D_LuttingerParameter_Infinite/</loc></url>

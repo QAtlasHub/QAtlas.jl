@@ -42,6 +42,19 @@ using AbstractQAtlas:
     #   relations_constraining(QAtlas.RenyiEntropy)         == 0
     RenyiEntropy,
     LiebRobinsonVelocity,
+    # Same rule, next batch (#807): the FAMILIES were already imported from above
+    # (`AbstractGap`, `AbstractVelocity`, `AbstractThermalPotential`,
+    # `AbstractEntanglementMeasure`) while these MEMBERS were declared locally. For
+    # the gaps that inverted the layering — the base package held the vague
+    # `MassGap` and the atlas held the sector-resolved pair.
+    ChargeGap,
+    SpinGap,
+    FermiVelocity,
+    LuttingerVelocity,
+    SpinWaveVelocity,
+    ResidualEntropy,
+    LogarithmicNegativity,
+    PageEntropy,
     Universality,
     CriticalExponents,
     GrowthExponents,

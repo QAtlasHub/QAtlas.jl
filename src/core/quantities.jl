@@ -109,29 +109,7 @@ struct QuenchEntanglementEntropy <: AbstractEntanglementMeasure end
 # `relations_constraining(QAtlas.RenyiEntropy) == 0`, so RenyiTwoPurity,
 # RenyiMonotonicity and RenyiEntropyMoment could never see an atlas value.
 
-"""
-    ResidualEntropy() <: AbstractQuantity
-
-Zero-temperature configurational (residual) entropy density.  Real-
-valued, non-negative; non-zero in the presence of macroscopic
-ground-state degeneracy (e.g. ice rule, frustrated Ising AFM,
-Pauling-1935-style models).  Distinct from [`ThermalEntropy`](@ref):
-`ThermalEntropy` is a finite-temperature thermodynamic quantity, while
-`ResidualEntropy` is the lim_{T -> 0} S(T) / N residual term.
-Zero-temperature ground-state entropy per site,
-
-    S_residual / (N k_B) = lim_{T → 0⁺} S(T) / N,
-
-i.e. the entropy density of the (possibly degenerate) ground-state
-manifold.  Non-zero for frustrated classical models with extensive
-ground-state degeneracy — e.g. the antiferromagnetic Ising model on
-the triangular lattice (Wannier 1950, ≈ 0.3230659669) and on the
-kagome lattice (Houtappel 1950).  Defined as a separate quantity
-from [`ThermalEntropy`](@ref) to keep the zero-temperature limit
-explicit at the dispatch level (avoiding β → ∞ extrapolations of a
-finite-T fetch).
-"""
-struct ResidualEntropy <: AbstractThermalPotential end
+# `ResidualEntropy` comes from AbstractQAtlas (0.4.4).
 
 # ─── Spin glass ─────────────────────────────────────────────────────────
 #
@@ -480,42 +458,11 @@ with U(1) symmetry (e.g. XXZ in the critical regime `|Δ| < 1`).
 """
 struct LuttingerParameter <: AbstractQuantity end
 
-"""
-    FermiVelocity() <: AbstractQuantity
+# `FermiVelocity` comes from AbstractQAtlas (0.4.4).
 
-Fermi velocity `v_F = ∂ε/∂k |_{k_F}`.  Meaningful for non-interacting
-/ mean-field fermionic band structures (tight-binding lattices,
-Bogoliubov-de Gennes diagonalisations).  In QAtlas this is the type
-returned by models like `Honeycomb` (at the Dirac cones), the
-other tight-binding lattices, and the TFIM Majorana mode at the
-critical field.
-"""
-struct FermiVelocity <: AbstractVelocity end
+# `LuttingerVelocity` comes from AbstractQAtlas (0.4.4).
 
-"""
-    LuttingerVelocity() <: AbstractQuantity
-
-Luttinger-liquid / bosonisation velocity `u` (a.k.a. `v_{LL}`) of the
-low-energy linear-dispersion mode in a 1D critical interacting system.
-Used by models like [`XXZ1D`](@ref) in the Luttinger regime
-`|Δ| < 1`, the Heisenberg chain at the SU(2) point, and any other
-bosonised 1D critical theory.
-
-For a free-fermion model this coincides with [`FermiVelocity`](@ref);
-for interacting systems `u` includes the Luttinger renormalisation.
-"""
-struct LuttingerVelocity <: AbstractVelocity end
-
-"""
-    const SpinWaveVelocity = LuttingerVelocity
-
-Spin-chain community alias for [`LuttingerVelocity`](@ref).  The "spin
-wave velocity" (e.g. in the Haldane / Affleck literature on the AFM
-Heisenberg chain) is the same quantity as the Luttinger velocity once
-bosonised; both dispatch through the same fetch method via the type
-identity.
-"""
-const SpinWaveVelocity = LuttingerVelocity
+# `SpinWaveVelocity` comes from AbstractQAtlas (0.4.4).
 
 # `LiebRobinsonVelocity` comes from AbstractQAtlas (0.4.2).
 
@@ -642,20 +589,7 @@ unitary CFTs with `c > 0`. Tracking: #580.
 """
 struct ConformalCasimirEnergy <: AbstractQuantity end
 
-"""
-    LogarithmicNegativity() <: AbstractQuantity
-
-Logarithmic negativity `E = log Tr |ρ^{T_B}|` measuring mixed-state
-entanglement between two subsystems. For two adjacent intervals on
-an infinite 1+1D-CFT chain at T = 0, the universal closed form
-(Calabrese-Cardy-Tonni 2012) is
-
-    E(ℓ_A, ℓ_B) = (c/4) log[ℓ_A · ℓ_B / (ℓ_A + ℓ_B)],
-
-i.e., the same geometric-mean log of the mutual-information universal
-formula with the prefactor c/3 replaced by c/4. Tracking: #580.
-"""
-struct LogarithmicNegativity <: AbstractEntanglementMeasure end
+# `LogarithmicNegativity` comes from AbstractQAtlas (0.4.4).
 
 """
     BoundaryEntropy() <: AbstractQuantity
@@ -673,24 +607,7 @@ Affleck-Ludwig 1991. Tracking: #580.
 """
 struct BoundaryEntropy <: AbstractQuantity end
 
-"""
-    PageEntropy() <: AbstractQuantity
-
-Page average entropy of a subsystem for a Haar-random pure state in
-`H_A ⊗ H_B`. For `dim(H_A) = m`, `dim(H_B) = n` with `m ≤ n` (else
-swap by purity symmetry), Page 1993 found
-
-    <S_A> = sum_{k=n+1}^{m·n} 1/k - (m-1)/(2n).
-
-For `m = n` this gives `<S_A> ≈ log m - 1/2` (close to maximal but
-reduced by 1/2); for `m << n` it gives `<S_A> ≈ log m - m/(2n)`.
-This is the famous Page curve in dimension space underlying e.g. the
-information-paradox / Page-time analysis of evaporating black holes.
-
-Reference: D. N. Page, *Phys. Rev. Lett.* **71**, 1291 (1993),
-DOI 10.1103/PhysRevLett.71.1291. Tracking: #580.
-"""
-struct PageEntropy <: AbstractEntanglementMeasure end
+# `PageEntropy` comes from AbstractQAtlas (0.4.4).
 
 """
     E8Spectrum() <: AbstractQuantity
@@ -836,36 +753,10 @@ end
 
 # ─── Charge / spin gaps (correlated electron systems) ──────────────────
 
-"""
-    ChargeGap() <: AbstractQuantity
+# `ChargeGap` comes from AbstractQAtlas (0.4.4).
 
-Charge (Mott) gap of an electron system,
+# `SpinGap` comes from AbstractQAtlas (0.4.4).
 
-    Δ_c = E₀(N+1) + E₀(N-1) - 2 E₀(N),
-
-i.e. the energy cost of adding a particle plus the cost of removing
-one, equivalent to the gap between the half-filled ground state and
-the lowest charged excitation.  Strictly positive in a Mott insulator
-and exactly zero in a metal / superconductor.
-
-Implemented analytically for [`Hubbard1D`](@ref) at half filling via
-the Lieb–Wu (1968) closed-form integral.
-"""
-struct ChargeGap <: AbstractGap end
-
-"""
-    SpinGap() <: AbstractQuantity
-
-Spin gap of an electron system,
-
-    Δ_s = E₀(S^z = 1) - E₀(S^z = 0),
-
-i.e. the lowest excitation energy at fixed total particle number that
-flips one spin.  Zero whenever the spinon branch is gapless (e.g. the
-half-filled 1D Hubbard chain — rigorous Lieb–Wu result), positive in a
-spin-gapped phase (Haldane chain, BCS superconductor, …).
-"""
-struct SpinGap <: AbstractGap end
 # ─── Quench / nonequilibrium long-time ensembles ────────────────────────
 
 """

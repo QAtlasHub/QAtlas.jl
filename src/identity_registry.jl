@@ -68,6 +68,12 @@
         # The finite-T rows it does have (FreeEnergy, ThermalEntropy, SpecificHeat) are
         # the c = 1 CFT low-T stopgap; there is no thermal <H> to close the identity with.
         HaldaneShastry => "Energy fetch returns the T=0 ground-state energy (beta swallowed); the finite-T rows are the c=1 CFT stopgap and carry no thermal ε — Gibbs does not apply as stated",
+        # Heisenberg1D, same shape, but keyed per-bc: its `Energy{:per_site}` at Infinite
+        # is the Hulthén T = 0 closed form `e₀ = J(1/4 - ln 2)` and takes no `beta` kwarg
+        # at all (so the identity errors rather than mismatching). At OBC the hub's Energy
+        # row is `Energy{:total}`, which IS the beta-dependent thermal energy delegated to
+        # XXZ1D(Δ=1) — a bare `Heisenberg1D` key would cover every bc and hide that edge.
+        (Heisenberg1D, Infinite) => "Infinite-bc Energy fetch is the Hulthén T=0 ground-state energy density and takes no beta; the finite-T rows at this bc carry no thermal ε — Gibbs does not apply as stated (#508 kwargs-swallow audit)",
         IsingTriangular => "default J > 0 is the frustrated AFM branch (no Houtappel closed form); finite-T requires J < 0",
         (IsingSquare, PBC) => "2D PBC fetches take Lx/Ly kwargs, not bc.N — generator finite-size materialization is 1D-only",
         (KitaevHoneycomb, OBC) => "2D OBC fetches take Lx/Ly kwargs, not bc.N — generator finite-size materialization is 1D-only",

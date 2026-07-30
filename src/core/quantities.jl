@@ -102,33 +102,12 @@ struct QuenchEntanglementEntropy <: AbstractEntanglementMeasure end
 # keeps its meaning — the equilibrium entropy — and `VonNeumannEntropy(:quench)`
 # breaks loudly with a MethodError; use `QuenchEntanglementEntropy()` instead.
 
-"""
-    RenyiEntropy(α) <: AbstractQuantity
-
-Rényi entropy of order `α`, `S_α = (1 − α)⁻¹ log Tr ρ_A^α`.
-
-- `α = 1` recovers [`VonNeumannEntropy`](@ref) (implementations may
-  dispatch accordingly).
-- `α = 2` is the second Rényi entropy, frequently measured
-  experimentally.
-- `α > 0`, `α ≠ 1` are the supported generic cases.
-
-The inner constructor rejects `α ≤ 0` and `α = 1` (use
-`VonNeumannEntropy()` explicitly) — this is intentional, to force the
-call site to be explicit about which entropy it wants.
-"""
-struct RenyiEntropy <: AbstractEntanglementMeasure
-    α::Float64
-    function RenyiEntropy(α::Real)
-        α > 0 || throw(ArgumentError("RenyiEntropy: α must be positive; got $α"))
-        α == 1 && throw(
-            ArgumentError(
-                "RenyiEntropy(1) is ambiguous; use VonNeumannEntropy() explicitly."
-            ),
-        )
-        return new(Float64(α))
-    end
-end
+# `RenyiEntropy` comes from AbstractQAtlas, which now carries the order in the type's
+# field (AbstractQAtlas 0.4.0). It used to be declared here as well, with the same
+# field and the same validation, which made it a SECOND type under a shared name:
+# MEASURED, `relations_constraining(AbstractQAtlas.RenyiEntropy) == 3` and
+# `relations_constraining(QAtlas.RenyiEntropy) == 0`, so RenyiTwoPurity,
+# RenyiMonotonicity and RenyiEntropyMoment could never see an atlas value.
 
 """
     ResidualEntropy() <: AbstractQuantity

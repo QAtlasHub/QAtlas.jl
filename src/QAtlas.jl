@@ -41,6 +41,7 @@ using AbstractQAtlas:
     #   relations_constraining(AbstractQAtlas.RenyiEntropy) == 3
     #   relations_constraining(QAtlas.RenyiEntropy)         == 0
     RenyiEntropy,
+    LiebRobinsonVelocity,
     Universality,
     CriticalExponents,
     GrowthExponents,
@@ -306,7 +307,6 @@ export SteadyStateCurrent                                # TASEP / non-equilibri
 export DynamicLocalization, driven_band_harmonic_weights # ac-driven free-fermion nonlinear response (Dunlap-Kenkre 1986)
 export HighHarmonicAmplitude, nonlinear_susceptibility   # higher-order (χ⁽ⁿ⁾ / n-th harmonic) response
 export E8Spectrum
-export LiebRobinsonBound  # status-axis example (:bound)
 export Bound              # universal-bounds namespace: Bound{:QuantumInformation}, …
 export CHSHBound          # CHSH / Bell correlator bound (:bound)
 export MerminGHZBound     # Mermin 3-party Bell bound (:bound)

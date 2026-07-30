@@ -517,22 +517,7 @@ identity.
 """
 const SpinWaveVelocity = LuttingerVelocity
 
-"""
-    LiebRobinsonVelocity() <: AbstractQuantity
-
-Lieb-Robinson velocity `v_LR` setting the linear light cone for
-information propagation in a local lattice quantum system: for any
-local operators `A_x`, `B_y` separated by `|x - y|`,
-
-    || [A_x(t), B_y(0)] || <= C * exp(-mu * (|x - y| - v_LR * t)).
-
-For free-fermion-mappable spin chains (TFIM, XY/XYh1D, the XX limit
-of XXZ) the bound is saturated and `v_LR` equals twice the maximum
-single-particle group velocity. Reference: Lieb-Robinson, *Commun.
-Math. Phys.* **28**, 251 (1972); Hastings-Koma, *Commun. Math. Phys.*
-**265**, 781 (2006). Tracking: issue #579 inequality framework.
-"""
-struct LiebRobinsonVelocity <: AbstractVelocity end
+# `LiebRobinsonVelocity` comes from AbstractQAtlas (0.4.2).
 
 """
     EntanglementGrowthSlope() <: AbstractQuantity
@@ -1145,30 +1130,20 @@ struct SpectralFormFactor <: AbstractQuantity end
 # definition-list redesign, which expresses approximations as non-canonical
 # definitions of an existing quantity rather than a new quantity.)
 
-"""
-    LiebRobinsonBound() <: AbstractQuantity
-
-Lieb-Robinson velocity `v_LR` — the slope of the causal cone bounding the
-spread of operator commutators,
-
-    ‖[A_x(t), B_y(0)]‖ ≤ C · exp(−μ (|x − y| − v_LR · t)).
-
-`fetch` returns `v_LR` itself (the bounding cone slope). This is a
-one-sided `:bound`: any genuinely measured information velocity stays
-`≤ v_LR`, and for free-fermion models the bound is *saturated* by the
-maximum group velocity `max_k |dΛ/dk|`. Registered with `status=:bound`.
-
-(Lieb & Robinson 1972; Hastings & Koma 2006.)
-"""
-struct LiebRobinsonBound <: AbstractQuantity end
+# `LiebRobinsonBound` is GONE as a quantity. It returned the identical closed form to
+# `LiebRobinsonVelocity` on the identical hub, and existed only to carry the second
+# claim about that number (`status = :bound, direction = :upper`). That is what a
+# `scheme`-distinguished second registry row is for. The name now belongs to
+# AbstractQAtlas's inequality `v <= v_LR`, whose `v_LR` slot is typed on
+# `LiebRobinsonVelocity`.
 
 """
     CHSHBound() <: AbstractQuantity
 
 The CHSH (Bell-inequality) correlator bound — the maximum of
 `S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical
-theory.  A `status=:bound` quantity with the historical name (like
-[`LiebRobinsonBound`](@ref)); fetched against a [`Bound`](@ref) domain
+theory.  A `status=:bound` quantity with the historical name; fetched against a
+[`Bound`](@ref) domain
 (not a model), with a `scheme=` selector choosing the theory regime
 (`:classical` → 2, `:quantum` → 2√2, `:no_signalling` → 4).
 """

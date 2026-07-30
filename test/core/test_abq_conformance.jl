@@ -193,6 +193,19 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :CanonicalTPQ => "needs tpq_weight and the Hilbert dimension D, neither of which \
                       is a quantity this atlas computes; the hubs with a \
                       PartitionFunction supply Z alone. Closing this needs a TPQ hub.",
+
+    # Became materializable when AbstractQAtlas 0.4.2 typed the bound's `v_LR` slot on
+    # `LiebRobinsonVelocity` -- the intended effect, and the reason the count moved
+    # again. It still cannot be WIRED, for the same shape of reason as
+    # SusceptibilityFDT: the relation is `v <= v_LR`, and `v` is an independently
+    # measured information velocity, which is not a quantity this atlas computes. The
+    # TFIM `verify_bound` card in test_TFIM_status_examples.jl does supply one -- the max
+    # group velocity of the BdG dispersion, computed in the test -- so the CHECK exists;
+    # what is missing is a quantity to hang the relation's other slot on.
+    :LiebRobinsonBound => "the `v` slot is an independently measured information \
+                           velocity and no quantity names it; the TFIM card supplies one \
+                           ad hoc from the dispersion. Closing this needs that \
+                           measurement to become a quantity.",
 )
 
 @testset "AbstractQAtlas relation conformance" begin

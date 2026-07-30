@@ -168,6 +168,44 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :SusceptibilityFDT => "needs a genuine var_M = ⟨M²⟩ − ⟨M⟩²; supplying it as a \
                            derivative collapses the relation onto \
                            susceptibility_response — see the note above",
+
+    # Both entries below became materializable only when QAtlas stopped declaring its
+    # own `PartitionFunction` and adopted AbstractQAtlas's (#734 leftovers). That is
+    # the intended effect — a forked type is invisible to every relation keyed on the
+    # base one — and it is why the count moved 10 -> 12 here.
+    #
+    # F = -ln(Z)/β is materializable on exactly one hub, and there it would not be a
+    # check: IsingSquare registers BOTH `PartitionFunction` at PBC and `FreeEnergy` at
+    # PBC through the same `:kaufman_free_fermion` routine, so the relation restates
+    # the implementation. The pair that WOULD be independent is Z at PBC against
+    # `FreeEnergy` at Infinite (`:onsager`) — different regions, so not instantiable as
+    # it stands. DimerLattice has the same split (Z at OBC, F at Infinite).
+    :FreeEnergyFromZ => "materializable only where Z and F share the routine that \
+                         produced them (IsingSquare/PBC, :kaufman_free_fermion), so it \
+                         restates the implementation; the independent pair (Z at PBC \
+                         vs F at Infinite/:onsager) spans two regions. Closing this \
+                         needs a finite-size F from a route that did not produce Z.",
+
+    # Z = D · tpq_weight is a statement about a TPQ construction, and the atlas has
+    # neither the weight nor the Hilbert dimension as quantities — the three hubs that
+    # carry a PartitionFunction (IsingSquare, DimerLattice, ChernSimons3D) supply Z and
+    # nothing else the relation needs.
+    :CanonicalTPQ => "needs tpq_weight and the Hilbert dimension D, neither of which \
+                      is a quantity this atlas computes; the hubs with a \
+                      PartitionFunction supply Z alone. Closing this needs a TPQ hub.",
+
+    # Became materializable when AbstractQAtlas 0.4.2 typed the bound's `v_LR` slot on
+    # `LiebRobinsonVelocity` -- the intended effect, and the reason the count moved
+    # again. It still cannot be WIRED, for the same shape of reason as
+    # SusceptibilityFDT: the relation is `v <= v_LR`, and `v` is an independently
+    # measured information velocity, which is not a quantity this atlas computes. The
+    # TFIM `verify_bound` card in test_TFIM_status_examples.jl does supply one -- the max
+    # group velocity of the BdG dispersion, computed in the test -- so the CHECK exists;
+    # what is missing is a quantity to hang the relation's other slot on.
+    :LiebRobinsonBound => "the `v` slot is an independently measured information \
+                           velocity and no quantity names it; the TFIM card supplies one \
+                           ad hoc from the dispersion. Closing this needs that \
+                           measurement to become a quantity.",
 )
 
 @testset "AbstractQAtlas relation conformance" begin

@@ -1,4 +1,5 @@
 [deps]
+AbstractQAtlas = "dcea2817-62f8-4a75-b498-1b50a9ed1e4d"
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"

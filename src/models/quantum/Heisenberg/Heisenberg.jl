@@ -42,12 +42,13 @@ chain (or more generally any finite spin-1/2 cluster). Hamiltonian:
 """
 struct Heisenberg1D <: AbstractQAtlasModel end
 
-"""
-    ExactSpectrum
-
-Dispatch tag for the full sorted eigenvalue spectrum of a finite model.
-"""
-struct ExactSpectrum <: AbstractQuantity end
+# `ExactSpectrum` and `GroundStateEnergyDensity` used to be declared in this file.
+# Neither is Heisenberg's: `GroundStateEnergyDensity` carries 9 registry rows across 8
+# models (AKLT1D, HaldaneShastry, Heisenberg1D, HeisenbergXYZ, Hubbard1D, MajumdarGhosh,
+# ToricCode, XXZ1D) and appears in 24 source files. A model file owning a cross-model
+# quantity is how `PartitionFunction` came to be declared in IsingSquare.jl and then
+# forked from the base package (#734), so both now live in core/quantities.jl with the
+# rest of the vocabulary.
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # fetch: exact spectrum for small N
@@ -111,14 +112,6 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 # Dispatch tag + fetch: Bethe ansatz ground-state energy density
 # ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    GroundStateEnergyDensity
-
-Dispatch tag for the ground-state energy per site in the thermodynamic
-limit (N → ∞).
-"""
-struct GroundStateEnergyDensity <: AbstractQuantity end
 
 """
     fetch(::Heisenberg1D, ::GroundStateEnergyDensity; J=1.0) -> Float64

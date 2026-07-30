@@ -8,7 +8,7 @@
 
 using Test
 using QAtlas
-using QAtlas: Hubbard1D, FreeEnergy, Infinite, Energy{:per_site}
+using QAtlas: Hubbard1D, FreeEnergy, Infinite, Energy
 using QAtlas.Hubbard1DJKSNLIE: atomic_free_energy
 
 using LinearAlgebra: Hermitian, eigen

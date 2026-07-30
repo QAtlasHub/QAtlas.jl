@@ -17,7 +17,7 @@ using Test
 using LinearAlgebra
 using SparseArrays
 using QAtlas
-using QAtlas: Hubbard1D, Energy{:per_site}, Infinite
+using QAtlas: Hubbard1D, Energy, Infinite
 using QAtlas.Hubbard1DJKSNLIE:
     JKSGrids53,
     JKSState53,

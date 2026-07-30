@@ -12,7 +12,7 @@ using Test
 using QAtlas
 using QAtlas:
     HaldaneShastry,
-    Energy{:per_site},
+    Energy,
     Infinite,
     haldane_shastry_spinon_dispersion,
     haldane_shastry_sound_velocity

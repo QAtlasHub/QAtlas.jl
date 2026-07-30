@@ -121,7 +121,12 @@ end
     @test any(h -> occursin("Correlation", h.quantity), gs.hits)
     # NO REGRESSION: the previous ground_state members are still ground_state
     @test QAtlas.available(; quantity=:MassGap, regime=:ground_state)                   # <:AbstractGap
-    @test QAtlas.available(; quantity=:Energy{:per_site}, regime=:ground_state)  # thermal=:unknown, kept explicitly
+    # `Energy` used to reach this regime through an explicit
+    # `impl.quantity === GroundStateEnergyDensity` clause in query.jl. That quantity is
+    # gone (the ground-state energy density is `Energy{:per_site}` without a `beta`), and
+    # the clause with it -- `Energy` carries `thermal_axis = :both`, so the rows match on
+    # `impl.thermal` instead. Same membership, one fewer special case.
+    @test QAtlas.available(; quantity=:Energy, regime=:ground_state)
     # family surfaces in the JSONL hit
     io = IOBuffer()
     QAtlas.search_jsonl(io; model=:Heisenberg1D, family=:correlation)

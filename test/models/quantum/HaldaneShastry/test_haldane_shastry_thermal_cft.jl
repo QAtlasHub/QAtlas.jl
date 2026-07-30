@@ -6,13 +6,7 @@
 
 using Test
 using QAtlas
-using QAtlas:
-    HaldaneShastry,
-    FreeEnergy,
-    ThermalEntropy,
-    SpecificHeat,
-    Energy{:per_site},
-    Infinite
+using QAtlas: HaldaneShastry, FreeEnergy, ThermalEntropy, SpecificHeat, Energy, Infinite
 
 @testset "HaldaneShastry — Infinite c=1 CFT thermal (#524 stopgap)" begin
     @testset "Validity gate at β = 5/J" begin

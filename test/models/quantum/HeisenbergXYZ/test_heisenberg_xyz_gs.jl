@@ -6,7 +6,7 @@
 using Test
 using QuadGK: quadgk
 using QAtlas
-using QAtlas: fetch, Energy{:per_site}, Infinite, HeisenbergXYZ
+using QAtlas: fetch, Energy, Infinite, HeisenbergXYZ
 
 @testset "HeisenbergXYZ — Energy{:per_site}@Infinite (Phase 2)" begin
     @testset "Heisenberg isotropic limit (Jx=Jy=Jz=J, AFM)" begin

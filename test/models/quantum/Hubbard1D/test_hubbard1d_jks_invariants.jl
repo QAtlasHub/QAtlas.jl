@@ -13,8 +13,8 @@
 #      the defect is present at EVERY temperature rather than switching on at
 #      mid-T (see the table below).
 #   2. grid convergence — a well-posed discretisation moves LESS as the grid
-#      refines. The current one wanders, which is what integrating a contour
-#      over the wrong domain looks like.
+#      refines. It used to wander; correcting K2 to its eq (38) form fixed that,
+#      so this one is now a live assertion rather than a pinned failure.
 #   3. the ED gap is not finite size — comparing N = 4 against N = 6, and OBC
 #      against PBC, separates "the NLIE disagrees with the TDL" from "a 4-site
 #      open chain is not the TDL".
@@ -114,20 +114,28 @@ end
     end
 
     @testset "refining the grid moves the answer less, not differently" begin
-        # A convergent quadrature has |f(2N) - f(N)| shrinking. MEASURED at
-        # beta = 0.1: -11.469, -11.089, -11.080, -11.087, -11.092 for grid_N
-        # 32, 64, 128, 192, 256 — it turns around, which is what refining a
-        # grid on [-x_max, x_max] toward a contour around [-1, 1] does.
+        # A convergent quadrature has |f(2N) - f(N)| shrinking. This was
+        # `@test_broken`: with the `K_n(s, n=2)` function that is not eq (38)'s K2,
+        # refining at beta = 0.1 gave -11.469, -11.089, -11.080, -11.087, -11.092
+        # for grid_N 32, 64, 128, 192, 256 — it turned around, which is what
+        # refining a grid on [-x_max, x_max] toward a contour around [-1, 1] does.
+        #
+        # Correcting K2 to the eq (38) Lorentzian made it monotone, so this is now
+        # a live assertion. Note what it does NOT say: the row is still wrong at
+        # mid-T (the imag(f) block above stays broken, and the ED comparison in
+        # test_hubbard1d_jks_ed_comparison.jl still deviates 26%). A convergent
+        # quadrature of the wrong equations converges to the wrong answer.
         beta = 0.1
         fs = Float64[]
         for gn in (32, 64, 128, 256)
             got = _solved(beta; grid_N=gn)
             @test got !== nothing
+            got === nothing && continue
             sol, grid = got
             push!(fs, free_energy_jks(sol.aux, grid, beta, _U; mu=_MU))
         end
         steps = abs.(diff(fs))
-        @test_broken all(steps[i + 1] < steps[i] for i in 1:(length(steps) - 1))
+        @test all(steps[i + 1] < steps[i] for i in 1:(length(steps) - 1))
     end
 
     @testset "the ED gap is not a finite-size effect" begin

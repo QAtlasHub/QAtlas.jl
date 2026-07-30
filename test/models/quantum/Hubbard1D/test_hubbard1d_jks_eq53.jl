@@ -114,22 +114,23 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
         @test jks53_kernel_line_integral(jks_kernel_K1, _G, -_A) == 1.0
         @test_throws DomainError jks53_kernel_line_integral(jks_kernel_K2, _G, 3 * _G)
 
-        # The residues are independently reproducible by refining the grid and
-        # pushing x_max out: the discrete sum for a CENTRAL row must approach them.
-        # (Edge rows never do -- half the kernel lies outside the grid, which is
-        # exactly why jks53_apply_wide exists.)
-        errs = Float64[]
-        for x_max in (64.0, 256.0, 1024.0)
-            grids = JKSGrids53(2001, 8, _G, _A; x_max=x_max)
-            mid = (grids.Nw + 1) ÷ 2
-            s = sum(
-                jks_kernel_K1bar(grids.xw[mid] - grids.xw[k] + im * _A, _G) * grids.ww[k]
-                for k in 1:(grids.Nw)
-            )
-            push!(errs, abs(s - 1.0))
+        # The residue values are checkable without reusing them: integrate the
+        # kernel directly on a fine wide grid, and what is missing must be the
+        # analytic tail. K1bar ~ gamma/(pi x^2) for large |x|, so truncating at
+        # x_max leaves 2 gamma/(pi x_max) -- 3.2e-4 at gamma = 1, x_max = 2000.
+        #
+        # dx is held FIXED here on purpose. An earlier version grew x_max at a
+        # fixed point count, which coarsens dx in step and trades truncation error
+        # for resolution error: at x_max = 1024 the spacing is 1.02 against a
+        # kernel whose structure sits on scale gamma = 1, so the total error need
+        # not fall at all. It did not, and the test failed in CI.
+        let dx = 0.01, x_max = 2000.0
+            s = sum(jks_kernel_K1bar(x + im * _A, _G) for x in (-x_max):dx:x_max) * dx
+            deficit = abs(s - 1.0)
+            @test deficit < 2e-3
+            # and it IS the tail, not slop: matches 2 gamma/(pi x_max) in size.
+            @test isapprox(deficit, 2 * _G / (pi * x_max); rtol=0.3)
         end
-        @test errs[end] < errs[1]
-        @test errs[end] < 5e-3
 
         # Tail-corrected application is exact on a constant, for every operator
         # eq (53) reads off the wide grid. Uncorrected it is not even close at the

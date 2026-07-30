@@ -47,6 +47,28 @@ function _forked(pred)
     ]
 end
 
+"""
+Name clashes that are NOT a forked vocabulary entry: the two packages bind the name to
+different KINDS of object, so there is no shared definition to converge on. Each needs
+a rename decision in one package or the other, which is a breaking change to an
+exported name and therefore not something to slip into an unrelated PR.
+
+Recorded here rather than filtered out silently, so the list can only shrink on
+purpose.
+"""
+const CROSS_KIND_NAME_CLASHES = Dict{Symbol,String}(
+    # QAtlas: `struct LiebRobinsonBound <: AbstractQuantity`, a quantity registered on
+    # the TFIM hub — the VALUE of the bound.
+    # AbstractQAtlas: `@inequality :quantum LiebRobinsonBound(v, v_LR) = v_LR - v`, the
+    # INEQUALITY itself. AbstractQAtlas has no LiebRobinson quantity at all, so this is
+    # not a duplicated vocabulary entry; it is a quantity and a relation competing for
+    # one name, which makes a bare reference ambiguous under
+    # `using QAtlas, AbstractQAtlas`.
+    :LiebRobinsonBound => "QAtlas binds it to a quantity, AbstractQAtlas to an \
+                           @inequality relation — different kinds, so neither side is \
+                           the one to adopt. Needs a rename on one side.",
+)
+
 @testset "the shared vocabulary is not forked" begin
     shared = _shared_names()
     # not vacuous: the two packages really do share a vocabulary
@@ -54,7 +76,7 @@ end
 
     # TYPES are the load-bearing case — a forked type breaks dispatch, relation
     # keying and `isa`, all silently.
-    forked_types = _forked(x -> x isa Type)
+    forked_types = setdiff(_forked(x -> x isa Type), keys(CROSS_KIND_NAME_CLASHES))
     isempty(forked_types) || @info "forked TYPES (same name, different type)" forked_types
     @test isempty(forked_types)
 
@@ -64,6 +86,19 @@ end
     isempty(forked_funcs) ||
         @info "forked FUNCTIONS (same name, different generic)" forked_funcs
     @test isempty(forked_funcs)
+end
+
+@testset "the cross-kind clash list does not rot" begin
+    # An entry that stopped clashing has been fixed and must leave the list, so the
+    # list cannot quietly outlive the problem it records.
+    for n in keys(CROSS_KIND_NAME_CLASHES)
+        @test isdefined(QAtlas, n) && isdefined(ABQ, n)
+        @test getfield(QAtlas, n) !== getfield(ABQ, n)
+    end
+    # ...and the one entry really is a quantity on one side and a relation on the other,
+    # which is what makes it a rename question rather than an adoption question.
+    @test QAtlas.LiebRobinsonBound <: ABQ.AbstractQuantity
+    @test ABQ.LiebRobinsonBound <: ABQ.AbstractRelation
 end
 
 @testset "the names that had drifted are the base ones again" begin

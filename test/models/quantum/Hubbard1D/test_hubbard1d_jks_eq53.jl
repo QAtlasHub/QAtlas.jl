@@ -14,8 +14,10 @@
 # difference would pass equally well if both were wrong.
 
 using Test
-using LinearAlgebra: norm
+using LinearAlgebra
+using SparseArrays
 using QAtlas
+using QAtlas: Hubbard1D, GroundStateEnergyDensity, Infinite
 using QAtlas.Hubbard1DJKSNLIE:
     JKSGrids53,
     JKSState53,
@@ -39,6 +41,8 @@ using QAtlas.Hubbard1DJKSNLIE:
     jks_kernel_K1,
     jks_kernel_K1bar,
     jks_kernel_K2
+
+include(joinpath(@__DIR__, "..", "..", "..", "util", "hubbard_ed.jl"))
 
 const _U = 4.0
 const _MU = 0.0          # half filling IN THE PAPER'S CONVENTION -- see below
@@ -316,6 +320,81 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
         # The bound above is not vacuous only if it is well above the neglected
         # hopping term; assert that ordering explicitly.
         @test _hopping_scale(1e-4, _U, _MU) < 1e-4
+    end
+
+    @testset "mid and low temperature -- where the eq (47) route fails" begin
+        # The high-T anchor above is NOT enough, and saying so is the whole lesson
+        # of #798: the eq (47) route also agreed with ED to 1% for beta <= 1e-3,
+        # was 26% off at beta = 0.1, and stopped converging at beta = 0.25. "Exact
+        # at high T" is precisely the claim that failed to generalise.
+        #
+        # The oracle has to change with temperature. The atomic closed form loses
+        # its grip because the neglected hopping term is O(beta^2) and reaches
+        # 1.3e-2 relative by beta = 0.1, so instead:
+        #
+        #   mid T : ED at N = 4 (PBC) and N = 6 (OBC). At beta = 0.1 their spread
+        #           is 0.083%, so they stand in for the TDL there. The ED helper is
+        #           in the PLAIN convention, so compare via
+        #           f_paper(mu=0) = f_plain(mu=U/2) + U/4.
+        #   low T : the Lieb-Wu ground-state energy density, closed form and with
+        #           no finite-size question at all:
+        #           f_paper(mu=0) -> E0/L - U/4 as beta -> inf.
+        #
+        # A coarser grid than the high-T testsets on purpose: this walk is about
+        # whether the route reaches these temperatures at all, and the bounds below
+        # are deliberately loose enough that grid resolution is not what they test.
+        grids = JKSGrids53(64, 16, _G, _A; x_max=32.0)
+
+        # beta = 0.1 is where the #798 disagreement lives, so the route has to
+        # reach it at minimum, and land far closer than the 26% the old one did.
+        sol = solve_jks53_continuation(grids, 0.1, _U, _MU; tol=1e-10)
+        @test sol.converged
+        if sol.converged
+            f = free_energy_jks53(sol.state, grids, 0.1, _U; mu=_MU)
+            fw = free_energy_jks53(sol.state, grids, 0.1, _U; mu=_MU, form=:wide)
+            ed4 = _ed_hubbard_free_energy(4, 1.0, _U, _U / 2, 0.1; pbc=true) + _U / 4
+            ed6 = _ed_hubbard_free_energy(6, 1.0, _U, _U / 2, 0.1; pbc=false) + _U / 4
+            @info "eq (53) at beta = 0.1" f = real(f) imag_f = imag(f) f_wide = real(fw) ed_N4_pbc =
+                ed4 ed_N6_obc = ed6 rel_vs_ed4 = abs((real(f) - ed4) / ed4)
+            # The two ED points bracket the TDL to 0.083% here, so 5% is loose by
+            # a factor of 60 and still an order of magnitude inside the old route's
+            # 26%. It tests kind, not precision.
+            @test abs((real(f) - ed4) / ed4) < 0.05
+            @test abs((real(f) - ed6) / ed6) < 0.05
+            @test abs(imag(f)) < 0.05 * max(abs(real(f)), 1.0)
+            @test isapprox(real(f), real(fw); rtol=1e-3)
+        end
+
+        # Beyond beta = 0.1 nothing is asserted yet -- how far the continuation
+        # reaches has not been measured, and a bound guessed here would be a bound
+        # nobody checked. The walk logs what happens so the next pass can set them
+        # from data; where it does converge, the temperature-independent invariants
+        # must still hold.
+        e0 = QAtlas.fetch(Hubbard1D(; t=1.0, U=_U), GroundStateEnergyDensity(), Infinite())
+        low_T_target = e0 - _U / 4
+        @info "Lieb-Wu low-T target for f_paper(mu=0)" E0_over_L = e0 target = low_T_target
+        reached = 0.1
+        for beta in (0.3, 1.0, 4.0)
+            s = solve_jks53_continuation(grids, beta, _U, _MU; tol=1e-10)
+            if !s.converged
+                @info "eq (53) did not reach beta" beta residual = s.residual
+                continue
+            end
+            reached = beta
+            f = free_energy_jks53(s.state, grids, beta, _U; mu=_MU)
+            fw = free_energy_jks53(s.state, grids, beta, _U; mu=_MU, form=:wide)
+            @info "eq (53) reached beta" beta f = real(f) imag_f = imag(f) gap_to_lowT =
+                real(f) - low_T_target
+            # Oracle-free and temperature-independent: a Hermitian H has real f,
+            # and the two forms of eq (56) share no quadrature.
+            @test abs(imag(f)) < 0.2 * max(abs(real(f)), 1.0)
+            @test isapprox(real(f), real(fw); rtol=1e-2)
+            # f is decreasing in beta and bounded below by the ground state.
+            @test real(f) > low_T_target - 1.0
+        end
+        @info "eq (53) continuation reached" beta_max = reached
+        # The old route stalled at 0.25; not regressing past that is the floor.
+        @test reached >= 0.1
     end
 
     @testset "refining the grid moves the answer less, not differently" begin

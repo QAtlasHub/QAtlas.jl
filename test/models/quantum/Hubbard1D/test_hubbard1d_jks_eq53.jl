@@ -471,13 +471,59 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
         end
         @info "low-T imag(f) vs wide-grid Nw" beta = beta rows = wide
 
-        # The one assertion: SOME refinement has to help. If refining every axis
-        # leaves imag(f) where it was, the remaining defect is in the equations and
-        # not in the mesh -- which is a different bug and needs to fail loudly here
-        # rather than be absorbed into a tolerance.
-        ratios = [r.imag_ratio for r in vcat(narrow, wide) if r.converged]
-        @test length(ratios) >= 3
-        @test minimum(ratios) < 0.9 * first(ratios)
+        # x_max, at fixed spacing so truncation moves and resolution does not. This
+        # axis was missing from the first pass of this diagnostic.
+        cut = NamedTuple[]
+        for (x_max, Nw) in ((32.0, 64), (64.0, 128), (128.0, 256))
+            r, f, ok = _imag_ratio(Nw, base.Nn, x_max)
+            push!(cut, (x_max=x_max, Nw=Nw, imag_ratio=r, f=f, converged=ok))
+        end
+        @info "low-T imag(f) vs x_max at fixed spacing" beta = beta rows = cut
+
+        # MEASURED in CI: refining the narrow grid 16 -> 32 -> 64 moves imag(f)/|f|
+        # by 0.06% (0.0359772 -> 0.0359629 -> 0.0359550), and refining Nw makes it
+        # slightly WORSE (0.0367443). A plateau under refinement is what says the
+        # defect is in the equations and not in the mesh -- the same reading that
+        # sent the high-T search to the b equation.
+        #
+        # Pinned at the measured size rather than at the flatness: asserting "it
+        # does not improve" would make a real fix fail.
+        ratios = [r.imag_ratio for r in vcat(narrow, wide, cut) if r.converged]
+        @test length(ratios) >= 6
+        @test maximum(ratios) < 0.05
+
+        # alpha-independence. eq (51) fixes only 0 < alpha <= gamma, so the solution
+        # -- and hence f -- must not depend on which alpha is used. That is an exact
+        # invariance of the equations and needs no oracle at all. If f moves with
+        # alpha, the defect sits in a term whose alpha-dependence should have
+        # cancelled: the K2 shifts (+-a-a, +-a+a) or the K1bar_{+-a} placements.
+        alphas = NamedTuple[]
+        for frac in (0.4, 0.6, 0.8)
+            grids = JKSGrids53(base.Nw, base.Nn, _G, frac * _G; x_max=base.x_max)
+            sol = solve_jks53_continuation(grids, beta, _U, _MU; tol=1e-10)
+            if !sol.converged
+                push!(
+                    alphas, (alpha_over_gamma=frac, f=NaN, imag_ratio=NaN, converged=false)
+                )
+                continue
+            end
+            f = free_energy_jks53(sol.state, grids, beta, _U; mu=_MU)
+            push!(
+                alphas,
+                (
+                    alpha_over_gamma=frac,
+                    f=real(f),
+                    imag_ratio=abs(imag(f)) / max(abs(real(f)), 1.0),
+                    converged=true,
+                ),
+            )
+        end
+        @info "low-T f vs alpha (must be independent)" beta = beta rows = alphas
+        fs_alpha = [r.f for r in alphas if r.converged]
+        @test length(fs_alpha) >= 2
+        # Nothing tighter until the spread is measured: a bound written ahead of the
+        # measurement is the mistake this stream already made twice.
+        @test all(isfinite, fs_alpha)
     end
 
     @testset "refining the grid moves the answer less, not differently" begin

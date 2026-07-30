@@ -715,19 +715,6 @@
 )
 
 # ── Status-axis worked example: Lieb-Robinson bound (:bound) ────────────
-@register(
-    TFIM,
-    LiebRobinsonBound,
-    Infinite,
-    method=:analytic,
-    cost=:closed_form,
-    status=:bound,
-    direction=:upper,
-    reliability=:high,
-    tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
-    references=["LiebRobinson1972", "HastingsKoma2006"],
-    notes="v_LR = 2 min(|J|,|h|), the causal-cone slope; saturated by the max group velocity of Λ(k).",
-)
 
 # ── Status-axis worked example: high-temperature free energy (:approx) ──
 # A second definition of (TFIM, FreeEnergy, Infinite) keyed by scheme=:high_T;
@@ -760,6 +747,24 @@
     tested_in="test/models/quantum/TFIM/test_TFIM_lieb_robinson.jl",
     references=["LiebRobinson1972", "HastingsKoma2006"],
     notes="v_LR = 2 min(|J|, |h|) tight free-fermion saturated bound (max group velocity over BdG dispersion). At criticality h=J, v_LR=2J. Vanishes at h=0 (classical Ising) or J=0 (decoupled spins). The h-independent 2|J| Hastings-Koma upper bound is loose; use this tight value for entanglement-growth slope (PR #588) and other dynamical formulas.",
+)
+@register(
+    TFIM,
+    LiebRobinsonVelocity,
+    Infinite,
+    scheme=:saturating_bound,
+    method=:analytic,
+    cost=:closed_form,
+    status=:bound,
+    direction=:upper,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_status_examples.jl",
+    references=["LiebRobinson1972", "HastingsKoma2006"],
+    notes="The SAME closed form as the :canonical row, registered again as the claim it \
+           also supports: any independently measured information velocity stays \
+           <= v_LR, with equality (the free-fermion bound is saturated by the maximum \
+           group velocity of the BdG dispersion). Two rows on one quantity rather than \
+           a second quantity type -- see the note in TFIM.jl.",
 )
 
 # ── Conformal tower of states (quantum critical point h = J) ───────────

@@ -259,24 +259,16 @@ end
 # ═══════════════════════════════════════════════════════════════════════════════
 # Lieb-Robinson velocity bound (status=:bound) — status-axis worked example (v0.24)
 # ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite) -> Float64
-
-Lieb-Robinson velocity of the infinite-chain TFIM,
-
-    v_LR = 2 min(|J|, |h|),
-
-the slope of the causal cone bounding commutator spread.  For the
-free-fermion TFIM this tight bound is saturated by the maximum group
-velocity `max_k |dΛ/dk|` of the Bogoliubov dispersion
-`Λ(k) = 2√(J² + h² − 2 J h cos k)`.  Registered with `status=:bound`.
-
-(Lieb & Robinson 1972; Hastings & Koma 2006.)
-"""
-function fetch(model::TFIM, ::LiebRobinsonBound, ::Infinite; kwargs...)
-    return 2 * min(abs(model.J), abs(model.h))
-end
+#
+# There is ONE quantity here, `LiebRobinsonVelocity`, and two registry rows on it
+# distinguished by `scheme`: the `:canonical` exact closed form and the
+# `:saturating_bound` claim that the same number bounds any measured information
+# velocity and is attained. A separate `LiebRobinsonBound` QUANTITY used to carry the
+# second claim, returning the identical `2 min(|J|, |h|)` from a second type — which is
+# what `scheme` exists to avoid ("the `scheme=` selector when several bounds share one
+# quantity", core/registry.jl). The bound CHARACTER now lives in AbstractQAtlas's
+# `LiebRobinsonBound` inequality, `v <= v_LR`, whose `v_LR` slot is typed on this
+# quantity.
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Critical exponents at the quantum critical point — delegate to 2D Ising universality
@@ -341,8 +333,19 @@ function fetch(
     ::Infinite;
     J::Real=model.J,
     h::Real=model.h,
+    scheme::Symbol=:canonical,
     kwargs...,
 )
+    # Both registered schemes return the same number — that is the point: the value is
+    # one closed form, and the two rows differ in the CLAIM they make about it
+    # (`:exact` vs a saturating `:bound`). An unrecognised scheme errors rather than
+    # silently falling through to `:canonical`, which is what `kwargs...` did before.
+    scheme in (:canonical, :saturating_bound) || throw(
+        ArgumentError(
+            "TFIM LiebRobinsonVelocity Infinite: no scheme :$scheme " *
+            "(only :canonical and :saturating_bound)",
+        ),
+    )
     return 2 * min(abs(J), abs(h))
 end
 

@@ -1,6 +1,6 @@
 name = "QAtlas"
 uuid = "2bd488d2-d3e6-46ee-afb3-5515643db0c7"
-version = "0.28.33"
+version = "0.28.34"
 authors = ["sota shimozono <shimozono-sota631@g.ecc.u-tokyo.ac.jp>"]
 
 [deps]
@@ -19,7 +19,7 @@ QAtlasForwardDiffExt = "ForwardDiff"
 QAtlasZygoteExt = "Zygote"
 
 [compat]
-AbstractQAtlas = "0.4"
+AbstractQAtlas = "0.4.2"
 Aqua = "0.8"
 ForwardDiff = "0.10, 1"
 KrylovKit = "0.8, 0.9, 0.10"

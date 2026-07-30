@@ -57,16 +57,12 @@ Recorded here rather than filtered out silently, so the list can only shrink on
 purpose.
 """
 const CROSS_KIND_NAME_CLASHES = Dict{Symbol,String}(
-    # QAtlas: `struct LiebRobinsonBound <: AbstractQuantity`, a quantity registered on
-    # the TFIM hub — the VALUE of the bound.
-    # AbstractQAtlas: `@inequality :quantum LiebRobinsonBound(v, v_LR) = v_LR - v`, the
-    # INEQUALITY itself. AbstractQAtlas has no LiebRobinson quantity at all, so this is
-    # not a duplicated vocabulary entry; it is a quantity and a relation competing for
-    # one name, which makes a bare reference ambiguous under
-    # `using QAtlas, AbstractQAtlas`.
-    :LiebRobinsonBound => "QAtlas binds it to a quantity, AbstractQAtlas to an \
-                           @inequality relation — different kinds, so neither side is \
-                           the one to adopt. Needs a rename on one side.",
+# Empty, and that is the point. The one entry was `LiebRobinsonBound`, which looked like
+# a quantity-vs-relation name clash and turned out to be a DUPLICATE QUANTITY: QAtlas
+# declared it returning the identical closed form to `LiebRobinsonVelocity` on the
+# identical hub, purely to carry a second claim (`status = :bound`) that a
+# `scheme`-distinguished registry row carries instead. Deleting the duplicate removed
+# the clash, so nothing had to be renamed.
 )
 
 @testset "the shared vocabulary is not forked" begin
@@ -89,16 +85,22 @@ const CROSS_KIND_NAME_CLASHES = Dict{Symbol,String}(
 end
 
 @testset "the cross-kind clash list does not rot" begin
+    # Empty is the healthy state; the loop below is a no-op then, and the two
+    # assertions after it are skipped with it.
     # An entry that stopped clashing has been fixed and must leave the list, so the
     # list cannot quietly outlive the problem it records.
     for n in keys(CROSS_KIND_NAME_CLASHES)
         @test isdefined(QAtlas, n) && isdefined(ABQ, n)
         @test getfield(QAtlas, n) !== getfield(ABQ, n)
     end
-    # ...and the one entry really is a quantity on one side and a relation on the other,
-    # which is what makes it a rename question rather than an adoption question.
-    @test QAtlas.LiebRobinsonBound <: ABQ.AbstractQuantity
+    # `LiebRobinsonBound` is no longer a QAtlas quantity at all — the name belongs to
+    # AbstractQAtlas's inequality alone, and its `v_LR` slot is typed on the one
+    # remaining quantity.
+    @test !isdefined(QAtlas, :LiebRobinsonBound) ||
+        getfield(QAtlas, :LiebRobinsonBound) === ABQ.LiebRobinsonBound
     @test ABQ.LiebRobinsonBound <: ABQ.AbstractRelation
+    @test ABQ.LiebRobinsonVelocity in ABQ.quantities(ABQ.LiebRobinsonBound())
+    @test QAtlas.LiebRobinsonVelocity === ABQ.LiebRobinsonVelocity
 end
 
 @testset "the names that had drifted are the base ones again" begin

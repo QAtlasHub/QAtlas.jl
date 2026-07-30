@@ -8,9 +8,9 @@
 # deferred to the definition-list redesign.)
 
 using QAtlas, Test
-using QAtlas: TFIM, LiebRobinsonBound, Infinite
+using QAtlas: TFIM, LiebRobinsonVelocity, Infinite
 
-@testset "TFIM LiebRobinsonBound — group velocity saturates v_LR (:bound)" begin
+@testset "TFIM LiebRobinsonVelocity — group velocity saturates v_LR (:bound)" begin
     # Dispersion Λ(k) = 2√(J² + h² − 2 J h cos k); group velocity is
     # v(k) = dΛ/dk = 2 J h sin k / √(J² + h² − 2 J h cos k).  Its maximum
     # over k is 2 min(|J|,|h|) (attained at cos k = min/max), exactly the
@@ -24,8 +24,11 @@ using QAtlas: TFIM, LiebRobinsonBound, Infinite
 
         s = verify_bound(
             m,
-            LiebRobinsonBound(),
+            LiebRobinsonVelocity(),
             Infinite();
+            # the :bound CLAIM about the same closed form lives on a second registry
+            # row keyed by `scheme`, not on a second quantity type -- see TFIM.jl
+            fetch_kw=(scheme=:saturating_bound,),
             route=:dispersion_velocity,
             measured=[max_vg],
             relation=:leq,

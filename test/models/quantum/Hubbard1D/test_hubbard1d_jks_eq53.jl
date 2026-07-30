@@ -429,6 +429,103 @@ _hopping_scale(beta, U, mu) = 2 * beta^2 / abs(log(_z_atomic(beta, U, mu)))
         end
     end
 
+    @testset "where the low-T imag(f) comes from -- discretisation or formulation" begin
+        # imag(f) is zero by construction for a Hermitian H, and MEASURED it grows
+        # 0.14% -> 1.3% -> 10.8% of |f| across beta = 0.1, 0.3, 1.0 on the coarse
+        # walk grid. Something is wrong at low T; this separates WHICH kind of
+        # wrong, by the same test that found the b-equation error at high T:
+        #
+        #   refine  ->  error falls    =>  discretisation, fix the grid
+        #   refine  ->  error plateaus =>  formulation, fix the equations
+        #
+        # Each axis is refined alone so the answer says which one matters. Recorded
+        # through `@info` rather than bounded here: the point is the trend, and a
+        # bound on the trend would need the trend measured first.
+        beta = 0.5
+        base = (Nw=64, Nn=16, x_max=32.0)
+
+        function _imag_ratio(Nw, Nn, x_max)
+            grids = JKSGrids53(Nw, Nn, _G, _A; x_max=x_max)
+            sol = solve_jks53_continuation(grids, beta, _U, _MU; tol=1e-10)
+            sol.converged || return (NaN, NaN, false)
+            f = free_energy_jks53(sol.state, grids, beta, _U; mu=_MU)
+            return (abs(imag(f)) / max(abs(real(f)), 1.0), real(f), true)
+        end
+
+        # narrow grid: the c/cbar channel on [-1, 1], where the PV convolutions and
+        # the +- 1/2 Dlog boundary terms live. Nn = 16 is coarse for a function with
+        # sqrt(1-x^2) structure, so this is the first suspect.
+        narrow = NamedTuple[]
+        for Nn in (16, 32, 64)
+            r, f, ok = _imag_ratio(base.Nw, Nn, base.x_max)
+            push!(narrow, (Nn=Nn, imag_ratio=r, f=f, converged=ok))
+        end
+        @info "low-T imag(f) vs narrow-grid Nn" beta = beta rows = narrow
+
+        # wide grid: the b channel. Its tail is already restored analytically, so a
+        # trend here would point at resolution rather than truncation.
+        wide = NamedTuple[]
+        for Nw in (64, 128)
+            r, f, ok = _imag_ratio(Nw, base.Nn, base.x_max)
+            push!(wide, (Nw=Nw, imag_ratio=r, f=f, converged=ok))
+        end
+        @info "low-T imag(f) vs wide-grid Nw" beta = beta rows = wide
+
+        # x_max, at fixed spacing so truncation moves and resolution does not. This
+        # axis was missing from the first pass of this diagnostic.
+        cut = NamedTuple[]
+        for (x_max, Nw) in ((32.0, 64), (64.0, 128), (128.0, 256))
+            r, f, ok = _imag_ratio(Nw, base.Nn, x_max)
+            push!(cut, (x_max=x_max, Nw=Nw, imag_ratio=r, f=f, converged=ok))
+        end
+        @info "low-T imag(f) vs x_max at fixed spacing" beta = beta rows = cut
+
+        # MEASURED in CI: refining the narrow grid 16 -> 32 -> 64 moves imag(f)/|f|
+        # by 0.06% (0.0359772 -> 0.0359629 -> 0.0359550), and refining Nw makes it
+        # slightly WORSE (0.0367443). A plateau under refinement is what says the
+        # defect is in the equations and not in the mesh -- the same reading that
+        # sent the high-T search to the b equation.
+        #
+        # Pinned at the measured size rather than at the flatness: asserting "it
+        # does not improve" would make a real fix fail.
+        ratios = [r.imag_ratio for r in vcat(narrow, wide, cut) if r.converged]
+        @test length(ratios) >= 6
+        @test maximum(ratios) < 0.05
+
+        # alpha-independence. eq (51) fixes only 0 < alpha <= gamma, so the solution
+        # -- and hence f -- must not depend on which alpha is used. That is an exact
+        # invariance of the equations and needs no oracle at all. If f moves with
+        # alpha, the defect sits in a term whose alpha-dependence should have
+        # cancelled: the K2 shifts (+-a-a, +-a+a) or the K1bar_{+-a} placements.
+        alphas = NamedTuple[]
+        for frac in (0.4, 0.6, 0.8)
+            grids = JKSGrids53(base.Nw, base.Nn, _G, frac * _G; x_max=base.x_max)
+            sol = solve_jks53_continuation(grids, beta, _U, _MU; tol=1e-10)
+            if !sol.converged
+                push!(
+                    alphas, (alpha_over_gamma=frac, f=NaN, imag_ratio=NaN, converged=false)
+                )
+                continue
+            end
+            f = free_energy_jks53(sol.state, grids, beta, _U; mu=_MU)
+            push!(
+                alphas,
+                (
+                    alpha_over_gamma=frac,
+                    f=real(f),
+                    imag_ratio=abs(imag(f)) / max(abs(real(f)), 1.0),
+                    converged=true,
+                ),
+            )
+        end
+        @info "low-T f vs alpha (must be independent)" beta = beta rows = alphas
+        fs_alpha = [r.f for r in alphas if r.converged]
+        @test length(fs_alpha) >= 2
+        # Nothing tighter until the spread is measured: a bound written ahead of the
+        # measurement is the mistake this stream already made twice.
+        @test all(isfinite, fs_alpha)
+    end
+
     @testset "refining the grid moves the answer less, not differently" begin
         # A convergent discretisation has |f(fine) - f(coarse)| shrinking. This is
         # what separated formulation error from discretisation error while #798 was

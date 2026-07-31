@@ -27,8 +27,8 @@ All `(Quantity, BC)` hubs `src` claims for **`HeisenbergXYZ`**.  Cells link to t
 | 🟢 corroborated-at-p | 1 |
 | 🔵 coherent | 1 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 3 |
+| **total claimed hubs** | **5** |
 
 **Methods** (from `@register`, derived): `closed_form`, `delegation`, `xxz_delegation`
 
@@ -38,7 +38,6 @@ All `(Quantity, BC)` hubs `src` claims for **`HeisenbergXYZ`**.  Cells link to t
 |---|---|
 | [`CorrelationLength`](../quantities/CorrelationLength.md) | 🟠 [hub](../hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/HeisenbergXYZ_Energy_Infinite.md) |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | 🟠 [hub](../hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | 🔵 [hub](../hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/HeisenbergXYZ_MassGap_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | 🟠 [hub](../hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) |

@@ -23,11 +23,11 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 13 |
+| 🟢 corroborated-at-p | 12 |
 | 🔵 coherent | 4 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 11 |
-| **total claimed hubs** | **28** |
+| 🟠 uncorroborated-but-feasible | 10 |
+| **total claimed hubs** | **26** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `cft`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz`
 
@@ -36,17 +36,15 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | Quantity | `OBC` | `PBC` | `Infinite` |
 |---|---|---|---|
 | [`ConformalTower`](../quantities/ConformalTower.md) | — | 🟠 [hub](../hubs/Heisenberg1D_ConformalTower_PBC.md) | — |
-| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | — |
+| [`DynamicalSpinStructureFactor`](../quantities/DynamicalSpinStructureFactor.md) | — | — | 🟢 [hub](../hubs/Heisenberg1D_DynamicalSpinStructureFactor_Infinite.md) |
+| [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_EnergyLocal_OBC.md) | — | — |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/Heisenberg1D_FreeEnergy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_FreeEnergy_Infinite.md) |
-| [`GroundStateEnergyDensity`](../quantities/GroundStateEnergyDensity.md) | — | — | 🟢 [hub](../hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) |
+| [`LocalMagnetization`](../quantities/LocalMagnetization.md) | 🟠 [hub](../hubs/Heisenberg1D_LocalMagnetization_OBC.md) | — | — |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | — | — | 🔵 [hub](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) |
 | [`MagnetizationX`](../quantities/MagnetizationX.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationX_OBC.md) | — | — |
-| [`MagnetizationXLocal`](../quantities/MagnetizationXLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) | — | — |
 | [`MagnetizationY`](../quantities/MagnetizationY.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationY_OBC.md) | — | — |
-| [`MagnetizationYLocal`](../quantities/MagnetizationYLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) | — | — |
 | [`MagnetizationZ`](../quantities/MagnetizationZ.md) | 🔵 [hub](../hubs/Heisenberg1D_MagnetizationZ_OBC.md) | — | — |
-| [`MagnetizationZLocal`](../quantities/MagnetizationZLocal.md) | 🟠 [hub](../hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) | — | — |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
 | [`RenyiEntropy`](../quantities/RenyiEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_RenyiEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_RenyiEntropy_Infinite.md) |
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/Heisenberg1D_SpecificHeat_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_SpecificHeat_Infinite.md) |
@@ -56,7 +54,6 @@ All `(Quantity, BC)` hubs `src` claims for **`Heisenberg1D`**.  Cells link to th
 | [`ThermalEntropy`](../quantities/ThermalEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_ThermalEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_ThermalEntropy_Infinite.md) |
 | [`UniversalityClass`](../quantities/UniversalityClass.md) | — | — | 🟠 [hub](../hubs/Heisenberg1D_UniversalityClass_Infinite.md) |
 | [`VonNeumannEntropy`](../quantities/VonNeumannEntropy.md) | 🟢 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) |
-| [`ZZStructureFactor`](../quantities/ZZStructureFactor.md) | — | — | 🟢 [hub](../hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) |
 
 ## Derivation notes
 

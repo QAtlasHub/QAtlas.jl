@@ -18,8 +18,8 @@ using QAtlas, Test
     # Linear in J
     @test QAtlas.fetch(DMIHeisenberg1D(; J=3.0, D=0.0), Energy{:per_site}(), Infinite()) ≈
         3 * (0.25 - log(2))
-    # Delegation matches Heisenberg1D directly (legacy GroundStateEnergyDensity API)
-    @test e0 ≈ QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); J=1.0)
+    # Delegation matches Heisenberg1D directly (legacy Energy{:per_site} API)
+    @test e0 ≈ QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite(); J=1.0)
 end
 
 @testset "DMIHeisenberg1D — D ≠ 0 throws DomainError (Phase 2 deferral)" begin
@@ -56,7 +56,7 @@ end
         Energy(:per_site),
         Infinite();
         route=:delegation_invariant,
-        independent=QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()),
+        independent=QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite()),
         agree_within=1e-12,
         refs=["DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths"],
     )

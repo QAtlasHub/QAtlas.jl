@@ -9,7 +9,7 @@
 # ── Closed-form ground state in the thermodynamic limit ───────────────
 @register(
     Heisenberg1D,
-    GroundStateEnergyDensity,
+    Energy{:per_site},
     Infinite,
     method=:bethe_ansatz,
     cost=:closed_form,

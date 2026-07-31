@@ -170,12 +170,14 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 10 hubs (qua
 | [`FreeEnergy`](../../atlas/hubs/IsingTriangular_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`ResidualEntropy`](../../atlas/hubs/IsingTriangular_ResidualEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 | [`SpecificHeat`](../../atlas/hubs/IsingTriangular_SpecificHeat_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
+| [`SpinCorrelation`](../../atlas/hubs/IsingTriangular_SpinCorrelation_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`SpontaneousMagnetization`](../../atlas/hubs/IsingTriangular_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`ThermalEntropy`](../../atlas/hubs/IsingTriangular_ThermalEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | [`UniversalityClass`](../../atlas/hubs/IsingTriangular_UniversalityClass_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
-| [`ZZCorrelation`](../../atlas/hubs/IsingTriangular_ZZCorrelation_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 
 <!-- ATLAS:HUBS:END -->
+
+
 
 
 

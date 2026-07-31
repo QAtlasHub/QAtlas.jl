@@ -37,7 +37,7 @@ using QAtlas, Test, KrylovKit, Random
     let Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12))
         verify(
             MajumdarGhosh(; J=1.0),
-            GroundStateEnergyDensity(),
+            Energy{:per_site}(),
             PBC(8);
             route=:ed_finite_size,
             independent=[mg_pbc_e0(N, 1.0) for N in Ns],

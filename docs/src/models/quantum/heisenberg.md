@@ -137,24 +137,23 @@ Full Bethe-ansatz derivation in
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), these 5 models register 57 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), these 5 models register 52 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Model | Quantity | BC | Assurance | Cards |
 |---|---|---|---|---|
 | `DMIHeisenberg1D` | [`Energy`](../../atlas/hubs/DMIHeisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
 | `Heisenberg1D` | [`ConformalTower`](../../atlas/hubs/Heisenberg1D_ConformalTower_PBC.md) | `PBC` | 🟠 uncorroborated-but-feasible | 0 |
+| `Heisenberg1D` | [`DynamicalSpinStructureFactor`](../../atlas/hubs/Heisenberg1D_DynamicalSpinStructureFactor_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
+| `Heisenberg1D` | [`Energy`](../../atlas/hubs/Heisenberg1D_Energy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`Energy`](../../atlas/hubs/Heisenberg1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 42 |
 | `Heisenberg1D` | [`EnergyLocal`](../../atlas/hubs/Heisenberg1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/Heisenberg1D_FreeEnergy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/Heisenberg1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
-| `Heisenberg1D` | [`GroundStateEnergyDensity`](../../atlas/hubs/Heisenberg1D_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
+| `Heisenberg1D` | [`LocalMagnetization`](../../atlas/hubs/Heisenberg1D_LocalMagnetization_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`LuttingerParameter`](../../atlas/hubs/Heisenberg1D_LuttingerParameter_Infinite.md) | `Infinite` | 🔵 coherent | 2 |
 | `Heisenberg1D` | [`MagnetizationX`](../../atlas/hubs/Heisenberg1D_MagnetizationX_OBC.md) | `OBC` | 🔵 coherent | 18 |
-| `Heisenberg1D` | [`MagnetizationXLocal`](../../atlas/hubs/Heisenberg1D_MagnetizationXLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`MagnetizationY`](../../atlas/hubs/Heisenberg1D_MagnetizationY_OBC.md) | `OBC` | 🔵 coherent | 18 |
-| `Heisenberg1D` | [`MagnetizationYLocal`](../../atlas/hubs/Heisenberg1D_MagnetizationYLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`MagnetizationZ`](../../atlas/hubs/Heisenberg1D_MagnetizationZ_OBC.md) | `OBC` | 🔵 coherent | 18 |
-| `Heisenberg1D` | [`MagnetizationZLocal`](../../atlas/hubs/Heisenberg1D_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`MassGap`](../../atlas/hubs/Heisenberg1D_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | `Heisenberg1D` | [`MassGap`](../../atlas/hubs/Heisenberg1D_MassGap_OBC.md) | `OBC` | 🟢 corroborated-at-p | 9 |
 | `Heisenberg1D` | [`RenyiEntropy`](../../atlas/hubs/Heisenberg1D_RenyiEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
@@ -169,37 +168,35 @@ In the [Verified Atlas](../../atlas/index.md), these 5 models register 57 hubs (
 | `Heisenberg1D` | [`UniversalityClass`](../../atlas/hubs/Heisenberg1D_UniversalityClass_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/Heisenberg1D_VonNeumannEntropy_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/Heisenberg1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
-| `Heisenberg1D` | [`ZZStructureFactor`](../../atlas/hubs/Heisenberg1D_ZZStructureFactor_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 | `HeisenbergXYZ` | [`CorrelationLength`](../../atlas/hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `HeisenbergXYZ` | [`Energy`](../../atlas/hubs/HeisenbergXYZ_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
-| `HeisenbergXYZ` | [`GroundStateEnergyDensity`](../../atlas/hubs/HeisenbergXYZ_GroundStateEnergyDensity_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `HeisenbergXYZ` | [`LuttingerParameter`](../../atlas/hubs/HeisenbergXYZ_LuttingerParameter_Infinite.md) | `Infinite` | 🔵 coherent | 1 |
 | `HeisenbergXYZ` | [`MassGap`](../../atlas/hubs/HeisenbergXYZ_MassGap_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `HeisenbergXYZ` | [`SpontaneousMagnetization`](../../atlas/hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md) | `Infinite` | 🟠 uncorroborated-but-feasible | 0 |
 | `J1J2Heisenberg1D` | [`Energy`](../../atlas/hubs/J1J2Heisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 6 |
+| `S1Heisenberg1D` | [`ConnectedSpinCorrelation`](../../atlas/hubs/S1Heisenberg1D_ConnectedSpinCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`Energy`](../../atlas/hubs/S1Heisenberg1D_Energy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 3 |
 | `S1Heisenberg1D` | [`Energy`](../../atlas/hubs/S1Heisenberg1D_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 29 |
 | `S1Heisenberg1D` | [`EnergyLocal`](../../atlas/hubs/S1Heisenberg1D_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`FreeEnergy`](../../atlas/hubs/S1Heisenberg1D_FreeEnergy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
+| `S1Heisenberg1D` | [`LocalMagnetization`](../../atlas/hubs/S1Heisenberg1D_LocalMagnetization_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`MagnetizationX`](../../atlas/hubs/S1Heisenberg1D_MagnetizationX_OBC.md) | `OBC` | 🔵 coherent | 24 |
-| `S1Heisenberg1D` | [`MagnetizationXLocal`](../../atlas/hubs/S1Heisenberg1D_MagnetizationXLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`MagnetizationY`](../../atlas/hubs/S1Heisenberg1D_MagnetizationY_OBC.md) | `OBC` | 🔵 coherent | 24 |
 | `S1Heisenberg1D` | [`MagnetizationZ`](../../atlas/hubs/S1Heisenberg1D_MagnetizationZ_OBC.md) | `OBC` | 🔵 coherent | 24 |
-| `S1Heisenberg1D` | [`MagnetizationZLocal`](../../atlas/hubs/S1Heisenberg1D_MagnetizationZLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`MassGap`](../../atlas/hubs/S1Heisenberg1D_MassGap_Infinite.md) | `Infinite` | ⚪ cited-only | 2 |
 | `S1Heisenberg1D` | [`MassGap`](../../atlas/hubs/S1Heisenberg1D_MassGap_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`RenyiEntropy`](../../atlas/hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 54 |
 | `S1Heisenberg1D` | [`SpecificHeat`](../../atlas/hubs/S1Heisenberg1D_SpecificHeat_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
+| `S1Heisenberg1D` | [`SpinCorrelation`](../../atlas/hubs/S1Heisenberg1D_SpinCorrelation_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | `S1Heisenberg1D` | [`SusceptibilityXX`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) | `OBC` | 🟢 corroborated-at-p | 6 |
 | `S1Heisenberg1D` | [`SusceptibilityYY`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityYY_OBC.md) | `OBC` | 🟢 corroborated-at-p | 6 |
 | `S1Heisenberg1D` | [`SusceptibilityZZ`](../../atlas/hubs/S1Heisenberg1D_SusceptibilityZZ_OBC.md) | `OBC` | 🟢 corroborated-at-p | 6 |
 | `S1Heisenberg1D` | [`ThermalEntropy`](../../atlas/hubs/S1Heisenberg1D_ThermalEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 45 |
 | `S1Heisenberg1D` | [`VonNeumannEntropy`](../../atlas/hubs/S1Heisenberg1D_VonNeumannEntropy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 27 |
-| `S1Heisenberg1D` | [`XXCorrelation`](../../atlas/hubs/S1Heisenberg1D_XXCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
-| `S1Heisenberg1D` | [`YYCorrelation`](../../atlas/hubs/S1Heisenberg1D_YYCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
-| `S1Heisenberg1D` | [`ZZCorrelation`](../../atlas/hubs/S1Heisenberg1D_ZZCorrelation_OBC.md) | `OBC` | 🟢 corroborated-at-p | 36 |
 
 <!-- ATLAS:HUBS:END -->
+
+
 
 
 

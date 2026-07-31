@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`UniversalityClass`** observable.  Empty cells = this model doesn't yet have a `UniversalityClass` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The emergent universality class of a model at its critical point / scaling regime.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 18

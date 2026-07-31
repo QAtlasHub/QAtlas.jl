@@ -19,9 +19,9 @@ using Logging: with_logger, NullLogger
 
     @testset "GSED PBC — odd N rejected, N-kwarg form callable" begin
         m = MajumdarGhosh(; J=1.0)
-        @test_throws DomainError QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(5))
+        @test_throws DomainError QAtlas.fetch(m, Energy{:per_site}(), PBC(5))
         # N-kwarg API form reachable (value covered by verify cards below).
-        @test QAtlas.fetch(m, GroundStateEnergyDensity(), PBC(); N=8) isa Real
+        @test QAtlas.fetch(m, Energy{:per_site}(), PBC(); N=8) isa Real
     end
 
     @testset "MassGap method dispatch & deprecation" begin
@@ -48,7 +48,7 @@ using Logging: with_logger, NullLogger
         rows = QAtlas.implementation_status(MajumdarGhosh)
         @test !isempty(rows)
         quantities = unique(r.quantity for r in rows)
-        @test GroundStateEnergyDensity in quantities
+        @test Energy{:per_site} in quantities
         @test MassGap in quantities
     end
 

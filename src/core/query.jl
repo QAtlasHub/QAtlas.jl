@@ -31,8 +31,10 @@ const REGIMES = (
         impl.thermal === :zero ||
         impl.thermal === :both ||
         impl.quantity <: AbstractGap ||
-        impl.quantity <: AbstractEntanglementMeasure ||
-        impl.quantity === GroundStateEnergyDensity
+        impl.quantity <: AbstractEntanglementMeasure
+        # `GroundStateEnergyDensity` used to be named here. It is gone: the ground-state
+        # energy density is `Energy{:per_site}` fetched without a `beta`, and `Energy`
+        # carries `thermal_axis = :both`, so those rows already match on `impl.thermal`.
     ),
     finite_temperature=impl -> (
         impl.thermal === :finite ||

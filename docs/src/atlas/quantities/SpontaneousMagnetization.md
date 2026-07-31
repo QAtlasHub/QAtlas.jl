@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`SpontaneousMagnetization`** observable.  Empty cells = this model doesn't yet have a `SpontaneousMagnetization` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Spontaneous magnetization of a classical model as a function of temperature.  Retained under this name for backward compatibility with the classical-Ising literature; new code may prefer the axis-explicit ``MagnetizationZ`` together with a `T < T_c` context.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 6

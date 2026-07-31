@@ -27,11 +27,11 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938)"])
+verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite()), agree_within = 1.0e-12, refs = ["J1J2 at J2=0 delegates to Heisenberg1D (Hulthen 1938)"])
 ```
 
 ```julia
-verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(MajumdarGhosh(; J = 1.0), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8)"])
+verify(J1J2Heisenberg1D(; J1 = 1.0, J2 = 0.5), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(MajumdarGhosh(; J = 1.0), Energy{:per_site}(), Infinite()), agree_within = 1.0e-12, refs = ["J1J2 at J2=J1/2 delegates to MajumdarGhosh (exact dimer, -3J/8)"])
 ```
 
 ```julia

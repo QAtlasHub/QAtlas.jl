@@ -114,29 +114,16 @@ end
 
 native_energy_granularity(::AKLT1D, ::Infinite) = :per_site
 
-"""
-    fetch(model::AKLT1D, ::GroundStateEnergyDensity, ::Infinite) -> Float64
-
-Closed-form ground-state energy density of the AKLT chain in the
-thermodynamic limit:
-
-    e₀ = −(2/3) J
-
-Derived analytically from the projector form `H = 2J Σ P₂(i,i+1) −
-(2J/3) (N − 1)` (AKLT 1988): the VBS state is the exact null space of
-every bond `P₂` projector, so per-bond energy is `−2J/3` and per-site
-energy density (one bond per site in the bulk) is `−2J/3`.
-"""
-function fetch(model::AKLT1D, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
-    return -(2.0 / 3.0) * model.J
-end
+# The `GroundStateEnergyDensity` method that used to live here is gone: it returned the
+# same value as this hub's `Energy{:per_site}` at `Infinite`, which already answers
+# without a `beta` by returning the ground state. See core/quantities.jl.
 
 """
     fetch(model::AKLT1D, ::Energy{:per_site}, ::Infinite) -> Float64
 
 Per-site ground-state energy `e₀ = −2J/3` of the infinite AKLT chain.
 Numerically identical to
-`fetch(::AKLT1D, ::GroundStateEnergyDensity, ::Infinite)`; provided so
+the ground-state energy density; provided so
 the BC-explicit `Energy(:per_site)` API resolves through the same
 analytic path.
 """
@@ -539,7 +526,7 @@ Per-site Helmholtz free energy at `β = ∞` for the infinite AKLT chain:
 
     f(∞) = −2J / 3
 
-Same closed form as `GroundStateEnergyDensity` at `Infinite()`; exposed
+Same closed form as `Energy{:per_site}` at `Infinite()`; exposed
 through `FreeEnergy` for callers that route generic thermodynamic
 observables.
 """

@@ -65,7 +65,7 @@ corresponds to `μ = U/2` (particle-hole-symmetric point).
 Phase 1 implements the Lieb–Wu (1968) closed-form integrals at **half
 filling only** (`μ = U/2`).  The supported `Infinite()` quantities are
 
-- [`GroundStateEnergyDensity`](@ref) — `E₀/N` via the Lieb–Wu integral,
+- [`Energy`](@ref)`{:per_site}` — `E₀/N` via the Lieb–Wu integral,
 - [`ChargeGap`](@ref) — Mott gap `Δ_c` via the Lieb–Wu second integral,
 - [`SpinGap`](@ref) — `0` exactly (rigorous gapless-spinon result).
 
@@ -160,29 +160,9 @@ end
 
 # ─── fetch methods ────────────────────────────────────────────────────
 
-"""
-    fetch(model::Hubbard1D, ::GroundStateEnergyDensity, ::Infinite) -> Float64
-
-Lieb–Wu ground-state energy density `E₀/N` at half filling.  Currently
-only implemented for `μ = U/2`; off-half-filling raises a
-`DomainError`.
-
-# Asymptotic limits
-
-- `U/t → 0`:  `E₀/N → -4t/π`  (free 1D fermion).
-- `U/t → ∞`: `E₀/N → -4 t² log 2 / U`  (Heisenberg AFM reduction).
-
-Both are exercised in `test/standalone/test_hubbard1d.jl`.
-
-# References
-
-- Lieb–Wu, *PRL* **20**, 1445 (1968).
-- Essler et al., *The One-Dimensional Hubbard Model* (Cambridge, 2005).
-"""
-function fetch(model::Hubbard1D, ::GroundStateEnergyDensity, ::Infinite; kwargs...)
-    _hubbard1d_check_half_filling(model)
-    return _hubbard1d_e0(model.t, model.U)
-end
+# The `GroundStateEnergyDensity` method that used to live here is gone: it returned the
+# same value as this hub's `Energy{:per_site}` at `Infinite`, which already answers
+# without a `beta` by returning the ground state. See core/quantities.jl.
 
 """
     fetch(model::Hubbard1D, ::ChargeGap, ::Infinite) -> Float64

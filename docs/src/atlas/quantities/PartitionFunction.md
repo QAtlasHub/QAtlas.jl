@@ -5,17 +5,11 @@
 
 All `(Model, BC)` hubs `src` claims for the **`PartitionFunction`** observable.  Empty cells = this model doesn't yet have a `PartitionFunction` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Canonical partition function `Z = Σ_σ exp(-β H(σ))`.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 3
 - **Total hubs (Model, BC pairs)**: 3
-- **Methods** (derived from `@register`): `analytic`, `transfer_matrix`
+- **Methods** (derived from `@register`): `analytic`, `kaufman_free_fermion`
 - **Universality classes** (where applicable): `Ising`, `WZW`
 
 **Top references** (by hub count):

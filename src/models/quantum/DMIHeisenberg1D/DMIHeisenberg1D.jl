@@ -26,7 +26,7 @@
 #
 # Phase 1 implementation strategy: delegate the D = 0 closed-form point to
 # the existing `Heisenberg1D` model, using its legacy
-# `GroundStateEnergyDensity` fetch (which is what `Heisenberg1D` exposes
+# `Energy{:per_site}` fetch (which is what `Heisenberg1D` exposes
 # at `Infinite`).  The public surface of `DMIHeisenberg1D` itself uses
 # the modern `Energy{:per_site}` axis-explicit convention.
 #
@@ -103,7 +103,7 @@ thermodynamic limit.  Phase 1 supports only the closed-form `D = 0`
 point:
 
 - `D = 0` → Bethe-Hulthén: `E/N = J · (1/4 − ln 2)`.
-  Delegates to `fetch(Heisenberg1D(), GroundStateEnergyDensity(),
+  Delegates to `fetch(Heisenberg1D(), Energy{:per_site}(),
   Infinite(); J=J)`.
 
 - `D ≠ 0` → `DomainError`: spiral order via gauge rotation to twisted
@@ -113,7 +113,7 @@ point:
 Floating-point tolerance for the `D = 0` match is `atol = 1e-12`.
 
 Note on delegation: `Heisenberg1D` currently exposes its thermodynamic-
-limit energy density via the legacy `GroundStateEnergyDensity` quantity,
+limit energy density via the legacy `Energy{:per_site}` quantity,
 not the modern `Energy{:per_site}` axis.  This wrapper bridges to the
 modern axis on the public surface while keeping the closed-form constant
 single-source-of-truth in the `Heisenberg1D` delegate.
@@ -144,7 +144,7 @@ function fetch(
         )
     end
     # D = 0 → pure Heisenberg.  Heisenberg1D exposes the Bethe-Hulthén
-    # density via the legacy GroundStateEnergyDensity tag, with J as a
+    # density via the legacy Energy{:per_site} tag, with J as a
     # kwarg (the struct itself carries no parameters).
-    return fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite(); J=J)
+    return fetch(Heisenberg1D(), Energy{:per_site}(), Infinite(); J=J)
 end

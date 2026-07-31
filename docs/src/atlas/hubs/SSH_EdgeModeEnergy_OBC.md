@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `dense_ed`, status `exact`, reliability `high`, refs: SSH1979 | AsbothOroszlanyPalyi2016
-- Same value as MassGap@OBC; named for the chiral edge-mode interpretation (exactly 0 at v = 0).
+- method `single_particle_diagonalization`, status `exact`, reliability `high`, refs: SSH1979 | AsbothOroszlanyPalyi2016
+- "Same value as MassGap@OBC; named for the chiral edge-mode interpretation " * "(exactly 0 at v = 0). Single-particle route, O(N^3) -- see MassGap@OBC."
 
 ## Corroboration
 

@@ -27,7 +27,7 @@
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(), Infinite()), agree_within = 1.0e-12, refs = ["DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths"])
+verify(DMIHeisenberg1D(; J = 1.0, D = 0.0), Energy(:per_site), Infinite(); route = :delegation_invariant, independent = QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(), Infinite()), agree_within = 1.0e-12, refs = ["DMIHeisenberg1D(D=0) delegates to Heisenberg1D: independent code paths"])
 ```
 
 ```julia

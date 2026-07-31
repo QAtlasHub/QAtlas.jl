@@ -21,7 +21,7 @@ end
 # One shim per supported (Symbol quantity, BC) pair.
 const _LEGACY_XXZ1D_QUANTITY_MAP = (
     (:energy, Energy),
-    (:ground_state_energy, GroundStateEnergyDensity),
+    (:ground_state_energy, Energy{:per_site}),
     (:central_charge, CentralCharge),
     (:luttinger_parameter, LuttingerParameter),
     (:luttinger_velocity, LuttingerVelocity),

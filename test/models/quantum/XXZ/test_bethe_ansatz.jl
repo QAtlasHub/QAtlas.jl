@@ -10,7 +10,7 @@ using QAtlas, Test
 
 @testset "Bethe ansatz: e₀ = J(1/4 − ln 2)" begin
     J = 1.0
-    e0 = QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(); J=J)
+    e0 = QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(); J=J)
 
     # Numerical value
     @test e0 ≈ J * (0.25 - log(2)) atol = 1e-14
@@ -18,7 +18,7 @@ using QAtlas, Test
 
     # J scaling
     for Jval in (0.5, 2.0, 3.7)
-        @test QAtlas.fetch(Heisenberg1D(), GroundStateEnergyDensity(); J=Jval) ≈ Jval * e0 rtol =
+        @test QAtlas.fetch(Heisenberg1D(), Energy{:per_site}(); J=Jval) ≈ Jval * e0 rtol =
             1e-14
     end
 
@@ -34,7 +34,7 @@ using QAtlas, Test
 end
 
 # ── Verification cards (WHY-correct plane) ─────────────────────────────────
-@testset "Heisenberg1D GroundStateEnergyDensity — verification cards" begin
+@testset "Heisenberg1D Energy{:per_site} — verification cards" begin
     Sx, Sy, Sz = spin_ops(1 // 2)
     bond_heis = kron(Sx, Sx) + kron(Sy, Sy) + kron(Sz, Sz)
     Ns = verify_profile_Ns(; fast=(6, 8), full=(6, 8, 10, 12), nightly=(6, 8, 10, 12, 14))
@@ -42,7 +42,7 @@ end
 
     verify(
         Heisenberg1D(),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:ed_finite_size,
         independent=ind,

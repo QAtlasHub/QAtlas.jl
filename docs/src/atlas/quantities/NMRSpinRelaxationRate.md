@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`NMRSpinRelaxationRate`** observable.  Empty cells = this model doesn't yet have a `NMRSpinRelaxationRate` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-NMR spin-lattice relaxation rate per site, `1/T_1(β, η)`. For non-interacting 1D fermion systems, computed using the regularized double momentum-space integral:
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 2

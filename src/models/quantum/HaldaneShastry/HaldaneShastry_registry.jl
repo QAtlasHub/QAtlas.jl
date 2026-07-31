@@ -7,7 +7,7 @@
 
 @register(
     HaldaneShastry,
-    GroundStateEnergyDensity,
+    Energy{:per_site},
     Infinite,
     method=:analytic,
     cost=:closed_form,

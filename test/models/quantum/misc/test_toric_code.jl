@@ -11,11 +11,11 @@
 using QAtlas, Test
 
 @testset "ToricCode — Kitaev 2003 closed-form quantities" begin
-    # ── GroundStateEnergyDensity = −(J_e + J_m) ──────────────────────────
+    # ── Energy{:per_site} = −(J_e + J_m) ──────────────────────────
     @testset "ε₀ = −(J_e + J_m)" begin
         for (Je, Jm) in ((1.0, 1.0), (2.0, 1.0), (1.0, 3.0), (0.5, 2.5), (3.7, 0.0))
             m = ToricCode(; J_e=Je, J_m=Jm)
-            ε = QAtlas.fetch(m, GroundStateEnergyDensity(), Infinite())
+            ε = QAtlas.fetch(m, Energy{:per_site}(), Infinite())
             @test ε == -(Je + Jm)
             @test ε isa Float64
         end
@@ -108,12 +108,12 @@ using QAtlas, Test
         ma = ToricCode(; J_e=1.0, J_m=2.0)
         mb = ToricCode(; J_e=2.0, J_m=1.0)
 
-        εa = QAtlas.fetch(ma, GroundStateEnergyDensity(), Infinite())
-        εb = QAtlas.fetch(mb, GroundStateEnergyDensity(), Infinite())
+        εa = QAtlas.fetch(ma, Energy{:per_site}(), Infinite())
+        εb = QAtlas.fetch(mb, Energy{:per_site}(), Infinite())
         @test εa == εb  # symmetric in (J_e, J_m) — both give -3.0
 
         mc = ToricCode(; J_e=1.0, J_m=3.0)
-        εc = QAtlas.fetch(mc, GroundStateEnergyDensity(), Infinite())
+        εc = QAtlas.fetch(mc, Energy{:per_site}(), Infinite())
         @test εc == -4.0
         @test εc != εa
 
@@ -149,7 +149,7 @@ end
 @testset "ToricCode — verification cards" begin
     verify(
         ToricCode(; J_e=1.0, J_m=1.0),
-        GroundStateEnergyDensity(),
+        Energy{:per_site}(),
         Infinite();
         route=:second_closed_form,
         independent=-2.0,

@@ -8,8 +8,8 @@
 
 ## `src` claim
 
-- method `dense_ed`, status `exact`, reliability `high`, refs: SSH1979
-- Smallest non-negative single-particle eigenvalue (edge-mode splitting in topological phase).
+- method `single_particle_diagonalization`, status `exact`, reliability `high`, refs: SSH1979
+- "Smallest non-negative single-particle eigenvalue (edge-mode splitting in " * "topological phase). Diagonalises the 2N x 2N SINGLE-PARTICLE matrix, so the " * "cost is O(N^3) and there is no Hilbert-space cap -- this was mislabelled " * "`:dense_ed`, which reads as exponential many-body ED."
 
 ## Corroboration
 

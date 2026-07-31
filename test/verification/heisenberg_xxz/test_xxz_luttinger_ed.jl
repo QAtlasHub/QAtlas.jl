@@ -22,7 +22,7 @@
 # SU(2)-restoring operator produces a log correction
 # K(N) = K_∞ + c / ln(N) that a linear 1/N fit undershoots by ~40 %.
 # An independent Δ = +1 check is already in place via the
-# `Heisenberg1D GroundStateEnergyDensity` cross-reference
+# `Heisenberg1D Energy{:per_site}` cross-reference
 # (test_XXZ1D.jl), which tests the Δ = 1 dispatch through an entirely
 # different physical observable.
 # ─────────────────────────────────────────────────────────────────────────────

@@ -30,20 +30,6 @@
 
 @register(
     HeisenbergXYZ,
-    GroundStateEnergyDensity,
-    Infinite,
-    method=:closed_form,
-    cost=:closed_form,
-    reliability=:high,
-    tested_in="test/models/quantum/HeisenbergXYZ/test_heisenberg_xyz_gs.jl",
-    references=["LiebSchultzMattis1961", "Baxter1972"],
-    notes="XY anisotropic line (Jz=0) via Lieb-Schultz-Mattis 1961 free-fermion " *
-          "closed form; axial XXZ case (Jx=Jy) delegated to XXZ1D Energy(:per_site). " *
-          "Generic XYZ (Jx!=Jy, Jz!=0) deferred to Baxter elliptic Phase 3.",
-)
-
-@register(
-    HeisenbergXYZ,
     MassGap,
     Infinite,
     method=:closed_form,

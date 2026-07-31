@@ -8,7 +8,7 @@
 
 ## `src` claim
 
-- method `central_diff`, status `exact`, reliability `medium`
+- method `central_diff`, status `approx`, reliability `medium`, refs: Onsager1944
 - Diverges at T_c (ln(1+√2)/2 ≈ 0.4407); finite elsewhere.
 
 ## Corroboration

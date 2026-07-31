@@ -5,24 +5,18 @@
 
 All `(Model, BC)` hubs `src` claims for the **`Energy`** observable.  Empty cells = this model doesn't yet have a `Energy` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-Ground-state / thermal energy expectation.  The type parameter `G` makes the granularity (total vs per-site) a dispatch axis instead of a hidden docstring contract.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
-- **Models with this quantity registered**: 28
-- **Total hubs (Model, BC pairs)**: 38
+- **Models with this quantity registered**: 31
+- **Total hubs (Model, BC pairs)**: 43
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `numerical`, `quadgk`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
 - AshcroftMermin1976 — 4 hubs
+- Hulthen1938 — 4 hubs
 - LiebSchultzMattis1961 — 4 hubs
 - Pfeuty1970 — 4 hubs
-- Hulthen1938 — 3 hubs
 - Kitaev2006 — 3 hubs
 
 ## Model × BC matrix
@@ -34,7 +28,8 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`Cluster1D`](../models/Cluster1D.md) | — | — | 🟢 [hub](../hubs/Cluster1D_Energy_Infinite.md) |
 | [`CurieWeissIsing`](../models/CurieWeissIsing.md) | — | — | 🟠 [hub](../hubs/CurieWeissIsing_Energy_Infinite.md) |
 | [`DMIHeisenberg1D`](../models/DMIHeisenberg1D.md) | — | — | 🟢 [hub](../hubs/DMIHeisenberg1D_Energy_Infinite.md) |
-| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | — |
+| [`HaldaneShastry`](../models/HaldaneShastry.md) | — | — | 🟠 [hub](../hubs/HaldaneShastry_Energy_Infinite.md) |
+| [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/Heisenberg1D_Energy_Infinite.md) |
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | — | 🟢 [hub](../hubs/HeisenbergXYZ_Energy_Infinite.md) |
 | [`Hubbard1D`](../models/Hubbard1D.md) | — | — | 🟠 [hub](../hubs/Hubbard1D_Energy_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | — | — | 🟠 [hub](../hubs/IsingChain1D_Energy_Infinite.md) |
@@ -44,6 +39,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) | — | — | ⚪ [hub](../hubs/KagomeHeisenbergAFM_Energy_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | — | — | 🟢 [hub](../hubs/Kitaev1D_Energy_Infinite.md) |
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_OBC.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_PBC.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_Infinite.md) |
+| [`MajumdarGhosh`](../models/MajumdarGhosh.md) | — | 🟠 [hub](../hubs/MajumdarGhosh_Energy_PBC.md) | 🟠 [hub](../hubs/MajumdarGhosh_Energy_Infinite.md) |
 | [`PXP1D`](../models/PXP1D.md) | — | — | ⚪ [hub](../hubs/PXP1D_Energy_Infinite.md) |
 | [`S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) | — | — | 🔵 [hub](../hubs/S1AnisotropicD1D_Energy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_Infinite.md) |
@@ -55,6 +51,7 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_Energy_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_Energy_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_Energy_Infinite.md) |
 | [`TightBindingV1D`](../models/TightBindingV1D.md) | — | — | 🟢 [hub](../hubs/TightBindingV1D_Energy_Infinite.md) |
+| [`ToricCode`](../models/ToricCode.md) | — | — | ⚪ [hub](../hubs/ToricCode_Energy_Infinite.md) |
 | [`XXZ1D`](../models/XXZ1D.md) | 🟢 [hub](../hubs/XXZ1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/XXZ1D_Energy_Infinite.md) |
 | [`XYh1D`](../models/XYh1D.md) | 🟠 [hub](../hubs/XYh1D_Energy_OBC.md) | — | 🟠 [hub](../hubs/XYh1D_Energy_Infinite.md) |
 

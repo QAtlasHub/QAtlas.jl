@@ -10,17 +10,6 @@
 # ── Infinite analytical rows (closed form) ───────────────────────────
 @register(
     AKLT1D,
-    GroundStateEnergyDensity,
-    Infinite,
-    method=:analytic,
-    cost=:closed_form,
-    reliability=:high,
-    tested_in="test/standalone/test_aklt.jl",
-    references=["AKLT1988"],
-    notes="Closed form e₀ = -2J/3 from the bond-projector decomposition of H.",
-)
-@register(
-    AKLT1D,
     Energy{:per_site},
     Infinite,
     method=:analytic,
@@ -194,7 +183,7 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_aklt_thermal_limits.jl",
     references=["AKLT1988"],
-    notes="β=∞ only: f(∞) = -2J/3, matches GroundStateEnergyDensity at Infinite. Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).",
+    notes="β=∞ only: f(∞) = -2J/3, matches Energy{:per_site} at Infinite. Finite β throws DomainError (use scheme=:htse for the high-T expansion, #506).",
 )
 @register(
     AKLT1D,

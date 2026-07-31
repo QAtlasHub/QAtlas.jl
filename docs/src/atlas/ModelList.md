@@ -25,7 +25,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`Heisenberg1D`](models/Heisenberg1D.md) | — | 26 | `analytic`, `bethe_ansatz`, `cft`, `cft_low_T`, `delegation`, `dense_ed`, `muller_ansatz` | 0 | 12 | 4 | 0 | 10 | feasible | `@su2` |
 | [`HeisenbergXYZ`](models/HeisenbergXYZ.md) | — | 5 | `closed_form`, `delegation`, `xxz_delegation` | 0 | 1 | 1 | 0 | 3 | feasible | `@isotropic`, `@xx`, `@xxz` |
 | [`Honeycomb`](models/Honeycomb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
-| [`Hubbard1D`](models/Hubbard1D.md) | — | 6 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 1 | 0 | 3 | feasible | `@sweep` |
+| [`Hubbard1D`](models/Hubbard1D.md) | — | 5 | `analytic`, `bethe_ansatz`, `jks_qtm_nlie` | 0 | 2 | 1 | 0 | 2 | feasible | `@sweep` |
 | [`IsingChain1D`](models/IsingChain1D.md) | — | 9 | `analytic` | 0 | 7 | 0 | 0 | 2 | feasible | `@ising1d` |
 | [`IsingSquare`](models/IsingSquare.md) | `Ising` | 13 | `analytic`, `central_diff`, `delegation`, `kaufman_free_fermion`, `onsager` | 0 | 7 | 2 | 0 | 4 | feasible | `@onsager` |
 | [`IsingTriangular`](models/IsingTriangular.md) | `Ising` | 10 | `analytic`, `delegation` | 0 | 2 | 0 | 0 | 8 | feasible | `@triangular` |
@@ -118,7 +118,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`MagnetizationX`](quantities/MagnetizationX.md) — 4 models
 - [`MagnetizationY`](quantities/MagnetizationY.md) — 4 models
 - [`MagnetizationZ`](quantities/MagnetizationZ.md) — 5 models
-- [`MassGap`](quantities/MassGap.md) — 27 models
+- [`MassGap`](quantities/MassGap.md) — 26 models
 - [`MerminGHZBound`](quantities/MerminGHZBound.md) — 1 models
 - [`NMRRelaxationExponent`](quantities/NMRRelaxationExponent.md) — 2 models
 - [`NMRSpinRelaxationRate`](quantities/NMRSpinRelaxationRate.md) — 2 models

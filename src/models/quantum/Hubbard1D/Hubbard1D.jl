@@ -220,25 +220,10 @@ function fetch(model::Hubbard1D, ::Energy{:per_site}, ::Infinite; kwargs...)
     return _hubbard1d_e0(model.t, model.U)
 end
 
-"""
-    fetch(model::Hubbard1D, ::MassGap, ::Infinite; type::Symbol=:charge, kwargs...) -> Float64
-
-Lieb–Wu mass gap of the 1D Hubbard chain at half filling.
-
-- `type = :charge` (default): returns the Mott charge gap `Δ_c` (Lieb–Wu 1968; Ovchinnikov 1970).
-- `type = :spin`: returns the spin gap which is rigorously `0.0` (gapless spinons).
-
-Off-half-filling raises a `DomainError`.
-"""
-function fetch(model::Hubbard1D, ::MassGap, ::Infinite; type::Symbol=:charge, kwargs...)
-    _hubbard1d_check_half_filling(model)
-    if type === :charge
-        return _hubbard1d_charge_gap(model.t, model.U)
-    elseif type === :spin
-        return 0.0
-    else
-        throw(ArgumentError("Hubbard1D MassGap type must be :charge or :spin; got :$type"))
-    end
+# `fetch(::Hubbard1D, ::MassGap, ::Infinite)` is GONE (#807). Its `type::Symbol`
+# keyword selected between expressions identical to the `ChargeGap` and `SpinGap`
+# fetches above, so the sector axis was encoded twice and the keyword's DEFAULT
+# silently made "the gap" mean the charge one. Ask for the sector by name.
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

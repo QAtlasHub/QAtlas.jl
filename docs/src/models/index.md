@@ -49,7 +49,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | 5 | 🟣 0 🟢 1 🔵 1 ⚪ 0 🟠 3 | — |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
-| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 6 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 3 | — |
+| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | 5 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 2 | — |
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`TightBinding(Kagome)`](../atlas/models/Kagome.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | 3 | 🟣 0 🟢 0 🔵 0 ⚪ 3 🟠 0 | — |

@@ -206,6 +206,23 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                            velocity and no quantity names it; the TFIM card supplies one \
                            ad hoc from the dispersion. Closing this needs that \
                            measurement to become a quantity.",
+
+    # Became materializable when AbstractQAtlas 0.5.0 folded FermiVelocity /
+    # LuttingerVelocity into `Velocity{K}`: the relation's `v` slot is typed on the
+    # family, and XXZ1D/Infinite is the ONE hub carrying both a Velocity component
+    # (`Velocity{:luttinger}`) and a CentralCharge. Same intended effect as the two
+    # PartitionFunction entries above — a name that was not part of the family could
+    # not fill the slot.
+    #
+    # What is missing is not a quantity but a BOUNDARY CONDITION. Both remaining slots
+    # are supplied values: `L`, a finite system size, and `dE = e₀(L) − e_∞`, the
+    # finite-size correction to the ground-state energy density. At `Infinite` there is
+    # no L, and no hub registers a finite-size energy correction. Closing this needs a
+    # finite-L hub that also knows its c and its velocity — XXZ1D registers both only at
+    # `Infinite`.
+    :CasimirCentralCharge => "both open slots (`L`, `dE = e₀(L) − e_∞`) are supplied \
+                              finite-size values, and the only hub that materializes \
+                              the relation (XXZ1D/Infinite) has no L to give them.",
 )
 
 @testset "AbstractQAtlas relation conformance" begin

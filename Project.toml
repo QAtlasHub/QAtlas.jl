@@ -19,7 +19,7 @@ QAtlasForwardDiffExt = "ForwardDiff"
 QAtlasZygoteExt = "Zygote"
 
 [compat]
-AbstractQAtlas = "0.4.2"
+AbstractQAtlas = "0.4.4"
 Aqua = "0.8"
 ForwardDiff = "0.10, 1"
 KrylovKit = "0.8, 0.9, 0.10"

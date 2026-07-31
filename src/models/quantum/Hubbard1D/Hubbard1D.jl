@@ -206,7 +206,7 @@ function fetch(model::Hubbard1D, ::SpinGap, ::Infinite; kwargs...)
     return 0.0
 end
 
-# ─── Standard quantity wrappers (Energy and MassGap) ──────────────────
+# ─── Standard quantity wrappers (Energy; no MassGap, see #807) ────────
 
 """
     fetch(model::Hubbard1D, ::Energy{:per_site}, ::Infinite; kwargs...) -> Float64

@@ -224,7 +224,6 @@ end
 # keyword selected between expressions identical to the `ChargeGap` and `SpinGap`
 # fetches above, so the sector axis was encoded twice and the keyword's DEFAULT
 # silently made "the gap" mean the charge one. Ask for the sector by name.
-end
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Luttinger parameter at U=0 (free-fermion limit, Phase 2)

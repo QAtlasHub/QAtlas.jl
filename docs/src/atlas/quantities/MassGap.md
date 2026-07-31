@@ -7,9 +7,9 @@ All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cel
 
 ## Coverage
 
-- **Models with this quantity registered**: 27
-- **Total hubs (Model, BC pairs)**: 38
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`, `single_particle_diagonalization`
+- **Models with this quantity registered**: 26
+- **Total hubs (Model, BC pairs)**: 37
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`, `single_particle_diagonalization`
 - **Universality classes** (where applicable): `Ising`
 
 **Top references** (by hub count):
@@ -29,7 +29,6 @@ All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cel
 | [`GrossNeveu`](../models/GrossNeveu.md) | — | — | 🟢 [hub](../hubs/GrossNeveu_MassGap_Infinite.md) |
 | [`Heisenberg1D`](../models/Heisenberg1D.md) | 🟢 [hub](../hubs/Heisenberg1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Heisenberg1D_MassGap_Infinite.md) |
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | — | — | 🟠 [hub](../hubs/HeisenbergXYZ_MassGap_Infinite.md) |
-| [`Hubbard1D`](../models/Hubbard1D.md) | — | — | 🟠 [hub](../hubs/Hubbard1D_MassGap_Infinite.md) |
 | [`KagomeHeisenbergAFM`](../models/KagomeHeisenbergAFM.md) | — | — | ⚪ [hub](../hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_OBC.md) | — | 🟢 [hub](../hubs/Kitaev1D_MassGap_Infinite.md) |
 | [`KitaevHeisenberg`](../models/KitaevHeisenberg.md) | — | — | 🟢 [hub](../hubs/KitaevHeisenberg_MassGap_Infinite.md) |

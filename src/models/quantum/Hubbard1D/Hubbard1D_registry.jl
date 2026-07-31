@@ -16,17 +16,14 @@
     references=["LiebWu1968", "Essler2005"],
     notes="Lieb-Wu integral E₀/N = -4t ∫₀^∞ J₀(ω) J₁(ω) / [ω (1+exp(ωU/2t))] dω at half filling (μ=U/2).",
 )
-@register(
-    Hubbard1D,
-    MassGap,
-    Infinite,
-    method=:bethe_ansatz,
-    cost=:polynomial,
-    reliability=:high,
-    tested_in="test/models/quantum/misc/test_hubbard1d.jl",
-    references=["LiebWu1968", "Essler2005", "Ovchinnikov1970"],
-    notes="Lieb-Wu charge gap (default, type=:charge) Δ_c = (16t²/U) ∫₁^∞ √(ω²-1)/sinh(2πtω/U) dω or spin gap (type=:spin) which is 0.0 at half filling.",
-)
+# No `MassGap` row here, deliberately (#807).  "The gap" is genuinely ambiguous for
+# this model — the charge sector is gapped by U and the spin sector is rigorously
+# gapless — and both unambiguous names are registered below.  The row that used to sit
+# here selected between them with a `type::Symbol=:charge` keyword whose two branches
+# were the SAME EXPRESSIONS as the `ChargeGap` and `SpinGap` fetches, so it encoded the
+# sector axis a second time and made a bare `fetch(m, MassGap(), Infinite())` return the
+# Mott gap for a model whose spectral gap (AbstractQAtlas: `Δ = E₁ − E₀`) is 0.
+# Asking for `:gap` here now raises, which is the honest answer: name the sector.
 
 @register(
     Hubbard1D,

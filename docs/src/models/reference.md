@@ -35,7 +35,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`GrossNeveu`](../atlas/models/GrossNeveu.md) | GrossNeveu1974, AndreiLowenstein1979 |
 | [`HeisenbergXYZ`](../atlas/models/HeisenbergXYZ.md) | YangYang1966, LiebSchultzMattis1961, Baxter1972, LutherPeschel1975, McCoyWu1978 |
 | [`TightBinding(Honeycomb)`](../atlas/models/Honeycomb.md) |  |
-| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | LiebWu1968, Essler2005, Ovchinnikov1970, Voit1995, JuttnerKlumperSuzuki1998 |
+| [`Hubbard1D`](../atlas/models/Hubbard1D.md) | LiebWu1968, Essler2005, Voit1995, JuttnerKlumperSuzuki1998 |
 | [`J1J2Heisenberg1D`](../atlas/models/J1J2Heisenberg1D.md) | Hulthen1938, MajumdarGhosh1969, WhiteAffleck1996 |
 | [`TightBinding(Kagome)`](../atlas/models/Kagome.md) |  |
 | [`KagomeHeisenbergAFM`](../atlas/models/KagomeHeisenbergAFM.md) | YanHuseWhite2011, DepenbrockMcCullochSchollwock2012, IqbalBeccaSorellaPoilblanc2013, KitaevPreskill2006, LevinWen2006, JiangWangBalents2012 |

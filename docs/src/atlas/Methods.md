@@ -369,14 +369,6 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`Heisenberg1D/SpecificHeat/Infinite`](hubs/Heisenberg1D_SpecificHeat_Infinite.md)
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](hubs/Heisenberg1D_ThermalEntropy_Infinite.md)
 
-## `bethe_ansatz` - 5 hubs
-
-- 🟠 [`Heisenberg1D/Energy/Infinite`](hubs/Heisenberg1D_Energy_Infinite.md)
-- 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
-- 🟠 [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md)
-- 🟠 [`Hubbard1D/MassGap/Infinite`](hubs/Hubbard1D_MassGap_Infinite.md)
-- 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
-
 ## `cft` - 5 hubs
 
 - 🟠 [`Heisenberg1D/ConformalTower/PBC`](hubs/Heisenberg1D_ConformalTower_PBC.md)
@@ -384,6 +376,13 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟠 [`TFIM/ConformalTower/PBC`](hubs/TFIM_ConformalTower_PBC.md)
 - 🟠 [`TFIM/RenyiEntropy/Infinite`](hubs/TFIM_RenyiEntropy_Infinite.md)
 - 🟠 [`TFIM/VonNeumannEntropy/Infinite`](hubs/TFIM_VonNeumannEntropy_Infinite.md)
+
+## `bethe_ansatz` - 4 hubs
+
+- 🟠 [`Heisenberg1D/Energy/Infinite`](hubs/Heisenberg1D_Energy_Infinite.md)
+- 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md)
+- 🟠 [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md)
+- 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
 
 ## `closed_form` - 4 hubs
 

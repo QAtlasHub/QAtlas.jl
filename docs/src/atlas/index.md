@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 384 |
-| ED-feasible claimed (risk denominator) | 358 |
+| Hubs `src` claims (registry) | 383 |
+| ED-feasible claimed (risk denominator) | 357 |
 | ED-infeasible claimed (frontier, excluded) | 26 |
 | 🟣 universality-corroborated | 0 |
 | 🟢 corroborated-at-p | 175 |
 | 🔵 coherent | 40 |
 | ⚪ cited-only (frontier — neutral) | 18 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 151 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 150 |
 | Inventory cards scanned (whole test/) | 2806 |
 | Registry files parsed | 83 / 83 |
 | Models | 67 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **48.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **60.1%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **49.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **60.2%**
 
 ## Browse by facet
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "151 actionable hub(s)"
+!!! warning "150 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`AKLT1D/SpinCorrelation/Infinite`](hubs/AKLT1D_SpinCorrelation_Infinite.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
@@ -103,7 +103,6 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md)
     - [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md)
     - [`Hubbard1D/FreeEnergy/Infinite`](hubs/Hubbard1D_FreeEnergy_Infinite.md)
-    - [`Hubbard1D/MassGap/Infinite`](hubs/Hubbard1D_MassGap_Infinite.md)
     - [`IsingChain1D/Energy/Infinite`](hubs/IsingChain1D_Energy_Infinite.md)
     - [`IsingChain1D/Magnetization/Infinite`](hubs/IsingChain1D_Magnetization_Infinite.md)
     - [`IsingSquare/CriticalExponents/Infinite`](hubs/IsingSquare_CriticalExponents_Infinite.md)
@@ -236,7 +235,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `Heisenberg1D` | 26 | 0 | 12 | 4 | 0 | 10 | feasible |
 | `HeisenbergXYZ` | 5 | 0 | 1 | 1 | 0 | 3 | feasible |
 | `Honeycomb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
-| `Hubbard1D` | 6 | 0 | 2 | 1 | 0 | 3 | feasible |
+| `Hubbard1D` | 5 | 0 | 2 | 1 | 0 | 2 | feasible |
 | `IsingChain1D` | 9 | 0 | 7 | 0 | 0 | 2 | feasible |
 | `IsingSquare` | 13 | 0 | 7 | 2 | 0 | 4 | feasible |
 | `IsingTriangular` | 10 | 0 | 2 | 0 | 0 | 8 | feasible |
@@ -286,7 +285,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `ZnParafermion` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 
-## Hubs (384) — select to drill down
+## Hubs (383) — select to drill down
 
 ### `AKLT1D` (18)
 
@@ -435,13 +434,12 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`Honeycomb/TightBindingChecksum/Infinite`](hubs/Honeycomb_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Honeycomb/TightBindingMaxEnergy/Infinite`](hubs/Honeycomb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 
-### `Hubbard1D` (6)
+### `Hubbard1D` (5)
 
 - 🔵 [`Hubbard1D/ChargeGap/Infinite`](hubs/Hubbard1D_ChargeGap_Infinite.md) — coherent
 - 🟠 [`Hubbard1D/Energy/Infinite`](hubs/Hubbard1D_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Hubbard1D/FreeEnergy/Infinite`](hubs/Hubbard1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Hubbard1D/LuttingerParameter/Infinite`](hubs/Hubbard1D_LuttingerParameter_Infinite.md) — corroborated-at-p
-- 🟠 [`Hubbard1D/MassGap/Infinite`](hubs/Hubbard1D_MassGap_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Hubbard1D/SpinGap/Infinite`](hubs/Hubbard1D_SpinGap_Infinite.md) — corroborated-at-p
 
 ### `IsingChain1D` (9)

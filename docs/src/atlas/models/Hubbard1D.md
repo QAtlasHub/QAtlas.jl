@@ -27,8 +27,8 @@ All `(Quantity, BC)` hubs `src` claims for **`Hubbard1D`**.  Cells link to the p
 | 🟢 corroborated-at-p | 2 |
 | 🔵 coherent | 1 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 3 |
-| **total claimed hubs** | **6** |
+| 🟠 uncorroborated-but-feasible | 2 |
+| **total claimed hubs** | **5** |
 
 **Methods** (from `@register`, derived): `analytic`, `bethe_ansatz`, `jks_qtm_nlie`
 
@@ -40,7 +40,6 @@ All `(Quantity, BC)` hubs `src` claims for **`Hubbard1D`**.  Cells link to the p
 | [`Energy`](../quantities/Energy.md) | 🟠 [hub](../hubs/Hubbard1D_Energy_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟠 [hub](../hubs/Hubbard1D_FreeEnergy_Infinite.md) |
 | [`LuttingerParameter`](../quantities/LuttingerParameter.md) | 🟢 [hub](../hubs/Hubbard1D_LuttingerParameter_Infinite.md) |
-| [`MassGap`](../quantities/MassGap.md) | 🟠 [hub](../hubs/Hubbard1D_MassGap_Infinite.md) |
 | [`SpinGap`](../quantities/SpinGap.md) | 🟢 [hub](../hubs/Hubbard1D_SpinGap_Infinite.md) |
 
 ## Derivation notes
@@ -59,7 +58,6 @@ Canonical = false
 Essler2005
 JuttnerKlumperSuzuki1998
 LiebWu1968
-Ovchinnikov1970
 Voit1995
 ```
 

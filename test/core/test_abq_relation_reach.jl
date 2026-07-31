@@ -31,7 +31,9 @@ using AbstractQAtlas:
     @test any(r -> r isa CasimirCentralCharge, applicable_relations(b; dE=dE, L=L))
     # ...and the family slot resolves to the LUTTINGER component, not to some
     # anonymous velocity — the row names which velocity it used.
-    rows = [r for r in relation_report(b; dE=dE, L=L) if r.relation isa CasimirCentralCharge]
+    rows = [
+        r for r in relation_report(b; dE=dE, L=L) if r.relation isa CasimirCentralCharge
+    ]
     @test length(rows) == 1
     @test rows[1].subject.type === Velocity{:luttinger}
     # solving back through the family slot needs the component named (ABQ §8a)

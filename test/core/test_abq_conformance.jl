@@ -304,6 +304,49 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                               the relation (XXZ1D/Infinite) has no L to give them.",
 )
 
+# Every identity-slot kind the accounting knows how to classify.  A slot that is
+# none of these is not "a relation with no quantity" — it is a slot type this test
+# does not understand, and the difference is invisible in the bucket counts.
+function _slot_kind(T)
+    T === nothing && return :supplied          # untyped value, supplied by the caller
+    T isa Type || return :UNRECOGNISED
+    QAtlas._quantity_slot(T) === nothing || return :quantity
+    T <: ABQ.AbstractField && return :field
+    T <: ABQ.AbstractCoordinate && return :coordinate
+    T <: ABQ.AbstractExponent && return :exponent
+    return :UNRECOGNISED
+end
+
+@testset "nothing lands in no_quantity_slot for an unclassifiable reason" begin
+    # `no_quantity_slot` is a QUEUE (relations needing a differently-shaped
+    # generator), reported by the @info below and deliberately not frozen: 67 of the
+    # 140 relations are in it, and most permanently — a scaling law between critical
+    # exponents will never have a quantity slot.  Freezing that list would be noise.
+    #
+    # What IS worth asserting is the REASON.  A relation belongs there because its
+    # slots are supplied values or non-quantity identities; it must never be there
+    # because the accounting failed to recognise a slot type.  That is exactly how
+    # `EachOf{AbstractVelocity}` landed in the bucket before #823 — a Type, not a
+    # quantity, not a field/coordinate/exponent, and silently uncounted.  MEASURED
+    # today: 180 supplied slots and 6 field slots, zero unrecognised.
+    unrecognised = String[]
+    bucket = 0
+    for rel in ABQ.all_relations()
+        slots = ABQ.variable_slots(rel)
+        any(((_, T),) -> _is_quantity_slot(T), slots) && continue
+        bucket += 1
+        for (n, T) in slots
+            _slot_kind(T) === :UNRECOGNISED &&
+                push!(unrecognised, "$(nameof(typeof(rel))).$n :: $T")
+        end
+    end
+    @test bucket > 10                       # not vacuous: the bucket really is populated
+    isempty(unrecognised) || @error "slot types the conformance accounting cannot \
+                                     classify — a relation is being counted as \
+                                     \"no quantity slot\" for an unknown reason" unrecognised
+    @test isempty(unrecognised)
+end
+
 @testset "AbstractQAtlas relation conformance" begin
     hubs = _hub_quantities()
     @test !isempty(hubs)

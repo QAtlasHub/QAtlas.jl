@@ -37,6 +37,27 @@ const _THERMO_DERIVATIVE_EXCLUSIONS = [
     HaldaneShastry => "Infinite-BC thermodynamics returns NaN outside its low-T validity window, same CFT-expansion guard as Heisenberg1D",
 ]
 
+# ── v ≥ 0 ─────────────────────────────────────────────────────────────
+# The first edge over a QUANTIFIED GROUP slot (`EachOf{AbstractVelocity}`,
+# AbstractQAtlas design §8c).  Every member of that group is a propagation SPEED,
+# and every relation consuming one requires it positive — `ξ = v/Δ` would give a
+# negative correlation length, the CFT finite-size forms a negative gap.  A measured
+# `v < 0` is a sign error in a dispersion derivative.
+#
+# The group is expanded by `_group_members` rather than `_family_members`: an
+# abstract group's members are DIFFERENT quantities, most with no `component` to
+# declare, and the component filter returns empty for them (#823).
+#
+# MEASURED: 3 group members are registered somewhere (Velocity{:luttinger},
+# FermiVelocity, LiebRobinsonVelocity) across 4 hubs, and all 4 pass — no
+# exclusions.  No sweep: these are T = 0 characteristic velocities.
+@bound_edge(
+    :velocity_positivity,
+    inequality = VelocityPositivity,
+    finite_N = 6,
+    notes = "Every characteristic velocity is a propagation speed, so v ≥ 0; a negative value is a sign error in a dispersion derivative.",
+)
+
 # ── Δ ≥ 0 ─────────────────────────────────────────────────────────────
 # The spectral gap is non-negative because `Δ = E₁ − E₀` and `E₀` is by definition
 # the lowest level, so this is airtight rather than a modelling assumption — and it

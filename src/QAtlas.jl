@@ -140,6 +140,7 @@ using AbstractQAtlas:
     SpecificHeatPositivity,
     SusceptibilityPositivity,
     MassGapPositivity,
+    VelocityPositivity,
     CarrierDensity,
     EffectiveMass,
     HallCoefficient,

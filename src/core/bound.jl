@@ -108,7 +108,10 @@ function bound!(
     slots = variable_slots(ineq)
     # `variable_slots` yields (name, type-or-nothing) pairs directly — do NOT wrap
     # it in `pairs()`, which would re-key them by integer index.
-    typed = [(n, T) for (n, T) in slots if T !== nothing]
+    # A quantified slot (`EachOf{AbstractVelocity}`) is stored UNWRAPPED, as the
+    # group: the wrapper is `isconcretetype`, so leaving it in place would make the
+    # generator hunt for a hub implementing `EachOf{...}` and silently find none.
+    typed = [(n, something(_slot_group(T), T)) for (n, T) in slots if T !== nothing]
     untyped = [n for (n, T) in slots if T === nothing]
     isempty(typed) && throw(
         ArgumentError(
@@ -172,13 +175,47 @@ function _bound_outcome(slack::Real; atol::Real, detail::String="")
     return CheckOutcome(status, s, 0.0, violation, violation, detail)
 end
 
-# A family slot (`Susceptibility`) stands for every concrete member; a concrete
-# slot stands for itself.  Returns the per-slot candidate lists, in a
-# deterministic order, so the generated ids are stable across runs.
+# A family slot (`Susceptibility`) or an abstract GROUP stands for every concrete
+# member; a concrete slot stands for itself.  Returns the per-slot candidate lists,
+# in a deterministic order, so the generated ids are stable across runs.
+#
+# Two traps here, both of which produce an edge that generates ZERO checks and says
+# nothing about it — strictly worse than not wiring the relation at all:
+#
+#   * `isconcretetype(EachOf{AbstractVelocity})` is TRUE (it is a struct with a
+#     fixed parameter), so a quantified slot would be taken for a concrete quantity
+#     type that no hub implements.  `e.quantities` therefore stores the unwrapped
+#     GROUP — see `bound!` — and never the wrapper.
+#   * `_family_members` filters on `component(...) !== nothing`, which is the
+#     PARAMETRIC-family notion.  Measured: it returns EMPTY for `AbstractVelocity`
+#     and, less obviously, for the parametric `Velocity` too, because no velocity
+#     type declares a component.  A group needs "registered concrete subtypes",
+#     which is what `_group_members` gives.
 function _bound_slot_candidates(e::BoundEdge)
     return map(values(e.quantities)) do Q
-        return isconcretetype(Q) ? Type[Q] : sort!(_family_members(Q); by=string)
+        isconcretetype(Q) && return Type[Q]
+        members = _family_members(Q)
+        isempty(members) && (members = _group_members(Q))
+        return sort!(members; by=string)
     end
+end
+
+"""
+    _group_members(group::Type) -> Vector{Type}
+
+Every CONCRETE quantity type registered on some hub that subtypes `group`.
+
+The group counterpart of [`_family_members`](@ref): no `component` filter, because
+an abstract group's members are different quantities rather than one quantity at
+different indices, and most of them have no component to declare.
+"""
+function _group_members(group::Type)
+    members = Type[]
+    for e in REGISTRY
+        e.quantity <: group && isconcretetype(e.quantity) || continue
+        e.quantity in members || push!(members, e.quantity)
+    end
+    return sort!(members; by=string)
 end
 
 function bound_checks()

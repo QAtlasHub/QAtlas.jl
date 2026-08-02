@@ -72,11 +72,17 @@ end
 # supertype (family slots such as `Susceptibility` cover `Susceptibility{(:x,:x)}`).
 _satisfies(have::Set{Type}, q::Type) = any(h -> h <: q || q <: h, have)
 
-# Lifted from core/response.jl so the two cannot drift apart.
-_is_quantity_slot(T) = (T isa Type && T <: QAtlas.AbstractQuantity)
+# DELEGATED to core/response.jl rather than lifted, so the two cannot drift apart at
+# all — the copy did drift once (#823): it missed the `EachOf`/`AnyOf` unwrap and put
+# every group-declared relation in the never-asserted `no_quantity_slot` bucket.
+_is_quantity_slot(T) = QAtlas._quantity_slot(T) !== nothing
 
 function _quantity_slots(rel)
-    return [(n, T) for (n, T) in ABQ.variable_slots(rel) if _is_quantity_slot(T)]
+    # the unwrapped GROUP for a quantified slot, the type itself otherwise
+    return [
+        (n, QAtlas._quantity_slot(T)) for
+        (n, T) in ABQ.variable_slots(rel) if _is_quantity_slot(T)
+    ]
 end
 _untyped_slots(rel) = [n for (n, T) in ABQ.variable_slots(rel) if T === nothing]
 

@@ -125,7 +125,22 @@ Every declared response edge, in declaration order.
 const RESPONSES = ResponseEdge[]
 
 # The quantity type behind a slot, or `nothing` if the slot is a field/untyped.
-_quantity_slot(T) = (T isa Type && T <: AbstractQuantity) ? T : nothing
+#
+# A slot may be QUANTIFIED over an abstract group (AbstractQAtlas design §8c):
+# `v::EachOf{AbstractVelocity}` means "every member", `AnyOf{G}` means "one member,
+# named by the caller".  The wrapper is not itself a quantity, so an un-unwrapped
+# test reports "no quantity slot" for a relation that is entirely about quantities —
+# which puts it in the conformance test's `no_quantity_slot` bucket, and that bucket
+# is reported but never asserted.  A relation over a group would therefore be
+# invisible to the accounting that exists to stop relations being silently unwired
+# (#823).  AbstractQAtlas had the same bug one layer up, in `bounds_on` (ABQ#134):
+# every place that asks "is this slot a quantity, and which one?" needs the unwrap.
+_slot_group(T) = AbstractQAtlas._group(T)
+function _quantity_slot(T)
+    g = _slot_group(T)
+    g === nothing || return (g isa Type && g <: AbstractQuantity) ? g : nothing
+    return (T isa Type && T <: AbstractQuantity) ? T : nothing
+end
 _field_slot(T) = (T isa Type && T <: AbstractQAtlas.AbstractField) ? T : nothing
 
 """

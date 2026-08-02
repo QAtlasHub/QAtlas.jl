@@ -577,29 +577,6 @@ here so `src/core/alias.jl` can reference it without circular loads.
 """
 struct E8Spectrum <: AbstractQuantity end
 
-"""
-    EdgeModeEnergy() <: AbstractQuantity
-
-Energy of the lowest-lying boundary mode on an open chain.  In a
-topological 1D superconductor (Kitaev 2001) the OBC chain hosts two
-Majorana zero modes at the chain ends; their hybridization energy
-decays exponentially with chain length,
-
-```math
-E_\\text{edge}(N) \\sim e^{-N/\\xi},
-```
-
-where `ξ` is the bulk correlation length.  In the trivial phase the
-OBC lowest single-particle excitation is set by the bulk gap.
-
-`EdgeModeEnergy` is the smallest positive BdG eigenvalue of the OBC
-chain — the same quantity as [`MassGap`](@ref) at `OBC`, exposed under
-a name that makes the boundary-mode interpretation explicit at the
-call site.
-
-Currently used by [`Kitaev1D`](@ref).
-"""
-struct EdgeModeEnergy <: AbstractQuantity end
 # ─── Quench dynamics: Loschmidt echo / DQPT rate function ──────────────
 
 # Loschmidt-echo family for sudden-quench dynamics.  After preparing `|ψ_0⟩` as

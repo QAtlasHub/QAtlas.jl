@@ -69,18 +69,11 @@
     method=:bdg,
     reliability=:high,
     tested_in="test/standalone/test_kitaev1d.jl",
-    references=["Kitaev2001"],
-    notes="Smallest non-negative BdG eigenvalue (Majorana edge mode in topological phase).",
-)
-@register(
-    Kitaev1D,
-    EdgeModeEnergy,
-    OBC,
-    method=:bdg,
-    reliability=:high,
-    tested_in="test/standalone/test_kitaev1d.jl",
     references=["Kitaev2001", "Alicea2012"],
-    notes="Same value as MassGap@OBC; named for the Majorana boundary-mode interpretation.",
+    notes="Smallest non-negative BdG eigenvalue. In the topological phase this IS the " *
+          "Majorana boundary-mode energy, splitting ~ e^{-N/xi}; in the trivial phase it " *
+          "converges to the bulk gap. That reading is an interpretation of this value in " *
+          "a phase, not a second quantity (#816 deleted EdgeModeEnergy, which duplicated it).",
 )
 @register(
     Kitaev1D,

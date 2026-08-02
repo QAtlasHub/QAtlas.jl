@@ -68,7 +68,6 @@ Currently registered fetches:
 | [`ExactSpectrum`](@ref)    | `OBC`              | Non-negative single-particle energies via dense diagonalization       |
 | [`Energy`](@ref)           | `Infinite`         | Ground-state energy density via Gauss-Kronrod dispersion integral     |
 | [`MassGap`](@ref)          | `Infinite` / `OBC` | Single-particle gap                                                   |
-| [`EdgeModeEnergy`](@ref)    | `OBC`              | Lowest-lying boundary mode energy                                     |
 | [`CorrelationLength`](@ref)| `Infinite`         | Inverse of single-particle gap                                        |
 | [`TopologicalInvariant`](@ref) | `Infinite`     | Winding number of the chiral off-diagonal loop                        |
 | [`FreeEnergy`](@ref)        | `Infinite`         | Thermal Helmholtz free energy density                                 |
@@ -191,8 +190,8 @@ single-particle energy `min_k |q(k)|`:
 
 (the minimum sits at `k = π` when `vw > 0` and at `k = 0` when `vw < 0`; for
 same-sign hoppings this reduces to `|v − w|`).  This Fermi-level-to-band-edge
-gap equals the smallest non-negative OBC eigenvalue ([`MassGap`](@ref) /
-[`EdgeModeEnergy`](@ref) at `OBC`); the full particle-hole *band* gap
+gap equals the smallest non-negative OBC eigenvalue ([`MassGap`](@ref) at
+`OBC`); the full particle-hole *band* gap
 `E_+ − E_−` is twice this.  Vanishes on the gapless line `|v| = |w|`.
 """
 fetch(model::SSH, ::MassGap, ::Infinite; kwargs...) = abs(abs(model.v) - abs(model.w))
@@ -201,33 +200,17 @@ fetch(model::SSH, ::MassGap, ::Infinite; kwargs...) = abs(abs(model.v) - abs(mod
     fetch(model::SSH, ::MassGap, bc::OBC; N::Int) -> Float64
 
 Single-particle gap of the `N`-cell OBC SSH chain — the smallest non-negative
-single-particle eigenvalue.  In the topological phase this is the edge-mode
-splitting `~ e^{−N/ξ}` (numerically equal to [`EdgeModeEnergy`](@ref) at `OBC`);
-in the trivial phase it converges to the single-particle gap `|v − w|` as
-`N → ∞`.
+single-particle eigenvalue.
+
+In the topological phase (`|w| > |v|`) this IS the edge-mode splitting: the two
+end-localised zero modes hybridise as `~ e^{−N/ξ}`, and exactly `0` at the
+`v = 0` sweet spot, where the end sites decouple.  In the trivial phase the same
+number converges to the single-particle gap `|v − w|` as `N → ∞`.
+
+The boundary-mode reading is an *interpretation of this value in a phase*, not a
+second quantity — it is recorded on the registry row (#816).
 """
 function fetch(model::SSH, ::MassGap, bc::OBC; kwargs...)
-    N = _bc_size(bc, kwargs)
-    return _ssh_obc_spectrum(N, model.v, model.w)[1]
-end
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# Edge-mode energy (OBC) — same value as MassGap@OBC, named for boundary modes
-# ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    fetch(model::SSH, ::EdgeModeEnergy, bc::OBC; N::Int) -> Float64
-
-Energy of the lowest-lying boundary mode on an `N`-cell OBC SSH chain — the
-smallest non-negative single-particle eigenvalue.
-
-In the topological phase (`|w| > |v|`) the two end-localised zero modes
-hybridise with exponentially-small splitting `~ e^{−N/ξ}`, exactly `0` at the
-`v = 0` sweet spot (the two end sites decouple).  Numerically equal to
-`fetch(model, MassGap(), OBC(N))`; the two names exist so call sites can be
-explicit about the boundary-mode interpretation.
-"""
-function fetch(model::SSH, ::EdgeModeEnergy, bc::OBC; kwargs...)
     N = _bc_size(bc, kwargs)
     return _ssh_obc_spectrum(N, model.v, model.w)[1]
 end

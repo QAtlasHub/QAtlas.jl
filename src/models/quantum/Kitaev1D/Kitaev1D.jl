@@ -244,7 +244,8 @@ Closed form (for `t ≠ 0`, `Δ ≠ 0`):
 returns `0.0` in that case.
 
 `MassGap` at `OBC` is provided as the smallest non-negative BdG
-eigenvalue (numerically equal to [`EdgeModeEnergy`](@ref) at `OBC`).
+eigenvalue — in the topological phase that same number is the Majorana
+boundary-mode splitting.
 """
 function fetch(model::Kitaev1D, ::MassGap, ::Infinite; kwargs...)
     μ = model.μ
@@ -279,10 +280,14 @@ end
 Single-quasiparticle gap of the `N`-site OBC Kitaev1D chain — the
 smallest non-negative BdG eigenvalue of the 2N × 2N BdG matrix.
 
-In the topological phase this is the Majorana edge-mode energy
-`~ e^{-N/ξ}` (use [`EdgeModeEnergy`](@ref) for the same value under a
-boundary-mode-explicit name).  In the trivial phase it converges to the
-bulk gap as `N → ∞`.
+In the topological phase (`|μ| < 2|t|`, `Δ ≠ 0`) this IS the Majorana
+edge-mode energy: the two end-localised Majorana modes hybridise into a
+single complex fermion whose splitting decays as `~ e^{-N/ξ}`, with
+`ξ ~ 1/log(2|t|/|μ|)` for `|μ| ≪ 2|t|`.  In the trivial phase the same
+number converges to the bulk gap as `N → ∞`.
+
+The boundary-mode reading is an *interpretation of this value in a
+phase*, not a second quantity — it is recorded on the registry row (#816).
 """
 function fetch(model::Kitaev1D, ::MassGap, bc::OBC; kwargs...)
     if model.Δ == 0.0 && abs(model.μ) < 2 * abs(model.t)
@@ -291,40 +296,6 @@ function fetch(model::Kitaev1D, ::MassGap, bc::OBC; kwargs...)
             "regime — the dispersion has zeros at k_F = ±arccos(-μ/2t) and the " *
             "BdG spectrum lowest level is a finite-size remnant of those Fermi " *
             "points, not a physical gap.  Refusing to silently mask this with a " *
-            "misleading number; re-evaluate with Δ ≠ 0.",
-        )
-    end
-    N = _bc_size(bc, kwargs)
-    Λ = _kitaev1d_bdg_spectrum(N, model.μ, model.t, model.Δ)
-    return Λ[1]
-end
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# Edge-mode energy (OBC) — same value as MassGap@OBC, named for boundary modes
-# ═══════════════════════════════════════════════════════════════════════════════
-
-"""
-    fetch(model::Kitaev1D, ::EdgeModeEnergy, bc::OBC; N::Int) -> Float64
-
-Energy of the lowest-lying boundary mode on an `N`-site OBC Kitaev1D
-chain — the smallest non-negative BdG eigenvalue.
-
-In the topological phase (`|μ| < 2|t|`, `Δ ≠ 0`) the two end-localised
-Majorana modes hybridise into a single complex fermion with
-exponentially-small splitting `~ e^{-N/ξ}` where `ξ ~ 1/log(2|t|/|μ|)`
-for `|μ| ≪ 2|t|`.
-
-Numerically equal to `fetch(model, MassGap(), OBC(N))`; the two methods
-exist as separate names so call sites can be explicit about which
-physical interpretation they have in mind.
-"""
-function fetch(model::Kitaev1D, ::EdgeModeEnergy, bc::OBC; kwargs...)
-    if model.Δ == 0.0 && abs(model.μ) < 2 * abs(model.t)
-        return error(
-            "Kitaev1D EdgeModeEnergy@OBC: Δ = 0 with |μ| < 2|t| is the gapless " *
-            "metal regime — there is no SC pairing, no topological invariant, " *
-            "and no Majorana edge modes; the BdG-spectrum lowest level is a " *
-            "finite-size Fermi-point remnant.  Refusing to mask this with a " *
             "misleading number; re-evaluate with Δ ≠ 0.",
         )
     end

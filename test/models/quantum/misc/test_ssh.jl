@@ -18,7 +18,6 @@ using QAtlas:
     MassGap,
     CorrelationLength,
     TopologicalInvariant,
-    EdgeModeEnergy,
     OBC,
     Infinite,
     fetch
@@ -47,25 +46,28 @@ using QAtlas:
         end
     end
 
-    @testset "EdgeModeEnergy/OBC == MassGap/OBC (definitional identity)" begin
+    @testset "MassGap@OBC is the smallest ExactSpectrum entry" begin
         m = SSH(; v=0.4, w=1.0)
         N = 32
-        @test fetch(m, EdgeModeEnergy(), OBC(N)) == fetch(m, MassGap(), OBC(N))
-        # MassGap@OBC is the smallest ExactSpectrum entry.
         @test fetch(m, MassGap(), OBC(N)) == fetch(m, ExactSpectrum(), OBC(N))[1]
     end
 
     @testset "topological vs trivial OBC edge mode (w>v vs v>w)" begin
+        # #816: this used to be phrased on `EdgeModeEnergy`, a second name for
+        # `MassGap@OBC`. The name is gone; the PHYSICS it stood for is what the
+        # assertions below actually check, and they are the reason the reading is
+        # worth recording at all — the same number means edge splitting in one
+        # phase and the bulk gap in the other.
+        #
         # Topological (w>v): edge mode ≪ bulk gap and shrinks with N.
         topo = SSH(; v=0.4, w=1.0)
-        e20 = fetch(topo, EdgeModeEnergy(), OBC(20))
-        e40 = fetch(topo, EdgeModeEnergy(), OBC(40))
+        e20 = fetch(topo, MassGap(), OBC(20))
+        e40 = fetch(topo, MassGap(), OBC(40))
         @test e40 < 1e-3                         # ≪ single-particle gap |v-w| = 0.6
         @test e40 < e20                          # exponential decay in N
         # Trivial (v>w): lowest OBC level is of order the bulk gap (no edge mode).
         triv = SSH(; v=1.0, w=0.4)
-        @test fetch(triv, EdgeModeEnergy(), OBC(40)) >
-            0.5 * fetch(triv, MassGap(), Infinite())
+        @test fetch(triv, MassGap(), OBC(40)) > 0.5 * fetch(triv, MassGap(), Infinite())
     end
 
     @testset "CorrelationLength gapless-line: ξ = Inf (structural)" begin
@@ -226,12 +228,12 @@ end
         refs=["SSH 1979 opposite-sign: ξ = 1/||v|−|w|| = 1/0.2 = 5"],
     )
 
-    # EdgeModeEnergy OBC at the topological sweet spot (v=0): the end sites
-    # decouple, so the boundary zero modes are EXACT for any N.
+    # MassGap@OBC at the topological sweet spot (v=0): the end sites decouple,
+    # so the boundary zero modes are EXACT for any N.  (#816: was EdgeModeEnergy.)
     for N in (6, 8, 16, 32)
         verify(
             SSH(; v=0.0, w=1.0),
-            EdgeModeEnergy(),
+            MassGap(),
             OBC(N);
             route=:second_closed_form,
             independent=0.0,

@@ -37,6 +37,32 @@ const _THERMO_DERIVATIVE_EXCLUSIONS = [
     HaldaneShastry => "Infinite-BC thermodynamics returns NaN outside its low-T validity window, same CFT-expansion guard as Heisenberg1D",
 ]
 
+# ── Δ ≥ 0 ─────────────────────────────────────────────────────────────
+# The spectral gap is non-negative because `Δ = E₁ − E₀` and `E₀` is by definition
+# the lowest level, so this is airtight rather than a modelling assumption — and it
+# fails in a way no equality identity can catch: a negative gap means the reported
+# "ground state" was not one (a variational state above a level the solver missed,
+# or two levels ordered wrongly), which two equally-wrong quantities would still
+# satisfy an identity between themselves.
+#
+# The widest edge in this file: 37 hubs register a MassGap.  MEASURED before
+# declaring (see the exclusion below) — 36 of the 37 pass at default parameters,
+# none returns a non-finite or negative value, and the one failure is a missing
+# required kwarg rather than a physics disagreement.
+#
+# NO SWEEP, deliberately.  MassGap is a T = 0 spectral quantity; measured with
+# `beta = 0.5` and `beta = 2.0` the results are identical to the no-kwarg call on
+# every hub, so a beta sweep would triple the check count for the same numbers.
+@bound_edge(
+    :mass_gap_positivity,
+    inequality = MassGapPositivity,
+    finite_N = 6,
+    exclusions = [
+        GrossNeveu => "MassGap fetch takes a required cutoff kwarg `Λ` (UndefKeywordError without it); the generator's sweep grid is hub-generic and has no value to supply",
+    ],
+    notes = "Δ = E₁ − E₀ ≥ 0 by definition of the ground state; a negative value means the reported ground state was not one.",
+)
+
 # ── C_v ≥ 0 ───────────────────────────────────────────────────────────
 # Thermodynamic stability: the specific heat is a variance (β²·Var(E)) and so
 # cannot be negative for any equilibrium state at any β.  Exact at every N, so

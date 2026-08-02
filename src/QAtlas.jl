@@ -139,6 +139,7 @@ using AbstractQAtlas:
     # the inequalities bound_registry.jl declares edges for
     SpecificHeatPositivity,
     SusceptibilityPositivity,
+    MassGapPositivity,
     CarrierDensity,
     EffectiveMass,
     HallCoefficient,

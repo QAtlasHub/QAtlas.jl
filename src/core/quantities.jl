@@ -56,13 +56,6 @@ component(::Type{<:AbstractQuantity}) = nothing
 # stub now live in AbstractQAtlas (#734) -- imported in src/QAtlas.jl.  The
 # BC-granularity `fetch` routing methods below dispatch on the imported symbols.
 
-"""
-    FidelitySusceptibility() <: AbstractQuantity
-
-Fidelity susceptibility `χ_F(λ) = −∂²⟨ψ(λ)|ψ(λ + δλ)⟩/∂δλ²`.
-"""
-struct FidelitySusceptibility <: AbstractQuantity end
-
 # `PartitionFunction`, `CriticalTemperature`, `SpontaneousMagnetization`
 # are currently defined in src/models/classical/IsingSquare/IsingSquare.jl
 # as bare `struct X end` tags.  They will be migrated to subtype
@@ -424,40 +417,6 @@ Future CFT classes may return different NamedTuple schemas (e.g.
 """
 struct PrimaryFields <: AbstractQuantity end
 
-"""
-    FractalDimension() <: AbstractQuantity
-
-Hausdorff dimension `d_H` of the random geometric set associated with
-a model — e.g. the SLE_κ curve's `d_H(κ) = min(2, 1 + κ/8)`
-(Beffara 2008).  Real-valued, dimensionless, capped at the ambient
-space dimension.
-"""
-struct FractalDimension <: AbstractQuantity end
-
-"""
-    StringOrderParameter() <: AbstractQuantity
-
-Kennedy-Tasaki non-local (string) order parameter
-
-    O_str = lim_{|i-j| -> infty} -<S^z_i exp[i pi sum_{i<k<j} S^z_k] S^z_j>
-
-for S=1 chains.  Detects the hidden Z_2 x Z_2 symmetry breaking that
-defines the Haldane phase (T. Kennedy and H. Tasaki, Phys. Rev. B **45**,
-304 (1992)).  At the AKLT point the closed-form value is O_str = 4/9
-(AKLT 1988), making it the canonical analytic test bed for any
-implementation that aims to detect topologically non-trivial gapped
-phases of integer-spin chains.
-"""
-struct StringOrderParameter <: AbstractQuantity end
-
-"""
-    LuttingerParameter() <: AbstractQuantity
-
-Luttinger liquid parameter `K`.  Meaningful for critical 1D models
-with U(1) symmetry (e.g. XXZ in the critical regime `|Δ| < 1`).
-"""
-struct LuttingerParameter <: AbstractQuantity end
-
 # `FermiVelocity` comes from AbstractQAtlas (0.4.4).
 
 # `LuttingerVelocity` comes from AbstractQAtlas (0.4.4).
@@ -653,40 +612,17 @@ struct EdgeModeEnergy <: AbstractQuantity end
 # `λ(t) = -log L(t)/N`.  #734: the `{:amplitude}` / `{:rate}` phantom mode is
 # split onto two types — they return different quantities (a probability vs an
 # intensive rate) and only the rate is defined at `Infinite`, so the mode was
-# never really one quantity.  Both stay QAtlas-side; AbstractQAtlas has no
-# quench-protocol vocabulary yet (promotion candidate for ABQ#4).
-
-"""
-    LoschmidtAmplitude() <: AbstractQuantity
-
-The Loschmidt echo `L(t) = |⟨ψ_0|e^{-i H_f t}|ψ_0⟩|² ∈ [0, 1]` after a sudden
-quench, at finite `N`.  Not defined at `Infinite`: `L(t)` vanishes identically
-in the thermodynamic limit (extensive cumulants) — use
-[`LoschmidtRateFunction`](@ref) there.
-
-The pre-quench Hamiltonian is passed via the `initial` keyword on `fetch`.
-"""
-struct LoschmidtAmplitude <: AbstractQuantity end
-
-"""
-    LoschmidtRateFunction() <: AbstractQuantity
-
-The Loschmidt rate function
-
-    λ(t) = -log L(t) / N         (finite N)
-    λ(t) = -lim_{N→∞} log L(t)/N (thermodynamic limit / Infinite)
-
-Non-analytic cusps in `λ(t)` are dynamical quantum phase transitions (DQPT).
-See Heyl, Polkovnikov, Kehrein, [Heyl2013](@cite) and the review Heyl,
-[Heyl2018](@cite).  The pre-quench Hamiltonian is passed via the `initial`
-keyword on `fetch`, e.g.
-
-    fetch(TFIM(J=1.0, h=0.5), LoschmidtRateFunction(), Infinite();
-          initial=TFIM(J=1.0, h=2.0), t=1.0)
-
-The un-normalised echo itself is [`LoschmidtAmplitude`](@ref).
-"""
-struct LoschmidtRateFunction <: AbstractQuantity end
+# never really one quantity.  BOTH TYPES NOW LIVE IN AbstractQAtlas
+# (AbstractQAtlas.jl#128) and are imported in src/QAtlas.jl; the promotion the
+# older note here called a "candidate for ABQ#4" has happened.
+#
+# The FETCH PROTOCOL stays here, because it is atlas-side and the upstream
+# vocabulary entry does not describe it: the pre-quench Hamiltonian is passed via
+# the `initial` keyword, and `LoschmidtAmplitude` is not defined at `Infinite`
+# (it vanishes identically there — ask for the rate function instead):
+#
+#     fetch(TFIM(J=1.0, h=0.5), LoschmidtRateFunction(), Infinite();
+#           initial=TFIM(J=1.0, h=2.0), t=1.0)
 
 """
     LoschmidtEcho(; mode = :rate)   (deprecated)
@@ -803,18 +739,6 @@ end
 # core/quantities.jl — concrete quantity struct library.
 
 # ─── Topological order (introduced for ToricCode, Kitaev 2003) ─────────
-
-"""
-    GroundStateDegeneracy() <: AbstractQuantity
-
-Dimension of the ground-state subspace as an `Int`.  In topologically
-ordered phases this is a robust, lattice-independent invariant
-determined by the ambient surface (e.g. `4^g` on a closed orientable
-genus-`g` surface for the toric code) and is set by the kwarg `genus`
-on the `fetch` call.  Trivially `1` for any gapped, symmetry-unbroken
-phase.
-"""
-struct GroundStateDegeneracy <: AbstractQuantity end
 
 """
     AnyonStatistics() <: AbstractQuantity
@@ -965,20 +889,6 @@ rate `p` and density `ρ`,
 """
 struct SteadyStateCurrent <: AbstractQuantity end
 
-"""
-    ChiralCondensate() <: AbstractQuantity
-
-Vacuum expectation value `⟨ψ̄ψ⟩` of a fermion bilinear, signalling
-spontaneous (anomalous) chiral-symmetry breaking.  The massless
-Schwinger model is the canonical 1+1-D example: even though the
-classical Lagrangian is chirally symmetric, the anomaly forces a
-non-zero condensate
-
-    ⟨ψ̄ψ⟩ = − exp(γ_E) · e / (2π^{3/2}),    m_γ = e/√π.
-
-(Schwinger 1962; Coleman-Jackiw-Susskind 1975.)
-"""
-struct ChiralCondensate <: AbstractQuantity end
 # ─── RMT spectral form factor (introduced for Universality{:RMT}, issue #243) ─
 
 """
@@ -1111,16 +1021,6 @@ positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched
 against a [`Bound`](@ref) domain (`Bound(:QuantumInformation)`).
 """
 struct BB84KeyRate <: AbstractQuantity end
-
-"""
-    Polarization() <: AbstractQuantity
-
-The bulk polarization density (or order parameter) per site. For the
-classical 2D six-vertex model, it corresponds to the spontaneous polarization
-(in the ferroelectric phase Δ > 1) or the spontaneous staggered polarization
-(in the antiferroelectric phase Δ < -1).
-"""
-struct Polarization <: AbstractQuantity end
 
 @doc raw"""
     SphereFreeEnergy() <: AbstractQuantity

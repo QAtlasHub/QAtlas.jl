@@ -113,6 +113,16 @@ end
         :PartitionFunction,
         :CriticalTemperature,
         :SpontaneousMagnetization,
+        # ABQ 0.5.1/0.5.2 (ABQ#128, ABQ#129); adopted here
+        :ChiralCondensate,
+        :FidelitySusceptibility,
+        :FractalDimension,
+        :GroundStateDegeneracy,
+        :LoschmidtAmplitude,
+        :LoschmidtRateFunction,
+        :LuttingerParameter,
+        :Polarization,
+        :StringOrderParameter,
     )
         @test getfield(QAtlas, n) === getfield(ABQ, n)
         @test parentmodule(getfield(QAtlas, n)) === ABQ

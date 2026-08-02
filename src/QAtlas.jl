@@ -343,7 +343,7 @@ export QuantumSpeedLimit  # Margolus-Levitin speed limit (:bound lower, Dynamics
 export OptimalCloningFidelity  # Buzek-Hillery cloning bound (:bound upper, QuantumInformation)
 export ScramblingTime     # Sekino-Susskind fast-scrambling time (:bound lower, Dynamics)
 export BB84KeyRate        # Shor-Preskill BB84 secret-key rate (:bound lower, QuantumInformation)
-export TopologicalInvariant, EdgeModeEnergy           # Kitaev1D Pfaffian invariant + edge mode
+export TopologicalInvariant                          # Kitaev1D Pfaffian invariant
 export LoschmidtAmplitude, LoschmidtRateFunction  # split quench flavours (was LoschmidtEcho{:amplitude,:rate})
 export LoschmidtEcho  # deprecated fused-name constructor function
 export GGEValue                                          # quench long-time wrapper

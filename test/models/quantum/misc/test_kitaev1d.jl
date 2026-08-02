@@ -5,7 +5,7 @@
 # only the structural / error / identity / relational guards that
 # verify() architecturally cannot express (DomainError on the gapless
 # line, TFIM↔Kitaev BdG-spectrum cross-model identity, OBC ExactSpectrum
-# shape, EdgeModeEnergy == MassGap@OBC identity, gapless-metal guard,
+# shape, gapless-metal guard,
 # trivial-phase bulk-gap relational bounds).
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -18,7 +18,6 @@ using QAtlas:
     MassGap,
     CorrelationLength,
     TopologicalInvariant,
-    EdgeModeEnergy,
     OBC,
     Infinite,
     fetch
@@ -59,20 +58,17 @@ using QAtlas:
         end
     end
 
-    @testset "EdgeModeEnergy/OBC == MassGap/OBC (definitional identity)" begin
-        # Registry: same value; named for the Majorana boundary-mode
-        # interpretation. Identity between two fetches — not a card.
-        m = Kitaev1D(; μ=0.0, t=1.0, Δ=1.0)
-        N = 40
-        @test fetch(m, EdgeModeEnergy(), OBC(N)) == fetch(m, MassGap(), OBC(N))
-    end
-
-    @testset "OBC trivial-phase EdgeModeEnergy is order of bulk gap" begin
+    # #816 deleted `EdgeModeEnergy`, a second name for `MassGap@OBC`; the testset
+    # that asserted the two fetches were equal is gone with it — it only ever
+    # checked that one of the names was redundant.  What follows is the physics it
+    # sat next to, and the reason the boundary-mode reading is worth recording: the
+    # SAME number is edge splitting in one phase and the bulk gap in the other.
+    @testset "OBC trivial-phase gap is of order the bulk gap" begin
         # Relational: at trivial μ=3, t=Δ=1 the bulk gap is |μ|-2t = 1;
         # the OBC lowest energy is of that order and approaches it
         # exponentially in N (no Majorana edge mode in trivial phase).
         m = Kitaev1D(; μ=3.0, t=1.0, Δ=1.0)
-        Λmin = fetch(m, EdgeModeEnergy(), OBC(40))
+        Λmin = fetch(m, MassGap(), OBC(40))
         bulk_gap = abs(abs(3.0) - 2 * 1.0)              # = 1.0
         @test 0.5 * bulk_gap <= Λmin <= 1.5 * bulk_gap
         # Cross-check against the analytic infinite-chain gap.
@@ -99,7 +95,6 @@ end
 @testset "Kitaev1D gapless-metal guard (OBC)" begin
     m_metal = Kitaev1D(; μ=1.0, t=1.0, Δ=0.0)
     @test_throws ErrorException QAtlas.fetch(m_metal, MassGap(), OBC(20))
-    @test_throws ErrorException QAtlas.fetch(m_metal, EdgeModeEnergy(), OBC(20))
 
     m_atomic = Kitaev1D(; μ=3.0, t=1.0, Δ=0.0)
     Δgap = QAtlas.fetch(m_atomic, MassGap(), OBC(20))
@@ -173,19 +168,9 @@ end
         refs=["Kitaev chain trivial μ=3, t=Δ=1: bulk gap = 1 ⇒ ξ = 1/Δ_gap = 1"],
     )
 
-    # EdgeModeEnergy OBC at the sweet spot (μ=0, t=Δ=1): the two
-    # Majoranas decouple exactly to the chain ends ⇒ splitting ≈ 0.
-    verify(
-        Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
-        EdgeModeEnergy(),
-        OBC(40);
-        route=:second_closed_form,
-        independent=0.0,
-        agree_within=1e-9,
-        refs=["Kitaev sweet spot μ=0, t=Δ=1: exact Majorana boundary, splitting ~ 0"],
-    )
-
-    # MassGap OBC at the sweet spot: same value as EdgeModeEnergy (defn).
+    # MassGap OBC at the sweet spot (μ=0, t=Δ=1): the two Majoranas decouple
+    # exactly to the chain ends, so the splitting — and hence the gap — is ~ 0.
+    # (#816: this was two cards, one per name, verifying one number twice.)
     verify(
         Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
         MassGap(),
@@ -193,7 +178,7 @@ end
         route=:second_closed_form,
         independent=0.0,
         agree_within=1e-9,
-        refs=["Kitaev sweet spot μ=0, t=Δ=1: OBC gap ≈ 0 (Majorana edge mode)"],
+        refs=["Kitaev sweet spot μ=0, t=Δ=1: exact Majorana boundary, OBC gap ≈ 0"],
     )
 end
 
@@ -255,13 +240,13 @@ end
         refs=["Kitaev 2001 trivial phase: bulk gap = |μ|−2|t| ⇒ ξ = 1/(|μ|−2|t|)"],
     )
 
-    # EdgeModeEnergy/OBC at the exact sweet spot (μ=0, t=Δ): the two
+    # MassGap/OBC at the exact sweet spot (μ=0, t=Δ): the two
     # end-localised Majorana modes do NOT hybridise — the lowest BdG
     # eigenvalue is exactly 0 for any N (Kitaev 2001, original example).
     for N in (6, 8, 16, 32)
         verify(
             Kitaev1D(; μ=0.0, t=1.0, Δ=1.0),
-            EdgeModeEnergy(),
+            MassGap(),
             OBC(N);
             route=:second_closed_form,
             independent=0.0,

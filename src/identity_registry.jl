@@ -93,6 +93,39 @@
     notes = "SU(2) invariance forces equal diagonal susceptibilities along all spin axes.",
 )
 
+# ── Σᵢ εᵢ = ⟨H⟩ ───────────────────────────────────────────────────────
+# The local energy density is DEFINED by this sum rule — EnergyLocal's own
+# docstring says "defined so that Σᵢ ε_i = ⟨H⟩_β" — so the check is the
+# definition, asked of the implementation.
+#
+# It is a genuine cross-route check, which is the part worth stating.  On the
+# free-fermion hubs the two sides are computed from DIFFERENT objects: ε_i sums
+# local terms read off the thermal Majorana covariance matrix Σ, while
+# Energy{:total} sums `-Λₙ/2 · tanh(βΛₙ/2)` over the BdG spectrum.  Neither is
+# derived from the other.  MEASURED: the residual sits at rounding scale
+# (1e-16 … 1e-14) and CHANGES SIGN with N, which is what an independent pair
+# looks like; a shared routine would give exactly 0 at every N, the way
+# LoschmidtRate does (see its MATERIALIZABLE_BUT_UNWIRED entry).
+#
+# And it DISCRIMINATES, which agreement alone does not establish.  Control,
+# measured at N = 6: comparing Σᵢεᵢ(β=1) against E_total at the WRONG temperature
+# (β=2) departs by 0.45 … 1.4 on the six hubs, against a matched residual of
+# ≤ 3e-15 — a margin of 1e14 … 1e15.  So the agreement is a fact about the
+# implementation, not an identity that holds whatever the numbers are.
+#
+# This is also the first edge whose participant is ARRAY-valued.  Nothing in
+# `identity!` needed changing: the check lambda reduces the profile itself, so
+# no "reduction relation" kind was required upstream — the narrower conclusion
+# than the one #819 originally reached for this group.
+@identity_edge(
+    :local_energy_sum_rule,
+    quantities = (ε=EnergyLocal, E=Energy{:total}),
+    check = (v, p) -> (sum(v.ε), v.E),
+    sweep = (beta=[0.5, 1.0, 2.0],),
+    finite_N = 6,
+    notes = "Σᵢ εᵢ = ⟨H⟩_β — the defining property of the local energy density, checked against a total energy computed from the spectrum rather than from the profile.",
+)
+
 # ── SU(2) isotropy of the magnetization family ────────────────────────
 # m_x = m_y = m_z (all zero in a finite-N canonical ensemble, but the edge
 # asserts the symmetry statement — equality — not the value).

@@ -204,21 +204,37 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # / `LoschmidtRateFunction` and adopted AbstractQAtlas's (ABQ#128). Same intended
     # effect as the PartitionFunction entries above.
     #
-    # Unlike them, this one is wirable IN PRINCIPLE and is queued rather than closed.
-    # MEASURED: exactly one hub carries both participants — TFIM at OBC (XXZ1D has the
-    # rate function only, at Infinite, so it cannot close the identity). Two things
-    # stop the generator as it stands:
-    #   * both fetches need `initial::TFIM`, a MODEL-valued kwarg, and the sweep grid
-    #     is splatted into `fetch` across every hub implementing the participants — a
-    #     hub-specific model instance in a hub-generic grid;
-    #   * `λ = -log L / N` needs `N`, an untyped slot the generator cannot fetch. The
-    #     check lambda does not receive the boundary condition, so `N` would have to be
-    #     restated beside `finite_N` — a second copy of a number that must agree.
-    # Both are generator-shape gaps, not physics gaps.
-    :LoschmidtRate => "wirable in principle but not by this generator: the only hub \
-                       with both participants (TFIM/OBC) needs a model-valued \
-                       `initial=` kwarg in a hub-generic sweep grid, and `N` would \
-                       have to be restated beside `finite_N`. See #815.",
+    # This entry FIRST said "wirable in principle, blocked on generator shape" (a
+    # model-valued `initial=` kwarg, and `N` not reaching the check lambda). That was
+    # wrong, and building those capabilities for this relation would have produced a
+    # check that cannot fail. Corrected 2026-08-02 after measuring it — see #815.
+    #
+    # Exactly one hub carries both participants (TFIM/OBC; XXZ1D has the rate function
+    # only, at Infinite). MEASURED there, N = 6, quench h: 2.0 -> 0.5:
+    #
+    #     t=0.0 residual 0.0     t=0.3 residual -1.39e-17
+    #     t=1.0 residual 0.0     t=2.5 residual 0.0
+    #
+    # Exactly zero, not zero-to-tolerance, because both fetches call the SAME routine
+    # and differ only in the last line (TFIM_loschmidt.jl):
+    #
+    #     LoschmidtAmplitude     log_L = _tfim_loschmidt_obc_log_echo(...); exp(log_L)
+    #     LoschmidtRateFunction  log_L = _tfim_loschmidt_obc_log_echo(...); -log_L / N
+    #
+    # so `λ = -log(L)/N` evaluates `-log(exp(log_L))/N` — one number reported twice.
+    # Same class as `FreeEnergyFromZ` above: it restates the implementation. Closing
+    # it needs an INDEPENDENT route to one of the two (a rate function from a
+    # many-body ED overlap rather than the free-fermion closed form), not generator
+    # work.
+    #
+    # The general rule this taught, worth keeping next to the entry: a residual of
+    # exactly 0.0 across every input is evidence AGAINST a check. Two independent
+    # routes agree to tolerance; one route reported twice agrees exactly.
+    :LoschmidtRate => "vacuous on the only hub that materializes it: TFIM/OBC computes \
+                       LoschmidtAmplitude and LoschmidtRateFunction from the SAME \
+                       routine, differing only by exp() vs -log()/N, so the residual is \
+                       exactly 0 by construction. Closing this needs an independent \
+                       route to one of the two, not generator work. See #815.",
 
     # Became materializable when AbstractQAtlas 0.4.2 typed the bound's `v_LR` slot on
     # `LiebRobinsonVelocity` -- the intended effect, and the reason the count moved

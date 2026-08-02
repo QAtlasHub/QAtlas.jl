@@ -1,5 +1,5 @@
 # Generated SU(2) isotropy checks (#698 × #700 × #690) — the family-mode
-# slice of the @identity edges (id prefix "identity/su2_"): pairwise
+# slice of the @identity_edge edges (id prefix "identity/su2_"): pairwise
 # component equalities over the taxonomy supertypes, gated on the @symmetry
 # profiles.  Split from the Gibbs slice for shard-planner granularity; the
 # prefix list must stay in sync with test_identity_rest.jl.

@@ -1,5 +1,5 @@
 # Generated BOUND checks (#734 Phase B) — the inequality slice of the
-# generated-check protocol, materialized from the @bound edges of
+# generated-check protocol, materialized from the @bound_edge edges of
 # src/bound_registry.jl.
 #
 # These are one-sided: `slack(inequality) ≥ -atol`, with the criterion and the

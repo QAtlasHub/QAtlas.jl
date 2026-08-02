@@ -23,7 +23,7 @@
 # leaf keeps its name and `<: AbstractQuantity` still holds transitively, so
 # all existing dispatch is unchanged.  The layer is what lets
 #   * identities be declared once against a family instead of per leaf
-#     (`@identity … family=AbstractSusceptibility`, core/identity.jl), and
+#     (`@identity_edge … family=AbstractSusceptibility`, core/identity.jl), and
 #   * the atlas graph group a family as one node cluster instead of N
 #     disconnected leaves.
 # The component that the leaf's *name* encodes is recovered by the
@@ -914,90 +914,6 @@ struct SpectralFormFactor <: AbstractQuantity end
 # `scheme`-distinguished second registry row is for. The name now belongs to
 # AbstractQAtlas's inequality `v <= v_LR`, whose `v_LR` slot is typed on
 # `LiebRobinsonVelocity`.
-
-"""
-    CHSHBound() <: AbstractQuantity
-
-The CHSH (Bell-inequality) correlator bound — the maximum of
-`S = E(a,b) + E(a,b′) + E(a′,b) − E(a′,b′)` admissible in a given physical
-theory.  A `status=:bound` quantity with the historical name; fetched against a
-[`Bound`](@ref) domain
-(not a model), with a `scheme=` selector choosing the theory regime
-(`:classical` → 2, `:quantum` → 2√2, `:no_signalling` → 4).
-"""
-struct CHSHBound <: AbstractQuantity end
-
-"""
-    MerminGHZBound() <: AbstractQuantity
-
-The Mermin 3-party Bell-type bound — the maximum of the Mermin operator
-`|⟨M₃⟩|` admissible in a given theory.  A `status=:bound` quantity
-(Mermin 1990); fetched against a [`Bound`](@ref) domain with `scheme=`
-choosing the theory regime (`:classical` → 2 local-realistic, `:quantum`
-→ 4 quantum, saturated by the GHZ state).
-"""
-struct MerminGHZBound <: AbstractQuantity end
-
-"""
-    ChaosBound() <: AbstractQuantity
-
-The Maldacena–Shenker–Stanford bound on quantum chaos — an upper bound on the
-Lyapunov exponent `λ_L` of out-of-time-order correlators (`λ_L ≤ 2π/β`).  A
-`status=:bound` quantity; fetched against a [`Bound`](@ref) domain
-(`Bound(:Dynamics)`).
-"""
-struct ChaosBound <: AbstractQuantity end
-
-"""
-    ScramblingTime() <: AbstractQuantity
-
-The fast-scrambling time `t_* = (β/2π) log N` (Sekino–Susskind 2008) — the
-conjectured *lower* bound on the time for a thermal system of `N` degrees of
-freedom to scramble local information into global entanglement; saturated by
-black holes (the fastest scramblers).  A `status=:bound`, `direction=:lower`
-quantity; fetched against a [`Bound`](@ref) domain (`Bound(:Dynamics)`).
-"""
-struct ScramblingTime <: AbstractQuantity end
-
-"""
-    BekensteinBound() <: AbstractQuantity
-
-The Bekenstein universal entropy bound — an upper bound on the entropy of a
-bounded system (`S ≤ 2π R E`).  A `status=:bound` quantity; fetched against a
-[`Bound`](@ref) domain (`Bound(:Holographic)`).
-"""
-struct BekensteinBound <: AbstractQuantity end
-
-"""
-    QuantumSpeedLimit() <: AbstractQuantity
-
-The quantum speed limit — a *lower* bound on the time to evolve a state to an
-orthogonal one (Margolus–Levitin `τ ≥ π/(2E)`).  A `status=:bound`,
-`direction=:lower` quantity; fetched against a [`Bound`](@ref) domain
-(`Bound(:Dynamics)`).
-"""
-struct QuantumSpeedLimit <: AbstractQuantity end
-
-"""
-    OptimalCloningFidelity() <: AbstractQuantity
-
-The optimal universal quantum cloning fidelity — an upper bound on the
-single-copy fidelity of a `1 → 2` qubit cloner (Bužek–Hillery `F ≤ 5/6`).  A
-`status=:bound`, `direction=:upper` quantity; fetched against a [`Bound`](@ref)
-domain (`Bound(:QuantumInformation)`).
-"""
-struct OptimalCloningFidelity <: AbstractQuantity end
-
-"""
-    BB84KeyRate() <: AbstractQuantity
-
-The BB84 asymptotic secret-key rate `R(e) = 1 − 2 H₂(e)` (Shor–Preskill 2000),
-with `H₂` the binary entropy and `e` the qubit error rate (QBER).  A provably
-achievable rate — a *lower* bound on the extractable secret-key fraction;
-positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched
-against a [`Bound`](@ref) domain (`Bound(:QuantumInformation)`).
-"""
-struct BB84KeyRate <: AbstractQuantity end
 
 @doc raw"""
     SphereFreeEnergy() <: AbstractQuantity

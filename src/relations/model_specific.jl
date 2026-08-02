@@ -5,7 +5,7 @@
 # each of them assumes a particular model or band structure.  Their home is the
 # implementing atlas, for the same reason the reference VALUES live here.
 #
-# They are declared with AbstractQAtlas's own `@relation` / `@inequality`, so
+# They are declared with AbstractQAtlas's own `@relation` / `@bound`, so
 # they join the SAME registry and the same verbs (`residual` / `check` / `solve`
 # / `relations_constraining`) as the universal ones — a caller cannot tell the
 # two apart at the API, only by the domain tag.  Slots are type-keyed wherever
@@ -96,7 +96,7 @@ disorder-averaged local-field factor.
 
 Variables: `βJ`, `sech4_avg`.
 """
-@inequality :spinglass AlmeidaThoulessStability(βJ, sech4_avg) = 1 - βJ^2 * sech4_avg
+@bound :spinglass AlmeidaThoulessStability(βJ, sech4_avg) = βJ^2 * sech4_avg <= 1
 
 # ─── Transport (model-specific band / scattering assumptions) ───────────────
 

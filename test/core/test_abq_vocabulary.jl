@@ -123,6 +123,15 @@ end
         :LuttingerParameter,
         :Polarization,
         :StringOrderParameter,
+        # ABQ 0.6.1 (ABQ#132) — the eight universal bound VALUES
+        :CHSHBound,
+        :MerminGHZBound,
+        :ChaosBound,
+        :BekensteinBound,
+        :QuantumSpeedLimit,
+        :ScramblingTime,
+        :BB84KeyRate,
+        :OptimalCloningFidelity,
     )
         @test getfield(QAtlas, n) === getfield(ABQ, n)
         @test parentmodule(getfield(QAtlas, n)) === ABQ

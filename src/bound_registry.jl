@@ -1,18 +1,23 @@
 # bound_registry.jl — declared BOUND edges (core/bound.jl), the inequality
 # sibling of identity_registry.jl.
 #
-# Each names an AbstractQAtlas `@inequality` and lets the generator materialize
+# Each names an AbstractQAtlas `@bound` and lets the generator materialize
 # it on every hub that implements the participants.  Nothing here restates the
 # criterion: the slack, its sign convention, and the physics all live upstream.
 #
-# WHY THESE FIRST.  Of AbstractQAtlas's 129 relations, 93 are type-keyed and 22
-# are reachable on some QAtlas hub — but only three of those need nothing beyond
-# what `fetch` already returns.  One is `FreeEnergyLegendre`, already covered by
-# the `:gibbs` identity.  The other two are these, and neither was checked
-# anywhere in the atlas before.  The rest of the reachable set waits on a
-# supplier for a derived input (`var_E`, `dS_dT`, the region entropies
-# `S_A`/`S_AB`/…), which is the same gap identity_registry.jl's deletion
-# criterion already names for the derivative-form identities.
+# WHY THESE TWO.  Most of AbstractQAtlas's reachable bounds need something
+# `fetch` does not return.  `FreeEnergyLegendre` is already covered by the
+# `:gibbs` identity; the rest wait on a supplier for a derived input (`var_E`,
+# `dS_dT`, the region entropies `S_A`/`S_AB`/…), which is the same gap
+# identity_registry.jl's deletion criterion names for the derivative-form
+# identities.  The eight universal bounds adopted in AbstractQAtlas 0.6.1 are
+# unwirable for a different and permanent reason — their BOUNDED side is an
+# untyped slot by design — and are allow-listed in test_abq_conformance.jl.
+#
+# The exact counts that used to stand here ("129 relations, 93 type-keyed, 22
+# reachable") went stale within two releases and were never checked by anything.
+# The reasoning above does not depend on them; test_abq_conformance.jl computes
+# the current numbers and fails when one is unaccounted for.
 #
 # These are STABILITY bounds, and they fail differently from an equality: a
 # sign error, a bad analytic continuation, or a mis-normalized thermal state
@@ -36,7 +41,7 @@ const _THERMO_DERIVATIVE_EXCLUSIONS = [
 # Thermodynamic stability: the specific heat is a variance (β²·Var(E)) and so
 # cannot be negative for any equilibrium state at any β.  Exact at every N, so
 # a small finite_N loses no coverage — same argument as :gibbs.
-@bound(
+@bound_edge(
     :specific_heat_positivity,
     inequality = SpecificHeatPositivity,
     sweep = (beta=[0.5, 1.0, 2.0],),
@@ -50,7 +55,7 @@ const _THERMO_DERIVATIVE_EXCLUSIONS = [
 # non-negative for every axis pair.  `SusceptibilityPositivity` types its slot
 # as the parametric FAMILY `Susceptibility`, so the generator expands it to one
 # check per concrete axis pair the hub implements.
-@bound(
+@bound_edge(
     :susceptibility_positivity,
     inequality = SusceptibilityPositivity,
     sweep = (beta=[0.5, 1.0],),

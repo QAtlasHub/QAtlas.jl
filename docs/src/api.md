@@ -154,7 +154,7 @@ Modules = [QAtlas]
 Pages = ["core/registry.jl", "core/realizes.jl", "core/reduces.jl", "core/about.jl"]
 ```
 
-### Constraint edges — `@symmetry`, `@identity`, `@dual`, `@limits_to`
+### Constraint edges — `@symmetry`, `@identity_edge`, `@dual`, `@limits_to`
 
 The third edge role (after *describe* and *route*): declared relations that
 implementations must satisfy, sharing one kernel — store registration, static

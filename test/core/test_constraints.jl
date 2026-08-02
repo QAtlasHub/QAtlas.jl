@@ -1,4 +1,4 @@
-# Constraint-edge layer (#697): kernel + @symmetry/@identity/@dual/@limits_to.
+# Constraint-edge layer (#697): kernel + @symmetry/@identity_edge/@dual/@limits_to.
 #
 # Unit tests of the SHARED kernel (EDGE_STORES registration, GeneratedCheck
 # protocol, hub enumeration) and of each edge type's store, macro, queries and
@@ -195,8 +195,8 @@ end
     end
 end
 
-# ── @identity ────────────────────────────────────────────────────────
-@testset "@identity store + queries" begin
+# ── @identity_edge ────────────────────────────────────────────────────────
+@testset "@identity_edge store + queries" begin
     edges = identities_for(FreeEnergy)
     @test any(e -> e.name === :gibbs, edges)
     gibbs = only(filter(e -> e.name === :gibbs, QAtlas.IDENTITIES))

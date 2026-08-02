@@ -2,7 +2,7 @@
 #
 # The entanglement inequalities AbstractQAtlas carries but that no generator on
 # this side could reach (#780).  Their slots are the same quantity on different
-# REGIONS, not different quantity types, so `@bound` rightly rejects them.
+# REGIONS, not different quantity types, so `@bound_edge` rightly rejects them.
 
 # ── the entropy inequalities on three adjacent blocks ─────────────────
 #

@@ -15,7 +15,15 @@
 _is_bound(::Type{T}) where {T} = T <: Bound
 _class_of(::Type{T}) where {T} = T <: Universality ? T.parameters[1]::Symbol : nothing
 _domain_of(::Type{T}) where {T} = T <: Bound ? T.parameters[1]::Symbol : nothing
-_kgshort(T) = replace(string(T), "QAtlas." => "")
+# Drop the module qualification from a type's printed name, for check ids and
+# report tables.  Must strip a MODULE PATH, not the substring "QAtlas." — the
+# latter also matches inside "AbstractQAtlas.", so
+# `AbstractQAtlas.Velocity{:luttinger}` became `AbstractVelocity{:luttinger}`:
+# a name that does not exist, and a plausible-looking one, since `AbstractVelocity`
+# IS a real abstract type and a reader would think the check ran on it (#823).
+# Only parametric AbstractQAtlas types with no const alias in scope print qualified,
+# which is why it went unnoticed — measured, exactly one generated check id changes.
+_kgshort(T) = replace(string(T), r"(?:[A-Za-z_][A-Za-z0-9_]*\.)+" => "")
 
 # ── predicts : universality class → quantities  (and inverse) ─────────────────
 """

@@ -718,24 +718,45 @@ end
 # ─── Topological order (introduced for ToricCode, Kitaev 2003) ─────────
 
 """
-    AnyonStatistics() <: AbstractQuantity
+    AnyonSelfStatistics() <: AbstractQuantity
 
-Topological data of the anyon content of a 2D topologically ordered
-phase.  The dispatched `fetch` method takes a `type::Symbol` kwarg
-selecting an anyon (or a mutual-braiding row) and returns a
-`NamedTuple` whose shape depends on the requested row — typically
-`(label, statistics, self_phase, quantum_dim, fusion)` for individual
-anyons, and `(label, mutual_phase, anyons)` for two-anyon braids.
+The self-statistics data of ONE anyon in a topologically ordered phase, selected
+by the `label` fetch kwarg:
 
-For Abelian theories like the toric code's Z₂ order all quantum
-dimensions are 1; for non-Abelian theories the schema is unchanged but
-`quantum_dim` becomes irrational and additional fields (e.g. `F`, `R`
-matrices) may be added by the implementing method.
+    (label, statistics, self_phase, quantum_dim, fusion)
 
-Has no boundary-condition argument: anyon statistics are purely
-topological invariants.
+`statistics` is `:boson` / `:fermion` / `:anyon`, `self_phase` the phase acquired
+under a `2π` self-rotation, `quantum_dim` the quantum dimension (1 for every
+Abelian anyon), and `fusion` the anyon's fusion with itself.
+
+The label is an INSTANCE selector, like a momentum or a site index — every label
+returns the same fields.  That is the difference from the `AnyonStatistics` this
+replaces (#819), whose returned schema changed with its `type` kwarg, so no
+caller could use it without branching on the argument it had just passed.
+
+See [`AnyonMutualStatistics`](@ref) for the braiding of a PAIR, which is the
+other schema that used to hide behind the same name.
 """
-struct AnyonStatistics <: AbstractQuantity end
+struct AnyonSelfStatistics <: AbstractQuantity end
+
+"""
+    AnyonMutualStatistics() <: AbstractQuantity
+
+The mutual braiding data of a PAIR of anyons, selected by the `anyons` fetch
+kwarg:
+
+    (anyons, mutual_phase)
+
+`mutual_phase` is the phase the wave function acquires when one anyon is carried
+in a full braid around the other — `π` for the toric code's `e`/`m` pair (a Z₂
+"mutual semion"), which is what makes the bound state `ε = e × m` a fermion even
+though `e` and `m` are both bosons.
+
+A different quantity from [`AnyonSelfStatistics`](@ref), not a different
+argument to it: the two answer questions about a single anyon and about a pair,
+and return different fields.
+"""
+struct AnyonMutualStatistics <: AbstractQuantity end
 
 # ─── Random Matrix Theory level statistics (introduced for RMT/Poisson universality classes) ───
 

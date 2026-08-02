@@ -333,7 +333,8 @@ export XXStructureFactor, YYStructureFactor, ZZStructureFactor  # deprecated sta
 export CentralCharge, LuttingerParameter, CorrelationLength, UniversalityClass
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
-export GroundStateDegeneracy, TopologicalEntanglementEntropy, AnyonStatistics  # ToricCode (#162)
+export GroundStateDegeneracy, TopologicalEntanglementEntropy  # ToricCode (#162)
+export AnyonSelfStatistics, AnyonMutualStatistics  # one schema each (#819)
 export SphereFreeEnergy, CornerEntanglementCoefficient                        # 2+1D CFT F-theorem / corner entropy
 export CasimirEnergyCorrection                                              # CFT 1/L correction (#150)
 export ConformalTower                                                       # CFT excitation spectrum (#150)

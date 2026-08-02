@@ -19,12 +19,18 @@
 #
 # FAMILY SLOTS.  AbstractQAtlas types some slots as a parametric FAMILY rather
 # than a concrete leaf (`SusceptibilityPositivity(χT::Susceptibility)` covers
-# every axis pair).  Its own bag matching cannot bind those (its C4 note calls
-# such a relation permanently dead there), but a generator that fetches by
-# concrete type can: a family slot expands to one check per concrete member the
-# hub actually implements, the same way `IsotropyIdentityEdge` walks a family.
-# That is why these bounds are usable from here even though they are inert
-# upstream.
+# every axis pair).  Upstream binds those by AUTO-DISCOVERY (design §8a): a bag
+# is scanned for every concrete component of the family, `relation_report`
+# emits one row per component, and `check(rel, bag; subject = Susceptibility{
+# (:z,:z)})` picks one.  (An older note here said family slots were "inert
+# upstream", quoting a C4 comment that §8a superseded — they are not, and no
+# design decision on this side should be made on that premise.)
+#
+# QAtlas expands the same slot itself, one check per concrete member the hub
+# implements, the same way `IsotropyIdentityEdge` walks a family — not because
+# upstream cannot, but because the entry point differs: the generator reaches
+# values through `fetch(model, ::ConcreteType, bc)` rather than by assembling a
+# bag first, so it must name the component to fetch it at all.
 
 """
     BoundEdge

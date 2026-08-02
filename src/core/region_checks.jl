@@ -2,10 +2,10 @@
 # core/region_checks.jl — @region: the entropy inequalities over REGIONS.
 #
 # Step 3 of #780.  The nine entanglement relations in AbstractQAtlas are a
-# different SHAPE from everything `@identity` / `@bound` / `@response` handle:
+# different SHAPE from everything `@identity_edge` / `@bound_edge` / `@response_edge` handle:
 # their slots (`S_A`, `S_B`, `S_AB`, …) are not quantity TYPES to look up on a
 # hub, they are the SAME quantity — `VonNeumannEntropy` — evaluated on different
-# REGIONS.  `@bound` correctly rejects them; a slot named `S_AB` has no type to
+# REGIONS.  `@bound_edge` correctly rejects them; a slot named `S_AB` has no type to
 # dispatch on.
 #
 # AbstractQAtlas already solves the discovery half.  `region_report(bag)` takes a

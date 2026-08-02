@@ -50,12 +50,20 @@ end
 
 # ── bounds : quantity ↔ bound ────────────────────────────────────────────────
 """
-    bounds_on(quantity) -> Vector{NamedTuple}
+    bound_rows_on(quantity) -> Vector{NamedTuple}
 
-Every registered bound constraining `quantity`: `(domain, direction, scheme,
-references)` — the bound nodes reachable from a quantity node.
+Every registered bound ROW supplying a bound value for `quantity`:
+`(domain, direction, scheme, references)` — the bound nodes reachable from a
+quantity node in this atlas.
+
+Not to be confused with AbstractQAtlas's `bounds_on`, which answers the same
+question one layer up: the universal INEQUALITIES whose bounded slot is keyed on
+`quantity`.  Both are "what bounds this?"; this one returns atlas rows that can
+be fetched, that one returns laws that must hold.  The name went upstream with
+AbstractQAtlas 0.6.0 (the vocabulary lives in the base package), so the row query
+took the more specific name.
 """
-function bounds_on(quantity)
+function bound_rows_on(quantity)
     q_T = _as_type(quantity)
     return [
         (

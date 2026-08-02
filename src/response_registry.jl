@@ -8,7 +8,7 @@
 # finite_N loses no coverage — the same argument :gibbs makes.
 
 # ── S = -∂F/∂T ────────────────────────────────────────────────────────
-@response(
+@response_edge(
     :entropy_response,
     relation = EntropyResponse,
     derived = (dF_dT=∂(FreeEnergy, :T),),
@@ -19,7 +19,7 @@
 )
 
 # ── C = T ∂S/∂T ───────────────────────────────────────────────────────
-@response(
+@response_edge(
     :specific_heat_from_entropy,
     relation = SpecificHeatFromEntropy,
     derived = (dS_dT=∂(ThermalEntropy, :T),),
@@ -58,7 +58,7 @@ const _BETA_PINNED_ENERGY_MODELS = [
 # relating the same two potentials: this is the β-derivative of βF, that one is
 # the T-derivative of F, and an implementation can satisfy one while breaking
 # the other.
-@response(
+@response_edge(
     :gibbs_helmholtz,
     relation = GibbsHelmholtz,
     derived = (dβF_dβ=∂(FreeEnergy, :β; of=(F, β) -> β * F),),
@@ -78,7 +78,7 @@ const _BETA_PINNED_ENERGY_MODELS = [
 # This is a genuinely INDEPENDENT route to C: :specific_heat_from_entropy gets it
 # from the entropy, this one from the energy.  A model that computes C by one
 # formula and S or U by another is exactly what these two disagree on.
-@response(
+@response_edge(
     :specific_heat_fdt,
     relation = SpecificHeatFDT,
     derived = (var_E=∂(Energy{:per_site}, :β; then=d -> -d),),
@@ -116,7 +116,7 @@ const _LONGITUDINAL_FIELD_MODELS = [IsingChain1D, CurieWeissIsing]
 # a central difference of 0.  Both edges are therefore placed at h ≠ 0, where F
 # is differentiable and the identity has content.
 
-@response(
+@response_edge(
     :susceptibility_response,
     relation = SusceptibilityResponse,
     derived = (dM_dh=∂(Magnetization{:z}, :h),),
@@ -129,7 +129,7 @@ const _LONGITUDINAL_FIELD_MODELS = [IsingChain1D, CurieWeissIsing]
     notes = "χ_zz = ∂M_z/∂h — the isothermal susceptibility as a field response.",
 )
 
-@response(
+@response_edge(
     :magnetization_response,
     relation = MagnetizationResponse,
     # NO `then` negation: AbstractQAtlas's relation is M = -dF_dh (verified:

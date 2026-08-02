@@ -69,7 +69,7 @@ const KNOWN_UNMIGRATED = Set{String}()
 
 # Every reference cited anywhere in the knowledge graph, via the
 # EDGE_STORES registration (one loop covers @register, @realizes, @reduces,
-# @about, @symmetry, @identity, @dual, @limits_to — and any future store the
+# @about, @symmetry, @identity_edge, @dual, @limits_to — and any future store the
 # moment it registers itself).
 function all_cited_references()
     refs = String[]

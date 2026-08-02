@@ -1,4 +1,4 @@
-# identity_registry.jl — quantity ↔ quantity identities (@identity, #698).
+# identity_registry.jl — quantity ↔ quantity identities (@identity_edge, #698).
 #
 # Migration discipline (per #698): the Gibbs relation is ported END-TO-END
 # first; the hand-written harness (test/util/thermodynamic_identities.jl,
@@ -50,7 +50,7 @@
 # numbers (fetched f vs derived f), keeping failures diagnosable — a residual-vs-0
 # pair would not.  Granularity: the relation is type-keyed per-site, matching the
 # `Energy{:per_site}` participant below.
-@identity(
+@identity_edge(
     :gibbs,
     quantities = (e=Energy{:per_site}, f=FreeEnergy, s=ThermalEntropy),
     check = (v, p) -> (v.f, solve(FreeEnergyLegendre(), Val(:F); U=v.e, S=v.s, β=p.beta)),
@@ -84,7 +84,7 @@
 # ── SU(2) isotropy of the susceptibility family ───────────────────────
 # χ_xx = χ_yy = χ_zz for every model whose @symmetry profile declares
 # internal=:SU2 — pairwise component equality over AbstractSusceptibility.
-@identity(
+@identity_edge(
     :su2_susceptibility_isotropy,
     family = AbstractSusceptibility,
     requires_internal = :SU2,
@@ -96,7 +96,7 @@
 # ── SU(2) isotropy of the magnetization family ────────────────────────
 # m_x = m_y = m_z (all zero in a finite-N canonical ensemble, but the edge
 # asserts the symmetry statement — equality — not the value).
-@identity(
+@identity_edge(
     :su2_magnetization_isotropy,
     family = AbstractMagnetization,
     requires_internal = :SU2,

@@ -1,5 +1,5 @@
 # Generated identity checks not claimed by a dedicated slice file: a NEW
-# @identity edge runs HERE automatically (no test edit needed) until it earns
+# @identity_edge edge runs HERE automatically (no test edit needed) until it earns
 # its own file.  The claimed-prefix list below must mirror
 # test_identity_gibbs.jl and test_identity_isotropy.jl; an empty remainder is
 # legal today.

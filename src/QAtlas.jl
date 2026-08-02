@@ -78,6 +78,20 @@ using AbstractQAtlas:
     LuttingerParameter,
     Polarization,
     StringOrderParameter,
+    # Fourth batch — AbstractQAtlas 0.6.1 (ABQ#132) adopted the eight universal
+    # BOUND VALUES together with their inequalities.  They could not move earlier:
+    # each bounds an observable that has no type in either package (a measured CHSH
+    # correlator, an extracted Lyapunov exponent), and `@inequality` had no way to
+    # state a bound whose bounded side is untyped.  `@bound`'s comparison form does,
+    # so they arrive CONSTRAINED and cost no self-consistency budget.
+    CHSHBound,
+    MerminGHZBound,
+    ChaosBound,
+    BekensteinBound,
+    QuantumSpeedLimit,
+    ScramblingTime,
+    BB84KeyRate,
+    OptimalCloningFidelity,
     NMRRelaxationExponent,
     NMRSpinRelaxationRate,
     TopologicalEntanglementEntropy,
@@ -91,7 +105,7 @@ using AbstractQAtlas:
     ConnectedSpinCorrelation,
     DynamicalCorrelation,
     # Relations layer (#734 Phase B): the universal identities themselves, so an
-    # @identity edge can delegate its arithmetic instead of restating it.
+    # @identity_edge edge can delegate its arithmetic instead of restating it.
     FreeEnergyLegendre,
     solve,
     # ...and the macros (#730), which let QAtlas HOST the model-specific
@@ -99,7 +113,17 @@ using AbstractQAtlas:
     # and behind the same verbs.  The transport pair is type-keyed onto the
     # carrier quantities ABQ kept.
     @relation,
-    @inequality,
+    # AbstractQAtlas 0.6.0 also exports `bounds_on(q)` — the universal INEQUALITIES
+    # whose bounded slot is keyed on `q`.  QAtlas had a function of the same name
+    # returning registry ROWS with `status=:bound`; both answer "what bounds this?",
+    # one with laws and one with fetchable atlas rows.  The vocabulary lives in the
+    # base package, so the row query was renamed `bound_rows_on` and the law query is
+    # imported here — a caller can now ask both and see they are different questions.
+    bounds_on,
+    # `@bound` REPLACED `@inequality` upstream (AbstractQAtlas 0.6.0).  QAtlas's own
+    # edge macros were renamed `@identity_edge` / `@response_edge` / `@bound_edge` in
+    # the same change, so this name is free and the two `@bound`s no longer collide.
+    @bound,
     # ...and the inequality verbs, so a BOUND edge (core/bound.jl) can delegate
     # its criterion to AbstractQAtlas exactly as :gibbs delegates its arithmetic.
     AbstractInequality,
@@ -230,9 +254,9 @@ include("core/about.jl")     # model description cards (summary + Hamiltonian)
 include("core/constraints.jl")  # kernel: EDGE_STORES + GeneratedCheck protocol
 include("core/derivative.jl")    # derived-input suppliers (AD via ext, FD fallback)
 include("core/symmetry.jl")     # @symmetry node attributes + LSM checks (C10)
-include("core/identity.jl")      # @identity quantity<->quantity edges (C11)
-include("core/bound.jl")         # @bound: the inequality sibling (#734 Phase B)
-include("core/response.jl")      # @response: relations needing a derived input
+include("core/identity.jl")      # @identity_edge quantity<->quantity edges (C11)
+include("core/bound.jl")         # @bound_edge: the inequality sibling (#734 Phase B)
+include("core/response.jl")      # @response_edge: relations needing a derived input
 include("core/region_checks.jl")  # @region: the entropy inequalities over REGIONS (#780 step 3)
 include("core/duality.jl")      # @dual model<->model parameter-mapped edges (C12)
 include("core/limits.jl")       # @limits_to asymptotic limit edges (C13)
@@ -254,7 +278,7 @@ export AbstractIdentityEdge,
     TupleIdentityEdge,
     IsotropyIdentityEdge,
     identity!,
-    @identity,
+    @identity_edge,
     identities_for,
     participants
 export Duality, dual!, @dual, dualities
@@ -285,12 +309,12 @@ export ChargeGap, SpinGap                                # Hubbard / correlated-
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export EdwardsAndersonParameter, SpinGlassSusceptibility  # spin-glass order (#730)
-export BoundEdge, BOUNDS, bound!, @bound  # inequality edges (core/bound.jl)
+export BoundEdge, BOUNDS, bound!, @bound_edge  # inequality edges (core/bound.jl)
 # Derived-input suppliers (core/derivative.jl).  The AD backends are package
 # EXTENSIONS — neither ForwardDiff nor Zygote is a hard dependency.
 export AbstractDiffBackend, FiniteDifference, ForwardDiffBackend, ZygoteBackend
 export derivative, derivative_agreement, backend_available, preferred_backend, default_rtol
-export ResponseEdge, RESPONSES, response!, @response, DerivedInput, ∂
+export ResponseEdge, RESPONSES, response!, @response_edge, DerivedInput, ∂
 export QuenchEntanglementEntropy  # QAtlas-side post-quench S(ℓ,t) (was VonNeumannEntropy{:quench})
 export Magnetization  # axis-parametric (AbstractQAtlas); MagnetizationX/Y/Z are deprecated aliases
 export MagnetizationX, MagnetizationY, MagnetizationZ
@@ -588,8 +612,8 @@ include("reduces_registry.jl")
 # and quantity types; the identity family validation reads REGISTRY).
 include("symmetry_registry.jl")
 include("identity_registry.jl")
-include("bound_registry.jl")            # @bound inequality edges (#734 Phase B)
-include("response_registry.jl")         # @response derivative-supplied edges
+include("bound_registry.jl")            # @bound_edge inequality edges (#734 Phase B)
+include("response_registry.jl")         # @response_edge derivative-supplied edges
 include("region_registry.jl")
 include("relations/model_specific.jl")   # #730: model-specific relations, hosted here
 include("duality_registry.jl")
@@ -599,7 +623,7 @@ include("limits_registry.jl")
 # (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.
 include("core/links.jl")
 include("core/coherence.jl")
-export predicts, predicted_by, bounds_on, cited_by, delegations, implementations_of
+export predicts, predicted_by, bound_rows_on, cited_by, delegations, implementations_of
 export coherence_report,
     coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
 

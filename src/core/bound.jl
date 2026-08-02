@@ -9,7 +9,7 @@
 # two equally-wrong quantities can miss.
 #
 # WHERE THE MATH LIVES.  Nowhere here.  AbstractQAtlas already states these as
-# `@inequality` relations with a `slack` verb whose sign IS the criterion, so a
+# `@bound` relations with a `slack` verb whose sign IS the criterion, so a
 # bound edge names the AbstractQAtlas inequality and QAtlas supplies only the
 # values and the harness — the same split #734 Phase B established for `:gibbs`,
 # where the arithmetic moved to `FreeEnergyLegendre` and the sweep / finite_N /
@@ -143,12 +143,12 @@ function bound!(
 end
 
 """
-    @bound(:name, inequality = SomeInequality, sweep = (...,), ...)
+    @bound_edge(:name, inequality = SomeInequality, sweep = (...,), ...)
 
-Keyword-macro front end for [`bound!`](@ref), matching [`@identity`](@ref)'s
+Keyword-macro front end for [`bound!`](@ref), matching [`@identity_edge`](@ref)'s
 call shape so the two read alike at the declaration site.
 """
-macro bound(name, kwargs...)
+macro bound_edge(name, kwargs...)
     kws = [esc(k) for k in kwargs]
     return :(bound!($(esc(name)); $(kws...)))
 end

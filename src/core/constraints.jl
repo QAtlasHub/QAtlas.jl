@@ -5,7 +5,7 @@
 #
 #   1. describe it — `@register`   (a hub has an implementation)
 #   2. route    it — `@reduces`    (delegation)
-#   3. constrain it — `@identity` / `@dual` / `@limits_to` (+ `@symmetry` node
+#   3. constrain it — `@identity_edge` / `@dual` / `@limits_to` (+ `@symmetry` node
 #      attributes): declared relations the implementations must satisfy.
 #
 # The *constrain* role is what this kernel serves.  Its central design decision

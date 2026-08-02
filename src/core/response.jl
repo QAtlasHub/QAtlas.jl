@@ -1,7 +1,7 @@
 # core/response.jl — constraint edges whose relation needs a DERIVED input.
 #
-# The third edge kind, after @identity (equalities between fetched values) and
-# @bound (inequalities on them).  A response edge covers the AbstractQAtlas
+# The third edge kind, after @identity_edge (equalities between fetched values) and
+# @bound_edge (inequalities on them).  A response edge covers the AbstractQAtlas
 # relations stated with a supplied derivative — `EntropyResponse(S, dF_dT)`,
 # `SpecificHeatFromEntropy(C, dS_dT, T)` — which the other two cannot express
 # because one of their slots is not fetchable.
@@ -209,11 +209,11 @@ function response!(
 end
 
 """
-    @response(:name, relation = R, derived = (dF_dT = ∂(FreeEnergy, :T),), ...)
+    @response_edge(:name, relation = R, derived = (dF_dT = ∂(FreeEnergy, :T),), ...)
 
-Keyword-macro front end for [`response!`](@ref), matching `@identity` / `@bound`.
+Keyword-macro front end for [`response!`](@ref), matching `@identity_edge` / `@bound_edge`.
 """
-macro response(name, kwargs...)
+macro response_edge(name, kwargs...)
     kws = [esc(k) for k in kwargs]
     return :(response!($(esc(name)); $(kws...)))
 end
@@ -374,7 +374,7 @@ end
 """
     _at_params(model, at::NamedTuple) -> model
 
-Rebuild `model` with the fields in `at` overridden, so a `@response` edge can
+Rebuild `model` with the fields in `at` overridden, so a `@response_edge` edge can
 say WHERE to evaluate.  Needed because the generator otherwise tests the default
 model, and for a field-response relation the default is exactly the useless
 point: at `h = 0` both `M_z` and `-∂F/∂h` vanish by symmetry, so the check is

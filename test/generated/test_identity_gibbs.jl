@@ -1,5 +1,5 @@
 # Generated Gibbs identity checks (#698) — the tuple-mode slice of the
-# @identity edges (id prefix "identity/gibbs/"), split from the isotropy
+# @identity_edge edges (id prefix "identity/gibbs/"), split from the isotropy
 # slice so the shard planner can schedule the two independently.  A check
 # claimed by NO slice file runs in test_identity_rest.jl — keep the prefix
 # lists of the three files in sync.

@@ -47,7 +47,7 @@ end
 # Iterates the EDGE_STORES registration (core/constraints.jl) rather than
 # hard-coding each store: every declarative store that registers itself —
 # REGISTRY/REALIZES/REDUCES/ABOUT and the constraint stores (@symmetry /
-# @identity / @dual / @limits_to) — is scanned for dangling bibkeys, so a new
+# @identity_edge / @dual / @limits_to) — is scanned for dangling bibkeys, so a new
 # edge type is covered by C1 the moment it registers, with no edit here.
 function check_reference_integrity(bibkeys)
     keys = Set(string.(bibkeys))
@@ -383,7 +383,7 @@ function coherence_report(; bibkeys=String[])
     append!(findings, check_orphan_classes())
     append!(findings, check_lsm_consistency())          # C10 — @symmetry / LSM theorems
     append!(findings, check_symmetry_corroboration())   # C10b — gapped fact corroborable
-    append!(findings, check_identity_coverage())        # C11 — @identity exercised
+    append!(findings, check_identity_coverage())        # C11 — @identity_edge exercised
     append!(findings, check_duality_maps())        # C12 — @dual param_map sanity
     append!(findings, check_limit_edges())         # C13 — @limits_to sanity
     append!(findings, check_cost_coherence())      # C14 — cost axis coherence

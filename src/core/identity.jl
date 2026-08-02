@@ -13,7 +13,7 @@
 # generators dispatch on the type — no `mode` tag, no nothing-filled halves):
 #
 #   * `TupleIdentityEdge` — an explicit relation over named quantities:
-#         @identity(:gibbs,
+#         @identity_edge(:gibbs,
 #             quantities = (f=FreeEnergy, e=Energy{:per_site}, s=ThermalEntropy),
 #             check = (v, p) -> (v.f, v.e - v.s / p.beta),
 #             sweep = (beta = [0.5, 1.0, 2.0],))
@@ -24,7 +24,7 @@
 #   * `IsotropyIdentityEdge` — the #690 × #700 integration: a quantity FAMILY
 #     (an abstract supertype from the taxonomy layer) whose components must
 #     coincide for models declaring a symmetry:
-#         @identity(:su2_susceptibility_isotropy,
+#         @identity_edge(:su2_susceptibility_isotropy,
 #             family = AbstractSusceptibility,
 #             requires_internal = :SU2,
 #             sweep = (beta = [0.5, 1.0],))
@@ -54,7 +54,7 @@ abstract type AbstractIdentityEdge end
 
 An explicit relation over named quantities: `check(vals, point) -> (lhs, rhs)`
 must agree for every hub implementing all of `quantities` (a NamedTuple
-`name => quantity Type`).  See [`@identity`](@ref).
+`name => quantity Type`).  See [`@identity_edge`](@ref).
 """
 struct TupleIdentityEdge <: AbstractIdentityEdge
     name::Symbol
@@ -74,7 +74,7 @@ end
 
 A component-isotropy relation over a quantity `family` (an abstract taxonomy
 supertype): the family's components must coincide, optionally gated on a
-`requires_internal` symmetry.  See [`@identity`](@ref).
+`requires_internal` symmetry.  See [`@identity_edge`](@ref).
 """
 struct IsotropyIdentityEdge <: AbstractIdentityEdge
     name::Symbol
@@ -93,7 +93,7 @@ end
     IDENTITIES :: Vector{AbstractIdentityEdge}
 
 The quantity↔quantity identity store, populated at include-time by
-[`identity!`](@ref) / [`@identity`](@ref).  Query with
+[`identity!`](@ref) / [`@identity_edge`](@ref).  Query with
 [`identities_for`](@ref) / [`participants`](@ref); the generated checks are
 the `:identity` kind of [`generated_checks`](@ref).
 """
@@ -233,14 +233,14 @@ function _exclusion_reason(e, model_T::Type, bc_T::Type)
 end
 
 """
-    @identity :name key=value …
+    @identity_edge :name key=value …
 
 Macro sugar around [`identity!`](@ref): the positional `:name` is the edge's
 identifier; the remaining `key=value` pairs are forwarded as keyword
 arguments.  See `src/identity_registry.jl` for the declared catalog.
 """
-macro identity(name, kwargs...)
-    return _forward_kw_macro(identity!, :identity, (name,), kwargs)
+macro identity_edge(name, kwargs...)
+    return _forward_kw_macro(identity!, :identity_edge, (name,), kwargs)
 end
 
 # Concrete family members that participate in component identities: the

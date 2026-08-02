@@ -29,12 +29,12 @@
 #
 # A slot typed with a quantity must be FETCHED, so a hub has to implement it.  A
 # slot typed with something else (`InverseTemperature`) comes from the sweep.  An
-# untyped slot needs `derived =`, which only `@response` supplies — `@bound`
+# untyped slot needs `derived =`, which only `@response_edge` supplies — `@bound_edge`
 # rejects it.  So: materializable on a hub iff it has at least one QUANTITY slot
 # and every quantity slot is implemented there.
 #
 # A relation with no quantity slot at all cannot be hung on a hub by a
-# TYPE-DISPATCHING generator (`@identity` / `@bound` / `@response`), because
+# TYPE-DISPATCHING generator (`@identity_edge` / `@bound_edge` / `@response_edge`), because
 # there is nothing to look up.  This file used to say the block was therefore
 # upstream and unfixable, and named the entanglement family as the example:
 # `Subadditivity`'s S_A / S_B / S_AB are untyped, since there is no
@@ -132,7 +132,7 @@ end
 # the staleness assertion below will say so.
 const WIRED_WITHOUT_A_STORED_RELATION = Dict{Symbol,String}(
     :FreeEnergyLegendre =>
-        "the `:gibbs` @identity calls solve(…, Val(:F)) inside its " *
+        "the `:gibbs` @identity_edge calls solve(…, Val(:F)) inside its " *
         "check closure; TupleIdentityEdge has no `relation` field",
 )
 
@@ -226,6 +226,43 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                            velocity and no quantity names it; the TFIM card supplies one \
                            ad hoc from the dispersion. Closing this needs that \
                            measurement to become a quantity.",
+
+    # ── the eight universal bounds (AbstractQAtlas 0.6.1 / ABQ#132) ─────────────
+    #
+    # These are materializable the moment they exist, because QAtlas registers every
+    # bounding VALUE on a `Bound{Domain}` hub. They are unwirable for a reason that
+    # is not a gap but the DESIGN: each states `measured OP fetched-bound`, and the
+    # measured side is deliberately an untyped slot. No quantity in either package
+    # names "the CHSH correlator I measured" or "the Lyapunov exponent I extracted",
+    # and inventing one would be naming a measurement protocol, not a physical
+    # quantity. `bound!` refuses an untyped slot by design, so this is the guard
+    # working, not failing.
+    #
+    # Same shape as `LiebRobinsonBound` below, which has carried this reason since
+    # AbstractQAtlas 0.4.2 — these eight are its siblings, and the reason generalises
+    # exactly. Each closes when a quantity for the measured side arrives, at which
+    # point the entry must be deleted (the stale-entry assertions below enforce that).
+    :CHSHInequality => "the `S` slot is a MEASURED CHSH correlator and no quantity \
+                        names it; only the Tsirelson/classical/PR bound VALUE is \
+                        fetchable. Closing this needs the measurement to become a \
+                        quantity.",
+    :MerminInequality => "same shape as CHSHInequality: `M` is a measured Mermin \
+                          operator value, untyped by design.",
+    :LyapunovChaosBound => "`λ_L` is a Lyapunov exponent extracted from an OTOC fit; \
+                            the atlas fetches the MSS ceiling, not the exponent.",
+    :BekensteinEntropyBound => "`S` is the entropy of a bounded system supplied by \
+                                the caller; the atlas fetches 2πRE, not S.",
+    :OrthogonalizationTimeBound => "`τ` is a measured orthogonalization time; the \
+                                    atlas fetches the limit it must clear. (The \
+                                    energy-data forms, MargolusLevitinBound and \
+                                    MandelstamTammBound, are separately unwired for \
+                                    the same reason.)",
+    :FastScramblingBound => "`t_scr` is a measured scrambling time; the atlas \
+                             fetches the Sekino-Susskind floor.",
+    :SecretKeyRateBound => "`r` is an achieved key rate; the atlas fetches the \
+                            Shor-Preskill rate it must exceed.",
+    :CloningFidelityBound => "`F` is a reported cloner fidelity; the atlas fetches \
+                              the Buzek-Hillery optimum it must not exceed.",
 
     # Became materializable when AbstractQAtlas 0.5.0 folded FermiVelocity /
     # LuttingerVelocity into `Velocity{K}`: the relation's `v` slot is typed on the

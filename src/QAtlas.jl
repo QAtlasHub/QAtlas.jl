@@ -113,6 +113,13 @@ using AbstractQAtlas:
     # and behind the same verbs.  The transport pair is type-keyed onto the
     # carrier quantities ABQ kept.
     @relation,
+    # AbstractQAtlas 0.6.0 also exports `bounds_on(q)` — the universal INEQUALITIES
+    # whose bounded slot is keyed on `q`.  QAtlas had a function of the same name
+    # returning registry ROWS with `status=:bound`; both answer "what bounds this?",
+    # one with laws and one with fetchable atlas rows.  The vocabulary lives in the
+    # base package, so the row query was renamed `bound_rows_on` and the law query is
+    # imported here — a caller can now ask both and see they are different questions.
+    bounds_on,
     # `@bound` REPLACED `@inequality` upstream (AbstractQAtlas 0.6.0).  QAtlas's own
     # edge macros were renamed `@identity_edge` / `@response_edge` / `@bound_edge` in
     # the same change, so this name is free and the two `@bound`s no longer collide.
@@ -616,7 +623,7 @@ include("limits_registry.jl")
 # (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.
 include("core/links.jl")
 include("core/coherence.jl")
-export predicts, predicted_by, bounds_on, cited_by, delegations, implementations_of
+export predicts, predicted_by, bound_rows_on, cited_by, delegations, implementations_of
 export coherence_report,
     coherence_errors, coherence_gaps, CoherenceFinding, check_realization_agreement
 

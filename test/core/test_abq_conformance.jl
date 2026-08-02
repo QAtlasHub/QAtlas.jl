@@ -194,6 +194,26 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                       is a quantity this atlas computes; the hubs with a \
                       PartitionFunction supply Z alone. Closing this needs a TPQ hub.",
 
+    # Became materializable when QAtlas stopped declaring its own `LoschmidtAmplitude`
+    # / `LoschmidtRateFunction` and adopted AbstractQAtlas's (ABQ#128). Same intended
+    # effect as the PartitionFunction entries above.
+    #
+    # Unlike them, this one is wirable IN PRINCIPLE and is queued rather than closed.
+    # MEASURED: exactly one hub carries both participants — TFIM at OBC (XXZ1D has the
+    # rate function only, at Infinite, so it cannot close the identity). Two things
+    # stop the generator as it stands:
+    #   * both fetches need `initial::TFIM`, a MODEL-valued kwarg, and the sweep grid
+    #     is splatted into `fetch` across every hub implementing the participants — a
+    #     hub-specific model instance in a hub-generic grid;
+    #   * `λ = -log L / N` needs `N`, an untyped slot the generator cannot fetch. The
+    #     check lambda does not receive the boundary condition, so `N` would have to be
+    #     restated beside `finite_N` — a second copy of a number that must agree.
+    # Both are generator-shape gaps, not physics gaps.
+    :LoschmidtRate => "wirable in principle but not by this generator: the only hub \
+                       with both participants (TFIM/OBC) needs a model-valued \
+                       `initial=` kwarg in a hub-generic sweep grid, and `N` would \
+                       have to be restated beside `finite_N`. See #815.",
+
     # Became materializable when AbstractQAtlas 0.4.2 typed the bound's `v_LR` slot on
     # `LiebRobinsonVelocity` -- the intended effect, and the reason the count moved
     # again. It still cannot be WIRED, for the same shape of reason as

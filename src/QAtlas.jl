@@ -64,6 +64,20 @@ using AbstractQAtlas:
     # Regions: the value-keyed support that lets `region_report` auto-discover the
     # entropy inequalities over a bag of S(A) (#780).
     Region,
+    # Same rule again, third batch — AbstractQAtlas 0.5.1/0.5.2 (ABQ#128 Loschmidt
+    # pair, ABQ#129 seven model-independent observables) adopted these nine, and
+    # QAtlas kept declaring its own until now.  The fork was SILENT to every model
+    # file (`Polarization` still resolved, just to the wrong object) and showed up
+    # only in test/core/test_abq_vocabulary.jl's sweep — which is what it is for.
+    ChiralCondensate,
+    FidelitySusceptibility,
+    FractalDimension,
+    GroundStateDegeneracy,
+    LoschmidtAmplitude,
+    LoschmidtRateFunction,
+    LuttingerParameter,
+    Polarization,
+    StringOrderParameter,
     NMRRelaxationExponent,
     NMRSpinRelaxationRate,
     TopologicalEntanglementEntropy,

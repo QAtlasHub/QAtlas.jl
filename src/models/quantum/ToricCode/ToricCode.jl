@@ -194,81 +194,100 @@ function fetch(::ToricCode, ::TopologicalEntanglementEntropy, ::Infinite; kwargs
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# AnyonStatistics — non-BC quantity (topological data only)
+# Anyon statistics — non-BC quantities (topological data only), one per return
+# SCHEMA: self-statistics of an anyon, and mutual braiding of a pair (#819)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 """
-    fetch(::ToricCode, ::AnyonStatistics; type::Symbol) -> NamedTuple
+    fetch(::ToricCode, ::AnyonSelfStatistics; label::Symbol = :e) -> NamedTuple
 
-Topological data of one of the four toric-code anyons or the
-`e`/`m` mutual braiding. The returned `NamedTuple` shape depends on
-`type`:
+Self-statistics of one toric-code anyon.  Always returns the same fields:
 
-| `type`         | NamedTuple fields                                      |
-| :------------- | :----------------------------------------------------- |
-| `:e`           | `(label = :e, statistics = :boson, self_phase = 0.0, quantum_dim = 1.0, fusion = (:e, :e) => :1)`  |
-| `:m`           | `(label = :m, statistics = :boson, self_phase = 0.0, quantum_dim = 1.0, fusion = (:m, :m) => :1)`  |
-| `:ε`           | `(label = :ε, statistics = :fermion, self_phase = π, quantum_dim = 1.0, fusion = (:ε, :ε) => :1)`  |
-| `:em_braiding` | `(label = :em_braiding, mutual_phase = π, anyons = (:e, :m))`                                          |
+    (label, statistics, self_phase, quantum_dim, fusion)
 
-Bosons have self-statistics phase `0`; the bound state `ε = e × m`
-acquires the relative phase `π` from the mutual `e`/`m` braid, making it
-a fermion. The `e`/`m` mutual phase is `π` (Z₂ "mutual semion") — a
-full braid of one around the other multiplies the wave function by
-`exp(iπ) = −1`. All quantum dimensions are 1 (Abelian theory).
+| `label`        | statistics | `self_phase` | fusion            |
+| :------------- | :--------- | :----------- | :---------------- |
+| `:1`, `:vacuum`| `:boson`   | `0`          | `1 x 1 -> 1`      |
+| `:e`           | `:boson`   | `0`          | `e x e -> 1`      |
+| `:m`           | `:boson`   | `0`          | `m x m -> 1`      |
+| `:eps`, `:epsilon`, `:ε` | `:fermion` | `pi` | `eps x eps -> 1` |
 
-Aliases: `type = :epsilon` is accepted as a synonym of `:ε`.
+All quantum dimensions are 1 (the theory is Abelian).  The bound state
+`eps = e x m` is a fermion because the `e`/`m` mutual braid contributes `pi` —
+see [`AnyonMutualStatistics`](@ref).
 
-Throws an `ErrorException` for any other `type`.
+Throws an `ArgumentError` for an unknown label, listing the accepted ones.
 """
-function fetch(::ToricCode, ::AnyonStatistics; type::Symbol=:em, kwargs...)
-    if type === :vacuum || type === Symbol("1")
-        return (
-            label=Symbol("1"),
-            statistics=:boson,
-            self_phase=0.0,
-            quantum_dim=1.0,
-            fusion=(Symbol("1"), Symbol("1")) => Symbol("1"),
-        )
-    elseif type === :e
-        return (
-            label=:e,
-            statistics=:boson,
-            self_phase=0.0,
-            quantum_dim=1.0,
-            fusion=(:e, :e) => Symbol("1"),
-        )
-    elseif type === :m
-        return (
-            label=:m,
-            statistics=:boson,
-            self_phase=0.0,
-            quantum_dim=1.0,
-            fusion=(:m, :m) => Symbol("1"),
-        )
-    elseif type === :ε || type === :epsilon
-        return (
-            label=:ε,
-            statistics=:fermion,
-            self_phase=Float64(π),
-            quantum_dim=1.0,
-            fusion=(:ε, :ε) => Symbol("1"),
-        )
-    elseif type === :em || type === :em_braiding
-        return (label=:em_braiding, mutual_phase=Float64(π), anyons=(:e, :m))
-    else
-        throw(
-            ArgumentError(
-                "ToricCode AnyonStatistics: unknown anyon type :$type; expected one of " *
-                ":vacuum / :1, :e, :m, :ε / :epsilon, :em / :em_braiding.",
-            ),
-        )
+function fetch(::ToricCode, ::AnyonSelfStatistics; label::Symbol=:e, kwargs...)
+    if label === :vacuum || label === Symbol("1")
+        return _toric_self(Symbol("1"), :boson, 0.0)
+    elseif label === :e
+        return _toric_self(:e, :boson, 0.0)
+    elseif label === :m
+        return _toric_self(:m, :boson, 0.0)
+    elseif label === :ε || label === :epsilon || label === :eps
+        return _toric_self(:ε, :fermion, Float64(π))
     end
+    return throw(
+        ArgumentError(
+            "ToricCode AnyonSelfStatistics: unknown anyon label :$label; expected " *
+            "one of :vacuum / :1, :e, :m, :ε / :epsilon / :eps.  For the e/m " *
+            "braiding phase use AnyonMutualStatistics, which is a different " *
+            "quantity with different fields (#819).",
+        ),
+    )
 end
 
-# BC-aware dispatch for AnyonStatistics: registry has (ToricCode, AnyonStatistics, Infinite)
-# row, so the drift guard `has_native_fetch` requires this method to exist. Delegates
-# to the no-BC implementation; the result is independent of the boundary tag.
-function fetch(model::ToricCode, q::AnyonStatistics, ::Infinite; kwargs...)
+# Every self-statistics row has the same shape; only the three values differ, and
+# every toric-code anyon is its own inverse (a x a -> 1) with quantum dimension 1.
+function _toric_self(label::Symbol, statistics::Symbol, self_phase::Float64)
+    return (
+        label=label,
+        statistics=statistics,
+        self_phase=self_phase,
+        quantum_dim=1.0,
+        fusion=(label, label) => Symbol("1"),
+    )
+end
+
+"""
+    fetch(::ToricCode, ::AnyonMutualStatistics; anyons = (:e, :m)) -> NamedTuple
+
+Mutual braiding phase of a pair of toric-code anyons:
+
+    (anyons, mutual_phase)
+
+`(:e, :m)` (in either order) gives `pi` — a full braid of one around the other
+multiplies the wave function by `exp(i pi) = -1`, the Z_2 "mutual semion"
+statistics that makes `eps = e x m` a fermion.  Any pair involving the vacuum,
+or an anyon with itself, braids trivially (`0`).
+
+Throws an `ArgumentError` for an unknown anyon.
+"""
+function fetch(::ToricCode, ::AnyonMutualStatistics; anyons=(:e, :m), kwargs...)
+    a, b = _toric_anyon.(anyons)
+    phase = Set([a, b]) == Set([:e, :m]) ? Float64(π) : 0.0
+    return (anyons=(a, b), mutual_phase=phase)
+end
+
+function _toric_anyon(s::Symbol)
+    s in (:vacuum, Symbol("1")) && return Symbol("1")
+    s in (:ε, :epsilon, :eps) && return :ε
+    s in (:e, :m) && return s
+    return throw(
+        ArgumentError(
+            "ToricCode AnyonMutualStatistics: unknown anyon :$s; expected one of " *
+            ":vacuum / :1, :e, :m, :ε / :epsilon / :eps.",
+        ),
+    )
+end
+
+# BC-aware dispatch: the registry carries (ToricCode, <quantity>, Infinite) rows, so
+# `has_native_fetch` requires these to exist.  The topological content is independent
+# of any boundary tag, so both delegate to the no-BC implementations.
+function fetch(model::ToricCode, q::AnyonSelfStatistics, ::Infinite; kwargs...)
+    return fetch(model, q; kwargs...)
+end
+function fetch(model::ToricCode, q::AnyonMutualStatistics, ::Infinite; kwargs...)
     return fetch(model, q; kwargs...)
 end

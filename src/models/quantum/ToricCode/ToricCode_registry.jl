@@ -7,9 +7,12 @@
 #   - GroundStateDegeneracy at PBC              = 4^genus
 #   - TopologicalEntanglementEntropy at Infinite = log 2
 #
-# `AnyonStatistics` is a non-BC quantity (the toric code's topological
-# content is independent of any boundary tag); no `bc` is registered for
-# it and `fetch(model, AnyonStatistics; type=…)` is the only call form.
+# The two anyon-statistics quantities are non-BC (the toric code's topological
+# content is independent of any boundary tag); no `bc` is registered for them
+# and `fetch(model, AnyonSelfStatistics; label=…)` /
+# `fetch(model, AnyonMutualStatistics; anyons=…)` are the only call forms.
+# They were one quantity whose returned SCHEMA changed with its `type` kwarg,
+# which is why they are two now (#819).
 # We register it against `Infinite` so the registry's `(model, quantity,
 # bc)` triple is well-formed; the actual `fetch` method has no `bc`
 # argument and always succeeds for any `type`.
@@ -66,12 +69,25 @@
 
 @register(
     ToricCode,
-    AnyonStatistics,
+    AnyonSelfStatistics,
     Infinite,
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
     tested_in="test/standalone/test_toric_code.jl",
     references=["Kitaev2003", "NayakSimonSternFreedmanDasSarma2008"],
-    notes="Topological data for {1, e, m, ε} and e/m mutual braiding (phase π).",
+    notes="Self-statistics of {1, e, m, ε}: bosons except ε, which is a fermion " *
+          "(self-phase π); all quantum dimensions 1 (Abelian).",
+)
+@register(
+    ToricCode,
+    AnyonMutualStatistics,
+    Infinite,
+    method=:analytic,
+    cost=:closed_form,
+    reliability=:high,
+    tested_in="test/standalone/test_toric_code.jl",
+    references=["Kitaev2003", "NayakSimonSternFreedmanDasSarma2008"],
+    notes="e/m mutual braiding phase π (Z₂ mutual semion); every other pair " *
+          "braids trivially.",
 )

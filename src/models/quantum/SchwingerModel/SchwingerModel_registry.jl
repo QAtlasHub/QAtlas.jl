@@ -10,7 +10,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_schwinger_model.jl",
+    tested_in="test/models/quantum/misc/test_schwinger_model.jl",
     references=["Schwinger1962"],
     notes="Massless Schwinger m_γ = e/√π via abelian bosonisation; m ≠ 0 raises DomainError (sine-Gordon dual, Phase 2).",
 )

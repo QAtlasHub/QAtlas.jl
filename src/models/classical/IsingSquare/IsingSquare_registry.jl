@@ -22,7 +22,11 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_ising2d_observables.jl",
+    tested_in=[
+        "test/models/classical/test_IsingSquare_PBC_thermo_ED_batch.jl",
+        "test/models/classical/test_IsingSquare_critical.jl",
+        "test/models/classical/test_IsingSquare_thermal.jl",
+    ],
     references=["Onsager1944"],
     notes="T_c = 2J/log(1+√2).",
 )
@@ -33,7 +37,11 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_ising2d_observables.jl",
+    tested_in=[
+        "test/models/classical/test_IsingSquare_PBC_thermo_ED_batch.jl",
+        "test/models/classical/test_IsingSquare_critical.jl",
+        "test/models/classical/test_IsingSquare_thermal.jl",
+    ],
     references=["Yang1952"],
     notes="M(T) = (1 - sinh⁻⁴(2βJ))^(1/8) for T < T_c.",
 )
@@ -46,7 +54,7 @@
     method=:kaufman_free_fermion,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="f = -log tr(T^Lx) / (β Lx Ly).",
 )
 @register(
@@ -63,7 +71,7 @@
                 "Numerically approximate, physically exact -- the approximation is " *
                 "the differencing, not the model.",
     reliability=:medium,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="ε = -∂(log Z)/∂β / N via central diff (O(δ²) truncation).",
 )
 @register(
@@ -79,7 +87,7 @@
     error_order="no differencing of its own -- s = beta(eps - f) propagates the " *
                 "energy row's central-difference error linearly.",
     reliability=:medium,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="s = β(ε - f).",
 )
 @register(
@@ -96,7 +104,7 @@
                 "O(eps/delta^2) round-off -- markedly worse conditioned than the " *
                 "first-derivative rows, which is why it is called out separately.",
     reliability=:medium,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="c_v = β² ∂²(log Z)/∂β² / N via 3-point stencil.",
 )
 @register(
@@ -106,7 +114,7 @@
     method=:onsager,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     references=["Onsager1944"],
     notes="-βf = log(2) + (1/2π)∫log[(A+√(A²-B²))/2]dφ; bond-counting matches PBC limit.",
 )
@@ -124,7 +132,7 @@
                 "Numerically approximate, physically exact -- the approximation is " *
                 "the differencing, not the model.",
     reliability=:high,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="ε = -∂(log Z/N)/∂β via central diff on Onsager log Z.",
 )
 @register(
@@ -140,7 +148,7 @@
     error_order="no differencing of its own -- s = beta(eps - f) propagates the " *
                 "energy row's central-difference error linearly.",
     reliability=:high,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="s = β(ε - f).",
 )
 @register(
@@ -157,7 +165,7 @@
                 "O(eps/delta^2) round-off -- markedly worse conditioned than the " *
                 "first-derivative rows, which is why it is called out separately.",
     reliability=:medium,
-    tested_in="test/models/test_IsingSquare_thermal.jl",
+    tested_in="test/models/classical/test_IsingSquare_thermal.jl",
     notes="Diverges at T_c (ln(1+√2)/2 ≈ 0.4407); finite elsewhere.",
 )
 

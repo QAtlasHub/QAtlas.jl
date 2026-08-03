@@ -10,7 +10,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_ising_chain_1d.jl",
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
     references=["Ising1925"],
     notes="No finite-temperature phase transition in 1-D; T_c = 0.",
 )
@@ -22,7 +22,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_ising_chain_1d.jl",
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
     references=["Ising1925"],
     notes="f(β,h) = -β^{-1} log λ_+; at h=0 reduces to -β^{-1} log(2 cosh βJ).",
 )
@@ -34,7 +34,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_ising_chain_1d.jl",
+    tested_in="test/models/classical/test_ising_chain_1d.jl",
     references=["Ising1925"],
     notes="ξ(β,h) = 1/log(λ_+/λ_-); at h=0 reduces to 1/log(coth βJ).",
 )

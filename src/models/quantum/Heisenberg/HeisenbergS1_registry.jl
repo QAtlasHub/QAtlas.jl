@@ -15,7 +15,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl",
     notes="Total ⟨H⟩(β) by dense ED on the 3^N Hilbert space; N ≤ 8.",
 )
 @register(
@@ -26,7 +26,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -36,7 +36,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -46,7 +46,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_thermal.jl",
 )
 
 # ── Per-site magnetisations (OBC) ─────────────────────────────────────
@@ -58,7 +58,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -68,7 +68,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -78,7 +78,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 
 # ── Susceptibilities (OBC) ────────────────────────────────────────────
@@ -90,7 +90,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -100,7 +100,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -110,7 +110,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 
 # ── Two-point correlators (static / connected, OBC) ───────────────────
@@ -122,7 +122,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -132,7 +132,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -142,7 +142,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -152,7 +152,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -162,7 +162,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -172,7 +172,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 
 # ── Local one-site / one-bond observables (OBC) ───────────────────────
@@ -184,7 +184,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -194,7 +194,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 @register(
     S1Heisenberg1D,
@@ -204,7 +204,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
 )
 
 # ── Spectrum / criticality ────────────────────────────────────────────
@@ -216,7 +216,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
     notes="E₁ - E₀ from dense ED on 3^N space; finite-N + edge-state corrections to Δ_∞.",
 )
 @register(
@@ -229,7 +229,7 @@
     valid_domain="spin-1 Heisenberg chain, thermodynamic limit",
     error_order="DMRG numerical value (White-Huse 1993); no closed form is known",
     reliability=:medium,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
     references=["WhiteHuse1993"],
     notes="Haldane gap Δ ≈ 0.41048 J (DMRG; no closed form).",
 )
@@ -243,7 +243,7 @@
     valid_domain="spin-1 Heisenberg chain, thermodynamic limit",
     error_order="DMRG numerical value (White-Huse 1993); no closed form is known",
     reliability=:medium,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
     references=["WhiteHuse1993"],
     notes="GS energy density e₀ ≈ -1.401484 J (DMRG; no closed form).",
 )
@@ -257,7 +257,7 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
     notes="Partial trace of dense thermal ρ over the SPIN complement, so the " *
           "subsystem may be ANY region — pass `region` (a Region, contiguous or " *
           "not) or the block length `ℓ` ∈ [1, N-1], which means Region(1:ℓ) (#780).",
@@ -270,6 +270,6 @@
     cost=:exponential,
     max_size=8,
     reliability=:high,
-    tested_in="test/models/test_S1Heisenberg1D_observables.jl",
+    tested_in="test/models/quantum/Heisenberg/test_S1Heisenberg1D_observables.jl",
     notes="S_α = log Tr ρ_A^α / (1-α); same partial-trace path as VonNeumann.",
 )

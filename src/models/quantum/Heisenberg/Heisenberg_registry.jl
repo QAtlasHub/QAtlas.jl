@@ -14,7 +14,7 @@
     method=:bethe_ansatz,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_bethe_ansatz.jl",
+    tested_in="test/models/quantum/XXZ/test_bethe_ansatz.jl",
     references=["Hulthen1938", "Bethe1931"],
     notes="e₀ = J(1/4 - ln 2) at the isotropic AF point.",
 )
@@ -28,7 +28,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl",
     notes="Delegates to XXZ1D(Δ=1.0); J passed via kwargs.",
 )
 
@@ -41,7 +41,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl",
     notes="Delegates to XXZ1D(Δ=1.0).",
 )
 @register(
@@ -51,7 +51,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl",
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl",
     notes="Gapless (0.0) at the isotropic critical point.",
 )
 
@@ -64,7 +64,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -74,7 +74,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -84,7 +84,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 
 # ── Magnetisations ────────────────────────────────────────────────────
@@ -96,7 +96,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -106,7 +106,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -116,7 +116,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 
 # ── Local site-resolved observables ───────────────────────────────────
@@ -128,7 +128,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -138,7 +138,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -148,7 +148,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -158,7 +158,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 
 # ── Susceptibilities ──────────────────────────────────────────────────
@@ -170,7 +170,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -180,7 +180,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -190,7 +190,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 
 # ── Two-point correlators (static + connected) ────────────────────────
@@ -210,7 +210,7 @@ for CorrT in (
         cost=:exponential,
         max_size=12,
         reliability=:high,
-        tested_in="test/models/test_Heisenberg1D_thermal.jl",
+        tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl",
     )
 end
 
@@ -223,7 +223,7 @@ end
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 @register(
     Heisenberg1D,
@@ -233,7 +233,7 @@ end
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_Heisenberg1D_thermal.jl"
+    tested_in="test/models/quantum/Heisenberg/test_Heisenberg1D_thermal.jl"
 )
 
 # ── Spinon kinematics (issue #154 phase 1, Infinite) ──────────────────

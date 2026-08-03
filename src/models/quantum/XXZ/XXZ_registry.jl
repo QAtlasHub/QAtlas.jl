@@ -17,7 +17,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_thermal.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_thermal.jl",
     references=["YangYang1966", "Takahashi1999"],
     notes="Total ⟨H⟩(β) by dense ED of the 2^N × 2^N XXZ Hamiltonian.",
 )
@@ -28,7 +28,7 @@
     method=:bethe_ansatz,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D.jl",
     references=["Hulthen1938", "YangYang1966"],
     notes="Closed form at Δ ∈ {-1, 0, 1}; Yang-Yang single integral via QuadGK for general -1 < Δ < 1; |Δ| > 1 (gapped) deferred.",
 )
@@ -41,7 +41,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D.jl",
     references=["Giamarchi2003"],
     notes="c = 1 in the critical regime -1 < Δ < 1.",
 )
@@ -52,7 +52,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D.jl",
     references=["Giamarchi2003"],
     notes="K = π / (2(π − arccos Δ)) for -1 < Δ ≤ 1.",
 )
@@ -63,7 +63,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D.jl",
     references=["Giamarchi2003", "desCloizeauxPearson1962"],
     notes="u = (πJ/2) sin γ / γ, γ = arccos Δ; -1 < Δ ≤ 1.",
 )
@@ -87,7 +87,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl",
     notes="E₁ - E₀ from full-spectrum dense ED.",
 )
 @register(
@@ -97,7 +97,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl",
     references=["Giamarchi2003"],
     notes="0 in the critical regime -1 < Δ ≤ 1; gapped regime returns NaN with a warning.",
 )
@@ -111,7 +111,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_thermal.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_thermal.jl"
 )
 @register(
     XXZ1D,
@@ -121,7 +121,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_thermal.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_thermal.jl"
 )
 @register(
     XXZ1D,
@@ -131,7 +131,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_thermal.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_thermal.jl"
 )
 
 # ── Magnetisations (Pauli convention) ─────────────────────────────────
@@ -143,7 +143,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -153,7 +153,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -163,7 +163,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 
 # ── Site-resolved local observables ───────────────────────────────────
@@ -175,7 +175,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -185,7 +185,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -195,7 +195,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -205,7 +205,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl",
     notes="Bonds split symmetrically: Σᵢ ε_i = ⟨H⟩.",
 )
 
@@ -218,7 +218,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -228,7 +228,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 @register(
     XXZ1D,
@@ -238,7 +238,7 @@
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl"
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl"
 )
 
 # ── Two-point correlators (static + connected) ────────────────────────
@@ -258,7 +258,7 @@ for CorrT in (
         cost=:exponential,
         max_size=12,
         reliability=:high,
-        tested_in="test/models/test_XXZ1D_observables.jl",
+        tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl",
         notes="(i,j) ⟨σᵅᵢ σᵅⱼ⟩_β; the connected variant subtracts the disconnected piece.",
     )
 end
@@ -272,7 +272,7 @@ end
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl",
     notes="Dense-ED partial trace over the SPIN complement, so the subsystem may " *
           "be ANY region — pass `region` (a Region, contiguous or not) or the block " *
           "length `ℓ`, which means Region(1:ℓ); β=Inf gives ground-state EE (#780).",
@@ -285,7 +285,7 @@ end
     cost=:exponential,
     max_size=12,
     reliability=:high,
-    tested_in="test/models/test_XXZ1D_observables.jl",
+    tested_in="test/models/quantum/XXZ/test_XXZ1D_observables.jl",
     notes="S_α = log Tr ρ_A^α / (1 - α); pass subsystem ℓ and order α.",
 )
 
@@ -308,7 +308,7 @@ end
     method=:free_fermion_quadgk_or_klumper_nlie,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_infinite.jl",
+    tested_in="test/models/quantum/XXZ/test_xxz_xx_infinite.jl",
     references=["Mahan2000", "Coleman2015", "Klumper1993"],
     notes="XX free-fermion s(β); -1<Δ<1 (Δ≠0) routes through Klümper NLIE finite-diff (issue #521); NaN+warn at |Δ|≥0.99.",
 )
@@ -319,7 +319,7 @@ end
     method=:free_fermion_quadgk_or_klumper_nlie,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_infinite.jl",
+    tested_in="test/models/quantum/XXZ/test_xxz_xx_infinite.jl",
     references=["Mahan2000", "Klumper1993"],
     notes="XX free-fermion closed form; -1<Δ<1 (Δ≠0) via Klümper NLIE finite-diff (issue #521); NaN+warn at |Δ|≥0.99.",
 )
@@ -331,7 +331,7 @@ end
     method=:free_fermion_analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_xxz_xx_quench.jl",
+    tested_in="test/models/quantum/XXZ/test_xxz_xx_quench.jl",
     references=["CalabreseEsslerFagotti2012", "Heyl2013", "EsslerFagotti2016"],
     notes="XX → XX quench Loschmidt rate λ(t) at Δ = 0 only; same-sign J ⇒ λ ≡ 0 (Fermi sea preserved), sign-flip ⇒ 0 (|GS(J₀)⟩ is a number eigenstate of H_f; Anderson orthogonality does not apply to the Loschmidt amplitude).  Δ ≠ 0 throws DomainError.",
 )

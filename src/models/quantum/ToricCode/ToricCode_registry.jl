@@ -27,7 +27,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_toric_code.jl",
+    tested_in="test/models/quantum/misc/test_toric_code.jl",
     references=["Kitaev2003"],
     notes="ε₀ = −(J_e + J_m) per (vertex+plaquette) unit cell.",
 )
@@ -39,7 +39,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_toric_code.jl",
+    tested_in="test/models/quantum/misc/test_toric_code.jl",
     references=["Kitaev2003"],
     notes="Δ = 2 · min(J_e, J_m) — single-anyon excitation gap.",
 )
@@ -50,7 +50,7 @@
     PBC,
     method=:analytic,
     reliability=:high,
-    tested_in="test/standalone/test_toric_code.jl",
+    tested_in="test/models/quantum/misc/test_toric_code.jl",
     references=["Kitaev2003"],
     notes="GSD = 4^genus on a closed orientable surface; OBC has unique GS (not registered).",
 )
@@ -62,7 +62,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_toric_code.jl",
+    tested_in="test/models/quantum/misc/test_toric_code.jl",
     references=["KitaevPreskill2006", "LevinWen2006"],
     notes="γ = log 𝒟 = log 2 (Z₂ topological order, total quantum dim 𝒟 = 2).",
 )
@@ -74,7 +74,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_toric_code.jl",
+    tested_in="test/models/quantum/misc/test_toric_code.jl",
     references=["Kitaev2003", "NayakSimonSternFreedmanDasSarma2008"],
     notes="Self-statistics of {1, e, m, ε}: bosons except ε, which is a fermion " *
           "(self-phase π); all quantum dimensions 1 (Abelian).",
@@ -86,7 +86,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_toric_code.jl",
+    tested_in="test/models/quantum/misc/test_toric_code.jl",
     references=["Kitaev2003", "NayakSimonSternFreedmanDasSarma2008"],
     notes="e/m mutual braiding phase π (Z₂ mutual semion); every other pair " *
           "braids trivially.",

@@ -10,7 +10,7 @@
     method=:minimal_model_delegation,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_tricritical_potts3.jl",
+    tested_in="test/universalities/test_tricritical_potts3.jl",
     references=["AndrewsBaxterForrester1984", "Huse1984"],
     notes="Delegates to MinimalModel(6,7); c = 6/7 exact (Rational).",
 )

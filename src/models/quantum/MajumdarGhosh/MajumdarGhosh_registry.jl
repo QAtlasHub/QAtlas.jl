@@ -12,7 +12,12 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
+    tested_in=[
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_structural.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_infinite.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_pbc.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl",
+    ],
     references=["MajumdarGhosh1969"],
     notes="E₀/N = -3J/8 from the exact dimer-product ground state.",
 )
@@ -22,7 +27,12 @@
     PBC,
     method=:analytic,
     reliability=:high,
-    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
+    tested_in=[
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_structural.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_infinite.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_pbc.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl",
+    ],
     references=["MajumdarGhosh1969"],
     notes="Size-independent: dimer-product state is an exact eigenstate for any even N.",
 )
@@ -35,7 +45,12 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
+    tested_in=[
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_structural.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_infinite.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_pbc.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl",
+    ],
     references=["ShastrySutherland1981", "WhiteAffleck1996"],
     notes="method=:lower_bound → J/4 (Shastry-Sutherland); :numerical → 0.234 J (White-Affleck DMRG).",
 )
@@ -50,7 +65,12 @@
     valid_domain="Majumdar-Ghosh point J2/J1 = 1/2, thermodynamic limit",
     error_order="DMRG estimate; the rigorous Shastry-Sutherland bound Δ >= J/4 is a separate claim",
     reliability=:medium,
-    tested_in="test/models/quantum/Heisenberg/test_majumdar_ghosh.jl",
+    tested_in=[
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_structural.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_infinite.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_ed_pbc.jl",
+        "test/models/quantum/Heisenberg/test_majumdar_ghosh_verify_lit.jl",
+    ],
     references=["WhiteAffleck1996", "Eggert1996"],
     notes="Δ ≈ 0.234 J DMRG; Shastry-Sutherland 1981 bound Δ ≥ J/4 is trimer-sector only.",
 )

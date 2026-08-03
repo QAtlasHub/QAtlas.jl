@@ -16,8 +16,13 @@
 #                      `:low` (heuristic, not validated),
 #                      `:not_implemented`.  Aligned with the
 #                      (a)/(b)/(c) test categories in #118.
-#   * `tested_in`   — relative path to the test file that validates
+#   * `tested_in`   — relative path(s) to the test file(s) that validate
 #                      this triple (or `nothing` if no dedicated test).
+#                      A `String` or a `Vector{String}`; stored normalised to a
+#                      vector, because a single row is often pinned by a FAMILY
+#                      of files (`test_TFIM_dynamics_{critical,ordered,…}.jl`)
+#                      and naming one of them reads as if the rest did not exist.
+#                      Every entry must resolve — `test/lint/test_tested_in.jl`.
 #   * `references`  — short literature pointers (author + year).
 #   * `notes`       — caller-facing caveats (granularity, kwargs, …).
 #
@@ -50,7 +55,7 @@ struct Implementation
     error_order::Union{String,Nothing}   # :approx only — leading error
     canonical::Bool                      # the bare-fetch default within a hub
     reliability::Symbol
-    tested_in::Union{String,Nothing}
+    tested_in::Union{Vector{String},Nothing}
     references::Vector{String}
     notes::String
     thermal::Symbol                      # orthogonal axis: :zero / :finite / :both / :unknown
@@ -215,7 +220,7 @@ function register!(
     error_order::Union{String,Nothing}=nothing,
     canonical::Bool=true,
     reliability::Symbol=:unknown,
-    tested_in::Union{String,Nothing}=nothing,
+    tested_in::Union{AbstractString,AbstractVector{<:AbstractString},Nothing}=nothing,
     references::AbstractVector{<:AbstractString}=String[],
     notes::AbstractString="",
     thermal::Union{Symbol,Nothing}=nothing,
@@ -311,7 +316,7 @@ function register!(
             error_order,
             canonical,
             reliability,
-            tested_in,
+            _normalise_tested_in(tested_in),
             String[r for r in references],
             String(notes),
             _derive_thermal(thermal, model_T, quantity_T, bc_T),
@@ -324,6 +329,23 @@ function register!(
 end
 
 """
+    _normalise_tested_in(x) -> Union{Vector{String},Nothing}
+
+Accept a single path or a list, and store a list either way.
+
+Normalising at the boundary rather than at every read site is what keeps the
+lint, `about` and the graph export from each having to re-handle the two shapes —
+and it is why passing a `String` stayed a valid spelling when the field went
+plural.
+"""
+_normalise_tested_in(::Nothing) = nothing
+_normalise_tested_in(x::AbstractString) = [String(x)]
+function _normalise_tested_in(x::AbstractVector{<:AbstractString})
+    isempty(x) && return nothing
+    return String[String(p) for p in x]
+end
+
+"""
     @register Model Quantity BC method=… reliability=… tested_in=… references=… notes=…
 
 Thin macro around [`register!`](@ref).  Lets each model file register
@@ -331,7 +353,7 @@ its native fetch methods declaratively, e.g.
 
 ```julia
 @register TFIM Energy{:total} OBC method=:bdg reliability=:high \\
-    tested_in="test/models/test_TFIM_thermal.jl" \\
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl" \\
     references=["Pfeuty 1970"]
 ```
 
@@ -677,7 +699,7 @@ function implementation_status_markdown(io::IO=stdout, entries=implementation_st
             e.reliability,
             "`",
             " | ",
-            something(e.tested_in, "—"),
+            e.tested_in === nothing ? "—" : join(e.tested_in, "; "),
             " | ",
             isempty(e.references) ? "—" : join(e.references, "; "),
             " |",

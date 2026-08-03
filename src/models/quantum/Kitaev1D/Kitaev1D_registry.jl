@@ -10,7 +10,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_kitaev1d.jl",
+    tested_in="test/models/quantum/misc/test_kitaev1d.jl",
     references=["Kitaev2001"],
     notes="Per-site ε₀ by Gauss-Kronrod over the PBC dispersion E(k).",
 )
@@ -58,7 +58,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_kitaev1d.jl",
+    tested_in="test/models/quantum/misc/test_kitaev1d.jl",
     references=["Kitaev2001", "Alicea2012"],
     notes="Closed-form min over k of √((2t cos k + μ)² + 4Δ² sin² k).",
 )
@@ -68,7 +68,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/standalone/test_kitaev1d.jl",
+    tested_in="test/models/quantum/misc/test_kitaev1d.jl",
     references=["Kitaev2001", "Alicea2012"],
     notes="Smallest non-negative BdG eigenvalue. In the topological phase this IS the " *
           "Majorana boundary-mode energy, splitting ~ e^{-N/xi}; in the trivial phase it " *
@@ -82,7 +82,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_kitaev1d.jl",
+    tested_in="test/models/quantum/misc/test_kitaev1d.jl",
     references=["Kitaev2001"],
     notes="ξ = 1/Δ_gap; Inf on the critical line |μ| = 2|t|.",
 )
@@ -93,7 +93,7 @@
     method=:pfaffian,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_kitaev1d.jl",
+    tested_in="test/models/quantum/misc/test_kitaev1d.jl",
     references=["Kitaev2001", "AsbothOroszlanyPalyi2016"],
     notes="ν = sgn[Pf A(k=0)·Pf A(k=π)] = sgn(μ² - 4t²); ν=-1 topological, +1 trivial.",
 )

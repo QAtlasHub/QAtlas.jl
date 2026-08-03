@@ -9,7 +9,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_sherrington_kirkpatrick.jl",
+    tested_in="test/models/classical/test_sherrington_kirkpatrick.jl",
     references=["SherringtonKirkpatrick1975"],
     notes="T_c = J in 1/√N normalisation with J_ij ~ N(0, J²); 0 for J ≤ 0.",
 )

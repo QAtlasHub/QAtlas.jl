@@ -15,7 +15,10 @@
     method=:delegation,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/quantum/Heisenberg/test_j1j2_heisenberg1d.jl",
+    tested_in=[
+        "test/models/quantum/Heisenberg/test_j1j2_heisenberg1d_structural.jl",
+        "test/models/quantum/Heisenberg/test_j1j2_heisenberg1d_verify_ed.jl",
+    ],
     references=["Hulthen1938", "MajumdarGhosh1969", "WhiteAffleck1996"],
     notes="Closed form at j=0 (Heisenberg1D delegate) and j=1/2 (MajumdarGhosh delegate); generic j deferred.",
 )

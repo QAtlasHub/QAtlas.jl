@@ -9,7 +9,7 @@
     method=:analytic_uv,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_gross_neveu.jl",
+    tested_in="test/models/quantum/misc/test_gross_neveu.jl",
     references=["GrossNeveu1974"],
     notes="UV free-fermion c = N at g = 0 (N Dirac flavours); g ≠ 0 raises DomainError (Phase 2: RG flow / dynamical mass).",
 )

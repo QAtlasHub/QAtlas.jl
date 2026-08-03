@@ -17,7 +17,7 @@
                 "sector that this branch does not see, so MassGap = 0 is a statement " *
                 "about the acoustic phonons alone (quantum Toda tracked as Phase 2).",
     reliability=:high,
-    tested_in="test/standalone/test_toda_lattice.jl",
+    tested_in="test/models/classical/test_toda_lattice.jl",
     references=["Toda1967", "Flaschka1974"],
     notes="Linearised acoustic phonon ω(k) = 2√(ab)|sin(k/2)| ⇒ MassGap = 0.  Soliton / quantum-Toda spectrum tracked as Phase 2.",
 )

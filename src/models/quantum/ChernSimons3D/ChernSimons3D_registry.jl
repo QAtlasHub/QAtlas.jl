@@ -10,7 +10,7 @@
     method=:sugawara,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_chern_simons_3d.jl",
+    tested_in="test/models/quantum/misc/test_chern_simons_3d.jl",
     references=["Witten1989", "KnizhnikZamolodchikov1984"],
     notes="Sugawara c = k(N²-1)/(k+N) for boundary ŝu(N)_k WZW; SU(2)_k specialises to 3k/(k+2).",
 )

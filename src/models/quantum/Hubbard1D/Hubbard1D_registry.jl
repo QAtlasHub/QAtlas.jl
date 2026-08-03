@@ -32,7 +32,7 @@
     method=:bethe_ansatz,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_hubbard1d.jl",
+    tested_in="test/models/quantum/misc/test_hubbard1d.jl",
     references=["LiebWu1968", "Essler2005"],
     notes="Lieb-Wu integral Δ_c = (16t²/U) ∫₁^∞ √(ω²-1)/sinh(2πtω/U) dω at half filling.",
 )
@@ -44,7 +44,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_hubbard1d.jl",
+    tested_in="test/models/quantum/misc/test_hubbard1d.jl",
     references=["LiebWu1968"],
     notes="Spinon branch is rigorously gapless at half filling — returns 0.0.",
 )

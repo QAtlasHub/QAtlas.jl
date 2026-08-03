@@ -10,7 +10,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_liouville_cft.jl",
+    tested_in="test/models/classical/test_liouville_cft.jl",
     references=["Polyakov1981"],
     notes="c = 1 + 6(b + 1/b)²; invariant under b↔1/b self-duality.",
 )

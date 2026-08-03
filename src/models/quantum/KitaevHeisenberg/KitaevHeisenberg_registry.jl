@@ -10,7 +10,7 @@
     method=:kitaev_delegation,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_kitaev_heisenberg.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_kitaev_heisenberg.jl",
     references=["Kitaev2006", "RauLeeKee2014"],
     notes="K-only limit (J=Γ=0) delegated to KitaevHoneycomb; non-zero J or Γ raises DomainError (Phase 2: DMRG/ED).",
 )

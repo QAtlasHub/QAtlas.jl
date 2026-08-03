@@ -10,7 +10,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:medium,
-    tested_in="test/standalone/test_spin_ice.jl",
+    tested_in="test/models/classical/test_spin_ice.jl",
     references=["Pauling1935"],
     notes="Pauling 1935 mean-tetrahedron closed form S/N = (1/2) log(3/2); a few percent below Nagle 1966.",
 )

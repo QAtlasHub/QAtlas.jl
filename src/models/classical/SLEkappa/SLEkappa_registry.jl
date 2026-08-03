@@ -10,7 +10,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_sle_kappa.jl",
+    tested_in="test/models/classical/test_sle_kappa.jl",
     references=["Schramm2000", "BauerBernard2006", "Cardy2005"],
     notes="SLE-CFT correspondence c(κ) = (3κ-8)(6-κ)/(2κ); symmetric under κ↔16/κ.",
 )

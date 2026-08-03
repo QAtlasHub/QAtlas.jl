@@ -12,7 +12,7 @@
     valid_domain="thermodynamic limit, extrapolated from cylindrical DMRG",
     error_order="quoted uncertainty 5e-4; cylinder-geometry extrapolation, not a closed form",
     reliability=:medium,
-    tested_in="test/standalone/test_kagome_heisenberg_afm.jl",
+    tested_in="test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl",
     references=["YanHuseWhite2011", "DepenbrockMcCullochSchollwock2012"],
     notes="e_0/J ≈ -0.4386(5) cylindrical-DMRG reference.",
 )
@@ -27,7 +27,7 @@
     valid_domain="Z2 spin-liquid scenario ONLY -- the ground state of the kagome AFM is not settled, and the competing gapless Dirac spin liquid predicts no spin gap at all",
     error_order="SCENARIO-DEPENDENT, not merely imprecise: this is an open question in the literature, so the disagreement is O(1) and not a quoted error bar",
     reliability=:medium,
-    tested_in="test/standalone/test_kagome_heisenberg_afm.jl",
+    tested_in="test/models/quantum/Heisenberg/test_kagome_heisenberg_afm.jl",
     references=["YanHuseWhite2011", "IqbalBeccaSorellaPoilblanc2013"],
     notes="Δ_s/J ≈ 0.13 (Z₂ scenario, YHW); competing VMC Dirac spin liquid suggests upper bound.",
 )

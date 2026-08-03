@@ -84,7 +84,7 @@ end
     @test sample.error_order isa Union{String,Nothing}
     @test sample.canonical isa Bool
     @test sample.reliability isa Symbol
-    @test sample.tested_in isa Union{String,Nothing}
+    @test sample.tested_in isa Union{Vector{String},Nothing}
     @test sample.references isa Vector{String}
     @test sample.notes isa String
 end

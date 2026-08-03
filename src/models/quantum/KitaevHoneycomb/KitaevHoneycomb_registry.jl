@@ -10,7 +10,13 @@
     method=:matter_free_fermion,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_KitaevHoneycomb.jl",
+    tested_in=[
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_closedform.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_ed.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl",
+    ],
     references=["Kitaev2006", "Lieb1994"],
     notes="GS by 2D Gauss-Kronrod; thermal value (β kwarg) uses matter-sector free fermion.",
 )
@@ -20,7 +26,13 @@
     OBC,
     method=:matter_free_fermion,
     reliability=:high,
-    tested_in="test/models/test_KitaevHoneycomb.jl",
+    tested_in=[
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_closedform.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_ed.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl",
+    ],
     references=["Kitaev2006"],
     notes="Bipartite hopping matrix SVD; thermal value (β kwarg) uses matter-sector free fermion.",
 )
@@ -30,7 +42,13 @@
     PBC,
     method=:matter_free_fermion,
     reliability=:high,
-    tested_in="test/models/test_KitaevHoneycomb.jl",
+    tested_in=[
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_closedform.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_ed.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl",
+    ],
     references=["Kitaev2006"],
     notes="Four-sector minimum on Lx × Ly torus (T = 0 only).",
 )
@@ -43,7 +61,13 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_KitaevHoneycomb.jl",
+    tested_in=[
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_closedform.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_ed.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal_trivial_batch.jl",
+        "test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_verify.jl",
+    ],
     references=["Kitaev2006"],
     notes="Δ = 2 · max(|K_γ_max| − sum_others, 0); 0 in B-phase, finite in A_γ.",
 )
@@ -58,7 +82,7 @@
     method=:matter_free_fermion,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
     references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
@@ -68,7 +92,7 @@
     OBC,
     method=:matter_free_fermion,
     reliability=:medium,
-    tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
     references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
@@ -79,7 +103,7 @@
     method=:matter_free_fermion,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
     references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
@@ -89,7 +113,7 @@
     OBC,
     method=:matter_free_fermion,
     reliability=:medium,
-    tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
     references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
@@ -100,7 +124,7 @@
     method=:matter_free_fermion,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
     references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )
@@ -110,7 +134,7 @@
     OBC,
     method=:matter_free_fermion,
     reliability=:medium,
-    tested_in="test/models/test_KitaevHoneycomb_thermal.jl",
+    tested_in="test/models/quantum/KitaevHoneycomb/test_KitaevHoneycomb_thermal.jl",
     references=["Kitaev2006", "Lieb1994"],
     notes="Matter-sector free-fermion approximation; valid below flux gap T ≪ Δ_v.",
 )

@@ -11,7 +11,7 @@
     method=:xxz_delegation,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/standalone/test_heisenberg_xyz.jl",
+    tested_in="test/models/quantum/XXZ/test_heisenberg_xyz.jl",
     references=["YangYang1966", "LiebSchultzMattis1961", "Baxter1972"],
     notes="Delegates to XXZ1D(J=Jx, Δ=Jz/Jx) when Jx=Jy; XY anisotropic line (Jz=0) via Lieb-Schultz-Mattis 1961 closed form; generic XYZ (Jx≠Jy, Jz≠0) deferred to Baxter elliptic Phase 3.",
 )

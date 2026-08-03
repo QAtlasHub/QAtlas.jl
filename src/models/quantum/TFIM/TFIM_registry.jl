@@ -17,7 +17,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl",
     references=["Pfeuty1970"],
     notes="Total ⟨H⟩(β) via the BdG spectrum; ground state when no β kwarg.",
 )
@@ -28,7 +28,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl",
     references=["Pfeuty1970"],
     notes="Per-site ε(β) by QuadGK over the PBC dispersion Λ(k).",
 )
@@ -41,7 +41,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_TFIM_massgap.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_massgap.jl",
     references=["Pfeuty1970"],
     notes="Δ_∞(J,h) = 2|h - J| — closed-form Ising gap.",
 )
@@ -51,7 +51,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_massgap.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_massgap.jl",
     references=["Pfeuty1970"],
     notes="Smallest positive BdG eigenvalue of the OBC chain.",
 )
@@ -62,7 +62,7 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_TFIM_central_charge.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_central_charge.jl",
     references=["BelavinPolyakovZamolodchikov1984"],
     notes="c = 1/2 at the critical point (h = J), 0 otherwise.",
 )
@@ -74,7 +74,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -83,7 +83,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -91,7 +91,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -100,7 +100,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -108,7 +108,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -117,7 +117,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -125,7 +125,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -134,7 +134,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -142,7 +142,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 @register(
     TFIM,
@@ -151,7 +151,7 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/models/test_TFIM_thermal.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_thermal.jl"
 )
 
 @register(
@@ -183,7 +183,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_local.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_local.jl"
 )
 @register(
     TFIM,
@@ -191,7 +191,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_local.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_local.jl"
 )
 @register(
     TFIM,
@@ -199,7 +199,7 @@
     OBC,
     method=:majorana_evolution,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_sigma_x_quench.jl",
     references=["BarouchMcCoy1970", "CalabreseEsslerFagotti2012"],
     notes="Sudden h_0 -> h_f quench; Sigma(t) = R(t) Sigma_0 R(t)^T; sigma^x_i(t) = Sigma(t)[2i-1, 2i].",
 )
@@ -210,7 +210,7 @@
     method=:analytic,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_sigma_x_quench.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_sigma_x_quench.jl",
     references=["BarouchMcCoy1970", "CalabreseEsslerFagotti2012"],
     notes="Closed-form k-integral over the Bogoliubov angles theta_k(h_0,f); QuadGK rtol=1e-12.",
 )
@@ -220,7 +220,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_local.jl"
+    tested_in="test/models/quantum/TFIM/test_TFIM_local.jl"
 )
 
 # ── Z-axis dynamics + correlations (BdG time evolution) ───────────────
@@ -230,7 +230,13 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_dynamics.jl"
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_dynamics_critical.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_disordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ed_small.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl",
+    ]
 )
 @register(
     TFIM,
@@ -238,7 +244,13 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_dynamics.jl"
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_dynamics_critical.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_disordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ed_small.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl",
+    ]
 )
 @register(
     TFIM,
@@ -246,7 +258,13 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_dynamics.jl"
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_dynamics_critical.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_disordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ed_small.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl",
+    ]
 )
 @register(
     TFIM,
@@ -254,7 +272,13 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_dynamics.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_dynamics_critical.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_disordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ed_small.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl",
+    ],
     notes="Single (i, j, t) point; for sweeps loop the kwargs.",
 )
 @register(
@@ -263,7 +287,13 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_dynamics.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_dynamics_critical.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_disordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ed_small.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl",
+    ],
     notes="C(r,t) lightcone slice for fixed center; takes a `times` vector.",
 )
 @register(
@@ -272,7 +302,13 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_dynamics.jl"
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_dynamics_critical.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_disordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ed_small.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_ordered.jl",
+        "test/models/quantum/TFIM/test_TFIM_dynamics_verify.jl",
+    ]
 )
 
 # ── Entanglement (T = 0; β kwarg defaults to Inf) ─────────────────────
@@ -282,7 +318,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_entanglement.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_entanglement.jl",
     references=["Peschel2003"],
     notes="Free-fermion correlation-matrix method; pass the subsystem as `region` " *
           "(a Region, anywhere in the chain) or as the block length `\u2113`, which is " *
@@ -315,7 +351,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
     references=["LiebSchultzMattis1961", "Sachdev2011"],
     notes="Per-site ε(β) with parity-projected fermion sectors (NS + R).",
 )
@@ -325,7 +361,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
     references=["LiebSchultzMattis1961"],
 )
 @register(
@@ -334,7 +370,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
 )
 @register(
     TFIM,
@@ -342,7 +378,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
 )
 @register(
     TFIM,
@@ -350,7 +386,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
 )
 @register(
     TFIM,
@@ -358,7 +394,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
 )
 @register(
     TFIM,
@@ -366,7 +402,7 @@
     PBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_pbc_thermal.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_pbc_thermal.jl",
     notes="Smallest excitation across NS (two-mode flip) and R (one-mode flip) sectors.",
 )
 
@@ -378,7 +414,11 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_TFIM_zaxis.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_zaxis_closedform.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_proxy.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl",
+    ],
     references=["Pfeuty1970"],
     notes="m_z = (1 - (h/J)²)^(1/8) for h < J, else 0 (T = 0 spontaneous).",
 )
@@ -389,7 +429,11 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_TFIM_zaxis.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_zaxis_closedform.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_proxy.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl",
+    ],
     references=["Pfeuty1970"],
     notes="Same value as MagnetizationZ; order-parameter alias.",
 )
@@ -400,7 +444,11 @@
     method=:analytic,
     cost=:closed_form,
     reliability=:high,
-    tested_in="test/models/test_TFIM_zaxis.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_zaxis_closedform.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_proxy.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl",
+    ],
     notes="Relativistic inverse-mass-gap convention: ξ = 1/Δ = 1/(2|h-J|) (gapped); Inf at criticality. Pfeuty 1/log(max/min) lattice form (alt convention) not exposed — agrees to leading order near criticality. See docstring Convention table.",
 )
 @register(
@@ -410,7 +458,12 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/verification/test_tfim_fdt.jl",
+    tested_in=[
+        "test/verification/tfim_ising/test_tfim_fdt_beta_0_5.jl",
+        "test/verification/tfim_ising/test_tfim_fdt_beta_1_0.jl",
+        "test/verification/tfim_ising/test_tfim_fdt_sanity.jl",
+        "test/verification/tfim_ising/test_tfim_fdt_verify.jl",
+    ],
     notes="OBC large-N proxy.  Static (ω = nothing) → uniform χ_zz(β); dynamic (ω::Real, q required) → χ''_zz(q,ω;β) via Kubo commutator.  N_proxy kwarg controls precision.",
 )
 @register(
@@ -420,7 +473,11 @@
     method=:bdg,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_zaxis.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_zaxis_closedform.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_proxy.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl",
+    ],
     notes="Static S_zz(q) via OBC large-N proxy of correlator Fourier sum.",
 )
 
@@ -431,7 +488,11 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_zaxis.jl",
+    tested_in=[
+        "test/models/quantum/TFIM/test_TFIM_zaxis_closedform.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_proxy.jl",
+        "test/models/quantum/TFIM/test_TFIM_zaxis_verify.jl",
+    ],
     notes="Connected = static for TFIM by Z₂ symmetry; explicit method for clarity.",
 )
 
@@ -442,7 +503,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_xx_static.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_static.jl",
     references=["LiebSchultzMattis1961", "Sachdev2011"],
     notes="t=0 limit of dynamic XX correlator; real Pfaffian.",
 )
@@ -452,7 +513,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_xx_static.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_static.jl",
 )
 @register(
     TFIM,
@@ -461,7 +522,7 @@
     method=:pfaffian,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_xx_static.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_static.jl",
     notes="OBC large-N proxy (N_proxy kwarg).",
 )
 @register(
@@ -471,7 +532,7 @@
     method=:pfaffian,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_xx_static.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_static.jl",
 )
 
 # ── Tier 2: Renyi entropy at OBC via Peschel correlation matrix ──────
@@ -481,7 +542,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/models/test_TFIM_renyi.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_renyi.jl",
     references=["Peschel2003", "CalabreseCardy2009"],
     notes="Free-fermion correlation-matrix Renyi α ≠ 1.",
 )
@@ -497,7 +558,7 @@
     valid_domain="critical point (h = J), asymptotic in the block length / system size",
     error_order="leading CFT scaling only; non-universal and finite-size corrections not included",
     reliability=:high,
-    tested_in="test/models/test_TFIM_cft_entanglement.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl",
     references=["CalabreseCardy2004", "CalabreseCardy2009"],
     notes="Closed-form CC; T=0 critical/gapped + T>0 critical (gapped + T>0 errors).",
 )
@@ -511,7 +572,7 @@
     valid_domain="critical point (h = J), asymptotic in the block length / system size",
     error_order="leading CFT scaling only; non-universal and finite-size corrections not included",
     reliability=:high,
-    tested_in="test/models/test_TFIM_cft_entanglement.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_cft_entanglement.jl",
     references=["CalabreseCardy2009"],
     notes="CC Renyi: prefactor (c/6)(1 + 1/α). Same case coverage as VN.",
 )
@@ -539,7 +600,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_yy.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_yy.jl",
     notes="σʸ_i = -(-i)^{i-1} γ_1 … γ_{2i-2} γ_{2i}; same Pfaffian machinery as σᶻ.",
 )
 @register(
@@ -548,7 +609,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_yy.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_yy.jl",
     notes="Connected = static for TFIM since ⟨σʸ⟩ = 0 by parity (odd Majorana product).",
 )
 @register(
@@ -557,7 +618,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_yy.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_yy.jl",
 )
 @register(
     TFIM,
@@ -565,7 +626,7 @@
     OBC,
     method=:analytic,
     reliability=:high,
-    tested_in="test/models/test_TFIM_yy.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_yy.jl",
     notes="Identically 0 in any Gaussian state (odd-Majorana product).",
 )
 @register(
@@ -574,7 +635,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_yy.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_yy.jl",
     notes="Per-site β·Var(M_y)/N via Wick contraction over O(N²) pairs.",
 )
 
@@ -585,7 +646,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl",
     notes="(1/N) Σ_{ij} e^{-iq(i-j)} ⟨σˣᵢ σˣⱼ⟩ from t=0 Pfaffian correlator.",
 )
 @register(
@@ -594,7 +655,7 @@
     OBC,
     method=:pfaffian,
     reliability=:high,
-    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl",
 )
 @register(
     TFIM,
@@ -603,7 +664,7 @@
     method=:pfaffian,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl",
     notes="OBC large-N proxy (N_proxy kwarg).",
 )
 @register(
@@ -613,7 +674,7 @@
     method=:pfaffian,
     cost=:polynomial,
     reliability=:medium,
-    tested_in="test/models/test_TFIM_xx_yy_structure_factor.jl",
+    tested_in="test/models/quantum/TFIM/test_TFIM_xx_yy_structure_factor.jl",
 )
 
 # ── Quench dynamics: Loschmidt echo + DQPT rate function ─────────────
@@ -623,7 +684,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_loschmidt.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_loschmidt.jl",
     references=["Heyl2013", "Heyl2018"],
     notes="L(t) = ∏_n |cos²θ_n + sin²θ_n e^{-2iΛ_n t}|² via OBC BdG diagonalisation of H_0, H_f.",
 )
@@ -633,7 +694,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_loschmidt.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_loschmidt.jl",
     references=["Heyl2013"],
     notes="λ(t) = -log L(t) / N from the OBC BdG product.",
 )
@@ -656,7 +717,7 @@
     method=:analytic,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_gge.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_gge.jl",
     references=["Rigol2007", "CalabreseEsslerFagotti2012"],
     notes="Per-site ε_GGE via QuadGK over the post-quench dispersion with Bogoliubov-mismatch occupations n_k = sin²(θ_k(h₀)−θ_k(h_f)).",
 )
@@ -667,7 +728,7 @@
     method=:analytic,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_gge.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_gge.jl",
     references=["Rigol2007", "CalabreseEsslerFagotti2012"],
     notes="⟨σˣ⟩_GGE via QuadGK over (h_f − J cos k)/Λ_k(h_f) · (1 − 2 n_k).",
 )
@@ -679,7 +740,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_quench_entanglement.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_quench_entanglement.jl",
     references=["CalabreseCardy2005", "Peschel2003"],
     notes="S(ℓ, t) after a global quench from initial::TFIM ground state; Peschel on time-evolved Σ(t) = R(t) Σ_0 R(t)ᵀ.",
 )
@@ -691,7 +752,7 @@
     OBC,
     method=:bdg,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_fidelity_susceptibility.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_fidelity_susceptibility.jl",
     references=["Gu2010", "Damski2013"],
     notes="χ_F = Σ_{p<q} 4 X_{pq}² / (Λ_p+Λ_q)² from Bogoliubov amplitudes.",
 )
@@ -702,7 +763,7 @@
     method=:analytic,
     cost=:polynomial,
     reliability=:high,
-    tested_in="test/standalone/test_tfim_fidelity_susceptibility.jl",
+    tested_in="test/models/quantum/TFIM/test_tfim_fidelity_susceptibility.jl",
     references=["Gu2010", "Damski2013"],
     notes="χ_F/L = 1/(16(J²-h²)) (h<J), J²/(16h²(h²-J²)) (h>J); QuadGK, divergent at h=J.",
 )

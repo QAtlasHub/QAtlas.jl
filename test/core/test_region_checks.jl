@@ -60,61 +60,38 @@ end
     end
 end
 
-@testset "region generator — the Jordan-Wigner guard is what limits the free-fermion hub" begin
-    # TFIM/OBC is a free-fermion hub, so it refuses the ONE non-contiguous member
-    # of the family, A ∪ C = {1,2,5,6} (#783).  Every instance it skips must be
-    # one that needs that region -- if it ever skips an instance built only from
-    # contiguous regions, something else is broken and this says so.
+@testset "region generator — the free-fermion hub no longer refuses anything" begin
+    # This testset used to assert the OPPOSITE: TFIM/OBC refused the one
+    # non-contiguous family member, A ∪ C = {1,2,5,6}, because the Jordan-Wigner
+    # string does not factorise there (#783).  #832 reinstates the string
+    # explicitly, so the hub answers every member and the skip is gone.
+    #
+    # Asserting "nothing is skipped" alone would be a weak test — an edge that
+    # generated no checks at all would satisfy it.  So the counts are pinned on
+    # both sides, and the previously-refused region is checked to return a number
+    # that actually DIFFERS from the fermionic one, which is what says the string
+    # was reinstated rather than dropped.
     e = only(QAtlas.REGION_EDGES)
     family = QAtlas._region_family(e.blocks)
     m, bc = TFIM(), OBC(e.finite_N)
     b = QAtlas._region_entropy_bag(m, bc, family, (beta=Inf,))
-    @test length(b) == length(family) - 1        # exactly one region refused
-
     dense = QAtlas._region_entropy_bag(XXZ1D(), OBC(e.finite_N), family, (beta=Inf,))
-    @test length(dense) == length(family)        # dense ED refuses nothing
-
-    # The id lists the instance's REGIONS, not the unions the relation forms from
-    # them, so a skip cannot be recognised by string-matching: the
-    # strong-subadditivity instance over (A={1,2}, B={5,6}, C={3,4}) needs
-    # A ∪ B = {1,2,5,6} without that ever appearing in its id.
-    #
-    # Nor is "names {1,2} and {5,6}" the right test.  NONE of these relations
-    # forms A ∪ C: the bipartite pair needs A ∪ B, and both triples are stated
-    # over A ∪ B and B ∪ C (strong subadditivity adds A ∪ B ∪ C and B; weak
-    # monotonicity adds A and C).  So the triple (A={1,2}, B={3,4}, C={5,6})
-    # needs only contiguous unions and must NOT skip, even though it names both
-    # {1,2} and {5,6}.  Build the unions the relation actually forms.
-    #
-    # And the REGIONS THEMSELVES count, not only the unions: a relation needs
-    # S(A) and S(B) as well as S(A∪B), so the bipartite instance over
-    # (A={1,2,5,6}, B={3,4}) is refused for A alone, even though A ∪ B = {1..6}
-    # is contiguous.  Measured, those two instances are exactly the ones a
-    # unions-only predicate got wrong.
-    parse_regions(id) = [parse.(Int, split(t, "+")) for t in split(split(id, "/")[6], "_")]
-    contiguous(v) = (maximum(v) - minimum(v) + 1) == length(unique(v))
-    function needs_refused_region(id)
-        rs = parse_regions(id)
-        unions = if length(rs) == 2
-            [vcat(rs[1], rs[2])]
-        else
-            [vcat(rs[1], rs[2]), vcat(rs[2], rs[3]), vcat(rs...)]
-        end
-        return any(u -> !contiguous(sort(u)), vcat(rs, unions))
-    end
+    @test length(b) == length(family)            # nothing refused any more
+    @test length(b) == length(dense)             # and it matches the dense-ED hub
 
     tfim_checks = filter(c -> occursin("/TFIM/", c.id), _REGION_CHECKS)
     @test !isempty(tfim_checks)
-    n_skipped = 0
-    for c in tfim_checks
-        skipped = QAtlas.run_generated_check(c).status === :skip
-        # both directions: every skip needs the refused union, and every
-        # instance needing it is skipped.  One direction alone would let the hub
-        # go silently blind to contiguous instances too.
-        @test skipped == needs_refused_region(c.id)
-        n_skipped += skipped
-    end
-    @test n_skipped > 0
+    @test all(c -> QAtlas.run_generated_check(c).status !== :skip, tfim_checks)
+    @test all(c -> QAtlas.run_generated_check(c).status === :pass, tfim_checks)
+
+    # the region that used to be refused now answers, and answers the SPIN
+    # question — a route that silently returned the fermionic number would agree
+    # with `FermionicEntanglementEntropy` here, and it must not
+    r = Region(1, 2, 5, 6)
+    S_spin = QAtlas.fetch(m, VonNeumannEntropy(), bc; region=r)
+    S_ferm = QAtlas.fetch(m, FermionicEntanglementEntropy(), bc; region=r)
+    @test isfinite(S_spin) && S_spin > 0
+    @test abs(S_spin - S_ferm) > 0.05
 end
 
 @testset "region generator — Infinite hubs are excluded structurally" begin

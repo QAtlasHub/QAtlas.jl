@@ -93,36 +93,42 @@ end
     end
 end
 
-@testset "TFIM entanglement — (b) multi-interval regions are refused, not guessed" begin
+@testset "TFIM entanglement — (b) multi-interval regions answer the SPIN question" begin
     N = 8
     m = TFIM(; J=1.0, h=0.5)
     ψ = eigen(Symmetric(Matrix(real(_build_tfim_dense(N, 1.0, 0.5))))).vectors[:, 1]
 
+    # This used to assert a THROW.  #832 reinstates the Jordan-Wigner string
+    # explicitly, so the route now answers — and the assertion that matters is
+    # that it answers the SPIN question, checked against this file's own dense-ED
+    # helper rather than against anything the new code shares.
     for sites in ([1, 3], [1, 4], [2, 4], [1, 2, 4], [1, 2, 5, 6])
-        # it throws ...
-        err = try
-            QAtlas.fetch(m, VonNeumannEntropy(), OBC(N); region=Region(sites...))
-            nothing
-        catch e
-            e
-        end
-        @test err isa ArgumentError
-        # ... and says WHY, so the caller can act on it
-        @test occursin("Jordan", err.msg)
-
-        # ... and the silent answer it refused to give really is wrong: the
-        # free-fermion submatrix differs from the spin entropy by ~0.5 nats,
-        # not by a rounding error.  Both are honest von Neumann entropies, so
-        # no entropy inequality downstream would have caught this.
+        got = QAtlas.fetch(m, VonNeumannEntropy(), OBC(N); region=Region(sites...))
         S_spin = _vn_entropy(_rdm_spin_sites(ψ, N, sites))
         S_ferm = _free_fermion_entropy(m, N, sites)
+        @test got ≈ S_spin atol = 1e-10
+
+        # and the free-fermion submatrix, which is what a naive route would have
+        # returned, differs by ~0.5 nats — not a rounding error.  Both are honest
+        # von Neumann entropies, so no entropy inequality downstream would have
+        # caught the substitution; only this comparison does.
         @test abs(S_spin - S_ferm) > 0.4
+        @test !isapprox(got, S_ferm; atol=0.1)
+        # …and asking for the fermionic one explicitly gives that other number
+        @test QAtlas.fetch(
+            m, FermionicEntanglementEntropy(), OBC(N); region=Region(sites...)
+        ) ≈ S_ferm atol = 1e-10
     end
 
-    # the Rényi method refuses the same regions
-    @test_throws ArgumentError QAtlas.fetch(
-        m, RenyiEntropy(2.0), OBC(N); region=Region(1, 3)
-    )
+    # the Rényi method takes the same split, so the SHAPE of a region never
+    # decides which quantities exist.  Checked against Tr ρ^α of this file's own
+    # dense-ED reduced state, not against the von Neumann route.
+    for sites in ([1, 3], [1, 2, 5, 6]), α in (0.5, 2.0)
+        λ = eigvals(Symmetric(Matrix(real(_rdm_spin_sites(ψ, N, sites)))))
+        want = log(sum(x -> x > 1e-13 ? x^α : 0.0, real(λ))) / (1 - α)
+        @test QAtlas.fetch(m, RenyiEntropy(α), OBC(N); region=Region(sites...)) ≈ want atol =
+            1e-9
+    end
 end
 
 @testset "TFIM entanglement — region argument validation" begin

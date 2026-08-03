@@ -102,20 +102,29 @@ chain — `Region(3, 4)` is the block on sites 3 and 4 — which is what lets th
 region entropy inequalities be instantiated on ADJACENT blocks (`A = 1:2`,
 `B = 3:4`, `C = 5:6`), where every union they need is again a single interval.
 
-!!! warning "Single interval only"
-    This is a free-fermion route, so it is exact for the SPIN entropy only
-    while the region is one contiguous interval: the Jordan–Wigner string
-    factorises across the boundary only then.  A multi-interval region throws
-    rather than silently returning the FERMIONIC entropy — measured on
-    `N = 8, J = 1, h = 0.5` the two differ by 0.50–0.60 nats on regions like
-    `{1,3}` or `{1,2,5,6}`, and no entropy inequality would flag the
-    difference, because both are honest von Neumann entropies.  See
-    `src/core/regions.jl`.
+Two routes, chosen by the shape of the region and **not** by a keyword, because
+the choice is forced rather than preferred:
+
+- **contiguous** — Peschel's correlation matrix, `O(ℓ³)`. The Jordan-Wigner
+  string factorises across the boundary, so the spin and fermionic entropies
+  coincide and the covariance restriction is already the answer.
+- **disconnected** — the string does not factorise, and the covariance
+  restriction would give the FERMIONIC entropy, a genuinely different number
+  that no entropy inequality would flag. The string is therefore reinstated
+  explicitly ([`spin_rdm_from_covariance`](@ref)), at a cost of `4^|region|`
+  Pfaffians but still polynomial in `N`.
+
+This used to throw. It answers now; ask for
+[`FermionicEntanglementEntropy`](@ref) if the fermionic number is what you
+want. Measured at `N = 12, J = h = 1`, the two differ by ~0.1–0.2 nats on
+regions like `{1,3}` or `{1,2,5,6}`.
 
 - `N = _bc_size(bc, kwargs)` (read from `OBC(N)` or legacy `kwargs[:N]`).
 - The region must lie in `1:N` and leave a non-empty complement.
-- Cost is `O(ℓ³)`; for typical `N = 200, ℓ = 100` this runs in a few
-  milliseconds, whereas the full-ED SVD baseline scales as `O(4^N)`.
+- Contiguous cost is `O(ℓ³)`; `N = 200, ℓ = 100` runs in a few milliseconds,
+  whereas the full-ED SVD baseline scales as `O(4^N)`. The disconnected route is
+  exponential in the REGION and polynomial in the CHAIN — the opposite trade to
+  dense ED, which is `2^N` and capped at `N = 12`.
 
 The result matches the full-ED reference at every small `N` (verified
 to 1e-10 in `test/models/test_TFIM_entanglement.jl`).
@@ -133,8 +142,34 @@ function fetch(
 )
     N = _bc_size(bc, kwargs)
     sites = _entanglement_sites(N, region, ℓ)
-    _require_single_interval(sites, "TFIM VonNeumannEntropy")
-    return _tfim_covariance_entropy(model, N, sites, beta)
+    # A contiguous interval takes the O(ℓ³) covariance route, where the spin and
+    # fermionic answers coincide.  A DISCONNECTED region no longer throws: the
+    # Jordan-Wigner string is reinstated explicitly (core/jw_spin_rdm.jl), which
+    # costs 4^|region| but stays polynomial in N — the opposite trade to dense ED.
+    _is_contiguous(sites) && return _tfim_covariance_entropy(model, N, sites, beta)
+    hmat = _majorana_ham(N, model.J, model.h)
+    Σ = _majorana_thermal_covariance(hmat, beta)
+    return _von_neumann_entropy(spin_rdm_from_covariance(Σ, sites, N))
+end
+
+"""
+    _von_neumann_entropy(ρ) -> Float64
+
+`S = -Tr(ρ ln ρ)` from a density matrix, dropping eigenvalues below `1e-13`.
+
+The cut is not cosmetic: a reconstructed `ρ` carries `O(1e-16)` negative
+eigenvalues, and `λ log λ` of a small NEGATIVE number is `NaN`, not a small
+error — so an unguarded sum would turn a correct calculation into a missing
+value rather than an inaccurate one.
+"""
+function _von_neumann_entropy(ρ::AbstractMatrix)
+    λ = eigvals(Hermitian(Matrix(ρ)))
+    S = 0.0
+    @inbounds for x in λ
+        r = real(x)
+        r > 1e-13 && (S -= r * log(r))
+    end
+    return S
 end
 
 """
@@ -273,7 +308,10 @@ spin Rényi entropy for a contiguous block.
 [`VonNeumannEntropy`](@ref) explicitly.
 
 Cost is `O(ℓ³)` from the Hermitian eigendecomposition of `i Σ_A`,
-identical to the von Neumann path.
+identical to the von Neumann path — and, like it, a **disconnected** region is
+answered rather than refused, by reconstructing the spin state with the
+Jordan-Wigner string reinstated ([`spin_rdm_from_covariance`](@ref)) and taking
+`Tr ρ^α` directly.  That branch is exponential in the region size.
 """
 function fetch(
     model::TFIM,
@@ -286,12 +324,19 @@ function fetch(
 )
     N = _bc_size(bc, kwargs)
     sites = _entanglement_sites(N, region, ℓ)
-    _require_single_interval(sites, "TFIM RenyiEntropy")
-    L = length(sites)
-    idx = _majorana_indices(sites)
     α = q.α
     hmat = _majorana_ham(N, model.J, model.h)
     Σ = _majorana_thermal_covariance(hmat, beta)
+    # Same split as the von Neumann route, and split here rather than only there
+    # on purpose: leaving Rényi guarded while von Neumann answered would make the
+    # SHAPE of the region decide which quantities exist, for no stateable reason.
+    if !_is_contiguous(sites)
+        ρ = spin_rdm_from_covariance(Σ, sites, N)
+        λ = real(eigvals(Hermitian(Matrix(ρ))))
+        return log(sum(x -> x > 1e-13 ? x^α : 0.0, λ)) / (1 - α)
+    end
+    L = length(sites)
+    idx = _majorana_indices(sites)
     Σ_A = Σ[idx, idx]
     λ = eigvals(Hermitian(im .* Σ_A))
     S = 0.0

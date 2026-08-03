@@ -35,3 +35,26 @@ jobs:
         General
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  # NOT part of the sharded suite, and that is the point. `test/harness/atlas/` is the v2 atlas
+  # infrastructure: the old universe.jl kept it out of the shard universe as a sanctioned
+  # exception, "run by dedicated CI jobs", and THIS is the dedicated job. runtests.jl skips
+  # harness/ for the same reason, so without this the three files there would run nowhere.
+  #
+  # It is also a required check on the default branch, so deleting it does not merely lose the
+  # coverage — it makes every pull request unmergeable, because a required check that never
+  # runs is not the same as one that is skipped.
+  #
+  # Static: it scans and compares, and never executes the suite.
+  inventory:
+    name: INVENTORY drift guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: '1'
+      - name: Static scan must equal committed INVENTORY.jsonl (no test exec)
+        run: julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
+      - name: Atlas taxonomy + registry-parser unit tests
+        run: julia --startup-file=no test/harness/atlas/test_atlas_logic.jl

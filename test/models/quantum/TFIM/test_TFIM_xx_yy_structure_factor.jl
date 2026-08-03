@@ -12,7 +12,7 @@
 
 using QAtlas, Test, LinearAlgebra
 
-const _SY = ComplexF64[0 -im; im 0]
+const _SY_sf = ComplexF64[0 -im; im 0]
 
 # Independent ED structure factor: build the dense H, partial-trace the
 # thermal state, and compute `S_αα(q) = (1/N) Σ_{ij} e^{-iq(i-j)} ⟨σᵅ_i σᵅ_j⟩`.
@@ -62,7 +62,7 @@ end
                 YYStructureFactor(),
                 OBC(N);
                 route=:ed_finite_size,
-                independent=_ed_structure_factor(_SY, N, 1.0, h, β, q),
+                independent=_ed_structure_factor(_SY_sf, N, 1.0, h, β, q),
                 agree_within=1e-10,
                 at=["h=$(h)", "β=$(β)", "q=$(round(q; digits=4))"],
                 refs=[

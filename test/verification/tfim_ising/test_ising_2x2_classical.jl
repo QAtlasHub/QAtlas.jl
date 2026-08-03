@@ -14,7 +14,7 @@
 
 using QAtlas, Test
 
-const J_ISING = 1.0
+const J_ISING_2X2 = 1.0
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Migrated from raw @test to verify()-first (PR #449 phase 2 zero-legacy).
@@ -25,17 +25,17 @@ const J_ISING = 1.0
 @testset "IsingSquare — transfer-matrix vs brute-force (verify cards)" begin
     for (Lx, Ly) in [(2, 2), (2, 3), (3, 3)]
         for β in [0.0, 0.1, 0.2, 0.44, 1.0, 2.0]
-            Z_bf = exact_partition(Lx, Ly, J_ISING, β)
+            Z_bf = exact_partition(Lx, Ly, J_ISING_2X2, β)
             # `verify`'s `agree_within` is absolute. The legacy @test used
             # relative tol 1e-10, which at β=2 and 3×3 yields Z ~ exp(12) ~
             # 1.6e5 — absolute 1e-10 is unattainable. Scale by |Z_bf| to
             # emulate the original relative tolerance.
             verify(
-                IsingSquare(; Lx=Lx, Ly=Ly, J=J_ISING),
+                IsingSquare(; Lx=Lx, Ly=Ly, J=J_ISING_2X2),
                 PartitionFunction(),
                 PBC(0);
                 route=:ed_finite_size,
-                fetch_kw=(; β=β, Lx=Lx, Ly=Ly, J=J_ISING),
+                fetch_kw=(; β=β, Lx=Lx, Ly=Ly, J=J_ISING_2X2),
                 independent=Z_bf,
                 agree_within=1e-10 * max(1.0, abs(Z_bf)),
                 at=["Lx=$(Lx)", "Ly=$(Ly)", "β=$(β)"],

@@ -14,11 +14,11 @@ using QAtlas:
 # N modes — a DIFFERENT quadrature from the production nested QuadGK, converging
 # to the continuum value as N→∞. Catches normalisation / Fermi-factor errors
 # that a re-typed closed form cannot. (N=400 reproduces the QuadGK value to ~1e-9.)
-_tb1d_nF(x) = x > 0 ? exp(-x) / (1 + exp(-x)) : 1 / (1 + exp(x))
-function _tb1d_nmr_kmode_sum(t, μ, β, η; N=400)
+_tb1d_thermal_nF(x) = x > 0 ? exp(-x) / (1 + exp(-x)) : 1 / (1 + exp(x))
+function _tb1d_thermal_nmr_kmode_sum(t, μ, β, η; N=400)
     ks = [(n - 0.5) * π / N for n in 1:N]
     εs = [-2t * cos(k) - μ for k in ks]
-    fs = _tb1d_nF.(β .* εs)
+    fs = _tb1d_thermal_nF.(β .* εs)
     s = 0.0
     for n in 1:N, m in 1:N
         s += fs[n] * (1 - fs[m]) * η / ((εs[n] - εs[m])^2 + η^2)
@@ -27,7 +27,7 @@ function _tb1d_nmr_kmode_sum(t, μ, β, η; N=400)
 end
 # η-broadened particle–hole phase space (no Fermi factors); the high-T limit is
 # 1/T₁(β→0) = ¼ · this, since f(1-f) → ¼ when every mode is half-filled.
-function _tb1d_nmr_phasespace(t, μ, η; N=400)
+function _tb1d_thermal_nmr_phasespace(t, μ, η; N=400)
     ks = [(n - 0.5) * π / N for n in 1:N]
     εs = [-2t * cos(k) - μ for k in ks]
     s = 0.0
@@ -158,7 +158,9 @@ end
                 m, NMRSpinRelaxationRate(), Infinite(); beta=1e-4, eta=eta_val
             )
             @test isapprox(
-                rate0, 0.25 * _tb1d_nmr_phasespace(1.0, 0.0, eta_val; N=400); rtol=1e-2
+                rate0,
+                0.25 * _tb1d_thermal_nmr_phasespace(1.0, 0.0, eta_val; N=400);
+                rtol=1e-2,
             )
         end
 
@@ -168,7 +170,7 @@ end
                 m, NMRSpinRelaxationRate(), Infinite(); beta=β_val, eta=eta_val
             )
             @test isapprox(
-                r, _tb1d_nmr_kmode_sum(1.0, 0.0, β_val, eta_val; N=400); rtol=1e-4
+                r, _tb1d_thermal_nmr_kmode_sum(1.0, 0.0, β_val, eta_val; N=400); rtol=1e-4
             )
         end
 

@@ -32,7 +32,7 @@
 
 using QAtlas, Test
 
-const _XX = XXZ1D(; J=1.0, Δ=0.0)
+const _XX_quench = XXZ1D(; J=1.0, Δ=0.0)
 const _LE_RATE = LoschmidtRateFunction()
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -47,7 +47,7 @@ end
 @testset "XXZ1D Δ=0 LoschmidtEcho — no-quench gives λ = 0" begin
     # H_initial = H_final exactly — λ(t) = 0 for every t.
     for t in (0.0, 0.5, 1.0, 5.0, 17.3)
-        λ = QAtlas.fetch(_XX, _LE_RATE, Infinite(); initial=_XX, t=t)
+        λ = QAtlas.fetch(_XX_quench, _LE_RATE, Infinite(); initial=_XX_quench, t=t)
         @test λ == 0.0
     end
 end
@@ -122,11 +122,11 @@ end
 @testset "XXZ1D Δ=0 LoschmidtEcho — Δ ≠ 0 raises DomainError" begin
     # Final has Δ = 0.5
     @test_throws DomainError QAtlas.fetch(
-        XXZ1D(; J=1.0, Δ=0.5), _LE_RATE, Infinite(); initial=_XX, t=1.0
+        XXZ1D(; J=1.0, Δ=0.5), _LE_RATE, Infinite(); initial=_XX_quench, t=1.0
     )
     # Initial has Δ = 0.5
     @test_throws DomainError QAtlas.fetch(
-        _XX, _LE_RATE, Infinite(); initial=XXZ1D(; J=1.0, Δ=0.5), t=1.0
+        _XX_quench, _LE_RATE, Infinite(); initial=XXZ1D(; J=1.0, Δ=0.5), t=1.0
     )
     # Both have Δ ≠ 0
     @test_throws DomainError QAtlas.fetch(

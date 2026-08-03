@@ -108,6 +108,29 @@ for, and that is a different fact about it than whether it is approximate.
 `:exponential` REQUIRES `max_size`: a route that cannot say where it stops is
 not documenting a limit, it is hiding one.
 
+WHAT `:exponential` MEANS TO A CONSUMER, since `status` alone will not say it.
+An `:exact` row can be perfectly correct and still not be a *reference value* in
+the sense the front page advertises: there is no publication for the local
+magnetisation of the eight-site open Heisenberg chain, and anyone with an ED
+routine reproduces it in minutes.  These rows are a cross-validation INSTRUMENT
+— the small-N ground truth a closed form is checked against, and the target a
+new DMRG/MPS implementation validates itself on — not a result the atlas is
+uniquely able to supply.  MEASURED on the loaded registry: 69 of 518 rows, but
+22 of `S1Heisenberg1D`'s 24 and the entire `OBC` surface of `Heisenberg1D` and
+`XXZ1D` (23 of 35 and 23 of 37).
+
+They are not redundant with the closed forms, which is the other easy
+assumption.  MEASURED: every `(model, quantity)` pair carrying both has the
+exponential row at a finite `OBC` chain and the cheap row at `Infinite` — a
+different physical question, not a second route to one number — and for 56
+`(model, quantity)` pairs the ED route is the only one that exists.  No
+`(model, quantity, bc)` triple carries both; `test_cost_axis.jl` asserts it.
+
+A generated check that spans both kinds is weaker than it looks on the ED side:
+all the `OBC` observables of those hubs come from ONE `eigen(H)`, so a
+cross-quantity identity there tests the post-processing, not the Hamiltonian.
+See the `:local_energy_sum_rule` note in `identity_registry.jl`.
+
 Why this is not inferable from `method`: it is not.  SSH's `MassGap@OBC` was
 labelled `:dense_ed` while diagonalising a 2N x 2N SINGLE-PARTICLE matrix in
 O(N^3) — a name can be wrong, `max_size` is a claim the implementation has to

@@ -77,6 +77,14 @@ include(joinpath(@__DIR__, "util", "verify.jl"))
 # shard locally with `TESTSHARDS_ID=s3 TESTSHARDS_N=16 julia --project -e 'using Pkg; Pkg.test()'`.
 TestShards.@shard begin
     for (dir, _, files) in sort!(collect(walkdir(@__DIR__)))
+        # `test/harness/` stays out, as it was out of the old universe.jl: that file's
+        # completeness guard names it a SANCTIONED exception — "v2 atlas infra, run by dedicated
+        # jobs" — so those three test files have never been part of this suite and are exercised
+        # elsewhere, in a context this one does not reproduce.
+        #
+        # This is the one thing a glob cannot infer. It reads the tree, and the tree does not say
+        # which of its directories somebody decided to keep out. Carried over deliberately.
+        startswith(relpath(dir, @__DIR__), "harness") && continue
         for f in sort(files)
             startswith(f, "test_") && endswith(f, ".jl") || continue
             include(joinpath(dir, f))

@@ -151,7 +151,7 @@ Generic in `β` and `J` so `ForwardDiff` Duals propagate: the per-site energy an
 the specific heat differentiate this function.
 """
 function _ising_sq_log_z(::IsingSquare, Lx::Integer, Ly::Integer, β::Real, J::Real)
-    return _ising_sq_log_z_torus(Lx, Ly, β * J)
+    return _ising_sq_log_z_torus_signed(Lx, Ly, β * J)
 end
 
 """

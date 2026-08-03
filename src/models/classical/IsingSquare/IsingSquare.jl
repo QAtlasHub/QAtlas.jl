@@ -208,7 +208,7 @@ function fetch(
         "IsingSquare PartitionFunction: Lx and Ly must be positive. " *
         "Pass them in the struct (IsingSquare(; Lx, Ly, J)) or as kwargs.",
     )
-    return exp(_ising_sq_log_z_torus(Lx, Ly, β * J))
+    return exp(_ising_sq_log_z_torus_signed(Lx, Ly, β * J))
 end
 
 """
@@ -223,15 +223,16 @@ below `T_c` and positive above.  Taking `acosh` there instead would silently
 drop that sign and break the low-temperature sector of `Z`.
 """
 function _ising_sq_gamma(k::Real, K::Real)
-    # |K|, not K.  On the bipartite square lattice the antiferromagnet maps to
-    # the ferromagnet by sigma -> -sigma on one sublattice, so Z is EVEN in J and
-    # the mode energies depend only on |K|.  Written with K, `log(tanh K)` is NaN
-    # for K < 0 and the whole closed form silently returns NaN -- a wrong answer
-    # for a physically ordinary input, where the transfer matrix it replaced
-    # simply worked.
-    a = abs(K)
-    k == 0 && return 2a + log(tanh(a))
-    c = cosh(2a) * coth(2a) - cos(k)
+    # DOMAIN: K >= 0.  Enforced at the caller (`_ising_sq_log_z_torus`) rather
+    # than here, so the check happens once per Z instead of once per mode.
+    #
+    # This used to take `abs(K)`, justified by "on the BIPARTITE square lattice
+    # the antiferromagnet maps to the ferromagnet, so Z is even in J".  That is
+    # true, and the periodic Lx x Ly square lattice is bipartite only when Lx and
+    # Ly are BOTH EVEN.  On an odd torus the fold is simply wrong, and it is wrong
+    # silently -- see the header of `_ising_sq_log_z_torus` (#824).
+    k == 0 && return 2K + log(tanh(K))
+    c = cosh(2K) * coth(2K) - cos(k)
     return acosh(max(c, one(c)))
 end
 
@@ -282,6 +283,14 @@ function _signed_logsumexp(terms)
 end
 
 function _ising_sq_log_z_torus(Lx::Integer, Ly::Integer, K::Real)
+    K >= 0 || throw(
+        ArgumentError(
+            "_ising_sq_log_z_torus: Kaufman's closed form is written for K >= 0; " *
+            "got K = $K. For K < 0 use `_ising_sq_log_z_torus_signed`, which folds " *
+            "onto |K| when the torus is bipartite and otherwise routes to the exact " *
+            "transfer matrix (#824).",
+        ),
+    )
     # K = 0 (beta = 0 or J = 0) is a SINGULAR POINT OF THE PARAMETRISATION, not
     # of the physics.  Kaufman's variables all blow up there -- sinh 2K = 0 makes
     # the prefactor log(0), coth K diverges, and gamma_0 = 2K + log tanh K is
@@ -327,7 +336,70 @@ function _ising_sq_log_z_torus(Lx::Integer, Ly::Integer, K::Real)
             "positive, so this is a bug in the sector signs, not a numerical edge.",
         ),
     )
-    return -log(2) + (Lx * Ly / 2) * log(2 * sinh(2 * abs(K))) + logsum
+    return -log(2) + (Lx * Ly / 2) * log(2 * sinh(2K)) + logsum
+end
+
+"""
+    _ising_sq_bipartite_torus(Lx::Integer, Ly::Integer) -> Bool
+
+Whether the `Lx × Ly` PERIODIC square lattice is bipartite — i.e. both sides
+even.  With either side odd the wrap-around closes an odd cycle, the two-colouring
+fails, and the antiferromagnet is frustrated.
+
+This is the whole content of #824: the infinite square lattice is bipartite, so
+`Z` is even in `J` there and every reference formula is written for `|K|`; a
+FINITE torus is bipartite only sometimes, and the difference is invisible on the
+even×even cases anyone would try first.
+"""
+_ising_sq_bipartite_torus(Lx::Integer, Ly::Integer) = iseven(Lx) && iseven(Ly)
+
+"""
+    _ising_sq_log_z_torus_signed(Lx, Ly, K::Real) -> Real
+
+`log Z` of the `Lx × Ly` periodic square-lattice Ising model at coupling `K = βJ`
+of **either sign**.
+
+Three routes, and which one applies is forced, not chosen:
+
+- `K ≥ 0` — Kaufman's closed form, `O(Ly)`.
+- `K < 0` on a BIPARTITE torus — `Z(−K) = Z(K)` exactly, by `σ → −σ` on one
+  sublattice, so the closed form at `|K|` is not an approximation.
+- `K < 0` on a NON-bipartite torus — the antiferromagnet is frustrated and `Z` is
+  genuinely smaller. Kaufman's derivation assumes `K > 0` (its `γ_k` acquire an
+  `iπ` shift and its `(2 sinh 2K)^{N/2}` prefactor a branch), so this routes to
+  the EXACT transfer matrix instead of extending a formula outside its derivation.
+
+The transfer matrix is `2^Ly × 2^Ly`, so the exponential axis is the SHORT side:
+the two sides are exchanged when that helps, since `Z(Lx, Ly) = Z(Ly, Lx)` on a
+torus. Beyond the cap it throws rather than silently returning the ferromagnetic
+value, which is what #824 was.
+"""
+function _ising_sq_log_z_torus_signed(Lx::Integer, Ly::Integer, K::Real)
+    (K >= 0 || _ising_sq_bipartite_torus(Lx, Ly)) &&
+        return _ising_sq_log_z_torus(Lx, Ly, abs(K))
+    # frustrated: put the exponential axis on the shorter side
+    a, b = Lx <= Ly ? (Ly, Lx) : (Lx, Ly)     # a = power, b = transfer width
+    b <= _MAX_ED_SITES || throw(
+        ArgumentError(
+            "IsingSquare log Z: K = $K < 0 on the non-bipartite $(Lx)×$(Ly) torus is " *
+            "FRUSTRATED, so Kaufman's closed form (derived for K > 0) does not apply " *
+            "and Z ≠ Z(|K|). The exact transfer-matrix route needs min(Lx, Ly) ≤ " *
+            "$(_MAX_ED_SITES) and here it is $b. Use a smaller transverse size, or a " *
+            "ferromagnetic K (#824).",
+        ),
+    )
+    T = _ising_sq_transfer_matrix(b, one(K), K)      # β folded into K
+    λ = eigvals(Symmetric(Matrix(T)))
+    m = maximum(abs, λ)
+    # signed log-sum-exp over λ^a: Z = tr(T^a) = Σ λ^a, and λ may be negative
+    acc = sum(x -> sign(x)^a * (abs(x) / m)^a, λ)
+    acc > 0 || throw(
+        ErrorException(
+            "IsingSquare log Z: the transfer-matrix eigenvalue sum came out " *
+            "non-positive ($acc) at Lx = $Lx, Ly = $Ly, K = $K — Z must be positive.",
+        ),
+    )
+    return a * log(m) + log(acc)
 end
 
 # BC-aware delegator: required by the registry drift guard so the

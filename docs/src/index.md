@@ -17,6 +17,46 @@ is accompanied by:
 3. **Cross-validation**: tested against independent computation
 4. **Connections**: linked to universality classes and other models
 
+### Two kinds of stored value, and the registry says which
+
+The paragraph above describes most of the atlas but **not all of it**, and the
+difference is worth stating rather than leaving a reader to discover.
+
+A row registered `cost = :exponential` is many-body **dense exact
+diagonalisation** on a `d^N` Hilbert space, with a declared `max_size` (12 for
+spin-½).  Measured on the loaded registry: **69 of 518 rows (13.3%)**,
+concentrated in three models — `S1Heisenberg1D` (22 of 24), `Heisenberg1D` (23 of
+35), `XXZ1D` (23 of 37), where they are the whole `OBC` surface.
+
+Those rows are **not** "authoritative reference values" in the sense above.
+There is no publication for the local magnetisation of the eight-site open
+Heisenberg chain at `β = 1`, and any consumer with an ED routine reproduces the
+number in minutes.  What they are is a **cross-validation instrument**:
+
+- the small-`N` ground truth an analytic closed form is *checked against* (the
+  TFIM entanglement entropy documents exactly this — "matches the full-ED
+  reference at every small `N`, verified to 1e-10");
+- the target a new DMRG / MPS / QMC implementation validates itself on before
+  it is trusted at sizes where nothing exact exists.
+
+Two things that are easy to assume and are false, both measured:
+
+- **They do not duplicate the closed forms.** Every `(model, quantity)` pair
+  carrying both has the ED row at a finite `OBC` chain and the analytic row at
+  `Infinite` — the thermodynamic limit is a *different question*, not a second
+  route to the same number.  No `(model, quantity, bc)` triple carries both, and
+  a test asserts it stays that way.  For **56** `(model, quantity)` pairs, ED is
+  the only route there is.
+- **The cost is not a detail.** `cost = :exponential` requires `max_size` at
+  registration precisely so a route cannot hide where it stops, and the limit
+  bites in practice: one region-entropy bag costs 0.0 s on `TFIM/OBC` and
+  **338.7 s** on `S1Heisenberg1D/OBC`, which is why the latter carries an
+  exclusion in `region_registry.jl`.
+
+So: read `cost` alongside `status`.  `status = :exact` says the value is right;
+`cost = :exponential` says it is an instrument you could have built yourself,
+and tells you the size beyond which it does not exist.
+
 ## Quick Start
 
 ```julia

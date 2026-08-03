@@ -60,6 +60,34 @@ end
     @test isempty([e for e in REGISTRY if e.cost === :exponential && e.bc <: Infinite])
 end
 
+@testset "an exponential route never shadows a cheaper one at the same hub" begin
+    # The docs say the ED rows do not duplicate the closed forms — that where a
+    # (model, quantity) carries both, the ED row is a finite OBC chain and the
+    # cheap row is the thermodynamic limit, a DIFFERENT question rather than a
+    # second route to one number.  That claim is only worth making if it stays
+    # true, so it is asserted at the level it could break: the same
+    # (model, quantity, bc), where two rows would be two routes to one answer.
+    #
+    # If this ever fires it is not necessarily a bug — someone may have added a
+    # closed form beside an ED row, which is GOOD news.  The right response is to
+    # make the cheap route canonical and demote or delete the ED one, not to
+    # relax the test.
+    bycost = Dict{Tuple{Type,Type,Type},Vector{Symbol}}()
+    for e in REGISTRY
+        push!(get!(bycost, (e.model, e.quantity, e.bc), Symbol[]), e.cost)
+    end
+    @test !isempty(bycost)                      # not vacuous
+    shadowed = sort!([
+        string(nameof(m), "/", nameof(q), "/", nameof(bc), " ", cs) for
+        ((m, q, bc), cs) in bycost if
+        (:exponential in cs) && any(c -> c in (:closed_form, :polynomial), cs)
+    ],)
+    isempty(shadowed) || @info "a hub offers BOTH an exponential and a cheaper \
+                                route for one quantity — make the cheap one \
+                                canonical rather than relaxing this test" shadowed
+    @test isempty(shadowed)
+end
+
 @testset "C14 reports no cost-coherence errors" begin
     findings = check_cost_coherence()
     errs = coherence_errors(findings)

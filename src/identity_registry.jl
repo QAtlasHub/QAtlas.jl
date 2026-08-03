@@ -107,6 +107,17 @@
 # looks like; a shared routine would give exactly 0 at every N, the way
 # LoschmidtRate does (see its MATERIALIZABLE_BUT_UNWIRED entry).
 #
+# NOT EQUALLY STRONG ON EVERY HUB, and the registry says which.  On the
+# free-fermion hubs (TFIM, XYh1D — cost=:polynomial) the two sides come from
+# different objects, as above.  On the dense-ED hubs (Heisenberg1D, XXZ1D,
+# S1Heisenberg1D — cost=:exponential) BOTH sides come from `eigen(H)` of the same
+# matrix: `Energy{:total}` is `Σₙ wₙ Eₙ`, `EnergyLocal` is `Σᵢ Σₙ wₙ ⟨n|bᵢ|n⟩`.
+# There the check tests the LOCAL DECOMPOSITION — that the bond operators and the
+# ½ splitting really sum to H — and nothing about the Hamiltonian or the spectrum,
+# which are shared.  Still a real check, and it would catch a wrong bond operator;
+# just a narrower one than the free-fermion hubs get.  Read `cost` alongside the
+# pass count.
+#
 # And it DISCRIMINATES, which agreement alone does not establish.  Control,
 # measured at N = 6: comparing Σᵢεᵢ(β=1) against E_total at the WRONG temperature
 # (β=2) departs by 0.45 … 1.4 on the six hubs, against a matched residual of

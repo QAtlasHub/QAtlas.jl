@@ -182,6 +182,28 @@ end
 # see that quantity's docstring, and `core/regions.jl` for the Jordan-Wigner
 # reason.  The two agree on a single contiguous interval and nowhere else.
 #
+# AND IT IS A FREE-FERMION RESULT, which is a sharper restriction than "critical
+# with central charge c".  For ONE interval the leading log is fixed by c alone,
+# so `cft_block_entropy` applies to any critical chain.  For SEVERAL intervals
+# that stops being true: a Luttinger liquid is a compactified boson, and its
+# multi-interval entropy depends on the compactification radius — on `K` — through
+# a cross-ratio function that is 1 for the free Dirac fermion and not otherwise.
+# So `c` is enough here only because the validated hubs are free fermions.
+#
+# MEASURED, on the open XXZ chain at N = 12, comparing the SPIN mutual information
+# of two blocks against this pair sum with c = 1:
+#
+#     Δ = 0.0    +46% … +61%
+#     Δ = 0.5    −3% … +12%
+#     Δ = 1.0    −15% … −4%
+#
+# The Δ = 0 column is the Jordan-Wigner gap alone (the pair sum is predicting the
+# FERMIONIC entropy, which the spin route does not return); N = 12 also carries a
+# large 1/ℓ² lattice correction, so no single row means much. What does mean
+# something is that the deviation MOVES WITH Δ instead of sitting at one offset:
+# a c-only formula cannot do that. Do not read a number out of this function for
+# an interacting chain.
+#
 # NO ALTERNATING TERM here.  The parity oscillation of `cft_block_entropy` is
 # indexed by the parity of one block length; a region with several intervals has
 # no single such parity, and the multi-interval amplitude is not the bipartite
@@ -288,6 +310,15 @@ disconnected region that is **not** the spin `VonNeumannEntropy`: the
 Jordan-Wigner string leaves the region, and the two differ by O(0.1) nats
 without violating any entropy inequality (see `core/regions.jl`).  They coincide
 on a single contiguous interval.
+
+!!! warning "Free fermions, not merely `c`"
+    Unlike [`cft_block_entropy`](@ref), which needs only the central charge, this
+    is a **free-fermion** result.  A Luttinger liquid is a compactified boson and
+    its multi-interval entropy depends on `K` as well as on `c`.  Measured against
+    the spin mutual information of the open XXZ chain at `N = 12`, the deviation
+    swings from `+46%` at `Δ = 0` to `−15%` at `Δ = 1` — it moves with `Δ`, which
+    a `c`-only formula cannot reproduce.  The validated hubs are the free-fermion
+    ones; treat an interacting chain as out of scope.
 
 There is no `alt_amplitude` here — see the section header.
 """

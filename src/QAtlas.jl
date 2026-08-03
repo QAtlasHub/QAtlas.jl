@@ -163,6 +163,9 @@ export BoundaryCondition, Infinite, PBC, OBC
 # Regions (AbstractQAtlas): the value-keyed support behind the entropy
 # inequalities, and now a fetch argument for the entanglement entropies (#780).
 export Region
+# The finite-L Calabrese-Cardy block entropy (chord form), shared by every
+# critical hub rather than re-derived per model.
+export chord_distance, cft_block_entropy
 export AbstractQuantity, Quantity
 export fetch
 
@@ -245,6 +248,7 @@ include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
 include("core/regions.jl")     # `region`/`ℓ` fetch argument for the entanglement entropies (#780)
+include("core/cft_entanglement.jl")  # finite-L Calabrese-Cardy block entropy (chord form)
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
 include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
 include("core/registry.jl")

@@ -107,27 +107,37 @@ using QAtlas.Hubbard1DJKSNLIE:
         # beta <= 0 → DomainError
         @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.0)
         @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=-1.0)
-        # t != 1 → ArgumentError (JKS path-rescale not implemented)
+        # t != 1 → DomainError (JKS path-rescale not implemented)
         m_t2 = Hubbard1D(t=2.0, U=4.0, μ=2.0)
-        @test_throws ArgumentError fetch(m_t2, FreeEnergy(), Infinite(); beta=0.1)
-        # H != 0 → ArgumentError (b̄=b symmetry only valid at H=0)
-        @test_throws ArgumentError fetch(m, FreeEnergy(), Infinite(); beta=0.1, H=0.5)
-        # off-half-filling → ArgumentError
+        @test_throws DomainError fetch(m_t2, FreeEnergy(), Infinite(); beta=0.1)
+        # H != 0 → DomainError (b̄=b symmetry only valid at H=0)
+        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.1, H=0.5)
+        # off-half-filling → DomainError
         m_qf = Hubbard1D(t=1.0, U=4.0, μ=1.0)
-        @test_throws ArgumentError fetch(m_qf, FreeEnergy(), Infinite(); beta=0.1)
+        @test_throws DomainError fetch(m_qf, FreeEnergy(), Infinite(); beta=0.1)
     end
 
-    @testset "alpha >= eta DomainError" begin
+    @testset "the eq (47) knobs are gone, and saying so is the contract" begin
+        # `alpha` was the eq (47) contour shift and had a 0 < alpha < eta guard.
+        # The eq (53) route has no such contour, so the knob does not exist. It is
+        # not silently accepted: unrecognised kwargs are warned about and ignored,
+        # which is this fetch's standing contract — asserted here rather than left
+        # to a reader, because "passing a knob that does nothing" is the failure
+        # mode a removed-but-tolerated keyword creates.
         m = Hubbard1D(t=1.0, U=4.0, μ=2.0)
-        # alpha = U/4 (=eta) hits the constraint boundary
-        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.001, alpha=1.0)
-        @test_throws DomainError fetch(m, FreeEnergy(), Infinite(); beta=0.001, alpha=2.0)
+        base = fetch(m, FreeEnergy(), Infinite(); beta=0.05)
+        for bad in (:alpha => 1.0, :grid_N => 32, :solver => :picard)
+            v = @test_logs (:warn,) match_mode = :any fetch(
+                m, FreeEnergy(), Infinite(); beta=0.05, (first(bad) => last(bad),)...
+            )
+            @test v == base            # ignored, not quietly honoured
+        end
     end
 
     @testset "nonuniform grid path" begin
         # Smoke test for build_nonuniform_grid path (Stage F.2)
         m = Hubbard1D(t=1.0, U=4.0, μ=2.0)
-        f_uni = fetch(m, FreeEnergy(), Infinite(); beta=0.001, grid_N=128, x_max=32.0)
+        f_uni = fetch(m, FreeEnergy(), Infinite(); beta=0.001, x_max=32.0)
         f_non = fetch(
             m,
             FreeEnergy(),

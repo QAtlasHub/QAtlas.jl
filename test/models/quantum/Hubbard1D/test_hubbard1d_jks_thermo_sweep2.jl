@@ -39,8 +39,8 @@ using SparseArrays: spzeros
         m = Hubbard1D(; t=1.0, U=4.0, μ=2.0)
         β = 1e-3
         f_atom = atomic_free_energy(β, 4.0, 2.0)
-        f_lo = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, grid_N=32, x_max=4.0)
-        f_hi = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, grid_N=64, x_max=8.0)
+        f_lo = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, x_max=4.0)
+        f_hi = QAtlas.fetch(m, FreeEnergy(), Infinite(); beta=β, x_max=8.0)
         @test isfinite(f_lo)
         @test isfinite(f_hi)
         # Higher resolution should be at least as close to atomic.

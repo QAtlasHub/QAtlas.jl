@@ -22,7 +22,9 @@ using LatticeCore: num_sites, bonds
 #
 # i.e. `-⟨|f(k)|⟩ / 2` in the conventions of the module.
 
-const ε_isotropic_TL = -0.7872986216706852
+# The value itself lives in test_KitaevHoneycomb_closedform.jl, which is the
+# only file that asserts against it; a second copy here was dead and, sharing one
+# `Main`, would have silently won if the two ever drifted.
 
 @testset "KitaevHoneycomb — verification cards" begin
     # Isotropic Kitaev honeycomb ground-state energy density: the exact

@@ -55,7 +55,7 @@ end
 _perbond_kappa(J2; N=6) = _cums(_blbq_obc(N, 1.0, J2)) .- _cums(_blbq_obc(N - 1, 1.0, J2))
 
 # independent Boltzmann-ED per-site thermodynamics
-function _ed_thermo(E, β, N)
+function _aklt_ed_thermo(E, β, N)
     Emin = minimum(E)
     w = exp.(-β .* (E .- Emin))
     Z = sum(w)
@@ -82,7 +82,7 @@ end
         m = AKLT1D(; J=1.0)
         E = eigvals(Symmetric(_blbq_pbc(7, 1.0, 1 / 3)))
         for β in (0.1, 0.2, 0.3, 0.35)
-            ed = _ed_thermo(E, β, 7)
+            ed = _aklt_ed_thermo(E, β, 7)
             @test fetch(m, SpecificHeat(), Infinite(); scheme=:htse, beta=β) ≈ ed.cv rtol =
                 0.015
             @test fetch(m, FreeEnergy(), Infinite(); scheme=:htse, beta=β) ≈ ed.f rtol =

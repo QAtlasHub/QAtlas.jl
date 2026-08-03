@@ -254,6 +254,7 @@ include("core/alias.jl")
 include("core/type.jl")
 include("core/quantities.jl")
 include("core/regions.jl")     # `region`/`ℓ` fetch argument for the entanglement entropies (#780)
+include("core/jw_spin_rdm.jl")  # SPIN rdm of a DISCONNECTED region from the covariance (#832)
 include("core/cft_entanglement.jl")  # finite-L Calabrese-Cardy block entropy (chord form)
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
 include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
@@ -318,6 +319,7 @@ export Energy,
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
 export FermionicEntanglementEntropy, fermionic_entanglement_entropy
+export spin_rdm_from_covariance, MAX_JW_SPIN_REGION  # JW string reinstated (#832)
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy

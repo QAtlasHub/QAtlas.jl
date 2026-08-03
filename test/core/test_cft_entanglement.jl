@@ -189,10 +189,16 @@ end
     r = Region(4, 5, 6)
     @test fetch(m, VonNeumannEntropy(), bc; region=r) ≈
         fetch(m, FermionicEntanglementEntropy(), bc; region=r) rtol = 1e-12
-    # a disconnected region: the spin route REFUSES rather than return the
-    # fermionic number under the spin name, and the fermionic route answers
-    @test_throws ArgumentError fetch(m, VonNeumannEntropy(), bc; region=Region(1, 2, 5, 6))
-    @test fetch(m, FermionicEntanglementEntropy(), bc; region=Region(1, 2, 5, 6)) > 0
+    # a disconnected region: BOTH routes answer now (#832 reinstates the
+    # Jordan-Wigner string for the spin one), and they must answer DIFFERENTLY —
+    # that difference is the whole reason they are separate quantities
+    rd = Region(1, 2, 5, 6)
+    @test fetch(m, FermionicEntanglementEntropy(), bc; region=rd) > 0
+    @test fetch(m, VonNeumannEntropy(), bc; region=rd) > 0
+    @test abs(
+        fetch(m, VonNeumannEntropy(), bc; region=rd) -
+        fetch(m, FermionicEntanglementEntropy(), bc; region=rd),
+    ) > 0.05
 end
 
 @testset "cft_region_entropy: geometry the pair sum must get right" begin

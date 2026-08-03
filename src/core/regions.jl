@@ -26,15 +26,21 @@
 # entropies of honest states, so subadditivity and friends hold for either one.
 # A silently-fermionic answer would therefore pass every check in the atlas
 # while answering a different question than `VonNeumannEntropy` on a SPIN model
-# asks.  So the free-fermion path refuses multi-interval regions outright and
-# says why; the dense-ED path, which traces out the complement of the actual
-# spin sites, has no such restriction and takes any region.
+# asks.
 #
-# This is not a limitation in practice for the region inequalities: choosing the
-# regions ADJACENT — A = 1:2, B = 3:4, C = 5:6 — makes every entropy that
-# `region_report` needs (S(A), S(B), S(C), S(A∪B), S(B∪C), S(A∪B∪C)) a single
-# contiguous interval, so the free-fermion hubs materialise all four relations
-# with no caveat at all.
+# THE RESTRICTION IS NOW LIFTED, for TFIM (#832).  Rather than refuse a
+# disconnected region, `core/jw_spin_rdm.jl` reinstates the Jordan-Wigner string
+# explicitly and reconstructs the SPIN reduced state from the same covariance —
+# at a cost exponential in the REGION but polynomial in the CHAIN, the opposite
+# trade to dense ED.  `_require_single_interval` remains for routes that have not
+# adopted it; a route that keeps the guard is stating that it returns the
+# fermionic object off a single interval, which is a real claim and not an
+# oversight.
+#
+# The old advice — choose the regions ADJACENT, A = 1:2, B = 3:4, C = 5:6, so
+# every union `region_report` needs is again a single interval — is no longer
+# forced, but it is still the cheap arrangement and remains what the region edge
+# uses.
 # ─────────────────────────────────────────────────────────────────────────────
 
 """
@@ -116,8 +122,9 @@ end
 """
     _require_single_interval(sites, who::AbstractString)
 
-Throw unless `sites` is a single contiguous interval.  Called by the free-fermion
-entanglement implementations, where a multi-interval region would return the
+Throw unless `sites` is a single contiguous interval.  Called by free-fermion
+entanglement implementations that have NOT adopted
+`spin_rdm_from_covariance` (#832), where a multi-interval region would return the
 FERMIONIC entropy rather than the spin one — see this file's header.
 """
 function _require_single_interval(sites::AbstractVector{<:Integer}, who::AbstractString)

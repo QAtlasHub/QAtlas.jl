@@ -21,10 +21,12 @@ using QAtlas
 using QAtlas: IsingSquare, PartitionFunction, fetch, PBC
 using QAtlas: FreeEnergy, Energy, ThermalEntropy, SpecificHeat
 
-_Z(Lx, Ly, J; β=1.0) = fetch(IsingSquare(), PartitionFunction(); β=β, Lx=Lx, Ly=Ly, J=J)
+# Prefixed per file: test files share one `Main`, so an unprefixed `_Z` would be
+# a global waiting to collide with whatever the shard planner puts next to it.
+_isq_Z(Lx, Ly, J; β=1.0) = fetch(IsingSquare(), PartitionFunction(); β=β, Lx=Lx, Ly=Ly, J=J)
 
 """
-    _Z_bruteforce(Lx, Ly, β, J) -> Float64
+    _isq_Z_bruteforce(Lx, Ly, β, J) -> Float64
 
 Partition function of the `Lx × Ly` periodic square-lattice Ising model by summing
 over all `2^(Lx·Ly)` spin configurations.
@@ -33,9 +35,9 @@ The point of doing it the stupid way: it shares no code path, no fermionisation
 and no transfer matrix with either production route — only the definition of the
 energy.  That is what makes it an oracle rather than a second opinion.
 """
-function _Z_bruteforce(Lx::Int, Ly::Int, β::Float64, J::Float64)
+function _isq_Z_bruteforce(Lx::Int, Ly::Int, β::Float64, J::Float64)
     n = Lx * Ly
-    n <= 16 || error("_Z_bruteforce: $n sites is too many")
+    n <= 16 || error("_isq_Z_bruteforce: $n sites is too many")
     idx(x, y) = ((x % Lx) * Ly + (y % Ly)) + 1     # 0-based (x, y), PBC both ways
     Z = 0.0
     σ = Vector{Int}(undef, n)
@@ -58,15 +60,15 @@ end
     # 3×3 is the smallest non-bipartite torus; 2^9 = 512 configurations.
     for (Lx, Ly) in ((3, 3), (4, 3), (3, 4)), J in (-0.5, +0.5), β in (0.6, 1.0)
         Lx * Ly <= 16 || continue
-        @test _Z(Lx, Ly, J; β=β) ≈ _Z_bruteforce(Lx, Ly, β, J) rtol = 1e-10
+        @test _isq_Z(Lx, Ly, J; β=β) ≈ _isq_Z_bruteforce(Lx, Ly, β, J) rtol = 1e-10
     end
     # …and on a bipartite one, where the old code was accidentally right
     for J in (-0.5, +0.5)
-        @test _Z(4, 4, J) ≈ _Z_bruteforce(4, 4, 1.0, J) rtol = 1e-10
+        @test _isq_Z(4, 4, J) ≈ _isq_Z_bruteforce(4, 4, 1.0, J) rtol = 1e-10
     end
     # the value #824 was filed on, pinned explicitly
-    @test log(_Z(3, 3, -0.5)) ≈ 7.8302303635 atol = 1e-9
-    @test log(_Z(3, 3, +0.5)) ≈ 9.9251503709 atol = 1e-9
+    @test log(_isq_Z(3, 3, -0.5)) ≈ 7.8302303635 atol = 1e-9
+    @test log(_isq_Z(3, 3, +0.5)) ≈ 9.9251503709 atol = 1e-9
 end
 
 @testset "frustration is an INEQUALITY, so it needs no reference data" begin
@@ -74,15 +76,15 @@ end
     # carries strictly less weight than the ferromagnet. This assertion cannot
     # rot: no stored number, no tolerance on a value, just a strict order.
     for (Lx, Ly) in ((3, 3), (4, 3), (3, 4), (5, 3), (3, 5), (5, 5), (3, 8), (7, 4))
-        @test _Z(Lx, Ly, -0.5) < _Z(Lx, Ly, +0.5)
+        @test _isq_Z(Lx, Ly, -0.5) < _isq_Z(Lx, Ly, +0.5)
     end
     # and it must NOT hold where the lattice is bipartite — equality, exactly,
     # since the two are related by a gauge transformation rather than a limit
     for (Lx, Ly) in ((4, 4), (6, 4), (4, 6), (8, 8), (2, 6))
-        @test _Z(Lx, Ly, -0.5) == _Z(Lx, Ly, +0.5)
+        @test _isq_Z(Lx, Ly, -0.5) == _isq_Z(Lx, Ly, +0.5)
     end
     # colder ⇒ more frustration ⇒ a wider gap
-    gap(β) = log(_Z(3, 3, +0.5; β=β)) - log(_Z(3, 3, -0.5; β=β))
+    gap(β) = log(_isq_Z(3, 3, +0.5; β=β)) - log(_isq_Z(3, 3, -0.5; β=β))
     @test gap(0.3) < gap(0.6) < gap(1.0) < gap(2.0)
 end
 
@@ -93,7 +95,7 @@ end
     # requires and which the transfer-matrix route is not obviously able to do —
     # so this checks the VALUES against finite differences of the brute-force
     # log Z, not just that nothing throws.
-    logZbf(Lx, Ly, β, J) = log(_Z_bruteforce(Lx, Ly, β, J))
+    logZbf(Lx, Ly, β, J) = log(_isq_Z_bruteforce(Lx, Ly, β, J))
     for (Lx, Ly, J) in ((3, 3, -0.5), (3, 3, +0.5), (4, 3, -0.5))
         N, β, h = Lx * Ly, 1.0, 1e-5
         f(b) = logZbf(Lx, Ly, b, J)
@@ -106,7 +108,7 @@ end
     end
     # free energy is just -log Z / (β N), so it inherits the fix directly
     @test fetch(IsingSquare(), FreeEnergy(), PBC(); beta=1.0, Lx=3, Ly=3, J=-0.5) ≈
-        -log(_Z(3, 3, -0.5)) / 9 rtol = 1e-12
+        -log(_isq_Z(3, 3, -0.5)) / 9 rtol = 1e-12
 end
 
 @testset "the torus is symmetric under swapping its axes" begin
@@ -114,7 +116,7 @@ end
     # frustrated route, which puts the exponential cost on the SHORTER side —
     # so 3×14 must work and must equal 14×3.
     for (Lx, Ly) in ((3, 4), (5, 3), (3, 14), (7, 4)), J in (-0.5, +0.5)
-        @test _Z(Lx, Ly, J) ≈ _Z(Ly, Lx, J) rtol = 1e-12
+        @test _isq_Z(Lx, Ly, J) ≈ _isq_Z(Ly, Lx, J) rtol = 1e-12
     end
 end
 
@@ -125,21 +127,21 @@ end
     # NON-bipartite with the short side over the cap.  Note 14×14 does NOT throw
     # and must not: both sides even, so it folds onto |K| legitimately — which is
     # exactly the trap this testset nearly fell into.
-    @test_throws ArgumentError _Z(13, 13, -0.5)
-    @test_throws ArgumentError _Z(15, 14, -0.5)
+    @test_throws ArgumentError _isq_Z(13, 13, -0.5)
+    @test_throws ArgumentError _isq_Z(15, 14, -0.5)
     err = try
-        _Z(13, 13, -0.5)
+        _isq_Z(13, 13, -0.5)
     catch e
         e
     end
     @test occursin("FRUSTRATED", err.msg)
     # the same sizes are fine ferromagnetically …
-    @test isfinite(_Z(13, 13, +0.5))
-    @test isfinite(_Z(15, 14, +0.5))
+    @test isfinite(_isq_Z(13, 13, +0.5))
+    @test isfinite(_isq_Z(15, 14, +0.5))
     # … and a BIPARTITE torus of the same scale answers for either sign, because
     # there the fold is a gauge transformation rather than an approximation
-    @test _Z(14, 14, -0.5) == _Z(14, 14, +0.5)
-    @test isfinite(_Z(14, 14, -0.5))
+    @test _isq_Z(14, 14, -0.5) == _isq_Z(14, 14, +0.5)
+    @test isfinite(_isq_Z(14, 14, -0.5))
 end
 
 @testset "the closed form now states its domain instead of folding silently" begin

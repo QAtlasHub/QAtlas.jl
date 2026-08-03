@@ -11,8 +11,15 @@ using QAtlas
 using QAtlas: TFIM, Infinite, fetch, QuenchLocalMagnetization, GGEValue, MagnetizationX
 using QAtlas: RenyiEntropy, VonNeumannEntropy, _quantity_instance, generated_checks
 
-_Q(mf, m0, t) = fetch(mf, QuenchLocalMagnetization{:x}(), Infinite(); initial=m0, t=t)
-_G(mf, m0) = fetch(mf, GGEValue(MagnetizationX()), Infinite(); initial=m0)
+# Prefixed per file, NOT abbreviated: every test file is `include`d into the SAME
+# `Main`, so a bare `_Q`/`_G` is a global that collides with any other file the
+# shard planner happens to place beside it. `_G` collided with `const _G` in
+# test_hubbard1d_jks_eq53.jl the moment an unrelated file changed the shard
+# partition — the first version of this file passed CI purely by luck.
+function _qgge_quench(mf, m0, t)
+    return fetch(mf, QuenchLocalMagnetization{:x}(), Infinite(); initial=m0, t=t)
+end
+_qgge_gge(mf, m0) = fetch(mf, GGEValue(MagnetizationX()), Infinite(); initial=m0)
 
 @testset "the edge materialises, and only on the hub that has both" begin
     cs = filter(
@@ -38,8 +45,8 @@ end
     tol = 1e-5
     for h0 in (0.2, 0.5, 0.8, 1.5, 2.0, 3.0)
         m0 = TFIM(1.0, h0)
-        resid = abs(_Q(mf, m0, 800.0) - _G(mf, m0))
-        margin = abs(_Q(mf, m0, 800.0) - _G(mf, TFIM(1.0, h0 + 0.1)))
+        resid = abs(_qgge_quench(mf, m0, 800.0) - _qgge_gge(mf, m0))
+        margin = abs(_qgge_quench(mf, m0, 800.0) - _qgge_gge(mf, TFIM(1.0, h0 + 0.1)))
         @test resid < tol / 10                  # ≥10× headroom below the tolerance
         @test margin > tol * 100                # ≥100× above it
         @test margin / max(resid, eps()) > 1e3  # and ≥10³ separation between them
@@ -52,8 +59,8 @@ end
     # wrong — if the residual kept falling — the honest edge would use a larger
     # `t` and a tighter tolerance, so the claim is load-bearing and pinned here.
     mf, m0 = TFIM(1.0, 1.0), TFIM(1.0, 0.5)
-    g = _G(mf, m0)
-    r(t) = abs(_Q(mf, m0, t) - g)
+    g = _qgge_gge(mf, m0)
+    r(t) = abs(_qgge_quench(mf, m0, t) - g)
     r100, r800, r3200 = r(100.0), r(800.0), r(3200.0)
     @test r100 > 10 * r800                      # it DOES improve up to ~800 …
     @test r3200 > r800 / 10                     # … and then stops: same order, no gain

@@ -137,6 +137,62 @@
     notes = "Σᵢ εᵢ = ⟨H⟩_β — the defining property of the local energy density, checked against a total energy computed from the spectrum rather than from the profile.",
 )
 
+# ── A quench relaxes to its GGE ───────────────────────────────────────
+# lim_{t→∞} ⟨σˣ⟩(t)  =  ⟨σˣ⟩_GGE  for the infinite TFIM after h₀ → h_f.
+#
+# WHY THIS AND NOT A PROTOCOL AXIS.  #819 step (2) proposed that the quench
+# quantities "need a protocol axis that does not exist yet in either package".
+# The law that would justify such an axis turns out to be statable with the
+# vocabulary already present: both quantities take `initial` and the quench one
+# takes `t`, and `_sweep_points` carries a MODEL-valued sweep entry without
+# changing anything.  That is the fourth §4(a) upstream change to shrink to
+# nothing under measurement (after `SiteSupport`, the group law, and the
+# reduction relation) — so the axis, if it is ever wanted, still needs its own
+# first user.
+#
+# WHY IT IS INDEPENDENT, and exactly how far.  The two integrands are different
+# expressions, not one routine called twice:
+#
+#     quench :  (1/π)∫₀^π [cos2θ_f·cos2Δθ + sin2θ_f·sin2Δθ·cos(2Λ_f t)]
+#     GGE    :  (2/π)∫₀^π (h_f − J cos k)/Λ_f · (1 − 2 n_k),  n_k = sin²Δθ
+#
+# and they agree only via the non-trivial identities cos2θ_f = (h_f − J cos k)/Λ_f
+# and cos2Δθ = 1 − 2n_k.  They also use SEPARATE helper families —
+# `_tfim_two_theta`/`_tfim_lambda` versus `_tfim_gge_two_theta`/`_tfim_dispersion`.
+# MEASURED: those pairs agree to every printed digit, i.e. they are DUPLICATE
+# implementations of the same convention.  So this edge cannot detect an error in
+# the Bogoliubov-angle convention itself — both sides would move together — and
+# it is stated here rather than left for a reader to discover.
+#
+# MEASURED, at the hub's own default h_f = 1.0 (the CRITICAL point, and the
+# gapless case where dephasing is slowest — so this is the unfavourable regime,
+# not a flattering one).  |residual| at t = 800 against the wrong-h₀ margin:
+#
+#     h₀      0.2      0.5      0.8      1.5      2.0      3.0
+#     resid   2.2e-7   1.1e-7   3.6e-8   6.5e-8   1.1e-7   1.6e-7
+#     margin  1.9e-2   1.3e-2   5.8e-3   4.5e-3   3.4e-3   1.9e-3
+#
+# — a separation of ~10⁴, so `atol = 1e-5` sits 45× above the worst residual and
+# 190× below the smallest margin.
+#
+# WHY t = 800 AND NOT LARGER.  The residual does NOT keep falling: it plateaus at
+# ~1e-7 from t ≈ 800 and is unchanged at t = 3200, because the `cos(2Λ_f t)` term
+# makes the integrand oscillate faster than the quadrature's `rtol = 1e-12` can
+# follow.  Raising `t` buys nothing and eventually costs accuracy, which is the
+# opposite of what "increase t for the long-time limit" would suggest.
+@identity_edge(
+    :quench_relaxes_to_gge,
+    quantities = (m=QuenchLocalMagnetization{:x}, g=GGEValue{MagnetizationX}),
+    check = (v, p) -> (v.m, v.g),
+    sweep = (
+        initial=[TFIM(1.0, 0.2), TFIM(1.0, 0.5), TFIM(1.0, 2.0), TFIM(1.0, 3.0)], t=[800.0]
+    ),
+    rtol = 1e-5,
+    atol = 1e-5,
+    notes = "lim_{t→∞} ⟨σˣ⟩(t) = ⟨σˣ⟩_GGE after a sudden h₀ → h_f quench of the infinite TFIM. Evaluated at t = 800, where the residual has plateaued; see the header for why larger t does not help.",
+    references = ["CalabreseEsslerFagotti2012"],
+)
+
 # ── SU(2) isotropy of the magnetization family ────────────────────────
 # m_x = m_y = m_z (all zero in a finite-N canonical ensemble, but the edge
 # asserts the symmetry statement — equality — not the value).

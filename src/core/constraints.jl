@@ -280,13 +280,31 @@ not instantiable from a bare type and raise an informative error — a
 constraint edge over such a quantity must carry the instance itself.
 """
 function _quantity_instance(::Type{Q}) where {Q<:AbstractQuantity}
-    fieldcount(Q) == 0 || throw(
+    fieldcount(Q) == 0 && return Q()
+    # A PARAMETRIC WRAPPER whose fields are themselves singletons has exactly one
+    # inhabitant, so the type determines it and the edge need not restate it.
+    # `GGEValue{Magnetization{:x}}` is the case that forced this: it is a functor
+    # over quantities (#819 item 3), so its single field holds another quantity —
+    # and if that one is a singleton, so is the whole.
+    #
+    # The rule is "the type determines the instance", NOT "wrappers are fine".
+    # `RenyiEntropy` holds an `α::Real` and still throws, correctly: no type
+    # names which α is meant, so an edge over it must say.
+    # `Base.issingletontype`, NOT `fieldcount(t) == 0`: a PRIMITIVE type also has
+    # zero fields, so the naive spelling accepts `RenyiEntropy`'s `Float64` field
+    # and then dies in `Float64()` with a MethodError instead of saying what is
+    # wrong. Measured — that is exactly what the first version of this did.
+    fts = fieldtypes(Q)
+    if !isempty(fts) && all(Base.issingletontype, fts)
+        return Q(map(t -> t(), fts)...)
+    end
+    return throw(
         ArgumentError(
-            "_quantity_instance: $(Q) has fields; a constraint edge over it " *
-            "must declare the quantity instance, not the bare type",
+            "_quantity_instance: $(Q) has field(s) of type(s) $(fts) that the type " *
+            "does not determine; a constraint edge over it must declare the " *
+            "quantity instance, not the bare type",
         ),
     )
-    return Q()
 end
 
 """

@@ -35,6 +35,12 @@ using AbstractQAtlas:
     MassGap,
     MutualInformation,
     VonNeumannEntropy,
+    # the FERMIONIC region entropy (AbstractQAtlas.jl#135) — a separate quantity from
+    # VonNeumannEntropy, not a mode of it: on a disconnected region the Jordan-Wigner
+    # string leaves the region and the two are different numbers that no entropy
+    # inequality separates.  It is what `cft_region_entropy` predicts.
+    FermionicEntanglementEntropy,
+    fermionic_entanglement_entropy,
     # #734 leftovers: these six were still declared locally, which made
     # `QAtlas.X !== AbstractQAtlas.X` and silently cut every relation keyed on the
     # base type out of the network. MEASURED before the fix:
@@ -165,7 +171,7 @@ export BoundaryCondition, Infinite, PBC, OBC
 export Region
 # The finite-L Calabrese-Cardy block entropy (chord form), shared by every
 # critical hub rather than re-derived per model.
-export chord_distance, cft_block_entropy
+export chord_distance, cft_block_entropy, cft_region_entropy
 export AbstractQuantity, Quantity
 export fetch
 
@@ -311,6 +317,7 @@ export Energy,
     NMRRelaxationExponent
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export Energy, FreeEnergy, SpecificHeat, MassGap, FidelitySusceptibility
+export FermionicEntanglementEntropy, fermionic_entanglement_entropy
 export ChargeGap, SpinGap                                # Hubbard / correlated-electron gaps
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy

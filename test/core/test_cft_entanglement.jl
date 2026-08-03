@@ -9,6 +9,7 @@ using Test
 using QAtlas
 using QAtlas: chord_distance, cft_block_entropy, fetch, OBC, Infinite
 using QAtlas: TFIM, XXZ1D, VonNeumannEntropy, LuttingerParameter
+using QAtlas: cft_region_entropy, FermionicEntanglementEntropy, Region
 
 # least-squares offset only (the non-universal constant this file does not return)
 function _fit_offset(exact, pred)
@@ -98,4 +99,130 @@ end
     # and the default really is "leading term only", matching the convention the
     # infinite-chain forms already follow
     @test cft_block_entropy(1.0, 3, 12; K=1.0) == cft_block_entropy(1.0, 3, 12)
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Arbitrary regions — the signed pair sum (cft_region_entropy)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# I(A:B) = S(A) + S(B) - S(A∪B).  Every non-universal constant and the cutoff
+# cancel here, so the comparison below has NOTHING fitted — unlike the block
+# tests above, which fit an offset.
+_mi(f, A, B) = f(A) + f(B) - f(sort(vcat(A, B)))
+
+@testset "cft_region_entropy reduces to cft_block_entropy on ONE interval" begin
+    # The whole claim of the pair sum is that the region enters only through its
+    # endpoints, so a single interval must give back the bipartite formula
+    # identically — not approximately.
+    for L in (16, 33, 64), ℓ in (1, 2, 5, L - 1)
+        for periodic in (false, true)
+            @test cft_region_entropy(1.0, ℓ, L; periodic=periodic) ≈
+                cft_block_entropy(1.0, ℓ, L; periodic=periodic) rtol = 1e-12
+            @test cft_region_entropy(0.5, Region(1:ℓ...), L; periodic=periodic) ≈
+                cft_block_entropy(0.5, ℓ, L; periodic=periodic) rtol = 1e-12
+        end
+    end
+    # linear in c, like the kernel it is built from
+    @test cft_region_entropy(2.0, [2, 3, 7, 8], 20) ≈
+        2 * cft_region_entropy(1.0, [2, 3, 7, 8], 20)
+end
+
+@testset "cft_region_entropy vs the EXACT free-fermion route (nothing fitted)" begin
+    # TFIM at criticality: c = 1/2, and the Peschel covariance restricted to any
+    # site set is the FERMIONIC entropy — the quantity the pair sum predicts.
+    m = TFIM(1.0, 1.0)
+    L = 96
+    Sf(sites) = fetch(m, FermionicEntanglementEntropy(), OBC(L); region=Region(sites...))
+    Sp(sites) = cft_region_entropy(0.5, sites, L)
+
+    # two blocks, several separations
+    for (ℓ, g) in ((6, 3), (6, 6), (6, 12), (10, 5), (10, 20))
+        p = (L - (2ℓ + g)) ÷ 2 + 1
+        A = collect(p:(p + ℓ - 1))
+        B = collect((p + ℓ + g):(p + ℓ + g + ℓ - 1))
+        exact, pred = _mi(Sf, A, B), _mi(Sp, A, B)
+        @test exact > 0                                  # subadditivity, as a sanity floor
+        @test isapprox(exact, pred; rtol=0.05)
+        # …and the agreement is much better than that bound on the well-separated
+        # configurations, where the 1/ℓ² lattice correction is smallest
+        g ≥ 2ℓ && @test isapprox(exact, pred; rtol=0.02)
+    end
+
+    # three blocks: S(A)+S(B)+S(C)-S(A∪B∪C) is constant-free the same way
+    ℓ, g = 6, 6
+    p = (L - (3ℓ + 2g)) ÷ 2 + 1
+    A = collect(p:(p + ℓ - 1))
+    B = collect((p + ℓ + g):(p + 2ℓ + g - 1))
+    C = collect((p + 2ℓ + 2g):(p + 3ℓ + 2g - 1))
+    all3 = sort(vcat(A, B, C))
+    ex3 = Sf(A) + Sf(B) + Sf(C) - Sf(all3)
+    pr3 = Sp(A) + Sp(B) + Sp(C) - Sp(all3)
+    @test isapprox(ex3, pr3; rtol=0.05)
+
+    # THE RESIDUAL IS A LATTICE ARTIFACT, not a theory-specific F(x): at fixed
+    # cross ratio it must SHRINK as the blocks grow.  A cross-ratio-dependent
+    # term would sit at a constant relative size instead.  (Measured decay is
+    # 1/ℓ², a factor of 4 per doubling; asserted loosely as ">2x better".)
+    function _relerr(Lx)
+        ℓx = Lx ÷ 16
+        px = (Lx - 3ℓx) ÷ 2 + 1
+        Ax = collect(px:(px + ℓx - 1))
+        Bx = collect((px + 2ℓx):(px + 3ℓx - 1))
+        f(s) = fetch(m, FermionicEntanglementEntropy(), OBC(Lx); region=Region(s...))
+        e, q = _mi(f, Ax, Bx), _mi(s -> cft_region_entropy(0.5, s, Lx), Ax, Bx)
+        return abs(e - q) / abs(q)
+    end
+    e64, e128, e256 = _relerr(64), _relerr(128), _relerr(256)
+    @test e64 > 2 * e128 > 4 * e256
+    @test e256 < 2e-3
+end
+
+@testset "the spin and fermionic routes agree ONLY on one interval" begin
+    m = TFIM(1.0, 1.0)
+    bc = OBC(12)
+    for ℓ in 1:6
+        r = Region((1:ℓ)...)
+        @test fetch(m, VonNeumannEntropy(), bc; region=r) ≈
+            fetch(m, FermionicEntanglementEntropy(), bc; region=r) rtol = 1e-12
+    end
+    # a block in the BULK is still one interval, so still both
+    r = Region(4, 5, 6)
+    @test fetch(m, VonNeumannEntropy(), bc; region=r) ≈
+        fetch(m, FermionicEntanglementEntropy(), bc; region=r) rtol = 1e-12
+    # a disconnected region: the spin route REFUSES rather than return the
+    # fermionic number under the spin name, and the fermionic route answers
+    @test_throws ArgumentError fetch(m, VonNeumannEntropy(), bc; region=Region(1, 2, 5, 6))
+    @test fetch(m, FermionicEntanglementEntropy(), bc; region=Region(1, 2, 5, 6)) > 0
+end
+
+@testset "cft_region_entropy: geometry the pair sum must get right" begin
+    L = 40
+    # A boundary-touching block merges with its own MIRROR image, so it has one
+    # endpoint pair while a bulk block of the same length has two.  If the merge
+    # were skipped the boundary block would pick up a log(0).
+    @test isfinite(cft_region_entropy(1.0, 1:5, L))
+    @test isfinite(cft_region_entropy(1.0, 36:40, L))          # the far boundary
+    @test cft_region_entropy(1.0, 1:5, L) ≈ cft_region_entropy(1.0, 36:40, L) rtol = 1e-12
+    # reflection symmetry of the whole construction, on a two-block region
+    @test cft_region_entropy(1.0, [3, 4, 5, 12, 13, 14], L) ≈
+        cft_region_entropy(1.0, [L + 1 - s for s in [3, 4, 5, 12, 13, 14]], L) rtol = 1e-12
+    # a bulk block sits BELOW the same-length boundary block: two endpoints cost
+    # more than one
+    @test cft_region_entropy(1.0, 16:20, L) > cft_region_entropy(1.0, 1:5, L)
+
+    # PERIODIC: sites L and 1 are neighbours, so a region holding both ends is
+    # ONE arc across the seam.  Rotating a block around the ring must not change
+    # its entropy — which is exactly what a missed seam merge would break.
+    ref = cft_region_entropy(1.0, 5:9, L; periodic=true)
+    @test cft_region_entropy(1.0, [39, 40, 1, 2, 3], L; periodic=true) ≈ ref rtol = 1e-12
+    @test cft_region_entropy(1.0, vcat(38:40, 1:2), L; periodic=true) ≈ ref rtol = 1e-12
+    @test cft_region_entropy(1.0, 1:5, L; periodic=true) ≈ ref rtol = 1e-12
+end
+
+@testset "cft_region_entropy: refusals rather than silent answers" begin
+    @test_throws ArgumentError cft_region_entropy(1.0, Int[], 12)          # empty
+    @test_throws ArgumentError cft_region_entropy(1.0, 1:12, 12)           # no complement
+    @test_throws ArgumentError cft_region_entropy(1.0, [0, 1], 12)         # outside 1:L
+    @test_throws ArgumentError cft_region_entropy(1.0, [11, 13], 12)       # outside 1:L
+    @test_throws ArgumentError cft_region_entropy(1.0, 1:1, 1)             # L must exceed 1
 end

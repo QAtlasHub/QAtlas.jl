@@ -291,6 +291,21 @@
           "interval and the free-fermion answer would be the FERMIONIC entropy (#780).",
 )
 
+@register(
+    TFIM,
+    FermionicEntanglementEntropy,
+    OBC,
+    method=:bdg,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_entanglement.jl",
+    references=["Peschel2003"],
+    notes="Same Peschel covariance restriction as the VonNeumannEntropy row, with NO " *
+          "contiguity requirement: restricting the Majorana covariance to a site set " *
+          "is exactly the fermionic entropy for ANY set. Equals the spin entropy on a " *
+          "single contiguous interval and differs on a disconnected one. This is the " *
+          "quantity the multi-interval `cft_region_entropy` closed form predicts.",
+)
+
 # ── PBC free-fermion thermal (per-site) — TFIM_pbc_thermal.jl ─────────
 @register(
     TFIM,

@@ -134,6 +134,24 @@ function fetch(
     N = _bc_size(bc, kwargs)
     sites = _entanglement_sites(N, region, ℓ)
     _require_single_interval(sites, "TFIM VonNeumannEntropy")
+    return _tfim_covariance_entropy(model, N, sites, beta)
+end
+
+"""
+    _tfim_covariance_entropy(model::TFIM, N, sites, beta) -> Float64
+
+Peschel entropy of the restriction of the Majorana covariance to `sites`.
+
+This is the FERMIONIC entropy of the region.  It is also the spin entropy, but
+only while `sites` is a single contiguous interval — so the contiguity guard
+lives at the two `fetch` entry points and not here, which is the entire
+difference between them.  Sharing the body is deliberate: two copies would let
+the spin and fermionic routes drift apart on the region where they must agree
+EXACTLY (measured to 1e-15 in `test/models/test_TFIM_entanglement.jl`).
+"""
+function _tfim_covariance_entropy(
+    model::TFIM, N::Int, sites::AbstractVector{<:Integer}, beta::Real
+)
     L = length(sites)
     idx = _majorana_indices(sites)
     hmat = _majorana_ham(N, model.J, model.h)
@@ -147,6 +165,43 @@ function fetch(
         S += _peschel_mode_entropy(λ[k])
     end
     return S
+end
+
+"""
+    fetch(model::TFIM, ::FermionicEntanglementEntropy, bc::OBC;
+          region::Region, beta::Float64 = Inf, kwargs...) -> Float64
+    fetch(model::TFIM, ::FermionicEntanglementEntropy, bc::OBC;
+          ℓ::Int, beta::Float64 = Inf, kwargs...) -> Float64
+
+Von Neumann entropy of the state restricted to the **fermionic** algebra of the
+region — the same Peschel covariance restriction as the
+[`VonNeumannEntropy`](@ref) route, with **no contiguity requirement**.
+
+This is the quantity the multi-interval closed form
+[`cft_region_entropy`](@ref) predicts, and it is what makes that formula
+checkable at all: the spin entropy of a disconnected region is a different
+number (the Jordan-Wigner string leaves the region), and no entropy inequality
+separates the two.  See `src/core/regions.jl`.
+
+On a single contiguous interval the two agree exactly, which is asserted rather
+than assumed — a route that quietly returned one for the other would otherwise
+be invisible on precisely the regions where both are defined.
+
+Cost is `O(|region|³)`, the same as the spin route; there is no ED fallback and
+no size cap, so `L = 64` with fifteen blocks runs in about 0.09 s.
+"""
+function fetch(
+    model::TFIM,
+    ::FermionicEntanglementEntropy,
+    bc::OBC;
+    region=nothing,
+    ℓ=nothing,
+    beta::Float64=Inf,
+    kwargs...,
+)
+    N = _bc_size(bc, kwargs)
+    sites = _entanglement_sites(N, region, ℓ)
+    return _tfim_covariance_entropy(model, N, sites, beta)
 end
 
 """

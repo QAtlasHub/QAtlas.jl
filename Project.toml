@@ -19,6 +19,9 @@ QAtlasForwardDiffExt = "ForwardDiff"
 QAtlasZygoteExt = "Zygote"
 
 [compat]
+Dates = "1"
+Logging = "1"
+TestShards = "0.3"
 AbstractQAtlas = "0.6.4"
 Aqua = "0.8"
 ForwardDiff = "0.10, 1"
@@ -44,6 +47,9 @@ LatticeCore = "84b1cbd8-bc58-4618-bc4f-b46a399f49f1"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+TestShards = "acceef1d-f5e0-4fe4-a546-818dc56ce7b2"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [targets]
-test = ["Test", "Aqua", "Lattice2D", "LatticeCore", "ForwardDiff", "Random", "SparseArrays", "KrylovKit"]
+test = ["Test", "Aqua", "Lattice2D", "LatticeCore", "ForwardDiff", "Random", "SparseArrays", "KrylovKit", "TestShards", "Dates", "Logging"]

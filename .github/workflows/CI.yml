@@ -1,329 +1,37 @@
 name: CI
 on:
   push:
-    branches:
-      - main
-      - next
+    branches: [main]
     tags: '*'
   pull_request:
-  workflow_dispatch:        # manual re-trigger entrypoint
+  workflow_dispatch:
 
 concurrency:
-  # Cancel a PR's superseded runs when it is pushed again; queue (never cancel)
-  # runs on main, where the shards feed the timing-history and evidence jobs.
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
-permissions:
-  contents: write   # record-timings pushes the orphan ci-timings branch
-
+# The whole sharded-test vertical lives in TestShards.jl. Nothing is planned up front — each
+# shard decides what it owns from the same timing history — and the reusable merges the shards'
+# coverage into one Codecov upload, merges their records into one ordered document, checks that
+# every unit ran exactly once, and refreshes the `ci-timings` branch on pushes to main.
+#
+# Called DIRECTLY, and passing the secret, because this repository is public and in the same
+# organisation as TestShards. A secret fails to reach a called workflow only when the caller is
+# PRIVATE and the callee is in ANOTHER organisation; neither holds here. The private repos in the
+# fleet go through their own organisation's wrapper instead.
 jobs:
-  # ───────────────────────────────────────────────────────────────────────────
-  # Shard planner.  WHAT-to-run is the canonical universe (test/ci/
-  # universe.jl, single source of truth + completeness guard).  This job
-  # only decides HOW to split: it Longest-Processing-Time bin-packs the
-  # universe using the `ci-timings` orphan branch when present, else
-  # falls back to deterministic round-robin.  Change the shard counts in the
-  # `SHARDS` env of the `gen` step below and nowhere else.
-  # ───────────────────────────────────────────────────────────────────────────
-  plan:
-    name: Plan shards
-    runs-on: ubuntu-latest
-    outputs:
-      plan: ${{ steps.gen.outputs.plan }}
-    steps:
-      - uses: actions/checkout@v7
-      - uses: julia-actions/setup-julia@v3
-        with:
-          version: '1'
-          arch: x64
-      - name: Fetch timing history (best-effort)
-        run: |
-          set -euo pipefail
-          if git ls-remote --exit-code --heads origin ci-timings >/dev/null 2>&1; then
-            git fetch --depth=1 origin ci-timings
-            git show FETCH_HEAD:timings.tsv > timings.tsv 2>/dev/null \
-              && echo "Loaded $(wc -l < timings.tsv) timing rows" \
-              || { echo "ci-timings has no timings.tsv — round-robin"; : > timings.tsv; }
-          else
-            echo "no ci-timings branch yet — round-robin fallback"
-            : > timings.tsv
-          fi
-      - id: gen
-        env:
-          # The org is on the GitHub Free plan: 20 concurrent jobs for the WHOLE
-          # organisation, shared with every other workflow and every other open
-          # PR.  A 16-way fan-out is therefore never realised on a PR — measured
-          # on run 30241591516 (22 jobs, all green): peak 9 jobs ran at once,
-          # 178.5 min was spent QUEUED against 137.4 min actually running, and
-          # the `All tests passed` gate itself waited 570 s for a slot.  The
-          # extra shards do not shorten the run; they queue, and they crowd out
-          # the cheap required checks that gate the merge.
-          #
-          # So: fan out only as wide as the account can actually run on a PR,
-          # and keep the full 16 for push:main and the nightly job, where
-          # nothing else is competing.
-          SHARDS: ${{ github.event_name == 'pull_request' && '8' || '16' }}
-        run: |
-          set -euo pipefail
-          N="$SHARDS"
-          echo "Planning $N shards (event=${{ github.event_name }})."
-          plan=$(julia test/ci/plan_shards.jl "$N" timings.tsv)
-          count=$(jq 'length' <<<"$plan")
-          if [ "$count" -lt 1 ]; then
-            echo "::error::plan_shards produced an empty plan (count=$count)"
-            exit 1
-          fi
-          echo "plan=$plan" >> "$GITHUB_OUTPUT"
-          echo "Planned $count shards."
-
   test:
-    name: shard ${{ matrix.sid }}
-    runs-on: ubuntu-latest
-    needs: plan
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJSON(needs.plan.outputs.plan) }}
-    env:
-      QATLAS_TEST_FILES: ${{ matrix.files }}
-      QATLAS_RUN_AQUA: ${{ matrix.aqua }}
-      # PR = fast merge gate (no emit).  push:main = full + emit timing
-      # so the persisted numbers reflect the heavier computation.
-      QATLAS_TEST_PROFILE: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && 'full' || 'fast' }}
-      QATLAS_EMIT: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && '1' || '0' }}
-      # julia-runtest sandboxes Pkg.test, so @__DIR__ points into a
-      # temp copy.  Pin the emit dir to the workspace so upload-artifact
-      # (which scans the workspace) actually finds the emitted files.
-      QATLAS_CIOUT_DIR: ${{ github.workspace }}/test/.ci-out
-    steps:
-      - uses: actions/checkout@v7
-      - uses: julia-actions/setup-julia@v3
-        with:
-          version: '1'
-          arch: x64
-      - uses: julia-actions/cache@v3
-        with:
-          cache-name: shard-${{ matrix.sid }}
-          # The default include-matrix:true serializes the ENTIRE matrix context
-          # (including the multi-KB `files` list) into the cache key, blowing the
-          # 512-char key limit — every restore AND save failed with
-          # "Key Validation Error", so each shard recompiled all deps from
-          # scratch on every run. matrix.sid is already in cache-name.
-          include-matrix: 'false'
-      - uses: julia-actions/julia-buildpkg@v1
-      # Coverage is push:main only, matching the PROFILE/EMIT split above.
-      # It is not merely an extra report: `--code-coverage=...` is part of the
-      # precompile CONFIGURATION, so a coverage run cannot reuse the ordinary
-      # compiled cache, and every test then executes instrumented.  Measured on
-      # a PR shard: 337 s precompile + ~737 s tests.  Codecov is still fed from
-      # push:main.  Keep this in sync with the `coverage` job's `if:`.
-      - uses: julia-actions/julia-runtest@v1
-        with:
-          julia-args: "--threads=auto"
-          coverage: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-      - uses: julia-actions/julia-processcoverage@v1
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      - uses: actions/upload-artifact@v7
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        with:
-          name: coverage-${{ matrix.sid }}
-          path: lcov.info
-          retention-days: 1
-          if-no-files-found: error
-          overwrite: true
-      - name: Upload shard timing (push:main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v7
-        with:
-          name: timing-${{ matrix.sid }}
-          path: test/.ci-out/timings-*.tsv
-          retention-days: 1
-          if-no-files-found: warn
-          overwrite: true
-          include-hidden-files: true
-      - name: Upload shard evidence cards (push:main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v7
-        with:
-          name: evidence-${{ matrix.sid }}
-          path: test/.ci-out/evidence-*.jsonl
-          retention-days: 1
-          if-no-files-found: warn
-          overwrite: true
-          include-hidden-files: true
-
-  record-timings:
-    name: Record timing history
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.result == 'success'
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v8
-        with:
-          path: timing-parts
-          pattern: timing-*
-      - name: Merge into the ci-timings orphan branch (latest value wins)
-        run: |
-          set -euo pipefail
-          mkdir -p merged
-          if git ls-remote --exit-code --heads origin ci-timings >/dev/null 2>&1; then
-            git fetch --depth=1 origin ci-timings
-            git show FETCH_HEAD:timings.tsv > merged/timings.tsv 2>/dev/null || : > merged/timings.tsv
-          else
-            : > merged/timings.tsv
-          fi
-          find timing-parts -name 'timings-*.tsv' -exec cat {} + >> merged/timings.tsv || true
-          awk -F'\t' 'NF==2{t[$1]=$2} END{for (k in t) print k"\t"t[k]}' \
-            merged/timings.tsv | sort > merged/final.tsv
-          rows=$(wc -l < merged/final.tsv)
-          if [ "$rows" -lt 1 ]; then
-            echo "::error::push:main produced 0 timing rows — emit path broken (sandbox/QATLAS_CIOUT_DIR). Failing loudly instead of silent green."
-            exit 1
-          fi
-          echo "Merged timing rows: $rows"
-          tmp=$(mktemp -d)
-          cp merged/final.tsv "$tmp/timings.tsv"
-          cd "$tmp"
-          git init -q
-          git config user.email "ci@qatlas"
-          git config user.name "qatlas-ci"
-          git checkout -q -b ci-timings
-          git add timings.tsv
-          git commit -q -m "ci: refresh test timings ($rows rows) [skip ci]"
-          git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-timings
-
-  record-evidence:
-    name: Record verification evidence
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.result == 'success'
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v8
-        with:
-          path: evidence-parts
-          pattern: evidence-*
-      - name: Merge JSONL cards into the ci-evidence orphan branch
-        run: |
-          set -euo pipefail
-          mkdir -p merged
-          if git ls-remote --exit-code --heads origin ci-evidence >/dev/null 2>&1; then
-            git fetch --depth=1 origin ci-evidence
-            git show FETCH_HEAD:evidence.jsonl > merged/old.jsonl 2>/dev/null || : > merged/old.jsonl
-          else
-            : > merged/old.jsonl
-          fi
-          : > merged/new.jsonl
-          find evidence-parts -name 'evidence-*.jsonl' -exec cat {} + >> merged/new.jsonl || true
-          cat merged/old.jsonl merged/new.jsonl > merged/all.jsonl
-          jq -c -s 'reduce .[] as $c ({}; .[$c.hub + "|" + $c.route] = $c)
-                    | to_entries | sort_by(.key) | map(.value) | .[]' \
-            merged/all.jsonl > merged/evidence.jsonl || : > merged/evidence.jsonl
-          rows=$(wc -l < merged/evidence.jsonl)
-          if [ "$rows" -lt 1 ]; then
-            echo "::error::push:main produced 0 verification cards — emit path broken (sandbox/QATLAS_CIOUT_DIR). Failing loudly instead of silent green."
-            exit 1
-          fi
-          echo "Merged evidence cards: $rows"
-          tmp=$(mktemp -d)
-          cp merged/evidence.jsonl "$tmp/evidence.jsonl"
-          cd "$tmp"
-          git init -q
-          git config user.email "ci@qatlas"
-          git config user.name "qatlas-ci"
-          git checkout -q -b ci-evidence
-          git add evidence.jsonl
-          git commit -q -m "ci: refresh verification evidence ($rows cards) [skip ci]"
-          git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-evidence
-
-  coverage:
-    name: Coverage (aggregated)
-    runs-on: ubuntu-latest
-    needs: test
-    # push:main only — the shards no longer emit lcov on PRs (see the runtest
-    # step), and this job hard-fails on zero artifacts.  `Coverage (aggregated)`
-    # is NOT a required check, so gating it cannot deadlock a PR (unlike the
-    # format-check/paths deadlock we hit before).
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.result == 'success'
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v8
-        with:
-          path: coverage-parts
-          pattern: coverage-*
-      - name: Install lcov
-        run: sudo apt-get update && sudo apt-get install -y lcov
-      - name: Merge per-shard lcov reports
-        run: |
-          set -euo pipefail
-          mapfile -t files < <(find coverage-parts -name 'lcov.info' | sort)
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "::error::No coverage artifacts found"
-            exit 1
-          fi
-          echo "Merging ${#files[@]} lcov reports:"
-          printf '  %s\n' "${files[@]}"
-          args=()
-          for f in "${files[@]}"; do
-            args+=(-a "$f")
-          done
-          lcov "${args[@]}" -o lcov.info
-          summary=$(lcov --summary lcov.info)
-          echo ""
-          echo "=== Merged coverage summary ==="
-          echo "$summary"
-          {
-            echo "## Merged coverage summary"
-            echo "(merged from ${#files[@]} shard artifacts)"
-            echo ""
-            echo '```'
-            echo "$summary"
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-      - uses: codecov/codecov-action@v7
-        with:
-          file: lcov.info
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
-
-  inventory-drift:
-    name: INVENTORY drift guard
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: julia-actions/setup-julia@v3
-        with:
-          version: '1'
-      - name: Static scan must equal committed INVENTORY.jsonl (no test exec)
-        run: julia --startup-file=no test/harness/atlas/test_inventory_drift.jl
-      - name: Atlas taxonomy + registry-parser unit tests
-        run: julia --startup-file=no test/harness/atlas/test_atlas_logic.jl
-
-  all-tests:
-    name: All tests passed
-    runs-on: ubuntu-latest
-    needs: [plan, test, inventory-drift]
-    if: always()
-    steps:
-      - name: Check plan + every shard passed
-        run: |
-          if [ "${{ needs.plan.result }}" != "success" ]; then
-            echo "Shard planning failed: ${{ needs.plan.result }}"
-            exit 1
-          fi
-          plan='${{ needs.plan.outputs.plan }}'
-          if [ -z "$plan" ] || [ "$plan" = "[]" ]; then
-            echo "Plan produced no shards ('$plan') — the test matrix would be empty"
-            exit 1
-          fi
-          if [ "${{ needs.test.result }}" != "success" ]; then
-            echo "One or more test shards failed: ${{ needs.test.result }}"
-            exit 1
-          fi
-          if [ "${{ needs.inventory-drift.result }}" != "success" ]; then
-            echo "INVENTORY drift / parse-fail guard failed: ${{ needs.inventory-drift.result }}"
-            exit 1
-          fi
-          echo "All shards green."
+    permissions:
+      contents: write   # the timing history is pushed to the `ci-timings` orphan branch
+    uses: QAtlasHub/TestShards.jl/.github/workflows/sharded-tests.yml@main
+    with:
+      # 8 on a pull request, 16 on the default branch, as before — a PR is the common case and
+      # extra shards there queue rather than finish sooner. The diagnosis printed on every run
+      # names the knee for this suite.
+      shards: ${{ github.event_name == 'pull_request' && 8 || 16 }}
+      # Also refreshes, which matters more than it looks: a registry that is present but STALE
+      # resolves fine while failing to see anything published since it was last pulled.
+      registries: |
+        General
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

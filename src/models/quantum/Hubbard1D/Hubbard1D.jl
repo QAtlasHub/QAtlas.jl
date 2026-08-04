@@ -278,36 +278,59 @@ end
     fetch(model::Hubbard1D, ::FreeEnergy, ::Infinite; beta, kwargs...) -> Float64
 
 Per-site Helmholtz free energy of the 1D Hubbard chain at finite
-temperature 1/beta, computed by the JKS 1998 quantum-transfer-matrix
-non-linear integral equations (issue #523).
+temperature `1/beta`, from the JKS 1998 quantum-transfer-matrix NLIE
+(issue #523), in its **eq (53)** six-unknown real-axis form.
 
-The solver uses the paper-precise eq (47) NLIE in 3 channels (b, c, c̄)
-on a discretised contour, then evaluates the QTM eigenvalue via paper
-eq (49) third form. At β → 0 the result reproduces the atomic limit
-`atomic_free_energy(β, U, μ)` to within a few percent (Stage C.10
-test guards this).
+# Which equations, and why it matters
+
+eq (51) fixes the real-axis unknowns as six — two boundary values each of
+`b`, `c`, `c̄` — because `Δlog C = log(C⁺/C⁻)` appears in eq (53) both as a
+convolution and as an explicit `±½` boundary term. The route this row used to
+call carried four unknowns, reading `b_bar`/`c_bar` as *barred functions*
+rather than as the `±` boundary index, and could not be corrected in place
+(#798). It is retained in `Hubbard1D_jks_nlie.jl` for comparison but is no
+longer reachable from `fetch`.
+
+# Convention
+
+The atlas writes the interaction as `U n↑n↓` with half filling at `μ = U/2`;
+JKS write it symmetrically, `U(n↓−½)(n↑−½)`, with half filling at `μ = 0`.
+The conversion is applied here by `_jks_paper_mu` and
+`_jks_plain_offset` rather than left to the caller — passing `μ` through
+unconverted is what made the old route solve a *doped* system while comparing
+itself against half-filled ED.
+
+# Accuracy
+
+Measured against ED (`N = 6`, PBC, converged in `N`) at `U = 4`, half filling:
+within **1 % for `β ≤ 0.1`**, degrading to ≈ 15 % by `β = 1`. It reproduces the
+parameter-free high-temperature limit `f → −log(4)/β`, and returns a finite
+value across the whole range where the old route returned `NaN` from `β ≈ 0.3`.
+
+The remaining low-temperature drift is **not** a resolution artifact — refining
+the solver's own grids moves the `β = 1` answer by 2e-4 while it sits 0.46 from
+ED — so `#798` stays open and the row is registered `status = :approx` with that
+measurement in its `error_order`.
 
 # Keyword arguments
 
-- `beta::Real`: inverse temperature (β > 0 required).
-- `H::Real = 0`: external magnetic field (couples to magnetisation).
-- `grid_N::Int = 64`, `x_max::Real = 8.0`: discretisation knobs.
-- `alpha::Real = m.U / 6`: contour shift in the b channel
-  (0 < α < η = U/4).
-- `tol::Real = 1e-6`, `maxiter::Int = 40`: Newton convergence knobs.
+- `beta::Real`: inverse temperature (`β > 0` required).
+- `H::Real = 0`: external magnetic field.
+- `Nw::Int = 96`, `Nn::Int = 48`: wide- and narrow-contour grid sizes.
+- `x_max::Real = 32.0`: contour half-width.
+- `form::Symbol = :cut`: free-energy evaluator form.
 
 # Notes
 
-Half-filling (μ = U/2) is the well-tested regime. Other fillings
-work as long as the NLIE converges (the Newton solver does not warn
-on non-convergence; the result is `NaN` in that case).
+`H = 0` and `μ = U/2` (half filling) only. Returns `NaN` if the `β`-continuation
+does not reach `beta`.
 
 # References
 
 - JKS 1998 = Jüttner, Klümper, Suzuki, *Nucl. Phys. B* **522**, 471 (1998),
-  arXiv:cond-mat/9711310.
-- Paper eqs (23), (47), (48), (49), (54), (55) all implemented per PDF
-  (Stage C.22c paper-precise rewrite + Stage C.24 FE evaluator fix).
+  arXiv:cond-mat/9711310. Equations transcribed from the **arXiv LaTeX source**:
+  the PDF text layer drops overlines, which is how `K1bar` was read as `K1` and
+  `c̄` as `c` in the superseded route.
 """
 function fetch(
     m::Hubbard1D,
@@ -315,16 +338,10 @@ function fetch(
     ::Infinite;
     beta::Real,
     H::Real=0.0,
-    grid_N::Int=128,
+    Nw::Int=96,
+    Nn::Int=48,
     x_max::Real=32.0,
-    alpha::Real=(m.U / 6),
-    tol::Real=1e-6,
-    maxiter::Int=40,
-    nonuniform::Bool=false,
-    x_inner::Real=2.0,
-    N_inner::Int=80,
-    N_outer::Int=24,
-    solver::Symbol=:full_newton_continuation,
+    form::Symbol=:cut,
     kwargs...,
 )
     beta > 0 || throw(
@@ -334,21 +351,47 @@ function fetch(
         "fetch(Hubbard1D, FreeEnergy, Infinite) received unrecognized kwargs; ignored.",
         kwargs=collect(keys(kwargs))
     )
-    return Hubbard1DJKSNLIE.hubbard1d_jks_free_energy(
-        m.t,
-        m.U,
-        m.μ,
-        beta;
-        H=H,
-        grid_N=grid_N,
-        x_max=x_max,
-        alpha=alpha,
-        tol=tol,
-        maxiter=maxiter,
-        nonuniform=nonuniform,
-        x_inner=x_inner,
-        N_inner=N_inner,
-        N_outer=N_outer,
-        solver=solver,
+    # The guards the eq (47) route carried, restored.  Rewiring to eq (53)
+    # dropped them, and the row supports NEITHER case: the solver enforces the
+    # b/b̄ particle-hole symmetry as b̄ = b, which is exact only at H = 0 and half
+    # filling.  Without these it returns a plausible number for both — a silent
+    # wrong answer where a refusal belongs, which is the shape of #798 itself.
+    iszero(H) || throw(
+        DomainError(
+            H,
+            "Hubbard1D FreeEnergy@Infinite (JKS eq 53) supports H = 0 only: the " *
+            "solver enforces b̄ = b, which is the particle-hole symmetry of the " *
+            "H = 0 half-filled point and is not exact away from it.",
+        ),
     )
+    _hubbard1d_check_half_filling(m)
+    return Hubbard1DJKSNLIE.hubbard1d_jks53_free_energy(
+        m.t, m.U, _jks_paper_mu(m.μ, m.U), beta; H=H, Nw=Nw, Nn=Nn, x_max=x_max, form=form
+    ) - _jks_plain_offset(m.U)
 end
+
+"""
+    _jks_paper_mu(mu_plain, U) -> Float64
+    _jks_plain_offset(U) -> Float64
+
+Convert between the atlas's Hubbard convention and the JKS paper's.
+
+The atlas writes the interaction as `U n↑ n↓` and puts half filling at
+`μ = U/2`.  JKS write it **symmetrically**, `U (n↓ − ½)(n↑ − ½)`, which puts
+their half filling at `μ = 0` and shifts the free energy:
+
+    f_paper(μ) = f_plain(μ + U/2) + U/4
+    ⇒ f_plain(μ) = f_paper(μ − U/2) − U/4
+
+This is the whole of one of #798's four defects, and the reason it stayed
+hidden for so long is that it is a *silent* mismatch: the old route passed
+`μ = U/2` straight through as though it were the paper's half filling, so it
+solved a DOPED system and compared it against half-filled ED.  Nothing errored;
+the numbers were merely wrong by the doping energy.
+
+Written as two functions rather than as a comment on the call site precisely
+because a convention that lives in prose is the one that gets mismatched — this
+one is executable, and `test_hubbard1d_jks53_wiring.jl` asserts the round trip.
+"""
+_jks_paper_mu(mu_plain::Real, U::Real) = float(mu_plain) - float(U) / 2
+_jks_plain_offset(U::Real) = float(U) / 4

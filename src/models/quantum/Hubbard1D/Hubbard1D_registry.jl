@@ -73,47 +73,45 @@
     # prose of `notes` where no query could see it (the same over-claim #792
     # fixed elsewhere).
     status = :approx,
-    valid_domain="beta <= 1e-3 at H = 0, mu = U/2 (half filling), t = 1, where " *
-                 "the ED comparison agrees to within 1%% across U in {2, 4, 8}. " *
-                 "That agreement is NOT evidence the equations are right there: " *
-                 "MEASURED, the spurious imaginary part of f is ~0.28 at every " *
-                 "beta from 1e-5 to 0.1, and only looks small because |Re f| ~ " *
-                 "1/beta diverges. Outside: deviation from ED by beta ~ 0.1, and " *
-                 "no value at all for beta >= 0.3, where the beta-continuation " *
-                 "stalls and `fetch` returns NaN.",
-    error_order="NOT a convergent discretisation error. The real-axis unknowns " *
-                "are the FOUR (b, b_bar, c, c_bar) where eq (51)-(53) require " *
-                "SIX -- two boundary values each of b, c, c_bar -- so the +- " *
-                "index has been collapsed into the bar index. Delta log C := " *
-                "log(C^+/C^-) and the +- 1/2 Delta log terms of eq (53) have no " *
-                "representation in that state, and the c-channel convolution is " *
-                "consequently taken over the full [-x_max, x_max] grid where " *
-                "eq (47) restricts it to a contour around [-1, 1]. MEASURED at " *
-                "beta = 0.1: 74%% of the c-channel convolution comes from " *
-                "|x| > 1, only 4 of 128 grid points lie inside [-1, 1], and " *
-                "refining grid_N 32 -> 256 moves the answer non-monotonically " *
-                "instead of converging.",
+    valid_domain="High-temperature. MEASURED against ED (N = 6, PBC): within " *
+                 "1%% for beta <= 0.1 at U = 4, half filling, degrading to ~15%% " *
+                 "by beta = 1. Unlike the eq (47) route it replaced, it returns " *
+                 "a finite value across that whole range rather than NaN from " *
+                 "beta ~ 0.3 upward. H = 0 and mu = U/2 (half filling) only.",
+    error_order="Relative to ED (N = 6, PBC, converged in N), MEASURED at " *
+                "U = 4, half filling: 0.14%% at beta = 0.05, 0.52%% at 0.1, " *
+                "1.9%% at 0.2, 3.7%% at 0.3, 7.8%% at 0.5, 14.6%% at 1.0. The " *
+                "error GROWS with beta and is NOT a discretisation artifact: " *
+                "refining the solver's own grids (Nw/Nn/x_max from 96/48/32 to " *
+                "256/128/64) moves the beta = 1 answer only from -2.669123 to " *
+                "-2.668871 while ED gives -3.125427. So it is the formulation " *
+                "or its implementation, and #798 stays open.",
     reliability=:medium,
-    tested_in="test/models/quantum/Hubbard1D/test_hubbard1d_jks_paper_precise.jl",
+    tested_in=[
+        "test/models/quantum/Hubbard1D/test_hubbard1d_jks53_wiring.jl",
+        "test/models/quantum/Hubbard1D/test_hubbard1d_jks_eq53.jl",
+    ],
     references=["JuttnerKlumperSuzuki1998"],
     notes=(
-        "Paper-precise eq (47) NLIE in 3 channels (b, c, c̄). FE evaluator uses " *
-        "Chebyshev-Gauss quadrature on the cut [-1, 1] (handles 1/sqrt(1-x^2) " *
-        "singularity exactly) + paper page-14 direct-form log Λ. " *
-        "Currently SUPPORTS H=0 AND μ = U/2 (half-filling) ONLY: the b/b̄ " *
-        "particle-hole symmetry is enforced in the solver via b̄ = b, which " *
-        "is exact at H=0 half-filling and breaks for H ≠ 0 or off-half-filling. " *
-        "Kernels are the three eq (38) functions K1, K1bar, K2. Mid-T " *
-        "(β ~ 0.1) deviation from ED is a formula-level bug, tracked in #798: " *
-        "the residuals still convolve the c channel with K1 where eq (47) says " *
-        "K1bar, use log(1+b) where it says log(1+1/b), and carry one boundary " *
-        "value per function where eq (53) needs two. CONVENTION: the JKS paper's " *
-        "Coulomb term is symmetric, U(n_down-1/2)(n_up-1/2), so ITS half filling " *
-        "is mu = 0 and f_paper(mu) = f_plain(mu+U/2) + U/4 relative to the plain " *
-        "U n_up n_down form the Lieb-Wu rows above use. This route is fed " *
-        "mu = U/2 as though it were the paper's half filling, so it has been " *
-        "solving a doped system and comparing it against half-filled ED. A " *
-        "corrected eq (53) solver lives in Hubbard1D_jks_eq53.jl and reproduces " *
-        "the closed-form high-T limit; wiring this row to it is the #798 followup."
+        "eq (53) NLIE -- the SIX-unknown real-axis form (two boundary values " *
+        "each of b, c, cbar), transcribed from the arXiv LaTeX source. " *
+        "Supersedes the eq (47) route this row used to call, which is retained " *
+        "in Hubbard1D_jks_nlie.jl for comparison but is no longer reachable " *
+        "from `fetch`. That route carried FOUR defects at once (#798): it " *
+        "convolved the c channel with K1 where the paper says K1bar, used " *
+        "log(1+b) where it says log(1+1/b), collapsed the +- boundary index " *
+        "into the bar index so eq (51) needed six unknowns and it had four, " *
+        "and -- dominating the error -- was fed mu = U/2 as though it were the " *
+        "PAPER's half filling. CONVENTION, now executable rather than prose " *
+        "(`_jks_paper_mu` / `_jks_plain_offset` in Hubbard1D.jl): the JKS " *
+        "Coulomb term is symmetric, U(n_down-1/2)(n_up-1/2), so ITS half " *
+        "filling is mu = 0 and f_paper(mu) = f_plain(mu+U/2) + U/4. The old " *
+        "route passed mu straight through, i.e. solved a DOPED system and " *
+        "compared it against half-filled ED. That mismatch was silent -- " *
+        "nothing errored, the numbers were merely wrong by the doping energy. " *
+        "IMPROVEMENT, NOT CLOSURE: eq (53) reproduces the parameter-free " *
+        "high-T limit f -> -log(4)/beta and returns a finite value for every " *
+        "beta where the old route gave NaN, but see `error_order` for the " *
+        "low-T drift that remains."
     ),
 )

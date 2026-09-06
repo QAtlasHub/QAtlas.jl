@@ -212,6 +212,7 @@ export XXZ1D                                            # v0.13 new model
 export KitaevHoneycomb                                  # spin-½ Kitaev honeycomb
 export Kitaev1D                                         # 1D p-wave Majorana wire (Kitaev 2001)
 export SSH                                              # 1D Su-Schrieffer-Heeger dimerised chain (1979)
+export RiceMele                                         # 1D dimerised chain + staggered potential (1982)
 export ToricCode                                         # Kitaev 2003 Z₂ surface code
 export TightBindingSpectrum
 export TightBindingChecksum, TightBindingMaxEnergy  # scalar invariants for verify()
@@ -538,6 +539,8 @@ include("models/quantum/Kitaev1D/Kitaev1D_thermal.jl")
 include("models/quantum/Kitaev1D/Kitaev1D_registry.jl")  # populates REGISTRY for Kitaev1D
 include("models/quantum/SSH/SSH.jl")
 include("models/quantum/SSH/SSH_registry.jl")  # populates REGISTRY for SSH
+include("models/quantum/RiceMele/RiceMele.jl")
+include("models/quantum/RiceMele/RiceMele_registry.jl")  # populates REGISTRY for RiceMele
 include("models/quantum/XXZ/XXZ.jl")
 include("models/quantum/XXZ/XXZ_bethe.jl")     # Yang-Yang single integral, used by XXZ.jl dispatch
 include("models/quantum/XXZ/XXZ_spinon.jl")

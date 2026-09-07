@@ -293,3 +293,30 @@ end
         end
     end
 end
+
+@testset "SSH — the zero mode the half-spectrum used to double-count" begin
+    # v = 0 is N−1 decoupled dimers plus two isolated end sites, so the branch is
+    # [0, |w|, …] and the energy density −(N−1)|w|/2N. Both closed forms, and both wrong
+    # under the old `filter(non-negative)[1:N]`.
+    for (N, w) in ((4, 1.0), (7, 0.6), (12, 1.5))
+        half = fetch(SSH(; v=0.0, w=w), ExactSpectrum(), OBC(N))
+        @test length(half) == N
+        @test half ≈ vcat(0.0, fill(abs(w), N - 1)) atol = 1.0e-12
+        @test -sum(half) / (2N) ≈ -(N - 1) * abs(w) / (2N) atol = 1.0e-12
+    end
+    # Ordinary parameters, nothing tuned: the edge splitting is ~(v/w)^N and crosses the
+    # old 1e-12 filter between N = 28 and N = 30, so the same defect appears purely from
+    # system size. (v, w, N) = (0.4, 1.0, 40) is already used elsewhere in this file.
+    for N in (30, 40, 60)
+        half = fetch(SSH(; v=0.4, w=1.0), ExactSpectrum(), OBC(N))
+        @test length(half) == N
+        @test count(<(1.0e-9), half) == 1        # the old code returned 2
+        @test half[1] < 1.0e-9
+    end
+    # w = 0: fully dimerised too, but no zero mode. The control.
+    for N in (4, 9)
+        half = fetch(SSH(; v=1.0, w=0.0), ExactSpectrum(), OBC(N))
+        @test half ≈ fill(1.0, N) atol = 1.0e-12
+        @test -sum(half) / (2N) ≈ -0.5 atol = 1.0e-12
+    end
+end

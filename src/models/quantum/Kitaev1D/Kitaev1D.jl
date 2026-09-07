@@ -106,10 +106,13 @@ sorted ascending.  The BdG zero modes of the topological phase (lifted
 by exponentially small N⁻¹ corrections) appear as the smallest entry.
 
 This is a strict generalisation of `_tfim_bdg_spectrum`: at
-`(μ, t, Δ) = (-2h, J, J)` the matrix coincides with the TFIM BdG matrix
-and the returned spectrum matches `_tfim_bdg_spectrum(N, J, h)`.
+`(μ, t, Δ) = (-2h, J, J)` the matrix coincides with the TFIM BdG matrix.
+The spectra agree on the top `length(_tfim_bdg_spectrum(N, J, h))` entries,
+not entry for entry — TFIM filters strictly positive, so where a zero mode
+is exact it returns `N-1` values and this returns `N`.
 """
 function _kitaev1d_bdg_spectrum(N::Int, μ::Float64, t::Float64, Δ::Float64)::Vector{Float64}
+    N >= 1 || throw(ArgumentError("Kitaev1D: need N ≥ 1 sites; got N = $N"))
     A = zeros(N, N)
     @inbounds for i in 1:N
         A[i, i] = -μ
@@ -127,13 +130,18 @@ function _kitaev1d_bdg_spectrum(N::Int, μ::Float64, t::Float64, Δ::Float64)::V
 
     H_bdg = [A B; -B -A]
     vals = eigvals(Symmetric(H_bdg))
-    # Drop the negative half (eigenvalues come in ± pairs); keep the
-    # non-negative branch even if one is numerically ~0 (Majorana zero
-    # mode in the topological phase) — TFIM filters at 1e-10, but here
-    # the topological zero mode is *the* observable we need to expose.
-    pos = filter(v -> v >= -1e-12, vals)
-    sort!(pos)
-    return pos[1:N]
+    sort!(vals)
+    # The UPPER half: the quasiparticle branch, Majorana zero included. Not
+    # `filter(non-negative)[1:N]`, which at μ = 0, t = Δ keeps both members of the exact
+    # zero pair and drops a level.
+    half = vals[(N + 1):(2N)]
+    # Taking a half only means anything if the spectrum is ± symmetric, which the BdG
+    # structure gives. Assert it, so a future matrix that breaks it says so.
+    scale = max(1.0, maximum(abs, vals))
+    maximum(abs, vals[1:N] .+ reverse(half)) < 1.0e-8 * scale || error(
+        "_kitaev1d_bdg_spectrum: spectrum is not ± symmetric; μ = $μ, t = $t, Δ = $Δ, N = $N",
+    )
+    return half
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

@@ -112,13 +112,17 @@ function _ssh_obc_spectrum(N::Int, v::Float64, w::Float64)::Vector{Float64}
         H[j + 1, j] = t
     end
     vals = eigvals(Symmetric(H))
-    pos = filter(e -> e >= -1e-12, vals)
-    sort!(pos)
-    length(pos) >= N || error(
-        "_ssh_obc_spectrum: chiral symmetry gave $(length(pos)) non-negative eigenvalues, " *
-        "expected ≥ $N (numerical degeneracy near a zero mode? v = $v, w = $w, N = $N).",
-    )
-    return pos[1:N]
+    sort!(vals)
+    # The UPPER half. Not `filter(non-negative)[1:N]`, which at v = 0 keeps both members
+    # of the exact zero pair and drops a particle level.
+    half = vals[(N + 1):(2N)]
+    # Taking a half only means anything if the spectrum is ± symmetric, which chiral
+    # symmetry gives structurally. Assert it, so a future matrix that breaks it says so
+    # instead of returning a plausible wrong set.
+    scale = max(1.0, maximum(abs, vals))
+    maximum(abs, vals[1:N] .+ reverse(half)) < 1.0e-8 * scale ||
+        error("_ssh_obc_spectrum: spectrum is not ± symmetric; v = $v, w = $w, N = $N")
+    return half
 end
 
 # |q(k)| = √(v² + w² + 2 v w cos k), the upper band energy at momentum k.

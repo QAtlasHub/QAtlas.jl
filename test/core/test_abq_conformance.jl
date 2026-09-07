@@ -302,6 +302,40 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :CasimirCentralCharge => "both open slots (`L`, `dE = e₀(L) − e_∞`) are supplied \
                               finite-size values, and the only hub that materializes \
                               the relation (XXZ1D/Infinite) has no L to give them.",
+
+    # The 39-hub count is an artefact of the ONE typed slot. `gap::MassGap` is computed
+    # across the atlas, but `v`, `w` and `Δ` are Rice–Mele's own fields and no other hub
+    # can supply them, so the relation is instantiable on RiceMele alone.
+    #
+    # And there it restates the implementation: `MassGap` at `Infinite` IS
+    # `√((|v|−|w|)² + Δ²)`, evaluated in closed form. The same shape as `FreeEnergyFromZ`
+    # on IsingSquare, and the same verdict.
+    #
+    # The independent route is `MassGap` at OBC, from a dense `2N × 2N` diagonalization
+    # that never touches the closed form. It is not an identity at finite N, and in half
+    # the parameter space it is not even a limit. MEASURED, |OBC(N) − Infinite|:
+    #
+    #     (v, w, Δ)            N=16     N=64     N=256    N=1024
+    #     (1.0, 0.4, 0.0)      1.0e-2   7.6e-4   5.0e-5   3.1e-6
+    #     (1.0, 0.4, 0.3)      9.4e-3   6.8e-4   4.4e-5   2.8e-6
+    #     (1.0, 0.9, 0.05)     5.8e-2   7.1e-3   5.6e-4   3.7e-5
+    #     (0.4, 1.0, 0.3)      0.37     0.37     0.37     0.37
+    #
+    # The first three converge like 1/N². The fourth does not converge at all: for
+    # |w| > |v| the OBC gap is pinned by the edge states to exactly Δ (0.2999999999999994
+    # at N = 1024, N-independent to 13 digits), so an edge wired on OBC would assert a
+    # falsehood over the whole topological phase rather than lose accuracy in it.
+    #
+    # Closing this needs a finite-N gap the relation can be stated AT, not extrapolated
+    # to. Until then the relation is checked directly, against independently chosen
+    # numbers and with a discriminating control, in `test/relations/test_model_specific.jl`.
+    :RiceMeleGapIdentity => "materializable by type wherever `MassGap` is computed, but \
+                             `v`, `w`, `Δ` are RiceMele's own fields, so RiceMele is the \
+                             only hub that can instantiate it — and there `MassGap` at \
+                             `Infinite` is the closed form the relation restates. The \
+                             independent route (OBC, dense diagonalization) converges \
+                             only as 1/N², and not at all for |w| > |v|; see the table \
+                             above.",
 )
 
 # Every identity-slot kind the accounting knows how to classify.  A slot that is

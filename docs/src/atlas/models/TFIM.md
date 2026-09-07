@@ -26,8 +26,8 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | 🟢 corroborated-at-p | 32 |
 | 🔵 coherent | 10 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 23 |
-| **total claimed hubs** | **65** |
+| 🟠 uncorroborated-but-feasible | 24 |
+| **total claimed hubs** | **66** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `majorana_evolution`, `pfaffian`
 
@@ -44,6 +44,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`DynamicalSpinStructureFactor`](../quantities/DynamicalSpinStructureFactor.md) | — | — | 🔵 [hub](../hubs/TFIM_DynamicalSpinStructureFactor_Infinite.md) |
 | [`Energy`](../quantities/Energy.md) | 🟢 [hub](../hubs/TFIM_Energy_OBC.md) | 🟢 [hub](../hubs/TFIM_Energy_PBC.md) | 🟢 [hub](../hubs/TFIM_Energy_Infinite.md) |
 | [`EnergyLocal`](../quantities/EnergyLocal.md) | 🟠 [hub](../hubs/TFIM_EnergyLocal_OBC.md) | — | — |
+| [`FermionicEntanglementEntropy`](../quantities/FermionicEntanglementEntropy.md) | 🟠 [hub](../hubs/TFIM_FermionicEntanglementEntropy_OBC.md) | — | — |
 | [`FidelitySusceptibility`](../quantities/FidelitySusceptibility.md) | 🟢 [hub](../hubs/TFIM_FidelitySusceptibility_OBC.md) | — | 🟢 [hub](../hubs/TFIM_FidelitySusceptibility_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_OBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_PBC.md) | 🟢 [hub](../hubs/TFIM_FreeEnergy_Infinite.md) |
 | [`GGEValue`](../quantities/GGEValue.md) | — | — | 🔵 [hub](../hubs/TFIM_GGEValue_Infinite.md) |

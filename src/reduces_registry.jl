@@ -20,3 +20,4 @@
 @reduces KitaevHeisenberg KitaevHoneycomb regime = "K-only limit J = Γ = 0; the K-J-Γ honeycomb model becomes the exactly-solvable Kitaev honeycomb model"
 @reduces S1XXZ1D S1Heisenberg1D regime = "isotropic point Δ = 1; the spin-1 XXZ chain becomes the spin-1 Heisenberg (Haldane) chain"
 @reduces S1AnisotropicD1D S1Heisenberg1D regime = "zero single-ion anisotropy D = 0; the anisotropic spin-1 chain becomes the spin-1 Heisenberg (Haldane) chain"
+@reduces RiceMele SSH regime = "staggered potential Δ = 0; the Rice-Mele chain becomes the SSH chain"

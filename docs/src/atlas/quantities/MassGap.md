@@ -7,8 +7,8 @@ All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cel
 
 ## Coverage
 
-- **Models with this quantity registered**: 26
-- **Total hubs (Model, BC pairs)**: 37
+- **Models with this quantity registered**: 27
+- **Total hubs (Model, BC pairs)**: 39
 - **Methods** (derived from `@register`): `analytic`, `bdg`, `closed_form`, `delegation`, `dense_ed`, `dmrg_reference`, `kitaev_delegation`, `linear_phonon`, `literature_value`, `s1_heisenberg_delegation`, `single_particle_diagonalization`
 - **Universality classes** (where applicable): `Ising`
 
@@ -37,10 +37,11 @@ All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cel
 | [`LongRangeXY1D`](../models/LongRangeXY1D.md) | — | — | 🟢 [hub](../hubs/LongRangeXY1D_MassGap_Infinite.md) |
 | [`MajumdarGhosh`](../models/MajumdarGhosh.md) | — | — | ⚪ [hub](../hubs/MajumdarGhosh_MassGap_Infinite.md) |
 | [`MixedFieldIsing1D`](../models/MixedFieldIsing1D.md) | — | — | 🔵 [hub](../hubs/MixedFieldIsing1D_MassGap_Infinite.md) |
+| [`RiceMele`](../models/RiceMele.md) | 🔵 [hub](../hubs/RiceMele_MassGap_OBC.md) | — | 🟢 [hub](../hubs/RiceMele_MassGap_Infinite.md) |
 | [`S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) | — | — | 🔵 [hub](../hubs/S1AnisotropicD1D_MassGap_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MassGap_OBC.md) | — | ⚪ [hub](../hubs/S1Heisenberg1D_MassGap_Infinite.md) |
 | [`S1XXZ1D`](../models/S1XXZ1D.md) | — | — | 🔵 [hub](../hubs/S1XXZ1D_MassGap_Infinite.md) |
-| [`SSH`](../models/SSH.md) | 🟠 [hub](../hubs/SSH_MassGap_OBC.md) | — | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
+| [`SSH`](../models/SSH.md) | 🟢 [hub](../hubs/SSH_MassGap_OBC.md) | — | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
 | [`SchwingerModel`](../models/SchwingerModel.md) | — | — | 🟢 [hub](../hubs/SchwingerModel_MassGap_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_MassGap_OBC.md) | 🟠 [hub](../hubs/TFIM_MassGap_PBC.md) | 🟢 [hub](../hubs/TFIM_MassGap_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |

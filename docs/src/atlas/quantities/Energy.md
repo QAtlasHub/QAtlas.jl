@@ -7,9 +7,9 @@ All `(Model, BC)` hubs `src` claims for the **`Energy`** observable.  Empty cell
 
 ## Coverage
 
-- **Models with this quantity registered**: 31
-- **Total hubs (Model, BC pairs)**: 43
-- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `numerical`, `quadgk`, `s1_heisenberg_delegation`, `variational_reference`, `xxz_delegation`
+- **Models with this quantity registered**: 32
+- **Total hubs (Model, BC pairs)**: 45
+- **Methods** (derived from `@register`): `analytic`, `bdg`, `bethe_ansatz`, `central_diff`, `delegation`, `dense_ed`, `dmrg_reference`, `exact_dimer`, `literature_value`, `matter_free_fermion`, `numerical`, `quadgk`, `s1_heisenberg_delegation`, `single_particle_diagonalization`, `variational_reference`, `xxz_delegation`
 - **Universality classes** (where applicable): `Ising`, `MeanField`
 
 **Top references** (by hub count):
@@ -41,6 +41,7 @@ All `(Model, BC)` hubs `src` claims for the **`Energy`** observable.  Empty cell
 | [`KitaevHoneycomb`](../models/KitaevHoneycomb.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_OBC.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_PBC.md) | ⚪ [hub](../hubs/KitaevHoneycomb_Energy_Infinite.md) |
 | [`MajumdarGhosh`](../models/MajumdarGhosh.md) | — | 🟠 [hub](../hubs/MajumdarGhosh_Energy_PBC.md) | 🟠 [hub](../hubs/MajumdarGhosh_Energy_Infinite.md) |
 | [`PXP1D`](../models/PXP1D.md) | — | — | ⚪ [hub](../hubs/PXP1D_Energy_Infinite.md) |
+| [`RiceMele`](../models/RiceMele.md) | 🟠 [hub](../hubs/RiceMele_Energy_OBC.md) | — | 🟠 [hub](../hubs/RiceMele_Energy_Infinite.md) |
 | [`S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) | — | — | 🔵 [hub](../hubs/S1AnisotropicD1D_Energy_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_OBC.md) | — | 🟢 [hub](../hubs/S1Heisenberg1D_Energy_Infinite.md) |
 | [`S1XXZ1D`](../models/S1XXZ1D.md) | — | — | 🔵 [hub](../hubs/S1XXZ1D_Energy_Infinite.md) |

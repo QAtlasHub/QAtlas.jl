@@ -17,6 +17,13 @@ using QAtlas:
     AlmeidaThoulessStability,
     DrudeMobility,
     SingleBandHall,
+    RiceMele,
+    RiceMeleGapIdentity,
+    RiceMeleTotalHopping,
+    RiceMeleDimerisation,
+    MassGap,
+    Infinite,
+    fetch,
     MODEL_SPECIFIC_RELATIONS,
     EdwardsAndersonParameter
 # Reach AbstractQAtlas THROUGH QAtlas (which `import`s the module for its
@@ -43,6 +50,9 @@ const ABQ = QAtlas.AbstractQAtlas
         AlmeidaThoulessStability,
         DrudeMobility,
         SingleBandHall,
+        RiceMeleGapIdentity,
+        RiceMeleTotalHopping,
+        RiceMeleDimerisation,
     )
         push!(declared, T)
     end
@@ -84,4 +94,36 @@ end
     @test ABQ.slack(AlmeidaThoulessStability(); βJ=0.5, sech4_avg=1.0) > 0   # RS stable
     @test ABQ.slack(AlmeidaThoulessStability(); βJ=1.0, sech4_avg=1.0) == 0  # on the AT line
     @test ABQ.slack(AlmeidaThoulessStability(); βJ=2.0, sech4_avg=1.0) < 0   # RSB
+end
+
+@testset "Rice-Mele relations" begin
+    # The gap identity, checked against the model's own fetch rather than a re-typed
+    # closed form — this is the relation earning its keep as a second route.
+    for (v, w, Δ) in
+        ((0.75, 0.25, 0.1), (0.25, 0.75, 0.1), (-0.5, 0.7, 0.2), (1.0, 1.0, 0.3))
+        gap = fetch(RiceMele(; v, w, Δ), MassGap(), Infinite())
+        @test ABQ.residual(RiceMeleGapIdentity(); gap=gap, v=v, w=w, Δ=Δ) ≈ 0 atol = 1.0e-13
+    end
+    # |v| − |w| and not v − w: the two differ exactly when vw < 0, which is where a
+    # re-typed closed form would have been wrong.
+    @test ABQ.residual(
+        RiceMeleGapIdentity(); gap=sqrt(0.2^2 + 0.3^2), v=-0.5, w=0.7, Δ=0.3
+    ) ≈ 0 atol = 1.0e-14
+    @test ABQ.residual(
+        RiceMeleGapIdentity(); gap=sqrt(1.2^2 + 0.3^2), v=-0.5, w=0.7, Δ=0.3
+    ) > 1.0
+
+    # The (hx, hy) bridge solves in both directions, which is the point of declaring it.
+    for (hx, hy) in ((1.0, 0.5), (0.8, -0.3), (2.0, 2.0))
+        v, w = (hx + hy) / 2, (hx - hy) / 2
+        @test ABQ.residual(RiceMeleTotalHopping(); hx=hx, v=v, w=w) ≈ 0 atol = 1.0e-14
+        @test ABQ.residual(RiceMeleDimerisation(); hy=hy, v=v, w=w) ≈ 0 atol = 1.0e-14
+        @test ABQ.solve(RiceMeleTotalHopping(), Val(:v); hx=hx, w=w) ≈ v
+        @test ABQ.solve(RiceMeleDimerisation(), Val(:hy); v=v, w=w) ≈ hy
+    end
+    # And the two together reproduce the paper's band gap through the relation, not
+    # through the model: 2√(hy² + hz²) at hx=1, hy=0.5, hz=0.1.
+    v = ABQ.solve(RiceMeleTotalHopping(), Val(:v); hx=1.0, w=0.25)
+    @test v ≈ 0.75
+    @test 2 * sqrt(0.5^2 + 0.1^2) ≈ 1.019803902718557 atol = 1.0e-12
 end

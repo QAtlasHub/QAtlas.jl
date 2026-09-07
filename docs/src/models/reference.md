@@ -48,6 +48,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`MixedFieldIsing1D`](../atlas/models/MixedFieldIsing1D.md) | Pfeuty1970, McCoyWu1978 |
 | [`PXP1D`](../atlas/models/PXP1D.md) | TurnerMichailidisAbaninSerbynPapic2018, LinMotrunich2019, IadecolaSchecterXu2019, Surace2020 |
 | [`PpIp2DSC`](../atlas/models/PpIp2DSC.md) | ReadGreen2000, Kitaev2006 |
+| [`RiceMele`](../atlas/models/RiceMele.md) | RiceMele1982 |
 | [`S1AnisotropicD1D`](../atlas/models/S1AnisotropicD1D.md) | WhiteHuse1993, ChenHidaSanctuary2003, TzengYang2008 |
 | [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | WhiteHuse1993 |
 | [`S1XXZ1D`](../atlas/models/S1XXZ1D.md) | WhiteHuse1993, Schulz1986, TzengYang2008 |

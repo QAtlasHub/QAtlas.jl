@@ -5,7 +5,7 @@
 
 Grouped by the `route` the verify card used. A hub appears under each mechanism it has a card for.
 
-## `(no card)` (155)
+## `(no card)` (158)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/SpinCorrelation/Infinite`](../hubs/AKLT1D_SpinCorrelation_Infinite.md) — uncorroborated-but-feasible
@@ -75,13 +75,14 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](../hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`MajumdarGhosh/Energy/Infinite`](../hubs/MajumdarGhosh_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`MajumdarGhosh/Energy/PBC`](../hubs/MajumdarGhosh_Energy_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`RiceMele/Energy/Infinite`](../hubs/RiceMele_Energy_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RiceMele/Energy/OBC`](../hubs/RiceMele_Energy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/ConnectedSpinCorrelation/OBC`](../hubs/S1Heisenberg1D_ConnectedSpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/EnergyLocal/OBC`](../hubs/S1Heisenberg1D_EnergyLocal_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/LocalMagnetization/OBC`](../hubs/S1Heisenberg1D_LocalMagnetization_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/MassGap/OBC`](../hubs/S1Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/SpinCorrelation/OBC`](../hubs/S1Heisenberg1D_SpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/FreeEnergy/Infinite`](../hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/UniversalityClass/Infinite`](../hubs/SSH_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
@@ -96,6 +97,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/DynamicalCorrelation/OBC`](../hubs/TFIM_DynamicalCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/FermionicEntanglementEntropy/OBC`](../hubs/TFIM_FermionicEntanglementEntropy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LightconeSpinCorrelation/OBC`](../hubs/TFIM_LightconeSpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LocalMagnetization/OBC`](../hubs/TFIM_LocalMagnetization_OBC.md) — uncorroborated-but-feasible
@@ -132,7 +134,8 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟠 [`TightBindingV1D/HighHarmonicAmplitude/Infinite`](../hubs/TightBindingV1D_HighHarmonicAmplitude_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](../hubs/ToricCode_AnyonMutualStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](../hubs/ToricCode_AnyonSelfStatistics_Infinite.md) — cited-only
 - ⚪ [`ToricCode/Energy/Infinite`](../hubs/ToricCode_Energy_Infinite.md) — cited-only
 - 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
@@ -243,7 +246,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 
 - 🟢 [`SixVertex/FreeEnergy/Infinite`](../hubs/SixVertex_FreeEnergy_Infinite.md) — corroborated-at-p
 
-## `limiting_case` (62)
+## `limiting_case` (64)
 
 - 🟢 [`CurieWeissIsing/FreeEnergy/Infinite`](../hubs/CurieWeissIsing_FreeEnergy_Infinite.md) — corroborated-at-p
 - 🟢 [`CurieWeissIsing/SpecificHeat/Infinite`](../hubs/CurieWeissIsing_SpecificHeat_Infinite.md) — corroborated-at-p
@@ -268,6 +271,8 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/Infinite`](../hubs/KitaevHoneycomb_ThermalEntropy_Infinite.md) — coherent
 - 🔵 [`KitaevHoneycomb/ThermalEntropy/OBC`](../hubs/KitaevHoneycomb_ThermalEntropy_OBC.md) — coherent
 - 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](../hubs/MixedFieldIsing1D_MassGap_Infinite.md) — coherent
+- 🔵 [`RiceMele/ExactSpectrum/OBC`](../hubs/RiceMele_ExactSpectrum_OBC.md) — coherent
+- 🔵 [`RiceMele/MassGap/OBC`](../hubs/RiceMele_MassGap_OBC.md) — coherent
 - 🟢 [`S1Heisenberg1D/FreeEnergy/OBC`](../hubs/S1Heisenberg1D_FreeEnergy_OBC.md) — corroborated-at-p
 - 🔵 [`S1Heisenberg1D/MagnetizationX/OBC`](../hubs/S1Heisenberg1D_MagnetizationX_OBC.md) — coherent
 - 🔵 [`S1Heisenberg1D/MagnetizationY/OBC`](../hubs/S1Heisenberg1D_MagnetizationY_OBC.md) — coherent
@@ -336,7 +341,7 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
 
-## `second_closed_form` (139)
+## `second_closed_form` (140)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/FreeEnergy/Infinite`](../hubs/AKLT1D_FreeEnergy_Infinite.md) — corroborated-at-p
@@ -391,7 +396,6 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](../hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/Energy/Infinite`](../hubs/Kitaev1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/Infinite`](../hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/OBC`](../hubs/Kitaev1D_MassGap_OBC.md) — corroborated-at-p
@@ -405,6 +409,8 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`PpIp2DSC/CentralCharge/Infinite`](../hubs/PpIp2DSC_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`RFIM/CriticalTemperature/Infinite`](../hubs/RFIM_CriticalTemperature_Infinite.md) — corroborated-at-p
+- 🟢 [`RiceMele/CorrelationLength/Infinite`](../hubs/RiceMele_CorrelationLength_Infinite.md) — corroborated-at-p
+- 🟢 [`RiceMele/MassGap/Infinite`](../hubs/RiceMele_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/Energy/OBC`](../hubs/S1Heisenberg1D_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/RenyiEntropy/OBC`](../hubs/S1Heisenberg1D_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`S1Heisenberg1D/SusceptibilityXX/OBC`](../hubs/S1Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
@@ -414,9 +420,9 @@ Grouped by the `route` the verify card used. A hub appears under each mechanism 
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](../hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/CorrelationLength/Infinite`](../hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](../hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/Energy/Infinite`](../hubs/SSH_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/MassGap/Infinite`](../hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`SYK/ConformalWeights/Infinite`](../hubs/SYK_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](../hubs/SchwingerModel_ChiralCondensate_Infinite.md) — corroborated-at-p

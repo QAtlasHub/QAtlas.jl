@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`MerminGHZBound`** observable.  Empty cells = this model doesn't yet have a `MerminGHZBound` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The Mermin 3-party Bell-type bound — the maximum of the Mermin operator `|⟨M₃⟩|` admissible in a given theory.  A `status=:bound` quantity (Mermin 1990); fetched against a ``Bound`` domain with `scheme=` choosing the theory regime (`:classical` → 2 local-realistic, `:quantum` → 4 quantum, saturated by the GHZ state).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

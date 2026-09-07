@@ -104,17 +104,21 @@ system:
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 5 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 6 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
-| [`AnyonStatistics`](../../atlas/hubs/ToricCode_AnyonStatistics_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
+| [`AnyonMutualStatistics`](../../atlas/hubs/ToricCode_AnyonMutualStatistics_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
+| [`AnyonSelfStatistics`](../../atlas/hubs/ToricCode_AnyonSelfStatistics_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
 | [`Energy`](../../atlas/hubs/ToricCode_Energy_Infinite.md) | `Infinite` | ⚪ cited-only | 0 |
 | [`GroundStateDegeneracy`](../../atlas/hubs/ToricCode_GroundStateDegeneracy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 6 |
 | [`MassGap`](../../atlas/hubs/ToricCode_MassGap_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 | [`TopologicalEntanglementEntropy`](../../atlas/hubs/ToricCode_TopologicalEntanglementEntropy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 1 |
 
 <!-- ATLAS:HUBS:END -->
+
+
+
 
 
 

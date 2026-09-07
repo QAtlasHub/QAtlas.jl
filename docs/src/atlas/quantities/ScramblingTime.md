@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ScramblingTime`** observable.  Empty cells = this model doesn't yet have a `ScramblingTime` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The fast-scrambling time `t_* = (β/2π) log N` (Sekino–Susskind 2008) — the conjectured *lower* bound on the time for a thermal system of `N` degrees of freedom to scramble local information into global entanglement; saturated by black holes (the fastest scramblers).  A `status=:bound`, `direction=:lower` quantity; fetched against a ``Bound`` domain (`Bound(:Dynamics)`).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

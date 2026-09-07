@@ -13,15 +13,19 @@ _(extracted from `src/core/quantities.jl` docstring.)_
 
 ## Coverage
 
-- **Models with this quantity registered**: 1
-- **Total hubs (Model, BC pairs)**: 1
-- **Methods** (derived from `@register`): `dense_ed`
+- **Models with this quantity registered**: 2
+- **Total hubs (Model, BC pairs)**: 2
+- **Methods** (derived from `@register`): `dense_ed`, `single_particle_diagonalization`
 - **Universality classes** (where applicable): —
+
+**Top references** (by hub count):
+- RiceMele1982 — 1 hub
 
 ## Model × BC matrix
 
 | Model | `OBC` |
 |---|---|
 | [`AKLT1D`](../models/AKLT1D.md) | 🟠 [hub](../hubs/AKLT1D_ExactSpectrum_OBC.md) |
+| [`RiceMele`](../models/RiceMele.md) | 🔵 [hub](../hubs/RiceMele_ExactSpectrum_OBC.md) |
 
 [← Atlas index](../index.md) · [Model list →](../ModelList.md)

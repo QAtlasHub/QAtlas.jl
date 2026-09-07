@@ -46,10 +46,14 @@ XYh1D(; Jx::Real=1.0, Jy::Real=1.0, h::Real=0.0) = XYh1D(Jx, Jy, h)
 """
     _xyh1d_bdg_spectrum(N, Jx, Jy, h) -> Vector{Float64}
 
-Return the N positive BdG quasiparticle energies Λₙ > 0 for the OBC XYh1D
-with N sites.
+Return the N BdG quasiparticle energies of the OBC XYh1D with N sites — the
+upper half of the `±`-paired `2N` spectrum, sorted ascending.
+
+In the ordered phase the smallest is the edge mode, which is exponentially small
+in `N` and is not excluded.
 """
 function _xyh1d_bdg_spectrum(N::Int, Jx::Real, Jy::Real, h::Real)::Vector{Float64}
+    N >= 1 || throw(ArgumentError("XYh1D: need N ≥ 1 sites; got N = $N"))
     A = zeros(N, N)
     for i in 1:N
         A[i, i] = 2.0 * h
@@ -67,7 +71,15 @@ function _xyh1d_bdg_spectrum(N::Int, Jx::Real, Jy::Real, h::Real)::Vector{Float6
 
     H_bdg = [A B; -B -A]
     vals = eigvals(Symmetric(H_bdg))
-    return sort!(filter(v -> v > 1e-10, vals))
+    sort!(vals)
+    # The UPPER half. Not `filter(v -> v > 1e-10, vals)`, which drops both members of an
+    # exact pair and returns N-1 values.
+    half = vals[(N + 1):(2N)]
+    scale = max(1.0, maximum(abs, vals))
+    maximum(abs, vals[1:N] .+ reverse(half)) < 1.0e-8 * scale || error(
+        "_xyh1d_bdg_spectrum: spectrum is not ± symmetric; Jx = $Jx, Jy = $Jy, h = $h, N = $N",
+    )
+    return half
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -145,7 +157,8 @@ end
 function fetch(m::XYh1D, ::MassGap, bc::OBC; kwargs...)
     N = _bc_size(bc, kwargs)
     Λ = _xyh1d_bdg_spectrum(N, m.Jx, m.Jy, m.h)
-    return Λ[1]
+    i = findfirst(>(1.0e-10), Λ)
+    return i === nothing ? Λ[end] : Λ[i]
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

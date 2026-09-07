@@ -55,8 +55,12 @@ TFIM(; J::Real=1.0, h::Real=1.0) = TFIM(Float64(J), Float64(h))
 """
     _tfim_bdg_spectrum(N, J, h) -> Vector{Float64}
 
-Return the N positive BdG quasiparticle energies Λₙ > 0 for the OBC TFIM
-with N sites, Ising coupling J, and transverse field h.
+Return the N BdG quasiparticle energies of the OBC TFIM with N sites, Ising
+coupling J and transverse field h — the upper half of the `±`-paired 2N
+spectrum, sorted ascending.
+
+In the ordered phase the smallest is the edge mode, which is exponentially small
+in N and is not excluded.
 
 The 2N×2N BdG matrix is:
     H_BdG = [[A, B]; [-B, -A]]
@@ -68,6 +72,7 @@ and B (antisymmetric) encodes the pairing terms from JW transformation.
     B_{i,i+1} = +J,  B_{i+1,i} = -J
 """
 function _tfim_bdg_spectrum(N::Int, J::Float64, h::Float64)::Vector{Float64}
+    N >= 1 || throw(ArgumentError("TFIM: need N ≥ 1 sites; got N = $N"))
     A = zeros(N, N)
     for i in 1:N
         A[i, i] = 2h
@@ -85,7 +90,14 @@ function _tfim_bdg_spectrum(N::Int, J::Float64, h::Float64)::Vector{Float64}
 
     H_bdg = [A B; -B -A]
     vals = eigvals(Symmetric(H_bdg))
-    return sort!(filter(v -> v > 1e-10, vals))
+    sort!(vals)
+    # The UPPER half. Not `filter(v -> v > 1e-10, vals)`, which drops both members of an
+    # exact pair and returns N-1 values.
+    half = vals[(N + 1):(2N)]
+    scale = max(1.0, maximum(abs, vals))
+    maximum(abs, vals[1:N] .+ reverse(half)) < 1.0e-8 * scale ||
+        error("_tfim_bdg_spectrum: spectrum is not ± symmetric; J = $J, h = $h, N = $N")
+    return half
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -214,21 +226,27 @@ end
 """
     fetch(model::TFIM, ::MassGap, bc::OBC) -> Float64
 
-Single-quasiparticle gap of the N-site OBC TFIM read off the BdG
-spectrum as `Λ_min`, the smallest positive eigenvalue of the 2N×2N
-Bogoliubov-de Gennes Hamiltonian.
+Single-quasiparticle gap of the N-site OBC TFIM: the smallest BdG quasiparticle
+energy above `1e-10`.
 
-This is the one-particle excitation energy.  Away from the critical
-point (`|h − J| > O(1/N)`) it converges to `2|h − J|` exponentially in
-N.  At the critical point `h = J` the OBC gap scales as
-`Δ(N) ~ π J / N` (Ising CFT).
+Away from the critical point (`|h − J| > O(1/N)`) this converges to `2|h − J|`
+exponentially in N.  At `h = J` the OBC gap scales as `Δ(N) ~ π J / N`
+(Ising CFT).
+
+The threshold is not a rounding guard.  In the ORDERED phase the chain carries
+two Majorana edge modes whose splitting is exponentially small in N, and that
+splitting — not `2|h − J|` — is the smallest quasiparticle energy.  Excluding it
+is what makes this quantity the BULK gap at OBC.  `Kitaev1D`, which is the same
+model at `μ = -2h, t = Δ = J`, does not exclude it and so reports a different
+number in that phase.
 
 Size is taken from `bc.N` (or `kwargs[:N]` as a legacy fallback).
 """
 function fetch(model::TFIM, ::MassGap, bc::OBC; kwargs...)
     N = _bc_size(bc, kwargs)
     Λ = _tfim_bdg_spectrum(N, model.J, model.h)
-    return Λ[1]
+    i = findfirst(>(1.0e-10), Λ)
+    return i === nothing ? Λ[end] : Λ[i]
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

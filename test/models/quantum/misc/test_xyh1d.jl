@@ -107,3 +107,15 @@ end
         @test isapprox(sum(e), E_total; atol=1e-6)
     end
 end
+
+@testset "XYh1D — the BdG branch keeps its zero mode" begin
+    # Jy = 0 makes the BdG matrix identical to TFIM's, so the two extractions must agree
+    # entry for entry. The constructor refuses Jy = 0, so this goes through the builder.
+    for (h, N) in ((0.5, 4), (0.05, 8), (0.05, 16), (0.001, 4), (0.0, 4))
+        a = QAtlas._tfim_bdg_spectrum(N, 1.0, h)
+        b = QAtlas._xyh1d_bdg_spectrum(N, 1.0, 0.0, h)
+        @test length(b) == N
+        @test a ≈ b atol = 1.0e-12
+    end
+    @test_throws ArgumentError QAtlas._xyh1d_bdg_spectrum(0, 1.0, 0.5, 0.0)
+end

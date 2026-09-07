@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`Polarization`** observable.  Empty cells = this model doesn't yet have a `Polarization` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The bulk polarization density (or order parameter) per site. For the classical 2D six-vertex model, it corresponds to the spontaneous polarization (in the ferroelectric phase Δ > 1) or the spontaneous staggered polarization (in the antiferroelectric phase Δ < -1).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

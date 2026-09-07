@@ -25,8 +25,7 @@
     tested_in="test/models/quantum/misc/test_ricemele.jl",
     references=["RiceMele1982"],
     notes="N lowest of 2N single-particle levels over 2N sites; carries the open-boundary " *
-          "correction, so it approaches Infinite as O(1/N). O(N³) on the SINGLE-PARTICLE " *
-          "matrix — no Hilbert-space cap.",
+          "correction, so it approaches Infinite as O(1/N).",
 )
 
 # ── Spectrum / criticality ────────────────────────────────────────────
@@ -39,9 +38,8 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_ricemele.jl",
     references=["RiceMele1982"],
-    notes="ALL 2N single-particle energies. The half would suffice — a complete-cell " *
-          "chain is ±-symmetric for every Δ — but that rests on the cells being complete, " *
-          "and returning half hides its loss from the caller.",
+    notes="ALL 2N single-particle energies, not SSH's non-negative half: the OBC ± symmetry " *
+          "holds only while the unit cells are complete.",
 )
 @register(
     RiceMele,
@@ -65,8 +63,9 @@
     tested_in="test/models/quantum/misc/test_ricemele.jl",
     references=["RiceMele1982"],
     notes="Half the HOMO-LUMO difference (ε_{N+1} − ε_N)/2 at half filling — the Infinite " *
-          "convention. Locates the Fermi level rather than assuming it at zero, which is " *
-          "SSH's phrasing; the two agree at every Δ.",
+          "convention. Agrees with SSH's smallest-non-negative phrasing at every Δ. Does " *
+          "NOT converge to the Infinite value when |w| > |v|: there it is the edge-mode " *
+          "scale, flat in N.",
 )
 @register(
     RiceMele,

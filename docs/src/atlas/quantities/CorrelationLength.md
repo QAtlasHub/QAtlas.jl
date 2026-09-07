@@ -7,8 +7,8 @@ All `(Model, BC)` hubs `src` claims for the **`CorrelationLength`** observable. 
 
 ## Coverage
 
-- **Models with this quantity registered**: 6
-- **Total hubs (Model, BC pairs)**: 6
+- **Models with this quantity registered**: 7
+- **Total hubs (Model, BC pairs)**: 7
 - **Methods** (derived from `@register`): `analytic`, `closed_form`
 - **Universality classes** (where applicable): `Ising`
 
@@ -27,6 +27,7 @@ All `(Model, BC)` hubs `src` claims for the **`CorrelationLength`** observable. 
 | [`HeisenbergXYZ`](../models/HeisenbergXYZ.md) | 🟠 [hub](../hubs/HeisenbergXYZ_CorrelationLength_Infinite.md) |
 | [`IsingChain1D`](../models/IsingChain1D.md) | 🟢 [hub](../hubs/IsingChain1D_CorrelationLength_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟢 [hub](../hubs/Kitaev1D_CorrelationLength_Infinite.md) |
+| [`RiceMele`](../models/RiceMele.md) | 🟢 [hub](../hubs/RiceMele_CorrelationLength_Infinite.md) |
 | [`SSH`](../models/SSH.md) | 🟢 [hub](../hubs/SSH_CorrelationLength_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_CorrelationLength_Infinite.md) |
 

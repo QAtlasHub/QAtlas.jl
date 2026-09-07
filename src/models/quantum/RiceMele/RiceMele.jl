@@ -103,8 +103,7 @@ sorted ascending.
 The `2N × 2N` Hamiltonian is real symmetric tridiagonal: off-diagonals
 `v, w, v, w, …, v` (odd bonds `v`, even bonds `w`) and diagonal `+Δ, −Δ, +Δ, …`.
 
-All `2N`. The half would do — the spectrum is `±`-symmetric whenever the cells
-are complete — but that is a property of the cells, not of the model.
+All `2N`, sorted ascending.
 """
 function _rice_mele_obc_spectrum(N::Int, v::Float64, w::Float64, Δ::Float64)
     N >= 1 || throw(ArgumentError("RiceMele: need N ≥ 1 unit cells; got N = $N"))
@@ -222,6 +221,9 @@ difference `(ε_{N+1} − ε_N)/2` at half filling — the `Infinite` convention
 
 Written by locating the Fermi level rather than assuming it at zero, which is
 [`SSH`](@ref)'s phrasing. The two agree at every `Δ`.
+
+Does NOT converge to `MassGap` at `Infinite` when `|w| > |v|`: there it is the
+edge-mode scale, flat in `N` from about `N = 10`.  Same caveat as [`SSH`](@ref).
 """
 function fetch(model::RiceMele, ::MassGap, bc::OBC; kwargs...)
     N = _bc_size(bc, kwargs)

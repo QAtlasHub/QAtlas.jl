@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`LoschmidtAmplitude`** observable.  Empty cells = this model doesn't yet have a `LoschmidtAmplitude` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The Loschmidt echo `L(t) = |⟨ψ_0|e^{-i H_f t}|ψ_0⟩|² ∈ [0, 1]` after a sudden quench, at finite `N`.  Not defined at `Infinite`: `L(t)` vanishes identically in the thermodynamic limit (extensive cumulants) — use ``LoschmidtRateFunction`` there.
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

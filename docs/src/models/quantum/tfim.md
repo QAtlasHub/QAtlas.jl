@@ -543,7 +543,7 @@ docstrings for the exported observable types and TFIM helpers
 
 ## Verified hubs
 
-In the [Verified Atlas](../../atlas/index.md), this model registers 65 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
+In the [Verified Atlas](../../atlas/index.md), this model registers 66 hubs (quantity / BC pair). The badge column shows the R1 assurance level; click a hub link to see the exact `verify(...)` calls, references, and corroboration mechanism.
 
 | Quantity | BC | Assurance | Cards |
 |---|---|---|---|
@@ -560,6 +560,7 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 65 hubs (qua
 | [`Energy`](../../atlas/hubs/TFIM_Energy_OBC.md) | `OBC` | 🟢 corroborated-at-p | 58 |
 | [`Energy`](../../atlas/hubs/TFIM_Energy_PBC.md) | `PBC` | 🟢 corroborated-at-p | 16 |
 | [`EnergyLocal`](../../atlas/hubs/TFIM_EnergyLocal_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
+| [`FermionicEntanglementEntropy`](../../atlas/hubs/TFIM_FermionicEntanglementEntropy_OBC.md) | `OBC` | 🟠 uncorroborated-but-feasible | 0 |
 | [`FidelitySusceptibility`](../../atlas/hubs/TFIM_FidelitySusceptibility_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 2 |
 | [`FidelitySusceptibility`](../../atlas/hubs/TFIM_FidelitySusceptibility_OBC.md) | `OBC` | 🟢 corroborated-at-p | 9 |
 | [`FreeEnergy`](../../atlas/hubs/TFIM_FreeEnergy_Infinite.md) | `Infinite` | 🟢 corroborated-at-p | 9 |
@@ -614,6 +615,8 @@ In the [Verified Atlas](../../atlas/index.md), this model registers 65 hubs (qua
 | [`ZZStructureFactor`](../../atlas/hubs/TFIM_ZZStructureFactor_OBC.md) | `OBC` | 🔵 coherent | 24 |
 
 <!-- ATLAS:HUBS:END -->
+
+
 
 
 

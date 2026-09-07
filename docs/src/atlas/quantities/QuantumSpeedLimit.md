@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`QuantumSpeedLimit`** observable.  Empty cells = this model doesn't yet have a `QuantumSpeedLimit` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The quantum speed limit — a *lower* bound on the time to evolve a state to an orthogonal one (Margolus–Levitin `τ ≥ π/(2E)`).  A `status=:bound`, `direction=:lower` quantity; fetched against a ``Bound`` domain (`Bound(:Dynamics)`).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

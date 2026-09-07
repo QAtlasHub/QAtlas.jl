@@ -91,3 +91,28 @@ end
         )
     end
 end
+
+@testset "TFIM MassGap@OBC — where it parts company with Kitaev1D" begin
+    # Same model at μ = -2h, t = Δ = J. TFIM excludes the Majorana edge splitting and so
+    # reports the bulk gap; Kitaev1D includes it. They agree only while the splitting is
+    # above the 1e-10 threshold. Pinned because the docstrings on both sides describe the
+    # other's behaviour, and nothing else holds them to it.
+    same(h, N) = (
+        QAtlas.fetch(TFIM(; J=1.0, h=h), MassGap(), OBC(N)),
+        QAtlas.fetch(Kitaev1D(; μ=-2h, t=1.0, Δ=1.0), MassGap(), OBC(N)),
+    )
+    for (h, N) in ((0.5, 4), (0.1, 4), (0.01, 4), (0.005, 4))
+        a, b = same(h, N)
+        @test a ≈ b atol = 1.0e-12
+        @test a > 1.0e-10
+    end
+    for (h, N) in ((0.001, 4), (0.0, 4), (0.05, 8), (0.05, 16))
+        a, b = same(h, N)
+        @test abs(b) < 1.0e-10                        # Kitaev1D: the edge mode
+        @test a ≈ 2 * abs(h - 1.0) rtol = 1.0e-2      # TFIM: the bulk gap
+    end
+    # Nothing above the threshold at all is refused, not answered with the band top.
+    @test_throws ErrorException QAtlas.fetch(
+        TFIM(; J=1.0e-12, h=2.0e-12), MassGap(), OBC(4)
+    )
+end

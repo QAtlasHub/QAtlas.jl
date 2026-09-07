@@ -9,7 +9,7 @@
 ## `src` claim
 
 - method `bdg`, status `exact`, reliability `high`, refs: Peschel2003
-- "Free-fermion correlation-matrix method; pass the subsystem as `region` " * "(a Region, anywhere in the chain) or as the block length `ℓ`, which is " * "sugar for Region(1:ℓ). Single contiguous interval only — a multi-interval " * "region throws, because the Jordan-Wigner string factorises only for one " * "interval and the free-fermion answer would be the FERMIONIC entropy (#780)."
+- "Free-fermion correlation-matrix method; pass the subsystem as `region` " * "(a Region, anywhere in the chain) or as the block length `ℓ`, which is " * "sugar for Region(1:ℓ). A CONTIGUOUS region takes the O(ℓ³) covariance route; " * "a DISCONNECTED one reinstates the Jordan-Wigner string explicitly " * "(core/jw_spin_rdm.jl) at 4^|region| Pfaffians, still polynomial in N. " * "Returns the SPIN entropy either way; ask FermionicEntanglementEntropy " * "for the fermionic one (#780, #832)."
 
 ## Corroboration
 

@@ -70,7 +70,7 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`ShastrySutherland`](../atlas/models/ShastrySutherland.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 1 | — |
 | [`TightBinding1D`](../atlas/models/TightBinding1D.md) | 7 | 🟣 0 🟢 4 🔵 0 ⚪ 0 🟠 15 | — |
 | [`TightBindingV1D`](../atlas/models/TightBindingV1D.md) | 8 | 🟣 0 🟢 3 🔵 0 ⚪ 0 🟠 5 | — |
-| [`ToricCode`](../atlas/models/ToricCode.md) | 5 | 🟣 0 🟢 3 🔵 0 ⚪ 2 🟠 0 | — |
+| [`ToricCode`](../atlas/models/ToricCode.md) | 6 | 🟣 0 🟢 3 🔵 0 ⚪ 3 🟠 0 | — |
 | [`TightBinding(Triangular)`](../atlas/models/Triangular.md) | 2 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 2 | — |
 | [`XCube`](../atlas/models/XCube.md) | 1 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 0 | — |
 | [`XYh1D`](../atlas/models/XYh1D.md) | 6 | 🟣 0 🟢 0 🔵 0 ⚪ 0 🟠 11 | — |
@@ -86,11 +86,11 @@ In this page, all model list defined in QAtlas.jl is shown. **67 models** have `
 | [`Heisenberg1D`](../atlas/models/Heisenberg1D.md) | 19 | 🟣 0 🟢 12 🔵 4 ⚪ 0 🟠 10 | — |
 | [`IsingSquare`](../atlas/models/IsingSquare.md) | 9 | 🟣 0 🟢 7 🔵 2 ⚪ 0 🟠 4 | `Ising` |
 | [`IsingTriangular`](../atlas/models/IsingTriangular.md) | 10 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 8 | `Ising` |
-| [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 9 | 🟣 0 🟢 6 🔵 0 ⚪ 0 🟠 4 | — |
-| [`SSH`](../atlas/models/SSH.md) | 9 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 5 | — |
+| [`Kitaev1D`](../atlas/models/Kitaev1D.md) | 8 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 4 | — |
+| [`SSH`](../atlas/models/SSH.md) | 8 | 🟣 0 🟢 5 🔵 0 ⚪ 0 🟠 4 | — |
 | [`SixVertex`](../atlas/models/SixVertex.md) | 5 | 🟣 0 🟢 2 🔵 1 ⚪ 0 🟠 2 | — |
 | [`TASEP`](../atlas/models/TASEP.md) | 2 | 🟣 0 🟢 1 🔵 0 ⚪ 0 🟠 1 | — |
-| [`TFIM`](../atlas/models/TFIM.md) | 38 | 🟣 0 🟢 32 🔵 10 ⚪ 0 🟠 23 | `Ising` |
+| [`TFIM`](../atlas/models/TFIM.md) | 39 | 🟣 0 🟢 32 🔵 10 ⚪ 0 🟠 24 | `Ising` |
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | 4 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 2 | `MinimalModel` |
 | [`Universality`](../atlas/models/Universality.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 1 | — |

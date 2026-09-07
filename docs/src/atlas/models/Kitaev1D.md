@@ -23,11 +23,11 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 6 |
+| 🟢 corroborated-at-p | 5 |
 | 🔵 coherent | 0 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 4 |
-| **total claimed hubs** | **10** |
+| **total claimed hubs** | **9** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `pfaffian`
 
@@ -36,7 +36,6 @@ All `(Quantity, BC)` hubs `src` claims for **`Kitaev1D`**.  Cells link to the pe
 | Quantity | `OBC` | `Infinite` |
 |---|---|---|
 | [`CorrelationLength`](../quantities/CorrelationLength.md) | — | 🟢 [hub](../hubs/Kitaev1D_CorrelationLength_Infinite.md) |
-| [`EdgeModeEnergy`](../quantities/EdgeModeEnergy.md) | 🟢 [hub](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) | — |
 | [`Energy`](../quantities/Energy.md) | — | 🟢 [hub](../hubs/Kitaev1D_Energy_Infinite.md) |
 | [`FreeEnergy`](../quantities/FreeEnergy.md) | — | 🟠 [hub](../hubs/Kitaev1D_FreeEnergy_Infinite.md) |
 | [`MassGap`](../quantities/MassGap.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_OBC.md) | 🟢 [hub](../hubs/Kitaev1D_MassGap_Infinite.md) |

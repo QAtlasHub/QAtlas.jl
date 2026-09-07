@@ -17,7 +17,7 @@
 # from which all thermodynamic potentials follow as standard derivatives.
 #
 # For OBC finite N the same expressions hold with the integral replaced by
-# a sum over the N positive BdG quasiparticle energies returned by
+# a sum over the N BdG quasiparticle energies returned by
 # `_tfim_bdg_spectrum(N, J, h)` in `TFIM.jl`.
 #
 # Quantities exposed via `fetch` (the kernels dispatch on the quantity type):

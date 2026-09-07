@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`OptimalCloningFidelity`** observable.  Empty cells = this model doesn't yet have a `OptimalCloningFidelity` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The optimal universal quantum cloning fidelity — an upper bound on the single-copy fidelity of a `1 → 2` qubit cloner (Bužek–Hillery `F ≤ 5/6`).  A `status=:bound`, `direction=:upper` quantity; fetched against a ``Bound`` domain (`Bound(:QuantumInformation)`).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

@@ -44,10 +44,10 @@ using QAtlas:
             μ_eq = -2h
             spec_kitaev = QAtlas._kitaev1d_bdg_spectrum(N, μ_eq, J, J)
             spec_tfim = QAtlas._tfim_bdg_spectrum(N, J, h)
-            K = length(spec_tfim)
-            @test K > 0
-            top_kitaev = spec_kitaev[(end - K + 1):end]
-            @test isapprox(sort(top_kitaev), sort(spec_tfim); atol=1e-9)
+            # Entry for entry, and both of length N. Slicing to `length(spec_tfim)` first
+            # would pass whether TFIM returned N or N-1, which is the regression to catch.
+            @test length(spec_tfim) == N
+            @test spec_kitaev ≈ spec_tfim atol = 1.0e-9
         end
     end
 

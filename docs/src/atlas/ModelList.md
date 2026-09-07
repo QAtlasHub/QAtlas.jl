@@ -32,7 +32,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`J1J2Heisenberg1D`](models/J1J2Heisenberg1D.md) | — | 1 | `delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`Kagome`](models/Kagome.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`KagomeHeisenbergAFM`](models/KagomeHeisenbergAFM.md) | — | 3 | `analytic`, `dmrg_reference` | 0 | 0 | 0 | 3 | 0 | infeasible | `@sweep` |
-| [`Kitaev1D`](models/Kitaev1D.md) | — | 10 | `analytic`, `bdg`, `pfaffian` | 0 | 6 | 0 | 0 | 4 | feasible | `@critical`, `@sweep`, `@topological` |
+| [`Kitaev1D`](models/Kitaev1D.md) | — | 9 | `analytic`, `bdg`, `pfaffian` | 0 | 5 | 0 | 0 | 4 | feasible | `@critical`, `@sweep`, `@topological` |
 | [`KitaevHeisenberg`](models/KitaevHeisenberg.md) | — | 1 | `kitaev_delegation` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`KitaevHoneycomb`](models/KitaevHoneycomb.md) | — | 10 | `analytic`, `matter_free_fermion` | 0 | 1 | 5 | 4 | 0 | infeasible | `@sweep` |
 | [`Lieb`](models/Lieb.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
@@ -50,7 +50,7 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 19 | `dense_ed`, `literature_value` | 0 | 10 | 3 | 1 | 5 | feasible | `@haldane` |
 | [`S1XXZ1D`](models/S1XXZ1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
 | [`SLEkappa`](models/SLEkappa.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`SSH`](models/SSH.md) | — | 10 | `analytic`, `single_particle_diagonalization` | 0 | 5 | 0 | 0 | 5 | feasible | `@sweep` |
+| [`SSH`](models/SSH.md) | — | 9 | `analytic`, `single_particle_diagonalization` | 0 | 5 | 0 | 0 | 4 | feasible | `@sweep` |
 | [`SYK`](models/SYK.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`SchwingerModel`](models/SchwingerModel.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | feasible | `@massless` |
 | [`ShastrySutherland`](models/ShastrySutherland.md) | — | 1 | `exact_dimer` | 0 | 0 | 0 | 0 | 1 | feasible | — |
@@ -58,12 +58,12 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 | [`SixVertex`](models/SixVertex.md) | — | 5 | `analytic`, `numerical` | 0 | 2 | 1 | 0 | 2 | feasible | `@sweep` |
 | [`SpinIce`](models/SpinIce.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TASEP`](models/TASEP.md) | — | 2 | `analytic` | 0 | 1 | 0 | 0 | 1 | feasible | `@sweep` |
-| [`TFIM`](models/TFIM.md) | `Ising` | 65 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `majorana_evolution`, `pfaffian` | 0 | 32 | 10 | 0 | 23 | feasible | `@critical`, `@disordered`, `@ordered` |
+| [`TFIM`](models/TFIM.md) | `Ising` | 66 | `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `majorana_evolution`, `pfaffian` | 0 | 32 | 10 | 0 | 24 | feasible | `@critical`, `@disordered`, `@ordered` |
 | [`TTbar`](models/TTbar.md) | — | 1 | `analytic` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`TightBinding1D`](models/TightBinding1D.md) | — | 19 | `analytic` | 0 | 4 | 0 | 0 | 15 | feasible | `@band_insulator`, `@half_filling`, `@sweep` |
 | [`TightBindingV1D`](models/TightBindingV1D.md) | — | 8 | `analytic` | 0 | 3 | 0 | 0 | 5 | feasible | `@sweep` |
 | [`TodaLattice`](models/TodaLattice.md) | — | 1 | `linear_phonon` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
-| [`ToricCode`](models/ToricCode.md) | — | 5 | `analytic` | 0 | 3 | 0 | 2 | 0 | infeasible | `@sweep` |
+| [`ToricCode`](models/ToricCode.md) | — | 6 | `analytic` | 0 | 3 | 0 | 3 | 0 | infeasible | `@sweep` |
 | [`Triangular`](models/Triangular.md) | — | 2 | `bloch_diagonalization` | 0 | 0 | 0 | 0 | 2 | feasible | — |
 | [`TricriticalIsing`](models/TricriticalIsing.md) | `MinimalModel` | 4 | `analytic` | 0 | 2 | 0 | 0 | 2 | feasible | `@sweep` |
 | [`TricriticalPotts3`](models/TricriticalPotts3.md) | `MinimalModel` | 4 | `analytic`, `minimal_model_delegation` | 0 | 2 | 0 | 0 | 2 | feasible | `@sweep` |
@@ -79,7 +79,8 @@ Top-level catalog of all **67 models** with claimed hubs.  One row per model; th
 
 Each quantity has its own `Model × BC` matrix page (gap visualisation across models):
 
-- [`AnyonStatistics`](quantities/AnyonStatistics.md) — 1 models
+- [`AnyonMutualStatistics`](quantities/AnyonMutualStatistics.md) — 1 models
+- [`AnyonSelfStatistics`](quantities/AnyonSelfStatistics.md) — 1 models
 - [`BB84KeyRate`](quantities/BB84KeyRate.md) — 1 models
 - [`BekensteinBound`](quantities/BekensteinBound.md) — 1 models
 - [`CHSHBound`](quantities/CHSHBound.md) — 1 models
@@ -96,11 +97,11 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`DynamicLocalization`](quantities/DynamicLocalization.md) — 1 models
 - [`DynamicalCorrelation`](quantities/DynamicalCorrelation.md) — 1 models
 - [`DynamicalSpinStructureFactor`](quantities/DynamicalSpinStructureFactor.md) — 3 models
-- [`EdgeModeEnergy`](quantities/EdgeModeEnergy.md) — 2 models
 - [`Energy`](quantities/Energy.md) — 31 models
 - [`EnergyLocal`](quantities/EnergyLocal.md) — 5 models
 - [`ExactSpectrum`](quantities/ExactSpectrum.md) — 1 models
 - [`FermiVelocity`](quantities/FermiVelocity.md) — 2 models
+- [`FermionicEntanglementEntropy`](quantities/FermionicEntanglementEntropy.md) — 1 models
 - [`FidelitySusceptibility`](quantities/FidelitySusceptibility.md) — 1 models
 - [`FractalDimension`](quantities/FractalDimension.md) — 1 models
 - [`FreeEnergy`](quantities/FreeEnergy.md) — 18 models

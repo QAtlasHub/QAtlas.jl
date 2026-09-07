@@ -413,4 +413,11 @@ end
     for N in (4, 8, 12, 16)
         @test length(QAtlas._tfim_bdg_spectrum(N, 1.0, 0.05)) == N
     end
+    # N = 1 is where the old filter failed worst: the 2x2 BdG matrix is exactly zero, so
+    # it returned an EMPTY vector, not N-1, and FreeEnergy came out 0 instead of -log(2)/β.
+    @test QAtlas._tfim_bdg_spectrum(1, 1.0, 0.0) == [0.0]
+    for β in (0.5, 2.0)
+        @test QAtlas.fetch(TFIM(; J=1.0, h=0.0), FreeEnergy(), OBC(1); beta=β) ≈ -log(2) / β atol =
+            1.0e-12
+    end
 end

@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`BB84KeyRate`** observable.  Empty cells = this model doesn't yet have a `BB84KeyRate` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The BB84 asymptotic secret-key rate `R(e) = 1 − 2 H₂(e)` (Shor–Preskill 2000), with `H₂` the binary entropy and `e` the qubit error rate (QBER).  A provably achievable rate — a *lower* bound on the extractable secret-key fraction; positive for `e < 11%`.  A `status=:bound`, `direction=:lower` quantity; fetched against a ``Bound`` domain (`Bound(:QuantumInformation)`).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

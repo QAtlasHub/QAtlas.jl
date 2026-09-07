@@ -24,7 +24,9 @@
     reliability=:high,
     tested_in="test/models/quantum/misc/test_xyh1d.jl",
     references=["LiebSchultzMattis1961", "Pfeuty1970"],
-    notes="Lowest BdG quasiparticle energy from 2N×2N diagonalization.",
+    notes="Smallest BdG quasiparticle energy above 1e-10 from the 2N×2N diagonalisation. " *
+          "The threshold excludes the edge splitting, making this the BULK gap at OBC; " *
+          "refuses if nothing is left above it.",
 )
 
 # ── Energy ────────────────────────────────────────────────────────────

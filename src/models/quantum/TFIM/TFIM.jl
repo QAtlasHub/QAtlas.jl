@@ -5,7 +5,7 @@
 #   H = -J Σᵢ σᶻᵢσᶻᵢ₊₁  -  h Σᵢ σˣᵢ
 #
 # Solved exactly via Jordan-Wigner + Bogoliubov-de Gennes (BdG) transformation.
-# The quadratic fermion Hamiltonian has quasiparticle energies Λₙ > 0, giving:
+# The quadratic fermion Hamiltonian has quasiparticle energies Λₙ ≥ 0, giving:
 #
 #   ⟨H⟩(β) = -Σₙ (Λₙ/2) tanh(β Λₙ / 2)
 #
@@ -94,8 +94,7 @@ function _tfim_bdg_spectrum(N::Int, J::Float64, h::Float64)::Vector{Float64}
     # The UPPER half. Not `filter(v -> v > 1e-10, vals)`, which drops both members of an
     # exact pair and returns N-1 values.
     half = vals[(N + 1):(2N)]
-    scale = max(1.0, maximum(abs, vals))
-    maximum(abs, vals[1:N] .+ reverse(half)) < 1.0e-8 * scale ||
+    maximum(abs, vals[1:N] .+ reverse(half)) <= 1.0e-8 * maximum(abs, vals) ||
         error("_tfim_bdg_spectrum: spectrum is not ± symmetric; J = $J, h = $h, N = $N")
     return half
 end
@@ -233,12 +232,10 @@ Away from the critical point (`|h − J| > O(1/N)`) this converges to `2|h − J
 exponentially in N.  At `h = J` the OBC gap scales as `Δ(N) ~ π J / N`
 (Ising CFT).
 
-The threshold is not a rounding guard.  In the ORDERED phase the chain carries
-two Majorana edge modes whose splitting is exponentially small in N, and that
-splitting — not `2|h − J|` — is the smallest quasiparticle energy.  Excluding it
-is what makes this quantity the BULK gap at OBC.  `Kitaev1D`, which is the same
-model at `μ = -2h, t = Δ = J`, does not exclude it and so reports a different
-number in that phase.
+The threshold is not a rounding guard: it excludes the Majorana edge splitting,
+which is what makes this quantity the BULK gap at OBC.  `Kitaev1D`, the same
+model at `μ = -2h, t = Δ = J`, does not exclude it and reports a different number
+in the ordered phase.  Refuses if nothing is left above the threshold.
 
 Size is taken from `bc.N` (or `kwargs[:N]` as a legacy fallback).
 """
@@ -246,7 +243,13 @@ function fetch(model::TFIM, ::MassGap, bc::OBC; kwargs...)
     N = _bc_size(bc, kwargs)
     Λ = _tfim_bdg_spectrum(N, model.J, model.h)
     i = findfirst(>(1.0e-10), Λ)
-    return i === nothing ? Λ[end] : Λ[i]
+    i === nothing && error(
+        "TFIM MassGap@OBC: every quasiparticle energy is below the 1e-10 threshold " *
+        "this quantity excludes the edge mode with (J = $(model.J), h = $(model.h), " *
+        "N = $N), so there is no bulk gap left to report. Refusing to silently mask " *
+        "this with a misleading number; rescale J and h.",
+    )
+    return Λ[i]
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

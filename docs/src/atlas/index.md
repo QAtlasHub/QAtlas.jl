@@ -19,18 +19,18 @@
 | | count |
 |---|---|
 | Hubs `src` claims (registry) | 383 |
-| ED-feasible claimed (risk denominator) | 357 |
-| ED-infeasible claimed (frontier, excluded) | 26 |
+| ED-feasible claimed (risk denominator) | 356 |
+| ED-infeasible claimed (frontier, excluded) | 27 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 175 |
+| 🟢 corroborated-at-p | 174 |
 | 🔵 coherent | 40 |
-| ⚪ cited-only (frontier — neutral) | 18 |
+| ⚪ cited-only (frontier — neutral) | 19 |
 | 🟠 uncorroborated-but-feasible (**actionable risk**) | 150 |
-| Inventory cards scanned (whole test/) | 2806 |
+| Inventory cards scanned (whole test/) | 2805 |
 | Registry files parsed | 83 / 83 |
 | Models | 67 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **49.0%** · **in-repo-verified rate** (incl. 🔵 coherent): **60.2%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **48.9%** · **in-repo-verified rate** (incl. 🔵 coherent): **60.1%**
 
 ## Browse by facet
 
@@ -44,7 +44,7 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 | Section | Count |
 |---|---|
 | 1. Models without CONVENTION header | 3 |
-| 2. Quantities without extracted Definition | 42 |
+| 2. Quantities without extracted Definition | 60 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
 | 5. INVENTORY card hubs with no `@register` claim | 9 |
@@ -133,7 +133,6 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`S1Heisenberg1D/MassGap/OBC`](hubs/S1Heisenberg1D_MassGap_OBC.md)
     - [`S1Heisenberg1D/SpinCorrelation/OBC`](hubs/S1Heisenberg1D_SpinCorrelation_OBC.md)
     - [`SSH/FreeEnergy/Infinite`](hubs/SSH_FreeEnergy_Infinite.md)
-    - [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
     - [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
     - [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
     - [`SSH/UniversalityClass/Infinite`](hubs/SSH_UniversalityClass_Infinite.md)
@@ -148,6 +147,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`TFIM/CriticalExponents/Infinite`](hubs/TFIM_CriticalExponents_Infinite.md)
     - [`TFIM/DynamicalCorrelation/OBC`](hubs/TFIM_DynamicalCorrelation_OBC.md)
     - [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
+    - [`TFIM/FermionicEntanglementEntropy/OBC`](hubs/TFIM_FermionicEntanglementEntropy_OBC.md)
     - [`TFIM/LiebRobinsonVelocity/Infinite`](hubs/TFIM_LiebRobinsonVelocity_Infinite.md)
     - [`TFIM/LightconeSpinCorrelation/OBC`](hubs/TFIM_LightconeSpinCorrelation_OBC.md)
     - [`TFIM/LocalMagnetization/OBC`](hubs/TFIM_LocalMagnetization_OBC.md)
@@ -242,7 +242,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `J1J2Heisenberg1D` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `Kagome` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `KagomeHeisenbergAFM` | 3 | 0 | 0 | 0 | 3 | 0 | infeasible |
-| `Kitaev1D` | 10 | 0 | 6 | 0 | 0 | 4 | feasible |
+| `Kitaev1D` | 9 | 0 | 5 | 0 | 0 | 4 | feasible |
 | `KitaevHeisenberg` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `KitaevHoneycomb` | 10 | 0 | 1 | 5 | 4 | 0 | infeasible |
 | `Lieb` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
@@ -260,7 +260,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `S1Heisenberg1D` | 19 | 0 | 10 | 3 | 1 | 5 | feasible |
 | `S1XXZ1D` | 2 | 0 | 0 | 2 | 0 | 0 | feasible |
 | `SLEkappa` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
-| `SSH` | 10 | 0 | 5 | 0 | 0 | 5 | feasible |
+| `SSH` | 9 | 0 | 5 | 0 | 0 | 4 | feasible |
 | `SYK` | 1 | 0 | 1 | 0 | 0 | 0 | infeasible |
 | `SchwingerModel` | 2 | 0 | 2 | 0 | 0 | 0 | feasible |
 | `ShastrySutherland` | 1 | 0 | 0 | 0 | 0 | 1 | feasible |
@@ -268,12 +268,12 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 5 | 0 | 2 | 1 | 0 | 2 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
-| `TFIM` | 65 | 0 | 32 | 10 | 0 | 23 | feasible |
+| `TFIM` | 66 | 0 | 32 | 10 | 0 | 24 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 19 | 0 | 4 | 0 | 0 | 15 | feasible |
 | `TightBindingV1D` | 8 | 0 | 3 | 0 | 0 | 5 | feasible |
 | `TodaLattice` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
-| `ToricCode` | 5 | 0 | 3 | 0 | 2 | 0 | infeasible |
+| `ToricCode` | 6 | 0 | 3 | 0 | 3 | 0 | infeasible |
 | `Triangular` | 2 | 0 | 0 | 0 | 0 | 2 | feasible |
 | `TricriticalIsing` | 4 | 0 | 2 | 0 | 0 | 2 | feasible |
 | `TricriticalPotts3` | 4 | 0 | 2 | 0 | 0 | 2 | feasible |
@@ -498,10 +498,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - ⚪ [`KagomeHeisenbergAFM/MassGap/Infinite`](hubs/KagomeHeisenbergAFM_MassGap_Infinite.md) — cited-only
 - ⚪ [`KagomeHeisenbergAFM/TopologicalEntanglementEntropy/Infinite`](hubs/KagomeHeisenbergAFM_TopologicalEntanglementEntropy_Infinite.md) — cited-only
 
-### `Kitaev1D` (10)
+### `Kitaev1D` (9)
 
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
@@ -615,14 +614,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 
-### `SSH` (10)
+### `SSH` (9)
 
 - 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/Energy/Infinite`](hubs/SSH_Energy_Infinite.md) — corroborated-at-p
 - 🟠 [`SSH/FreeEnergy/Infinite`](hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/MassGap/Infinite`](hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
-- 🟠 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md) — corroborated-at-p
 - 🟠 [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
@@ -663,7 +661,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 - 🟠 [`TASEP/UniversalityClass/Infinite`](hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-### `TFIM` (65)
+### `TFIM` (66)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/ConformalTower/OBC`](hubs/TFIM_ConformalTower_OBC.md) — uncorroborated-but-feasible
@@ -678,6 +676,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md) — corroborated-at-p
 - 🟠 [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/FermionicEntanglementEntropy/OBC`](hubs/TFIM_FermionicEntanglementEntropy_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/FidelitySusceptibility/Infinite`](hubs/TFIM_FidelitySusceptibility_Infinite.md) — corroborated-at-p
 - 🟢 [`TFIM/FidelitySusceptibility/OBC`](hubs/TFIM_FidelitySusceptibility_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md) — corroborated-at-p
@@ -772,9 +771,10 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🟢 [`TodaLattice/MassGap/Infinite`](hubs/TodaLattice_MassGap_Infinite.md) — corroborated-at-p
 
-### `ToricCode` (5)
+### `ToricCode` (6)
 
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](hubs/ToricCode_AnyonMutualStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](hubs/ToricCode_AnyonSelfStatistics_Infinite.md) — cited-only
 - ⚪ [`ToricCode/Energy/Infinite`](hubs/ToricCode_Energy_Infinite.md) — cited-only
 - 🟢 [`ToricCode/GroundStateDegeneracy/PBC`](hubs/ToricCode_GroundStateDegeneracy_PBC.md) — corroborated-at-p
 - 🟢 [`ToricCode/MassGap/Infinite`](hubs/ToricCode_MassGap_Infinite.md) — corroborated-at-p

@@ -7,7 +7,7 @@ Every distinct `method=:X` value used in any `@register(...)` across the atlas (
 
 Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): both decompose hubs along orthogonal axes of the `@register` metadata.
 
-## `analytic` - 177 hubs
+## `analytic` - 178 hubs
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](hubs/AKLT1D_CorrelationLength_Infinite.md)
 - 🟢 [`AKLT1D/Energy/Infinite`](hubs/AKLT1D_Energy_Infinite.md)
@@ -158,7 +158,8 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TightBindingV1D/MassGap/Infinite`](hubs/TightBindingV1D_MassGap_Infinite.md)
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](hubs/TightBindingV1D_SpecificHeat_Infinite.md)
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](hubs/TightBindingV1D_ThermalEntropy_Infinite.md)
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](hubs/ToricCode_AnyonStatistics_Infinite.md)
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](hubs/ToricCode_AnyonMutualStatistics_Infinite.md)
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](hubs/ToricCode_AnyonSelfStatistics_Infinite.md)
 - ⚪ [`ToricCode/Energy/Infinite`](hubs/ToricCode_Energy_Infinite.md)
 - 🟢 [`ToricCode/GroundStateDegeneracy/PBC`](hubs/ToricCode_GroundStateDegeneracy_PBC.md)
 - 🟢 [`ToricCode/MassGap/Infinite`](hubs/ToricCode_MassGap_Infinite.md)
@@ -240,7 +241,6 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 
 ## `bdg` - 51 hubs
 
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
 - 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
 - 🟠 [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md)
 - 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
@@ -253,6 +253,7 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`TFIM/Energy/OBC`](hubs/TFIM_Energy_OBC.md)
 - 🟢 [`TFIM/Energy/PBC`](hubs/TFIM_Energy_PBC.md)
 - 🟠 [`TFIM/EnergyLocal/OBC`](hubs/TFIM_EnergyLocal_OBC.md)
+- 🟠 [`TFIM/FermionicEntanglementEntropy/OBC`](hubs/TFIM_FermionicEntanglementEntropy_OBC.md)
 - 🟢 [`TFIM/FidelitySusceptibility/OBC`](hubs/TFIM_FidelitySusceptibility_OBC.md)
 - 🟢 [`TFIM/FreeEnergy/Infinite`](hubs/TFIM_FreeEnergy_Infinite.md)
 - 🟢 [`TFIM/FreeEnergy/OBC`](hubs/TFIM_FreeEnergy_OBC.md)
@@ -444,11 +445,6 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 - 🟢 [`IsingSquare/FreeEnergy/PBC`](hubs/IsingSquare_FreeEnergy_PBC.md)
 - 🟢 [`IsingSquare/PartitionFunction/PBC`](hubs/IsingSquare_PartitionFunction_PBC.md)
 
-## `single_particle_diagonalization` - 2 hubs
-
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md)
-- 🟠 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
-
 ## `analytic_imry_ma` - 1 hub
 
 - 🟢 [`RFIM/CriticalTemperature/Infinite`](hubs/RFIM_CriticalTemperature_Infinite.md)
@@ -500,6 +496,10 @@ Symmetric with **[Bibliography](Bibliography.md)** (which groups by citation): b
 ## `onsager` - 1 hub
 
 - 🟠 [`IsingSquare/FreeEnergy/Infinite`](hubs/IsingSquare_FreeEnergy_Infinite.md)
+
+## `single_particle_diagonalization` - 1 hub
+
+- 🟢 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
 
 ## `sugawara` - 1 hub
 

@@ -75,8 +75,7 @@ function _xyh1d_bdg_spectrum(N::Int, Jx::Real, Jy::Real, h::Real)::Vector{Float6
     # The UPPER half. Not `filter(v -> v > 1e-10, vals)`, which drops both members of an
     # exact pair and returns N-1 values.
     half = vals[(N + 1):(2N)]
-    scale = max(1.0, maximum(abs, vals))
-    maximum(abs, vals[1:N] .+ reverse(half)) < 1.0e-8 * scale || error(
+    maximum(abs, vals[1:N] .+ reverse(half)) <= 1.0e-8 * maximum(abs, vals) || error(
         "_xyh1d_bdg_spectrum: spectrum is not ± symmetric; Jx = $Jx, Jy = $Jy, h = $h, N = $N",
     )
     return half
@@ -153,12 +152,22 @@ end
 
 """
     fetch(model::XYh1D, ::MassGap, bc::OBC) -> Float64
+
+Smallest BdG quasiparticle energy above `1e-10`.  The threshold excludes the
+edge splitting, making this the BULK gap at OBC; refuses if nothing is left
+above it.
 """
 function fetch(m::XYh1D, ::MassGap, bc::OBC; kwargs...)
     N = _bc_size(bc, kwargs)
     Λ = _xyh1d_bdg_spectrum(N, m.Jx, m.Jy, m.h)
     i = findfirst(>(1.0e-10), Λ)
-    return i === nothing ? Λ[end] : Λ[i]
+    i === nothing && error(
+        "XYh1D MassGap@OBC: every quasiparticle energy is below the 1e-10 threshold " *
+        "this quantity excludes the edge mode with (Jx = $(m.Jx), Jy = $(m.Jy), " *
+        "h = $(m.h), N = $N), so there is no bulk gap left to report. Refusing to " *
+        "silently mask this with a misleading number; rescale the couplings.",
+    )
+    return Λ[i]
 end
 
 # ═══════════════════════════════════════════════════════════════════════════════

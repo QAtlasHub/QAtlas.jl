@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`ChaosBound`** observable.  Empty cells = this model doesn't yet have a `ChaosBound` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The Maldacena–Shenker–Stanford bound on quantum chaos — an upper bound on the Lyapunov exponent `λ_L` of out-of-time-order correlators (`λ_L ≤ 2π/β`).  A `status=:bound` quantity; fetched against a ``Bound`` domain (`Bound(:Dynamics)`).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

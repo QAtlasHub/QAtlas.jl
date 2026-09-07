@@ -130,6 +130,54 @@ Variables: `R_H` ([`HallCoefficient`](@ref)), `n` ([`CarrierDensity`](@ref)), `e
 @relation :transport SingleBandHall(R_H::HallCoefficient, n::CarrierDensity, e) =
     R_H * n * e - 1
 
+# ─── Rice-Mele (dimerised chain + staggered potential) ──────────────────────
+
+"""
+    RiceMeleGapIdentity <: AbstractRelation
+
+The two-band gap of the Rice-Mele chain ([RiceMele1982](@cite)),
+
+`gap² = (|v| − |w|)² + Δ²`,
+
+with `v` the intracell hopping, `w` the intercell hopping and `Δ` the staggered
+on-site potential.  Never zero for `Δ ≠ 0`: the staggered potential gaps out the
+`|v| = |w|` Dirac point that [`SSH`](@ref) closes there.
+
+Written on the squares because that is the form in which it is an identity for
+every sign combination — `|v| − |w|` and not `v − w` is what the minimum of
+`E₊(k)` gives when `vw < 0`.
+
+Variables: `gap` ([`MassGap`](@ref)), `v`, `w`, `Δ`.
+"""
+@relation :spectral RiceMeleGapIdentity(gap::MassGap, v, w, Δ) =
+    gap^2 - (abs(v) - abs(w))^2 - Δ^2
+
+"""
+    RiceMeleTotalHopping <: AbstractRelation
+
+`hx = v + w`, the total-hopping half of the reparametrisation the nonlinear-response
+literature states the Rice-Mele chain in, `d(k) = (−hx cos(k/2), −hy sin(k/2), −hz)`
+on a folded zone.  Affine in every variable, so it solves in either direction.
+
+Variables: `hx`, `v`, `w`.  See [`RiceMeleDimerisation`](@ref) for the other half.
+"""
+@relation :spectral RiceMeleTotalHopping(hx, v, w) = hx - (v + w)
+
+"""
+    RiceMeleDimerisation <: AbstractRelation
+
+`hy = v − w`, the dimerisation half of the same reparametrisation, with `Δ = hz`
+carrying over unchanged.  Together with [`RiceMeleTotalHopping`](@ref) this inverts
+to `v = (hx + hy)/2`, `w = (hx − hy)/2`.
+
+The pair is what lets a response calculation stated in `(hx, hy, hz)` be checked
+against [`RiceMele`](@ref)'s exact solution without either side adopting the other's
+parametrisation.
+
+Variables: `hy`, `v`, `w`.
+"""
+@relation :spectral RiceMeleDimerisation(hy, v, w) = hy - (v - w)
+
 """
     MODEL_SPECIFIC_RELATIONS
 
@@ -146,4 +194,7 @@ const MODEL_SPECIFIC_RELATIONS = (
     AlmeidaThoulessStability(),
     DrudeMobility(),
     SingleBandHall(),
+    RiceMeleGapIdentity(),
+    RiceMeleTotalHopping(),
+    RiceMeleDimerisation(),
 )

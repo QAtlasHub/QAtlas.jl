@@ -1,0 +1,22 @@
+# docs/references.title-allow — exceptions for the TITLE cross-check.
+#
+# `docs/check_reference_titles.py` compares each entry's title against the one its DOI
+# resolves to on Crossref. That catches a mistyped DOI that lands on somebody else's real
+# paper — which the resolution gate cannot, since the wrong DOI resolves fine. Measured on
+# this bibliography: 2 of 18 sampled DOIs have a resolving neighbour one digit away.
+#
+# Kept SEPARATE from references.allow so that exempting an entry here does not also exempt
+# it from the resolution gate.
+#
+# Every line below is a Crossref metadata defect, not a citation error: the registered title
+# is truncated or drops a subtitle. Verified by reading the paper's own title page.
+
+CavagliaNegroSzecsenyiTateo2016  # Crossref returns both the rendered and the LaTeX form of TT-bar
+Kasteleyn1961                    # Crossref drops the ": I. The number of dimer arrangements…" subtitle
+Haldane1988                      # Crossref title truncated mid-word at "with 1/"
+Fisher1978                       # Crossref title truncated at "Yang-Lee Edge Singularity and"
+MiyaharaUeda1999                 # Crossref title truncated
+Kageyama1999                     # Crossref title truncated
+Haldane1991                      # Crossref title truncated
+Kimura2007                       # Crossref title truncated
+McCoyWu1978a                     # Crossref title truncated

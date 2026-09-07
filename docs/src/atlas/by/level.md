@@ -5,7 +5,7 @@
 
 Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only actionable bucket.
 
-## `cited-only` (18)
+## `cited-only` (19)
 
 - ⚪ [`AKLT1D/MassGap/Infinite`](../hubs/AKLT1D_MassGap_Infinite.md) — cited-only
 - ⚪ [`ChernSimons3D/PartitionFunction/Infinite`](../hubs/ChernSimons3D_PartitionFunction_Infinite.md) — cited-only
@@ -22,7 +22,8 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - ⚪ [`PXP1D/Energy/Infinite`](../hubs/PXP1D_Energy_Infinite.md) — cited-only
 - ⚪ [`S1Heisenberg1D/MassGap/Infinite`](../hubs/S1Heisenberg1D_MassGap_Infinite.md) — cited-only
 - ⚪ [`SherringtonKirkpatrick/Energy/Infinite`](../hubs/SherringtonKirkpatrick_Energy_Infinite.md) — cited-only
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](../hubs/ToricCode_AnyonMutualStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](../hubs/ToricCode_AnyonSelfStatistics_Infinite.md) — cited-only
 - ⚪ [`ToricCode/Energy/Infinite`](../hubs/ToricCode_Energy_Infinite.md) — cited-only
 - ⚪ [`YangLee/ConformalWeights/Infinite`](../hubs/YangLee_ConformalWeights_Infinite.md) — cited-only
 
@@ -69,7 +70,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🔵 [`XXZ1D/MagnetizationZ/OBC`](../hubs/XXZ1D_MagnetizationZ_OBC.md) — coherent
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — coherent
 
-## `corroborated-at-p` (175)
+## `corroborated-at-p` (174)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -136,7 +137,6 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`IsingTriangular/ResidualEntropy/Infinite`](../hubs/IsingTriangular_ResidualEntropy_Infinite.md) — corroborated-at-p
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](../hubs/J1J2Heisenberg1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](../hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/Energy/Infinite`](../hubs/Kitaev1D_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/Infinite`](../hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/OBC`](../hubs/Kitaev1D_MassGap_OBC.md) — corroborated-at-p
@@ -163,9 +163,9 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](../hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/CorrelationLength/Infinite`](../hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](../hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/Energy/Infinite`](../hubs/SSH_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/MassGap/Infinite`](../hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`SYK/ConformalWeights/Infinite`](../hubs/SYK_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`SchwingerModel/ChiralCondensate/Infinite`](../hubs/SchwingerModel_ChiralCondensate_Infinite.md) — corroborated-at-p
@@ -320,7 +320,6 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`S1Heisenberg1D/MassGap/OBC`](../hubs/S1Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/SpinCorrelation/OBC`](../hubs/S1Heisenberg1D_SpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/FreeEnergy/Infinite`](../hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/UniversalityClass/Infinite`](../hubs/SSH_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
@@ -335,6 +334,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/DynamicalCorrelation/OBC`](../hubs/TFIM_DynamicalCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/FermionicEntanglementEntropy/OBC`](../hubs/TFIM_FermionicEntanglementEntropy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LightconeSpinCorrelation/OBC`](../hubs/TFIM_LightconeSpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LocalMagnetization/OBC`](../hubs/TFIM_LocalMagnetization_OBC.md) — uncorroborated-but-feasible

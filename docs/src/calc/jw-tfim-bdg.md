@@ -709,12 +709,21 @@ zero-eigenvalue boundary mode:
 $$\{\Lambda^{\rm QAtlas}_1,\dots,\Lambda^{\rm QAtlas}_N\}
  = \{0,\Lambda_1,\dots,\Lambda_{N-1}\},$$
 
-and the filter `filter(v -> v > 1e-10, …)` at line 74 of TFIM.jl
-drops the zero mode before returning the sorted positive spectrum.
-The two conventions yield identical ground-state energies and
-identical thermal expectations, but the QAtlas convention is simpler
-to implement (a single tridiagonal block rather than tracking
-boundary conditions).
+`_tfim_bdg_spectrum` returns all $N$, zero mode included, and the
+QAtlas convention is simpler to implement (a single tridiagonal block
+rather than tracking boundary conditions).
+
+The zero mode is not spare. It carries the two-fold degeneracy of the
+ordered ground state, so it contributes $\log(2\cosh 0) = \log 2$ to
+$\sum_n \log(2\cosh\beta\Lambda_n/2)$. Dropping it therefore shifts
+`FreeEnergy` by $\log 2/(N\beta)$ and `ThermalEntropy` by $\log 2/N$
+— at $h = 0$, $J = 1$, $N = 4$, $\beta = 2$ that is $-0.7568$ against
+the exact $-0.8434$. The two conventions agree for `Energy` alone,
+where $\Lambda\tanh(\beta\Lambda/2) \to 0$ makes the mode inert.
+
+The check is exact: at $h = 0$ the OBC chain is the classical Ising
+chain, $Z = 2\,(2\cosh\beta J)^{N-1}$, and the $2$ is that same
+degeneracy.
 
 ## References
 

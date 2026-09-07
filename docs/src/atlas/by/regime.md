@@ -5,7 +5,7 @@
 
 Grouped by the named physical regime resolved from the test call (`@sweep` = loop-variable, not yet a named point).
 
-## `(no card)` (155)
+## `(no card)` (156)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/SpinCorrelation/Infinite`](../hubs/AKLT1D_SpinCorrelation_Infinite.md) — uncorroborated-but-feasible
@@ -81,7 +81,6 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`S1Heisenberg1D/MassGap/OBC`](../hubs/S1Heisenberg1D_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/SpinCorrelation/OBC`](../hubs/S1Heisenberg1D_SpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/FreeEnergy/Infinite`](../hubs/SSH_FreeEnergy_Infinite.md) — uncorroborated-but-feasible
-- 🟠 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/SpecificHeat/Infinite`](../hubs/SSH_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/ThermalEntropy/Infinite`](../hubs/SSH_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/UniversalityClass/Infinite`](../hubs/SSH_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
@@ -96,6 +95,7 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`TFIM/CriticalExponents/Infinite`](../hubs/TFIM_CriticalExponents_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/DynamicalCorrelation/OBC`](../hubs/TFIM_DynamicalCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/EnergyLocal/OBC`](../hubs/TFIM_EnergyLocal_OBC.md) — uncorroborated-but-feasible
+- 🟠 [`TFIM/FermionicEntanglementEntropy/OBC`](../hubs/TFIM_FermionicEntanglementEntropy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LiebRobinsonVelocity/Infinite`](../hubs/TFIM_LiebRobinsonVelocity_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LightconeSpinCorrelation/OBC`](../hubs/TFIM_LightconeSpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/LocalMagnetization/OBC`](../hubs/TFIM_LocalMagnetization_OBC.md) — uncorroborated-but-feasible
@@ -132,7 +132,8 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟠 [`TightBindingV1D/HighHarmonicAmplitude/Infinite`](../hubs/TightBindingV1D_HighHarmonicAmplitude_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/SpecificHeat/Infinite`](../hubs/TightBindingV1D_SpecificHeat_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TightBindingV1D/ThermalEntropy/Infinite`](../hubs/TightBindingV1D_ThermalEntropy_Infinite.md) — uncorroborated-but-feasible
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](../hubs/ToricCode_AnyonStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](../hubs/ToricCode_AnyonMutualStatistics_Infinite.md) — cited-only
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](../hubs/ToricCode_AnyonSelfStatistics_Infinite.md) — cited-only
 - ⚪ [`ToricCode/Energy/Infinite`](../hubs/ToricCode_Energy_Infinite.md) — cited-only
 - 🟠 [`Triangular/TightBindingChecksum/Infinite`](../hubs/Triangular_TightBindingChecksum_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Triangular/TightBindingMaxEnergy/Infinite`](../hubs/Triangular_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
@@ -400,9 +401,9 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`SLEkappa/CentralCharge/Infinite`](../hubs/SLEkappa_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`SLEkappa/FractalDimension/Infinite`](../hubs/SLEkappa_FractalDimension_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/CorrelationLength/Infinite`](../hubs/SSH_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](../hubs/SSH_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/Energy/Infinite`](../hubs/SSH_Energy_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/MassGap/Infinite`](../hubs/SSH_MassGap_Infinite.md) — corroborated-at-p
+- 🟢 [`SSH/MassGap/OBC`](../hubs/SSH_MassGap_OBC.md) — corroborated-at-p
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`SYK/ConformalWeights/Infinite`](../hubs/SYK_ConformalWeights_Infinite.md) — corroborated-at-p
 - 🟢 [`SherringtonKirkpatrick/CriticalTemperature/Infinite`](../hubs/SherringtonKirkpatrick_CriticalTemperature_Infinite.md) — corroborated-at-p
@@ -484,10 +485,9 @@ Grouped by the named physical regime resolved from the test call (`@sweep` = loo
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `@topological` (4)
+## `@topological` (3)
 
 - 🟢 [`Kitaev1D/CorrelationLength/Infinite`](../hubs/Kitaev1D_CorrelationLength_Infinite.md) — corroborated-at-p
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](../hubs/Kitaev1D_EdgeModeEnergy_OBC.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/Infinite`](../hubs/Kitaev1D_MassGap_Infinite.md) — corroborated-at-p
 - 🟢 [`Kitaev1D/MassGap/OBC`](../hubs/Kitaev1D_MassGap_OBC.md) — corroborated-at-p
 

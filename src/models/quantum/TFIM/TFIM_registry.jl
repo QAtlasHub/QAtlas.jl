@@ -53,7 +53,10 @@
     reliability=:high,
     tested_in="test/models/quantum/TFIM/test_TFIM_massgap.jl",
     references=["Pfeuty1970"],
-    notes="Smallest positive BdG eigenvalue of the OBC chain.",
+    notes="Smallest BdG quasiparticle energy above 1e-10. The threshold excludes the " *
+          "Majorana edge splitting, making this the BULK gap at OBC; Kitaev1D at " *
+          "μ = -2h, t = Δ = J is the same model and does not exclude it. Refuses if " *
+          "nothing is left above the threshold.",
 )
 @register(
     TFIM,

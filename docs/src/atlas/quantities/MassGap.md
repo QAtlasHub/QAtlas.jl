@@ -40,7 +40,7 @@ All `(Model, BC)` hubs `src` claims for the **`MassGap`** observable.  Empty cel
 | [`S1AnisotropicD1D`](../models/S1AnisotropicD1D.md) | — | — | 🔵 [hub](../hubs/S1AnisotropicD1D_MassGap_Infinite.md) |
 | [`S1Heisenberg1D`](../models/S1Heisenberg1D.md) | 🟠 [hub](../hubs/S1Heisenberg1D_MassGap_OBC.md) | — | ⚪ [hub](../hubs/S1Heisenberg1D_MassGap_Infinite.md) |
 | [`S1XXZ1D`](../models/S1XXZ1D.md) | — | — | 🔵 [hub](../hubs/S1XXZ1D_MassGap_Infinite.md) |
-| [`SSH`](../models/SSH.md) | 🟠 [hub](../hubs/SSH_MassGap_OBC.md) | — | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
+| [`SSH`](../models/SSH.md) | 🟢 [hub](../hubs/SSH_MassGap_OBC.md) | — | 🟢 [hub](../hubs/SSH_MassGap_Infinite.md) |
 | [`SchwingerModel`](../models/SchwingerModel.md) | — | — | 🟢 [hub](../hubs/SchwingerModel_MassGap_Infinite.md) |
 | [`TFIM`](../models/TFIM.md) | 🟢 [hub](../hubs/TFIM_MassGap_OBC.md) | 🟠 [hub](../hubs/TFIM_MassGap_PBC.md) | 🟢 [hub](../hubs/TFIM_MassGap_Infinite.md) |
 | [`TightBinding1D`](../models/TightBinding1D.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_OBC.md) | 🟠 [hub](../hubs/TightBinding1D_MassGap_PBC.md) | 🟢 [hub](../hubs/TightBinding1D_MassGap_Infinite.md) |

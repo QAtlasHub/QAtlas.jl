@@ -143,30 +143,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`IsingChain1D/SusceptibilityZZ/Infinite`](hubs/IsingChain1D_SusceptibilityZZ_Infinite.md)
 - 🟢 [`IsingChain1D/ThermalEntropy/Infinite`](hubs/IsingChain1D_ThermalEntropy_Infinite.md)
 
-## Kitaev2001 — 9 hubs
-
-- 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
-- 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
-- 🟠 [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md)
-- 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
-- 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
-- 🟠 [`Kitaev1D/SpecificHeat/Infinite`](hubs/Kitaev1D_SpecificHeat_Infinite.md)
-- 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](hubs/Kitaev1D_ThermalEntropy_Infinite.md)
-- 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
-
-## SSH1979 — 9 hubs
-
-- 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md)
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md)
-- 🟢 [`SSH/Energy/Infinite`](hubs/SSH_Energy_Infinite.md)
-- 🟠 [`SSH/FreeEnergy/Infinite`](hubs/SSH_FreeEnergy_Infinite.md)
-- 🟢 [`SSH/MassGap/Infinite`](hubs/SSH_MassGap_Infinite.md)
-- 🟠 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
-- 🟠 [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
-- 🟠 [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
-- 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md)
-
 ## Affleck1986 — 8 hubs
 
 - 🟠 [`HaldaneShastry/FreeEnergy/Infinite`](hubs/HaldaneShastry_FreeEnergy_Infinite.md)
@@ -178,6 +154,17 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`Heisenberg1D/ThermalEntropy/Infinite`](hubs/Heisenberg1D_ThermalEntropy_Infinite.md)
 - 🟢 [`Universality/ConformalTower/PBC`](hubs/Universality_ConformalTower_PBC.md)
 
+## Kitaev2001 — 8 hubs
+
+- 🟢 [`Kitaev1D/CorrelationLength/Infinite`](hubs/Kitaev1D_CorrelationLength_Infinite.md)
+- 🟢 [`Kitaev1D/Energy/Infinite`](hubs/Kitaev1D_Energy_Infinite.md)
+- 🟠 [`Kitaev1D/FreeEnergy/Infinite`](hubs/Kitaev1D_FreeEnergy_Infinite.md)
+- 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
+- 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
+- 🟠 [`Kitaev1D/SpecificHeat/Infinite`](hubs/Kitaev1D_SpecificHeat_Infinite.md)
+- 🟠 [`Kitaev1D/ThermalEntropy/Infinite`](hubs/Kitaev1D_ThermalEntropy_Infinite.md)
+- 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
+
 ## LandauLifshitz1980 — 8 hubs
 
 - 🟢 [`CurieWeissIsing/CriticalTemperature/Infinite`](hubs/CurieWeissIsing_CriticalTemperature_Infinite.md)
@@ -188,6 +175,17 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`CurieWeissIsing/SpontaneousMagnetization/Infinite`](hubs/CurieWeissIsing_SpontaneousMagnetization_Infinite.md)
 - 🟢 [`CurieWeissIsing/SusceptibilityZZ/Infinite`](hubs/CurieWeissIsing_SusceptibilityZZ_Infinite.md)
 - 🟢 [`CurieWeissIsing/ThermalEntropy/Infinite`](hubs/CurieWeissIsing_ThermalEntropy_Infinite.md)
+
+## SSH1979 — 8 hubs
+
+- 🟢 [`SSH/CorrelationLength/Infinite`](hubs/SSH_CorrelationLength_Infinite.md)
+- 🟢 [`SSH/Energy/Infinite`](hubs/SSH_Energy_Infinite.md)
+- 🟠 [`SSH/FreeEnergy/Infinite`](hubs/SSH_FreeEnergy_Infinite.md)
+- 🟢 [`SSH/MassGap/Infinite`](hubs/SSH_MassGap_Infinite.md)
+- 🟢 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
+- 🟠 [`SSH/SpecificHeat/Infinite`](hubs/SSH_SpecificHeat_Infinite.md)
+- 🟠 [`SSH/ThermalEntropy/Infinite`](hubs/SSH_ThermalEntropy_Infinite.md)
+- 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md)
 
 ## CalabreseCardy2004 — 7 hubs
 
@@ -277,6 +275,14 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`XXZ1D/MassGap/Infinite`](hubs/XXZ1D_MassGap_Infinite.md)
 - 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](hubs/XXZ1D_NMRRelaxationExponent_Infinite.md)
 
+## Kitaev2003 — 5 hubs
+
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](hubs/ToricCode_AnyonMutualStatistics_Infinite.md)
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](hubs/ToricCode_AnyonSelfStatistics_Infinite.md)
+- ⚪ [`ToricCode/Energy/Infinite`](hubs/ToricCode_Energy_Infinite.md)
+- 🟢 [`ToricCode/GroundStateDegeneracy/PBC`](hubs/ToricCode_GroundStateDegeneracy_PBC.md)
+- 🟢 [`ToricCode/MassGap/Infinite`](hubs/ToricCode_MassGap_Infinite.md)
+
 ## LiebWu1968 — 5 hubs
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
@@ -314,12 +320,12 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](hubs/J1J2Heisenberg1D_Energy_Infinite.md)
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
 
-## Kitaev2003 — 4 hubs
+## Peschel2003 — 4 hubs
 
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](hubs/ToricCode_AnyonStatistics_Infinite.md)
-- ⚪ [`ToricCode/Energy/Infinite`](hubs/ToricCode_Energy_Infinite.md)
-- 🟢 [`ToricCode/GroundStateDegeneracy/PBC`](hubs/ToricCode_GroundStateDegeneracy_PBC.md)
-- 🟢 [`ToricCode/MassGap/Infinite`](hubs/ToricCode_MassGap_Infinite.md)
+- 🟠 [`TFIM/FermionicEntanglementEntropy/OBC`](hubs/TFIM_FermionicEntanglementEntropy_OBC.md)
+- 🔵 [`TFIM/QuenchEntanglementEntropy/OBC`](hubs/TFIM_QuenchEntanglementEntropy_OBC.md)
+- 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md)
+- 🟢 [`TFIM/VonNeumannEntropy/OBC`](hubs/TFIM_VonNeumannEntropy_OBC.md)
 
 ## TzengYang2008 — 4 hubs
 
@@ -331,7 +337,7 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## AsbothOroszlanyPalyi2016 — 3 hubs
 
 - 🟢 [`Kitaev1D/TopologicalInvariant/Infinite`](hubs/Kitaev1D_TopologicalInvariant_Infinite.md)
-- 🟢 [`SSH/EdgeModeEnergy/OBC`](hubs/SSH_EdgeModeEnergy_OBC.md)
+- 🟢 [`SSH/MassGap/OBC`](hubs/SSH_MassGap_OBC.md)
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](hubs/SSH_TopologicalInvariant_Infinite.md)
 
 ## Baxter1972 — 3 hubs
@@ -412,12 +418,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`HeisenbergXYZ/SpontaneousMagnetization/Infinite`](hubs/HeisenbergXYZ_SpontaneousMagnetization_Infinite.md)
 - 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](hubs/MixedFieldIsing1D_MassGap_Infinite.md)
 
-## Peschel2003 — 3 hubs
-
-- 🔵 [`TFIM/QuenchEntanglementEntropy/OBC`](hubs/TFIM_QuenchEntanglementEntropy_OBC.md)
-- 🟢 [`TFIM/RenyiEntropy/OBC`](hubs/TFIM_RenyiEntropy_OBC.md)
-- 🟢 [`TFIM/VonNeumannEntropy/OBC`](hubs/TFIM_VonNeumannEntropy_OBC.md)
-
 ## SSH1980 — 3 hubs
 
 - 🟠 [`SSH/FreeEnergy/Infinite`](hubs/SSH_FreeEnergy_Infinite.md)
@@ -461,8 +461,8 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 
 ## Alicea2012 — 2 hubs
 
-- 🟢 [`Kitaev1D/EdgeModeEnergy/OBC`](hubs/Kitaev1D_EdgeModeEnergy_OBC.md)
 - 🟢 [`Kitaev1D/MassGap/Infinite`](hubs/Kitaev1D_MassGap_Infinite.md)
+- 🟢 [`Kitaev1D/MassGap/OBC`](hubs/Kitaev1D_MassGap_OBC.md)
 
 ## AndrewsBaxterForrester1984 — 2 hubs
 
@@ -555,6 +555,11 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## Mermin1990 — 1 hub
 
 - 🟠 [`Bound/MerminGHZBound/Infinite`](hubs/Bound_MerminGHZBound_Infinite.md)
+
+## NayakSimonSternFreedmanDasSarma2008 — 2 hubs
+
+- ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](hubs/ToricCode_AnyonMutualStatistics_Infinite.md)
+- ⚪ [`ToricCode/AnyonSelfStatistics/Infinite`](hubs/ToricCode_AnyonSelfStatistics_Infinite.md)
 
 ## Polyakov1981 — 2 hubs
 
@@ -876,10 +881,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 ## Nakamura2000 — 1 hub
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](hubs/ExtendedHubbard1D_ChargeGap_Infinite.md)
-
-## NayakSimonSternFreedmanDasSarma2008 — 1 hub
-
-- ⚪ [`ToricCode/AnyonStatistics/Infinite`](hubs/ToricCode_AnyonStatistics_Infinite.md)
 
 ## Nishimori1981 — 1 hub
 

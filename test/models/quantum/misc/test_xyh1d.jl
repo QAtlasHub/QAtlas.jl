@@ -107,3 +107,38 @@ end
         @test isapprox(sum(e), E_total; atol=1e-6)
     end
 end
+
+@testset "XYh1D — the BdG branch keeps its zero mode" begin
+    # Jy = 0 makes the BdG matrix identical to TFIM's, so the two extractions must agree
+    # entry for entry. The constructor refuses Jy = 0, so this goes through the builder.
+    for (h, N) in ((0.5, 4), (0.05, 8), (0.05, 16), (0.001, 4), (0.0, 4))
+        a = QAtlas._tfim_bdg_spectrum(N, 1.0, h)
+        b = QAtlas._xyh1d_bdg_spectrum(N, 1.0, 0.0, h)
+        @test length(b) == N
+        @test a ≈ b atol = 1.0e-12
+    end
+    @test_throws ArgumentError QAtlas._xyh1d_bdg_spectrum(0, 1.0, 0.5, 0.0)
+    # The `a ≈ b` comparisons above cannot fail independently of the length check: at
+    # Jy = 0 both sides come from the same matrix, so the old filter dropped the same mode
+    # from each. These are what actually pin the fix for this model.
+    #
+    # Jy → 0 makes XYh1D into TFIM, so at h = 0 the classical Ising closed form applies
+    # end to end: Z = 2 (2 cosh βJ)^(N-1).
+    for (N, β) in ((4, 2.0), (6, 2.0), (4, 0.5))
+        exact = -log(2 * (2 * cosh(β * 1.0))^(N - 1)) / (β * N)
+        @test QAtlas.fetch(
+            XYh1D(; Jx=1.0, Jy=1.0e-9, h=0.0), FreeEnergy(), OBC(N); beta=β
+        ) ≈ exact atol = 1.0e-9
+    end
+    # Its own zero pair is at Jx = Jy, h = 0 with ODD N: the pairing block vanishes and the
+    # BdG splits into two open tight-binding chains, which carry a zero only at odd length.
+    for n in (3, 5, 9)
+        Λ = QAtlas._xyh1d_bdg_spectrum(n, 1.0, 1.0, 0.0)
+        @test length(Λ) == n
+        @test count(x -> abs(x) < 1.0e-10, Λ) == 1
+    end
+    for n in (4, 8)
+        @test count(x -> abs(x) < 1.0e-10, QAtlas._xyh1d_bdg_spectrum(n, 1.0, 1.0, 0.0)) ==
+            0
+    end
+end

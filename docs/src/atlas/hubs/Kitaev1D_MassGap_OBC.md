@@ -8,28 +8,48 @@
 
 ## `src` claim
 
-- method `bdg`, status `exact`, reliability `high`, refs: Kitaev2001
-- Smallest non-negative BdG eigenvalue (Majorana edge mode in topological phase).
+- method `bdg`, status `exact`, reliability `high`, refs: Kitaev2001 | Alicea2012
+- "Smallest non-negative BdG eigenvalue. In the topological phase this IS the " * "Majorana boundary-mode energy, splitting ~ e^{-N/xi}; in the trivial phase it " * "converges to the bulk gap. That reading is an interpretation of this value in " * "a phase, not a second quantity (#816 deleted EdgeModeEnergy, which duplicated it)."
 
 ## Corroboration
 
 | regime | mechanism | independence | refs | file |
 |---|---|---|---|---|
-| `@topological` | `second_closed_form` | 🟢 structural | Kitaev sweet spot μ=0, t=Δ=1: OBC gap ≈ 0 (Majorana edge mode) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev sweet spot μ=0, t=Δ=1: exact Majorana boundary, OBC gap ≈ 0 | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
+| `@topological` | `second_closed_form` | 🟢 structural | Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N) | `test/models/quantum/misc/test_kitaev1d.jl` |
 
 ## Test calls
 
 _The exact `verify(...)` call the harness executed for this hub (reconstructed from the test AST):_
 
 ```julia
-verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(40); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Kitaev sweet spot μ=0, t=Δ=1: OBC gap ≈ 0 (Majorana edge mode)"])
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(40); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-9, refs = ["Kitaev sweet spot μ=0, t=Δ=1: exact Majorana boundary, OBC gap ≈ 0"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(6); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(8); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(16); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
+```
+
+```julia
+verify(Kitaev1D(; μ = 0.0, t = 1.0, Δ = 1.0), MassGap(), OBC(32); route = :second_closed_form, independent = 0.0, agree_within = 1.0e-10, refs = ["Kitaev 2001 sweet spot OBC: Majorana zero modes are exact (E_edge = 0 for any N)"])
 ```
 
 
 ## Assurance (provisional)
 
 - level: **corroborated-at-p** 🟢
-- cards: 1 · model ED-feasible
+- cards: 5 · model ED-feasible
 - RES not wired — measured residuals / confidence are not shown yet.
 
 

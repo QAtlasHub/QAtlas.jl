@@ -106,10 +106,8 @@ sorted ascending.  The BdG zero modes of the topological phase (lifted
 by exponentially small N⁻¹ corrections) appear as the smallest entry.
 
 This is a strict generalisation of `_tfim_bdg_spectrum`: at
-`(μ, t, Δ) = (-2h, J, J)` the matrix coincides with the TFIM BdG matrix.
-The spectra agree on the top `length(_tfim_bdg_spectrum(N, J, h))` entries,
-not entry for entry — TFIM filters strictly positive, so where a zero mode
-is exact it returns `N-1` values and this returns `N`.
+`(μ, t, Δ) = (-2h, J, J)` the matrix coincides with the TFIM BdG matrix and
+the spectra agree entry for entry.
 """
 function _kitaev1d_bdg_spectrum(N::Int, μ::Float64, t::Float64, Δ::Float64)::Vector{Float64}
     N >= 1 || throw(ArgumentError("Kitaev1D: need N ≥ 1 sites; got N = $N"))

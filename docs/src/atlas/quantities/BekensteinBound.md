@@ -5,12 +5,6 @@
 
 All `(Model, BC)` hubs `src` claims for the **`BekensteinBound`** observable.  Empty cells = this model doesn't yet have a `BekensteinBound` registered at that BC — i.e. where this quantity could be added to other models.
 
-## Definition
-
-The Bekenstein universal entropy bound — an upper bound on the entropy of a bounded system (`S ≤ 2π R E`).  A `status=:bound` quantity; fetched against a ``Bound`` domain (`Bound(:Holographic)`).
-
-_(extracted from `src/core/quantities.jl` docstring.)_
-
 ## Coverage
 
 - **Models with this quantity registered**: 1

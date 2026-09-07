@@ -388,3 +388,36 @@ end
         @test isnan(QAtlas.fetch(m_off, NMRRelaxationExponent(), Infinite()))
     end
 end
+
+@testset "TFIM — the BdG branch keeps its zero mode" begin
+    # h = 0 OBC is the classical Ising chain, Z = 2 (2 cosh βJ)^(N-1) exactly. The thermal
+    # sums need all N modes to reproduce it; the old filter returned N-1.
+    for (N, β) in ((4, 2.0), (6, 2.0), (4, 0.5), (8, 1.0))
+        @test length(QAtlas._tfim_bdg_spectrum(N, 1.0, 0.0)) == N
+        exact = -log(2 * (2 * cosh(β * 1.0))^(N - 1)) / (β * N)
+        @test QAtlas.fetch(TFIM(; J=1.0, h=0.0), FreeEnergy(), OBC(N); beta=β) ≈ exact atol =
+            1.0e-12
+    end
+    # The old 1e-10 filter made these discontinuous in h and in N, since the edge splitting
+    # is ~(h/J)^N. Neither knob may move the answer by a finite step.
+    fs = [
+        QAtlas.fetch(TFIM(; J=1.0, h=h), FreeEnergy(), OBC(4); beta=2.0) for
+        h in (0.02, 0.01, 0.005, 0.001, 0.0)
+    ]
+    @test maximum(abs, diff(fs)) < 1.0e-3
+    ss = [
+        QAtlas.fetch(TFIM(; J=1.0, h=h), ThermalEntropy(), OBC(4); beta=2.0) for
+        h in (0.02, 0.01, 0.005, 0.001, 0.0)
+    ]
+    @test maximum(abs, diff(ss)) < 1.0e-3
+    for N in (4, 8, 12, 16)
+        @test length(QAtlas._tfim_bdg_spectrum(N, 1.0, 0.05)) == N
+    end
+    # N = 1 is where the old filter failed worst: the 2x2 BdG matrix is exactly zero, so
+    # it returned an EMPTY vector, not N-1, and FreeEnergy came out 0 instead of -log(2)/β.
+    @test QAtlas._tfim_bdg_spectrum(1, 1.0, 0.0) == [0.0]
+    for β in (0.5, 2.0)
+        @test QAtlas.fetch(TFIM(; J=1.0, h=0.0), FreeEnergy(), OBC(1); beta=β) ≈ -log(2) / β atol =
+            1.0e-12
+    end
+end

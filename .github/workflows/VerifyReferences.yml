@@ -5,10 +5,10 @@ name: Verify references
 # + sticky PR comment) so the whole fleet runs one identical, canonical check.
 on:
   pull_request:
-    paths: ['docs/references.bib', 'docs/references.allow', 'docs/references.title-allow', 'docs/check_reference_titles.py', '.github/workflows/VerifyReferences.yml']
+    paths: ['docs/references.bib', 'docs/references.allow', 'docs/references.title-allow', '.github/workflows/VerifyReferences.yml']
   push:
     branches: [main]
-    paths: ['docs/references.bib', 'docs/references.allow', 'docs/references.title-allow', 'docs/check_reference_titles.py']
+    paths: ['docs/references.bib', 'docs/references.allow', 'docs/references.title-allow']
   workflow_dispatch:
 concurrency:
   # Cancel a PR's superseded runs when it is pushed again; queue (never cancel)
@@ -24,12 +24,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: QAtlasHub/doiget-citation-check@v1
+      # Pinned to v1.2.0 rather than v1: the title cross-check is new, and the rest of the
+      # fleet stays on the resolution-only gate until this hub has run it for a while.
+      - uses: QAtlasHub/doiget-citation-check@v1.2.0
         with:
           bib: docs/references.bib
           allow: docs/references.allow
-      # The action above gates on whether a DOI RESOLVES. That cannot see a one-character
-      # slip that lands on somebody else's real paper — measured on this bibliography, 2 of
-      # 18 sampled DOIs have a resolving neighbour one digit away. Comparing the title does.
-      - name: Cross-check titles against Crossref
-        run: python3 docs/check_reference_titles.py docs/references.bib docs/references.title-allow
+          # Resolution alone cannot see a one-character slip that lands on somebody else's
+          # real paper — measured here, 2 of 18 sampled DOIs have a resolving neighbour one
+          # digit away. The title can.
+          titles: 'true'
+          title-allow: docs/references.title-allow

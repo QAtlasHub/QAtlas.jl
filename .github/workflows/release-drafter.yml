@@ -24,6 +24,6 @@ jobs:
       pull-requests: write  # autolabeler writes labels back to PRs
     runs-on: ubuntu-latest
     steps:
-      - uses: release-drafter/release-drafter@v7
+      - uses: release-drafter/release-drafter@v7.6.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

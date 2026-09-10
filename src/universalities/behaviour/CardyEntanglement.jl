@@ -188,15 +188,18 @@ end
 
 # ─── Calabrese–Cardy entanglement entropy: generic Universality{C} ──────────
 #
-# All entanglement methods route through `_cardy_central_charge(model)` to
-# extract `c`, so that helper is the single place the applicability of these
-# closed forms is decided — see `_cardy_applies`.
+# The entanglement methods here route through `_cardy_central_charge(model)` to
+# extract `c`.  Applicability is decided one level below that, by
+# `_require_cardy_applicable` — which `behaviour/conformal_casimir.jl` also calls
+# directly, because it reads `c` from `_universality_central_charge` instead.
+# Any new conformal closed form must call the gate, wherever it gets `c`.
 
 """
     _cardy_applies(::Universality{C}) -> Bool
 
-Whether the Calabrese–Cardy closed forms in this file may be evaluated for
-universality class `C`.
+Whether the conformal-invariance closed forms may be evaluated for universality
+class `C` — the Calabrese–Cardy family in this file, and the Cardy Casimir
+correction in `behaviour/conformal_casimir.jl`.
 
 **Opt-in, defaulting to `false`**, and deliberately not derived from "has a
 `CentralCharge`".  Having a logarithmic coefficient is not the criterion: it is
@@ -225,17 +228,24 @@ _cardy_applies(::Universality{:XY}) = true           # compact boson, c = 1
 _cardy_applies(::Universality{:Heisenberg}) = true   # SU(2)_1 WZW, c = 1
 
 """
-    _cardy_central_charge(model::Universality{C}; kwargs...) -> Float64
+    _require_cardy_applicable(model::Universality{C})
 
-Internal helper: fetch the central charge `c` of the universality class
-`model` and return it as a `Float64`.  Throws an `ErrorException` if the
-class is not a 1+1D CFT (`_cardy_applies`) or has no
-`CentralCharge` defined.
+Throw unless `C` is declared conformal (`_cardy_applies`); return `nothing`
+otherwise.
+
+**Every conformal-invariance closed form must call this before it reads a
+central charge**, whichever accessor it reads it from.  There are two:
+`_cardy_central_charge` (below) and `_universality_central_charge`
+(`core/universality.jl`), and gating only the first is not enough — the Cardy
+Casimir correction in `behaviour/conformal_casimir.jl` reads the second, so it
+calls this directly.  A grep for `_cardy_central_charge` cannot find such a
+route, by construction: it lists the formulas that already go through the gate,
+not the ones that get `c` some other way.  The sweep that does find them is
+`grep -rn "Universality{C}" src/` — every generic-in-`C` `fetch` either gates
+here, dispatches per class with an erroring fallback (`conformal_towers.jl`), or
+carries its own explicit allow-list (`conformal_2plus1d.jl`).
 """
-function _cardy_central_charge(model::Universality{C}; c=nothing, kwargs...) where {C}
-    # Checked BEFORE the supplied-`c` shortcut below: what is refused here is the
-    # FORMULA, not the value of its coefficient, so passing `c` explicitly must
-    # not route around it.
+function _require_cardy_applicable(model::Universality{C}) where {C}
     _cardy_applies(model) || return error(
         "Universality{:$C}: the Calabrese-Cardy closed forms are consequences of " *
         "conformal invariance, and this universality class is not declared to be a " *
@@ -247,6 +257,22 @@ function _cardy_central_charge(model::Universality{C}; c=nothing, kwargs...) whe
         "conformal formula, not a coefficient: where this class has one, it is still " *
         "`fetch(Universality(:$C), CentralCharge())`.",
     )
+    return nothing
+end
+
+"""
+    _cardy_central_charge(model::Universality{C}; kwargs...) -> Float64
+
+Internal helper: fetch the central charge `c` of the universality class
+`model` and return it as a `Float64`.  Throws an `ErrorException` if the
+class is not a 1+1D CFT (`_require_cardy_applicable`) or has no
+`CentralCharge` defined.
+"""
+function _cardy_central_charge(model::Universality{C}; c=nothing, kwargs...) where {C}
+    # Checked BEFORE the supplied-`c` shortcut below: what is refused is the
+    # FORMULA, not the value of its coefficient, so passing `c` explicitly must
+    # not route around it.
+    _require_cardy_applicable(model)
     # Caller-supplied (e.g. model-dependent) central charge takes precedence: a
     # model that realizes this class passes its own `c` into the universal EE
     # formula, rather than the formula hard-wiring the class value.

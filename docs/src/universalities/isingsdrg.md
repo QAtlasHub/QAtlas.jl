@@ -41,8 +41,10 @@ c_eff = QAtlas.fetch(Universality(:IsingSDRG), CentralCharge(); d=2)
 
 The Calabrese–Cardy closed forms that every *conformal* class in QAtlas
 answers — the finite-size chord ``S(\ell, L) = \frac{c}{3}\log\!\big[\frac{L}{\pi}\sin\frac{\pi\ell}{L}\big]``,
-the Casimir energy, Cardy's density of states, the thermal ``\sinh`` form,
-the quench light-cone — **raise an `ErrorException` for `IsingSDRG`**:
+the Casimir energy (both `ConformalCasimirEnergy` and
+`CasimirEnergyCorrection`), Cardy's density of states, the thermal ``\sinh``
+form, the quench light-cone — **raise an `ErrorException` for `IsingSDRG`**,
+on every route that reaches them:
 
 ```julia
 QAtlas.fetch(Universality(:IsingSDRG), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)

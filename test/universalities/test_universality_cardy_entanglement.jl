@@ -192,16 +192,69 @@ using QAtlas, Test
         @test QAtlas.fetch(sdrg, CentralCharge(), Infinite()) ≈ log(2) / 2
         @test !QAtlas._cardy_applies(sdrg)
 
-        # Every route through `_cardy_central_charge`, not one of them: a guard
-        # verified on a single entry point says nothing about the other seventeen.
+        # EVERY gated route, not a sample: a guard verified on one entry point says
+        # nothing about the other seventeen, and the two `CasimirEnergyCorrection`
+        # rows are here because they were the ones that got away — they live in
+        # `behaviour/conformal_casimir.jl` and read `c` from
+        # `_universality_central_charge`, so a grep for `_cardy_central_charge`
+        # could not see them.  All arguments below are VALID, so that the guard is
+        # what fires and not an earlier `ArgumentError`.
+        #
+        # If a new conformal closed form is added, it belongs in this list.
         refused = [
             () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0),
             () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), OBC(); ℓ=4.0, L=8.0),
             () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), Infinite(); ℓ=10.0),
             () -> QAtlas.fetch(sdrg, RenyiEntropy(2.0), PBC(); ℓ=4.0, L=8.0),
-            () -> QAtlas.fetch(sdrg, ConformalCasimirEnergy(), Infinite(); L=8.0),
+            () -> QAtlas.fetch(sdrg, RenyiEntropy(2.0), OBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(sdrg, RenyiEntropy(2.0), Infinite(); ℓ=10.0),
+            () -> QAtlas.fetch(
+                sdrg, EntanglementGrowthSlope(), Infinite(); v=1.0, beta_eff=1.0
+            ),
             () -> QAtlas.fetch(sdrg, CardyEntropy(), Infinite(); E=10.0),
+            () -> QAtlas.fetch(sdrg, ConformalCasimirEnergy(), Infinite(); L=8.0),
+            () -> QAtlas.fetch(sdrg, LogarithmicNegativity(), Infinite(); ℓ_A=4.0, ℓ_B=4.0),
+            () -> QAtlas.fetch(
+                sdrg, EntanglementSaturationDensity(), Infinite(); beta_eff=1.0
+            ),
+            () -> QAtlas.fetch(sdrg, ThermalEnergyDensity(), Infinite(); beta=1.0),
+            () -> QAtlas.fetch(sdrg, CFTThermalEntropyDensity(), Infinite(); beta=1.0),
+            () -> QAtlas.fetch(
+                sdrg,
+                QuenchEntanglementEntropy(),
+                Infinite();
+                ℓ=4.0,
+                t=1.0,
+                v=1.0,
+                beta_eff=1.0,
+            ),
+            () -> QAtlas.fetch(
+                sdrg,
+                QuenchEntanglementEntropy(),
+                OBC();
+                ℓ=4.0,
+                t=1.0,
+                v=1.0,
+                beta_eff=1.0,
+            ),
+            () -> QAtlas.fetch(
+                sdrg,
+                QuenchEntanglementEntropy(),
+                PBC();
+                ℓ=4.0,
+                L=8.0,
+                t=1.0,
+                v=1.0,
+                beta_eff=1.0,
+            ),
+            () -> QAtlas.fetch(sdrg, CasimirEnergyCorrection(), PBC(); L=8.0, v=1.0),
+            () -> QAtlas.fetch(sdrg, CasimirEnergyCorrection(), OBC(); L=8.0, v=1.0),
+            # Not a gate site: MutualInformation composes three VonNeumannEntropy
+            # fetches.  Here to assert the refusal PROPAGATES through a composed
+            # route, rather than only that each leaf triggers it.
+            () -> QAtlas.fetch(sdrg, MutualInformation(), Infinite(); ℓ_A=4.0, ℓ_B=4.0),
         ]
+        @test length(refused) == 19            # 18 gate sites + 1 composed route
         for f in refused
             @test_throws ErrorException f()
             # ...and it DIAGNOSES: `@test_throws ErrorException` alone would also
@@ -238,6 +291,18 @@ using QAtlas, Test
         # Ising, explicitly, against the closed form it is supposed to give.
         @test QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0) ≈
             (0.5 / 3) * log((8.0 / π) * sin(π * 4.0 / 8.0))
+
+        # The Casimir correction newly routed through the gate keeps its documented
+        # RATIONAL return for a rational `c` and `v` — the reason it reads
+        # `_universality_central_charge` rather than `_cardy_central_charge`, which
+        # would have converted to Float64.
+        casimir = QAtlas.fetch(
+            Universality(:Ising), CasimirEnergyCorrection(), PBC(); L=16, v=2
+        )
+        @test casimir ≈ -π * (1 // 2) * 2 / (6 * 16)
+        @test QAtlas.fetch(
+            Universality(:Ising), CasimirEnergyCorrection(), OBC(); L=16, v=2
+        ) ≈ -π * (1 // 2) * 2 / (24 * 16)
     end
 
     @testset "non-1+1D classes have no central charge" begin

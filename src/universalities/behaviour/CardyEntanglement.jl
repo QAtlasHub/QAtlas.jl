@@ -190,7 +190,7 @@ end
 #
 # The entanglement methods here route through `_cardy_central_charge(model)` to
 # extract `c`.  Applicability is decided one level below that, by
-# `_require_cardy_applicable` — which `behaviour/conformal_casimir.jl` also calls
+# `_require_cardy_applicable` — which `universalities/behaviour/conformal_casimir.jl` also calls
 # directly, because it reads `c` from `_universality_central_charge` instead.
 # Any new conformal closed form must call the gate, wherever it gets `c`.
 
@@ -199,7 +199,7 @@ end
 
 Whether the conformal-invariance closed forms may be evaluated for universality
 class `C` — the Calabrese–Cardy family in this file, and the Cardy Casimir
-correction in `behaviour/conformal_casimir.jl`.
+correction in `universalities/behaviour/conformal_casimir.jl`.
 
 **Opt-in, defaulting to `false`**, and deliberately not derived from "has a
 `CentralCharge`".  Having a logarithmic coefficient is not the criterion: it is
@@ -209,10 +209,10 @@ states, the thermal `sinh` form, the quench light-cone — is a consequence of
 CONFORMAL INVARIANCE, and follows from `c` only when the fixed point has it.
 
 `Universality{:IsingSDRG}` is the class that separates the two.  Its
-Refael–Moore `c̃ = (ln 2)/2` is a genuine, published log-coefficient and stays
+Refael–Moore `c_eff = (ln 2)/2` is a genuine, published log-coefficient and stays
 fetchable through [`CentralCharge`](@ref); the infinite-randomness fixed point
 it describes is not conformal (its dynamic scaling is activated,
-`ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`), so substituting `c̃` into a finite-size
+`ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`), so substituting `c_eff` into a finite-size
 chord would be an extrapolation nothing in the atlas has measured.
 
 A denylist would not do: this atlas grows non-conformal classes (further
@@ -237,13 +237,13 @@ otherwise.
 central charge**, whichever accessor it reads it from.  There are two:
 `_cardy_central_charge` (below) and `_universality_central_charge`
 (`core/universality.jl`), and gating only the first is not enough — the Cardy
-Casimir correction in `behaviour/conformal_casimir.jl` reads the second, so it
+Casimir correction in `universalities/behaviour/conformal_casimir.jl` reads the second, so it
 calls this directly.  A grep for `_cardy_central_charge` cannot find such a
 route, by construction: it lists the formulas that already go through the gate,
 not the ones that get `c` some other way.  The sweep that does find them is
 `grep -rn "Universality{C}" src/` — every generic-in-`C` `fetch` either gates
-here, dispatches per class with an erroring fallback (`conformal_towers.jl`), or
-carries its own explicit allow-list (`conformal_2plus1d.jl`).
+here, dispatches per class with an erroring fallback (`universalities/behaviour/conformal_towers.jl`), or
+carries its own explicit allow-list (`universalities/behaviour/conformal_2plus1d.jl`).
 """
 function _require_cardy_applicable(model::Universality{C}) where {C}
     _cardy_applies(model) || error(

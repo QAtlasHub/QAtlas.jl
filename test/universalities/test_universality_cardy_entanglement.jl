@@ -181,7 +181,7 @@ using QAtlas, Test
     end
 
     # A logarithmic coefficient is not conformal invariance.  :IsingSDRG has the
-    # first (Refael-Moore c̃ = ln2/2) and not the second (activated dynamic
+    # first (Refael-Moore c_eff = ln2/2) and not the second (activated dynamic
     # scaling, ln Ω ~ L^{1/2}), so the closed forms here must refuse it while its
     # coefficient stays fetchable.
     @testset "log-scaling without conformal invariance is refused (:IsingSDRG)" begin
@@ -292,8 +292,8 @@ using QAtlas, Test
         @test QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0) ≈
             (0.5 / 3) * log((8.0 / π) * sin(π * 4.0 / 8.0))
 
-        # The Casimir correction newly routed through the gate keeps its documented
-        # RATIONAL return for a rational `c` and `v` — the reason it reads
+        # The Casimir correction keeps its documented RATIONAL return for a
+        # rational `c` and `v` — which is the reason it reads
         # `_universality_central_charge` rather than `_cardy_central_charge`, which
         # would have converted to Float64.
         casimir = QAtlas.fetch(

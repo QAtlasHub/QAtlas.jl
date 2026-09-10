@@ -85,13 +85,9 @@ effective central charge:
 
     c_eff = c * log(2) = log(2) / 2  ≈ 0.34657359
 
-This is the whole of what the class exposes here.  The Calabrese–Cardy
-closed forms in this file are **refused** for it (see `_cardy_applies`):
-`c_eff` is a logarithmic coefficient, but the infinite-randomness fixed
-point is not conformal — its dynamic scaling is activated,
-`ln Ω ~ L^{1/2}` — so the finite-size chord, the Casimir energy and the
-rest do not follow from it.  `S̄(ℓ) = (c_eff/3) ln ℓ` in the class
-documentation is the two-cut logarithm and nothing more.
+All this class exposes here: the closed forms in this file are **refused**
+for it (see `_cardy_applies`).  `S̄(ℓ) = (c_eff/3) ln ℓ` is the two-cut
+logarithm and nothing more.
 
 Reference: Refael, Moore, [RefaelMoore2004](@cite).
 """
@@ -194,16 +190,15 @@ end
 """
     _cardy_applies(::Universality{C}) -> Bool
 
-Whether the conformal-invariance closed forms may be evaluated for class `C`:
-the Calabrese–Cardy family here, and the Cardy Casimir correction in
-`universalities/behaviour/conformal_casimir.jl`.
+Whether the conformal closed forms apply to class `C` — the Calabrese–Cardy
+family here and the Casimir correction in
+`universalities/behaviour/conformal_casimir.jl`.  **Opt-in, default `false`**,
+so a new non-conformal class cannot fall in.
 
-**Opt-in, defaulting to `false`**, so a new non-conformal class cannot fall into
-the formulas.  Having a `CentralCharge` is NOT the criterion: that is the weaker
-statement `S ~ (coefficient) log ℓ`, while these forms follow from conformal
-invariance.  `:IsingSDRG` separates the two — its Refael–Moore
-`c_eff = (ln 2)/2` stays fetchable through [`CentralCharge`](@ref), but its
-fixed point scales in an activated way, `ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`.
+Having a `CentralCharge` is not the criterion; it says only
+`S ~ (coefficient) log ℓ`.  `:IsingSDRG` separates the two: `c_eff = (ln 2)/2`
+stays fetchable through [`CentralCharge`](@ref), but its fixed point scales in
+an activated way, `ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`.
 """
 _cardy_applies(::Universality) = false
 _cardy_applies(::Universality{:Ising}) = true        # M(3,4), c = 1/2
@@ -215,17 +210,16 @@ _cardy_applies(::Universality{:Heisenberg}) = true   # SU(2)_1 WZW, c = 1
 """
     _require_cardy_applicable(model::Universality{C})
 
-Throw unless `C` is declared conformal (`_cardy_applies`); return `nothing`
-otherwise.
+Throw unless `_cardy_applies(C)`.
 
-**Call this before reading a central charge, whichever accessor you use.**
-There are two — `_cardy_central_charge` below and `_universality_central_charge`
-(`core/universality.jl`) — and `universalities/behaviour/conformal_casimir.jl`
-reads the latter, so it calls this directly.
+**Call this before reading a central charge, whichever accessor you use** —
+there are two, `_cardy_central_charge` below and `_universality_central_charge`
+(`core/universality.jl`); `.../conformal_casimir.jl` reads the latter and so
+calls this directly.
 
-Audit with `grep -rn "Universality{C}" src/`, not with an accessor name: that
-grep lists only what already routes through the accessor.  Every generic-in-`C`
-`fetch` must gate here, dispatch per class with an erroring fallback
+Audit with `grep -rn "Universality{C}" src/`, never with an accessor name — that
+lists only what already routes through it.  Each generic-in-`C` `fetch` must
+gate here, dispatch per class with an erroring fallback
 (`.../conformal_towers.jl`), or carry an allow-list
 (`.../conformal_2plus1d.jl`).
 """

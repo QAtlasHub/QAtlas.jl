@@ -246,7 +246,7 @@ here, dispatches per class with an erroring fallback (`conformal_towers.jl`), or
 carries its own explicit allow-list (`conformal_2plus1d.jl`).
 """
 function _require_cardy_applicable(model::Universality{C}) where {C}
-    _cardy_applies(model) || return error(
+    _cardy_applies(model) || error(
         "Universality{:$C}: the Calabrese-Cardy closed forms are consequences of " *
         "conformal invariance, and this universality class is not declared to be a " *
         "1+1D CFT, so they do not follow from its logarithmic coefficient. A class " *

@@ -60,20 +60,39 @@ fetch(::Universality{C}, ::RenyiEntropy, ::Infinite; ℓ::Real, kwargs...)
 ```
 
 The central charge is fetched internally via
-`fetch(Universality{C}(), CentralCharge(); kwargs...)`. Universality
-classes that do not have a 1+1D-CFT central charge defined (e.g. KPZ,
-Percolation, the 3D O(``n``) classes) raise `ErrorException` with a
-clear message.
+`fetch(Universality{C}(), CentralCharge(); kwargs...)`, behind a
+conformal-invariance gate. There are **two** distinct refusals, and they
+are not the same question:
+
+1. the class has no 1+1D-CFT central charge at all (e.g. KPZ,
+   Percolation, the 3D O(``n``) classes);
+2. the class **has** a logarithmic coefficient but is **not conformal**,
+   so these closed forms do not follow from it — currently
+   `Universality(:IsingSDRG)`.
+
+Both raise `ErrorException` with a message naming which case applies.
 
 ## Supported universality classes
 
 | Class | ``d`` | ``c`` | Reference |
 |-------|-----|-----|-----------|
 | `Universality(:Ising)` | 2 | ``1/2`` | M(3,4) — Belavin–Polyakov–Zamolodchikov, Nucl. Phys. B 241, 333 (1984) |
-| `Universality(:IsingSDRG)` | 2 | ``\ln(2)/2`` | Strong-disorder renormalization group (SDRG) / infinite-randomness fixed point (IRFP) of 1D random TFIM — Refael–Moore, Phys. Rev. Lett. 93, 260602 (2004) |
 | `Universality(:Potts3)` | 2 | ``4/5`` | M(5,6) — Dotsenko, Nucl. Phys. B 235, 54 (1984) |
 | `Universality(:Potts4)` | 2 | ``1`` | Compact boson at marginal point — di Francesco–Mathieu–Sénéchal §12.3 |
 | `Universality(:XY)` | 2 | ``1`` | BKT free boson — Kosterlitz J. Phys. C 7, 1046 (1974) |
+
+### Not supported: `Universality(:IsingSDRG)`
+
+The IRFP of the 1D random TFIM has a Refael–Moore effective central charge
+``c_{\text{eff}} = \ln(2)/2``, still available as
+`fetch(Universality(:IsingSDRG), CentralCharge())` — but it is **not a
+conformal field theory** (its dynamic scaling is activated,
+``\ln \Omega \sim L^{1/2}``), so every closed form on this page refuses
+it. Having a logarithmic coefficient is the strictly weaker statement;
+these formulas are consequences of conformal invariance. See
+[Ising SDRG](isingsdrg.md) for the full argument, and
+`QAtlas._cardy_applies` for the opt-in a class uses to declare itself
+conformal.
 
 For all other classes — `Universality(:KPZ)`, `Universality(:Percolation)`,
 `Universality(:Heisenberg)` (3D O(3)), and any future class — the

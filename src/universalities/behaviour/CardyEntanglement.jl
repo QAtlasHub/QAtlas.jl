@@ -2,9 +2,7 @@
 # Calabrese–Cardy entanglement entropy at the Universality{C} level
 #
 # Generic 1+1D CFT entanglement formulae for any universality class DECLARED
-# CONFORMAL by `_cardy_applies`.  Having a central charge is not the criterion
-# and never was a sufficient one: `:IsingSDRG` has one and is refused, because
-# these are consequences of conformal invariance and its fixed point has none.
+# CONFORMAL by `_cardy_applies` — having a central charge is not the criterion.
 # The closed forms are
 #
 #   PBC, finite L:   S(ℓ, L) = (c/3) log[(L/π) sin(πℓ/L)] + c'_1
@@ -46,13 +44,11 @@
 
 # ─── CentralCharge: minimal-model 1+1D CFT lookups ──────────────────────────
 #
-# A central charge here is a logarithmic coefficient, and having one is
-# independent of being conformal — `:IsingSDRG` has one without being a CFT,
-# which is why applicability is a separate question (`_cardy_applies`) and not
-# read off this dispatch.  Higher-d universality classes (e.g. 3D Ising, 3D
-# Heisenberg) have no central charge at the universality-class level at all,
-# even though the d-dimensional class is perfectly well-defined; those call
-# sites raise an `ErrorException` with the dimension in the message.
+# A central charge here is a logarithmic coefficient; whether the formulas
+# APPLY is the separate question `_cardy_applies` answers.  Higher-d classes
+# (e.g. 3D Ising, 3D Heisenberg) have no central charge at this level at all,
+# well-defined though the d-dimensional class is; those call sites raise an
+# `ErrorException` naming the dimension.
 
 """
     fetch(::Universality{:Ising}, ::CentralCharge; d::Int=2) -> Rational{Int}
@@ -192,26 +188,22 @@ end
 
 # ─── Calabrese–Cardy entanglement entropy: generic Universality{C} ──────────
 #
-# The entanglement methods here route through `_cardy_central_charge(model)` to
-# extract `c`.  Applicability is decided one level below that, by
-# `_require_cardy_applicable` — which `universalities/behaviour/conformal_casimir.jl` also calls
-# directly, because it reads `c` from `_universality_central_charge` instead.
-# Any new conformal closed form must call the gate, wherever it gets `c`.
+# These methods take `c` from `_cardy_central_charge`; applicability is decided
+# one level below, in `_require_cardy_applicable`.
 
 """
     _cardy_applies(::Universality{C}) -> Bool
 
-Whether the conformal-invariance closed forms may be evaluated for universality
-class `C` — the Calabrese–Cardy family in this file, and the Cardy Casimir
-correction in `universalities/behaviour/conformal_casimir.jl`.
+Whether the conformal-invariance closed forms may be evaluated for class `C`:
+the Calabrese–Cardy family here, and the Cardy Casimir correction in
+`universalities/behaviour/conformal_casimir.jl`.
 
-**Opt-in, defaulting to `false`**: a class asserts conformal invariance by
-declaring itself here, so a new non-conformal class cannot default into the
-formulas.  Having a `CentralCharge` is NOT the criterion — that is the weaker
+**Opt-in, defaulting to `false`**, so a new non-conformal class cannot fall into
+the formulas.  Having a `CentralCharge` is NOT the criterion: that is the weaker
 statement `S ~ (coefficient) log ℓ`, while these forms follow from conformal
-invariance.  `Universality{:IsingSDRG}` separates the two: its Refael–Moore
+invariance.  `:IsingSDRG` separates the two — its Refael–Moore
 `c_eff = (ln 2)/2` stays fetchable through [`CentralCharge`](@ref), but its
-fixed point has activated dynamic scaling, `ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`.
+fixed point scales in an activated way, `ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`.
 """
 _cardy_applies(::Universality) = false
 _cardy_applies(::Universality{:Ising}) = true        # M(3,4), c = 1/2
@@ -226,17 +218,16 @@ _cardy_applies(::Universality{:Heisenberg}) = true   # SU(2)_1 WZW, c = 1
 Throw unless `C` is declared conformal (`_cardy_applies`); return `nothing`
 otherwise.
 
-**Every conformal-invariance closed form must call this before it reads a
-central charge**, whichever accessor it uses — there are two,
-`_cardy_central_charge` below and `_universality_central_charge`
-(`core/universality.jl`), and `universalities/behaviour/conformal_casimir.jl`
+**Call this before reading a central charge, whichever accessor you use.**
+There are two — `_cardy_central_charge` below and `_universality_central_charge`
+(`core/universality.jl`) — and `universalities/behaviour/conformal_casimir.jl`
 reads the latter, so it calls this directly.
 
-To audit the set, sweep `grep -rn "Universality{C}" src/` rather than the
-accessor name: a grep for an accessor lists only what already routes through
-it.  Every generic-in-`C` `fetch` must gate here, dispatch per class with an
-erroring fallback (`universalities/behaviour/conformal_towers.jl`), or carry an
-explicit allow-list (`universalities/behaviour/conformal_2plus1d.jl`).
+Audit with `grep -rn "Universality{C}" src/`, not with an accessor name: that
+grep lists only what already routes through the accessor.  Every generic-in-`C`
+`fetch` must gate here, dispatch per class with an erroring fallback
+(`.../conformal_towers.jl`), or carry an allow-list
+(`.../conformal_2plus1d.jl`).
 """
 function _require_cardy_applicable(model::Universality{C}) where {C}
     _cardy_applies(model) || error(

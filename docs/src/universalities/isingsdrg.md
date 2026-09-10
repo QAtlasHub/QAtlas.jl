@@ -39,12 +39,10 @@ c_eff = QAtlas.fetch(Universality(:IsingSDRG), CentralCharge(); d=2)
 
 ### What this class deliberately does not answer
 
-The Calabrese–Cardy closed forms that every *conformal* class in QAtlas
-answers — the finite-size chord ``S(\ell, L) = \frac{c}{3}\log\!\big[\frac{L}{\pi}\sin\frac{\pi\ell}{L}\big]``,
-the Casimir energy (both `ConformalCasimirEnergy` and
-`CasimirEnergyCorrection`), Cardy's density of states, the thermal ``\sinh``
-form, the quench light-cone — **raise an `ErrorException` for `IsingSDRG`**,
-on every route that reaches them:
+Every Calabrese–Cardy closed form — the finite-size chord, both Casimir
+quantities (`ConformalCasimirEnergy`, `CasimirEnergyCorrection`), Cardy's
+density of states, the thermal ``\sinh`` form, the quench light-cone —
+**raises an `ErrorException` for `IsingSDRG`**, on every route:
 
 ```julia
 QAtlas.fetch(Universality(:IsingSDRG), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
@@ -52,20 +50,15 @@ QAtlas.fetch(Universality(:IsingSDRG), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.
 #        invariance, and this universality class is not declared to be a 1+1D CFT ...
 ```
 
-This is a refusal, not a gap in coverage. Every one of those forms is a
-consequence of *conformal invariance*, and the IRFP does not have it — its
-dynamic scaling is activated, ``\ln \Omega \sim L^{\psi}`` with ``\psi = 1/2``,
-rather than ``\Omega \sim L^{-z}``. ``c_{\text{eff}}`` is a logarithmic
-coefficient, which is the strictly weaker statement, so substituting it into a
-finite-size chord would be an extrapolation nothing here has measured.
-Passing `c` explicitly does not route around the refusal: what is refused is
-the formula, not the value of its coefficient.
+This is a refusal, not a gap in coverage: ``c_{\text{eff}}`` is a logarithmic
+coefficient, which is strictly weaker than the conformal invariance those forms
+need, and the IRFP scales in an activated way (``\psi = 1/2`` above). Passing
+`c` explicitly does not route around it — what is refused is the formula, not
+its coefficient.
 
-``\overline{S(\ell)} = \frac{c_{\text{eff}}}{3}\ln \ell + \text{const}`` above is
-the logarithm and nothing more. Its ``c_{\text{eff}}/3`` is the **two-cut**
-coefficient (``\text{ncuts}\cdot c_{\text{eff}}/6`` with two cuts), which is what
-a block with both edges in the bulk has; a region with a single cut takes half
-of it.
+The ``c_{\text{eff}}/3`` above is the **two-cut** coefficient
+(``\text{ncuts}\cdot c_{\text{eff}}/6``), i.e. a block with both edges in the
+bulk; one cut takes half.
 
 ---
 

@@ -192,15 +192,11 @@ using QAtlas, Test
         @test QAtlas.fetch(sdrg, CentralCharge(), Infinite()) ≈ log(2) / 2
         @test !QAtlas._cardy_applies(sdrg)
 
-        # EVERY gated route, not a sample: a guard verified on one entry point says
-        # nothing about the other seventeen, and the two `CasimirEnergyCorrection`
-        # rows are here because they were the ones that got away — they live in
-        # `behaviour/conformal_casimir.jl` and read `c` from
-        # `_universality_central_charge`, so a grep for `_cardy_central_charge`
-        # could not see them.  All arguments below are VALID, so that the guard is
-        # what fires and not an earlier `ArgumentError`.
-        #
-        # If a new conformal closed form is added, it belongs in this list.
+        # EVERY gated route, not a sample.  The two `CasimirEnergyCorrection` rows
+        # live in `universalities/behaviour/conformal_casimir.jl` and reach `c`
+        # through `_universality_central_charge`, so they are easy to miss.  All
+        # arguments are VALID, so the guard fires and not an earlier
+        # `ArgumentError`.  A new conformal closed form belongs in this list.
         refused = [
             () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0),
             () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), OBC(); ℓ=4.0, L=8.0),

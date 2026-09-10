@@ -1,8 +1,11 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Calabrese–Cardy entanglement entropy at the Universality{C} level
 #
-# Generic 1+1D CFT entanglement formulae for any universality class for which
-# a central charge `c` is defined.  The closed forms are
+# Generic 1+1D CFT entanglement formulae for any universality class DECLARED
+# CONFORMAL by `_cardy_applies`.  Having a central charge is not the criterion
+# and never was a sufficient one: `:IsingSDRG` has one and is refused, because
+# these are consequences of conformal invariance and its fixed point has none.
+# The closed forms are
 #
 #   PBC, finite L:   S(ℓ, L) = (c/3) log[(L/π) sin(πℓ/L)] + c'_1
 #   OBC, finite L:   S(ℓ, L) = (c/6) log[(2L/π) sin(πℓ/L)] + c'_1 + log g
@@ -43,12 +46,13 @@
 
 # ─── CentralCharge: minimal-model 1+1D CFT lookups ──────────────────────────
 #
-# Only universality classes whose critical point is described by a known
-# 1+1D CFT have a well-defined central charge in this dispatch.  Higher-d
-# universality classes (e.g. 3D Ising, 3D Heisenberg) do *not* live in a
-# 1+1D CFT — there is no central charge at the universality-class level
-# even though the d-dimensional class is perfectly well-defined.  Those
-# call sites raise an `ErrorException` with the dimension in the message.
+# A central charge here is a logarithmic coefficient, and having one is
+# independent of being conformal — `:IsingSDRG` has one without being a CFT,
+# which is why applicability is a separate question (`_cardy_applies`) and not
+# read off this dispatch.  Higher-d universality classes (e.g. 3D Ising, 3D
+# Heisenberg) have no central charge at the universality-class level at all,
+# even though the d-dimensional class is perfectly well-defined; those call
+# sites raise an `ErrorException` with the dimension in the message.
 
 """
     fetch(::Universality{:Ising}, ::CentralCharge; d::Int=2) -> Rational{Int}
@@ -201,24 +205,13 @@ Whether the conformal-invariance closed forms may be evaluated for universality
 class `C` — the Calabrese–Cardy family in this file, and the Cardy Casimir
 correction in `universalities/behaviour/conformal_casimir.jl`.
 
-**Opt-in, defaulting to `false`**, and deliberately not derived from "has a
-`CentralCharge`".  Having a logarithmic coefficient is not the criterion: it is
-the weaker statement that `S ~ (coefficient) log ℓ`, whereas every formula here
-— the chord `log[(L/π) sin(πℓ/L)]`, the Casimir energy, Cardy's density of
-states, the thermal `sinh` form, the quench light-cone — is a consequence of
-CONFORMAL INVARIANCE, and follows from `c` only when the fixed point has it.
-
-`Universality{:IsingSDRG}` is the class that separates the two.  Its
-Refael–Moore `c_eff = (ln 2)/2` is a genuine, published log-coefficient and stays
-fetchable through [`CentralCharge`](@ref); the infinite-randomness fixed point
-it describes is not conformal (its dynamic scaling is activated,
-`ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`), so substituting `c_eff` into a finite-size
-chord would be an extrapolation nothing in the atlas has measured.
-
-A denylist would not do: this atlas grows non-conformal classes (further
-infinite-randomness fixed points, many-body-localised phases), and each new one
-would default into the CFT formulas silently.  A class asserts conformal
-invariance by declaring itself here.
+**Opt-in, defaulting to `false`**: a class asserts conformal invariance by
+declaring itself here, so a new non-conformal class cannot default into the
+formulas.  Having a `CentralCharge` is NOT the criterion — that is the weaker
+statement `S ~ (coefficient) log ℓ`, while these forms follow from conformal
+invariance.  `Universality{:IsingSDRG}` separates the two: its Refael–Moore
+`c_eff = (ln 2)/2` stays fetchable through [`CentralCharge`](@ref), but its
+fixed point has activated dynamic scaling, `ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`.
 """
 _cardy_applies(::Universality) = false
 _cardy_applies(::Universality{:Ising}) = true        # M(3,4), c = 1/2
@@ -234,16 +227,16 @@ Throw unless `C` is declared conformal (`_cardy_applies`); return `nothing`
 otherwise.
 
 **Every conformal-invariance closed form must call this before it reads a
-central charge**, whichever accessor it reads it from.  There are two:
-`_cardy_central_charge` (below) and `_universality_central_charge`
-(`core/universality.jl`), and gating only the first is not enough — the Cardy
-Casimir correction in `universalities/behaviour/conformal_casimir.jl` reads the second, so it
-calls this directly.  A grep for `_cardy_central_charge` cannot find such a
-route, by construction: it lists the formulas that already go through the gate,
-not the ones that get `c` some other way.  The sweep that does find them is
-`grep -rn "Universality{C}" src/` — every generic-in-`C` `fetch` either gates
-here, dispatches per class with an erroring fallback (`universalities/behaviour/conformal_towers.jl`), or
-carries its own explicit allow-list (`universalities/behaviour/conformal_2plus1d.jl`).
+central charge**, whichever accessor it uses — there are two,
+`_cardy_central_charge` below and `_universality_central_charge`
+(`core/universality.jl`), and `universalities/behaviour/conformal_casimir.jl`
+reads the latter, so it calls this directly.
+
+To audit the set, sweep `grep -rn "Universality{C}" src/` rather than the
+accessor name: a grep for an accessor lists only what already routes through
+it.  Every generic-in-`C` `fetch` must gate here, dispatch per class with an
+erroring fallback (`universalities/behaviour/conformal_towers.jl`), or carry an
+explicit allow-list (`universalities/behaviour/conformal_2plus1d.jl`).
 """
 function _require_cardy_applicable(model::Universality{C}) where {C}
     _cardy_applies(model) || error(

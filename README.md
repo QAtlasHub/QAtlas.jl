@@ -11,8 +11,8 @@
 > [PR #83](https://github.com/QAtlasHub/QAtlas.jl/pull/83));
 > more eyes keep making the package better.
 
-[![docs: stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://codes.sota-shimozono.com/QAtlas.jl/stable/)
-[![docs: dev](https://img.shields.io/badge/docs-dev-purple.svg)](https://codes.sota-shimozono.com/QAtlas.jl/dev/)
+[![docs: stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://qatlashub.github.io/QAtlas.jl/stable/)
+[![docs: dev](https://img.shields.io/badge/docs-dev-purple.svg)](https://qatlashub.github.io/QAtlas.jl/dev/)
 [![Julia](https://img.shields.io/badge/julia-v1.12+-9558b2.svg)](https://julialang.org)
 [![Code Style: Blue](https://img.shields.io/badge/Code%20Style-Blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
@@ -182,7 +182,7 @@ using Pkg
 Pkg.add("QAtlas")
 ```
 
-Requires Julia ≥ 1.12. Documentation: [codes.sota-shimozono.com/QAtlas.jl/stable](https://codes.sota-shimozono.com/QAtlas.jl/stable/).
+Requires Julia ≥ 1.12. Documentation: [codes.sota-shimozono.com/QAtlas.jl/stable](https://qatlashub.github.io/QAtlas.jl/stable/).
 
 ### Precompilation time, and how to opt out
 

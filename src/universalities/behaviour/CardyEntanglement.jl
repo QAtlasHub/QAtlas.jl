@@ -13,8 +13,17 @@
 # entropy `log g` are *dropped* — they require model-specific UV input
 # (lattice spacing convention) and boundary input (which conformal boundary
 # state is realised) that is not available at the universality level.  What
-# remains is the universal log-prefactor coefficient `(c/3)` (PBC) or
-# `(c/6)` (OBC), exactly the piece that universality alone determines.
+# remains is the universal log-prefactor, exactly the piece that universality
+# alone determines.
+#
+# That prefactor is `ncuts · c/6`, and `ncuts` is a property of WHERE THE REGION
+# SITS, not of the chain's boundary condition.  The two forms above are the two
+# geometries these methods implement — a single interval on a ring (2 cuts) and
+# a block at an open end (1 cut) — and the `PBC`/`OBC` arguments select between
+# THOSE, not between boundary conditions in general.  A block in the bulk of an
+# OPEN chain has 2 cuts and takes `c/3`; it is a third geometry, it is not
+# implemented here, and reading its coefficient off "OBC" would halve it.  See
+# the `OBC` method's docstring.
 #
 # The Rényi extension uses the substitution
 #
@@ -75,6 +84,14 @@ For d = 2 (1+1D), the clean Ising central charge c = 1/2 is replaced by the Refa
 effective central charge:
 
     c_eff = c * log(2) = log(2) / 2  ≈ 0.34657359
+
+This is the whole of what the class exposes here.  The Calabrese–Cardy
+closed forms in this file are **refused** for it (see `_cardy_applies`):
+`c_eff` is a logarithmic coefficient, but the infinite-randomness fixed
+point is not conformal — its dynamic scaling is activated,
+`ln Ω ~ L^{1/2}` — so the finite-size chord, the Casimir energy and the
+rest do not follow from it.  `S̄(ℓ) = (c_eff/3) ln ℓ` in the class
+documentation is the two-cut logarithm and nothing more.
 
 Reference: Refael, Moore, [RefaelMoore2004](@cite).
 """
@@ -172,18 +189,64 @@ end
 # ─── Calabrese–Cardy entanglement entropy: generic Universality{C} ──────────
 #
 # All entanglement methods route through `_cardy_central_charge(model)` to
-# extract `c`.  The method errors out cleanly for any universality class
-# that has no `CentralCharge` defined (KPZ, Percolation, …).
+# extract `c`, so that helper is the single place the applicability of these
+# closed forms is decided — see `_cardy_applies`.
+
+"""
+    _cardy_applies(::Universality{C}) -> Bool
+
+Whether the Calabrese–Cardy closed forms in this file may be evaluated for
+universality class `C`.
+
+**Opt-in, defaulting to `false`**, and deliberately not derived from "has a
+`CentralCharge`".  Having a logarithmic coefficient is not the criterion: it is
+the weaker statement that `S ~ (coefficient) log ℓ`, whereas every formula here
+— the chord `log[(L/π) sin(πℓ/L)]`, the Casimir energy, Cardy's density of
+states, the thermal `sinh` form, the quench light-cone — is a consequence of
+CONFORMAL INVARIANCE, and follows from `c` only when the fixed point has it.
+
+`Universality{:IsingSDRG}` is the class that separates the two.  Its
+Refael–Moore `c̃ = (ln 2)/2` is a genuine, published log-coefficient and stays
+fetchable through [`CentralCharge`](@ref); the infinite-randomness fixed point
+it describes is not conformal (its dynamic scaling is activated,
+`ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`), so substituting `c̃` into a finite-size
+chord would be an extrapolation nothing in the atlas has measured.
+
+A denylist would not do: this atlas grows non-conformal classes (further
+infinite-randomness fixed points, many-body-localised phases), and each new one
+would default into the CFT formulas silently.  A class asserts conformal
+invariance by declaring itself here.
+"""
+_cardy_applies(::Universality) = false
+_cardy_applies(::Universality{:Ising}) = true        # M(3,4), c = 1/2
+_cardy_applies(::Universality{:Potts3}) = true       # M(5,6), c = 4/5
+_cardy_applies(::Universality{:Potts4}) = true       # compact boson, c = 1
+_cardy_applies(::Universality{:XY}) = true           # compact boson, c = 1
+_cardy_applies(::Universality{:Heisenberg}) = true   # SU(2)_1 WZW, c = 1
 
 """
     _cardy_central_charge(model::Universality{C}; kwargs...) -> Float64
 
 Internal helper: fetch the central charge `c` of the universality class
-`model` and return it as a `Float64`.  Re-throws as an `ErrorException`
-with a Calabrese–Cardy-specific message if the class has no
+`model` and return it as a `Float64`.  Throws an `ErrorException` if the
+class is not a 1+1D CFT (`_cardy_applies`) or has no
 `CentralCharge` defined.
 """
 function _cardy_central_charge(model::Universality{C}; c=nothing, kwargs...) where {C}
+    # Checked BEFORE the supplied-`c` shortcut below: what is refused here is the
+    # FORMULA, not the value of its coefficient, so passing `c` explicitly must
+    # not route around it.
+    _cardy_applies(model) || return error(
+        "Universality{:$C}: the Calabrese-Cardy closed forms are consequences of " *
+        "conformal invariance, and this universality class is not declared to be a " *
+        "1+1D CFT, so they do not follow from its logarithmic coefficient. A class " *
+        "asserts conformal invariance with `QAtlas._cardy_applies(::Universality{:$C}) " *
+        "= true`; a class that scales logarithmically WITHOUT being conformal (e.g. " *
+        ":IsingSDRG, whose infinite-randomness fixed point has activated rather than " *
+        "power-law dynamic scaling) must not declare it. What is refused here is the " *
+        "conformal formula, not a coefficient: where this class has one, it is still " *
+        "`fetch(Universality(:$C), CentralCharge())`.",
+    )
     # Caller-supplied (e.g. model-dependent) central charge takes precedence: a
     # model that realizes this class passes its own `c` into the universal EE
     # formula, rather than the formula hard-wiring the class value.

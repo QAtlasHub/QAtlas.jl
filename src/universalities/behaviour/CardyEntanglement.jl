@@ -1,8 +1,9 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Calabrese–Cardy entanglement entropy at the Universality{C} level
 #
-# Generic 1+1D CFT entanglement formulae for any universality class for which
-# a central charge `c` is defined.  The closed forms are
+# Generic 1+1D CFT entanglement formulae for any universality class DECLARED
+# CONFORMAL by `_cardy_applies` — having a central charge is not the criterion.
+# The closed forms are
 #
 #   PBC, finite L:   S(ℓ, L) = (c/3) log[(L/π) sin(πℓ/L)] + c'_1
 #   OBC, finite L:   S(ℓ, L) = (c/6) log[(2L/π) sin(πℓ/L)] + c'_1 + log g
@@ -13,8 +14,17 @@
 # entropy `log g` are *dropped* — they require model-specific UV input
 # (lattice spacing convention) and boundary input (which conformal boundary
 # state is realised) that is not available at the universality level.  What
-# remains is the universal log-prefactor coefficient `(c/3)` (PBC) or
-# `(c/6)` (OBC), exactly the piece that universality alone determines.
+# remains is the universal log-prefactor, exactly the piece that universality
+# alone determines.
+#
+# That prefactor is `ncuts · c/6`, and `ncuts` is a property of WHERE THE REGION
+# SITS, not of the chain's boundary condition.  The two forms above are the two
+# geometries these methods implement — a single interval on a ring (2 cuts) and
+# a block at an open end (1 cut) — and the `PBC`/`OBC` arguments select between
+# THOSE, not between boundary conditions in general.  A block in the bulk of an
+# OPEN chain has 2 cuts and takes `c/3`; it is a third geometry, it is not
+# implemented here, and reading its coefficient off "OBC" would halve it.  See
+# the `OBC` method's docstring.
 #
 # The Rényi extension uses the substitution
 #
@@ -34,12 +44,11 @@
 
 # ─── CentralCharge: minimal-model 1+1D CFT lookups ──────────────────────────
 #
-# Only universality classes whose critical point is described by a known
-# 1+1D CFT have a well-defined central charge in this dispatch.  Higher-d
-# universality classes (e.g. 3D Ising, 3D Heisenberg) do *not* live in a
-# 1+1D CFT — there is no central charge at the universality-class level
-# even though the d-dimensional class is perfectly well-defined.  Those
-# call sites raise an `ErrorException` with the dimension in the message.
+# A central charge here is a logarithmic coefficient; whether the formulas
+# APPLY is the separate question `_cardy_applies` answers.  Higher-d classes
+# (e.g. 3D Ising, 3D Heisenberg) have no central charge at this level at all,
+# well-defined though the d-dimensional class is; those call sites raise an
+# `ErrorException` naming the dimension.
 
 """
     fetch(::Universality{:Ising}, ::CentralCharge; d::Int=2) -> Rational{Int}
@@ -75,6 +84,10 @@ For d = 2 (1+1D), the clean Ising central charge c = 1/2 is replaced by the Refa
 effective central charge:
 
     c_eff = c * log(2) = log(2) / 2  ≈ 0.34657359
+
+All this class exposes here: the closed forms in this file are **refused**
+for it (see `_cardy_applies`).  `S̄(ℓ) = (c_eff/3) ln ℓ` is the two-cut
+logarithm and nothing more.
 
 Reference: Refael, Moore, [RefaelMoore2004](@cite).
 """
@@ -171,19 +184,73 @@ end
 
 # ─── Calabrese–Cardy entanglement entropy: generic Universality{C} ──────────
 #
-# All entanglement methods route through `_cardy_central_charge(model)` to
-# extract `c`.  The method errors out cleanly for any universality class
-# that has no `CentralCharge` defined (KPZ, Percolation, …).
+# These methods take `c` from `_cardy_central_charge`; applicability is decided
+# one level below, in `_require_cardy_applicable`.
+
+"""
+    _cardy_applies(::Universality{C}) -> Bool
+
+Whether the conformal closed forms apply to class `C` — the Calabrese–Cardy
+family here and the Casimir correction in
+`universalities/behaviour/conformal_casimir.jl`.  **Opt-in, default `false`**,
+so a new non-conformal class cannot fall in.
+
+Having a `CentralCharge` is not the criterion; it says only
+`S ~ (coefficient) log ℓ`.  `:IsingSDRG` separates the two: `c_eff = (ln 2)/2`
+stays fetchable through [`CentralCharge`](@ref), but its fixed point scales in
+an activated way, `ln Ω ~ L^{1/2}`, not `Ω ~ L^{-z}`.
+"""
+_cardy_applies(::Universality) = false
+_cardy_applies(::Universality{:Ising}) = true        # M(3,4), c = 1/2
+_cardy_applies(::Universality{:Potts3}) = true       # M(5,6), c = 4/5
+_cardy_applies(::Universality{:Potts4}) = true       # compact boson, c = 1
+_cardy_applies(::Universality{:XY}) = true           # compact boson, c = 1
+_cardy_applies(::Universality{:Heisenberg}) = true   # SU(2)_1 WZW, c = 1
+
+"""
+    _require_cardy_applicable(model::Universality{C})
+
+Throw unless `_cardy_applies(C)`.
+
+**Call this before reading a central charge, whichever accessor you use** —
+there are two, `_cardy_central_charge` below and `_universality_central_charge`
+(`core/universality.jl`); `.../conformal_casimir.jl` reads the latter and so
+calls this directly.
+
+Audit with `grep -rn "Universality{C}" src/`, never with an accessor name — that
+lists only what already routes through it.  Each generic-in-`C` `fetch` must
+gate here, dispatch per class with an erroring fallback
+(`.../conformal_towers.jl`), or carry an allow-list
+(`.../conformal_2plus1d.jl`).
+"""
+function _require_cardy_applicable(model::Universality{C}) where {C}
+    _cardy_applies(model) || error(
+        "Universality{:$C}: the Calabrese-Cardy closed forms are consequences of " *
+        "conformal invariance, and this universality class is not declared to be a " *
+        "1+1D CFT, so they do not follow from its logarithmic coefficient. A class " *
+        "asserts conformal invariance with `QAtlas._cardy_applies(::Universality{:$C}) " *
+        "= true`; a class that scales logarithmically WITHOUT being conformal (e.g. " *
+        ":IsingSDRG, whose infinite-randomness fixed point has activated rather than " *
+        "power-law dynamic scaling) must not declare it. What is refused here is the " *
+        "conformal formula, not a coefficient: where this class has one, it is still " *
+        "`fetch(Universality(:$C), CentralCharge())`.",
+    )
+    return nothing
+end
 
 """
     _cardy_central_charge(model::Universality{C}; kwargs...) -> Float64
 
 Internal helper: fetch the central charge `c` of the universality class
-`model` and return it as a `Float64`.  Re-throws as an `ErrorException`
-with a Calabrese–Cardy-specific message if the class has no
+`model` and return it as a `Float64`.  Throws an `ErrorException` if the
+class is not a 1+1D CFT (`_require_cardy_applicable`) or has no
 `CentralCharge` defined.
 """
 function _cardy_central_charge(model::Universality{C}; c=nothing, kwargs...) where {C}
+    # Checked BEFORE the supplied-`c` shortcut below: what is refused is the
+    # FORMULA, not the value of its coefficient, so passing `c` explicitly must
+    # not route around it.
+    _require_cardy_applicable(model)
     # Caller-supplied (e.g. model-dependent) central charge takes precedence: a
     # model that realizes this class passes its own `c` into the universal EE
     # formula, rather than the formula hard-wiring the class value.

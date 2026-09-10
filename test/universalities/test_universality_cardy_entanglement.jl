@@ -180,6 +180,127 @@ using QAtlas, Test
         )
     end
 
+    # A logarithmic coefficient is not conformal invariance.  :IsingSDRG has the
+    # first (Refael-Moore c_eff = ln2/2) and not the second (activated dynamic
+    # scaling, ln Ω ~ L^{1/2}), so the closed forms here must refuse it while its
+    # coefficient stays fetchable.
+    @testset "log-scaling without conformal invariance is refused (:IsingSDRG)" begin
+        sdrg = Universality(:IsingSDRG)
+
+        # The coefficient is NOT withdrawn — this is the value the class exists for.
+        @test QAtlas.fetch(sdrg, CentralCharge(); d=2) ≈ log(2) / 2
+        @test QAtlas.fetch(sdrg, CentralCharge(), Infinite()) ≈ log(2) / 2
+        @test !QAtlas._cardy_applies(sdrg)
+
+        # EVERY gated route, not a sample.  The two `CasimirEnergyCorrection` rows
+        # live in `universalities/behaviour/conformal_casimir.jl` and reach `c`
+        # through `_universality_central_charge`, so they are easy to miss.  All
+        # arguments are VALID, so the guard fires and not an earlier
+        # `ArgumentError`.  A new conformal closed form belongs in this list.
+        refused = [
+            () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), OBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(sdrg, VonNeumannEntropy(), Infinite(); ℓ=10.0),
+            () -> QAtlas.fetch(sdrg, RenyiEntropy(2.0), PBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(sdrg, RenyiEntropy(2.0), OBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(sdrg, RenyiEntropy(2.0), Infinite(); ℓ=10.0),
+            () -> QAtlas.fetch(
+                sdrg, EntanglementGrowthSlope(), Infinite(); v=1.0, beta_eff=1.0
+            ),
+            () -> QAtlas.fetch(sdrg, CardyEntropy(), Infinite(); E=10.0),
+            () -> QAtlas.fetch(sdrg, ConformalCasimirEnergy(), Infinite(); L=8.0),
+            () -> QAtlas.fetch(sdrg, LogarithmicNegativity(), Infinite(); ℓ_A=4.0, ℓ_B=4.0),
+            () -> QAtlas.fetch(
+                sdrg, EntanglementSaturationDensity(), Infinite(); beta_eff=1.0
+            ),
+            () -> QAtlas.fetch(sdrg, ThermalEnergyDensity(), Infinite(); beta=1.0),
+            () -> QAtlas.fetch(sdrg, CFTThermalEntropyDensity(), Infinite(); beta=1.0),
+            () -> QAtlas.fetch(
+                sdrg,
+                QuenchEntanglementEntropy(),
+                Infinite();
+                ℓ=4.0,
+                t=1.0,
+                v=1.0,
+                beta_eff=1.0,
+            ),
+            () -> QAtlas.fetch(
+                sdrg,
+                QuenchEntanglementEntropy(),
+                OBC();
+                ℓ=4.0,
+                t=1.0,
+                v=1.0,
+                beta_eff=1.0,
+            ),
+            () -> QAtlas.fetch(
+                sdrg,
+                QuenchEntanglementEntropy(),
+                PBC();
+                ℓ=4.0,
+                L=8.0,
+                t=1.0,
+                v=1.0,
+                beta_eff=1.0,
+            ),
+            () -> QAtlas.fetch(sdrg, CasimirEnergyCorrection(), PBC(); L=8.0, v=1.0),
+            () -> QAtlas.fetch(sdrg, CasimirEnergyCorrection(), OBC(); L=8.0, v=1.0),
+            # Not a gate site: MutualInformation composes three VonNeumannEntropy
+            # fetches.  Here to assert the refusal PROPAGATES through a composed
+            # route, rather than only that each leaf triggers it.
+            () -> QAtlas.fetch(sdrg, MutualInformation(), Infinite(); ℓ_A=4.0, ℓ_B=4.0),
+        ]
+        @test length(refused) == 19            # 18 gate sites + 1 composed route
+        for f in refused
+            @test_throws ErrorException f()
+            # ...and it DIAGNOSES: `@test_throws ErrorException` alone would also
+            # pass on an unrelated failure downstream of the guard.
+            msg = try
+                f()
+                ""
+            catch err
+                sprint(showerror, err)
+            end
+            @test occursin("conformal", msg)
+            @test occursin("IsingSDRG", msg)
+        end
+
+        # Supplying `c` explicitly must not route around the refusal: what is
+        # refused is the FORMULA, not the value of its coefficient.
+        @test_throws ErrorException QAtlas.fetch(
+            sdrg, VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0, c=log(2) / 2
+        )
+        @test_throws ErrorException QAtlas.fetch(
+            sdrg, VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0, c=1 / 2
+        )
+    end
+
+    # Positive control for the guard above: a blanket refusal would pass every
+    # assertion in that testset, so pin that the conformal classes still evaluate.
+    @testset "the conformal classes are unaffected" begin
+        for C in (:Ising, :Potts3, :Potts4, :XY, :Heisenberg)
+            @test QAtlas._cardy_applies(Universality(C))
+            @test isfinite(
+                QAtlas.fetch(Universality(C), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
+            )
+        end
+        # Ising, explicitly, against the closed form it is supposed to give.
+        @test QAtlas.fetch(Universality(:Ising), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0) ≈
+            (0.5 / 3) * log((8.0 / π) * sin(π * 4.0 / 8.0))
+
+        # The Casimir correction keeps its documented RATIONAL return for a
+        # rational `c` and `v` — which is the reason it reads
+        # `_universality_central_charge` rather than `_cardy_central_charge`, which
+        # would have converted to Float64.
+        casimir = QAtlas.fetch(
+            Universality(:Ising), CasimirEnergyCorrection(), PBC(); L=16, v=2
+        )
+        @test casimir ≈ -π * (1 // 2) * 2 / (6 * 16)
+        @test QAtlas.fetch(
+            Universality(:Ising), CasimirEnergyCorrection(), OBC(); L=16, v=2
+        ) ≈ -π * (1 // 2) * 2 / (24 * 16)
+    end
+
     @testset "non-1+1D classes have no central charge" begin
         @test_throws ErrorException QAtlas.fetch(Universality(:Ising), CentralCharge(); d=3)
         @test_throws ErrorException QAtlas.fetch(Universality(:XY), CentralCharge(); d=3)

@@ -37,6 +37,29 @@ c_eff = QAtlas.fetch(Universality(:IsingSDRG), CentralCharge(); d=2)
 # => 0.34657359027997264 (log(2.0)/2.0)
 ```
 
+### What this class deliberately does not answer
+
+Every Calabrese–Cardy closed form — the finite-size chord, both Casimir
+quantities (`ConformalCasimirEnergy`, `CasimirEnergyCorrection`), Cardy's
+density of states, the thermal ``\sinh`` form, the quench light-cone —
+**raises an `ErrorException` for `IsingSDRG`**, on every route:
+
+```julia
+QAtlas.fetch(Universality(:IsingSDRG), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
+# ERROR: ... the Calabrese-Cardy closed forms are consequences of conformal
+#        invariance, and this universality class is not declared to be a 1+1D CFT ...
+```
+
+This is a refusal, not a gap in coverage: ``c_{\text{eff}}`` is a logarithmic
+coefficient, which is strictly weaker than the conformal invariance those forms
+need, and the IRFP scales in an activated way (``\psi = 1/2`` above). Passing
+`c` explicitly does not route around it — what is refused is the formula, not
+its coefficient.
+
+The ``c_{\text{eff}}/3`` above is the **two-cut** coefficient
+(``\text{ncuts}\cdot c_{\text{eff}}/6``), i.e. a block with both edges in the
+bulk; one cut takes half.
+
 ---
 
 ## References

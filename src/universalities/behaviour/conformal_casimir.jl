@@ -35,6 +35,11 @@ function fetch(
 ) where {C}
     L > 0 || throw(ArgumentError("CasimirEnergyCorrection: L must be positive; got $L"))
     v > 0 || throw(ArgumentError("CasimirEnergyCorrection: v must be positive; got $v"))
+    # Same conformal-invariance gate as the Calabrese-Cardy forms: this is the
+    # Cardy 1/L correction, so a class that is not a 1+1D CFT must be refused
+    # here too.  Read `c` from `_universality_central_charge` rather than
+    # `_cardy_central_charge` to keep the documented Rational return type.
+    _require_cardy_applicable(u)
     c = _universality_central_charge(u)
     return -π * c * v / (6 * L)
 end
@@ -54,6 +59,11 @@ function fetch(
 ) where {C}
     L > 0 || throw(ArgumentError("CasimirEnergyCorrection: L must be positive; got $L"))
     v > 0 || throw(ArgumentError("CasimirEnergyCorrection: v must be positive; got $v"))
+    # Same conformal-invariance gate as the Calabrese-Cardy forms: this is the
+    # Cardy 1/L correction, so a class that is not a 1+1D CFT must be refused
+    # here too.  Read `c` from `_universality_central_charge` rather than
+    # `_cardy_central_charge` to keep the documented Rational return type.
+    _require_cardy_applicable(u)
     c = _universality_central_charge(u)
     return -π * c * v / (24 * L)
 end

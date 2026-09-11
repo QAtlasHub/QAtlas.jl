@@ -171,12 +171,51 @@ using QAtlas, Test
 
     # ── Error-path guards (raw @test_throws — verify() doesn't model error
     # outcomes) ──────────────────────────────────────────────────────────────
-    @testset "Classes without CentralCharge raise ErrorException" begin
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:KPZ), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0
+    # This testset was named for the "no CentralCharge defined" branch, and stopped
+    # reaching it when `_cardy_central_charge` began gating on `_require_cardy_applicable`
+    # first: neither class is declared conformal, so both are refused before the central
+    # charge is read. Measured — the branch's own text is in neither message. It kept
+    # passing throughout, because `@test_throws ErrorException` alone cannot tell the two
+    # refusals apart.
+    @testset "A non-conformal class is refused before its central charge is read" begin
+        for f in (
+            () ->
+                QAtlas.fetch(Universality(:KPZ), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(
+                Universality(:Percolation), VonNeumannEntropy(), Infinite(); ℓ=10.0
+            ),
         )
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:Percolation), VonNeumannEntropy(), Infinite(); ℓ=10.0
+            @test_throws ErrorException f()
+            msg = try
+                f()
+                ""
+            catch err
+                err isa ErrorException ? sprint(showerror, err) : rethrow()
+            end
+            @test occursin("not declared to be a", msg)
+            @test !occursin("is not defined for this universality class", msg)
+        end
+    end
+
+    # ...and the branch itself, which no shipped class can reach: conformal invariance
+    # asserted, no `CentralCharge` defined. Left untested when the gate went in.
+    QAtlas._cardy_applies(::Universality{:ConformalWithoutACentralCharge}) = true
+    @testset "A conformal class with no CentralCharge names the method to define" begin
+        msg = try
+            QAtlas.fetch(
+                Universality(:ConformalWithoutACentralCharge),
+                VonNeumannEntropy(),
+                PBC();
+                ℓ=4.0,
+                L=8.0,
+            )
+            ""
+        catch err
+            err isa ErrorException ? sprint(showerror, err) : rethrow()
+        end
+        @test occursin("is not defined for this universality class", msg)
+        @test occursin(
+            "fetch(::Universality{:ConformalWithoutACentralCharge}, ::CentralCharge", msg
         )
     end
 

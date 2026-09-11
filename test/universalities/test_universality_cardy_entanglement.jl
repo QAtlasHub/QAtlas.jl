@@ -262,7 +262,9 @@ using QAtlas, Test
                 sprint(showerror, err)
             end
             @test occursin("conformal", msg)
-            @test occursin("IsingSDRG", msg)
+            # The braced form only comes from `$C`. Bare "IsingSDRG" would not: the
+            # template names it as a fixed example, so it holds for every refused class.
+            @test occursin("Universality{:IsingSDRG}", msg)
         end
 
         # Supplying `c` explicitly must not route around the refusal: what is
@@ -275,29 +277,24 @@ using QAtlas, Test
         )
     end
 
-    # A typo reaches the same refusal as a deliberately non-conformal class, because
-    # `Universality(::Symbol)` validates nothing and QAtlas has no canonical list of its
-    # own class names to check against — `REALIZES` holds 11 of the 16 symbols that
-    # appear in `src/`, so consulting it would call `:Percolation` unknown. The message
-    # names the possibility rather than guessing which one it is.
-    @testset "a misspelled class is told to check the spelling" begin
-        msg = try
-            QAtlas.fetch(Universality(:ising), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
-            ""
-        catch err
-            sprint(showerror, err)
-        end
-        @test occursin("check the spelling", msg)
-        @test occursin(":ising", msg)
-        # ...and the real class still gets the physics reason, on the same code path.
-        sdrg_msg = try
-            QAtlas.fetch(Universality(:IsingSDRG), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
-            ""
-        catch err
-            sprint(showerror, err)
-        end
-        @test occursin("conformal", sdrg_msg)
-        @test occursin("IsingSDRG", sdrg_msg)
+    # A typo lands on the same refusal as a deliberately non-conformal class — the
+    # `_cardy_applies` docstring says why no registry separates them. Pinned here: the
+    # clause is unconditional, and the class in the message is the one passed.
+    @testset "an unrecognised symbol is told to check its spelling" begin
+        refusal(c) =
+            try
+                QAtlas.fetch(Universality(c), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
+                ""
+            catch err
+                err isa ErrorException ? sprint(showerror, err) : rethrow()
+            end
+        typo, genuine = refusal(:ising), refusal(:IsingSDRG)
+        @test occursin("check the spelling", typo)
+        @test occursin("check the spelling", genuine)
+        # Interpolated AND unique to this refusal, unlike ":ising" on its own, which a
+        # MethodError would also print.
+        @test occursin("Universality(:ising), CentralCharge()", typo)
+        @test occursin("Universality(:IsingSDRG), CentralCharge()", genuine)
     end
 
     # Positive control for the guard above: a blanket refusal would pass every

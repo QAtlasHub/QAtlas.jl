@@ -195,11 +195,10 @@ family here and the Casimir correction in
 `universalities/behaviour/conformal_casimir.jl`.  **Opt-in, default `false`**,
 so a new non-conformal class cannot fall in.
 
-`false` therefore covers two different situations — a class that is deliberately not
-conformal, and a symbol that names no class at all, since `Universality(::Symbol)`
-validates nothing. QAtlas has no canonical list of its own class names to tell them apart
-(`REALIZES` holds 11 of the 16 that appear in `src/`, so using it would report
-`:Percolation` as unknown), so the refusal names the possibility instead of guessing.
+`false` covers two situations: a class deliberately not conformal, and a symbol naming
+no class at all — `Universality(::Symbol)` validates nothing. No registry separates them;
+`REALIZES` omits `:Percolation`, which `src/` uses. So the refusal names the possibility
+rather than guessing which.
 
 Having a `CentralCharge` is not the criterion; it says only
 `S ~ (coefficient) log ℓ`.  `:IsingSDRG` separates the two: `c_eff = (ln 2)/2`

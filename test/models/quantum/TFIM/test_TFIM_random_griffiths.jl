@@ -29,19 +29,21 @@ function _inverse_moment(a)
 end
 
 function _griffiths_expectation(m::RandomTFIM, z)
-    pos, _ = quadgk(u -> u^(m.bonds.D / z), 0, 1; rtol=1e-12)
-    return (m.J / m.h)^(1 / z) * pos * _inverse_moment(m.fields.D / z)
+    pos, _ = quadgk(u -> u^(disorder(m, :J).D / z), 0, 1; rtol=1e-12)
+    return (clean_model(m).J / clean_model(m).h)^(1 / z) *
+           pos *
+           _inverse_moment(disorder(m, :h).D / z)
 end
 
 # The independent route: bisect the defining condition itself.  E − 1 is +∞ as
 # z → D⁺ (the inverse moment diverges) and negative as z → ∞ (where (ln r)/z
 # beats D²/z²), so the bracket needs no input from the implementation.
 function _z_by_quadrature(m::RandomTFIM)
-    # `m.fields.D` and NOT `moment_floor(m.fields)`: sharing that call with the
+    # `disorder(m, :h).D` and NOT `moment_floor(...)`: sharing that call with the
     # implementation makes the card blind to a bug in it. Measured, a factor-2
     # error there leaves impl and "independent" agreeing to 1e-9 while both sit
     # 65% off the true root.
-    fl = m.fields.D
+    fl = disorder(m, :h).D
     lo, hi = fl * (1 + 1e-9), fl * 2
     steps = 0
     while _griffiths_expectation(m, hi) > 1
@@ -76,7 +78,7 @@ end
         # Not implied by the card: below the field family's floor the checker's
         # own substitution returns a finite wrong number instead of diverging,
         # so both sides would agree on nonsense.
-        @test z > -1 / moment_floor(m.fields)
+        @test z > -1 / moment_floor(disorder(m, :h))
     end
 end
 
@@ -96,7 +98,7 @@ end
     )
         v = var_log(f)
         for δ in (1e-2, 1e-3)
-            m = RandomTFIM(1.0, exp(2δ * v), f, f)   # δ = ln(h/J) / (2 var)
+            m = Disordered(TFIM(; J=1.0, h=exp(2δ * v)); J=f, h=f)  # δ = ln(h/J)/(2 var)
             @test rtfim_delta(m) ≈ δ rtol = 1e-12
             z = verify(
                 m,
@@ -119,7 +121,7 @@ end
     # Solving in u = 1/z means no upper cap on z. At h = nextfloat(1.0) the true
     # root is 4.5e15 and the earlier z-space search gave up and returned Inf,
     # indistinguishable from the honest "exactly critical, no root" answer.
-    m = RandomTFIM(1.0, nextfloat(1.0), PowerLawDisorder(1.0), PowerLawDisorder(1.0))
+    m = RandomTFIM(; J=1.0, h=nextfloat(1.0), D=1.0)
     δ = rtfim_delta(m)
     @test 0 < δ < 1e-15
     z = fetch(m, DynamicalExponent(), Infinite())
@@ -131,8 +133,10 @@ end
 # code with `log_moment` (no logs, no quadrature, no series) and no bracket with
 # the implementation either.
 function _binary_expectation(m::RandomTFIM, z)
-    r = m.J / m.h
-    return sum((r * λ / μ)^(1 / z) for λ in (1.0, m.bonds.κ), μ in (1.0, m.fields.κ)) / 4
+    r = clean_model(m).J / clean_model(m).h
+    return sum(
+        (r * λ / μ)^(1 / z) for λ in (1.0, disorder(m, :J).κ), μ in (1.0, disorder(m, :h).κ)
+    ) / 4
 end
 
 function _z_by_enumeration(m::RandomTFIM)
@@ -151,7 +155,7 @@ end
     # exists, checks that the machinery is general and not the power law in
     # disguise.
     for (κJ, κh, hh) in ((0.3, 0.3, 2.0), (0.3, 0.3, 1.1), (0.1, 0.1, 5.0))
-        m = RandomTFIM(1.0, hh, BinaryDisorder(κJ), BinaryDisorder(κh))
+        m = Disordered(TFIM(; J=1.0, h=hh); J=BinaryDisorder(κJ), h=BinaryDisorder(κh))
         verify(
             m,
             DynamicalExponent(),
@@ -208,17 +212,41 @@ end
     @test occursin("all four", msg)
 end
 
+@testset "Disordered :: disorder attaches to a model, not a new model type" begin
+    # The point of the decoration: any model with named couplings can carry it,
+    # without a `RandomXXZ`, `RandomHeisenberg`, ... for each.
+    m = RandomTFIM(; J=1.0, h=2.0, D=1.0)
+    @test m isa Disordered{TFIM}
+    @test clean_model(m) == TFIM(; J=1.0, h=2.0)
+    @test disorder(m, :J) == PowerLawDisorder(1.0)
+    @test Disordered(XXZ1D(; Δ=0.5); Δ=BinaryDisorder(0.4)) isa Disordered{XXZ1D}
+
+    # A name that is not a field would be disorder asked for and never applied.
+    @test_throws ArgumentError Disordered(TFIM(); Jay=PowerLawDisorder(1.0))
+    @test_throws ArgumentError Disordered(TFIM(); J=1.0)          # not a family
+    @test_throws ArgumentError Disordered(TFIM())                 # nothing random
+    # Asking for a coupling that is not random is a different statement from
+    # asking for one with no disorder, so it throws rather than answering.
+    @test_throws ArgumentError disorder(Disordered(TFIM(); J=PowerLawDisorder(1.0)), :h)
+
+    # It does not inherit the clean model's answers, and does not need a blanket
+    # refusal to say so: it is not a TFIM, so nothing dispatches.
+    @test !(m isa TFIM)
+    @test_throws Exception fetch(m, MassGap(), Infinite())
+end
+
 @testset "RandomTFIM :: bonds and fields may be different families" begin
-    # The two type parameters are only worth having if the shapes can differ, not
-    # merely the parameters. Every other test here varies κ or D within one family.
-    m = RandomTFIM(1.0, 2.0, PowerLawDisorder(1.0), BinaryDisorder(0.3))
-    @test m isa RandomTFIM{PowerLawDisorder,BinaryDisorder}
+    # Worth checking because every other test here varies κ or D within ONE
+    # family, which a single shared family would already serve.
+    m = Disordered(TFIM(; J=1.0, h=2.0); J=PowerLawDisorder(1.0), h=BinaryDisorder(0.3))
+    @test disorder(m, :J) isa PowerLawDisorder
+    @test disorder(m, :h) isa BinaryDisorder
     z = fetch(m, DynamicalExponent(), Infinite())
     @test isfinite(z) && z > 0
     # Mixed E[(J/h)^{1/z}]: power-law bonds by quadrature, two-valued fields by sum.
-    pos, _ = quadgk(u -> u^(m.bonds.D / z), 0, 1; rtol=1e-12)
-    neg = (1.0^(-1 / z) + m.fields.κ^(-1 / z)) / 2
-    @test (m.J / m.h)^(1 / z) * pos * neg ≈ 1.0 rtol = 1e-8
+    pos, _ = quadgk(u -> u^(disorder(m, :J).D / z), 0, 1; rtol=1e-12)
+    neg = (1.0^(-1 / z) + disorder(m, :h).κ^(-1 / z)) / 2
+    @test (clean_model(m).J / clean_model(m).h)^(1 / z) * pos * neg ≈ 1.0 rtol = 1e-8
 end
 
 @testset "RandomTFIM :: no rare regions means no exponent, said so" begin
@@ -229,14 +257,14 @@ end
     # does not. Before the bracket was checked, both returned 1.00003e-8, which is
     # the bisection's own starting point, dressed as an exponent.
     @test fetch(
-        RandomTFIM(1.0, 5.0, BinaryDisorder(0.1), BinaryDisorder(0.1)),
+        Disordered(TFIM(; J=1.0, h=5.0); J=BinaryDisorder(0.1), h=BinaryDisorder(0.1)),
         DynamicalExponent(),
         Infinite(),
     ) ≈ 0.507823054 rtol = 1e-6
     for κ in (0.2, 0.3, 0.9)
         msg = try
             fetch(
-                RandomTFIM(1.0, 5.0, BinaryDisorder(κ), BinaryDisorder(κ)),
+                Disordered(TFIM(; J=1.0, h=5.0); J=BinaryDisorder(κ), h=BinaryDisorder(κ)),
                 DynamicalExponent(),
                 Infinite(),
             )
@@ -251,8 +279,8 @@ end
     # A deterministic coupling is allowed by `BinaryDisorder` (0 < κ ≤ 1) but makes
     # the spread of ln λ zero, so δ is 0/0 or finite/0. `iszero` sees neither.
     for m in (
-        RandomTFIM(1.0, 1.0, BinaryDisorder(1.0), BinaryDisorder(1.0)),
-        RandomTFIM(1.0, 2.0, BinaryDisorder(1.0), BinaryDisorder(1.0)),
+        Disordered(TFIM(; J=1.0, h=1.0); J=BinaryDisorder(1.0), h=BinaryDisorder(1.0)),
+        Disordered(TFIM(; J=1.0, h=2.0); J=BinaryDisorder(1.0), h=BinaryDisorder(1.0)),
     )
         @test !isfinite(rtfim_delta(m))
         msg = try
@@ -269,8 +297,8 @@ end
     # With unequal bond and field families, min(J,h)/max(J,h) is NOT the dual:
     # it leaves the ordered side without a root. The swap is (J, bonds) ↔
     # (h, fields) (Igloi-Monthus, below Eq. (4.15)).
-    ordered = RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.2))
-    dual = RandomTFIM(1.0, 1.0, BinaryDisorder(0.2), BinaryDisorder(0.5))
+    ordered = Disordered(TFIM(; J=1.0, h=1.0); J=BinaryDisorder(0.5), h=BinaryDisorder(0.2))
+    dual = Disordered(TFIM(; J=1.0, h=1.0); J=BinaryDisorder(0.2), h=BinaryDisorder(0.5))
     @test rtfim_delta(ordered) ≈ -rtfim_delta(dual)
     @test rtfim_delta(ordered) < 0                      # the ordered branch
     @test fetch(ordered, DynamicalExponent(), Infinite()) ≈
@@ -279,17 +307,21 @@ end
     # Self-consistency alone is weak: a bonds/fields swap inside the residual makes
     # BOTH sides wrong identically. So check the ORDERED branch against ground
     # truth, by quadrature on the dual problem the implementation should be solving.
-    ord = RandomTFIM(3.0, 1.0, PowerLawDisorder(0.7), PowerLawDisorder(0.7))
+    ord = Disordered(TFIM(; J=3.0, h=1.0); J=PowerLawDisorder(0.7), h=PowerLawDisorder(0.7))
     @test rtfim_delta(ord) < 0
     @test fetch(ord, DynamicalExponent(), Infinite()) ≈ _z_by_quadrature(
-        RandomTFIM(1.0, 3.0, PowerLawDisorder(0.7), PowerLawDisorder(0.7))
+        Disordered(TFIM(; J=1.0, h=3.0); J=PowerLawDisorder(0.7), h=PowerLawDisorder(0.7))
     ) rtol = 1e-8
     # ...and criticality is [ln J] = [ln h], which here is NOT J == h.
     @test !iszero(
-        rtfim_delta(RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.2)))
+        rtfim_delta(
+            Disordered(TFIM(; J=1.0, h=1.0); J=BinaryDisorder(0.5), h=BinaryDisorder(0.2))
+        ),
     )
     @test iszero(
-        rtfim_delta(RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.5)))
+        rtfim_delta(
+            Disordered(TFIM(; J=1.0, h=1.0); J=BinaryDisorder(0.5), h=BinaryDisorder(0.5))
+        ),
     )
 end
 

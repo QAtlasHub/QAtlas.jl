@@ -3,157 +3,52 @@
 #
 # `TFIM` is the clean chain and carries two scalars, which is why the exact
 # Griffiths result could not live there: it is a condition on the DISTRIBUTIONS
-# of the couplings.  That condition, [(J/h)^{1/z}]_av = 1, is itself
-# distribution-free; only its evaluation is per-family, which is what
-# `DisorderFamily` separates.
+# of the couplings. That condition, [(J/h)^{1/z}]_av = 1, is itself
+# distribution-free and model-independent in shape; the vocabulary it needs
+# (`DisorderFamily`, `Disordered`) is in `core/disorder.jl`, and only its
+# evaluation for THIS chain is here.
 #
-# Reference: Iglói–Monthus, [IgloiMonthus2005](@cite).  Equation and section
+# Reference: Iglói-Monthus, [IgloiMonthus2005](@cite). Equation and section
 # numbers are those of the arXiv version, `cond-mat/0502448`.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION
 #   Hamiltonian: Pauli σ, as in `TFIM.jl`. H = -Σ Jᵢ σᶻσᶻ - Σ hᵢ σˣ
-#   Disorder:    Jᵢ = J·λᵢ and hᵢ = h·μᵢ with λ, μ i.i.d. dimensionless and
-#                J, h the SCALES, not the couplings; see `DisorderFamily`.
+#   Disorder:    Jᵢ = J·λᵢ and hᵢ = h·μᵢ, so the TFIM's J and h are the SCALES.
 
 """
-    DisorderFamily
+    RandomTFIM
 
-A distribution of dimensionless couplings `λ > 0`, carrying the three things the
-Griffiths condition needs: [`log_moment`](@ref), [`mean_log`](@ref) and
-[`var_log`](@ref).  A concrete family also gives [`moment_floor`](@ref), the
-exponent below which `E[λ^s]` stops existing.
-"""
-abstract type DisorderFamily end
-export DisorderFamily
-
-"""
-    log_moment(f::DisorderFamily, s::Real) -> Float64
-
-`ln E[λ^s]`, computed in logs so the Griffiths residual stays cancellation-free
-near criticality, where every term is `O(1/z)`.
-"""
-function log_moment end
-export log_moment
-
-"""    mean_log(f::DisorderFamily) -> Float64. `E[ln λ]`."""
-function mean_log end
-export mean_log
-
-"""    var_log(f::DisorderFamily) -> Float64. `var[ln λ]`."""
-function var_log end
-export var_log
-
-"""
-    moment_floor(f::DisorderFamily) -> Float64
-
-`inf{s : E[λ^s] < ∞}`, or `-Inf` where every moment exists.  The field family's
-floor is what bounds `z` from below: the condition needs `E[μ^{−1/z}]`.
-"""
-function moment_floor end
-export moment_floor
-
-# A family missing one of the four is otherwise a raw MethodError at whichever
-# call path happens to reach it first, and three of the four `fetch` routes do
-# not touch `moment_floor` at all, so a partial family can pass them. Same shape
-# as `derivative(::AbstractDiffBackend, ...)` in `core/derivative.jl`: name the
-# contract rather than let dispatch report the symptom.
-for _f in (:log_moment, :mean_log, :var_log, :moment_floor)
-    @eval function $(_f)(f::DisorderFamily, args...; kwargs...)
-        return error(
-            "QAtlas.$($(QuoteNode(_f))): not defined for $(nameof(typeof(f))). A " *
-            "`DisorderFamily` must implement all four of `log_moment`, `mean_log`, " *
-            "`var_log` and `moment_floor`. `mean_log` and `var_log` are the first " *
-            "two derivatives of `log_moment` at s = 0, so they must agree with it.",
-        )
-    end
-end
-
-"""
-    PowerLawDisorder(D) <: DisorderFamily
-
-`P(λ) = D⁻¹ λ^{−1+1/D}` on `(0, 1]`, the review's generic disorder-strength
-family ([IgloiMonthus2005](@cite) §A.1): `D² = var(ln λ)`, and `D = 1` is
-uniform on `[0, 1]`.  `E[λ^s] = 1/(1 + D s)`, so moments below `s = −1/D` do not
-exist and `z > D` for a chain whose fields are drawn from it.
-"""
-struct PowerLawDisorder <: DisorderFamily
-    D::Float64
-    function PowerLawDisorder(D::Real)
-        D > 0 || throw(ArgumentError("PowerLawDisorder: D must be > 0; got $D"))
-        return new(Float64(D))
-    end
-end
-export PowerLawDisorder
-
-log_moment(f::PowerLawDisorder, s::Real) = -log1p(f.D * s)
-mean_log(f::PowerLawDisorder) = -f.D
-var_log(f::PowerLawDisorder) = f.D^2
-moment_floor(f::PowerLawDisorder) = -1 / f.D
-
-"""
-    BinaryDisorder(κ) <: DisorderFamily
-
-Two couplings, `λ ∈ {1, κ}` with equal probability, `0 < κ ≤ 1`: the other
-standard RTFIM choice.  Bounded away from zero, so `E[λ^s]` exists for EVERY `s`
-and `z` has no lower bound: the `z > D` of [`PowerLawDisorder`](@ref) is a
-property of that family, not of the Griffiths condition.
-"""
-struct BinaryDisorder <: DisorderFamily
-    κ::Float64
-    function BinaryDisorder(κ::Real)
-        0 < κ <= 1 || throw(ArgumentError("BinaryDisorder: need 0 < κ ≤ 1; got $κ"))
-        return new(Float64(κ))
-    end
-end
-export BinaryDisorder
-
-# log((1 + κ^s)/2), guarded for the s → ±∞ tails the bisection walks through.
-function log_moment(f::BinaryDisorder, s::Real)
-    x = s * log(f.κ)
-    return (x > 700 ? x : log1p(exp(x))) - log(2)
-end
-mean_log(f::BinaryDisorder) = log(f.κ) / 2
-var_log(f::BinaryDisorder) = log(f.κ)^2 / 4
-moment_floor(::BinaryDisorder) = -Inf
-
-"""
-    RandomTFIM(; J = 1.0, h = 1.0, D = 1.0)
-    RandomTFIM(J, h, bonds::DisorderFamily, fields::DisorderFamily)
-
-The 1D random transverse-field Ising chain,
+`Disordered{TFIM}`: the 1D random transverse-field Ising chain,
 
     H = -Σ_i J_i σᶻ_i σᶻ_{i+1} - Σ_i h_i σˣ_i
 
-with `J_i = J·λ_i` and `h_i = h·μ_i` for `λ ~ bonds`, `μ ~ fields`.  The keyword
-form is the symmetric [`PowerLawDisorder`](@ref) case on both.
+with `J_i = J·λ_i` and `h_i = h·μ_i`, the TFIM's own `J` and `h` being the
+SCALES and `λ`, `μ` drawn from the families named for `:J` and `:h`.
 
-Criticality is `[ln J]_av = [ln h]_av`, which for equal families is `J == h` but
-in general is not.  Distance from it is the standard control parameter
-
-    δ = ([ln h]_av − [ln J]_av) / (var[ln h] + var[ln J]),
-
-positive in the disordered (field-dominated) phase; see [`rtfim_delta`](@ref).
+Criticality is `[ln J]_av = [ln h]_av`, which for equal families is `J == h` and
+in general is not.  Distance from it is [`rtfim_delta`](@ref).
 
 | Quantity | BC | Coverage |
 | --- | --- | --- |
-| [`DynamicalExponent`](@ref) | `Infinite` | exact, off criticality; throws at `δ = 0` |
+| [`DynamicalExponent`](@ref) | `Infinite` | exact off criticality; throws at `δ = 0` |
 | [`ActivatedExponent`](@ref) | `Infinite` | `1/2`, at criticality only |
 | [`UniversalityClass`](@ref) | `Infinite` | `:IsingSDRG`, at criticality only |
+
+Anything else is refused: a disordered chain does not inherit the clean one's
+answers.
 """
-struct RandomTFIM{B<:DisorderFamily,F<:DisorderFamily} <: AbstractQAtlasModel
-    J::Float64
-    h::Float64
-    bonds::B
-    fields::F
-    function RandomTFIM(J::Real, h::Real, bonds::B, fields::F) where {B,F}
-        J > 0 || throw(ArgumentError("RandomTFIM: J must be > 0; got $J"))
-        h > 0 || throw(ArgumentError("RandomTFIM: h must be > 0; got $h"))
-        return new{B,F}(Float64(J), Float64(h), bonds, fields)
-    end
-end
+const RandomTFIM = Disordered{TFIM}
+
+"""
+    RandomTFIM(; J = 1.0, h = 1.0, D = 1.0)
+
+The symmetric [`PowerLawDisorder`](@ref) case, which is the default in the
+strong-disorder RG literature.  Any other combination is built with
+[`Disordered`](@ref) directly.
+"""
 function RandomTFIM(; J::Real=1.0, h::Real=1.0, D::Real=1.0)
-    return RandomTFIM(J, h, PowerLawDisorder(D), PowerLawDisorder(D))
+    return Disordered(TFIM(; J=J, h=h); J=PowerLawDisorder(D), h=PowerLawDisorder(D))
 end
 export RandomTFIM
 
@@ -164,8 +59,10 @@ export RandomTFIM
 infinite-randomness critical point; positive in the disordered phase.
 """
 function rtfim_delta(m::RandomTFIM)
-    num = (log(m.h) + mean_log(m.fields)) - (log(m.J) + mean_log(m.bonds))
-    return num / (var_log(m.fields) + var_log(m.bonds))
+    num =
+        (log(clean_model(m).h) + mean_log(disorder(m, :h))) -
+        (log(clean_model(m).J) + mean_log(disorder(m, :J)))
+    return num / (var_log(disorder(m, :h)) + var_log(disorder(m, :J)))
 end
 export rtfim_delta
 
@@ -186,13 +83,18 @@ And every term is `O(u)` near criticality, where the linear form
 root is where it returns.
 """
 function _rtfim_griffiths_residual(u, m::RandomTFIM)
-    return u * log(m.J / m.h) + log_moment(m.bonds, u) + log_moment(m.fields, -u)
+    return u * log(clean_model(m).J / clean_model(m).h) +
+           log_moment(disorder(m, :J), u) +
+           log_moment(disorder(m, :h), -u)
 end
 
 # Duality interchanges bonds with fields: the WHOLE problem, not just the two
 # scales ([IgloiMonthus2005](@cite), below Eq. (4.15)).  With unequal families
 # `min(J,h)/max(J,h)` is not that swap and gets the ordered side wrong.
-_rtfim_dual(m::RandomTFIM) = RandomTFIM(m.h, m.J, m.fields, m.bonds)
+function _rtfim_dual(m::RandomTFIM)
+    c = clean_model(m)
+    return Disordered(TFIM(; J=c.h, h=c.J); J=disorder(m, :h), h=disorder(m, :J))
+end
 
 """
     _rtfim_solve_u(m::RandomTFIM) -> Union{Float64,Nothing}
@@ -210,7 +112,7 @@ let the bisection collapse onto its own starting point and return that as an
 answer.
 """
 function _rtfim_solve_u(m::RandomTFIM)
-    fl = moment_floor(m.fields)
+    fl = moment_floor(disorder(m, :h))
     u_cap = isfinite(fl) ? -fl : Inf
     G(u) = _rtfim_griffiths_residual(u, m)
 

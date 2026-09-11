@@ -263,6 +263,7 @@ include("core/jw_spin_rdm.jl")  # SPIN rdm of a DISCONNECTED region from the cov
 include("core/cft_entanglement.jl")  # finite-L Calabrese-Cardy block entropy (chord form)
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
 include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
+include("core/disorder.jl")   # DisorderFamily + the `Disordered` decoration
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/reduces.jl")   # model -> model reductions (limit / special point)

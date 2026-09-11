@@ -61,25 +61,28 @@ infinite-randomness critical point; positive in the disordered phase.
 rtfim_delta(m::RandomTFIM) = log(m.h / m.J) / (2 * m.D^2)
 export rtfim_delta
 
-# The Griffiths condition [(J/h)^{1/z}]_av = 1 ([IgloiMonthus2005](@cite)
-# Eq. (4.15), §4.1.3) on the family above.  Both factors are elementary:
-#
-#     E[λ^{ 1/z}] = 1 / (1 + D/z)          E[μ^{−1/z}] = 1 / (1 − D/z),  z > D
-#
-# so with r = J/h the condition collapses to  r^{1/z} = 1 − D²/z².  The second
-# expectation is what fixes the domain: below z = D the field distribution has
-# no 1/z-th inverse moment and the condition has no meaning, not merely no root.
-#
-# Written with `expm1` rather than as `r^(1/z) - (1 - D^2/z^2)`.  Near criticality
-# both of those are 1 − O(10⁻⁸) and their difference loses eight digits to
-# cancellation — in the regime where z diverges, which is the regime this oracle
-# exists for.  `expm1(ln(r)/z) + D²/z²` is the same root with both terms small.
+"""
+    _rtfim_griffiths_residual(z, r, D)
+
+Residual of `[(J/h)^{1/z}]_av = 1` ([`IgloiMonthus2005`](@cite) Eq. (4.15),
+§4.1.3) on this model's disorder family, where `E[λ^{1/z}] = 1/(1 + D/z)` and
+`E[μ^{−1/z}] = 1/(1 − D/z)` reduce it to `r^{1/z} = 1 − D²/z²` with `r = J/h`.
+
+`z > D` is the domain, not a bracket: below it the field distribution has no
+`1/z`-th inverse moment.
+
+`expm1` because near criticality both sides are `1 − O(10⁻⁸)`, so their
+difference loses eight digits exactly where `z` diverges.
+"""
 _rtfim_griffiths_residual(z, r, D) = expm1(log(r) / z) + D^2 / z^2
 
-# Bisection rather than a solver dependency: the residual is monotone in z on
-# (D, ∞) for r < 1, and the bracket is known analytically — it is positive as
-# z → D⁺ (where the right-hand side vanishes) and negative as z → ∞ (where
-# 2|δ|D²/z beats D²/z²).
+"""
+    _rtfim_solve_z(r, D) -> Float64
+
+Bisect [`_rtfim_griffiths_residual`](@ref) on `(D, ∞)`, where the bracket is
+analytic: positive as `z → D⁺`, negative as `z → ∞`.  `Inf` when no root is
+found below `z = 10¹²`, i.e. when `r` is indistinguishable from critical.
+"""
 function _rtfim_solve_z(r::Float64, D::Float64)
     lo, hi = D * (1 + 1e-12), D
     while _rtfim_griffiths_residual(hi, r, D) > 0

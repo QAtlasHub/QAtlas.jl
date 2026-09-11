@@ -293,44 +293,25 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # PartitionFunction entries above — a name that was not part of the family could
     # not fill the slot.
     #
-    # Both became materializable when `RandomTFIM` started registering the two
-    # exponents (and `Universality{:IsingSDRG}` the second one). The typed slot of
-    # each is an EXPONENT — `z::DynamicalExponent`, `ψ::ActivatedExponent` — and a
-    # hub that answers the exponent fills it.
-    #
-    # What neither hub has is the other side. Both relations are supplied-derivative
-    # shapes: `d(ln Δ)/d(ln ξ)` and `d(ln[ln(1/Δ)])/d(ln ξ)`. `RandomTFIM` is a
-    # statement about the DISTRIBUTIONS of the couplings — it has no spectrum, so no
-    # gap and no correlation length to differentiate one against the other.
-    # `Universality{:IsingSDRG}` is a class, not a chain, and has neither either.
-    #
-    # So the relations would be checking an exponent against a slope nothing here can
-    # produce. Closing this needs a finite-size RTFIM solver — the free-fermion
-    # spectrum of a sampled chain — which is a computation, not a wiring.
-    :DynamicalScaling => "the hubs that answer `z` (RandomTFIM, a statement about the \
-                          coupling distributions) have no spectrum, so no Δ(ξ) to take \
+    # Materializable since `RandomTFIM` and `Universality{:IsingSDRG}` answer the
+    # exponents that are their typed slots. Both are supplied-derivative shapes and
+    # neither hub has a spectrum, so there is no Δ(ξ) to differentiate. Closing them
+    # needs a finite-size RTFIM solver — a computation, not a wiring.
+    :DynamicalScaling => "the hubs answering `z` have no spectrum, so no Δ(ξ) to take \
                           the supplied log-slope of.",
-    :ActivatedDynamicalScaling => "same as `DynamicalScaling`: the hubs answering `ψ` \
-                                   supply the exponent and not the gap it is the \
-                                   scaling of.",
+    :ActivatedDynamicalScaling => "as `DynamicalScaling` — the hub supplies `ψ`, not the \
+                                   gap it is the scaling of.",
 
-    # Became materializable when QAtlas adopted AbstractQAtlas 0.7, which gave
-    # `CFTEntanglementSlope` its `ncuts` slot. The 15-hub count is an artefact of the ONE
-    # typed slot, `c::CentralCharge`; both open slots (`dS_dlogℓ`, `ncuts`) are supplied.
+    # Materializable since the 0.7 adoption gave the relation its `ncuts` slot; the
+    # 15-hub count is an artefact of the one typed slot, `c::CentralCharge`.
     #
-    # Wherever QAtlas can supply `dS_dlogℓ` today it takes it from the Calabrese-Cardy
-    # form itself — the universality hubs and `TFIM`/Infinite return `(c/3) log(2ℓ)` and
-    # its finite-L / finite-β variants — so the check collapses to `c/3 = 2·(c/6)` and
-    # restates the implementation. Same verdict as `FreeEnergyFromZ` on IsingSquare.
-    #
-    # The one independent route is XXZ1D/OBC, a dense-ED trace over the spin complement
-    # rather than a closed form. It is blocked on `ncuts`, which is not a model quantity
-    # but a count of the region's BOUNDARY: `Region(1:ℓ)` touches the chain end and cuts
-    # once, a bulk block cuts twice, and the two give different slopes for the same `c`.
-    # `Region` is a set of sites and says so — AbstractQAtlas `core/region.jl` calls
-    # contiguity and boundary "a deferred optional lattice extension" — so nothing can
-    # derive `ncuts` from the region that hub was handed. Closing this needs that layer,
-    # not another quantity.
+    # Every hub that can supply `dS_dlogℓ` takes it from the Calabrese-Cardy form
+    # itself, so the check collapses to c/3 = 2·(c/6) — same verdict as
+    # `FreeEnergyFromZ` on IsingSquare. The exception, XXZ1D/OBC, is a dense-ED trace
+    # and genuinely independent; it is blocked on `ncuts`, a count of the region's
+    # BOUNDARY (end block cuts once, bulk block twice). `Region` is a set of sites and
+    # AbstractQAtlas `core/region.jl` calls boundary "a deferred optional lattice
+    # extension", so nothing derives it. Needs that layer, not another quantity.
     :CFTEntanglementSlope => "the hubs that can supply `dS_dlogℓ` take it from the \
                               Calabrese-Cardy form itself, so the check restates it; the \
                               one state-computed hub (XXZ1D/OBC) cannot supply `ncuts`, a \

@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Random transverse-field Ising chain — the Griffiths dynamical exponent.
+# Random transverse-field Ising chain: the Griffiths dynamical exponent.
 #
 # `TFIM` is the clean chain and carries two scalars, which is why the exact
 # Griffiths result could not live there: it is a condition on the DISTRIBUTIONS
@@ -12,7 +12,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 # CONVENTION
-#   Hamiltonian: Pauli σ, as in `TFIM.jl` — H = -Σ Jᵢ σᶻσᶻ - Σ hᵢ σˣ
+#   Hamiltonian: Pauli σ, as in `TFIM.jl`. H = -Σ Jᵢ σᶻσᶻ - Σ hᵢ σˣ
 #   Disorder:    Jᵢ = J·λᵢ and hᵢ = h·μᵢ with λ, μ i.i.d. dimensionless and
 #                J, h the SCALES, not the couplings; see `DisorderFamily`.
 
@@ -36,11 +36,11 @@ near criticality, where every term is `O(1/z)`.
 function log_moment end
 export log_moment
 
-"""    mean_log(f::DisorderFamily) -> Float64 — `E[ln λ]`."""
+"""    mean_log(f::DisorderFamily) -> Float64. `E[ln λ]`."""
 function mean_log end
 export mean_log
 
-"""    var_log(f::DisorderFamily) -> Float64 — `var[ln λ]`."""
+"""    var_log(f::DisorderFamily) -> Float64. `var[ln λ]`."""
 function var_log end
 export var_log
 
@@ -54,7 +54,7 @@ function moment_floor end
 export moment_floor
 
 # A family missing one of the four is otherwise a raw MethodError at whichever
-# call path happens to reach it first — and three of the four `fetch` routes do
+# call path happens to reach it first, and three of the four `fetch` routes do
 # not touch `moment_floor` at all, so a partial family can pass them. Same shape
 # as `derivative(::AbstractDiffBackend, ...)` in `core/derivative.jl`: name the
 # contract rather than let dispatch report the symptom.
@@ -63,7 +63,7 @@ for _f in (:log_moment, :mean_log, :var_log, :moment_floor)
         return error(
             "QAtlas.$($(QuoteNode(_f))): not defined for $(nameof(typeof(f))). A " *
             "`DisorderFamily` must implement all four of `log_moment`, `mean_log`, " *
-            "`var_log` and `moment_floor` — `mean_log` and `var_log` are the first " *
+            "`var_log` and `moment_floor`. `mean_log` and `var_log` are the first " *
             "two derivatives of `log_moment` at s = 0, so they must agree with it.",
         )
     end
@@ -94,7 +94,7 @@ moment_floor(f::PowerLawDisorder) = -1 / f.D
 """
     BinaryDisorder(κ) <: DisorderFamily
 
-Two couplings, `λ ∈ {1, κ}` with equal probability, `0 < κ ≤ 1` — the other
+Two couplings, `λ ∈ {1, κ}` with equal probability, `0 < κ ≤ 1`: the other
 standard RTFIM choice.  Bounded away from zero, so `E[λ^s]` exists for EVERY `s`
 and `z` has no lower bound: the `z > D` of [`PowerLawDisorder`](@ref) is a
 property of that family, not of the Griffiths condition.
@@ -175,8 +175,8 @@ export rtfim_delta
 `ln [(J/h)^{1/z}]_av` at `u = 1/z` ([`IgloiMonthus2005`](@cite) Eq. (4.15),
 §4.1.3), which the condition sets to zero.
 
-Solved in `u`, not `z`, for two reasons.  The admissible interval is bounded —
-`E[μ^{−u}]` needs `u < −moment_floor(fields)` — so a root arbitrarily close to
+Solved in `u`, not `z`, for two reasons.  The admissible interval is bounded,
+since `E[μ^{−u}]` needs `u < −moment_floor(fields)`, so a root arbitrarily close to
 criticality is reached by bisection without an arbitrary upper cut-off on `z`.
 And every term is `O(u)` near criticality, where the linear form
 `r^{1/z} − (1 − D²/z²)` would difference two numbers both `1 − O(10⁻⁸)`.
@@ -189,7 +189,7 @@ function _rtfim_griffiths_residual(u, m::RandomTFIM)
     return u * log(m.J / m.h) + log_moment(m.bonds, u) + log_moment(m.fields, -u)
 end
 
-# Duality interchanges bonds with fields — the WHOLE problem, not just the two
+# Duality interchanges bonds with fields: the WHOLE problem, not just the two
 # scales ([IgloiMonthus2005](@cite), below Eq. (4.15)).  With unequal families
 # `min(J,h)/max(J,h)` is not that swap and gets the ordered side wrong.
 _rtfim_dual(m::RandomTFIM) = RandomTFIM(m.h, m.J, m.fields, m.bonds)
@@ -198,14 +198,14 @@ _rtfim_dual(m::RandomTFIM) = RandomTFIM(m.h, m.J, m.fields, m.bonds)
     _rtfim_solve_u(m::RandomTFIM) -> Union{Float64,Nothing}
 
 Bisect [`_rtfim_griffiths_residual`](@ref) on `0 < u < −moment_floor(fields)`,
-returning `nothing` when the residual never turns positive there — which means
+returning `nothing` when the residual never turns positive there, which means
 the condition has NO root, not that the search gave up.
 
 That case is real and reachable.  For a family bounded away from zero the
 residual's slope at large `u` is `ln(J/h) − ln(min μ)`, so a root exists only
 while `J·max λ > h·min μ`: the strongest bond must beat the weakest field, or no
 region can be locally ordered and there is no Griffiths phase to have an
-exponent.  The bracket is therefore checked rather than assumed — assuming it
+exponent.  The bracket is therefore checked rather than assumed: assuming it
 let the bisection collapse onto its own starting point and return that as an
 answer.
 """
@@ -249,13 +249,13 @@ function fetch(m::RandomTFIM, ::DynamicalExponent, ::Infinite; kwargs...)
     δ = rtfim_delta(m)
     isfinite(δ) || return error(
         "RandomTFIM: the distance from criticality is $δ, so there is nothing to " *
-        "solve. It is not finite when both families have zero spread in ln λ — " *
-        "`BinaryDisorder(1.0)` is a deterministic coupling — and a chain with no " *
+        "solve. It is not finite when both families have zero spread in ln λ, and " *
+        "`BinaryDisorder(1.0)` is a deterministic coupling. A chain with no " *
         "disorder has no Griffiths phase.",
     )
     iszero(δ) && return error(
         "RandomTFIM at [ln J]_av == [ln h]_av is the infinite-randomness critical " *
-        "point, where no finite dynamical exponent exists — the gap closes as " *
+        "point, where no finite dynamical exponent exists: the gap closes as " *
         "ln(1/Δ) ~ ξ^ψ, so [(J/h)^{1/z}]_av = 1 has no root. Ask for " *
         "`ActivatedExponent()` (= 1/2). A finite z exists on either side, and " *
         "diverges as criticality is approached.",
@@ -279,7 +279,7 @@ end
 ([IgloiMonthus2005](@cite) Eq. (4.13), §4.1.3).
 
 Refused away from criticality, where the chain is in a Griffiths phase with a
-finite [`DynamicalExponent`](@ref) instead — returning `1/2` there would name the
+finite [`DynamicalExponent`](@ref) instead. Returning `1/2` there would name the
 exponent of a fixed point the model is not at.
 """
 function fetch(m::RandomTFIM, ::ActivatedExponent, ::Infinite; kwargs...)

@@ -1,6 +1,6 @@
 # models/quantum/TFIM/TFIM_random_registry.jl
 #
-# Random transverse-field Ising chain — the exact Griffiths dynamical exponent
+# Random transverse-field Ising chain: the exact Griffiths dynamical exponent
 # and the fixed point it flows to at J == h.
 
 @register(

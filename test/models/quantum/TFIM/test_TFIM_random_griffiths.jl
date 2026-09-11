@@ -4,7 +4,7 @@
 # verify()-first.  The value pins are cards: z against a root found on the
 # DEFINING expectation by quadrature (never touching the implementation's
 # closed form), and against the review's published near-critical 1/z = 2|δ|.
-# Raw @test is kept only where verify() cannot model the outcome — the two
+# Raw @test is kept only where verify() cannot model the outcome: the two
 # refusals, the structural inequalities, and the next-order coefficient, which
 # is a statement about the ERROR of the card above rather than a value.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -38,7 +38,7 @@ end
 # beats D²/z²), so the bracket needs no input from the implementation.
 function _z_by_quadrature(m::RandomTFIM)
     # `m.fields.D` and NOT `moment_floor(m.fields)`: sharing that call with the
-    # implementation makes the card blind to a bug in it — measured, a factor-2
+    # implementation makes the card blind to a bug in it. Measured, a factor-2
     # error there leaves impl and "independent" agreeing to 1e-9 while both sit
     # 65% off the true root.
     fl = m.fields.D
@@ -83,7 +83,7 @@ end
 @testset "RandomTFIM :: near criticality, against the published 1/z = 2|δ|" begin
     # 2|δ| is the LEADING term and is family-independent. The next one is NOT: it
     # comes from the fourth cumulant of ln λ, and for these two families it has
-    # OPPOSITE signs — measured (1/z−2δ)/(2δ) at δ = 1e-2 is −2.0e-4 for
+    # OPPOSITE signs. Measured (1/z−2δ)/(2δ) at δ = 1e-2 is −2.0e-4 for
     # PowerLaw(1) and +2.4e-5 for Binary(0.3). Asserting "approached from below"
     # for both, as this testset first did, would have been a power-law fact
     # written as a general one.
@@ -117,7 +117,7 @@ end
 
 @testset "RandomTFIM :: arbitrarily close to criticality, without a cut-off" begin
     # Solving in u = 1/z means no upper cap on z. At h = nextfloat(1.0) the true
-    # root is 4.5e15 and the earlier z-space search gave up and returned Inf —
+    # root is 4.5e15 and the earlier z-space search gave up and returned Inf,
     # indistinguishable from the honest "exactly critical, no root" answer.
     m = RandomTFIM(1.0, nextfloat(1.0), PowerLawDisorder(1.0), PowerLawDisorder(1.0))
     δ = rtfim_delta(m)
@@ -128,7 +128,7 @@ end
 end
 
 # BinaryDisorder makes the expectation a four-term sum, so this route shares no
-# code with `log_moment` — no logs, no quadrature, no series — and no bracket with
+# code with `log_moment` (no logs, no quadrature, no series) and no bracket with
 # the implementation either.
 function _binary_expectation(m::RandomTFIM, z)
     r = m.J / m.h
@@ -147,8 +147,8 @@ end
 
 @testset "RandomTFIM :: a second disorder family, by exact enumeration" begin
     # The condition is distribution-free; only its evaluation is per-family. A
-    # family with a different STRUCTURE — bounded away from zero, so every moment
-    # exists — checks that the machinery is general and not the power law in
+    # family with a different STRUCTURE, bounded away from zero so every moment
+    # exists, checks that the machinery is general and not the power law in
     # disguise.
     for (κJ, κh, hh) in ((0.3, 0.3, 2.0), (0.3, 0.3, 1.1), (0.1, 0.1, 5.0))
         m = RandomTFIM(1.0, hh, BinaryDisorder(κJ), BinaryDisorder(κh))
@@ -172,12 +172,12 @@ end
 @testset "RandomTFIM :: the family interface is consistent and enforced" begin
     # `log_moment(f, s) = ln E[λ^s]` is the cumulant generating function of ln λ, so
     # `mean_log` and `var_log` are its first two derivatives at s = 0. They are
-    # supplied in closed form for precision — `rtfim_delta` is checked to 1e-12 and
-    # a finite difference is nowhere near that — but nothing bound the three
+    # supplied in closed form for precision, since `rtfim_delta` is checked to
+    # 1e-12 and a finite difference is nowhere near that, but nothing bound the three
     # together, so an algebra slip in one would not have shown up anywhere.
     #
     # ABSOLUTE tolerance, not relative: `var_log` → 0 as κ → 1 (no disorder), so a
-    # relative bound is unbounded there — measured, the relative error on
+    # relative bound is unbounded there. Measured, the relative error on
     # BinaryDisorder(0.99) is 2e-4 while the absolute one is 5e-9. At h = 1e-4 the
     # worst absolute error over these families is 4.2e-8, so 1e-6 is achievable
     # with room, and still catches any real algebra slip, which is O(1).
@@ -186,7 +186,7 @@ end
         PowerLawDisorder(0.4),
         BinaryDisorder(0.35),
         BinaryDisorder(0.9),
-        BinaryDisorder(0.99),            # var_log ≈ 2.5e-5 — the hard one
+        BinaryDisorder(0.99),            # var_log ≈ 2.5e-5, the hard one
     )
         h = 1e-4
         d1 = (log_moment(f, h) - log_moment(f, -h)) / (2h)
@@ -210,7 +210,7 @@ end
 
 @testset "RandomTFIM :: bonds and fields may be different families" begin
     # The two type parameters are only worth having if the shapes can differ, not
-    # merely the parameters — every other test here varies κ or D within one family.
+    # merely the parameters. Every other test here varies κ or D within one family.
     m = RandomTFIM(1.0, 2.0, PowerLawDisorder(1.0), BinaryDisorder(0.3))
     @test m isa RandomTFIM{PowerLawDisorder,BinaryDisorder}
     z = fetch(m, DynamicalExponent(), Infinite())
@@ -222,12 +222,12 @@ end
 end
 
 @testset "RandomTFIM :: no rare regions means no exponent, said so" begin
-    # For two-valued couplings a root exists only while J·max λ > h·min μ — the
+    # For two-valued couplings a root exists only while J·max λ > h·min μ: the
     # strongest bond must beat the weakest field, or nothing can be locally ordered
     # and there is no Griffiths phase. The sweep above sits ON that boundary:
     # (κ, h) = (0.1, 5.0) has J/h = 0.2 > κ and works, and κ = 0.2 at the same h
-    # does not. Before the bracket was checked, both returned 1.00003e-8 — the
-    # bisection's own starting point, dressed as an exponent.
+    # does not. Before the bracket was checked, both returned 1.00003e-8, which is
+    # the bisection's own starting point, dressed as an exponent.
     @test fetch(
         RandomTFIM(1.0, 5.0, BinaryDisorder(0.1), BinaryDisorder(0.1)),
         DynamicalExponent(),
@@ -266,7 +266,7 @@ end
 end
 
 @testset "RandomTFIM :: duality swaps the whole problem, not the two scales" begin
-    # With unequal bond and field families, min(J,h)/max(J,h) is NOT the dual —
+    # With unequal bond and field families, min(J,h)/max(J,h) is NOT the dual:
     # it leaves the ordered side without a root. The swap is (J, bonds) ↔
     # (h, fields) (Igloi-Monthus, below Eq. (4.15)).
     ordered = RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.2))
@@ -300,7 +300,7 @@ end
         hh in (4.0, 2.0, 1.5, 1.2, 1.05, 1.01)
     ]
     @test issorted(zs) && allunique(zs)     # continuously varying, not a plateau
-    @test zs[end] > 50                      # and running away — a Griffiths exponent
+    @test zs[end] > 50                      # and running away, a Griffiths exponent
     # Duality: interchanging h and J is the ordered branch and gives the same z
     # (Igloi-Monthus, below Eq. (4.15)).  Guards writing J/h for min/max.
     @test fetch(RandomTFIM(; J=1.0, h=3.0, D=0.7), DynamicalExponent(), Infinite()) ≈
@@ -310,7 +310,7 @@ end
 @testset "RandomTFIM :: criticality refuses z and supplies ψ instead" begin
     # Raw @test_throws / message pins: verify() does not model error outcomes.
     crit = RandomTFIM(; J=1.0, h=1.0, D=1.7)
-    @test rtfim_delta(crit) == 0.0          # whatever D — the cut-offs alone decide
+    @test rtfim_delta(crit) == 0.0          # whatever D; the cut-offs alone decide
     @test rtfim_delta(RandomTFIM(; J=1.0, h=exp(2 * 1e-3), D=1.0)) ≈ 1e-3 rtol = 1e-12
 
     msg = try

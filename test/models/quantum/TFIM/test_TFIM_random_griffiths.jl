@@ -13,6 +13,10 @@ using QAtlas, Test
 using QAtlas: fetch, rtfim_delta
 using QuadGK: quadgk
 
+# A family that implements nothing, to check the contract error rather than a
+# bare MethodError.
+struct _PartialFamily <: DisorderFamily end
+
 # λ = u^D makes u uniform, so each factor of E[(J/h)^{1/z}] is an integral over
 # [0,1].  ∫v^{−a}dv is only just integrable as a = D/z → 1, and deep in the
 # disordered phase it reaches 0.978 and overflows; v = tᵐ with m from a makes it
@@ -137,6 +141,58 @@ end
         DynamicalExponent(),
         Infinite(),
     ) < 0.5
+end
+
+@testset "RandomTFIM :: the family interface is consistent and enforced" begin
+    # `log_moment(f, s) = ln E[λ^s]` is the cumulant generating function of ln λ, so
+    # `mean_log` and `var_log` are its first two derivatives at s = 0. They are
+    # supplied in closed form for precision — `rtfim_delta` is checked to 1e-12 and
+    # a finite difference is nowhere near that — but nothing bound the three
+    # together, so an algebra slip in one would not have shown up anywhere.
+    #
+    # ABSOLUTE tolerance, not relative: `var_log` → 0 as κ → 1 (no disorder), so a
+    # relative bound is unbounded there — measured, the relative error on
+    # BinaryDisorder(0.99) is 2e-4 while the absolute one is 5e-9. At h = 1e-4 the
+    # worst absolute error over these families is 4.2e-8, so 1e-6 is achievable
+    # with room, and still catches any real algebra slip, which is O(1).
+    for f in (
+        PowerLawDisorder(1.7),
+        PowerLawDisorder(0.4),
+        BinaryDisorder(0.35),
+        BinaryDisorder(0.9),
+        BinaryDisorder(0.99),            # var_log ≈ 2.5e-5 — the hard one
+    )
+        h = 1e-4
+        d1 = (log_moment(f, h) - log_moment(f, -h)) / (2h)
+        d2 = (log_moment(f, h) - 2 * log_moment(f, 0.0) + log_moment(f, -h)) / h^2
+        @test mean_log(f) ≈ d1 atol = 1e-6
+        @test var_log(f) ≈ d2 atol = 1e-6
+    end
+
+    # A family implementing only some of the four must SAY so. Three of the four
+    # fetch routes never reach `moment_floor`, so without this a partial family
+    # passes them and fails later with a bare MethodError.
+    msg = try
+        moment_floor(_PartialFamily())
+        ""
+    catch err
+        err isa ErrorException ? sprint(showerror, err) : rethrow()
+    end
+    @test occursin("DisorderFamily", msg)
+    @test occursin("all four", msg)
+end
+
+@testset "RandomTFIM :: bonds and fields may be different families" begin
+    # The two type parameters are only worth having if the shapes can differ, not
+    # merely the parameters — every other test here varies κ or D within one family.
+    m = RandomTFIM(1.0, 2.0, PowerLawDisorder(1.0), BinaryDisorder(0.3))
+    @test m isa RandomTFIM{PowerLawDisorder,BinaryDisorder}
+    z = fetch(m, DynamicalExponent(), Infinite())
+    @test isfinite(z) && z > 0
+    # Mixed E[(J/h)^{1/z}]: power-law bonds by quadrature, two-valued fields by sum.
+    pos, _ = quadgk(u -> u^(m.bonds.D / z), 0, 1; rtol=1e-12)
+    neg = (1.0^(-1 / z) + m.fields.κ^(-1 / z)) / 2
+    @test (m.J / m.h)^(1 / z) * pos * neg ≈ 1.0 rtol = 1e-8
 end
 
 @testset "RandomTFIM :: duality swaps the whole problem, not the two scales" begin

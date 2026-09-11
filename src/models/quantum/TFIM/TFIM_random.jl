@@ -53,6 +53,22 @@ floor is what bounds `z` from below: the condition needs `E[μ^{−1/z}]`.
 function moment_floor end
 export moment_floor
 
+# A family missing one of the four is otherwise a raw MethodError at whichever
+# call path happens to reach it first — and three of the four `fetch` routes do
+# not touch `moment_floor` at all, so a partial family can pass them. Same shape
+# as `derivative(::AbstractDiffBackend, ...)` in `core/derivative.jl`: name the
+# contract rather than let dispatch report the symptom.
+for _f in (:log_moment, :mean_log, :var_log, :moment_floor)
+    @eval function $(_f)(f::DisorderFamily, args...; kwargs...)
+        return error(
+            "QAtlas.$($(QuoteNode(_f))): not defined for $(nameof(typeof(f))). A " *
+            "`DisorderFamily` must implement all four of `log_moment`, `mean_log`, " *
+            "`var_log` and `moment_floor` — `mean_log` and `var_log` are the first " *
+            "two derivatives of `log_moment` at s = 0, so they must agree with it.",
+        )
+    end
+end
+
 """
     PowerLawDisorder(D) <: DisorderFamily
 

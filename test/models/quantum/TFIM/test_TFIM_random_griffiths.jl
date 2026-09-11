@@ -25,15 +25,16 @@ function _inverse_moment(a)
 end
 
 function _griffiths_expectation(m::RandomTFIM, z)
-    pos, _ = quadgk(u -> u^(m.D / z), 0, 1; rtol=1e-12)
-    return (min(m.J, m.h) / max(m.J, m.h))^(1 / z) * pos * _inverse_moment(m.D / z)
+    pos, _ = quadgk(u -> u^(m.bonds.D / z), 0, 1; rtol=1e-12)
+    return (m.J / m.h)^(1 / z) * pos * _inverse_moment(m.fields.D / z)
 end
 
 # The independent route: bisect the defining condition itself.  E − 1 is +∞ as
 # z → D⁺ (the inverse moment diverges) and negative as z → ∞ (where (ln r)/z
 # beats D²/z²), so the bracket needs no input from the implementation.
 function _z_by_quadrature(m::RandomTFIM)
-    lo, hi = m.D * (1 + 1e-9), m.D * 2
+    fl = -1 / moment_floor(m.fields)
+    lo, hi = fl * (1 + 1e-9), fl * 2
     while _griffiths_expectation(m, hi) > 1
         hi *= 2
     end
@@ -60,10 +61,10 @@ end
             ],
             at=("D=$D", "h=$hh"),
         )
-        # Not implied by the card: for z < D the checker's own substitution
-        # returns a finite wrong number instead of diverging, so both sides
-        # would agree on nonsense.
-        @test z > D
+        # Not implied by the card: below the field family's floor the checker's
+        # own substitution returns a finite wrong number instead of diverging,
+        # so both sides would agree on nonsense.
+        @test z > -1 / moment_floor(m.fields)
     end
 end
 
@@ -90,6 +91,71 @@ end
         @test 1 / z < 2δ
         @test abs(1 / z - 2δ) / (2δ) ≈ 2 * δ^2 * D^2 rtol = 1e-2
     end
+end
+
+# BinaryDisorder makes the expectation a four-term sum, so this route shares no
+# code with `log_moment` — no logs, no quadrature, no series.
+function _binary_expectation(m::RandomTFIM, z)
+    r = m.J / m.h
+    return sum((r * λ / μ)^(1 / z) for λ in (1.0, m.bonds.κ), μ in (1.0, m.fields.κ)) / 4
+end
+
+function _z_by_enumeration(m::RandomTFIM)
+    lo, hi = 1e-6, 1e8
+    for _ in 1:300
+        mid = 0.5 * (lo + hi)
+        (hi - lo) <= 1e-13 * mid && break
+        _binary_expectation(m, mid) > 1 ? (lo = mid) : (hi = mid)
+    end
+    return 0.5 * (lo + hi)
+end
+
+@testset "RandomTFIM :: a second disorder family, by exact enumeration" begin
+    # The condition is distribution-free; only its evaluation is per-family. A
+    # family with a different STRUCTURE — bounded away from zero, so every moment
+    # exists — checks that the machinery is general and not the power law in
+    # disguise.
+    for (κJ, κh, hh) in ((0.3, 0.3, 2.0), (0.3, 0.3, 1.1), (0.1, 0.1, 5.0))
+        m = RandomTFIM(1.0, hh, BinaryDisorder(κJ), BinaryDisorder(κh))
+        verify(
+            m,
+            DynamicalExponent(),
+            Infinite();
+            route=:sum_rule,
+            independent=_z_by_enumeration(m),
+            agree_within=1e-8,
+            refs=["Igloi-Monthus 2005 Eq. (4.15), §4.1.3, on two-valued couplings"],
+            at=("kappa=$κJ", "h=$hh"),
+        )
+    end
+    # No z floor here, unlike the power law: `z > D` is a property of that family
+    # and not of the condition.
+    @test moment_floor(BinaryDisorder(0.3)) == -Inf
+    @test moment_floor(PowerLawDisorder(2.0)) == -0.5
+    @test fetch(
+        RandomTFIM(1.0, 2.0, BinaryDisorder(0.3), BinaryDisorder(0.3)),
+        DynamicalExponent(),
+        Infinite(),
+    ) < 0.5
+end
+
+@testset "RandomTFIM :: duality swaps the whole problem, not the two scales" begin
+    # With unequal bond and field families, min(J,h)/max(J,h) is NOT the dual —
+    # it leaves the ordered side without a root. The swap is (J, bonds) ↔
+    # (h, fields) (Igloi-Monthus, below Eq. (4.15)).
+    ordered = RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.2))
+    dual = RandomTFIM(1.0, 1.0, BinaryDisorder(0.2), BinaryDisorder(0.5))
+    @test rtfim_delta(ordered) ≈ -rtfim_delta(dual)
+    @test rtfim_delta(ordered) < 0                      # the ordered branch
+    @test fetch(ordered, DynamicalExponent(), Infinite()) ≈
+        fetch(dual, DynamicalExponent(), Infinite())
+    # ...and criticality is [ln J] = [ln h], which here is NOT J == h.
+    @test !iszero(
+        rtfim_delta(RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.2)))
+    )
+    @test iszero(
+        rtfim_delta(RandomTFIM(1.0, 1.0, BinaryDisorder(0.5), BinaryDisorder(0.5)))
+    )
 end
 
 @testset "RandomTFIM :: z varies continuously and diverges at criticality" begin

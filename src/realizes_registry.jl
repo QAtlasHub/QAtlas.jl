@@ -18,8 +18,8 @@
     "Fisher1992", "Fisher1995", "RefaelMoore2004"
 ]
 
-@realizes RandomTFIM :IsingSDRG regime = "critical chain [ln J]_av = [ln h]_av, i.e. J == h for this disorder family; infinite-randomness fixed point" at = (
-    m -> m.J == m.h
+@realizes RandomTFIM :IsingSDRG regime = "critical chain [ln J]_av = [ln h]_av; infinite-randomness fixed point" at = (
+    m -> iszero(rtfim_delta(m))
 ) example = RandomTFIM(; J=1.0, h=1.0, D=1.0) references = [
     "Fisher1992", "FisherDS1995", "IgloiMonthus2005"
 ]

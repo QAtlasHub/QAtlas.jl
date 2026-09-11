@@ -232,8 +232,11 @@ end
 end
 
 @testset "query: describe — the full per-model grounding record" begin
-    rs = QAtlas.describe(:TFIM)
+    # Exact Type facet: `:TFIM` is a substring match and would also describe
+    # RandomTFIM, which is a different record and not the one under test.
+    rs = QAtlas.describe(TFIM)
     @test length(rs) == 1
+    @test length(QAtlas.describe(:TFIM)) > 1     # ...and the fuzzy one is wider
     r = rs[1]
     @test r.model == "TFIM"
     @test !isempty(r.quantities)                 # the observables — disambiguating structural content
@@ -245,7 +248,7 @@ end
     @test fib[1].summary == ""                   # honestly uncarded (no @about card)
     # JSONL: a header line then one rich record per model
     io = IOBuffer()
-    QAtlas.describe_jsonl(io, :TFIM)
+    QAtlas.describe_jsonl(io, TFIM)
     lines = split(strip(String(take!(io))), '\n')
     @test length(lines) == 2                      # header + 1 record
     @test startswith(lines[1], "{\"count\":1")

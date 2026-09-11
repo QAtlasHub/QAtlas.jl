@@ -293,6 +293,27 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # PartitionFunction entries above — a name that was not part of the family could
     # not fill the slot.
     #
+    # Both became materializable when `RandomTFIM` started registering the two
+    # exponents (and `Universality{:IsingSDRG}` the second one). The typed slot of
+    # each is an EXPONENT — `z::DynamicalExponent`, `ψ::ActivatedExponent` — and a
+    # hub that answers the exponent fills it.
+    #
+    # What neither hub has is the other side. Both relations are supplied-derivative
+    # shapes: `d(ln Δ)/d(ln ξ)` and `d(ln[ln(1/Δ)])/d(ln ξ)`. `RandomTFIM` is a
+    # statement about the DISTRIBUTIONS of the couplings — it has no spectrum, so no
+    # gap and no correlation length to differentiate one against the other.
+    # `Universality{:IsingSDRG}` is a class, not a chain, and has neither either.
+    #
+    # So the relations would be checking an exponent against a slope nothing here can
+    # produce. Closing this needs a finite-size RTFIM solver — the free-fermion
+    # spectrum of a sampled chain — which is a computation, not a wiring.
+    :DynamicalScaling => "the hubs that answer `z` (RandomTFIM, a statement about the \
+                          coupling distributions) have no spectrum, so no Δ(ξ) to take \
+                          the supplied log-slope of.",
+    :ActivatedDynamicalScaling => "same as `DynamicalScaling`: the hubs answering `ψ` \
+                                   supply the exponent and not the gap it is the \
+                                   scaling of.",
+
     # Became materializable when QAtlas adopted AbstractQAtlas 0.7, which gave
     # `CFTEntanglementSlope` its `ncuts` slot. The 15-hub count is an artefact of the ONE
     # typed slot, `c::CentralCharge`; both open slots (`dS_dlogℓ`, `ncuts`) are supplied.

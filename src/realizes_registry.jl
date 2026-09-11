@@ -18,6 +18,12 @@
     "Fisher1992", "Fisher1995", "RefaelMoore2004"
 ]
 
+@realizes RandomTFIM :IsingSDRG regime = "critical chain [ln J]_av = [ln h]_av, i.e. J == h for this disorder family; infinite-randomness fixed point" at = (
+    m -> m.J == m.h
+) example = RandomTFIM(; J=1.0, h=1.0, D=1.0) references = [
+    "Fisher1992", "FisherDS1995", "IgloiMonthus2005"
+]
+
 @realizes XXZ1D :XY regime = "critical line -1 < Δ < 1; Luttinger liquid (free boson), c = 1" at = (
     m -> -1 < m.Δ < 1
 ) example = XXZ1D(; Δ=0.0)

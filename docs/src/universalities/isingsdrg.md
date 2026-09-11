@@ -20,7 +20,7 @@ At the critical point of the random chain, the properties differ drastically fro
 - **Effective Central Charge**: The disorder-averaged entanglement entropy of a block of size $\ell$ scales as:
   $$\overline{S(\ell)} = \frac{c_{\text{eff}}}{3} \ln \ell + \text{const}$$
   with $c_{\text{eff}} = \frac{\ln 2}{2} \approx 0.34657359$.
-- **Typical Correlation Length**: Near criticality ($\delta \propto [\ln J] - [\ln h]$), the correlation length scales as $\ln \xi \sim \lvert\delta\rvert^{-\nu}$ with exponent $\nu = 2$.
+- **Correlation Lengths (two of them)**: Near criticality ($\delta \propto [\ln J] - [\ln h]$) the *average* correlation length is $\xi \sim \lvert\delta\rvert^{-\nu}$ with $\nu = 2$. The *typical* one is a different, smaller power, $\xi_{\text{typ}} \sim \xi^{1-\psi} \sim \lvert\delta\rvert^{-\nu_{\text{typ}}}$ with $\nu_{\text{typ}} = \nu(1-\psi) = 1$ — the correlation function is not self-averaging, so one length does not describe it.
 - **Fluctuations**: The entanglement entropy has non-vanishing sample-to-sample variance even in the thermodynamic limit.
 
 ---
@@ -62,10 +62,24 @@ bulk; one cut takes half.
 
 ---
 
+## Exponent table
+
+The exact exponents, and the one quantity this class refuses, generated from the source:
+
+```@autodocs
+Modules = [QAtlas]
+Pages = ["universalities/IsingSDRG/IsingSDRG.jl"]
+Private = false
+Order = [:type, :function]
+```
+
+---
+
 ## References
 
 - D. S. Fisher, "Random transverse field Ising spin chains", Phys. Rev. Lett. **69**, 534 (1992); "Critical behavior of random transverse-field Ising spin chains", Phys. Rev. B **51**, 6411 (1995) --- original SDRG solution and scaling theory.
 - G. Refael, J. E. Moore, "Entanglement entropy of random quantum critical points in one dimension", Phys. Rev. Lett. **93**, 260602 (2004) --- derivation of the effective central charge $c_{\text{eff}} = (\ln 2)/2$ at the random-singlet fixed point.
+- F. Iglói, C. Monthus, "Strong disorder RG approach of random systems", Phys. Rep. **412**, 277 (2005), [doi:10.1016/j.physrep.2005.02.006](https://doi.org/10.1016/j.physrep.2005.02.006) --- Table 1d collects the exponent set returned by `CriticalExponents`, and states the Griffiths-phase and typical-correlation relations for general $d$.
 
 ---
 

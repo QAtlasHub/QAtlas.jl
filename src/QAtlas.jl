@@ -64,6 +64,10 @@ using AbstractQAtlas:
     Universality,
     CriticalExponents,
     GrowthExponents,
+    # the two dynamic-scaling exponents (AbstractQAtlas 0.7): `z` where a finite one
+    # exists, `ψ` at an infinite-randomness fixed point where none does.
+    DynamicalExponent,
+    ActivatedExponent,
     PartitionFunction,
     CriticalTemperature,
     SpontaneousMagnetization,
@@ -347,6 +351,7 @@ export XXCorrelation, YYCorrelation, ZZCorrelation  # deprecated fused-name cons
 export SpinStructureFactor, DynamicalSpinStructureFactor  # axis-parametric (AbstractQAtlas)
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor  # deprecated static aliases
 export CentralCharge, LuttingerParameter, CorrelationLength, UniversalityClass
+export DynamicalExponent, ActivatedExponent  # IRFP vocabulary (AbstractQAtlas 0.7)
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy  # ToricCode (#162)
@@ -406,6 +411,7 @@ include("universalities/E8/E8.jl")
 include("universalities/MeanField/MeanField.jl")
 include("universalities/MeanField/MeanField_registry.jl")  # :universal predicts edge (CriticalExponents)
 include("universalities/Ising2D/Ising2D.jl")
+include("universalities/IsingSDRG/IsingSDRG.jl")
 include("universalities/KPZ/KPZ.jl")
 include("universalities/KPZ/KPZ_registry.jl")  # :universal predicts edge (GrowthExponents)
 include("universalities/Percolation/Percolation.jl")

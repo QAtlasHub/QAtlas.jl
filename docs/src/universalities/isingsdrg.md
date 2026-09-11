@@ -79,7 +79,7 @@ Order = [:type, :function]
 
 - D. S. Fisher, "Random transverse field Ising spin chains", Phys. Rev. Lett. **69**, 534 (1992); "Critical behavior of random transverse-field Ising spin chains", Phys. Rev. B **51**, 6411 (1995) --- original SDRG solution and scaling theory.
 - G. Refael, J. E. Moore, "Entanglement entropy of random quantum critical points in one dimension", Phys. Rev. Lett. **93**, 260602 (2004) --- derivation of the effective central charge $c_{\text{eff}} = (\ln 2)/2$ at the random-singlet fixed point.
-- F. Iglói, C. Monthus, "Strong disorder RG approach of random systems", Phys. Rep. **412**, 277 (2005), [doi:10.1016/j.physrep.2005.02.006](https://doi.org/10.1016/j.physrep.2005.02.006) --- Table 1d collects the exponent set returned by `CriticalExponents`, and states the Griffiths-phase and typical-correlation relations for general $d$.
+- F. Iglói, C. Monthus, "Strong disorder RG approach of random systems", Phys. Rep. **412**, 277 (2005), [doi:10.1016/j.physrep.2005.02.006](https://doi.org/10.1016/j.physrep.2005.02.006) --- Table 1 (§4.1.2) collects the exponent set returned by `CriticalExponents`; §4.4.2 the Griffiths-phase singularities, §9.1.2 the typical-correlation and Griffiths-exponent relations for general $d$. Equation numbers cited in the source are those of the arXiv version, `cond-mat/0502448`.
 
 ---
 

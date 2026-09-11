@@ -302,6 +302,29 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :ActivatedDynamicalScaling => "as `DynamicalScaling` — the hub supplies `ψ`, not the \
                                    gap it is the scaling of.",
 
+    # The AbstractQAtlas 0.7.4 infinite-randomness block, materializable for the same
+    # reason: `RandomTFIM` and `Universality{:IsingSDRG}` answer the exponents that are
+    # their typed slots. They split two ways.
+    #
+    # The first two need a supplied log-slope over T of a DISORDER-AVERAGED observable.
+    # No hub has one: `RandomTFIM` is a statement about the coupling distributions and
+    # carries no thermodynamics at all.
+    :GriffithsSusceptibility => "no hub carries a disorder-averaged χ(T) for a random \
+                                 chain, so there is no slope to supply.",
+    :GriffithsSpecificHeat => "as `GriffithsSusceptibility` — no disorder-averaged \
+                               c_V(T) exists here.",
+    :GriffithsExponentDivergence => "needs d(ln z)/d(ln|δ|); z is fetchable at each δ, \
+                                     so this is a sweep-and-fit and not a wiring.",
+
+    # The other two ARE satisfied by data QAtlas has — the `:IsingSDRG` exponent table
+    # carries ν, ν_typ, ψ, x_m and φ — and are checked against them in
+    # test/universalities/test_universality_isingsdrg.jl, by calling the relations rather
+    # than restating them. That is a test, not an EDGE_STORE edge, so they stay here.
+    :TypicalCorrelationLength => "holds on the `:IsingSDRG` exponent table and is \
+                                  checked there; no edge stores it.",
+    :ActivatedMomentGrowth => "as `TypicalCorrelationLength` — satisfied by the same \
+                               table, checked in the same file.",
+
     # Materializable since the 0.7 adoption gave the relation its `ncuts` slot; the
     # 15-hub count is an artefact of the one typed slot, `c::CentralCharge`.
     #

@@ -1,10 +1,13 @@
-# The Griffiths dynamical exponent of the random transverse-field Ising chain.
+# ─────────────────────────────────────────────────────────────────────────────
+# Griffiths dynamical exponent of the random transverse-field Ising chain.
 #
-# One check carries the file: the returned z is put back into the DEFINING
-# expectation, [(J/h)^{1/z}]_av = 1 (Iglói–Monthus Eq. (4.15), §4.1.3), by
-# quadrature — so it cannot inherit the implementation's algebra. The rest test
-# properties that expectation does not fix: the near-critical coefficient, the
-# refusals, and the duality.
+# verify()-first.  The value pins are cards: z against a root found on the
+# DEFINING expectation by quadrature (never touching the implementation's
+# closed form), and against the review's published near-critical 1/z = 2|δ|.
+# Raw @test is kept only where verify() cannot model the outcome — the two
+# refusals, the structural inequalities, and the next-order coefficient, which
+# is a statement about the ERROR of the card above rather than a value.
+# ─────────────────────────────────────────────────────────────────────────────
 
 using QAtlas, Test
 using QAtlas: fetch, rtfim_delta
@@ -26,18 +29,71 @@ function _griffiths_expectation(m::RandomTFIM, z)
     return (min(m.J, m.h) / max(m.J, m.h))^(1 / z) * pos * _inverse_moment(m.D / z)
 end
 
-@testset "RandomTFIM :: the returned z satisfies the defining expectation" begin
+# The independent route: bisect the defining condition itself.  E − 1 is +∞ as
+# z → D⁺ (the inverse moment diverges) and negative as z → ∞ (where (ln r)/z
+# beats D²/z²), so the bracket needs no input from the implementation.
+function _z_by_quadrature(m::RandomTFIM)
+    lo, hi = m.D * (1 + 1e-9), m.D * 2
+    while _griffiths_expectation(m, hi) > 1
+        hi *= 2
+    end
+    for _ in 1:200
+        mid = 0.5 * (lo + hi)
+        (hi - lo) <= 1e-13 * mid && break
+        _griffiths_expectation(m, mid) > 1 ? (lo = mid) : (hi = mid)
+    end
+    return 0.5 * (lo + hi)
+end
+
+@testset "RandomTFIM :: Griffiths z" begin
     for D in (0.5, 1.0, 2.0), hh in (1.25, 2.0, 5.0)
         m = RandomTFIM(; J=1.0, h=hh, D=D)
-        z = fetch(m, DynamicalExponent(), Infinite())
-        # Not implied by the line below: for z < D the checker's own substitution
-        # silently returns a finite wrong number instead of diverging.
+        z = verify(
+            m,
+            DynamicalExponent(),
+            Infinite();
+            route=:sum_rule,
+            independent=_z_by_quadrature(m),
+            agree_within=1e-8,
+            refs=[
+                "Igloi-Monthus 2005 Eq. (4.15), §4.1.3: z is the positive root of [(J/h)^{1/z}]_av = 1",
+            ],
+            at=("D=$D", "h=$hh"),
+        )
+        # Not implied by the card: for z < D the checker's own substitution
+        # returns a finite wrong number instead of diverging, so both sides
+        # would agree on nonsense.
         @test z > D
-        @test _griffiths_expectation(m, z) ≈ 1.0 rtol = 1e-8
+    end
+end
+
+@testset "RandomTFIM :: near criticality, against the published 1/z = 2|δ|" begin
+    # 2|δ| is the LEADING term, so the card's tolerance is the next one rather
+    # than a guess: x = 2δ − 4δ³D² gives |z − 1/(2δ)| ≈ δD².
+    for D in (0.5, 1.0, 2.0), δ in (1e-2, 1e-4)
+        m = RandomTFIM(; J=1.0, h=exp(2δ * D^2), D=D)
+        z = verify(
+            m,
+            DynamicalExponent(),
+            Infinite();
+            route=:literature_value,
+            independent=1 / (2δ),
+            agree_within=1.5 * δ * D^2,
+            refs=[
+                "Igloi-Monthus 2005, with Eq. (4.51), §4.4.2: 1/z = 2|δ| near criticality"
+            ],
+            at=("D=$D", "delta=$δ"),
+        )
+        # ...and the deviation the card tolerates is not slack: it is exactly
+        # 2δ²D², which no tolerance can express. A solver right at first order
+        # and wrong at second passes the card and fails here.
+        @test 1 / z < 2δ
+        @test abs(1 / z - 2δ) / (2δ) ≈ 2 * δ^2 * D^2 rtol = 1e-2
     end
 end
 
 @testset "RandomTFIM :: z varies continuously and diverges at criticality" begin
+    # Structural, so raw: verify() pins values, not orderings.
     zs = [
         fetch(RandomTFIM(; J=1.0, h=hh, D=1.0), DynamicalExponent(), Infinite()) for
         hh in (4.0, 2.0, 1.5, 1.2, 1.05, 1.01)
@@ -45,26 +101,13 @@ end
     @test issorted(zs) && allunique(zs)     # continuously varying, not a plateau
     @test zs[end] > 50                      # and running away — a Griffiths exponent
     # Duality: interchanging h and J is the ordered branch and gives the same z
-    # (Iglói–Monthus, below Eq. (4.15)).  Guards writing J/h for min/max.
+    # (Igloi-Monthus, below Eq. (4.15)).  Guards writing J/h for min/max.
     @test fetch(RandomTFIM(; J=1.0, h=3.0, D=0.7), DynamicalExponent(), Infinite()) ≈
         fetch(RandomTFIM(; J=3.0, h=1.0, D=0.7), DynamicalExponent(), Infinite())
 end
 
-@testset "RandomTFIM :: near criticality 1/z → 2|δ| with the next term" begin
-    # 1/z = 2|δ| is the LEADING term. Substituting x = 1/z into exp(−2δD²x) =
-    # 1 − D²x² gives x = 2δ − 4δ³D², a relative error of exactly 2δ²D². Pinning
-    # that coefficient catches a solver correct at first order and wrong at second,
-    # which any ratio band would pass.
-    for D in (0.5, 1.0, 2.0), δ in (1e-2, 1e-4)
-        z = fetch(
-            RandomTFIM(; J=1.0, h=exp(2δ * D^2), D=D), DynamicalExponent(), Infinite()
-        )
-        @test 1 / z < 2δ                                       # approached from below
-        @test abs(1 / z - 2δ) / (2δ) ≈ 2 * δ^2 * D^2 rtol = 1e-2
-    end
-end
-
 @testset "RandomTFIM :: criticality refuses z and supplies ψ instead" begin
+    # Raw @test_throws / message pins: verify() does not model error outcomes.
     crit = RandomTFIM(; J=1.0, h=1.0, D=1.7)
     @test rtfim_delta(crit) == 0.0          # whatever D — the cut-offs alone decide
     @test rtfim_delta(RandomTFIM(; J=1.0, h=exp(2 * 1e-3), D=1.0)) ≈ 1e-3 rtol = 1e-12

@@ -171,12 +171,51 @@ using QAtlas, Test
 
     # ── Error-path guards (raw @test_throws — verify() doesn't model error
     # outcomes) ──────────────────────────────────────────────────────────────
-    @testset "Classes without CentralCharge raise ErrorException" begin
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:KPZ), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0
+    # This testset was named for the "no CentralCharge defined" branch, and stopped
+    # reaching it when `_cardy_central_charge` began gating on `_require_cardy_applicable`
+    # first: neither class is declared conformal, so both are refused before the central
+    # charge is read. Measured — the branch's own text is in neither message. It kept
+    # passing throughout, because `@test_throws ErrorException` alone cannot tell the two
+    # refusals apart.
+    @testset "A non-conformal class is refused before its central charge is read" begin
+        for f in (
+            () ->
+                QAtlas.fetch(Universality(:KPZ), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0),
+            () -> QAtlas.fetch(
+                Universality(:Percolation), VonNeumannEntropy(), Infinite(); ℓ=10.0
+            ),
         )
-        @test_throws ErrorException QAtlas.fetch(
-            Universality(:Percolation), VonNeumannEntropy(), Infinite(); ℓ=10.0
+            @test_throws ErrorException f()
+            msg = try
+                f()
+                ""
+            catch err
+                err isa ErrorException ? sprint(showerror, err) : rethrow()
+            end
+            @test occursin("not declared to be a", msg)
+            @test !occursin("is not defined for this universality class", msg)
+        end
+    end
+
+    # ...and the branch itself, which no shipped class can reach: conformal invariance
+    # asserted, no `CentralCharge` defined. Left untested when the gate went in.
+    QAtlas._cardy_applies(::Universality{:ConformalWithoutACentralCharge}) = true
+    @testset "A conformal class with no CentralCharge names the method to define" begin
+        msg = try
+            QAtlas.fetch(
+                Universality(:ConformalWithoutACentralCharge),
+                VonNeumannEntropy(),
+                PBC();
+                ℓ=4.0,
+                L=8.0,
+            )
+            ""
+        catch err
+            err isa ErrorException ? sprint(showerror, err) : rethrow()
+        end
+        @test occursin("is not defined for this universality class", msg)
+        @test occursin(
+            "fetch(::Universality{:ConformalWithoutACentralCharge}, ::CentralCharge", msg
         )
     end
 
@@ -262,7 +301,9 @@ using QAtlas, Test
                 sprint(showerror, err)
             end
             @test occursin("conformal", msg)
-            @test occursin("IsingSDRG", msg)
+            # The braced form only comes from `$C`. Bare "IsingSDRG" would not: the
+            # template names it as a fixed example, so it holds for every refused class.
+            @test occursin("Universality{:IsingSDRG}", msg)
         end
 
         # Supplying `c` explicitly must not route around the refusal: what is
@@ -273,6 +314,26 @@ using QAtlas, Test
         @test_throws ErrorException QAtlas.fetch(
             sdrg, VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0, c=1 / 2
         )
+    end
+
+    # A typo lands on the same refusal as a deliberately non-conformal class — the
+    # `_cardy_applies` docstring says why no registry separates them. Pinned here: the
+    # clause is unconditional, and the class in the message is the one passed.
+    @testset "an unrecognised symbol is told to check its spelling" begin
+        refusal(c) =
+            try
+                QAtlas.fetch(Universality(c), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
+                ""
+            catch err
+                err isa ErrorException ? sprint(showerror, err) : rethrow()
+            end
+        typo, genuine = refusal(:ising), refusal(:IsingSDRG)
+        @test occursin("check the spelling", typo)
+        @test occursin("check the spelling", genuine)
+        # Interpolated AND unique to this refusal, unlike ":ising" on its own, which a
+        # MethodError would also print.
+        @test occursin("Universality(:ising), CentralCharge()", typo)
+        @test occursin("Universality(:IsingSDRG), CentralCharge()", genuine)
     end
 
     # Positive control for the guard above: a blanket refusal would pass every

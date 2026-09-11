@@ -195,6 +195,12 @@ family here and the Casimir correction in
 `universalities/behaviour/conformal_casimir.jl`.  **Opt-in, default `false`**,
 so a new non-conformal class cannot fall in.
 
+`false` therefore covers two different situations — a class that is deliberately not
+conformal, and a symbol that names no class at all, since `Universality(::Symbol)`
+validates nothing. QAtlas has no canonical list of its own class names to tell them apart
+(`REALIZES` holds 11 of the 16 that appear in `src/`, so using it would report
+`:Percolation` as unknown), so the refusal names the possibility instead of guessing.
+
 Having a `CentralCharge` is not the criterion; it says only
 `S ~ (coefficient) log ℓ`.  `:IsingSDRG` separates the two: `c_eff = (ln 2)/2`
 stays fetchable through [`CentralCharge`](@ref), but its fixed point scales in
@@ -233,7 +239,9 @@ function _require_cardy_applicable(model::Universality{C}) where {C}
         ":IsingSDRG, whose infinite-randomness fixed point has activated rather than " *
         "power-law dynamic scaling) must not declare it. What is refused here is the " *
         "conformal formula, not a coefficient: where this class has one, it is still " *
-        "`fetch(Universality(:$C), CentralCharge())`.",
+        "`fetch(Universality(:$C), CentralCharge())`. If :$C is not a class you meant, " *
+        "check the spelling — `Universality(::Symbol)` accepts any symbol, so a typo " *
+        "arrives here rather than at the constructor.",
     )
     return nothing
 end

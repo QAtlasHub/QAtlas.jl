@@ -275,6 +275,31 @@ using QAtlas, Test
         )
     end
 
+    # A typo reaches the same refusal as a deliberately non-conformal class, because
+    # `Universality(::Symbol)` validates nothing and QAtlas has no canonical list of its
+    # own class names to check against — `REALIZES` holds 11 of the 16 symbols that
+    # appear in `src/`, so consulting it would call `:Percolation` unknown. The message
+    # names the possibility rather than guessing which one it is.
+    @testset "a misspelled class is told to check the spelling" begin
+        msg = try
+            QAtlas.fetch(Universality(:ising), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
+            ""
+        catch err
+            sprint(showerror, err)
+        end
+        @test occursin("check the spelling", msg)
+        @test occursin(":ising", msg)
+        # ...and the real class still gets the physics reason, on the same code path.
+        sdrg_msg = try
+            QAtlas.fetch(Universality(:IsingSDRG), VonNeumannEntropy(), PBC(); ℓ=4.0, L=8.0)
+            ""
+        catch err
+            sprint(showerror, err)
+        end
+        @test occursin("conformal", sdrg_msg)
+        @test occursin("IsingSDRG", sdrg_msg)
+    end
+
     # Positive control for the guard above: a blanket refusal would pass every
     # assertion in that testset, so pin that the conformal classes still evaluate.
     @testset "the conformal classes are unaffected" begin

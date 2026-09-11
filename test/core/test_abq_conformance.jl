@@ -293,6 +293,29 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # PartitionFunction entries above — a name that was not part of the family could
     # not fill the slot.
     #
+    # Became materializable when QAtlas adopted AbstractQAtlas 0.7, which gave
+    # `CFTEntanglementSlope` its `ncuts` slot. The 15-hub count is an artefact of the ONE
+    # typed slot, `c::CentralCharge`; both open slots (`dS_dlogℓ`, `ncuts`) are supplied.
+    #
+    # Wherever QAtlas can supply `dS_dlogℓ` today it takes it from the Calabrese-Cardy
+    # form itself — the universality hubs and `TFIM`/Infinite return `(c/3) log(2ℓ)` and
+    # its finite-L / finite-β variants — so the check collapses to `c/3 = 2·(c/6)` and
+    # restates the implementation. Same verdict as `FreeEnergyFromZ` on IsingSquare.
+    #
+    # The one independent route is XXZ1D/OBC, a dense-ED trace over the spin complement
+    # rather than a closed form. It is blocked on `ncuts`, which is not a model quantity
+    # but a count of the region's BOUNDARY: `Region(1:ℓ)` touches the chain end and cuts
+    # once, a bulk block cuts twice, and the two give different slopes for the same `c`.
+    # `Region` is a set of sites and says so — AbstractQAtlas `core/region.jl` calls
+    # contiguity and boundary "a deferred optional lattice extension" — so nothing can
+    # derive `ncuts` from the region that hub was handed. Closing this needs that layer,
+    # not another quantity.
+    :CFTEntanglementSlope => "the hubs that can supply `dS_dlogℓ` take it from the \
+                              Calabrese-Cardy form itself, so the check restates it; the \
+                              one state-computed hub (XXZ1D/OBC) cannot supply `ncuts`, a \
+                              region boundary count that `Region` deliberately does not \
+                              carry.",
+
     # What is missing is not a quantity but a BOUNDARY CONDITION. Both remaining slots
     # are supplied values: `L`, a finite system size, and `dE = e₀(L) − e_∞`, the
     # finite-size correction to the ground-state energy density. At `Infinite` there is

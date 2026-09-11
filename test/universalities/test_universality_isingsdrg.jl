@@ -8,6 +8,7 @@
 
 using QAtlas, Test
 using QAtlas: fetch
+using AbstractQAtlas: residual, TypicalCorrelationLength, ActivatedMomentGrowth
 
 @testset "IsingSDRG :: exact IRFP exponents" begin
     e = fetch(Universality(:IsingSDRG), CriticalExponents(); d=2)
@@ -29,17 +30,21 @@ using QAtlas: fetch
         @test e.β_s == e.ν * e.x_m_s
 
         # Eq. (9.4)'s ν_typ = ν(1−ψ), against the ν_typ Eq. (4.10) obtained from the
-        # finite-size dependence instead.
-        @test e.ν_typ == e.ν * (1 - e.ψ)
+        # finite-size dependence instead — asked of the AbstractQAtlas relation
+        # rather than rewritten here, so the table and the relation cannot drift.
+        @test residual(TypicalCorrelationLength(); ν_typ=e.ν_typ, ν=e.ν, ψ=e.ψ) == 0 // 1
         @test e.ν_typ < e.ν                      # strictly smaller, since ψ > 0
 
-        # Eq. (A.21), φ = (d − x_m)/ψ, at the SPATIAL dimension d = 1 — the golden
-        # mean, which Eq. (3.18) reaches by a different route.
-        @test e.φ ≈ (1 - e.x_m) / e.ψ rtol = 1e-14
-        @test e.φ ≈ (1 + sqrt(5)) / 2 rtol = 1e-14
-        # ...and with QAtlas's Euclidean d = 2 it is NOT the golden mean, which is
-        # the trap the docstring warns about.
-        @test !isapprox((2 - e.x_m) / e.ψ, (1 + sqrt(5)) / 2; rtol=1e-6)
+        # Eq. (A.21), φ = (d − x_m)/ψ, at the SPATIAL dimension d = 1 — again the
+        # relation itself, not a copy of it.
+        @test residual(ActivatedMomentGrowth(); φ=e.φ, d=1, x_m=e.x_m, ψ=e.ψ) ≈ 0 atol =
+            1e-15
+        @test e.φ ≈ (1 + sqrt(5)) / 2 rtol = 1e-14   # ...and it is the golden mean
+        # With QAtlas's Euclidean d = 2 the same relation FAILS, which is the trap
+        # the docstring warns about.
+        @test !isapprox(
+            residual(ActivatedMomentGrowth(); φ=e.φ, d=2, x_m=e.x_m, ψ=e.ψ), 0; atol=1e-6
+        )
     end
 
     @testset "the absent exponents stay absent" begin

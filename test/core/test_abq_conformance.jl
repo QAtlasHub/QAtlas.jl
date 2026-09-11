@@ -293,23 +293,48 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # PartitionFunction entries above — a name that was not part of the family could
     # not fill the slot.
     #
-    # Became materializable when QAtlas adopted AbstractQAtlas 0.7, which gave
-    # `CFTEntanglementSlope` its `ncuts` slot. The 15-hub count is an artefact of the ONE
-    # typed slot, `c::CentralCharge`; both open slots (`dS_dlogℓ`, `ncuts`) are supplied.
+    # Materializable since `RandomTFIM` and `Universality{:IsingSDRG}` answer the
+    # exponents that are their typed slots. Both are supplied-derivative shapes and
+    # neither hub has a spectrum, so there is no Δ(ξ) to differentiate. Closing them
+    # needs a finite-size RTFIM solver — a computation, not a wiring.
+    :DynamicalScaling => "the hubs answering `z` have no spectrum, so no Δ(ξ) to take \
+                          the supplied log-slope of.",
+    :ActivatedDynamicalScaling => "as `DynamicalScaling` — the hub supplies `ψ`, not the \
+                                   gap it is the scaling of.",
+
+    # The AbstractQAtlas 0.7.4 infinite-randomness block, materializable for the same
+    # reason: `RandomTFIM` and `Universality{:IsingSDRG}` answer the exponents that are
+    # their typed slots. They split two ways.
     #
-    # Wherever QAtlas can supply `dS_dlogℓ` today it takes it from the Calabrese-Cardy
-    # form itself — the universality hubs and `TFIM`/Infinite return `(c/3) log(2ℓ)` and
-    # its finite-L / finite-β variants — so the check collapses to `c/3 = 2·(c/6)` and
-    # restates the implementation. Same verdict as `FreeEnergyFromZ` on IsingSquare.
+    # The first two need a supplied log-slope over T of a DISORDER-AVERAGED observable.
+    # No hub has one: `RandomTFIM` is a statement about the coupling distributions and
+    # carries no thermodynamics at all.
+    :GriffithsSusceptibility => "no hub carries a disorder-averaged χ(T) for a random \
+                                 chain, so there is no slope to supply.",
+    :GriffithsSpecificHeat => "as `GriffithsSusceptibility` — no disorder-averaged \
+                               c_V(T) exists here.",
+    :GriffithsExponentDivergence => "needs d(ln z)/d(ln|δ|); z is fetchable at each δ, \
+                                     so this is a sweep-and-fit and not a wiring.",
+
+    # The other two ARE satisfied by data QAtlas has — the `:IsingSDRG` exponent table
+    # carries ν, ν_typ, ψ, x_m and φ — and are checked against them in
+    # test/universalities/test_universality_isingsdrg.jl, by calling the relations rather
+    # than restating them. That is a test, not an EDGE_STORE edge, so they stay here.
+    :TypicalCorrelationLength => "holds on the `:IsingSDRG` exponent table and is \
+                                  checked there; no edge stores it.",
+    :ActivatedMomentGrowth => "as `TypicalCorrelationLength` — satisfied by the same \
+                               table, checked in the same file.",
+
+    # Materializable since the 0.7 adoption gave the relation its `ncuts` slot; the
+    # 15-hub count is an artefact of the one typed slot, `c::CentralCharge`.
     #
-    # The one independent route is XXZ1D/OBC, a dense-ED trace over the spin complement
-    # rather than a closed form. It is blocked on `ncuts`, which is not a model quantity
-    # but a count of the region's BOUNDARY: `Region(1:ℓ)` touches the chain end and cuts
-    # once, a bulk block cuts twice, and the two give different slopes for the same `c`.
-    # `Region` is a set of sites and says so — AbstractQAtlas `core/region.jl` calls
-    # contiguity and boundary "a deferred optional lattice extension" — so nothing can
-    # derive `ncuts` from the region that hub was handed. Closing this needs that layer,
-    # not another quantity.
+    # Every hub that can supply `dS_dlogℓ` takes it from the Calabrese-Cardy form
+    # itself, so the check collapses to c/3 = 2·(c/6) — same verdict as
+    # `FreeEnergyFromZ` on IsingSquare. The exception, XXZ1D/OBC, is a dense-ED trace
+    # and genuinely independent; it is blocked on `ncuts`, a count of the region's
+    # BOUNDARY (end block cuts once, bulk block twice). `Region` is a set of sites and
+    # AbstractQAtlas `core/region.jl` calls boundary "a deferred optional lattice
+    # extension", so nothing derives it. Needs that layer, not another quantity.
     :CFTEntanglementSlope => "the hubs that can supply `dS_dlogℓ` take it from the \
                               Calabrese-Cardy form itself, so the check restates it; the \
                               one state-computed hub (XXZ1D/OBC) cannot supply `ncuts`, a \

@@ -655,7 +655,7 @@ Every `fetch(::Model, …)` method registered for this model — together with t
 
 ```@autodocs
 Modules = [QAtlas]
-Pages = ["models/quantum/TFIM/TFIM.jl", "models/quantum/TFIM/TFIM_cft_entanglement.jl", "models/quantum/TFIM/TFIM_dynamics.jl", "models/quantum/TFIM/TFIM_entanglement.jl", "models/quantum/TFIM/TFIM_fidelity.jl", "models/quantum/TFIM/TFIM_gge.jl", "models/quantum/TFIM/TFIM_infinite_dynamics.jl", "models/quantum/TFIM/TFIM_local.jl", "models/quantum/TFIM/TFIM_loschmidt.jl", "models/quantum/TFIM/TFIM_pbc_thermal.jl", "models/quantum/TFIM/TFIM_quench_entanglement.jl", "models/quantum/TFIM/TFIM_registry.jl", "models/quantum/TFIM/TFIM_sigma_x_quench.jl", "models/quantum/TFIM/TFIM_thermal.jl", "models/quantum/TFIM/TFIM_xx_static.jl", "models/quantum/TFIM/TFIM_xx_yy_structure_factor.jl", "models/quantum/TFIM/TFIM_yy.jl", "models/quantum/TFIM/TFIM_zaxis.jl"]
+Pages = ["models/quantum/TFIM/TFIM.jl", "models/quantum/TFIM/TFIM_random.jl", "models/quantum/TFIM/TFIM_random_registry.jl", "models/quantum/TFIM/TFIM_cft_entanglement.jl", "models/quantum/TFIM/TFIM_dynamics.jl", "models/quantum/TFIM/TFIM_entanglement.jl", "models/quantum/TFIM/TFIM_fidelity.jl", "models/quantum/TFIM/TFIM_gge.jl", "models/quantum/TFIM/TFIM_infinite_dynamics.jl", "models/quantum/TFIM/TFIM_local.jl", "models/quantum/TFIM/TFIM_loschmidt.jl", "models/quantum/TFIM/TFIM_pbc_thermal.jl", "models/quantum/TFIM/TFIM_quench_entanglement.jl", "models/quantum/TFIM/TFIM_registry.jl", "models/quantum/TFIM/TFIM_sigma_x_quench.jl", "models/quantum/TFIM/TFIM_thermal.jl", "models/quantum/TFIM/TFIM_xx_static.jl", "models/quantum/TFIM/TFIM_xx_yy_structure_factor.jl", "models/quantum/TFIM/TFIM_yy.jl", "models/quantum/TFIM/TFIM_zaxis.jl"]
 Private = false
 Order = [:type, :function]
 ```

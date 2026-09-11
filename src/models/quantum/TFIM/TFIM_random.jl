@@ -170,15 +170,23 @@ end
 export rtfim_delta
 
 """
-    _rtfim_griffiths_residual(z, m)
+    _rtfim_griffiths_residual(u, m)
 
-`ln [(J/h)^{1/z}]_av` for the chain `m` ([IgloiMonthus2005](@cite) Eq. (4.15),
-§4.1.3), which the condition sets to zero.  In logs throughout: near criticality
-every term is `O(1/z)`, and the linear form `r^{1/z} − (1 − D²/z²)` would be the
-difference of two numbers that are both `1 − O(10⁻⁸)`.
+`ln [(J/h)^{1/z}]_av` at `u = 1/z` ([`IgloiMonthus2005`](@cite) Eq. (4.15),
+§4.1.3), which the condition sets to zero.
+
+Solved in `u`, not `z`, for two reasons.  The admissible interval is bounded —
+`E[μ^{−u}]` needs `u < −moment_floor(fields)` — so a root arbitrarily close to
+criticality is reached by bisection without an arbitrary upper cut-off on `z`.
+And every term is `O(u)` near criticality, where the linear form
+`r^{1/z} − (1 − D²/z²)` would difference two numbers both `1 − O(10⁻⁸)`.
+
+`G(0) = 0` identically, and `G'(0)` is minus the numerator of
+[`rtfim_delta`](@ref), so on the disordered side `G` leaves zero downwards and a
+root is where it returns.
 """
-function _rtfim_griffiths_residual(z, m::RandomTFIM)
-    return log(m.J / m.h) / z + log_moment(m.bonds, 1 / z) + log_moment(m.fields, -1 / z)
+function _rtfim_griffiths_residual(u, m::RandomTFIM)
+    return u * log(m.J / m.h) + log_moment(m.bonds, u) + log_moment(m.fields, -u)
 end
 
 # Duality interchanges bonds with fields — the WHOLE problem, not just the two
@@ -187,24 +195,41 @@ end
 _rtfim_dual(m::RandomTFIM) = RandomTFIM(m.h, m.J, m.fields, m.bonds)
 
 """
-    _rtfim_solve_z(m::RandomTFIM) -> Float64
+    _rtfim_solve_u(m::RandomTFIM) -> Union{Float64,Nothing}
 
-Bisect [`_rtfim_griffiths_residual`](@ref) above the floor the FIELD family sets
-(`E[μ^{−1/z}]` must exist), doubling until the residual changes sign.  `Inf` past
-`z = 10¹²`, i.e. when `m` is indistinguishable from critical.
+Bisect [`_rtfim_griffiths_residual`](@ref) on `0 < u < −moment_floor(fields)`,
+returning `nothing` when the residual never turns positive there — which means
+the condition has NO root, not that the search gave up.
+
+That case is real and reachable.  For a family bounded away from zero the
+residual's slope at large `u` is `ln(J/h) − ln(min μ)`, so a root exists only
+while `J·max λ > h·min μ`: the strongest bond must beat the weakest field, or no
+region can be locally ordered and there is no Griffiths phase to have an
+exponent.  The bracket is therefore checked rather than assumed — assuming it
+let the bisection collapse onto its own starting point and return that as an
+answer.
 """
-function _rtfim_solve_z(m::RandomTFIM)
+function _rtfim_solve_u(m::RandomTFIM)
     fl = moment_floor(m.fields)
-    lo = isfinite(fl) ? (-1 / fl) * (1 + 1e-12) : 1e-8
-    hi = 2 * lo
-    while _rtfim_griffiths_residual(hi, m) > 0
-        hi *= 2
-        hi > 1e12 && return Inf
+    u_cap = isfinite(fl) ? -fl : Inf
+    G(u) = _rtfim_griffiths_residual(u, m)
+
+    hi = isfinite(u_cap) ? u_cap * (1 - 1e-12) : 1.0
+    if isfinite(u_cap)
+        G(hi) > 0 || return nothing
+    else
+        steps = 0
+        while !(G(hi) > 0)
+            hi *= 2
+            (steps += 1) > 300 && return nothing
+        end
     end
-    for _ in 1:200
+
+    lo = 0.0
+    for _ in 1:300
         mid = 0.5 * (lo + hi)
-        (hi - lo) <= 1e-12 * max(1.0, mid) && return mid
-        _rtfim_griffiths_residual(mid, m) > 0 ? (lo = mid) : (hi = mid)
+        (hi - lo) <= 1e-14 * hi && break
+        G(mid) > 0 ? (hi = mid) : (lo = mid)
     end
     return 0.5 * (lo + hi)
 end
@@ -222,6 +247,12 @@ root rather than a large one.  Ask for [`ActivatedExponent`](@ref) instead.
 """
 function fetch(m::RandomTFIM, ::DynamicalExponent, ::Infinite; kwargs...)
     δ = rtfim_delta(m)
+    isfinite(δ) || return error(
+        "RandomTFIM: the distance from criticality is $δ, so there is nothing to " *
+        "solve. It is not finite when both families have zero spread in ln λ — " *
+        "`BinaryDisorder(1.0)` is a deterministic coupling — and a chain with no " *
+        "disorder has no Griffiths phase.",
+    )
     iszero(δ) && return error(
         "RandomTFIM at [ln J]_av == [ln h]_av is the infinite-randomness critical " *
         "point, where no finite dynamical exponent exists — the gap closes as " *
@@ -229,7 +260,16 @@ function fetch(m::RandomTFIM, ::DynamicalExponent, ::Infinite; kwargs...)
         "`ActivatedExponent()` (= 1/2). A finite z exists on either side, and " *
         "diverges as criticality is approached.",
     )
-    return _rtfim_solve_z(δ > 0 ? m : _rtfim_dual(m))
+    u = _rtfim_solve_u(δ > 0 ? m : _rtfim_dual(m))
+    u === nothing && return error(
+        "RandomTFIM: [(J/h)^{1/z}]_av = 1 has no root for these distributions, so " *
+        "there is no Griffiths dynamical exponent to return. This happens when the " *
+        "strongest bond cannot beat the weakest field (for two-valued couplings, " *
+        "when J·max λ ≤ h·min μ): no region can be locally ordered, so there are no " *
+        "rare regions and no Griffiths phase. δ = $δ says how far from criticality " *
+        "the chain is, and says nothing about this.",
+    )
+    return 1 / u
 end
 
 """

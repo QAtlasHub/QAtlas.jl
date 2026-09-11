@@ -60,7 +60,7 @@ end
     PowerLawDisorder(D) <: DisorderFamily
 
 `P(λ) = D⁻¹ λ^{−1+1/D}` on `(0, 1]`, the strong-disorder RG's generic family
-([`IgloiMonthus2005`](@cite) §A.1): `D² = var(ln λ)`, and `D = 1` is uniform on
+([IgloiMonthus2005](@cite) §A.1): `D² = var(ln λ)`, and `D = 1` is uniform on
 `[0, 1]`.  `E[λ^s] = 1/(1 + D s)`, so moments below `s = −1/D` do not exist.
 """
 struct PowerLawDisorder <: DisorderFamily
@@ -104,6 +104,58 @@ var_log(f::BinaryDisorder) = log(f.κ)^2 / 4
 moment_floor(::BinaryDisorder) = -Inf
 
 """
+    DisorderCorrelation
+
+How the randomised couplings are correlated in space.  This is the axis the
+relevance criteria classify, so it decides WHICH criterion applies to a
+disordered model, not merely how strong the disorder is.
+"""
+abstract type DisorderCorrelation end
+export DisorderCorrelation
+
+"""
+    Uncorrelated() <: DisorderCorrelation
+
+Independent couplings.  Harris's criterion governs, on the CLEAN correlation
+length exponent.
+"""
+struct Uncorrelated <: DisorderCorrelation end
+export Uncorrelated
+
+"""
+    PowerLawCorrelated(ρ) <: DisorderCorrelation
+
+Correlator falling as `G(r) ∼ r^{−ρ}`.  Weinrib-Halperin governs, and on the
+UNCORRELATED DISORDERED `ν`, not the clean one: it asks whether correlations
+move a fixed point that disorder has already changed.
+"""
+struct PowerLawCorrelated <: DisorderCorrelation
+    ρ::Float64
+    function PowerLawCorrelated(ρ::Real)
+        ρ > 0 || throw(ArgumentError("PowerLawCorrelated: ρ must be > 0; got $ρ"))
+        return new(Float64(ρ))
+    end
+end
+export PowerLawCorrelated
+
+"""
+    Aperiodic(ω) <: DisorderCorrelation
+
+A deterministic modulation whose fluctuations grow as `Δ(L) ∼ L^ω`.  Luck's
+criterion governs.  `ω = 1/2` reproduces a random sequence, and Luck then
+reduces to Harris in one dimension.
+"""
+struct Aperiodic <: DisorderCorrelation
+    ω::Float64
+    function Aperiodic(ω::Real)
+        ω < 1 ||
+            throw(ArgumentError("Aperiodic: the wandering exponent must be < 1; got $ω"))
+        return new(Float64(ω))
+    end
+end
+export Aperiodic
+
+"""
     Disordered(clean::AbstractQAtlasModel; couplings...)
 
 `clean` with the named couplings drawn at random: field `c` of `clean` becomes
@@ -123,10 +175,14 @@ subtype of `M`, so a clean `fetch` cannot dispatch on it and asking for one is a
 blanket refusal is registered here, because one would be ambiguous with the
 generic per-quantity dispatchers that already exist.
 """
-struct Disordered{M<:AbstractQAtlasModel,F<:NamedTuple} <: AbstractQAtlasModel
+struct Disordered{M<:AbstractQAtlasModel,F<:NamedTuple,C<:DisorderCorrelation} <:
+       AbstractQAtlasModel
     clean::M
     families::F
-    function Disordered(clean::M, families::F) where {M<:AbstractQAtlasModel,F<:NamedTuple}
+    correlation::C
+    function Disordered(
+        clean::M, families::F, correlation::C=Uncorrelated()
+    ) where {M<:AbstractQAtlasModel,F<:NamedTuple,C<:DisorderCorrelation}
         isempty(families) &&
             throw(ArgumentError("Disordered: name at least one random coupling"))
         for c in keys(families)
@@ -151,10 +207,16 @@ struct Disordered{M<:AbstractQAtlasModel,F<:NamedTuple} <: AbstractQAtlasModel
                 ),
             )
         end
-        return new{M,F}(clean, families)
+        return new{M,F,C}(clean, families, correlation)
     end
 end
-Disordered(clean::AbstractQAtlasModel; couplings...) = Disordered(clean, values(couplings))
+function Disordered(
+    clean::AbstractQAtlasModel;
+    correlation::DisorderCorrelation=Uncorrelated(),
+    couplings...,
+)
+    return Disordered(clean, values(couplings), correlation)
+end
 export Disordered
 
 """
@@ -165,6 +227,15 @@ couplings, not couplings themselves.
 """
 clean_model(m::Disordered) = m.clean
 export clean_model
+
+"""
+    correlation(m::Disordered) -> DisorderCorrelation
+
+How the randomised couplings are correlated, which is what selects the relevance
+criterion in [`disorder_relevance`](@ref).
+"""
+correlation(m::Disordered) = m.correlation
+export correlation
 
 """
     disorder(m::Disordered, coupling::Symbol) -> DisorderFamily
@@ -183,3 +254,94 @@ function disorder(m::Disordered, coupling::Symbol)
     return m.families[coupling]
 end
 export disorder
+
+# ─── the generic consumer ────────────────────────────────────────────────────
+#
+# One method for every model. It reads the clean model's universality class out
+# of the atlas, takes its correlation-length exponent, and asks the criterion
+# that this disorder's CORRELATION selects. Nothing here is per-model, and
+# nothing has to be written when a model is added: the answer appears as soon as
+# the atlas knows that model's class.
+
+"""
+    _clean_nu(m::Disordered; d_euclidean::Int) -> Real
+
+The clean model's correlation-length exponent, via its universality class.
+
+`d_euclidean`, not the criterion's spatial `d`: `CriticalExponents` is keyed by
+the EUCLIDEAN dimension, so a quantum chain asks it at `d = 2` while Harris asks
+about that same chain at `d = 1`.  Mixing them is silent, because both are small
+positive integers.
+
+Throws naming the missing link rather than a `MethodError`: the two ways it can
+be absent are different gaps in the atlas and worth telling apart.
+"""
+function _clean_nu(m::Disordered; d_euclidean::Int)
+    c = clean_model(m)
+    u = try
+        fetch(c, UniversalityClass(), Infinite())
+    catch
+        error(
+            "disorder_relevance: $(nameof(typeof(c))) has no registered " *
+            "`UniversalityClass`, so its clean ν is unknown. Relevance is a " *
+            "statement about the clean fixed point; without one there is nothing " *
+            "to ask. Register the class, or pass `ν₀` explicitly.",
+        )
+    end
+    e = fetch(u, CriticalExponents(); d=d_euclidean)
+    haskey(e, :ν) || error(
+        "disorder_relevance: the exponent set of $u at d = $d_euclidean has no `ν` " *
+        "(it carries $(keys(e))). Pass `ν₀` explicitly, or fill that entry in.",
+    )
+    return e.ν
+end
+
+"""
+    disorder_relevance(m::Disordered; d, ν₀=nothing, ν_dis=nothing, atol=0) -> Symbol
+
+Does this disorder change the fixed point?  `:relevant`, `:marginal` or
+`:irrelevant`.
+
+The [`correlation`](@ref) selects the criterion, which is the whole point of
+carrying one:
+
+| correlation | criterion | reads |
+| --- | --- | --- |
+| [`Uncorrelated`](@ref) | `HarrisCriterion` | the CLEAN `ν₀` |
+| [`Aperiodic`](@ref) | `LuckCriterion` | the clean `ν₀` and `ω` |
+| [`PowerLawCorrelated`](@ref) | `WeinribHalperinCriterion` | the DISORDERED `ν_dis` and `ρ` |
+
+`d` is the SPATIAL dimension, which is what the criteria take.  `d_euclidean` is
+what `CriticalExponents` is keyed by and defaults to `d + 1`: the quantum-to-
+classical mapping adds the imaginary-time direction, `d_euclidean = d + z`, with
+`z = 1` at a clean relativistic critical point.  Pass it where that does not
+hold.  A quantum chain is `d = 1`, `d_euclidean = 2`, and giving one number to
+both is the mistake these two keywords exist to prevent.
+
+`ν₀` is looked up from the clean model's universality class unless given.
+`ν_dis` has no such route: it is the exponent of the uncorrelated DISORDERED
+fixed point, a different object from anything the clean model knows, so it must
+be supplied.
+
+```jldoctest
+julia> disorder_relevance(RandomTFIM(); d=1)      # ν₀ = 1 < 2 = 2/d
+:relevant
+```
+"""
+function disorder_relevance(
+    m::Disordered; d::Int, d_euclidean::Int=d + 1, ν₀=nothing, ν_dis=nothing, atol::Real=0
+)
+    corr = correlation(m)
+    if corr isa PowerLawCorrelated
+        ν_dis === nothing && error(
+            "disorder_relevance: correlated disorder is judged on the exponent of " *
+            "the UNCORRELATED DISORDERED fixed point, not the clean one, and the " *
+            "atlas has no route to it. Pass `ν_dis`.",
+        )
+        return relevance(WeinribHalperinCriterion(); ν_dis=ν_dis, ρ=corr.ρ, atol=atol)
+    end
+    ν = ν₀ === nothing ? _clean_nu(m; d_euclidean=d_euclidean) : ν₀
+    corr isa Aperiodic && return relevance(LuckCriterion(); ν₀=ν, ω=corr.ω, atol=atol)
+    return relevance(HarrisCriterion(); ν₀=ν, d=d, atol=atol)
+end
+export disorder_relevance

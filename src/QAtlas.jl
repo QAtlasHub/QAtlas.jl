@@ -68,6 +68,12 @@ using AbstractQAtlas:
     # exists, `ψ` at an infinite-randomness fixed point where none does.
     DynamicalExponent,
     ActivatedExponent,
+    # the relevance criteria (AbstractQAtlas 0.7.6): which one applies is decided
+    # by a disorder's correlation, in `core/disorder.jl`.
+    relevance,
+    HarrisCriterion,
+    LuckCriterion,
+    WeinribHalperinCriterion,
     PartitionFunction,
     CriticalTemperature,
     SpontaneousMagnetization,
@@ -353,6 +359,7 @@ export SpinStructureFactor, DynamicalSpinStructureFactor  # axis-parametric (Abs
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor  # deprecated static aliases
 export CentralCharge, LuttingerParameter, CorrelationLength, UniversalityClass
 export DynamicalExponent, ActivatedExponent  # IRFP vocabulary (AbstractQAtlas 0.7)
+export relevance, HarrisCriterion, LuckCriterion, WeinribHalperinCriterion
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy  # ToricCode (#162)

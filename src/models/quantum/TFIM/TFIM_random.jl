@@ -69,7 +69,7 @@ export rtfim_delta
 """
     _rtfim_griffiths_residual(u, m)
 
-`ln [(J/h)^{1/z}]_av` at `u = 1/z` ([`IgloiMonthus2005`](@cite) Eq. (4.15),
+`ln [(J/h)^{1/z}]_av` at `u = 1/z` ([IgloiMonthus2005](@cite) Eq. (4.15),
 §4.1.3), which the condition sets to zero.
 
 Solved in `u`, not `z`, for two reasons.  The admissible interval is bounded,

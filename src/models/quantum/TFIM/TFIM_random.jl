@@ -47,7 +47,9 @@ The symmetric [`PowerLawDisorder`](@ref) case, which is the default in the
 strong-disorder RG literature.  Any other combination is built with
 [`Disordered`](@ref) directly.
 """
-function RandomTFIM(; J::Real=1.0, h::Real=1.0, D::Real=1.0)
+@experimental """
+the design is not fixed: which parameters the decoration takes, and which of the answers depend on which of them, are both still moving. Under development, not a shape to build on
+""" function RandomTFIM(; J::Real=1.0, h::Real=1.0, D::Real=1.0)
     return Disordered(TFIM(; J=J, h=h); J=PowerLawDisorder(D), h=PowerLawDisorder(D))
 end
 export RandomTFIM

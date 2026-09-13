@@ -23,11 +23,13 @@ using QAtlas: fetch, clean_model, disorder, correlation
     # Not random is a different statement from random with no spread.
     @test_throws ArgumentError disorder(Disordered(TFIM(); J=PowerLawDisorder(1.0)), :h)
 
-    # It is not a TFIM, so no clean method can dispatch on it. That is the type
-    # system refusing, not a guard, which is why none is registered: pin that the
-    # refusal is a MethodError, since a guard would raise something else.
+    # It is not a TFIM, so no TFIM method dispatches. What answers is not the
+    # type system, though: AbstractQAtlas's top-level fallback catches every
+    # unimplemented (model, quantity, bc) triple and names it. Pinning the type
+    # said MethodError and got ErrorException, which is how that was found, so
+    # pin the message instead.
     @test !(m isa TFIM)
-    @test_throws MethodError fetch(m, MassGap(), Infinite())
+    @test_throws "no fetch method for model=" fetch(m, MassGap(), Infinite())
 end
 
 @testset "Disordered :: the correlation decides which criterion applies" begin
@@ -99,22 +101,29 @@ end
     # messages tell them apart.
     no_class = Disordered(S1Heisenberg1D(); J=PowerLawDisorder(1.0))
     msg = try
-        disorder_relevance(no_class; d=1)
+        disorder_relevance(no_class; d=1, d_euclidean=2)
         ""
     catch err
         sprint(showerror, err)
     end
-    @test occursin("no registered `UniversalityClass`", msg)
+    @test occursin("`UniversalityClass`", msg)
+    @test occursin("S1Heisenberg1D", msg)
+    # The atlas's own diagnosis is quoted, not replaced by a guess at what it was.
+    @test occursin("The atlas said:", msg)
 
     # XXZ1D has a class, and that class's exponent set has no ν.
     no_nu = Disordered(XXZ1D(; Δ=0.5); Δ=PowerLawDisorder(1.0))
     msg2 = try
-        disorder_relevance(no_nu; d=1)
+        disorder_relevance(no_nu; d=1, d_euclidean=2)
         ""
     catch err
         sprint(showerror, err)
     end
-    @test occursin("has no `ν`", msg2)
+    @test occursin("carries no", msg2)
     @test occursin("XY", msg2)                      # says which class
-    @test msg != msg2                               # ...and the two gaps differ
+    # ...and does not tell the caller to fill the entry in, which is wrong advice
+    # for a class whose transition has no power-law exponents to report.
+    @test occursin("Berezinskii", msg2)
+    @test !occursin("fill that entry in", msg2)
+    @test msg != msg2                               # the two gaps differ
 end

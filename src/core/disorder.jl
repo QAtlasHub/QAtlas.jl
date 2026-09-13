@@ -340,10 +340,8 @@ julia> disorder_relevance(RandomTFIM(); d=1, d_euclidean=2)   # ν₀ = 1 < 2 = 
 ```
 """
 @experimental """
-the dimension arguments and the correlation axis: `d` and `d_euclidean` are two
-numbers for one model and only the uncorrelated route is checked against
-published values, so a relevance verdict from the correlated or aperiodic route
-has not been validated against anything
+the design is not fixed: which parameters the decoration takes, and which of the answers depend on which of them, are both still moving. Under development, not a shape to build on. Concretely here: `d` and `d_euclidean` are two numbers for one model,
+and only the uncorrelated route is checked against published values
 """ function disorder_relevance(
     m::Disordered;
     d::Int,
@@ -390,3 +388,10 @@ has not been validated against anything
     return relevance(HarrisCriterion(); ν₀=ν, d=d, atol=atol)
 end
 export disorder_relevance
+
+# The vocabulary above is a declaration, not an observation: a type has no body
+# to enter.  `disorder_relevance` and `RandomTFIM` carry the observed flags, so a
+# run that builds a disordered model or asks it for a verdict says so at exit.
+@experimental """
+the design is not fixed: which parameters the decoration takes, and which of the answers depend on which of them, are both still moving. Under development, not a shape to build on
+""" DisorderFamily PowerLawDisorder BinaryDisorder DisorderCorrelation Uncorrelated PowerLawCorrelated AperiodicSequence Disordered

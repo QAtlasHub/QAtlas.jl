@@ -10,6 +10,7 @@ module QAtlas
 # QAtlas keeps the deprecation surface (`AbstractModel` alias, `Model{M}` /
 # `Quantity{Q}` wrappers), which now subtype the shared roots.  Remaining
 # duplicate definitions in `src/core/` are replaced in later per-slice steps.
+using ExperimentalAPI: @experimental
 using AbstractQAtlas:
     AbstractQAtlasModel,
     AbstractQuantity,
@@ -33,6 +34,8 @@ using AbstractQAtlas:
     CentralCharge,
     CorrelationLength,
     MassGap,
+    SurfaceMagnetization,
+    SpatialDimension,
     MutualInformation,
     VonNeumannEntropy,
     # the FERMIONIC region entropy (AbstractQAtlas.jl#135) — a separate quantity from
@@ -68,6 +71,12 @@ using AbstractQAtlas:
     # exists, `ψ` at an infinite-randomness fixed point where none does.
     DynamicalExponent,
     ActivatedExponent,
+    # the relevance criteria (AbstractQAtlas 0.7.6): which one applies is decided
+    # by a disorder's correlation, in `core/disorder.jl`.
+    relevance,
+    HarrisCriterion,
+    LuckCriterion,
+    WeinribHalperinCriterion,
     PartitionFunction,
     CriticalTemperature,
     SpontaneousMagnetization,
@@ -263,6 +272,7 @@ include("core/jw_spin_rdm.jl")  # SPIN rdm of a DISCONNECTED region from the cov
 include("core/cft_entanglement.jl")  # finite-L Calabrese-Cardy block entropy (chord form)
 include("core/universality.jl")  # Universality{C} + CriticalExponents/GrowthExponents (registry design)
 include("core/axes.jl")          # orthogonal thermal/dynamical hub axes (quantity traits + derivation)
+include("core/disorder.jl")   # DisorderFamily + the `Disordered` decoration
 include("core/registry.jl")
 include("core/realizes.jl")  # model <-> universality-class correspondence
 include("core/reduces.jl")   # model -> model reductions (limit / special point)
@@ -352,6 +362,7 @@ export SpinStructureFactor, DynamicalSpinStructureFactor  # axis-parametric (Abs
 export XXStructureFactor, YYStructureFactor, ZZStructureFactor  # deprecated static aliases
 export CentralCharge, LuttingerParameter, CorrelationLength, UniversalityClass
 export DynamicalExponent, ActivatedExponent  # IRFP vocabulary (AbstractQAtlas 0.7)
+export relevance, HarrisCriterion, LuckCriterion, WeinribHalperinCriterion
 export FractalDimension                                  # SLE_κ Hausdorff dimension (Beffara 2008, #244)
 export ChiralCondensate  # massless Schwinger condensate (#246)
 export GroundStateDegeneracy, TopologicalEntanglementEntropy  # ToricCode (#162)
@@ -511,6 +522,7 @@ include("models/quantum/tightbinding/regular/Kagome_registry.jl")
 include("models/quantum/tightbinding/regular/Lieb_registry.jl")
 include("models/quantum/tightbinding/regular/Triangular_registry.jl")
 include("models/quantum/TFIM/TFIM.jl")
+include("models/quantum/TFIM/TFIM_random.jl")
 include("models/quantum/TFIM/TFIM_dynamics.jl")
 include("models/quantum/TFIM/TFIM_xx_static.jl")
 include("models/quantum/TFIM/TFIM_yy.jl")
@@ -526,6 +538,7 @@ include("models/quantum/TFIM/TFIM_infinite_dynamics.jl")
 include("models/quantum/TFIM/TFIM_loschmidt.jl")
 include("models/quantum/TFIM/TFIM_gge.jl")
 include("models/quantum/TFIM/TFIM_registry.jl")  # populates REGISTRY for TFIM
+include("models/quantum/TFIM/TFIM_random_registry.jl")   # RandomTFIM: Griffiths z, psi, class
 include("models/quantum/Heisenberg/Heisenberg.jl")
 include("models/quantum/Heisenberg/Heisenberg1D_thermal_cft.jl")  # c=1 CFT low-T (#521 Path B)
 include("models/quantum/Heisenberg/Heisenberg_spinon.jl")

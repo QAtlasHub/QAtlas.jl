@@ -134,3 +134,29 @@ end
     @test any(occursin("does_not_exist.jl", p[1]) for p in AtlasInventory.PARSE_FAILS)
     empty!(AtlasInventory.PARSE_FAILS)                # clean global for later use
 end
+
+@testset "injected doc pages do not accumulate blank lines" begin
+    # The hub-section splice kept `section`'s own trailing newline AND the one
+    # that had terminated the old end marker, so every regeneration inserted a
+    # blank line. At the end of a file generate.jl's trailing rstrip hid that;
+    # between the hub block and what followed, it grew unbounded: 35 lines on
+    # each of eleven pages before anyone counted. The guard is on the invariant
+    # a regeneration must preserve, not on a number that was only ever an
+    # accident of how many times the generator had run.
+    root = normpath(joinpath(@__DIR__, "..", "..", "..", "docs", "src"))
+    pages = String[]
+    for (dir, _, fs) in walkdir(root), f in fs
+        endswith(f, ".md") || continue
+        p = joinpath(dir, f)
+        occursin("ATLAS:HUBS:END", read(p, String)) && push!(pages, p)
+    end
+    @test !isempty(pages)          # a sweep with no hits would prove nothing
+    for p in pages
+        run = worst = 0
+        for l in readlines(p)
+            run = isempty(strip(l)) ? run + 1 : 0
+            worst = max(worst, run)
+        end
+        @test worst <= 1
+    end
+end

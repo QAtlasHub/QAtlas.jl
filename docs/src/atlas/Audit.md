@@ -13,17 +13,19 @@ The CI lint enforces `# CONVENTION` headers on new model files, but older files 
 
 - [`DimerLattice`](models/DimerLattice.md)
 
-**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (2) — model may live elsewhere or be defined inline:
+**Source file not found at `src/models/<class>/<Model>/<Model>.jl`** (3) — model may live elsewhere or be defined inline:
 
 - [`Bound`](models/Bound.md)
+- [`RandomTFIM`](models/RandomTFIM.md)
 - [`Universality`](models/Universality.md)
 
 ## 2. Quantities without auto-extracted `Definition`
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.
 
-**60 quantities**:
+**64 quantities**:
 
+- [`ActivatedExponent`](quantities/ActivatedExponent.md)
 - [`BB84KeyRate`](quantities/BB84KeyRate.md)
 - [`BekensteinBound`](quantities/BekensteinBound.md)
 - [`CHSHBound`](quantities/CHSHBound.md)
@@ -36,6 +38,7 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 - [`CriticalExponents`](quantities/CriticalExponents.md)
 - [`CriticalTemperature`](quantities/CriticalTemperature.md)
 - [`DynamicalCorrelation`](quantities/DynamicalCorrelation.md)
+- [`DynamicalExponent`](quantities/DynamicalExponent.md)
 - [`DynamicalSpinStructureFactor`](quantities/DynamicalSpinStructureFactor.md)
 - [`Energy`](quantities/Energy.md)
 - [`FermiVelocity`](quantities/FermiVelocity.md)
@@ -68,11 +71,13 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 - [`RenyiEntropy`](quantities/RenyiEntropy.md)
 - [`ResidualEntropy`](quantities/ResidualEntropy.md)
 - [`ScramblingTime`](quantities/ScramblingTime.md)
+- [`SpatialDimension`](quantities/SpatialDimension.md)
 - [`SpecificHeat`](quantities/SpecificHeat.md)
 - [`SpinCorrelation`](quantities/SpinCorrelation.md)
 - [`SpinGap`](quantities/SpinGap.md)
 - [`SpontaneousMagnetization`](quantities/SpontaneousMagnetization.md)
 - [`StringOrderParameter`](quantities/StringOrderParameter.md)
+- [`SurfaceMagnetization`](quantities/SurfaceMagnetization.md)
 - [`SusceptibilityXX`](quantities/SusceptibilityXX.md)
 - [`SusceptibilityYY`](quantities/SusceptibilityYY.md)
 - [`SusceptibilityZZ`](quantities/SusceptibilityZZ.md)
@@ -125,7 +130,7 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 
 ### 5b. Real orphan card hubs (need @register or removal)
 
-**9 real orphan card hub(s)**:
+**10 real orphan card hub(s)**:
 
 - `AKLT1D/ZZCorrelation/Infinite`
 - `f_model/FreeEnergy/Infinite`
@@ -136,5 +141,6 @@ Verify cards exist for `(M, Q, BC)` triples that no `@register` claims.  Split i
 - `TFIM/XXCorrelation/OBC`
 - `TFIM/YYCorrelation/OBC`
 - `TFIM/ZZCorrelation/OBC`
+- `max/DynamicalExponent/Infinite`
 
 [← back to the Atlas index](index.md)

@@ -48,6 +48,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`MixedFieldIsing1D`](../atlas/models/MixedFieldIsing1D.md) | Pfeuty1970, McCoyWu1978 |
 | [`PXP1D`](../atlas/models/PXP1D.md) | TurnerMichailidisAbaninSerbynPapic2018, LinMotrunich2019, IadecolaSchecterXu2019, Surace2020 |
 | [`PpIp2DSC`](../atlas/models/PpIp2DSC.md) | ReadGreen2000, Kitaev2006 |
+| [`RandomTFIM`](../atlas/models/RandomTFIM.md) | IgloiMonthus2005, FisherDS1995, RefaelMoore2004 |
 | [`RiceMele`](../atlas/models/RiceMele.md) | RiceMele1982 |
 | [`S1AnisotropicD1D`](../atlas/models/S1AnisotropicD1D.md) | WhiteHuse1993, ChenHidaSanctuary2003, TzengYang2008 |
 | [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | WhiteHuse1993 |
@@ -77,7 +78,7 @@ Search this page (Ctrl+F) to find the QAtlas entry for a physical system you hav
 | [`SSH`](../atlas/models/SSH.md) | SSH1979, AsbothOroszlanyPalyi2016, SSH1980 |
 | [`SixVertex`](../atlas/models/SixVertex.md) | Lieb1967a, Lieb1967b, Sutherland1967, Baxter1982, Lieb1967c |
 | [`TASEP`](../atlas/models/TASEP.md) | KardarParisiZhang1986, DerridaEvansHakimPasquier1993, DerridaLebowitz1998 |
-| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, BelavinPolyakovZamolodchikov1984, Sachdev1997, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006, Cardy1986, BloteCardyNightingale1986 |
+| [`TFIM`](../atlas/models/TFIM.md) | Pfeuty1970, Peschel1984, IgloiMonthus2005, BelavinPolyakovZamolodchikov1984, Sachdev1997, BarouchMcCoy1970, CalabreseEsslerFagotti2012, Peschel2003, LiebSchultzMattis1961, Sachdev2011, CalabreseCardy2009, CalabreseCardy2004, Heyl2013, Heyl2018, Rigol2007, CalabreseCardy2005, Gu2010, Damski2013, Onsager1944, LiebRobinson1972, HastingsKoma2006, Cardy1986, BloteCardyNightingale1986 |
 | [`TricriticalIsing`](../atlas/models/TricriticalIsing.md) | BelavinPolyakovZamolodchikov1984, FriedanQiuShenker1984 |
 | [`TricriticalPotts3`](../atlas/models/TricriticalPotts3.md) | AndrewsBaxterForrester1984, Huse1984, BelavinPolyakovZamolodchikov1984 |
 | [`Universality`](../atlas/models/Universality.md) | Cardy1986, BloteCardyNightingale1986, Affleck1986 |

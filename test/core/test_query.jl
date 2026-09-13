@@ -185,8 +185,19 @@ end
     rs = QAtlas.relations(:TFIM)
     @test !isempty(rs)
     @test :dual in (r.kind for r in rs)                      # TFIM is Kramers–Wannier self-dual
-    @test all(r -> r.from == "TFIM" || r.to == "TFIM", rs)   # every relation touches TFIM
+    # A SYMBOL facet is a documented substring match, so this returns every model
+    # whose name contains "TFIM" — RandomTFIM as well, since it exists. The edges
+    # still all touch one of them; asserting `== "TFIM"` was assuming no model name
+    # would ever contain another's.
+    @test all(r -> occursin("TFIM", r.from) || occursin("TFIM", r.to), rs)
     @test all(r -> r.references isa Vector, rs)
+
+    # ...and the TYPE facet is exact (`_match(::Type, T) = T <: want`), which is what
+    # the assertion above used to mean. Pinned separately now that the two differ.
+    exact = QAtlas.relations(TFIM)
+    @test !isempty(exact)
+    @test all(r -> r.from == "TFIM" || r.to == "TFIM", exact)
+    @test length(exact) < length(rs)                         # the fuzzy query is wider
     io = IOBuffer()
     QAtlas.relations_jsonl(io, :TFIM)
     lines = split(strip(String(take!(io))), '\n')
@@ -201,23 +212,31 @@ end
 end
 
 @testset "query: gaps — per-model coverage holes (absence search)" begin
-    g = QAtlas.gaps(:TFIM)
+    # The partition identity below is PER MODEL, so the facet has to be the exact
+    # Type. `:TFIM` is a documented substring match and spans RandomTFIM too, whose
+    # gaps would be added into the same count — the identity then reads 8 == 4.
+    g = QAtlas.gaps(TFIM)
     @test all(x -> x.kind === :regime && x.model == "TFIM", g)
     # grounded: gaps + covered regimes partition all REGIMES (no guessed "expected set")
-    covered = count(r -> QAtlas.available(; model=:TFIM, regime=r), keys(QAtlas.REGIMES))
+    covered = count(r -> QAtlas.available(; model=TFIM, regime=r), keys(QAtlas.REGIMES))
     @test length(g) + covered == length(QAtlas.REGIMES)
     # each reported gap is genuinely absent
-    @test all(x -> !QAtlas.available(; model=:TFIM, regime=Symbol(x.subject)), g)
+    @test all(x -> !QAtlas.available(; model=TFIM, regime=Symbol(x.subject)), g)
+    # ...and the fuzzy facet really is wider, which is the reason for the line above
+    @test length(QAtlas.gaps(:TFIM)) > length(g)
     io = IOBuffer()
-    QAtlas.gaps_jsonl(io, :TFIM)
+    QAtlas.gaps_jsonl(io, TFIM)
     lines = split(strip(String(take!(io))), '\n')
     @test length(lines) == length(g) + 1
     @test startswith(lines[1], "{\"has_gaps\":")
 end
 
 @testset "query: describe — the full per-model grounding record" begin
-    rs = QAtlas.describe(:TFIM)
+    # Exact Type facet: `:TFIM` is a substring match and would also describe
+    # RandomTFIM, which is a different record and not the one under test.
+    rs = QAtlas.describe(TFIM)
     @test length(rs) == 1
+    @test length(QAtlas.describe(:TFIM)) > 1     # ...and the fuzzy one is wider
     r = rs[1]
     @test r.model == "TFIM"
     @test !isempty(r.quantities)                 # the observables — disambiguating structural content
@@ -229,7 +248,7 @@ end
     @test fib[1].summary == ""                   # honestly uncarded (no @about card)
     # JSONL: a header line then one rich record per model
     io = IOBuffer()
-    QAtlas.describe_jsonl(io, :TFIM)
+    QAtlas.describe_jsonl(io, TFIM)
     lines = split(strip(String(take!(io))), '\n')
     @test length(lines) == 2                      # header + 1 record
     @test startswith(lines[1], "{\"count\":1")

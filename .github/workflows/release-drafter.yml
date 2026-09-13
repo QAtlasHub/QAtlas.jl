@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  # Required for autolabeler to act on PRs as they are opened/edited.
+  # Required for the autolabeler job below to act on PRs as they are opened/edited.
   pull_request:
     types: [opened, reopened, synchronize, edited]
 
@@ -18,10 +18,27 @@ permissions:
   contents: read
 
 jobs:
+  # v7 split autolabeling out into its own action. Until this was noticed the PR event called
+  # the releaser, which labels nothing: it checks out `refs/pull/N/merge`, calls that "an
+  # ephemeral pull request merge commit" and forces dry-run. Measured on one push before the
+  # fix: 137 releases fetched, 291 commits walked, 93 merged PRs resolved and a 9489-character
+  # body built, all discarded, while every `feat:`/`fix:`/`ci:` PR went unlabelled and so landed
+  # uncategorised in the draft. The two actions are cheap and expensive respectively, and each
+  # belongs to exactly one of the two events.
+  autolabel:
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write  # autolabeler writes labels back to PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter/autolabeler@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   update_release_draft:
+    if: github.event_name == 'push'
     permissions:
       contents: write       # release-drafter writes the draft release
-      pull-requests: write  # autolabeler writes labels back to PRs
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v7

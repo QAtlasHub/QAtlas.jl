@@ -1542,7 +1542,12 @@ function inject_hub_section!(page_rel, model_names)
         return nothing
     end
     if b !== nothing && e !== nothing
-        new = content[1:(first(b) - 1)] * section * content[(last(e) + 1):end]
+        # `section` ends with a newline of its own and the retained tail begins
+        # with the one that terminated the OLD end marker, so splicing them
+        # verbatim inserts one blank line per regeneration. At the end of the
+        # file the trailing rstrip below hides that; in the middle of one it
+        # accumulates, which is why only the hub block grew.
+        new = content[1:(first(b) - 1)] * rstrip(section, '\n') * content[(last(e) + 1):end]
     else
         new = rstrip(content, '\n') * "\n\n---\n\n" * section * "\n"
     end
@@ -1649,7 +1654,12 @@ function inject_model_docs_section!(page_rel, model_names)
         return nothing
     end
     if b !== nothing && e !== nothing
-        new = content[1:(first(b) - 1)] * section * content[(last(e) + 1):end]
+        # `section` ends with a newline of its own and the retained tail begins
+        # with the one that terminated the OLD end marker, so splicing them
+        # verbatim inserts one blank line per regeneration. At the end of the
+        # file the trailing rstrip below hides that; in the middle of one it
+        # accumulates, which is why only the hub block grew.
+        new = content[1:(first(b) - 1)] * rstrip(section, '\n') * content[(last(e) + 1):end]
     else
         new = rstrip(content, '\n') * "\n\n---\n\n" * section * "\n"
     end

@@ -180,6 +180,18 @@ Modules = [QAtlas]
 Pages = ["core/type.jl"]
 ```
 
+### Quenched disorder
+
+Disorder decorates a model rather than replacing it: `Disordered(clean; c=family)`
+names which of `clean`'s fields are random and with what distribution, so any model
+with named couplings can carry it. The `DisorderFamily` interface is what a
+distribution must answer, and is independent of which model reads it.
+
+```@autodocs
+Modules = [QAtlas]
+Pages = ["core/disorder.jl"]
+```
+
 ### Quantity
 
 ```@autodocs

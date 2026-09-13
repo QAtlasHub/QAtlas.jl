@@ -27,7 +27,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - ⚪ [`ToricCode/Energy/Infinite`](../hubs/ToricCode_Energy_Infinite.md) — cited-only
 - ⚪ [`YangLee/ConformalWeights/Infinite`](../hubs/YangLee_ConformalWeights_Infinite.md) — cited-only
 
-## `coherent` (42)
+## `coherent` (43)
 
 - 🔵 [`ExtendedHubbard1D/ChargeGap/Infinite`](../hubs/ExtendedHubbard1D_ChargeGap_Infinite.md) — coherent
 - 🔵 [`Heisenberg1D/LuttingerParameter/Infinite`](../hubs/Heisenberg1D_LuttingerParameter_Infinite.md) — coherent
@@ -46,6 +46,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🔵 [`LongRangeIsing1D/MassGap/Infinite`](../hubs/LongRangeIsing1D_MassGap_Infinite.md) — coherent
 - 🔵 [`MixedFieldIsing1D/MassGap/Infinite`](../hubs/MixedFieldIsing1D_MassGap_Infinite.md) — coherent
 - 🔵 [`RandomBondIsing2D/CentralCharge/Infinite`](../hubs/RandomBondIsing2D_CentralCharge_Infinite.md) — coherent
+- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](../hubs/RandomTFIM_DynamicalExponent_Infinite.md) — coherent
 - 🔵 [`RiceMele/ExactSpectrum/OBC`](../hubs/RiceMele_ExactSpectrum_OBC.md) — coherent
 - 🔵 [`RiceMele/MassGap/OBC`](../hubs/RiceMele_MassGap_OBC.md) — coherent
 - 🔵 [`S1AnisotropicD1D/Energy/Infinite`](../hubs/S1AnisotropicD1D_Energy_Infinite.md) — coherent
@@ -72,7 +73,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🔵 [`XXZ1D/MagnetizationZ/OBC`](../hubs/XXZ1D_MagnetizationZ_OBC.md) — coherent
 - 🔵 [`XXZ1D/ThermalEntropy/Infinite`](../hubs/XXZ1D_ThermalEntropy_Infinite.md) — coherent
 
-## `corroborated-at-p` (176)
+## `corroborated-at-p` (177)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -202,6 +203,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`TFIM/SpecificHeat/OBC`](../hubs/TFIM_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SpecificHeat/PBC`](../hubs/TFIM_SpecificHeat_PBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/SurfaceMagnetization/OBC`](../hubs/TFIM_SurfaceMagnetization_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityYY/OBC`](../hubs/TFIM_SusceptibilityYY_OBC.md) — corroborated-at-p
@@ -251,7 +253,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (152)
+## `uncorroborated-but-feasible` (155)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/SpinCorrelation/Infinite`](../hubs/AKLT1D_SpinCorrelation_Infinite.md) — uncorroborated-but-feasible
@@ -318,6 +320,9 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`Lieb/TightBindingMaxEnergy/Infinite`](../hubs/Lieb_TightBindingMaxEnergy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`MajumdarGhosh/Energy/Infinite`](../hubs/MajumdarGhosh_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`MajumdarGhosh/Energy/PBC`](../hubs/MajumdarGhosh_Energy_PBC.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](../hubs/RandomTFIM_ActivatedExponent_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/SpatialDimension/Infinite`](../hubs/RandomTFIM_SpatialDimension_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](../hubs/RandomTFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`RiceMele/Energy/Infinite`](../hubs/RiceMele_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`RiceMele/Energy/OBC`](../hubs/RiceMele_Energy_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`S1Heisenberg1D/ConnectedSpinCorrelation/OBC`](../hubs/S1Heisenberg1D_ConnectedSpinCorrelation_OBC.md) — uncorroborated-but-feasible

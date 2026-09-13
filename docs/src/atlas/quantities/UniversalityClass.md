@@ -7,10 +7,15 @@ All `(Model, BC)` hubs `src` claims for the **`UniversalityClass`** observable. 
 
 ## Coverage
 
-- **Models with this quantity registered**: 18
-- **Total hubs (Model, BC pairs)**: 18
+- **Models with this quantity registered**: 19
+- **Total hubs (Model, BC pairs)**: 19
 - **Methods** (derived from `@register`): `analytic`
 - **Universality classes** (where applicable): `Ising`, `MeanField`, `MinimalModel`
+
+**Top references** (by hub count):
+- FisherDS1995 — 1 hub
+- IgloiMonthus2005 — 1 hub
+- RefaelMoore2004 — 1 hub
 
 ## Model × BC matrix
 
@@ -23,6 +28,7 @@ All `(Model, BC)` hubs `src` claims for the **`UniversalityClass`** observable. 
 | [`IsingSquare`](../models/IsingSquare.md) | 🟠 [hub](../hubs/IsingSquare_UniversalityClass_Infinite.md) |
 | [`IsingTriangular`](../models/IsingTriangular.md) | 🟠 [hub](../hubs/IsingTriangular_UniversalityClass_Infinite.md) |
 | [`Kitaev1D`](../models/Kitaev1D.md) | 🟠 [hub](../hubs/Kitaev1D_UniversalityClass_Infinite.md) |
+| [`RandomTFIM`](../models/RandomTFIM.md) | 🟠 [hub](../hubs/RandomTFIM_UniversalityClass_Infinite.md) |
 | [`SSH`](../models/SSH.md) | 🟠 [hub](../hubs/SSH_UniversalityClass_Infinite.md) |
 | [`SixVertex`](../models/SixVertex.md) | 🟠 [hub](../hubs/SixVertex_UniversalityClass_Infinite.md) |
 | [`TASEP`](../models/TASEP.md) | 🟠 [hub](../hubs/TASEP_UniversalityClass_Infinite.md) |

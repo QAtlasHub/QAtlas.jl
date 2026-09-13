@@ -231,6 +231,52 @@ function fetch(model::TFIM, ::MassGap, bc::OBC; kwargs...)
     return Λ[1]
 end
 
+"""
+    fetch(model::TFIM, ::SurfaceMagnetization, bc::OBC) -> Float64
+
+Surface magnetization of the N-site open chain with the far end fixed
+(`h_N = 0`), in closed form.  Peschel's exact free-fermion result
+([Peschel1984](@cite); [IgloiMonthus2005](@cite) Eq. (4.4)) is a sum over
+products of `h_j/J_j`; on a uniform chain those are one ratio `r = h/J` and the
+sum is geometric:
+
+`m_s(N) = [1 + r²(1 − r^{2(N−1)})/(1 − r²)]^{-1/2}`,   `m_s(N) = N^{-1/2}` at `r = 1`.
+
+The two limits are the exponents, not fitted: `N → ∞` below the transition gives
+`m_s = √(1−r²)`, so `β_s = 1/2`, and at `r = 1` the `N^{-1/2}` is `x_m^s = 1/2`.
+Both are the surface entries of the 2D Ising table, and both are what a RANDOM
+chain also has for `x_m^s` by a different argument, which is why the average
+alone cannot tell the two apart and the typical value must.
+
+Evaluated through `log1p`/`expm1` so `r > 1` neither overflows the numerator nor
+loses the answer: `m_s` is exponentially small there, not zero.
+
+Size comes from `bc.N` (or `kwargs[:N]`), which is where a non-positive `N` is
+refused; there is no second check for it here.
+"""
+function fetch(model::TFIM, ::SurfaceMagnetization, bc::OBC; kwargs...)
+    N = _bc_size(bc, kwargs)          # already refuses N <= 0
+    model.J == 0 && throw(
+        ArgumentError("SurfaceMagnetization: J = 0 leaves no chain to be the surface of."),
+    )
+    r = abs(model.h / model.J)
+    N == 1 && return 1.0                       # the sum in Eq. (4.4) is empty
+    r == 1 && return 1 / sqrt(N)
+    # An overflowed ratio makes both log terms `Inf`, and their difference `NaN`,
+    # which would leave here as a value. The limit is the one the merely-huge
+    # branch below already reaches.
+    isinf(r) && return 0.0
+    # ln S for S = sum_{i=1}^{N-1} r^{2i}, written so r > 1 cannot overflow.
+    a = 2 * log(r)
+    lnS = a + _log_abs_expm1(a * (N - 1)) - _log_abs_expm1(a)
+    return exp(-0.5 * _log1p_exp(lnS))
+end
+
+# |expm1(x)| = e^x(1 - e^{-x}); past x = 33 the correction is below eps() of x.
+_log_abs_expm1(x::Real) = x > 33 ? x : log(abs(expm1(x)))
+# log1p(exp(x)) without forming exp(x); past x = 36 the correction is below eps().
+_log1p_exp(x::Real) = x > 36 ? x : log1p(exp(x))
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # Central charge (critical point h = J)
 # ═══════════════════════════════════════════════════════════════════════════════

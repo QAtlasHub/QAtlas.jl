@@ -18,19 +18,19 @@
 
 | | count |
 |---|---|
-| Hubs `src` claims (registry) | 389 |
-| ED-feasible claimed (risk denominator) | 362 |
+| Hubs `src` claims (registry) | 394 |
+| ED-feasible claimed (risk denominator) | 367 |
 | ED-infeasible claimed (frontier, excluded) | 27 |
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 176 |
-| 🔵 coherent | 42 |
+| 🟢 corroborated-at-p | 177 |
+| 🔵 coherent | 43 |
 | ⚪ cited-only (frontier — neutral) | 19 |
-| 🟠 uncorroborated-but-feasible (**actionable risk**) | 152 |
-| Inventory cards scanned (whole test/) | 2848 |
-| Registry files parsed | 84 / 84 |
-| Models | 68 |
+| 🟠 uncorroborated-but-feasible (**actionable risk**) | 155 |
+| Inventory cards scanned (whole test/) | 2863 |
+| Registry files parsed | 85 / 85 |
+| Models | 69 |
 
-**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **48.6%** · **in-repo-verified rate** (incl. 🔵 coherent): **60.2%**
+**Externally-corroborated rate** (🟣+🟢 over ED-feasible claimed): **48.2%** · **in-repo-verified rate** (incl. 🔵 coherent): **59.9%**
 
 ## Browse by facet
 
@@ -43,11 +43,11 @@ Actionable gap surface — see **[Audit](Audit.md)** for the itemised list.
 
 | Section | Count |
 |---|---|
-| 1. Models without CONVENTION header | 3 |
-| 2. Quantities without extracted Definition | 60 |
+| 1. Models without CONVENTION header | 4 |
+| 2. Quantities without extracted Definition | 64 |
 | 3. Orphan calc notes (matched to no model) | 0 |
 | 4. Models registered but with 0 hubs | 0 |
-| 5. INVENTORY card hubs with no `@register` claim | 9 |
+| 5. INVENTORY card hubs with no `@register` claim | 10 |
 
 ## Reference & derivation indices
 
@@ -61,7 +61,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 `src` claims the hub, the model is ED-**feasible**, yet zero corroboration cards exist. `cited-only` (frontier) and ED-infeasible hubs are **not** listed here — they are the honest ceiling, not a gap.
 
-!!! warning "152 actionable hub(s)"
+!!! warning "155 actionable hub(s)"
     - [`AKLT1D/ExactSpectrum/OBC`](hubs/AKLT1D_ExactSpectrum_OBC.md)
     - [`AKLT1D/SpinCorrelation/Infinite`](hubs/AKLT1D_SpinCorrelation_Infinite.md)
     - [`Bound/BB84KeyRate/Infinite`](hubs/Bound_BB84KeyRate_Infinite.md)
@@ -127,6 +127,9 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
     - [`Lieb/TightBindingMaxEnergy/Infinite`](hubs/Lieb_TightBindingMaxEnergy_Infinite.md)
     - [`MajumdarGhosh/Energy/Infinite`](hubs/MajumdarGhosh_Energy_Infinite.md)
     - [`MajumdarGhosh/Energy/PBC`](hubs/MajumdarGhosh_Energy_PBC.md)
+    - [`RandomTFIM/ActivatedExponent/Infinite`](hubs/RandomTFIM_ActivatedExponent_Infinite.md)
+    - [`RandomTFIM/SpatialDimension/Infinite`](hubs/RandomTFIM_SpatialDimension_Infinite.md)
+    - [`RandomTFIM/UniversalityClass/Infinite`](hubs/RandomTFIM_UniversalityClass_Infinite.md)
     - [`RiceMele/Energy/Infinite`](hubs/RiceMele_Energy_Infinite.md)
     - [`RiceMele/Energy/OBC`](hubs/RiceMele_Energy_OBC.md)
     - [`S1Heisenberg1D/ConnectedSpinCorrelation/OBC`](hubs/S1Heisenberg1D_ConnectedSpinCorrelation_OBC.md)
@@ -258,6 +261,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `PpIp2DSC` | 2 | 0 | 2 | 0 | 0 | 0 | infeasible |
 | `RFIM` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `RandomBondIsing2D` | 1 | 0 | 0 | 1 | 0 | 0 | feasible |
+| `RandomTFIM` | 4 | 0 | 0 | 1 | 0 | 3 | feasible |
 | `RiceMele` | 6 | 0 | 2 | 2 | 0 | 2 | feasible |
 | `S1AnisotropicD1D` | 2 | 0 | 0 | 2 | 0 | 0 | feasible |
 | `S1Heisenberg1D` | 19 | 0 | 10 | 3 | 1 | 5 | feasible |
@@ -271,7 +275,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `SixVertex` | 5 | 0 | 2 | 1 | 0 | 2 | feasible |
 | `SpinIce` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TASEP` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
-| `TFIM` | 66 | 0 | 32 | 10 | 0 | 24 | feasible |
+| `TFIM` | 67 | 0 | 33 | 10 | 0 | 24 | feasible |
 | `TTbar` | 1 | 0 | 1 | 0 | 0 | 0 | feasible |
 | `TightBinding1D` | 19 | 0 | 4 | 0 | 0 | 15 | feasible |
 | `TightBindingV1D` | 8 | 0 | 3 | 0 | 0 | 5 | feasible |
@@ -288,7 +292,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 | `ZnClock` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 | `ZnParafermion` | 2 | 0 | 1 | 0 | 0 | 1 | feasible |
 
-## Hubs (389) — select to drill down
+## Hubs (394) — select to drill down
 
 ### `AKLT1D` (18)
 
@@ -580,6 +584,13 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 
 - 🔵 [`RandomBondIsing2D/CentralCharge/Infinite`](hubs/RandomBondIsing2D_CentralCharge_Infinite.md) — coherent
 
+### `RandomTFIM` (4)
+
+- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](hubs/RandomTFIM_ActivatedExponent_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](hubs/RandomTFIM_DynamicalExponent_Infinite.md) — coherent
+- 🟠 [`RandomTFIM/SpatialDimension/Infinite`](hubs/RandomTFIM_SpatialDimension_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](hubs/RandomTFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+
 ### `RiceMele` (6)
 
 - 🟢 [`RiceMele/CorrelationLength/Infinite`](hubs/RiceMele_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -673,7 +684,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 - 🟠 [`TASEP/UniversalityClass/Infinite`](hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-### `TFIM` (66)
+### `TFIM` (67)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/ConformalTower/OBC`](hubs/TFIM_ConformalTower_OBC.md) — uncorroborated-but-feasible
@@ -723,6 +734,7 @@ Each model has a per-model index showing its hubs as a `Quantity × BC` matrix; 
 - 🟠 [`TFIM/SpinCorrelation/Infinite`](hubs/TFIM_SpinCorrelation_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpinCorrelation/OBC`](hubs/TFIM_SpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/SurfaceMagnetization/OBC`](hubs/TFIM_SurfaceMagnetization_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/SusceptibilityXX/OBC`](hubs/TFIM_SusceptibilityXX_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/PBC`](hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p

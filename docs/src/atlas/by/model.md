@@ -295,6 +295,13 @@ Every `src`-claimed hub grouped by model.
 
 - 🔵 [`RandomBondIsing2D/CentralCharge/Infinite`](../hubs/RandomBondIsing2D_CentralCharge_Infinite.md) — coherent
 
+## `RandomTFIM` (4)
+
+- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](../hubs/RandomTFIM_ActivatedExponent_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](../hubs/RandomTFIM_DynamicalExponent_Infinite.md) — coherent
+- 🟠 [`RandomTFIM/SpatialDimension/Infinite`](../hubs/RandomTFIM_SpatialDimension_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](../hubs/RandomTFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+
 ## `RiceMele` (6)
 
 - 🟢 [`RiceMele/CorrelationLength/Infinite`](../hubs/RiceMele_CorrelationLength_Infinite.md) — corroborated-at-p
@@ -388,7 +395,7 @@ Every `src`-claimed hub grouped by model.
 - 🟢 [`TASEP/SteadyStateCurrent/Infinite`](../hubs/TASEP_SteadyStateCurrent_Infinite.md) — corroborated-at-p
 - 🟠 [`TASEP/UniversalityClass/Infinite`](../hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-## `TFIM` (66)
+## `TFIM` (67)
 
 - 🟢 [`TFIM/CentralCharge/Infinite`](../hubs/TFIM_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟠 [`TFIM/ConformalTower/OBC`](../hubs/TFIM_ConformalTower_OBC.md) — uncorroborated-but-feasible
@@ -438,6 +445,7 @@ Every `src`-claimed hub grouped by model.
 - 🟠 [`TFIM/SpinCorrelation/Infinite`](../hubs/TFIM_SpinCorrelation_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TFIM/SpinCorrelation/OBC`](../hubs/TFIM_SpinCorrelation_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/SpontaneousMagnetization/Infinite`](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) — corroborated-at-p
+- 🟢 [`TFIM/SurfaceMagnetization/OBC`](../hubs/TFIM_SurfaceMagnetization_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SusceptibilityXX/Infinite`](../hubs/TFIM_SusceptibilityXX_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/PBC`](../hubs/TFIM_SusceptibilityXX_PBC.md) — corroborated-at-p

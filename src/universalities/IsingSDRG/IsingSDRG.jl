@@ -82,6 +82,17 @@ function fetch(m::Universality{:IsingSDRG}, q::ActivatedExponent, ::Infinite; kw
 end
 
 """
+    fetch(::Universality{:IsingSDRG}, ::SpatialDimension, ::Infinite) -> Int
+
+`1`. The random transverse-field Ising CHAIN, so one spatial direction.
+
+Not the `d = 2` this same class takes for `CriticalExponents`: that one selects
+the 2D classical image's exponent table. Both are right and they are different
+numbers, which is why they now have different names.
+"""
+fetch(::Universality{:IsingSDRG}, ::SpatialDimension, ::Infinite; kwargs...) = 1
+
+"""
     fetch(::Universality{:IsingSDRG}, ::DynamicalExponent)
 
 Always throws. No finite `z` exists at an infinite-randomness fixed point: the

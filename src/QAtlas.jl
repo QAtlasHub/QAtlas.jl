@@ -35,6 +35,7 @@ using AbstractQAtlas:
     CorrelationLength,
     MassGap,
     SurfaceMagnetization,
+    SpatialDimension,
     MutualInformation,
     VonNeumannEntropy,
     # the FERMIONIC region entropy (AbstractQAtlas.jl#135) — a separate quantity from

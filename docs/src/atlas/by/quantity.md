@@ -431,6 +431,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟠 [`Bound/ScramblingTime/Infinite`](../hubs/Bound_ScramblingTime_Infinite.md) — uncorroborated-but-feasible
 
+## `SpatialDimension` (1)
+
+- 🟠 [`RandomTFIM/SpatialDimension/Infinite`](../hubs/RandomTFIM_SpatialDimension_Infinite.md) — uncorroborated-but-feasible
+
 ## `SpecificHeat` (25)
 
 - 🟢 [`AKLT1D/SpecificHeat/Infinite`](../hubs/AKLT1D_SpecificHeat_Infinite.md) — corroborated-at-p

@@ -5,6 +5,20 @@
 
 @register(
     RandomTFIM,
+    SpatialDimension,
+    Infinite,
+    method=:analytic,
+    cost=:closed_form,
+    reliability=:high,
+    tested_in="test/core/test_disorder.jl",
+    references=["IgloiMonthus2005"],
+    notes="1: the chain's own spatial dimension, which quenched disorder lives in. \
+           Distinct from the d = 2 this atlas takes for CriticalExponents, which is \
+           the 2D classical image's.",
+)
+
+@register(
+    RandomTFIM,
     DynamicalExponent,
     Infinite,
     method=:analytic_griffiths_root,

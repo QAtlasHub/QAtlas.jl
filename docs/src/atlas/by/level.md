@@ -253,7 +253,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟢 [`ZnClock/CentralCharge/Infinite`](../hubs/ZnClock_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 
-## `uncorroborated-but-feasible` (154)
+## `uncorroborated-but-feasible` (155)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟠 [`AKLT1D/SpinCorrelation/Infinite`](../hubs/AKLT1D_SpinCorrelation_Infinite.md) — uncorroborated-but-feasible
@@ -321,6 +321,7 @@ Grouped by the R1 assurance level. `uncorroborated-but-feasible` is the only act
 - 🟠 [`MajumdarGhosh/Energy/Infinite`](../hubs/MajumdarGhosh_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`MajumdarGhosh/Energy/PBC`](../hubs/MajumdarGhosh_Energy_PBC.md) — uncorroborated-but-feasible
 - 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](../hubs/RandomTFIM_ActivatedExponent_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/SpatialDimension/Infinite`](../hubs/RandomTFIM_SpatialDimension_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`RandomTFIM/UniversalityClass/Infinite`](../hubs/RandomTFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`RiceMele/Energy/Infinite`](../hubs/RiceMele_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`RiceMele/Energy/OBC`](../hubs/RiceMele_Energy_OBC.md) — uncorroborated-but-feasible

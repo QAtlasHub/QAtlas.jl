@@ -17,8 +17,8 @@ _No `CONVENTION` header found in `src/models/<class>/RandomTFIM/RandomTFIM.jl` (
 | 🟢 corroborated-at-p | 0 |
 | 🔵 coherent | 1 |
 | ⚪ cited-only | 0 |
-| 🟠 uncorroborated-but-feasible | 2 |
-| **total claimed hubs** | **3** |
+| 🟠 uncorroborated-but-feasible | 3 |
+| **total claimed hubs** | **4** |
 
 **Methods** (from `@register`, derived): `analytic`, `analytic_griffiths_root`
 
@@ -28,6 +28,7 @@ _No `CONVENTION` header found in `src/models/<class>/RandomTFIM/RandomTFIM.jl` (
 |---|---|
 | [`ActivatedExponent`](../quantities/ActivatedExponent.md) | 🟠 [hub](../hubs/RandomTFIM_ActivatedExponent_Infinite.md) |
 | [`DynamicalExponent`](../quantities/DynamicalExponent.md) | 🔵 [hub](../hubs/RandomTFIM_DynamicalExponent_Infinite.md) |
+| [`SpatialDimension`](../quantities/SpatialDimension.md) | 🟠 [hub](../hubs/RandomTFIM_SpatialDimension_Infinite.md) |
 | [`UniversalityClass`](../quantities/UniversalityClass.md) | 🟠 [hub](../hubs/RandomTFIM_UniversalityClass_Infinite.md) |
 
 ## References

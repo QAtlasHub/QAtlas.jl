@@ -310,6 +310,15 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :CriticalQuantumSpecificHeat => "as `CriticalQuantumSusceptibility`, for c_V(T).",
     :ActivatedFiniteSizeScaling => "no hub sweeps L for a random chain.",
     :ConventionalFiniteSizeEnergy => "the hubs answering `z` fetch a gap at one N, not Ω(L).",
+    :OrderedGriffithsEnergyScale => "needs d(ln|ln Ω|)/d(ln ln L); nothing sweeps L here.",
+
+    # Materializable since `RandomTFIM` began answering `SpatialDimension`, which is
+    # the only quantity slot Josephson has. Both are exponent identities checked
+    # against exponent tables in the universality tests rather than stored as edges,
+    # as `TypicalCorrelationLength` is.
+    :Josephson => "checked on the exponent tables; no edge stores it.",
+    :QuantumHyperscaling => "as `Josephson`; and its `z` is refused at the one hub \
+                             that answers the rest, an infinite-randomness point.",
 
     # Satisfied by the `:IsingSDRG` exponent table and checked against it in
     # test/universalities/test_universality_isingsdrg.jl, by calling the relations

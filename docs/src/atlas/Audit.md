@@ -23,7 +23,7 @@ The CI lint enforces `# CONVENTION` headers on new model files, but older files 
 
 Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't matched by the regex extractor (likely defined as bare `struct X end` without `<: AbstractQuantity`, or with alternate formatting).  Adding the supertype + docstring makes them appear on the per-quantity page automatically.
 
-**63 quantities**:
+**64 quantities**:
 
 - [`ActivatedExponent`](quantities/ActivatedExponent.md)
 - [`BB84KeyRate`](quantities/BB84KeyRate.md)
@@ -71,6 +71,7 @@ Quantities whose `struct X[{params}] <: AbstractQuantity` docstring wasn't match
 - [`RenyiEntropy`](quantities/RenyiEntropy.md)
 - [`ResidualEntropy`](quantities/ResidualEntropy.md)
 - [`ScramblingTime`](quantities/ScramblingTime.md)
+- [`SpatialDimension`](quantities/SpatialDimension.md)
 - [`SpecificHeat`](quantities/SpecificHeat.md)
 - [`SpinCorrelation`](quantities/SpinCorrelation.md)
 - [`SpinGap`](quantities/SpinGap.md)

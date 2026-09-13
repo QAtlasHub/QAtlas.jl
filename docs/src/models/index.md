@@ -62,7 +62,7 @@ In this page, all model list defined in QAtlas.jl is shown. **69 models** have `
 | [`MixedFieldIsing1D`](../atlas/models/MixedFieldIsing1D.md) | 1 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 0 | — |
 | [`PXP1D`](../atlas/models/PXP1D.md) | 1 | 🟣 0 🟢 0 🔵 0 ⚪ 1 🟠 0 | — |
 | [`PpIp2DSC`](../atlas/models/PpIp2DSC.md) | 2 | 🟣 0 🟢 2 🔵 0 ⚪ 0 🟠 0 | — |
-| [`RandomTFIM`](../atlas/models/RandomTFIM.md) | 3 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 2 | — |
+| [`RandomTFIM`](../atlas/models/RandomTFIM.md) | 4 | 🟣 0 🟢 0 🔵 1 ⚪ 0 🟠 3 | — |
 | [`RiceMele`](../atlas/models/RiceMele.md) | 4 | 🟣 0 🟢 2 🔵 2 ⚪ 0 🟠 2 | — |
 | [`S1AnisotropicD1D`](../atlas/models/S1AnisotropicD1D.md) | 2 | 🟣 0 🟢 0 🔵 2 ⚪ 0 🟠 0 | — |
 | [`S1Heisenberg1D`](../atlas/models/S1Heisenberg1D.md) | 17 | 🟣 0 🟢 10 🔵 3 ⚪ 1 🟠 5 | — |

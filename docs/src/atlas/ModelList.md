@@ -46,7 +46,7 @@ Top-level catalog of all **69 models** with claimed hubs.  One row per model; th
 | [`PpIp2DSC`](models/PpIp2DSC.md) | — | 2 | `analytic` | 0 | 2 | 0 | 0 | 0 | infeasible | `@sweep` |
 | [`RFIM`](models/RFIM.md) | — | 1 | `analytic_imry_ma` | 0 | 1 | 0 | 0 | 0 | feasible | `@sweep` |
 | [`RandomBondIsing2D`](models/RandomBondIsing2D.md) | `Ising` | 1 | `delegation` | 0 | 0 | 1 | 0 | 0 | feasible | `@sweep` |
-| [`RandomTFIM`](models/RandomTFIM.md) | — | 3 | `analytic`, `analytic_griffiths_root` | 0 | 0 | 1 | 0 | 2 | feasible | `@sweep` |
+| [`RandomTFIM`](models/RandomTFIM.md) | — | 4 | `analytic`, `analytic_griffiths_root` | 0 | 0 | 1 | 0 | 3 | feasible | `@sweep` |
 | [`RiceMele`](models/RiceMele.md) | — | 6 | `analytic`, `single_particle_diagonalization` | 0 | 2 | 2 | 0 | 2 | feasible | `@sweep` |
 | [`S1AnisotropicD1D`](models/S1AnisotropicD1D.md) | — | 2 | `s1_heisenberg_delegation` | 0 | 0 | 2 | 0 | 0 | feasible | `@haldane` |
 | [`S1Heisenberg1D`](models/S1Heisenberg1D.md) | — | 19 | `dense_ed`, `literature_value` | 0 | 10 | 3 | 1 | 5 | feasible | `@haldane` |
@@ -137,6 +137,7 @@ Each quantity has its own `Model × BC` matrix page (gap visualisation across mo
 - [`RenyiEntropy`](quantities/RenyiEntropy.md) — 5 models
 - [`ResidualEntropy`](quantities/ResidualEntropy.md) — 5 models
 - [`ScramblingTime`](quantities/ScramblingTime.md) — 1 models
+- [`SpatialDimension`](quantities/SpatialDimension.md) — 1 models
 - [`SpecificHeat`](quantities/SpecificHeat.md) — 15 models
 - [`SpinCorrelation`](quantities/SpinCorrelation.md) — 4 models
 - [`SpinGap`](quantities/SpinGap.md) — 2 models

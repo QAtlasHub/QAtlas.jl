@@ -186,6 +186,7 @@ Refused away from criticality, where the chain is in a Griffiths phase with a
 finite [`DynamicalExponent`](@ref) instead. Returning `1/2` there would name the
 exponent of a fixed point the model is not at.
 """
+
 function fetch(m::RandomTFIM, ::ActivatedExponent, ::Infinite; kwargs...)
     iszero(rtfim_delta(m)) || return error(
         "RandomTFIM: ψ is the exponent of the infinite-randomness fixed point, " *
@@ -195,6 +196,20 @@ function fetch(m::RandomTFIM, ::ActivatedExponent, ::Infinite; kwargs...)
     )
     return 1 // 2
 end
+
+"""
+    fetch(::RandomTFIM, ::SpatialDimension, ::Infinite) -> Int
+
+`1`. The chain's own spatial dimension, which is what quenched disorder lives in
+and what every infinite-randomness relation reads.
+
+Worth answering rather than leaving to the caller: this atlas also hands out
+`d = 2` for the same chain, under [`CriticalExponents`](@ref), where it means the
+2D classical image whose exponent table that is. The two are different numbers
+for one system, so the one the relations take is stated here instead of guessed
+(see AbstractQAtlas's `SpatialDimension`).
+"""
+fetch(::RandomTFIM, ::SpatialDimension, ::Infinite; kwargs...) = 1
 
 """
     fetch(::RandomTFIM, ::UniversalityClass, ::Infinite) -> Universality{:IsingSDRG}

@@ -284,6 +284,14 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟢 [`XXZ1D/MassGap/Infinite`](hubs/XXZ1D_MassGap_Infinite.md)
 - 🟢 [`XXZ1D/NMRRelaxationExponent/Infinite`](hubs/XXZ1D_NMRRelaxationExponent_Infinite.md)
 
+## IgloiMonthus2005 — 5 hubs
+
+- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](hubs/RandomTFIM_ActivatedExponent_Infinite.md)
+- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](hubs/RandomTFIM_DynamicalExponent_Infinite.md)
+- 🟠 [`RandomTFIM/SpatialDimension/Infinite`](hubs/RandomTFIM_SpatialDimension_Infinite.md)
+- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](hubs/RandomTFIM_UniversalityClass_Infinite.md)
+- 🟢 [`TFIM/SurfaceMagnetization/OBC`](hubs/TFIM_SurfaceMagnetization_OBC.md)
+
 ## Kitaev2003 — 5 hubs
 
 - ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](hubs/ToricCode_AnyonMutualStatistics_Infinite.md)
@@ -328,13 +336,6 @@ Citations are kept as-is from `@register` (no normalization, no DOI lookup).  Fr
 - 🟠 [`Heisenberg1D/Energy/Infinite`](hubs/Heisenberg1D_Energy_Infinite.md)
 - 🟢 [`J1J2Heisenberg1D/Energy/Infinite`](hubs/J1J2Heisenberg1D_Energy_Infinite.md)
 - 🟢 [`XXZ1D/Energy/Infinite`](hubs/XXZ1D_Energy_Infinite.md)
-
-## IgloiMonthus2005 — 4 hubs
-
-- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](hubs/RandomTFIM_ActivatedExponent_Infinite.md)
-- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](hubs/RandomTFIM_DynamicalExponent_Infinite.md)
-- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](hubs/RandomTFIM_UniversalityClass_Infinite.md)
-- 🟢 [`TFIM/SurfaceMagnetization/OBC`](hubs/TFIM_SurfaceMagnetization_OBC.md)
 
 ## Peschel2003 — 4 hubs
 

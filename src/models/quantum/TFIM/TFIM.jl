@@ -251,11 +251,11 @@ alone cannot tell the two apart and the typical value must.
 Evaluated through `log1p`/`expm1` so `r > 1` neither overflows the numerator nor
 loses the answer: `m_s` is exponentially small there, not zero.
 
-Size comes from `bc.N` (or `kwargs[:N]`).
+Size comes from `bc.N` (or `kwargs[:N]`), which is where a non-positive `N` is
+refused; there is no second check for it here.
 """
 function fetch(model::TFIM, ::SurfaceMagnetization, bc::OBC; kwargs...)
-    N = _bc_size(bc, kwargs)
-    N >= 1 || throw(ArgumentError("SurfaceMagnetization: need N >= 1, got $N."))
+    N = _bc_size(bc, kwargs)          # already refuses N <= 0
     model.J == 0 && throw(
         ArgumentError("SurfaceMagnetization: J = 0 leaves no chain to be the surface of."),
     )

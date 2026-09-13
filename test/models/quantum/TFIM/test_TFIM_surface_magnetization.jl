@@ -43,7 +43,14 @@ end
     end
     # N = 1 has no bond, so the sum is empty and the fixed end IS the surface.
     @test fetch(TFIM(), SurfaceMagnetization(), OBC(1)) == 1.0
-    @test_throws ArgumentError fetch(TFIM(), SurfaceMagnetization(), OBC(0))
+    # OBC(0) is the legacy sentinel for "N comes via kwargs", so a non-positive N
+    # is refused by `_bc_size` before this method sees it. A second check here
+    # would be unreachable.
+    @test_throws "N unspecified" fetch(TFIM(), SurfaceMagnetization(), OBC(0))
+    @test fetch(TFIM(), SurfaceMagnetization(), OBC(0); N=16) ==
+        fetch(TFIM(), SurfaceMagnetization(), OBC(16))
+    # J = 0 is not refused at construction, and r = h/J would be Inf, so it is
+    # refused here where it can be.
     @test_throws ArgumentError fetch(TFIM(; J=0.0, h=1.0), SurfaceMagnetization(), OBC(4))
 end
 

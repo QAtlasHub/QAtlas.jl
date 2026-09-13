@@ -5,7 +5,7 @@
 
 Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 
-## `Infinite` (256)
+## `Infinite` (259)
 
 - 🟢 [`AKLT1D/CorrelationLength/Infinite`](../hubs/AKLT1D_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟢 [`AKLT1D/Energy/Infinite`](../hubs/AKLT1D_Energy_Infinite.md) — corroborated-at-p
@@ -143,6 +143,9 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`RFIM/CriticalTemperature/Infinite`](../hubs/RFIM_CriticalTemperature_Infinite.md) — corroborated-at-p
 - 🔵 [`RandomBondIsing2D/CentralCharge/Infinite`](../hubs/RandomBondIsing2D_CentralCharge_Infinite.md) — coherent
+- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](../hubs/RandomTFIM_ActivatedExponent_Infinite.md) — uncorroborated-but-feasible
+- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](../hubs/RandomTFIM_DynamicalExponent_Infinite.md) — coherent
+- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](../hubs/RandomTFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`RiceMele/CorrelationLength/Infinite`](../hubs/RiceMele_CorrelationLength_Infinite.md) — corroborated-at-p
 - 🟠 [`RiceMele/Energy/Infinite`](../hubs/RiceMele_Energy_Infinite.md) — uncorroborated-but-feasible
 - 🟢 [`RiceMele/MassGap/Infinite`](../hubs/RiceMele_MassGap_Infinite.md) — corroborated-at-p
@@ -264,7 +267,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`ZnParafermion/CentralCharge/Infinite`](../hubs/ZnParafermion_CentralCharge_Infinite.md) — corroborated-at-p
 - 🟠 [`ZnParafermion/UniversalityClass/Infinite`](../hubs/ZnParafermion_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 
-## `OBC` (103)
+## `OBC` (104)
 
 - 🟠 [`AKLT1D/ExactSpectrum/OBC`](../hubs/AKLT1D_ExactSpectrum_OBC.md) — uncorroborated-but-feasible
 - 🟢 [`AKLT1D/FreeEnergy/OBC`](../hubs/AKLT1D_FreeEnergy_OBC.md) — corroborated-at-p
@@ -333,6 +336,7 @@ Grouped by boundary condition (`Infinite` / `OBC` / `PBC` …).
 - 🟢 [`TFIM/RenyiEntropy/OBC`](../hubs/TFIM_RenyiEntropy_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SpecificHeat/OBC`](../hubs/TFIM_SpecificHeat_OBC.md) — corroborated-at-p
 - 🟠 [`TFIM/SpinCorrelation/OBC`](../hubs/TFIM_SpinCorrelation_OBC.md) — uncorroborated-but-feasible
+- 🟢 [`TFIM/SurfaceMagnetization/OBC`](../hubs/TFIM_SurfaceMagnetization_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityXX/OBC`](../hubs/TFIM_SusceptibilityXX_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityYY/OBC`](../hubs/TFIM_SusceptibilityYY_OBC.md) — corroborated-at-p
 - 🟢 [`TFIM/SusceptibilityZZ/OBC`](../hubs/TFIM_SusceptibilityZZ_OBC.md) — corroborated-at-p

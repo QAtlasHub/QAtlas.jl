@@ -34,6 +34,7 @@ using AbstractQAtlas:
     CentralCharge,
     CorrelationLength,
     MassGap,
+    SurfaceMagnetization,
     MutualInformation,
     VonNeumannEntropy,
     # the FERMIONIC region entropy (AbstractQAtlas.jl#135) — a separate quantity from

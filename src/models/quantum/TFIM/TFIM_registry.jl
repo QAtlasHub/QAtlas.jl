@@ -55,6 +55,19 @@
     references=["Pfeuty1970"],
     notes="Smallest positive BdG eigenvalue of the OBC chain.",
 )
+
+@register(
+    TFIM,
+    SurfaceMagnetization,
+    OBC,
+    method=:analytic,
+    cost=:closed_form,
+    reliability=:high,
+    tested_in="test/models/quantum/TFIM/test_TFIM_surface_magnetization.jl",
+    references=["Peschel1984", "IgloiMonthus2005"],
+    notes="Peschel's exact m_s summed in closed form on the uniform chain; \
+           far end fixed (h_N = 0).",
+)
 @register(
     TFIM,
     CentralCharge,

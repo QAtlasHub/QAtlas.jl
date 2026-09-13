@@ -23,11 +23,11 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | Level | Count |
 |---|---|
 | 🟣 universality-corroborated | 0 |
-| 🟢 corroborated-at-p | 32 |
+| 🟢 corroborated-at-p | 33 |
 | 🔵 coherent | 10 |
 | ⚪ cited-only | 0 |
 | 🟠 uncorroborated-but-feasible | 24 |
-| **total claimed hubs** | **66** |
+| **total claimed hubs** | **67** |
 
 **Methods** (from `@register`, derived): `analytic`, `bdg`, `cft`, `closed_form`, `delegation`, `majorana_evolution`, `pfaffian`
 
@@ -65,6 +65,7 @@ All `(Quantity, BC)` hubs `src` claims for **`TFIM`**.  Cells link to the per-hu
 | [`SpecificHeat`](../quantities/SpecificHeat.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_OBC.md) | 🟢 [hub](../hubs/TFIM_SpecificHeat_PBC.md) | 🔵 [hub](../hubs/TFIM_SpecificHeat_Infinite.md) |
 | [`SpinCorrelation`](../quantities/SpinCorrelation.md) | 🟠 [hub](../hubs/TFIM_SpinCorrelation_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SpinCorrelation_Infinite.md) |
 | [`SpontaneousMagnetization`](../quantities/SpontaneousMagnetization.md) | — | — | 🟢 [hub](../hubs/TFIM_SpontaneousMagnetization_Infinite.md) |
+| [`SurfaceMagnetization`](../quantities/SurfaceMagnetization.md) | 🟢 [hub](../hubs/TFIM_SurfaceMagnetization_OBC.md) | — | — |
 | [`SusceptibilityXX`](../quantities/SusceptibilityXX.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityXX_OBC.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityXX_PBC.md) | 🟠 [hub](../hubs/TFIM_SusceptibilityXX_Infinite.md) |
 | [`SusceptibilityYY`](../quantities/SusceptibilityYY.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityYY_OBC.md) | — | — |
 | [`SusceptibilityZZ`](../quantities/SusceptibilityZZ.md) | 🟢 [hub](../hubs/TFIM_SusceptibilityZZ_OBC.md) | — | 🟠 [hub](../hubs/TFIM_SusceptibilityZZ_Infinite.md) |
@@ -115,9 +116,11 @@ Gu2010
 HastingsKoma2006
 Heyl2013
 Heyl2018
+IgloiMonthus2005
 LiebRobinson1972
 LiebSchultzMattis1961
 Onsager1944
+Peschel1984
 Peschel2003
 Pfeuty1970
 Rigol2007

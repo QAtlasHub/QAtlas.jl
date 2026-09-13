@@ -5,6 +5,10 @@
 
 Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC schema).
 
+## `ActivatedExponent` (1)
+
+- 🟠 [`RandomTFIM/ActivatedExponent/Infinite`](../hubs/RandomTFIM_ActivatedExponent_Infinite.md) — uncorroborated-but-feasible
+
 ## `AnyonMutualStatistics` (1)
 
 - ⚪ [`ToricCode/AnyonMutualStatistics/Infinite`](../hubs/ToricCode_AnyonMutualStatistics_Infinite.md) — cited-only
@@ -112,6 +116,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 ## `DynamicalCorrelation` (1)
 
 - 🟠 [`TFIM/DynamicalCorrelation/OBC`](../hubs/TFIM_DynamicalCorrelation_OBC.md) — uncorroborated-but-feasible
+
+## `DynamicalExponent` (1)
+
+- 🔵 [`RandomTFIM/DynamicalExponent/Infinite`](../hubs/RandomTFIM_DynamicalExponent_Infinite.md) — coherent
 
 ## `DynamicalSpinStructureFactor` (3)
 
@@ -481,6 +489,10 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 
 - 🟢 [`AKLT1D/StringOrderParameter/Infinite`](../hubs/AKLT1D_StringOrderParameter_Infinite.md) — corroborated-at-p
 
+## `SurfaceMagnetization` (1)
+
+- 🟢 [`TFIM/SurfaceMagnetization/OBC`](../hubs/TFIM_SurfaceMagnetization_OBC.md) — corroborated-at-p
+
 ## `SusceptibilityXX` (6)
 
 - 🟢 [`Heisenberg1D/SusceptibilityXX/OBC`](../hubs/Heisenberg1D_SusceptibilityXX_OBC.md) — corroborated-at-p
@@ -565,7 +577,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟢 [`PpIp2DSC/TopologicalInvariant/Infinite`](../hubs/PpIp2DSC_TopologicalInvariant_Infinite.md) — corroborated-at-p
 - 🟢 [`SSH/TopologicalInvariant/Infinite`](../hubs/SSH_TopologicalInvariant_Infinite.md) — corroborated-at-p
 
-## `UniversalityClass` (18)
+## `UniversalityClass` (19)
 
 - 🟠 [`CurieWeissIsing/UniversalityClass/Infinite`](../hubs/CurieWeissIsing_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`DimerLattice/UniversalityClass/Infinite`](../hubs/DimerLattice_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
@@ -574,6 +586,7 @@ Grouped by the observable (the `Quantity` axis of the locked Model/Quantity/BC s
 - 🟠 [`IsingSquare/UniversalityClass/Infinite`](../hubs/IsingSquare_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`IsingTriangular/UniversalityClass/Infinite`](../hubs/IsingTriangular_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`Kitaev1D/UniversalityClass/Infinite`](../hubs/Kitaev1D_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
+- 🟠 [`RandomTFIM/UniversalityClass/Infinite`](../hubs/RandomTFIM_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SSH/UniversalityClass/Infinite`](../hubs/SSH_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`SixVertex/UniversalityClass/Infinite`](../hubs/SixVertex_UniversalityClass_Infinite.md) — uncorroborated-but-feasible
 - 🟠 [`TASEP/UniversalityClass/Infinite`](../hubs/TASEP_UniversalityClass_Infinite.md) — uncorroborated-but-feasible

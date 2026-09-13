@@ -293,64 +293,33 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # PartitionFunction entries above — a name that was not part of the family could
     # not fill the slot.
     #
-    # Materializable since `RandomTFIM` and `Universality{:IsingSDRG}` answer the
-    # exponents that are their typed slots. Both are supplied-derivative shapes and
-    # neither hub has a spectrum, so there is no Δ(ξ) to differentiate. Closing them
-    # needs a finite-size RTFIM solver — a computation, not a wiring.
-    :DynamicalScaling => "the hubs answering `z` have no spectrum, so no Δ(ξ) to take \
-                          the supplied log-slope of.",
-    :ActivatedDynamicalScaling => "as `DynamicalScaling` — the hub supplies `ψ`, not the \
-                                   gap it is the scaling of.",
-
-    # The AbstractQAtlas 0.7.4 infinite-randomness block, materializable for the same
-    # reason: `RandomTFIM` and `Universality{:IsingSDRG}` answer the exponents that are
-    # their typed slots. They split two ways.
-    #
-    # The first two need a supplied log-slope over T of a DISORDER-AVERAGED observable.
-    # No hub has one: `RandomTFIM` is a statement about the coupling distributions and
-    # carries no thermodynamics at all.
-    :GriffithsSusceptibility => "no hub carries a disorder-averaged χ(T) for a random \
-                                 chain, so there is no slope to supply.",
-    :GriffithsSpecificHeat => "as `GriffithsSusceptibility` — no disorder-averaged \
-                               c_V(T) exists here.",
-    :GriffithsExponentDivergence => "needs d(ln z)/d(ln|δ|); z is fetchable at each δ, \
-                                     so this is a sweep-and-fit and not a wiring.",
-
-    # The other two ARE satisfied by data QAtlas has — the `:IsingSDRG` exponent table
-    # carries ν, ν_typ, ψ, x_m and φ — and are checked against them in
-    # test/universalities/test_universality_isingsdrg.jl, by calling the relations rather
-    # than restating them. That is a test, not an EDGE_STORE edge, so they stay here.
-    :TypicalCorrelationLength => "holds on the `:IsingSDRG` exponent table and is \
-                                  checked there; no edge stores it.",
-    :ActivatedMomentGrowth => "as `TypicalCorrelationLength` — satisfied by the same \
-                               table, checked in the same file.",
-
-    # The AbstractQAtlas 0.7.7 Appendix-A block. Materializable for the same reason
-    # again: `Universality{:IsingSDRG}` and `RandomTFIM` answer their typed exponent
-    # slots. Every one of them is short the SAME thing, a supplied log-slope of an
-    # observable this atlas does not carry for a random chain, so they are listed
-    # rather than wired, exactly as `DynamicalScaling` above.
-    #
-    # Against system size, which no hub sweeps for a random chain:
-    :ActivatedFiniteSizeScaling => "needs d(ln[-ln O_typ])/d(ln L) on an open random \
-                                    chain; no hub sweeps L for one.",
-    :ConventionalFiniteSizeEnergy => "as `DynamicalScaling` in size space — the hubs \
-                                      answering `z` fetch a gap at one N, not Ω(L).",
-    # Against temperature, at a quantum critical point:
-    :CriticalQuantumSusceptibility => "needs d(ln χ)/d(ln T) at T -> 0; the hubs with \
-                                       a χ(T) are classical and answer no `z`.",
+    # The infinite-randomness blocks (AbstractQAtlas 0.7.4 and 0.7.7).
+    # `Universality{:IsingSDRG}` and `RandomTFIM` answer the exponents that are these
+    # relations' typed slots, so they materialize; what is missing in every case below
+    # is the same thing, a supplied log-slope of an observable this atlas does not
+    # carry for a random chain. Closing them needs a finite-size RTFIM solver, which
+    # is a computation and not a wiring.
+    :DynamicalScaling => "the hubs answering `z` have no spectrum, so no Δ(ξ).",
+    :ActivatedDynamicalScaling => "the hub supplies `ψ`, not the gap it scales.",
+    :GriffithsSusceptibility => "no disorder-averaged χ(T) for a random chain.",
+    :GriffithsSpecificHeat => "no disorder-averaged c_V(T).",
+    :ActivatedSpecificHeat => "as `GriffithsSpecificHeat`, slope against ln|ln T|.",
+    :GriffithsAutocorrelation => "no disorder-averaged G(t); `RandomTFIM` has no dynamics.",
+    :GriffithsExponentDivergence => "d(ln z)/d(ln|δ|) is a sweep-and-fit, not a wiring.",
+    :CriticalQuantumSusceptibility => "the hubs with a χ(T) are classical and answer no `z`.",
     :CriticalQuantumSpecificHeat => "as `CriticalQuantumSusceptibility`, for c_V(T).",
-    :ActivatedSpecificHeat => "as `GriffithsSpecificHeat` — no disorder-averaged c_V(T), \
-                               and this one wants its slope against ln|ln T|.",
-    # Against time:
-    :GriffithsAutocorrelation => "needs a disorder-averaged G(t); `RandomTFIM` carries \
-                                  the coupling distributions and no dynamics.",
+    :ActivatedFiniteSizeScaling => "no hub sweeps L for a random chain.",
+    :ConventionalFiniteSizeEnergy => "the hubs answering `z` fetch a gap at one N, not Ω(L).",
 
-    # Not a missing slope but a missing fixed point: nothing here realises the
-    # large-spin phase, which wants a random chain with mixed ferromagnetic and
-    # antiferromagnetic couplings. `ζ` and `κ` have no supplier at all.
-    :LargeSpinMoment => "no hub realises a large-spin fixed point; `ζ` and `κ` are \
-                         unanswerable here, not merely unwired.",
+    # Satisfied by the `:IsingSDRG` exponent table and checked against it in
+    # test/universalities/test_universality_isingsdrg.jl, by calling the relations
+    # rather than restating them. A test, not an edge.
+    :TypicalCorrelationLength => "checked on the `:IsingSDRG` table; no edge stores it.",
+    :ActivatedMomentGrowth => "as `TypicalCorrelationLength`, same table, same file.",
+
+    # Not a missing slope but a missing fixed point: no hub realises the large-spin
+    # phase of a random chain with mixed ferro- and antiferromagnetic couplings.
+    :LargeSpinMoment => "no large-spin hub; `ζ` and `κ` are unanswerable, not unwired.",
 
     # Materializable since the 0.7 adoption gave the relation its `ncuts` slot; the
     # 15-hub count is an artefact of the one typed slot, `c::CentralCharge`.

@@ -116,4 +116,3 @@ using .AtlasInventory, .AtlasRegistry
         @test occursin(".md", calc_body)
     end
 end
-

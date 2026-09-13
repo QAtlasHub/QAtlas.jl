@@ -139,21 +139,22 @@ end
 export PowerLawCorrelated
 
 """
-    Aperiodic(ω) <: DisorderCorrelation
+    AperiodicSequence(ω) <: DisorderCorrelation
 
 A deterministic modulation whose fluctuations grow as `Δ(L) ∼ L^ω`.  Luck's
 criterion governs.  `ω = 1/2` reproduces a random sequence, and Luck then
 reduces to Harris in one dimension.
 """
-struct Aperiodic <: DisorderCorrelation
+struct AperiodicSequence <: DisorderCorrelation
     ω::Float64
-    function Aperiodic(ω::Real)
-        ω < 1 ||
-            throw(ArgumentError("Aperiodic: the wandering exponent must be < 1; got $ω"))
+    function AperiodicSequence(ω::Real)
+        ω < 1 || throw(
+            ArgumentError("AperiodicSequence: the wandering exponent must be < 1; got $ω"),
+        )
         return new(Float64(ω))
     end
 end
-export Aperiodic
+export AperiodicSequence
 
 """
     Disordered(clean::AbstractQAtlasModel; couplings...)
@@ -280,18 +281,22 @@ function _clean_nu(m::Disordered; d_euclidean::Int)
     c = clean_model(m)
     u = try
         fetch(c, UniversalityClass(), Infinite())
-    catch
+    catch err
         error(
-            "disorder_relevance: $(nameof(typeof(c))) has no registered " *
+            "disorder_relevance: could not read $(nameof(typeof(c)))'s " *
             "`UniversalityClass`, so its clean ν is unknown. Relevance is a " *
             "statement about the clean fixed point; without one there is nothing " *
-            "to ask. Register the class, or pass `ν₀` explicitly.",
+            "to ask. Register the class, or pass `ν₀` explicitly. The atlas said: " *
+            sprint(showerror, err),
         )
     end
     e = fetch(u, CriticalExponents(); d=d_euclidean)
     haskey(e, :ν) || error(
-        "disorder_relevance: the exponent set of $u at d = $d_euclidean has no `ν` " *
-        "(it carries $(keys(e))). Pass `ν₀` explicitly, or fill that entry in.",
+        "disorder_relevance: the exponent set of $u at d = $d_euclidean carries no " *
+        "`ν` (it has $(keys(e))). That is not necessarily a gap in the atlas: a " *
+        "Berezinskii-Kosterlitz-Thouless transition has no power-law exponents to " *
+        "report, and Harris asks a question that is not defined there. Pass `ν₀` if " *
+        "the class has one.",
     )
     return e.ν
 end
@@ -308,31 +313,53 @@ carrying one:
 | correlation | criterion | reads |
 | --- | --- | --- |
 | [`Uncorrelated`](@ref) | `HarrisCriterion` | the CLEAN `ν₀` |
-| [`Aperiodic`](@ref) | `LuckCriterion` | the clean `ν₀` and `ω` |
+| [`AperiodicSequence`](@ref) | `LuckCriterion` | the clean `ν₀` and `ω` |
 | [`PowerLawCorrelated`](@ref) | `WeinribHalperinCriterion` | the DISORDERED `ν_dis` and `ρ` |
 
-`d` is the SPATIAL dimension, which is what the criteria take.  `d_euclidean` is
-what `CriticalExponents` is keyed by and defaults to `d + 1`: the quantum-to-
-classical mapping adds the imaginary-time direction, `d_euclidean = d + z`, with
-`z = 1` at a clean relativistic critical point.  Pass it where that does not
-hold.  A quantum chain is `d = 1`, `d_euclidean = 2`, and giving one number to
-both is the mistake these two keywords exist to prevent.
+`d_euclidean` has no default and is required wherever it is actually read, which
+is the clean-ν lookup: give `ν₀` yourself, or take the correlated route, and it
+is not asked for.  `d`
+is the system's own spatial dimension, which is what the criteria take and what
+quenched disorder lives in.  `d_euclidean` is the dimension of the classical
+theory whose exponent table `CriticalExponents` holds: `d + z` for a quantum
+critical point, and simply `d` for a classical model, which has no imaginary-time
+direction to add.  A quantum chain is `d = 1`, `d_euclidean = 2`; a 2D classical
+Ising model is `d = 2`, `d_euclidean = 2`.  Handing the second one `d + 1` is how
+that model silently reports `:relevant` where Harris' own 1974 answer is
+`:marginal`.
 
 `ν₀` is looked up from the clean model's universality class unless given.
 `ν_dis` has no such route: it is the exponent of the uncorrelated DISORDERED
 fixed point, a different object from anything the clean model knows, so it must
-be supplied.
+be supplied.  Each is read by one criterion only, and passing the other one is
+refused rather than ignored.
 
 ```jldoctest
-julia> disorder_relevance(RandomTFIM(); d=1)      # ν₀ = 1 < 2 = 2/d
+julia> disorder_relevance(RandomTFIM(); d=1, d_euclidean=2)   # ν₀ = 1 < 2 = 2/d
 :relevant
 ```
 """
-function disorder_relevance(
-    m::Disordered; d::Int, d_euclidean::Int=d + 1, ν₀=nothing, ν_dis=nothing, atol::Real=0
+@experimental """
+the dimension arguments and the correlation axis: `d` and `d_euclidean` are two
+numbers for one model and only the uncorrelated route is checked against
+published values, so a relevance verdict from the correlated or aperiodic route
+has not been validated against anything
+""" function disorder_relevance(
+    m::Disordered;
+    d::Int,
+    d_euclidean::Union{Int,Nothing}=nothing,
+    ν₀=nothing,
+    ν_dis=nothing,
+    atol::Real=0,
 )
     corr = correlation(m)
     if corr isa PowerLawCorrelated
+        ν₀ === nothing || error(
+            "disorder_relevance: `ν₀` is the CLEAN exponent and the Weinrib-Halperin " *
+            "criterion does not read it; correlated disorder is judged on `ν_dis`, " *
+            "the uncorrelated DISORDERED fixed point's. Refusing rather than " *
+            "ignoring the argument you passed.",
+        )
         ν_dis === nothing && error(
             "disorder_relevance: correlated disorder is judged on the exponent of " *
             "the UNCORRELATED DISORDERED fixed point, not the clean one, and the " *
@@ -340,8 +367,26 @@ function disorder_relevance(
         )
         return relevance(WeinribHalperinCriterion(); ν_dis=ν_dis, ρ=corr.ρ, atol=atol)
     end
-    ν = ν₀ === nothing ? _clean_nu(m; d_euclidean=d_euclidean) : ν₀
-    corr isa Aperiodic && return relevance(LuckCriterion(); ν₀=ν, ω=corr.ω, atol=atol)
+    ν_dis === nothing || error(
+        "disorder_relevance: `ν_dis` is the exponent of the uncorrelated DISORDERED " *
+        "fixed point and only the Weinrib-Halperin criterion reads it. This model's " *
+        "correlation is $(nameof(typeof(corr))), judged on the CLEAN `ν₀`. Refusing " *
+        "rather than ignoring the argument you passed.",
+    )
+    ν = if ν₀ !== nothing
+        ν₀
+    else
+        d_euclidean === nothing && error(
+            "disorder_relevance: looking up the clean ν needs `d_euclidean`, the " *
+            "dimension of the classical theory whose exponent table the atlas " *
+            "holds: `d + z` at a quantum critical point, and `d` for a classical " *
+            "model, which has no imaginary-time direction to add. It has no " *
+            "default because no default is right for both. Pass it, or pass `ν₀`.",
+        )
+        _clean_nu(m; d_euclidean=d_euclidean)
+    end
+    corr isa AperiodicSequence &&
+        return relevance(LuckCriterion(); ν₀=ν, ω=corr.ω, atol=atol)
     return relevance(HarrisCriterion(); ν₀=ν, d=d, atol=atol)
 end
 export disorder_relevance

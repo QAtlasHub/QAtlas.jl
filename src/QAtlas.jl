@@ -10,6 +10,7 @@ module QAtlas
 # QAtlas keeps the deprecation surface (`AbstractModel` alias, `Model{M}` /
 # `Quantity{Q}` wrappers), which now subtype the shared roots.  Remaining
 # duplicate definitions in `src/core/` are replaced in later per-slice steps.
+using ExperimentalAPI: @experimental
 using AbstractQAtlas:
     AbstractQAtlasModel,
     AbstractQuantity,

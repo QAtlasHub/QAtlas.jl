@@ -212,29 +212,6 @@ end
     @test occursin("all four", msg)
 end
 
-@testset "Disordered :: disorder attaches to a model, not a new model type" begin
-    # The point of the decoration: any model with named couplings can carry it,
-    # without a `RandomXXZ`, `RandomHeisenberg`, ... for each.
-    m = RandomTFIM(; J=1.0, h=2.0, D=1.0)
-    @test m isa Disordered{TFIM}
-    @test clean_model(m) == TFIM(; J=1.0, h=2.0)
-    @test disorder(m, :J) == PowerLawDisorder(1.0)
-    @test Disordered(XXZ1D(; Δ=0.5); Δ=BinaryDisorder(0.4)) isa Disordered{XXZ1D}
-
-    # A name that is not a field would be disorder asked for and never applied.
-    @test_throws ArgumentError Disordered(TFIM(); Jay=PowerLawDisorder(1.0))
-    @test_throws ArgumentError Disordered(TFIM(); J=1.0)          # not a family
-    @test_throws ArgumentError Disordered(TFIM())                 # nothing random
-    # Asking for a coupling that is not random is a different statement from
-    # asking for one with no disorder, so it throws rather than answering.
-    @test_throws ArgumentError disorder(Disordered(TFIM(); J=PowerLawDisorder(1.0)), :h)
-
-    # It does not inherit the clean model's answers, and does not need a blanket
-    # refusal to say so: it is not a TFIM, so nothing dispatches.
-    @test !(m isa TFIM)
-    @test_throws Exception fetch(m, MassGap(), Infinite())
-end
-
 @testset "RandomTFIM :: bonds and fields may be different families" begin
     # Worth checking because every other test here varies κ or D within ONE
     # family, which a single shared family would already serve.

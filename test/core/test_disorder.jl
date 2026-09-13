@@ -24,8 +24,10 @@ using QAtlas: fetch, clean_model, disorder, correlation
     @test_throws ArgumentError disorder(Disordered(TFIM(); J=PowerLawDisorder(1.0)), :h)
 
     # It is not a TFIM, so no clean method can dispatch on it. That is the type
-    # system refusing, not a guard, which is why none is registered.
+    # system refusing, not a guard, which is why none is registered: pin that the
+    # refusal is a MethodError, since a guard would raise something else.
     @test !(m isa TFIM)
+    @test_throws MethodError fetch(m, MassGap(), Infinite())
 end
 
 @testset "Disordered :: the correlation decides which criterion applies" begin
@@ -34,17 +36,35 @@ end
     # label.
     fam = (; J=PowerLawDisorder(1.0), h=PowerLawDisorder(1.0))
     uncorr = Disordered(TFIM(), fam, Uncorrelated())
-    fib = Disordered(TFIM(), fam, Aperiodic(-1.0))
-    @test disorder_relevance(uncorr; d=1) === :relevant      # Harris: ν₀ = 1 < 2/d
-    @test disorder_relevance(fib; d=1) === :irrelevant       # Luck: 1 > 1/(1−(−1))
+    fib = Disordered(TFIM(), fam, AperiodicSequence(-1.0))
+    @test disorder_relevance(uncorr; d=1, d_euclidean=2) === :relevant   # ν₀ = 1 < 2/d
+    @test disorder_relevance(fib; d=1, d_euclidean=2) === :irrelevant    # 1 > 1/(1−(−1))
 
-    # ω = 1/2 is a random sequence, where Luck IS Harris in one dimension.
-    rand_seq = Disordered(TFIM(), fam, Aperiodic(0.5))
-    @test disorder_relevance(rand_seq; d=1) === disorder_relevance(uncorr; d=1)
+    # ω = 1/2 is a random sequence, where Luck IS Harris in one dimension. The
+    # wiring has to actually read corr.ω for this to mean anything, so check the
+    # verdict MOVES with ω across Luck's own boundary at ν₀ = 1/(1−ω), i.e. ω = 0.
+    rand_seq = Disordered(TFIM(), fam, AperiodicSequence(0.5))
+    @test disorder_relevance(rand_seq; d=1, d_euclidean=2) ===
+        disorder_relevance(uncorr; d=1, d_euclidean=2)
+    for (ω, want) in ((-1.0, :irrelevant), (0.0, :marginal), (0.5, :relevant))
+        m = Disordered(TFIM(), fam, AperiodicSequence(ω))
+        @test disorder_relevance(m; d=1, d_euclidean=2) === want
+    end
 
     # Correlated disorder reads the DISORDERED ν, which the atlas cannot supply.
-    @test_throws ErrorException disorder_relevance(
+    @test_throws "Pass `ν_dis`" disorder_relevance(
         Disordered(TFIM(), fam, PowerLawCorrelated(1.0)); d=1
+    )
+    # and each exponent is read by one criterion only: handing a route the other
+    # one is refused rather than quietly dropped, which is how it used to go.
+    @test_throws "does not read it" disorder_relevance(
+        Disordered(TFIM(), fam, PowerLawCorrelated(1.0)); d=1, ν₀=1, ν_dis=2
+    )
+    @test_throws "only the Weinrib-Halperin criterion reads it" disorder_relevance(
+        uncorr; d=1, d_euclidean=2, ν_dis=2
+    )
+    @test_throws "only the Weinrib-Halperin criterion reads it" disorder_relevance(
+        fib; d=1, d_euclidean=2, ν_dis=2
     )
     # Slower decay is more correlated, so more relevant: monotone in ρ through
     # the boundary at ρ = 2/ν_dis = 1.
@@ -56,16 +76,21 @@ end
 
 @testset "Disordered :: the two dimensions are different numbers" begin
     # `d` is spatial and goes to the criterion; `d_euclidean` keys
-    # `CriticalExponents` and defaults to d + 1. Passing one number to both is
-    # the mistake the pair exists to prevent, and it fails loudly rather than
-    # answering.
-    @test disorder_relevance(RandomTFIM(); d=1) === :relevant
+    # `CriticalExponents`. There is no default, because `d + 1` is right for a
+    # quantum chain and wrong for a classical model, and being wrong there is
+    # silent: it answers, with the other model's number.
+    @test_throws "no default" disorder_relevance(RandomTFIM(); d=1)
     @test disorder_relevance(RandomTFIM(); d=1, d_euclidean=2) === :relevant
     @test_throws ErrorException disorder_relevance(RandomTFIM(); d=1, d_euclidean=1)
 
-    # Supplying ν₀ skips the lookup, so the Euclidean dimension stops mattering.
+    # Supplying ν₀ skips the lookup, so the Euclidean dimension stops mattering
+    # and is not asked for.
     @test disorder_relevance(RandomTFIM(); d=1, ν₀=1) === :relevant
     @test disorder_relevance(RandomTFIM(); d=1, ν₀=3) === :irrelevant
+    # Harris is marginal at ν₀ = 2/d exactly, so :marginal is reachable and not
+    # a verdict the code can only ever name.
+    @test disorder_relevance(RandomTFIM(); d=1, ν₀=2) === :marginal
+    @test disorder_relevance(RandomTFIM(); d=2, ν₀=1) === :marginal
 end
 
 @testset "Disordered :: a missing atlas entry is named, not a MethodError" begin

@@ -57,22 +57,26 @@ jobs:
             2*) echo "pages/builds -> $code" ;;
             *) echo "::warning::pages/builds returned ${code:-no response}; Pages rebuilds on its own schedule anyway" ;;
           esac
-      # The preview URL is a pure function of the PR number, so restating it on every push
-      # spent API calls to say something that cannot have changed: `find-comment` pages through
-      # the PR's comments, then `create-or-update-comment` rewrites an identical body. That ran
-      # 21 times on one PR. The summary costs nothing and is always current; the comment is
-      # posted once, when there is nothing to search for yet.
-      - name: Preview URL in the run summary
+      - name: Find existing preview comment
         if: github.event_name == 'pull_request'
-        run: |
-          echo "📚 [Docs preview](https://codes.sota-shimozono.com/QAtlas.jl/previews/PR${{ github.event.pull_request.number }}/)" >> "$GITHUB_STEP_SUMMARY"
+        id: find-comment
+        continue-on-error: true
+        uses: peter-evans/find-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: 'Docs preview'
+      # With `find-comment` best-effort, `comment-id` can be empty, which posts a new comment
+      # instead of editing the old one. A duplicate comment beats a red check.
       - name: Post preview URL to PR
-        if: github.event_name == 'pull_request' && github.event.action == 'opened' && success()
+        if: github.event_name == 'pull_request' && success()
         continue-on-error: true
         uses: peter-evans/create-or-update-comment@v5
         with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             📚 **Docs preview**: https://codes.sota-shimozono.com/QAtlas.jl/previews/PR${{ github.event.pull_request.number }}/
 
-            *(the site is rebuilt on each push; this link does not change)*
+            *(updates on each push to this PR)*
+          edit-mode: replace

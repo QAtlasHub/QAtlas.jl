@@ -1,25 +1,18 @@
 name: Release Drafter
 
-# Only on main. The `pull_request` trigger used to be here for the autolabeler, and it wrote
-# nothing: a PR event checks out `refs/pull/N/merge`, which release-drafter reports as "an
-# ephemeral pull request merge commit", and it responds by forcing dry-run, which suppresses the
-# labels as well as the draft. Measured on 2026-09-13 on a single PR push: 137 releases fetched,
-# 291 commits walked, 93 merged pull requests resolved, a 9489-character body built, all
-# discarded. Across the last 100 PRs the autolabeler's own labels (`feature`, `ci`, `test`,
-# `refactor`) appear zero times, including on PRs titled `ci:`, `fix:` and `perf:` that its rules
-# match; every label actually present comes from PRLabeler or Dependabot. So the labelling this
-# trigger existed for is done by `PRLabeler.yml`, which calls the org reusable and reads only the
-# PR, while the draft is only meaningful once something has merged.
 on:
   push:
     branches:
       - main
+  # Required for autolabeler to act on PRs as they are opened/edited.
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
 
 concurrency:
-  # Queue, never cancel: this writes the draft release. With the PR trigger gone the
-  # cancel-on-superseded half had no event left that could reach it.
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+  # Cancel a PR's superseded runs when it is pushed again; queue (never cancel)
+  # runs on main, where these workflows publish or record state.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read

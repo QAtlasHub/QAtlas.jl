@@ -325,6 +325,33 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :ActivatedMomentGrowth => "as `TypicalCorrelationLength` — satisfied by the same \
                                table, checked in the same file.",
 
+    # The AbstractQAtlas 0.7.7 Appendix-A block. Materializable for the same reason
+    # again: `Universality{:IsingSDRG}` and `RandomTFIM` answer their typed exponent
+    # slots. Every one of them is short the SAME thing, a supplied log-slope of an
+    # observable this atlas does not carry for a random chain, so they are listed
+    # rather than wired, exactly as `DynamicalScaling` above.
+    #
+    # Against system size, which no hub sweeps for a random chain:
+    :ActivatedFiniteSizeScaling => "needs d(ln[-ln O_typ])/d(ln L) on an open random \
+                                    chain; no hub sweeps L for one.",
+    :ConventionalFiniteSizeEnergy => "as `DynamicalScaling` in size space — the hubs \
+                                      answering `z` fetch a gap at one N, not Ω(L).",
+    # Against temperature, at a quantum critical point:
+    :CriticalQuantumSusceptibility => "needs d(ln χ)/d(ln T) at T -> 0; the hubs with \
+                                       a χ(T) are classical and answer no `z`.",
+    :CriticalQuantumSpecificHeat => "as `CriticalQuantumSusceptibility`, for c_V(T).",
+    :ActivatedSpecificHeat => "as `GriffithsSpecificHeat` — no disorder-averaged c_V(T), \
+                               and this one wants its slope against ln|ln T|.",
+    # Against time:
+    :GriffithsAutocorrelation => "needs a disorder-averaged G(t); `RandomTFIM` carries \
+                                  the coupling distributions and no dynamics.",
+
+    # Not a missing slope but a missing fixed point: nothing here realises the
+    # large-spin phase, which wants a random chain with mixed ferromagnetic and
+    # antiferromagnetic couplings. `ζ` and `κ` have no supplier at all.
+    :LargeSpinMoment => "no hub realises a large-spin fixed point; `ζ` and `κ` are \
+                         unanswerable here, not merely unwired.",
+
     # Materializable since the 0.7 adoption gave the relation its `ncuts` slot; the
     # 15-hub count is an artefact of the one typed slot, `c::CentralCharge`.
     #

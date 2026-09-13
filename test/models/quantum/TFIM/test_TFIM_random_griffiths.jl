@@ -11,6 +11,7 @@
 
 using QAtlas, Test
 using QAtlas: fetch, rtfim_delta
+using AbstractQAtlas: SpatialDimension
 using QuadGK: quadgk
 
 # A family that implements nothing, to check the contract error rather than a
@@ -353,4 +354,57 @@ end
 
     @test_throws ArgumentError RandomTFIM(; J=0.0, h=1.0, D=1.0)
     @test_throws ArgumentError RandomTFIM(; J=1.0, h=1.0, D=0.0)
+end
+
+@testset "RandomTFIM :: weak disorder still has a Griffiths phase" begin
+    # The bracket used to be probed a fixed 1e-12 in from the pole, and the root
+    # can sit far closer than that: log_moment(fields, -u) diverges only
+    # logarithmically, so for D below about |ln(J/h)|/27 the sign change was
+    # invisible and the solver reported "no rare regions and no Griffiths phase".
+    # That claim needs a family bounded away from zero; PowerLawDisorder reaches
+    # zero, so a root always exists and the refusal was never right for it.
+    for (h, D) in ((2.0, 0.0257), (2.0, 0.02), (2.0, 0.01), (10.0, 0.05), (100.0, 0.1))
+        z = fetch(RandomTFIM(; J=1.0, h=h, D=D), DynamicalExponent(), Infinite())
+        @test isfinite(z)
+        @test z >= D                       # the documented floor
+        @test z < 1.05 * D                 # and this deep, the root sits on it
+    end
+    # Where Float64 cannot resolve the root from the pole, 1/u_cap = D is the
+    # correctly rounded answer, not an approximation: a 4096-bit bisection of
+    # (J/h)^u = 1 - D^2 u^2 gives exactly these three to the last bit.
+    for (h, D) in ((2.0, 0.01), (10.0, 0.05), (100.0, 0.1))
+        @test fetch(RandomTFIM(; J=1.0, h=h, D=D), DynamicalExponent(), Infinite()) == D
+    end
+    # Asymmetric families exercise the same branch without the equal-D symmetry
+    # that made every existing fixture keep G(hi) > 0 no matter what.
+    m = Disordered(
+        TFIM(; J=1.0, h=4.0), (; J=PowerLawDisorder(0.9), h=PowerLawDisorder(0.03))
+    )
+    z = fetch(m, DynamicalExponent(), Infinite())
+    @test isfinite(z) && z >= 0.03
+end
+
+@testset "RandomTFIM :: the closed form is i.i.d., and the type says so" begin
+    # [(J/h)^{1/z}]_av = 1 is a statement about independent couplings. A
+    # correlated or aperiodic chain is not one, so it must not be a RandomTFIM
+    # and these methods must not dispatch on it. They used to, returning a number
+    # bit-identical to the uncorrelated one.
+    fam = (; J=PowerLawDisorder(1.0), h=PowerLawDisorder(1.0))
+    plain = Disordered(TFIM(; J=2.0, h=1.0), fam, Uncorrelated())
+    @test plain isa RandomTFIM
+    @test isfinite(fetch(plain, DynamicalExponent(), Infinite()))
+    for c in (PowerLawCorrelated(0.5), AperiodicSequence(-1.0))
+        other = Disordered(TFIM(; J=2.0, h=1.0), fam, c)
+        @test !(other isa RandomTFIM)
+        @test_throws Exception fetch(other, DynamicalExponent(), Infinite())
+    end
+end
+
+@testset "RandomTFIM :: the spatial dimension is answered, and it is not the image's" begin
+    # Untested until now: mutating either of these to 2 changed nothing anywhere.
+    @test fetch(RandomTFIM(), SpatialDimension(), Infinite()) == 1
+    @test fetch(Universality(:IsingSDRG), SpatialDimension(), Infinite()) == 1
+    # ...and the contrast the docstrings turn on: the same class takes d = 2 for
+    # the exponent table, which is the 2D classical image's dimension.
+    @test haskey(fetch(Universality(:IsingSDRG), CriticalExponents(); d=2), :ψ)
 end

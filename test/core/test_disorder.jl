@@ -5,6 +5,7 @@
 
 using QAtlas, Test
 using QAtlas: fetch, clean_model, disorder, correlation
+using AbstractQAtlas: margin, HarrisCriterion
 
 @testset "Disordered :: the decoration checks what it can" begin
     m = RandomTFIM(; J=1.0, h=2.0, D=1.0)
@@ -93,6 +94,16 @@ end
     # a verdict the code can only ever name.
     @test disorder_relevance(RandomTFIM(); d=1, ν₀=2) === :marginal
     @test disorder_relevance(RandomTFIM(); d=2, ν₀=1) === :marginal
+
+    # Which argument reaches which keyword cannot be certified by a verdict at
+    # atol = 0: margin = ν₀ - 2/d and the swapped d - 2/ν₀ have the SAME SIGN for
+    # every positive pair, both reducing to ν₀·d against 2. Their MAGNITUDES
+    # differ, though, so a tolerance turns the difference into a verdict: at
+    # ν₀ = 1/2, d = 1 the margin is -3/2 and the swap gives -3.
+    @test margin(HarrisCriterion(); ν₀=1 // 2, d=1) == -3 // 2
+    @test margin(HarrisCriterion(); ν₀=1, d=1 // 2) == -3 // 1
+    @test disorder_relevance(RandomTFIM(); d=1, ν₀=1 // 2, atol=2) === :marginal
+    @test disorder_relevance(RandomTFIM(); d=1, ν₀=1 // 2, atol=1) === :relevant
 end
 
 @testset "Disordered :: a missing atlas entry is named, not a MethodError" begin

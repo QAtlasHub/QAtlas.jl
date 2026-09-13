@@ -38,7 +38,7 @@ in general is not.  Distance from it is [`rtfim_delta`](@ref).
 Anything else is refused: a disordered chain does not inherit the clean one's
 answers.
 """
-const RandomTFIM = Disordered{TFIM}
+const RandomTFIM = Disordered{TFIM,F,Uncorrelated} where {F}
 
 """
     RandomTFIM(; J = 1.0, h = 1.0, D = 1.0)
@@ -105,23 +105,36 @@ Bisect [`_rtfim_griffiths_residual`](@ref) on `0 < u < −moment_floor(fields)`,
 returning `nothing` when the residual never turns positive there, which means
 the condition has NO root, not that the search gave up.
 
-That case is real and reachable.  For a family bounded away from zero the
-residual's slope at large `u` is `ln(J/h) − ln(min μ)`, so a root exists only
-while `J·max λ > h·min μ`: the strongest bond must beat the weakest field, or no
-region can be locally ordered and there is no Griffiths phase to have an
-exponent.  The bracket is therefore checked rather than assumed: assuming it
-let the bisection collapse onto its own starting point and return that as an
-answer.
+That case is real and reachable, but ONLY for a family bounded away from zero,
+where the residual's slope at large `u` is `ln(J/h) − ln(min μ)` and a root
+exists only while `J·max λ > h·min μ`: the strongest bond must beat the weakest
+field, or no region can be locally ordered and there is no Griffiths phase to
+have an exponent.  A family whose support reaches zero, `PowerLawDisorder` among
+them, has no such threshold, and returning `nothing` for one would be a claim
+this reasoning does not support.
+
+The bracket is checked rather than assumed either way: assuming it let the
+bisection collapse onto its own starting point and return that as an answer.
 """
 function _rtfim_solve_u(m::RandomTFIM)
     fl = moment_floor(disorder(m, :h))
     u_cap = isfinite(fl) ? -fl : Inf
     G(u) = _rtfim_griffiths_residual(u, m)
 
-    hi = isfinite(u_cap) ? u_cap * (1 - 1e-12) : 1.0
+    local hi
     if isfinite(u_cap)
-        G(hi) > 0 || return nothing
+        # `log_moment(fields, -u)` diverges at the pole, so `G` does too and a
+        # positive root ALWAYS exists on this branch: `nothing` is never the right
+        # answer here.  Probe at the last representable point below the pole, not a
+        # fixed offset in from it, because the root can sit far closer than that.
+        # When even that cannot see the sign change the root is within rounding of
+        # the pole, and `1/u_cap` is then the correctly rounded exponent, checked
+        # against a 4096-bit bisection at (J, h, D) = (1, 2, 0.01), (1, 10, 0.05)
+        # and (1, 100, 0.1), where it agrees to the last bit.
+        hi = prevfloat(u_cap)
+        G(hi) > 0 || return u_cap
     else
+        hi = 1.0
         steps = 0
         while !(G(hi) > 0)
             hi *= 2
@@ -168,10 +181,11 @@ function fetch(m::RandomTFIM, ::DynamicalExponent, ::Infinite; kwargs...)
     u === nothing && return error(
         "RandomTFIM: [(J/h)^{1/z}]_av = 1 has no root for these distributions, so " *
         "there is no Griffiths dynamical exponent to return. This happens when the " *
-        "strongest bond cannot beat the weakest field (for two-valued couplings, " *
-        "when J·max λ ≤ h·min μ): no region can be locally ordered, so there are no " *
-        "rare regions and no Griffiths phase. δ = $δ says how far from criticality " *
-        "the chain is, and says nothing about this.",
+        "strongest bond cannot beat the weakest field, J·max λ ≤ h·min μ, which " *
+        "needs a family bounded away from zero: no region is locally ordered, so " *
+        "there are no rare regions and no Griffiths phase. A family whose support " *
+        "reaches zero has no such threshold and never reaches this message. " *
+        "δ = $δ says how far from criticality the chain is, and nothing about this.",
     )
     return 1 / u
 end
@@ -186,7 +200,6 @@ Refused away from criticality, where the chain is in a Griffiths phase with a
 finite [`DynamicalExponent`](@ref) instead. Returning `1/2` there would name the
 exponent of a fixed point the model is not at.
 """
-
 function fetch(m::RandomTFIM, ::ActivatedExponent, ::Infinite; kwargs...)
     iszero(rtfim_delta(m)) || return error(
         "RandomTFIM: ψ is the exponent of the infinite-randomness fixed point, " *

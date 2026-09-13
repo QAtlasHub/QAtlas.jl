@@ -106,3 +106,23 @@ end
         refs=["Peschel1984"],
     )
 end
+
+@testset "TFIM :: the overflow guards are load-bearing, and the ratio can overflow" begin
+    # Raising both thresholds to 800 used to change nothing: every fixture either
+    # sat where the two branches agree to better than double precision, or sat so
+    # deep that a broken guard also produced 0.0. This one lands in between, where
+    # m_s is tiny but representable and a too-permissive threshold floors it.
+    # The window is narrow: a·(N-1) must exceed 709.78, where expm1 overflows, and
+    # stay under the mutated threshold, or both branches agree and nothing is
+    # tested. At r = 2, N = 542 puts it at 750.
+    m = fetch(TFIM(; J=1.0, h=2.0), SurfaceMagnetization(), OBC(542))
+    @test 0 < m < 1e-100
+    ref = let r = big(2.0), N = 542
+        Float64((1 + sum(r^(2i) for i in 1:(N - 1)))^big(-0.5))
+    end
+    @test m ≈ ref rtol = 1e-12
+    # And the ratio itself can overflow, which made both log terms Inf and their
+    # difference NaN. A subnormal J is enough.
+    @test fetch(TFIM(; J=5.0e-324, h=1.0), SurfaceMagnetization(), OBC(10)) == 0.0
+    @test fetch(TFIM(; J=1.0e-300, h=1.0), SurfaceMagnetization(), OBC(10)) == 0.0
+end

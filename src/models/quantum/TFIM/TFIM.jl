@@ -262,6 +262,10 @@ function fetch(model::TFIM, ::SurfaceMagnetization, bc::OBC; kwargs...)
     r = abs(model.h / model.J)
     N == 1 && return 1.0                       # the sum in Eq. (4.4) is empty
     r == 1 && return 1 / sqrt(N)
+    # An overflowed ratio makes both log terms `Inf`, and their difference `NaN`,
+    # which would leave here as a value. The limit is the one the merely-huge
+    # branch below already reaches.
+    isinf(r) && return 0.0
     # ln S for S = sum_{i=1}^{N-1} r^{2i}, written so r > 1 cannot overflow.
     a = 2 * log(r)
     lnS = a + _log_abs_expm1(a * (N - 1)) - _log_abs_expm1(a)

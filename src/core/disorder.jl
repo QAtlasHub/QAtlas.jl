@@ -290,7 +290,18 @@ function _clean_nu(m::Disordered; d_euclidean::Int)
             sprint(showerror, err),
         )
     end
-    e = fetch(u, CriticalExponents(); d=d_euclidean)
+    e = try
+        fetch(u, CriticalExponents(); d=d_euclidean)
+    catch err
+        error(
+            "disorder_relevance: $u has no exponent table at d_euclidean = " *
+            "$d_euclidean. That is the dimension of the classical theory whose " *
+            "table the atlas holds, `d + z` at a quantum critical point and `d` " *
+            "for a classical model. Pass the right one, or pass `ν₀`. The atlas " *
+            "said: " *
+            sprint(showerror, err),
+        )
+    end
     haskey(e, :ν) || error(
         "disorder_relevance: the exponent set of $u at d = $d_euclidean carries no " *
         "`ν` (it has $(keys(e))). That is not necessarily a gap in the atlas: a " *

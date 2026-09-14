@@ -21,31 +21,10 @@
 # Hubs added: Universality(:Ising/:XY/:Heisenberg)/CriticalExponents/Infinite
 # (3 hubs × 6 fields = 18 verify cards), plus Percolation d=3 (4 fields).
 #
-# Percolation is the one that does not fit the shape above, and the difference is
-# not cosmetic.  Wang et al. quote the RENORMALIZATION exponents, not the six
-# standard ones: `1/ν = 1.141 0(15)` and `y_h = 2.522 95(15)`.  The standard
-# exponents follow from those by DEFINITION:
-#
-#     ν = 1/y_t      β/ν = d − y_h      γ/ν = 2y_h − d
-#     δ = y_h/(d − y_h)                 η = d + 2 − 2y_h
-#
-# and the pin is against those.  `agree_within` cannot be `0` as it is above,
-# because src carries a rounded decimal while the paper carries an eigenvalue; it
-# is half a unit in the stored decimal's LAST PLACE, which is the same intent:
-# any edit to the stored digits surfaces.  The field's own quoted error would be
-# six to forty times looser and would let a digit change pass.  MEASURED
-# headroom against the real deviations: β 27×, γ 6.6×, δ 3.7×, η exact.
-#
-# Two of the six are NOT pinned, and that is the finding rather than an omission:
-#
-#   * `α`. The only route from the paper's numbers is `α = 2 − dν`, which IS
-#     Josephson. Pinning α that way would assert hyperscaling against a table the
-#     :derivation plane tests hyperscaling ON. The shipped `−0.625(3)` is 1.4σ
-#     from `2 − dν = −0.629 27` and the paper quotes no α, so its source is
-#     elsewhere and unrecorded.
-#   * `ν`. The paper gives `ν = 1/1.1410(15) = 0.876 42(115)`. src carries
-#     `0.876 19(12)`: 2.0σ away in its OWN error, and with an error ten times
-#     tighter than this paper supports. Also from elsewhere, also unrecorded.
+# Percolation d=3 is pinned against DEFINITIONS of the paper's y_t and y_h, and
+# leaves α and ν unpinned; Percolation.jl's own header says why.  Its
+# `agree_within` is half a unit in the stored decimal's last place rather than
+# `0`, because src rounds where the paper does not.
 #
 # References:
 #   Ising d=3:      Kos, Poland, Simmons-Duffin, Vichi, JHEP 08, 036 (2016).
@@ -151,27 +130,10 @@ end
 # ─────────────────────────────────────────────────────────────────────────────
 # d=2 Coulomb gas: percolation (q=1), Potts q=3, Potts q=4
 #
-# One closed form covers all of them, so they are pinned together rather than
-# table by table.  The critical q-state Potts model in d=2 is a Coulomb gas with
-# coupling g, and [Xu2025](@cite) states it as
-#
-#     sqrt(q) = -2 cos(pi g),  g in (0, 1]                        Eq. (20)
-#     y_t = 3 (2g - 1) / (2g)                                     Eq. (22a)
-#     y_h = (2g + 1) (2g + 3) / (8g)                              Eq. (23a)
-#
-# attributing the formulas to Nienhuis's Coulomb-gas review (Domb and Lebowitz
-# Vol. 11), which is the primary source and is not open access.  That paper's
-# own Table I lists g = 2/3, 3/4, 5/6, 1 for q = 1, 2, 3, 4 and the matching
-# y_t, y_h, so the g values used below are the paper's and not a re-derivation.
-#
-# The pin is EXACT rational equality, which is stronger than the decimal pins
-# above: these tables are exact, so a closed form that reproduces them leaves no
-# rounding to hide in.
-#
-# alpha is excluded for the same reason as in the d=3 percolation block: its only
-# route from (y_t, y_h) is alpha = 2 - d/y_t, which is Josephson, and pinning it
-# that way would assert hyperscaling against a table the :derivation plane tests
-# hyperscaling on.
+# One closed form covers all three ([Xu2025](@cite) Eqs. 20, 22a, 23a, coded
+# below), with g read off that paper's Table I.  The pin is EXACT rational
+# equality: these tables are exact, so there is no rounding to hide in.  alpha is
+# excluded as in the d=3 block, its only route being Josephson.
 const _CG_G = Dict(
     :percolation => 2 // 3, :ising => 3 // 4, :potts3 => 5 // 6, :potts4 => 1 // 1
 )
@@ -203,10 +165,8 @@ end
         @test _cg_yh(g) == y_h
     end
 
-    # All four tables, all six exponents, exact rational equality.  alpha is
-    # included HERE (it is the closed form's own value) while being excluded from
-    # the verify pins below, which is the whole distinction: the closed form
-    # produces alpha, so a route that also produces it cannot check it.
+    # alpha is included here and excluded from the pins below: the closed form
+    # produces it, so a route that also produces it cannot check it.
     for (key, M, kw) in (
         (:percolation, Universality(:Percolation), (; d=2)),
         (:ising, Universality(:Ising), (; d=2)),

@@ -14,6 +14,7 @@ using QAtlas:
     _sigma_outcome,
     _roundoff_floor,
     exponent_sweep!,
+    refuse_exponents!,
     exponent_hubs,
     check_derivation_coverage,
     derivation_reach,
@@ -174,7 +175,7 @@ end
     @test isempty(check_derivation_coverage())
 end
 
-@testset "exponent_sweep! refuses the declarations that would read as coverage" begin
+@testset "a declaration that would read as coverage is refused" begin
     @test_throws ArgumentError exponent_sweep!(
         Universality{:Ising}, Infinite; sweep=(d=[2],)
     )                                                  # duplicate (model, bc, sweep)
@@ -183,24 +184,140 @@ end
     @test_throws ArgumentError exponent_sweep!(
         Universality{:Potts3}, PBC; dimension=:nope, sweep=(d=[2],)
     )
+    # A non-numeric swept `d` reaches the relations without passing the `isa Real`
+    # test the fetched exponents get; caught here, it names the declaration.
+    @test_throws ArgumentError exponent_sweep!(Universality{:Potts3}, PBC; sweep=(d=["2"],))
     # dimension=nothing suppresses the hyperscaling routes; unexplained, that is
     # a silent exclusion wearing the shape of a pass.
     @test_throws ArgumentError exponent_sweep!(
         Universality{:Potts3}, PBC; dimension=nothing
     )
-    @test_throws ArgumentError exponent_sweep!(
-        Universality{:Potts3}, PBC; refused="because", notes="also because"
-    )
+    @test_throws ArgumentError refuse_exponents!(Universality{:Potts3}, PBC; reason="")
+    # A refusal is keyed on (model, bc) alone: its check id carries no sweep point,
+    # so a second one would pass a sweep-aware test and then collide on that id.
+    @test_throws ArgumentError refuse_exponents!(KPZ1D, Infinite; reason="again")
     # ...and nothing above left a row behind.
     @test !any(s -> s.bc === PBC, EXPONENT_SWEEPS)
+    @test count(s -> s.model === KPZ1D, EXPONENT_SWEEPS) == 1
+end
+
+# `derived_from` is a second copy of a provenance header, and it fails in the
+# direction that looks fine: a name matching nothing suppresses nothing, the
+# route runs, and it PASSES, because the shipped value is what that relation
+# predicts. Both halves are validated at declaration.
+@testset "derived_from cannot name an exponent or a relation that does not exist" begin
+    @test_throws ArgumentError exponent_sweep!(
+        Universality{:Potts3}, PBC; sweep=(d=[2],), derived_from=[:delta => [:Widom]]
+    )
+    @test_throws ArgumentError exponent_sweep!(
+        Universality{:Potts3}, PBC; sweep=(d=[2],), derived_from=[:δ => [:widom]]
+    )
+    @test !any(s -> s.bc === PBC, EXPONENT_SWEEPS)
+
+    # Positive control: the spelling the registry actually uses is accepted, so
+    # the two refusals above are rejecting the typo and not the shape.
+    known = QAtlas._scaling_relation_names()
+    for r in (:Widom, :Fisher, :Rushbrooke, :Josephson)
+        @test r in known
+    end
+end
+
+# The emptiness test that reads naturally cannot fire: a point that cannot be
+# prepared still emits a refusal check. What CAN happen is a declaration all of
+# whose points were refused, and that is what is asked.
+@testset "a declaration that judges nothing is reported, and the guard can fire" begin
+    for s in EXPONENT_SWEEPS
+        s isa QAtlas.SweptExponents || continue
+        @test !QAtlas._judges_nothing(s)
+    end
+    # Positive control, built directly so it never enters the store: Heisenberg1D
+    # has no CriticalExponents method, so every point refuses.
+    dead = QAtlas.SweptExponents(
+        QAtlas.Heisenberg1D,
+        Infinite,
+        (;),
+        2,
+        Pair{Symbol,Vector{Symbol}}[],
+        3.0,
+        "",
+        String[],
+    )
+    @test QAtlas._judges_nothing(dead)
+    # ...and it is reported as an :error, not a :skip: a hub whose fetch does not
+    # work is a config bug, and a suite that skips it goes green with the whole
+    # cross-check missing.
+    checks = QAtlas._scaling_checks(dead)
+    @test !isempty(checks)
+    @test all(c -> QAtlas.run_generated_check(c).status === :error, checks)
+end
+
+@testset "a non-finite sigma is refused, never used as a tolerance" begin
+    # The tolerance is built FROM the sigma, so an infinite one accepts every
+    # disagreement. Both the value and the sigma are checked.
+    @test _sigma_outcome(1.0, 2.0, 0.1, Inf; k=3).status === :error
+    @test _sigma_outcome(1.0, 2.0, NaN, 0.1; k=3).status === :error
+    @test _sigma_outcome(1.0, Inf, 0.1, 0.1; k=3).status === :error
+    @test _sigma_outcome(1.0, 2.0, 0.1, 0.1; k=3).status === :fail
 end
 
 @testset "derivation_reach measures the other planes rather than guessing them" begin
     reach = derivation_reach()
     @test !isempty(reach)
     # A supplied temperature is not a second fetched value, so every reported hub
-    # really does hold two atlas numbers the relation connects.
-    @test all(r -> !isempty(r.relations), reach)
+    # really does hold two atlas numbers the relation connects.  (`relations` is
+    # non-empty by the producer's own filter, so asserting THAT would be
+    # tautological; what is not free is that the hub implements enough.)
     @test all(r -> r.quantities ≥ 2, reach)
     @test any(r -> r.model === QAtlas.TFIM && r.bc === Infinite, reach)
+end
+
+# The hyperscaling suppression has no declared user today, so nothing would
+# exercise it: a branch that no fixture reaches is a documented contract with no
+# implementation behind it. Built directly, both arms asserted.
+@testset "a hub without a dimension suppresses only the hyperscaling routes" begin
+    free = QAtlas.SweptExponents(
+        Universality{:Ising},
+        Infinite,
+        (d=[2],),
+        nothing,
+        Pair{Symbol,Vector{Symbol}}[],
+        3.0,
+        "an infinite-range hub has no spatial dimension",
+        String[],
+    )
+    outcomes = Dict(
+        c.id => QAtlas.run_generated_check(c) for c in QAtlas._scaling_checks(free)
+    )
+    josephson = filter(i -> endswith(i, "/Josephson"), collect(keys(outcomes)))
+    @test !isempty(josephson)
+    for i in josephson
+        @test outcomes[i].status === :skip
+        @test occursin("hyperscaling does not apply", outcomes[i].detail)
+    end
+    # ...and the routes that do not need a dimension still judge, so dropping the
+    # dimension costs the hyperscaling laws and not the row.
+    others = filter(i -> !endswith(i, "/Josephson"), collect(keys(outcomes)))
+    @test any(i -> outcomes[i].status === :pass, others)
+end
+
+@testset "k is the declaration's, not a constant in the generator" begin
+    # Same table twice, differing only in k. The 2D Ising table agrees exactly, so
+    # a tolerance change cannot flip it; perturb γ and let k decide.
+    function verdicts(k)
+        s = QAtlas.SweptExponents(
+            Universality{:Ising},
+            Infinite,
+            (d=[3],),
+            :sweep,
+            Pair{Symbol,Vector{Symbol}}[],
+            k,
+            "",
+            String[],
+        )
+        return [QAtlas.run_generated_check(c).status for c in QAtlas._scaling_checks(s)]
+    end
+    # The d=3 bootstrap table sits within ~1.3 sigma on every route, so k below
+    # that must fail somewhere and k above it must not.
+    @test any(==(:fail), verdicts(0.5))
+    @test !any(==(:fail), verdicts(3.0))
 end

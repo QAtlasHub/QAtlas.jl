@@ -343,7 +343,8 @@ export EdwardsAndersonParameter, SpinGlassSusceptibility  # spin-glass order (#7
 export BoundEdge, BOUNDS, bound!, @bound_edge  # inequality edges (core/bound.jl)
 # The ABQ relation network as a check generator (core/derivation.jl).  No edge
 # store of its own: the store is AbstractQAtlas's relation registry.
-export ExponentSweep, EXPONENT_SWEEPS, exponent_sweep!, @exponent_sweep
+export AbstractExponentSweep, SweptExponents, RefusedExponents, EXPONENT_SWEEPS
+export exponent_sweep!, @exponent_sweep, refuse_exponents!, @refuse_exponents
 export exponent_hubs, check_derivation_coverage, DerivationReach, derivation_reach
 # Derived-input suppliers (core/derivative.jl).  The AD backends are package
 # EXTENSIONS — neither ForwardDiff nor Zygote is a hard dependency.

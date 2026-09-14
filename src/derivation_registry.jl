@@ -79,35 +79,35 @@
 # whose letters mean something else must be kept out rather than fed in and
 # reported as a contradiction.
 
-@exponent_sweep(
+@refuse_exponents(
     KPZ1D,
     Infinite,
-    refused = "KPZ1D/CriticalExponents returns GrowthExponents: its α is the \
+    reason = "KPZ1D/CriticalExponents returns GrowthExponents: its α is the \
                roughness exponent and its β the growth exponent, not the \
                specific-heat and order-parameter exponents the :scaling \
                relations are written on. Same letters, different quantities.",
 )
 
-@exponent_sweep(
+@refuse_exponents(
     Universality{:IsingSDRG},
     Infinite,
-    refused = "the infinite-randomness table carries β and ν beside ψ, φ and \
+    reason = "the infinite-randomness table carries β and ν beside ψ, φ and \
                x_m, and its d=2 is QAtlas's Euclidean convention while the \
                relations' d is the spatial dimension (d=1 for the chain). Two \
                different d and a different fixed point; ActivatedExponent and \
                the :scaling algebra are not the same statement.",
 )
 
-@exponent_sweep(
+@refuse_exponents(
     Ising2D,
     Infinite,
-    refused = "pinned-d alias of Universality(:Ising) at d=2, which is swept \
+    reason = "pinned-d alias of Universality(:Ising) at d=2, which is swept \
                above; the same table under a second name.",
 )
 
-@exponent_sweep(
+@refuse_exponents(
     MeanField,
     Infinite,
-    refused = "legacy alias of Universality(:MeanField), which is swept above; \
+    reason = "legacy alias of Universality(:MeanField), which is swept above; \
                the same table under a second name.",
 )

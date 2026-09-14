@@ -24,16 +24,17 @@ using QAtlas: derivation_reach, REGISTRY
     reach = derivation_reach()
     @test length(reach) ≥ 26
 
+    # Exact, not a superset.  A relation newly closing here is a change in what the
+    # network can check and is worth being told about; a superset test would let
+    # the set drift in the direction this file exists to watch.
     rels = sort!(unique!(reduce(vcat, (r.relations for r in reach); init=Symbol[])))
-    for r in (
+    @test rels == [
         :CasimirCentralCharge,
         :FreeEnergyFromZ,
         :FreeEnergyLegendre,
         :LoschmidtRate,
         :OffCriticalEntanglementSaturation,
-    )
-        @test r in rels
-    end
+    ]
 end
 
 @testset "the four hubs that reach more than the Gibbs relation" begin

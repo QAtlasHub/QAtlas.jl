@@ -25,7 +25,7 @@
 #     hyperscaling routes rather than letting them drop out silently.
 #   * `consistency_report` on a NamedTuple keys on formula LETTERS, so a table
 #     whose `α` is not the specific-heat exponent must be refused, not fed in.
-#     `refused` is that declaration; KPZ is the measured case.
+#     `RefusedExponents` is that declaration; KPZ is the measured case.
 #
 # Tolerance is not a guessed rtol.  Each table carries its own quoted errors
 # (`α_err`, …); a route's value carries those errors PROPAGATED through the
@@ -34,56 +34,98 @@
 # never judged against a tolerance it did not state.
 
 """
-    ExponentSweep
+    AbstractExponentSweep
 
-One declared hub of the scaling plane: the `(model, bc)` whose
-`CriticalExponents` row is cross-checked, the `sweep` of fetch kwargs to run it
-at, the spatial `dimension` the hyperscaling relations need, and the routes that
-may not judge it.
+A declared hub of the scaling plane: a `(model, bc)` whose `CriticalExponents`
+row either IS handed to the network ([`SweptExponents`](@ref)) or is deliberately
+kept out of it ([`RefusedExponents`](@ref)).
+
+Two types rather than one with a `refused` field, for the reason
+[`AbstractIdentityEdge`](@ref) gives: a refused hub has no sweep, no dimension and
+no derived-from list, so one struct would carry a mode tag and a nothing-filled
+half, and `_scaling_checks` would branch where it can dispatch.
+"""
+abstract type AbstractExponentSweep end
+
+"""
+    SweptExponents
+
+A hub whose exponent table is cross-checked: the `(model, bc)`, the `sweep` of
+fetch kwargs to run it at, the spatial `dimension` the hyperscaling relations
+need, and the routes that may not judge it.
 
 `dimension` is `nothing` where hyperscaling does not apply, `:sweep` where the
 sweep's own `d` is the dimension, or a number where the hub sits at a fixed `d`
 its `fetch` does not take as a kwarg.
 
-`derived_from` maps a target exponent to the relation NAMES the shipped value
-was obtained from; those routes cannot check it and are skipped with a reason.
-`refused`, when set, makes the whole hub one visible skip carrying that reason.
-`k` is the sigma multiplier of the pass criterion.
+`derived_from` maps a target exponent to the relation NAMES the shipped value was
+obtained from; those routes cannot check it and are skipped with a reason.  `k`
+is the sigma multiplier of the pass criterion.
 """
-struct ExponentSweep
+struct SweptExponents <: AbstractExponentSweep
     model::Type
     bc::Type
     sweep::NamedTuple
     dimension::Union{Nothing,Symbol,Real}
     derived_from::Vector{Pair{Symbol,Vector{Symbol}}}
-    refused::Union{Nothing,String}
     k::Float64
     notes::String
     references::Vector{String}
 end
 
 """
-    EXPONENT_SWEEPS :: Vector{ExponentSweep}
+    RefusedExponents
+
+A hub whose `CriticalExponents` are kept OUT of the network, carrying `reason`.
+
+It exists because the name-keyed `consistency_report` cannot tell two quantities
+wearing one letter apart, so a table whose `α` is not the specific-heat exponent
+has to be excluded rather than fed in and reported as a contradiction.  The
+refusal is emitted as a visible skip, because an absence and an exclusion read
+the same in a pass count.
+"""
+struct RefusedExponents <: AbstractExponentSweep
+    model::Type
+    bc::Type
+    reason::String
+    references::Vector{String}
+end
+
+"""
+    EXPONENT_SWEEPS :: Vector{AbstractExponentSweep}
 
 The declared scaling-plane hubs, populated at include-time by
-[`exponent_sweep!`](@ref).  Every hub with a `CriticalExponents` method must
-appear here — swept or refused — or [`check_derivation_coverage`](@ref) reports
-it: an exponent table nothing declares is a table the network never sees.
+[`exponent_sweep!`](@ref) / [`refuse_exponents!`](@ref).  Every hub with a
+`CriticalExponents` method must appear here, or
+[`check_derivation_coverage`](@ref) reports it: an exponent table nothing
+declares is a table the network never sees.
 """
-const EXPONENT_SWEEPS = ExponentSweep[]
+const EXPONENT_SWEEPS = AbstractExponentSweep[]
+
+# The relation names the `:scaling` domain actually offers, read from the
+# registry rather than listed.  `derived_from` is a second copy of a provenance
+# header, and an unvalidated second copy fails in the direction that looks fine:
+# a mistyped `:widom` never matches, the route it was meant to suppress runs, and
+# it PASSES, because the shipped value is what that relation predicts. The
+# anti-tautology guarantee would then be a tautology.
+function _scaling_relation_names()
+    return Set(
+        Symbol(nameof(typeof(r))) for r in AbstractQAtlas.all_relations(; domain=:scaling)
+    )
+end
 
 """
     exponent_sweep!(model, bc; sweep=(;), dimension=:sweep, derived_from=[],
-                    refused=nothing, k=3.0, notes="", references=String[])
+                    k=3.0, notes="", references=String[])
 
-Declare one scaling-plane hub.  See [`ExponentSweep`](@ref) for the fields and
-`src/derivation_registry.jl` for the catalog.
+Declare a [`SweptExponents`](@ref) hub.  See `src/derivation_registry.jl` for the
+catalog.
 
 Refuses a duplicate `(model, bc, sweep)`, a non-positive `k`, a `dimension` that
-is neither `nothing`, `:sweep` nor a real, and a `:sweep` dimension whose sweep
-carries no `d` (the algebra's `d` must be the `d` the exponents were fetched at).
-`dimension=nothing` and `refused` each require `notes`, because both suppress
-checks and an unexplained suppression reads as coverage.
+is neither `nothing`, `:sweep` nor a real, a `:sweep` dimension whose sweep
+carries no real `d`, and a `derived_from` naming an exponent or a relation that
+does not exist.  `dimension=nothing` needs `notes`: it suppresses the
+hyperscaling routes, and an unexplained suppression reads as coverage.
 """
 function exponent_sweep!(
     model::Type,
@@ -91,42 +133,12 @@ function exponent_sweep!(
     sweep::NamedTuple=NamedTuple(),
     dimension::Union{Nothing,Symbol,Real}=:sweep,
     derived_from::AbstractVector=Pair{Symbol,Vector{Symbol}}[],
-    refused::Union{Nothing,AbstractString}=nothing,
     k::Real=3.0,
     notes::AbstractString="",
     references::AbstractVector{<:AbstractString}=String[],
 )
-    any(s -> s.model === model && s.bc === bc && s.sweep == sweep, EXPONENT_SWEEPS) &&
-        throw(
-            ArgumentError(
-                "exponent_sweep!: $(_kgshort(model))/$(_kgshort(bc)) at $(sweep) is " *
-                "already declared",
-            ),
-        )
+    _reject_duplicate_hub(model, bc, sweep)
     k > 0 || throw(ArgumentError("exponent_sweep!: k must be > 0; got $(k)"))
-    if refused !== nothing
-        isempty(notes) || throw(
-            ArgumentError(
-                "exponent_sweep!: a refused hub carries its reason in " *
-                "`refused`; drop `notes`",
-            ),
-        )
-        push!(
-            EXPONENT_SWEEPS,
-            ExponentSweep(
-                model,
-                bc,
-                sweep,
-                nothing,
-                Pair{Symbol,Vector{Symbol}}[],
-                String(refused),
-                Float64(k),
-                "",
-                String[r for r in references],
-            ),
-        )
-        return nothing
-    end
     dimension isa Symbol &&
         dimension !== :sweep &&
         throw(
@@ -135,14 +147,23 @@ function exponent_sweep!(
                 "got :$(dimension)",
             ),
         )
-    dimension === :sweep &&
-        !haskey(sweep, :d) &&
-        throw(
+    if dimension === :sweep
+        haskey(sweep, :d) || throw(
             ArgumentError(
                 "exponent_sweep!: dimension=:sweep needs the sweep to carry `d` " *
                 "(the algebra's d must be the d the exponents were fetched at)",
             ),
         )
+        # Checked here rather than left to the solver: `d` is the one value that
+        # reaches the relations without passing the `isa Real` test the fetched
+        # exponents get, so a non-numeric one surfaces as a MethodError from inside
+        # AbstractQAtlas instead of naming the declaration that caused it.
+        all(x -> x isa Real, sweep.d) || throw(
+            ArgumentError(
+                "exponent_sweep!: every swept `d` must be a real number; got $(sweep.d)"
+            ),
+        )
+    end
     dimension === nothing &&
         isempty(notes) &&
         throw(
@@ -151,24 +172,86 @@ function exponent_sweep!(
                 "routes, so it needs `notes` saying why they do not apply",
             ),
         )
+    known = _scaling_relation_names()
     df = Pair{Symbol,Vector{Symbol}}[]
     for p in derived_from
-        push!(df, Pair{Symbol,Vector{Symbol}}(Symbol(first(p)), Symbol[last(p)...]))
+        target = Symbol(first(p))
+        target in _SCALING_EXPONENTS || throw(
+            ArgumentError(
+                "exponent_sweep!: derived_from names :$(target), which is not one of " *
+                "$(_SCALING_EXPONENTS)",
+            ),
+        )
+        rels = Symbol[last(p)...]
+        for r in rels
+            r in known || throw(
+                ArgumentError(
+                    "exponent_sweep!: derived_from names the relation :$(r), which is " *
+                    "not in the :scaling domain — a name that matches nothing " *
+                    "suppresses nothing, and the route it meant to exclude would pass",
+                ),
+            )
+        end
+        push!(df, Pair{Symbol,Vector{Symbol}}(target, rels))
     end
     push!(
         EXPONENT_SWEEPS,
-        ExponentSweep(
+        SweptExponents(
             model,
             bc,
             sweep,
             dimension,
             df,
-            nothing,
             Float64(k),
             String(notes),
             String[r for r in references],
         ),
     )
+    return nothing
+end
+
+"""
+    refuse_exponents!(model, bc; reason, references=String[])
+
+Declare a [`RefusedExponents`](@ref) hub: its `CriticalExponents` are kept out of
+the network and `reason` says why.
+
+A refusal is keyed on `(model, bc)` ALONE, because its generated check carries no
+sweep point in its id; two refusals for one hub would pass a sweep-aware
+duplicate test and then collide on that id, which surfaces three layers away as
+`generated_checks` calling the generator non-deterministic.
+"""
+function refuse_exponents!(
+    model::Type,
+    bc::Type;
+    reason::AbstractString,
+    references::AbstractVector{<:AbstractString}=String[],
+)
+    isempty(reason) &&
+        throw(ArgumentError("refuse_exponents!: a refusal carries its reason"))
+    _reject_duplicate_hub(model, bc, nothing)
+    push!(
+        EXPONENT_SWEEPS,
+        RefusedExponents(model, bc, String(reason), String[r for r in references]),
+    )
+    return nothing
+end
+
+# A swept hub is identified by `(model, bc, sweep)` — Ising is legitimately
+# declared twice, at different `d`, and the sweep is what separates their check
+# ids.  A refusal (`sweep === nothing`) is identified by `(model, bc)`, and
+# collides with any other declaration of the same hub in either direction.
+function _reject_duplicate_hub(model::Type, bc::Type, sweep)
+    for s in EXPONENT_SWEEPS
+        (s.model === model && s.bc === bc) || continue
+        (sweep !== nothing && s isa SweptExponents && s.sweep != sweep) && continue
+        throw(
+            ArgumentError(
+                "declaring $(_kgshort(model))/$(_kgshort(bc)): already declared as " *
+                "$(nameof(typeof(s)))",
+            ),
+        )
+    end
     return nothing
 end
 
@@ -180,6 +263,15 @@ the two positional arguments are the hub, the rest are forwarded as keywords.
 """
 macro exponent_sweep(model, bc, kwargs...)
     return _forward_kw_macro(exponent_sweep!, :exponent_sweep, (model, bc), kwargs)
+end
+
+"""
+    @refuse_exponents Model BC reason=…
+
+Macro sugar around [`refuse_exponents!`](@ref).
+"""
+macro refuse_exponents(model, bc, kwargs...)
+    return _forward_kw_macro(refuse_exponents!, :refuse_exponents, (model, bc), kwargs)
 end
 
 # The six exponents the `:scaling` domain is written on.  `c`, `ψ`, `x_m` and the
@@ -230,13 +322,24 @@ end
 # relation, added in quadrature.  Linear propagation by finite difference AT the
 # quoted error, exact for a relation affine in that input, which the `:scaling`
 # relations are.
+#
+# A non-finite contribution returns `NaN` rather than entering the sum.  These
+# routes divide by a variable (Widom by `β` and by `δ−1`, Fisher by `ν` and by
+# `2−η`, Josephson by `ν`), so a quoted error that straddles a pole would return
+# an infinite sigma, and an infinite sigma is an infinite tolerance that accepts
+# every disagreement.  `_sigma_outcome` refuses the `NaN` instead of passing it.
+# Upstream's own `_families_satisfied` drops non-finite scales for this reason.
 function _route_sigma(step, data::NamedTuple, errs::NamedTuple, base::Real)
+    b = Float64(base)
+    isfinite(b) || return NaN
     s2 = 0.0
     for v in step.inputs
         e = getfield(errs, v)
         iszero(e) && continue
         bumped = merge(data, NamedTuple{(v,)}((data[v] + e,)))
-        s2 += abs2(Float64(_solve_step(step, bumped)) - Float64(base))
+        δ = Float64(_solve_step(step, bumped)) - b
+        isfinite(δ) || return NaN
+        s2 += abs2(δ)
     end
     return sqrt(s2)
 end
@@ -255,13 +358,28 @@ The scaling plane's pass criterion: `|value − held| ≤ k·√(σ_held² + σ_
 floored at round-off.  Reported as `lhs = held`, `rhs = value`, with `rel_err`
 carrying the DEVIATION IN SIGMA rather than a relative difference — what a reader
 of a failing row needs is how far outside the stated errors it is.
+
+A non-finite input is `:error`, never `:pass`.  The tolerance is built FROM the
+sigmas, so an infinite one accepts every disagreement; refusing is the only
+answer that does not turn a numerical breakdown into agreement.
 """
 function _sigma_outcome(
     held::Real, value::Real, sigma_held::Real, sigma_route::Real; k::Real, detail::String=""
 )
     l, r = Float64(held), Float64(value)
+    sh, sr = Float64(sigma_held), Float64(sigma_route)
+    if !(isfinite(l) && isfinite(r) && isfinite(sh) && isfinite(sr))
+        return CheckOutcome(
+            :error,
+            l,
+            r,
+            NaN,
+            NaN,
+            "no tolerance can be formed: held=$(l) value=$(r) σ_held=$(sh) σ_route=$(sr)",
+        )
+    end
     abs_err = abs(l - r)
-    sigma = sqrt(abs2(Float64(sigma_held)) + abs2(Float64(sigma_route)))
+    sigma = hypot(sh, sr)
     tol = max(k * sigma, _roundoff_floor(l, r))
     status = abs_err ≤ tol ? :pass : :fail
     n_sigma = sigma > 0 ? abs_err / sigma : (status === :pass ? 0.0 : Inf)
@@ -270,7 +388,7 @@ end
 
 # The routes a sweep declares circular for `target`, plus the hyperscaling ones
 # when the hub has no dimension.  `name => reason`, so the skip says which.
-function _suppressed_routes(s::ExponentSweep, target::Symbol)
+function _suppressed_routes(s::SweptExponents, target::Symbol)
     out = Pair{Symbol,String}[]
     for (t, rels) in s.derived_from
         t === target || continue
@@ -296,45 +414,72 @@ end
 # ──────────────────────────────────────────────────────────────────────
 
 # Fetch the table, shape it for the network, and ask the network which routes
-# reach each exponent.  Returns `(data, errs, rows)` or a refusal string.
+# reach each exponent.  Returns `(data, errs, rows)` or a [`ScalingRefusal`](@ref).
 # The fetch happens HERE rather than inside each check's runner: one table feeds
 # every route of the hub, and re-fetching per route would let a stale-value bug
 # hide behind rows that each fetched their own copy.
-function _prepare_scaling(s::ExponentSweep, point::NamedTuple, dim)
+function _prepare_scaling(s::SweptExponents, point::NamedTuple, dim)
     table = try
         fetch(s.model(), CriticalExponents(), _bc_instance(s.bc; finite_N=8); point...)
     catch err
-        return "fetch threw: $(sprint(showerror, err))"
+        return ScalingRefusal(:error, "fetch threw: $(sprint(showerror, err))")
     end
-    table isa NamedTuple || return "fetch returned $(typeof(table)), not a NamedTuple"
+    table isa NamedTuple ||
+        return ScalingRefusal(:error, "fetch returned $(typeof(table)), not a NamedTuple")
     prepared = _scaling_data(table, dim)
-    prepared isa String && return prepared
+    prepared isa String && return ScalingRefusal(:skip, prepared)
     data, errs = prepared
     rows = try
         AbstractQAtlas.consistency_report(data; domain=:scaling, atol=0, rtol=0)
     catch err
-        return "consistency_report threw: $(sprint(showerror, err))"
+        return ScalingRefusal(:error, "consistency_report threw: $(sprint(showerror, err))")
     end
     # `agree` is deliberately not read: that verdict is one tolerance for a whole
     # row, and this plane judges each route against ITS OWN propagated error.
     # What the report is used for here is the enumeration of routes.
-    isempty(rows) && return "no :scaling relation reaches any exponent of this table"
+    isempty(rows) && return ScalingRefusal(
+        :skip, "no :scaling relation reaches any exponent of this table"
+    )
     return (data, errs, rows)
 end
 
-function _scaling_checks(s::ExponentSweep)
+# A refusal is reported as a skip, never as an absence: `_push_excluded_check!`
+# for the declared kind, and a check that reports `:error` where a call THREW,
+# so a renamed `fetch` keyword fails the suite instead of joining the several
+# skips this table legitimately carries.
+function _push_refusal_check!(out, id::AbstractString, r::ScalingRefusal)
+    r.status === :skip && return _push_excluded_check!(out, :derivation, id, r.reason)
+    push!(
+        out,
+        GeneratedCheck(
+            :derivation,
+            id,
+            "BROKEN: $(r.reason)",
+            () -> CheckOutcome(:error, NaN, NaN, NaN, NaN, r.reason),
+        ),
+    )
+    return out
+end
+
+function _hub_id(s::AbstractExponentSweep)
+    return string("derivation/scaling/", _kgshort(s.model), "/", _kgshort(s.bc))
+end
+
+function _scaling_checks(s::RefusedExponents)
     out = GeneratedCheck[]
-    hub = string("derivation/scaling/", _kgshort(s.model), "/", _kgshort(s.bc))
-    if s.refused !== nothing
-        _push_excluded_check!(out, :derivation, hub, s.refused)
-        return out
-    end
+    _push_excluded_check!(out, :derivation, _hub_id(s), s.reason)
+    return out
+end
+
+function _scaling_checks(s::SweptExponents)
+    out = GeneratedCheck[]
+    hub = _hub_id(s)
     for point in _sweep_points(s.sweep)
-        pid = isempty(keys(point)) ? "" : "/" * _point_id(point)
+        pid = _point_suffix(point)
         dim = s.dimension === :sweep ? getfield(point, :d) : s.dimension
         prepared = _prepare_scaling(s, point, dim)
-        if prepared isa String
-            _push_excluded_check!(out, :derivation, hub * pid, prepared)
+        if prepared isa ScalingRefusal
+            _push_refusal_check!(out, hub * pid, prepared)
             continue
         end
         data, errs, rows = prepared
@@ -350,7 +495,6 @@ function _scaling_checks(s::ExponentSweep)
                     continue
                 end
                 held = row.held_out
-                sigma_route = _route_sigma(step, data, errs, value)
                 sigma_held = getfield(errs, target)
                 kk = s.k
                 desc = string(
@@ -369,7 +513,16 @@ function _scaling_checks(s::ExponentSweep)
                         :derivation,
                         id,
                         desc,
-                        () -> _sigma_outcome(held, value, sigma_held, sigma_route; k=kk),
+                        # The propagation runs INSIDE the runner. Computed while
+                        # generating, a throwing `solve` would escape
+                        # `run_generated_check` and abort `generated_checks()` for
+                        # every kind, not just this route.
+                        function ()
+                            sigma_route = _route_sigma(step, data, errs, value)
+                            return _sigma_outcome(
+                                held, value, sigma_held, sigma_route; k=kk
+                            )
+                        end,
                     ),
                 )
             end
@@ -406,16 +559,32 @@ the ten classes that carry the exponent tables.
 """
 function exponent_hubs()
     out = Type[]
+    for (M, _) in _exponent_methods()
+        M === nothing && continue
+        M in out || push!(out, M)
+    end
+    return sort!(out; by=_kgshort)
+end
+
+# Every `CriticalExponents` method as `(hub_or_nothing, method)`.  `nothing` where
+# the model slot is a TypeVar: a `fetch(m::M, ::CriticalExponents, …) where {M<:…}`
+# has no hub to name, so it cannot be declared and cannot be exempted, and
+# dropping it would let it read as "no gap" instead of "a gap nothing can close".
+function _exponent_methods()
+    out = Tuple{Union{Nothing,Type},Method}[]
     for m in methods(fetch)
         p = Base.unwrap_unionall(m.sig).parameters
         length(p) ≥ 3 || continue
         M, Q = p[2], p[3]
-        (M isa Type && Q isa Type) || continue
-        isconcretetype(M) && M <: AbstractQAtlasModel || continue
-        Q <: CriticalExponents || continue
-        M in out || push!(out, M)
+        (Q isa Type && Q <: CriticalExponents) || continue
+        hub = if M isa Type && isconcretetype(M) && M <: AbstractQAtlasModel
+            M
+        else
+            nothing
+        end
+        push!(out, (hub, m))
     end
-    return sort!(out; by=_kgshort)
+    return out
 end
 
 """
@@ -425,7 +594,7 @@ Every hub that can fetch `CriticalExponents` is declared — swept or refused �
 and every declaration generates at least one check.
 
 Both directions are needed and they fail differently: an undeclared hub is a
-table nothing cross-checks and nothing says so, and a declaration that generates
+table nothing cross-checks and nothing says so, and a declaration that judges
 nothing reads as coverage while constraining nothing.  Delegation rows of
 [`REGISTRY`](@ref) are exempt: a delegated table is the same numbers as the hub
 it routes to, so sweeping it would run one check several times under different
@@ -438,7 +607,20 @@ function check_derivation_coverage()
         e.model for
         e in REGISTRY if e.quantity === CriticalExponents && _is_delegation(e.method)
     )
-    for M in exponent_hubs()
+    for (M, m) in _exponent_methods()
+        if M === nothing
+            push!(
+                out,
+                CoherenceFinding(
+                    :derivation_coverage,
+                    :gap,
+                    "a CriticalExponents method with a non-concrete model slot " *
+                    "($(m.file):$(m.line)) names no hub, so it can be neither " *
+                    "declared nor exempted — the scaling algebra cannot reach it",
+                ),
+            )
+            continue
+        end
         (M in declared || M in delegating) && continue
         push!(
             out,
@@ -451,17 +633,33 @@ function check_derivation_coverage()
         )
     end
     for s in EXPONENT_SWEEPS
-        isempty(_scaling_checks(s)) && push!(
+        _judges_nothing(s) && push!(
             out,
             CoherenceFinding(
                 :derivation_coverage,
                 :gap,
                 "exponent_sweep! $(_kgshort(s.model))/$(_kgshort(s.bc)) at $(s.sweep) " *
-                "generates no checks — it constrains nothing",
+                "emits only skips — it judges nothing",
             ),
         )
     end
     return out
+end
+
+"""
+    _judges_nothing(s::AbstractExponentSweep) -> Bool
+
+Whether a SWEPT declaration produces no check that can return a verdict.
+
+Emptiness is the test that reads naturally here and it cannot fire: a point
+`_scaling_checks` cannot prepare still emits a refusal check, so the vector is
+never empty and a guard on `isempty` would be a guard unable to fail.  What can
+happen, and is what this asks, is a declaration every one of whose points was
+refused.  A refused hub is exempt by construction; its skip IS its content.
+"""
+_judges_nothing(::RefusedExponents) = false
+function _judges_nothing(s::SweptExponents)
+    return !any(c -> run_generated_check(c).status !== :skip, _scaling_checks(s))
 end
 
 # ──────────────────────────────────────────────────────────────────────

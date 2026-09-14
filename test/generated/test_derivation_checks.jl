@@ -1,4 +1,4 @@
-# Generated derivation checks — the AbstractQAtlas relation network applied to
+# Generated derivation checks: the AbstractQAtlas relation network applied to
 # what a hub fetches (src/core/derivation.jl).  Today's plane is `:scaling`: an
 # exponent table held out one exponent at a time and solved for by every
 # relation that reaches it from the rest.
@@ -11,14 +11,14 @@
 include("util_run_checks.jl")
 using QAtlas: generated_checks, EXPONENT_SWEEPS, run_generated_check
 
-@testset "generated derivation checks — :scaling" begin
+@testset "generated derivation checks on the :scaling plane" begin
     checks = generated_checks(; kinds=(:derivation,))
     @test !isempty(checks)
     ids = [c.id for c in checks]
 
     # Every SWEPT hub produces at least one real route, not merely an id under its
     # own name.  The bare prefix is satisfied by an excluded check too, so a hub
-    # whose fetch started throwing would still match it — the id grammar
+    # whose fetch started throwing would still match it; the id grammar
     # `<hub>/<point>/<target>/<relation>` is what separates a route from a refusal,
     # and a route is what this plane exists to emit.
     for s in EXPONENT_SWEEPS
@@ -119,7 +119,7 @@ end
 end
 
 # The BKT point returns η alone.  Too few exponents to close is a REPORTED skip,
-# not an empty result — an absent hub and a hub with nothing to check read the
+# not an empty result. An absent hub and a hub with nothing to check read the
 # same in a pass count and must not in the stream.
 @testset "a table too small to close is skipped, not absent" begin
     checks = generated_checks(; kinds=(:derivation,))

@@ -1,8 +1,10 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # test/universalities/test_universality_critical_exponents_lit.jl
 #
-# Literature-value pins for Universality{X}/CriticalExponents/Infinite at d=3
-# (3D Ising, XY, Heisenberg conformal-bootstrap exponents).
+# Literature-value pins for Universality{X}/CriticalExponents/Infinite: the d=3
+# conformal-bootstrap exponents (Ising, XY, Heisenberg), the d=3 percolation
+# Monte-Carlo table, and the d=2 Coulomb-gas family (percolation, Potts q=3,
+# Potts q=4).
 #
 # Restores a piece of the WHY-plane coverage removed in PR #449:
 # the deleted test/verification/universality/test_universality_literature_values.jl
@@ -22,12 +24,12 @@
 # Percolation is the one that does not fit the shape above, and the difference is
 # not cosmetic.  Wang et al. quote the RENORMALIZATION exponents, not the six
 # standard ones: `1/ν = 1.141 0(15)` and `y_h = 2.522 95(15)`.  The standard
-# exponents follow from those by DEFINITION —
+# exponents follow from those by DEFINITION:
 #
 #     ν = 1/y_t      β/ν = d − y_h      γ/ν = 2y_h − d
 #     δ = y_h/(d − y_h)                 η = d + 2 − 2y_h
 #
-# — and the pin is against those.  `agree_within` cannot be `0` as it is above,
+# and the pin is against those.  `agree_within` cannot be `0` as it is above,
 # because src carries a rounded decimal while the paper carries an eigenvalue; it
 # is half a unit in the stored decimal's LAST PLACE, which is the same intent:
 # any edit to the stored digits surfaces.  The field's own quoted error would be
@@ -42,7 +44,7 @@
 #     from `2 − dν = −0.629 27` and the paper quotes no α, so its source is
 #     elsewhere and unrecorded.
 #   * `ν`. The paper gives `ν = 1/1.1410(15) = 0.876 42(115)`. src carries
-#     `0.876 19(12)` — 2.0σ away in its OWN error, and with an error ten times
+#     `0.876 19(12)`: 2.0σ away in its OWN error, and with an error ten times
 #     tighter than this paper supports. Also from elsewhere, also unrecorded.
 #
 # References:
@@ -141,6 +143,116 @@ using QAtlas, Test
                 ],
                 fetch_kw=(; d=3),
                 subject_extract=e -> getproperty(e, field),
+            )
+        end
+    end
+end
+
+# ─────────────────────────────────────────────────────────────────────────────
+# d=2 Coulomb gas: percolation (q=1), Potts q=3, Potts q=4
+#
+# One closed form covers all of them, so they are pinned together rather than
+# table by table.  The critical q-state Potts model in d=2 is a Coulomb gas with
+# coupling g, and [Xu2025](@cite) states it as
+#
+#     sqrt(q) = -2 cos(pi g),  g in (0, 1]                        Eq. (20)
+#     y_t = 3 (2g - 1) / (2g)                                     Eq. (22a)
+#     y_h = (2g + 1) (2g + 3) / (8g)                              Eq. (23a)
+#
+# attributing the formulas to Nienhuis's Coulomb-gas review (Domb and Lebowitz
+# Vol. 11), which is the primary source and is not open access.  That paper's
+# own Table I lists g = 2/3, 3/4, 5/6, 1 for q = 1, 2, 3, 4 and the matching
+# y_t, y_h, so the g values used below are the paper's and not a re-derivation.
+#
+# The pin is EXACT rational equality, which is stronger than the decimal pins
+# above: these tables are exact, so a closed form that reproduces them leaves no
+# rounding to hide in.
+#
+# alpha is excluded for the same reason as in the d=3 percolation block: its only
+# route from (y_t, y_h) is alpha = 2 - d/y_t, which is Josephson, and pinning it
+# that way would assert hyperscaling against a table the :derivation plane tests
+# hyperscaling on.
+const _CG_G = Dict(
+    :percolation => 2 // 3, :ising => 3 // 4, :potts3 => 5 // 6, :potts4 => 1 // 1
+)
+_cg_yt(g) = 3 * (2g - 1) // (2g)
+_cg_yh(g) = (2g + 1) * (2g + 3) // (8g)
+function _cg_exponents(g; d=2)
+    y_t, y_h = _cg_yt(g), _cg_yh(g)
+    return (
+        β=(d - y_h) // y_t,
+        γ=(2y_h - d) // y_t,
+        δ=y_h // (d - y_h),
+        ν=1 // y_t,
+        η=d + 2 - 2y_h,
+        α=2 - d // y_t,
+    )
+end
+
+@testset "d=2 Coulomb gas reproduces every exact exponent this atlas ships" begin
+    # The paper's own Table I, so the formulas are checked before they are used.
+    for (q, g, y_t, y_h) in (
+        (1, 2 // 3, 3 // 4, 91 // 48),
+        (2, 3 // 4, 1 // 1, 15 // 8),
+        (3, 5 // 6, 6 // 5, 28 // 15),
+        (4, 1 // 1, 3 // 2, 15 // 8),
+    )
+        @test _CG_G[(:percolation, :ising, :potts3, :potts4)[q]] == g
+        @test 4 * cos(pi * float(g))^2 ≈ q atol = 1e-12
+        @test _cg_yt(g) == y_t
+        @test _cg_yh(g) == y_h
+    end
+
+    # All four tables, all six exponents, exact rational equality.  alpha is
+    # included HERE (it is the closed form's own value) while being excluded from
+    # the verify pins below, which is the whole distinction: the closed form
+    # produces alpha, so a route that also produces it cannot check it.
+    for (key, M, kw) in (
+        (:percolation, Universality(:Percolation), (; d=2)),
+        (:ising, Universality(:Ising), (; d=2)),
+        (:potts3, Universality(:Potts3), (; d=2)),
+        (:potts4, Universality(:Potts4), (; d=2)),
+    )
+        shipped = QAtlas.fetch(M, CriticalExponents(); kw...)
+        closed = _cg_exponents(_CG_G[key])
+        for f in (:α, :β, :γ, :δ, :ν, :η)
+            @test shipped[f] == closed[f]
+        end
+    end
+
+    # Positive control: the equality is a claim about THESE g, not something the
+    # formulas satisfy for any argument.  One step along the g axis breaks it.
+    off = _cg_exponents(_CG_G[:potts3] + 1 // 12)
+    @test any(
+        off[f] != QAtlas.fetch(Universality(:Potts3), CriticalExponents(); d=2)[f] for
+        f in (:α, :β, :γ, :δ, :ν, :η)
+    )
+end
+
+@testset "d=2 Coulomb-gas literature pins" begin
+    for (key, M, label) in (
+        (:percolation, Universality(:Percolation), "q=1 (percolation)"),
+        (:potts3, Universality(:Potts3), "q=3"),
+        (:potts4, Universality(:Potts4), "q=4"),
+    )
+        g = _CG_G[key]
+        closed = _cg_exponents(g)
+        for f in (:β, :γ, :δ, :ν, :η)
+            verify(
+                M,
+                CriticalExponents(),
+                Infinite();
+                route=:literature_value,
+                independent=float(closed[f]),
+                agree_within=0,
+                at=["d=2", "field=$(f)"],
+                refs=[
+                    "Xu-Salas-Deng 2025 (Entropy 27, 418) Eqs. (20), (22a), (23a) and Table I: \
+                     d=2 Potts $(label) at g = $(g), y_t = $(_cg_yt(g)), y_h = $(_cg_yh(g)) \
+                     gives $(f) = $(closed[f])",
+                ],
+                fetch_kw=(; d=2),
+                subject_extract=e -> float(getproperty(e, f)),
             )
         end
     end

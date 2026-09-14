@@ -1,4 +1,4 @@
-# test/core/test_derivation.jl — the scaling-plane generator itself
+# test/core/test_derivation.jl: the scaling-plane generator itself
 # (src/core/derivation.jl), as opposed to the checks it emits
 # (test/generated/test_derivation_checks.jl).
 #
@@ -287,7 +287,7 @@ end
 # The hyperscaling suppression has no declared user today, so nothing would
 # exercise it. It also cannot work route-by-route: with no dimension, `d` never
 # enters the data, `consistency_report` never reaches Josephson, and there is no
-# route to mark — the silent absence the exclusion exists to prevent. So the skip
+# route to mark, which is the silent absence the exclusion exists to prevent. So the skip
 # is emitted on its own, and both halves are asserted here.
 @testset "a hub without a dimension says so, rather than losing the route quietly" begin
     free = QAtlas.SweptExponents(
@@ -355,7 +355,7 @@ end
 # What a green row on an exponent table means, asserted rather than asserted-in-prose.
 #
 # The `:scaling` algebra is four independent relations on seven numbers
-# (α β γ δ ν η d), so its solution set is three-dimensional — and those three
+# (α β γ δ ν η d), so its solution set is three-dimensional, and those three
 # are exactly the renormalization parameters `(y_t, y_h, d)`, through
 #
 #     ν = 1/y_t     β/ν = d − y_h     γ/ν = 2y_h − d

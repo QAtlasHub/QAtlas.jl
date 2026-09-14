@@ -1,10 +1,10 @@
-# test/lint/test_derivation_reach.jl — the reach of the AbstractQAtlas relation
+# test/lint/test_derivation_reach.jl: the reach of the AbstractQAtlas relation
 # network over this atlas, pinned.
 #
 # `derivation_reach()` answers "which hubs could the network cross-check", and the
 # answer moves with things outside this file: a quantity added to a hub, a relation
 # retyped upstream, a family erased differently.  Left unpinned it can only shrink
-# quietly — nothing fails when a hub stops being reachable, because a cross-check
+# quietly: nothing fails when a hub stops being reachable, because a cross-check
 # that is not generated is not a cross-check that fails.
 #
 # MEASURED on this tree: 27 of 112 hubs reach at least one relation, over 9
@@ -92,7 +92,7 @@ end
 # because the number reads like a to-do list otherwise.  Four of the nine relations
 # above sit in test_abq_conformance.jl's `MATERIALIZABLE_BUT_UNWIRED` allow-list:
 # their typed quantity slots close on the hub while the SUPPLIED slots they also
-# need — a disorder-averaged χ(T), a c_V(T) curve — do not exist here.  The two
+# need (a disorder-averaged χ(T), a c_V(T) curve) do not exist here.  The two
 # tests ask different questions and must not be read as disagreeing.
 @testset "a reachable relation is not therefore a wireable one" begin
     reach = derivation_reach()

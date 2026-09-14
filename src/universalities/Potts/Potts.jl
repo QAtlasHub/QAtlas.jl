@@ -9,8 +9,16 @@
 #     den Nijs (1979) J. Phys. A 12, 1857.
 #     Nienhuis (1982) Phys. Rev. Lett. 49, 1062.
 #     Nienhuis (1984) J. Stat. Phys. 34, 731 — comprehensive review.
-#   The coupling g is related to q by q = 2 + 2cos(2πg).
-#     q=3: g = 5/6. q=4: g = 2/3 (marginal, logarithmic corrections).
+#   The coupling g is related to q by q = 2 + 2cos(2πg) = 4cos^2(πg),
+#   equivalently sqrt(q) = -2cos(πg) with g in (0, 1] on the critical branch
+#   ([Xu2025](@cite) Eq. (20), attributed there to Nienhuis's Coulomb-gas review
+#   in Domb and Lebowitz Vol. 11). That fixes g per q, and [Xu2025](@cite)
+#   Table I lists the same values:
+#     q=1: g = 2/3 (percolation).  q=2: g = 3/4 (Ising).
+#     q=3: g = 5/6.                q=4: g = 1 (marginal, logarithmic corrections).
+#   The exponents follow from y_t = 3(2g-1)/(2g) (Eq. 22a) and
+#   y_h = (2g+1)(2g+3)/(8g) (Eq. 23a); both tables below are reproduced exactly,
+#   pinned in test/universalities/test_universality_critical_exponents_lit.jl.
 #   Critical temperature (exact):
 #     Baxter (1973) J. Phys. C 6, L445: T_c = J/ln(1 + √q).
 #   Textbook compilation:

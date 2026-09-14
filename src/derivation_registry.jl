@@ -1,4 +1,4 @@
-# derivation_registry.jl — the scaling-plane catalog (core/derivation.jl).
+# derivation_registry.jl: the scaling-plane catalog (core/derivation.jl).
 #
 # One declaration per hub with a `CriticalExponents` method, swept or refused.
 # `check_derivation_coverage()` enforces that: a hub missing from here is a
@@ -12,7 +12,7 @@
 
 # ── Ising ────────────────────────────────────────────────────────────
 # d=2 provenance (src/universalities/Ising2D/Ising2D.jl header): α Onsager 1944,
-# β Yang 1952, γ Fisher 1964, η Kadanoff 1966, ν den Nijs 1979 — each
+# β Yang 1952, γ Fisher 1964, η Kadanoff 1966, ν den Nijs 1979. Each
 # individually sourced.  δ = 15 is the one the header marks as obtained from the
 # scaling relation, so Widom cannot judge it.
 @exponent_sweep(
@@ -53,7 +53,7 @@
 
 # ── O(n) ─────────────────────────────────────────────────────────────
 # d=2 is the BKT point and returns η alone, which the generator refuses as too
-# few to close — a visible skip, which is the honest report for a transition with
+# few to close: a visible skip, which is the honest report for a transition with
 # no power-law exponents.  d=3 is one bootstrap table, d≥4 mean-field.
 @exponent_sweep(
     Universality{:XY}, Infinite, sweep = (d=[2, 3, 4],), references = ["Chester2020"]

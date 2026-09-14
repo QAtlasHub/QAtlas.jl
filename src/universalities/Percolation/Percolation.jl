@@ -13,11 +13,13 @@
 #     Smirnov, Werner (2001) Math. Res. Lett. 8, 729 — conformal
 #     invariance of critical percolation in d=2.
 #
-# d=3: Wang, Zhou, Zhang, Garoni, Deng (2013) Phys. Rev. E 87, 052107
-#       — large-scale Monte Carlo.  The paper quotes the RENORMALIZATION
-#       exponents, 1/ν = 1.141 0(15) and y_h = 2.522 95(15); the standard
-#       exponents follow as β/ν = d − y_h, γ/ν = 2y_h − d and
-#       η = 2 + d − 2y_h = −0.045 90(30).
+# d=3: Wang, Zhou, Zhang, Garoni, Deng (2013) Phys. Rev. E 87, 052107, which
+#       quotes 1/ν = 1.141 0(15) and y_h = 2.522 95(15), not the six. β, γ, δ and
+#       η follow by definition (η = 2 + d − 2y_h = −0.045 90(30)) and are pinned
+#       in test/universalities/test_universality_critical_exponents_lit.jl.
+#       α and ν are NOT from this paper and neither has a recorded source: it
+#       quotes no α (the only route, 2 − dν, is Josephson) and its ν is
+#       0.876 42(115) against the shipped 0.876 19(12).
 #
 # d≥6: upper critical dimension; Toulouse (1974) mean-field exponents.
 # ─────────────────────────────────────────────────────────────────────────────

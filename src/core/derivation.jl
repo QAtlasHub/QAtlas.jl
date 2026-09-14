@@ -1,4 +1,4 @@
-# core/derivation.jl — the AbstractQAtlas relation NETWORK as a check generator.
+# core/derivation.jl: the AbstractQAtlas relation NETWORK as a check generator.
 #
 # The other constraint edge types (identity.jl, bound.jl, duality.jl, limits.jl)
 # each own a QAtlas-side STORE of hand-written edges.  This one does not: its
@@ -7,7 +7,7 @@
 # relation that reaches it from the rest.  What QAtlas supplies is the data and
 # the scope; what the network supplies is which laws close over it.
 #
-# Scope of this file: the SCALING plane — a hub that fetches `CriticalExponents`
+# Scope of this file is the SCALING plane: a hub that fetches `CriticalExponents`
 # is cross-checked against the `:scaling` domain (Rushbrooke, Widom, Fisher,
 # Josephson).  `derivation_reach` below measures what the other planes would
 # reach, and the measurement is why they are not here: 27 of 112 hubs close on
@@ -15,10 +15,15 @@
 # `@identity_edge :gibbs` edge already covers.  Pinned by
 # test/lint/test_derivation_reach.jl.
 #
-# What a passing row does and does not say.  This is INTERNAL CONSISTENCY, the
-# claim identity.jl makes, not corroboration against the literature: the routes
-# and the held-out value come from one table.  Three ways that claim can be
-# overstated are mechanised rather than left to prose:
+# What a green row says, exactly: the `:scaling` algebra is four relations on
+# seven numbers, so its solutions are the tables built from one `(y_t, y_h, d)`.
+# A green row means the six exponents came from one fixed point's two
+# eigenvalues, not that those are right; what it catches is a value spliced in
+# from elsewhere.  Pinned both ways in test/core/test_derivation.jl.
+#
+# INTERNAL CONSISTENCY, then, as identity.jl claims; the literature plane is the
+# `verify` cards with `route = :literature_value`.  Three ways to overstate it,
+# mechanised rather than left to prose:
 #
 #   * a value the table OBTAINED from one of these relations cannot check it.
 #     `derived_from` names those routes and each is emitted as a visible :skip.
@@ -190,7 +195,7 @@ function exponent_sweep!(
             r in known || throw(
                 ArgumentError(
                     "exponent_sweep!: derived_from names the relation :$(r), which is " *
-                    "not in the :scaling domain — a name that matches nothing " *
+                    "not in the :scaling domain; a name that matches nothing " *
                     "suppresses nothing, and the route it meant to exclude would pass",
                 ),
             )
@@ -240,7 +245,7 @@ function refuse_exponents!(
     return nothing
 end
 
-# A swept hub is identified by `(model, bc, sweep)` — Ising is legitimately
+# A swept hub is identified by `(model, bc, sweep)`. Ising is legitimately
 # declared twice, at different `d`, and the sweep is what separates their check
 # ids.  A refusal (`sweep === nothing`) is identified by `(model, bc)`, and
 # collides with any other declaration of the same hub in either direction.
@@ -359,7 +364,7 @@ end
 
 The scaling plane's pass criterion: `|value − held| ≤ k·√(σ_held² + σ_route²)`,
 floored at round-off.  Reported as `lhs = held`, `rhs = value`, with `rel_err`
-carrying the DEVIATION IN SIGMA rather than a relative difference — what a reader
+carrying the DEVIATION IN SIGMA rather than a relative difference; what a reader
 of a failing row needs is how far outside the stated errors it is.
 
 A non-finite input is `:error`, never `:pass`.  The tolerance is built FROM the
@@ -412,8 +417,8 @@ end
 # They cannot be suppressed route-by-route the way `derived_from` is: with no
 # dimension, `d` never enters the data, so `consistency_report` never reaches a
 # relation that needs it and there is no route to mark.  That silent absence is
-# the very thing upstream warns about — a route missing for want of an input
-# reads exactly like one excluded for want of applicability — so the exclusion is
+# the very thing upstream warns about: a route missing for want of an input
+# reads exactly like one excluded for want of applicability, so the exclusion is
 # emitted on its own rather than inferred from a gap.
 function _push_hyperscaling_skips!(out, hub::AbstractString, s::SweptExponents)
     s.dimension === nothing || return out
@@ -429,7 +434,7 @@ function _push_hyperscaling_skips!(out, hub::AbstractString, s::SweptExponents)
 end
 
 # ──────────────────────────────────────────────────────────────────────
-# Generator — the :derivation kind of generated_checks()
+# Generator: the :derivation kind of generated_checks()
 # ──────────────────────────────────────────────────────────────────────
 
 """
@@ -580,7 +585,7 @@ end
 register_check_generator!(:derivation, derivation_checks)
 
 # ──────────────────────────────────────────────────────────────────────
-# Coverage — an undeclared exponent table is a table the network never sees
+# Coverage: an undeclared exponent table is a table the network never sees
 # ──────────────────────────────────────────────────────────────────────
 
 """
@@ -628,7 +633,7 @@ end
 """
     check_derivation_coverage() -> Vector{CoherenceFinding}
 
-Every hub that can fetch `CriticalExponents` is declared — swept or refused —
+Every hub that can fetch `CriticalExponents` is declared (swept or refused),
 and every declaration generates at least one check.
 
 Both directions are needed and they fail differently: an undeclared hub is a
@@ -654,7 +659,7 @@ function check_derivation_coverage()
                     :gap,
                     "a CriticalExponents method with a non-concrete model slot " *
                     "($(m.file):$(m.line)) names no hub, so it can be neither " *
-                    "declared nor exempted — the scaling algebra cannot reach it",
+                    "declared nor exempted; the scaling algebra cannot reach it",
                 ),
             )
             continue
@@ -666,7 +671,7 @@ function check_derivation_coverage()
                 :derivation_coverage,
                 :gap,
                 "$(_kgshort(M)) fetches CriticalExponents but declares no " *
-                "exponent_sweep! — the scaling algebra never sees it",
+                "exponent_sweep!; the scaling algebra never sees it",
             ),
         )
     end
@@ -677,7 +682,7 @@ function check_derivation_coverage()
                 :derivation_coverage,
                 :gap,
                 "exponent_sweep! $(_kgshort(s.model))/$(_kgshort(s.bc)) at $(s.sweep) " *
-                "emits only skips — it judges nothing",
+                "emits only skips, so it judges nothing",
             ),
         )
     end
@@ -703,7 +708,7 @@ function _emits_only_skips(s::SweptExponents)
 end
 
 # ──────────────────────────────────────────────────────────────────────
-# Reach — what the OTHER planes would cross-check, measured not guessed
+# Reach: what the OTHER planes would cross-check, measured not guessed
 # ──────────────────────────────────────────────────────────────────────
 
 """
@@ -742,7 +747,7 @@ not count.
 Structural, and an upper bound on what fires, in two ways worth keeping apart. A
 step's UNTYPED slots are not consulted here at all, so a relation can close on a
 hub's quantities and still have no route because a supplied value it needs does
-not exist — four of the reachable relations sit in `test_abq_conformance.jl`'s
+not exist. Four of the reachable relations sit in `test_abq_conformance.jl`'s
 `MATERIALIZABLE_BUT_UNWIRED` for exactly that. And whether the solve computes at
 all is [`generated_checks`](@ref)'s business, not this one's.
 

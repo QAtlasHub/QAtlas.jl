@@ -1,4 +1,4 @@
-# test/core/test_derivation.jl — the scaling-plane generator itself
+# test/core/test_derivation.jl: the scaling-plane generator itself
 # (src/core/derivation.jl), as opposed to the checks it emits
 # (test/generated/test_derivation_checks.jl).
 #
@@ -287,7 +287,7 @@ end
 # The hyperscaling suppression has no declared user today, so nothing would
 # exercise it. It also cannot work route-by-route: with no dimension, `d` never
 # enters the data, `consistency_report` never reaches Josephson, and there is no
-# route to mark — the silent absence the exclusion exists to prevent. So the skip
+# route to mark, which is the silent absence the exclusion exists to prevent. So the skip
 # is emitted on its own, and both halves are asserted here.
 @testset "a hub without a dimension says so, rather than losing the route quietly" begin
     free = QAtlas.SweptExponents(
@@ -350,4 +350,82 @@ end
     @test worst > 0                                 # the table is not exact, so k can bite
     @test any(o -> o.status === :fail, outcomes(worst / 2))
     @test !any(o -> o.status === :fail, outcomes(worst * 2))
+end
+
+# What a green row on an exponent table means, asserted rather than asserted-in-prose.
+#
+# The `:scaling` algebra is four independent relations on seven numbers
+# (α β γ δ ν η d), so its solution set is three-dimensional, and those three
+# are exactly the renormalization parameters `(y_t, y_h, d)`, through
+#
+#     ν = 1/y_t     β/ν = d − y_h     γ/ν = 2y_h − d
+#     δ = y_h/(d − y_h)               η = d + 2 − 2y_h     α = 2 − dν
+#
+# So "self-consistent" and "built from one fixed point's two eigenvalues" are the
+# SAME statement, and this plane sees exactly one thing: whether the six numbers
+# came from one place. It cannot see whether that place was right.
+@testset "the scaling algebra's solution set is the RG-eigenvalue family" begin
+    function from_eigenvalues(y_t, y_h, d)
+        ν = 1 / y_t
+        return (
+            α=2 - d * ν,
+            β=(d - y_h) * ν,
+            γ=(2 * y_h - d) * ν,
+            δ=y_h / (d - y_h),
+            ν=ν,
+            η=d + 2 - 2 * y_h,
+            d=float(d),
+        )
+    end
+    zero_err(nt) = NamedTuple{keys(nt)}(ntuple(_ -> 0.0, length(nt)))
+
+    # Any (y_t, y_h, d) passes every route, to round-off. The check is blind to
+    # the whole three-parameter family, which is what it means for it to test
+    # provenance rather than value.
+    for (y_t, y_h, d) in
+        ((1.0, 15 / 8, 2), (1.141, 2.52295, 3), (2.0, 3.0, 4), (0.7, 1.6, 3))
+        t = from_eigenvalues(y_t, y_h, d)
+        rows = consistency_report(t; domain=:scaling, atol=0, rtol=0)
+        @test !isempty(rows)
+        for row in rows, (step, value) in zip(row.steps, row.values)
+            out = _sigma_outcome(row.held_out, value, 0.0, 0.0; k=3)
+            @test out.status === :pass
+        end
+    end
+
+    # ...and every exact table this atlas ships is a member, recoverable from its
+    # own two eigenvalues. A table that were NOT would be inconsistent, so this is
+    # the same fact read from the other side.
+    for (M, kw, d) in (
+        (Universality(:Ising), (; d=2), 2),
+        (Universality(:Potts3), (; d=2), 2),
+        (Universality(:Potts4), (; d=2), 2),
+        (Universality(:Percolation), (; d=2), 2),
+        (Universality(:MeanField), (;), 4),
+    )
+        e = QAtlas.fetch(M, CriticalExponents(); kw...)
+        rebuilt = from_eigenvalues(1 / e.ν, (d + 2 - e.η) / 2, d)
+        for f in (:α, :β, :γ, :δ, :ν, :η)
+            @test rebuilt[f] ≈ float(e[f]) atol = 1e-12
+        end
+    end
+
+    # The positive control, and the thing the plane DOES catch: one value spliced
+    # in from somewhere else leaves the family. This is the shape of the defect it
+    # found in the 3D percolation table.
+    base = from_eigenvalues(1.141, 2.52295, 3)
+    errs = zero_err(base)
+    for f in (:α, :β, :γ, :δ, :ν, :η)
+        spliced = merge(base, NamedTuple{(f,)}((base[f] * 1.05 + 0.01,)))
+        red = 0
+        for row in consistency_report(spliced; domain=:scaling, atol=0, rtol=0)
+            for (step, value) in zip(row.steps, row.values)
+                out = _sigma_outcome(
+                    row.held_out, value, 0.0, _route_sigma(step, spliced, errs, value); k=3
+                )
+                out.status === :fail && (red += 1)
+            end
+        end
+        @test red ≥ 3
+    end
 end

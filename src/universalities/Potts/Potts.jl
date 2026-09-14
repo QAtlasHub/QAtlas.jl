@@ -9,8 +9,12 @@
 #     den Nijs (1979) J. Phys. A 12, 1857.
 #     Nienhuis (1982) Phys. Rev. Lett. 49, 1062.
 #     Nienhuis (1984) J. Stat. Phys. 34, 731 — comprehensive review.
-#   The coupling g is related to q by q = 2 + 2cos(2πg).
-#     q=3: g = 5/6. q=4: g = 2/3 (marginal, logarithmic corrections).
+#   The coupling: sqrt(q) = -2cos(πg), g in (0, 1], i.e. q = 2 + 2cos(2πg).
+#   [Xu2025](@cite) Table I gives g = 2/3, 3/4, 5/6, 1 for q = 1, 2, 3, 4, so
+#   q=4 is g = 1 and 2/3 is the q=1 percolation point. Exponents from
+#   y_t = 3(2g-1)/(2g) (Eq. 22a) and y_h = (2g+1)(2g+3)/(8g) (Eq. 23a); both
+#   tables below are reproduced exactly, pinned in
+#   test/universalities/test_universality_critical_exponents_lit.jl.
 #   Critical temperature (exact):
 #     Baxter (1973) J. Phys. C 6, L445: T_c = J/ln(1 + √q).
 #   Textbook compilation:

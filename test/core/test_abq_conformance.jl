@@ -306,11 +306,26 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :ActivatedSpecificHeat => "as `GriffithsSpecificHeat`, slope against ln|ln T|.",
     :GriffithsAutocorrelation => "no disorder-averaged G(t); `RandomTFIM` has no dynamics.",
     :GriffithsExponentDivergence => "d(ln z)/d(ln|δ|) is a sweep-and-fit, not a wiring.",
+    :ActivatedCriticalCorrelation => "d(ln ln C)/d(ln r) is a sweep-and-fit too; the hub \
+                                      answers ψ and no disorder-averaged C(r).",
     :CriticalQuantumSusceptibility => "the hubs with a χ(T) are classical and answer no `z`.",
     :CriticalQuantumSpecificHeat => "as `CriticalQuantumSusceptibility`, for c_V(T).",
     :ActivatedFiniteSizeScaling => "no hub sweeps L for a random chain.",
     :ConventionalFiniteSizeEnergy => "the hubs answering `z` fetch a gap at one N, not Ω(L).",
     :OrderedGriffithsEnergyScale => "needs d(ln|ln Ω|)/d(ln ln L); nothing sweeps L here.",
+
+    # One thing more than its neighbours above: not a disorder AVERAGE but a
+    # sample-to-sample VARIANCE, R_X = Var(X)/[X]² over an ensemble, and off
+    # criticality rather than at the fixed point. `RandomTFIM` answers four
+    # closed-form values at `Infinite` and draws no samples, so there is no R_X.
+    # It materializes only because `d` is its one typed slot and every hub carries
+    # one; supplying the slope ourselves means writing -d and checking it against
+    # d, the cannot-fail shape `LoschmidtRate` records above.
+    :StrongSelfAveraging => "needs d(ln R_X)/d(ln L/ξ) with R_X = Var(X)/[X]² over a \
+                             disorder ENSEMBLE, off criticality; `RandomTFIM` is \
+                             closed-form at one point and draws no samples. `d` is the \
+                             only typed slot, so wiring it would supply -d and check it \
+                             against d.",
 
     # Materializable since `RandomTFIM` began answering `SpatialDimension`, which is
     # the only quantity slot Josephson has. Both are exponent identities checked
@@ -348,6 +363,8 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                               one state-computed hub (XXZ1D/OBC) cannot supply `ncuts`, a \
                               region boundary count that `Region` deliberately does not \
                               carry.",
+    :CFTEntanglementChordSlope => "`CFTEntanglementSlope` against the chord rather than \
+                                   ℓ, with the same `ncuts` blocker and the same hubs.",
 
     # The rest of the Calabrese-Cardy family arrived in the same place by the same
     # route: one typed slot, `c::CentralCharge`, and every other slot supplied.

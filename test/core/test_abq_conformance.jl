@@ -314,6 +314,19 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :ConventionalFiniteSizeEnergy => "the hubs answering `z` fetch a gap at one N, not Ω(L).",
     :OrderedGriffithsEnergyScale => "needs d(ln|ln Ω|)/d(ln ln L); nothing sweeps L here.",
 
+    # One thing more than its neighbours above: not a disorder AVERAGE but a
+    # sample-to-sample VARIANCE, R_X = Var(X)/[X]² over an ensemble, and off
+    # criticality rather than at the fixed point. `RandomTFIM` answers four
+    # closed-form values at `Infinite` and draws no samples, so there is no R_X.
+    # It materializes only because `d` is its one typed slot and every hub carries
+    # one; supplying the slope ourselves means writing -d and checking it against
+    # d, the cannot-fail shape `LoschmidtRate` records above.
+    :StrongSelfAveraging => "needs d(ln R_X)/d(ln L/ξ) with R_X = Var(X)/[X]² over a \
+                             disorder ENSEMBLE, off criticality; `RandomTFIM` is \
+                             closed-form at one point and draws no samples. `d` is the \
+                             only typed slot, so wiring it would supply -d and check it \
+                             against d.",
+
     # Materializable since `RandomTFIM` began answering `SpatialDimension`, which is
     # the only quantity slot Josephson has. Both are exponent identities checked
     # against exponent tables in the universality tests rather than stored as edges,

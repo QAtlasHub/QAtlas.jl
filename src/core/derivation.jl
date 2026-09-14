@@ -15,10 +15,21 @@
 # `@identity_edge :gibbs` edge already covers.  Pinned by
 # test/lint/test_derivation_reach.jl.
 #
-# What a passing row does and does not say.  This is INTERNAL CONSISTENCY, the
-# claim identity.jl makes, not corroboration against the literature: the routes
-# and the held-out value come from one table.  Three ways that claim can be
-# overstated are mechanised rather than left to prose:
+# What a passing row does and does not say.  On the scaling plane this is
+# unusually sharp and worth stating exactly.  The `:scaling` algebra is four
+# independent relations on seven numbers, so its solution set is
+# three-dimensional, and those three are the renormalization parameters
+# `(y_t, y_h, d)`: `ν = 1/y_t`, `β/ν = d − y_h`, `γ/ν = 2y_h − d`,
+# `δ = y_h/(d − y_h)`, `η = d + 2 − 2y_h`, `α = 2 − dν`.  So a green row says the
+# six exponents came from ONE fixed point's two eigenvalues, and says nothing
+# about whether those eigenvalues are right.  What it catches is a value spliced
+# in from a different source, which is what it found in the 3D percolation table.
+# Pinned in test/core/test_derivation.jl, both directions.
+#
+# It is INTERNAL CONSISTENCY, the claim identity.jl makes, not corroboration
+# against the literature; the literature plane is the `verify` cards with
+# `route = :literature_value`.  Three ways the claim can be overstated are
+# mechanised rather than left to prose:
 #
 #   * a value the table OBTAINED from one of these relations cannot check it.
 #     `derived_from` names those routes and each is emitted as a visible :skip.

@@ -16,8 +16,18 @@
 # d=3: Wang, Zhou, Zhang, Garoni, Deng (2013) Phys. Rev. E 87, 052107
 #       — large-scale Monte Carlo.  The paper quotes the RENORMALIZATION
 #       exponents, 1/ν = 1.141 0(15) and y_h = 2.522 95(15); the standard
-#       exponents follow as β/ν = d − y_h, γ/ν = 2y_h − d and
-#       η = 2 + d − 2y_h = −0.045 90(30).
+#       exponents follow as β/ν = d − y_h, γ/ν = 2y_h − d, δ = y_h/(d − y_h)
+#       and η = 2 + d − 2y_h = −0.045 90(30).
+#       β, γ, δ and η are pinned against those in
+#       test/universalities/test_universality_critical_exponents_lit.jl.
+#
+#       α AND ν ARE NOT FROM THIS PAPER, and no source is recorded for either.
+#       The paper quotes no α, and its only route from these numbers is
+#       α = 2 − dν, which is Josephson; against that the shipped −0.625(3) sits
+#       1.4σ out. And 1/1.1410(15) gives ν = 0.876 42(115) where src carries
+#       0.876 19(12) — 2.0σ out in its own error, with an error ten times
+#       tighter than this paper supports. Both are left as they are: replacing
+#       them needs a source, not an algebra.
 #
 # d≥6: upper critical dimension; Toulouse (1974) mean-field exponents.
 # ─────────────────────────────────────────────────────────────────────────────

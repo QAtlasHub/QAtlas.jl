@@ -288,6 +288,7 @@ include("core/response.jl")      # @response_edge: relations needing a derived i
 include("core/region_checks.jl")  # @region: the entropy inequalities over REGIONS (#780 step 3)
 include("core/duality.jl")      # @dual model<->model parameter-mapped edges (C12)
 include("core/limits.jl")       # @limits_to asymptotic limit edges (C13)
+include("core/derivation.jl")   # the ABQ relation NETWORK as a check generator
 include("core/pfaffian.jl")
 include("core/dense_ed.jl")
 
@@ -340,6 +341,10 @@ export ThermalEntropy, VonNeumannEntropy, RenyiEntropy
 export ThermalEntropy, VonNeumannEntropy, RenyiEntropy, ResidualEntropy
 export EdwardsAndersonParameter, SpinGlassSusceptibility  # spin-glass order (#730)
 export BoundEdge, BOUNDS, bound!, @bound_edge  # inequality edges (core/bound.jl)
+# The ABQ relation network as a check generator (core/derivation.jl).  No edge
+# store of its own: the store is AbstractQAtlas's relation registry.
+export ExponentSweep, EXPONENT_SWEEPS, exponent_sweep!, @exponent_sweep
+export exponent_hubs, check_derivation_coverage, DerivationReach, derivation_reach
 # Derived-input suppliers (core/derivative.jl).  The AD backends are package
 # EXTENSIONS — neither ForwardDiff nor Zygote is a hard dependency.
 export AbstractDiffBackend, FiniteDifference, ForwardDiffBackend, ZygoteBackend
@@ -656,6 +661,8 @@ include("region_registry.jl")
 include("relations/model_specific.jl")   # #730: model-specific relations, hosted here
 include("duality_registry.jl")
 include("limits_registry.jl")
+# After the universality files: every declaration names a `CriticalExponents` hub.
+include("derivation_registry.jl")
 
 # Knowledge-graph layer: bidirectional queries over the edge stores
 # (REGISTRY + REALIZES) and verification DERIVED from the cross-link network.

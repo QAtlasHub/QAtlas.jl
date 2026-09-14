@@ -384,6 +384,7 @@ function coherence_report(; bibkeys=String[])
     append!(findings, check_lsm_consistency())          # C10 — @symmetry / LSM theorems
     append!(findings, check_symmetry_corroboration())   # C10b — gapped fact corroborable
     append!(findings, check_identity_coverage())        # C11 — @identity_edge exercised
+    append!(findings, check_derivation_coverage())      # every exponent hub declared
     append!(findings, check_duality_maps())        # C12 — @dual param_map sanity
     append!(findings, check_limit_edges())         # C13 — @limits_to sanity
     append!(findings, check_cost_coherence())      # C14 — cost axis coherence

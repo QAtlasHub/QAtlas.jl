@@ -242,6 +242,11 @@ end
     @test 0.40 < e.β < 0.45
     @test 0.85 < e.ν < 0.90
     @test e.β_err > 0
+    check_scaling_relations_approx(e; d=3)
+    # η is NEGATIVE above d=2: γ/ν = 2.0464 > 2, so Fisher fixes the sign.  The
+    # bound is the discriminant the range checks above do not carry — a positive
+    # η passes every one of them.
+    @test -0.06 < e.η < -0.03
 end
 
 # ═══════════════ KPZ higher dimensions (numerical) ────────────────────────────

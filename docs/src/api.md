@@ -170,8 +170,13 @@ Pages = [
     "core/identity.jl",
     "core/duality.jl",
     "core/limits.jl",
+    "core/derivation.jl",
 ]
 ```
+
+The last of those is the odd one out: it owns no store of edges.  Its store is
+AbstractQAtlas's relation registry, so declaring a hub says which data to feed
+the network and at what scope, and the network says which laws close over it.
 
 ### Model & boundary conditions
 

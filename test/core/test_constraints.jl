@@ -314,8 +314,11 @@ end
     @test allunique(c.id for c in checks)
     # Closed vocabulary on purpose: a new edge type must be DECLARED here, so it
     # cannot start emitting checks unnoticed.  `:bound` and `:response` joined
-    # in #734 Phase B; `:region` in #780 step 3.
-    declared_kinds = (:identity, :dual, :limit, :symmetry, :bound, :response, :region)
+    # in #734 Phase B; `:region` in #780 step 3; `:derivation` with the relation
+    # network (it is the one kind with no edge store of its own).
+    declared_kinds = (
+        :identity, :dual, :limit, :symmetry, :bound, :response, :region, :derivation
+    )
     @test all(c.kind in declared_kinds for c in checks)
     # ...and say so usefully when it is forgotten.  Registering a generator and
     # forgetting this list has now happened THREE times — most recently `:region`,

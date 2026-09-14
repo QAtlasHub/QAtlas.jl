@@ -14,7 +14,10 @@
 #     invariance of critical percolation in d=2.
 #
 # d=3: Wang, Zhou, Zhang, Garoni, Deng (2013) Phys. Rev. E 87, 052107
-#       — large-scale Monte Carlo, Table I.
+#       — large-scale Monte Carlo.  The paper quotes the RENORMALIZATION
+#       exponents, 1/ν = 1.141 0(15) and y_h = 2.522 95(15); the standard
+#       exponents follow as β/ν = d − y_h, γ/ν = 2y_h − d and
+#       η = 2 + d − 2y_h = −0.045 90(30).
 #
 # d≥6: upper critical dimension; Toulouse (1974) mean-field exponents.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -43,8 +46,11 @@ function fetch(::Universality{:Percolation}, ::CriticalExponents; d::Int, kwargs
             δ_err=0.06,
             ν=0.87619,
             ν_err=0.00012,
-            η=0.46,
-            η_err=0.08,
+            # NEGATIVE in d=3, from the paper's y_h: η = 2 + d − 2y_h.  Fisher
+            # pins the sign here — γ/ν = 2 − η is 2.0464 > 2, so a positive η
+            # contradicts the γ and ν above.
+            η=-0.04590,
+            η_err=0.00030,
         )
     elseif d >= 6
         # Percolation upper critical dimension is 6

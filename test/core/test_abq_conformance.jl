@@ -324,7 +324,10 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     # test/universalities/test_universality_isingsdrg.jl, by calling the relations
     # rather than restating them. A test, not an edge.
     :TypicalCorrelationLength => "checked on the `:IsingSDRG` table; no edge stores it.",
-    :ActivatedMomentGrowth => "as `TypicalCorrelationLength`, same table, same file.",
+    # `ActivatedMomentGrowth` sat here beside it until its `x_m` was typed
+    # `ScalingDimension` upstream. No hub implements that quantity, so the relation
+    # is not materializable any more and an entry saying it is unwired would
+    # describe a situation that no longer exists.
 
     # Not a missing slope but a missing fixed point: no hub realises the large-spin
     # phase of a random chain with mixed ferro- and antiferromagnetic couplings.
@@ -345,6 +348,45 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                               one state-computed hub (XXZ1D/OBC) cannot supply `ncuts`, a \
                               region boundary count that `Region` deliberately does not \
                               carry.",
+
+    # The rest of the Calabrese-Cardy family arrived in the same place by the same
+    # route: one typed slot, `c::CentralCharge`, and every other slot supplied.
+    # Their blocker is a different one and it is not a wiring gap.
+    #
+    # `c₁`, the non-universal cutoff constant, and `log g`, the Affleck-Ludwig
+    # boundary entropy, are DROPPED by this atlas on purpose:
+    # universalities/behaviour/CardyEntanglement.jl says they "require model-specific
+    # UV input (lattice spacing convention) and boundary input (which conformal
+    # boundary state is realised) that is not available at the universality level".
+    # A relation cannot fire without them, and supplying a fitted `c₁` would make the
+    # check a fit residual rather than an identity. The same header records that what
+    # the atlas keeps is the universal log-prefactor alone.
+    :CFTEntanglementInfinite => "needs `c₁`, the non-universal cutoff constant this \
+                                 atlas drops by design; the hubs that supply `S` take \
+                                 it from this very form, so the check would restate it.",
+    :CFTEntanglementPBC => "as `CFTEntanglementInfinite`, plus `L` and `ℓ`.",
+    :CFTEntanglementOBC => "as `CFTEntanglementInfinite`, and also `ln_g`, the \
+                            Affleck-Ludwig boundary entropy, which needs the conformal \
+                            boundary state the hub does not name.",
+
+    # `ncuts` again, as in `CFTEntanglementSlope`, and one more missing row each.
+    :HalvedChainEntropyDifference => "`ΔS` is a difference of two entropies and no row \
+                                      fetches it, and `ncuts` is the region boundary \
+                                      count `Region` does not carry.",
+    :OffCriticalEntanglementSaturation => "both typed slots are fetchable together at \
+                                           TFIM/Infinite, but the saturation value `S` \
+                                           is no row and `ncuts` is the boundary count \
+                                           `Region` does not carry.",
+
+    # Materializable since `γ` was typed `TopologicalEntanglementEntropy` upstream. The
+    # three hubs that answer it (ToricCode, KitaevHoneycomb, FibonacciAnyons) store it
+    # as a closed-form constant and implement no region entropy at all — the `@region`
+    # machinery is 1D blocks on a chain. So the seven entropies this identity balances
+    # do not exist here. A missing computation (2D reduced density matrices), not a
+    # missing edge.
+    :KitaevPreskillTEE => "the hubs answering `γ` store it as a constant and compute no \
+                           region entropy, so the seven S(A) the identity balances do \
+                           not exist; needs 2D reduced density matrices.",
 
     # What is missing is not a quantity but a BOUNDARY CONDITION. Both remaining slots
     # are supplied values: `L`, a finite system size, and `dE = e₀(L) − e_∞`, the

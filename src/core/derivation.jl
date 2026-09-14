@@ -10,7 +10,10 @@
 # Scope of this file: the SCALING plane — a hub that fetches `CriticalExponents`
 # is cross-checked against the `:scaling` domain (Rushbrooke, Widom, Fisher,
 # Josephson).  `derivation_reach` below measures what the other planes would
-# reach; the number is small and is pinned by test/lint/test_derivation_reach.jl.
+# reach, and the measurement is why they are not here: 27 of 112 hubs close on
+# some relation, 22 of those on `FreeEnergyLegendre` alone, which the
+# `@identity_edge :gibbs` edge already covers.  Pinned by
+# test/lint/test_derivation_reach.jl.
 #
 # What a passing row does and does not say.  This is INTERNAL CONSISTENCY, the
 # claim identity.jl makes, not corroboration against the literature: the routes
@@ -401,10 +404,26 @@ function _suppressed_routes(s::SweptExponents, target::Symbol)
             )
         end
     end
-    if s.dimension === nothing
-        for r in _HYPERSCALING_RELATIONS
-            push!(out, r => "hyperscaling does not apply here: $(s.notes)")
-        end
+    return out
+end
+
+# The hyperscaling routes of a hub that has no dimension, as STANDALONE skips.
+#
+# They cannot be suppressed route-by-route the way `derived_from` is: with no
+# dimension, `d` never enters the data, so `consistency_report` never reaches a
+# relation that needs it and there is no route to mark.  That silent absence is
+# the very thing upstream warns about — a route missing for want of an input
+# reads exactly like one excluded for want of applicability — so the exclusion is
+# emitted on its own rather than inferred from a gap.
+function _push_hyperscaling_skips!(out, hub::AbstractString, s::SweptExponents)
+    s.dimension === nothing || return out
+    for r in _HYPERSCALING_RELATIONS
+        _push_excluded_check!(
+            out,
+            :derivation,
+            string(hub, "/", r),
+            "hyperscaling does not apply here, so $(r) is not a route: $(s.notes)",
+        )
     end
     return out
 end
@@ -412,6 +431,24 @@ end
 # ──────────────────────────────────────────────────────────────────────
 # Generator — the :derivation kind of generated_checks()
 # ──────────────────────────────────────────────────────────────────────
+
+"""
+    ScalingRefusal(status, reason)
+
+Why a hub produced no routes at a sweep point.  `status` is `:skip` where the
+table is DECLARED not to close (too few exponents, no quoted error, no relation
+reaches it) and `:error` where a call THREW.
+
+The split is the point.  A renamed `fetch` keyword and a BKT table carrying η
+alone both end a sweep point, and reported the same way the first disappears into
+the second: a suite that treats every non-route as a declared skip goes green
+while a whole hub's cross-checks stop existing.  `:error` fails the suite,
+matching [`CheckOutcome`](@ref)'s own split of a config bug from a contradiction.
+"""
+struct ScalingRefusal
+    status::Symbol
+    reason::String
+end
 
 # Fetch the table, shape it for the network, and ask the network which routes
 # reach each exponent.  Returns `(data, errs, rows)` or a [`ScalingRefusal`](@ref).
@@ -474,6 +511,7 @@ end
 function _scaling_checks(s::SweptExponents)
     out = GeneratedCheck[]
     hub = _hub_id(s)
+    _push_hyperscaling_skips!(out, hub, s)
     for point in _sweep_points(s.sweep)
         pid = _point_suffix(point)
         dim = s.dimension === :sweep ? getfield(point, :d) : s.dimension
@@ -633,7 +671,7 @@ function check_derivation_coverage()
         )
     end
     for s in EXPONENT_SWEEPS
-        _judges_nothing(s) && push!(
+        _emits_only_skips(s) && push!(
             out,
             CoherenceFinding(
                 :derivation_coverage,
@@ -647,7 +685,7 @@ function check_derivation_coverage()
 end
 
 """
-    _judges_nothing(s::AbstractExponentSweep) -> Bool
+    _emits_only_skips(s::AbstractExponentSweep) -> Bool
 
 Whether a SWEPT declaration produces no check that can return a verdict.
 
@@ -655,10 +693,12 @@ Emptiness is the test that reads naturally here and it cannot fire: a point
 `_scaling_checks` cannot prepare still emits a refusal check, so the vector is
 never empty and a guard on `isempty` would be a guard unable to fail.  What can
 happen, and is what this asks, is a declaration every one of whose points was
-refused.  A refused hub is exempt by construction; its skip IS its content.
+skipped.  An `:error` counts as content: it fails the suite, so a hub that is
+merely broken is loud already and does not also need a coverage finding.  A
+refused hub is exempt by construction; its skip IS its content.
 """
-_judges_nothing(::RefusedExponents) = false
-function _judges_nothing(s::SweptExponents)
+_emits_only_skips(::RefusedExponents) = false
+function _emits_only_skips(s::SweptExponents)
     return !any(c -> run_generated_check(c).status !== :skip, _scaling_checks(s))
 end
 
@@ -697,8 +737,14 @@ step has its output and all of its quantity inputs implemented there.
 
 A genuine cross-check needs the hub to fetch at least TWO of the step's
 quantities, so a step whose only other typed slot is a supplied temperature does
-not count.  Structural, and an upper bound on what fires: whether the solve
-actually computes is [`generated_checks`](@ref)'s business, not this one's.
+not count.
+
+Structural, and an upper bound on what fires, in two ways worth keeping apart. A
+step's UNTYPED slots are not consulted here at all, so a relation can close on a
+hub's quantities and still have no route because a supplied value it needs does
+not exist — four of the reachable relations sit in `test_abq_conformance.jl`'s
+`MATERIALIZABLE_BUT_UNWIRED` for exactly that. And whether the solve computes at
+all is [`generated_checks`](@ref)'s business, not this one's.
 
 Name-sorted and deterministic.  Pinned by `test/lint/test_derivation_reach.jl`,
 so the reachable set cannot shrink unnoticed.

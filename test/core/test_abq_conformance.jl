@@ -306,6 +306,8 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
     :ActivatedSpecificHeat => "as `GriffithsSpecificHeat`, slope against ln|ln T|.",
     :GriffithsAutocorrelation => "no disorder-averaged G(t); `RandomTFIM` has no dynamics.",
     :GriffithsExponentDivergence => "d(ln z)/d(ln|δ|) is a sweep-and-fit, not a wiring.",
+    :ActivatedCriticalCorrelation => "d(ln ln C)/d(ln r) is a sweep-and-fit too; the hub \
+                                      answers ψ and no disorder-averaged C(r).",
     :CriticalQuantumSusceptibility => "the hubs with a χ(T) are classical and answer no `z`.",
     :CriticalQuantumSpecificHeat => "as `CriticalQuantumSusceptibility`, for c_V(T).",
     :ActivatedFiniteSizeScaling => "no hub sweeps L for a random chain.",
@@ -348,6 +350,8 @@ const MATERIALIZABLE_BUT_UNWIRED = Dict{Symbol,String}(
                               one state-computed hub (XXZ1D/OBC) cannot supply `ncuts`, a \
                               region boundary count that `Region` deliberately does not \
                               carry.",
+    :CFTEntanglementChordSlope => "`CFTEntanglementSlope` against the chord rather than \
+                                   ℓ, with the same `ncuts` blocker and the same hubs.",
 
     # The rest of the Calabrese-Cardy family arrived in the same place by the same
     # route: one typed slot, `c::CentralCharge`, and every other slot supplied.
